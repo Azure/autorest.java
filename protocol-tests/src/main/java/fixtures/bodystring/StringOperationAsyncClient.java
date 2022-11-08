@@ -336,4 +336,260 @@ public final class StringOperationAsyncClient {
     public Mono<Response<BinaryData>> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullBase64UrlEncodedWithResponseAsync(requestOptions);
     }
+
+    /**
+     * Get null string value value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null string value value on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> getNull() {
+        // Generated convenience method for getNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getNullWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * Set string value null.
+     *
+     * @param stringBody string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNull(String stringBody) {
+        // Generated convenience method for putNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (stringBody != null) {
+            requestOptions.setBody(BinaryData.fromObject(stringBody));
+        }
+        return putNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get empty string value value ''.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty string value value '' on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> getEmpty() {
+        // Generated convenience method for getEmptyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getEmptyWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * Set string value empty ''.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putEmpty() {
+        // Generated convenience method for putEmptyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putEmptyWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' on successful
+     *     completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> getMbcs() {
+        // Generated convenience method for getMbcsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getMbcsWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putMbcs() {
+        // Generated convenience method for putMbcsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putMbcsWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
+     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
+     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' on successful
+     *     completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> getWhitespace() {
+        // Generated convenience method for getWhitespaceWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getWhitespaceWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
+     * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putWhitespace() {
+        // Generated convenience method for putWhitespaceWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putWhitespaceWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get String value when no string value is sent in response payload.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return string value when no string value is sent in response payload on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> getNotProvided() {
+        // Generated convenience method for getNotProvidedWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getNotProvidedWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * Get value that is base64 encoded.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64 encoded on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<byte[]> getBase64Encoded() {
+        // Generated convenience method for getBase64EncodedWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getBase64EncodedWithResponse(requestOptions).map(Response::getValue);
+    }
+
+    /**
+     * Get value that is base64url encoded.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value that is base64url encoded on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<byte[]> getBase64UrlEncoded() {
+        // Generated convenience method for getBase64UrlEncodedWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getBase64UrlEncodedWithResponse(requestOptions).map(Response::getValue);
+    }
+
+    /**
+     * Put value that is base64url encoded.
+     *
+     * @param stringBody string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBase64UrlEncoded(byte[] stringBody) {
+        // Generated convenience method for putBase64UrlEncodedWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putBase64UrlEncodedWithResponse(BinaryData.fromObject(stringBody), requestOptions).then();
+    }
+
+    /**
+     * Get null value that is expected to be base64url encoded.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null value that is expected to be base64url encoded on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<byte[]> getNullBase64UrlEncoded() {
+        // Generated convenience method for getNullBase64UrlEncodedWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getNullBase64UrlEncodedWithResponse(requestOptions).map(Response::getValue);
+    }
 }

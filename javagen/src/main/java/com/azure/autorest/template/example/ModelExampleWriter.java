@@ -165,13 +165,15 @@ public class ModelExampleWriter {
         protected String codeDeserializeJsonString(String jsonStr) {
             imports.add(com.azure.core.util.serializer.JacksonAdapter.class.getName());
             imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());
-            imports.add(java.io.IOException.class.getName());
 
             return String.format("JacksonAdapter.createDefaultSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",
                     ClassType.String.defaultValueExpression(jsonStr));
         }
 
         public Set<String> getImports() {
+            if (helperFeatures.contains(ExampleHelperFeature.ThrowsIOException)) {
+                imports.add(java.io.IOException.class.getName());
+            }
             return imports;
         }
 
@@ -182,6 +184,10 @@ public class ModelExampleWriter {
         public String accept(ExampleNode node) {
             if (node instanceof LiteralNode) {
                 node.getClientType().addImportsTo(imports, false);
+
+                if (node.getClientType() == ClassType.URL) {
+                    helperFeatures.add(ExampleHelperFeature.ThrowsIOException); // MalformedURLException from URL ctor
+                }
 
                 return node.getClientType().defaultValueExpression(((LiteralNode) node).getLiteralsValue());
             } else if (node instanceof ObjectNode) {

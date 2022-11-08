@@ -79,4 +79,58 @@ public final class AutoRestHeadExceptionTestServiceAsyncClient {
     public Mono<Response<Void>> head404WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.head404WithResponseAsync(requestOptions);
     }
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @throws fixtures.headexceptions.models.CustomizedException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> head200() {
+        // Generated convenience method for head200WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return head200WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @throws fixtures.headexceptions.models.CustomizedException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> head204() {
+        // Generated convenience method for head204WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return head204WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @throws fixtures.headexceptions.models.CustomizedException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> head404() {
+        // Generated convenience method for head404WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return head404WithResponse(requestOptions).then();
+    }
 }

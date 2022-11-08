@@ -655,4 +655,472 @@ public final class HttpClientFailureAsyncClient {
     public Mono<Response<Void>> head429WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.head429WithResponseAsync(requestOptions);
     }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> head400() {
+        // Generated convenience method for head400WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return head400WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get400() {
+        // Generated convenience method for get400WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get400WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> options400() {
+        // Generated convenience method for options400WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return options400WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> put400() {
+        // Generated convenience method for put400WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return put400WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> patch400() {
+        // Generated convenience method for patch400WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return patch400WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> post400() {
+        // Generated convenience method for post400WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return post400WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> delete400() {
+        // Generated convenience method for delete400WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return delete400WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 401 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> head401() {
+        // Generated convenience method for head401WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return head401WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 402 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get402() {
+        // Generated convenience method for get402WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get402WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> options403() {
+        // Generated convenience method for options403WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return options403WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get403() {
+        // Generated convenience method for get403WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get403WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> put404() {
+        // Generated convenience method for put404WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return put404WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> patch405() {
+        // Generated convenience method for patch405WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return patch405WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> post406() {
+        // Generated convenience method for post406WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return post406WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> delete407() {
+        // Generated convenience method for delete407WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return delete407WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> put409() {
+        // Generated convenience method for put409WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return put409WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 410 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> head410() {
+        // Generated convenience method for head410WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return head410WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 411 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get411() {
+        // Generated convenience method for get411WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get411WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> options412() {
+        // Generated convenience method for options412WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return options412WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get412() {
+        // Generated convenience method for get412WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get412WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> put413() {
+        // Generated convenience method for put413WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return put413WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> patch414() {
+        // Generated convenience method for patch414WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return patch414WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> post415() {
+        // Generated convenience method for post415WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return post415WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 416 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> get416() {
+        // Generated convenience method for get416WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get416WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> delete417() {
+        // Generated convenience method for delete417WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return delete417WithResponse(requestOptions).then();
+    }
+
+    /**
+     * Return 429 status code - should be represented in the client as an error.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> head429() {
+        // Generated convenience method for head429WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return head429WithResponse(requestOptions).then();
+    }
 }

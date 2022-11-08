@@ -98,4 +98,58 @@ public final class AutoRestSwaggerBatFileServiceAsyncClient {
     public Mono<Response<BinaryData>> getEmptyFileWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyFileWithResponseAsync(requestOptions);
     }
+
+    /**
+     * Get file.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return file on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BinaryData> getFile() {
+        // Generated convenience method for getFileWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getFileWithResponse(requestOptions).map(Response::getValue);
+    }
+
+    /**
+     * Get a large file.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a large file on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BinaryData> getFileLarge() {
+        // Generated convenience method for getFileLargeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getFileLargeWithResponse(requestOptions).map(Response::getValue);
+    }
+
+    /**
+     * Get empty file.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty file on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BinaryData> getEmptyFile() {
+        // Generated convenience method for getEmptyFileWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getEmptyFileWithResponse(requestOptions).map(Response::getValue);
+    }
 }

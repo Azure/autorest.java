@@ -15,6 +15,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
+import fixtures.paging.implementation.models.BodyParamModel;
+import fixtures.paging.implementation.models.Product;
 
 /** Initializes a new instance of the synchronous AutoRestPagingTestServiceClient type. */
 @ServiceClient(builder = AutoRestPagingTestServiceClientBuilder.class)
@@ -707,5 +709,420 @@ public final class AutoRestPagingTestServiceClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPagingModelWithItemNameWithXmsClientName(RequestOptions requestOptions) {
         return new PagedIterable<>(this.client.getPagingModelWithItemNameWithXmsClientName(requestOptions));
+    }
+
+    /**
+     * A paging operation that must return result of the default 'value' node.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getNoItemNamePages() {
+        // Generated convenience method for getNoItemNamePages
+        return new PagedIterable<>(client.getNoItemNamePages());
+    }
+
+    /**
+     * A paging operation that must ignore any kind of nextLink, and stop after page 1.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getNullNextLinkNamePages() {
+        // Generated convenience method for getNullNextLinkNamePages
+        return new PagedIterable<>(client.getNullNextLinkNamePages());
+    }
+
+    /**
+     * A paging operation that finishes on the first call without a nextlink.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getSinglePages() {
+        // Generated convenience method for getSinglePages
+        return new PagedIterable<>(client.getSinglePages());
+    }
+
+    /**
+     * A paging operation that finishes on the first call with body params without a nextlink.
+     *
+     * @param parameters put {'name': 'body'} to pass the test.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getSinglePagesWithBodyParams(BodyParamModel parameters) {
+        // Generated convenience method for getSinglePagesWithBodyParams
+        return new PagedIterable<>(client.getSinglePagesWithBodyParams(parameters));
+    }
+
+    /**
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
+     * call, will give you an items list of 1.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> firstResponseEmpty() {
+        // Generated convenience method for firstResponseEmpty
+        return new PagedIterable<>(client.firstResponseEmpty());
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId The clientRequestId parameter.
+     * @param maxresults Sets the maximum number of items to return in the response.
+     * @param timeout Sets the maximum time that the server can spend processing the request, in seconds. The default is
+     *     30 seconds.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePages(String clientRequestId, Integer maxresults, Integer timeout) {
+        // Generated convenience method for getMultiplePages
+        return new PagedIterable<>(client.getMultiplePages(clientRequestId, maxresults, timeout));
+    }
+
+    /**
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
+     * nextOperationWithQueryParams. Returns a ProductResult.
+     *
+     * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getWithQueryParams(int requiredQueryParameter) {
+        // Generated convenience method for getWithQueryParams
+        return new PagedIterable<>(client.getWithQueryParams(requiredQueryParameter));
+    }
+
+    /**
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
+     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     *
+     * @param filter OData filter options. Pass in 'foo'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> duplicateParams(String filter) {
+        // Generated convenience method for duplicateParams
+        return new PagedIterable<>(client.duplicateParams(filter));
+    }
+
+    /**
+     * Paging with max page size. We don't want to.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> pageWithMaxPageSize() {
+        // Generated convenience method for pageWithMaxPageSize
+        return new PagedIterable<>(client.pageWithMaxPageSize());
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param clientRequestId The clientRequestId parameter.
+     * @param maxresults Sets the maximum number of items to return in the response.
+     * @param timeout Sets the maximum time that the server can spend processing the request, in seconds. The default is
+     *     30 seconds.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getOdataMultiplePages(String clientRequestId, Integer maxresults, Integer timeout) {
+        // Generated convenience method for getOdataMultiplePages
+        return new PagedIterable<>(client.getOdataMultiplePages(clientRequestId, maxresults, timeout));
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param offset Offset of return value.
+     * @param clientRequestId The clientRequestId parameter.
+     * @param maxresults Sets the maximum number of items to return in the response.
+     * @param timeout Sets the maximum time that the server can spend processing the request, in seconds. The default is
+     *     30 seconds.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePagesWithOffset(
+            int offset, String clientRequestId, Integer maxresults, Integer timeout) {
+        // Generated convenience method for getMultiplePagesWithOffset
+        return new PagedIterable<>(client.getMultiplePagesWithOffset(offset, clientRequestId, maxresults, timeout));
+    }
+
+    /**
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
+     * nextLink that has 10 pages.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePagesRetryFirst() {
+        // Generated convenience method for getMultiplePagesRetryFirst
+        return new PagedIterable<>(client.getMultiplePagesRetryFirst());
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
+     * client should retry and finish all 10 pages eventually.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePagesRetrySecond() {
+        // Generated convenience method for getMultiplePagesRetrySecond
+        return new PagedIterable<>(client.getMultiplePagesRetrySecond());
+    }
+
+    /**
+     * A paging operation that receives a 400 on the first call.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getSinglePagesFailure() {
+        // Generated convenience method for getSinglePagesFailure
+        return new PagedIterable<>(client.getSinglePagesFailure());
+    }
+
+    /**
+     * A paging operation that receives a 400 on the second call.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePagesFailure() {
+        // Generated convenience method for getMultiplePagesFailure
+        return new PagedIterable<>(client.getMultiplePagesFailure());
+    }
+
+    /**
+     * A paging operation that receives an invalid nextLink.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePagesFailureUri() {
+        // Generated convenience method for getMultiplePagesFailureUri
+        return new PagedIterable<>(client.getMultiplePagesFailureUri());
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePagesFragmentNextLink(String apiVersion, String tenant) {
+        // Generated convenience method for getMultiplePagesFragmentNextLink
+        return new PagedIterable<>(client.getMultiplePagesFragmentNextLink(apiVersion, tenant));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     *
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePagesFragmentWithGroupingNextLink(String apiVersion, String tenant) {
+        // Generated convenience method for getMultiplePagesFragmentWithGroupingNextLink
+        return new PagedIterable<>(client.getMultiplePagesFragmentWithGroupingNextLink(apiVersion, tenant));
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId The clientRequestId parameter.
+     * @param maxresults Sets the maximum number of items to return in the response.
+     * @param timeout Sets the maximum time that the server can spend processing the request, in seconds. The default is
+     *     30 seconds.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getMultiplePagesLro(String clientRequestId, Integer maxresults, Integer timeout) {
+        // Generated convenience method for getMultiplePagesLro
+        return new PagedIterable<>(client.getMultiplePagesLro(clientRequestId, maxresults, timeout));
+    }
+
+    /**
+     * A paging operation with api version. When calling the next link, you want to append your client's api version to
+     * the next link.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> appendApiVersion() {
+        // Generated convenience method for appendApiVersion
+        return new PagedIterable<>(client.appendApiVersion());
+    }
+
+    /**
+     * A paging operation with api version. When calling the next link, you want to reformat it and override the
+     * returned api version with your client's api version.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> replaceApiVersion() {
+        // Generated convenience method for replaceApiVersion
+        return new PagedIterable<>(client.replaceApiVersion());
+    }
+
+    /**
+     * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getPagingModelWithItemNameWithXmsClientName() {
+        // Generated convenience method for getPagingModelWithItemNameWithXmsClientName
+        return new PagedIterable<>(client.getPagingModelWithItemNameWithXmsClientName());
     }
 }

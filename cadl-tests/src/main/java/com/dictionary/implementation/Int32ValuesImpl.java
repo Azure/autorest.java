@@ -46,11 +46,11 @@ public final class Int32ValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryInt32Values to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for DictionaryClientInt32Values to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "DictionaryInt32Value")
+    @ServiceInterface(name = "DictionaryClientInt3")
     private interface Int32ValuesService {
         @Get("/dictionary/int32")
         @ExpectedResponses({200})

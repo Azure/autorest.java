@@ -6,7 +6,7 @@ package com.cadl.response;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of ResponseClient. */
+/** Service version of CoreClient. */
 public enum ResponseServiceVersion implements ServiceVersion {
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");

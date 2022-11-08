@@ -15,6 +15,11 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.url.implementation.QueriesImpl;
+import fixtures.url.implementation.models.UriColor;
+import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestUrlTestServiceClient type. */
@@ -799,5 +804,768 @@ public final class QueriesAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringPipesValidWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.arrayStringPipesValidWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return true Boolean value on path on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getBooleanTrue() {
+        // Generated convenience method for getBooleanTrueWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getBooleanTrueWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get false Boolean value on path.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return false Boolean value on path on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getBooleanFalse() {
+        // Generated convenience method for getBooleanFalseWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getBooleanFalseWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @param boolQuery null boolean value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null Boolean value on query (query string should be absent) on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getBooleanNull(Boolean boolQuery) {
+        // Generated convenience method for getBooleanNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (boolQuery != null) {
+            requestOptions.addQueryParam("boolQuery", String.valueOf(boolQuery));
+        }
+        return getBooleanNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '1000000' integer value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '1000000' integer value on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getIntOneMillion() {
+        // Generated convenience method for getIntOneMillionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getIntOneMillionWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-1000000' integer value on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getIntNegativeOneMillion() {
+        // Generated convenience method for getIntNegativeOneMillionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getIntNegativeOneMillionWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @param intQuery null integer value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null integer value (no query parameter) on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getIntNull(Integer intQuery) {
+        // Generated convenience method for getIntNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (intQuery != null) {
+            requestOptions.addQueryParam("intQuery", String.valueOf(intQuery));
+        }
+        return getIntNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '10000000000' 64 bit integer value on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getTenBillion() {
+        // Generated convenience method for getTenBillionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getTenBillionWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-10000000000' 64 bit integer value on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getNegativeTenBillion() {
+        // Generated convenience method for getNegativeTenBillionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getNegativeTenBillionWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @param longQuery null 64 bit integer value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 'null 64 bit integer value (no query param in uri) on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getLongNull(Long longQuery) {
+        // Generated convenience method for getLongNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (longQuery != null) {
+            requestOptions.addQueryParam("longQuery", String.valueOf(longQuery));
+        }
+        return getLongNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '1.034E+20' numeric value on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> floatScientificPositive() {
+        // Generated convenience method for floatScientificPositiveWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return floatScientificPositiveWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-1.034E-20' numeric value on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> floatScientificNegative() {
+        // Generated convenience method for floatScientificNegativeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return floatScientificNegativeWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param floatQuery null numeric value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null numeric value (no query parameter) on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> floatNull(Float floatQuery) {
+        // Generated convenience method for floatNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (floatQuery != null) {
+            requestOptions.addQueryParam("floatQuery", String.valueOf(floatQuery));
+        }
+        return floatNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '9999999.999' numeric value on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> doubleDecimalPositive() {
+        // Generated convenience method for doubleDecimalPositiveWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return doubleDecimalPositiveWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '-9999999.999' numeric value on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> doubleDecimalNegative() {
+        // Generated convenience method for doubleDecimalNegativeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return doubleDecimalNegativeWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param doubleQuery null numeric value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null numeric value (no query parameter) on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> doubleNull(Double doubleQuery) {
+        // Generated convenience method for doubleNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (doubleQuery != null) {
+            requestOptions.addQueryParam("doubleQuery", String.valueOf(doubleQuery));
+        }
+        return doubleNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> stringUnicode() {
+        // Generated convenience method for stringUnicodeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return stringUnicodeWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return 'begin!*'();:@ &amp;=+$,/?#[]end on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> stringUrlEncoded() {
+        // Generated convenience method for stringUrlEncodedWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return stringUrlEncodedWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get ''.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '' on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> stringEmpty() {
+        // Generated convenience method for stringEmptyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return stringEmptyWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param stringQuery null string value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (no query parameter in url) on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> stringNull(String stringQuery) {
+        // Generated convenience method for stringNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (stringQuery != null) {
+            requestOptions.addQueryParam("stringQuery", stringQuery);
+        }
+        return stringNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @param enumQuery 'green color' enum value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return using uri with query parameter 'green color' on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> enumValid(UriColor enumQuery) {
+        // Generated convenience method for enumValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (enumQuery != null) {
+            requestOptions.addQueryParam("enumQuery", enumQuery.toString());
+        }
+        return enumValidWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param enumQuery null string value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null (no query parameter in url) on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> enumNull(UriColor enumQuery) {
+        // Generated convenience method for enumNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (enumQuery != null) {
+            requestOptions.addQueryParam("enumQuery", enumQuery.toString());
+        }
+        return enumNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> byteMultiByte(byte[] byteQuery) {
+        // Generated convenience method for byteMultiByteWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (byteQuery != null) {
+            requestOptions.addQueryParam("byteQuery", String.valueOf(byteQuery));
+        }
+        return byteMultiByteWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '' as byte array.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '' as byte array on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> byteEmpty() {
+        // Generated convenience method for byteEmptyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return byteEmptyWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @param byteQuery null as byte array (no query parameters in uri).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as byte array (no query parameters in uri) on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> byteNull(byte[] byteQuery) {
+        // Generated convenience method for byteNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (byteQuery != null) {
+            requestOptions.addQueryParam("byteQuery", String.valueOf(byteQuery));
+        }
+        return byteNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '2012-01-01' as date on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> dateValid() {
+        // Generated convenience method for dateValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return dateValidWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @param dateQuery null as date (no query parameters in uri).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date - this should result in no query parameters in uri on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> dateNull(String dateQuery) {
+        // Generated convenience method for dateNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (dateQuery != null) {
+            requestOptions.addQueryParam("dateQuery", dateQuery);
+        }
+        return dateNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return '2012-01-01T01:01:01Z' as date-time on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> dateTimeValid() {
+        // Generated convenience method for dateTimeValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return dateTimeValidWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @param dateTimeQuery null as date-time (no query parameters).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return null as date-time, should result in no query parameters in uri on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> dateTimeNull(OffsetDateTime dateTimeQuery) {
+        // Generated convenience method for dateTimeNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (dateTimeQuery != null) {
+            requestOptions.addQueryParam("dateTimeQuery", String.valueOf(dateTimeQuery));
+        }
+        return dateTimeNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     csv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     *     format on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringCsvValid(List<String> arrayQuery) {
+        // Generated convenience method for arrayStringCsvValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (arrayQuery != null) {
+            requestOptions.addQueryParam(
+                    "arrayQuery",
+                    arrayQuery.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
+        }
+        return arrayStringCsvValidWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @param arrayQuery a null array of string using the csv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a null array of string using the csv-array format on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringCsvNull(List<String> arrayQuery) {
+        // Generated convenience method for arrayStringCsvNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (arrayQuery != null) {
+            requestOptions.addQueryParam(
+                    "arrayQuery",
+                    arrayQuery.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
+        }
+        return arrayStringCsvNullWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @param arrayQuery an empty array [] of string using the csv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an empty array [] of string using the csv-array format on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringCsvEmpty(List<String> arrayQuery) {
+        // Generated convenience method for arrayStringCsvEmptyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (arrayQuery != null) {
+            requestOptions.addQueryParam(
+                    "arrayQuery",
+                    arrayQuery.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
+        }
+        return arrayStringCsvEmptyWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
+     * the 'arrayQuery' parameter to the service.
+     *
+     * @param arrayQuery Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringNoCollectionFormatEmpty(List<String> arrayQuery) {
+        // Generated convenience method for arrayStringNoCollectionFormatEmptyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (arrayQuery != null) {
+            requestOptions.addQueryParam(
+                    "arrayQuery",
+                    arrayQuery.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
+        }
+        return arrayStringNoCollectionFormatEmptyWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     ssv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     *     format on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringSsvValid(List<String> arrayQuery) {
+        // Generated convenience method for arrayStringSsvValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (arrayQuery != null) {
+            requestOptions.addQueryParam(
+                    "arrayQuery",
+                    arrayQuery.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(" ")));
+        }
+        return arrayStringSsvValidWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     tsv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     *     format on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringTsvValid(List<String> arrayQuery) {
+        // Generated convenience method for arrayStringTsvValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (arrayQuery != null) {
+            requestOptions.addQueryParam(
+                    "arrayQuery",
+                    arrayQuery.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining("	")));
+        }
+        return arrayStringTsvValidWithResponse(requestOptions).then();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
+     * format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     pipes-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
+     *     format on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> arrayStringPipesValid(List<String> arrayQuery) {
+        // Generated convenience method for arrayStringPipesValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (arrayQuery != null) {
+            requestOptions.addQueryParam(
+                    "arrayQuery",
+                    arrayQuery.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining("|")));
+        }
+        return arrayStringPipesValidWithResponse(requestOptions).then();
     }
 }

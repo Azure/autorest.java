@@ -23,6 +23,7 @@ import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.HttpHeader;
@@ -49,8 +50,6 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static com.azure.autorest.template.util.ModelTemplateHeaderHelper.addCustomStronglyTypedHeadersConstructor;
 
 /**
  * Writes a ClientModel to a JavaFile.
@@ -612,7 +611,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // Early out on custom strongly typed headers constructor as this has different handling that doesn't require
         // inspecting the required and constant properties.
         if (model.isStronglyTypedHeader()) {
-            addCustomStronglyTypedHeadersConstructor(classBlock, model, settings);
+            ModelTemplateHeaderHelper.addCustomStronglyTypedHeadersConstructor(classBlock, model, settings);
             return;
         }
 

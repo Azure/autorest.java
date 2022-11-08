@@ -186,4 +186,75 @@ public final class SpecialHeaderClient {
     public PagedIterable<BinaryData> paramRepeatabilityRequestPageable(RequestOptions requestOptions) {
         return new PagedIterable<>(this.client.paramRepeatabilityRequestPageable(requestOptions));
     }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Object paramRepeatabilityRequest() {
+        // Generated convenience method for paramRepeatabilityRequestWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return paramRepeatabilityRequestWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Object paramRepeatabilityRequestPut() {
+        // Generated convenience method for paramRepeatabilityRequestPutWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return paramRepeatabilityRequestPutWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return any object.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Object paramRepeatabilityRequestGet() {
+        // Generated convenience method for paramRepeatabilityRequestGetWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return paramRepeatabilityRequestGetWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Object> paramRepeatabilityRequestPageable() {
+        // Generated convenience method for paramRepeatabilityRequestPageable
+        return new PagedIterable<>(client.paramRepeatabilityRequestPageable());
+    }
 }

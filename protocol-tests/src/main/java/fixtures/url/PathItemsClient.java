@@ -161,4 +161,128 @@ public final class PathItemsClient {
                 .getLocalPathItemQueryNullWithResponse(pathItemStringPath, localStringPath, requestOptions)
                 .block();
     }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
+     * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @param localStringQuery should contain value 'localStringQuery'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getAllWithValues(
+            String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
+        // Generated convenience method for getAllWithValuesWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (pathItemStringQuery != null) {
+            requestOptions.addQueryParam("pathItemStringQuery", pathItemStringQuery);
+        }
+        if (localStringQuery != null) {
+            requestOptions.addQueryParam("localStringQuery", localStringQuery);
+        }
+        getAllWithValuesWithResponse(pathItemStringPath, localStringPath, requestOptions).getValue();
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
+     * localStringQuery='localStringQuery'.
+     *
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @param localStringQuery should contain value 'localStringQuery'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getGlobalQueryNull(
+            String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
+        // Generated convenience method for getGlobalQueryNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (pathItemStringQuery != null) {
+            requestOptions.addQueryParam("pathItemStringQuery", pathItemStringQuery);
+        }
+        if (localStringQuery != null) {
+            requestOptions.addQueryParam("localStringQuery", localStringQuery);
+        }
+        getGlobalQueryNullWithResponse(pathItemStringPath, localStringPath, requestOptions).getValue();
+    }
+
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
+     * localStringQuery=null.
+     *
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
+     * @param localStringQuery should contain null value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getGlobalAndLocalQueryNull(
+            String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
+        // Generated convenience method for getGlobalAndLocalQueryNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (pathItemStringQuery != null) {
+            requestOptions.addQueryParam("pathItemStringQuery", pathItemStringQuery);
+        }
+        if (localStringQuery != null) {
+            requestOptions.addQueryParam("localStringQuery", localStringQuery);
+        }
+        getGlobalAndLocalQueryNullWithResponse(pathItemStringPath, localStringPath, requestOptions).getValue();
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
+     * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
+     * localStringQuery=null.
+     *
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
+     * @param localStringPath should contain value 'localStringPath'.
+     * @param pathItemStringQuery should contain value null.
+     * @param localStringQuery should contain value null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getLocalPathItemQueryNull(
+            String pathItemStringPath, String localStringPath, String pathItemStringQuery, String localStringQuery) {
+        // Generated convenience method for getLocalPathItemQueryNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (pathItemStringQuery != null) {
+            requestOptions.addQueryParam("pathItemStringQuery", pathItemStringQuery);
+        }
+        if (localStringQuery != null) {
+            requestOptions.addQueryParam("localStringQuery", localStringQuery);
+        }
+        getLocalPathItemQueryNullWithResponse(pathItemStringPath, localStringPath, requestOptions).getValue();
+    }
 }

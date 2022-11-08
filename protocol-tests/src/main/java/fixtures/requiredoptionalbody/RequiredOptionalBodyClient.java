@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.requiredoptionalbody.implementation.models.Deployment;
 
 /** Initializes a new instance of the synchronous RequiredOptionalBodyClient type. */
 @ServiceClient(builder = RequiredOptionalBodyClientBuilder.class)
@@ -150,5 +151,50 @@ public final class RequiredOptionalBodyClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> optionalObjectWithResponse(RequestOptions requestOptions) {
         return this.client.optionalObjectWithResponse(requestOptions).block();
+    }
+
+    /**
+     * Creates or updates a deployment.
+     *
+     * @param deployment The deployment properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return deployment metadata.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Deployment createOrUpdateDeployment(Deployment deployment) {
+        // Generated convenience method for createOrUpdateDeploymentWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createOrUpdateDeploymentWithResponse(BinaryData.fromObject(deployment), requestOptions)
+                .getValue()
+                .toObject(Deployment.class);
+    }
+
+    /**
+     * optional object.
+     *
+     * @param deployment The deployment properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return deployment metadata.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Deployment optionalObject(Deployment deployment) {
+        // Generated convenience method for optionalObjectWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (deployment != null) {
+            requestOptions.setBody(BinaryData.fromObject(deployment));
+        }
+        return optionalObjectWithResponse(requestOptions).getValue().toObject(Deployment.class);
     }
 }

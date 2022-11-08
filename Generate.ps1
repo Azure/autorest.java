@@ -140,7 +140,7 @@ Remove-Item ./protocol-tests/src/samples -Recurse -Force
     "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/multi-media-types.json --namespace=fixtures.multimediatypes",
     "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/required-optional-body.json --namespace=fixtures.requiredoptionalbody",
     "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/enums.json --namespace=fixtures.enums",
-    "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/endpoint-lro.json --namespace=fixtures.endpointlro",
+    "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/endpoint-lro.json --namespace=fixtures.endpointlro --service-name=LroEndpoint",
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/dpg-customization.md",
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/custom-http-exception-mapping.md"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION

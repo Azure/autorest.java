@@ -45,4 +45,21 @@ public final class ConstantAndClientParameterServiceClient {
     public Response<Void> putClientConstantsWithResponse(RequestOptions requestOptions) {
         return this.client.putClientConstantsWithResponse(requestOptions).block();
     }
+
+    /**
+     * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putClientConstants() {
+        // Generated convenience method for putClientConstantsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putClientConstantsWithResponse(requestOptions).getValue();
+    }
 }

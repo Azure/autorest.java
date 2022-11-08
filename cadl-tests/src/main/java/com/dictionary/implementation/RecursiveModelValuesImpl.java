@@ -47,11 +47,11 @@ public final class RecursiveModelValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryRecursiveModelValues to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for DictionaryClientRecursiveModelValues to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "DictionaryRecursiveM")
+    @ServiceInterface(name = "DictionaryClientRecu")
     private interface RecursiveModelValuesService {
         @Get("/dictionary/model/recursive")
         @ExpectedResponses({200})

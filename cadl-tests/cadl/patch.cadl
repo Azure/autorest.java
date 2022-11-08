@@ -6,7 +6,7 @@ using Cadl.Rest;
 using Azure.Core.Foundations;
 
 @service({
-  title: "JsonMergePatch",
+  title: "Patch",
   version: "1.0.0",
 })
 namespace Cadl.Patch;

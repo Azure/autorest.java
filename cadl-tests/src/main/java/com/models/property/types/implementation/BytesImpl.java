@@ -32,24 +32,24 @@ public final class BytesImpl {
     private final BytesService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyTypesClientImpl client;
+    private final TypesClientImpl client;
 
     /**
      * Initializes an instance of BytesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    BytesImpl(ModelsPropertyTypesClientImpl client) {
+    BytesImpl(TypesClientImpl client) {
         this.service = RestProxy.create(BytesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyTypesBytes to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for TypesClientBytes to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyTypesB")
+    @ServiceInterface(name = "TypesClientBytes")
     private interface BytesService {
         @Get("/models/properties/types/bytes")
         @ExpectedResponses({200})

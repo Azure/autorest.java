@@ -16,6 +16,13 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.multimediatypes.implementation.DpgMultiMediaTypesClientImpl;
+import fixtures.multimediatypes.implementation.models.ContentType1;
+import fixtures.multimediatypes.implementation.models.ContentType2;
+import fixtures.multimediatypes.implementation.models.ContentType3;
+import fixtures.multimediatypes.implementation.models.ContentType4;
+import fixtures.multimediatypes.implementation.models.contentType;
+import java.nio.ByteBuffer;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous DpgMultiMediaTypesClient type. */
@@ -450,5 +457,315 @@ public final class DpgMultiMediaTypesAsyncClient {
     public Mono<Response<BinaryData>> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(
             RequestOptions requestOptions) {
         return this.serviceClient.jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * json and binary types with json type first.
+     *
+     * @param contentType Upload file type.
+     * @param input Input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndBinaryTypesJsonFirst(ContentType contentType, BinaryData input) {
+        // Generated convenience method for jsonAndBinaryTypesJsonFirstWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return jsonAndBinaryTypesJsonFirstWithResponse(contentType.toString(), input, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * json and binary types with binary type first.
+     *
+     * @param contentType Upload file type.
+     * @param input Input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndBinaryTypesBinaryFirst(ContentType contentType, BinaryData input) {
+        // Generated convenience method for jsonAndBinaryTypesBinaryFirstWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return jsonAndBinaryTypesBinaryFirstWithResponse(contentType.toString(), input, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * json and octet media types with json type first.
+     *
+     * @param contentType Upload file type.
+     * @param message The payload body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndOctectWithJsonFirst(ContentType1 contentType, BinaryData message) {
+        // Generated convenience method for jsonAndOctectWithJsonFirstWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return jsonAndOctectWithJsonFirstWithResponse(contentType.toString(), message, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * json and octet media types with octet type first.
+     *
+     * @param contentType Upload file type.
+     * @param message The payload body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndOctectWithOctetFirst(ContentType1 contentType, BinaryData message) {
+        // Generated convenience method for jsonAndOctectWithOctetFirstWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return jsonAndOctectWithOctetFirstWithResponse(contentType.toString(), message, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * json and encoding types with json type first.
+     *
+     * @param contentType Upload file type.
+     * @param message The payload body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndEncodingWithJsonFirst(ContentType2 contentType, BinaryData message) {
+        // Generated convenience method for jsonAndEncodingWithJsonFirstWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return jsonAndEncodingWithJsonFirstWithResponse(contentType.toString(), message, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * json and encoding types with encoding type first.
+     *
+     * @param contentType Upload file type.
+     * @param input Input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndEncodingWithEncodingFirst(ContentType2 contentType, String input) {
+        // Generated convenience method for jsonAndEncodingWithEncodingFirstWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return jsonAndEncodingWithEncodingFirstWithResponse(
+                        contentType.toString(), BinaryData.fromObject(input), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * json and text types with text type first.
+     *
+     * @param contentType Upload file type.
+     * @param input Input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndTextWithTextFirst(ContentType3 contentType, String input) {
+        // Generated convenience method for jsonAndTextWithTextFirstWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return jsonAndTextWithTextFirstWithResponse(
+                        contentType.toString(), BinaryData.fromObject(input), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * json and text types with json type first.
+     *
+     * @param contentType Upload file type.
+     * @param input Input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndTextWithJsonFirst(ContentType3 contentType, String input) {
+        // Generated convenience method for jsonAndTextWithJsonFirstWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return jsonAndTextWithJsonFirstWithResponse(
+                        contentType.toString(), BinaryData.fromObject(input), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * json and image types with json type first.
+     *
+     * @param contentType Upload file type.
+     * @param input Input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndImageWithJsonFirst(ContentType4 contentType, BinaryData input) {
+        // Generated convenience method for jsonAndImageWithJsonFirstWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return jsonAndImageWithJsonFirstWithResponse(contentType.toString(), input, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * json and image types with json type first.
+     *
+     * @param contentType The content type.
+     * @param input Input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndImageObjectTypeWithJsonFirst(contentType contentType, BinaryData input) {
+        // Generated convenience method for jsonAndImageObjectTypeWithJsonFirstWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return jsonAndImageObjectTypeWithJsonFirstWithResponse(contentType.toString(), input, requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * image type with non-required body.
+     *
+     * @param input Input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> imageTypeWithNonRequiredBody(Flux<ByteBuffer> input) {
+        // Generated convenience method for imageTypeWithNonRequiredBodyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (input != null) {
+            requestOptions.setBody(BinaryData.fromObject(input));
+        }
+        return imageTypeWithNonRequiredBodyWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * json and image types with non-required body and json type first.
+     *
+     * @param contentType Upload file type.
+     * @param input Input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBody(
+            ContentType4 contentType, Flux<ByteBuffer> input) {
+        // Generated convenience method for jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (input != null) {
+            requestOptions.setBody(BinaryData.fromObject(input));
+        }
+        return jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse(contentType.toString(), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+    }
+
+    /**
+     * json and image types with non-required body and json type first.
+     *
+     * @param input Input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> jsonAndImageObjectTypeJsonFirstWithNonRequiredBody(Flux<ByteBuffer> input) {
+        // Generated convenience method for jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (input != null) {
+            requestOptions.setBody(BinaryData.fromObject(input));
+        }
+        return jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 }

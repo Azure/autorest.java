@@ -15,6 +15,17 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.bodycomplex.implementation.models.BooleanWrapper;
+import fixtures.bodycomplex.implementation.models.ByteWrapper;
+import fixtures.bodycomplex.implementation.models.DateWrapper;
+import fixtures.bodycomplex.implementation.models.DatetimeWrapper;
+import fixtures.bodycomplex.implementation.models.Datetimerfc1123Wrapper;
+import fixtures.bodycomplex.implementation.models.DoubleWrapper;
+import fixtures.bodycomplex.implementation.models.DurationWrapper;
+import fixtures.bodycomplex.implementation.models.FloatWrapper;
+import fixtures.bodycomplex.implementation.models.IntWrapper;
+import fixtures.bodycomplex.implementation.models.LongWrapper;
+import fixtures.bodycomplex.implementation.models.StringWrapper;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = PrimitiveClientBuilder.class)
@@ -588,5 +599,412 @@ public final class PrimitiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putByteWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.client.putByteWithResponse(complexBody, requestOptions).block();
+    }
+
+    /**
+     * Get complex types with integer properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with integer properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public IntWrapper getInt() {
+        // Generated convenience method for getIntWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getIntWithResponse(requestOptions).getValue().toObject(IntWrapper.class);
+    }
+
+    /**
+     * Put complex types with integer properties.
+     *
+     * @param complexBody Please put -1 and 2.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putInt(IntWrapper complexBody) {
+        // Generated convenience method for putIntWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putIntWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get complex types with long properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with long properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public LongWrapper getLong() {
+        // Generated convenience method for getLongWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getLongWithResponse(requestOptions).getValue().toObject(LongWrapper.class);
+    }
+
+    /**
+     * Put complex types with long properties.
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putLong(LongWrapper complexBody) {
+        // Generated convenience method for putLongWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putLongWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get complex types with float properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with float properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public FloatWrapper getFloat() {
+        // Generated convenience method for getFloatWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getFloatWithResponse(requestOptions).getValue().toObject(FloatWrapper.class);
+    }
+
+    /**
+     * Put complex types with float properties.
+     *
+     * @param complexBody Please put 1.05 and -0.003.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putFloat(FloatWrapper complexBody) {
+        // Generated convenience method for putFloatWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putFloatWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get complex types with double properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with double properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DoubleWrapper getDouble() {
+        // Generated convenience method for getDoubleWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDoubleWithResponse(requestOptions).getValue().toObject(DoubleWrapper.class);
+    }
+
+    /**
+     * Put complex types with double properties.
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putDouble(DoubleWrapper complexBody) {
+        // Generated convenience method for putDoubleWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putDoubleWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get complex types with bool properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with bool properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public BooleanWrapper getBool() {
+        // Generated convenience method for getBoolWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getBoolWithResponse(requestOptions).getValue().toObject(BooleanWrapper.class);
+    }
+
+    /**
+     * Put complex types with bool properties.
+     *
+     * @param complexBody Please put true and false.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putBool(BooleanWrapper complexBody) {
+        // Generated convenience method for putBoolWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putBoolWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get complex types with string properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with string properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public StringWrapper getString() {
+        // Generated convenience method for getStringWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getStringWithResponse(requestOptions).getValue().toObject(StringWrapper.class);
+    }
+
+    /**
+     * Put complex types with string properties.
+     *
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putString(StringWrapper complexBody) {
+        // Generated convenience method for putStringWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putStringWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get complex types with date properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with date properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DateWrapper getDate() {
+        // Generated convenience method for getDateWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDateWithResponse(requestOptions).getValue().toObject(DateWrapper.class);
+    }
+
+    /**
+     * Put complex types with date properties.
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putDate(DateWrapper complexBody) {
+        // Generated convenience method for putDateWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putDateWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get complex types with datetime properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetime properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DatetimeWrapper getDateTime() {
+        // Generated convenience method for getDateTimeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDateTimeWithResponse(requestOptions).getValue().toObject(DatetimeWrapper.class);
+    }
+
+    /**
+     * Put complex types with datetime properties.
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putDateTime(DatetimeWrapper complexBody) {
+        // Generated convenience method for putDateTimeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putDateTimeWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get complex types with datetimeRfc1123 properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetimeRfc1123 properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Datetimerfc1123Wrapper getDateTimeRfc1123() {
+        // Generated convenience method for getDateTimeRfc1123WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDateTimeRfc1123WithResponse(requestOptions).getValue().toObject(Datetimerfc1123Wrapper.class);
+    }
+
+    /**
+     * Put complex types with datetimeRfc1123 properties.
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
+        // Generated convenience method for putDateTimeRfc1123WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putDateTimeRfc1123WithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get complex types with duration properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with duration properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DurationWrapper getDuration() {
+        // Generated convenience method for getDurationWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDurationWithResponse(requestOptions).getValue().toObject(DurationWrapper.class);
+    }
+
+    /**
+     * Put complex types with duration properties.
+     *
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putDuration(DurationWrapper complexBody) {
+        // Generated convenience method for putDurationWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putDurationWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get complex types with byte properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with byte properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ByteWrapper getByte() {
+        // Generated convenience method for getByteWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getByteWithResponse(requestOptions).getValue().toObject(ByteWrapper.class);
+    }
+
+    /**
+     * Put complex types with byte properties.
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putByte(ByteWrapper complexBody) {
+        // Generated convenience method for putByteWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putByteWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
     }
 }

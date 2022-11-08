@@ -328,8 +328,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             }
             return createSingleValueAsyncReturnType(singleValueType);
         } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()
-                && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))
-                && operation.getResponses().stream().noneMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {  // temporary skip InputStream, no idea how to do this in PollerFlux
+                && (operation.getExtensions().getXmsPageable() == null || !(operation.getExtensions().getXmsPageable().getNextOperation() == operation))) {
+            // LRO in fluent uses Flux<ByteBuffer> for PollerFactory in azure-core-management
             return createBinaryContentAsyncReturnType();
         } else if (SchemaUtil.responseContainsHeaderSchemas(operation, settings)) {
             // SchemaResponse

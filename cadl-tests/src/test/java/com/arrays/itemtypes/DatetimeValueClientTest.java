@@ -12,7 +12,7 @@ import java.util.List;
 
 class DatetimeValueClientTest {
 
-    DatetimeValueClient client = new ArraysItemTypesClientBuilder().buildDatetimeValueClient();
+    DatetimeValueClient client = new ItemTypesClientBuilder().buildDatetimeValueClient();
 
     @Test
     void get() {

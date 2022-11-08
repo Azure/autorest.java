@@ -10,7 +10,6 @@ import {
   getKnownValues,
   getServiceNamespace,
   getServiceNamespaceString,
-  getServiceTitle,
   getServiceVersion,
   getSummary,
   getVisibility,
@@ -148,10 +147,12 @@ export class CodeModelBuilder {
     };
 
     // init code model
-    let title = getServiceTitle(this.program);
-    if (title === "(title)") {
-      title = namespace;
-    }
+    // let title = getServiceTitle(this.program);
+    // if (title === "(title)") {
+    //   title = namespace;
+    // }
+    const title = serviceNamespace.name;
+
     const description = this.getDoc(serviceNamespace);
     this.codeModel = new CodeModel(title, false, {
       info: {

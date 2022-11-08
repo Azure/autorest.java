@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.httpinfrastructure.implementation.models.MyException;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = MultipleResponsesClientBuilder.class)
@@ -734,5 +735,617 @@ public final class MultipleResponsesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA202ValidWithResponse(RequestOptions requestOptions) {
         return this.client.get200ModelA202ValidWithResponse(requestOptions).block();
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200Model204NoModelDefaultError200Valid() {
+        // Generated convenience method for get200Model204NoModelDefaultError200ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200Model204NoModelDefaultError200ValidWithResponse(requestOptions)
+                .getValue()
+                .toObject(MyException.class);
+    }
+
+    /**
+     * Send a 204 response with no payload.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200Model204NoModelDefaultError204Valid() {
+        // Generated convenience method for get200Model204NoModelDefaultError204ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200Model204NoModelDefaultError204ValidWithResponse(requestOptions)
+                .getValue()
+                .toObject(MyException.class);
+    }
+
+    /**
+     * Send a 201 response with valid payload: {'statusCode': '201'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200Model204NoModelDefaultError201Invalid() {
+        // Generated convenience method for get200Model204NoModelDefaultError201InvalidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200Model204NoModelDefaultError201InvalidWithResponse(requestOptions)
+                .getValue()
+                .toObject(MyException.class);
+    }
+
+    /**
+     * Send a 202 response with no payload:.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200Model204NoModelDefaultError202None() {
+        // Generated convenience method for get200Model204NoModelDefaultError202NoneWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200Model204NoModelDefaultError202NoneWithResponse(requestOptions)
+                .getValue()
+                .toObject(MyException.class);
+    }
+
+    /**
+     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200Model204NoModelDefaultError400Valid() {
+        // Generated convenience method for get200Model204NoModelDefaultError400ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200Model204NoModelDefaultError400ValidWithResponse(requestOptions)
+                .getValue()
+                .toObject(MyException.class);
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200Model201ModelDefaultError200Valid() {
+        // Generated convenience method for get200Model201ModelDefaultError200ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200Model201ModelDefaultError200ValidWithResponse(requestOptions)
+                .getValue()
+                .toObject(MyException.class);
+    }
+
+    /**
+     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200Model201ModelDefaultError201Valid() {
+        // Generated convenience method for get200Model201ModelDefaultError201ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200Model201ModelDefaultError201ValidWithResponse(requestOptions)
+                .getValue()
+                .toObject(MyException.class);
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200Model201ModelDefaultError400Valid() {
+        // Generated convenience method for get200Model201ModelDefaultError400ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200Model201ModelDefaultError400ValidWithResponse(requestOptions)
+                .getValue()
+                .toObject(MyException.class);
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Object get200ModelA201ModelC404ModelDDefaultError200Valid() {
+        // Generated convenience method for get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'httpCode': '201'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Object get200ModelA201ModelC404ModelDDefaultError201Valid() {
+        // Generated convenience method for get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Object get200ModelA201ModelC404ModelDDefaultError404Valid() {
+        // Generated convenience method for get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Object get200ModelA201ModelC404ModelDDefaultError400Valid() {
+        // Generated convenience method for get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 202 response with no payload.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void get202None204NoneDefaultError202None() {
+        // Generated convenience method for get202None204NoneDefaultError202NoneWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        get202None204NoneDefaultError202NoneWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 204 response with no payload.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void get202None204NoneDefaultError204None() {
+        // Generated convenience method for get202None204NoneDefaultError204NoneWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        get202None204NoneDefaultError204NoneWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void get202None204NoneDefaultError400Valid() {
+        // Generated convenience method for get202None204NoneDefaultError400ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        get202None204NoneDefaultError400ValidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 202 response with an unexpected payload {'property': 'value'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void get202None204NoneDefaultNone202Invalid() {
+        // Generated convenience method for get202None204NoneDefaultNone202InvalidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        get202None204NoneDefaultNone202InvalidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 204 response with no payload.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void get202None204NoneDefaultNone204None() {
+        // Generated convenience method for get202None204NoneDefaultNone204NoneWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        get202None204NoneDefaultNone204NoneWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 400 response with no payload.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void get202None204NoneDefaultNone400None() {
+        // Generated convenience method for get202None204NoneDefaultNone400NoneWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        get202None204NoneDefaultNone400NoneWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 400 response with an unexpected payload {'property': 'value'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void get202None204NoneDefaultNone400Invalid() {
+        // Generated convenience method for get202None204NoneDefaultNone400InvalidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        get202None204NoneDefaultNone400InvalidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException getDefaultModelA200Valid() {
+        // Generated convenience method for getDefaultModelA200ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDefaultModelA200ValidWithResponse(requestOptions).getValue().toObject(MyException.class);
+    }
+
+    /**
+     * Send a 200 response with no payload.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException getDefaultModelA200None() {
+        // Generated convenience method for getDefaultModelA200NoneWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDefaultModelA200NoneWithResponse(requestOptions).getValue().toObject(MyException.class);
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getDefaultModelA400Valid() {
+        // Generated convenience method for getDefaultModelA400ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getDefaultModelA400ValidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 400 response with no payload.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getDefaultModelA400None() {
+        // Generated convenience method for getDefaultModelA400NoneWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getDefaultModelA400NoneWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 200 response with invalid payload: {'statusCode': '200'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getDefaultNone200Invalid() {
+        // Generated convenience method for getDefaultNone200InvalidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getDefaultNone200InvalidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 200 response with no payload.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getDefaultNone200None() {
+        // Generated convenience method for getDefaultNone200NoneWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getDefaultNone200NoneWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getDefaultNone400Invalid() {
+        // Generated convenience method for getDefaultNone400InvalidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getDefaultNone400InvalidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 400 response with no payload.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getDefaultNone400None() {
+        // Generated convenience method for getDefaultNone400NoneWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getDefaultNone400NoneWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
+     * for model A.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200ModelA200None() {
+        // Generated convenience method for get200ModelA200NoneWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200ModelA200NoneWithResponse(requestOptions).getValue().toObject(MyException.class);
+    }
+
+    /**
+     * Send a 200 response with payload {'statusCode': '200'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200ModelA200Valid() {
+        // Generated convenience method for get200ModelA200ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200ModelA200ValidWithResponse(requestOptions).getValue().toObject(MyException.class);
+    }
+
+    /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200ModelA200Invalid() {
+        // Generated convenience method for get200ModelA200InvalidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200ModelA200InvalidWithResponse(requestOptions).getValue().toObject(MyException.class);
+    }
+
+    /**
+     * Send a 400 response with no payload client should treat as an http error with no error model.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200ModelA400None() {
+        // Generated convenience method for get200ModelA400NoneWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200ModelA400NoneWithResponse(requestOptions).getValue().toObject(MyException.class);
+    }
+
+    /**
+     * Send a 200 response with payload {'statusCode': '400'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200ModelA400Valid() {
+        // Generated convenience method for get200ModelA400ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200ModelA400ValidWithResponse(requestOptions).getValue().toObject(MyException.class);
+    }
+
+    /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200ModelA400Invalid() {
+        // Generated convenience method for get200ModelA400InvalidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200ModelA400InvalidWithResponse(requestOptions).getValue().toObject(MyException.class);
+    }
+
+    /**
+     * Send a 202 response with payload {'statusCode': '202'}.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyException get200ModelA202Valid() {
+        // Generated convenience method for get200ModelA202ValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return get200ModelA202ValidWithResponse(requestOptions).getValue().toObject(MyException.class);
     }
 }

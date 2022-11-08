@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import fixtures.header.implementation.models.GreyscaleColors;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 
@@ -570,5 +571,579 @@ public final class AutoRestSwaggerBatHeaderServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> customRequestIdWithResponse(RequestOptions requestOptions) {
         return this.client.customRequestIdWithResponse(requestOptions).block();
+    }
+
+    /**
+     * Send a post request with header value "User-Agent": "overwrite".
+     *
+     * @param userAgent Send a post request with header value "User-Agent": "overwrite".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramExistingKey(String userAgent) {
+        // Generated convenience method for paramExistingKeyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        paramExistingKeyWithResponse(userAgent, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header value "User-Agent": "overwrite".
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseExistingKey() {
+        // Generated convenience method for responseExistingKeyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseExistingKeyWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header value "Content-Type": "text/html".
+     *
+     * @param contentType Send a post request with header value "Content-Type": "text/html".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramProtectedKey(String contentType) {
+        // Generated convenience method for paramProtectedKeyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        paramProtectedKeyWithResponse(contentType, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header value "Content-Type": "text/html".
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseProtectedKey() {
+        // Generated convenience method for responseProtectedKeyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseProtectedKeyWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 1 or -2.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramInteger(String scenario, int value) {
+        // Generated convenience method for paramIntegerWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        paramIntegerWithResponse(scenario, value, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header value "value": 1 or -2.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseInteger(String scenario) {
+        // Generated convenience method for responseIntegerWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseIntegerWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
+     * -2.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 105 or -2.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramLong(String scenario, long value) {
+        // Generated convenience method for paramLongWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        paramLongWithResponse(scenario, value, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header value "value": 105 or -2.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseLong(String scenario) {
+        // Generated convenience method for responseLongWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseLongWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
+     * -3.0.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 0.07 or -3.0.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramFloat(String scenario, float value) {
+        // Generated convenience method for paramFloatWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        paramFloatWithResponse(scenario, value, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header value "value": 0.07 or -3.0.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseFloat(String scenario) {
+        // Generated convenience method for responseFloatWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseFloatWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
+     * -3.0.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param value Send a post request with header values 7e120 or -3.0.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramDouble(String scenario, double value) {
+        // Generated convenience method for paramDoubleWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        paramDoubleWithResponse(scenario, value, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header value "value": 7e120 or -3.0.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseDouble(String scenario) {
+        // Generated convenience method for responseDoubleWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseDoubleWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
+     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
+     * @param value Send a post request with header values true or false.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramBool(String scenario, boolean value) {
+        // Generated convenience method for paramBoolWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        paramBoolWithResponse(scenario, value, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header value "value": true or false.
+     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseBool(String scenario) {
+        // Generated convenience method for responseBoolWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseBoolWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
+     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramString(String scenario, String value) {
+        // Generated convenience method for paramStringWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (value != null) {
+            requestOptions.setHeader("value", value);
+        }
+        paramStringWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseString(String scenario) {
+        // Generated convenience method for responseStringWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseStringWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
+     * "0001-01-01".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramDate(String scenario, String value) {
+        // Generated convenience method for paramDateWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        paramDateWithResponse(scenario, value, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header values "2010-01-01" or "0001-01-01".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseDate(String scenario) {
+        // Generated convenience method for responseDateWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseDateWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
+     * "value": "0001-01-01T00:00:00Z".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramDatetime(String scenario, OffsetDateTime value) {
+        // Generated convenience method for paramDatetimeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        paramDatetimeWithResponse(scenario, value, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseDatetime(String scenario) {
+        // Generated convenience method for responseDatetimeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseDatetimeWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
+     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00
+     *     GMT".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramDatetimeRfc1123(String scenario, OffsetDateTime value) {
+        // Generated convenience method for paramDatetimeRfc1123WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (value != null) {
+            requestOptions.setHeader("value", String.valueOf(value));
+        }
+        paramDatetimeRfc1123WithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseDatetimeRfc1123(String scenario) {
+        // Generated convenience method for responseDatetimeRfc1123WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseDatetimeRfc1123WithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param value Send a post request with header values "P123DT22H14M12.011S".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramDuration(String scenario, Duration value) {
+        // Generated convenience method for paramDurationWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        paramDurationWithResponse(scenario, value, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header values "P123DT22H14M12.011S".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseDuration(String scenario) {
+        // Generated convenience method for responseDurationWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseDurationWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramByte(String scenario, byte[] value) {
+        // Generated convenience method for paramByteWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        paramByteWithResponse(scenario, value, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseByte(String scenario) {
+        // Generated convenience method for responseByteWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseByteWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @param value Send a post request with header values 'GREY'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void paramEnum(String scenario, GreyscaleColors value) {
+        // Generated convenience method for paramEnumWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (value != null) {
+            requestOptions.setHeader("value", value.toString());
+        }
+        paramEnumWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Get a response with header values "GREY" or null.
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void responseEnum(String scenario) {
+        // Generated convenience method for responseEnumWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        responseEnumWithResponse(scenario, requestOptions).getValue();
+    }
+
+    /**
+     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void customRequestId() {
+        // Generated convenience method for customRequestIdWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        customRequestIdWithResponse(requestOptions).getValue();
     }
 }

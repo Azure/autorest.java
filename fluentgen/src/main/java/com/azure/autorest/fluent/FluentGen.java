@@ -371,6 +371,10 @@ public class FluentGen extends Javagen {
     }
 
     void clear() {
+        FluentStatic.setClient(null);
+        FluentStatic.setFluentClient(null);
+        FluentStatic.setFluentJavaSettings(null);
+
         JavaSettings.clear();
         ClientModels.getInstance().clear();
         fluentJavaSettings = null;

@@ -11,7 +11,7 @@ import java.util.List;
 
 class Int32ValueClientTest {
 
-    Int32ValueClient client = new ArraysItemTypesClientBuilder().buildInt32ValueClient();
+    Int32ValueClient client = new ItemTypesClientBuilder().buildInt32ValueClient();
 
     @Test
     void get() {

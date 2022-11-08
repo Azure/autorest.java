@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.models.property.optional.models.CollectionsModelProperty;
 
-/** Initializes a new instance of the synchronous ModelsPropertyOptionalClient type. */
-@ServiceClient(builder = ModelsPropertyOptionalClientBuilder.class)
+/** Initializes a new instance of the synchronous OptionalClient type. */
+@ServiceClient(builder = OptionalClientBuilder.class)
 public final class CollectionsModelClient {
     @Generated private final CollectionsModelAsyncClient client;
 

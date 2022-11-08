@@ -46,11 +46,11 @@ public final class Int64ValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryInt64Values to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for DictionaryClientInt64Values to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "DictionaryInt64Value")
+    @ServiceInterface(name = "DictionaryClientInt6")
     private interface Int64ValuesService {
         @Get("/dictionary/int64")
         @ExpectedResponses({200})

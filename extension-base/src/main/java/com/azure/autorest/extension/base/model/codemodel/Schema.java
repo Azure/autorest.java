@@ -271,6 +271,7 @@ public class Schema extends Metadata {
         ANY("any"),
         ANY_OBJECT("any-object"),
         AND("and"),
+        ARM_ID("arm-id"),
         ARRAY("array"),
         BINARY("binary"),
         BOOLEAN("boolean"),

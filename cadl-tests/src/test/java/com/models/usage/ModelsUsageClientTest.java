@@ -13,7 +13,8 @@ import org.junit.jupiter.api.Test;
 @Disabled("https://github.com/Azure/cadl-ranch/issues/157")
 class ModelsUsageClientTest {
 
-    ModelsUsageClient client = new ModelsUsageClientBuilder().buildClient();
+    UsageClient client = new UsageClientBuilder().buildClient();
+
     @Test
     void input() {
         InputRecord inputRecord = new InputRecord("example-value");

@@ -25,6 +25,16 @@ public final class PartialUpdateAsyncClient {
     @Generated private final PartialUpdateClientImpl serviceClient;
 
     /**
+     * Initializes an instance of PartialUpdateAsyncClient class.
+     *
+     * @param serviceClient the service client implementation.
+     */
+    @Generated
+    PartialUpdateAsyncClient(PartialUpdateClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
+    }
+
+    /**
      * The read operation.
      *
      * <p><strong>Response Body Schema</strong>
@@ -48,16 +58,6 @@ public final class PartialUpdateAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> readWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.readWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Initializes an instance of PartialUpdateAsyncClient class.
-     *
-     * @param serviceClient the service client implementation.
-     */
-    @Generated
-    PartialUpdateAsyncClient(PartialUpdateClientImpl serviceClient) {
-        this.serviceClient = serviceClient;
     }
 
     /**

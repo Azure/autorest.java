@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import fixtures.url.implementation.models.UriColor;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -478,5 +479,487 @@ public final class PathsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unixTimeUrlWithResponse(long unixTimeUrlPath, RequestOptions requestOptions) {
         return this.client.unixTimeUrlWithResponse(unixTimeUrlPath, requestOptions).block();
+    }
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getBooleanTrue() {
+        // Generated convenience method for getBooleanTrueWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getBooleanTrueWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get false Boolean value on path.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getBooleanFalse() {
+        // Generated convenience method for getBooleanFalseWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getBooleanFalseWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get '1000000' integer value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getIntOneMillion() {
+        // Generated convenience method for getIntOneMillionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getIntOneMillionWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getIntNegativeOneMillion() {
+        // Generated convenience method for getIntNegativeOneMillionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getIntNegativeOneMillionWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getTenBillion() {
+        // Generated convenience method for getTenBillionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getTenBillionWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getNegativeTenBillion() {
+        // Generated convenience method for getNegativeTenBillionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getNegativeTenBillionWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void floatScientificPositive() {
+        // Generated convenience method for floatScientificPositiveWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        floatScientificPositiveWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void floatScientificNegative() {
+        // Generated convenience method for floatScientificNegativeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        floatScientificNegativeWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void doubleDecimalPositive() {
+        // Generated convenience method for doubleDecimalPositiveWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        doubleDecimalPositiveWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void doubleDecimalNegative() {
+        // Generated convenience method for doubleDecimalNegativeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        doubleDecimalNegativeWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void stringUnicode() {
+        // Generated convenience method for stringUnicodeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        stringUnicodeWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void stringUrlEncoded() {
+        // Generated convenience method for stringUrlEncodedWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        stringUrlEncodedWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get 'begin!*'();:@&amp;=+$,end
+     *
+     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void stringUrlNonEncoded() {
+        // Generated convenience method for stringUrlNonEncodedWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        stringUrlNonEncodedWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get ''.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void stringEmpty() {
+        // Generated convenience method for stringEmptyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        stringEmptyWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get null (should throw).
+     *
+     * @param stringPath null string value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void stringNull(String stringPath) {
+        // Generated convenience method for stringNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        stringNullWithResponse(stringPath, requestOptions).getValue();
+    }
+
+    /**
+     * Get using uri with 'green color' in path parameter.
+     *
+     * @param enumPath send the value green.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void enumValid(UriColor enumPath) {
+        // Generated convenience method for enumValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        enumValidWithResponse(enumPath.toString(), requestOptions).getValue();
+    }
+
+    /**
+     * Get null (should throw on the client before the request is sent on wire).
+     *
+     * @param enumPath send null should throw.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void enumNull(UriColor enumPath) {
+        // Generated convenience method for enumNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        enumNullWithResponse(enumPath.toString(), requestOptions).getValue();
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void byteMultiByte(byte[] bytePath) {
+        // Generated convenience method for byteMultiByteWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        byteMultiByteWithResponse(bytePath, requestOptions).getValue();
+    }
+
+    /**
+     * Get '' as byte array.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void byteEmpty() {
+        // Generated convenience method for byteEmptyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        byteEmptyWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get null as byte array (should throw).
+     *
+     * @param bytePath null as byte array (should throw).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void byteNull(byte[] bytePath) {
+        // Generated convenience method for byteNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        byteNullWithResponse(bytePath, requestOptions).getValue();
+    }
+
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void dateValid() {
+        // Generated convenience method for dateValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        dateValidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
+     *
+     * @param datePath null as date (should throw).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void dateNull(String datePath) {
+        // Generated convenience method for dateNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        dateNullWithResponse(datePath, requestOptions).getValue();
+    }
+
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void dateTimeValid() {
+        // Generated convenience method for dateTimeValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        dateTimeValidWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
+     *
+     * @param dateTimePath null as date-time.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void dateTimeNull(OffsetDateTime dateTimePath) {
+        // Generated convenience method for dateTimeNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        dateTimeNullWithResponse(dateTimePath, requestOptions).getValue();
+    }
+
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     *
+     * @param base64UrlPath base64url encoded value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void base64Url(byte[] base64UrlPath) {
+        // Generated convenience method for base64UrlWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        base64UrlWithResponse(base64UrlPath, requestOptions).getValue();
+    }
+
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     csv-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayCsvInPath(List<String> arrayPath) {
+        // Generated convenience method for arrayCsvInPathWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        arrayCsvInPathWithResponse(arrayPath, requestOptions).getValue();
+    }
+
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     *
+     * @param unixTimeUrlPath Unix time encoded value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void unixTimeUrl(long unixTimeUrlPath) {
+        // Generated convenience method for unixTimeUrlWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        unixTimeUrlWithResponse(unixTimeUrlPath, requestOptions).getValue();
     }
 }

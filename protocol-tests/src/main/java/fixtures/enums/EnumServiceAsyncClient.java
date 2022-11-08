@@ -16,6 +16,14 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.enums.implementation.EnumServiceClientImpl;
+import fixtures.enums.implementation.models.Enum0;
+import fixtures.enums.implementation.models.Enum1;
+import fixtures.enums.implementation.models.Enum2;
+import fixtures.enums.implementation.models.Enum3;
+import fixtures.enums.implementation.models.Enum4;
+import fixtures.enums.implementation.models.Enum5;
+import fixtures.enums.implementation.models.Enum6;
+import fixtures.enums.implementation.models.Enum7;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous EnumServiceClient type. */
@@ -148,5 +156,104 @@ public final class EnumServiceAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNonRequiredBodyEnumsWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putNonRequiredBodyEnumsWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * query enums operation.
+     *
+     * @param queryIntegerEnum integer enum with three values.
+     * @param queryBooleanEnum boolean enum with two values.
+     * @param queryRequiredEnum required enum with three values.
+     * @param queryNonRequiredEnum non required enum with three values.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putQueryEnums(
+            Enum0 queryIntegerEnum, Enum1 queryBooleanEnum, Enum3 queryRequiredEnum, Enum2 queryNonRequiredEnum) {
+        // Generated convenience method for putQueryEnumsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (queryNonRequiredEnum != null) {
+            requestOptions.addQueryParam("query-non-required-enum", queryNonRequiredEnum.toString());
+        }
+        return putQueryEnumsWithResponse(
+                        String.valueOf(queryIntegerEnum.toInt()),
+                        String.valueOf(queryBooleanEnum.toBoolean()),
+                        queryRequiredEnum.toString(),
+                        requestOptions)
+                .then();
+    }
+
+    /**
+     * enums header operation.
+     *
+     * @param headerRequiredStringEnum required string enum with three values.
+     * @param headerNonRequiredStringEnum non required string enum with three values.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putHeaderEnums(Enum4 headerRequiredStringEnum, Enum5 headerNonRequiredStringEnum) {
+        // Generated convenience method for putHeaderEnumsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (headerNonRequiredStringEnum != null) {
+            requestOptions.setHeader("header-non-required-string-enum", headerNonRequiredStringEnum.toString());
+        }
+        return putHeaderEnumsWithResponse(headerRequiredStringEnum.toString(), requestOptions).then();
+    }
+
+    /**
+     * enums required body operation.
+     *
+     * @param bodyRequiredEnum body required enum.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putRequiredBodyEnums(Enum6 bodyRequiredEnum) {
+        // Generated convenience method for putRequiredBodyEnumsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putRequiredBodyEnumsWithResponse(BinaryData.fromObject(bodyRequiredEnum), requestOptions).then();
+    }
+
+    /**
+     * enums non required body operation.
+     *
+     * @param bodyNonRequiredEnum body non required enum.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putNonRequiredBodyEnums(Enum7 bodyNonRequiredEnum) {
+        // Generated convenience method for putNonRequiredBodyEnumsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (bodyNonRequiredEnum != null) {
+            requestOptions.setBody(BinaryData.fromObject(bodyNonRequiredEnum));
+        }
+        return putNonRequiredBodyEnumsWithResponse(requestOptions).then();
     }
 }

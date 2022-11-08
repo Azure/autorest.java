@@ -11,7 +11,7 @@ import java.util.List;
 
 class Int64ValueClientTest {
 
-    Int64ValueClient client = new ArraysItemTypesClientBuilder().buildInt64ValueClient();
+    Int64ValueClient client = new ItemTypesClientBuilder().buildInt64ValueClient();
 
     @Test
     void get() {

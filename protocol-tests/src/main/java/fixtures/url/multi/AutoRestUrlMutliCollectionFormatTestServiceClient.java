@@ -14,6 +14,9 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /** Initializes a new instance of the synchronous AutoRestUrlMutliCollectionFormatTestServiceClient type. */
 @ServiceClient(builder = AutoRestUrlMutliCollectionFormatTestServiceClientBuilder.class)
@@ -107,5 +110,84 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringMultiValidWithResponse(RequestOptions requestOptions) {
         return this.client.arrayStringMultiValidWithResponse(requestOptions).block();
+    }
+
+    /**
+     * Get a null array of string using the multi-array format.
+     *
+     * @param arrayQuery a null array of string using the multi-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayStringMultiNull(List<String> arrayQuery) {
+        // Generated convenience method for arrayStringMultiNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (arrayQuery != null) {
+            requestOptions.addQueryParam(
+                    "arrayQuery",
+                    arrayQuery.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
+        }
+        arrayStringMultiNullWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get an empty array [] of string using the multi-array format.
+     *
+     * @param arrayQuery an empty array [] of string using the multi-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayStringMultiEmpty(List<String> arrayQuery) {
+        // Generated convenience method for arrayStringMultiEmptyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (arrayQuery != null) {
+            requestOptions.addQueryParam(
+                    "arrayQuery",
+                    arrayQuery.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
+        }
+        arrayStringMultiEmptyWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     mult-array format.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void arrayStringMultiValid(List<String> arrayQuery) {
+        // Generated convenience method for arrayStringMultiValidWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (arrayQuery != null) {
+            requestOptions.addQueryParam(
+                    "arrayQuery",
+                    arrayQuery.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
+        }
+        arrayStringMultiValidWithResponse(requestOptions).getValue();
     }
 }

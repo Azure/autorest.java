@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.requiredoptionalbody.implementation.RequiredOptionalBodyClientImpl;
+import fixtures.requiredoptionalbody.implementation.models.Deployment;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous RequiredOptionalBodyClient type. */
@@ -152,5 +153,52 @@ public final class RequiredOptionalBodyAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> optionalObjectWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.optionalObjectWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * Creates or updates a deployment.
+     *
+     * @param deployment The deployment properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return deployment metadata on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Deployment> createOrUpdateDeployment(Deployment deployment) {
+        // Generated convenience method for createOrUpdateDeploymentWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createOrUpdateDeploymentWithResponse(BinaryData.fromObject(deployment), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Deployment.class));
+    }
+
+    /**
+     * optional object.
+     *
+     * @param deployment The deployment properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return deployment metadata on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Deployment> optionalObject(Deployment deployment) {
+        // Generated convenience method for optionalObjectWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (deployment != null) {
+            requestOptions.setBody(BinaryData.fromObject(deployment));
+        }
+        return optionalObjectWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Deployment.class));
     }
 }

@@ -15,6 +15,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.bodystring.implementation.models.Colors;
+import fixtures.bodystring.implementation.models.RefColorConstant;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type. */
 @ServiceClient(builder = EnumClientBuilder.class)
@@ -172,5 +174,116 @@ public final class EnumClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedConstantWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
         return this.client.putReferencedConstantWithResponse(enumStringBody, requestOptions).block();
+    }
+
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Colors getNotExpandable() {
+        // Generated convenience method for getNotExpandableWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return Colors.fromString(getNotExpandableWithResponse(requestOptions).getValue());
+    }
+
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param stringBody string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putNotExpandable(Colors stringBody) {
+        // Generated convenience method for putNotExpandableWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putNotExpandableWithResponse(BinaryData.fromObject(stringBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Colors getReferenced() {
+        // Generated convenience method for getReferencedWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return Colors.fromString(getReferencedWithResponse(requestOptions).getValue());
+    }
+
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param enumStringBody enum string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putReferenced(Colors enumStringBody) {
+        // Generated convenience method for putReferencedWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putReferencedWithResponse(BinaryData.fromObject(enumStringBody), requestOptions).getValue();
+    }
+
+    /**
+     * Get value 'green-color' from the constant.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return value 'green-color' from the constant.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public RefColorConstant getReferencedConstant() {
+        // Generated convenience method for getReferencedConstantWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getReferencedConstantWithResponse(requestOptions).getValue().toObject(RefColorConstant.class);
+    }
+
+    /**
+     * Sends value 'green-color' from a constant.
+     *
+     * @param enumStringBody enum string body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putReferencedConstant(RefColorConstant enumStringBody) {
+        // Generated convenience method for putReferencedConstantWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putReferencedConstantWithResponse(BinaryData.fromObject(enumStringBody), requestOptions).getValue();
     }
 }

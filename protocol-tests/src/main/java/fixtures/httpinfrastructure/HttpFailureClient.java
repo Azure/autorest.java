@@ -95,4 +95,58 @@ public final class HttpFailureClient {
     public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
         return this.client.getNoModelEmptyWithResponse(requestOptions).block();
     }
+
+    /**
+     * Get empty error form server.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty error form server.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean getEmptyError() {
+        // Generated convenience method for getEmptyErrorWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getEmptyErrorWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get empty error form server.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty error form server.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean getNoModelError() {
+        // Generated convenience method for getNoModelErrorWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getNoModelErrorWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Get empty response from server.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return empty response from server.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean getNoModelEmpty() {
+        // Generated convenience method for getNoModelEmptyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getNoModelEmptyWithResponse(requestOptions).getValue();
+    }
 }

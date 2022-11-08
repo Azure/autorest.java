@@ -10,46 +10,55 @@ public class MethodPageDetails {
     /**
      * Get whether or not this method is a request to get the next page of a sequence of pages.
      */
-    private String nextLinkName;
+    private final String nextLinkName;
+    private final IType nextLinkType;
+
+    private final String itemName;
+
     /**
-     * Raw nextLink name. It is the name in swagger and in response.
+     * Serialized nextLink name. It is the name in swagger and in response.
      */
-    private String rawNextLinkName;
-    private String itemName;
+    private final String serializedNextLinkName;
     /**
-     * Raw item name. It is the name in swagger and in response.
+     * Serialized item name. It is the name in swagger and in response.
      */
-    private String rawItemName;
-    private ClientMethod nextMethod;
+    private final String serializedItemName;
+
+    private final ClientMethod nextMethod;
 
     // Proxy method return type is Flux<ByteBuffer>. Client method return type is PagedResponse<>.
     // This intermediate type is the type of pagination response (the type with values and nextLink).
-    private IType lroIntermediateType;
+    private final IType lroIntermediateType;
 
-    public MethodPageDetails(String nextLinkName, String itemName, ClientMethod nextMethod, IType lroIntermediateType,
-                             String rawNextLinkName, String rawItemName) {
+    public MethodPageDetails(String nextLinkName, IType nextLinkType, String itemName, ClientMethod nextMethod, IType lroIntermediateType,
+                             String serializedNextLinkName, String serializedItemName) {
         this.nextLinkName = nextLinkName;
+        this.nextLinkType = nextLinkType;
         this.itemName = itemName;
         this.nextMethod = nextMethod;
         this.lroIntermediateType = lroIntermediateType;
-        this.rawNextLinkName = rawNextLinkName;
-        this.rawItemName = rawItemName;
+        this.serializedNextLinkName = serializedNextLinkName;
+        this.serializedItemName = serializedItemName;
     }
 
     public String getNextLinkName() {
         return nextLinkName;
     }
 
-    public String getRawNextLinkName() {
-        return rawNextLinkName;
+    public IType getNextLinkType() {
+        return nextLinkType;
+    }
+
+    public String getSerializedNextLinkName() {
+        return serializedNextLinkName;
     }
 
     public String getItemName() {
         return itemName;
     }
 
-    public String getRawItemName() {
-        return rawItemName;
+    public String getSerializedItemName() {
+        return serializedItemName;
     }
 
     public ClientMethod getNextMethod() {

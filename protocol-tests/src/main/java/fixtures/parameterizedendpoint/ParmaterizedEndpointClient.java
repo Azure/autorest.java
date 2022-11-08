@@ -45,4 +45,21 @@ public final class ParmaterizedEndpointClient {
     public Response<Void> getWithResponse(RequestOptions requestOptions) {
         return this.client.getWithResponse(requestOptions).block();
     }
+
+    /**
+     * Basic get to make sure base url formatting of 'endpoint' works.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void get() {
+        // Generated convenience method for getWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getWithResponse(requestOptions).getValue();
+    }
 }

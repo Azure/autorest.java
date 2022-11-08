@@ -16,6 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.PrimitivesImpl;
+import fixtures.bodycomplex.implementation.models.BooleanWrapper;
+import fixtures.bodycomplex.implementation.models.ByteWrapper;
+import fixtures.bodycomplex.implementation.models.DateWrapper;
+import fixtures.bodycomplex.implementation.models.DatetimeWrapper;
+import fixtures.bodycomplex.implementation.models.Datetimerfc1123Wrapper;
+import fixtures.bodycomplex.implementation.models.DoubleWrapper;
+import fixtures.bodycomplex.implementation.models.DurationWrapper;
+import fixtures.bodycomplex.implementation.models.FloatWrapper;
+import fixtures.bodycomplex.implementation.models.IntWrapper;
+import fixtures.bodycomplex.implementation.models.LongWrapper;
+import fixtures.bodycomplex.implementation.models.StringWrapper;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
@@ -596,5 +607,445 @@ public final class PrimitiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putByteWithResponseAsync(complexBody, requestOptions);
+    }
+
+    /**
+     * Get complex types with integer properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with integer properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<IntWrapper> getInt() {
+        // Generated convenience method for getIntWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getIntWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(IntWrapper.class));
+    }
+
+    /**
+     * Put complex types with integer properties.
+     *
+     * @param complexBody Please put -1 and 2.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putInt(IntWrapper complexBody) {
+        // Generated convenience method for putIntWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putIntWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
+    }
+
+    /**
+     * Get complex types with long properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with long properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LongWrapper> getLong() {
+        // Generated convenience method for getLongWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getLongWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(LongWrapper.class));
+    }
+
+    /**
+     * Put complex types with long properties.
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putLong(LongWrapper complexBody) {
+        // Generated convenience method for putLongWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putLongWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
+    }
+
+    /**
+     * Get complex types with float properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with float properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<FloatWrapper> getFloat() {
+        // Generated convenience method for getFloatWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getFloatWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(FloatWrapper.class));
+    }
+
+    /**
+     * Put complex types with float properties.
+     *
+     * @param complexBody Please put 1.05 and -0.003.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putFloat(FloatWrapper complexBody) {
+        // Generated convenience method for putFloatWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putFloatWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
+    }
+
+    /**
+     * Get complex types with double properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with double properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DoubleWrapper> getDouble() {
+        // Generated convenience method for getDoubleWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDoubleWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(DoubleWrapper.class));
+    }
+
+    /**
+     * Put complex types with double properties.
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDouble(DoubleWrapper complexBody) {
+        // Generated convenience method for putDoubleWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putDoubleWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
+    }
+
+    /**
+     * Get complex types with bool properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with bool properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BooleanWrapper> getBool() {
+        // Generated convenience method for getBoolWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getBoolWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(BooleanWrapper.class));
+    }
+
+    /**
+     * Put complex types with bool properties.
+     *
+     * @param complexBody Please put true and false.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putBool(BooleanWrapper complexBody) {
+        // Generated convenience method for putBoolWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putBoolWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
+    }
+
+    /**
+     * Get complex types with string properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with string properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<StringWrapper> getString() {
+        // Generated convenience method for getStringWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getStringWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(StringWrapper.class));
+    }
+
+    /**
+     * Put complex types with string properties.
+     *
+     * @param complexBody Please put 'goodrequest', '', and null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putString(StringWrapper complexBody) {
+        // Generated convenience method for putStringWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putStringWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
+    }
+
+    /**
+     * Get complex types with date properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with date properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DateWrapper> getDate() {
+        // Generated convenience method for getDateWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDateWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(DateWrapper.class));
+    }
+
+    /**
+     * Put complex types with date properties.
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDate(DateWrapper complexBody) {
+        // Generated convenience method for putDateWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putDateWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
+    }
+
+    /**
+     * Get complex types with datetime properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetime properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DatetimeWrapper> getDateTime() {
+        // Generated convenience method for getDateTimeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDateTimeWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(DatetimeWrapper.class));
+    }
+
+    /**
+     * Put complex types with datetime properties.
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDateTime(DatetimeWrapper complexBody) {
+        // Generated convenience method for putDateTimeWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putDateTimeWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
+    }
+
+    /**
+     * Get complex types with datetimeRfc1123 properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with datetimeRfc1123 properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Datetimerfc1123Wrapper> getDateTimeRfc1123() {
+        // Generated convenience method for getDateTimeRfc1123WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDateTimeRfc1123WithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Datetimerfc1123Wrapper.class));
+    }
+
+    /**
+     * Put complex types with datetimeRfc1123 properties.
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
+        // Generated convenience method for putDateTimeRfc1123WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putDateTimeRfc1123WithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
+    }
+
+    /**
+     * Get complex types with duration properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with duration properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<DurationWrapper> getDuration() {
+        // Generated convenience method for getDurationWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDurationWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(DurationWrapper.class));
+    }
+
+    /**
+     * Put complex types with duration properties.
+     *
+     * @param complexBody Please put 'P123DT22H14M12.011S'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putDuration(DurationWrapper complexBody) {
+        // Generated convenience method for putDurationWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putDurationWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
+    }
+
+    /**
+     * Get complex types with byte properties.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return complex types with byte properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ByteWrapper> getByte() {
+        // Generated convenience method for getByteWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getByteWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(ByteWrapper.class));
+    }
+
+    /**
+     * Put complex types with byte properties.
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putByte(ByteWrapper complexBody) {
+        // Generated convenience method for putByteWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putByteWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
     }
 }

@@ -275,4 +275,158 @@ public final class HttpRetryClient {
     public Response<Void> patch504WithResponse(RequestOptions requestOptions) {
         return this.client.patch504WithResponse(requestOptions).block();
     }
+
+    /**
+     * Return 408 status code, then 200 after retry.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void head408() {
+        // Generated convenience method for head408WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        head408WithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void put500() {
+        // Generated convenience method for put500WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        put500WithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void patch500() {
+        // Generated convenience method for patch500WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        patch500WithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Return 502 status code, then 200 after retry.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void get502() {
+        // Generated convenience method for get502WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        get502WithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Return 502 status code, then 200 after retry.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return simple boolean.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean options502() {
+        // Generated convenience method for options502WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return options502WithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void post503() {
+        // Generated convenience method for post503WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        post503WithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void delete503() {
+        // Generated convenience method for delete503WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        delete503WithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void put504() {
+        // Generated convenience method for put504WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        put504WithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void patch504() {
+        // Generated convenience method for patch504WithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        patch504WithResponse(requestOptions).getValue();
+    }
 }

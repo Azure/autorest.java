@@ -27,10 +27,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Utility class for {@link ModelTemplate} that handles generating {@link HttpHeaders} deserialization to POJOs.
@@ -39,7 +38,7 @@ public final class ModelTemplateHeaderHelper {
     private static final Map<String, String> HEADER_TO_KNOWN_HTTPHEADERNAME;
 
     static {
-        Map<String, String> headerToKnownHttpHeaderName = new HashMap<>();
+        Map<String, String> headerToKnownHttpHeaderName = new TreeMap<>(String::compareToIgnoreCase);
         for (Field httpHeaderNameConstant : HttpHeaderName.class.getDeclaredFields()) {
             if (httpHeaderNameConstant.getType() != HttpHeaderName.class
                 || !isPublicConstant(httpHeaderNameConstant.getModifiers())) {
@@ -107,7 +106,7 @@ public final class ModelTemplateHeaderHelper {
                 continue;
             }
 
-            if (HEADER_TO_KNOWN_HTTPHEADERNAME.containsKey(property.getSerializedName().toLowerCase(Locale.ROOT))) {
+            if (HEADER_TO_KNOWN_HTTPHEADERNAME.containsKey(property.getSerializedName())) {
                 // Header is a well-known HttpHeaderName, don't need to create a private constant.
                 continue;
             }
@@ -127,8 +126,8 @@ public final class ModelTemplateHeaderHelper {
                 || wireType instanceof EnumType || wireType instanceof GenericType);
 
         // No matter the wire type the rawHeaders will need to be accessed.
-        String httpHeaderName = HEADER_TO_KNOWN_HTTPHEADERNAME.containsKey(property.getSerializedName().toLowerCase(Locale.ROOT))
-            ? "HttpHeaderName." + CodeNamer.getEnumMemberName(property.getSerializedName())
+        String knownHttpHeaderNameConstant = HEADER_TO_KNOWN_HTTPHEADERNAME.get(property.getSerializedName());
+        String httpHeaderName = knownHttpHeaderNameConstant != null ? "HttpHeaderName." + knownHttpHeaderNameConstant
             : CodeNamer.getEnumMemberName(property.getSerializedName());
 
         String rawHeaderAccess = String.format("rawHeaders.getValue(%s)", httpHeaderName);

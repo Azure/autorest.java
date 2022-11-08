@@ -32,25 +32,25 @@ public final class Float32ValuesImpl {
     private final Float32ValuesService service;
 
     /** The service client containing this operation class. */
-    private final ArraysItemTypesClientImpl client;
+    private final ItemTypesClientImpl client;
 
     /**
      * Initializes an instance of Float32ValuesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    Float32ValuesImpl(ArraysItemTypesClientImpl client) {
+    Float32ValuesImpl(ItemTypesClientImpl client) {
         this.service =
                 RestProxy.create(Float32ValuesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ArraysItemTypesFloat32Values to be used by the proxy service to
+     * The interface defining all the services for ItemTypesClientFloat32Values to be used by the proxy service to
      * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ArraysItemTypesFloat")
+    @ServiceInterface(name = "ItemTypesClientFloat")
     private interface Float32ValuesService {
         @Get("/arrays/item-types/float32")
         @ExpectedResponses({200})

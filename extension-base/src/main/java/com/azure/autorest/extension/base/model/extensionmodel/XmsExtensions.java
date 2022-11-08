@@ -30,6 +30,8 @@ public class XmsExtensions {
 
     private XmsInternalAutorestAnonymousSchema xmsInternalAutorestAnonymousSchema;
 
+    private XmsArmIdDetails xmsArmIdDetails;
+
     private XmsExamples xmsExamples;
 
     public XmsEnum getXmsEnum() {
@@ -126,6 +128,14 @@ public class XmsExtensions {
 
     public void setXmsLongRunningOperationOptions(XmsLongRunningOperationOptions xmsLongRunningOperationOptions) {
         this.xmsLongRunningOperationOptions = xmsLongRunningOperationOptions;
+    }
+
+    public XmsArmIdDetails getXmsArmIdDetails() {
+        return xmsArmIdDetails;
+    }
+
+    public void setXmsArmIdDetails(XmsArmIdDetails xmsArmIdDetails) {
+        this.xmsArmIdDetails = xmsArmIdDetails;
     }
 
     public XmsExamples getXmsExamples() {
