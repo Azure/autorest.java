@@ -32,25 +32,25 @@ public final class UnknownValuesImpl {
     private final UnknownValuesService service;
 
     /** The service client containing this operation class. */
-    private final ArraysItemTypesClientImpl client;
+    private final ItemTypesClientImpl client;
 
     /**
      * Initializes an instance of UnknownValuesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    UnknownValuesImpl(ArraysItemTypesClientImpl client) {
+    UnknownValuesImpl(ItemTypesClientImpl client) {
         this.service =
                 RestProxy.create(UnknownValuesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ArraysItemTypesUnknownValues to be used by the proxy service to
+     * The interface defining all the services for ItemTypesClientUnknownValues to be used by the proxy service to
      * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ArraysItemTypesUnkno")
+    @ServiceInterface(name = "ItemTypesClientUnkno")
     public interface UnknownValuesService {
         @Get("/arrays/item-types/unknown")
         @ExpectedResponses({200})

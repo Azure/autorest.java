@@ -20,8 +20,8 @@ import com.azure.core.util.serializer.TypeReference;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ArraysItemTypesClient type. */
-@ServiceClient(builder = ArraysItemTypesClientBuilder.class, isAsync = true)
+/** Initializes a new instance of the asynchronous ItemTypesClient type. */
+@ServiceClient(builder = ItemTypesClientBuilder.class, isAsync = true)
 public final class StringValueAsyncClient {
     @Generated private final StringValuesImpl serviceClient;
 

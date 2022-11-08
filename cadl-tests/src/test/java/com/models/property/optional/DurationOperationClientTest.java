@@ -12,7 +12,7 @@ import java.time.Duration;
 
 class DurationOperationClientTest {
 
-    DurationOperationClient client = new ModelsPropertyOptionalClientBuilder().buildDurationOperationClient();
+    DurationOperationClient client = new OptionalClientBuilder().buildDurationOperationClient();
 
     @Test
     void getAll() {

@@ -11,7 +11,7 @@ import java.time.Duration;
 
 class DurationOperationClientTest {
 
-    DurationOperationClient client = new ModelsPropertyTypesClientBuilder().buildDurationOperationClient();
+    DurationOperationClient client = new TypesClientBuilder().buildDurationOperationClient();
 
     @Test
     void get() {

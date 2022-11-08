@@ -11,7 +11,7 @@ import java.time.OffsetDateTime;
 
 class DatetimeOperationClientTest {
 
-    DatetimeOperationClient client = new ModelsPropertyTypesClientBuilder().buildDatetimeOperationClient();
+    DatetimeOperationClient client = new TypesClientBuilder().buildDatetimeOperationClient();
 
     @Test
     void get() {

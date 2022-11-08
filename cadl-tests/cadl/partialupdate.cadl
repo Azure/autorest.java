@@ -6,7 +6,7 @@ using Cadl.Http;
   title: "PartialUpdate",
   version: "1.0.0",
 })
-namespace Cadl.Partialupdate;
+namespace Cadl.PartialUpdate;
 
 model PartialUpdateModel {
   boolean: boolean;

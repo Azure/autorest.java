@@ -32,24 +32,24 @@ public final class IntsImpl {
     private final IntsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyTypesClientImpl client;
+    private final TypesClientImpl client;
 
     /**
      * Initializes an instance of IntsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    IntsImpl(ModelsPropertyTypesClientImpl client) {
+    IntsImpl(TypesClientImpl client) {
         this.service = RestProxy.create(IntsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyTypesInts to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for TypesClientInts to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyTypesI")
+    @ServiceInterface(name = "TypesClientInts")
     public interface IntsService {
         @Get("/models/properties/types/int")
         @ExpectedResponses({200})

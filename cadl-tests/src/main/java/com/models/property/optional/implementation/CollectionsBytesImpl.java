@@ -32,14 +32,14 @@ public final class CollectionsBytesImpl {
     private final CollectionsBytesService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyOptionalClientImpl client;
+    private final OptionalClientImpl client;
 
     /**
      * Initializes an instance of CollectionsBytesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    CollectionsBytesImpl(ModelsPropertyOptionalClientImpl client) {
+    CollectionsBytesImpl(OptionalClientImpl client) {
         this.service =
                 RestProxy.create(
                         CollectionsBytesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
@@ -47,11 +47,11 @@ public final class CollectionsBytesImpl {
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyOptionalCollectionsBytes to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for OptionalClientCollectionsBytes to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyOption")
+    @ServiceInterface(name = "OptionalClientCollec")
     public interface CollectionsBytesService {
         @Get("/models/properties/optional/collections/bytes/all")
         @ExpectedResponses({200})

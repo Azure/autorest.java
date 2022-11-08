@@ -4,6 +4,7 @@
 package com.azure.autorest.util;
 
 import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
+import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
@@ -48,7 +49,7 @@ public class ClientModelUtil {
      * @param asyncClients output, the async clients.
      * @param syncClients output, the sync client.
      */
-    public static void getAsyncSyncClients(CodeModel codeModel, ServiceClient serviceClient,
+    public static void getAsyncSyncClients(Client client, ServiceClient serviceClient,
                                            List<AsyncSyncClient> asyncClients, List<AsyncSyncClient> syncClients) {
         boolean generateConvenienceMethods = JavaSettings.getInstance().isDataPlaneClient()
                 // TODO: switch to CADL side-car
@@ -64,7 +65,7 @@ public class ClientModelUtil {
                     .serviceClient(serviceClient);
 
             final List<ConvenienceMethod> convenienceMethods = new ArrayList<>();
-            codeModel.getOperationGroups().stream()
+            client.getOperationGroups().stream()
                     .filter(og -> CoreUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))    // no resource group
                     .findAny()
                     .ifPresent(og -> {
@@ -102,7 +103,7 @@ public class ClientModelUtil {
                     .methodGroupClient(methodGroupClient);
 
             final List<ConvenienceMethod> convenienceMethods = new ArrayList<>();
-            codeModel.getOperationGroups().stream()
+            client.getOperationGroups().stream()
                     .filter(og -> methodGroupClient.getClassBaseName().equals(og.getLanguage().getJava().getName()))
                     .findAny()
                     .ifPresent(og -> {
@@ -152,7 +153,7 @@ public class ClientModelUtil {
      * @param codeModel the code model
      * @return the interface name of service client.
      */
-    public static String getClientInterfaceName(CodeModel codeModel) {
+    public static String getClientInterfaceName(Client codeModel) {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientInterfaceName = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
                 + codeModel.getLanguage().getJava().getName();
@@ -160,7 +161,7 @@ public class ClientModelUtil {
             // mandate ending Client for LLC
             if (!serviceClientInterfaceName.endsWith("Client")) {
                 String serviceName = settings.getServiceName();
-                if (serviceName != null) {
+                if (serviceName != null && codeModel instanceof CodeModel) {
                     serviceName = SPACE.matcher(serviceName).replaceAll("");
                     serviceClientInterfaceName = serviceName.endsWith("Client") ? serviceName : (serviceName + "Client");
                 } else {
@@ -175,7 +176,7 @@ public class ClientModelUtil {
      * @param codeModel the code model
      * @return the class name of service client implementation.
      */
-    public static String getClientImplementClassName(CodeModel codeModel) {
+    public static String getClientImplementClassName(Client codeModel) {
         String serviceClientInterfaceName = getClientInterfaceName(codeModel);
         return getClientImplementClassName(serviceClientInterfaceName);
     }

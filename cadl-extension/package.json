@@ -43,7 +43,7 @@
     "@azure-tools/cadl-dpg": "~0.1.0"
   },
   "dependencies": {
-    "@autorest/codemodel": "~4.18.2",
+    "@autorest/codemodel": "~4.19.2",
     "js-yaml": "~4.1.0"
   },
   "devDependencies": {

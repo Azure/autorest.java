@@ -32,25 +32,25 @@ public final class ExtensibleEnumsImpl {
     private final ExtensibleEnumsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyTypesClientImpl client;
+    private final TypesClientImpl client;
 
     /**
      * Initializes an instance of ExtensibleEnumsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    ExtensibleEnumsImpl(ModelsPropertyTypesClientImpl client) {
+    ExtensibleEnumsImpl(TypesClientImpl client) {
         this.service =
                 RestProxy.create(ExtensibleEnumsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyTypesExtensibleEnums to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for TypesClientExtensibleEnums to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyTypesE")
+    @ServiceInterface(name = "TypesClientExtensibl")
     public interface ExtensibleEnumsService {
         @Get("/models/properties/types/extensible-enum")
         @ExpectedResponses({200})

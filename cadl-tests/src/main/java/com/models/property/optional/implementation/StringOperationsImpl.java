@@ -32,14 +32,14 @@ public final class StringOperationsImpl {
     private final StringOperationsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyOptionalClientImpl client;
+    private final OptionalClientImpl client;
 
     /**
      * Initializes an instance of StringOperationsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    StringOperationsImpl(ModelsPropertyOptionalClientImpl client) {
+    StringOperationsImpl(OptionalClientImpl client) {
         this.service =
                 RestProxy.create(
                         StringOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
@@ -47,11 +47,11 @@ public final class StringOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyOptionalStringOperations to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for OptionalClientStringOperations to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyOption")
+    @ServiceInterface(name = "OptionalClientString")
     public interface StringOperationsService {
         @Get("/models/properties/optional/string/all")
         @ExpectedResponses({200})

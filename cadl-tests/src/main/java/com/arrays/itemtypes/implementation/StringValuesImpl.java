@@ -32,25 +32,25 @@ public final class StringValuesImpl {
     private final StringValuesService service;
 
     /** The service client containing this operation class. */
-    private final ArraysItemTypesClientImpl client;
+    private final ItemTypesClientImpl client;
 
     /**
      * Initializes an instance of StringValuesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    StringValuesImpl(ArraysItemTypesClientImpl client) {
+    StringValuesImpl(ItemTypesClientImpl client) {
         this.service =
                 RestProxy.create(StringValuesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ArraysItemTypesStringValues to be used by the proxy service to
+     * The interface defining all the services for ItemTypesClientStringValues to be used by the proxy service to
      * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ArraysItemTypesStrin")
+    @ServiceInterface(name = "ItemTypesClientStrin")
     public interface StringValuesService {
         @Get("/arrays/item-types/string")
         @ExpectedResponses({200})

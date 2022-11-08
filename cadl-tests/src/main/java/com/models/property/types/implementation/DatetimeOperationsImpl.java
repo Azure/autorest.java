@@ -32,14 +32,14 @@ public final class DatetimeOperationsImpl {
     private final DatetimeOperationsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyTypesClientImpl client;
+    private final TypesClientImpl client;
 
     /**
      * Initializes an instance of DatetimeOperationsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    DatetimeOperationsImpl(ModelsPropertyTypesClientImpl client) {
+    DatetimeOperationsImpl(TypesClientImpl client) {
         this.service =
                 RestProxy.create(
                         DatetimeOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
@@ -47,11 +47,11 @@ public final class DatetimeOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyTypesDatetimeOperations to be used by the proxy service
-     * to perform REST calls.
+     * The interface defining all the services for TypesClientDatetimeOperations to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyTypesD")
+    @ServiceInterface(name = "TypesClientDatetimeO")
     public interface DatetimeOperationsService {
         @Get("/models/properties/types/datetime")
         @ExpectedResponses({200})

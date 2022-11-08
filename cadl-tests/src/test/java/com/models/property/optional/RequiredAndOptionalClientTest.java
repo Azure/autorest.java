@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class RequiredAndOptionalClientTest {
-    RequiredAndOptionalClient client = new ModelsPropertyOptionalClientBuilder().buildRequiredAndOptionalClient();
+    RequiredAndOptionalClient client = new OptionalClientBuilder().buildRequiredAndOptionalClient();
 
     @Test
     void getAll() {

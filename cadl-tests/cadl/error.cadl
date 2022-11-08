@@ -5,7 +5,7 @@ using Cadl.Http;
 using Azure.Core.Foundations;
 
 @service({
-  title: "Error",
+  title: "ErrorModel",
   version: "1.0.0",
 })
 namespace Cadl.ErrorModel;

@@ -32,14 +32,14 @@ public final class BooleanOperationsImpl {
     private final BooleanOperationsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyTypesClientImpl client;
+    private final TypesClientImpl client;
 
     /**
      * Initializes an instance of BooleanOperationsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    BooleanOperationsImpl(ModelsPropertyTypesClientImpl client) {
+    BooleanOperationsImpl(TypesClientImpl client) {
         this.service =
                 RestProxy.create(
                         BooleanOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
@@ -47,11 +47,11 @@ public final class BooleanOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyTypesBooleanOperations to be used by the proxy service
-     * to perform REST calls.
+     * The interface defining all the services for TypesClientBooleanOperations to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyTypesB")
+    @ServiceInterface(name = "TypesClientBooleanOp")
     public interface BooleanOperationsService {
         @Get("/models/properties/types/boolean")
         @ExpectedResponses({200})

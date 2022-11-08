@@ -32,25 +32,25 @@ public final class DurationValuesImpl {
     private final DurationValuesService service;
 
     /** The service client containing this operation class. */
-    private final ArraysItemTypesClientImpl client;
+    private final ItemTypesClientImpl client;
 
     /**
      * Initializes an instance of DurationValuesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    DurationValuesImpl(ArraysItemTypesClientImpl client) {
+    DurationValuesImpl(ItemTypesClientImpl client) {
         this.service =
                 RestProxy.create(DurationValuesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ArraysItemTypesDurationValues to be used by the proxy service to
+     * The interface defining all the services for ItemTypesClientDurationValues to be used by the proxy service to
      * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ArraysItemTypesDurat")
+    @ServiceInterface(name = "ItemTypesClientDurat")
     public interface DurationValuesService {
         @Get("/arrays/item-types/duration")
         @ExpectedResponses({200})

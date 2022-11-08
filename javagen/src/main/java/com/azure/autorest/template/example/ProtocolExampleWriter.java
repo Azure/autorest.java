@@ -342,8 +342,8 @@ public class ProtocolExampleWriter {
                                 && method.getMethodPageDetails() != null
                                 && response.getBody() instanceof Map) {
                             Map<String, Object> bodyMap = (Map<String, Object>) response.getBody();
-                            if (bodyMap.containsKey(method.getMethodPageDetails().getRawItemName())) {
-                                Object items = bodyMap.get(method.getMethodPageDetails().getRawItemName());
+                            if (bodyMap.containsKey(method.getMethodPageDetails().getSerializedItemName())) {
+                                Object items = bodyMap.get(method.getMethodPageDetails().getSerializedItemName());
                                 if (items instanceof List) {
                                     List<Object> itemArray = (List<Object>) items;
                                     if (itemArray.isEmpty()) {

@@ -13,7 +13,7 @@ import java.util.List;
 
 class CollectionsModelClientTest {
 
-    CollectionsModelClient client = new ModelsPropertyTypesClientBuilder().buildCollectionsModelClient();
+    CollectionsModelClient client = new TypesClientBuilder().buildCollectionsModelClient();
 
     @Test
     void get() {
