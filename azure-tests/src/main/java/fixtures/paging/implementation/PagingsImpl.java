@@ -63,7 +63,7 @@ public final class PagingsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestPagingTestSe")
-    private interface PagingsService {
+    public interface PagingsService {
         @Get("/paging/noitemname")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)

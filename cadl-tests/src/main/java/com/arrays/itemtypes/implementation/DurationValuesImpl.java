@@ -51,7 +51,7 @@ public final class DurationValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ArraysItemTypesDurat")
-    private interface DurationValuesService {
+    public interface DurationValuesService {
         @Get("/arrays/item-types/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

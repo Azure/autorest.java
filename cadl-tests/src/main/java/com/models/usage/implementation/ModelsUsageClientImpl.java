@@ -98,7 +98,7 @@ public final class ModelsUsageClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsUsageClient")
-    private interface ModelsUsageClientService {
+    public interface ModelsUsageClientService {
         @Post("/models/usage/input")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(

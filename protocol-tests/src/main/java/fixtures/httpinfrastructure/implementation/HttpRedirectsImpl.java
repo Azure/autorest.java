@@ -57,7 +57,7 @@ public final class HttpRedirectsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
-    private interface HttpRedirectsService {
+    public interface HttpRedirectsService {
         @Head("/http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(

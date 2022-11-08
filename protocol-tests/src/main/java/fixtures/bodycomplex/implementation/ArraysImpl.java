@@ -51,7 +51,7 @@ public final class ArraysImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface ArraysService {
+    public interface ArraysService {
         @Get("/complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

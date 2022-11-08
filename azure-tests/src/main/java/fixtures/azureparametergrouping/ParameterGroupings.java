@@ -56,7 +56,7 @@ public final class ParameterGroupings {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestParameterGro")
-    private interface ParameterGroupingsService {
+    public interface ParameterGroupingsService {
         @Post("/parameterGrouping/postRequired/{path}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

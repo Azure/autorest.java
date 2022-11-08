@@ -47,7 +47,7 @@ public final class Groups {
      */
     @Host("{$host}")
     @ServiceInterface(name = "MicrosoftAzureTestUr")
-    private interface GroupsService {
+    public interface GroupsService {
         @Get("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

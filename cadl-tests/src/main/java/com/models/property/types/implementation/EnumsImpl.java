@@ -50,7 +50,7 @@ public final class EnumsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyTypesE")
-    private interface EnumsService {
+    public interface EnumsService {
         @Get("/models/properties/types/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

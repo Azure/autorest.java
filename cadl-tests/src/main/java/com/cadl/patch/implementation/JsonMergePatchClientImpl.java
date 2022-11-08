@@ -121,7 +121,7 @@ public final class JsonMergePatchClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "JsonMergePatchClient")
-    private interface JsonMergePatchClientService {
+    public interface JsonMergePatchClientService {
         @Put("/patch/{name}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

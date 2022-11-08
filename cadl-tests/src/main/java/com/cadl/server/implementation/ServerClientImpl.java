@@ -133,7 +133,7 @@ public final class ServerClientImpl {
      */
     @Host("https://{domain}.{tld}")
     @ServiceInterface(name = "ServerClient")
-    private interface ServerClientService {
+    public interface ServerClientService {
         @Get("/status/{code}")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(

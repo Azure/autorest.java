@@ -51,7 +51,7 @@ public final class Pagings {
      */
     @Host("http://{accountName}{host}")
     @ServiceInterface(name = "AutoRestParameterize")
-    private interface PagingsService {
+    public interface PagingsService {
         @Get("/paging/customurl/partialnextlink")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)

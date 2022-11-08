@@ -52,7 +52,7 @@ public final class CollectionsBytesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyOption")
-    private interface CollectionsBytesService {
+    public interface CollectionsBytesService {
         @Get("/models/properties/optional/collections/bytes/all")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

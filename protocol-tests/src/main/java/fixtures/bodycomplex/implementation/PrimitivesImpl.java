@@ -52,7 +52,7 @@ public final class PrimitivesImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface PrimitivesService {
+    public interface PrimitivesService {
         @Get("/complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

@@ -147,7 +147,7 @@ public final class PagedClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "PagedClient")
-    private interface PagedClientService {
+    public interface PagedClientService {
         @Get("/paged/resources")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

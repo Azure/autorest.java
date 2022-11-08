@@ -59,7 +59,7 @@ public final class Arrays {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATAr")
-    private interface ArraysService {
+    public interface ArraysService {
         @Get("/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

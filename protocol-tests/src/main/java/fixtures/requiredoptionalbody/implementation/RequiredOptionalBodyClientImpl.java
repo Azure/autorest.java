@@ -120,7 +120,7 @@ public final class RequiredOptionalBodyClientImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "RequiredOptionalBody")
-    private interface RequiredOptionalBodyClientService {
+    public interface RequiredOptionalBodyClientService {
         @Put("/body/required/object")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

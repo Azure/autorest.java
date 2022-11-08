@@ -46,7 +46,7 @@ public final class MetricAlerts {
      */
     @Host("{$host}")
     @ServiceInterface(name = "MonitorManagementCli")
-    private interface MetricAlertsService {
+    public interface MetricAlertsService {
         @Get("/providers/Microsoft.Insights/metricAlerts")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)

@@ -51,7 +51,7 @@ public final class QueriesImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestUrlTestServi")
-    private interface QueriesService {
+    public interface QueriesService {
         @Get("/queries/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

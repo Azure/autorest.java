@@ -51,7 +51,7 @@ public final class HeadersImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBatHe")
-    private interface HeadersService {
+    public interface HeadersService {
         @Post("/header/param/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

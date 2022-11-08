@@ -50,7 +50,7 @@ public final class SubscriptionInCredentials {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
-    private interface SubscriptionInCredentialsService {
+    public interface SubscriptionInCredentialsService {
         @Post("/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

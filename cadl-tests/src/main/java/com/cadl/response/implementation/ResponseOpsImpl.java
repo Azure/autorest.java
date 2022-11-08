@@ -52,7 +52,7 @@ public final class ResponseOpsImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ResponseResponseOps")
-    private interface ResponseOpsService {
+    public interface ResponseOpsService {
         @Get("/response/get-binary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
