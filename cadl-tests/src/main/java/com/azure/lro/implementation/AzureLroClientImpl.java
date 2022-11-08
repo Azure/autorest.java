@@ -101,7 +101,7 @@ public final class AzureLroClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AzureLroClient")
-    private interface AzureLroClientService {
+    public interface AzureLroClientService {
         @Put("/lro/basic/put")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

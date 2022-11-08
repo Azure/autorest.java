@@ -51,7 +51,7 @@ public final class Int64ValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ArraysItemTypesInt64")
-    private interface Int64ValuesService {
+    public interface Int64ValuesService {
         @Get("/arrays/item-types/int64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

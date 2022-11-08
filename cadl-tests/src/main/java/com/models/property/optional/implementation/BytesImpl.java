@@ -50,7 +50,7 @@ public final class BytesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyOption")
-    private interface BytesService {
+    public interface BytesService {
         @Get("/models/properties/optional/bytes/all")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

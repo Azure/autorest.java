@@ -134,7 +134,7 @@ public final class ResiliencyDevDrivenClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ResiliencyDevDrivenC")
-    private interface ResiliencyDevDrivenClientService {
+    public interface ResiliencyDevDrivenClientService {
         @Get("/resiliency/devdriven/customization/model/{mode}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

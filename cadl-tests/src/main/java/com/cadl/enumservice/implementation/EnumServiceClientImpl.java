@@ -123,7 +123,7 @@ public final class EnumServiceClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "EnumServiceClient")
-    private interface EnumServiceClientService {
+    public interface EnumServiceClientService {
         @Get("/enum/color")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

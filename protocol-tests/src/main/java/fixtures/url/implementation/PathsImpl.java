@@ -55,7 +55,7 @@ public final class PathsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestUrlTestServi")
-    private interface PathsService {
+    public interface PathsService {
         @Get("/paths/bool/true/{boolPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

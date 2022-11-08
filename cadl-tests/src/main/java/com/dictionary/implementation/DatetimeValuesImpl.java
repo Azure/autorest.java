@@ -51,7 +51,7 @@ public final class DatetimeValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryDatetimeVa")
-    private interface DatetimeValuesService {
+    public interface DatetimeValuesService {
         @Get("/dictionary/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

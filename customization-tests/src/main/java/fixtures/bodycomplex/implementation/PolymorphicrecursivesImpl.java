@@ -49,7 +49,7 @@ public final class PolymorphicrecursivesImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface PolymorphicrecursivesService {
+    public interface PolymorphicrecursivesService {
         @Get("/complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

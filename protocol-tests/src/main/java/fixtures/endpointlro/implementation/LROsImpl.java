@@ -54,7 +54,7 @@ public final class LROsImpl {
      */
     @Host("https://{Endpoint}/resource/{ProjectName}")
     @ServiceInterface(name = "AutoRestLongRunningO")
-    private interface LROsService {
+    public interface LROsService {
         @Put("/lro/put/200/succeeded")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(

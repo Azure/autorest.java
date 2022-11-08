@@ -51,7 +51,7 @@ public final class BooleanValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryBooleanVal")
-    private interface BooleanValuesService {
+    public interface BooleanValuesService {
         @Get("/dictionary/boolean")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

@@ -48,7 +48,7 @@ public final class SkipUrlEncodings {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
-    private interface SkipUrlEncodingsService {
+    public interface SkipUrlEncodingsService {
         @Get("/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

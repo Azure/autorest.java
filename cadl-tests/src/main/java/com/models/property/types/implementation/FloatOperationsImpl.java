@@ -51,7 +51,7 @@ public final class FloatOperationsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ModelsPropertyTypesF")
-    private interface FloatOperationsService {
+    public interface FloatOperationsService {
         @Get("/models/properties/types/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

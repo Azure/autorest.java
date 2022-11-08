@@ -48,7 +48,7 @@ public final class InheritancesImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface InheritancesService {
+    public interface InheritancesService {
         @Get("/complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -51,7 +51,7 @@ public final class DurationValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryDurationVa")
-    private interface DurationValuesService {
+    public interface DurationValuesService {
         @Get("/dictionary/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

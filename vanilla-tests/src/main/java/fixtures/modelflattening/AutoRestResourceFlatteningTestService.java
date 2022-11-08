@@ -130,7 +130,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestResourceFlat")
-    private interface AutoRestResourceFlatteningTestServiceService {
+    public interface AutoRestResourceFlatteningTestServiceService {
         @Put("/model-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

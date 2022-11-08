@@ -46,7 +46,7 @@ public final class Paths {
      */
     @Host("{vault}{secret}{dnsSuffix}")
     @ServiceInterface(name = "AutoRestParameterize")
-    private interface PathsService {
+    public interface PathsService {
         @Get("/customuri/{subscriptionId}/{keyName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

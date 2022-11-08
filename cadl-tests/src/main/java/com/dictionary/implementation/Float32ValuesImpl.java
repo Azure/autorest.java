@@ -51,7 +51,7 @@ public final class Float32ValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryFloat32Val")
-    private interface Float32ValuesService {
+    public interface Float32ValuesService {
         @Get("/dictionary/float32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

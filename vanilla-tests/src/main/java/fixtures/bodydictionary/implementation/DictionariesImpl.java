@@ -56,7 +56,7 @@ public final class DictionariesImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATDi")
-    private interface DictionariesService {
+    public interface DictionariesService {
         @Get("/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

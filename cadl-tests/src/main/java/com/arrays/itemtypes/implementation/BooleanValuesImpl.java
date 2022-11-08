@@ -51,7 +51,7 @@ public final class BooleanValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ArraysItemTypesBoole")
-    private interface BooleanValuesService {
+    public interface BooleanValuesService {
         @Get("/arrays/item-types/boolean")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

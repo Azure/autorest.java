@@ -47,7 +47,7 @@ public final class IntsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "NonStringEnumsClient")
-    private interface IntsService {
+    public interface IntsService {
         @Put("/nonStringEnums/int/put")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)

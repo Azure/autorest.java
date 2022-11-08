@@ -57,7 +57,7 @@ public final class LroRetrysImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestLongRunningO")
-    private interface LroRetrysService {
+    public interface LroRetrysService {
         @Put("/lro/retryerror/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(

@@ -117,7 +117,7 @@ public final class NamingClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "NamingClient")
-    private interface NamingClientService {
+    public interface NamingClientService {
         @Post("/naming")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

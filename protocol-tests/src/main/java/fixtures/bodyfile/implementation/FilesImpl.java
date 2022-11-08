@@ -49,7 +49,7 @@ public final class FilesImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBatFi")
-    private interface FilesService {
+    public interface FilesService {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

@@ -48,7 +48,7 @@ public final class QueriesImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestUrlMutliColl")
-    private interface QueriesService {
+    public interface QueriesService {
         @Get("/queries/array/multi/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

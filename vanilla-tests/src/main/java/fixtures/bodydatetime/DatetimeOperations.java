@@ -50,7 +50,7 @@ public final class DatetimeOperations {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestDateTimeTest")
-    private interface DatetimeOperationsService {
+    public interface DatetimeOperationsService {
         @Get("/datetime/null")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)

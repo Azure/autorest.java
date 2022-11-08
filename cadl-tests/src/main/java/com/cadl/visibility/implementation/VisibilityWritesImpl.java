@@ -52,7 +52,7 @@ public final class VisibilityWritesImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "VisibilityVisibility")
-    private interface VisibilityWritesService {
+    public interface VisibilityWritesService {
         @Put("/write")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

@@ -116,7 +116,7 @@ public final class AutoRestReportServiceForAzure {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestReportServic")
-    private interface AutoRestReportServiceForAzureService {
+    public interface AutoRestReportServiceForAzureService {
         @Get("/report/azure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

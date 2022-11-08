@@ -163,7 +163,7 @@ public final class ResponseClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ResponseClient")
-    private interface ResponseClientService {
+    public interface ResponseClientService {
         @Put("/cadl-core/resources/{name}")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(
