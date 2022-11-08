@@ -210,6 +210,7 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType URL = new Builder(false)
+        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("new URL(\"%1$s\")", defaultValueExpression))
         .knownClass(java.net.URL.class)
         .wrapSerializationWithObjectsToString(true)
         .jsonDeserializationMethod("getNullable(nonNullReader -> new URL(nonNullReader.getString()))")
