@@ -131,8 +131,9 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     final ServiceClient serviceClient = syncClient.getServiceClient();
     final MethodGroupClient methodGroupClient = syncClient.getMethodGroupClient();
 
+    final boolean useMethodGroupClient = methodGroupClient != null;
     List<ClientMethod> clientMethods = serviceClient.getClientMethods();
-    if (CoreUtils.isNullOrEmpty(clientMethods)) {
+    if(useMethodGroupClient) {
       clientMethods = methodGroupClient.getClientMethods();
     }
 
@@ -140,7 +141,6 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
         .filter(clientMethod -> clientMethod.getMethodVisibility() == JavaVisibility.Public)
         .filter(clientMethod -> !clientMethod.isImplementationOnly())
         .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
-        .filter(clientMethod -> clientMethod.getMethodVisibility().equals(JavaVisibility.Public))
         .forEach(clientMethod -> {
           writeMethod(clientMethod, classBlock);
         });
