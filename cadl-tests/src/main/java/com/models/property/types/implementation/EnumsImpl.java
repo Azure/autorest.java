@@ -32,25 +32,25 @@ public final class EnumsImpl {
     private final EnumsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyTypesClientImpl client;
+    private final TypesClientImpl client;
 
     /**
      * Initializes an instance of EnumsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    EnumsImpl(ModelsPropertyTypesClientImpl client) {
+    EnumsImpl(TypesClientImpl client) {
         this.service = RestProxy.create(EnumsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyTypesEnums to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for TypesClientEnums to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyTypesE")
-    private interface EnumsService {
+    @ServiceInterface(name = "TypesClientEnums")
+    public interface EnumsService {
         @Get("/models/properties/types/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

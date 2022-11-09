@@ -176,6 +176,11 @@ public class CodeModelCustomConstructor extends Constructor {
                         value.setListType(TimeSchema.class);
                         break;
                     }
+                    case "armIds": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(ArmIdSchema.class);
+                        break;
+                    }
                     case "requests": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         value.setListType(Request.class);
@@ -310,6 +315,14 @@ public class CodeModelCustomConstructor extends Constructor {
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),
                                         extension.getValueNode()));
+                            } else if ("x-ms-arm-id-details".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsArmIdDetails",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
                             } else {
                                 // handle properties that do not contain hyphen in name
                                 actualValues.add(new NodeTuple(keyNode, extension.getValueNode()));
@@ -425,6 +438,8 @@ public class CodeModelCustomConstructor extends Constructor {
                         return UuidSchema.class;
                     case "xor":
                         return XorSchema.class;
+                    case "arm-id":
+                        return ArmIdSchema.class;
                     default:
                         return Schema.class;
                 }

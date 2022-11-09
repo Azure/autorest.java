@@ -19,8 +19,8 @@ import com.models.property.types.implementation.ExtensibleEnumsImpl;
 import com.models.property.types.models.ExtensibleEnumProperty;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ModelsPropertyTypesClient type. */
-@ServiceClient(builder = ModelsPropertyTypesClientBuilder.class, isAsync = true)
+/** Initializes a new instance of the asynchronous TypesClient type. */
+@ServiceClient(builder = TypesClientBuilder.class, isAsync = true)
 public final class ExtensibleEnumAsyncClient {
     @Generated private final ExtensibleEnumsImpl serviceClient;
 

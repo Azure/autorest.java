@@ -46,12 +46,12 @@ public final class Float32ValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryFloat32Values to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for DictionaryClientFloat32Values to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "DictionaryFloat32Val")
-    private interface Float32ValuesService {
+    @ServiceInterface(name = "DictionaryClientFloa")
+    public interface Float32ValuesService {
         @Get("/dictionary/float32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

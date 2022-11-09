@@ -44,12 +44,12 @@ public final class ParametersImpl {
     }
 
     /**
-     * The interface defining all the services for SpecialWordsParameters to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for SpecialWordsClientParameters to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "SpecialWordsParamete")
-    private interface ParametersService {
+    @ServiceInterface(name = "SpecialWordsClientPa")
+    public interface ParametersService {
         @Get("/special-words/parameter/if")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(

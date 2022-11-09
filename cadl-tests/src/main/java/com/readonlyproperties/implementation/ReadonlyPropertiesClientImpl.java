@@ -99,7 +99,7 @@ public final class ReadonlyPropertiesClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ReadonlyPropertiesCl")
-    private interface ReadonlyPropertiesClientService {
+    public interface ReadonlyPropertiesClientService {
         @Get("/readonly-properties/models")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

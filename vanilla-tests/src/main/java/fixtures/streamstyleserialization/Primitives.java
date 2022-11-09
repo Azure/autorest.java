@@ -59,7 +59,7 @@ public final class Primitives {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface PrimitivesService {
+    public interface PrimitivesService {
         @Get("/complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -458,23 +458,6 @@ public final class Primitives {
     /**
      * Get complex types with integer properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with integer properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<IntWrapper> getIntSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getIntSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with integer properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -482,7 +465,7 @@ public final class Primitives {
      * @return complex types with integer properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<IntWrapper> getIntSyncWithResponse(Context context) {
+    public Response<IntWrapper> getIntWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -499,22 +482,8 @@ public final class Primitives {
      * @return complex types with integer properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public IntWrapper getIntSync() {
-        return getIntSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with integer properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with integer properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public IntWrapper getIntSync(Context context) {
-        return getIntSyncWithResponse(context).getValue();
+    public IntWrapper getInt() {
+        return getIntWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -601,31 +570,6 @@ public final class Primitives {
      * Put complex types with integer properties.
      *
      * @param complexBody Please put -1 and 2.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putIntSyncWithResponse(IntWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putIntSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with integer properties.
-     *
-     * @param complexBody Please put -1 and 2.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -633,7 +577,7 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putIntSyncWithResponse(IntWrapper complexBody, Context context) {
+    public Response<Void> putIntWithResponse(IntWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -657,22 +601,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putIntSync(IntWrapper complexBody) {
-        putIntSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with integer properties.
-     *
-     * @param complexBody Please put -1 and 2.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putIntSync(IntWrapper complexBody, Context context) {
-        putIntSyncWithResponse(complexBody, context);
+    public void putInt(IntWrapper complexBody) {
+        putIntWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -740,23 +670,6 @@ public final class Primitives {
     /**
      * Get complex types with long properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with long properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<LongWrapper> getLongSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getLongSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with long properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -764,7 +677,7 @@ public final class Primitives {
      * @return complex types with long properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<LongWrapper> getLongSyncWithResponse(Context context) {
+    public Response<LongWrapper> getLongWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -781,22 +694,8 @@ public final class Primitives {
      * @return complex types with long properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public LongWrapper getLongSync() {
-        return getLongSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with long properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with long properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public LongWrapper getLongSync(Context context) {
-        return getLongSyncWithResponse(context).getValue();
+    public LongWrapper getLong() {
+        return getLongWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -883,31 +782,6 @@ public final class Primitives {
      * Put complex types with long properties.
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLongSyncWithResponse(LongWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putLongSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with long properties.
-     *
-     * @param complexBody Please put 1099511627775 and -999511627788.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -915,7 +789,7 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putLongSyncWithResponse(LongWrapper complexBody, Context context) {
+    public Response<Void> putLongWithResponse(LongWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -939,22 +813,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putLongSync(LongWrapper complexBody) {
-        putLongSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with long properties.
-     *
-     * @param complexBody Please put 1099511627775 and -999511627788.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putLongSync(LongWrapper complexBody, Context context) {
-        putLongSyncWithResponse(complexBody, context);
+    public void putLong(LongWrapper complexBody) {
+        putLongWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -1022,23 +882,6 @@ public final class Primitives {
     /**
      * Get complex types with float properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with float properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<FloatWrapper> getFloatSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getFloatSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with float properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1046,7 +889,7 @@ public final class Primitives {
      * @return complex types with float properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<FloatWrapper> getFloatSyncWithResponse(Context context) {
+    public Response<FloatWrapper> getFloatWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1063,22 +906,8 @@ public final class Primitives {
      * @return complex types with float properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public FloatWrapper getFloatSync() {
-        return getFloatSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with float properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with float properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public FloatWrapper getFloatSync(Context context) {
-        return getFloatSyncWithResponse(context).getValue();
+    public FloatWrapper getFloat() {
+        return getFloatWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1165,31 +994,6 @@ public final class Primitives {
      * Put complex types with float properties.
      *
      * @param complexBody Please put 1.05 and -0.003.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putFloatSyncWithResponse(FloatWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putFloatSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with float properties.
-     *
-     * @param complexBody Please put 1.05 and -0.003.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1197,7 +1001,7 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putFloatSyncWithResponse(FloatWrapper complexBody, Context context) {
+    public Response<Void> putFloatWithResponse(FloatWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1221,22 +1025,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putFloatSync(FloatWrapper complexBody) {
-        putFloatSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with float properties.
-     *
-     * @param complexBody Please put 1.05 and -0.003.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putFloatSync(FloatWrapper complexBody, Context context) {
-        putFloatSyncWithResponse(complexBody, context);
+    public void putFloat(FloatWrapper complexBody) {
+        putFloatWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -1306,23 +1096,6 @@ public final class Primitives {
     /**
      * Get complex types with double properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with double properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DoubleWrapper> getDoubleSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getDoubleSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with double properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1330,7 +1103,7 @@ public final class Primitives {
      * @return complex types with double properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DoubleWrapper> getDoubleSyncWithResponse(Context context) {
+    public Response<DoubleWrapper> getDoubleWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1347,22 +1120,8 @@ public final class Primitives {
      * @return complex types with double properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DoubleWrapper getDoubleSync() {
-        return getDoubleSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with double properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with double properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DoubleWrapper getDoubleSync(Context context) {
-        return getDoubleSyncWithResponse(context).getValue();
+    public DoubleWrapper getDouble() {
+        return getDoubleWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1449,31 +1208,6 @@ public final class Primitives {
      * Put complex types with double properties.
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDoubleSyncWithResponse(DoubleWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putDoubleSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with double properties.
-     *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1481,7 +1215,7 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDoubleSyncWithResponse(DoubleWrapper complexBody, Context context) {
+    public Response<Void> putDoubleWithResponse(DoubleWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1505,22 +1239,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDoubleSync(DoubleWrapper complexBody) {
-        putDoubleSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with double properties.
-     *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDoubleSync(DoubleWrapper complexBody, Context context) {
-        putDoubleSyncWithResponse(complexBody, context);
+    public void putDouble(DoubleWrapper complexBody) {
+        putDoubleWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -1588,23 +1308,6 @@ public final class Primitives {
     /**
      * Get complex types with bool properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with bool properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BooleanWrapper> getBoolSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getBoolSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with bool properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1612,7 +1315,7 @@ public final class Primitives {
      * @return complex types with bool properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BooleanWrapper> getBoolSyncWithResponse(Context context) {
+    public Response<BooleanWrapper> getBoolWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1629,22 +1332,8 @@ public final class Primitives {
      * @return complex types with bool properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BooleanWrapper getBoolSync() {
-        return getBoolSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with bool properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with bool properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public BooleanWrapper getBoolSync(Context context) {
-        return getBoolSyncWithResponse(context).getValue();
+    public BooleanWrapper getBool() {
+        return getBoolWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -1731,31 +1420,6 @@ public final class Primitives {
      * Put complex types with bool properties.
      *
      * @param complexBody Please put true and false.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBoolSyncWithResponse(BooleanWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putBoolSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with bool properties.
-     *
-     * @param complexBody Please put true and false.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1763,7 +1427,7 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putBoolSyncWithResponse(BooleanWrapper complexBody, Context context) {
+    public Response<Void> putBoolWithResponse(BooleanWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1787,22 +1451,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putBoolSync(BooleanWrapper complexBody) {
-        putBoolSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with bool properties.
-     *
-     * @param complexBody Please put true and false.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putBoolSync(BooleanWrapper complexBody, Context context) {
-        putBoolSyncWithResponse(complexBody, context);
+    public void putBool(BooleanWrapper complexBody) {
+        putBoolWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -1872,23 +1522,6 @@ public final class Primitives {
     /**
      * Get complex types with string properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with string properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<StringWrapper> getStringSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getStringSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with string properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1896,7 +1529,7 @@ public final class Primitives {
      * @return complex types with string properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<StringWrapper> getStringSyncWithResponse(Context context) {
+    public Response<StringWrapper> getStringWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1913,22 +1546,8 @@ public final class Primitives {
      * @return complex types with string properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public StringWrapper getStringSync() {
-        return getStringSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with string properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with string properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public StringWrapper getStringSync(Context context) {
-        return getStringSyncWithResponse(context).getValue();
+    public StringWrapper getString() {
+        return getStringWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2015,31 +1634,6 @@ public final class Primitives {
      * Put complex types with string properties.
      *
      * @param complexBody Please put 'goodrequest', '', and null.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putStringSyncWithResponse(StringWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putStringSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with string properties.
-     *
-     * @param complexBody Please put 'goodrequest', '', and null.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2047,7 +1641,7 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putStringSyncWithResponse(StringWrapper complexBody, Context context) {
+    public Response<Void> putStringWithResponse(StringWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2071,22 +1665,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putStringSync(StringWrapper complexBody) {
-        putStringSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with string properties.
-     *
-     * @param complexBody Please put 'goodrequest', '', and null.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putStringSync(StringWrapper complexBody, Context context) {
-        putStringSyncWithResponse(complexBody, context);
+    public void putString(StringWrapper complexBody) {
+        putStringWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -2154,23 +1734,6 @@ public final class Primitives {
     /**
      * Get complex types with date properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with date properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DateWrapper> getDateSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getDateSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with date properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2178,7 +1741,7 @@ public final class Primitives {
      * @return complex types with date properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DateWrapper> getDateSyncWithResponse(Context context) {
+    public Response<DateWrapper> getDateWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2195,22 +1758,8 @@ public final class Primitives {
      * @return complex types with date properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DateWrapper getDateSync() {
-        return getDateSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with date properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with date properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DateWrapper getDateSync(Context context) {
-        return getDateSyncWithResponse(context).getValue();
+    public DateWrapper getDate() {
+        return getDateWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2297,31 +1846,6 @@ public final class Primitives {
      * Put complex types with date properties.
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateSyncWithResponse(DateWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putDateSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with date properties.
-     *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2329,7 +1853,7 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateSyncWithResponse(DateWrapper complexBody, Context context) {
+    public Response<Void> putDateWithResponse(DateWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2353,22 +1877,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateSync(DateWrapper complexBody) {
-        putDateSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with date properties.
-     *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateSync(DateWrapper complexBody, Context context) {
-        putDateSyncWithResponse(complexBody, context);
+    public void putDate(DateWrapper complexBody) {
+        putDateWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -2438,23 +1948,6 @@ public final class Primitives {
     /**
      * Get complex types with datetime properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetime properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DatetimeWrapper> getDateTimeSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getDateTimeSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with datetime properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2462,7 +1955,7 @@ public final class Primitives {
      * @return complex types with datetime properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DatetimeWrapper> getDateTimeSyncWithResponse(Context context) {
+    public Response<DatetimeWrapper> getDateTimeWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2479,22 +1972,8 @@ public final class Primitives {
      * @return complex types with datetime properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DatetimeWrapper getDateTimeSync() {
-        return getDateTimeSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with datetime properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetime properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DatetimeWrapper getDateTimeSync(Context context) {
-        return getDateTimeSyncWithResponse(context).getValue();
+    public DatetimeWrapper getDateTime() {
+        return getDateTimeWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2582,31 +2061,6 @@ public final class Primitives {
      * Put complex types with datetime properties.
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeSyncWithResponse(DatetimeWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putDateTimeSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with datetime properties.
-     *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2614,7 +2068,7 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeSyncWithResponse(DatetimeWrapper complexBody, Context context) {
+    public Response<Void> putDateTimeWithResponse(DatetimeWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2638,22 +2092,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTimeSync(DatetimeWrapper complexBody) {
-        putDateTimeSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with datetime properties.
-     *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTimeSync(DatetimeWrapper complexBody, Context context) {
-        putDateTimeSyncWithResponse(complexBody, context);
+    public void putDateTime(DatetimeWrapper complexBody) {
+        putDateTimeWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -2723,23 +2163,6 @@ public final class Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetimeRfc1123 properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Datetimerfc1123Wrapper> getDateTimeRfc1123SyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getDateTimeRfc1123Sync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with datetimeRfc1123 properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2747,7 +2170,7 @@ public final class Primitives {
      * @return complex types with datetimeRfc1123 properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Datetimerfc1123Wrapper> getDateTimeRfc1123SyncWithResponse(Context context) {
+    public Response<Datetimerfc1123Wrapper> getDateTimeRfc1123WithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2764,22 +2187,8 @@ public final class Primitives {
      * @return complex types with datetimeRfc1123 properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Datetimerfc1123Wrapper getDateTimeRfc1123Sync() {
-        return getDateTimeRfc1123SyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with datetimeRfc1123 properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetimeRfc1123 properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Datetimerfc1123Wrapper getDateTimeRfc1123Sync(Context context) {
-        return getDateTimeRfc1123SyncWithResponse(context).getValue();
+    public Datetimerfc1123Wrapper getDateTimeRfc1123() {
+        return getDateTimeRfc1123WithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -2868,31 +2277,6 @@ public final class Primitives {
      * Put complex types with datetimeRfc1123 properties.
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeRfc1123SyncWithResponse(Datetimerfc1123Wrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putDateTimeRfc1123Sync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with datetimeRfc1123 properties.
-     *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2900,7 +2284,7 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDateTimeRfc1123SyncWithResponse(Datetimerfc1123Wrapper complexBody, Context context) {
+    public Response<Void> putDateTimeRfc1123WithResponse(Datetimerfc1123Wrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2924,22 +2308,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTimeRfc1123Sync(Datetimerfc1123Wrapper complexBody) {
-        putDateTimeRfc1123SyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with datetimeRfc1123 properties.
-     *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTimeRfc1123Sync(Datetimerfc1123Wrapper complexBody, Context context) {
-        putDateTimeRfc1123SyncWithResponse(complexBody, context);
+    public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
+        putDateTimeRfc1123WithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -3009,23 +2379,6 @@ public final class Primitives {
     /**
      * Get complex types with duration properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with duration properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DurationWrapper> getDurationSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getDurationSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with duration properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3033,7 +2386,7 @@ public final class Primitives {
      * @return complex types with duration properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DurationWrapper> getDurationSyncWithResponse(Context context) {
+    public Response<DurationWrapper> getDurationWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3050,22 +2403,8 @@ public final class Primitives {
      * @return complex types with duration properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DurationWrapper getDurationSync() {
-        return getDurationSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with duration properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with duration properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DurationWrapper getDurationSync(Context context) {
-        return getDurationSyncWithResponse(context).getValue();
+    public DurationWrapper getDuration() {
+        return getDurationWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3153,31 +2492,6 @@ public final class Primitives {
      * Put complex types with duration properties.
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDurationSyncWithResponse(DurationWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putDurationSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with duration properties.
-     *
-     * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3185,7 +2499,7 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putDurationSyncWithResponse(DurationWrapper complexBody, Context context) {
+    public Response<Void> putDurationWithResponse(DurationWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3209,22 +2523,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDurationSync(DurationWrapper complexBody) {
-        putDurationSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with duration properties.
-     *
-     * @param complexBody Please put 'P123DT22H14M12.011S'.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDurationSync(DurationWrapper complexBody, Context context) {
-        putDurationSyncWithResponse(complexBody, context);
+    public void putDuration(DurationWrapper complexBody) {
+        putDurationWithResponse(complexBody, Context.NONE);
     }
 
     /**
@@ -3292,23 +2592,6 @@ public final class Primitives {
     /**
      * Get complex types with byte properties.
      *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with byte properties along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ByteWrapper> getByteSyncWithResponse() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getByteSync(this.client.getHost(), accept, Context.NONE);
-    }
-
-    /**
-     * Get complex types with byte properties.
-     *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3316,7 +2599,7 @@ public final class Primitives {
      * @return complex types with byte properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ByteWrapper> getByteSyncWithResponse(Context context) {
+    public Response<ByteWrapper> getByteWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3333,22 +2616,8 @@ public final class Primitives {
      * @return complex types with byte properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ByteWrapper getByteSync() {
-        return getByteSyncWithResponse(Context.NONE).getValue();
-    }
-
-    /**
-     * Get complex types with byte properties.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with byte properties.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ByteWrapper getByteSync(Context context) {
-        return getByteSyncWithResponse(context).getValue();
+    public ByteWrapper getByte() {
+        return getByteWithResponse(Context.NONE).getValue();
     }
 
     /**
@@ -3435,31 +2704,6 @@ public final class Primitives {
      * Put complex types with byte properties.
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putByteSyncWithResponse(ByteWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return service.putByteSync(this.client.getHost(), complexBody, accept, Context.NONE);
-    }
-
-    /**
-     * Put complex types with byte properties.
-     *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3467,7 +2711,7 @@ public final class Primitives {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putByteSyncWithResponse(ByteWrapper complexBody, Context context) {
+    public Response<Void> putByteWithResponse(ByteWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3491,22 +2735,8 @@ public final class Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putByteSync(ByteWrapper complexBody) {
-        putByteSyncWithResponse(complexBody, Context.NONE);
-    }
-
-    /**
-     * Put complex types with byte properties.
-     *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putByteSync(ByteWrapper complexBody, Context context) {
-        putByteSyncWithResponse(complexBody, context);
+    public void putByte(ByteWrapper complexBody) {
+        putByteWithResponse(complexBody, Context.NONE);
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(Primitives.class);

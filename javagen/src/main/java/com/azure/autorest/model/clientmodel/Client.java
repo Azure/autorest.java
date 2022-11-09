@@ -3,7 +3,7 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,6 +50,7 @@ public class Client {
      * The serviceClient for this service.
      */
     private ServiceClient serviceClient;
+    private List<ServiceClient> serviceClients;
     /**
      * Get the module info.
      */
@@ -82,7 +83,7 @@ public class Client {
     private Client(String clientName, String clientDescription, List<EnumType> enums, List<ClientException> exceptions,
                    List<XmlSequenceWrapper> xmlSequenceWrappers, List<ClientResponse> responseModels,
                    List<ClientModel> models, List<PackageInfo> packageInfos, Manager manager,
-                   ServiceClient serviceClient, ModuleInfo moduleInfo,
+                   ServiceClient serviceClient, List<ServiceClient> serviceClients, ModuleInfo moduleInfo,
                    List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
                    List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
                    List<LiveTests> liveTests
@@ -97,6 +98,7 @@ public class Client {
         this.packageInfos = packageInfos;
         this.manager = manager;
         this.serviceClient = serviceClient;
+        this.serviceClients = serviceClients;
         this.moduleInfo = moduleInfo;
         this.syncClients = syncClients;
         this.asyncClients = asyncClients;
@@ -149,6 +151,10 @@ public class Client {
         return serviceClient;
     }
 
+    public final List<ServiceClient> getServiceClients() {
+        return serviceClients;
+    }
+
     /** @return the sync service clients */
     public List<AsyncSyncClient> getSyncClients() {
         return syncClients;
@@ -185,12 +191,13 @@ public class Client {
         private List<PackageInfo> packageInfos;
         private Manager manager;
         private ServiceClient serviceClient;
+        private List<ServiceClient> serviceClients = Collections.emptyList();
         private ModuleInfo moduleInfo;
-        private List<AsyncSyncClient> syncClients = new ArrayList<>();
-        private List<AsyncSyncClient> asyncClients = new ArrayList<>();
-        private List<ClientBuilder> clientBuilders = new ArrayList<>();
-        private List<ProtocolExample> protocolExamples = new ArrayList<>();
-        private List<LiveTests> liveTests = new ArrayList<>();
+        private List<AsyncSyncClient> syncClients = Collections.emptyList();
+        private List<AsyncSyncClient> asyncClients = Collections.emptyList();
+        private List<ClientBuilder> clientBuilders = Collections.emptyList();
+        private List<ProtocolExample> protocolExamples = Collections.emptyList();
+        private List<LiveTests> liveTests = Collections.emptyList();
 
         /**
          * Sets the name of this service client.
@@ -292,6 +299,11 @@ public class Client {
             return this;
         }
 
+        public Builder serviceClients(List<ServiceClient> serviceClients) {
+            this.serviceClients = serviceClients;
+            return this;
+        }
+
         /**
          * Sets the module info for this client.
          * @param moduleInfo the module info
@@ -353,6 +365,9 @@ public class Client {
         }
 
         public Client build() {
+            if (serviceClient == null && !serviceClients.isEmpty()) {
+                serviceClient = serviceClients.iterator().next();
+            }
             return new Client(clientName,
                     clientDescription,
                     enums,
@@ -363,6 +378,7 @@ public class Client {
                     packageInfos,
                     manager,
                     serviceClient,
+                    serviceClients,
                     moduleInfo,
                     syncClients,
                     asyncClients,

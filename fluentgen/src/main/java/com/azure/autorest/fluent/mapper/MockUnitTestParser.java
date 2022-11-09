@@ -159,7 +159,7 @@ public class MockUnitTestParser extends ExampleParser {
                 Object firstJsonObjectInPageable = ModelTestCaseUtil.jsonFromType(0, elementType);
                 // put to first element in array
                 Map<String, Object> jsonMap = new HashMap<>();
-                jsonMap.put(clientMethod.getMethodPageDetails().getRawItemName(), Collections.singletonList(firstJsonObjectInPageable));
+                jsonMap.put(clientMethod.getMethodPageDetails().getSerializedItemName(), Collections.singletonList(firstJsonObjectInPageable));
 
                 jsonObject = jsonMap;
 

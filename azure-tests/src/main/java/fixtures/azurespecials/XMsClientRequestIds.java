@@ -47,7 +47,7 @@ public final class XMsClientRequestIds {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
-    private interface XMsClientRequestIdsService {
+    public interface XMsClientRequestIdsService {
         @Get("/azurespecials/overwrite/x-ms-client-request-id/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)

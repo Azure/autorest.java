@@ -32,26 +32,26 @@ public final class Int64ValuesImpl {
     private final Int64ValuesService service;
 
     /** The service client containing this operation class. */
-    private final ArraysItemTypesClientImpl client;
+    private final ItemTypesClientImpl client;
 
     /**
      * Initializes an instance of Int64ValuesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    Int64ValuesImpl(ArraysItemTypesClientImpl client) {
+    Int64ValuesImpl(ItemTypesClientImpl client) {
         this.service =
                 RestProxy.create(Int64ValuesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ArraysItemTypesInt64Values to be used by the proxy service to perform
+     * The interface defining all the services for ItemTypesClientInt64Values to be used by the proxy service to perform
      * REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ArraysItemTypesInt64")
-    private interface Int64ValuesService {
+    @ServiceInterface(name = "ItemTypesClientInt64")
+    public interface Int64ValuesService {
         @Get("/arrays/item-types/int64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

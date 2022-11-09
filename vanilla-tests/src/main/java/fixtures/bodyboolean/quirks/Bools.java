@@ -46,7 +46,7 @@ public final class Bools {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestBoolTestServ")
-    private interface BoolsService {
+    public interface BoolsService {
         @Get("/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

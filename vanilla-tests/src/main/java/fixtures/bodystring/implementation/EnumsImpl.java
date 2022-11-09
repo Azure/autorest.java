@@ -49,7 +49,7 @@ public final class EnumsImpl implements Enums {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATSe")
-    private interface EnumsService {
+    public interface EnumsService {
         @Get("/string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

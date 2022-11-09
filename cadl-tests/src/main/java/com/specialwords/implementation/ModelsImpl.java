@@ -45,12 +45,12 @@ public final class ModelsImpl {
     }
 
     /**
-     * The interface defining all the services for SpecialWordsModels to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for SpecialWordsClientModels to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "SpecialWordsModels")
-    private interface ModelsService {
+    @ServiceInterface(name = "SpecialWordsClientMo")
+    public interface ModelsService {
         @Get("/special-words/model/get")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

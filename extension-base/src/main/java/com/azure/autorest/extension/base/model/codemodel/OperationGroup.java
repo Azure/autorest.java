@@ -26,7 +26,7 @@ public class OperationGroup extends Metadata {
      */
     private List<Operation> operations = new ArrayList<Operation>();
 
-    private CodeModel codeModel;
+    private Client codeModel;
 
     /**
      * 
@@ -65,11 +65,14 @@ public class OperationGroup extends Metadata {
     }
 
 
-    public CodeModel getCodeModel() {
+    /**
+     * @return the client which contains the operation group.
+     */
+    public Client getCodeModel() {
         return codeModel;
     }
 
-    public void setCodeModel(CodeModel codeModel) {
+    public void setCodeModel(Client codeModel) {
         this.codeModel = codeModel;
     }
 }

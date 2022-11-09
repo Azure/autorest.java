@@ -43,12 +43,12 @@ public final class OperationsImpl {
     }
 
     /**
-     * The interface defining all the services for SpecialWordsOperations to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for SpecialWordsClientOperations to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "SpecialWordsOperatio")
-    private interface OperationsService {
+    @ServiceInterface(name = "SpecialWordsClientOp")
+    public interface OperationsService {
         @Get("/special-words/operation/for")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(

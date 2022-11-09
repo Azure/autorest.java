@@ -121,7 +121,7 @@ public final class PolymorphismClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "PolymorphismClient")
-    private interface PolymorphismClientService {
+    public interface PolymorphismClientService {
         @Get("/Pets")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

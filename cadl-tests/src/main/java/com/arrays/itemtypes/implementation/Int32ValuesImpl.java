@@ -32,26 +32,26 @@ public final class Int32ValuesImpl {
     private final Int32ValuesService service;
 
     /** The service client containing this operation class. */
-    private final ArraysItemTypesClientImpl client;
+    private final ItemTypesClientImpl client;
 
     /**
      * Initializes an instance of Int32ValuesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    Int32ValuesImpl(ArraysItemTypesClientImpl client) {
+    Int32ValuesImpl(ItemTypesClientImpl client) {
         this.service =
                 RestProxy.create(Int32ValuesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ArraysItemTypesInt32Values to be used by the proxy service to perform
+     * The interface defining all the services for ItemTypesClientInt32Values to be used by the proxy service to perform
      * REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ArraysItemTypesInt32")
-    private interface Int32ValuesService {
+    @ServiceInterface(name = "ItemTypesClientInt32")
+    public interface Int32ValuesService {
         @Get("/arrays/item-types/int32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

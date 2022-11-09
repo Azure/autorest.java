@@ -53,7 +53,7 @@ public final class StringOperationsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBatSe")
-    private interface StringOperationsService {
+    public interface StringOperationsService {
         @Get("/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

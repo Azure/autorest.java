@@ -44,7 +44,7 @@ public final class Paths {
      */
     @Host("http://{accountName}{host}")
     @ServiceInterface(name = "AutoRestParameterize")
-    private interface PathsService {
+    public interface PathsService {
         @Get("/customuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

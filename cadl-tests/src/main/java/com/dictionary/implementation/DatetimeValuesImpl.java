@@ -46,12 +46,12 @@ public final class DatetimeValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryDatetimeValues to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for DictionaryClientDatetimeValues to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "DictionaryDatetimeVa")
-    private interface DatetimeValuesService {
+    @ServiceInterface(name = "DictionaryClientDate")
+    public interface DatetimeValuesService {
         @Get("/dictionary/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

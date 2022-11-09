@@ -637,15 +637,15 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             function.line("res.getStatusCode(),");
             function.line("res.getHeaders(),");
             if (settings.isDataPlaneClient()) {
-                function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getRawItemName());
+                function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getSerializedItemName());
             } else {
                 function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
             }
             if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                 if (settings.isDataPlaneClient()) {
-                    function.line("getNextLink(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getRawNextLinkName());
+                    function.line("getNextLink(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getSerializedNextLinkName());
                 } else {
-                    function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
+                    function.line(nextLinkLine(clientMethod));
                 }
             } else {
                 function.line("null,");
@@ -915,7 +915,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     protected void generatePlainSyncMethod(ClientMethod clientMethod, JavaType typeBlock,
         ProxyMethod restAPIMethod, JavaSettings settings) {
-        String effectiveMethodName = clientMethod.getProxyMethod().getName() + "Sync";
+        String effectiveProxyMethodName = clientMethod.getProxyMethod().getName();
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
 
@@ -928,7 +928,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 settings);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
-                    effectiveMethodName, clientMethod.getArgumentList());
+                    effectiveProxyMethodName, clientMethod.getArgumentList());
                 function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
                     javaBlock.annotation("Override");
                     javaBlock.publicMethod("boolean hasMoreElements()", methodBlock -> methodBlock.methodReturn("iterator.hasNext()"));
@@ -940,7 +940,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 IType returnType = clientMethod.getReturnValue().getType();
                 if (returnType instanceof PrimitiveType) {
                     function.line("%s value = %s(%s);", returnType.asNullable(),
-                        effectiveMethodName, clientMethod.getArgumentList());
+                        effectiveProxyMethodName, clientMethod.getArgumentList());
                     function.ifBlock("value != null", ifAction -> {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
@@ -954,7 +954,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     function.methodReturn(serviceMethodCall);
                 }
             } else {
-                function.line("%s(%s);", effectiveMethodName, clientMethod.getArgumentList());
+                function.line("%s(%s);", effectiveProxyMethodName, clientMethod.getArgumentList());
             }
         });
     }
@@ -1038,15 +1038,15 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     function.line("res.getStatusCode(),");
                     function.line("res.getHeaders(),");
                     if (settings.isDataPlaneClient()) {
-                        function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getRawItemName());
+                        function.line("getValues(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getSerializedItemName());
                     } else {
                         function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
                     }
                     if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                         if (settings.isDataPlaneClient()) {
-                            function.line("getNextLink(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getRawNextLinkName());
+                            function.line("getNextLink(res.getValue(), \"%s\"),", clientMethod.getMethodPageDetails().getSerializedNextLinkName());
                         } else {
-                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
+                            function.line(nextLinkLine(clientMethod));
                         }
                     } else {
                         function.line("null,");
@@ -1060,6 +1060,17 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 });
             });
         });
+    }
+
+    protected static String nextLinkLine(ClientMethod clientMethod) {
+        return nextLinkLine(clientMethod, "getValue()");
+    }
+
+    protected static String nextLinkLine(ClientMethod clientMethod, String valueExpression) {
+        return String.format("res.%3$s.%1$s()%2$s,",
+            CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()),
+            (clientMethod.getMethodPageDetails().getNextLinkType() == ClassType.String ? "" : ".toString()"),   // nextLink could be type URL
+            valueExpression);
     }
 
     private static boolean responseTypeHasDeserializedHeaders(IType type) {

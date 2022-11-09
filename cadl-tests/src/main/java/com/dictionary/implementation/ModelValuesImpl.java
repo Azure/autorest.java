@@ -46,12 +46,12 @@ public final class ModelValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryModelValues to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for DictionaryClientModelValues to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "DictionaryModelValue")
-    private interface ModelValuesService {
+    @ServiceInterface(name = "DictionaryClientMode")
+    public interface ModelValuesService {
         @Get("/dictionary/model")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

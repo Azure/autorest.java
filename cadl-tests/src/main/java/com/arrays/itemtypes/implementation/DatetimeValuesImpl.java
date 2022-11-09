@@ -32,26 +32,26 @@ public final class DatetimeValuesImpl {
     private final DatetimeValuesService service;
 
     /** The service client containing this operation class. */
-    private final ArraysItemTypesClientImpl client;
+    private final ItemTypesClientImpl client;
 
     /**
      * Initializes an instance of DatetimeValuesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    DatetimeValuesImpl(ArraysItemTypesClientImpl client) {
+    DatetimeValuesImpl(ItemTypesClientImpl client) {
         this.service =
                 RestProxy.create(DatetimeValuesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ArraysItemTypesDatetimeValues to be used by the proxy service to
+     * The interface defining all the services for ItemTypesClientDatetimeValues to be used by the proxy service to
      * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ArraysItemTypesDatet")
-    private interface DatetimeValuesService {
+    @ServiceInterface(name = "ItemTypesClientDatet")
+    public interface DatetimeValuesService {
         @Get("/arrays/item-types/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

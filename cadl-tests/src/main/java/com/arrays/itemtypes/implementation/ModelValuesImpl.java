@@ -32,26 +32,26 @@ public final class ModelValuesImpl {
     private final ModelValuesService service;
 
     /** The service client containing this operation class. */
-    private final ArraysItemTypesClientImpl client;
+    private final ItemTypesClientImpl client;
 
     /**
      * Initializes an instance of ModelValuesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    ModelValuesImpl(ArraysItemTypesClientImpl client) {
+    ModelValuesImpl(ItemTypesClientImpl client) {
         this.service =
                 RestProxy.create(ModelValuesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ArraysItemTypesModelValues to be used by the proxy service to perform
+     * The interface defining all the services for ItemTypesClientModelValues to be used by the proxy service to perform
      * REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ArraysItemTypesModel")
-    private interface ModelValuesService {
+    @ServiceInterface(name = "ItemTypesClientModel")
+    public interface ModelValuesService {
         @Get("/arrays/item-types/model")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 class CollectionsByteClientTest {
 
-    CollectionsByteClient client = new ModelsPropertyOptionalClientBuilder().buildCollectionsByteClient();
+    CollectionsByteClient client = new OptionalClientBuilder().buildCollectionsByteClient();
 
     @Test
     void getAll() {

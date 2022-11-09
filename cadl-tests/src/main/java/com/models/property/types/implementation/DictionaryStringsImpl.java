@@ -32,14 +32,14 @@ public final class DictionaryStringsImpl {
     private final DictionaryStringsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyTypesClientImpl client;
+    private final TypesClientImpl client;
 
     /**
      * Initializes an instance of DictionaryStringsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    DictionaryStringsImpl(ModelsPropertyTypesClientImpl client) {
+    DictionaryStringsImpl(TypesClientImpl client) {
         this.service =
                 RestProxy.create(
                         DictionaryStringsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
@@ -47,12 +47,12 @@ public final class DictionaryStringsImpl {
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyTypesDictionaryStrings to be used by the proxy service
-     * to perform REST calls.
+     * The interface defining all the services for TypesClientDictionaryStrings to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyTypesD")
-    private interface DictionaryStringsService {
+    @ServiceInterface(name = "TypesClientDictionar")
+    public interface DictionaryStringsService {
         @Get("/models/properties/types/dictionary/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

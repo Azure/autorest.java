@@ -54,7 +54,7 @@ public final class HttpServerFailuresImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
-    private interface HttpServerFailuresService {
+    public interface HttpServerFailuresService {
         @Head("/http/failure/server/501")
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,

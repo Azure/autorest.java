@@ -11,7 +11,7 @@ import java.util.List;
 
 class StringValueClientTest {
 
-    StringValueClient client = new ArraysItemTypesClientBuilder().buildStringValueClient();
+    StringValueClient client = new ItemTypesClientBuilder().buildStringValueClient();
 
     @Test
     void get() {

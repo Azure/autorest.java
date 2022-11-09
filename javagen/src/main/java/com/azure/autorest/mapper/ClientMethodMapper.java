@@ -14,6 +14,7 @@ import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.extensionmodel.XmsPageable;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -41,6 +42,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodNamer;
 import com.azure.autorest.util.MethodUtil;
@@ -290,7 +292,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                 if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null
                     && shouldGeneratePagingMethods()) {
-                    String pageableItemName = getPageableItemName(operation);
+                    String pageableItemName = getPageableItemName(operation.getExtensions().getXmsPageable(), proxyMethod.getRawResponseBodyType() != null ? proxyMethod.getRawResponseBodyType() : proxyMethod.getResponseBodyType());
                     if (pageableItemName == null) {
                         // There is no pageable item name for this operation, skip it.
                         continue;
@@ -595,7 +597,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         ClientMethod nextMethod = (nextMethods == null) ? null
             : nextMethods.stream().filter(m -> m.getType() == nextMethodType).findFirst().orElse(null);
 
-        MethodPageDetails details = new MethodPageDetails(CodeNamer.getPropertyName(nextLinkName), pageableItemName,
+        IType nextLinkType = getPageableNextLinkType(operation.getExtensions().getXmsPageable(), proxyMethod.getRawResponseBodyType() != null ? proxyMethod.getRawResponseBodyType() : proxyMethod.getResponseBodyType());
+
+        MethodPageDetails details = new MethodPageDetails(CodeNamer.getPropertyName(nextLinkName), nextLinkType, pageableItemName,
             nextMethod, lroIntermediateType, nextLinkName, itemName);
         builder.methodPageDetails(details);
 
@@ -657,7 +661,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .orElse(null);
 
             if (nextMethod != null) {
-                detailsWithContext = new MethodPageDetails(CodeNamer.getPropertyName(nextLinkName),
+                detailsWithContext = new MethodPageDetails(CodeNamer.getPropertyName(nextLinkName), nextLinkType,
                     pageableItemName, nextMethod, lroIntermediateType, nextLinkName, itemName);
             }
         }
@@ -1044,9 +1048,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     : NOT_GENERATE;
             }
         } else {
-            if (!settings.isSyncStackEnabled() && methodType == ClientMethodType.SimpleSyncRestResponse && !hasContextParameter) {
+            if (methodType == ClientMethodType.SimpleSyncRestResponse && !hasContextParameter) {
                 return NOT_GENERATE;
-            } else if (!settings.isSyncStackEnabled() && methodType == ClientMethodType.SimpleSync && hasContextParameter) {
+            } else if (methodType == ClientMethodType.SimpleSync && hasContextParameter) {
                 return NOT_GENERATE;
             }
             return VISIBLE;
@@ -1098,13 +1102,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         builder.parameters(parameters);
     }
 
-    private String getPageableItemName(Operation operation) {
-        Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
-            operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
-        ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
+    private static String getPageableItemName(XmsPageable xmsPageable, IType responseBodyType) {
+        ClientModel responseBodyModel = ClientModelUtil.getClientModel(responseBodyType.toString());
         return responseBodyModel.getProperties().stream()
-            .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
+            .filter(p -> p.getSerializedName().equals(xmsPageable.getItemName()))
             .map(ClientModelProperty::getName).findAny().orElse(null);
+    }
+
+    private static IType getPageableNextLinkType(XmsPageable xmsPageable, IType responseBodyType) {
+        ClientModel responseBodyModel = ClientModelUtil.getClientModel(responseBodyType.toString());
+        return responseBodyModel.getProperties().stream()
+            .filter(p -> p.getSerializedName().equals(xmsPageable.getNextLinkName()))
+            .map(ClientModelProperty::getClientType).findAny().orElse(null);
     }
 
     private IType getPollingIntermediateType(JavaSettings.PollingDetails details, IType syncReturnType) {
@@ -1277,6 +1286,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (!isProtocolMethod && convenienceApi != null) {
             return new MethodNamer(convenienceApi.getName());
         } else {
+            if (proxyMethod.isSync()) {
+                return new MethodNamer(proxyMethod.getBaseName());
+            }
             return new MethodNamer(proxyMethod.getName());
         }
     }

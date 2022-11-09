@@ -32,14 +32,14 @@ public final class DurationOperationsImpl {
     private final DurationOperationsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyOptionalClientImpl client;
+    private final OptionalClientImpl client;
 
     /**
      * Initializes an instance of DurationOperationsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    DurationOperationsImpl(ModelsPropertyOptionalClientImpl client) {
+    DurationOperationsImpl(OptionalClientImpl client) {
         this.service =
                 RestProxy.create(
                         DurationOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
@@ -47,12 +47,12 @@ public final class DurationOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyOptionalDurationOperations to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for OptionalClientDurationOperations to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyOption")
-    private interface DurationOperationsService {
+    @ServiceInterface(name = "OptionalClientDurati")
+    public interface DurationOperationsService {
         @Get("/models/properties/optional/duration/all")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

@@ -32,14 +32,14 @@ public final class RequiredAndOptionalsImpl {
     private final RequiredAndOptionalsService service;
 
     /** The service client containing this operation class. */
-    private final ModelsPropertyOptionalClientImpl client;
+    private final OptionalClientImpl client;
 
     /**
      * Initializes an instance of RequiredAndOptionalsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    RequiredAndOptionalsImpl(ModelsPropertyOptionalClientImpl client) {
+    RequiredAndOptionalsImpl(OptionalClientImpl client) {
         this.service =
                 RestProxy.create(
                         RequiredAndOptionalsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
@@ -47,12 +47,12 @@ public final class RequiredAndOptionalsImpl {
     }
 
     /**
-     * The interface defining all the services for ModelsPropertyOptionalRequiredAndOptionals to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for OptionalClientRequiredAndOptionals to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ModelsPropertyOption")
-    private interface RequiredAndOptionalsService {
+    @ServiceInterface(name = "OptionalClientRequir")
+    public interface RequiredAndOptionalsService {
         @Get("/models/properties/optional/requiredAndOptional/all")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

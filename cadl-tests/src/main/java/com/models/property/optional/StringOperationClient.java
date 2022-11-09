@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.models.property.optional.models.StringProperty;
 
-/** Initializes a new instance of the synchronous ModelsPropertyOptionalClient type. */
-@ServiceClient(builder = ModelsPropertyOptionalClientBuilder.class)
+/** Initializes a new instance of the synchronous OptionalClient type. */
+@ServiceClient(builder = OptionalClientBuilder.class)
 public final class StringOperationClient {
     @Generated private final StringOperationAsyncClient client;
 

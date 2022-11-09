@@ -45,7 +45,6 @@ interface VisibilityWrite {
   create(@body dog: WriteDog): Dog;
 }
 
-@operationGroup
 @route("/visibility")
 interface VisibilityOp extends VisibilityRead, VisibilityWrite {
   @post

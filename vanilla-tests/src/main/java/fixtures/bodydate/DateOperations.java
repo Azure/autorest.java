@@ -48,7 +48,7 @@ public final class DateOperations {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestDateTestServ")
-    private interface DateOperationsService {
+    public interface DateOperationsService {
         @Get("/date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

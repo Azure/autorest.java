@@ -131,7 +131,7 @@ public final class DpgClientImpl {
     /** The interface defining all the services for DpgClient to be used by the proxy service to perform REST calls. */
     @Host("{$host}")
     @ServiceInterface(name = "DpgClient")
-    private interface DpgClientService {
+    public interface DpgClientService {
         @Get("/customization/model/{mode}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

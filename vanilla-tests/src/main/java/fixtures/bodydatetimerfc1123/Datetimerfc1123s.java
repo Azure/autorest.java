@@ -51,7 +51,7 @@ public final class Datetimerfc1123s {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestRFC1123DateT")
-    private interface Datetimerfc1123sService {
+    public interface Datetimerfc1123sService {
         @Get("/datetimerfc1123/null")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)

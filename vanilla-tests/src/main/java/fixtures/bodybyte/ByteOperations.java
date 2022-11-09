@@ -47,7 +47,7 @@ public final class ByteOperations {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATBy")
-    private interface ByteOperationsService {
+    public interface ByteOperationsService {
         @Get("/byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

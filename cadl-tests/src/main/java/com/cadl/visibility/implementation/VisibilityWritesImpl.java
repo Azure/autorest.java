@@ -47,12 +47,12 @@ public final class VisibilityWritesImpl {
     }
 
     /**
-     * The interface defining all the services for VisibilityVisibilityWrites to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for VisibilityClientVisibilityWrites to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{endpoint}")
-    @ServiceInterface(name = "VisibilityVisibility")
-    private interface VisibilityWritesService {
+    @ServiceInterface(name = "VisibilityClientVisi")
+    public interface VisibilityWritesService {
         @Put("/write")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

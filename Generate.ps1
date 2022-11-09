@@ -5,6 +5,11 @@ $AZURE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-fol
 $PROTOCOL_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=protocol-tests --data-plane --generate-samples"
 $PROTOCOL_RESILIENCE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --data-plane"
 $SWAGGER_PATH = "node_modules/@microsoft.azure/autorest.testserver/swagger"
+$PARALLELIZATION = 3
+if ($IsWindows) {
+    $PARALLELIZATION = (Get-CIMInstance -Class 'CIM_Processor').NumberOfCores - 1
+}
+
 $ExitCode = 0
 
 $generateScript = {
@@ -73,7 +78,7 @@ if (Test-Path ./vanilla-tests/src/main) {
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/constants.json --namespace=fixtures.constants",
     "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/lro.md",
     "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit 3
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION
 
 if (Test-Path ./vanilla-tests/swagger/CoverageReporter.java) {
     Move-Item ./vanilla-tests/swagger/CoverageReporter.java ./vanilla-tests/src/main/java/fixtures/report/CoverageReporter.java -Force
@@ -94,7 +99,7 @@ if (Test-Path ./vanilla-tests/swagger/CoverageReporter.java) {
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/security-info.json --namespace=fixtures.securityinfo",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true --output-model-immutable"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit 3
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION
 
 # Azure
 @(
@@ -104,7 +109,7 @@ if (Test-Path ./vanilla-tests/swagger/CoverageReporter.java) {
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/azure-parameter-grouping.json --namespace=fixtures.azureparametergrouping --payload-flattening-threshold=1",
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/subscriptionId-apiVersion.json --namespace=fixtures.subscriptionidapiversion --payload-flattening-threshold=1",
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit 3
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION
 
 #  "$ARM_ARGUMENTS --input-file=$SWAGGER_PATH/lro.json --namespace=fixtures.lro"
 #  "$ARM_ARGUMENTS --input-file=$SWAGGER_PATH/lro-parameterized-endpoints.json --namespace=fixtures.lroparameterizedendpoints"
@@ -135,10 +140,10 @@ Remove-Item ./protocol-tests/src/samples -Recurse -Force
     "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/multi-media-types.json --namespace=fixtures.multimediatypes",
     "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/required-optional-body.json --namespace=fixtures.requiredoptionalbody",
     "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/enums.json --namespace=fixtures.enums",
-    "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/endpoint-lro.json --namespace=fixtures.endpointlro",
+    "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/endpoint-lro.json --namespace=fixtures.endpointlro --service-name=LroEndpoint",
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/dpg-customization.md",
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/custom-http-exception-mapping.md"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit 3
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION
 
 New-Item ./protocol-tests/src/main/java/fixtures/headexceptions/models -ItemType Directory -Force
 Copy-Item -Path ./protocol-tests/swagger/CustomizedException.java -Destination ./protocol-tests/src/main/java/fixtures/headexceptions/models/CustomizedException.java -Force
@@ -151,7 +156,7 @@ Remove-Item ./protocol-resilience-test/llcupdate1/src/main -Recurse -Force
 @(
     "$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial",
     "$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit 3
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION
 
 Remove-Item ./protocol-resilience-test/llcinitial/src/main/java/module-info.java -Force
 Remove-Item ./protocol-resilience-test/llcupdate1/src/main/java/module-info.java -Force
@@ -169,6 +174,6 @@ Remove-Item ./partial-update-tests/generated/src/main/java/module-info.java -For
     "--use:. docs/samples/specification/azure_key_credential/readme.md",
     "--use:. docs/samples/specification/basic/readme.md",
     "--use:. docs/samples/specification/management/readme.md"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit 3
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION
 
 exit $ExitCode

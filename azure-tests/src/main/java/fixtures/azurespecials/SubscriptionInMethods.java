@@ -47,7 +47,7 @@ public final class SubscriptionInMethods {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
-    private interface SubscriptionInMethodsService {
+    public interface SubscriptionInMethodsService {
         @Post("/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

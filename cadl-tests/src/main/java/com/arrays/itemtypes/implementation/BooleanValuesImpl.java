@@ -32,26 +32,26 @@ public final class BooleanValuesImpl {
     private final BooleanValuesService service;
 
     /** The service client containing this operation class. */
-    private final ArraysItemTypesClientImpl client;
+    private final ItemTypesClientImpl client;
 
     /**
      * Initializes an instance of BooleanValuesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    BooleanValuesImpl(ArraysItemTypesClientImpl client) {
+    BooleanValuesImpl(ItemTypesClientImpl client) {
         this.service =
                 RestProxy.create(BooleanValuesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ArraysItemTypesBooleanValues to be used by the proxy service to
+     * The interface defining all the services for ItemTypesClientBooleanValues to be used by the proxy service to
      * perform REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "ArraysItemTypesBoole")
-    private interface BooleanValuesService {
+    @ServiceInterface(name = "ItemTypesClientBoole")
+    public interface BooleanValuesService {
         @Get("/arrays/item-types/boolean")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

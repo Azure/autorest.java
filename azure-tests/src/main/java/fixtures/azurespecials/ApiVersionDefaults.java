@@ -47,7 +47,7 @@ public final class ApiVersionDefaults {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
-    private interface ApiVersionDefaultsService {
+    public interface ApiVersionDefaultsService {
         @Get("/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

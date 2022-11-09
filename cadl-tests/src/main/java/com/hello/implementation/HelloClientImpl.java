@@ -95,7 +95,7 @@ public final class HelloClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "HelloClient")
-    private interface HelloClientService {
+    public interface HelloClientService {
         @Get("/hello/world")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

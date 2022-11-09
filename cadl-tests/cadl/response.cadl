@@ -51,7 +51,6 @@ interface CadlCoreOp {
   name: "ResponseClient",
   service: Cadl.Response,
 })
-@operationGroup
 @doc("Response")
 @route("/response")
 interface ResponseOp {

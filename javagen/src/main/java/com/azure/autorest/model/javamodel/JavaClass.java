@@ -3,11 +3,14 @@
 
 package com.azure.autorest.model.javamodel;
 
+import com.azure.core.util.CoreUtils;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class JavaClass implements JavaType {
     private JavaFileContents contents;
@@ -67,6 +70,24 @@ public class JavaClass implements JavaType {
     public final void protectedMemberVariable(String variableType, String variableName) {
         addExpectedNewLine();
         contents.line(String.format("protected %1$s %2$s;", variableType, variableName));
+        addNewLine = true;
+    }
+
+    /**
+     * Adds a variable with the given declaration, visibility, and modifiers.
+     * <p>
+     * Adding a private constant variable would be:
+     * {@code variable(declaration, JavaVisibility.Private, JavaModifier.Static, JavaModifier.Final)}
+     *
+     * @param variableDeclaration The variable declaration.
+     * @param visibility The visibility of the variable.
+     * @param modifiers The modifiers of the variable.
+     */
+    public final void variable(String variableDeclaration, JavaVisibility visibility, JavaModifier... modifiers) {
+        addExpectedNewLine();
+        String modifier = CoreUtils.isNullOrEmpty(modifiers) ? ""
+            : Arrays.stream(modifiers).map(JavaModifier::toString).collect(Collectors.joining(" "));
+        contents.line(visibility + " " + modifier + " " + variableDeclaration + ";");
         addNewLine = true;
     }
 

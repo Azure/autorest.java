@@ -49,7 +49,7 @@ public final class AvailabilitySets {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestParameterFla")
-    private interface AvailabilitySetsService {
+    public interface AvailabilitySetsService {
         @Patch("/parameterFlattening/{resourceGroupName}/{availabilitySetName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)

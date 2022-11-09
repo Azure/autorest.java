@@ -49,7 +49,7 @@ public final class HttpServerFailures {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
-    private interface HttpServerFailuresService {
+    public interface HttpServerFailuresService {
         @Head("/http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> head501(

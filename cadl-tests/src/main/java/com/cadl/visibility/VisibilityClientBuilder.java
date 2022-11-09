@@ -41,12 +41,12 @@ import java.util.stream.Collectors;
 /** A builder for creating a new instance of the VisibilityClient type. */
 @ServiceClientBuilder(
         serviceClients = {
+            VisibilityClient.class,
             VisibilityReadClient.class,
             VisibilityWriteClient.class,
-            VisibilityOpClient.class,
+            VisibilityAsyncClient.class,
             VisibilityReadAsyncClient.class,
-            VisibilityWriteAsyncClient.class,
-            VisibilityOpAsyncClient.class
+            VisibilityWriteAsyncClient.class
         })
 public final class VisibilityClientBuilder
         implements HttpTrait<VisibilityClientBuilder>,
@@ -239,6 +239,16 @@ public final class VisibilityClientBuilder
     }
 
     /**
+     * Builds an instance of VisibilityAsyncClient class.
+     *
+     * @return an instance of VisibilityAsyncClient.
+     */
+    @Generated
+    public VisibilityAsyncClient buildAsyncClient() {
+        return new VisibilityAsyncClient(buildInnerClient());
+    }
+
+    /**
      * Builds an instance of VisibilityReadAsyncClient class.
      *
      * @return an instance of VisibilityReadAsyncClient.
@@ -259,13 +269,13 @@ public final class VisibilityClientBuilder
     }
 
     /**
-     * Builds an instance of VisibilityOpAsyncClient class.
+     * Builds an instance of VisibilityClient class.
      *
-     * @return an instance of VisibilityOpAsyncClient.
+     * @return an instance of VisibilityClient.
      */
     @Generated
-    public VisibilityOpAsyncClient buildVisibilityOpAsyncClient() {
-        return new VisibilityOpAsyncClient(buildInnerClient().getVisibilityOps());
+    public VisibilityClient buildClient() {
+        return new VisibilityClient(new VisibilityAsyncClient(buildInnerClient()));
     }
 
     /**
@@ -286,15 +296,5 @@ public final class VisibilityClientBuilder
     @Generated
     public VisibilityWriteClient buildVisibilityWriteClient() {
         return new VisibilityWriteClient(new VisibilityWriteAsyncClient(buildInnerClient().getVisibilityWrites()));
-    }
-
-    /**
-     * Builds an instance of VisibilityOpClient class.
-     *
-     * @return an instance of VisibilityOpClient.
-     */
-    @Generated
-    public VisibilityOpClient buildVisibilityOpClient() {
-        return new VisibilityOpClient(new VisibilityOpAsyncClient(buildInnerClient().getVisibilityOps()));
     }
 }

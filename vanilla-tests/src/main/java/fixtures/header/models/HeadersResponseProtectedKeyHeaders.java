@@ -5,6 +5,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,7 +25,7 @@ public final class HeadersResponseProtectedKeyHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseProtectedKeyHeaders(HttpHeaders rawHeaders) {
-        this.contentType = rawHeaders.getValue("Content-Type");
+        this.contentType = rawHeaders.getValue(HttpHeaderName.CONTENT_TYPE);
     }
 
     /**

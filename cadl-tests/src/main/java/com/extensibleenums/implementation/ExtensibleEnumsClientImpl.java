@@ -99,7 +99,7 @@ public final class ExtensibleEnumsClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ExtensibleEnumsClien")
-    private interface ExtensibleEnumsClientService {
+    public interface ExtensibleEnumsClientService {
         @Get("/extensible-enums/string/known-value")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

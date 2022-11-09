@@ -48,7 +48,7 @@ public final class Pets {
      */
     @Host("{$host}")
     @ServiceInterface(name = "PetStoreIncPets")
-    private interface PetsService {
+    public interface PetsService {
         @Get("/extensibleenums/pet/{petId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
