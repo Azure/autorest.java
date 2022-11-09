@@ -218,10 +218,8 @@ export class CodeModelBuilder {
         if (it.name === "ApiVersion") {
           parameter.origin = "modelerfour:synthesized/api-version";
         }
-  
-        return this.hostParameters.push(
-          this.codeModel.addGlobalParameter(parameter),
-        );
+
+        return this.hostParameters.push(this.codeModel.addGlobalParameter(parameter));
       });
     } else {
       this.hostParameters.push(
