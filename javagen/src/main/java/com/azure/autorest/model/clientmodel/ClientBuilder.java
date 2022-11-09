@@ -53,14 +53,14 @@ public class ClientBuilder {
     }
 
     public String getBuilderMethodNameForSyncClient(AsyncSyncClient syncClient) {
-        boolean singleClient = asyncClients.size() == 1;
+        boolean singleClient = asyncClients.size() == 1 || syncClient.getMethodGroupClient() == null;
         return singleClient
                 ? "buildClient"
                 : ("build" + syncClient.getClassName());
     }
 
     public String getBuilderMethodNameForAsyncClient(AsyncSyncClient asyncClient) {
-        boolean singleClient = asyncClients.size() == 1;
+        boolean singleClient = asyncClients.size() == 1 || asyncClient.getMethodGroupClient() == null;
         return singleClient
                 ? "buildAsyncClient"
                 : ("build" + asyncClient.getClassName());
