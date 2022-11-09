@@ -35,10 +35,6 @@ if (Test-Path ./cadl-output) {
     Remove-Item ./cadl-output -Recurse -Force
 }
 
-# enable convenience methods for tests
-$env:GENERATE_MODELS = "true"
-$env:GENERATE_CONVENIENCE_METHODS = "true"
-
 #run other local tests except partial update
 foreach ($cadlFile in (Get-Item ./cadl/* -Filter "*.cadl" -Exclude "*partialupdate*")) {
     generate $cadlFile
