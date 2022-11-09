@@ -199,23 +199,28 @@ export class CodeModelBuilder {
     if (server) {
       server.parameters.forEach((it) => {
         const schema = this.processSchema(it.type, it.name);
+        const parameter = new Parameter(it.name, this.getDoc(it), schema, {
+          implementation: ImplementationLocation.Client,
+          origin: "modelerfour:synthesized/host",
+          required: true,
+          protocol: {
+            http: new HttpParameter(ParameterLocation.Uri),
+          },
+          clientDefaultValue: this.getDefaultValue(it.default),
+          language: {
+            default: {
+              serializedName: it.name,
+            },
+          },
+        });
+
+        // TODO hack on "ApiVersion"
+        if (it.name === "ApiVersion") {
+          parameter.origin = "modelerfour:synthesized/api-version";
+        }
+  
         return this.hostParameters.push(
-          this.codeModel.addGlobalParameter(
-            new Parameter(it.name, this.getDoc(it), schema, {
-              implementation: ImplementationLocation.Client,
-              origin: "modelerfour:synthesized/host",
-              required: true,
-              protocol: {
-                http: new HttpParameter(ParameterLocation.Uri),
-              },
-              clientDefaultValue: this.getDefaultValue(it.default),
-              language: {
-                default: {
-                  serializedName: it.name,
-                },
-              },
-            }),
-          ),
+          this.codeModel.addGlobalParameter(parameter),
         );
       });
     } else {
@@ -452,6 +457,7 @@ export class CodeModelBuilder {
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter) {
     if (param.name.toLowerCase() === "api-version") {
+      // TODO hack on "api-version"
       const parameter = this.apiVersionParameter;
       op.addParameter(parameter);
     } else if (this.specialHeaderNames.has(param.name.toLowerCase())) {
@@ -1144,6 +1150,7 @@ export class CodeModelBuilder {
         return this.processDateTimeSchema(type, nameHint, true);
       case "password":
       case "uri":
+      case "uuid":
         return this.processStringSchema(type, nameHint);
     }
     throw new Error(`Unrecognized string format: '${format}'.`);
