@@ -15,23 +15,25 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.visibility.implementation.VisibilityClientImpl;
 import com.cadl.visibility.models.Dog;
 import com.cadl.visibility.models.ReadDog;
 import com.cadl.visibility.models.WriteDog;
+import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the synchronous VisibilityClient type. */
-@ServiceClient(builder = VisibilityClientBuilder.class)
-public final class VisibilityOpClient {
-    @Generated private final VisibilityOpAsyncClient client;
+/** Initializes a new instance of the asynchronous VisibilityClient type. */
+@ServiceClient(builder = VisibilityClientBuilder.class, isAsync = true)
+public final class VisibilityAsyncClient {
+    @Generated private final VisibilityClientImpl serviceClient;
 
     /**
-     * Initializes an instance of VisibilityOpClient class.
+     * Initializes an instance of VisibilityAsyncClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    VisibilityOpClient(VisibilityOpAsyncClient client) {
-        this.client = client;
+    VisibilityAsyncClient(VisibilityClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -52,12 +54,12 @@ public final class VisibilityOpClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+    public Mono<Response<BinaryData>> getWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getWithResponseAsync(requestOptions);
     }
 
     /**
@@ -88,12 +90,12 @@ public final class VisibilityOpClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createWithResponse(BinaryData dog, RequestOptions requestOptions) {
-        return this.client.createWithResponse(dog, requestOptions).block();
+    public Mono<Response<BinaryData>> createWithResponse(BinaryData dog, RequestOptions requestOptions) {
+        return this.serviceClient.createWithResponseAsync(dog, requestOptions);
     }
 
     /**
@@ -124,12 +126,12 @@ public final class VisibilityOpClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> queryWithResponse(BinaryData dog, RequestOptions requestOptions) {
-        return this.client.queryWithResponse(dog, requestOptions).block();
+    public Mono<Response<BinaryData>> queryWithResponse(BinaryData dog, RequestOptions requestOptions) {
+        return this.serviceClient.queryWithResponseAsync(dog, requestOptions);
     }
 
     /**
@@ -140,14 +142,16 @@ public final class VisibilityOpClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Dog get() {
+    public Mono<Dog> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(Dog.class);
+        return getWithResponse(requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 
     /**
@@ -160,14 +164,16 @@ public final class VisibilityOpClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Dog create(WriteDog dog) {
+    public Mono<Dog> create(WriteDog dog) {
         // Generated convenience method for createWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createWithResponse(BinaryData.fromObject(dog), requestOptions).getValue().toObject(Dog.class);
+        return createWithResponse(BinaryData.fromObject(dog), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 
     /**
@@ -180,13 +186,15 @@ public final class VisibilityOpClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the response body on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Dog query(ReadDog dog) {
+    public Mono<Dog> query(ReadDog dog) {
         // Generated convenience method for queryWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return queryWithResponse(BinaryData.fromObject(dog), requestOptions).getValue().toObject(Dog.class);
+        return queryWithResponse(BinaryData.fromObject(dog), requestOptions)
+                .map(Response::getValue)
+                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 }
