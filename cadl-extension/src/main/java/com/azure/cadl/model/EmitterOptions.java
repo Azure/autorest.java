@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.IOException;
+import java.util.List;
 
 public class EmitterOptions {
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
@@ -23,6 +24,9 @@ public class EmitterOptions {
     private String serviceName;
     @JsonProperty(value="partial-update")
     private Boolean partialUpdate;
+
+    @JsonProperty(value="service-versions")
+    private List<String> serviceVersions;
 
     public String getNamespace() {
         return namespace;
@@ -50,14 +54,8 @@ public class EmitterOptions {
         return this;
     }
 
-    public EmitterOptions setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-        return this;
-    }
-
-    public EmitterOptions setPartialUpdate(Boolean partialUpdate) {
-        this.partialUpdate = partialUpdate;
-        return this;
+    public List<String> getServiceVersions() {
+        return serviceVersions;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {

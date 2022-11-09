@@ -139,6 +139,9 @@ public class CadlPlugin extends Javagen {
         if (options.getPartialUpdate() != null) {
             SETTINGS_MAP.put("partial-update", options.getPartialUpdate());
         }
+        if (!CoreUtils.isNullOrEmpty(options.getServiceVersions())) {
+            SETTINGS_MAP.put("service-versions", options.getServiceVersions());
+        }
 
         JavaSettingsAccessor.setHost(this);
         LOGGER.info("Output folder: {}", options.getOutputDir());

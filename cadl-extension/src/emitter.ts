@@ -18,6 +18,7 @@ export interface EmitterOptions {
   "service-name"?: string;
   "partial-update"?: boolean;
   "output-dir"?: string;
+  "service-versions"?: Array<string>;
 }
 
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
@@ -28,6 +29,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "service-name": { type: "string", nullable: true },
     "partial-update": { type: "boolean", nullable: true },
     "output-dir": { type: "string", nullable: true },
+    "service-versions": { type: "array", items: { type: "string" }, nullable: true },
   },
   required: [],
 };
