@@ -19,6 +19,14 @@ export interface EmitterOptions {
   "partial-update"?: boolean;
   "output-dir"?: string;
   "service-versions"?: Array<string>;
+
+  "dev-options"?: DevOptions;
+}
+
+export interface DevOptions {
+  "generate-code-model"?: boolean;
+  "generate-models"?: boolean;
+  "generate-convenience-apis"?: boolean;
 }
 
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
@@ -30,6 +38,8 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "partial-update": { type: "boolean", nullable: true },
     "output-dir": { type: "string", nullable: true },
     "service-versions": { type: "array", items: { type: "string" }, nullable: true },
+
+    "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },
   required: [],
 };
@@ -81,5 +91,9 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
       codeModelFileName,
     ]);
     program.trace("cadl-java", output.stdout ? output.stdout : output.stderr);
+
+    if (!options["dev-options"]?.["generate-code-model"]) {
+      await program.host.rm(codeModelFileName);
+    }
   }
 }

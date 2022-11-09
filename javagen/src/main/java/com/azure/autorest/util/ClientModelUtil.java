@@ -21,7 +21,6 @@ import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
-import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -51,10 +50,6 @@ public class ClientModelUtil {
      */
     public static void getAsyncSyncClients(Client client, ServiceClient serviceClient,
                                            List<AsyncSyncClient> asyncClients, List<AsyncSyncClient> syncClients) {
-        boolean generateConvenienceMethods = JavaSettings.getInstance().isDataPlaneClient()
-                // TODO: switch to CADL side-car
-                && Configuration.getGlobalConfiguration().get("GENERATE_CONVENIENCE_METHODS" , false);
-
         String packageName = getAsyncSyncClientPackageName(serviceClient);
         boolean generateSyncMethods = JavaSettings.SyncMethodsGeneration.ALL
             .equals(JavaSettings.getInstance().getSyncMethods());
@@ -70,7 +65,7 @@ public class ClientModelUtil {
                     .findAny()
                     .ifPresent(og -> {
                         og.getOperations().stream()
-                                .filter(o -> generateConvenienceMethods || o.getConvenienceApi() != null)
+                                .filter(o -> o.getConvenienceApi() != null)
                                 .forEach(o -> {
                                     List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false);
                                     if (!cMethods.isEmpty()) {
@@ -108,7 +103,7 @@ public class ClientModelUtil {
                     .findAny()
                     .ifPresent(og -> {
                         og.getOperations().stream()
-                                .filter(o -> generateConvenienceMethods || o.getConvenienceApi() != null)
+                                .filter(o -> o.getConvenienceApi() != null)
                                 .forEach(o -> {
                                     List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false);
                                     if (!cMethods.isEmpty()) {

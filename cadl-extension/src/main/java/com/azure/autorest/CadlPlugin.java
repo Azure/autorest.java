@@ -6,15 +6,16 @@ package com.azure.autorest;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.ConvenienceApi;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
+import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.cadl.model.EmitterOptions;
 import com.azure.cadl.mapper.CadlMapperFactory;
 import com.azure.cadl.util.ModelUtil;
-import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,35 @@ public class CadlPlugin extends Javagen {
 
     private final EmitterOptions emitterOptions;
 
-    public JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
+    private CodeModel preTransform(CodeModel codeModel) {
+        if (emitterOptions.getDevOptions() != null && emitterOptions.getDevOptions().getGenerateConvenienceApis() == Boolean.TRUE) {
+            codeModel.getClients().stream()
+                    .flatMap(c -> c.getOperationGroups().stream())
+                    .flatMap(og -> og.getOperations().stream())
+                    .forEach(o -> {
+                        if (o.getConvenienceApi() == null) {
+                            ConvenienceApi convenienceApi = new ConvenienceApi();
+                            convenienceApi.setName(o.getLanguage().getDefault().getName());
+                            o.setConvenienceApi(convenienceApi);
+                        }
+                    });
+        }
+        return codeModel;
+    }
+
+    public Client processClient(CodeModel codeModel) {
+        codeModel = preTransform(codeModel);
+
+        // transform code model
+        codeModel = new Transformer().transform(codeModel);
+
+        // map to client model
+        Client client = Mappers.getClientMapper().map(codeModel);
+
+        return client;
+    }
+
+    public JavaPackage processTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
         return super.writeToTemplates(codeModel, client, settings, false);
     }
 
@@ -114,8 +143,6 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("required-parameter-client-methods", true);
         SETTINGS_MAP.put("generic-response-type", true);
         SETTINGS_MAP.put("output-model-immutable", true);
-
-        SETTINGS_MAP.put("generate-models", Configuration.getGlobalConfiguration().get("GENERATE_MODELS", false));
     }
 
     public static class MockConnection extends Connection {
@@ -141,6 +168,10 @@ public class CadlPlugin extends Javagen {
         }
         if (!CoreUtils.isNullOrEmpty(options.getServiceVersions())) {
             SETTINGS_MAP.put("service-versions", options.getServiceVersions());
+        }
+
+        if (options.getDevOptions() != null && options.getDevOptions().getGenerateModels() == Boolean.TRUE) {
+            SETTINGS_MAP.put("generate-models", true);
         }
 
         JavaSettingsAccessor.setHost(this);
