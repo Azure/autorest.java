@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -29,6 +30,8 @@ public final class LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders {
     @JsonProperty(value = "Location")
     private String location;
 
+    private static final HttpHeaderName AZURE_ASYNC_OPERATION = HttpHeaderName.fromString("Azure-AsyncOperation");
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders class.
@@ -36,12 +39,12 @@ public final class LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders(HttpHeaders rawHeaders) {
-        String retryAfter = rawHeaders.getValue("Retry-After");
+        String retryAfter = rawHeaders.getValue(HttpHeaderName.RETRY_AFTER);
         if (retryAfter != null) {
             this.retryAfter = Integer.parseInt(retryAfter);
         }
-        this.azureAsyncOperation = rawHeaders.getValue("Azure-AsyncOperation");
-        this.location = rawHeaders.getValue("Location");
+        this.azureAsyncOperation = rawHeaders.getValue(AZURE_ASYNC_OPERATION);
+        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
     }
 
     /**

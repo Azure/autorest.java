@@ -5,6 +5,7 @@
 package com.cadl.response.models;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,6 +18,8 @@ public final class DeleteWithHeadersHeaders {
     @JsonProperty(value = "operation-location")
     private String operationLocation;
 
+    private static final HttpHeaderName OPERATION_LOCATION = HttpHeaderName.fromString("operation-location");
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of DeleteWithHeadersHeaders class.
@@ -24,7 +27,7 @@ public final class DeleteWithHeadersHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public DeleteWithHeadersHeaders(HttpHeaders rawHeaders) {
-        this.operationLocation = rawHeaders.getValue("operation-location");
+        this.operationLocation = rawHeaders.getValue(OPERATION_LOCATION);
     }
 
     /**

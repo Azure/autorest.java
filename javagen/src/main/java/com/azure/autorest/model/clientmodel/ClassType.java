@@ -6,6 +6,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.core.http.HttpHeaderName;
 
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -319,6 +320,8 @@ public class ClassType implements IType {
     public static final ClassType HttpHeaders = new Builder(false)
         .knownClass(com.azure.core.http.HttpHeaders.class)
         .build();
+
+    public static final ClassType HTTP_HEADER_NAME = new Builder(false).knownClass(HttpHeaderName.class).build();
 
 
     // Java exception types

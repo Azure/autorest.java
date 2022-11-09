@@ -5,6 +5,7 @@
 package com.cadl.optional.models;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,6 +24,10 @@ public final class PutHeaders {
     @JsonProperty(value = "header-optional")
     private String headerOptional;
 
+    private static final HttpHeaderName HEADER_REQUIRED = HttpHeaderName.fromString("header-required");
+
+    private static final HttpHeaderName HEADER_OPTIONAL = HttpHeaderName.fromString("header-optional");
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of PutHeaders class.
@@ -30,8 +35,8 @@ public final class PutHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public PutHeaders(HttpHeaders rawHeaders) {
-        this.headerRequired = rawHeaders.getValue("header-required");
-        this.headerOptional = rawHeaders.getValue("header-optional");
+        this.headerRequired = rawHeaders.getValue(HEADER_REQUIRED);
+        this.headerOptional = rawHeaders.getValue(HEADER_OPTIONAL);
     }
 
     /**

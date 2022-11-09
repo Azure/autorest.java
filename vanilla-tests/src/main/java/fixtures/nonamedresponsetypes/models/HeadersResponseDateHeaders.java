@@ -5,6 +5,7 @@
 package fixtures.nonamedresponsetypes.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
@@ -18,6 +19,8 @@ public final class HeadersResponseDateHeaders {
     @JsonProperty(value = "value")
     private LocalDate value;
 
+    private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseDateHeaders class.
@@ -25,7 +28,7 @@ public final class HeadersResponseDateHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseDateHeaders(HttpHeaders rawHeaders) {
-        String value = rawHeaders.getValue("value");
+        String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = LocalDate.parse(value);
         }
