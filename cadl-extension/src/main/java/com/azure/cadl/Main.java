@@ -8,10 +8,8 @@ import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
-import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.cadl.model.EmitterOptions;
 import com.azure.core.util.Configuration;
@@ -64,14 +62,11 @@ public class Main {
         // initialize plugin
         CadlPlugin cadlPlugin = new CadlPlugin(emitterOptions);
 
-        // transform code model
-        codeModel = new Transformer().transform(codeModel);
-
-        // map to client model
-        Client client = Mappers.getClientMapper().map(codeModel);
+        // client
+        Client client = cadlPlugin.processClient(codeModel);
 
         // template
-        JavaPackage javaPackage = cadlPlugin.writeToTemplates(codeModel, client, JavaSettings.getInstance());
+        JavaPackage javaPackage = cadlPlugin.processTemplates(codeModel, client, JavaSettings.getInstance());
 
         LOGGER.info("Count of Java files: {}", javaPackage.getJavaFiles().size());
         LOGGER.info("Count of XML files: {}", javaPackage.getXmlFiles().size());

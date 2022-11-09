@@ -28,6 +28,9 @@ public class EmitterOptions {
     @JsonProperty(value="service-versions")
     private List<String> serviceVersions;
 
+    @JsonProperty(value="dev-options")
+    private DevOptions devOptions;
+
     public String getNamespace() {
         return namespace;
     }
@@ -56,6 +59,10 @@ public class EmitterOptions {
 
     public List<String> getServiceVersions() {
         return serviceVersions;
+    }
+
+    public DevOptions getDevOptions() {
+        return devOptions;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {
