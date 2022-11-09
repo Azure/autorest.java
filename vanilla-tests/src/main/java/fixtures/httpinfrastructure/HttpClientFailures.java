@@ -52,7 +52,7 @@ public final class HttpClientFailures {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
-    private interface HttpClientFailuresService {
+    public interface HttpClientFailuresService {
         @Head("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> head400(

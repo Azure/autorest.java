@@ -48,7 +48,7 @@ public final class Flattencomplexes {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface FlattencomplexesService {
+    public interface FlattencomplexesService {
         @Get("/complex/flatten/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)

@@ -52,7 +52,7 @@ public final class RequiredAndOptionalsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "OptionalClientRequir")
-    private interface RequiredAndOptionalsService {
+    public interface RequiredAndOptionalsService {
         @Get("/models/properties/optional/requiredAndOptional/all")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

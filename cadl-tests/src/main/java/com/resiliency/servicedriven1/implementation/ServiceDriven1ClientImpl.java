@@ -103,7 +103,7 @@ public final class ServiceDriven1ClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ServiceDriven1Client")
-    private interface ServiceDriven1ClientService {
+    public interface ServiceDriven1ClientService {
         @Head("/resiliency/servicedriven1/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

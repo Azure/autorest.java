@@ -52,7 +52,7 @@ public final class DurationOperationsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "OptionalClientDurati")
-    private interface DurationOperationsService {
+    public interface DurationOperationsService {
         @Get("/models/properties/optional/duration/all")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

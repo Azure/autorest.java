@@ -51,7 +51,7 @@ public final class DatetimeValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ItemTypesClientDatet")
-    private interface DatetimeValuesService {
+    public interface DatetimeValuesService {
         @Get("/arrays/item-types/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

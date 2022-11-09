@@ -50,7 +50,7 @@ public final class ContantsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerConst")
-    private interface ContantsService {
+    public interface ContantsService {
         @Put("/constants/putNoModelAsStringNoRequiredTwoValueNoDefault")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(

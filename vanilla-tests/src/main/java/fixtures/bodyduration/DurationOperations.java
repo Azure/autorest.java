@@ -49,7 +49,7 @@ public final class DurationOperations {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestDurationTest")
-    private interface DurationOperationsService {
+    public interface DurationOperationsService {
         @Get("/duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

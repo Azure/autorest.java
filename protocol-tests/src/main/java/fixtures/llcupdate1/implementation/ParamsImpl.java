@@ -55,7 +55,7 @@ public final class ParamsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "DpgClientParams")
-    private interface ParamsService {
+    public interface ParamsService {
         @Head("/serviceDriven/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

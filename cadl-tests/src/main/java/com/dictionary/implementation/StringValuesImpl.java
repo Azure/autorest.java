@@ -51,7 +51,7 @@ public final class StringValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryClientStri")
-    private interface StringValuesService {
+    public interface StringValuesService {
         @Get("/dictionary/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

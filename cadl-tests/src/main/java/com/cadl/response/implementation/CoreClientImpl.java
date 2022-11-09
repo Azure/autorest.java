@@ -148,7 +148,7 @@ public final class CoreClientImpl {
     /** The interface defining all the services for CoreClient to be used by the proxy service to perform REST calls. */
     @Host("{endpoint}")
     @ServiceInterface(name = "CoreClient")
-    private interface CoreClientService {
+    public interface CoreClientService {
         @Put("/cadl-core/resources/{name}")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(

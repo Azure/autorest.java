@@ -52,7 +52,7 @@ public final class DictionaryStringsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "TypesClientDictionar")
-    private interface DictionaryStringsService {
+    public interface DictionaryStringsService {
         @Get("/models/properties/types/dictionary/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

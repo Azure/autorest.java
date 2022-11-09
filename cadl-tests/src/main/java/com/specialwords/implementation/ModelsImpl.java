@@ -50,7 +50,7 @@ public final class ModelsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "SpecialWordsClientMo")
-    private interface ModelsService {
+    public interface ModelsService {
         @Get("/special-words/model/get")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

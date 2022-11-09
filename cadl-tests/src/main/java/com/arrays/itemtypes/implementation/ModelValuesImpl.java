@@ -51,7 +51,7 @@ public final class ModelValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ItemTypesClientModel")
-    private interface ModelValuesService {
+    public interface ModelValuesService {
         @Get("/arrays/item-types/model")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

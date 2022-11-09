@@ -49,7 +49,7 @@ public final class HttpFailuresImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
-    private interface HttpFailuresService {
+    public interface HttpFailuresService {
         @Get("/http/failure/emptybody/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

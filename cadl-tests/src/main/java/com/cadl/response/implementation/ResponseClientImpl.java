@@ -140,7 +140,7 @@ public final class ResponseClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ResponseClient")
-    private interface ResponseClientService {
+    public interface ResponseClientService {
         @Get("/response/get-binary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

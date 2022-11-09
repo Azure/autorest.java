@@ -99,7 +99,7 @@ public final class LroClientImpl {
     /** The interface defining all the services for LroClient to be used by the proxy service to perform REST calls. */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "LroClient")
-    private interface LroClientService {
+    public interface LroClientService {
         @Put("/lro/basic/put")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

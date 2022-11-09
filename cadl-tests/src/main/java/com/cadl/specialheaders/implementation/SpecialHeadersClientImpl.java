@@ -155,7 +155,7 @@ public final class SpecialHeadersClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "SpecialHeadersClient")
-    private interface SpecialHeadersClientService {
+    public interface SpecialHeadersClientService {
         @Get("/special-headers/{name}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

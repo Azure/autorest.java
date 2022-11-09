@@ -52,7 +52,7 @@ public final class BasicsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface BasicsService {
+    public interface BasicsService {
         @Get("/complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

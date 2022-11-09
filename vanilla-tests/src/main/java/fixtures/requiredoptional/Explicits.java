@@ -62,7 +62,7 @@ public final class Explicits {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestRequiredOpti")
-    private interface ExplicitsService {
+    public interface ExplicitsService {
         @Put("/reqopt/explicit/optional/binary-body")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

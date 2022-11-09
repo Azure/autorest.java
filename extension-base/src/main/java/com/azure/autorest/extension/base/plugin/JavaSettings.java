@@ -123,7 +123,7 @@ public class JavaSettings {
                 getStringValue(host, "sync-methods", "essential"),
                 getBooleanValue(host, "client-logger", false),
                 getBooleanValue(host, "required-fields-as-ctor-args", false),
-                getBooleanValue(host, "service-interface-as-public", false),
+                getBooleanValue(host, "service-interface-as-public", true),
                 getStringValue(host, "artifact-id", ""),
                 getStringValue(host, "credential-types", "none"),
                 getStringValue(host, "credential-scopes"),

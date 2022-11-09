@@ -99,7 +99,7 @@ public final class InheritanceClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "InheritanceClient")
-    private interface InheritanceClientService {
+    public interface InheritanceClientService {
         @Post("/models/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

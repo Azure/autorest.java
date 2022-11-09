@@ -56,7 +56,7 @@ public final class LrosaDsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestLongRunningO")
-    private interface LrosaDsService {
+    public interface LrosaDsService {
         @Put("/lro/nonretryerror/put/400")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(

@@ -52,7 +52,7 @@ public final class Implicits {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestRequiredOpti")
-    private interface ImplicitsService {
+    public interface ImplicitsService {
         @Get("/reqopt/implicit/required/path/{pathParameter}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

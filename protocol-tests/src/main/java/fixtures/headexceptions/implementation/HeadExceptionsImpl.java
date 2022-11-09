@@ -48,7 +48,7 @@ public final class HeadExceptionsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHeadExceptio")
-    private interface HeadExceptionsService {
+    public interface HeadExceptionsService {
         @Head("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

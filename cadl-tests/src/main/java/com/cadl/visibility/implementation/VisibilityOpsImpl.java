@@ -53,7 +53,7 @@ public final class VisibilityOpsImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "VisibilityClientVisi")
-    private interface VisibilityOpsService {
+    public interface VisibilityOpsService {
         @Get("/visibility/read")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

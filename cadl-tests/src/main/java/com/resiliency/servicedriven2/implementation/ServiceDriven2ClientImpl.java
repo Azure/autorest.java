@@ -125,7 +125,7 @@ public final class ServiceDriven2ClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ServiceDriven2Client")
-    private interface ServiceDriven2ClientService {
+    public interface ServiceDriven2ClientService {
         @Head("/serviceDriven2/serviceDriven/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

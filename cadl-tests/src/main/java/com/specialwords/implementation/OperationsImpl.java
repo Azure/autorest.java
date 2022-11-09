@@ -48,7 +48,7 @@ public final class OperationsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "SpecialWordsClientOp")
-    private interface OperationsService {
+    public interface OperationsService {
         @Get("/special-words/operation/for")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(

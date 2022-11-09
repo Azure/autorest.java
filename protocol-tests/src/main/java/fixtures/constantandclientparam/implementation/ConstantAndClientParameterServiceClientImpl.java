@@ -196,7 +196,7 @@ public final class ConstantAndClientParameterServiceClientImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "ConstantAndClientPar")
-    private interface ConstantAndClientParameterServiceClientService {
+    public interface ConstantAndClientParameterServiceClientService {
         @Put("/constant/clientparam/path")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

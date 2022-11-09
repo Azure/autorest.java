@@ -48,7 +48,7 @@ public final class Headers {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
-    private interface HeadersService {
+    public interface HeadersService {
         @Post("/azurespecials/customNamedRequestId")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

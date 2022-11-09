@@ -152,7 +152,7 @@ public final class LongRunningClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "LongRunningClient")
-    private interface LongRunningClientService {
+    public interface LongRunningClientService {
         @Get("/long-running/resources/{name}/operations/{operationId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

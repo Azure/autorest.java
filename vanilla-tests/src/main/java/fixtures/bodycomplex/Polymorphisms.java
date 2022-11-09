@@ -51,7 +51,7 @@ public final class Polymorphisms {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
-    private interface PolymorphismsService {
+    public interface PolymorphismsService {
         @Get("/complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -52,7 +52,7 @@ public final class DatetimeOperationsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "TypesClientDatetimeO")
-    private interface DatetimeOperationsService {
+    public interface DatetimeOperationsService {
         @Get("/models/properties/types/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

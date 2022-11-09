@@ -119,7 +119,7 @@ public final class DpgMultiMediaTypesClientImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "DpgMultiMediaTypesCl")
-    private interface DpgMultiMediaTypesClientService {
+    public interface DpgMultiMediaTypesClientService {
         @Post("/mediatypes/jsonandbinary/jsonfirst")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
