@@ -49,7 +49,6 @@ To debug, add `--java.debugger` to the argument list. The JVM will suspend at th
 
 # Recommended Settings
 
-- `client-logger: true`, Exception is required to be thrown via `ClientLogger`.
 - `use-default-http-status-code-to-exception-type-mapping: true`, use subclass of `HttpResponseException` defined in azure-core, when service returns unexpected status code.
 - `generic-response-type: true`, use `ResponseBase<>`, instead a subclass of `ResponseBase<>`, for response with HTTP headers. Performance and reflective access improvement.
 - `output-model-immutable: true`, make model classes immutable, if model is used only in response.
