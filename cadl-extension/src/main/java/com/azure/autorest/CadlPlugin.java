@@ -12,6 +12,7 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
+import com.azure.autorest.preprocessor.namer.CodeNamer;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.cadl.model.EmitterOptions;
 import com.azure.cadl.mapper.CadlMapperFactory;
@@ -45,7 +46,7 @@ public class CadlPlugin extends Javagen {
                     .forEach(o -> {
                         if (o.getConvenienceApi() == null) {
                             ConvenienceApi convenienceApi = new ConvenienceApi();
-                            convenienceApi.setName(o.getLanguage().getDefault().getName());
+                            convenienceApi.setName(CodeNamer.getMethodName(o.getLanguage().getDefault().getName()));
                             o.setConvenienceApi(convenienceApi);
                         }
                     });
