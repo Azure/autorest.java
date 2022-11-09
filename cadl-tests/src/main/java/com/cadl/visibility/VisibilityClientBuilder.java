@@ -244,7 +244,7 @@ public final class VisibilityClientBuilder
      * @return an instance of VisibilityAsyncClient.
      */
     @Generated
-    public VisibilityAsyncClient buildVisibilityAsyncClient() {
+    public VisibilityAsyncClient buildAsyncClient() {
         return new VisibilityAsyncClient(buildInnerClient());
     }
 
@@ -274,7 +274,7 @@ public final class VisibilityClientBuilder
      * @return an instance of VisibilityClient.
      */
     @Generated
-    public VisibilityClient buildVisibilityClient() {
+    public VisibilityClient buildClient() {
         return new VisibilityClient(new VisibilityAsyncClient(buildInnerClient()));
     }
 
