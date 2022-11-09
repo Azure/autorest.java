@@ -16,7 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.ReadonlypropertiesImpl;
-import fixtures.bodycomplex.implementation.models.ReadonlyObj;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
@@ -84,45 +83,5 @@ public final class ReadonlypropertyAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponseAsync(complexBody, requestOptions);
-    }
-
-    /**
-     * Get complex types that have readonly properties.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that have readonly properties on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ReadonlyObj> getValid() {
-        // Generated convenience method for getValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getValidWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(ReadonlyObj.class));
-    }
-
-    /**
-     * Put complex types that have readonly properties.
-     *
-     * @param complexBody The complexBody parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValid(ReadonlyObj complexBody) {
-        // Generated convenience method for putValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putValidWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
     }
 }

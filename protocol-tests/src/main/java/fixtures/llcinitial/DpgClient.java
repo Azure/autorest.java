@@ -15,7 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.llcinitial.implementation.models.PostInput;
 
 /** Initializes a new instance of the synchronous DpgClient type. */
 @ServiceClient(builder = DpgClientBuilder.class)
@@ -175,114 +174,5 @@ public final class DpgClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
         return this.client.getOptionalWithResponse(requestOptions).block();
-    }
-
-    /**
-     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
-     * added.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Object headNoParams() {
-        // Generated convenience method for headNoParamsWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return headNoParamsWithResponse(requestOptions).getValue();
-    }
-
-    /**
-     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
-     * query parameter is added.
-     *
-     * @param parameter I am a required parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value on path. Initially only has one required Query Parameter.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Object getRequired(String parameter) {
-        // Generated convenience method for getRequiredWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getRequiredWithResponse(parameter, requestOptions).getValue();
-    }
-
-    /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
-     *
-     * @param requiredParam I am a required parameter.
-     * @param optionalParam I am an optional parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Object putRequiredOptional(String requiredParam, String optionalParam) {
-        // Generated convenience method for putRequiredOptionalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
-        }
-        return putRequiredOptionalWithResponse(requiredParam, requestOptions).getValue();
-    }
-
-    /**
-     * POST a JSON.
-     *
-     * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Object postParameters(PostInput parameter) {
-        // Generated convenience method for postParametersWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return postParametersWithResponse(BinaryData.fromObject(parameter), requestOptions).getValue();
-    }
-
-    /**
-     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
-     * parameter is added.
-     *
-     * @param optionalParam I am an optional parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return true Boolean value on path. Initially has one optional query parameter.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Object getOptional(String optionalParam) {
-        // Generated convenience method for getOptionalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
-        }
-        return getOptionalWithResponse(requestOptions).getValue();
     }
 }

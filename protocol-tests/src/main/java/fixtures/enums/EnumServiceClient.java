@@ -15,14 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.enums.implementation.models.Enum0;
-import fixtures.enums.implementation.models.Enum1;
-import fixtures.enums.implementation.models.Enum2;
-import fixtures.enums.implementation.models.Enum3;
-import fixtures.enums.implementation.models.Enum4;
-import fixtures.enums.implementation.models.Enum5;
-import fixtures.enums.implementation.models.Enum6;
-import fixtures.enums.implementation.models.Enum7;
 
 /** Initializes a new instance of the synchronous EnumServiceClient type. */
 @ServiceClient(builder = EnumServiceClientBuilder.class)
@@ -153,100 +145,5 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNonRequiredBodyEnumsWithResponse(RequestOptions requestOptions) {
         return this.client.putNonRequiredBodyEnumsWithResponse(requestOptions).block();
-    }
-
-    /**
-     * query enums operation.
-     *
-     * @param queryIntegerEnum integer enum with three values.
-     * @param queryBooleanEnum boolean enum with two values.
-     * @param queryRequiredEnum required enum with three values.
-     * @param queryNonRequiredEnum non required enum with three values.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putQueryEnums(
-            Enum0 queryIntegerEnum, Enum1 queryBooleanEnum, Enum3 queryRequiredEnum, Enum2 queryNonRequiredEnum) {
-        // Generated convenience method for putQueryEnumsWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (queryNonRequiredEnum != null) {
-            requestOptions.addQueryParam("query-non-required-enum", queryNonRequiredEnum.toString());
-        }
-        putQueryEnumsWithResponse(
-                        String.valueOf(queryIntegerEnum.toInt()),
-                        String.valueOf(queryBooleanEnum.toBoolean()),
-                        queryRequiredEnum.toString(),
-                        requestOptions)
-                .getValue();
-    }
-
-    /**
-     * enums header operation.
-     *
-     * @param headerRequiredStringEnum required string enum with three values.
-     * @param headerNonRequiredStringEnum non required string enum with three values.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putHeaderEnums(Enum4 headerRequiredStringEnum, Enum5 headerNonRequiredStringEnum) {
-        // Generated convenience method for putHeaderEnumsWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (headerNonRequiredStringEnum != null) {
-            requestOptions.setHeader("header-non-required-string-enum", headerNonRequiredStringEnum.toString());
-        }
-        putHeaderEnumsWithResponse(headerRequiredStringEnum.toString(), requestOptions).getValue();
-    }
-
-    /**
-     * enums required body operation.
-     *
-     * @param bodyRequiredEnum body required enum.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putRequiredBodyEnums(Enum6 bodyRequiredEnum) {
-        // Generated convenience method for putRequiredBodyEnumsWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        putRequiredBodyEnumsWithResponse(BinaryData.fromObject(bodyRequiredEnum), requestOptions).getValue();
-    }
-
-    /**
-     * enums non required body operation.
-     *
-     * @param bodyNonRequiredEnum body non required enum.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putNonRequiredBodyEnums(Enum7 bodyNonRequiredEnum) {
-        // Generated convenience method for putNonRequiredBodyEnumsWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (bodyNonRequiredEnum != null) {
-            requestOptions.setBody(BinaryData.fromObject(bodyNonRequiredEnum));
-        }
-        putNonRequiredBodyEnumsWithResponse(requestOptions).getValue();
     }
 }

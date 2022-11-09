@@ -16,7 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.InheritancesImpl;
-import fixtures.bodycomplex.implementation.models.Siamese;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
@@ -103,47 +102,5 @@ public final class InheritanceAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponseAsync(complexBody, requestOptions);
-    }
-
-    /**
-     * Get complex types that extend others.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that extend others on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Siamese> getValid() {
-        // Generated convenience method for getValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getValidWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Siamese.class));
-    }
-
-    /**
-     * Put complex types that extend others.
-     *
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValid(Siamese complexBody) {
-        // Generated convenience method for putValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putValidWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
     }
 }

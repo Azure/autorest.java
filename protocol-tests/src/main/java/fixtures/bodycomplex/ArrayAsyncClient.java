@@ -16,7 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.ArraysImpl;
-import fixtures.bodycomplex.implementation.models.ArrayWrapper;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
@@ -167,107 +166,5 @@ public final class ArrayAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotProvidedWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * Get complex types with array property.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ArrayWrapper> getValid() {
-        // Generated convenience method for getValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getValidWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(ArrayWrapper.class));
-    }
-
-    /**
-     * Put complex types with array property.
-     *
-     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValid(ArrayWrapper complexBody) {
-        // Generated convenience method for putValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putValidWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
-    }
-
-    /**
-     * Get complex types with array property which is empty.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property which is empty on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ArrayWrapper> getEmpty() {
-        // Generated convenience method for getEmptyWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getEmptyWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(ArrayWrapper.class));
-    }
-
-    /**
-     * Put complex types with array property which is empty.
-     *
-     * @param complexBody Please put an empty array.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmpty(ArrayWrapper complexBody) {
-        // Generated convenience method for putEmptyWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putEmptyWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
-    }
-
-    /**
-     * Get complex types with array property while server doesn't provide a response payload.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload on successful
-     *     completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ArrayWrapper> getNotProvided() {
-        // Generated convenience method for getNotProvidedWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getNotProvidedWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(ArrayWrapper.class));
     }
 }

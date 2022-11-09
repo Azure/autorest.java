@@ -15,7 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodycomplex.implementation.models.MyBaseType;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = FlattencomplexClientBuilder.class)
@@ -57,23 +56,5 @@ public final class FlattencomplexClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
         return this.client.getValidWithResponse(requestOptions).block();
-    }
-
-    /**
-     * The getValid operation.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public MyBaseType getValid() {
-        // Generated convenience method for getValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getValidWithResponse(requestOptions).getValue().toObject(MyBaseType.class);
     }
 }

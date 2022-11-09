@@ -16,7 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.PolymorphicrecursivesImpl;
-import fixtures.bodycomplex.implementation.models.Fish;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
@@ -96,52 +95,5 @@ public final class PolymorphicrecursiveAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.serviceClient.putValidWithResponseAsync(complexBody, requestOptions);
-    }
-
-    /**
-     * Get complex types that are polymorphic and have recursive references.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic and have recursive references on successful completion of {@link
-     *     Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Fish> getValid() {
-        // Generated convenience method for getValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getValidWithResponse(requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Fish.class));
-    }
-
-    /**
-     * Put complex types that are polymorphic and have recursive references.
-     *
-     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
-     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
-     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
-     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
-     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
-     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
-     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValid(Fish complexBody) {
-        // Generated convenience method for putValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putValidWithResponse(BinaryData.fromObject(complexBody), requestOptions).then();
     }
 }

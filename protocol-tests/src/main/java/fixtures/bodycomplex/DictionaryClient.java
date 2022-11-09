@@ -15,7 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodycomplex.implementation.models.DictionaryWrapper;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = DictionaryClientBuilder.class)
@@ -190,116 +189,5 @@ public final class DictionaryClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
         return this.client.getNotProvidedWithResponse(requestOptions).block();
-    }
-
-    /**
-     * Get complex types with dictionary property.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DictionaryWrapper getValid() {
-        // Generated convenience method for getValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getValidWithResponse(requestOptions).getValue().toObject(DictionaryWrapper.class);
-    }
-
-    /**
-     * Put complex types with dictionary property.
-     *
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     *     "xls":"excel", "exe":"", "":null.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(DictionaryWrapper complexBody) {
-        // Generated convenience method for putValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        putValidWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
-    }
-
-    /**
-     * Get complex types with dictionary property which is empty.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property which is empty.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DictionaryWrapper getEmpty() {
-        // Generated convenience method for getEmptyWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getEmptyWithResponse(requestOptions).getValue().toObject(DictionaryWrapper.class);
-    }
-
-    /**
-     * Put complex types with dictionary property which is empty.
-     *
-     * @param complexBody Please put an empty dictionary.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(DictionaryWrapper complexBody) {
-        // Generated convenience method for putEmptyWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        putEmptyWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
-    }
-
-    /**
-     * Get complex types with dictionary property which is null.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property which is null.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DictionaryWrapper getNull() {
-        // Generated convenience method for getNullWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getNullWithResponse(requestOptions).getValue().toObject(DictionaryWrapper.class);
-    }
-
-    /**
-     * Get complex types with dictionary property while server doesn't provide a response payload.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property while server doesn't provide a response payload.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DictionaryWrapper getNotProvided() {
-        // Generated convenience method for getNotProvidedWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getNotProvidedWithResponse(requestOptions).getValue().toObject(DictionaryWrapper.class);
     }
 }

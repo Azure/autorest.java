@@ -18,8 +18,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
 import fixtures.dpgcustomization.implementation.DpgClientImpl;
-import fixtures.dpgcustomization.models.Input;
-import fixtures.dpgcustomization.models.Product;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous DpgClient type. */
@@ -154,76 +152,5 @@ public final class DpgAsyncClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginLro(String mode, RequestOptions requestOptions) {
         return this.serviceClient.beginLroAsync(mode, requestOptions);
-    }
-
-    /**
-     * Get models that you will either return to end users as a raw body, or with a model added during grow up.
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return models that you will either return to end users as a raw body, or with a model added during grow up on
-     *     successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Product> getModel(String mode) {
-        // Generated convenience method for getModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getModelWithResponse(mode, requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Product.class));
-    }
-
-    /**
-     * Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model
-     * instead, and put in 'model' as mode.
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param input Please put {'hello': 'world!'}.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Product> postModel(String mode, Input input) {
-        // Generated convenience method for postModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return postModelWithResponse(mode, BinaryData.fromObject(input), requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(Product.class));
-    }
-
-    /**
-     * Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as
-     *     paginated response with {@link PagedFlux}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getPages(String mode) {
-        // Generated convenience method for getPages
-        RequestOptions requestOptions = new RequestOptions();
-        return getPages(mode, requestOptions).mapPage(protocolMethodData -> protocolMethodData.toObject(Product.class));
     }
 }

@@ -15,7 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodycomplex.implementation.models.Fish;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = PolymorphicrecursiveClientBuilder.class)
@@ -93,48 +92,5 @@ public final class PolymorphicrecursiveClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
         return this.client.putValidWithResponse(complexBody, requestOptions).block();
-    }
-
-    /**
-     * Get complex types that are polymorphic and have recursive references.
-     *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic and have recursive references.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Fish getValid() {
-        // Generated convenience method for getValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getValidWithResponse(requestOptions).getValue().toObject(Fish.class);
-    }
-
-    /**
-     * Put complex types that are polymorphic and have recursive references.
-     *
-     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
-     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
-     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
-     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
-     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
-     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
-     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(Fish complexBody) {
-        // Generated convenience method for putValidWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        putValidWithResponse(BinaryData.fromObject(complexBody), requestOptions).getValue();
     }
 }

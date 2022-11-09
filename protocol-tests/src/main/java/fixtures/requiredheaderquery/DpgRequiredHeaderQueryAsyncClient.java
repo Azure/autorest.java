@@ -15,15 +15,10 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.requiredheaderquery.implementation.ParamsImpl;
-import fixtures.requiredheaderquery.implementation.models.Get6ItemsItem;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous DpgRequiredHeaderQueryClient type. */
@@ -142,109 +137,5 @@ public final class DpgRequiredHeaderQueryAsyncClient {
                 parameterDatetime,
                 parameterDuration,
                 requestOptions);
-    }
-
-    /**
-     * Test Case for Required Query Parameters
-     *
-     * <p>Get Required Query Parameters.
-     *
-     * @param parameterInt I am a required int parameter.
-     * @param parameterBoolean I am a required boolean parameter.
-     * @param parameterCsvStringArray I am a required csv string array parameter.
-     * @param parameterCsvIntArray I am a required csv int array parameter.
-     * @param parameterMultiStringArray The array of string collect by multi.
-     * @param parameterMultiIntArray The array of integer collect by multi.
-     * @param parameterMultiEnumArray The array of enum collect by multi.
-     * @param parameterDatetime The datetime parameter.
-     * @param parameterOptionalCsvIntArray I am a required csv int array parameter.
-     * @param parameterOptionalMultiIntArray The array of integer collect by multi.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return required Query Parameters on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Object> getRequiredQueryParam(
-            int parameterInt,
-            boolean parameterBoolean,
-            List<String> parameterCsvStringArray,
-            List<Integer> parameterCsvIntArray,
-            List<String> parameterMultiStringArray,
-            List<Integer> parameterMultiIntArray,
-            List<Get6ItemsItem> parameterMultiEnumArray,
-            OffsetDateTime parameterDatetime,
-            List<Integer> parameterOptionalCsvIntArray,
-            List<Integer> parameterOptionalMultiIntArray) {
-        // Generated convenience method for getRequiredQueryParamWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (parameterOptionalCsvIntArray != null) {
-            requestOptions.addQueryParam(
-                    "parameter_optional_csv_int_array",
-                    JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(parameterOptionalCsvIntArray, CollectionFormat.CSV));
-        }
-        if (parameterOptionalMultiIntArray != null) {
-            requestOptions.addQueryParam(
-                    "parameter_optional_multi_int_array",
-                    JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(parameterOptionalMultiIntArray, CollectionFormat.CSV));
-        }
-        return getRequiredQueryParamWithResponse(
-                        parameterInt,
-                        parameterBoolean,
-                        parameterCsvStringArray,
-                        parameterCsvIntArray,
-                        parameterMultiStringArray,
-                        parameterMultiIntArray,
-                        parameterMultiEnumArray.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.toList()),
-                        parameterDatetime,
-                        requestOptions)
-                .map(Response::getValue);
-    }
-
-    /**
-     * Get Required Header Parameters.
-     *
-     * @param parameterInt I am a required int parameter.
-     * @param parameterBoolean I am a required boolean parameter.
-     * @param parameterCsvStringArray The array of string collect by csv.
-     * @param parameterCsvIntArray The array of integer collect by csv.
-     * @param parameterDatetime The datetime parameter.
-     * @param parameterDuration The duration parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return required Header Parameters on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Object> getRequiredHeader(
-            int parameterInt,
-            boolean parameterBoolean,
-            List<String> parameterCsvStringArray,
-            List<Integer> parameterCsvIntArray,
-            OffsetDateTime parameterDatetime,
-            Duration parameterDuration) {
-        // Generated convenience method for getRequiredHeaderWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getRequiredHeaderWithResponse(
-                        parameterInt,
-                        parameterBoolean,
-                        parameterCsvStringArray,
-                        parameterCsvIntArray,
-                        parameterDatetime,
-                        parameterDuration,
-                        requestOptions)
-                .map(Response::getValue);
     }
 }
