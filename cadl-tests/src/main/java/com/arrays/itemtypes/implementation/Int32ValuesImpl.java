@@ -51,7 +51,7 @@ public final class Int32ValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ItemTypesClientInt32")
-    private interface Int32ValuesService {
+    public interface Int32ValuesService {
         @Get("/arrays/item-types/int32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

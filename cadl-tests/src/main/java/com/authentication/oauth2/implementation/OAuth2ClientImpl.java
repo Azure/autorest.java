@@ -94,7 +94,7 @@ public final class OAuth2ClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "OAuth2Client")
-    private interface OAuth2ClientService {
+    public interface OAuth2ClientService {
         @Get("/authentication/oauth2/valid")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(

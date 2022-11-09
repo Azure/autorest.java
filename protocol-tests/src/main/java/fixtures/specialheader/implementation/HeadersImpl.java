@@ -67,7 +67,7 @@ public final class HeadersImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "SpecialHeaderHeaders")
-    private interface HeadersService {
+    public interface HeadersService {
         @Post("/status/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

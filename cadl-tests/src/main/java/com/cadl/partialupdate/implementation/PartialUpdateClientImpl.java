@@ -118,7 +118,7 @@ public final class PartialUpdateClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "PartialUpdateClient")
-    private interface PartialUpdateClientService {
+    public interface PartialUpdateClientService {
         @Get("/partialupdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

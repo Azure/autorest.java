@@ -49,7 +49,7 @@ public final class MultipleResponses {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
-    private interface MultipleResponsesService {
+    public interface MultipleResponsesService {
         @Get("/http/payloads/200/A/204/none/default/Error/response/200/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)

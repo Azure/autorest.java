@@ -94,7 +94,7 @@ public final class ApiKeyClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ApiKeyClient")
-    private interface ApiKeyClientService {
+    public interface ApiKeyClientService {
         @Get("/authentication/api-key/valid")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(

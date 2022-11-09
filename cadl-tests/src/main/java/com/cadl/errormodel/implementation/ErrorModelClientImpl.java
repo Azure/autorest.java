@@ -117,7 +117,7 @@ public final class ErrorModelClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ErrorModelClient")
-    private interface ErrorModelClientService {
+    public interface ErrorModelClientService {
         @Get("/error")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(

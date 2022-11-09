@@ -48,7 +48,7 @@ public final class Ints {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestIntegerTestS")
-    private interface IntsService {
+    public interface IntsService {
         @Get("/int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

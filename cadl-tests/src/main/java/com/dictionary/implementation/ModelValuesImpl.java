@@ -51,7 +51,7 @@ public final class ModelValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryClientMode")
-    private interface ModelValuesService {
+    public interface ModelValuesService {
         @Get("/dictionary/model")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

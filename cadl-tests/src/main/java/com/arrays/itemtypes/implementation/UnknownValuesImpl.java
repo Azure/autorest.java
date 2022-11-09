@@ -51,7 +51,7 @@ public final class UnknownValuesImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ItemTypesClientUnkno")
-    private interface UnknownValuesService {
+    public interface UnknownValuesService {
         @Get("/arrays/item-types/unknown")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

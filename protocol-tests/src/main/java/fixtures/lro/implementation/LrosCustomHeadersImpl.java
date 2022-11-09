@@ -57,7 +57,7 @@ public final class LrosCustomHeadersImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestLongRunningO")
-    private interface LrosCustomHeadersService {
+    public interface LrosCustomHeadersService {
         @Put("/lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

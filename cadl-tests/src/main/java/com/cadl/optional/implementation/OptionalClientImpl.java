@@ -117,7 +117,7 @@ public final class OptionalClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "OptionalClient")
-    private interface OptionalClientService {
+    public interface OptionalClientService {
         @Put("/optional/put")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

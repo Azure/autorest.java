@@ -49,7 +49,7 @@ public final class ParametersImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "SpecialWordsClientPa")
-    private interface ParametersService {
+    public interface ParametersService {
         @Get("/special-words/parameter/if")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(

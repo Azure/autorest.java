@@ -114,7 +114,7 @@ public final class AuthClientImpl {
     /** The interface defining all the services for AuthClient to be used by the proxy service to perform REST calls. */
     @Host("{endpoint}")
     @ServiceInterface(name = "AuthClient")
-    private interface AuthClientService {
+    public interface AuthClientService {
         @Get("/auth")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

@@ -66,7 +66,7 @@ public final class Xmls {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATXM")
-    private interface XmlsService {
+    public interface XmlsService {
         @Get("/xml/complex-type-ref-no-meta")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)

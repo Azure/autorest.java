@@ -130,7 +130,7 @@ public final class DevDrivenClientImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DevDrivenClient")
-    private interface DevDrivenClientService {
+    public interface DevDrivenClientService {
         @Get("/resiliency/devdriven/customization/model/{mode}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

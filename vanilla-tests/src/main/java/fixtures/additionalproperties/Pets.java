@@ -51,7 +51,7 @@ public final class Pets {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AdditionalProperties")
-    private interface PetsService {
+    public interface PetsService {
         @Put("/additionalProperties/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -52,7 +52,7 @@ public final class CollectionsModelsImpl {
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "OptionalClientCollec")
-    private interface CollectionsModelsService {
+    public interface CollectionsModelsService {
         @Get("/models/properties/optional/collections/model/all")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

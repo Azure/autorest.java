@@ -129,24 +129,20 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
   protected void writeMethods(AsyncSyncClient syncClient, JavaClass classBlock) {
     final ServiceClient serviceClient = syncClient.getServiceClient();
     final MethodGroupClient methodGroupClient = syncClient.getMethodGroupClient();
-    final boolean wrapServiceClient = methodGroupClient == null;
-    if (wrapServiceClient) {
-      serviceClient.getClientMethods().stream()
-          .filter(clientMethod -> clientMethod.getMethodVisibility() == JavaVisibility.Public)
-          .filter(clientMethod -> !clientMethod.isImplementationOnly())
-          .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
-          .forEach(clientMethod -> {
-            writeMethod(clientMethod, classBlock);
-          });
-    } else {
-      methodGroupClient.getClientMethods().stream()
-          .filter(clientMethod -> clientMethod.getMethodVisibility() == JavaVisibility.Public)
-          .filter(clientMethod -> !clientMethod.isImplementationOnly())
-          .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
-          .forEach(clientMethod -> {
-            writeMethod(clientMethod, classBlock);
-          });
+
+    final boolean useMethodGroupClient = methodGroupClient != null;
+    List<ClientMethod> clientMethods = serviceClient.getClientMethods();
+    if(useMethodGroupClient) {
+      clientMethods = methodGroupClient.getClientMethods();
     }
+
+    clientMethods.stream()
+        .filter(clientMethod -> clientMethod.getMethodVisibility() == JavaVisibility.Public)
+        .filter(clientMethod -> !clientMethod.isImplementationOnly())
+        .filter(clientMethod -> !clientMethod.getType().name().contains("Async"))
+        .forEach(clientMethod -> {
+          writeMethod(clientMethod, classBlock);
+        });
 
     syncClient.getConvenienceMethods().forEach(m -> writeConvenienceMethods(m, classBlock));
 

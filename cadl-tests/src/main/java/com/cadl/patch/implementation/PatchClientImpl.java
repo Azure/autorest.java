@@ -119,7 +119,7 @@ public final class PatchClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "PatchClient")
-    private interface PatchClientService {
+    public interface PatchClientService {
         @Put("/patch/{name}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

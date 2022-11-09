@@ -118,7 +118,7 @@ public final class ParmaterizedEndpointClientImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ParmaterizedEndpoint")
-    private interface ParmaterizedEndpointClientService {
+    public interface ParmaterizedEndpointClientService {
         @Get("/parameterizedEndpoint/get")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

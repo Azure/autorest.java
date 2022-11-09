@@ -47,7 +47,7 @@ public final class Numbers {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestNumberTestSe")
-    private interface NumbersService {
+    public interface NumbersService {
         @Get("/number/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

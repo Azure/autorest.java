@@ -58,7 +58,7 @@ public final class ParamsImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "DpgRequiredHeaderQue")
-    private interface ParamsService {
+    public interface ParamsService {
         @Get("/required/query/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

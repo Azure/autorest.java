@@ -47,7 +47,7 @@ public final class ApiVersionLocals {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
-    private interface ApiVersionLocalsService {
+    public interface ApiVersionLocalsService {
         @Get("/azurespecials/apiVersion/method/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

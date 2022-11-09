@@ -119,7 +119,7 @@ public final class EnumServiceClientImpl {
      */
     @Host("{$host}")
     @ServiceInterface(name = "EnumServiceClient")
-    private interface EnumServiceClientService {
+    public interface EnumServiceClientService {
         @Put("/enums/queryparam")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

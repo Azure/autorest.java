@@ -45,7 +45,7 @@ public final class Odatas {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
-    private interface OdatasService {
+    public interface OdatasService {
         @Get("/azurespecials/odata/filter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

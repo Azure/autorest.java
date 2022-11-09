@@ -47,7 +47,7 @@ public final class PathItems {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestUrlTestServi")
-    private interface PathItemsService {
+    public interface PathItemsService {
         @Get(
                 "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})

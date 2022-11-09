@@ -53,6 +53,8 @@ emitters:
     "namespace": "com.azure.ai.language.authoring"
     "service-name": "Authoring"
     "partial-update": true
+    "service-versions":
+      - "2022-05-15-preview"
 ```
 
 ## Convenience API
