@@ -1042,7 +1042,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 return ((methodType == ClientMethodType.SimpleAsync && !hasContextParameter)
                     || (methodType == ClientMethodType.SimpleSync && !hasContextParameter)
                     || (methodType == ClientMethodType.PagingAsync && !hasContextParameter)
-                    || (methodType == ClientMethodType.PagingSync && !hasContextParameter))
+                    || (methodType == ClientMethodType.PagingSync && !hasContextParameter)
+                    || (methodType == ClientMethodType.LongRunningBeginAsync && !hasContextParameter)
+                    || (methodType == ClientMethodType.LongRunningBeginSync && !hasContextParameter))
                     // || (methodType == ClientMethodType.SimpleSyncRestResponse && hasContextParameter))
                     ? VISIBLE
                     : NOT_GENERATE;
