@@ -515,7 +515,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addFieldAnnotations(property, classBlock, settings);
 
-            if (property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()
+            if (property.isRequired() && settings.isRequiredFieldsAsConstructorArgs() && !property.isReadOnly()
                 && settings.isStreamStyleSerialization()) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
             } else {
