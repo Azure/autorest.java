@@ -148,6 +148,9 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         } else if (responseBodyType instanceof GenericType) {
             // generic, e.g. list, map
             return String.format("%2$s.toObject(new TypeReference<%1$s>() {})", responseBodyType, invocationExpression);
+        } else if (responseBodyType == ClassType.BinaryData) {
+            // BinaryData
+            return invocationExpression;
         } else if (isModelOrBuiltin(responseBodyType)) {
             // class
             return String.format("%2$s.toObject(%1$s.class)", responseBodyType, invocationExpression);

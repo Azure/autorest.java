@@ -19,10 +19,13 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
 import com.azure.core.client.traits.EndpointTrait;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.TypeReference;
+import reactor.core.publisher.Flux;
 
 import java.util.HashSet;
 import java.util.List;
@@ -199,9 +202,16 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     ClassType.RequestOptions.addImportsTo(imports, false);
     imports.add(Collectors.class.getName());
     imports.add(Objects.class.getName());
+
+    // collection format
     imports.add(JacksonAdapter.class.getName());
     imports.add(CollectionFormat.class.getName());
     imports.add(TypeReference.class.getName());
+
+    // pageable
+    imports.add(PagedResponse.class.getName());
+    imports.add(PagedResponseBase.class.getName());
+    imports.add(Flux.class.getName());
   }
 
   private static void writeConvenienceMethods(ConvenienceMethod convenienceMethod, JavaClass classBlock) {
