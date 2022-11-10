@@ -12,8 +12,6 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
 
-import java.util.Objects;
-
 public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBase {
 
     private static final ConvenienceAsyncMethodTemplate INSTANCE = new ConvenienceAsyncMethodTemplate();
@@ -50,6 +48,7 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         if (methodType == ClientMethodType.PagingAsync) {
             String expressionMapFromBinaryData = expressionMapFromBinaryData(responseBodyType);
             if (expressionMapFromBinaryData == null) {
+                // no need to do the map
                 methodBlock.methodReturn(String.format("%1$s(%2$s)", getMethodName(protocolMethod), invocationExpression));
             } else {
                 methodBlock.line("PagedFlux<BinaryData> pagedFluxResponse = %1$s(%2$s);", getMethodName(protocolMethod), invocationExpression);
@@ -92,6 +91,7 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         if (expressionMapFromBinaryData != null) {
             return String.format(".map(%s)", expressionMapFromBinaryData);
         } else {
+            // no need to do the map
             return "";
         }
     }
