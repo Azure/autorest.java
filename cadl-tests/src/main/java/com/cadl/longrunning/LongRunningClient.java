@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import com.cadl.longrunning.models.ExportedResource;
 import com.cadl.longrunning.models.OperationStatusResourceResource;
 import com.cadl.longrunning.models.Resource;
 
@@ -232,6 +233,26 @@ public final class LongRunningClient {
     }
 
     /**
+     * The createOrUpdate operation.
+     *
+     * @param name The name parameter.
+     * @param resource The resource parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<OperationStatusResourceResource, Resource> beginCreateOrUpdate(String name, Resource resource) {
+        // Generated convenience method for beginCreateOrUpdateWithModel
+        return client.beginCreateOrUpdate(name, resource).getSyncPoller();
+    }
+
+    /**
      * The get operation.
      *
      * @param name The name parameter.
@@ -249,5 +270,65 @@ public final class LongRunningClient {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(name, requestOptions).getValue().toObject(Resource.class);
+    }
+
+    /**
+     * The delete operation.
+     *
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<OperationStatusResourceResource, Void> beginDelete(String name) {
+        // Generated convenience method for beginDeleteWithModel
+        return client.beginDelete(name).getSyncPoller();
+    }
+
+    /**
+     * The export operation.
+     *
+     * @param name The name parameter.
+     * @param projectFileVersion The projectFileVersion parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<OperationStatusResourceResource, Void> beginExport(String name, String projectFileVersion) {
+        // Generated convenience method for beginExportWithModel
+        return client.beginExport(name, projectFileVersion).getSyncPoller();
+    }
+
+    /**
+     * The importx operation.
+     *
+     * @param name The name parameter.
+     * @param exportedResource The exportedResource parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<OperationStatusResourceResource, Void> beginImportx(
+            String name, ExportedResource exportedResource) {
+        // Generated convenience method for beginImportxWithModel
+        return client.beginImportx(name, exportedResource).getSyncPoller();
     }
 }
