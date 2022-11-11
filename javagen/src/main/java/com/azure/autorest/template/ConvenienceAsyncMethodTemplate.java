@@ -25,12 +25,14 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
 
     @Override
     protected boolean isMethodIncluded(ClientMethod method) {
-        return isMethodAsync(method) && isMethodVisible(method);
+        return isMethodAsync(method) && isMethodVisible(method) && !method.isImplementationOnly();
     }
 
     @Override
     protected boolean isMethodIncluded(ConvenienceMethod method) {
         return isMethodAsync(method.getProtocolMethod()) && isMethodVisible(method.getProtocolMethod())
+                // for LRO, we actually choose the protocol method of "WithModel"
+                && (method.getProtocolMethod().getType() != ClientMethodType.LongRunningBeginAsync || (method.getProtocolMethod().getImplementationDetails() != null && method.getProtocolMethod().getImplementationDetails().isImplementationOnly()))
                 && method.getProtocolMethod().getMethodParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context);
     }
 
@@ -67,6 +69,9 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
                                 "})",
                         responseBodyType, expressionMapFromBinaryData));
             }
+        } else if (methodType == ClientMethodType.LongRunningBeginAsync) {
+            String methodName = protocolMethod.getName();
+            methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));
         } else {
             // return type is Mono<Void>, Response::getValue would be null
             String returnExpression = responseBodyType.asNullable() == ClassType.Void

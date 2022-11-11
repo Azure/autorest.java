@@ -158,8 +158,7 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
     }
 
     protected boolean isMethodVisible(ClientMethod method) {
-        return method.getMethodVisibility() == JavaVisibility.Public
-                && !method.isImplementationOnly();
+        return method.getMethodVisibility() == JavaVisibility.Public;
     }
 
     protected String getMethodName(ClientMethod method) {

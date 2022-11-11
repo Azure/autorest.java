@@ -21,6 +21,7 @@ import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -67,11 +68,13 @@ public class ClientModelUtil {
                         og.getOperations().stream()
                                 .filter(o -> o.getConvenienceApi() != null)
                                 .forEach(o -> {
-                                    List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false);
+                                    List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false).stream()
+                                            .filter(m -> m.getMethodVisibility() == JavaVisibility.Public)
+                                            .collect(Collectors.toList());
                                     if (!cMethods.isEmpty()) {
                                         String methodName = cMethods.iterator().next().getProxyMethod().getName();
                                         serviceClient.getClientMethods().stream()
-                                                .filter(m -> methodName.equals(m.getProxyMethod().getName()))
+                                                .filter(m -> methodName.equals(m.getProxyMethod().getName()) && m.getMethodVisibility() == JavaVisibility.Public)
                                                 .forEach(m -> convenienceMethods.add(new ConvenienceMethod(m, cMethods)));
                                     }
                                 });
@@ -105,11 +108,13 @@ public class ClientModelUtil {
                         og.getOperations().stream()
                                 .filter(o -> o.getConvenienceApi() != null)
                                 .forEach(o -> {
-                                    List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false);
+                                    List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false).stream()
+                                            .filter(m -> m.getMethodVisibility() == JavaVisibility.Public)
+                                            .collect(Collectors.toList());
                                     if (!cMethods.isEmpty()) {
                                         String methodName = cMethods.iterator().next().getProxyMethod().getName();
                                         methodGroupClient.getClientMethods().stream()
-                                                .filter(m -> methodName.equals(m.getProxyMethod().getName()))
+                                                .filter(m -> methodName.equals(m.getProxyMethod().getName()) && m.getMethodVisibility() == JavaVisibility.Public)
                                                 .forEach(m -> convenienceMethods.add(new ConvenienceMethod(m, cMethods)));
                                     }
                                 });
