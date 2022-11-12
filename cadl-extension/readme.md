@@ -36,9 +36,9 @@ emitters:
 
 # Generate Java
 
-Same `npx cadl compile .` or `npx cadl compile . --outputPath=<target-folder>`.
+Same `npx cadl compile .` or `npx cadl compile . --output-dir=<target-folder>`.
 
-If `outputPath` option is not provided, generated Java code will be under `cadl-output` folder.
+If `output-dir` option is not provided, generated Java code will be under `cadl-output` folder.
 
 # Optional Configuration
 
@@ -49,11 +49,11 @@ One can further configure the SDK generated, using the emitter options on `@azur
 ```yaml
 emitters:
   "@azure-tools/cadl-java":
-    "output-dir": "./azure-ai-language-authoring"
-    "namespace": "com.azure.ai.language.authoring"
-    "service-name": "Authoring"
-    "partial-update": true
-    "service-versions":
+    output-dir: "./azure-ai-language-authoring"
+    namespace: "com.azure.ai.language.authoring"
+    service-name: "Authoring"
+    partial-update: true
+    service-versions:
       - "2022-05-15-preview"
 ```
 
