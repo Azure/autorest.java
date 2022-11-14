@@ -357,7 +357,7 @@ export class CodeModelBuilder {
     this.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
     op.parameters.parameters.map((it) =>
-      this.processParameter(codeModelOperation, it, codeModelOperation.convenienceApi != null),
+      this.processParameter(codeModelOperation, it),
     );
     // Accept header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
@@ -460,7 +460,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processParameter(op: CodeModelOperation, param: HttpOperationParameter, models: boolean) {
+  private processParameter(op: CodeModelOperation, param: HttpOperationParameter) {
     if (param.name.toLowerCase() === "api-version") {
       // TODO hack on "api-version"
       const parameter = this.apiVersionParameter;
@@ -493,7 +493,7 @@ export class CodeModelBuilder {
 
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
-      if (op.convenienceApi && models) {
+      if (op.convenienceApi) {
         this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
       }
 
