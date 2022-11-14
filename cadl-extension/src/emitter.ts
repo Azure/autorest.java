@@ -2,6 +2,7 @@ import {
   resolvePath,
   getNormalizedAbsolutePath,
   Program,
+  NoTarget,
   JSONSchemaType,
   createCadlLibrary,
 } from "@cadl-lang/compiler";
@@ -84,13 +85,25 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
     const jarFileName = resolvePath(moduleRoot, "target", "azure-cadl-extension-jar-with-dependencies.jar");
     program.trace("cadl-java", `Exec JAR ${jarFileName}`);
 
-    const output = await promisify(execFile)("java", [
-      `-DemitterOptions=${emitterOptions}`,
-      "-jar",
-      jarFileName,
-      codeModelFileName,
-    ]);
-    program.trace("cadl-java", output.stdout ? output.stdout : output.stderr);
+    try {
+      const output = await promisify(execFile)("java", [
+        `-DemitterOptions=${emitterOptions}`,
+        "-jar",
+        jarFileName,
+        codeModelFileName,
+      ]);
+      program.trace("cadl-java", output.stdout ? output.stdout : output.stderr);
+    } catch (err: any) {
+      if ("code" in err && err.code === "ENOENT") {
+        program.trace("cadl-java", "'java' is not on PATH. Please install JDK 11 or above.");
+        program.reportDiagnostic({
+          code: "cadl-java",
+          severity: "error",
+          message: "'java' is not on PATH. Please install JDK 11 or above.",
+          target: NoTarget,
+        });
+      }
+    }
 
     if (!options["dev-options"]?.["generate-code-model"]) {
       await program.host.rm(codeModelFileName);
