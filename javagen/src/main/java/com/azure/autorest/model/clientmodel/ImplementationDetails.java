@@ -35,12 +35,12 @@ public class ImplementationDetails {
         EXCEPTION("exception"),
 
         /**
-         * Model used in input or output of methods marked as convenience method.
-         *
+         * Model used in input or output of methods marked as convenience API.
+         * <p>
          * In DPG, it means the model need to be written to Java class.
          * Else, it may only exist in memory for Javadoc purpose.
          */
-        CONVENIENCE_METHOD("convenience-method");
+        CONVENIENCE_API("convenience-api");
 
         private final static Map<String, Usage> CONSTANTS = new HashMap<>();
         static {
@@ -93,7 +93,7 @@ public class ImplementationDetails {
      * @return whether the model used for convenience method, or the method requires a convenience method.
      */
     public boolean isConvenienceMethod() {
-        return usages.contains(Usage.CONVENIENCE_METHOD);
+        return usages.contains(Usage.CONVENIENCE_API);
     }
 
     public boolean isInput() {

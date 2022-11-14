@@ -44,7 +44,9 @@ public class CadlPlugin extends Javagen {
                     .flatMap(c -> c.getOperationGroups().stream())
                     .flatMap(og -> og.getOperations().stream())
                     .forEach(o -> {
-                        if (o.getConvenienceApi() == null) {
+                        if (o.getConvenienceApi() == null
+                                // TODO (weidxu): design for JSON Merge Patch
+                                && o.getRequests().stream().noneMatch(r -> r.getProtocol() != null &&r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getMediaTypes() != null && r.getProtocol().getHttp().getMediaTypes().contains("application/merge-patch+json"))) {
                             ConvenienceApi convenienceApi = new ConvenienceApi();
                             convenienceApi.setName(CodeNamer.getMethodName(o.getLanguage().getDefault().getName()));
                             o.setConvenienceApi(convenienceApi);
