@@ -95,13 +95,16 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
       program.trace("cadl-java", output.stdout ? output.stdout : output.stderr);
     } catch (err: any) {
       if ("code" in err && err.code === "ENOENT") {
-        program.trace("cadl-java", "'java' is not on PATH. Please install JDK 11 or above.");
+        const msg = "'java' is not on PATH. Please install JDK 11 or above.";
+        program.trace("cadl-java", msg);
         program.reportDiagnostic({
           code: "cadl-java",
           severity: "error",
-          message: "'java' is not on PATH. Please install JDK 11 or above.",
+          message: msg,
           target: NoTarget,
         });
+      } else {
+        throw err;
       }
     }
 
