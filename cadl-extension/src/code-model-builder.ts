@@ -356,9 +356,7 @@ export class CodeModelBuilder {
     // host
     this.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
-    op.parameters.parameters.map((it) =>
-      this.processParameter(codeModelOperation, it),
-    );
+    op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it));
     // Accept header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
