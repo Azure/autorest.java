@@ -15,6 +15,7 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodNamer;
 import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpMethod;
+import org.openjdk.tools.javah.Gen;
 
 import java.util.List;
 import java.util.Map;
@@ -106,6 +107,7 @@ public class ProxyMethod {
 
     private final boolean isSync;
     private ProxyMethod syncProxy;
+    private final boolean customHeaderIgnored;
 
     protected ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String baseUrl,
         String urlPath, List<Integer> responseExpectedStatusCodes,
@@ -120,7 +122,7 @@ public class ProxyMethod {
         this(requestContentType, returnType, httpMethod, baseUrl, urlPath, responseExpectedStatusCodes,
             unexpectedResponseExceptionType, unexpectedResponseExceptionTypes, name, parameters, allParameters,
             description, returnValueWireType, responseBodyType, rawResponseBodyType, isResumable,
-            responseContentTypes, operationId, examples, specialHeaders, false, name);
+            responseContentTypes, operationId, examples, specialHeaders, false, name, false);
     }
 
     /**
@@ -155,7 +157,7 @@ public class ProxyMethod {
         IType returnValueWireType, IType responseBodyType, IType rawResponseBodyType,
         boolean isResumable, Set<String> responseContentTypes,
         String operationId, Map<String, ProxyMethodExample> examples,
-        List<String> specialHeaders, boolean isSync, String baseName) {
+        List<String> specialHeaders, boolean isSync, String baseName, boolean customHeaderIgnored) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
         this.httpMethod = httpMethod;
@@ -178,6 +180,7 @@ public class ProxyMethod {
         this.specialHeaders = specialHeaders;
         this.isSync = isSync;
         this.baseName = baseName;
+        this.customHeaderIgnored = customHeaderIgnored;
     }
 
     public final String getRequestContentType() {
@@ -288,6 +291,10 @@ public class ProxyMethod {
         return isSync;
     }
 
+    public boolean isCustomHeaderIgnored() {
+        return customHeaderIgnored;
+    }
+
     public ProxyMethod toSync() {
         if (isSync) {
             return this;
@@ -330,6 +337,7 @@ public class ProxyMethod {
             .responseContentTypes(this.getResponseContentTypes())
             .responseExpectedStatusCodes(this.getResponseExpectedStatusCodes())
             .isSync(true)
+            .customHeaderIgnored(this.customHeaderIgnored)
             .build();
         return this.syncProxy;
     }
@@ -347,13 +355,23 @@ public class ProxyMethod {
             return ClassType.BinaryData;
         }
 
-
         if (type instanceof GenericType) {
             GenericType genericType = (GenericType) type;
             if (genericType.getName().equals("Mono")) {
-                return (genericType.getTypeArguments()[0] == ClassType.StreamResponse)
-                    ? GenericType.Response(ClassType.BinaryData)
-                    : genericType.getTypeArguments()[0];
+                if (genericType.getTypeArguments()[0] instanceof GenericType) {
+                    GenericType innerGenericType = (GenericType) genericType.getTypeArguments()[0];
+                    if (innerGenericType.getName().equals("ResponseBase") && innerGenericType.getTypeArguments()[1] == GenericType.FluxByteBuffer) {
+                        return GenericType.RestResponse(innerGenericType.getTypeArguments()[0],
+                                JavaSettings.getInstance().isInputStreamForBinary()
+                                        ? ClassType.InputStream : ClassType.BinaryData);
+                    }
+                }
+
+                if (genericType.getTypeArguments()[0] == ClassType.StreamResponse) {
+                    return JavaSettings.getInstance().isInputStreamForBinary()
+                            ? GenericType.Response(ClassType.InputStream) : GenericType.Response(ClassType.BinaryData);
+                }
+                return genericType.getTypeArguments()[0];
             }
             if (genericType.getName().equals("PagedFlux")) {
                 IType pageType = genericType.getTypeArguments()[0];
@@ -438,6 +456,7 @@ public class ProxyMethod {
         protected List<String> specialHeaders;
         protected boolean isSync;
         protected String baseName;
+        protected boolean customHeaderIgnored;
 
         /*
          * Sets the Content-Type of the request.
@@ -676,6 +695,11 @@ public class ProxyMethod {
             return this;
         }
 
+        public Builder customHeaderIgnored(boolean customHeaderIgnored) {
+            this.customHeaderIgnored = customHeaderIgnored;
+            return this;
+        }
+
         /**
          * @return an immutable ProxyMethod instance with the configurations on this builder.
          */
@@ -701,7 +725,8 @@ public class ProxyMethod {
                 examples,
                 specialHeaders,
                 isSync,
-                baseName);
+                baseName,
+                customHeaderIgnored);
         }
     }
 }

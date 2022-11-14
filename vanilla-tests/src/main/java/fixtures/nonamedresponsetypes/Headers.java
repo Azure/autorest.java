@@ -81,6 +81,12 @@ public final class Headers {
         Mono<ResponseBase<HeadersResponseExistingKeyHeaders, Void>> responseExistingKey(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
+        @Post("/header/response/existingkey")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseExistingKeyNoCustomHeaders(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
         @Post("/header/param/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -94,6 +100,12 @@ public final class Headers {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<HeadersResponseProtectedKeyHeaders, Void>> responseProtectedKey(
+                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Post("/header/response/protectedkey")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseProtectedKeyNoCustomHeaders(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/integer")
@@ -110,6 +122,15 @@ public final class Headers {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<HeadersResponseIntegerHeaders, Void>> responseInteger(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Post("/header/response/prim/integer")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseIntegerNoCustomHeaders(
                 @HostParam("$host") String host,
                 @HeaderParam("scenario") String scenario,
                 @HeaderParam("Accept") String accept,
@@ -134,6 +155,15 @@ public final class Headers {
                 @HeaderParam("Accept") String accept,
                 Context context);
 
+        @Post("/header/response/prim/long")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseLongNoCustomHeaders(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
         @Post("/header/param/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -148,6 +178,15 @@ public final class Headers {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<HeadersResponseFloatHeaders, Void>> responseFloat(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Post("/header/response/prim/float")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseFloatNoCustomHeaders(
                 @HostParam("$host") String host,
                 @HeaderParam("scenario") String scenario,
                 @HeaderParam("Accept") String accept,
@@ -172,6 +211,15 @@ public final class Headers {
                 @HeaderParam("Accept") String accept,
                 Context context);
 
+        @Post("/header/response/prim/double")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseDoubleNoCustomHeaders(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
         @Post("/header/param/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -186,6 +234,15 @@ public final class Headers {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<HeadersResponseBoolHeaders, Void>> responseBool(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Post("/header/response/prim/bool")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseBoolNoCustomHeaders(
                 @HostParam("$host") String host,
                 @HeaderParam("scenario") String scenario,
                 @HeaderParam("Accept") String accept,
@@ -210,6 +267,15 @@ public final class Headers {
                 @HeaderParam("Accept") String accept,
                 Context context);
 
+        @Post("/header/response/prim/string")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseStringNoCustomHeaders(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
         @Post("/header/param/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -224,6 +290,15 @@ public final class Headers {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<HeadersResponseDateHeaders, Void>> responseDate(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Post("/header/response/prim/date")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseDateNoCustomHeaders(
                 @HostParam("$host") String host,
                 @HeaderParam("scenario") String scenario,
                 @HeaderParam("Accept") String accept,
@@ -248,6 +323,15 @@ public final class Headers {
                 @HeaderParam("Accept") String accept,
                 Context context);
 
+        @Post("/header/response/prim/datetime")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseDatetimeNoCustomHeaders(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
         @Post("/header/param/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -262,6 +346,15 @@ public final class Headers {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<HeadersResponseDatetimeRfc1123Headers, Void>> responseDatetimeRfc1123(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Post("/header/response/prim/datetimerfc1123")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseDatetimeRfc1123NoCustomHeaders(
                 @HostParam("$host") String host,
                 @HeaderParam("scenario") String scenario,
                 @HeaderParam("Accept") String accept,
@@ -286,6 +379,15 @@ public final class Headers {
                 @HeaderParam("Accept") String accept,
                 Context context);
 
+        @Post("/header/response/prim/duration")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseDurationNoCustomHeaders(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
         @Post("/header/param/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -305,6 +407,15 @@ public final class Headers {
                 @HeaderParam("Accept") String accept,
                 Context context);
 
+        @Post("/header/response/prim/byte")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseByteNoCustomHeaders(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
         @Post("/header/param/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -319,6 +430,15 @@ public final class Headers {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<HeadersResponseEnumHeaders, Void>> responseEnum(
+                @HostParam("$host") String host,
+                @HeaderParam("scenario") String scenario,
+                @HeaderParam("Accept") String accept,
+                Context context);
+
+        @Post("/header/response/prim/enum")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> responseEnumNoCustomHeaders(
                 @HostParam("$host") String host,
                 @HeaderParam("scenario") String scenario,
                 @HeaderParam("Accept") String accept,
@@ -525,6 +645,59 @@ public final class Headers {
     }
 
     /**
+     * Get a response with header value "User-Agent": "overwrite".
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "User-Agent": "overwrite" along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseExistingKeyNoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseExistingKeyNoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Get a response with header value "User-Agent": "overwrite".
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "User-Agent": "overwrite" along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseExistingKeyNoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseExistingKeyNoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get a response with header value "User-Agent": "overwrite".
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "User-Agent": "overwrite" along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseExistingKeyNoCustomHeadersWithResponse(Context context) {
+        return responseExistingKeyNoCustomHeadersWithResponseAsync(context).block();
+    }
+
+    /**
      * Send a post request with header value "Content-Type": "text/html".
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html".
@@ -715,6 +888,59 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseProtectedKey() {
         responseProtectedKeyWithResponse(Context.NONE);
+    }
+
+    /**
+     * Get a response with header value "Content-Type": "text/html".
+     *
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "Content-Type": "text/html" along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseProtectedKeyNoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseProtectedKeyNoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Get a response with header value "Content-Type": "text/html".
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "Content-Type": "text/html" along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseProtectedKeyNoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseProtectedKeyNoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Get a response with header value "Content-Type": "text/html".
+     *
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "Content-Type": "text/html" along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseProtectedKeyNoCustomHeadersWithResponse(Context context) {
+        return responseProtectedKeyNoCustomHeadersWithResponseAsync(context).block();
     }
 
     /**
@@ -931,6 +1157,69 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseInteger(String scenario) {
         responseIntegerWithResponse(scenario, Context.NONE);
+    }
+
+    /**
+     * Get a response with header value "value": 1 or -2.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 1 or -2 along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseIntegerNoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseIntegerNoCustomHeaders(this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header value "value": 1 or -2.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 1 or -2 along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseIntegerNoCustomHeadersWithResponseAsync(String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseIntegerNoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header value "value": 1 or -2.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 1 or -2 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseIntegerNoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseIntegerNoCustomHeadersWithResponseAsync(scenario, context).block();
     }
 
     /**
@@ -1154,6 +1443,69 @@ public final class Headers {
     }
 
     /**
+     * Get a response with header value "value": 105 or -2.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 105 or -2 along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseLongNoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseLongNoCustomHeaders(this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header value "value": 105 or -2.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 105 or -2 along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseLongNoCustomHeadersWithResponseAsync(String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseLongNoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header value "value": 105 or -2.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 105 or -2 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseLongNoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseLongNoCustomHeadersWithResponseAsync(scenario, context).block();
+    }
+
+    /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
      *
@@ -1371,6 +1723,69 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseFloat(String scenario) {
         responseFloatWithResponse(scenario, Context.NONE);
+    }
+
+    /**
+     * Get a response with header value "value": 0.07 or -3.0.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 0.07 or -3.0 along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseFloatNoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseFloatNoCustomHeaders(this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header value "value": 0.07 or -3.0.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 0.07 or -3.0 along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseFloatNoCustomHeadersWithResponseAsync(String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseFloatNoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header value "value": 0.07 or -3.0.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 0.07 or -3.0 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseFloatNoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseFloatNoCustomHeadersWithResponseAsync(scenario, context).block();
     }
 
     /**
@@ -1596,6 +2011,69 @@ public final class Headers {
     }
 
     /**
+     * Get a response with header value "value": 7e120 or -3.0.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 7e120 or -3.0 along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseDoubleNoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseDoubleNoCustomHeaders(this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header value "value": 7e120 or -3.0.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 7e120 or -3.0 along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseDoubleNoCustomHeadersWithResponseAsync(String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseDoubleNoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header value "value": 7e120 or -3.0.
+     *
+     * @param scenario Send a post request with header values "scenario": "positive" or "negative".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": 7e120 or -3.0 along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseDoubleNoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseDoubleNoCustomHeadersWithResponseAsync(scenario, context).block();
+    }
+
+    /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
@@ -1807,6 +2285,69 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseBool(String scenario) {
         responseBoolWithResponse(scenario, Context.NONE);
+    }
+
+    /**
+     * Get a response with header value "value": true or false.
+     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": true or false along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseBoolNoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseBoolNoCustomHeaders(this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header value "value": true or false.
+     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": true or false along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseBoolNoCustomHeadersWithResponseAsync(String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseBoolNoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header value "value": true or false.
+     *
+     * @param scenario Send a post request with header values "scenario": "true" or "false".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header value "value": true or false along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseBoolNoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseBoolNoCustomHeadersWithResponseAsync(scenario, context).block();
     }
 
     /**
@@ -2066,6 +2607,70 @@ public final class Headers {
     }
 
     /**
+     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" along with
+     *     {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseStringNoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseStringNoCustomHeaders(this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" along with
+     *     {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseStringNoCustomHeadersWithResponseAsync(String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseStringNoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" along with
+     *     {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseStringNoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseStringNoCustomHeadersWithResponseAsync(scenario, context).block();
+    }
+
+    /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
      *
@@ -2289,6 +2894,69 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDate(String scenario) {
         responseDateWithResponse(scenario, Context.NONE);
+    }
+
+    /**
+     * Get a response with header values "2010-01-01" or "0001-01-01".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "2010-01-01" or "0001-01-01" along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseDateNoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseDateNoCustomHeaders(this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header values "2010-01-01" or "0001-01-01".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "2010-01-01" or "0001-01-01" along with {@link Response} on successful
+     *     completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseDateNoCustomHeadersWithResponseAsync(String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseDateNoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header values "2010-01-01" or "0001-01-01".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "2010-01-01" or "0001-01-01" along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseDateNoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseDateNoCustomHeadersWithResponseAsync(scenario, context).block();
     }
 
     /**
@@ -2520,6 +3188,70 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseDatetime(String scenario) {
         responseDatetimeWithResponse(scenario, Context.NONE);
+    }
+
+    /**
+     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" along with {@link
+     *     Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseDatetimeNoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseDatetimeNoCustomHeaders(this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" along with {@link
+     *     Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseDatetimeNoCustomHeadersWithResponseAsync(String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseDatetimeNoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" along with {@link
+     *     Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseDatetimeNoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseDatetimeNoCustomHeadersWithResponseAsync(scenario, context).block();
     }
 
     /**
@@ -2790,6 +3522,73 @@ public final class Headers {
     }
 
     /**
+     * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" along
+     *     with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseDatetimeRfc1123NoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.responseDatetimeRfc1123NoCustomHeaders(
+                                this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" along
+     *     with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseDatetimeRfc1123NoCustomHeadersWithResponseAsync(
+            String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseDatetimeRfc1123NoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" along
+     *     with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseDatetimeRfc1123NoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseDatetimeRfc1123NoCustomHeadersWithResponseAsync(scenario, context).block();
+    }
+
+    /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      *
      * @param scenario Send a post request with header values "scenario": "valid".
@@ -3012,6 +3811,69 @@ public final class Headers {
     }
 
     /**
+     * Get a response with header values "P123DT22H14M12.011S".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "P123DT22H14M12.011S" along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseDurationNoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseDurationNoCustomHeaders(this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header values "P123DT22H14M12.011S".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "P123DT22H14M12.011S" along with {@link Response} on successful completion
+     *     of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseDurationNoCustomHeadersWithResponseAsync(String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseDurationNoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header values "P123DT22H14M12.011S".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "P123DT22H14M12.011S" along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseDurationNoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseDurationNoCustomHeadersWithResponseAsync(scenario, context).block();
+    }
+
+    /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param scenario Send a post request with header values "scenario": "valid".
@@ -3231,6 +4093,69 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseByte(String scenario) {
         responseByteWithResponse(scenario, Context.NONE);
+    }
+
+    /**
+     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩" along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseByteNoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseByteNoCustomHeaders(this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩" along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseByteNoCustomHeadersWithResponseAsync(String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseByteNoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩" along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseByteNoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseByteNoCustomHeadersWithResponseAsync(scenario, context).block();
     }
 
     /**
@@ -3474,6 +4399,69 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void responseEnum(String scenario) {
         responseEnumWithResponse(scenario, Context.NONE);
+    }
+
+    /**
+     * Get a response with header values "GREY" or null.
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "GREY" or null along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseEnumNoCustomHeadersWithResponseAsync(String scenario) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.responseEnumNoCustomHeaders(this.client.getHost(), scenario, accept, context));
+    }
+
+    /**
+     * Get a response with header values "GREY" or null.
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "GREY" or null along with {@link Response} on successful completion of
+     *     {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> responseEnumNoCustomHeadersWithResponseAsync(String scenario, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (scenario == null) {
+            return Mono.error(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.responseEnumNoCustomHeaders(this.client.getHost(), scenario, accept, context);
+    }
+
+    /**
+     * Get a response with header values "GREY" or null.
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a response with header values "GREY" or null along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> responseEnumNoCustomHeadersWithResponse(String scenario, Context context) {
+        return responseEnumNoCustomHeadersWithResponseAsync(scenario, context).block();
     }
 
     /**
