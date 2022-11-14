@@ -232,7 +232,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             ProxyMethod proxyMethod = builder.build();
             proxyMethods.add(proxyMethod);
 
-            if (((GenericType) ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0]).getName().equals("ResponseBase")) {
+            if(asyncRestResponseReturnType instanceof GenericType
+                    && ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0] instanceof GenericType
+                    && ((GenericType) ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0]).getName().equals("ResponseBase")) {
                 IType asyncResponseWithNoHeaders = getAsyncRestResponseReturnType(operation, responseBodyType,
                         settings.isDataPlaneClient(), settings, true);
                 builder.returnType(asyncResponseWithNoHeaders);
@@ -267,7 +269,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 builder.parameters(proxyMethodParameters);
                 proxyMethods.add(builder.build());
 
-                if (((GenericType) ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0]).getName().equals("ResponseBase")) {
+                if(asyncRestResponseReturnType instanceof GenericType
+                        && ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0] instanceof GenericType
+                        && ((GenericType) ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0]).getName().equals("ResponseBase")) {
                     IType asyncResponseWithNoHeaders = getAsyncRestResponseReturnType(operation, responseBodyType,
                             settings.isDataPlaneClient(), settings, true);
                     builder.returnType(asyncResponseWithNoHeaders);
