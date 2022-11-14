@@ -241,6 +241,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 proxyMethods.add(builder.build());
 
                 // reset builder state
+                // TODO (srnagar): add a clone method to builder to use separate builder instances for each proxy method
                 builder.returnType(asyncRestResponseReturnType);
                 builder.name(operationName);
                 builder.customHeaderIgnored(false);
