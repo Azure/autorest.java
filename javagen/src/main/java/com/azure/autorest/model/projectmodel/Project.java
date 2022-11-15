@@ -58,8 +58,8 @@ public class Project {
         private String azureCoreManagementVersion = "1.9.0";
         private String azureCoreHttpNettyVersion = "1.12.7";
         private String azureCoreTestVersion = "1.13.0";
-        private String azureIdentityVersion = "1.6.1";
-        private String junitVersion = "5.8.2";
+        private String azureIdentityVersion = "1.7.0";
+        private String junitVersion = "5.9.1";
         private String mockitoVersion = "4.5.1";
         private String slf4jSimpleVersion = "1.7.36";
 
