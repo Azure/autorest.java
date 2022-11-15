@@ -21,6 +21,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 /**
@@ -36,18 +37,25 @@ public final class ClientModelPropertiesManager {
     private static final Pattern SPLIT_KEY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
 
     private final ClientModel model;
+    private final boolean hasRequiredProperties;
+    private final List<ClientModelProperty> superConstructorProperties;
     private final List<ClientModelProperty> superRequiredProperties;
     private final List<ClientModelProperty> superSetterProperties;
+    private final List<ClientModelProperty> superReadOnlyProperties;
+    private final List<ClientModelProperty> constructorProperties;
     private final List<ClientModelProperty> requiredProperties;
     private final List<ClientModelProperty> setterProperties;
+    private final List<ClientModelProperty> readOnlyProperties;
     private final ClientModelProperty additionalProperties;
     private final ClientModelProperty discriminatorProperty;
     private final String expectedDiscriminator;
     private final JsonFlattenedPropertiesTree jsonFlattenedPropertiesTree;
     private final String jsonReaderFieldNameVariableName;
 
+    private final boolean hasXmlElements;
     private final String xmlReaderNameVariableName;
     private final List<ClientModelProperty> xmlAttributes;
+    private final List<ClientModelProperty> xmlTexts;
     private final List<ClientModelProperty> xmlElements;
 
     /**
@@ -67,16 +75,30 @@ public final class ClientModelPropertiesManager {
         this.expectedDiscriminator = model.getSerializedName();
 
         Map<String, ClientModelPropertyWithMetadata> flattenedProperties = new LinkedHashMap<>();
-        List<ClientModelProperty> superRequiredProperties = new ArrayList<>();
-        List<ClientModelProperty> superSetterProperties = new ArrayList<>();
-        List<ClientModelProperty> xmlAttributes = new ArrayList<>();
-        List<ClientModelProperty> xmlElements = new ArrayList<>();
+        boolean hasRequiredProperties = false;
+        superConstructorProperties = new ArrayList<>();
+        superRequiredProperties = new ArrayList<>();
+        superSetterProperties = new ArrayList<>();
+        superReadOnlyProperties = new ArrayList<>();
+        boolean hasXmlElements = false;
+        xmlAttributes = new ArrayList<>();
+        xmlTexts = new ArrayList<>();
+        xmlElements = new ArrayList<>();
         for (ClientModelProperty property : ClientModelUtil.getParentProperties(model)) {
             // Ignore additional and discriminator properties.
             if (property.isAdditionalProperties() || property.isPolymorphicDiscriminator()) {
                 continue;
-            } else if (property.isRequired() && requiredFieldsAsConstructorArgs && !property.isReadOnly()) {
+            }
+
+            if (property.isRequired()) {
+                hasRequiredProperties = true;
                 superRequiredProperties.add(property);
+
+                if (requiredFieldsAsConstructorArgs && !property.isReadOnly()) {
+                    superConstructorProperties.add(property);
+                } else {
+                    superReadOnlyProperties.add(property);
+                }
             } else {
                 superSetterProperties.add(property);
             }
@@ -90,18 +112,30 @@ public final class ClientModelPropertiesManager {
 
             if (property.isXmlAttribute()) {
                 xmlAttributes.add(property);
+            } else if (property.isXmlText()) {
+                xmlTexts.add(property);
             } else {
+                hasXmlElements = true;
                 xmlElements.add(property);
             }
         }
 
-        List<ClientModelProperty> requiredProperties = new ArrayList<>();
-        List<ClientModelProperty> setterProperties = new ArrayList<>();
+        constructorProperties = new ArrayList<>();
+        requiredProperties = new ArrayList<>();
+        setterProperties = new ArrayList<>();
+        readOnlyProperties = new ArrayList<>();
         ClientModelProperty discriminatorProperty = null;
         ClientModelProperty additionalProperties = null;
         for (ClientModelProperty property : model.getProperties()) {
-            if (property.isRequired() && requiredFieldsAsConstructorArgs && !property.isReadOnly()) {
+            if (property.isRequired()) {
+                hasRequiredProperties = true;
                 requiredProperties.add(property);
+
+                if (requiredFieldsAsConstructorArgs && !property.isReadOnly()) {
+                    constructorProperties.add(property);
+                } else {
+                    readOnlyProperties.add(property);
+                }
             } else if (property.isAdditionalProperties()) {
                 // Extract the additionalProperties property as this will need to be passed into all deserialization
                 // logic creation calls.
@@ -121,16 +155,17 @@ public final class ClientModelPropertiesManager {
 
             if (property.isXmlAttribute()) {
                 xmlAttributes.add(property);
+            } else if (property.isXmlText()) {
+                xmlTexts.add(property);
             } else {
+                hasXmlElements = true;
                 xmlElements.add(property);
             }
         }
 
+        this.hasRequiredProperties = hasRequiredProperties;
+        this.hasXmlElements = hasXmlElements;
         this.discriminatorProperty = discriminatorProperty;
-        this.superRequiredProperties = superRequiredProperties;
-        this.superSetterProperties = superSetterProperties;
-        this.requiredProperties = requiredProperties;
-        this.setterProperties = setterProperties;
         this.additionalProperties = additionalProperties;
         this.jsonFlattenedPropertiesTree = getFlattenedPropertiesHierarchy(model.getPolymorphicDiscriminator(),
             flattenedProperties);
@@ -149,9 +184,6 @@ public final class ClientModelPropertiesManager {
             throw new IllegalStateException("Model properties exhausted all possible XmlReader name variables. "
                 + "Add additional possible XmlReader name variables to resolve this issue.");
         }
-
-        this.xmlAttributes = xmlAttributes;
-        this.xmlElements = xmlElements;
     }
 
     /**
@@ -164,44 +196,88 @@ public final class ClientModelPropertiesManager {
     }
 
     /**
-     * Gets the required {@link ClientModelProperty properties} that are defined by super classes of the
-     * {@link #getModel() model}.
+     * Whether the {@link #getModel() model} contains required properties, either directly or through super classes.
      *
-     * @return The required {@link ClientModelProperty properties} that are defined by super classes of the
-     * {@link #getModel() model}.
+     * @return Whether the {@link #getModel() model} contains required properties.
      */
-    public List<ClientModelProperty> getSuperRequiredProperties() {
-        return superRequiredProperties;
+    public boolean hasRequiredProperties() {
+        return hasRequiredProperties;
     }
 
     /**
-     * Gets the non-required {@link ClientModelProperty properties} that are defined by super classes of the
+     * Consumes each constructor {@link ClientModelProperty property} defined by super classes of the
      * {@link #getModel() model}.
      *
-     * @return The non-required {@link ClientModelProperty properties} that are defined by super classes of the
-     * {@link #getModel() model}.
+     * @param consumer The {@link ClientModelProperty} consumer.
      */
-    public List<ClientModelProperty> getSuperSetterProperties() {
-        return superSetterProperties;
+    public void forEachSuperConstructorProperty(Consumer<ClientModelProperty> consumer) {
+        superConstructorProperties.forEach(consumer);
     }
 
     /**
-     * Gets the required {@link ClientModelProperty properties} that are defined by the {@link #getModel() model}.
+     * Consumes each required {@link ClientModelProperty property} defined by super classes of the
+     * {@link #getModel() model}.
      *
-     * @return The required {@link ClientModelProperty properties} that are defined by the {@link #getModel() model}.
+     * @param consumer The {@link ClientModelProperty} consumer.
      */
-    public List<ClientModelProperty> getRequiredProperties() {
-        return requiredProperties;
+    public void forEachSuperRequiredProperty(Consumer<ClientModelProperty> consumer) {
+        superRequiredProperties.forEach(consumer);
     }
 
     /**
-     * Gets the non-required {@link ClientModelProperty properties} that are defined by the {@link #getModel() model}.
-     *
-     * @return The non-required {@link ClientModelProperty properties} that are defined by the
+     * Consumes each non-required {@link ClientModelProperty property} defined by super classes of the
      * {@link #getModel() model}.
+     *
+     * @param consumer The {@link ClientModelProperty} consumer.
      */
-    public List<ClientModelProperty> getSetterProperties() {
-        return setterProperties;
+    public void forEachSuperSetterProperty(Consumer<ClientModelProperty> consumer) {
+        superSetterProperties.forEach(consumer);
+    }
+
+    /**
+     * Consumes each read-only {@link ClientModelProperty property} defined by super classes of the
+     * {@link #getModel() model}.
+     *
+     * @param consumer The {@link ClientModelProperty} consumer.
+     */
+    public void forEachSuperReadOnlyProperty(Consumer<ClientModelProperty> consumer) {
+        superReadOnlyProperties.forEach(consumer);
+    }
+
+    /**
+     * Consumes each constructor {@link ClientModelProperty property} defined by the {@link #getModel() model}.
+     *
+     * @param consumer The {@link ClientModelProperty} consumer.
+     */
+    public void forEachConstructorProperty(Consumer<ClientModelProperty> consumer) {
+        constructorProperties.forEach(consumer);
+    }
+
+    /**
+     * Consumes each required {@link ClientModelProperty property} defined by the {@link #getModel() model}.
+     *
+     * @param consumer The {@link ClientModelProperty} consumer.
+     */
+    public void forEachRequiredProperty(Consumer<ClientModelProperty> consumer) {
+        requiredProperties.forEach(consumer);
+    }
+
+    /**
+     * Consumes each non-required {@link ClientModelProperty property} defined by the {@link #getModel() model}.
+     *
+     * @param consumer The {@link ClientModelProperty} consumer.
+     */
+    public void forEachSetterProperty(Consumer<ClientModelProperty> consumer) {
+        setterProperties.forEach(consumer);
+    }
+
+    /**
+     * Consumes each read-only {@link ClientModelProperty property} defined by the {@link #getModel() model}.
+     *
+     * @param consumer The {@link ClientModelProperty} consumer.
+     */
+    public void forEachReadOnlyProperty(Consumer<ClientModelProperty> consumer) {
+        readOnlyProperties.forEach(consumer);
     }
 
     /**
@@ -221,8 +297,8 @@ public final class ClientModelPropertiesManager {
      * <p>
      * If the model isn't polymorphic this will return null.
      *
-     * @return The {@link ClientModelProperty} that defines the discriminator property for polymorphic types, or null
-     * if the model isn't a polymorphic type.
+     * @return The {@link ClientModelProperty} that defines the discriminator property for polymorphic types, or null if
+     * the model isn't a polymorphic type.
      */
     public ClientModelProperty getDiscriminatorProperty() {
         return discriminatorProperty;
@@ -283,25 +359,40 @@ public final class ClientModelPropertiesManager {
     }
 
     /**
-     * Gets the XML attribute {@link ClientModelProperty properties} for the model.
-     * <p>
-     * If the model type isn't XML this will return null.
+     * Whether the {@link #getModel() model} defines XML elements, XML properties that aren't
+     * {@link ClientModelProperty#isXmlAttribute() attributes} or {@link ClientModelProperty#isXmlText() text}.
      *
-     * @return The XML attribute {@link ClientModelProperty properties} for the model.
+     * @return Whether the {@link #getModel() model} defines XML elements
      */
-    public List<ClientModelProperty> getXmlAttributes() {
-        return xmlAttributes;
+    public boolean hasXmlElements() {
+        return hasXmlElements;
     }
 
     /**
-     * Gets the XML element {@link ClientModelProperty properties} for the model.
-     * <p>
-     * If the model type isn't XML this will return null.
+     * Consumes each XML attribute {@link ClientModelProperty property} defined by the {@link #getModel() model}.
      *
-     * @return The XML element {@link ClientModelProperty properties} for the model.
+     * @param consumer The {@link ClientModelProperty} consumer.
      */
-    public List<ClientModelProperty> getXmlElements() {
-        return xmlElements;
+    public void forEachXmlAttribute(Consumer<ClientModelProperty> consumer) {
+        xmlAttributes.forEach(consumer);
+    }
+
+    /**
+     * Consumes each XML text {@link ClientModelProperty property} defined by the {@link #getModel() model}.
+     *
+     * @param consumer The {@link ClientModelProperty} consumer.
+     */
+    public void forEachXmlText(Consumer<ClientModelProperty> consumer) {
+        xmlTexts.forEach(consumer);
+    }
+
+    /**
+     * Consumes each XML element {@link ClientModelProperty property} defined by the {@link #getModel() model}.
+     *
+     * @param consumer The {@link ClientModelProperty} consumer.
+     */
+    public void forEachXmlElement(Consumer<ClientModelProperty> consumer) {
+        xmlElements.forEach(consumer);
     }
 
     /**

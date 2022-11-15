@@ -41,9 +41,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Writes a ClientModel to a JavaFile using stream-style serialization.
@@ -237,14 +238,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     true);
             }
 
-            propertiesManager.getSuperRequiredProperties().forEach(property ->
-                serializeJsonProperty(methodBlock, property, property.getSerializedName(), true, true));
-            propertiesManager.getSuperSetterProperties().forEach(property ->
-                serializeJsonProperty(methodBlock, property, property.getSerializedName(), true, true));
-            propertiesManager.getRequiredProperties().forEach(property ->
-                serializeJsonProperty(methodBlock, property, property.getSerializedName(), false, true));
-            propertiesManager.getSetterProperties().forEach(property ->
-                serializeJsonProperty(methodBlock, property, property.getSerializedName(), false, true));
+            BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty = (property, fromSuper) ->
+                serializeJsonProperty(methodBlock, property, property.getSerializedName(), fromSuper, true);
+
+            propertiesManager.forEachSuperRequiredProperty(property -> serializeJsonProperty.accept(property, true));
+            propertiesManager.forEachSuperSetterProperty(property -> serializeJsonProperty.accept(property, true));
+            propertiesManager.forEachRequiredProperty(property -> serializeJsonProperty.accept(property, false));
+            propertiesManager.forEachSetterProperty(property -> serializeJsonProperty.accept(property, false));
 
             handleFlattenedPropertiesSerialization(methodBlock, propertiesManager.getJsonFlattenedPropertiesTree());
 
@@ -613,8 +613,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Add the deserialization logic.
         methodBlock.indent(() -> {
             // Initialize local variables to track what has been deserialized.
-            initializeLocalVariables(methodBlock, propertiesManager, settings.isRequiredFieldsAsConstructorArgs(),
-                false);
+            initializeLocalVariables(methodBlock, propertiesManager, false);
 
             // Add the outermost while loop to read the JSON object.
             String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
@@ -639,14 +638,15 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 }
 
                 // Loop over all properties and generate their deserialization handling.
-                ifBlock = handleJsonPropertiesDeserialization(propertiesManager.getSuperRequiredProperties(),
-                    whileBlock, ifBlock, fieldNameVariableName, requiredFieldsAsConstructorArgs);
-                ifBlock = handleJsonPropertiesDeserialization(propertiesManager.getSuperSetterProperties(), whileBlock,
-                    ifBlock, fieldNameVariableName, requiredFieldsAsConstructorArgs);
-                ifBlock = handleJsonPropertiesDeserialization(propertiesManager.getRequiredProperties(), whileBlock,
-                    ifBlock, fieldNameVariableName, requiredFieldsAsConstructorArgs);
-                ifBlock = handleJsonPropertiesDeserialization(propertiesManager.getSetterProperties(), whileBlock,
-                    ifBlock, fieldNameVariableName, requiredFieldsAsConstructorArgs);
+                AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>(ifBlock);
+                Consumer<ClientModelProperty> consumer = property -> handleJsonPropertyDeserialization(property,
+                    whileBlock, ifBlockReference, fieldNameVariableName, requiredFieldsAsConstructorArgs);
+                propertiesManager.forEachSuperRequiredProperty(consumer);
+                propertiesManager.forEachSuperSetterProperty(consumer);
+                propertiesManager.forEachRequiredProperty(consumer);
+                propertiesManager.forEachSetterProperty(consumer);
+
+                ifBlock = ifBlockReference.get();
 
                 handleFlattenedPropertiesDeserialization(propertiesManager.getJsonFlattenedPropertiesTree(),
                     methodBlock, ifBlock, propertiesManager.getAdditionalProperties(),
@@ -660,7 +660,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
 
         // Add the validation and return logic.
-        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, settings);
+        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager);
     }
 
     /**
@@ -685,8 +685,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String methodName = superTypeReading ? "fromJsonKnownDiscriminator" : "fromJson";
 
         String modelName = propertiesManager.getModel().getName();
-        boolean hasRequiredProperties = !CoreUtils.isNullOrEmpty(propertiesManager.getSuperRequiredProperties())
-            || !CoreUtils.isNullOrEmpty(propertiesManager.getRequiredProperties());
+        boolean hasRequiredProperties = propertiesManager.hasRequiredProperties();
         boolean isPolymorphic = propertiesManager.getDiscriminatorProperty() != null;
 
         if (!superTypeReading) {
@@ -733,35 +732,26 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param methodBlock The method handling deserialization.
      * @param propertiesManager The property manager for the model.
      */
-    private static void initializeLocalVariables(JavaBlock methodBlock,
-        ClientModelPropertiesManager propertiesManager, boolean requiredFieldsAsConstructorArgs, boolean isXml) {
+    private static void initializeLocalVariables(JavaBlock methodBlock, ClientModelPropertiesManager propertiesManager,
+        boolean isXml) {
         if (isXml) {
             // XML only needs to initialize the XML element properties. XML attribute properties are initialized with
             // their XML value.
-            propertiesManager.getXmlElements()
-                .stream()
-                .filter(property -> !property.isXmlText()) // XML text is also handled specially.
-                .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
+            propertiesManager.forEachXmlElement(element -> initializeLocalVariable(methodBlock, element));
         } else {
-            propertiesManager.getSuperRequiredProperties()
-                .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
-            propertiesManager.getSuperSetterProperties()
-                .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
-            propertiesManager.getRequiredProperties()
-                .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
-            propertiesManager.getSetterProperties()
-                .forEach(property -> initializeLocalVariable(methodBlock, property, requiredFieldsAsConstructorArgs));
+            propertiesManager.forEachSuperRequiredProperty(property -> initializeLocalVariable(methodBlock, property));
+            propertiesManager.forEachSuperSetterProperty(property -> initializeLocalVariable(methodBlock, property));
+            propertiesManager.forEachRequiredProperty(property -> initializeLocalVariable(methodBlock, property));
+            propertiesManager.forEachSetterProperty(property -> initializeLocalVariable(methodBlock, property));
         }
 
         if (propertiesManager.getAdditionalProperties() != null) {
-            initializeLocalVariable(methodBlock, propertiesManager.getAdditionalProperties(),
-                requiredFieldsAsConstructorArgs);
+            initializeLocalVariable(methodBlock, propertiesManager.getAdditionalProperties());
         }
     }
 
-    private static void initializeLocalVariable(JavaBlock methodBlock, ClientModelProperty property,
-        boolean requiredFieldsAsConstructorArgs) {
-        if (property.isRequired() && requiredFieldsAsConstructorArgs) {
+    private static void initializeLocalVariable(JavaBlock methodBlock, ClientModelProperty property) {
+        if (property.isRequired()) {
             // Required properties need an additional boolean variable to indicate they've been found.
             methodBlock.line("boolean " + property.getName() + "Found = false;");
         }
@@ -805,20 +795,19 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
     }
 
-    private static JavaIfBlock handleJsonPropertiesDeserialization(List<ClientModelProperty> properties,
-        JavaBlock methodBlock, JavaIfBlock ifBlock, String fieldNameVariableName,
+    private static void handleJsonPropertyDeserialization(ClientModelProperty property, JavaBlock methodBlock,
+        AtomicReference<JavaIfBlock> ifBlockReference, String fieldNameVariableName,
         boolean requiredFieldsAsConstructorArgs) {
-        for (ClientModelProperty property : properties) {
-            // Property will be handled later by flattened deserialization.
-            if (property.getNeedsFlatten()) {
-                continue;
-            }
-
-            ifBlock = handleJsonPropertyDeserialization(property, methodBlock, ifBlock, fieldNameVariableName,
-                requiredFieldsAsConstructorArgs);
+        // Property will be handled later by flattened deserialization.
+        if (property.getNeedsFlatten()) {
+            return;
         }
 
-        return ifBlock;
+        JavaIfBlock ifBlock = ifBlockReference.get();
+        ifBlock = handleJsonPropertyDeserialization(property, methodBlock, ifBlock, fieldNameVariableName,
+            requiredFieldsAsConstructorArgs);
+
+        ifBlockReference.set(ifBlock);
     }
 
     private static JavaIfBlock handleJsonPropertyDeserialization(ClientModelProperty property, JavaBlock methodBlock,
@@ -999,54 +988,49 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param methodBlock The method handling deserialization.
      * @param modelName The name of the model.
      * @param propertiesManager The property manager for the model.
-     * @param settings The Autorest generation settings.
      */
     private static void handleReadReturn(JavaBlock methodBlock, String modelName,
-        ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager) {
+        StringBuilder constructorArgs = new StringBuilder();
+
+        propertiesManager.forEachSuperConstructorProperty(arg -> addConstructorParameter(constructorArgs, arg.getName()));
+        propertiesManager.forEachConstructorProperty(arg -> addConstructorParameter(constructorArgs, arg.getName()));
+
         // If there are required properties of any type we must check that all required fields were found.
-        if (!CoreUtils.isNullOrEmpty(propertiesManager.getSuperRequiredProperties())
-            || !CoreUtils.isNullOrEmpty(propertiesManager.getRequiredProperties())) {
-            StringBuilder constructorArgs = new StringBuilder();
+        if (propertiesManager.hasRequiredProperties()) {
+            StringBuilder ifStatementBuilder = new StringBuilder();
+            propertiesManager.forEachSuperRequiredProperty(property -> addRequiredCheck(ifStatementBuilder, property));
+            propertiesManager.forEachRequiredProperty(property -> addRequiredCheck(ifStatementBuilder, property));
 
-            propertiesManager.getSuperRequiredProperties().stream().map(ClientModelProperty::getName)
-                .forEach(arg -> addConstructorParameter(constructorArgs, arg));
-            propertiesManager.getRequiredProperties().stream().map(ClientModelProperty::getName)
-                .forEach(arg -> addConstructorParameter(constructorArgs, arg));
-
-            String ifStatement = Stream.concat(propertiesManager.getSuperRequiredProperties().stream(),
-                    propertiesManager.getRequiredProperties().stream())
-                .map(property -> property.getName() + "Found")
-                .collect(Collectors.joining(" && "));
-
-            methodBlock.ifBlock(ifStatement, ifAction ->
-                createJsonObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager,
-                    settings));
+            methodBlock.ifBlock(ifStatementBuilder.toString(), ifAction ->
+                createJsonObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager));
 
             methodBlock.line("List<String> missingProperties = new ArrayList<>();");
-            propertiesManager.getSuperRequiredProperties().forEach(property ->
-                addFoundValidationIfCheck(methodBlock, property));
-            propertiesManager.getRequiredProperties().forEach(property ->
-                addFoundValidationIfCheck(methodBlock, property));
+            propertiesManager.forEachSuperRequiredProperty(property -> addFoundValidationIfCheck(methodBlock, property));
+            propertiesManager.forEachRequiredProperty(property -> addFoundValidationIfCheck(methodBlock, property));
 
             methodBlock.line();
             methodBlock.line("throw new IllegalStateException(\"Missing required property/properties: \""
                 + "+ String.join(\", \", missingProperties));");
         } else {
-            createJsonObjectAndReturn(methodBlock, modelName, "", propertiesManager, settings);
+            createJsonObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager);
         }
     }
 
     private static void createJsonObjectAndReturn(JavaBlock methodBlock, String modelName, String constructorArgs,
-        ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager) {
         methodBlock.line(modelName + " deserializedValue = new " + modelName + "(" + constructorArgs + ");");
 
-        propertiesManager.getSuperSetterProperties().forEach(property ->
-            handleSettingDeserializedValue(methodBlock, property, settings, true));
-        propertiesManager.getSetterProperties().forEach(property ->
-            handleSettingDeserializedValue(methodBlock, property, settings, false));
+        BiConsumer<ClientModelProperty, Boolean> handleSettingDeserializedValue = (property, fromSuper) ->
+            handleSettingDeserializedValue(methodBlock, property, fromSuper);
+
+        propertiesManager.forEachSuperReadOnlyProperty(property -> handleSettingDeserializedValue.accept(property, true));
+        propertiesManager.forEachSuperSetterProperty(property -> handleSettingDeserializedValue.accept(property, true));
+        propertiesManager.forEachReadOnlyProperty(property -> handleSettingDeserializedValue.accept(property, false));
+        propertiesManager.forEachSetterProperty(property -> handleSettingDeserializedValue.accept(property, false));
 
         if (propertiesManager.getAdditionalProperties() != null) {
-            handleSettingDeserializedValue(methodBlock, propertiesManager.getAdditionalProperties(), settings, false);
+            handleSettingDeserializedValue(methodBlock, propertiesManager.getAdditionalProperties(), false);
         }
 
         methodBlock.line();
@@ -1061,13 +1045,21 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         constructor.append(parameterName);
     }
 
+    private static void addRequiredCheck(StringBuilder ifCheck, ClientModelProperty property) {
+        if (ifCheck.length() > 0) {
+            ifCheck.append(" && ");
+        }
+
+        ifCheck.append(property.getName()).append("Found");
+    }
+
     private static void addFoundValidationIfCheck(JavaBlock methodBlock, ClientModelProperty property) {
         methodBlock.ifBlock("!" + property.getName() + "Found",
             ifAction -> ifAction.line("missingProperties.add(\"" + property.getSerializedName() + "\");"));
     }
 
     private static void handleSettingDeserializedValue(JavaBlock methodBlock, ClientModelProperty property,
-        JavaSettings settings, boolean fromSuper) {
+        boolean fromSuper) {
         // If the property is defined in a super class or doesn't match the wire type use the setter as this will
         // be able to set the value in the super class definition or handle converting the wire type.
         if (fromSuper || property.getWireType() != property.getClientType() || property.isXmlWrapper()) {
@@ -1107,8 +1099,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line("xmlWriter.writeNamespace(\"" + modelXmlNamespace + "\");");
             }
 
-            propertiesManager.getXmlAttributes().forEach(property -> serializeXml(methodBlock, property));
-            propertiesManager.getXmlElements().forEach(property -> serializeXml(methodBlock, property));
+            propertiesManager.forEachXmlAttribute(property -> serializeXml(methodBlock, property));
+            propertiesManager.forEachXmlElement(property -> serializeXml(methodBlock, property));
 
             methodBlock.methodReturn("xmlWriter.writeEndElement()");
         });
@@ -1322,8 +1314,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String methodName = superTypeReading ? "fromXmlKnownDiscriminator" : "fromXml";
 
         String modelName = propertiesManager.getModel().getName();
-        boolean hasRequiredProperties = !CoreUtils.isNullOrEmpty(propertiesManager.getSuperRequiredProperties())
-            || !CoreUtils.isNullOrEmpty(propertiesManager.getRequiredProperties());
+        boolean hasRequiredProperties = propertiesManager.hasRequiredProperties();
         boolean isPolymorphic = propertiesManager.getDiscriminatorProperty() != null;
 
         if (!superTypeReading) {
@@ -1394,27 +1385,19 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Add the deserialization logic.
         methodBlock.indent(() -> {
             // Read the XML attribute properties first.
-            for (ClientModelProperty attribute : propertiesManager.getXmlAttributes()) {
-                methodBlock.line("%s %s = %s;", attribute.getClientType(), attribute.getName(),
-                    getSimpleXmlDeserialization(attribute.getWireType(), attribute.getClientType(), "reader",
-                        attribute.getXmlName(), attribute.getXmlNamespace()));
-            }
+            propertiesManager.forEachXmlAttribute(attribute -> deserializeXmlAttribute(methodBlock, attribute));
 
             // Read the XML text next.
-            propertiesManager.getXmlElements().stream()
-                .filter(ClientModelProperty::isXmlText)
-                .forEach(text -> methodBlock.line("%s %s = %s;", text.getClientType(), text.getName(),
-                    getSimpleXmlDeserialization(text.getWireType(), text.getClientType(), "reader", null, null)));
+            propertiesManager.forEachXmlText(text -> methodBlock.line("%s %s = %s;", text.getClientType(), text.getName(),
+                getSimpleXmlDeserialization(text.getWireType(), text.getClientType(), "reader", null, null)));
 
             // Model only had XML attributes and XML text, no need to create the reader loop.
-            if (CoreUtils.isNullOrEmpty(propertiesManager.getXmlElements())
-                || propertiesManager.getXmlElements().stream().allMatch(ClientModelProperty::isXmlText)) {
+            if (!propertiesManager.hasXmlElements()) {
                 return;
             }
 
             // Initialize local variables to track what has been deserialized.
-            initializeLocalVariables(methodBlock, propertiesManager, settings.isRequiredFieldsAsConstructorArgs(),
-                true);
+            initializeLocalVariables(methodBlock, propertiesManager, true);
 
             // Add the outermost while loop to read the JSON object.
             String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
@@ -1439,8 +1422,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 }
 
                 // Loop over all properties and generate their deserialization handling.
-                ifBlock = handleXmlPropertiesDeserialization(propertiesManager.getXmlElements(), whileBlock,
-                    ifBlock, fieldNameVariableName, requiredFieldsAsConstructorArgs);
+                AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>(ifBlock);
+                propertiesManager.forEachXmlElement(element -> handleXmlPropertyDeserialization(element, whileBlock,
+                    ifBlockReference, fieldNameVariableName, requiredFieldsAsConstructorArgs));
+
+                ifBlock = ifBlockReference.get();
 
                 // All properties have been checked for, add an else block that will either ignore unknown properties
                 // or add them into an additional properties bag.
@@ -1450,24 +1436,29 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
 
         // Add the validation and return logic.
-        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, settings);
+        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager);
     }
 
-    private static JavaIfBlock handleXmlPropertiesDeserialization(List<ClientModelProperty> properties,
-        JavaBlock methodBlock, JavaIfBlock ifBlock, String fieldNameVariableName,
-        boolean requiredFieldsAsConstructorArgs) {
-        for (ClientModelProperty property : properties) {
-            // Property will be handled later by flattened deserialization.
-            // XML should never have flattening.
-            if (property.getNeedsFlatten()) {
-                continue;
-            }
+    private static void deserializeXmlAttribute(JavaBlock methodBlock, ClientModelProperty attribute) {
+        String simpleXmlDeserialization = getSimpleXmlDeserialization(attribute.getWireType(),
+            attribute.getClientType(), "reader", attribute.getXmlName(), attribute.getXmlNamespace());
 
-            ifBlock = handleXmlPropertyDeserialization(property, methodBlock, ifBlock, fieldNameVariableName,
-                requiredFieldsAsConstructorArgs);
+        methodBlock.line("%s %s = %s;", attribute.getClientType(), attribute.getName(), simpleXmlDeserialization);
+    }
+
+    private static void handleXmlPropertyDeserialization(ClientModelProperty property, JavaBlock methodBlock,
+        AtomicReference<JavaIfBlock> ifBlockReference, String fieldNameVariableName, boolean requiredFieldsAsConstructorArgs) {
+        // Property will be handled later by flattened deserialization.
+        // XML should never have flattening.
+        if (property.getNeedsFlatten()) {
+            return;
         }
 
-        return ifBlock;
+        JavaIfBlock ifBlock = ifBlockReference.get();
+        ifBlock = handleXmlPropertyDeserialization(property, methodBlock, ifBlock, fieldNameVariableName,
+            requiredFieldsAsConstructorArgs);
+
+        ifBlockReference.set(ifBlock);
     }
 
     private static JavaIfBlock handleXmlPropertyDeserialization(ClientModelProperty property, JavaBlock methodBlock,
