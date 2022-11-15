@@ -199,25 +199,46 @@ export class CodeModelBuilder {
   private processHost(server: HttpServer | undefined) {
     if (server) {
       server.parameters.forEach((it) => {
-        const schema = this.processSchema(it.type, it.name);
-        const parameter = new Parameter(it.name, this.getDoc(it), schema, {
-          implementation: ImplementationLocation.Client,
-          origin: "modelerfour:synthesized/host",
-          required: true,
-          protocol: {
-            http: new HttpParameter(ParameterLocation.Uri),
-          },
-          clientDefaultValue: this.getDefaultValue(it.default),
-          language: {
-            default: {
-              serializedName: it.name,
-            },
-          },
-        });
+        let parameter;
 
-        // TODO hack on "ApiVersion"
         if (it.name === "ApiVersion") {
-          parameter.origin = "modelerfour:synthesized/api-version";
+          // TODO hack on "ApiVersion"
+          const schema = this.codeModel.schemas.add(
+            new ConstantSchema(it.name, `api-version: ${this.version}`, {
+              valueType: this.stringSchema,
+              value: new ConstantValue(this.version),
+            }),
+          );
+          parameter = new Parameter(it.name, this.getDoc(it), schema, {
+            implementation: ImplementationLocation.Client,
+            origin: "modelerfour:synthesized/api-version",
+            required: true,
+            protocol: {
+              http: new HttpParameter(ParameterLocation.Uri),
+            },
+            clientDefaultValue: this.getDefaultValue(it.default),
+            language: {
+              default: {
+                serializedName: it.name,
+              },
+            },
+          });
+        } else {
+          const schema = this.processSchema(it.type, it.name);
+          parameter = new Parameter(it.name, this.getDoc(it), schema, {
+            implementation: ImplementationLocation.Client,
+            origin: "modelerfour:synthesized/host",
+            required: true,
+            protocol: {
+              http: new HttpParameter(ParameterLocation.Uri),
+            },
+            clientDefaultValue: this.getDefaultValue(it.default),
+            language: {
+              default: {
+                serializedName: it.name,
+              },
+            },
+          });
         }
 
         return this.hostParameters.push(this.codeModel.addGlobalParameter(parameter));
