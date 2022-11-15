@@ -100,7 +100,7 @@ public class SchemaUtil {
                 // Azure core would internally convert the response status code to boolean.
                 responseBodyType = PrimitiveType.Boolean;
             } else if (containsBinaryResponse(operation)) {
-                if (settings.isDataPlaneClient() || settings.isSyncStackEnabled() || !settings.isInputStreamForBinary()) {
+                if (settings.isDataPlaneClient() || !settings.isInputStreamForBinary()) {
                     responseBodyType = ClassType.BinaryData;
                 } else {
                     responseBodyType = ClassType.InputStream;

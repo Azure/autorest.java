@@ -109,8 +109,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             }
         }
         builder.responseBodyType(responseBodyType);
-        builder.returnType(
-                getAsyncRestResponseReturnType(operation, responseBodyType, settings.isDataPlaneClient(), settings));
+        IType asyncRestResponseReturnType = getAsyncRestResponseReturnType(operation, responseBodyType, settings.isDataPlaneClient(), settings);
+        builder.returnType(asyncRestResponseReturnType);
 
         buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
 
@@ -232,6 +232,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             ProxyMethod proxyMethod = builder.build();
             proxyMethods.add(proxyMethod);
 
+            addNoCustomHeaderProxyMethod(operation, settings, operationName, builder, responseBodyType,
+                    asyncRestResponseReturnType, proxyMethods);
+
             ProxyMethodParameter fluxByteBufferParam = parameters.stream()
                     .filter(parameter -> parameter.getClientType() == GenericType.FluxByteBuffer)
                     .findFirst()
@@ -251,6 +254,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 proxyMethodParameters.add(i, binaryDataParam);
                 builder.parameters(proxyMethodParameters);
                 proxyMethods.add(builder.build());
+
+                addNoCustomHeaderProxyMethod(operation, settings, operationName, builder, responseBodyType,
+                        asyncRestResponseReturnType, proxyMethods);
             }
 
             if (settings.isSyncStackEnabled()) {
@@ -260,6 +266,30 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             parsed.put(request, proxyMethods);
         }
         return result;
+    }
+
+    private void addNoCustomHeaderProxyMethod(Operation operation, JavaSettings settings,
+                                              String operationName, ProxyMethod.Builder builder,
+                                              IType responseBodyType, IType asyncRestResponseReturnType,
+                                              List<ProxyMethod> proxyMethods) {
+        if(settings.isNoCustomHeaders() && asyncRestResponseReturnType instanceof GenericType
+                && ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0] instanceof GenericType
+                && ((GenericType) ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0]).getName().equals("ResponseBase")) {
+            IType asyncResponseWithNoHeaders = getAsyncRestResponseReturnType(operation, responseBodyType,
+                    settings.isDataPlaneClient(), settings, true);
+            builder.returnType(asyncResponseWithNoHeaders);
+            builder.name(operationName + "NoCustomHeaders");
+            builder.customHeaderIgnored(true);
+
+            proxyMethods.add(builder.build());
+
+            // reset builder state
+            // TODO (srnagar): add a clone method to proxy method builder. Each proxy method should use it's own
+            //  builder instance to maintain its state separately.
+            builder.returnType(asyncRestResponseReturnType);
+            builder.name(operationName);
+            builder.customHeaderIgnored(false);
+        }
     }
 
     private void addSyncProxyMethods(List<ProxyMethod> proxyMethods) {
@@ -319,6 +349,21 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
      */
     protected IType getAsyncRestResponseReturnType(Operation operation, IType responseBodyType,
                                                    boolean isProtocolMethod, JavaSettings settings) {
+        return this.getAsyncRestResponseReturnType(operation, responseBodyType, isProtocolMethod, settings, false);
+    }
+
+    /**
+     * Gets the type for AsyncRestResponse.
+     *
+     * @param operation the operation.
+     * @param responseBodyType the type of the response body.
+     * @param isProtocolMethod whether the client method to be simplified for resilience to API changes.
+     * @param settings the JavaSettings.
+     * @param ignoreTypedHeaders Ignores typed headers when creating the return type, if this is set to {@code true}.
+     * @return the type for AsyncRestResponse.
+     */
+    protected IType getAsyncRestResponseReturnType(Operation operation, IType responseBodyType,
+                                                   boolean isProtocolMethod, JavaSettings settings, boolean ignoreTypedHeaders) {
         if (isProtocolMethod) {
             IType singleValueType;
             if (responseBodyType.equals(PrimitiveType.Void)) {
@@ -337,11 +382,18 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             if (settings.isGenericResponseTypes()) {
                 // If the response body type is InputStream it needs to be converted to Flux<ByteBuffer> to be
                 // asynchronous, unless this is sync-stack.
-                if (responseBodyType == ClassType.InputStream && !settings.isSyncStackEnabled()) {
+                if (responseBodyType == ClassType.InputStream) {
                     responseBodyType = GenericType.FluxByteBuffer;
                 }
                 IType genericResponseType = GenericType.RestResponse(
                     Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)), responseBodyType);
+
+                if (ignoreTypedHeaders) {
+                    if (responseBodyType == GenericType.FluxByteBuffer) {
+                        return createStreamContentAsyncReturnType();
+                    }
+                    genericResponseType = GenericType.Response(responseBodyType);
+                }
                 return createSingleValueAsyncReturnType(genericResponseType);
             } else {
                 ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation,

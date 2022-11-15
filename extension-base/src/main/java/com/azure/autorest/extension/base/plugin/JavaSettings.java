@@ -33,6 +33,8 @@ public class JavaSettings {
     private static final Map<String, Object> SIMPLE_JAVA_SETTINGS = new HashMap<>();
 
     private static Logger logger;
+    private boolean noCustomHeaders;
+
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
             header = MICROSOFT_MIT_LICENSE_HEADER + "\n" + String.format(DEFAULT_CODE_GENERATION_HEADER, VERSION);
@@ -155,7 +157,8 @@ public class JavaSettings {
                 getBooleanValue(host, "stream-style-serialization", false),
                 getBooleanValue(host, "enable-sync-stack", false),
                 getBooleanValue(host, "output-model-immutable", false),
-                getBooleanValue(host, "use-input-stream-for-binary", false)
+                getBooleanValue(host, "use-input-stream-for-binary", false),
+                getBooleanValue(host, "no-custom-headers", false)
             );
         }
         return instance;
@@ -164,17 +167,56 @@ public class JavaSettings {
     /**
      * Create a new JavaSettings object with the provided properties.
      *
+     * @param autorestSettings
+     * @param modelerSettings
+     * @param azure
+     * @param sdkIntegration
+     * @param fluent
+     * @param regeneratePom
+     * @param fileHeaderText
+     * @param maximumJavadocCommentWidth
+     * @param serviceName
+     * @param packageKeyword
+     * @param shouldGenerateXmlSerialization
      * @param nonNullAnnotations Whether to add the @NotNull annotation to required parameters in client methods.
+     * @param clientSideValidations
      * @param clientTypePrefix The prefix that will be added to each generated client type.
      * @param generateClientInterfaces Whether interfaces will be generated for Service and Method Group clients.
+     * @param generateClientAsImpl
      * @param implementationSubpackage The sub-package that the Service and Method Group client implementation classes
      * will be put into.
      * @param modelsSubpackage The sub-package that Enums, Exceptions, and Model types will be put into.
+     * @param customTypes
+     * @param customTypesSubpackage
+     * @param fluentSubpackage
      * @param requiredParameterClientMethods Whether Service and Method Group client method overloads that omit optional
      * parameters will be created.
+     * @param generateSyncAsyncClients
+     * @param generateBuilderPerClient
+     * @param syncMethods
+     * @param clientLogger
+     * @param requiredFieldsAsConstructorArgs
      * @param serviceInterfaceAsPublic If set to true, proxy method service interface will be marked as public.
+     * @param artifactId
+     * @param credentialType
+     * @param credentialScopes
+     * @param customizationJarPath
+     * @param customizationClass
+     * @param optionalConstantAsEnum
+     * @param dataPlaneClient
+     * @param useIterable
+     * @param serviceVersions
      * @param requireXMsFlattenedToFlatten If set to true, a model must have x-ms-flattened to be annotated with
      * JsonFlatten.
+     * @param clientFlattenAnnotationTarget
+     * @param keyCredentialHeaderName
+     * @param clientBuilderDisabled
+     * @param skipFormatting
+     * @param pollingConfig
+     * @param generateSamples
+     * @param generateTests
+     * @param generateSendRequestMethod
+     * @param generateModels
      * @param passDiscriminatorToChildDeserialization If set to true, Jackson subtype deserialization will be passed
      * the discriminator field.
      * @param annotateGettersAndSettersForSerialization If set to true, Jackson JsonGetter and JsonSetter will annotate
@@ -187,10 +229,19 @@ public class JavaSettings {
      * @param httpStatusCodeToExceptionTypeMapping A mapping of HTTP response status code to the exception type that should be
      * thrown if that status code is seen. All exception types must be fully-qualified and extend from
      * HttpResponseException.
+     * @param handlePartialUpdate
      * @param genericResponseTypes If set to true, responses will only use Response, ResponseBase, PagedResponse, and
      * PagedResponseBase types with generics instead of creating a specific named type that extends one of those types.
      * @param streamStyleSerialization If set to true, models will handle serialization themselves using stream-style
      * serialization instead of relying on Jackson Databind.
+     *
+     * @param isSyncStackEnabled If set to true, sync methods are generated using sync stack. i.e these methods do
+     * not use sync-over-async stack.
+     * @param outputModelImmutable If set to true, the models that are determined as output only models will be made
+     * immutable without any public constructors or setter methods.
+     * @param streamResponseInputStream If set to true, sync methods will use {@code InputStream} for binary responses.
+     * @param noCustomHeaders If set to true, methods that have custom header types will also have an equivalent
+     * method that returns just the response with untyped headers.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -249,7 +300,8 @@ public class JavaSettings {
         boolean streamStyleSerialization,
         boolean isSyncStackEnabled,
         boolean outputModelImmutable,
-        boolean streamResponseInputStream) {
+        boolean streamResponseInputStream,
+        boolean noCustomHeaders) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -341,6 +393,7 @@ public class JavaSettings {
         this.outputModelImmutable = outputModelImmutable;
 
         this.isInputStreamForBinary = streamResponseInputStream;
+        this.noCustomHeaders = noCustomHeaders;
     }
 
     private String keyCredentialHeaderName;
@@ -371,6 +424,10 @@ public class JavaSettings {
 
     public String getArtifactId() {
         return artifactId;
+    }
+
+    public boolean isNoCustomHeaders() {
+        return noCustomHeaders;
     }
 
     public enum Fluent {
