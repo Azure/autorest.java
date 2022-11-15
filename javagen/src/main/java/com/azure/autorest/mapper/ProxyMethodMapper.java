@@ -232,22 +232,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             ProxyMethod proxyMethod = builder.build();
             proxyMethods.add(proxyMethod);
 
-            if(asyncRestResponseReturnType instanceof GenericType
-                    && ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0] instanceof GenericType
-                    && ((GenericType) ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0]).getName().equals("ResponseBase")) {
-                IType asyncResponseWithNoHeaders = getAsyncRestResponseReturnType(operation, responseBodyType,
-                        settings.isDataPlaneClient(), settings, true);
-                builder.returnType(asyncResponseWithNoHeaders);
-                builder.name(operationName + "NoCustomHeaders");
-                builder.customHeaderIgnored(true);
-                proxyMethods.add(builder.build());
-
-                // reset builder state
-                // TODO (srnagar): add a clone method to builder to use separate builder instances for each proxy method
-                builder.returnType(asyncRestResponseReturnType);
-                builder.name(operationName);
-                builder.customHeaderIgnored(false);
-            }
+            addNoCustomHeaderProxyMethod(operation, settings, operationName, builder, responseBodyType,
+                    asyncRestResponseReturnType, proxyMethods);
 
             ProxyMethodParameter fluxByteBufferParam = parameters.stream()
                     .filter(parameter -> parameter.getClientType() == GenericType.FluxByteBuffer)
@@ -269,22 +255,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 builder.parameters(proxyMethodParameters);
                 proxyMethods.add(builder.build());
 
-                if(asyncRestResponseReturnType instanceof GenericType
-                        && ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0] instanceof GenericType
-                        && ((GenericType) ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0]).getName().equals("ResponseBase")) {
-                    IType asyncResponseWithNoHeaders = getAsyncRestResponseReturnType(operation, responseBodyType,
-                            settings.isDataPlaneClient(), settings, true);
-                    builder.returnType(asyncResponseWithNoHeaders);
-                    builder.name(operationName + "NoCustomHeaders");
-                    builder.customHeaderIgnored(true);
-
-                    proxyMethods.add(builder.build());
-
-                    // reset builder state
-                    builder.returnType(asyncRestResponseReturnType);
-                    builder.name(operationName);
-                    builder.customHeaderIgnored(false);
-                }
+                addNoCustomHeaderProxyMethod(operation, settings, operationName, builder, responseBodyType,
+                        asyncRestResponseReturnType, proxyMethods);
             }
 
             if (settings.isSyncStackEnabled()) {
@@ -294,6 +266,30 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             parsed.put(request, proxyMethods);
         }
         return result;
+    }
+
+    private void addNoCustomHeaderProxyMethod(Operation operation, JavaSettings settings,
+                                              String operationName, ProxyMethod.Builder builder,
+                                              IType responseBodyType, IType asyncRestResponseReturnType,
+                                              List<ProxyMethod> proxyMethods) {
+        if(settings.isNoCustomHeaders() && asyncRestResponseReturnType instanceof GenericType
+                && ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0] instanceof GenericType
+                && ((GenericType) ((GenericType) asyncRestResponseReturnType).getTypeArguments()[0]).getName().equals("ResponseBase")) {
+            IType asyncResponseWithNoHeaders = getAsyncRestResponseReturnType(operation, responseBodyType,
+                    settings.isDataPlaneClient(), settings, true);
+            builder.returnType(asyncResponseWithNoHeaders);
+            builder.name(operationName + "NoCustomHeaders");
+            builder.customHeaderIgnored(true);
+
+            proxyMethods.add(builder.build());
+
+            // reset builder state
+            // TODO (srnagar): add a clone method to proxy method builder. Each proxy method should use it's own
+            //  builder instance to maintain its state separately.
+            builder.returnType(asyncRestResponseReturnType);
+            builder.name(operationName);
+            builder.customHeaderIgnored(false);
+        }
     }
 
     private void addSyncProxyMethods(List<ProxyMethod> proxyMethods) {
