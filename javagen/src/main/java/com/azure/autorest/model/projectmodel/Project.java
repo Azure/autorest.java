@@ -253,7 +253,7 @@ public class Project {
     private void findPackageVersions(Path path) throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
-                checkArtifact(line, "org.junit.jupiter:junit-jupiter-engine").ifPresent(v -> packageVersions.junitVersion = v);
+                checkArtifact(line, "org.junit.jupiter:junit-jupiter-api").ifPresent(v -> packageVersions.junitVersion = v);
                 checkArtifact(line, "org.mockito:mockito-core").ifPresent(v -> packageVersions.mockitoVersion = v);
                 checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
                 checkArtifact(line, "com.azure:azure-json").ifPresent(v -> packageVersions.azureJsonVersion = v);

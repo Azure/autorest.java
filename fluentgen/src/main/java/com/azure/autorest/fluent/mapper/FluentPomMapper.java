@@ -43,6 +43,8 @@ public class FluentPomMapper extends PomMapper {
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     IDENTITY_PREFIX, project.getPackageVersions().getAzureIdentityVersion(), true);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    JUNIT_JUPITER_API_PREFIX, project.getPackageVersions().getJunitVersion(), true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     JUNIT_JUPITER_ENGINE_PREFIX, project.getPackageVersions().getJunitVersion(), true);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     MOCKITO_CORE_PREFIX, project.getPackageVersions().getMockitoVersion(), true);
