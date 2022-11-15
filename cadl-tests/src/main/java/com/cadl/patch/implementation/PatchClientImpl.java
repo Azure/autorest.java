@@ -11,7 +11,6 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.PathParam;
-import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -120,26 +119,6 @@ public final class PatchClientImpl {
     @Host("{endpoint}")
     @ServiceInterface(name = "PatchClient")
     public interface PatchClientService {
-        @Put("/patch/{name}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> create(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("name") String name,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
-
         @Patch("/patch/{name}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -152,7 +131,7 @@ public final class PatchClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> update(
+        Mono<Response<BinaryData>> createOrUpdate(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("content-type") String contentType,
                 @PathParam("name") String name,
@@ -163,7 +142,7 @@ public final class PatchClientImpl {
     }
 
     /**
-     * The create operation.
+     * The createOrUpdate operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -197,98 +176,18 @@ public final class PatchClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createWithResponseAsync(
-            String name, BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.create(this.getEndpoint(), name, accept, body, requestOptions, context));
-    }
-
-    /**
-     * The create operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param name The name parameter.
-     * @param body The body parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
-        return createWithResponseAsync(name, body, requestOptions).block();
-    }
-
-    /**
-     * The update operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param name The name parameter.
-     * @param body The body parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> updateWithResponseAsync(
+    public Mono<Response<BinaryData>> createOrUpdateWithResponseAsync(
             String name, BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.update(this.getEndpoint(), contentType, name, accept, body, requestOptions, context));
+                        service.createOrUpdate(
+                                this.getEndpoint(), contentType, name, accept, body, requestOptions, context));
     }
 
     /**
-     * The update operation.
+     * The createOrUpdate operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -322,7 +221,8 @@ public final class PatchClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> updateWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
-        return updateWithResponseAsync(name, body, requestOptions).block();
+    public Response<BinaryData> createOrUpdateWithResponse(
+            String name, BinaryData body, RequestOptions requestOptions) {
+        return createOrUpdateWithResponseAsync(name, body, requestOptions).block();
     }
 }

@@ -44,6 +44,7 @@ import {
   getQueryParamName,
   getServers,
   getStatusCodeDescription,
+  HttpOperation,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
@@ -328,9 +329,13 @@ export class CodeModelBuilder {
       ],
     });
 
-    const convenienceApiName = this.getConvenienceApiName(operation);
-    if (convenienceApiName) {
-      codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
+    if (!operationContainsJsonMergePatch(op)) {
+      // do not generate convenience method for JSON Merge Patch
+
+      const convenienceApiName = this.getConvenienceApiName(operation);
+      if (convenienceApiName) {
+        codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
+      }
     }
 
     // cache for later reference from operationLinks
@@ -487,7 +492,7 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
       if (op.convenienceApi) {
-        this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
+        this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
       }
 
       if (param.name.toLowerCase() === "content-type") {
@@ -556,7 +561,7 @@ export class CodeModelBuilder {
     this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
     if (op.convenienceApi) {
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
     }
   }
 
@@ -645,7 +650,7 @@ export class CodeModelBuilder {
         this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
 
         if (op.convenienceApi) {
-          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.ConvenienceMethod] });
+          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.ConvenienceApi] });
         }
       }
     }
@@ -1051,7 +1056,7 @@ export class CodeModelBuilder {
     }
 
     // process all children
-    type.derivedModels?.filter(includeDerivedModel).forEach((it) => this.processSchema(it, this.getName(it)));
+    type.derivedModels?.filter(modelContainsDerivedModel).forEach((it) => this.processSchema(it, this.getName(it)));
 
     return objectSchema;
   }
@@ -1446,7 +1451,7 @@ function getJavaNamespace(namespace: string | undefined): string | undefined {
   return namespace ? "com." + namespace.toLowerCase() : undefined;
 }
 
-function includeDerivedModel(model: Model): boolean {
+function modelContainsDerivedModel(model: Model): boolean {
   return !isTemplateDeclaration(model) && !(isTemplateInstance(model) && model.derivedModels.length === 0);
 }
 
@@ -1478,8 +1483,17 @@ function getNameForTemplate(target: Type): string {
   }
 }
 
-function containsIgnoreCase(stringList: string[], str: string) {
+function containsIgnoreCase(stringList: string[], str: string): boolean {
   return stringList && str ? stringList.findIndex((s) => s.toLowerCase() === str.toLowerCase()) != -1 : false;
+}
+
+function operationContainsJsonMergePatch(op: HttpOperation): boolean {
+  for (const param of op.parameters.parameters) {
+    if (param.name.toLowerCase() === "content-type") {
+      return true;
+    }
+  }
+  return false;
 }
 
 // function hasDecorator(type: DecoratedType, name: string): boolean {

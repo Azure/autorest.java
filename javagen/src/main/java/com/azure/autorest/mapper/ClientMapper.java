@@ -421,7 +421,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         headerSchema.setStronglyTypedHeader(true);
         headerSchema.setUsage(new HashSet<>(Collections.singletonList(SchemaContext.OUTPUT)));
         if (operation.getConvenienceApi() != null) {
-            headerSchema.getUsage().add(SchemaContext.CONVENIENCE_METHOD);
+            headerSchema.getUsage().add(SchemaContext.CONVENIENCE_API);
         }
         for (Map.Entry<String, Schema> header : headerMap.entrySet()) {
             Property property = new Property();

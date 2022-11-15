@@ -1,9 +1,11 @@
 import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core.Foundations;
+using Azure.DPG;
 
 @service({
   title: "Patch",
@@ -24,11 +26,10 @@ model Resource {
 
 @route("/patch")
 interface Patch {
-  @put
-  create(@path name: string, @body body: Resource): Resource | ErrorResponse;
-
+  // this convenienceAPI should be ignored
+  @convenienceAPI
   @patch
-  update(
+  createOrUpdate(
     @header("content-type") contentType: "application/merge-patch+json",
     @path name: string,
     @body body: Resource
