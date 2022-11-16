@@ -20,9 +20,7 @@ public class ModelUtilTests {
     // sadly ModelUtil.isGeneratingModel queries JavaSettings
     @BeforeAll
     public static void ensurePlugin() {
-        CadlPlugin plugin = new CadlPlugin(
-                new EmitterOptions()
-                        .setNamespace("com.azure.client"));
+        CadlPlugin plugin = new CadlPlugin(new EmitterOptions().setNamespace("com.azure.client"), false);
     }
 
     @Test
@@ -44,15 +42,15 @@ public class ModelUtilTests {
         // in convenience method
 
         // model which is only used in exception
-        implementationDetailsBuilder.usages(new HashSet<>(Arrays.asList(ImplementationDetails.Usage.EXCEPTION, ImplementationDetails.Usage.CONVENIENCE_METHOD)));
+        implementationDetailsBuilder.usages(new HashSet<>(Arrays.asList(ImplementationDetails.Usage.EXCEPTION, ImplementationDetails.Usage.CONVENIENCE_API)));
         Assertions.assertFalse(ModelUtil.isGeneratingModel(modelBuilder.implementationDetails(implementationDetailsBuilder.build()).build()));
 
         // model which is used in input
-        implementationDetailsBuilder.usages(new HashSet<>(Arrays.asList(ImplementationDetails.Usage.INPUT, ImplementationDetails.Usage.CONVENIENCE_METHOD)));
+        implementationDetailsBuilder.usages(new HashSet<>(Arrays.asList(ImplementationDetails.Usage.INPUT, ImplementationDetails.Usage.CONVENIENCE_API)));
         Assertions.assertTrue(ModelUtil.isGeneratingModel(modelBuilder.implementationDetails(implementationDetailsBuilder.build()).build()));
 
         // model which is used in output and exception
-        implementationDetailsBuilder.usages(new HashSet<>(Arrays.asList(ImplementationDetails.Usage.OUTPUT, ImplementationDetails.Usage.EXCEPTION, ImplementationDetails.Usage.CONVENIENCE_METHOD)));
+        implementationDetailsBuilder.usages(new HashSet<>(Arrays.asList(ImplementationDetails.Usage.OUTPUT, ImplementationDetails.Usage.EXCEPTION, ImplementationDetails.Usage.CONVENIENCE_API)));
         Assertions.assertTrue(ModelUtil.isGeneratingModel(modelBuilder.implementationDetails(implementationDetailsBuilder.build()).build()));
     }
 }

@@ -28,9 +28,15 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -59,8 +65,23 @@ public class Main {
 
         EmitterOptions emitterOptions = loadEmitterOptions(codeModel);
 
+        boolean sdkIntegration = true;
+        String outputDir = emitterOptions.getOutputDir();
+        Path outputDirPath = Paths.get(outputDir);
+        if (Files.exists(outputDirPath)) {
+            try (Stream<Path> filestream = Files.list(outputDirPath)) {
+                Set<String> filenames = filestream
+                        .map(p -> p.getFileName().toString())
+                        .map(name -> name.toLowerCase(Locale.ROOT))
+                        .collect(Collectors.toSet());
+
+                // if there is already pom and source, do not overwrite them (includes README.md, CHANGELOG.md etc.)
+                sdkIntegration = !filenames.containsAll(Arrays.asList("pom.xml", "src"));
+            }
+        }
+
         // initialize plugin
-        CadlPlugin cadlPlugin = new CadlPlugin(emitterOptions);
+        CadlPlugin cadlPlugin = new CadlPlugin(emitterOptions, sdkIntegration);
 
         // client
         Client client = cadlPlugin.processClient(codeModel);

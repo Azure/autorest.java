@@ -54,6 +54,7 @@ import java.util.stream.Collectors;
             CollectionsIntClient.class,
             CollectionsModelClient.class,
             DictionaryStringClient.class,
+            NeverClient.class,
             BooleanOperationAsyncClient.class,
             StringOperationAsyncClient.class,
             BytesAsyncClient.class,
@@ -67,7 +68,8 @@ import java.util.stream.Collectors;
             CollectionsStringAsyncClient.class,
             CollectionsIntAsyncClient.class,
             CollectionsModelAsyncClient.class,
-            DictionaryStringAsyncClient.class
+            DictionaryStringAsyncClient.class,
+            NeverAsyncClient.class
         })
 public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, ConfigurationTrait<TypesClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
@@ -383,6 +385,16 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
     }
 
     /**
+     * Builds an instance of NeverAsyncClient class.
+     *
+     * @return an instance of NeverAsyncClient.
+     */
+    @Generated
+    public NeverAsyncClient buildNeverAsyncClient() {
+        return new NeverAsyncClient(buildInnerClient().getNevers());
+    }
+
+    /**
      * Builds an instance of BooleanOperationClient class.
      *
      * @return an instance of BooleanOperationClient.
@@ -523,5 +535,15 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
     @Generated
     public DictionaryStringClient buildDictionaryStringClient() {
         return new DictionaryStringClient(new DictionaryStringAsyncClient(buildInnerClient().getDictionaryStrings()));
+    }
+
+    /**
+     * Builds an instance of NeverClient class.
+     *
+     * @return an instance of NeverClient.
+     */
+    @Generated
+    public NeverClient buildNeverClient() {
+        return new NeverClient(new NeverAsyncClient(buildInnerClient().getNevers()));
     }
 }

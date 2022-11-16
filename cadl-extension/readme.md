@@ -4,7 +4,7 @@ Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node
 
 Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by `java --version`)
 
-Install [Cadl](https://github.com/microsoft/cadl/) 0.36. 
+Install [Cadl](https://github.com/microsoft/cadl/) 0.37. 
 
 # Initialize Cadl Project
 
@@ -19,10 +19,10 @@ Make sure the version of [Cadl-java release](https://github.com/Azure/autorest.j
 Modify `package.json`, add one line under `dependencies`:
 ```diff
     "dependencies": {
-      "@cadl-lang/compiler": "^0.36.0",
-      "@cadl-lang/rest": "^0.18.0",
-      "@azure-tools/cadl-azure-core": "^0.8.0",
-+      "@azure-tools/cadl-java": "0.1.0-dev.11"
+      "@cadl-lang/compiler": "^0.37.0",
+      "@cadl-lang/rest": "^0.19.0",
+      "@azure-tools/cadl-azure-core": "^0.9.0",
++      "@azure-tools/cadl-java": "0.1.0"
     },
 ```
 
@@ -36,9 +36,9 @@ emitters:
 
 # Generate Java
 
-Same `npx cadl compile .` or `npx cadl compile . --outputPath=<target-folder>`.
+Same `npx cadl compile .` or `npx cadl compile . --output-dir=<target-folder>`.
 
-If `outputPath` option is not provided, generated Java code will be under `cadl-output` folder.
+If `output-dir` option is not provided, generated Java code will be under `cadl-output` folder.
 
 # Optional Configuration
 
@@ -49,11 +49,11 @@ One can further configure the SDK generated, using the emitter options on `@azur
 ```yaml
 emitters:
   "@azure-tools/cadl-java":
-    "output-dir": "./azure-ai-language-authoring"
-    "namespace": "com.azure.ai.language.authoring"
-    "service-name": "Authoring"
-    "partial-update": true
-    "service-versions":
+    output-dir: "./azure-ai-language-authoring"
+    namespace: "com.azure.ai.language.authoring"
+    service-name: "Authoring"
+    partial-update: true
+    service-versions:
       - "2022-05-15-preview"
 ```
 

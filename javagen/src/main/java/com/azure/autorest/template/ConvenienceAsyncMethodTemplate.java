@@ -25,12 +25,14 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
 
     @Override
     protected boolean isMethodIncluded(ClientMethod method) {
-        return isMethodAsync(method) && isMethodVisible(method);
+        return isMethodAsync(method) && isMethodVisible(method) && !method.isImplementationOnly();
     }
 
     @Override
     protected boolean isMethodIncluded(ConvenienceMethod method) {
         return isMethodAsync(method.getProtocolMethod()) && isMethodVisible(method.getProtocolMethod())
+                // for LRO, we actually choose the protocol method of "WithModel"
+                && (method.getProtocolMethod().getType() != ClientMethodType.LongRunningBeginAsync || (method.getProtocolMethod().getImplementationDetails() != null && method.getProtocolMethod().getImplementationDetails().isImplementationOnly()))
                 && method.getProtocolMethod().getMethodParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context);
     }
 
@@ -43,19 +45,45 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
 
         IType responseBodyType = getResponseBodyType(convenienceMethod);
 
-        String returnTypeConversionExpression = expressionConvertFromBinaryData(responseBodyType, methodType);
+        String returnTypeConversionExpression = expressionConvertFromBinaryData(responseBodyType);
 
-        String returnExpression = (methodType == ClientMethodType.PagingAsync)
-                ? "%1$s(%2$s)%3$s"
-                : ((responseBodyType.asNullable() == ClassType.Void)
-                ? "%1$s(%2$s).then()%3$s"   // return type is Mono<Void>, Response::getValue would be null
-                : "%1$s(%2$s).map(Response::getValue)%3$s");
+        if (methodType == ClientMethodType.PagingAsync) {
+            String expressionMapFromBinaryData = expressionMapFromBinaryData(responseBodyType);
+            if (expressionMapFromBinaryData == null) {
+                // no need to do the map
+                methodBlock.methodReturn(String.format("%1$s(%2$s)", getMethodName(protocolMethod), invocationExpression));
+            } else {
+                methodBlock.line("PagedFlux<BinaryData> pagedFluxResponse = %1$s(%2$s);", getMethodName(protocolMethod), invocationExpression);
 
-        methodBlock.methodReturn(
-                String.format(returnExpression,
-                        getMethodName(protocolMethod),
-                        invocationExpression,
-                        returnTypeConversionExpression));
+                methodBlock.methodReturn(String.format(
+                        "PagedFlux.create(() -> (continuationToken, pageSize) -> {\n" +
+                                "    Flux<PagedResponse<BinaryData>> flux = (continuationToken == null)\n" +
+                                "        ? pagedFluxResponse.byPage().take(1)\n" +
+                                "        : pagedFluxResponse.byPage(continuationToken).take(1);\n" +
+                                "    return flux.map(pagedResponse -> new PagedResponseBase<Void, %1$s>(pagedResponse.getRequest(),\n" +
+                                "        pagedResponse.getStatusCode(),\n" +
+                                "        pagedResponse.getHeaders(),\n" +
+                                "        pagedResponse.getValue().stream().map(%2$s).collect(Collectors.toList()),\n" +
+                                "        pagedResponse.getContinuationToken(),\n" +
+                                "        null));\n" +
+                                "})",
+                        responseBodyType, expressionMapFromBinaryData));
+            }
+        } else if (methodType == ClientMethodType.LongRunningBeginAsync) {
+            String methodName = protocolMethod.getName();
+            methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));
+        } else {
+            // return type is Mono<Void>, Response::getValue would be null
+            String returnExpression = responseBodyType.asNullable() == ClassType.Void
+                    ? "%1$s(%2$s).then()%3$s"   // return type is Mono<Void>, Response::getValue would be null
+                    : "%1$s(%2$s).map(Response::getValue)%3$s";
+
+            methodBlock.methodReturn(
+                    String.format(returnExpression,
+                            getMethodName(protocolMethod),
+                            invocationExpression,
+                            returnTypeConversionExpression));
+        }
     }
 
     private IType getResponseBodyType(ClientMethod method) {
@@ -63,19 +91,31 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         return ((GenericType) method.getReturnValue().getType()).getTypeArguments()[0];
     }
 
-    private String expressionConvertFromBinaryData(IType responseBodyType, ClientMethodType methodType) {
-        String mapMethod = (methodType == ClientMethodType.PagingAsync) ? "mapPage" : "map";
-        if (responseBodyType instanceof EnumType) {
-            // enum
-            return String.format(".%1$s(%2$s::from%3$s)", mapMethod, responseBodyType, ((EnumType) responseBodyType).getElementType());
-        } else if (responseBodyType instanceof GenericType) {
-            // generic, e.g. list, map
-            return String.format(".%1$s(protocolMethodData -> protocolMethodData.toObject(new TypeReference<%2$s>() {}))", mapMethod, responseBodyType);
-        } else if (isModelOrBuiltin(responseBodyType)) {
-            // class
-            return String.format(".%1$s(protocolMethodData -> protocolMethodData.toObject(%2$s.class))", mapMethod, responseBodyType);
+    private String expressionConvertFromBinaryData(IType responseBodyType) {
+        String expressionMapFromBinaryData = expressionMapFromBinaryData(responseBodyType);
+        if (expressionMapFromBinaryData != null) {
+            return String.format(".map(%s)", expressionMapFromBinaryData);
         } else {
+            // no need to do the map
             return "";
         }
+    }
+
+    private String expressionMapFromBinaryData(IType responseBodyType) {
+        String mapExpression = null;
+        if (responseBodyType instanceof EnumType) {
+            // enum
+            mapExpression = String.format("%1$s::from%2$s", responseBodyType, ((EnumType) responseBodyType).getElementType());
+        } else if (responseBodyType instanceof GenericType) {
+            // generic, e.g. list, map
+            mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(new TypeReference<%1$s>() {})", responseBodyType);
+        } else if (responseBodyType == ClassType.BinaryData) {
+            // BinaryData, no need to do the map in expressionConvertFromBinaryData
+            mapExpression = null;
+        } else if (isModelOrBuiltin(responseBodyType)) {
+            // class
+            mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(%1$s.class)", responseBodyType);
+        }
+        return mapExpression;
     }
 }

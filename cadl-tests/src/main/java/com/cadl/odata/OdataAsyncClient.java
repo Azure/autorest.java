@@ -13,6 +13,8 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedFlux;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.cadl.odata.implementation.OdataClientImpl;
@@ -20,6 +22,7 @@ import com.cadl.odata.models.Resource;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
 
 /** Initializes a new instance of the asynchronous OdataClient type. */
 @ServiceClient(builder = OdataClientBuilder.class, isAsync = true)
@@ -137,7 +140,28 @@ public final class OdataAsyncClient {
                             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                             .collect(Collectors.joining(",")));
         }
-        return list(requestOptions).mapPage(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+        PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
+        return PagedFlux.create(
+                () ->
+                        (continuationToken, pageSize) -> {
+                            Flux<PagedResponse<BinaryData>> flux =
+                                    (continuationToken == null)
+                                            ? pagedFluxResponse.byPage().take(1)
+                                            : pagedFluxResponse.byPage(continuationToken).take(1);
+                            return flux.map(
+                                    pagedResponse ->
+                                            new PagedResponseBase<Void, Resource>(
+                                                    pagedResponse.getRequest(),
+                                                    pagedResponse.getStatusCode(),
+                                                    pagedResponse.getHeaders(),
+                                                    pagedResponse.getValue().stream()
+                                                            .map(
+                                                                    protocolMethodData ->
+                                                                            protocolMethodData.toObject(Resource.class))
+                                                            .collect(Collectors.toList()),
+                                                    pagedResponse.getContinuationToken(),
+                                                    null));
+                        });
     }
 
     /**
@@ -155,6 +179,27 @@ public final class OdataAsyncClient {
     public PagedFlux<Resource> list() {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return list(requestOptions).mapPage(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+        PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
+        return PagedFlux.create(
+                () ->
+                        (continuationToken, pageSize) -> {
+                            Flux<PagedResponse<BinaryData>> flux =
+                                    (continuationToken == null)
+                                            ? pagedFluxResponse.byPage().take(1)
+                                            : pagedFluxResponse.byPage(continuationToken).take(1);
+                            return flux.map(
+                                    pagedResponse ->
+                                            new PagedResponseBase<Void, Resource>(
+                                                    pagedResponse.getRequest(),
+                                                    pagedResponse.getStatusCode(),
+                                                    pagedResponse.getHeaders(),
+                                                    pagedResponse.getValue().stream()
+                                                            .map(
+                                                                    protocolMethodData ->
+                                                                            protocolMethodData.toObject(Resource.class))
+                                                            .collect(Collectors.toList()),
+                                                    pagedResponse.getContinuationToken(),
+                                                    null));
+                        });
     }
 }

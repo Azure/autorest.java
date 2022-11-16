@@ -13,10 +13,14 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedFlux;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.cadl.paged.implementation.PagedClientImpl;
 import com.cadl.paged.models.Resource;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
 
 /** Initializes a new instance of the asynchronous PagedClient type. */
 @ServiceClient(builder = PagedClientBuilder.class, isAsync = true)
@@ -74,6 +78,27 @@ public final class PagedAsyncClient {
     public PagedFlux<Resource> listConvenience() {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return list(requestOptions).mapPage(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+        PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
+        return PagedFlux.create(
+                () ->
+                        (continuationToken, pageSize) -> {
+                            Flux<PagedResponse<BinaryData>> flux =
+                                    (continuationToken == null)
+                                            ? pagedFluxResponse.byPage().take(1)
+                                            : pagedFluxResponse.byPage(continuationToken).take(1);
+                            return flux.map(
+                                    pagedResponse ->
+                                            new PagedResponseBase<Void, Resource>(
+                                                    pagedResponse.getRequest(),
+                                                    pagedResponse.getStatusCode(),
+                                                    pagedResponse.getHeaders(),
+                                                    pagedResponse.getValue().stream()
+                                                            .map(
+                                                                    protocolMethodData ->
+                                                                            protocolMethodData.toObject(Resource.class))
+                                                            .collect(Collectors.toList()),
+                                                    pagedResponse.getContinuationToken(),
+                                                    null));
+                        });
     }
 }

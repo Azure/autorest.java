@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
+import com.cadl.longrunning.models.ExportedResource;
 import com.cadl.longrunning.models.OperationStatusResourceResource;
 import com.cadl.longrunning.models.Resource;
 import reactor.core.publisher.Mono;
@@ -254,5 +255,68 @@ public final class LongRunningAsyncClient {
         return getWithResponse(name, requestOptions)
                 .map(Response::getValue)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+    }
+
+    /**
+     * The delete operation.
+     *
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<OperationStatusResourceResource, Void> beginDelete(String name) {
+        // Generated convenience method for beginDeleteWithModel
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginDeleteWithModelAsync(name, requestOptions);
+    }
+
+    /**
+     * The export operation.
+     *
+     * @param name The name parameter.
+     * @param projectFileVersion The projectFileVersion parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<OperationStatusResourceResource, Void> beginExport(String name, String projectFileVersion) {
+        // Generated convenience method for beginExportWithModel
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginExportWithModelAsync(name, projectFileVersion, requestOptions);
+    }
+
+    /**
+     * The importx operation.
+     *
+     * @param name The name parameter.
+     * @param exportedResource The exportedResource parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<OperationStatusResourceResource, Void> beginImportx(
+            String name, ExportedResource exportedResource) {
+        // Generated convenience method for beginImportxWithModel
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginImportxWithModelAsync(name, BinaryData.fromObject(exportedResource), requestOptions);
     }
 }

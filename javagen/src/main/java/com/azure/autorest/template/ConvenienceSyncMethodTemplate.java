@@ -33,12 +33,14 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
 
     @Override
     protected boolean isMethodIncluded(ClientMethod method) {
-        return !isMethodAsync(method) && isMethodVisible(method);
+        return !isMethodAsync(method) && isMethodVisible(method) && !method.isImplementationOnly();
     }
 
     @Override
     protected boolean isMethodIncluded(ConvenienceMethod method) {
-        return !isMethodAsync(method.getProtocolMethod()) && isMethodVisible(method.getProtocolMethod());
+        return !isMethodAsync(method.getProtocolMethod()) && isMethodVisible(method.getProtocolMethod())
+                // for LRO, we actually choose the protocol method of "WithModel"
+                && (method.getProtocolMethod().getType() != ClientMethodType.LongRunningBeginSync || (method.getProtocolMethod().getImplementationDetails() != null && method.getProtocolMethod().getImplementationDetails().isImplementationOnly()));
     }
 
     @Override
@@ -49,18 +51,27 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             // Call the convenience method from async client
             // It would need rework, when underlying sync method in Impl is switched to sync protocol method
 
-            List<String> parameterNames = convenienceMethod.getMethodInputParameters().stream()
-                    .map(ClientMethodParameter::getName).collect(Collectors.toList());
+            String methodInvoke = "new PagedIterable<>(" + getMethodInvokeViaAsyncClient(convenienceMethod) + ")";
 
-            String methodInvoke = String.format("%1$s.%2$s(%3$s)",
-                    ASYNC_CLIENT_VAR_NAME, convenienceMethod.getName(), String.join(", ", parameterNames));
-
-            methodInvoke = "new PagedIterable<>(" + methodInvoke + ")";
+            methodBlock.methodReturn(methodInvoke);
+        } else if (protocolMethod.getType() == ClientMethodType.LongRunningBeginSync) {
+            // Call the convenience method from async client
+            String methodInvoke = getMethodInvokeViaAsyncClient(convenienceMethod) + ".getSyncPoller()";
 
             methodBlock.methodReturn(methodInvoke);
         } else {
             super.writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock);
         }
+    }
+
+    private static String getMethodInvokeViaAsyncClient(ClientMethod convenienceMethod) {
+        List<String> parameterNames = convenienceMethod.getMethodInputParameters().stream()
+                .map(ClientMethodParameter::getName).collect(Collectors.toList());
+
+        String methodInvoke = String.format("%1$s.%2$s(%3$s)",
+                ASYNC_CLIENT_VAR_NAME, convenienceMethod.getName(), String.join(", ", parameterNames));
+
+        return methodInvoke;
     }
 
     @Override
@@ -108,8 +119,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                 } else {
                     methodBlock.methodReturn(statement);
                 }
-            }
-            else if (responseBodyType.asNullable() == ClassType.Void) {
+            } else if (responseBodyType.asNullable() == ClassType.Void) {
                 methodBlock.line(statement + ";");
             } else {
                 methodBlock.methodReturn(statement);
@@ -148,6 +158,9 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         } else if (responseBodyType instanceof GenericType) {
             // generic, e.g. list, map
             return String.format("%2$s.toObject(new TypeReference<%1$s>() {})", responseBodyType, invocationExpression);
+        } else if (responseBodyType == ClassType.BinaryData) {
+            // BinaryData
+            return invocationExpression;
         } else if (isModelOrBuiltin(responseBodyType)) {
             // class
             return String.format("%2$s.toObject(%1$s.class)", responseBodyType, invocationExpression);

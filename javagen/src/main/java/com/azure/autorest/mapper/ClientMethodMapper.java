@@ -165,7 +165,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
         }
 
-        ReturnTypeHolder returnTypeHolder = getReturnTypes(operation, isProtocolMethod, settings);
 
         // map externalDocs property
         if (operation.getExternalDocs() != null) {
@@ -180,6 +179,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         for (Request request : requests) {
             List<ProxyMethod> proxyMethods = proxyMethodsMap.get(request);
             for (ProxyMethod proxyMethod : proxyMethods) {
+                ReturnTypeHolder returnTypeHolder = getReturnTypes(operation, isProtocolMethod, settings, proxyMethod.isCustomHeaderIgnored());
                 builder.proxyMethod(proxyMethod);
                 List<ClientMethodParameter> parameters = new ArrayList<>();
                 List<String> requiredParameterExpressions = new ArrayList<>();
@@ -445,7 +445,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .collect(Collectors.toList());
     }
 
-    private ReturnTypeHolder getReturnTypes(Operation operation, boolean isProtocolMethod, JavaSettings settings) {
+    private ReturnTypeHolder getReturnTypes(Operation operation, boolean isProtocolMethod, JavaSettings settings,
+                                            boolean isCustomHeaderIgnored) {
         ReturnTypeHolder returnTypeHolder = new ReturnTypeHolder();
 
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
@@ -492,7 +493,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         }
 
         returnTypeHolder.asyncRestResponseReturnType = Mappers.getProxyMethodMapper()
-            .getAsyncRestResponseReturnType(operation, responseBodyType, isProtocolMethod, settings)
+            .getAsyncRestResponseReturnType(operation, responseBodyType, isProtocolMethod, settings, isCustomHeaderIgnored)
             .getClientType();
 
         IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
@@ -512,7 +513,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             returnTypeHolder.syncReturnWithResponse = GenericType.Response(ClassType.BinaryData);
         } else {
             returnTypeHolder.syncReturnWithResponse = createSyncReturnWithResponseType(returnTypeHolder.syncReturnType,
-                operation, isProtocolMethod, settings);
+                operation, isProtocolMethod, settings, isCustomHeaderIgnored);
         }
 
         return returnTypeHolder;
@@ -729,6 +730,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         addClientMethodWithContext(methods, builder, parameters, contextParameter);
 
         // Repeat the same but for simple returns.
+        if (proxyMethod.isCustomHeaderIgnored()) {
+            return;
+        }
         methodName = isSync ? methodNamer.getMethodName() : methodNamer.getSimpleAsyncMethodName();
         methodType = isSync ? ClientMethodType.SimpleSync : ClientMethodType.SimpleAsync;
 
@@ -841,7 +845,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     }
 
     protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation,
-        boolean isProtocolMethod, JavaSettings settings) {
+                                                     boolean isProtocolMethod, JavaSettings settings) {
+        return this.createSyncReturnWithResponseType(syncReturnType, operation, isProtocolMethod, settings, false);
+    }
+
+    protected IType createSyncReturnWithResponseType(IType syncReturnType, Operation operation,
+        boolean isProtocolMethod, JavaSettings settings, boolean ignoreCustomHeaders) {
         boolean responseContainsHeaders = SchemaUtil.responseContainsHeaderSchemas(operation, settings);
 
         // If DPG is being generated or the response doesn't contain headers return Response<T>
@@ -850,7 +859,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (isProtocolMethod || !responseContainsHeaders) {
             return GenericType.Response(syncReturnType);
         } else if (settings.isGenericResponseTypes()) {
-
+            if (ignoreCustomHeaders) {
+                return GenericType.Response(syncReturnType);
+            }
             return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),
                 syncReturnType);
         } else {
@@ -1042,7 +1053,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 return ((methodType == ClientMethodType.SimpleAsync && !hasContextParameter)
                     || (methodType == ClientMethodType.SimpleSync && !hasContextParameter)
                     || (methodType == ClientMethodType.PagingAsync && !hasContextParameter)
-                    || (methodType == ClientMethodType.PagingSync && !hasContextParameter))
+                    || (methodType == ClientMethodType.PagingSync && !hasContextParameter)
+                    || (methodType == ClientMethodType.LongRunningBeginAsync && !hasContextParameter)
+                    || (methodType == ClientMethodType.LongRunningBeginSync && !hasContextParameter))
                     // || (methodType == ClientMethodType.SimpleSyncRestResponse && hasContextParameter))
                     ? VISIBLE
                     : NOT_GENERATE;

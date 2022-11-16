@@ -12,7 +12,6 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
-import com.azure.autorest.preprocessor.namer.CodeNamer;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.cadl.model.EmitterOptions;
 import com.azure.cadl.mapper.CadlMapperFactory;
@@ -44,9 +43,11 @@ public class CadlPlugin extends Javagen {
                     .flatMap(c -> c.getOperationGroups().stream())
                     .flatMap(og -> og.getOperations().stream())
                     .forEach(o -> {
-                        if (o.getConvenienceApi() == null) {
+                        if (o.getConvenienceApi() == null
+                                // TODO (weidxu): design for JSON Merge Patch
+                                && o.getRequests().stream().noneMatch(r -> r.getProtocol() != null &&r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getMediaTypes() != null && r.getProtocol().getHttp().getMediaTypes().contains("application/merge-patch+json"))) {
                             ConvenienceApi convenienceApi = new ConvenienceApi();
-                            convenienceApi.setName(CodeNamer.getMethodName(o.getLanguage().getDefault().getName()));
+                            convenienceApi.setName(o.getLanguage().getDefault().getName());
                             o.setConvenienceApi(convenienceApi);
                         }
                     });
@@ -154,7 +155,7 @@ public class CadlPlugin extends Javagen {
 
     }
 
-    public CadlPlugin(EmitterOptions options) {
+    public CadlPlugin(EmitterOptions options, boolean sdkIntegration) {
         super(new MockConnection(), "dummy", "dummy");
         this.emitterOptions = options;
         SETTINGS_MAP.put("namespace", options.getNamespace());
@@ -174,6 +175,9 @@ public class CadlPlugin extends Javagen {
         if (options.getDevOptions() != null && options.getDevOptions().getGenerateModels() == Boolean.TRUE) {
             SETTINGS_MAP.put("generate-models", true);
         }
+
+        SETTINGS_MAP.put("sdk-integration", sdkIntegration);
+        SETTINGS_MAP.put("regenerate-pom", sdkIntegration);
 
         JavaSettingsAccessor.setHost(this);
         LOGGER.info("Output folder: {}", options.getOutputDir());

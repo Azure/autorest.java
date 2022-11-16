@@ -10,8 +10,8 @@ export enum SchemaContext {
   /** Schema is used as an exception from an operation. */
   Exception = "exception",
 
-  /** Schema is used from the operation for generating convenience method. */
-  ConvenienceMethod = "convenience-method",
+  /** Schema is used from the operation for generating convenience API. */
+  ConvenienceApi = "convenience-api",
 }
 
 export interface SchemaUsage {

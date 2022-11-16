@@ -44,6 +44,7 @@ import {
   getQueryParamName,
   getServers,
   getStatusCodeDescription,
+  HttpOperation,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
@@ -198,25 +199,46 @@ export class CodeModelBuilder {
   private processHost(server: HttpServer | undefined) {
     if (server) {
       server.parameters.forEach((it) => {
-        const schema = this.processSchema(it.type, it.name);
-        const parameter = new Parameter(it.name, this.getDoc(it), schema, {
-          implementation: ImplementationLocation.Client,
-          origin: "modelerfour:synthesized/host",
-          required: true,
-          protocol: {
-            http: new HttpParameter(ParameterLocation.Uri),
-          },
-          clientDefaultValue: this.getDefaultValue(it.default),
-          language: {
-            default: {
-              serializedName: it.name,
-            },
-          },
-        });
+        let parameter;
 
-        // TODO hack on "ApiVersion"
         if (it.name === "ApiVersion") {
-          parameter.origin = "modelerfour:synthesized/api-version";
+          // TODO hack on "ApiVersion"
+          const schema = this.codeModel.schemas.add(
+            new ConstantSchema(it.name, `api-version: ${this.version}`, {
+              valueType: this.stringSchema,
+              value: new ConstantValue(this.version),
+            }),
+          );
+          parameter = new Parameter(it.name, this.getDoc(it), schema, {
+            implementation: ImplementationLocation.Client,
+            origin: "modelerfour:synthesized/api-version",
+            required: true,
+            protocol: {
+              http: new HttpParameter(ParameterLocation.Uri),
+            },
+            clientDefaultValue: this.getDefaultValue(it.default),
+            language: {
+              default: {
+                serializedName: it.name,
+              },
+            },
+          });
+        } else {
+          const schema = this.processSchema(it.type, it.name);
+          parameter = new Parameter(it.name, this.getDoc(it), schema, {
+            implementation: ImplementationLocation.Client,
+            origin: "modelerfour:synthesized/host",
+            required: true,
+            protocol: {
+              http: new HttpParameter(ParameterLocation.Uri),
+            },
+            clientDefaultValue: this.getDefaultValue(it.default),
+            language: {
+              default: {
+                serializedName: it.name,
+              },
+            },
+          });
         }
 
         return this.hostParameters.push(this.codeModel.addGlobalParameter(parameter));
@@ -328,9 +350,13 @@ export class CodeModelBuilder {
       ],
     });
 
-    const convenienceApiName = this.getConvenienceApiName(operation);
-    if (convenienceApiName) {
-      codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
+    if (!operationContainsJsonMergePatch(op)) {
+      // do not generate convenience method for JSON Merge Patch
+
+      const convenienceApiName = this.getConvenienceApiName(operation);
+      if (convenienceApiName) {
+        codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
+      }
     }
 
     // cache for later reference from operationLinks
@@ -487,7 +513,7 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
       if (op.convenienceApi) {
-        this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
+        this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
       }
 
       if (param.name.toLowerCase() === "content-type") {
@@ -556,7 +582,7 @@ export class CodeModelBuilder {
     this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
     if (op.convenienceApi) {
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceMethod] });
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
     }
   }
 
@@ -645,7 +671,7 @@ export class CodeModelBuilder {
         this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
 
         if (op.convenienceApi) {
-          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.ConvenienceMethod] });
+          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.ConvenienceApi] });
         }
       }
     }
@@ -1051,7 +1077,7 @@ export class CodeModelBuilder {
     }
 
     // process all children
-    type.derivedModels?.filter(includeDerivedModel).forEach((it) => this.processSchema(it, this.getName(it)));
+    type.derivedModels?.filter(modelContainsDerivedModel).forEach((it) => this.processSchema(it, this.getName(it)));
 
     return objectSchema;
   }
@@ -1241,7 +1267,7 @@ export class CodeModelBuilder {
     } else {
       const visibility = getVisibility(this.program, target);
       if (visibility) {
-        return !visibility.includes("write");
+        return !visibility.includes("write") && !visibility.includes("create") && !visibility.includes("update");
       } else {
         return false;
       }
@@ -1250,23 +1276,7 @@ export class CodeModelBuilder {
 
   private getConvenienceApiName(op: Operation): string | undefined {
     // check @convenienceMethod
-    let convenienceApiName = getConvenienceAPIName(this.program, op);
-    if (!convenienceApiName) {
-      // check @extension with x-ms-convenient-api=true
-      const extensionDecorators = op.decorators.filter((it) => it.decorator.name === "$extension");
-      for (const extensionDecorator of extensionDecorators) {
-        if (extensionDecorator.args.length == 2) {
-          const name = extensionDecorator.args[0].value;
-          const value = extensionDecorator.args[1].value;
-
-          if (name === "x-ms-convenient-api" && value === true) {
-            convenienceApiName = op.name;
-            break;
-          }
-        }
-      }
-    }
-    return convenienceApiName;
+    return getConvenienceAPIName(this.program, op);
   }
 
   private _stringSchema?: StringSchema;
@@ -1446,7 +1456,7 @@ function getJavaNamespace(namespace: string | undefined): string | undefined {
   return namespace ? "com." + namespace.toLowerCase() : undefined;
 }
 
-function includeDerivedModel(model: Model): boolean {
+function modelContainsDerivedModel(model: Model): boolean {
   return !isTemplateDeclaration(model) && !(isTemplateInstance(model) && model.derivedModels.length === 0);
 }
 
@@ -1478,8 +1488,17 @@ function getNameForTemplate(target: Type): string {
   }
 }
 
-function containsIgnoreCase(stringList: string[], str: string) {
+function containsIgnoreCase(stringList: string[], str: string): boolean {
   return stringList && str ? stringList.findIndex((s) => s.toLowerCase() === str.toLowerCase()) != -1 : false;
+}
+
+function operationContainsJsonMergePatch(op: HttpOperation): boolean {
+  for (const param of op.parameters.parameters) {
+    if (param.name.toLowerCase() === "content-type") {
+      return true;
+    }
+  }
+  return false;
 }
 
 // function hasDecorator(type: DecoratedType, name: string): boolean {

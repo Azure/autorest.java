@@ -189,7 +189,7 @@ public final class LongRunningClientImpl {
         Mono<Response<BinaryData>> createOrUpdate(
                 @HostParam("endpoint") String endpoint,
                 @PathParam("name") String name,
-                @HeaderParam("content-type") String contentType,
+                @HeaderParam("Content-Type") String contentType,
                 @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/merge-patch+json") BinaryData resource,
