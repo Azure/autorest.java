@@ -155,7 +155,7 @@ public class CadlPlugin extends Javagen {
 
     }
 
-    public CadlPlugin(EmitterOptions options) {
+    public CadlPlugin(EmitterOptions options, boolean sdkIntegration) {
         super(new MockConnection(), "dummy", "dummy");
         this.emitterOptions = options;
         SETTINGS_MAP.put("namespace", options.getNamespace());
@@ -175,6 +175,9 @@ public class CadlPlugin extends Javagen {
         if (options.getDevOptions() != null && options.getDevOptions().getGenerateModels() == Boolean.TRUE) {
             SETTINGS_MAP.put("generate-models", true);
         }
+
+        SETTINGS_MAP.put("sdk-integration", sdkIntegration);
+        SETTINGS_MAP.put("regenerate-pom", sdkIntegration);
 
         JavaSettingsAccessor.setHost(this);
         LOGGER.info("Output folder: {}", options.getOutputDir());
