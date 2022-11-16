@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/cadl-java",
-  "version": "0.1.0-dev.11",
+  "version": "0.1.0-dev.12",
   "description": "Java client emitter for CADL compiler",
   "keywords": [
     "cadl"
