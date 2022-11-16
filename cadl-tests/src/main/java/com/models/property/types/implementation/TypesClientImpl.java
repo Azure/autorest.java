@@ -206,6 +206,18 @@ public final class TypesClientImpl {
         return this.dictionaryStrings;
     }
 
+    /** The NeversImpl object to access its operations. */
+    private final NeversImpl nevers;
+
+    /**
+     * Gets the NeversImpl object to access its operations.
+     *
+     * @return the NeversImpl object.
+     */
+    public NeversImpl getNevers() {
+        return this.nevers;
+    }
+
     /** Initializes an instance of TypesClient client. */
     public TypesClientImpl() {
         this(
@@ -247,5 +259,6 @@ public final class TypesClientImpl {
         this.collectionsInts = new CollectionsIntsImpl(this);
         this.collectionsModels = new CollectionsModelsImpl(this);
         this.dictionaryStrings = new DictionaryStringsImpl(this);
+        this.nevers = new NeversImpl(this);
     }
 }
