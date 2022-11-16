@@ -1276,23 +1276,7 @@ export class CodeModelBuilder {
 
   private getConvenienceApiName(op: Operation): string | undefined {
     // check @convenienceMethod
-    let convenienceApiName = getConvenienceAPIName(this.program, op);
-    if (!convenienceApiName) {
-      // check @extension with x-ms-convenient-api=true
-      const extensionDecorators = op.decorators.filter((it) => it.decorator.name === "$extension");
-      for (const extensionDecorator of extensionDecorators) {
-        if (extensionDecorator.args.length == 2) {
-          const name = extensionDecorator.args[0].value;
-          const value = extensionDecorator.args[1].value;
-
-          if (name === "x-ms-convenient-api" && value === true) {
-            convenienceApiName = op.name;
-            break;
-          }
-        }
-      }
-    }
-    return convenienceApiName;
+    return getConvenienceAPIName(this.program, op);
   }
 
   private _stringSchema?: StringSchema;
