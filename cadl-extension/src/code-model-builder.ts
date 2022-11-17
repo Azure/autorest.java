@@ -54,6 +54,13 @@ import {
   getHttpOperation,
 } from "@cadl-lang/rest/http";
 import { getVersion } from "@cadl-lang/versioning";
+import { isPollingLocation, getPagedResult, getOperationLinks } from "@azure-tools/cadl-azure-core";
+import {
+  getConvenienceAPIName,
+  listClients,
+  listOperationGroups,
+  listOperationsInOperationGroup,
+} from "@azure-tools/cadl-dpg";
 import { fail } from "assert";
 import {
   AnySchema,
@@ -96,14 +103,8 @@ import { Client as CodeModelClient } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
-import { isPollingLocation, getPagedResult, getOperationLinks } from "@azure-tools/cadl-azure-core";
-import {
-  getConvenienceAPIName,
-  listClients,
-  listOperationGroups,
-  listOperationsInOperationGroup,
-} from "@azure-tools/cadl-dpg";
-import { DevOptions } from "./emitter.js";
+import { PreNamer } from "./prenamer/prenamer.js";
+import { EmitterOptions } from "./emitter.js";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -112,7 +113,7 @@ export class CodeModelBuilder {
   private baseUri: string;
   private hostParameters: Parameter[];
 
-  private devOptions: DevOptions;
+  private options: EmitterOptions;
 
   private codeModel: CodeModel;
 
@@ -121,8 +122,8 @@ export class CodeModelBuilder {
 
   private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
-  public constructor(program1: Program, devOptions: DevOptions | undefined) {
-    this.devOptions = devOptions ?? {};
+  public constructor(program1: Program, options: EmitterOptions) {
+    this.options = options;
     this.program = program1;
     const serviceNamespace = getServiceNamespace(this.program);
     if (serviceNamespace === undefined) {
@@ -196,6 +197,10 @@ export class CodeModelBuilder {
     this.processClients();
 
     this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
+
+    if (this.options.prenamer) {
+      this.codeModel = new PreNamer(this.codeModel).init().process();
+    }
 
     return this.codeModel;
   }
@@ -360,7 +365,7 @@ export class CodeModelBuilder {
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
-      } else if (this.devOptions["generate-convenience-apis"]) {
+      } else if (this.options["dev-options"] && this.options["dev-options"]["generate-convenience-apis"]) {
         // devOptions, add convenienceApi
         codeModelOperation.convenienceApi = new ConvenienceApi(operation.name);
       }
@@ -607,7 +612,16 @@ export class CodeModelBuilder {
       headers = [];
       for (const [key, header] of Object.entries(resp.responses[0].headers)) {
         const schema = this.processSchema(header.type, key);
-        headers.push(new HttpHeader(key, schema));
+        headers.push(
+          new HttpHeader(key, schema, {
+            language: {
+              default: {
+                name: key,
+                description: this.getDoc(header),
+              },
+            },
+          }),
+        );
       }
     }
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
@@ -626,6 +640,7 @@ export class CodeModelBuilder {
           },
           language: {
             default: {
+              name: op.language.default.name + "Response",
               description: this.getResponseDescription(resp),
             },
           },
@@ -643,6 +658,7 @@ export class CodeModelBuilder {
           },
           language: {
             default: {
+              name: op.language.default.name + "Response",
               description: this.getResponseDescription(resp),
             },
           },
@@ -659,6 +675,7 @@ export class CodeModelBuilder {
         },
         language: {
           default: {
+            name: op.language.default.name + "Response",
             description: this.getResponseDescription(resp),
           },
         },
