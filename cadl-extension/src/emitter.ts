@@ -26,7 +26,6 @@ export interface EmitterOptions {
 
 export interface DevOptions {
   "generate-code-model"?: boolean;
-  "generate-models"?: boolean;
   "generate-convenience-apis"?: boolean;
 }
 
@@ -54,7 +53,7 @@ export const $lib = createCadlLibrary({
 });
 
 export async function $onEmit(program: Program, options: EmitterOptions) {
-  const builder = new CodeModelBuilder(program);
+  const builder = new CodeModelBuilder(program, options["dev-options"]);
   const codeModel = builder.build();
 
   if (!program.compilerOptions.noEmit && !program.hasError()) {

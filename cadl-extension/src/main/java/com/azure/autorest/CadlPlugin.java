@@ -6,7 +6,6 @@ package com.azure.autorest;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.ConvenienceApi;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
@@ -37,27 +36,7 @@ public class CadlPlugin extends Javagen {
 
     private final EmitterOptions emitterOptions;
 
-    private CodeModel preTransform(CodeModel codeModel) {
-        if (emitterOptions.getDevOptions() != null && emitterOptions.getDevOptions().getGenerateConvenienceApis() == Boolean.TRUE) {
-            codeModel.getClients().stream()
-                    .flatMap(c -> c.getOperationGroups().stream())
-                    .flatMap(og -> og.getOperations().stream())
-                    .forEach(o -> {
-                        if (o.getConvenienceApi() == null
-                                // TODO (weidxu): design for JSON Merge Patch
-                                && o.getRequests().stream().noneMatch(r -> r.getProtocol() != null &&r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getMediaTypes() != null && r.getProtocol().getHttp().getMediaTypes().contains("application/merge-patch+json"))) {
-                            ConvenienceApi convenienceApi = new ConvenienceApi();
-                            convenienceApi.setName(o.getLanguage().getDefault().getName());
-                            o.setConvenienceApi(convenienceApi);
-                        }
-                    });
-        }
-        return codeModel;
-    }
-
     public Client processClient(CodeModel codeModel) {
-        codeModel = preTransform(codeModel);
-
         // transform code model
         codeModel = new Transformer().transform(codeModel);
 
@@ -170,10 +149,6 @@ public class CadlPlugin extends Javagen {
         }
         if (!CoreUtils.isNullOrEmpty(options.getServiceVersions())) {
             SETTINGS_MAP.put("service-versions", options.getServiceVersions());
-        }
-
-        if (options.getDevOptions() != null && options.getDevOptions().getGenerateModels() == Boolean.TRUE) {
-            SETTINGS_MAP.put("generate-models", true);
         }
 
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
