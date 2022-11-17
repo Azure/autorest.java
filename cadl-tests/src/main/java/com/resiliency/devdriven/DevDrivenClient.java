@@ -17,7 +17,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.resiliency.devdriven.models.Input;
-import com.resiliency.devdriven.models.LROProduct;
+import com.resiliency.devdriven.models.LroProduct;
 import com.resiliency.devdriven.models.Mode;
 import com.resiliency.devdriven.models.Product;
 
@@ -239,9 +239,9 @@ public final class DevDrivenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public LROProduct lro(Mode mode) {
+    public LroProduct lro(Mode mode) {
         // Generated convenience method for lroWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return lroWithResponse(mode.toString(), requestOptions).getValue().toObject(LROProduct.class);
+        return lroWithResponse(mode.toString(), requestOptions).getValue().toObject(LroProduct.class);
     }
 }

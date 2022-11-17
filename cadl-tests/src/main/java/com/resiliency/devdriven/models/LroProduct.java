@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Final response from LRO call. */
 @Immutable
-public final class LROProduct extends Product {
+public final class LroProduct extends Product {
     /*
      * Provisioning state returned by the service
      */
@@ -18,13 +18,13 @@ public final class LROProduct extends Product {
     private String provisioningState;
 
     /**
-     * Creates an instance of LROProduct class.
+     * Creates an instance of LroProduct class.
      *
      * @param received the received value to set.
      * @param provisioningState the provisioningState value to set.
      */
     @JsonCreator
-    private LROProduct(
+    private LroProduct(
             @JsonProperty(value = "received", required = true) Mode received,
             @JsonProperty(value = "provisioningState", required = true) String provisioningState) {
         super(received);
