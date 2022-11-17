@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 public final class SharkTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         Shark model =
                 BinaryData.fromString(
                                 "{\"fishtype\":\"shark\",\"age\":91789189,\"birthday\":\"2021-08-17T04:19:07Z\",\"species\":\"mjqulngsn\",\"length\":75.88975,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"kzgcwrwcl\",\"length\":99.26511,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"jdous\",\"length\":84.4235,\"siblings\":[]}]}")
@@ -28,7 +28,7 @@ public final class SharkTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         Shark model =
                 new Shark(75.88975f, OffsetDateTime.parse("2021-08-17T04:19:07Z"))
                         .setSpecies("mjqulngsn")

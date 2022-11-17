@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public final class SiameseTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         Siamese model =
                 BinaryData.fromString(
                                 "{\"breed\":\"jofjd\",\"color\":\"qs\",\"hates\":[{\"food\":\"pewnw\",\"id\":853033280,\"name\":\"jzyflu\"},{\"food\":\"rh\",\"id\":614383228,\"name\":\"qhsmyurkdtml\"},{\"food\":\"ekuksjtx\",\"id\":743792160,\"name\":\"mparcryuanzw\"},{\"food\":\"zdxtayrlhmwhf\",\"id\":1944828988,\"name\":\"obmtukk\"}],\"id\":1306784267,\"name\":\"tihfx\"}")
@@ -28,7 +28,7 @@ public final class SiameseTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         Siamese model =
                 new Siamese()
                         .setId(1306784267)

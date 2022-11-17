@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
 
 public final class DurationWrapperTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         DurationWrapper model = BinaryData.fromString("{\"field\":\"PT208H24M29S\"}").toObject(DurationWrapper.class);
         Assertions.assertEquals(Duration.parse("PT208H24M29S"), model.getField());
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         DurationWrapper model = new DurationWrapper().setField(Duration.parse("PT208H24M29S"));
         model = BinaryData.fromObject(model).toObject(DurationWrapper.class);
         Assertions.assertEquals(Duration.parse("PT208H24M29S"), model.getField());

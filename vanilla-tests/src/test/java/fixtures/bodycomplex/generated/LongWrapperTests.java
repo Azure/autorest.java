@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public final class LongWrapperTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         LongWrapper model =
                 BinaryData.fromString("{\"field1\":4252062726585189836,\"field2\":8175024465191423839}")
                         .toObject(LongWrapper.class);
@@ -20,7 +20,7 @@ public final class LongWrapperTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         LongWrapper model = new LongWrapper().setField1(4252062726585189836L).setField2(8175024465191423839L);
         model = BinaryData.fromObject(model).toObject(LongWrapper.class);
         Assertions.assertEquals(4252062726585189836L, model.getField1());

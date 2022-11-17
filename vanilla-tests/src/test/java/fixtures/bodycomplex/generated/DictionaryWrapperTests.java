@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public final class DictionaryWrapperTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         DictionaryWrapper model =
                 BinaryData.fromString(
                                 "{\"defaultProgram\":{\"nq\":\"dznrbtcqq\",\"ifsqesaagdfmg\":\"lhqgnufooojy\",\"izntocipao\":\"zlhjxrifkwmrvkt\",\"poyfdkfogkn\":\"ajpsquc\"}}")
@@ -22,7 +22,7 @@ public final class DictionaryWrapperTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         DictionaryWrapper model =
                 new DictionaryWrapper()
                         .setDefaultProgram(

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 public final class SawsharkTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         Sawshark model =
                 BinaryData.fromString(
                                 "{\"fishtype\":\"sawshark\",\"age\":422670277,\"birthday\":\"2021-06-30T08:44:34Z\",\"species\":\"jdkwtnhxbnjb\",\"length\":57.91524,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"gls\",\"length\":81.586426,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"p\",\"length\":77.7406,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"ljfmppee\",\"length\":43.36704,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"sabkyqduujitcjcz\",\"length\":99.2908,\"siblings\":[]}]}")
@@ -28,7 +28,7 @@ public final class SawsharkTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         Sawshark model =
                 new Sawshark(57.91524f, OffsetDateTime.parse("2021-06-30T08:44:34Z"))
                         .setSpecies("jdkwtnhxbnjb")

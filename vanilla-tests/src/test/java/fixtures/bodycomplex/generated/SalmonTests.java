@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public final class SalmonTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         Salmon model =
                 BinaryData.fromString(
                                 "{\"fishtype\":\"salmon\",\"location\":\"xaolth\",\"iswild\":true,\"species\":\"qjbpfzfsin\",\"length\":25.12173,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"jrwzox\",\"length\":2.6165128,\"siblings\":[]}]}")
@@ -27,7 +27,7 @@ public final class SalmonTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         Salmon model =
                 new Salmon(25.12173f)
                         .setSpecies("qjbpfzfsin")

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public final class DatetimeWrapperTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         DatetimeWrapper model =
                 BinaryData.fromString("{\"field\":\"2021-06-29T08:49:50Z\",\"now\":\"2021-06-25T01:54:31Z\"}")
                         .toObject(DatetimeWrapper.class);
@@ -21,7 +21,7 @@ public final class DatetimeWrapperTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         DatetimeWrapper model =
                 new DatetimeWrapper()
                         .setField(OffsetDateTime.parse("2021-06-29T08:49:50Z"))

@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test;
 
 public final class PetTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         Pet model = BinaryData.fromString("{\"id\":920256064,\"name\":\"rtfw\"}").toObject(Pet.class);
         Assertions.assertEquals(920256064, model.getId());
         Assertions.assertEquals("rtfw", model.getName());
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         Pet model = new Pet().setId(920256064).setName("rtfw");
         model = BinaryData.fromObject(model).toObject(Pet.class);
         Assertions.assertEquals(920256064, model.getId());

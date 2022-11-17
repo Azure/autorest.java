@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
 
 public final class ArrayWrapperTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         ArrayWrapper model = BinaryData.fromString("{\"array\":[\"bc\"]}").toObject(ArrayWrapper.class);
         Assertions.assertEquals("bc", model.getArray().get(0));
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         ArrayWrapper model = new ArrayWrapper().setArray(Arrays.asList("bc"));
         model = BinaryData.fromObject(model).toObject(ArrayWrapper.class);
         Assertions.assertEquals("bc", model.getArray().get(0));
