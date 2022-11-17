@@ -16,15 +16,15 @@ $generateScript = {
     $generateOutput = Invoke-Expression "autorest $_"
     $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
 
-    if ($global:ExitCode -ne 0) {
-        exit 1
-    }
     Write-Host "
 ========================
 autorest $_
 ========================
 $([String]::Join("`n", $generateOutput))
     "
+    if ($global:ExitCode -ne 0) {
+        exit 1
+    }
 }
 
 java -version
