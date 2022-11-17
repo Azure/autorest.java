@@ -103,6 +103,7 @@ import {
   listOperationGroups,
   listOperationsInOperationGroup,
 } from "@azure-tools/cadl-dpg";
+import { DevOptions } from "./emitter.js";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -111,6 +112,8 @@ export class CodeModelBuilder {
   private baseUri: string;
   private hostParameters: Parameter[];
 
+  private devOptions: DevOptions;
+
   private codeModel: CodeModel;
 
   private schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
@@ -118,7 +121,8 @@ export class CodeModelBuilder {
 
   private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
-  public constructor(program1: Program) {
+  public constructor(program1: Program, devOptions: DevOptions | undefined) {
+    this.devOptions = devOptions ?? {};
     this.program = program1;
     const serviceNamespace = getServiceNamespace(this.program);
     if (serviceNamespace === undefined) {
@@ -356,6 +360,9 @@ export class CodeModelBuilder {
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
+      } else if (this.devOptions["generate-convenience-apis"]) {
+        // devOptions, add convenienceApi
+        codeModelOperation.convenienceApi = new ConvenienceApi(operation.name);
       }
     }
 
