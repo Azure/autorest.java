@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public final class BasicTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         Basic model =
                 BinaryData.fromString("{\"id\":268043672,\"name\":\"quvgjxpybczme\",\"color\":\"blacK\"}")
                         .toObject(Basic.class);
@@ -22,7 +22,7 @@ public final class BasicTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         Basic model = new Basic().setId(268043672).setName("quvgjxpybczme").setColor(CMYKColors.BLACK);
         model = BinaryData.fromObject(model).toObject(Basic.class);
         Assertions.assertEquals(268043672, model.getId());

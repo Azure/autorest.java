@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public final class StringWrapperTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         StringWrapper model =
                 BinaryData.fromString("{\"field\":\"htbmuf\",\"empty\":\"wnoi\",\"null\":\"wlrxyb\"}")
                         .toObject(StringWrapper.class);
@@ -21,7 +21,7 @@ public final class StringWrapperTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         StringWrapper model = new StringWrapper().setField("htbmuf").setEmpty("wnoi").setNullProperty("wlrxyb");
         model = BinaryData.fromObject(model).toObject(StringWrapper.class);
         Assertions.assertEquals("htbmuf", model.getField());

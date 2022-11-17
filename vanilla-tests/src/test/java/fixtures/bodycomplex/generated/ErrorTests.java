@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public final class ErrorTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         Error model =
                 BinaryData.fromString("{\"status\":655985822,\"message\":\"bsphrupidgsybbe\"}").toObject(Error.class);
         Assertions.assertEquals(655985822, model.getStatus());

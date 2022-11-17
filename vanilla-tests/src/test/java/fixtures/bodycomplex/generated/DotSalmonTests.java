@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public final class DotSalmonTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         DotSalmon model =
                 BinaryData.fromString(
                                 "{\"fish.type\":\"DotSalmon\",\"location\":\"fdfdosygexpa\",\"iswild\":true,\"species\":\"hmsbzjhcrzevdp\"}")

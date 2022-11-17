@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 
 public final class DateWrapperTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         DateWrapper model = BinaryData.fromString("{}").toObject(DateWrapper.class);
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         DateWrapper model = new DateWrapper();
         model = BinaryData.fromObject(model).toObject(DateWrapper.class);
     }
