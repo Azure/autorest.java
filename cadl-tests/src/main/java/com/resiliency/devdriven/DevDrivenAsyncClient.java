@@ -20,7 +20,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.resiliency.devdriven.implementation.DevDrivenClientImpl;
 import com.resiliency.devdriven.models.Input;
-import com.resiliency.devdriven.models.LROProduct;
+import com.resiliency.devdriven.models.LroProduct;
 import com.resiliency.devdriven.models.Mode;
 import com.resiliency.devdriven.models.Product;
 import java.util.stream.Collectors;
@@ -271,11 +271,11 @@ public final class DevDrivenAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROProduct> lro(Mode mode) {
+    public Mono<LroProduct> lro(Mode mode) {
         // Generated convenience method for lroWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return lroWithResponse(mode.toString(), requestOptions)
                 .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(LROProduct.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(LroProduct.class));
     }
 }
