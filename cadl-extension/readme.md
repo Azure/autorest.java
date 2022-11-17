@@ -55,7 +55,7 @@ emitters:
     partial-update: true
     service-versions:
       - "2022-05-15-preview"
-    prenamer: true
+    namer: true
 ```
 
 ## Convenience API

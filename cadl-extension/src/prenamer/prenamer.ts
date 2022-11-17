@@ -64,7 +64,7 @@ export class PreNamer {
         "type": "pascal",
         "local": "camel",
         "global": "camel",
-        "preserve-uppercase-max-length": 0,
+        "preserve-uppercase-max-length": 1,
       },
     };
     const naming = this.options.naming || {};

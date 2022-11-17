@@ -198,7 +198,7 @@ export class CodeModelBuilder {
 
     this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
 
-    if (this.options.prenamer) {
+    if (this.options.namer) {
       this.codeModel = new PreNamer(this.codeModel).init().process();
     }
 
