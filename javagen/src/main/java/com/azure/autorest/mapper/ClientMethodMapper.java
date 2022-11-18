@@ -1297,7 +1297,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private static MethodNamer resolveMethodNamer(ProxyMethod proxyMethod, ConvenienceApi convenienceApi, boolean isProtocolMethod) {
         if (!isProtocolMethod && convenienceApi != null) {
-            return new MethodNamer(convenienceApi.getName());
+            return new MethodNamer(SchemaUtil.getJavaName(convenienceApi));
         } else {
             if (proxyMethod.isSync()) {
                 return new MethodNamer(proxyMethod.getBaseName());

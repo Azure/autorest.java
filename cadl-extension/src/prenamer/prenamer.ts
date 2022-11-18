@@ -246,6 +246,15 @@ export class PreNamer {
           this.setResponseHeaderNames(response);
         }
 
+        if ((operation as Operation).convenienceApi) {
+          this.namingService.setName(
+            (operation as Operation).convenienceApi,
+            this.format.operation,
+            "",
+            this.format.override,
+          );
+        }
+
         const p = operation.language.default.paging;
         if (p) {
           p.group = p.group ? this.format.operationGroup(p.group, true, this.format.override) : undefined;
