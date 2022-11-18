@@ -266,6 +266,12 @@ export class PreNamer {
     // set a styled client name
     this.namingService.setName(this.codeModel, this.format.client, this.codeModel.info.title, this.format.override);
 
+    if (this.codeModel.clients) {
+      for (const client of this.codeModel.clients) {
+        this.namingService.setName(client, this.format.client, "", this.format.override);
+      }
+    }
+
     // fix collisions from flattening on ObjectSchemas
     this.fixPropertyCollisions();
 
