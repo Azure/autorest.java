@@ -5,6 +5,7 @@ package com.azure.autorest.util;
 
 import com.azure.autorest.extension.base.model.codemodel.AnySchema;
 import com.azure.autorest.extension.base.model.codemodel.Header;
+import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Property;
@@ -267,5 +268,19 @@ public class SchemaUtil {
 
     private static boolean notDataPlaneLRO(Operation operation, JavaSettings settings) {
         return !(settings.isDataPlaneClient() && operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation());
+    }
+
+    public static String getDefaultName(Metadata m) {
+        if (m.getLanguage() == null || m.getLanguage().getDefault() == null) {
+            return null;
+        }
+        return m.getLanguage().getDefault().getName();
+    }
+
+    public static String getJavaName(Metadata m) {
+        if (m.getLanguage() == null || m.getLanguage().getJava() == null) {
+            return null;
+        }
+        return m.getLanguage().getJava().getName();
     }
 }

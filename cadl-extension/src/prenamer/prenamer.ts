@@ -246,6 +246,11 @@ export class PreNamer {
           this.setResponseHeaderNames(response);
         }
 
+        const convenienceApi = (operation as Operation).convenienceApi;
+        if (convenienceApi) {
+          this.namingService.setName(convenienceApi, this.format.operation, "", this.format.override);
+        }
+
         const p = operation.language.default.paging;
         if (p) {
           p.group = p.group ? this.format.operationGroup(p.group, true, this.format.override) : undefined;
@@ -260,6 +265,26 @@ export class PreNamer {
 
     // set a styled client name
     this.namingService.setName(this.codeModel, this.format.client, this.codeModel.info.title, this.format.override);
+
+    if (this.codeModel.clients) {
+      // client
+      for (const client of this.codeModel.clients) {
+        this.namingService.setName(client, this.format.client, "", this.format.override);
+
+        // operation group
+        for (const operationGroup of client.operationGroups) {
+          this.namingService.setNameAllowEmpty(
+            operationGroup,
+            this.format.operationGroup,
+            operationGroup.$key,
+            this.format.override,
+            {
+              removeDuplicates: false,
+            },
+          );
+        }
+      }
+    }
 
     // fix collisions from flattening on ObjectSchemas
     this.fixPropertyCollisions();

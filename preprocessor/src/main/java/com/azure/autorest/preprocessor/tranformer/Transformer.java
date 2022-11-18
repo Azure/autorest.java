@@ -125,7 +125,7 @@ public class Transformer {
         operation.setOperationGroup(operationGroup);
         renameMethod(operation);
         if (operation.getConvenienceApi() != null) {
-          operation.getConvenienceApi().setName(CodeNamer.getMethodName(operation.getConvenienceApi().getName()));
+          renameMethod(operation.getConvenienceApi());
         }
         for (Request request : operation.getRequests()) {
           Stream<Parameter> newParameters = Stream.concat(operation.getParameters().stream(), request.getParameters().stream());
