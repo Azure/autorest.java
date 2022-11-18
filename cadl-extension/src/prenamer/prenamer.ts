@@ -267,8 +267,22 @@ export class PreNamer {
     this.namingService.setName(this.codeModel, this.format.client, this.codeModel.info.title, this.format.override);
 
     if (this.codeModel.clients) {
+      // client
       for (const client of this.codeModel.clients) {
         this.namingService.setName(client, this.format.client, "", this.format.override);
+
+        // operation group
+        for (const operationGroup of client.operationGroups) {
+          this.namingService.setNameAllowEmpty(
+            operationGroup,
+            this.format.operationGroup,
+            operationGroup.$key,
+            this.format.override,
+            {
+              removeDuplicates: false,
+            },
+          );
+        }
       }
     }
 
