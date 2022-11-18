@@ -5,7 +5,6 @@ package com.azure.cadl.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.ServiceClientMapper;
