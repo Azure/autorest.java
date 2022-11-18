@@ -710,6 +710,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 if (throwsStatement != null) {
                     javadocComment.methodThrows("IllegalStateException", throwsStatement);
                 }
+
+                javadocComment.methodThrows("IOException", "If an error occurs while reading the " + modelName + ".");
             });
         }
 
