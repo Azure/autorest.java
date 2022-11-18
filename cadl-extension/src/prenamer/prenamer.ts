@@ -246,13 +246,9 @@ export class PreNamer {
           this.setResponseHeaderNames(response);
         }
 
-        if ((operation as Operation).convenienceApi) {
-          this.namingService.setName(
-            (operation as Operation).convenienceApi,
-            this.format.operation,
-            "",
-            this.format.override,
-          );
+        const convenienceApi = (operation as Operation).convenienceApi;
+        if (convenienceApi) {
+          this.namingService.setName(convenienceApi, this.format.operation, "", this.format.override);
         }
 
         const p = operation.language.default.paging;
