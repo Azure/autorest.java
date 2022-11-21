@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollerFlux;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
 import com.cadl.longrunning.models.ExportedResource;
@@ -231,7 +232,7 @@ public final class LongRunningAsyncClient {
         // Generated convenience method for statusMonitorWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return statusMonitorWithResponse(name, operationId, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(OperationStatusResource.class));
     }
 
@@ -253,7 +254,7 @@ public final class LongRunningAsyncClient {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(name, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 

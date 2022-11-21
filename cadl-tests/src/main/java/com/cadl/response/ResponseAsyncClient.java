@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.TypeReference;
 import com.cadl.response.implementation.ResponseClientImpl;
 import com.cadl.response.models.Resource;
@@ -145,7 +146,7 @@ public final class ResponseAsyncClient {
     public Mono<BinaryData> getBinary() {
         // Generated convenience method for getBinaryWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getBinaryWithResponse(requestOptions).map(Response::getValue);
+        return getBinaryWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -164,7 +165,7 @@ public final class ResponseAsyncClient {
         // Generated convenience method for getArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getArrayWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<List<Resource>>() {}));
     }
 
@@ -184,7 +185,7 @@ public final class ResponseAsyncClient {
         // Generated convenience method for createWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return createWithHeadersWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
@@ -203,6 +204,6 @@ public final class ResponseAsyncClient {
     public Mono<Void> deleteWithHeaders() {
         // Generated convenience method for deleteWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return deleteWithHeadersWithResponse(requestOptions).then();
+        return deleteWithHeadersWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 }

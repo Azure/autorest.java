@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.cadl.naming.implementation.NamingClientImpl;
 import com.cadl.naming.models.DataResponse;
 import reactor.core.publisher.Mono;
@@ -105,7 +106,7 @@ public final class NamingAsyncClient {
             requestOptions.setHeader("etag", etag);
         }
         return postWithResponse(name, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(DataResponse.class));
     }
 
@@ -130,7 +131,7 @@ public final class NamingAsyncClient {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(DataResponse.class));
     }
 }

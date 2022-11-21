@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.cadl.visibility.implementation.VisibilityWritesImpl;
 import com.cadl.visibility.models.Dog;
 import com.cadl.visibility.models.WriteDog;
@@ -89,7 +90,7 @@ public final class VisibilityWriteAsyncClient {
         // Generated convenience method for createWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(BinaryData.fromObject(dog), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 }

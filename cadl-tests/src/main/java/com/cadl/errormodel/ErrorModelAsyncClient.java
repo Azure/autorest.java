@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.cadl.errormodel.implementation.ErrorModelClientImpl;
 import com.cadl.errormodel.models.Diagnostic;
 import reactor.core.publisher.Mono;
@@ -75,7 +76,7 @@ public final class ErrorModelAsyncClient {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Diagnostic.class));
     }
 }
