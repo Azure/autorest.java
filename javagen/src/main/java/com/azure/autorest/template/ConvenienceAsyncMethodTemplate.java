@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
@@ -11,6 +12,19 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
+import com.azure.core.util.CoreUtils;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
+import reactor.core.publisher.Flux;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBase {
 
@@ -21,6 +35,30 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
 
     public static ConvenienceAsyncMethodTemplate getInstance() {
         return INSTANCE;
+    }
+
+    public void addImports(Set<String> imports, List<ConvenienceMethod> convenienceMethods) {
+        if (!CoreUtils.isNullOrEmpty(convenienceMethods)) {
+            JavaSettings settings = JavaSettings.getInstance();
+            convenienceMethods.stream().flatMap(m -> m.getConvenienceMethods().stream())
+                    .forEach(m -> m.addImportsTo(imports, false, settings));
+
+            ClassType.BinaryData.addImportsTo(imports, false);
+            ClassType.RequestOptions.addImportsTo(imports, false);
+            imports.add(Collectors.class.getName());
+            imports.add(Objects.class.getName());
+            imports.add(FluxUtil.class.getName());
+
+            // collection format
+            imports.add(JacksonAdapter.class.getName());
+            imports.add(CollectionFormat.class.getName());
+            imports.add(TypeReference.class.getName());
+
+            // pageable
+            imports.add(PagedResponse.class.getName());
+            imports.add(PagedResponseBase.class.getName());
+            imports.add(Flux.class.getName());
+        }
     }
 
     @Override
@@ -73,13 +111,8 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
             String methodName = protocolMethod.getName();
             methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));
         } else {
-            // return type is Mono<Void>, Response::getValue would be null
-            String returnExpression = responseBodyType.asNullable() == ClassType.Void
-                    ? "%1$s(%2$s).then()%3$s"   // return type is Mono<Void>, Response::getValue would be null
-                    : "%1$s(%2$s).map(Response::getValue)%3$s";
-
             methodBlock.methodReturn(
-                    String.format(returnExpression,
+                    String.format("%1$s(%2$s).flatMap(FluxUtil::toMono)%3$s",
                             getMethodName(protocolMethod),
                             invocationExpression,
                             returnTypeConversionExpression));
