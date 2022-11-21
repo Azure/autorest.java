@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.resiliency.servicedriven2.implementation.ServiceDriven2ClientImpl;
 import com.resiliency.servicedriven2.models.ContentTypePath;
 import com.resiliency.servicedriven2.models.Message;
@@ -273,7 +274,7 @@ public final class ServiceDriven2AsyncClient {
         if (newParameter != null) {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
-        return headNoParamsWithResponse(requestOptions).then();
+        return headNoParamsWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -292,7 +293,7 @@ public final class ServiceDriven2AsyncClient {
     public Mono<Void> headNoParams() {
         // Generated convenience method for headNoParamsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return headNoParamsWithResponse(requestOptions).then();
+        return headNoParamsWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -319,7 +320,7 @@ public final class ServiceDriven2AsyncClient {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
         return getRequiredWithResponse(parameter, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -343,7 +344,7 @@ public final class ServiceDriven2AsyncClient {
         // Generated convenience method for getRequiredWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getRequiredWithResponse(parameter, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -374,7 +375,7 @@ public final class ServiceDriven2AsyncClient {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -397,7 +398,7 @@ public final class ServiceDriven2AsyncClient {
         // Generated convenience method for putRequiredOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -420,7 +421,7 @@ public final class ServiceDriven2AsyncClient {
         // Generated convenience method for postParametersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postParametersWithResponse(contentTypePath.toString(), BinaryData.fromObject(parameter), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -440,7 +441,7 @@ public final class ServiceDriven2AsyncClient {
     public Mono<Void> deleteParameters() {
         // Generated convenience method for deleteParametersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return deleteParametersWithResponse(requestOptions).then();
+        return deleteParametersWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -470,7 +471,7 @@ public final class ServiceDriven2AsyncClient {
             requestOptions.addQueryParam("new_parameter", newParameter);
         }
         return getOptionalWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -492,7 +493,7 @@ public final class ServiceDriven2AsyncClient {
         // Generated convenience method for getOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -513,7 +514,7 @@ public final class ServiceDriven2AsyncClient {
         // Generated convenience method for getNewOperationWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getNewOperationWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 }

@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollerFlux;
 import com.cadl.specialheaders.implementation.SpecialHeadersClientImpl;
 import com.cadl.specialheaders.models.Resource;
@@ -235,7 +236,7 @@ public final class SpecialHeadersAsyncClient {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(name, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
@@ -258,7 +259,7 @@ public final class SpecialHeadersAsyncClient {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(name, BinaryData.fromObject(body), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
@@ -281,7 +282,7 @@ public final class SpecialHeadersAsyncClient {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, BinaryData.fromObject(body), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 }

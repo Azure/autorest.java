@@ -1,7 +1,7 @@
 emitters:
   "@azure-tools/cadl-java":
     partial-update: true
+    namer: true
     dev-options:
       generate-code-model: true
-      generate-models: true
       generate-convenience-apis: true

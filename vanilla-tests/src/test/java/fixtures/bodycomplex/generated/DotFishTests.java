@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public final class DotFishTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         DotFish model =
                 BinaryData.fromString("{\"fish.type\":\"DotFish\",\"species\":\"gejspodmailzyde\"}")
                         .toObject(DotFish.class);

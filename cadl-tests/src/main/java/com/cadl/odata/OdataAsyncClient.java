@@ -52,8 +52,8 @@ public final class OdataAsyncClient {
      *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The skip parameter</td></tr>
      *     <tr><td>top</td><td>Integer</td><td>No</td><td>The top parameter</td></tr>
      *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maxPageSize parameter</td></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>The select parameter. In the form of "," separated string.</td></tr>
-     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>The expand parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. In the form of "," separated string.</td></tr>
+     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -89,8 +89,8 @@ public final class OdataAsyncClient {
      * @param skip The skip parameter.
      * @param top The top parameter.
      * @param maxPageSize The maxPageSize parameter.
-     * @param select The select parameter.
-     * @param expand The expand parameter.
+     * @param select Array of Filter.
+     * @param expand Array of Filter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

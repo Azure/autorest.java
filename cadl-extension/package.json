@@ -44,9 +44,11 @@
   },
   "dependencies": {
     "@autorest/codemodel": "~4.19.2",
+    "lodash": "~4.17.20",
     "js-yaml": "~4.1.0"
   },
   "devDependencies": {
+    "@types/lodash": "~4.14.168",
     "@types/js-yaml": "~4.0.1",
     "@types/mocha": "~9.1.0",
     "@types/node": "~14.0.27",

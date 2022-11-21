@@ -420,9 +420,12 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         headerSchema.setProperties(new ArrayList<>());
         headerSchema.setStronglyTypedHeader(true);
         headerSchema.setUsage(new HashSet<>(Collections.singletonList(SchemaContext.OUTPUT)));
-        if (operation.getConvenienceApi() != null) {
-            headerSchema.getUsage().add(SchemaContext.CONVENIENCE_API);
-        }
+
+        // TODO (weidxu): at present we do not generate convenience API with Header model
+//        if (operation.getConvenienceApi() != null) {
+//            headerSchema.getUsage().add(SchemaContext.CONVENIENCE_API);
+//        }
+
         for (Map.Entry<String, Schema> header : headerMap.entrySet()) {
             Property property = new Property();
             property.setSerializedName(header.getKey());

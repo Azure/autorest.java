@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public final class DotFishMarketTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         DotFishMarket model =
                 BinaryData.fromString(
                                 "{\"sampleSalmon\":{\"fish.type\":\"DotSalmon\",\"location\":\"wyahuxinpmqnja\",\"iswild\":true,\"species\":\"jsprozvcpute\"},\"salmons\":[{\"fish.type\":\"DotSalmon\",\"location\":\"mfdatscmdvpj\",\"iswild\":true,\"species\":\"uuvmkjozkrwfnd\"}],\"sampleFish\":{\"fish.type\":\"DotFish\",\"species\":\"jpslwejd\"},\"fishes\":[{\"fish.type\":\"DotFish\",\"species\":\"yoqpsoaccta\"},{\"fish.type\":\"DotFish\",\"species\":\"kljla\"},{\"fish.type\":\"DotFish\",\"species\":\"cr\"}]}")

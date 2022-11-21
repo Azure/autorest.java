@@ -3,7 +3,6 @@
 
 package com.azure.cadl.util;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
@@ -16,13 +15,13 @@ public class ModelUtil {
 
     public static boolean isGeneratingModel(ClientModel model) {
         return model.getImplementationDetails() != null
-                && (model.getImplementationDetails().isConvenienceMethod() || JavaSettings.getInstance().isGenerateModels())
+                && model.getImplementationDetails().isConvenienceMethod()
                 && !(isModelUsedOnlyInException(model.getImplementationDetails()));
     }
 
     public static boolean isGeneratingModel(EnumType model) {
         return model.getImplementationDetails() != null
-                && (model.getImplementationDetails().isConvenienceMethod() || JavaSettings.getInstance().isGenerateModels())
+                && model.getImplementationDetails().isConvenienceMethod()
                 && !(isModelUsedOnlyInException(model.getImplementationDetails()));
     }
 

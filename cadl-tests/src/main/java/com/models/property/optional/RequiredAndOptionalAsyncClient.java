@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.models.property.optional.implementation.RequiredAndOptionalsImpl;
 import com.models.property.optional.models.RequiredAndOptionalProperty;
 import reactor.core.publisher.Mono;
@@ -154,7 +155,7 @@ public final class RequiredAndOptionalAsyncClient {
         // Generated convenience method for getAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getAllWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(RequiredAndOptionalProperty.class));
     }
 
@@ -174,7 +175,7 @@ public final class RequiredAndOptionalAsyncClient {
         // Generated convenience method for getRequiredOnlyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getRequiredOnlyWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(RequiredAndOptionalProperty.class));
     }
 
@@ -195,7 +196,7 @@ public final class RequiredAndOptionalAsyncClient {
     public Mono<Void> putAll(RequiredAndOptionalProperty body) {
         // Generated convenience method for putAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putAllWithResponse(BinaryData.fromObject(body), requestOptions).then();
+        return putAllWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -215,6 +216,6 @@ public final class RequiredAndOptionalAsyncClient {
     public Mono<Void> putRequiredOnly(RequiredAndOptionalProperty body) {
         // Generated convenience method for putRequiredOnlyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putRequiredOnlyWithResponse(BinaryData.fromObject(body), requestOptions).then();
+        return putRequiredOnlyWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 }

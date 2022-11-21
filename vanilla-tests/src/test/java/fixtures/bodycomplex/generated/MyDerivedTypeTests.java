@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public final class MyDerivedTypeTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         MyDerivedType model =
                 BinaryData.fromString(
                                 "{\"kind\":\"Kind1\",\"propD1\":\"awxklr\",\"propB1\":\"lwckbasyypnddhs\",\"helper\":{\"propBH1\":\"bacphejko\"}}")

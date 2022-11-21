@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.util.SchemaUtil;
 import org.slf4j.Logger;
 
 import java.lang.reflect.Field;
@@ -19,17 +20,11 @@ public class Utils {
     public final static String METHOD_POSTFIX_WITH_RESPONSE = "WithResponse";
 
     public static String getDefaultName(Metadata m) {
-        if (m.getLanguage() == null || m.getLanguage().getDefault() == null) {
-            return null;
-        }
-        return m.getLanguage().getDefault().getName();
+        return SchemaUtil.getDefaultName(m);
     }
 
     public static String getJavaName(Metadata m) {
-        if (m.getLanguage() == null || m.getLanguage().getJava() == null) {
-            return null;
-        }
-        return m.getLanguage().getJava().getName();
+        return SchemaUtil.getJavaName(m);
     }
 
     public static boolean nonFlattenedProperty(Property p) {

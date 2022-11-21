@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.models.inheritance.implementation.InheritanceClientImpl;
 import com.models.inheritance.models.Fish;
 import com.models.inheritance.models.Siamese;
@@ -294,7 +295,7 @@ public final class InheritanceAsyncClient {
     public Mono<Void> postValid(Siamese input) {
         // Generated convenience method for postValidWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postValidWithResponse(BinaryData.fromObject(input), requestOptions).then();
+        return postValidWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -313,7 +314,7 @@ public final class InheritanceAsyncClient {
         // Generated convenience method for getValidWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getValidWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Siamese.class));
     }
 
@@ -335,7 +336,7 @@ public final class InheritanceAsyncClient {
         // Generated convenience method for putValidWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putValidWithResponse(BinaryData.fromObject(input), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Siamese.class));
     }
 
@@ -356,7 +357,7 @@ public final class InheritanceAsyncClient {
         // Generated convenience method for getModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getModelWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Fish.class));
     }
 
@@ -377,7 +378,7 @@ public final class InheritanceAsyncClient {
     public Mono<Void> putModel(Fish input) {
         // Generated convenience method for putModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putModelWithResponse(BinaryData.fromObject(input), requestOptions).then();
+        return putModelWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -397,7 +398,7 @@ public final class InheritanceAsyncClient {
         // Generated convenience method for getRecursiveModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getRecursiveModelWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Fish.class));
     }
 
@@ -418,7 +419,7 @@ public final class InheritanceAsyncClient {
     public Mono<Void> putRecursiveModel(Fish input) {
         // Generated convenience method for putRecursiveModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putRecursiveModelWithResponse(BinaryData.fromObject(input), requestOptions).then();
+        return putRecursiveModelWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -438,7 +439,7 @@ public final class InheritanceAsyncClient {
         // Generated convenience method for getMissingDiscriminatorWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getMissingDiscriminatorWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Fish.class));
     }
 
@@ -459,7 +460,7 @@ public final class InheritanceAsyncClient {
         // Generated convenience method for getWrongDiscriminatorWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWrongDiscriminatorWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Fish.class));
     }
 }

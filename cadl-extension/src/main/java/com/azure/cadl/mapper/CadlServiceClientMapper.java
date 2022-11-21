@@ -5,7 +5,6 @@ package com.azure.cadl.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.ServiceClientMapper;
@@ -13,6 +12,7 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class CadlServiceClientMapper extends ServiceClientMapper {
     public ServiceClient map(Client client, CodeModel codeModel) {
         ServiceClient.Builder builder = createClientBuilder();
 
-        String baseName = getJavaName(client);
+        String baseName = SchemaUtil.getJavaName(client);
         String className = ClientModelUtil.getClientImplementClassName(baseName);
         String packageName = ClientModelUtil.getServiceClientPackageName(className);
         builder.interfaceName(baseName)
@@ -33,7 +33,7 @@ public class CadlServiceClientMapper extends ServiceClientMapper {
 
         Proxy proxy = null;
         OperationGroup clientOperationGroup = client.getOperationGroups().stream()
-                .filter(og -> CoreUtils.isNullOrEmpty(getJavaName(og)))
+                .filter(og -> CoreUtils.isNullOrEmpty(SchemaUtil.getJavaName(og)))
                 .findFirst().orElse(null);
         if (clientOperationGroup != null) {
             proxy = processClientOperations(builder, clientOperationGroup.getOperations(), baseName);
@@ -43,7 +43,7 @@ public class CadlServiceClientMapper extends ServiceClientMapper {
 
         List<MethodGroupClient> methodGroupClients = new ArrayList<>();
         client.getOperationGroups().stream()
-                .filter(og -> !CoreUtils.isNullOrEmpty(getJavaName(og)))
+                .filter(og -> !CoreUtils.isNullOrEmpty(SchemaUtil.getJavaName(og)))
                 .forEach(og -> methodGroupClients.add(Mappers.getMethodGroupMapper().map(og)));
         builder.methodGroupClients(methodGroupClients);
 
@@ -55,12 +55,5 @@ public class CadlServiceClientMapper extends ServiceClientMapper {
         processParametersAndConstructors(builder, codeModel, ClientModelUtil.getServiceVersionClassName(ClientModelUtil.getClientInterfaceName(codeModel)), proxy);
 
         return builder.build();
-    }
-
-    private static String getJavaName(Metadata m) {
-        if (m.getLanguage() == null || m.getLanguage().getJava() == null) {
-            return null;
-        }
-        return m.getLanguage().getJava().getName();
     }
 }

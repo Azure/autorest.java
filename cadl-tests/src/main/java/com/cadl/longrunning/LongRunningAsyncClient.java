@@ -15,10 +15,11 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollerFlux;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
 import com.cadl.longrunning.models.ExportedResource;
-import com.cadl.longrunning.models.OperationStatusResourceResource;
+import com.cadl.longrunning.models.OperationStatusResource;
 import com.cadl.longrunning.models.Resource;
 import reactor.core.publisher.Mono;
 
@@ -227,12 +228,12 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<OperationStatusResourceResource> statusMonitorConvenience(String name, String operationId) {
+    public Mono<OperationStatusResource> statusMonitorConvenience(String name, String operationId) {
         // Generated convenience method for statusMonitorWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return statusMonitorWithResponse(name, operationId, requestOptions)
-                .map(Response::getValue)
-                .map(protocolMethodData -> protocolMethodData.toObject(OperationStatusResourceResource.class));
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(OperationStatusResource.class));
     }
 
     /**
@@ -253,7 +254,7 @@ public final class LongRunningAsyncClient {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(name, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
@@ -271,7 +272,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationStatusResourceResource, Void> beginDelete(String name) {
+    public PollerFlux<OperationStatusResource, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginDeleteWithModelAsync(name, requestOptions);
@@ -292,7 +293,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationStatusResourceResource, Void> beginExport(String name, String projectFileVersion) {
+    public PollerFlux<OperationStatusResource, Void> beginExport(String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginExportWithModelAsync(name, projectFileVersion, requestOptions);
@@ -313,8 +314,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationStatusResourceResource, Void> beginImportx(
-            String name, ExportedResource exportedResource) {
+    public PollerFlux<OperationStatusResource, Void> beginImportx(String name, ExportedResource exportedResource) {
         // Generated convenience method for beginImportxWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginImportxWithModelAsync(name, BinaryData.fromObject(exportedResource), requestOptions);

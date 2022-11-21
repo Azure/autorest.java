@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.FluxUtil;
 import com.specialwords.implementation.OperationsImpl;
 import reactor.core.publisher.Mono;
 
@@ -63,6 +64,6 @@ public final class OperationAsyncClient {
     public Mono<Void> forMethod() {
         // Generated convenience method for forMethodWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return forMethodWithResponse(requestOptions).then();
+        return forMethodWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 }

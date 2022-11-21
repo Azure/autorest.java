@@ -639,7 +639,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The colorArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -650,7 +650,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param colorArray The colorArray parameter.
+     * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -678,7 +678,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The colorArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -689,7 +689,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param colorArray The colorArray parameter.
+     * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -710,7 +710,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The priorityArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Priority. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -721,7 +721,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param priorityArray The priorityArray parameter.
+     * @param priorityArray Array of Priority.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -749,7 +749,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The priorityArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Priority. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -760,7 +760,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param priorityArray The priorityArray parameter.
+     * @param priorityArray Array of Priority.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -781,7 +781,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The stringArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Response. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -792,7 +792,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param stringArray The stringArray parameter.
+     * @param stringArray Array of Response.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -820,7 +820,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The stringArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Response. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -831,7 +831,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param stringArray The stringArray parameter.
+     * @param stringArray Array of Response.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -852,7 +852,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -863,7 +863,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param intArray The intArray parameter.
+     * @param intArray Array of IntArray.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -889,7 +889,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -900,7 +900,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param intArray The intArray parameter.
+     * @param intArray Array of IntArray.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

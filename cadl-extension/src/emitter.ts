@@ -21,12 +21,13 @@ export interface EmitterOptions {
   "output-dir"?: string;
   "service-versions"?: Array<string>;
 
+  "namer"?: boolean;
+
   "dev-options"?: DevOptions;
 }
 
 export interface DevOptions {
   "generate-code-model"?: boolean;
-  "generate-models"?: boolean;
   "generate-convenience-apis"?: boolean;
 }
 
@@ -39,6 +40,8 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "partial-update": { type: "boolean", nullable: true },
     "output-dir": { type: "string", nullable: true },
     "service-versions": { type: "array", items: { type: "string" }, nullable: true },
+
+    "namer": { type: "boolean", nullable: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },
@@ -54,7 +57,7 @@ export const $lib = createCadlLibrary({
 });
 
 export async function $onEmit(program: Program, options: EmitterOptions) {
-  const builder = new CodeModelBuilder(program);
+  const builder = new CodeModelBuilder(program, options);
   const codeModel = builder.build();
 
   if (!program.compilerOptions.noEmit && !program.hasError()) {

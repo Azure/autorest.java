@@ -55,12 +55,20 @@ export interface Operation extends Aspect {
   operationLinks?: Record<string, OperationLink>;
 }
 
-export class ConvenienceApi {
-  constructor(name: string) {
-    this.name = name;
+export class ConvenienceApi extends Metadata {
+  constructor(name: string, initializer?: ConvenienceApi) {
+    super();
+    this.apply(
+      {
+        language: {
+          default: {
+            name: name,
+          },
+        },
+      },
+      initializer,
+    );
   }
-
-  name: string;
 }
 
 export class OperationLink {

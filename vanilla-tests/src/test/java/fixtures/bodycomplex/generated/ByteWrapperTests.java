@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 
 public final class ByteWrapperTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         ByteWrapper model = BinaryData.fromString("{}").toObject(ByteWrapper.class);
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         ByteWrapper model = new ByteWrapper();
         model = BinaryData.fromObject(model).toObject(ByteWrapper.class);
     }
