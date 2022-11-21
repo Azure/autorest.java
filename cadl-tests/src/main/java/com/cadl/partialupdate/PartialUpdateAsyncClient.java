@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.cadl.partialupdate.implementation.PartialUpdateClientImpl;
 import com.cadl.partialupdate.models.PartialUpdateModel;
 import reactor.core.publisher.Mono;
@@ -76,7 +77,7 @@ public final class PartialUpdateAsyncClient {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(PartialUpdateModel.class));
     }
 }

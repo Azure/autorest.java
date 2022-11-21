@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.models.property.types.implementation.NeversImpl;
 import reactor.core.publisher.Mono;
 
@@ -93,7 +94,7 @@ public final class NeverAsyncClient {
     public Mono<Object> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).map(Response::getValue);
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -113,6 +114,6 @@ public final class NeverAsyncClient {
     public Mono<Void> put(Object body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(BinaryData.fromObject(body), requestOptions).then();
+        return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 }

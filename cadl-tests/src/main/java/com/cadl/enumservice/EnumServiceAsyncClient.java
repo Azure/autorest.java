@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.enumservice.implementation.EnumServiceClientImpl;
@@ -352,7 +353,7 @@ public final class EnumServiceAsyncClient {
     public Mono<Color> getColor() {
         // Generated convenience method for getColorWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getColorWithResponse(requestOptions).map(Response::getValue).map(Color::fromString);
+        return getColorWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(Color::fromString);
     }
 
     /**
@@ -370,7 +371,7 @@ public final class EnumServiceAsyncClient {
     public Mono<ColorModel> getColorModel() {
         // Generated convenience method for getColorModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getColorModelWithResponse(requestOptions).map(Response::getValue).map(ColorModel::fromString);
+        return getColorModelWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(ColorModel::fromString);
     }
 
     /**
@@ -391,7 +392,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setColorModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setColorModelWithResponse(color.toString(), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
@@ -413,7 +414,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setPriorityWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
@@ -433,7 +434,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for getRunningOperationWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getRunningOperationWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
@@ -455,7 +456,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for getOperationWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getOperationWithResponse(state.toString(), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
@@ -488,7 +489,7 @@ public final class EnumServiceAsyncClient {
                                 .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.toList()),
                         requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
@@ -514,7 +515,7 @@ public final class EnumServiceAsyncClient {
                                 .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.toList()),
                         requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
@@ -549,7 +550,7 @@ public final class EnumServiceAsyncClient {
                                                 paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
                                 .collect(Collectors.toList()),
                         requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
@@ -577,7 +578,7 @@ public final class EnumServiceAsyncClient {
                                                 paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
                                 .collect(Collectors.toList()),
                         requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
@@ -607,7 +608,7 @@ public final class EnumServiceAsyncClient {
                             .collect(Collectors.joining(",")));
         }
         return setStringArrayWithResponse(stringArray, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
@@ -629,7 +630,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setStringArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setStringArrayWithResponse(stringArray, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
@@ -658,7 +659,7 @@ public final class EnumServiceAsyncClient {
                             .serializeIterable(intArrayOpt, CollectionFormat.CSV));
         }
         return setIntArrayWithResponse(intArray, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
@@ -680,7 +681,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntArrayWithResponse(intArray, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 }

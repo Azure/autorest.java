@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.FluxUtil;
 import com.cadl.server.implementation.ServerClientImpl;
 import reactor.core.publisher.Mono;
 
@@ -66,6 +67,6 @@ public final class ServerAsyncClient {
     public Mono<Void> status(int code) {
         // Generated convenience method for statusWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return statusWithResponse(code, requestOptions).then();
+        return statusWithResponse(code, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

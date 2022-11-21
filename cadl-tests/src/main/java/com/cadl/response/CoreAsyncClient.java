@@ -18,6 +18,7 @@ import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.cadl.response.implementation.CoreClientImpl;
 import com.cadl.response.models.Resource;
 import java.util.stream.Collectors;
@@ -171,7 +172,7 @@ public final class CoreAsyncClient {
         // Generated convenience method for createOrUpdateWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return createOrUpdateWithResponse(name, BinaryData.fromObject(resource), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
@@ -193,7 +194,7 @@ public final class CoreAsyncClient {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(name, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
@@ -214,7 +215,7 @@ public final class CoreAsyncClient {
     public Mono<Void> delete(String name) {
         // Generated convenience method for deleteWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return deleteWithResponse(name, requestOptions).then();
+        return deleteWithResponse(name, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**

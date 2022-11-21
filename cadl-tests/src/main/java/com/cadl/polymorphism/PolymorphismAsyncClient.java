@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.cadl.polymorphism.implementation.PolymorphismClientImpl;
 import com.cadl.polymorphism.models.BaseType;
 import com.cadl.polymorphism.models.Pet;
@@ -141,7 +142,7 @@ public final class PolymorphismAsyncClient {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Pet.class));
     }
 
@@ -163,7 +164,7 @@ public final class PolymorphismAsyncClient {
         // Generated convenience method for writeWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return writeWithResponse(BinaryData.fromObject(body), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(BaseType.class));
     }
 
@@ -185,7 +186,7 @@ public final class PolymorphismAsyncClient {
         // Generated convenience method for taskWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return taskWithResponse(BinaryData.fromObject(body), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Task.class));
     }
 }

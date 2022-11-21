@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.models.property.optional.implementation.BytesImpl;
 import com.models.property.optional.models.BytesProperty;
 import reactor.core.publisher.Mono;
@@ -152,7 +153,7 @@ public final class BytesAsyncClient {
         // Generated convenience method for getAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getAllWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(BytesProperty.class));
     }
 
@@ -172,7 +173,7 @@ public final class BytesAsyncClient {
         // Generated convenience method for getDefaultWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getDefaultWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(BytesProperty.class));
     }
 
@@ -194,7 +195,7 @@ public final class BytesAsyncClient {
     public Mono<Void> putAll(BytesProperty body) {
         // Generated convenience method for putAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putAllWithResponse(BinaryData.fromObject(body), requestOptions).then();
+        return putAllWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -215,6 +216,6 @@ public final class BytesAsyncClient {
     public Mono<Void> putDefault(BytesProperty body) {
         // Generated convenience method for putDefaultWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putDefaultWithResponse(BinaryData.fromObject(body), requestOptions).then();
+        return putDefaultWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 }

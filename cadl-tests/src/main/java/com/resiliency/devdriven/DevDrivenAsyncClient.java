@@ -18,6 +18,7 @@ import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.resiliency.devdriven.implementation.DevDrivenClientImpl;
 import com.resiliency.devdriven.models.Input;
 import com.resiliency.devdriven.models.LroProduct;
@@ -186,7 +187,7 @@ public final class DevDrivenAsyncClient {
         // Generated convenience method for getModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getModelWithResponse(mode.toString(), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Product.class));
     }
 
@@ -211,7 +212,7 @@ public final class DevDrivenAsyncClient {
         // Generated convenience method for postModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postModelWithResponse(mode.toString(), BinaryData.fromObject(input), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Product.class));
     }
 
@@ -275,7 +276,7 @@ public final class DevDrivenAsyncClient {
         // Generated convenience method for lroWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return lroWithResponse(mode.toString(), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(LroProduct.class));
     }
 }

@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.resiliency.servicedriven1.implementation.ServiceDriven1ClientImpl;
 import com.resiliency.servicedriven1.models.Message;
 import com.resiliency.servicedriven1.models.PostInput;
@@ -201,7 +202,7 @@ public final class ServiceDriven1AsyncClient {
     public Mono<Void> headNoParams() {
         // Generated convenience method for headNoParamsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return headNoParamsWithResponse(requestOptions).then();
+        return headNoParamsWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -224,7 +225,7 @@ public final class ServiceDriven1AsyncClient {
         // Generated convenience method for getRequiredWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getRequiredWithResponse(parameter, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -251,7 +252,7 @@ public final class ServiceDriven1AsyncClient {
             requestOptions.addQueryParam("optionalParam", optionalParam);
         }
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -274,7 +275,7 @@ public final class ServiceDriven1AsyncClient {
         // Generated convenience method for putRequiredOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -296,7 +297,7 @@ public final class ServiceDriven1AsyncClient {
         // Generated convenience method for postParametersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postParametersWithResponse(BinaryData.fromObject(parameter), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -323,7 +324,7 @@ public final class ServiceDriven1AsyncClient {
             requestOptions.addQueryParam("optionalParam", optionalParam);
         }
         return getOptionalWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 
@@ -345,7 +346,7 @@ public final class ServiceDriven1AsyncClient {
         // Generated convenience method for getOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Message.class));
     }
 }

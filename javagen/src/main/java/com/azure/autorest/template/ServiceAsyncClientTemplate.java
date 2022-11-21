@@ -19,17 +19,9 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
 import com.azure.core.client.traits.EndpointTrait;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.util.CoreUtils;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.TypeReference;
-import reactor.core.publisher.Flux;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -71,7 +63,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     imports.add(builderPackageName + "." + builderClassName);
     addServiceClientAnnotationImports(imports);
 
-    addImportsToConvenienceMethods(imports, asyncClient.getConvenienceMethods());
+    Templates.getConvenienceAsyncMethodTemplate().addImports(imports, asyncClient.getConvenienceMethods());
 
     javaFile.declareImport(imports);
     javaFile.javadocComment(comment ->
@@ -115,8 +107,8 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             .filter(clientMethod -> !clientMethod.isImplementationOnly())
             .filter(clientMethod -> clientMethod.getType().name().contains("Async"))
             .filter(clientMethod -> !clientMethod.getMethodParameters()
-                    .stream()
-                    .anyMatch(methodParam -> methodParam.getWireType().contains(ClassType.Context)))
+                .stream()
+                .anyMatch(methodParam -> methodParam.getWireType().contains(ClassType.Context)))
             .forEach(clientMethod -> {
               Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
             });
@@ -126,8 +118,8 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             .filter(clientMethod -> !clientMethod.isImplementationOnly())
             .filter(clientMethod -> clientMethod.getType().name().contains("Async"))
             .filter(clientMethod -> !clientMethod.getMethodParameters()
-                    .stream()
-                    .anyMatch(methodParam -> methodParam.getWireType().contains(ClassType.Context)))
+                .stream()
+                .anyMatch(methodParam -> methodParam.getWireType().contains(ClassType.Context)))
             .forEach(clientMethod -> {
               Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
             });
@@ -161,18 +153,18 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     // expose "getEndpoint" as public, as companion to "sendRequest" method
     if (JavaSettings.getInstance().isGenerateSendRequestMethod()) {
       ClientMethod referenceClientMethod = !CoreUtils.isNullOrEmpty(serviceClient.getClientMethods())
-              ? serviceClient.getClientMethods().iterator().next()
-              : serviceClient.getMethodGroupClients().stream().flatMap(mg -> mg.getClientMethods().stream()).findFirst().orElse(null);
+          ? serviceClient.getClientMethods().iterator().next()
+          : serviceClient.getMethodGroupClients().stream().flatMap(mg -> mg.getClientMethods().stream()).findFirst().orElse(null);
 
       if (referenceClientMethod != null) {
         final String baseUrl = serviceClient.getBaseUrl();
         final String endpointReplacementExpr = referenceClientMethod.getProxyMethod().getParameters().stream()
-                .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
-                .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
-                .map(p -> String.format(".replace(%1$s, %2$s)",
-                        ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
-                        p.getParameterReference()
-                )).collect(Collectors.joining());
+            .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
+            .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
+            .map(p -> String.format(".replace(%1$s, %2$s)",
+                ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
+                p.getParameterReference()
+            )).collect(Collectors.joining());
         final String endpointExpr = ClassType.String.defaultValueExpression(baseUrl) + endpointReplacementExpr;
 
         clientBuilder.getBuilderTraits().stream()
@@ -191,27 +183,6 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             });
       }
     }
-  }
-
-  private static void addImportsToConvenienceMethods(Set<String> imports, List<ConvenienceMethod> convenienceMethods) {
-    JavaSettings settings = JavaSettings.getInstance();
-    convenienceMethods.stream().flatMap(m -> m.getConvenienceMethods().stream())
-        .forEach(m -> m.addImportsTo(imports, false, settings));
-
-    ClassType.BinaryData.addImportsTo(imports, false);
-    ClassType.RequestOptions.addImportsTo(imports, false);
-    imports.add(Collectors.class.getName());
-    imports.add(Objects.class.getName());
-
-    // collection format
-    imports.add(JacksonAdapter.class.getName());
-    imports.add(CollectionFormat.class.getName());
-    imports.add(TypeReference.class.getName());
-
-    // pageable
-    imports.add(PagedResponse.class.getName());
-    imports.add(PagedResponseBase.class.getName());
-    imports.add(Flux.class.getName());
   }
 
   private static void writeConvenienceMethods(ConvenienceMethod convenienceMethod, JavaClass classBlock) {
