@@ -333,4 +333,21 @@ public class PartialUpdateHandlerTest {
         assertEquals("exports com.azure.communication.phonenumbersdemo.models;", compilationUnit.getModule().get().getDirectives().get(2).asModuleExportsDirective().getTokenRange().get().toString());
     }
 
+    @Test
+    public void testModuleInfoFile_WhenGeneratedFileHasConvenienceMethodHasSameNameWithExistingGeneratedMethod_ThenShouldIncludeThisConvenienceMethod() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClient.java").toURI())));
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
+
+        String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+
+        CompilationUnit compilationUnit = parse(output);
+        assertEquals(1, compilationUnit.getTypes().size());
+        assertEquals(4, compilationUnit.getTypes().get(0).getMembers().size());
+        assertEquals(1, compilationUnit.getTypes().get(0).getConstructors().size());
+        assertEquals(1, compilationUnit.getTypes().get(0).getFields().size());
+        assertEquals(2, compilationUnit.getTypes().get(0).getMethods().size());
+
+        assertEquals(2, compilationUnit.getTypes().get(0).getMethodsByName("list").size());
+    }
+
 }
