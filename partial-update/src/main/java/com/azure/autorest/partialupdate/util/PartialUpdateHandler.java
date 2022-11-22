@@ -132,13 +132,16 @@ public class PartialUpdateHandler {
 
         // 5. add remaining members in generated file to the new members list
         for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
-            boolean hasMembersWithSameName = false;
+            boolean needToAddToUpdateMembersList = true;
             for (BodyDeclaration<?> existingMember : updatedMembersList) {
-                if (isMembersWithSameName(existingMember, generatedMember)) {
-                    hasMembersWithSameName = true;
+                // If there is an existing member who has the same name as the generated member and is manually written,
+                // Or if the generated method and the existing method have the same method signature.
+                // Then we don't put the generated member to the updatedMembersList
+                if (isMembersWithSameName(existingMember, generatedMember) && !hasGeneratedAnnotation(existingMember) || isMembersCorresponding(existingMember, generatedMember)) {
+                    needToAddToUpdateMembersList = false;
                 }
             }
-            if (!hasMembersWithSameName) {
+            if (needToAddToUpdateMembersList) {
                 updatedMembersList.add(generatedMember);
             }
         }
