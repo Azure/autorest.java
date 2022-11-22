@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public final class CatTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         Cat model =
                 BinaryData.fromString(
                                 "{\"color\":\"jbpzvgnwzsymg\",\"hates\":[{\"food\":\"cyzkohdbihanuf\",\"id\":808084535,\"name\":\"jysagith\"}],\"id\":731883185,\"name\":\"bifpikxwczb\"}")
@@ -27,7 +27,7 @@ public final class CatTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         Cat model =
                 new Cat()
                         .setId(731883185)

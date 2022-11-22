@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous OAuth2Client type. */
@@ -79,7 +80,7 @@ public final class OAuth2AsyncClient {
     public Mono<Void> valid() {
         // Generated convenience method for validWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return validWithResponse(requestOptions).then();
+        return validWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -97,6 +98,6 @@ public final class OAuth2AsyncClient {
     public Mono<Void> invalid() {
         // Generated convenience method for invalidWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return invalidWithResponse(requestOptions).then();
+        return invalidWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 }

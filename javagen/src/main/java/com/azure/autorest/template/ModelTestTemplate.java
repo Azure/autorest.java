@@ -64,7 +64,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.publicFinalClass(model.getName() + "Tests", classBlock -> {
             // testDeserialize
             classBlock.annotation("Test");
-            classBlock.publicMethod("void testDeserialize()", methodBlock -> {
+            classBlock.publicMethod("void testDeserialize() throws Exception", methodBlock -> {
                 methodBlock.line(String.format("%1$s model = BinaryData.fromString(%2$s).toObject(%1$s.class);",
                         model.getName(), ClassType.String.defaultValueExpression(jsonStr)));
                 writer.writeAssertion(methodBlock);
@@ -73,10 +73,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (!immutableOutputModel) {
                 // testSerialize
                 classBlock.annotation("Test");
-                String methodSignature = "void testSerialize()";
-                if (writer.getHelperFeatures().contains(ExampleHelperFeature.ThrowsIOException)) {
-                    methodSignature += " throws IOException";
-                }
+                String methodSignature = "void testSerialize() throws Exception";
                 classBlock.publicMethod(methodSignature, methodBlock -> {
                     methodBlock.line(String.format("%1$s model = %2$s;",
                             model.getName(), writer.getModelInitializationCode()));

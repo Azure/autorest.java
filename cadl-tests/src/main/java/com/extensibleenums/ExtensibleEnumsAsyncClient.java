@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.extensibleenums.implementation.ExtensibleEnumsClientImpl;
 import com.extensibleenums.models.DaysOfWeekExtensibleEnum;
 import reactor.core.publisher.Mono;
@@ -140,7 +141,7 @@ public final class ExtensibleEnumsAsyncClient {
         // Generated convenience method for getKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getKnownValueWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(DaysOfWeekExtensibleEnum::fromString);
     }
 
@@ -160,7 +161,7 @@ public final class ExtensibleEnumsAsyncClient {
         // Generated convenience method for getUnknownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getUnknownValueWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(DaysOfWeekExtensibleEnum::fromString);
     }
 
@@ -181,7 +182,7 @@ public final class ExtensibleEnumsAsyncClient {
     public Mono<Void> putKnownValue(DaysOfWeekExtensibleEnum body) {
         // Generated convenience method for putKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putKnownValueWithResponse(BinaryData.fromObject(body), requestOptions).then();
+        return putKnownValueWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -201,6 +202,6 @@ public final class ExtensibleEnumsAsyncClient {
     public Mono<Void> putUnknownValue(DaysOfWeekExtensibleEnum body) {
         // Generated convenience method for putUnknownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putUnknownValueWithResponse(BinaryData.fromObject(body), requestOptions).then();
+        return putUnknownValueWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 }

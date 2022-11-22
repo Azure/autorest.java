@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.FluxUtil;
 import com.specialwords.implementation.ParametersImpl;
 import reactor.core.publisher.Mono;
 
@@ -83,7 +84,7 @@ public final class ParameterAsyncClient {
     public Mono<Void> getWithIf(String ifParameter) {
         // Generated convenience method for getWithIfWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithIfWithResponse(ifParameter, requestOptions).then();
+        return getWithIfWithResponse(ifParameter, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -103,6 +104,6 @@ public final class ParameterAsyncClient {
     public Mono<Void> getWithFilter(String filter) {
         // Generated convenience method for getWithFilterWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithFilterWithResponse(filter, requestOptions).then();
+        return getWithFilterWithResponse(filter, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

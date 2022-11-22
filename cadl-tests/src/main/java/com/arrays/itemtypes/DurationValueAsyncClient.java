@@ -16,6 +16,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.TypeReference;
 import java.time.Duration;
 import java.util.List;
@@ -52,7 +53,7 @@ public final class DurationValueAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return array of Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -71,7 +72,7 @@ public final class DurationValueAsyncClient {
      * ]
      * }</pre>
      *
-     * @param body The body parameter.
+     * @param body Array of Response.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -93,7 +94,7 @@ public final class DurationValueAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return array of Response on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -101,14 +102,14 @@ public final class DurationValueAsyncClient {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<List<Duration>>() {}));
     }
 
     /**
      * The put operation.
      *
-     * @param body The body parameter.
+     * @param body Array of Response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -122,6 +123,6 @@ public final class DurationValueAsyncClient {
     public Mono<Void> put(List<Duration> body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(BinaryData.fromObject(body), requestOptions).then();
+        return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 }

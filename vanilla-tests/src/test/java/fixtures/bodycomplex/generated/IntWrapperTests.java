@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public final class IntWrapperTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         IntWrapper model =
                 BinaryData.fromString("{\"field1\":318397575,\"field2\":1830732530}").toObject(IntWrapper.class);
         Assertions.assertEquals(318397575, model.getField1());
@@ -19,7 +19,7 @@ public final class IntWrapperTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         IntWrapper model = new IntWrapper().setField1(318397575).setField2(1830732530);
         model = BinaryData.fromObject(model).toObject(IntWrapper.class);
         Assertions.assertEquals(318397575, model.getField1());

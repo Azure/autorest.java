@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.models.property.types.implementation.CollectionsIntsImpl;
 import com.models.property.types.models.CollectionsIntProperty;
 import reactor.core.publisher.Mono;
@@ -104,7 +105,7 @@ public final class CollectionsIntAsyncClient {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(CollectionsIntProperty.class));
     }
 
@@ -125,6 +126,6 @@ public final class CollectionsIntAsyncClient {
     public Mono<Void> put(CollectionsIntProperty body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(BinaryData.fromObject(body), requestOptions).then();
+        return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 }

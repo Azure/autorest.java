@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.readonlyproperties.implementation.ReadonlyPropertiesClientImpl;
 import com.readonlyproperties.models.OutputModel;
 import com.readonlyproperties.models.RoundTripModel;
@@ -168,7 +169,7 @@ public final class ReadonlyPropertiesAsyncClient {
         // Generated convenience method for getOptionalPropertyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getOptionalPropertyModelWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
     }
 
@@ -190,7 +191,7 @@ public final class ReadonlyPropertiesAsyncClient {
         // Generated convenience method for setOptionalPropertyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setOptionalPropertyModelWithResponse(BinaryData.fromObject(input), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(RoundTripModel.class));
     }
 }

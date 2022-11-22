@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 public final class GoblinsharkTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         Goblinshark model =
                 BinaryData.fromString(
                                 "{\"fishtype\":\"goblin\",\"jawsize\":1757775346,\"color\":\"gray\",\"age\":968287955,\"birthday\":\"2021-07-01T17:17:50Z\",\"species\":\"appd\",\"length\":56.1473,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"wrwjfeu\",\"length\":93.839714,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"je\",\"length\":87.67903,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"dhugjzzdatqxhocd\",\"length\":25.122803,\"siblings\":[]}]}")
@@ -31,7 +31,7 @@ public final class GoblinsharkTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         Goblinshark model =
                 new Goblinshark(56.1473f, OffsetDateTime.parse("2021-07-01T17:17:50Z"))
                         .setSpecies("appd")

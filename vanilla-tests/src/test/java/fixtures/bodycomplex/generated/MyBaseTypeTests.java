@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public final class MyBaseTypeTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         MyBaseType model =
                 BinaryData.fromString(
                                 "{\"kind\":\"MyBaseType\",\"propB1\":\"jlxofpdvhpfxxyp\",\"helper\":{\"propBH1\":\"i\"}}")

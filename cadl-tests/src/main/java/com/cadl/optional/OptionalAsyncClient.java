@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.cadl.optional.implementation.OptionalClientImpl;
 import com.cadl.optional.models.AllPropertiesOptional;
 import com.cadl.optional.models.Optional;
@@ -208,7 +209,7 @@ public final class OptionalAsyncClient {
                         stringRequired,
                         stringRequiredNullable,
                         requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(AllPropertiesOptional.class));
     }
 
@@ -245,7 +246,7 @@ public final class OptionalAsyncClient {
                         stringRequired,
                         stringRequiredNullable,
                         requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(AllPropertiesOptional.class));
     }
 }

@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.models.usage.implementation.UsageClientImpl;
 import com.models.usage.models.InputOutputRecord;
 import com.models.usage.models.InputRecord;
@@ -137,7 +138,7 @@ public final class UsageAsyncClient {
     public Mono<Void> input(InputRecord input) {
         // Generated convenience method for inputWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return inputWithResponse(BinaryData.fromObject(input), requestOptions).then();
+        return inputWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -156,7 +157,7 @@ public final class UsageAsyncClient {
         // Generated convenience method for outputWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return outputWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(OutputRecord.class));
     }
 
@@ -178,7 +179,7 @@ public final class UsageAsyncClient {
         // Generated convenience method for inputAndOutputWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return inputAndOutputWithResponse(BinaryData.fromObject(body), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(InputOutputRecord.class));
     }
 }

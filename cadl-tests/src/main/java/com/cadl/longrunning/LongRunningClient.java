@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.longrunning.models.ExportedResource;
-import com.cadl.longrunning.models.OperationStatusResourceResource;
+import com.cadl.longrunning.models.OperationStatusResource;
 import com.cadl.longrunning.models.Resource;
 
 /** Initializes a new instance of the synchronous LongRunningClient type. */
@@ -224,12 +224,12 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public OperationStatusResourceResource statusMonitorConvenience(String name, String operationId) {
+    public OperationStatusResource statusMonitorConvenience(String name, String operationId) {
         // Generated convenience method for statusMonitorWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return statusMonitorWithResponse(name, operationId, requestOptions)
                 .getValue()
-                .toObject(OperationStatusResourceResource.class);
+                .toObject(OperationStatusResource.class);
     }
 
     /**
@@ -266,7 +266,7 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationStatusResourceResource, Void> beginDelete(String name) {
+    public SyncPoller<OperationStatusResource, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
         return client.beginDelete(name).getSyncPoller();
     }
@@ -286,7 +286,7 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationStatusResourceResource, Void> beginExport(String name, String projectFileVersion) {
+    public SyncPoller<OperationStatusResource, Void> beginExport(String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         return client.beginExport(name, projectFileVersion).getSyncPoller();
     }
@@ -306,8 +306,7 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationStatusResourceResource, Void> beginImportx(
-            String name, ExportedResource exportedResource) {
+    public SyncPoller<OperationStatusResource, Void> beginImportx(String name, ExportedResource exportedResource) {
         // Generated convenience method for beginImportxWithModel
         return client.beginImportx(name, exportedResource).getSyncPoller();
     }

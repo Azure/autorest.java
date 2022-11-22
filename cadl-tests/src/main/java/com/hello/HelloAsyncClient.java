@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.hello.implementation.HelloClientImpl;
 import reactor.core.publisher.Mono;
 
@@ -71,7 +72,7 @@ public final class HelloAsyncClient {
         // Generated convenience method for worldWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return worldWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 }

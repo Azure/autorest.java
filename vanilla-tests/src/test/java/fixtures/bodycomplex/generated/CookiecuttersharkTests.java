@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 public final class CookiecuttersharkTests {
     @Test
-    public void testDeserialize() {
+    public void testDeserialize() throws Exception {
         Cookiecuttershark model =
                 BinaryData.fromString(
                                 "{\"fishtype\":\"cookiecuttershark\",\"age\":885062254,\"birthday\":\"2021-05-27T22:50:20Z\",\"species\":\"uticndvkaozwyif\",\"length\":25.075048,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"urokft\",\"length\":81.88607,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"iwpwcuk\",\"length\":48.25244,\"siblings\":[]}]}")
@@ -28,7 +28,7 @@ public final class CookiecuttersharkTests {
     }
 
     @Test
-    public void testSerialize() {
+    public void testSerialize() throws Exception {
         Cookiecuttershark model =
                 new Cookiecuttershark(25.075048f, OffsetDateTime.parse("2021-05-27T22:50:20Z"))
                         .setSpecies("uticndvkaozwyif")

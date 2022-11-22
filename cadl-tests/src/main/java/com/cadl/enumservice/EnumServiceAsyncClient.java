@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.enumservice.implementation.EnumServiceClientImpl;
@@ -210,7 +211,7 @@ public final class EnumServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The colorArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -221,7 +222,7 @@ public final class EnumServiceAsyncClient {
      * String
      * }</pre>
      *
-     * @param colorArray The colorArray parameter.
+     * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -244,7 +245,7 @@ public final class EnumServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The priorityArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Priority. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -255,7 +256,7 @@ public final class EnumServiceAsyncClient {
      * String
      * }</pre>
      *
-     * @param priorityArray The priorityArray parameter.
+     * @param priorityArray Array of Priority.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -278,7 +279,7 @@ public final class EnumServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The stringArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Response. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -289,7 +290,7 @@ public final class EnumServiceAsyncClient {
      * String
      * }</pre>
      *
-     * @param stringArray The stringArray parameter.
+     * @param stringArray Array of Response.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -312,7 +313,7 @@ public final class EnumServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -323,7 +324,7 @@ public final class EnumServiceAsyncClient {
      * String
      * }</pre>
      *
-     * @param intArray The intArray parameter.
+     * @param intArray Array of IntArray.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -352,7 +353,7 @@ public final class EnumServiceAsyncClient {
     public Mono<Color> getColor() {
         // Generated convenience method for getColorWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getColorWithResponse(requestOptions).map(Response::getValue).map(Color::fromString);
+        return getColorWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(Color::fromString);
     }
 
     /**
@@ -370,7 +371,7 @@ public final class EnumServiceAsyncClient {
     public Mono<ColorModel> getColorModel() {
         // Generated convenience method for getColorModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getColorModelWithResponse(requestOptions).map(Response::getValue).map(ColorModel::fromString);
+        return getColorModelWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(ColorModel::fromString);
     }
 
     /**
@@ -391,7 +392,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setColorModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setColorModelWithResponse(color.toString(), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
@@ -413,7 +414,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setPriorityWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
@@ -433,7 +434,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for getRunningOperationWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getRunningOperationWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
@@ -455,15 +456,15 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for getOperationWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getOperationWithResponse(state.toString(), requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
     /**
      * The setStringEnumArray operation.
      *
-     * @param colorArray The colorArray parameter.
-     * @param colorArrayOpt The colorArrayOpt parameter.
+     * @param colorArray Array of ColorModel.
+     * @param colorArrayOpt Array of ColorModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -488,14 +489,14 @@ public final class EnumServiceAsyncClient {
                                 .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.toList()),
                         requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
      * The setStringEnumArray operation.
      *
-     * @param colorArray The colorArray parameter.
+     * @param colorArray Array of ColorModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -514,15 +515,15 @@ public final class EnumServiceAsyncClient {
                                 .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.toList()),
                         requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
      * The setIntEnumArray operation.
      *
-     * @param priorityArray The priorityArray parameter.
-     * @param priorityArrayOpt The priorityArrayOpt parameter.
+     * @param priorityArray Array of Priority.
+     * @param priorityArrayOpt Array of Priority.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -549,14 +550,14 @@ public final class EnumServiceAsyncClient {
                                                 paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
                                 .collect(Collectors.toList()),
                         requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
      * The setIntEnumArray operation.
      *
-     * @param priorityArray The priorityArray parameter.
+     * @param priorityArray Array of Priority.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -577,15 +578,15 @@ public final class EnumServiceAsyncClient {
                                                 paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
                                 .collect(Collectors.toList()),
                         requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
      * The setStringArray operation.
      *
-     * @param stringArray The stringArray parameter.
-     * @param stringArrayOpt The stringArrayOpt parameter.
+     * @param stringArray Array of Response.
+     * @param stringArrayOpt Array of Response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -607,14 +608,14 @@ public final class EnumServiceAsyncClient {
                             .collect(Collectors.joining(",")));
         }
         return setStringArrayWithResponse(stringArray, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
      * The setStringArray operation.
      *
-     * @param stringArray The stringArray parameter.
+     * @param stringArray Array of Response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -629,15 +630,15 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setStringArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setStringArrayWithResponse(stringArray, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
      * The setIntArray operation.
      *
-     * @param intArray The intArray parameter.
-     * @param intArrayOpt The intArrayOpt parameter.
+     * @param intArray Array of IntArray.
+     * @param intArrayOpt Array of IntArray.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -658,14 +659,14 @@ public final class EnumServiceAsyncClient {
                             .serializeIterable(intArrayOpt, CollectionFormat.CSV));
         }
         return setIntArrayWithResponse(intArray, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
      * The setIntArray operation.
      *
-     * @param intArray The intArray parameter.
+     * @param intArray Array of IntArray.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -680,7 +681,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntArrayWithResponse(intArray, requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 }

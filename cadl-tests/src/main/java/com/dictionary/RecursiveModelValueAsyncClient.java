@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.TypeReference;
 import com.dictionary.implementation.RecursiveModelValuesImpl;
 import com.dictionary.models.InnerModel;
@@ -57,7 +58,7 @@ public final class RecursiveModelValueAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return dictionary of InnerModel along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -81,7 +82,7 @@ public final class RecursiveModelValueAsyncClient {
      * }
      * }</pre>
      *
-     * @param body The body parameter.
+     * @param body Dictionary of InnerModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -103,7 +104,7 @@ public final class RecursiveModelValueAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return dictionary of InnerModel on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -111,7 +112,7 @@ public final class RecursiveModelValueAsyncClient {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
-                .map(Response::getValue)
+                .flatMap(FluxUtil::toMono)
                 .map(
                         protocolMethodData ->
                                 protocolMethodData.toObject(new TypeReference<Map<String, InnerModel>>() {}));
@@ -120,7 +121,7 @@ public final class RecursiveModelValueAsyncClient {
     /**
      * The put operation.
      *
-     * @param body The body parameter.
+     * @param body Dictionary of InnerModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -134,6 +135,6 @@ public final class RecursiveModelValueAsyncClient {
     public Mono<Void> put(Map<String, InnerModel> body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(BinaryData.fromObject(body), requestOptions).then();
+        return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 }
