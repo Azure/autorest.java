@@ -942,8 +942,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String wireTypeDeserialization = null;
         if (wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
             wireTypeDeserialization = wireType + ".fromJson(" + readerName + ")";
-        } else if (wireType.jsonDeserializationMethod() != null) {
-            wireTypeDeserialization = readerName + "." + wireType.jsonDeserializationMethod();
+        } else {
+            wireTypeDeserialization = wireType.jsonDeserializationMethod(readerName);
         }
 
         return (wireType != clientType && wireTypeDeserialization != null)

@@ -192,8 +192,12 @@ public class PrimitiveType implements IType {
     }
 
     @Override
-    public String jsonDeserializationMethod() {
-        return jsonDeserializationMethod;
+    public String jsonDeserializationMethod(String jsonReaderName) {
+        if (jsonDeserializationMethod == null) {
+            return null;
+        }
+
+        return jsonReaderName + "." + jsonDeserializationMethod;
     }
 
     @Override

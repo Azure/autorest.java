@@ -64,8 +64,6 @@ public final class ClientModelPropertiesManager {
      * @param model The {@link ClientModel}.
      */
     public ClientModelPropertiesManager(ClientModel model, JavaSettings settings) {
-        boolean requiredFieldsAsConstructorArgs = settings.isRequiredFieldsAsConstructorArgs();
-
         // The reader name variable needs to be mutable as it may match a property name in the class.
         Set<String> possibleReaderFieldNameVariableNames = new LinkedHashSet<>(Arrays.asList(
             "fieldName", "jsonFieldName", "deserializationFieldName"));
@@ -94,7 +92,7 @@ public final class ClientModelPropertiesManager {
                 hasRequiredProperties = true;
                 superRequiredProperties.add(property);
 
-                if (requiredFieldsAsConstructorArgs && !property.isReadOnly()) {
+                if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
                     superConstructorProperties.add(property);
                 } else {
                     superReadOnlyProperties.add(property);
@@ -131,7 +129,7 @@ public final class ClientModelPropertiesManager {
                 hasRequiredProperties = true;
                 requiredProperties.add(property);
 
-                if (requiredFieldsAsConstructorArgs && !property.isReadOnly()) {
+                if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
                     constructorProperties.add(property);
                 } else {
                     readOnlyProperties.add(property);

@@ -515,8 +515,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addFieldAnnotations(property, classBlock, settings);
 
-            if ((property.isRequired() && settings.isRequiredFieldsAsConstructorArgs() && !property.isReadOnly()
-                && settings.isStreamStyleSerialization()) || property.isPolymorphicDiscriminator()) {
+            if ((ClientModelUtil.includePropertyInConstructor(property, settings) && settings.isStreamStyleSerialization())
+                || property.isPolymorphicDiscriminator()) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
             } else {
                 classBlock.privateMemberVariable(fieldSignature);
@@ -623,7 +623,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         for (ClientModelProperty property : model.getProperties()) {
             // Property isn't required and won't be bucketed into either constant or required properties.
-            if (!property.isRequired() || property.isReadOnly()) {
+            if (!property.isConstant() && !ClientModelUtil.includePropertyInConstructor(property, settings)) {
                 continue;
             }
 

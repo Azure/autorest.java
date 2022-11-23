@@ -3,6 +3,7 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.json.JsonReader;
 import com.azure.json.JsonWriter;
 import com.azure.xml.XmlWriter;
 
@@ -88,9 +89,10 @@ public interface IType {
      * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a JSON
      * deserialization method and support needs to be added.
      *
+     * @param jsonReaderName The name of the {@link JsonReader} performing deserialization.
      * @return The JSON deserialization method, or null i it isn't supported directly.
      */
-    String jsonDeserializationMethod();
+    String jsonDeserializationMethod(String jsonReaderName);
 
     /**
      * Gets the method call that will handle JSON serialization.

@@ -76,8 +76,8 @@ public class ArrayType implements IType {
     }
 
     @Override
-    public String jsonDeserializationMethod() {
-        return "getBinary()";
+    public String jsonDeserializationMethod(String jsonReaderName) {
+        return jsonReaderName + ".getBinary()";
     }
 
     @Override

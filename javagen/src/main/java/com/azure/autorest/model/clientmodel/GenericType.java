@@ -271,7 +271,7 @@ public class GenericType implements IType {
     }
 
     @Override
-    public final String jsonDeserializationMethod() {
+    public final String jsonDeserializationMethod(String jsonReaderName) {
         return null;
     }
 

@@ -530,8 +530,12 @@ public class ClassType implements IType {
     }
 
     @Override
-    public java.lang.String jsonDeserializationMethod() {
-        return jsonDeserializationMethod;
+    public java.lang.String jsonDeserializationMethod(String jsonReaderName) {
+        if (jsonDeserializationMethod == null) {
+            return null;
+        }
+
+        return jsonReaderName + "." + jsonDeserializationMethod;
     }
 
     @Override

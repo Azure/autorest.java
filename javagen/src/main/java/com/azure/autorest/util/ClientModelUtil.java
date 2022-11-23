@@ -438,8 +438,7 @@ public class ClientModelUtil {
     public static boolean hasSetter(ClientModelPropertyAccess property, JavaSettings settings) {
         // If the property isn't read-only or required and part of the constructor, and it isn't private,
         // add a setter.
-        return !isReadOnlyOrInConstructor(property, settings)
-                && !isPrivateAccess(property);
+        return !isReadOnlyOrInConstructor(property, settings) && !isPrivateAccess(property);
     }
 
     // A property has private access when it is to be flattened.
@@ -454,7 +453,25 @@ public class ClientModelUtil {
     }
 
     private static boolean isReadOnlyOrInConstructor(ClientModelPropertyAccess property, JavaSettings settings) {
-        return property.isReadOnly()
-                || (settings.isRequiredFieldsAsConstructorArgs() && property.isRequired());
+        return property.isReadOnly() || (settings.isRequiredFieldsAsConstructorArgs() && property.isRequired());
+    }
+
+    /**
+     * Determines whether the {@link ClientModelProperty} should be included in the model's constructor.
+     * <p>
+     * {@link ClientModelProperty Properties} are included in the constructor if the following hold true
+     * <li>
+     * <ul>{@link ClientModelProperty#isRequired()} is true</ul>
+     * <ul>{@link JavaSettings#isRequiredFieldsAsConstructorArgs()} is true</ul>
+     * <ul>{@link ClientModelProperty#isReadOnly()} is false or {@link JavaSettings#isIncludeReadOnlyInConstructorArgs()} is true</ul>
+     * </li>
+     *
+     * @param property The {@link ClientModelProperty}
+     * @param settings The Autorest generation settings.
+     * @return Whether the {@code property} should be included in the model's constructor.
+     */
+    public static boolean includePropertyInConstructor(ClientModelProperty property, JavaSettings settings) {
+        return property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()
+            && (!property.isReadOnly() || settings.isIncludeReadOnlyInConstructorArgs());
     }
 }
