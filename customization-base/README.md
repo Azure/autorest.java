@@ -1,5 +1,9 @@
 # Overview
 
+The `azure-autorest-customization` package provides APIs for customizing Autorest code generation safely and
+programmatically to support special cases not supported by Autorest code generation directly using Eclipse language
+server to ensure valid Java code.
+
 To set up customizations, create a Maven project with dependency:
 
 ```xml
