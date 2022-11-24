@@ -39,7 +39,7 @@ public final class VisibilityModel {
     /*
      * Required bool, illustrating a delete property.
      */
-    @JsonProperty(value = "deleteProp", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "deleteProp", required = true)
     private boolean deleteProp;
 
     /**
@@ -47,13 +47,16 @@ public final class VisibilityModel {
      *
      * @param createProp the createProp value to set.
      * @param updateProp the updateProp value to set.
+     * @param deleteProp the deleteProp value to set.
      */
     @JsonCreator
     public VisibilityModel(
             @JsonProperty(value = "createProp", required = true) List<String> createProp,
-            @JsonProperty(value = "updateProp", required = true) List<Integer> updateProp) {
+            @JsonProperty(value = "updateProp", required = true) List<Integer> updateProp,
+            @JsonProperty(value = "deleteProp", required = true) boolean deleteProp) {
         this.createProp = createProp;
         this.updateProp = updateProp;
+        this.deleteProp = deleteProp;
     }
 
     /**
