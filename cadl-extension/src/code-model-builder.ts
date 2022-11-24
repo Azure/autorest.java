@@ -1295,7 +1295,8 @@ export class CodeModelBuilder {
           !visibility.includes("write") &&
           !visibility.includes("create") &&
           !visibility.includes("update") &&
-          !visibility.includes("delete")
+          !visibility.includes("delete") &&
+          !visibility.includes("query")
         );
       } else {
         return false;

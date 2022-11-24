@@ -21,7 +21,7 @@ public final class VisibilityModel {
     /*
      * Required int32, illustrating a query property.
      */
-    @JsonProperty(value = "queryProp", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "queryProp", required = true)
     private int queryProp;
 
     /*
@@ -45,15 +45,18 @@ public final class VisibilityModel {
     /**
      * Creates an instance of VisibilityModel class.
      *
+     * @param queryProp the queryProp value to set.
      * @param createProp the createProp value to set.
      * @param updateProp the updateProp value to set.
      * @param deleteProp the deleteProp value to set.
      */
     @JsonCreator
     public VisibilityModel(
+            @JsonProperty(value = "queryProp", required = true) int queryProp,
             @JsonProperty(value = "createProp", required = true) List<String> createProp,
             @JsonProperty(value = "updateProp", required = true) List<Integer> updateProp,
             @JsonProperty(value = "deleteProp", required = true) boolean deleteProp) {
+        this.queryProp = queryProp;
         this.createProp = createProp;
         this.updateProp = updateProp;
         this.deleteProp = deleteProp;
