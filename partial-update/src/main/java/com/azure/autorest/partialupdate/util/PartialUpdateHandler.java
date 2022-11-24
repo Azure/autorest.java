@@ -122,9 +122,15 @@ public class PartialUpdateHandler {
                 updatedMembersList.add(existingMember);
             } else {
                 // find the corresponding newly generated member
+                boolean hasFoundCorrespondingNewlyGeneratedMember = false;
                 for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
                     if (isMembersCorresponding(existingMember, generatedMember)) {
+                        if (hasFoundCorrespondingNewlyGeneratedMember) {
+                            // it's not possible to find two methods in the generatedMembers with the same signature, otherwise generated file can have compilation error.
+                            throw new RuntimeException("Found more than one corresponding newly generated method. Generated file have methods with same signature and can ave compilation error");
+                        }
                         updatedMembersList.add(generatedMember);
+                        hasFoundCorrespondingNewlyGeneratedMember = true;
                     }
                 }
             }

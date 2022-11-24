@@ -156,7 +156,7 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testJavaOrInterfaceFile_WhenGeneratedFileHasSameNameButSameSignatureWithExistingGeneratedMethod_ThenShouldIncludeThisSameNameMethod() throws URISyntaxException, IOException {
+    public void testJavaOrInterfaceFile_WhenNoChangesAreMadeOnNextGeneration_ThenTheFileShouldStaySame() throws URISyntaxException, IOException {
         String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
         String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
 
