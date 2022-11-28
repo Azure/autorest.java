@@ -35,12 +35,14 @@ if (Test-Path ./cadl-output) {
 }
 
 # generate without convenience APIs
-Get-Content -path "cadl-project.yaml" | % { $_ -Replace "      generate-convenience-apis: true", "      generate-convenience-apis: false" } |  Out-File "cadl-project.yaml"
+Copy-Item ./cadl-project.yaml ./cadl-project-backup.yaml
+Get-Content -path "cadl-project-backup.yaml" | % { $_ -Replace "      generate-convenience-apis: true", "      generate-convenience-apis: false" } |  Out-File "cadl-project.yaml"
 foreach ($cadlFile in (Get-Item ./cadl/* -Filter "*.cadl" -Exclude "*partialupdate*")) {
     generate $cadlFile
 }
-Get-Content -path "cadl-project.yaml" | % { $_ -Replace "      generate-convenience-apis: false", "      generate-convenience-apis: true" } |  Out-File "cadl-project.yaml"
-Invoke-Expression "npm package -Dmaven.test.skip"
+Copy-Item ./cadl-project-backup.yaml ./cadl-project.yaml
+Remove-Item ./cadl-project-backup.yaml
+Invoke-Expression "mvn package ""-Dmaven.test.skip"""
 if ($LASTEXITCODE) {
     exit $LASTEXITCODE
 }
