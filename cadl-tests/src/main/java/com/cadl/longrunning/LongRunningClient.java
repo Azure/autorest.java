@@ -109,6 +109,45 @@ public final class LongRunningClient {
     }
 
     /**
+     * The createOrReplace operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(
+            String name, BinaryData resource, RequestOptions requestOptions) {
+        return this.client.beginCreateOrReplace(name, resource, requestOptions).getSyncPoller();
+    }
+
+    /**
      * The get operation.
      *
      * <p><strong>Response Body Schema</strong>
@@ -224,12 +263,32 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public OperationStatusResource statusMonitorConvenience(String name, String operationId) {
+    public OperationStatusResource statusMonitor(String name, String operationId) {
         // Generated convenience method for statusMonitorWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return statusMonitorWithResponse(name, operationId, requestOptions)
                 .getValue()
                 .toObject(OperationStatusResource.class);
+    }
+
+    /**
+     * The createOrReplace operation.
+     *
+     * @param name The name parameter.
+     * @param resource The resource parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<OperationStatusResource, Resource> beginCreateOrReplace(String name, Resource resource) {
+        // Generated convenience method for beginCreateOrReplaceWithModel
+        return client.beginCreateOrReplace(name, resource).getSyncPoller();
     }
 
     /**
