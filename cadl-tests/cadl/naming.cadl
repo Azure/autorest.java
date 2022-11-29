@@ -26,6 +26,7 @@ model Response {
 
   @summary("summary of type property")
   @doc("description of type property")
+  @friendlyName("dataType")
   type: TypesModel;
 
   @summary("summary of status property")
