@@ -1291,7 +1291,13 @@ export class CodeModelBuilder {
     } else {
       const visibility = getVisibility(this.program, target);
       if (visibility) {
-        return !visibility.includes("write") && !visibility.includes("create") && !visibility.includes("update");
+        return (
+          !visibility.includes("write") &&
+          !visibility.includes("create") &&
+          !visibility.includes("update") &&
+          !visibility.includes("delete") &&
+          !visibility.includes("query")
+        );
       } else {
         return false;
       }

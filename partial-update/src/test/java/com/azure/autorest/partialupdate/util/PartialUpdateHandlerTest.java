@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 
 import static com.github.javaparser.StaticJavaParser.parse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PartialUpdateHandlerTest {
@@ -138,6 +139,55 @@ public class PartialUpdateHandlerTest {
         assertEquals("test", compilationUnit.getTypes().get(0).getMethodsByName("putNullWithResponse").get(0).getParameter(1).getName().asString());
     }
 
+    @Test
+    public void testClassOrInterfaceFile_WhenGeneratedFileHasSameNameButDifferentSignatureWithExistingGeneratedMethod_ThenShouldIncludeThisSameNameMethod() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClient.java").toURI())));
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
+
+        String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+
+        CompilationUnit compilationUnit = parse(output);
+        assertEquals(1, compilationUnit.getTypes().size());
+        assertEquals(4, compilationUnit.getTypes().get(0).getMembers().size());
+        assertEquals(1, compilationUnit.getTypes().get(0).getConstructors().size());
+        assertEquals(1, compilationUnit.getTypes().get(0).getFields().size());
+        assertEquals(2, compilationUnit.getTypes().get(0).getMethods().size());
+
+        assertEquals(2, compilationUnit.getTypes().get(0).getMethodsByName("list").size());
+    }
+
+    @Test
+    public void testClassOrInterfaceFile_WhenNoChangesAreMadeOnNextGeneration_ThenTheFileShouldStaySame() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
+
+        String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+
+        CompilationUnit compilationUnit = parse(output);
+        assertEquals(1, compilationUnit.getTypes().size());
+        assertEquals(4, compilationUnit.getTypes().get(0).getMembers().size());
+        assertEquals(1, compilationUnit.getTypes().get(0).getConstructors().size());
+        assertEquals(1, compilationUnit.getTypes().get(0).getFields().size());
+        assertEquals(2, compilationUnit.getTypes().get(0).getMethods().size());
+
+        assertEquals(2, compilationUnit.getTypes().get(0).getMethodsByName("list").size());
+    }
+
+    @Test
+    public void testClassOrInterfaceFile_VerifyGeneratedFileShouldNotContainDuplicateMethods() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithDuplicateMethodGeneratedClient.java").toURI())));
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithDuplicateMethodGeneratedClient.java").toURI())));
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+        });
+
+        String expectedMessage = "Found duplicate methods in the generated file.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+
+    }
     @Test
     public void testModuleInfoFile_WhenGeneratedFileEqualsExistingFile_ThenUseGeneratedFile() {
         String existingFileContent = "// Copyright (c) Microsoft Corporation. All rights reserved.\n" +
@@ -332,5 +382,9 @@ public class PartialUpdateHandlerTest {
         assertEquals("exports com.azure.communication.phonenumbersdemo;", compilationUnit.getModule().get().getDirectives().get(1).asModuleExportsDirective().getTokenRange().get().toString());
         assertEquals("exports com.azure.communication.phonenumbersdemo.models;", compilationUnit.getModule().get().getDirectives().get(2).asModuleExportsDirective().getTokenRange().get().toString());
     }
+
+
+
+
 
 }
