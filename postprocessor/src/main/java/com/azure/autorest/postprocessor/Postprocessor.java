@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class Postprocessor extends NewPlugin {
@@ -234,6 +235,7 @@ public class Postprocessor extends NewPlugin {
             byte[] buffer = new byte[pomStream.available()];
             pomStream.read(buffer);
             editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
+            attemptMavenInstall(Paths.get(tempDirWithPrefix.toString(), "pom.xml"), logger);
             editor.addFile(fileName, code);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -290,6 +292,24 @@ public class Postprocessor extends NewPlugin {
             return generatedFileContent;
         });
         logger.info("Finish handle partial update.");
+    }
+
+    private static void attemptMavenInstall(Path pomPath, Logger logger) {
+        String[] command;
+        if (Utils.isWindows()) {
+            command = new String[] { "cmd", "/c", "mvn", "clean", "install", "-f", pomPath.toString() };
+        } else {
+            command = new String[] { "sh", "-c", "mvn", "clean", "install", "-f", pomPath.toString() };
+        }
+
+        // Attempt to install the POM file. This will ensure that the Eclipse language server will have all
+        // necessary dependencies to run.
+        try {
+            Runtime.getRuntime().exec(command).waitFor(30, TimeUnit.SECONDS);
+        } catch (IOException | InterruptedException ex) {
+            logger.warn("Failed to install customization POM file. Eclipse language server may fail with missing dependencies."
+                + "If this happens 'mvn install -f" + pomPath + "' to install dependencies manually.");
+        }
     }
 
     private void clear() {
