@@ -17,8 +17,11 @@ import com.github.javaparser.ast.modules.ModuleDirective;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+
 
 /**
  * Partial update handler. It can handle partial update for .java class files.
@@ -108,7 +111,7 @@ public class PartialUpdateHandler {
         }
 
         // 3. Verify Generated File, will throw error if there is invalid part found.
-        validateGeneratedFile(generatedFileMembers);
+        validateGeneratedClassOrInterface(generatedFileMembers);
 
         // 4. Check if the file is in scope of partial update:
         // if there is a method has @Generated annotation, then the file is in scope of partial update, otherwise return directly
@@ -162,38 +165,22 @@ public class PartialUpdateHandler {
     }
 
     /**
-     * Verify if the generatedFile is valid
+     * Verify if the generated class or interface is valid
      * @param generatedFileMembers, members in the generated file
-     * @return true if the generated file is valid, otherwise return false
+     * @return true if the generated class or interface is valid, otherwise return false
      */
-    private static void validateGeneratedFile(List<BodyDeclaration<?>> generatedFileMembers) {
+    private static void validateGeneratedClassOrInterface(List<BodyDeclaration<?>> generatedFileMembers) {
         // 1. Verify there is no duplicate methods (methods with same signature are considered duplicate methods)
-        NodeList<CallableDeclaration<?>> methodList = new NodeList<>();
+        Set<CallableDeclaration.Signature> methodSignatureSet = new HashSet<>();
         for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
             if (generatedMember.isCallableDeclaration()) {
-                if (isMethodExistsInMethodList(generatedMember.asCallableDeclaration(), methodList)) {
+                if (methodSignatureSet.contains(generatedMember.asCallableDeclaration().getSignature())) {
                     throw new RuntimeException(String.format("Found duplicate methods in the generated file."));
                 }
-                methodList.add(generatedMember.asCallableDeclaration());
+                methodSignatureSet.add(generatedMember.asCallableDeclaration().getSignature());
             }
         }
     }
-
-    /**
-     * Verify if a method exists in a method list.
-     * @param method
-     * @param methodList
-     * @return true if method exists in the method list, otherwise return false.
-     */
-    private static boolean isMethodExistsInMethodList(CallableDeclaration<?> method, NodeList<CallableDeclaration<?>> methodList) {
-        for (CallableDeclaration<?> m : methodList) {
-            if (method.getSignature().equals(m.getSignature())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     /**
      * Handle partial update for module-info.java file.

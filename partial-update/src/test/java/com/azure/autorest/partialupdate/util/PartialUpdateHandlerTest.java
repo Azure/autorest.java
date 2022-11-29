@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 
 import static com.github.javaparser.StaticJavaParser.parse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PartialUpdateHandlerTest {
@@ -139,7 +140,7 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testJavaOrInterfaceFile_WhenGeneratedFileHasSameNameButDifferentSignatureWithExistingGeneratedMethod_ThenShouldIncludeThisSameNameMethod() throws URISyntaxException, IOException {
+    public void testClassOrInterfaceFile_WhenGeneratedFileHasSameNameButDifferentSignatureWithExistingGeneratedMethod_ThenShouldIncludeThisSameNameMethod() throws URISyntaxException, IOException {
         String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClient.java").toURI())));
         String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
 
@@ -156,7 +157,7 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testJavaOrInterfaceFile_WhenNoChangesAreMadeOnNextGeneration_ThenTheFileShouldStaySame() throws URISyntaxException, IOException {
+    public void testClassOrInterfaceFile_WhenNoChangesAreMadeOnNextGeneration_ThenTheFileShouldStaySame() throws URISyntaxException, IOException {
         String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
         String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
 
@@ -172,6 +173,21 @@ public class PartialUpdateHandlerTest {
         assertEquals(2, compilationUnit.getTypes().get(0).getMethodsByName("list").size());
     }
 
+    @Test
+    public void testClassOrInterfaceFile_VerifyGeneratedFileShouldNotContainDuplicateMethods() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithDuplicateMethodGeneratedClient.java").toURI())));
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithDuplicateMethodGeneratedClient.java").toURI())));
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+        });
+
+        String expectedMessage = "Found duplicate methods in the generated file.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+
+    }
     @Test
     public void testModuleInfoFile_WhenGeneratedFileEqualsExistingFile_ThenUseGeneratedFile() {
         String existingFileContent = "// Copyright (c) Microsoft Corporation. All rights reserved.\n" +
