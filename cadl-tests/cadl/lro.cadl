@@ -1,11 +1,9 @@
 import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
-using Azure.DPG;
 
 @service({
   title: "LongRunning",
@@ -35,11 +33,13 @@ model ExportedResource {
 
 @route("/long-running")
 interface LongRunningOp {
-  @convenienceAPI("statusMonitorConvenience")
   statusMonitor is CustomCore.PollingOperation<Resource>;
 
   @pollingOperation(LongRunningOp.statusMonitor)
   createOrUpdate is LongRunningResourceCreateOrUpdate<Resource>;
+
+  @pollingOperation(LongRunningOp.statusMonitor)
+  createOrReplace is LongRunningResourceCreateOrReplace<Resource>;
 
   get is ResourceRead<Resource>;
 

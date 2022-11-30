@@ -14,6 +14,7 @@ import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
+import com.azure.core.annotation.Put;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -193,6 +194,27 @@ public final class LongRunningClientImpl {
                 @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/merge-patch+json") BinaryData resource,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/long-running/resources/{name}")
+        @ExpectedResponses({200, 201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> createOrReplace(
+                @HostParam("endpoint") String endpoint,
+                @PathParam("name") String name,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData resource,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -494,7 +516,55 @@ public final class LongRunningClientImpl {
     }
 
     /**
-     * The createOrUpdate operation.
+     * The createOrReplace operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(
+            String name, BinaryData resource, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.createOrReplace(
+                                this.getEndpoint(),
+                                name,
+                                this.getServiceVersion().getVersion(),
+                                accept,
+                                resource,
+                                requestOptions,
+                                context));
+    }
+
+    /**
+     * The createOrReplace operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -526,11 +596,11 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationStatusResource, Resource> beginCreateOrUpdateWithModelAsync(
+    public PollerFlux<BinaryData, BinaryData> beginCreateOrReplaceAsync(
             String name, BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
-                () -> this.createOrUpdateWithResponseAsync(name, resource, requestOptions),
+                () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
                 new DefaultPollingStrategy<>(
                         this.getHttpPipeline(),
                         "{endpoint}".replace("{endpoint}", this.getEndpoint()),
@@ -538,12 +608,12 @@ public final class LongRunningClientImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                TypeReference.createInstance(OperationStatusResource.class),
-                TypeReference.createInstance(Resource.class));
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * The createOrUpdate operation.
+     * The createOrReplace operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -575,9 +645,96 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationStatusResource, Resource> beginCreateOrUpdateWithModel(
+    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.beginCreateOrUpdateWithModelAsync(name, resource, requestOptions).getSyncPoller();
+        return this.beginCreateOrReplaceAsync(name, resource, requestOptions).getSyncPoller();
+    }
+
+    /**
+     * The createOrReplace operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<OperationStatusResource, Resource> beginCreateOrReplaceWithModelAsync(
+            String name, BinaryData resource, RequestOptions requestOptions) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(OperationStatusResource.class),
+                TypeReference.createInstance(Resource.class));
+    }
+
+    /**
+     * The createOrReplace operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<OperationStatusResource, Resource> beginCreateOrReplaceWithModel(
+            String name, BinaryData resource, RequestOptions requestOptions) {
+        return this.beginCreateOrReplaceWithModelAsync(name, resource, requestOptions).getSyncPoller();
     }
 
     /**

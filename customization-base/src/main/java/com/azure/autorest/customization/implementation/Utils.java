@@ -19,6 +19,7 @@ import com.azure.autorest.customization.models.Range;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.expr.AnnotationExpr;
+import com.sun.jna.Platform;
 
 import java.io.File;
 import java.lang.reflect.Modifier;
@@ -518,6 +519,10 @@ public class Utils {
                         Utils.applyWorkspaceEdit(importEdit, editor, languageClient));
                 }
             });
+    }
+
+    public static boolean isWindows() {
+        return Platform.isWindows();
     }
 
     private Utils() {

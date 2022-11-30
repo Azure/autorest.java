@@ -1251,7 +1251,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             JavaSettings.PollingDetails pollingDetails,
             JavaSettings settings) {
 
-        if (operation.getOperationLinks() == null || pollingDetails == null) {
+        if (operation.getOperationLinks() == null || pollingDetails == null || operation.getConvenienceApi() == null) {
             return null;
         }
 

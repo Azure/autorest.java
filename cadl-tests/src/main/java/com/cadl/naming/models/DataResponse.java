@@ -37,7 +37,7 @@ public final class DataResponse {
      * description of type property
      */
     @JsonProperty(value = "type", required = true)
-    private TypesModel type;
+    private TypesModel dataType;
 
     /*
      * summary of status property
@@ -52,18 +52,18 @@ public final class DataResponse {
      *
      * @param name the name value to set.
      * @param data the data value to set.
-     * @param type the type value to set.
+     * @param dataType the dataType value to set.
      * @param status the status value to set.
      */
     @JsonCreator
     private DataResponse(
             @JsonProperty(value = "name", required = true) String name,
             @JsonProperty(value = "data", required = true) BinaryData data,
-            @JsonProperty(value = "type", required = true) TypesModel type,
+            @JsonProperty(value = "type", required = true) TypesModel dataType,
             @JsonProperty(value = "status", required = true) DataStatus status) {
         this.name = name;
         this.data = data;
-        this.type = type;
+        this.dataType = dataType;
         this.status = status;
     }
 
@@ -90,14 +90,14 @@ public final class DataResponse {
     }
 
     /**
-     * Get the type property: summary of type property
+     * Get the dataType property: summary of type property
      *
      * <p>description of type property.
      *
-     * @return the type value.
+     * @return the dataType value.
      */
-    public TypesModel getType() {
-        return this.type;
+    public TypesModel getDataType() {
+        return this.dataType;
     }
 
     /**
