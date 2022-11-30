@@ -25,6 +25,7 @@ import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
@@ -503,7 +504,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // handle x-ms-client-default
                     if (property.getDefaultValue() != null
                         && (!settings.isStreamStyleSerialization() || property.isPolymorphicDiscriminator())) {
-                        fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
+                        if (property.isPolymorphicDiscriminator()) {
+                            fieldSignature = propertyType + " " + CodeNamer.getEnumMemberName(propertyName) + " = " + property.getDefaultValue();
+                        } else {
+                            fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
+                        }
                     } else {
                         fieldSignature = propertyType + " " + propertyName;
                     }
@@ -515,8 +520,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addFieldAnnotations(property, classBlock, settings);
 
-            if ((ClientModelUtil.includePropertyInConstructor(property, settings) && settings.isStreamStyleSerialization())
-                || property.isPolymorphicDiscriminator()) {
+            if (property.isPolymorphicDiscriminator()) {
+                classBlock.privateStaticFinalVariable(fieldSignature);
+            } else if ((ClientModelUtil.includePropertyInConstructor(property, settings) && settings.isStreamStyleSerialization())) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
             } else {
                 classBlock.privateMemberVariable(fieldSignature);

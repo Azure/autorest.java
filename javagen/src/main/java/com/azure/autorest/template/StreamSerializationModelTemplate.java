@@ -19,6 +19,7 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -286,7 +287,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         IType wireType = property.getWireType();
-        String propertyValueGetter = fromSuperType ? property.getGetterName() + "()" : "this." + property.getName();
+        String propertyValueGetter;
+        if (fromSuperType) {
+            propertyValueGetter = property.getGetterName() + "()";
+        } else if (property.isPolymorphicDiscriminator()) {
+            propertyValueGetter = CodeNamer.getEnumMemberName(property.getName());
+        } else {
+            propertyValueGetter = "this." + property.getName();
+        }
 
         // Attempt to determine whether the wire type is simple serialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
@@ -622,17 +630,18 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
                 if (propertiesManager.getDiscriminatorProperty() != null) {
                     ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
+                    String discriminatorConstant = CodeNamer.getEnumMemberName(discriminatorProperty.getName());
                     String ifStatement = String.format("\"%s\".equals(%s)", discriminatorProperty.getSerializedName(),
                         fieldNameVariableName);
 
                     ifBlock = methodBlock.ifBlock(ifStatement, ifAction -> {
                         ifAction.line("String %s = reader.getString();", discriminatorProperty.getName());
-                        String ifStatement2 = String.format("!%s.equals(%s)", discriminatorProperty.getDefaultValue(),
+                        String ifStatement2 = String.format("!%s.equals(%s)", discriminatorConstant,
                             discriminatorProperty.getName());
                         ifAction.ifBlock(ifStatement2, ifAction2 -> ifAction2.line(
-                            "throw new IllegalStateException(\"'%s' was expected to be non-null and equal to '%s'. "
+                            "throw new IllegalStateException(\"'%s' was expected to be non-null and equal to '\" + %s + \"'. "
                                 + "The found '%s' was '\" + %s + \"'.\");",
-                            discriminatorProperty.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
+                            discriminatorProperty.getSerializedName(), discriminatorConstant,
                             discriminatorProperty.getSerializedName(), discriminatorProperty.getName()));
                     });
                 }
