@@ -16,12 +16,20 @@ import com.azure.autorest.util.SchemaUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * A mapper that maps an {@link Parameter} to a {@link ClientMethodParameter}.
+ */
 public class ClientParameterMapper implements IMapper<Parameter, ClientMethodParameter> {
     private static final ClientParameterMapper INSTANCE = new ClientParameterMapper();
 
     private ClientParameterMapper() {
     }
 
+    /**
+     * Gets the global {@link ClientParameterMapper} instance.
+     *
+     * @return The global {@link ClientParameterMapper} instance.
+     */
     public static ClientParameterMapper getInstance() {
         return INSTANCE;
     }
@@ -31,6 +39,13 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         return map(parameter, JavaSettings.getInstance().isDataPlaneClient());
     }
 
+    /**
+     * Maps an {@link Parameter} to a {@link ClientMethodParameter}.
+     *
+     * @param parameter The {@link Parameter} being mapped.
+     * @param isProtocolMethod Whether the parameter is being used in a protocol method.
+     * @return The {@link ClientMethodParameter}.
+     */
     public ClientMethodParameter map(Parameter parameter, boolean isProtocolMethod) {
         String name = parameter.getOriginalParameter() != null && parameter.getLanguage().getJava().getName().equals(parameter.getOriginalParameter().getLanguage().getJava().getName())
                 ? CodeNamer.toCamelCase(parameter.getOriginalParameter().getSchema().getLanguage().getJava().getName()) + CodeNamer.toPascalCase(parameter.getLanguage().getJava().getName())

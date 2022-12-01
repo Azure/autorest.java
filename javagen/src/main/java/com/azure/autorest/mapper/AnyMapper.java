@@ -7,6 +7,9 @@ import com.azure.autorest.extension.base.model.codemodel.AnySchema;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 
+/**
+ * A mapper that maps an {@link AnySchema} to {@link ClassType#Object}, always.
+ */
 public class AnyMapper implements IMapper<AnySchema, IType> {
 
   private static final AnyMapper INSTANCE = new AnyMapper();
@@ -15,6 +18,11 @@ public class AnyMapper implements IMapper<AnySchema, IType> {
     // private constructor
   }
 
+  /**
+   * Gets the global {@link AnyMapper} instance.
+   *
+   * @return The global {@link AnyMapper} instance.
+   */
   public static AnyMapper getInstance() {
     return INSTANCE;
   }

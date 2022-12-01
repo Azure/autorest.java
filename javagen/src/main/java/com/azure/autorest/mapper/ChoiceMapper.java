@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * A mapper that maps a {@link ChoiceSchema} to an {@link EnumType}.
+ */
 public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
     private static final ChoiceMapper INSTANCE = new ChoiceMapper();
     Map<ChoiceSchema, IType> parsed = new ConcurrentHashMap<>();
@@ -27,6 +30,11 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
     private ChoiceMapper() {
     }
 
+    /**
+     * Gets the global {@link ChoiceMapper} instance.
+     *
+     * @return The global {@link ChoiceMapper} instance.
+     */
     public static ChoiceMapper getInstance() {
         return INSTANCE;
     }

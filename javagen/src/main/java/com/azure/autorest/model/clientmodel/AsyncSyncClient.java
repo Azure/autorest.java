@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * An asynchronous and/or synchronous client.
+ */
 public class AsyncSyncClient {
 
     private final String className;
@@ -16,15 +19,15 @@ public class AsyncSyncClient {
 
     private final ServiceClient serviceClient;
 
-    private List<ConvenienceMethod> convenienceMethods;
+    private final List<ConvenienceMethod> convenienceMethods;
 
     // There is also reference from Client to ClientBuilder via "@ServiceClient(builder = ClientBuilder.class)"
     // clientBuilder can be null, if builder is disabled via "disable-client-builder"
     private ClientBuilder clientBuilder;
 
     private AsyncSyncClient(String packageName, String className,
-                            MethodGroupClient methodGroupClient, ServiceClient serviceClient,
-                            List<ConvenienceMethod> convenienceMethods) {
+        MethodGroupClient methodGroupClient, ServiceClient serviceClient,
+        List<ConvenienceMethod> convenienceMethods) {
         this.packageName = packageName;
         this.className = className;
         this.methodGroupClient = methodGroupClient;
@@ -34,6 +37,7 @@ public class AsyncSyncClient {
 
     /**
      * Get the package name.
+     *
      * @return the package name.
      */
     public String getPackageName() {
@@ -42,6 +46,7 @@ public class AsyncSyncClient {
 
     /**
      * Get the class name.
+     *
      * @return the class name.
      */
     public String getClassName() {
@@ -50,6 +55,7 @@ public class AsyncSyncClient {
 
     /**
      * Get the method group client.
+     *
      * @return the method group client.
      */
     public MethodGroupClient getMethodGroupClient() {
@@ -58,31 +64,53 @@ public class AsyncSyncClient {
 
     /**
      * Get the service client.
-     * @return the service cleint.
+     *
+     * @return the service client.
      */
     public ServiceClient getServiceClient() {
         return serviceClient;
     }
 
     /**
+     * Gets the list of convenience methods.
+     *
      * @return the list of convenience methods.
      */
     public List<ConvenienceMethod> getConvenienceMethods() {
         return convenienceMethods;
     }
 
+    /**
+     * Adds the imports required by the client to the set of imports.
+     *
+     * @param imports The imports being added to.
+     * @param includeImplementationImports Whether implementation imports should be included.
+     */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-        imports.add(String.format("%1$s.%2$s", getPackageName(), getClassName()));
+        imports.add(packageName + "." + className);
     }
 
+    /**
+     * Gets the {@link Builder} associated with this client.
+     *
+     * @return The {@link Builder} associated with this client.
+     */
     public ClientBuilder getClientBuilder() {
         return clientBuilder;
     }
 
+    /**
+     * Sets the {@link Builder} to associate with this client.
+     *
+     * @param clientBuilder The {@link Builder} to associate with this client.
+     */
     public void setClientBuilder(ClientBuilder clientBuilder) {
         this.clientBuilder = clientBuilder;
     }
 
+    /**
+     * A builder that is used to create instance of {@link AsyncSyncClient}.
+     */
     public static class Builder {
 
         private String className;
@@ -94,31 +122,66 @@ public class AsyncSyncClient {
 
         private List<ConvenienceMethod> convenienceMethods = Collections.emptyList();
 
+        /**
+         * Sets the class name.
+         *
+         * @param className The class name.
+         * @return This builder.
+         */
         public Builder className(String className) {
             this.className = className;
             return this;
         }
 
+        /**
+         * Sets the package name.
+         *
+         * @param packageName The package name.
+         * @return This builder.
+         */
         public Builder packageName(String packageName) {
             this.packageName = packageName;
             return this;
         }
 
+        /**
+         * Sets the {@link MethodGroupClient}.
+         *
+         * @param methodGroupClient The {@link MethodGroupClient}.
+         * @return This builder.
+         */
         public Builder methodGroupClient(MethodGroupClient methodGroupClient) {
             this.methodGroupClient = methodGroupClient;
             return this;
         }
 
+        /**
+         * Sets the {@link ServiceClient}.
+         *
+         * @param serviceClient The {@link ServiceClient}.
+         * @return This builder.
+         */
         public Builder serviceClient(ServiceClient serviceClient) {
             this.serviceClient = serviceClient;
             return this;
         }
 
+        /**
+         * Sets the list of {@link ConvenienceMethod ConvenienceMethods}.
+         *
+         * @param convenienceMethods The list of {@link ConvenienceMethod ConvenienceMethods}.
+         * @return This builder.
+         */
         public Builder convenienceMethods(List<ConvenienceMethod> convenienceMethods) {
             this.convenienceMethods = convenienceMethods;
             return this;
         }
 
+        /**
+         * Builds an instance of {@link AsyncSyncClient}.
+         *
+         * @return The instance of {@link AsyncSyncClient}.
+         */
         public AsyncSyncClient build() {
             return new AsyncSyncClient(packageName, className, methodGroupClient, serviceClient, convenienceMethods);
         }

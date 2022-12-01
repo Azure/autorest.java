@@ -9,6 +9,9 @@ import com.azure.autorest.model.clientmodel.IType;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * A mapper that maps a {@link ConstantSchema} to a type.
+ */
 public class ConstantMapper implements IMapper<ConstantSchema, IType> {
     private static final ConstantMapper INSTANCE = new ConstantMapper();
     Map<ConstantSchema, IType> parsed = new ConcurrentHashMap<>();
@@ -16,6 +19,11 @@ public class ConstantMapper implements IMapper<ConstantSchema, IType> {
     private ConstantMapper() {
     }
 
+    /**
+     * Gets the global {@link ConstantMapper} instance.
+     *
+     * @return The global {@link ConstantMapper} instance.
+     */
     public static ConstantMapper getInstance() {
         return INSTANCE;
     }

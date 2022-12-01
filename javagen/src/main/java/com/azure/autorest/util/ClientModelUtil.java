@@ -216,7 +216,7 @@ public class ClientModelUtil {
 
     /**
      * Gets the suffix of the builder class.
-     *
+     * <p>
      * The class name of the Builder is usually the service client interface name + builder suffix.
      *
      * @return the suffix of the builder class.
@@ -460,11 +460,11 @@ public class ClientModelUtil {
      * Determines whether the {@link ClientModelProperty} should be included in the model's constructor.
      * <p>
      * {@link ClientModelProperty Properties} are included in the constructor if the following hold true
-     * <li>
-     * <ul>{@link ClientModelProperty#isRequired()} is true</ul>
-     * <ul>{@link JavaSettings#isRequiredFieldsAsConstructorArgs()} is true</ul>
-     * <ul>{@link ClientModelProperty#isReadOnly()} is false or {@link JavaSettings#isIncludeReadOnlyInConstructorArgs()} is true</ul>
-     * </li>
+     * <ul>
+     * <li>{@link ClientModelProperty#isRequired()} is true</li>
+     * <li>{@link JavaSettings#isRequiredFieldsAsConstructorArgs()} is true</li>
+     * <li>{@link ClientModelProperty#isReadOnly()} is false or {@link JavaSettings#isIncludeReadOnlyInConstructorArgs()} is true</li>
+     * </ul>
      *
      * @param property The {@link ClientModelProperty}
      * @param settings The Autorest generation settings.
