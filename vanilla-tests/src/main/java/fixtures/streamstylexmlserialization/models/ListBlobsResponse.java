@@ -9,6 +9,8 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
@@ -266,6 +268,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
      * @param xmlReader The XmlReader being read.
      * @return An instance of ListBlobsResponse if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static ListBlobsResponse fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
@@ -273,11 +276,17 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
                 reader -> {
                     String serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
                     String containerName = reader.getStringAttribute(null, "ContainerName");
+                    boolean prefixFound = false;
                     String prefix = null;
+                    boolean markerFound = false;
                     String marker = null;
+                    boolean maxResultsFound = false;
                     int maxResults = 0;
+                    boolean delimiterFound = false;
                     String delimiter = null;
+                    boolean blobsFound = false;
                     Blobs blobs = null;
+                    boolean nextMarkerFound = false;
                     String nextMarker = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
@@ -298,17 +307,50 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
                             reader.skipElement();
                         }
                     }
-                    ListBlobsResponse deserializedValue = new ListBlobsResponse();
-                    deserializedValue.serviceEndpoint = serviceEndpoint;
-                    deserializedValue.containerName = containerName;
-                    deserializedValue.prefix = prefix;
-                    deserializedValue.marker = marker;
-                    deserializedValue.maxResults = maxResults;
-                    deserializedValue.delimiter = delimiter;
-                    deserializedValue.blobs = blobs;
-                    deserializedValue.nextMarker = nextMarker;
+                    if (containerNameFound
+                            && prefixFound
+                            && markerFound
+                            && maxResultsFound
+                            && delimiterFound
+                            && blobsFound
+                            && nextMarkerFound) {
+                        ListBlobsResponse deserializedValue = new ListBlobsResponse();
+                        deserializedValue.containerName = containerName;
+                        deserializedValue.prefix = prefix;
+                        deserializedValue.marker = marker;
+                        deserializedValue.maxResults = maxResults;
+                        deserializedValue.delimiter = delimiter;
+                        deserializedValue.blobs = blobs;
+                        deserializedValue.nextMarker = nextMarker;
+                        deserializedValue.serviceEndpoint = serviceEndpoint;
 
-                    return deserializedValue;
+                        return deserializedValue;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!containerNameFound) {
+                        missingProperties.add("ContainerName");
+                    }
+                    if (!prefixFound) {
+                        missingProperties.add("Prefix");
+                    }
+                    if (!markerFound) {
+                        missingProperties.add("Marker");
+                    }
+                    if (!maxResultsFound) {
+                        missingProperties.add("MaxResults");
+                    }
+                    if (!delimiterFound) {
+                        missingProperties.add("Delimiter");
+                    }
+                    if (!blobsFound) {
+                        missingProperties.add("Blobs");
+                    }
+                    if (!nextMarkerFound) {
+                        missingProperties.add("NextMarker");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
                 });
     }
 }

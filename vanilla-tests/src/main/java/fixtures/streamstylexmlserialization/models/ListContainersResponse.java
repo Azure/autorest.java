@@ -255,16 +255,20 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * @param xmlReader The XmlReader being read.
      * @return An instance of ListContainersResponse if the XmlReader was pointing to an instance of it, or null if it
      *     was pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static ListContainersResponse fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "EnumerationResults",
                 reader -> {
                     String serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
+                    boolean prefixFound = false;
                     String prefix = null;
                     String marker = null;
+                    boolean maxResultsFound = false;
                     int maxResults = 0;
                     List<Container> containers = null;
+                    boolean nextMarkerFound = false;
                     String nextMarker = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
@@ -286,15 +290,33 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                             reader.skipElement();
                         }
                     }
-                    ListContainersResponse deserializedValue = new ListContainersResponse();
-                    deserializedValue.serviceEndpoint = serviceEndpoint;
-                    deserializedValue.prefix = prefix;
-                    deserializedValue.marker = marker;
-                    deserializedValue.maxResults = maxResults;
-                    deserializedValue.setContainers(containers);
-                    deserializedValue.nextMarker = nextMarker;
+                    if (serviceEndpointFound && prefixFound && maxResultsFound && nextMarkerFound) {
+                        ListContainersResponse deserializedValue = new ListContainersResponse();
+                        deserializedValue.serviceEndpoint = serviceEndpoint;
+                        deserializedValue.prefix = prefix;
+                        deserializedValue.maxResults = maxResults;
+                        deserializedValue.nextMarker = nextMarker;
+                        deserializedValue.marker = marker;
+                        deserializedValue.setContainers(containers);
 
-                    return deserializedValue;
+                        return deserializedValue;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!serviceEndpointFound) {
+                        missingProperties.add("ServiceEndpoint");
+                    }
+                    if (!prefixFound) {
+                        missingProperties.add("Prefix");
+                    }
+                    if (!maxResultsFound) {
+                        missingProperties.add("MaxResults");
+                    }
+                    if (!nextMarkerFound) {
+                        missingProperties.add("NextMarker");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
                 });
     }
 }

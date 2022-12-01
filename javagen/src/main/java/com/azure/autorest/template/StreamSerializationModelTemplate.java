@@ -1111,7 +1111,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
 
             propertiesManager.forEachXmlAttribute(property -> serializeXml(methodBlock, property));
-            propertiesManager.forEachXmlElement(property -> serializeXml(methodBlock, property));
+
+            // Valid XML should only either have elements or text.
+            if (propertiesManager.hasXmlElements()) {
+                propertiesManager.forEachXmlElement(property -> serializeXml(methodBlock, property));
+            } else {
+                propertiesManager.forEachXmlText(property -> serializeXml(methodBlock, property));
+            }
 
             methodBlock.methodReturn("xmlWriter.writeEndElement()");
         });

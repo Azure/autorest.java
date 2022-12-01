@@ -9,7 +9,9 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -132,12 +134,15 @@ public final class Container implements XmlSerializable<Container> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of Container if the XmlReader was pointing to an instance of it, or null if it was pointing
      *     to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static Container fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "Container",
                 reader -> {
+                    boolean nameFound = false;
                     String name = null;
+                    boolean propertiesFound = false;
                     ContainerProperties properties = null;
                     Map<String, String> metadata = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
@@ -158,12 +163,24 @@ public final class Container implements XmlSerializable<Container> {
                             reader.skipElement();
                         }
                     }
-                    Container deserializedValue = new Container();
-                    deserializedValue.name = name;
-                    deserializedValue.properties = properties;
-                    deserializedValue.metadata = metadata;
+                    if (nameFound && propertiesFound) {
+                        Container deserializedValue = new Container();
+                        deserializedValue.name = name;
+                        deserializedValue.properties = properties;
+                        deserializedValue.metadata = metadata;
 
-                    return deserializedValue;
+                        return deserializedValue;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!nameFound) {
+                        missingProperties.add("Name");
+                    }
+                    if (!propertiesFound) {
+                        missingProperties.add("Properties");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
                 });
     }
 }

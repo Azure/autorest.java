@@ -11,6 +11,8 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -796,12 +798,15 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of BlobProperties if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static BlobProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "BlobProperties",
                 reader -> {
+                    boolean lastModifiedFound = false;
                     OffsetDateTime lastModified = null;
+                    boolean etagFound = false;
                     String etag = null;
                     Long contentLength = null;
                     String contentType = null;
@@ -892,37 +897,49 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
                             reader.skipElement();
                         }
                     }
-                    BlobProperties deserializedValue = new BlobProperties();
-                    deserializedValue.setLastModified(lastModified);
-                    deserializedValue.etag = etag;
-                    deserializedValue.contentLength = contentLength;
-                    deserializedValue.contentType = contentType;
-                    deserializedValue.contentEncoding = contentEncoding;
-                    deserializedValue.contentLanguage = contentLanguage;
-                    deserializedValue.contentMD5 = contentMD5;
-                    deserializedValue.contentDisposition = contentDisposition;
-                    deserializedValue.cacheControl = cacheControl;
-                    deserializedValue.blobSequenceNumber = blobSequenceNumber;
-                    deserializedValue.blobType = blobType;
-                    deserializedValue.leaseStatus = leaseStatus;
-                    deserializedValue.leaseState = leaseState;
-                    deserializedValue.leaseDuration = leaseDuration;
-                    deserializedValue.copyId = copyId;
-                    deserializedValue.copyStatus = copyStatus;
-                    deserializedValue.copySource = copySource;
-                    deserializedValue.copyProgress = copyProgress;
-                    deserializedValue.setCopyCompletionTime(copyCompletionTime);
-                    deserializedValue.copyStatusDescription = copyStatusDescription;
-                    deserializedValue.serverEncrypted = serverEncrypted;
-                    deserializedValue.incrementalCopy = incrementalCopy;
-                    deserializedValue.destinationSnapshot = destinationSnapshot;
-                    deserializedValue.setDeletedTime(deletedTime);
-                    deserializedValue.remainingRetentionDays = remainingRetentionDays;
-                    deserializedValue.accessTier = accessTier;
-                    deserializedValue.accessTierInferred = accessTierInferred;
-                    deserializedValue.archiveStatus = archiveStatus;
+                    if (lastModifiedFound && etagFound) {
+                        BlobProperties deserializedValue = new BlobProperties();
+                        deserializedValue.setLastModified(lastModified);
+                        deserializedValue.etag = etag;
+                        deserializedValue.contentLength = contentLength;
+                        deserializedValue.contentType = contentType;
+                        deserializedValue.contentEncoding = contentEncoding;
+                        deserializedValue.contentLanguage = contentLanguage;
+                        deserializedValue.contentMD5 = contentMD5;
+                        deserializedValue.contentDisposition = contentDisposition;
+                        deserializedValue.cacheControl = cacheControl;
+                        deserializedValue.blobSequenceNumber = blobSequenceNumber;
+                        deserializedValue.blobType = blobType;
+                        deserializedValue.leaseStatus = leaseStatus;
+                        deserializedValue.leaseState = leaseState;
+                        deserializedValue.leaseDuration = leaseDuration;
+                        deserializedValue.copyId = copyId;
+                        deserializedValue.copyStatus = copyStatus;
+                        deserializedValue.copySource = copySource;
+                        deserializedValue.copyProgress = copyProgress;
+                        deserializedValue.setCopyCompletionTime(copyCompletionTime);
+                        deserializedValue.copyStatusDescription = copyStatusDescription;
+                        deserializedValue.serverEncrypted = serverEncrypted;
+                        deserializedValue.incrementalCopy = incrementalCopy;
+                        deserializedValue.destinationSnapshot = destinationSnapshot;
+                        deserializedValue.setDeletedTime(deletedTime);
+                        deserializedValue.remainingRetentionDays = remainingRetentionDays;
+                        deserializedValue.accessTier = accessTier;
+                        deserializedValue.accessTierInferred = accessTierInferred;
+                        deserializedValue.archiveStatus = archiveStatus;
 
-                    return deserializedValue;
+                        return deserializedValue;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!lastModifiedFound) {
+                        missingProperties.add("Last-Modified");
+                    }
+                    if (!etagFound) {
+                        missingProperties.add("Etag");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
                 });
     }
 }

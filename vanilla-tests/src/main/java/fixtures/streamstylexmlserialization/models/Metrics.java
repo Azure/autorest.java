@@ -9,6 +9,8 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
@@ -147,12 +149,14 @@ public final class Metrics implements XmlSerializable<Metrics> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of Metrics if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static Metrics fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "Metrics",
                 reader -> {
                     String version = null;
+                    boolean enabledFound = false;
                     boolean enabled = false;
                     Boolean includeAPIs = null;
                     RetentionPolicy retentionPolicy = null;
@@ -171,13 +175,22 @@ public final class Metrics implements XmlSerializable<Metrics> {
                             reader.skipElement();
                         }
                     }
-                    Metrics deserializedValue = new Metrics();
-                    deserializedValue.version = version;
-                    deserializedValue.enabled = enabled;
-                    deserializedValue.includeAPIs = includeAPIs;
-                    deserializedValue.retentionPolicy = retentionPolicy;
+                    if (enabledFound) {
+                        Metrics deserializedValue = new Metrics();
+                        deserializedValue.enabled = enabled;
+                        deserializedValue.version = version;
+                        deserializedValue.includeAPIs = includeAPIs;
+                        deserializedValue.retentionPolicy = retentionPolicy;
 
-                    return deserializedValue;
+                        return deserializedValue;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!enabledFound) {
+                        missingProperties.add("Enabled");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
                 });
     }
 }

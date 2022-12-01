@@ -63,6 +63,7 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of ByteWrapper if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
+     * @throws IOException If an error occurs while reading the ByteWrapper.
      */
     public static ByteWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(

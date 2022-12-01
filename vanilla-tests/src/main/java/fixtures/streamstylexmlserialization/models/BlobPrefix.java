@@ -9,6 +9,8 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
@@ -67,11 +69,13 @@ public final class BlobPrefix implements XmlSerializable<BlobPrefix> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of BlobPrefix if the XmlReader was pointing to an instance of it, or null if it was pointing
      *     to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static BlobPrefix fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "BlobPrefix",
                 reader -> {
+                    boolean nameFound = false;
                     String name = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
@@ -82,10 +86,19 @@ public final class BlobPrefix implements XmlSerializable<BlobPrefix> {
                             reader.skipElement();
                         }
                     }
-                    BlobPrefix deserializedValue = new BlobPrefix();
-                    deserializedValue.name = name;
+                    if (nameFound) {
+                        BlobPrefix deserializedValue = new BlobPrefix();
+                        deserializedValue.name = name;
 
-                    return deserializedValue;
+                        return deserializedValue;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!nameFound) {
+                        missingProperties.add("Name");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
                 });
     }
 }

@@ -751,7 +751,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         JavaSettings settings, JavaBlock methodBlock) {
         String sourceTypeName = propertyWireType.toString();
         String targetTypeName = propertyClientType.toString();
-        String expression = String.format("this.%s", property.getName());
+        String expression = property.isPolymorphicDiscriminator()
+            ? CodeNamer.getEnumMemberName(property.getName())
+            : "this." + property.getName();
         if (propertyWireType.equals(ArrayType.ByteArray)) {
             expression = String.format("CoreUtils.clone(%s)", expression);
         }

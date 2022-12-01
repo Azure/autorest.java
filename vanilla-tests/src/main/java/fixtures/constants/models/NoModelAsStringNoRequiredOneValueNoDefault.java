@@ -17,7 +17,9 @@ public final class NoModelAsStringNoRequiredOneValueNoDefault {
     private String parameter = "value1";
 
     /** Creates an instance of NoModelAsStringNoRequiredOneValueNoDefault class. */
-    public NoModelAsStringNoRequiredOneValueNoDefault() {}
+    public NoModelAsStringNoRequiredOneValueNoDefault() {
+        parameter = "value1";
+    }
 
     /**
      * Get the parameter property: The parameter property.

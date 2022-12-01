@@ -20,7 +20,7 @@ public final class Goblinshark extends Shark {
     /*
      * The fishtype property.
      */
-    private String fishtype = "goblin";
+    private static final String FISHTYPE = "goblin";
 
     /*
      * The jawsize property.
@@ -116,7 +116,7 @@ public final class Goblinshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", this.fishtype);
+        jsonWriter.writeStringField("fishtype", FISHTYPE);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday", Objects.toString(getBirthday(), null));
         jsonWriter.writeStringField("species", getSpecies());
@@ -135,6 +135,7 @@ public final class Goblinshark extends Shark {
      *     pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
      *     polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the Goblinshark.
      */
     public static Goblinshark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
@@ -154,9 +155,11 @@ public final class Goblinshark extends Shark {
 
                         if ("fishtype".equals(fieldName)) {
                             String fishtype = reader.getString();
-                            if (!"goblin".equals(fishtype)) {
+                            if (!FISHTYPE.equals(fishtype)) {
                                 throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
+                                        "'fishtype' was expected to be non-null and equal to '"
+                                                + FISHTYPE
+                                                + "'. The found 'fishtype' was '"
                                                 + fishtype
                                                 + "'.");
                             }
@@ -177,9 +180,7 @@ public final class Goblinshark extends Shark {
                         } else if ("jawsize".equals(fieldName)) {
                             jawsize = reader.getNullable(JsonReader::getInt);
                         } else if ("color".equals(fieldName)) {
-                            color =
-                                    reader.getNullable(
-                                            enumReader -> GoblinSharkColor.fromString(enumReader.getString()));
+                            color = GoblinSharkColor.fromString(reader.getString());
                         } else {
                             reader.skipChildren();
                         }

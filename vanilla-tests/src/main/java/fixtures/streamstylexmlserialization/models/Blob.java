@@ -9,7 +9,9 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -187,14 +189,19 @@ public final class Blob implements XmlSerializable<Blob> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of Blob if the XmlReader was pointing to an instance of it, or null if it was pointing to XML
      *     null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static Blob fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "Blob",
                 reader -> {
+                    boolean nameFound = false;
                     String name = null;
+                    boolean deletedFound = false;
                     boolean deleted = false;
+                    boolean snapshotFound = false;
                     String snapshot = null;
+                    boolean propertiesFound = false;
                     BlobProperties properties = null;
                     Map<String, String> metadata = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
@@ -219,14 +226,32 @@ public final class Blob implements XmlSerializable<Blob> {
                             reader.skipElement();
                         }
                     }
-                    Blob deserializedValue = new Blob();
-                    deserializedValue.name = name;
-                    deserializedValue.deleted = deleted;
-                    deserializedValue.snapshot = snapshot;
-                    deserializedValue.properties = properties;
-                    deserializedValue.metadata = metadata;
+                    if (nameFound && deletedFound && snapshotFound && propertiesFound) {
+                        Blob deserializedValue = new Blob();
+                        deserializedValue.name = name;
+                        deserializedValue.deleted = deleted;
+                        deserializedValue.snapshot = snapshot;
+                        deserializedValue.properties = properties;
+                        deserializedValue.metadata = metadata;
 
-                    return deserializedValue;
+                        return deserializedValue;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!nameFound) {
+                        missingProperties.add("Name");
+                    }
+                    if (!deletedFound) {
+                        missingProperties.add("Deleted");
+                    }
+                    if (!snapshotFound) {
+                        missingProperties.add("Snapshot");
+                    }
+                    if (!propertiesFound) {
+                        missingProperties.add("Properties");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
                 });
     }
 }

@@ -23,7 +23,9 @@ public final class Grouper {
     private String groupedParameter;
 
     /** Creates an instance of Grouper class. */
-    public Grouper() {}
+    public Grouper() {
+        groupedConstant = "foo";
+    }
 
     /**
      * Get the groupedConstant property: A grouped parameter that is a constant.

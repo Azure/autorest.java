@@ -11,6 +11,8 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -210,12 +212,15 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * @param xmlReader The XmlReader being read.
      * @return An instance of ContainerProperties if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static ContainerProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
                 "ContainerProperties",
                 reader -> {
+                    boolean lastModifiedFound = false;
                     OffsetDateTime lastModified = null;
+                    boolean etagFound = false;
                     String etag = null;
                     LeaseStatusType leaseStatus = null;
                     LeaseStateType leaseState = null;
@@ -240,15 +245,27 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
                             reader.skipElement();
                         }
                     }
-                    ContainerProperties deserializedValue = new ContainerProperties();
-                    deserializedValue.setLastModified(lastModified);
-                    deserializedValue.etag = etag;
-                    deserializedValue.leaseStatus = leaseStatus;
-                    deserializedValue.leaseState = leaseState;
-                    deserializedValue.leaseDuration = leaseDuration;
-                    deserializedValue.publicAccess = publicAccess;
+                    if (lastModifiedFound && etagFound) {
+                        ContainerProperties deserializedValue = new ContainerProperties();
+                        deserializedValue.setLastModified(lastModified);
+                        deserializedValue.etag = etag;
+                        deserializedValue.leaseStatus = leaseStatus;
+                        deserializedValue.leaseState = leaseState;
+                        deserializedValue.leaseDuration = leaseDuration;
+                        deserializedValue.publicAccess = publicAccess;
 
-                    return deserializedValue;
+                        return deserializedValue;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!lastModifiedFound) {
+                        missingProperties.add("Last-Modified");
+                    }
+                    if (!etagFound) {
+                        missingProperties.add("Etag");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
                 });
     }
 }

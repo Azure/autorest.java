@@ -27,7 +27,8 @@ public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlert
      */
     @JsonTypeId
     @JsonProperty(value = "odata\\.type", required = true)
-    private Odatatype odataType = Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA;
+    private static final Odatatype ODATA_TYPE =
+            Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA;
 
     /*
      * The list of metric criteria for this 'all of' operation.
@@ -44,7 +45,7 @@ public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlert
      * @return the odataType value.
      */
     public Odatatype getOdataType() {
-        return this.odataType;
+        return ODATA_TYPE;
     }
 
     /**
