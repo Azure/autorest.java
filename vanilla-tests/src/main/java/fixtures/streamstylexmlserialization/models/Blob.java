@@ -187,6 +187,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of Blob if the XmlReader was pointing to an instance of it, or null if it was pointing to XML
      *     null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static Blob fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(

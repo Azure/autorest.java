@@ -17,7 +17,7 @@ public final class MyDerivedType extends MyBaseType {
     /*
      * The kind property.
      */
-    private MyKind kind = MyKind.KIND1;
+    private static final MyKind KIND = MyKind.KIND1;
 
     /*
      * The propD1 property.
@@ -74,7 +74,7 @@ public final class MyDerivedType extends MyBaseType {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", Objects.toString(this.kind, null));
+        jsonWriter.writeStringField("kind", Objects.toString(KIND, null));
         jsonWriter.writeStringField("propB1", getPropB1());
         jsonWriter.writeStringField("propD1", this.propD1);
         if (getPropBH1() != null) {
@@ -92,6 +92,7 @@ public final class MyDerivedType extends MyBaseType {
      * @return An instance of MyDerivedType if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the MyDerivedType.
      */
     public static MyDerivedType fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
@@ -105,9 +106,11 @@ public final class MyDerivedType extends MyBaseType {
 
                         if ("kind".equals(fieldName)) {
                             String kind = reader.getString();
-                            if (!MyKind.KIND1.equals(kind)) {
+                            if (!KIND.equals(kind)) {
                                 throw new IllegalStateException(
-                                        "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '"
+                                        "'kind' was expected to be non-null and equal to '"
+                                                + KIND
+                                                + "'. The found 'kind' was '"
                                                 + kind
                                                 + "'.");
                             }

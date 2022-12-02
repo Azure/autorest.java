@@ -210,6 +210,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * @param xmlReader The XmlReader being read.
      * @return An instance of ContainerProperties if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static ContainerProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(

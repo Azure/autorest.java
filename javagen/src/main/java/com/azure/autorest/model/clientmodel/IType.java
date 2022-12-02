@@ -3,6 +3,7 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.json.JsonReader;
 import com.azure.json.JsonWriter;
 import com.azure.xml.XmlWriter;
 
@@ -14,18 +15,23 @@ import java.util.Set;
 public interface IType {
     /**
      * The type variant that users interact with.
+     *
      * @return The type's client-side variant.
      */
     IType getClientType();
 
     /**
      * Convert this type to the type users interact with.
+     *
+     * @param expression The expression used to convert the type to a client type.
      * @return Java code to convert an expression to client type.
      */
     String convertToClientType(String expression);
 
     /**
      * Convert the client type variant of this type to the original form that should be sent on the wire.
+     *
+     * @param expression The expression used to convert from the client type.
      * @return Java code to convert a client type expression to wire format.
      */
     String convertFromClientType(String expression);
@@ -41,45 +47,53 @@ public interface IType {
 
     /**
      * Convert this IType to an IType that is nullable.
+     *
      * @return A version of this IType that is nullable.
      */
     IType asNullable();
 
     /**
      * Get whether this IType contains (or is) the provided type.
-     * @param type The type to search for.
      *
+     * @param type The type to search for.
      * @return Whether this IType contains (or is) the provided type.
      */
     boolean contains(IType type);
 
     /**
      * Add this type's imports to the provided ISet of imports.
+     *
      * @param imports The set of imports to add to.
-     * @param includeImplementationImports Whether to include imports that are only necessary for method implementations.
+     * @param includeImplementationImports Whether to include imports that are only necessary for method
+     * implementations.
      */
     void addImportsTo(Set<String> imports, boolean includeImplementationImports);
 
     /**
      * Convert the provided default value expression to this type's default value expression.
-     * @param sourceExpression The source expression to convert to this type's default value expression.
      *
+     * @param sourceExpression The source expression to convert to this type's default value expression.
      * @return This type's default value expression.
      */
     String defaultValueExpression(String sourceExpression);
 
     /**
      * The default value expression, when this type does not have data.
-     *
-     * This is the expression of the type provided as client.
-     * By default, the expression is "null" for class types.
-     * For primitive types, this would be the Java default value, usually "0".
-     * For some collection types, this could be the empty collection.
+     * <p>
+     * This is the expression of the type provided as client. By default, the expression is "null" for class types. For
+     * primitive types, this would be the Java default value, usually "0". For some collection types, this could be the
+     * empty collection.
      *
      * @return the default value expression, when this type does not have data.
      */
     String defaultValueExpression();
 
+    /**
+     * Gets the Java code used to validate the type.
+     *
+     * @param expression The expression used during validation.
+     * @return The Java code used to validate the type.
+     */
     String validate(String expression);
 
     /**
@@ -88,9 +102,10 @@ public interface IType {
      * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a JSON
      * deserialization method and support needs to be added.
      *
+     * @param jsonReaderName The name of the {@link JsonReader} performing deserialization.
      * @return The JSON deserialization method, or null i it isn't supported directly.
      */
-    String jsonDeserializationMethod();
+    String jsonDeserializationMethod(String jsonReaderName);
 
     /**
      * Gets the method call that will handle JSON serialization.

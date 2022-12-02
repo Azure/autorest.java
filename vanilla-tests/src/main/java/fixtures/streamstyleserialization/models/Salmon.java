@@ -18,7 +18,7 @@ public class Salmon extends Fish {
     /*
      * The fishtype property.
      */
-    private String fishtype = "salmon";
+    private static final String FISHTYPE = "salmon";
 
     /*
      * The location property.
@@ -106,7 +106,7 @@ public class Salmon extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", this.fishtype);
+        jsonWriter.writeStringField("fishtype", FISHTYPE);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
@@ -123,6 +123,7 @@ public class Salmon extends Fish {
      *     JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
      *     polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the Salmon.
      */
     public static Salmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
@@ -185,9 +186,11 @@ public class Salmon extends Fish {
 
                         if ("fishtype".equals(fieldName)) {
                             String fishtype = reader.getString();
-                            if (!"salmon".equals(fishtype)) {
+                            if (!FISHTYPE.equals(fishtype)) {
                                 throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to 'salmon'. The found 'fishtype' was '"
+                                        "'fishtype' was expected to be non-null and equal to '"
+                                                + FISHTYPE
+                                                + "'. The found 'fishtype' was '"
                                                 + fishtype
                                                 + "'.");
                             }

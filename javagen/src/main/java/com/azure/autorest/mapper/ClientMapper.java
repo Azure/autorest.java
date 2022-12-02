@@ -60,12 +60,20 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * A mapper that maps a {@link CodeModel} to a {@link Client}.
+ */
 public class ClientMapper implements IMapper<CodeModel, Client> {
     private static final ClientMapper INSTANCE = new ClientMapper();
 
     protected ClientMapper() {
     }
 
+    /**
+     * Gets the global {@link ClientMapper} instance.
+     *
+     * @return The global {@link ClientMapper} instance.
+     */
     public static ClientMapper getInstance() {
         return INSTANCE;
     }

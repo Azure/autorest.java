@@ -266,6 +266,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
      * @param xmlReader The XmlReader being read.
      * @return An instance of ListBlobsResponse if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static ListBlobsResponse fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
@@ -299,7 +300,6 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
                         }
                     }
                     ListBlobsResponse deserializedValue = new ListBlobsResponse();
-                    deserializedValue.serviceEndpoint = serviceEndpoint;
                     deserializedValue.containerName = containerName;
                     deserializedValue.prefix = prefix;
                     deserializedValue.marker = marker;
@@ -307,6 +307,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
                     deserializedValue.delimiter = delimiter;
                     deserializedValue.blobs = blobs;
                     deserializedValue.nextMarker = nextMarker;
+                    deserializedValue.serviceEndpoint = serviceEndpoint;
 
                     return deserializedValue;
                 });

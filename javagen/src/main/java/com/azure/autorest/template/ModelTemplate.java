@@ -25,6 +25,7 @@ import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
@@ -503,7 +504,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // handle x-ms-client-default
                     if (property.getDefaultValue() != null
                         && (!settings.isStreamStyleSerialization() || property.isPolymorphicDiscriminator())) {
-                        fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
+                        if (property.isPolymorphicDiscriminator()) {
+                            fieldSignature = propertyType + " " + CodeNamer.getEnumMemberName(propertyName) + " = " + property.getDefaultValue();
+                        } else {
+                            fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
+                        }
                     } else {
                         fieldSignature = propertyType + " " + propertyName;
                     }
@@ -515,8 +520,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             addFieldAnnotations(property, classBlock, settings);
 
-            if (property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()
-                && settings.isStreamStyleSerialization()) {
+            if (property.isPolymorphicDiscriminator()) {
+                classBlock.privateStaticFinalVariable(fieldSignature);
+            } else if ((ClientModelUtil.includePropertyInConstructor(property, settings) && settings.isStreamStyleSerialization())) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
             } else {
                 classBlock.privateMemberVariable(fieldSignature);
@@ -623,7 +629,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         for (ClientModelProperty property : model.getProperties()) {
             // Property isn't required and won't be bucketed into either constant or required properties.
-            if (!property.isRequired() || property.isReadOnly()) {
+            if (!property.isConstant() && !ClientModelUtil.includePropertyInConstructor(property, settings)) {
                 continue;
             }
 
@@ -745,7 +751,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         JavaSettings settings, JavaBlock methodBlock) {
         String sourceTypeName = propertyWireType.toString();
         String targetTypeName = propertyClientType.toString();
-        String expression = String.format("this.%s", property.getName());
+        String expression = property.isPolymorphicDiscriminator()
+            ? CodeNamer.getEnumMemberName(property.getName())
+            : "this." + property.getName();
         if (propertyWireType.equals(ArrayType.ByteArray)) {
             expression = String.format("CoreUtils.clone(%s)", expression);
         }

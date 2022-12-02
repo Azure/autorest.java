@@ -147,6 +147,7 @@ public final class Metrics implements XmlSerializable<Metrics> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of Metrics if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static Metrics fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
@@ -172,8 +173,8 @@ public final class Metrics implements XmlSerializable<Metrics> {
                         }
                     }
                     Metrics deserializedValue = new Metrics();
-                    deserializedValue.version = version;
                     deserializedValue.enabled = enabled;
+                    deserializedValue.version = version;
                     deserializedValue.includeAPIs = includeAPIs;
                     deserializedValue.retentionPolicy = retentionPolicy;
 

@@ -11,6 +11,9 @@ import java.util.function.Function;
  * The details of an array type that is used by a client.
  */
 public class ArrayType implements IType {
+    /**
+     * The {@code byte[]} type.
+     */
     public static final ArrayType ByteArray = new ArrayType(PrimitiveType.Byte,
         defaultValueExpression -> defaultValueExpression == null
             ? "new byte[0]" // TODO (alzimmer): Should this be new byte[0] or null?
@@ -26,6 +29,11 @@ public class ArrayType implements IType {
         this.defaultValueExpressionConverter = defaultValueExpressionConverter;
     }
 
+    /**
+     * Gets the element type of the array.
+     *
+     * @return The element type of the array.
+     */
     public final IType getElementType() {
         return elementType;
     }
@@ -35,18 +43,22 @@ public class ArrayType implements IType {
         return toStringValue;
     }
 
+    @Override
     public final IType asNullable() {
         return this;
     }
 
+    @Override
     public final boolean contains(IType type) {
         return this == type || getElementType().contains(type);
     }
 
+    @Override
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         getElementType().addImportsTo(imports, includeImplementationImports);
     }
 
+    @Override
     public final String defaultValueExpression(String sourceExpression) {
         return defaultValueExpressionConverter.apply(sourceExpression);
     }
@@ -56,28 +68,32 @@ public class ArrayType implements IType {
         return defaultValueExpression(null);
     }
 
+    @Override
     public final IType getClientType() {
         // The only supported array type is byte[]
         return this;
     }
 
+    @Override
     public final String convertToClientType(String expression) {
         // The only supported array type is byte[]
         return expression;
     }
 
+    @Override
     public final String convertFromClientType(String expression) {
         // The only supported array type is byte[]
         return expression;
     }
 
+    @Override
     public String validate(String expression) {
         return null;
     }
 
     @Override
-    public String jsonDeserializationMethod() {
-        return "getBinary()";
+    public String jsonDeserializationMethod(String jsonReaderName) {
+        return jsonReaderName + ".getBinary()";
     }
 
     @Override

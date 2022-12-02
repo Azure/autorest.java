@@ -154,6 +154,7 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of DotFishMarket if the JsonReader was pointing to an instance of it, or null if it was
      *     pointing to JSON null.
+     * @throws IOException If an error occurs while reading the DotFishMarket.
      */
     public static DotFishMarket fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(

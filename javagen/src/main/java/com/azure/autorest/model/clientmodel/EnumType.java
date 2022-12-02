@@ -164,8 +164,8 @@ public class EnumType implements IType {
     }
 
     @Override
-    public String jsonDeserializationMethod() {
-        return String.format("getNullable(enumReader -> %s.%s(enumReader.getString()))", name, getFromJsonMethodName());
+    public String jsonDeserializationMethod(String jsonReaderName) {
+        return String.format("%s.%s(%s.getString())", name, getFromJsonMethodName(), jsonReaderName);
     }
 
     @Override

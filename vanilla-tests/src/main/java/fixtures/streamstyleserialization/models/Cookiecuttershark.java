@@ -20,7 +20,7 @@ public final class Cookiecuttershark extends Shark {
     /*
      * The fishtype property.
      */
-    private String fishtype = "cookiecuttershark";
+    private static final String FISHTYPE = "cookiecuttershark";
 
     /**
      * Creates an instance of Cookiecuttershark class.
@@ -66,7 +66,7 @@ public final class Cookiecuttershark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", this.fishtype);
+        jsonWriter.writeStringField("fishtype", FISHTYPE);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday", Objects.toString(getBirthday(), null));
         jsonWriter.writeStringField("species", getSpecies());
@@ -83,6 +83,7 @@ public final class Cookiecuttershark extends Shark {
      *     pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
      *     polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the Cookiecuttershark.
      */
     public static Cookiecuttershark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
@@ -100,9 +101,11 @@ public final class Cookiecuttershark extends Shark {
 
                         if ("fishtype".equals(fieldName)) {
                             String fishtype = reader.getString();
-                            if (!"cookiecuttershark".equals(fishtype)) {
+                            if (!FISHTYPE.equals(fishtype)) {
                                 throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to 'cookiecuttershark'. The found 'fishtype' was '"
+                                        "'fishtype' was expected to be non-null and equal to '"
+                                                + FISHTYPE
+                                                + "'. The found 'fishtype' was '"
                                                 + fishtype
                                                 + "'.");
                             }

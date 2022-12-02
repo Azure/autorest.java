@@ -158,7 +158,8 @@ public class JavaSettings {
                 getBooleanValue(host, "enable-sync-stack", false),
                 getBooleanValue(host, "output-model-immutable", false),
                 getBooleanValue(host, "use-input-stream-for-binary", false),
-                getBooleanValue(host, "no-custom-headers", false)
+                getBooleanValue(host, "no-custom-headers", false),
+                getBooleanValue(host, "include-read-only-in-constructor-args", false)
             );
         }
         return instance;
@@ -242,6 +243,9 @@ public class JavaSettings {
      * @param streamResponseInputStream If set to true, sync methods will use {@code InputStream} for binary responses.
      * @param noCustomHeaders If set to true, methods that have custom header types will also have an equivalent
      * method that returns just the response with untyped headers.
+     * @param includeReadOnlyInConstructorArgs If set to true, read-only required properties will be included in the
+     * constructor if {@code requiredFieldsAsConstructorArgs} is true. This is a backwards compatibility flag as
+     * previously read-only required were included in constructors.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -301,7 +305,8 @@ public class JavaSettings {
         boolean isSyncStackEnabled,
         boolean outputModelImmutable,
         boolean streamResponseInputStream,
-        boolean noCustomHeaders) {
+        boolean noCustomHeaders,
+        boolean includeReadOnlyInConstructorArgs) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -394,6 +399,7 @@ public class JavaSettings {
 
         this.isInputStreamForBinary = streamResponseInputStream;
         this.noCustomHeaders = noCustomHeaders;
+        this.includeReadOnlyInConstructorArgs = includeReadOnlyInConstructorArgs;
     }
 
     private String keyCredentialHeaderName;
@@ -998,6 +1004,24 @@ public class JavaSettings {
      */
     public boolean isInputStreamForBinary() {
         return isInputStreamForBinary;
+    }
+
+    private final boolean includeReadOnlyInConstructorArgs;
+
+    /**
+     * Whether required read-only properties will be included in constructor arguments.
+     * <p>
+     * In the past, required read-only properties were included in constructor arguments when
+     * {@link #isRequiredFieldsAsConstructorArgs()} was true. This flag re-enables that capability when the property is
+     * required and read-only and {@link #isRequiredFieldsAsConstructorArgs()} is true.
+     * <p>
+     * If this returns true but {@link #isRequiredFieldsAsConstructorArgs()} returns false this configuration does
+     * nothing.
+     *
+     * @return Whether required read-only properties will be included in constructor arguments.
+     */
+    public boolean isIncludeReadOnlyInConstructorArgs() {
+        return includeReadOnlyInConstructorArgs;
     }
 
     private static final String DEFAULT_CODE_GENERATION_HEADER = String.join("\r\n",

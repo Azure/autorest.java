@@ -117,6 +117,7 @@ public final class Basic implements JsonSerializable<Basic> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Basic if the JsonReader was pointing to an instance of it, or null if it was pointing to
      *     JSON null.
+     * @throws IOException If an error occurs while reading the Basic.
      */
     public static Basic fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
@@ -133,7 +134,7 @@ public final class Basic implements JsonSerializable<Basic> {
                         } else if ("name".equals(fieldName)) {
                             name = reader.getString();
                         } else if ("color".equals(fieldName)) {
-                            color = reader.getNullable(enumReader -> CMYKColors.fromString(enumReader.getString()));
+                            color = CMYKColors.fromString(reader.getString());
                         } else {
                             reader.skipChildren();
                         }

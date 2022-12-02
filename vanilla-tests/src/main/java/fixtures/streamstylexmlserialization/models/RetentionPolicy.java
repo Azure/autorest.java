@@ -92,6 +92,7 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of RetentionPolicy if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static RetentionPolicy fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(

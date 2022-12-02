@@ -7,6 +7,7 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.core.http.HttpHeaderName;
+import com.azure.core.util.CoreUtils;
 
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -529,13 +530,21 @@ public class ClassType implements IType {
     }
 
     @Override
-    public java.lang.String jsonDeserializationMethod() {
-        return jsonDeserializationMethod;
+    public java.lang.String jsonDeserializationMethod(String jsonReaderName) {
+        if (jsonDeserializationMethod == null) {
+            return null;
+        }
+
+        return jsonReaderName + "." + jsonDeserializationMethod;
     }
 
     @Override
     public java.lang.String jsonSerializationMethodCall(java.lang.String jsonWriterName, java.lang.String fieldName,
         java.lang.String valueGetter) {
+        if (!isSwaggerType && CoreUtils.isNullOrEmpty(serializationMethodBase)) {
+            return null;
+        }
+
         String methodBase = isSwaggerType ? "writeJson" : serializationMethodBase;
         String value = wrapSerializationWithObjectsToString
             ? "Objects.toString(" + valueGetter + ", null)" : valueGetter;

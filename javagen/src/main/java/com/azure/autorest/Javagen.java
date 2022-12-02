@@ -47,6 +47,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 
@@ -93,6 +94,7 @@ public class Javagen extends NewPlugin {
             // Formatting Java source files can be expensive but can be run in parallel.
             // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
             // complete.
+            AtomicBoolean failedFormatting = new AtomicBoolean();
             javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
                 String formattedSource = javaFile.getContents().toString();
                 if (!settings.isSkipFormatting()) {
@@ -100,12 +102,16 @@ public class Javagen extends NewPlugin {
                         formattedSource = formatter.formatSourceAndFixImports(formattedSource);
                     } catch (Exception e) {
                         logger.error("Unable to format output file " + javaFile.getFilePath(), e);
-                        throw new RuntimeException(e);
+                        failedFormatting.set(true);
                     }
                 }
 
                 formattedFiles.put(javaFile.getFilePath(), formattedSource);
             });
+
+            if (failedFormatting.get()) {
+                throw new RuntimeException("Failed to format Java files.");
+            }
 
             // Then for each formatted file write the file. This is done synchronously as there is potential race
             // conditions that can lead to deadlocking.

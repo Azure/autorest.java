@@ -93,6 +93,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * @return An instance of MyBaseType if the JsonReader was pointing to an instance of it, or null if it was pointing
      *     to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the MyBaseType.
      */
     public static MyBaseType fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(

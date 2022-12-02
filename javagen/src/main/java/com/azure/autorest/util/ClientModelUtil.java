@@ -216,7 +216,7 @@ public class ClientModelUtil {
 
     /**
      * Gets the suffix of the builder class.
-     *
+     * <p>
      * The class name of the Builder is usually the service client interface name + builder suffix.
      *
      * @return the suffix of the builder class.
@@ -438,8 +438,7 @@ public class ClientModelUtil {
     public static boolean hasSetter(ClientModelPropertyAccess property, JavaSettings settings) {
         // If the property isn't read-only or required and part of the constructor, and it isn't private,
         // add a setter.
-        return !isReadOnlyOrInConstructor(property, settings)
-                && !isPrivateAccess(property);
+        return !isReadOnlyOrInConstructor(property, settings) && !isPrivateAccess(property);
     }
 
     // A property has private access when it is to be flattened.
@@ -454,7 +453,25 @@ public class ClientModelUtil {
     }
 
     private static boolean isReadOnlyOrInConstructor(ClientModelPropertyAccess property, JavaSettings settings) {
-        return property.isReadOnly()
-                || (settings.isRequiredFieldsAsConstructorArgs() && property.isRequired());
+        return property.isReadOnly() || (settings.isRequiredFieldsAsConstructorArgs() && property.isRequired());
+    }
+
+    /**
+     * Determines whether the {@link ClientModelProperty} should be included in the model's constructor.
+     * <p>
+     * {@link ClientModelProperty Properties} are included in the constructor if the following hold true
+     * <ul>
+     * <li>{@link ClientModelProperty#isRequired()} is true</li>
+     * <li>{@link JavaSettings#isRequiredFieldsAsConstructorArgs()} is true</li>
+     * <li>{@link ClientModelProperty#isReadOnly()} is false or {@link JavaSettings#isIncludeReadOnlyInConstructorArgs()} is true</li>
+     * </ul>
+     *
+     * @param property The {@link ClientModelProperty}
+     * @param settings The Autorest generation settings.
+     * @return Whether the {@code property} should be included in the model's constructor.
+     */
+    public static boolean includePropertyInConstructor(ClientModelProperty property, JavaSettings settings) {
+        return property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()
+            && (!property.isReadOnly() || settings.isIncludeReadOnlyInConstructorArgs());
     }
 }

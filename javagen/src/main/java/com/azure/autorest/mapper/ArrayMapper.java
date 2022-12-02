@@ -12,6 +12,9 @@ import com.azure.autorest.model.clientmodel.ListType;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * A mapper that maps an {@link ArraySchema} to either an {@link IterableType} or {@link ListType}.
+ */
 public class ArrayMapper implements IMapper<ArraySchema, IType> {
     private static final ArrayMapper INSTANCE = new ArrayMapper();
     Map<ArraySchema, IType> parsed = new ConcurrentHashMap<>();
@@ -19,6 +22,11 @@ public class ArrayMapper implements IMapper<ArraySchema, IType> {
     private ArrayMapper() {
     }
 
+    /**
+     * Gets the global {@link ArrayMapper} instance.
+     *
+     * @return The global {@link ArrayMapper} instance.
+     */
     public static ArrayMapper getInstance() {
         return INSTANCE;
     }

@@ -255,6 +255,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * @param xmlReader The XmlReader being read.
      * @return An instance of ListContainersResponse if the XmlReader was pointing to an instance of it, or null if it
      *     was pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      */
     public static ListContainersResponse fromXml(XmlReader xmlReader) throws XMLStreamException {
         return xmlReader.readObject(
@@ -289,10 +290,10 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                     ListContainersResponse deserializedValue = new ListContainersResponse();
                     deserializedValue.serviceEndpoint = serviceEndpoint;
                     deserializedValue.prefix = prefix;
-                    deserializedValue.marker = marker;
                     deserializedValue.maxResults = maxResults;
-                    deserializedValue.setContainers(containers);
                     deserializedValue.nextMarker = nextMarker;
+                    deserializedValue.marker = marker;
+                    deserializedValue.setContainers(containers);
 
                     return deserializedValue;
                 });

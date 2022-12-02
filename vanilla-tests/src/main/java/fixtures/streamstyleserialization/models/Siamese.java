@@ -97,6 +97,7 @@ public final class Siamese extends Cat {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Siamese if the JsonReader was pointing to an instance of it, or null if it was pointing to
      *     JSON null.
+     * @throws IOException If an error occurs while reading the Siamese.
      */
     public static Siamese fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
