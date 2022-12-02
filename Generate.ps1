@@ -89,7 +89,7 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/lro.md",
     "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 200 | Out-Null
+$job | Wait-Job -Timeout 360
 $job | Receive-Job
 
 if (Test-Path ./vanilla-tests/swagger/CoverageReporter.java) {
@@ -112,7 +112,7 @@ $job = @(
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true --output-model-immutable"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 60 | Out-Null
+$job | Wait-Job -Timeout 120
 $job | Receive-Job
 
 # Azure
@@ -124,7 +124,7 @@ $job = @(
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/subscriptionId-apiVersion.json --namespace=fixtures.subscriptionidapiversion --payload-flattening-threshold=1",
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 60 | Out-Null
+$job | Wait-Job -Timeout 120
 $job | Receive-Job
 
 #  "$ARM_ARGUMENTS --input-file=$SWAGGER_PATH/lro.json --namespace=fixtures.lro"
@@ -160,7 +160,7 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/dpg-customization.md",
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/custom-http-exception-mapping.md"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 100 | Out-Null
+$job | Wait-Job -Timeout 240
 $job | Receive-Job
 
 New-Item ./protocol-tests/src/main/java/fixtures/headexceptions/models -ItemType Directory -Force | Out-Null
@@ -175,7 +175,7 @@ $job = @(
     "$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial",
     "$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 30 | Out-Null
+$job | Wait-Job -Timeout 30
 $job | Receive-Job
 
 Remove-Item ./protocol-resilience-test/llcinitial/src/main/java/module-info.java -Force | Out-Null
@@ -195,7 +195,7 @@ $job = @(
     "--use:. docs/samples/specification/basic/readme.md",
     "--use:. docs/samples/specification/management/readme.md"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 30 | Out-Null
+$job | Wait-Job -Timeout 30
 $job | Receive-Job
 
 exit $ExitCode
