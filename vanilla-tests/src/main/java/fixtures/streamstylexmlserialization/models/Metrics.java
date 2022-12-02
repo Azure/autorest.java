@@ -9,8 +9,6 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
@@ -156,7 +154,6 @@ public final class Metrics implements XmlSerializable<Metrics> {
                 "Metrics",
                 reader -> {
                     String version = null;
-                    boolean enabledFound = false;
                     boolean enabled = false;
                     Boolean includeAPIs = null;
                     RetentionPolicy retentionPolicy = null;
@@ -175,22 +172,13 @@ public final class Metrics implements XmlSerializable<Metrics> {
                             reader.skipElement();
                         }
                     }
-                    if (enabledFound) {
-                        Metrics deserializedValue = new Metrics();
-                        deserializedValue.enabled = enabled;
-                        deserializedValue.version = version;
-                        deserializedValue.includeAPIs = includeAPIs;
-                        deserializedValue.retentionPolicy = retentionPolicy;
+                    Metrics deserializedValue = new Metrics();
+                    deserializedValue.enabled = enabled;
+                    deserializedValue.version = version;
+                    deserializedValue.includeAPIs = includeAPIs;
+                    deserializedValue.retentionPolicy = retentionPolicy;
 
-                        return deserializedValue;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!enabledFound) {
-                        missingProperties.add("Enabled");
-                    }
-
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                    return deserializedValue;
                 });
     }
 }

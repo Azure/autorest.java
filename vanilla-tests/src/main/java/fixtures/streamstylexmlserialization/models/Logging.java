@@ -9,8 +9,6 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
@@ -184,15 +182,10 @@ public final class Logging implements XmlSerializable<Logging> {
         return xmlReader.readObject(
                 "Logging",
                 reader -> {
-                    boolean versionFound = false;
                     String version = null;
-                    boolean deleteFound = false;
                     boolean delete = false;
-                    boolean readFound = false;
                     boolean read = false;
-                    boolean writeFound = false;
                     boolean write = false;
-                    boolean retentionPolicyFound = false;
                     RetentionPolicy retentionPolicy = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
@@ -211,35 +204,14 @@ public final class Logging implements XmlSerializable<Logging> {
                             reader.skipElement();
                         }
                     }
-                    if (versionFound && deleteFound && readFound && writeFound && retentionPolicyFound) {
-                        Logging deserializedValue = new Logging();
-                        deserializedValue.version = version;
-                        deserializedValue.delete = delete;
-                        deserializedValue.read = read;
-                        deserializedValue.write = write;
-                        deserializedValue.retentionPolicy = retentionPolicy;
+                    Logging deserializedValue = new Logging();
+                    deserializedValue.version = version;
+                    deserializedValue.delete = delete;
+                    deserializedValue.read = read;
+                    deserializedValue.write = write;
+                    deserializedValue.retentionPolicy = retentionPolicy;
 
-                        return deserializedValue;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!versionFound) {
-                        missingProperties.add("Version");
-                    }
-                    if (!deleteFound) {
-                        missingProperties.add("Delete");
-                    }
-                    if (!readFound) {
-                        missingProperties.add("Read");
-                    }
-                    if (!writeFound) {
-                        missingProperties.add("Write");
-                    }
-                    if (!retentionPolicyFound) {
-                        missingProperties.add("RetentionPolicy");
-                    }
-
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                    return deserializedValue;
                 });
     }
 }

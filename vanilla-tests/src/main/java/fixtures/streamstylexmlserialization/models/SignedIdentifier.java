@@ -9,8 +9,6 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
@@ -106,9 +104,7 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
         return xmlReader.readObject(
                 "SignedIdentifier",
                 reader -> {
-                    boolean idFound = false;
                     String id = null;
-                    boolean accessPolicyFound = false;
                     AccessPolicy accessPolicy = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
@@ -121,23 +117,11 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
                             reader.skipElement();
                         }
                     }
-                    if (idFound && accessPolicyFound) {
-                        SignedIdentifier deserializedValue = new SignedIdentifier();
-                        deserializedValue.id = id;
-                        deserializedValue.accessPolicy = accessPolicy;
+                    SignedIdentifier deserializedValue = new SignedIdentifier();
+                    deserializedValue.id = id;
+                    deserializedValue.accessPolicy = accessPolicy;
 
-                        return deserializedValue;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!idFound) {
-                        missingProperties.add("Id");
-                    }
-                    if (!accessPolicyFound) {
-                        missingProperties.add("AccessPolicy");
-                    }
-
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                    return deserializedValue;
                 });
     }
 }

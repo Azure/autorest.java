@@ -9,8 +9,6 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
@@ -209,15 +207,10 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
         return xmlReader.readObject(
                 "CorsRule",
                 reader -> {
-                    boolean allowedOriginsFound = false;
                     String allowedOrigins = null;
-                    boolean allowedMethodsFound = false;
                     String allowedMethods = null;
-                    boolean allowedHeadersFound = false;
                     String allowedHeaders = null;
-                    boolean exposedHeadersFound = false;
                     String exposedHeaders = null;
-                    boolean maxAgeInSecondsFound = false;
                     int maxAgeInSeconds = 0;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
@@ -236,39 +229,14 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
                             reader.skipElement();
                         }
                     }
-                    if (allowedOriginsFound
-                            && allowedMethodsFound
-                            && allowedHeadersFound
-                            && exposedHeadersFound
-                            && maxAgeInSecondsFound) {
-                        CorsRule deserializedValue = new CorsRule();
-                        deserializedValue.allowedOrigins = allowedOrigins;
-                        deserializedValue.allowedMethods = allowedMethods;
-                        deserializedValue.allowedHeaders = allowedHeaders;
-                        deserializedValue.exposedHeaders = exposedHeaders;
-                        deserializedValue.maxAgeInSeconds = maxAgeInSeconds;
+                    CorsRule deserializedValue = new CorsRule();
+                    deserializedValue.allowedOrigins = allowedOrigins;
+                    deserializedValue.allowedMethods = allowedMethods;
+                    deserializedValue.allowedHeaders = allowedHeaders;
+                    deserializedValue.exposedHeaders = exposedHeaders;
+                    deserializedValue.maxAgeInSeconds = maxAgeInSeconds;
 
-                        return deserializedValue;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!allowedOriginsFound) {
-                        missingProperties.add("AllowedOrigins");
-                    }
-                    if (!allowedMethodsFound) {
-                        missingProperties.add("AllowedMethods");
-                    }
-                    if (!allowedHeadersFound) {
-                        missingProperties.add("AllowedHeaders");
-                    }
-                    if (!exposedHeadersFound) {
-                        missingProperties.add("ExposedHeaders");
-                    }
-                    if (!maxAgeInSecondsFound) {
-                        missingProperties.add("MaxAgeInSeconds");
-                    }
-
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                    return deserializedValue;
                 });
     }
 }

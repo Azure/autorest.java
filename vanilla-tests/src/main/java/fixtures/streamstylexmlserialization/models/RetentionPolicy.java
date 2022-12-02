@@ -9,8 +9,6 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
@@ -100,7 +98,6 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
         return xmlReader.readObject(
                 "RetentionPolicy",
                 reader -> {
-                    boolean enabledFound = false;
                     boolean enabled = false;
                     Integer days = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
@@ -114,20 +111,11 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
                             reader.skipElement();
                         }
                     }
-                    if (enabledFound) {
-                        RetentionPolicy deserializedValue = new RetentionPolicy();
-                        deserializedValue.enabled = enabled;
-                        deserializedValue.days = days;
+                    RetentionPolicy deserializedValue = new RetentionPolicy();
+                    deserializedValue.enabled = enabled;
+                    deserializedValue.days = days;
 
-                        return deserializedValue;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!enabledFound) {
-                        missingProperties.add("Enabled");
-                    }
-
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                    return deserializedValue;
                 });
     }
 }

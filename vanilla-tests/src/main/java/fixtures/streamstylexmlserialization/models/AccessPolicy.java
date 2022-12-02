@@ -10,8 +10,6 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -135,11 +133,8 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
         return xmlReader.readObject(
                 "AccessPolicy",
                 reader -> {
-                    boolean startFound = false;
                     OffsetDateTime start = null;
-                    boolean expiryFound = false;
                     OffsetDateTime expiry = null;
-                    boolean permissionFound = false;
                     String permission = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
@@ -154,27 +149,12 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
                             reader.skipElement();
                         }
                     }
-                    if (startFound && expiryFound && permissionFound) {
-                        AccessPolicy deserializedValue = new AccessPolicy();
-                        deserializedValue.start = start;
-                        deserializedValue.expiry = expiry;
-                        deserializedValue.permission = permission;
+                    AccessPolicy deserializedValue = new AccessPolicy();
+                    deserializedValue.start = start;
+                    deserializedValue.expiry = expiry;
+                    deserializedValue.permission = permission;
 
-                        return deserializedValue;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!startFound) {
-                        missingProperties.add("Start");
-                    }
-                    if (!expiryFound) {
-                        missingProperties.add("Expiry");
-                    }
-                    if (!permissionFound) {
-                        missingProperties.add("Permission");
-                    }
-
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                    return deserializedValue;
                 });
     }
 }

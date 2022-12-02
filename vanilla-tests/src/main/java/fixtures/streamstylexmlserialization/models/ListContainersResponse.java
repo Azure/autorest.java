@@ -262,13 +262,10 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                 "EnumerationResults",
                 reader -> {
                     String serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
-                    boolean prefixFound = false;
                     String prefix = null;
                     String marker = null;
-                    boolean maxResultsFound = false;
                     int maxResults = 0;
                     List<Container> containers = null;
-                    boolean nextMarkerFound = false;
                     String nextMarker = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
@@ -290,33 +287,15 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                             reader.skipElement();
                         }
                     }
-                    if (serviceEndpointFound && prefixFound && maxResultsFound && nextMarkerFound) {
-                        ListContainersResponse deserializedValue = new ListContainersResponse();
-                        deserializedValue.serviceEndpoint = serviceEndpoint;
-                        deserializedValue.prefix = prefix;
-                        deserializedValue.maxResults = maxResults;
-                        deserializedValue.nextMarker = nextMarker;
-                        deserializedValue.marker = marker;
-                        deserializedValue.setContainers(containers);
+                    ListContainersResponse deserializedValue = new ListContainersResponse();
+                    deserializedValue.serviceEndpoint = serviceEndpoint;
+                    deserializedValue.prefix = prefix;
+                    deserializedValue.maxResults = maxResults;
+                    deserializedValue.nextMarker = nextMarker;
+                    deserializedValue.marker = marker;
+                    deserializedValue.setContainers(containers);
 
-                        return deserializedValue;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!serviceEndpointFound) {
-                        missingProperties.add("ServiceEndpoint");
-                    }
-                    if (!prefixFound) {
-                        missingProperties.add("Prefix");
-                    }
-                    if (!maxResultsFound) {
-                        missingProperties.add("MaxResults");
-                    }
-                    if (!nextMarkerFound) {
-                        missingProperties.add("NextMarker");
-                    }
-
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                    return deserializedValue;
                 });
     }
 }
