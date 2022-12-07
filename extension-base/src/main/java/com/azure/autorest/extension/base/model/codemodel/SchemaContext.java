@@ -14,7 +14,9 @@ public enum SchemaContext {
 
     EXCEPTION("exception"),
 
-    CONVENIENCE_API("convenience-api");
+    CONVENIENCE_API("convenience-api"),
+
+    PAGED("paged");
 
     private final String value;
     private final static Map<String, SchemaContext> CONSTANTS = new HashMap<>();

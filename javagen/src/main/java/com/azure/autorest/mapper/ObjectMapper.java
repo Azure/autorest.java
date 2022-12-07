@@ -4,6 +4,7 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -112,7 +113,9 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
     protected boolean isPageModel(ObjectSchema compositeType) {
         boolean ret = false;
 
-        if (compositeType.getLanguage() != null && compositeType.getLanguage().getDefault() != null) {
+        if (compositeType.getUsage() != null && compositeType.getUsage().contains(SchemaContext.PAGED)) {
+            ret = true;
+        } else if (compositeType.getLanguage() != null && compositeType.getLanguage().getDefault() != null) {
             String namespace = compositeType.getLanguage().getDefault().getNamespace();
             String name = compositeType.getLanguage().getDefault().getName();
 
