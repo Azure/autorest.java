@@ -159,7 +159,9 @@ public class JavaSettings {
                 getBooleanValue(host, "output-model-immutable", false),
                 getBooleanValue(host, "use-input-stream-for-binary", false),
                 getBooleanValue(host, "no-custom-headers", false),
-                getBooleanValue(host, "include-read-only-in-constructor-args", false)
+                getBooleanValue(host, "include-read-only-in-constructor-args", false),
+                // setting the default as true as the Java design guideline recommends using String for URLs.
+                getBooleanValue(host, "url-as-string", true)
             );
         }
         return instance;
@@ -246,6 +248,8 @@ public class JavaSettings {
      * @param includeReadOnlyInConstructorArgs If set to true, read-only required properties will be included in the
      * constructor if {@code requiredFieldsAsConstructorArgs} is true. This is a backwards compatibility flag as
      * previously read-only required were included in constructors.
+     * @param urlAsString This generates all URLs as String type. This is enabled by default as required by the Java
+     * design guidelines. For backward compatability, this can be set to false.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -306,7 +310,8 @@ public class JavaSettings {
         boolean outputModelImmutable,
         boolean streamResponseInputStream,
         boolean noCustomHeaders,
-        boolean includeReadOnlyInConstructorArgs) {
+        boolean includeReadOnlyInConstructorArgs,
+        boolean urlAsString) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -400,6 +405,7 @@ public class JavaSettings {
         this.isInputStreamForBinary = streamResponseInputStream;
         this.noCustomHeaders = noCustomHeaders;
         this.includeReadOnlyInConstructorArgs = includeReadOnlyInConstructorArgs;
+        this.urlAsString = urlAsString;
     }
 
     private String keyCredentialHeaderName;
@@ -434,6 +440,11 @@ public class JavaSettings {
 
     public boolean isNoCustomHeaders() {
         return noCustomHeaders;
+    }
+
+    private boolean urlAsString;
+    public boolean urlAsString() {
+        return urlAsString;
     }
 
     public enum Fluent {
