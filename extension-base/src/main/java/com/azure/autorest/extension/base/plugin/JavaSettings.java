@@ -248,6 +248,8 @@ public class JavaSettings {
      * @param includeReadOnlyInConstructorArgs If set to true, read-only required properties will be included in the
      * constructor if {@code requiredFieldsAsConstructorArgs} is true. This is a backwards compatibility flag as
      * previously read-only required were included in constructors.
+     * @param urlAsString This generates all URLs as String type. This is enabled by default as required by the Java
+     * design guidelines. For backward compatability, this can be set to false.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -440,7 +442,7 @@ public class JavaSettings {
         return noCustomHeaders;
     }
 
-    boolean urlAsString;
+    private boolean urlAsString;
     public boolean urlAsString() {
         return urlAsString;
     }
