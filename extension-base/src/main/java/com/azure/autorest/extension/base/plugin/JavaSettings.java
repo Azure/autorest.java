@@ -159,7 +159,9 @@ public class JavaSettings {
                 getBooleanValue(host, "output-model-immutable", false),
                 getBooleanValue(host, "use-input-stream-for-binary", false),
                 getBooleanValue(host, "no-custom-headers", false),
-                getBooleanValue(host, "include-read-only-in-constructor-args", false)
+                getBooleanValue(host, "include-read-only-in-constructor-args", false),
+                // setting the default as true as the Java design guideline recommends using String for URLs.
+                getBooleanValue(host, "url-as-string", true)
             );
         }
         return instance;
@@ -306,7 +308,8 @@ public class JavaSettings {
         boolean outputModelImmutable,
         boolean streamResponseInputStream,
         boolean noCustomHeaders,
-        boolean includeReadOnlyInConstructorArgs) {
+        boolean includeReadOnlyInConstructorArgs,
+        boolean urlAsString) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -400,6 +403,7 @@ public class JavaSettings {
         this.isInputStreamForBinary = streamResponseInputStream;
         this.noCustomHeaders = noCustomHeaders;
         this.includeReadOnlyInConstructorArgs = includeReadOnlyInConstructorArgs;
+        this.urlAsString = urlAsString;
     }
 
     private String keyCredentialHeaderName;
@@ -434,6 +438,11 @@ public class JavaSettings {
 
     public boolean isNoCustomHeaders() {
         return noCustomHeaders;
+    }
+
+    boolean urlAsString;
+    public boolean urlAsString() {
+        return urlAsString;
     }
 
     public enum Fluent {
