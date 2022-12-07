@@ -16,7 +16,7 @@
     "@azure-tools/cadl-dpg": "~0.3.0",
     "@azure-tools/cadl-ranch-specs": "~0.5.0",
     "@azure-tools/cadl-ranch-expect": "~0.1.12",
-    "@azure-tools/cadl-java": "file:/../cadl-extension/azure-tools-cadl-java-0.1.1.tgz"
+    "@azure-tools/cadl-java": "file:/../cadl-extension/azure-tools-cadl-java-0.1.2.tgz"
   },
   "devDependencies": {
     "@cadl-lang/prettier-plugin-cadl": "~0.5.15",
