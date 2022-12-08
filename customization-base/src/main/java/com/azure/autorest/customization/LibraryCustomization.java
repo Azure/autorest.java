@@ -41,6 +41,11 @@ public final class LibraryCustomization {
     public ClassCustomization getClass(String packageName, String className) {
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className).stream()
+            // findWorkspace symbol finds all classes that contain the classname term
+            // The filter that checks the filename only works if there are no nested classes
+            // So, when customizing client classes that contain service interface, this can incorrectly return
+            // the service interface instead of the client class. So, we should add another check for exact name match
+            .filter(si -> si.getName().equals(className))
             .filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
             .findFirst();
 
