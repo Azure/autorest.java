@@ -780,60 +780,65 @@ export class CodeModelBuilder {
 
   private processScalar(type: Scalar, formatFromDerived: string | undefined, nameHint: string): Schema {
     const scalarName = type.name;
-    switch (scalarName) {
-      case "string": {
-        const Enum = getKnownValues(this.program, type as Scalar);
-        if (Enum) {
-          return this.processChoiceSchema(Enum, this.getName(type), false);
-        } else {
-          const format = formatFromDerived ?? getFormat(this.program, type);
-          if (format) {
-            return this.processFormatString(type, format, nameHint);
+    if (this.program.checker.isStdType(type)) {
+      switch (scalarName) {
+        case "string": {
+          const Enum = getKnownValues(this.program, type as Scalar);
+          if (Enum) {
+            return this.processChoiceSchema(Enum, this.getName(type), false);
+          } else {
+            const format = formatFromDerived ?? getFormat(this.program, type);
+            if (format) {
+              return this.processFormatString(type, format, nameHint);
+            }
+            return this.processStringSchema(type, nameHint);
           }
-          return this.processStringSchema(type, nameHint);
         }
+
+        case "bytes":
+          return this.processByteArraySchema(type, nameHint, false);
+
+        case "boolean":
+          return this.processBooleanSchema(type, nameHint);
+
+        case "plainTime":
+          return this.processTimeSchema(type, nameHint);
+
+        case "plainDate":
+          return this.processDateSchema(type, nameHint);
+
+        case "zonedDateTime":
+          return this.processDateTimeSchema(type, nameHint, false);
+
+        case "duration":
+          return this.processDurationSchema(type, nameHint);
+
+        case "url":
+          return this.processUrlSchema(type, nameHint);
       }
 
-      case "bytes":
-        return this.processByteArraySchema(type, nameHint, false);
-
-      case "boolean":
-        return this.processBooleanSchema(type, nameHint);
-
-      case "plainTime":
-        return this.processTimeSchema(type, nameHint);
-
-      case "plainDate":
-        return this.processDateSchema(type, nameHint);
-
-      case "zonedDateTime":
-        return this.processDateTimeSchema(type, nameHint, false);
-
-      case "duration":
-        return this.processDurationSchema(type, nameHint);
-
-      case "url":
-        return this.processUrlSchema(type, nameHint);
-    }
-
-    if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
-      // integer
-      const integerSize = scalarName === "safeint" || scalarName.includes("int64") ? 64 : 32;
-      return this.processIntegerSchema(type, nameHint, integerSize);
-    } else if (scalarName.startsWith("float")) {
-      // float point
-      return this.processNumberSchema(type, nameHint);
-    } else {
-      if (type.baseScalar) {
-        const Enum = getKnownValues(this.program, type as Scalar);
-        if (Enum) {
-          return this.processChoiceSchema(Enum, this.getName(type), false);
-        } else {
-          // fallback to baseScalar
-          return this.processScalar(type.baseScalar, getFormat(this.program, type), nameHint);
-        }
+      if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
+        // integer
+        const integerSize = scalarName === "safeint" || scalarName.includes("int64") ? 64 : 32;
+        return this.processIntegerSchema(type, nameHint, integerSize);
+      } else if (scalarName.startsWith("float")) {
+        // float point
+        return this.processNumberSchema(type, nameHint);
       } else {
         throw new Error(`Unrecognized scalar type: '${scalarName}'.`);
+      }
+    } else {
+      const Enum = getKnownValues(this.program, type as Scalar);
+      if (Enum) {
+        // use it for extensible enum
+        return this.processChoiceSchema(Enum, this.getName(type), false);
+      } else {
+        if (type.baseScalar) {
+          // fallback to baseScalar
+          return this.processScalar(type.baseScalar, getFormat(this.program, type), nameHint);
+        } else {
+          throw new Error(`Unrecognized scalar type: '${scalarName}'.`);
+        }
       }
     }
   }
