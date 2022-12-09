@@ -22,7 +22,7 @@ Modify `package.json`, add one line under `dependencies`:
       "@cadl-lang/compiler": "^0.37.0",
       "@cadl-lang/rest": "^0.19.0",
       "@azure-tools/cadl-azure-core": "^0.9.0",
-+      "@azure-tools/cadl-java": "0.1.1"
++      "@azure-tools/cadl-java": "0.1.2"
     },
 ```
 

@@ -12,6 +12,9 @@ export enum SchemaContext {
 
   /** Schema is used from the operation for generating convenience API. */
   ConvenienceApi = "convenience-api",
+
+  /** Schema is used from the pageable operation. This usage does not propagate. */
+  Paged = "paged",
 }
 
 export interface SchemaUsage {

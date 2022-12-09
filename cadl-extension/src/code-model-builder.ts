@@ -442,6 +442,12 @@ export class CodeModelBuilder {
               nextLinkName: pagedResult.nextLinkProperty?.name,
             };
 
+            op.responses?.forEach((r) => {
+              if (r instanceof SchemaResponse) {
+                this.trackSchemaUsage(r.schema, { usage: [SchemaContext.Paged] });
+              }
+            });
+
             break;
           }
         }
@@ -1414,8 +1420,13 @@ export class CodeModelBuilder {
       }
     };
 
+    // Exclude context that not to be propagated
+    const schemaUsage = {
+      usage: (schema as SchemaUsage).usage?.filter((p) => p !== SchemaContext.Paged),
+      serializationFormats: (schema as SchemaUsage).serializationFormats,
+    };
     // Propagate the usage of the initial schema itself
-    innerPropagateSchemaUsage(schema, schema as SchemaUsage);
+    innerPropagateSchemaUsage(schema, schemaUsage);
   }
 
   private trackSchemaUsage(schema: Schema, schemaUsage: SchemaUsage): void {

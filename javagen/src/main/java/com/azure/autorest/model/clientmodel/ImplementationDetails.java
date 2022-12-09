@@ -40,7 +40,12 @@ public class ImplementationDetails {
          * In DPG, it means the model need to be written to Java class.
          * Else, it may only exist in memory for Javadoc purpose.
          */
-        CONVENIENCE_API("convenience-api");
+        CONVENIENCE_API("convenience-api"),
+
+        /**
+         * Model used in paged response.
+         */
+        PAGED("paged");
 
         private final static Map<String, Usage> CONSTANTS = new HashMap<>();
         static {
