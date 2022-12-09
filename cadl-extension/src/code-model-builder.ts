@@ -33,6 +33,7 @@ import {
   Scalar,
   listServices,
   getNamespaceFullName,
+  isNullType,
 } from "@cadl-lang/compiler";
 import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
@@ -1243,9 +1244,7 @@ export class CodeModelBuilder {
   }
 
   private processUnionSchema(type: Union, name: string): Schema {
-    const nonNullVariants = Array.from(type.variants.values()).filter(
-      (it) => !(it.type.kind === "Intrinsic" && it.type.name === "null"),
-    );
+    const nonNullVariants = Array.from(type.variants.values()).filter((it) => !isNullType(it.type));
     if (nonNullVariants.length === 1) {
       // nullable
       return this.processSchema(nonNullVariants[0].type, name);
@@ -1262,9 +1261,7 @@ export class CodeModelBuilder {
 
   private isNullableType(type: Type): boolean {
     if (type.kind === "Union") {
-      const nullVariants = Array.from(type.variants.values()).filter(
-        (it) => it.type.kind === "Intrinsic" && it.type.name === "null",
-      );
+      const nullVariants = Array.from(type.variants.values()).filter((it) => isNullType(it.type));
       return nullVariants.length >= 1;
     } else {
       return false;
