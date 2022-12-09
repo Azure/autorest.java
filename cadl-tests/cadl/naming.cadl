@@ -54,7 +54,7 @@ enum TypesModel {
 @doc("description of Statuses")
 @knownValues(StatusValues)
 @friendlyName("DataStatus")
-model StatusModel is string;
+scalar StatusModel extends string;
 
 @summary("summary of StatusValues")
 @doc("description of StatusValues")

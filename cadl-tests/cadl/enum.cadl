@@ -16,7 +16,7 @@ enum Color {
 }
 
 @knownValues(Color)
-model ColorModel is string;
+scalar ColorModel extends string;
 
 enum Priority {
   High: 100,

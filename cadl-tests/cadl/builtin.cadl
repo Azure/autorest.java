@@ -22,7 +22,7 @@ model Builtin {
   dateTime: zonedDateTime;
   stringList: string[];
   bytesDict: Record<bytes>;
-  uri: uri;
+  url: url;
 }
 
 model FormatString {
@@ -39,12 +39,12 @@ model FormatString {
   @format("password")
   password: string;
 
-  @format("uri")
+  @format("url")
   uri: string;
 }
 
 @format("date-time-rfc1123")
-model DateTimeRfc1123 is string;
+scalar DateTimeRfc1123 extends string;
 
 @route("/builtin")
 interface BuiltinOp {
