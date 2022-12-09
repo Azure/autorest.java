@@ -832,7 +832,7 @@ export class CodeModelBuilder {
           return this.processScalar(type.baseScalar, getFormat(this.program, type), nameHint);
         }
       } else {
-        throw new Error(`Unrecognized intrinsic type: '${scalarName}'.`);
+        throw new Error(`Unrecognized scalar type: '${scalarName}'.`);
       }
     }
   }
