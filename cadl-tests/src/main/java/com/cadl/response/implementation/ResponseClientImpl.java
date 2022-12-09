@@ -153,7 +153,7 @@ public final class ResponseClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getBinary(
+        Mono<Response<byte[]>> getBinary(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -220,7 +220,7 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * byte[]
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -231,7 +231,7 @@ public final class ResponseClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getBinaryWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<byte[]>> getBinaryWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json, image/png";
         return FluxUtil.withContext(context -> service.getBinary(this.getEndpoint(), accept, requestOptions, context));
     }
@@ -242,7 +242,7 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * byte[]
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -253,7 +253,7 @@ public final class ResponseClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getBinaryWithResponse(RequestOptions requestOptions) {
+    public Response<byte[]> getBinaryWithResponse(RequestOptions requestOptions) {
         return getBinaryWithResponseAsync(requestOptions).block();
     }
 

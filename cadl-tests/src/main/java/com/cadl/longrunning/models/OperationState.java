@@ -4,41 +4,54 @@
 
 package com.cadl.longrunning.models;
 
-import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /** Defines values for OperationState. */
-public final class OperationState extends ExpandableStringEnum<OperationState> {
-    /** Static value InProgress for OperationState. */
-    public static final OperationState IN_PROGRESS = fromString("InProgress");
+public enum OperationState {
+    /** Enum value InProgress. */
+    IN_PROGRESS("InProgress"),
 
-    /** Static value Succeeded for OperationState. */
-    public static final OperationState SUCCEEDED = fromString("Succeeded");
+    /** Enum value Succeeded. */
+    SUCCEEDED("Succeeded"),
 
-    /** Static value Failed for OperationState. */
-    public static final OperationState FAILED = fromString("Failed");
+    /** Enum value Failed. */
+    FAILED("Failed"),
 
-    /** Static value Canceled for OperationState. */
-    public static final OperationState CANCELED = fromString("Canceled");
+    /** Enum value Canceled. */
+    CANCELED("Canceled");
 
-    /**
-     * Creates or finds a OperationState from its string representation.
-     *
-     * @param name a name to look for.
-     * @return the corresponding OperationState.
-     */
-    @JsonCreator
-    public static OperationState fromString(String name) {
-        return fromString(name, OperationState.class);
+    /** The actual serialized value for a OperationState instance. */
+    private final String value;
+
+    OperationState(String value) {
+        this.value = value;
     }
 
     /**
-     * Gets known OperationState values.
+     * Parses a serialized value to a OperationState instance.
      *
-     * @return known OperationState values.
+     * @param value the serialized value to parse.
+     * @return the parsed OperationState object, or null if unable to parse.
      */
-    public static Collection<OperationState> values() {
-        return values(OperationState.class);
+    @JsonCreator
+    public static OperationState fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        OperationState[] items = OperationState.values();
+        for (OperationState item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    /** {@inheritDoc} */
+    @JsonValue
+    @Override
+    public String toString() {
+        return this.value;
     }
 }

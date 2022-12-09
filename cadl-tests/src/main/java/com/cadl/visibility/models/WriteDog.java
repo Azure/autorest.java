@@ -12,12 +12,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Immutable
 public final class WriteDog {
     /*
-     * The secretName property.
-     */
-    @JsonProperty(value = "secretName", required = true)
-    private String secretName;
-
-    /*
      * The name property.
      */
     @JsonProperty(value = "name", required = true)
@@ -26,24 +20,11 @@ public final class WriteDog {
     /**
      * Creates an instance of WriteDog class.
      *
-     * @param secretName the secretName value to set.
      * @param name the name value to set.
      */
     @JsonCreator
-    public WriteDog(
-            @JsonProperty(value = "secretName", required = true) String secretName,
-            @JsonProperty(value = "name", required = true) String name) {
-        this.secretName = secretName;
+    public WriteDog(@JsonProperty(value = "name", required = true) String name) {
         this.name = name;
-    }
-
-    /**
-     * Get the secretName property: The secretName property.
-     *
-     * @return the secretName value.
-     */
-    public String getSecretName() {
-        return this.secretName;
     }
 
     /**

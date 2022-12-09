@@ -86,7 +86,7 @@ public final class ModelsImpl {
     }
 
     /**
-     * The get operation.
+     * Get call.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -103,7 +103,7 @@ public final class ModelsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return model with model properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return call along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(RequestOptions requestOptions) {
@@ -112,7 +112,7 @@ public final class ModelsImpl {
     }
 
     /**
-     * The get operation.
+     * Get call.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -129,7 +129,7 @@ public final class ModelsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return model with model properties along with {@link Response}.
+     * @return call along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
@@ -137,7 +137,7 @@ public final class ModelsImpl {
     }
 
     /**
-     * The put operation.
+     * Put operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -149,7 +149,7 @@ public final class ModelsImpl {
      * }
      * }</pre>
      *
-     * @param body Model with model properties.
+     * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -164,7 +164,7 @@ public final class ModelsImpl {
     }
 
     /**
-     * The put operation.
+     * Put operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -176,7 +176,7 @@ public final class ModelsImpl {
      * }
      * }</pre>
      *
-     * @param body Model with model properties.
+     * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

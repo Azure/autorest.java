@@ -15,7 +15,7 @@ public final class EnumProperty {
      * Property
      */
     @JsonProperty(value = "property", required = true)
-    private InnerEnum property;
+    private FixedInnerEnum property;
 
     /**
      * Creates an instance of EnumProperty class.
@@ -23,7 +23,7 @@ public final class EnumProperty {
      * @param property the property value to set.
      */
     @JsonCreator
-    public EnumProperty(@JsonProperty(value = "property", required = true) InnerEnum property) {
+    public EnumProperty(@JsonProperty(value = "property", required = true) FixedInnerEnum property) {
         this.property = property;
     }
 
@@ -32,7 +32,7 @@ public final class EnumProperty {
      *
      * @return the property value.
      */
-    public InnerEnum getProperty() {
+    public FixedInnerEnum getProperty() {
         return this.property;
     }
 }

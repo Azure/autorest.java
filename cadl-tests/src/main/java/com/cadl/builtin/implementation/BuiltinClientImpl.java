@@ -147,7 +147,7 @@ public final class BuiltinClientImpl {
      *         base64Encoded: Base64Url (Required)
      *         binary: byte[] (Required)
      *         dateTime: OffsetDateTime (Required)
-     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
+     *         dateTimeRfc1123: String (Required)
      *         password: String (Required)
      *         uri: String (Required)
      *     }
@@ -167,7 +167,7 @@ public final class BuiltinClientImpl {
      *     bytesDict (Required): {
      *         String: byte[] (Required)
      *     }
-     *     uri: String (Required)
+     *     url: String (Required)
      * }
      * }</pre>
      *
@@ -195,7 +195,7 @@ public final class BuiltinClientImpl {
      *         base64Encoded: Base64Url (Required)
      *         binary: byte[] (Required)
      *         dateTime: OffsetDateTime (Required)
-     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
+     *         dateTimeRfc1123: String (Required)
      *         password: String (Required)
      *         uri: String (Required)
      *     }
@@ -215,7 +215,7 @@ public final class BuiltinClientImpl {
      *     bytesDict (Required): {
      *         String: byte[] (Required)
      *     }
-     *     uri: String (Required)
+     *     url: String (Required)
      * }
      * }</pre>
      *

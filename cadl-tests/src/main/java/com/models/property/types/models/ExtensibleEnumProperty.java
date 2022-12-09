@@ -15,7 +15,7 @@ public final class ExtensibleEnumProperty {
      * Property
      */
     @JsonProperty(value = "property", required = true)
-    private InnerExtensibleEnum property;
+    private InnerEnum property;
 
     /**
      * Creates an instance of ExtensibleEnumProperty class.
@@ -23,7 +23,7 @@ public final class ExtensibleEnumProperty {
      * @param property the property value to set.
      */
     @JsonCreator
-    public ExtensibleEnumProperty(@JsonProperty(value = "property", required = true) InnerExtensibleEnum property) {
+    public ExtensibleEnumProperty(@JsonProperty(value = "property", required = true) InnerEnum property) {
         this.property = property;
     }
 
@@ -32,7 +32,7 @@ public final class ExtensibleEnumProperty {
      *
      * @return the property value.
      */
-    public InnerExtensibleEnum getProperty() {
+    public InnerEnum getProperty() {
         return this.property;
     }
 }
