@@ -1,7 +1,7 @@
 import {
   resolvePath,
   getNormalizedAbsolutePath,
-  Program,
+  EmitContext,
   NoTarget,
   JSONSchemaType,
   createCadlLibrary,
@@ -56,7 +56,9 @@ export const $lib = createCadlLibrary({
   },
 });
 
-export async function $onEmit(program: Program, options: EmitterOptions) {
+export async function $onEmit(context: EmitContext<EmitterOptions>) {
+  const program = context.program;
+  const options = context.options;
   const builder = new CodeModelBuilder(program, options);
   const codeModel = builder.build();
 

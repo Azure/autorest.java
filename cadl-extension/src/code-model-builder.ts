@@ -6,17 +6,12 @@ import {
   getEffectiveModelType,
   getFormat,
   getFriendlyName,
-  getIntrinsicModelName,
   getKnownValues,
-  getServiceNamespace,
-  getServiceNamespaceString,
-  getServiceVersion,
   getSummary,
   getVisibility,
   ignoreDiagnostics,
   IntrinsicType,
   isArrayModelType,
-  isIntrinsic,
   isRecordModelType,
   isTemplateDeclaration,
   isTemplateInstance,
@@ -35,6 +30,9 @@ import {
   UnionVariant,
   getDiscriminator,
   isNeverType,
+  Scalar,
+  listServices,
+  getNamespaceFullName,
 } from "@cadl-lang/compiler";
 import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
@@ -57,6 +55,7 @@ import { getVersion } from "@cadl-lang/versioning";
 import { isPollingLocation, getPagedResult, getOperationLinks } from "@azure-tools/cadl-azure-core";
 import {
   getConvenienceAPIName,
+  getDefaultApiVersion,
   listClients,
   listOperationGroups,
   listOperationsInOperationGroup,
@@ -97,6 +96,7 @@ import {
   OAuth2SecurityScheme,
   KeySecurityScheme,
   OperationGroup,
+  UriSchema,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient } from "./common/client.js";
@@ -125,22 +125,32 @@ export class CodeModelBuilder {
   public constructor(program1: Program, options: EmitterOptions) {
     this.options = options;
     this.program = program1;
-    const serviceNamespace = getServiceNamespace(this.program);
+
+    const service = listServices(this.program)[0];
+    const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
       throw Error("Can not emit yaml for a namespace that doesn't exist.");
     }
 
     // java namespace
-    const namespace = getServiceNamespaceString(this.program) || "Azure.Client";
+    const namespace = getNamespaceFullName(serviceNamespace) || "Azure.Client";
     const javaNamespace = getJavaNamespace(namespace);
 
-    // service version
-    this.version = getServiceVersion(this.program);
-    if (this.version === "0000-00-00") {
+    // API version
+    const apiVersion = getDefaultApiVersion(this.program, serviceNamespace);
+    if (apiVersion) {
+      this.version = apiVersion.value;
+    } else {
       const versioning = getVersion(this.program, serviceNamespace);
       if (versioning) {
         // TODO: versioning support
         this.version = versioning.getVersions()[0].value;
+      } else {
+        if (service.version) {
+          this.version = service.version;
+        } else {
+          throw new Error("API version not available.");
+        }
       }
     }
 
@@ -752,57 +762,68 @@ export class CodeModelBuilder {
         // return this.processSchema(type.type, nameHint);
         return this.applyModelPropertyDecorators(type, nameHint, this.processSchema(type.type, nameHint));
 
-      case "Model":
-        if (isIntrinsic(this.program, type)) {
-          const intrinsicModelName = getIntrinsicModelName(this.program, type);
-          switch (intrinsicModelName) {
-            case "string": {
-              const Enum = getKnownValues(this.program, type);
-              if (Enum) {
-                return this.processChoiceSchema(Enum, this.getName(type), false);
-              } else {
-                const format = getFormat(this.program, type);
-                if (format) {
-                  return this.processFormatString(type, format, nameHint);
-                }
-                return this.processStringSchema(type, nameHint);
+      case "Scalar": {
+        const scalarName = type.name;
+        switch (scalarName) {
+          case "string": {
+            const Enum = getKnownValues(this.program, type as Scalar);
+            if (Enum) {
+              return this.processChoiceSchema(Enum, this.getName(type), false);
+            } else {
+              const format = getFormat(this.program, type);
+              if (format) {
+                return this.processFormatString(type, format, nameHint);
               }
+              return this.processStringSchema(type, nameHint);
             }
-
-            case "bytes":
-              return this.processByteArraySchema(type, nameHint, false);
-
-            case "boolean":
-              return this.processBooleanSchema(type, nameHint);
-
-            case "plainTime":
-              return this.processTimeSchema(type, nameHint);
-
-            case "plainDate":
-              return this.processDateSchema(type, nameHint);
-
-            case "zonedDateTime":
-              return this.processDateTimeSchema(type, nameHint, false);
-
-            case "duration":
-              return this.processDurationSchema(type, nameHint);
           }
 
-          if (
-            intrinsicModelName.startsWith("int") ||
-            intrinsicModelName.startsWith("uint") ||
-            intrinsicModelName === "safeint"
-          ) {
-            // integer
-            const integerSize = intrinsicModelName === "safeint" || intrinsicModelName.includes("int64") ? 64 : 32;
-            return this.processIntegerSchema(type, nameHint, integerSize);
-          } else if (intrinsicModelName.startsWith("float")) {
-            // float point
-            return this.processNumberSchema(type, nameHint);
+          case "bytes":
+            return this.processByteArraySchema(type, nameHint, false);
+
+          case "boolean":
+            return this.processBooleanSchema(type, nameHint);
+
+          case "plainTime":
+            return this.processTimeSchema(type, nameHint);
+
+          case "plainDate":
+            return this.processDateSchema(type, nameHint);
+
+          case "zonedDateTime":
+            return this.processDateTimeSchema(type, nameHint, false);
+
+          case "duration":
+            return this.processDurationSchema(type, nameHint);
+
+          case "url":
+            return this.processUrlSchema(type, nameHint);
+        }
+
+        if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
+          // integer
+          const integerSize = scalarName === "safeint" || scalarName.includes("int64") ? 64 : 32;
+          return this.processIntegerSchema(type, nameHint, integerSize);
+        } else if (scalarName.startsWith("float")) {
+          // float point
+          return this.processNumberSchema(type, nameHint);
+        } else {
+          if (type.baseScalar) {
+            const Enum = getKnownValues(this.program, type as Scalar);
+            if (Enum) {
+              return this.processChoiceSchema(Enum, this.getName(type), false);
+            } else {
+              // fallback to baseScalar
+              return this.processSchemaImpl(type.baseScalar, nameHint);
+            }
           } else {
-            throw new Error(`Unrecognized intrinsic type: '${intrinsicModelName}'.`);
+            throw new Error(`Unrecognized intrinsic type: '${scalarName}'.`);
           }
-        } else if (isArrayModelType(this.program, type)) {
+        }
+      }
+
+      case "Model":
+        if (isArrayModelType(this.program, type)) {
           return this.processArraySchema(type, nameHint);
         } else if (isRecordModelType(this.program, type)) {
           return this.processDictionarySchema(type, nameHint);
@@ -821,7 +842,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processStringSchema(type: Model, name: string): StringSchema {
+  private processStringSchema(type: Scalar, name: string): StringSchema {
     return this.codeModel.schemas.add(
       new StringSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
@@ -829,7 +850,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processByteArraySchema(type: Model, name: string, base64Encoded: boolean): ByteArraySchema {
+  private processByteArraySchema(type: Scalar, name: string, base64Encoded: boolean): ByteArraySchema {
     return this.codeModel.schemas.add(
       new ByteArraySchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
@@ -838,7 +859,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processIntegerSchema(type: Model, name: string, precision: number): NumberSchema {
+  private processIntegerSchema(type: Scalar, name: string, precision: number): NumberSchema {
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type), SchemaType.Integer, precision, {
         summary: this.getSummary(type),
@@ -846,7 +867,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processNumberSchema(type: Model, name: string): NumberSchema {
+  private processNumberSchema(type: Scalar, name: string): NumberSchema {
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type), SchemaType.Number, 64, {
         summary: this.getSummary(type),
@@ -854,7 +875,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processBooleanSchema(type: Model, name: string): BooleanSchema {
+  private processBooleanSchema(type: Scalar, name: string): BooleanSchema {
     return this.codeModel.schemas.add(
       new BooleanSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
@@ -984,7 +1005,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processDateTimeSchema(type: Model, name: string, rfc1123: boolean): DateTimeSchema {
+  private processDateTimeSchema(type: Scalar, name: string, rfc1123: boolean): DateTimeSchema {
     return this.codeModel.schemas.add(
       new DateTimeSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
@@ -993,7 +1014,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processDateSchema(type: Model, name: string): DateSchema {
+  private processDateSchema(type: Scalar, name: string): DateSchema {
     return this.codeModel.schemas.add(
       new DateSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
@@ -1001,7 +1022,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processTimeSchema(type: Model, name: string): TimeSchema {
+  private processTimeSchema(type: Scalar, name: string): TimeSchema {
     return this.codeModel.schemas.add(
       new TimeSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
@@ -1009,9 +1030,17 @@ export class CodeModelBuilder {
     );
   }
 
-  private processDurationSchema(type: Model, name: string): DurationSchema {
+  private processDurationSchema(type: Scalar, name: string): DurationSchema {
     return this.codeModel.schemas.add(
       new DurationSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+      }),
+    );
+  }
+
+  private processUrlSchema(type: Scalar, name: string): UriSchema {
+    return this.codeModel.schemas.add(
+      new UriSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
       }),
     );
@@ -1171,7 +1200,7 @@ export class CodeModelBuilder {
     // }
     const format = getFormat(this.program, prop);
     if (format) {
-      if (prop.type.kind === "Model" && schema instanceof StringSchema) {
+      if (prop.type.kind === "Scalar" && schema instanceof StringSchema) {
         schema = this.processFormatString(prop.type, format, nameHint);
       }
     }
@@ -1192,7 +1221,7 @@ export class CodeModelBuilder {
     });
   }
 
-  private processFormatString(type: Model, format: string, nameHint: string): Schema {
+  private processFormatString(type: Scalar, format: string, nameHint: string): Schema {
     switch (format) {
       case "byte":
         return this.processByteArraySchema(type, nameHint, true);
@@ -1203,7 +1232,7 @@ export class CodeModelBuilder {
       case "date-time-rfc1123":
         return this.processDateTimeSchema(type, nameHint, true);
       case "password":
-      case "uri":
+      case "url":
       case "uuid":
         return this.processStringSchema(type, nameHint);
     }
@@ -1212,7 +1241,7 @@ export class CodeModelBuilder {
 
   private processUnionSchema(type: Union, name: string): Schema {
     const nonNullVariants = Array.from(type.variants.values()).filter(
-      (it) => !(isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null"),
+      (it) => !(it.type.kind === "Intrinsic" && it.type.name === "null"),
     );
     if (nonNullVariants.length === 1) {
       // nullable
@@ -1231,7 +1260,7 @@ export class CodeModelBuilder {
   private isNullableType(type: Type): boolean {
     if (type.kind === "Union") {
       const nullVariants = Array.from(type.variants.values()).filter(
-        (it) => isIntrinsic(this.program, it.type) && getIntrinsicModelName(this.program, it.type) === "null",
+        (it) => it.type.kind === "Intrinsic" && it.type.name === "null",
       );
       return nullVariants.length >= 1;
     } else {
@@ -1273,7 +1302,7 @@ export class CodeModelBuilder {
     return getSummary(this.program, target);
   }
 
-  private getName(target: Model | Enum | ModelProperty): string {
+  private getName(target: Model | Enum | ModelProperty | Scalar): string {
     const friendlyName = getFriendlyName(this.program, target);
     if (friendlyName) {
       return friendlyName;
