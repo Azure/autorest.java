@@ -4,7 +4,7 @@ Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node
 
 Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by `java --version`)
 
-Install [Cadl](https://github.com/microsoft/cadl/) 0.37. 
+Install [Cadl](https://github.com/microsoft/cadl/) 0.38. 
 
 # Initialize Cadl Project
 
@@ -19,9 +19,9 @@ Make sure the version of [Cadl-java release](https://github.com/Azure/autorest.j
 Modify `package.json`, add one line under `dependencies`:
 ```diff
     "dependencies": {
-      "@cadl-lang/compiler": "^0.37.0",
-      "@cadl-lang/rest": "^0.19.0",
-      "@azure-tools/cadl-azure-core": "^0.9.0",
+      "@cadl-lang/compiler": "^0.38.0",
+      "@cadl-lang/rest": "^0.38.0",
+      "@azure-tools/cadl-azure-core": "^0.24.0",
 +      "@azure-tools/cadl-java": "0.1.2"
     },
 ```
