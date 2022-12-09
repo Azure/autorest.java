@@ -6,12 +6,14 @@ package com.models.property.types;
 import com.models.property.types.models.ExtensibleEnumProperty;
 import com.models.property.types.models.InnerEnum;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class ExtensibleEnumClientTest {
 
     ExtensibleEnumClient client = new TypesClientBuilder().buildExtensibleEnumClient();
 
+    @Disabled("issue https://github.com/Azure/cadl-ranch/issues/158")
     @Test
     void get() {
         ExtensibleEnumProperty extensibleEnumProperty = client.get();
@@ -19,6 +21,7 @@ class ExtensibleEnumClientTest {
         Assertions.assertEquals("UnknownValue", innerExtensibleEnum.toString());
     }
 
+    @Disabled("issue https://github.com/Azure/cadl-ranch/issues/158")
     @Test
     void put() {
         ExtensibleEnumProperty extensibleEnumProperty = new ExtensibleEnumProperty(InnerEnum.fromString("UnknownValue"));
