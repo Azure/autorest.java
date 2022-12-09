@@ -4,7 +4,7 @@
 package com.models.property.types;
 
 import com.models.property.types.models.EnumProperty;
-import com.models.property.types.models.InnerEnum;
+import com.models.property.types.models.FixedInnerEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,13 +15,13 @@ class EnumClientTest {
     @Test
     void get() {
         EnumProperty enumProperty = client.get();
-        InnerEnum innerEnum = enumProperty.getProperty();
+        FixedInnerEnum innerEnum = enumProperty.getProperty();
         Assertions.assertEquals("ValueOne", innerEnum.toString());
     }
 
     @Test
     void put() {
-        InnerEnum innerEnum = InnerEnum.VALUE_ONE;
+        FixedInnerEnum innerEnum = FixedInnerEnum.VALUE_ONE;
         EnumProperty enumProperty = new EnumProperty(innerEnum);
         client.put(enumProperty);
     }
