@@ -7,6 +7,7 @@ package com.cadl.builtin.models;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
@@ -36,7 +37,7 @@ public final class FormatString {
      * The dateTimeRfc1123 property.
      */
     @JsonProperty(value = "dateTimeRfc1123", required = true)
-    private String dateTimeRfc1123;
+    private DateTimeRfc1123 dateTimeRfc1123;
 
     /*
      * The password property.
@@ -65,13 +66,13 @@ public final class FormatString {
             @JsonProperty(value = "base64Encoded", required = true) byte[] base64Encoded,
             @JsonProperty(value = "binary", required = true) byte[] binary,
             @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
-            @JsonProperty(value = "dateTimeRfc1123", required = true) String dateTimeRfc1123,
+            @JsonProperty(value = "dateTimeRfc1123", required = true) OffsetDateTime dateTimeRfc1123,
             @JsonProperty(value = "password", required = true) String password,
             @JsonProperty(value = "uri", required = true) String uri) {
         this.base64Encoded = Base64Url.encode(base64Encoded);
         this.binary = binary;
         this.dateTime = dateTime;
-        this.dateTimeRfc1123 = dateTimeRfc1123;
+        this.dateTimeRfc1123 = new DateTimeRfc1123(dateTimeRfc1123);
         this.password = password;
         this.uri = uri;
     }
@@ -111,8 +112,11 @@ public final class FormatString {
      *
      * @return the dateTimeRfc1123 value.
      */
-    public String getDateTimeRfc1123() {
-        return this.dateTimeRfc1123;
+    public OffsetDateTime getDateTimeRfc1123() {
+        if (this.dateTimeRfc1123 == null) {
+            return null;
+        }
+        return this.dateTimeRfc1123.getDateTime();
     }
 
     /**
