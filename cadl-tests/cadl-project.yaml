@@ -1,5 +1,6 @@
 emitters:
   "@azure-tools/cadl-java":
+    emitter-output-dir: "{project-root}/cadl-output"
     partial-update: true
     namer: true
     dev-options:
