@@ -34,7 +34,7 @@ public final class FormatString {
     private OffsetDateTime dateTime;
 
     /*
-     * The dateTimeRfc1123 property.
+     * summary of RFC1123 date-time
      */
     @JsonProperty(value = "dateTimeRfc1123", required = true)
     private DateTimeRfc1123 dateTimeRfc1123;
@@ -51,6 +51,18 @@ public final class FormatString {
     @JsonProperty(value = "uri", required = true)
     private String uri;
 
+    /*
+     * The extensibleEnum property.
+     */
+    @JsonProperty(value = "extensibleEnum", required = true)
+    private KnownValues extensibleEnum;
+
+    /*
+     * The extensibleEnumScalar property.
+     */
+    @JsonProperty(value = "extensibleEnumScalar", required = true)
+    private KnownValuesScalar extensibleEnumScalar;
+
     /**
      * Creates an instance of FormatString class.
      *
@@ -60,6 +72,8 @@ public final class FormatString {
      * @param dateTimeRfc1123 the dateTimeRfc1123 value to set.
      * @param password the password value to set.
      * @param uri the uri value to set.
+     * @param extensibleEnum the extensibleEnum value to set.
+     * @param extensibleEnumScalar the extensibleEnumScalar value to set.
      */
     @JsonCreator
     private FormatString(
@@ -68,13 +82,17 @@ public final class FormatString {
             @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
             @JsonProperty(value = "dateTimeRfc1123", required = true) OffsetDateTime dateTimeRfc1123,
             @JsonProperty(value = "password", required = true) String password,
-            @JsonProperty(value = "uri", required = true) String uri) {
+            @JsonProperty(value = "uri", required = true) String uri,
+            @JsonProperty(value = "extensibleEnum", required = true) KnownValues extensibleEnum,
+            @JsonProperty(value = "extensibleEnumScalar", required = true) KnownValuesScalar extensibleEnumScalar) {
         this.base64Encoded = Base64Url.encode(base64Encoded);
         this.binary = binary;
         this.dateTime = dateTime;
         this.dateTimeRfc1123 = new DateTimeRfc1123(dateTimeRfc1123);
         this.password = password;
         this.uri = uri;
+        this.extensibleEnum = extensibleEnum;
+        this.extensibleEnumScalar = extensibleEnumScalar;
     }
 
     /**
@@ -108,7 +126,7 @@ public final class FormatString {
     }
 
     /**
-     * Get the dateTimeRfc1123 property: The dateTimeRfc1123 property.
+     * Get the dateTimeRfc1123 property: summary of RFC1123 date-time.
      *
      * @return the dateTimeRfc1123 value.
      */
@@ -135,5 +153,23 @@ public final class FormatString {
      */
     public String getUri() {
         return this.uri;
+    }
+
+    /**
+     * Get the extensibleEnum property: The extensibleEnum property.
+     *
+     * @return the extensibleEnum value.
+     */
+    public KnownValues getExtensibleEnum() {
+        return this.extensibleEnum;
+    }
+
+    /**
+     * Get the extensibleEnumScalar property: The extensibleEnumScalar property.
+     *
+     * @return the extensibleEnumScalar value.
+     */
+    public KnownValuesScalar getExtensibleEnumScalar() {
+        return this.extensibleEnumScalar;
     }
 }

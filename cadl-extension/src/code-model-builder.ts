@@ -759,9 +759,17 @@ export class CodeModelBuilder {
       case "Union":
         return this.processUnionSchema(type, nameHint);
 
-      case "ModelProperty":
-        // return this.processSchema(type.type, nameHint);
-        return this.applyModelPropertyDecorators(type, nameHint, this.processSchema(type.type, nameHint));
+      case "ModelProperty": {
+        let schema = undefined;
+        const knownValues = getKnownValues(this.program, type);
+        if (knownValues) {
+          // use it for extensible enum
+          schema = this.processChoiceSchema(knownValues, this.getName(knownValues), false);
+        } else {
+          schema = this.processSchema(type.type, nameHint);
+        }
+        return this.applyModelPropertyDecorators(type, nameHint, schema);
+      }
 
       case "Scalar":
         return this.processScalar(type, undefined, nameHint);
@@ -783,16 +791,11 @@ export class CodeModelBuilder {
     if (this.program.checker.isStdType(type)) {
       switch (scalarName) {
         case "string": {
-          const Enum = getKnownValues(this.program, type as Scalar);
-          if (Enum) {
-            return this.processChoiceSchema(Enum, this.getName(type), false);
-          } else {
-            const format = formatFromDerived ?? getFormat(this.program, type);
-            if (format) {
-              return this.processFormatString(type, format, nameHint);
-            }
-            return this.processStringSchema(type, nameHint);
+          const format = formatFromDerived ?? getFormat(this.program, type);
+          if (format) {
+            return this.processFormatString(type, format, nameHint);
           }
+          return this.processStringSchema(type, nameHint);
         }
 
         case "bytes":
@@ -828,14 +831,23 @@ export class CodeModelBuilder {
         throw new Error(`Unrecognized scalar type: '${scalarName}'.`);
       }
     } else {
-      const Enum = getKnownValues(this.program, type as Scalar);
-      if (Enum) {
+      const knownValues = getKnownValues(this.program, type as Scalar);
+      if (knownValues) {
         // use it for extensible enum
-        return this.processChoiceSchema(Enum, this.getName(type), false);
+        return this.processChoiceSchema(knownValues, this.getName(type), false);
       } else {
         if (type.baseScalar) {
           // fallback to baseScalar
-          return this.processScalar(type.baseScalar, getFormat(this.program, type), nameHint);
+          const schema = this.processScalar(type.baseScalar, getFormat(this.program, type), nameHint);
+          const doc = getDoc(this.program, type);
+          const summary = getSummary(this.program, type);
+          if (doc) {
+            schema.language.default.description = doc;
+          }
+          if (summary) {
+            schema.summary = summary;
+          }
+          return schema;
         } else {
           throw new Error(`Unrecognized scalar type: '${scalarName}'.`);
         }

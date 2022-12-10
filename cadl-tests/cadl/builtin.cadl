@@ -41,10 +41,25 @@ model FormatString {
 
   @format("url")
   uri: string;
+
+  @knownValues(KnownValues)
+  extensibleEnum: string;
+  extensibleEnumScalar: KnownValuesScalar;
 }
 
+@summary("summary of RFC1123 date-time")
+@doc("description of RFC1123 date-time")
+@friendlyName("DateTime")
 @format("date-time-rfc1123")
 scalar DateTimeRfc1123 extends string;
+
+enum KnownValues {
+  Value1,
+  Value2,
+}
+
+@knownValues(KnownValues)
+scalar KnownValuesScalar extends string;
 
 @route("/builtin")
 interface BuiltinOp {
