@@ -53,7 +53,7 @@ import {
   getHttpOperation,
 } from "@cadl-lang/rest/http";
 import { getVersion } from "@cadl-lang/versioning";
-import { isPollingLocation, getPagedResult, getOperationLinks } from "@azure-tools/cadl-azure-core";
+import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/cadl-azure-core";
 import {
   getConvenienceAPIName,
   getDefaultApiVersion,
@@ -754,7 +754,7 @@ export class CodeModelBuilder {
         return this.processChoiceSchemaForLiteral(type, nameHint);
 
       case "Enum":
-        return this.processChoiceSchema(type, this.getName(type), true);
+        return this.processChoiceSchema(type, this.getName(type), isFixed(this.program, type));
 
       case "Union":
         return this.processUnionSchema(type, nameHint);
