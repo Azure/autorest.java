@@ -85,6 +85,7 @@ javagen/*.yaml
 /cadl-tests/cadl-output/
 /cadl-tests/cadl-ranch-coverage.json
 /cadl-tests/cadl-ranch-coverage-java.json
+/cadl-tests/cadl-src/
 
 # Coverage report
 /coverage/
