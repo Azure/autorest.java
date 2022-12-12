@@ -28,10 +28,10 @@ Modify `package.json`, add one line under `dependencies`:
 
 Run `npm install` again to install `@azure-tools/cadl-java`.
 
-Modify (or create) `cadl-project.yaml`, add one line under `emitters`:
+Modify (or create) `cadl-project.yaml`, specify emit as `@azure-tools/cadl-java`:
 ```diff
-emitters:
-+  "@azure-tools/cadl-java": true
+emit:
+  - "@azure-tools/cadl-java"
 ```
 
 # Generate Java
@@ -47,7 +47,9 @@ If `emitter-output-dir` option is not provided, generated Java code will be unde
 One can further configure the SDK generated, using the emitter options on `@azure-tools/cadl-java`.
 
 ```yaml
-emitters:
+emit:
+  - "@azure-tools/cadl-java"
+options:
   "@azure-tools/cadl-java":
     emitter-output-dir: "{project-root}/azure-ai-language-authoring"
     namespace: "com.azure.ai.language.authoring"

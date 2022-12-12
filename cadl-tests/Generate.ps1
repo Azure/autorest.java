@@ -1,6 +1,6 @@
 function Generate($CadlFile) {
-  Write-Host "npx cadl compile $CadlFile --emit=@azure-tools/cadl-java --trace import-resolution --trace projection --trace cadl-java"
-  Invoke-Expression "npx cadl compile $CadlFile --emit=@azure-tools/cadl-java --trace import-resolution --trace projection --trace cadl-java"
+  Write-Host "npx cadl compile $CadlFile --trace import-resolution --trace projection --trace cadl-java"
+  Invoke-Expression "npx cadl compile $CadlFile --trace import-resolution --trace projection --trace cadl-java"
 
   if ($LASTEXITCODE) {
     exit $LASTEXITCODE
@@ -59,7 +59,7 @@ foreach ($cadlFile in (Get-Item ./cadl/* -Filter "*.cadl" -Exclude "*partialupda
 }
 
 # partial update test
-npx cadl compile ./cadl/partialupdate.cadl --emit=@azure-tools/cadl-java --options="@azure-tools/cadl-java.emitter-output-dir={project-root}/existingcode"
+npx cadl compile ./cadl/partialupdate.cadl --options="@azure-tools/cadl-java.emitter-output-dir={project-root}/existingcode"
 Copy-Item -Path ./existingcode/src/main/java/com/cadl/partialupdate -Destination ./src/main/java/com/cadl/partialupdate -Recurse -Force
 Remove-Item ./existingcode -Recurse -Force
 
