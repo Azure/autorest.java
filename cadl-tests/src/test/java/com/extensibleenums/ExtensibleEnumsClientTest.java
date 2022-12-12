@@ -5,7 +5,6 @@ package com.extensibleenums;
 
 import com.extensibleenums.models.DaysOfWeekExtensibleEnum;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class ExtensibleEnumsClientTest {
@@ -19,7 +18,6 @@ class ExtensibleEnumsClientTest {
     }
 
     @Test
-    @Disabled("issue https://github.com/Azure/cadl-ranch/issues/158")
     void getUnknownValue() {
         DaysOfWeekExtensibleEnum daysOfWeekExtensibleEnum = client.getUnknownValue();
         Assertions.assertEquals("Weekend", daysOfWeekExtensibleEnum.toString());
@@ -32,7 +30,6 @@ class ExtensibleEnumsClientTest {
     }
 
     @Test
-    @Disabled("issue https://github.com/Azure/cadl-ranch/issues/158")
     void putUnknownValue() {
         DaysOfWeekExtensibleEnum daysOfWeekExtensibleEnum = DaysOfWeekExtensibleEnum.fromString("Weekend");
         client.putUnknownValue(daysOfWeekExtensibleEnum);
