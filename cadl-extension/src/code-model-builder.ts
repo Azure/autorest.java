@@ -34,6 +34,7 @@ import {
   listServices,
   getNamespaceFullName,
   isNullType,
+  NoTarget,
 } from "@cadl-lang/compiler";
 import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
@@ -1272,8 +1273,27 @@ export class CodeModelBuilder {
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
 
-    // TODO
-    throw new Error(`Unsupported Union type: '${name}'.`);
+    const variantsMsg = nonNullVariants
+      .map((it) => {
+        if (
+          it.type.kind === "Model" ||
+          it.type.kind === "Scalar" ||
+          it.type.kind === "Intrinsic" ||
+          it.type.kind === "Enum"
+        ) {
+          return it.type.name;
+        } else {
+          return "";
+        }
+      })
+      .join(",");
+    this.logWarning(`Unsupported Union type: '${name}' for '${variantsMsg}'. Treated as Unknown.`);
+
+    return this.codeModel.schemas.add(
+      new AnySchema(this.getDoc(type), {
+        summary: this.getSummary(type),
+      }),
+    );
   }
 
   private isNullableType(type: Type): boolean {
@@ -1359,6 +1379,16 @@ export class CodeModelBuilder {
   private getConvenienceApiName(op: Operation): string | undefined {
     // check @convenienceMethod
     return getConvenienceAPIName(this.program, op);
+  }
+
+  private logWarning(msg: string) {
+    this.program.trace("cadl-java", msg);
+    this.program.reportDiagnostic({
+      code: "cadl-java",
+      severity: "warning",
+      message: msg,
+      target: NoTarget,
+    });
   }
 
   private _stringSchema?: StringSchema;
@@ -1468,7 +1498,7 @@ export class CodeModelBuilder {
 
     // Exclude context that not to be propagated
     const schemaUsage = {
-      usage: (schema as SchemaUsage).usage?.filter((p) => p !== SchemaContext.Paged),
+      usage: (schema as SchemaUsage).usage?.filter((it) => it !== SchemaContext.Paged),
       serializationFormats: (schema as SchemaUsage).serializationFormats,
     };
     // Propagate the usage of the initial schema itself
