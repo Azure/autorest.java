@@ -4,48 +4,35 @@
 
 package com.models.property.types.models;
 
+import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Collection;
 
 /** Enum that will be used as a property for model EnumProperty. Non-extensible. */
-public enum InnerEnum {
-    /** Enum value ValueOne. */
-    VALUE_ONE("ValueOne"),
+public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
+    /** Static value ValueOne for InnerEnum. */
+    public static final InnerEnum VALUE_ONE = fromString("ValueOne");
 
-    /** Enum value ValueTwo. */
-    VALUE_TWO("ValueTwo");
+    /** Static value ValueTwo for InnerEnum. */
+    public static final InnerEnum VALUE_TWO = fromString("ValueTwo");
 
-    /** The actual serialized value for a InnerEnum instance. */
-    private final String value;
-
-    InnerEnum(String value) {
-        this.value = value;
+    /**
+     * Creates or finds a InnerEnum from its string representation.
+     *
+     * @param name a name to look for.
+     * @return the corresponding InnerEnum.
+     */
+    @JsonCreator
+    public static InnerEnum fromString(String name) {
+        return fromString(name, InnerEnum.class);
     }
 
     /**
-     * Parses a serialized value to a InnerEnum instance.
+     * Gets known InnerEnum values.
      *
-     * @param value the serialized value to parse.
-     * @return the parsed InnerEnum object, or null if unable to parse.
+     * @return known InnerEnum values.
      */
-    @JsonCreator
-    public static InnerEnum fromString(String value) {
-        if (value == null) {
-            return null;
-        }
-        InnerEnum[] items = InnerEnum.values();
-        for (InnerEnum item : items) {
-            if (item.toString().equalsIgnoreCase(value)) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    /** {@inheritDoc} */
-    @JsonValue
-    @Override
-    public String toString() {
-        return this.value;
+    public static Collection<InnerEnum> values() {
+        return values(InnerEnum.class);
     }
 }

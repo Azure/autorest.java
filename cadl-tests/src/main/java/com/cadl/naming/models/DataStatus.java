@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
- * summary of StatusValues
+ * summary of Statuses
  *
- * <p>description of StatusValues.
+ * <p>description of Statuses.
  */
 public final class DataStatus extends ExpandableStringEnum<DataStatus> {
     /** Static value Running for DataStatus. */

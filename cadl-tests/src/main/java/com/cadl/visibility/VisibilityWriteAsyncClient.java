@@ -43,7 +43,6 @@ public final class VisibilityWriteAsyncClient {
      *
      * <pre>{@code
      * {
-     *     secretName: String (Required)
      *     name: String (Required)
      * }
      * }</pre>

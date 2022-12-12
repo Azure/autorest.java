@@ -70,7 +70,6 @@ public final class VisibilityAsyncClient {
      *
      * <pre>{@code
      * {
-     *     secretName: String (Required)
      *     name: String (Required)
      * }
      * }</pre>

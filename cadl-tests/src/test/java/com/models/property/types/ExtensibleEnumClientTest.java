@@ -4,7 +4,7 @@
 package com.models.property.types;
 
 import com.models.property.types.models.ExtensibleEnumProperty;
-import com.models.property.types.models.InnerExtensibleEnum;
+import com.models.property.types.models.InnerEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,13 +15,13 @@ class ExtensibleEnumClientTest {
     @Test
     void get() {
         ExtensibleEnumProperty extensibleEnumProperty = client.get();
-        InnerExtensibleEnum innerExtensibleEnum = extensibleEnumProperty.getProperty();
+        InnerEnum innerExtensibleEnum = extensibleEnumProperty.getProperty();
         Assertions.assertEquals("UnknownValue", innerExtensibleEnum.toString());
     }
 
     @Test
     void put() {
-        ExtensibleEnumProperty extensibleEnumProperty = new ExtensibleEnumProperty(InnerExtensibleEnum.fromString("UnknownValue"));
+        ExtensibleEnumProperty extensibleEnumProperty = new ExtensibleEnumProperty(InnerEnum.fromString("UnknownValue"));
         client.put(extensibleEnumProperty);
     }
 }

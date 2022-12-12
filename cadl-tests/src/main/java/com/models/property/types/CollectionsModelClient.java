@@ -33,7 +33,7 @@ public final class CollectionsModelClient {
     }
 
     /**
-     * The get operation.
+     * Get call.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -52,7 +52,7 @@ public final class CollectionsModelClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return model with collection model properties along with {@link Response}.
+     * @return call along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -61,7 +61,7 @@ public final class CollectionsModelClient {
     }
 
     /**
-     * The put operation.
+     * Put operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -75,7 +75,7 @@ public final class CollectionsModelClient {
      * }
      * }</pre>
      *
-     * @param body Model with collection model properties.
+     * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -90,14 +90,14 @@ public final class CollectionsModelClient {
     }
 
     /**
-     * The get operation.
+     * Get call.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return model with collection model properties.
+     * @return call.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -108,9 +108,9 @@ public final class CollectionsModelClient {
     }
 
     /**
-     * The put operation.
+     * Put operation.
      *
-     * @param body Model with collection model properties.
+     * @param body body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

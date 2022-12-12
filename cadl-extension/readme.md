@@ -4,7 +4,7 @@ Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node
 
 Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by `java --version`)
 
-Install [Cadl](https://github.com/microsoft/cadl/) 0.37. 
+Install [Cadl](https://github.com/microsoft/cadl/) 0.38. 
 
 # Initialize Cadl Project
 
@@ -19,26 +19,26 @@ Make sure the version of [Cadl-java release](https://github.com/Azure/autorest.j
 Modify `package.json`, add one line under `dependencies`:
 ```diff
     "dependencies": {
-      "@cadl-lang/compiler": "^0.37.0",
-      "@cadl-lang/rest": "^0.19.0",
-      "@azure-tools/cadl-azure-core": "^0.9.0",
-+      "@azure-tools/cadl-java": "0.1.2"
+      "@cadl-lang/compiler": "^0.38.0",
+      "@cadl-lang/rest": "^0.38.0",
+      "@azure-tools/cadl-azure-core": "^0.24.0",
++      "@azure-tools/cadl-java": "0.2.0"
     },
 ```
 
 Run `npm install` again to install `@azure-tools/cadl-java`.
 
-Modify (or create) `cadl-project.yaml`, add one line under `emitters`:
+Modify (or create) `cadl-project.yaml`, specify emit as `@azure-tools/cadl-java`:
 ```diff
-emitters:
-+  "@azure-tools/cadl-java": true
+emit:
+  - "@azure-tools/cadl-java"
 ```
 
 # Generate Java
 
-Same `npx cadl compile .` or `npx cadl compile . --output-dir=<target-folder>`.
+`npx cadl compile client.cadl --emit=@azure-tools/cadl-java` or `npx cadl compile client.cadl --emit=@azure-tools/cadl-java --options='@azure-tools/cadl-java.emitter-output-dir=<target=folder>`.
 
-If `output-dir` option is not provided, generated Java code will be under `cadl-output` folder.
+If `emitter-output-dir` option is not provided, generated Java code will be under `cadl-output/@azure-tools` folder.
 
 # Optional Configuration
 
@@ -47,9 +47,11 @@ If `output-dir` option is not provided, generated Java code will be under `cadl-
 One can further configure the SDK generated, using the emitter options on `@azure-tools/cadl-java`.
 
 ```yaml
-emitters:
+emit:
+  - "@azure-tools/cadl-java"
+options:
   "@azure-tools/cadl-java":
-    output-dir: "./azure-ai-language-authoring"
+    emitter-output-dir: "{project-root}/azure-ai-language-authoring"
     namespace: "com.azure.ai.language.authoring"
     service-name: "Authoring"
     partial-update: true

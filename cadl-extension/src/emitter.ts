@@ -1,7 +1,7 @@
 import {
   resolvePath,
   getNormalizedAbsolutePath,
-  Program,
+  EmitContext,
   NoTarget,
   JSONSchemaType,
   createCadlLibrary,
@@ -56,7 +56,9 @@ export const $lib = createCadlLibrary({
   },
 });
 
-export async function $onEmit(program: Program, options: EmitterOptions) {
+export async function $onEmit(context: EmitContext<EmitterOptions>) {
+  const program = context.program;
+  const options = context.options;
   const builder = new CodeModelBuilder(program, options);
   const codeModel = builder.build();
 
@@ -64,15 +66,12 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
     const __dirname = dirname(fileURLToPath(import.meta.url));
     const moduleRoot = resolvePath(__dirname, "..", "..");
 
-    const outputPath =
-      options["output-dir"] ??
-      program.compilerOptions.outputDir ??
-      getNormalizedAbsolutePath("./cadl-output", undefined);
+    const outputPath = options["output-dir"] ?? context.emitterOutputDir;
     options["output-dir"] = getNormalizedAbsolutePath(outputPath, undefined);
 
     const codeModelFileName = resolvePath(outputPath, "./code-model.yaml");
 
-    await promises.mkdir(outputPath).catch((err) => {
+    await promises.mkdir(outputPath, { recursive: true }).catch((err) => {
       if (err.code !== "EISDIR" && err.code !== "EEXIST") {
         throw err;
       }

@@ -2,6 +2,7 @@ import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
+using Azure.Core;
 using Azure.Core.Foundations;
 
 @summary("summary of Naming")
@@ -45,6 +46,7 @@ model DataModel {
 
 @summary("summary of Types")
 @doc("description of Types")
+@fixed
 enum TypesModel {
   Blob,
   File,
@@ -52,13 +54,8 @@ enum TypesModel {
 
 @summary("summary of Statuses")
 @doc("description of Statuses")
-@knownValues(StatusValues)
 @friendlyName("DataStatus")
-model StatusModel is string;
-
-@summary("summary of StatusValues")
-@doc("description of StatusValues")
-enum StatusValues {
+enum StatusModel {
   Running,
   Completed,
   Failed,

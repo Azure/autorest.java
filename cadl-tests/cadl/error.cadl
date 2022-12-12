@@ -2,12 +2,14 @@ import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
+using Versioning;
 using Azure.Core.Foundations;
 
 @service({
   title: "ErrorModel",
   version: "1.0.0",
 })
+@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace Cadl.ErrorModel;
 
 model Diagnostic {

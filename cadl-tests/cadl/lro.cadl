@@ -3,12 +3,15 @@ import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
 using Cadl.Rest;
+using Versioning;
 using Azure.Core;
+using Azure.Core.Foundations;
 
 @service({
   title: "LongRunning",
   version: "1.0.0",
 })
+@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace Cadl.LongRunning;
 
 model Resource {
@@ -47,21 +50,17 @@ interface LongRunningOp {
   delete is LongRunningResourceDelete<Resource>;
 
   @pollingOperation(LongRunningOp.statusMonitor)
-  export is ResourceAction<Resource, ExportParams, Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation>;
+  export is ResourceAction<Resource, ExportParams, Cadl.Http.AcceptedResponse & LongRunningStatusLocation>;
 
   @pollingOperation(LongRunningOp.statusMonitor)
-  importx is ResourceAction<
-    Resource,
-    ExportedResource,
-    Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation
-  >;
+  importx is ResourceAction<Resource, ExportedResource, Cadl.Http.AcceptedResponse & LongRunningStatusLocation>;
 }
 
 namespace CustomCore {
   @parentResource(T)
   @resource("operations")
-  model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus<T>;
+  model OperationStatusResource<T> is OperationStatus<T>;
 
   @route("operations")
-  op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
+  op PollingOperation<TCustom> is ResourceRead<OperationStatusResource<TCustom>>;
 }

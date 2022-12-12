@@ -2,6 +2,7 @@ import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
+using Azure.Core;
 
 @service({
   title: "EnumService",
@@ -9,20 +10,26 @@ using Cadl.Http;
 })
 namespace Cadl.EnumService;
 
+@fixed
 enum Color {
   Red,
   Blue,
   Green,
 }
 
-@knownValues(Color)
-model ColorModel is string;
+enum ColorModel {
+  Red,
+  Blue,
+  Green,
+}
 
+@fixed
 enum Priority {
   High: 100,
   Low: 0,
 }
 
+@fixed
 enum OperationStateValues {
   Running,
   Completed,

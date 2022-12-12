@@ -49,6 +49,8 @@ public final class BuiltinAsyncClient {
      *         dateTimeRfc1123: DateTimeRfc1123 (Required)
      *         password: String (Required)
      *         uri: String (Required)
+     *         extensibleEnum: String(Value1/Value2) (Required)
+     *         extensibleEnumScalar: String(Value1/Value2) (Required)
      *     }
      *     boolean: boolean (Required)
      *     string: String (Required)
@@ -66,7 +68,7 @@ public final class BuiltinAsyncClient {
      *     bytesDict (Required): {
      *         String: byte[] (Required)
      *     }
-     *     uri: String (Required)
+     *     url: String (Required)
      * }
      * }</pre>
      *

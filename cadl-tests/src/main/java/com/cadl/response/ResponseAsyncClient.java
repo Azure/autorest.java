@@ -43,7 +43,7 @@ public final class ResponseAsyncClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * byte[]
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -55,7 +55,7 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getBinaryWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<byte[]>> getBinaryWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBinaryWithResponseAsync(requestOptions);
     }
 
@@ -143,7 +143,7 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> getBinary() {
+    public Mono<byte[]> getBinary() {
         // Generated convenience method for getBinaryWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getBinaryWithResponse(requestOptions).flatMap(FluxUtil::toMono);
