@@ -4,48 +4,35 @@
 
 package com.resiliency.devdriven.models;
 
+import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Collection;
 
 /** Defines values for Mode. */
-public enum Mode {
-    /** Enum value raw. */
-    RAW("raw"),
+public final class Mode extends ExpandableStringEnum<Mode> {
+    /** Static value raw for Mode. */
+    public static final Mode RAW = fromString("raw");
 
-    /** Enum value model. */
-    MODEL("model");
+    /** Static value model for Mode. */
+    public static final Mode MODEL = fromString("model");
 
-    /** The actual serialized value for a Mode instance. */
-    private final String value;
-
-    Mode(String value) {
-        this.value = value;
+    /**
+     * Creates or finds a Mode from its string representation.
+     *
+     * @param name a name to look for.
+     * @return the corresponding Mode.
+     */
+    @JsonCreator
+    public static Mode fromString(String name) {
+        return fromString(name, Mode.class);
     }
 
     /**
-     * Parses a serialized value to a Mode instance.
+     * Gets known Mode values.
      *
-     * @param value the serialized value to parse.
-     * @return the parsed Mode object, or null if unable to parse.
+     * @return known Mode values.
      */
-    @JsonCreator
-    public static Mode fromString(String value) {
-        if (value == null) {
-            return null;
-        }
-        Mode[] items = Mode.values();
-        for (Mode item : items) {
-            if (item.toString().equalsIgnoreCase(value)) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    /** {@inheritDoc} */
-    @JsonValue
-    @Override
-    public String toString() {
-        return this.value;
+    public static Collection<Mode> values() {
+        return values(Mode.class);
     }
 }

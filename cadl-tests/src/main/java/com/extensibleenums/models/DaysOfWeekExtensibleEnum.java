@@ -4,63 +4,50 @@
 
 package com.extensibleenums.models;
 
+import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Collection;
 
 /** Defines values for DaysOfWeekExtensibleEnum. */
-public enum DaysOfWeekExtensibleEnum {
-    /** Enum value Monday. */
-    MONDAY("Monday"),
+public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfWeekExtensibleEnum> {
+    /** Static value Monday for DaysOfWeekExtensibleEnum. */
+    public static final DaysOfWeekExtensibleEnum MONDAY = fromString("Monday");
 
-    /** Enum value Tuesday. */
-    TUESDAY("Tuesday"),
+    /** Static value Tuesday for DaysOfWeekExtensibleEnum. */
+    public static final DaysOfWeekExtensibleEnum TUESDAY = fromString("Tuesday");
 
-    /** Enum value Wednesday. */
-    WEDNESDAY("Wednesday"),
+    /** Static value Wednesday for DaysOfWeekExtensibleEnum. */
+    public static final DaysOfWeekExtensibleEnum WEDNESDAY = fromString("Wednesday");
 
-    /** Enum value Thursday. */
-    THURSDAY("Thursday"),
+    /** Static value Thursday for DaysOfWeekExtensibleEnum. */
+    public static final DaysOfWeekExtensibleEnum THURSDAY = fromString("Thursday");
 
-    /** Enum value Friday. */
-    FRIDAY("Friday"),
+    /** Static value Friday for DaysOfWeekExtensibleEnum. */
+    public static final DaysOfWeekExtensibleEnum FRIDAY = fromString("Friday");
 
-    /** Enum value Saturday. */
-    SATURDAY("Saturday"),
+    /** Static value Saturday for DaysOfWeekExtensibleEnum. */
+    public static final DaysOfWeekExtensibleEnum SATURDAY = fromString("Saturday");
 
-    /** Enum value Sunday. */
-    SUNDAY("Sunday");
+    /** Static value Sunday for DaysOfWeekExtensibleEnum. */
+    public static final DaysOfWeekExtensibleEnum SUNDAY = fromString("Sunday");
 
-    /** The actual serialized value for a DaysOfWeekExtensibleEnum instance. */
-    private final String value;
-
-    DaysOfWeekExtensibleEnum(String value) {
-        this.value = value;
+    /**
+     * Creates or finds a DaysOfWeekExtensibleEnum from its string representation.
+     *
+     * @param name a name to look for.
+     * @return the corresponding DaysOfWeekExtensibleEnum.
+     */
+    @JsonCreator
+    public static DaysOfWeekExtensibleEnum fromString(String name) {
+        return fromString(name, DaysOfWeekExtensibleEnum.class);
     }
 
     /**
-     * Parses a serialized value to a DaysOfWeekExtensibleEnum instance.
+     * Gets known DaysOfWeekExtensibleEnum values.
      *
-     * @param value the serialized value to parse.
-     * @return the parsed DaysOfWeekExtensibleEnum object, or null if unable to parse.
+     * @return known DaysOfWeekExtensibleEnum values.
      */
-    @JsonCreator
-    public static DaysOfWeekExtensibleEnum fromString(String value) {
-        if (value == null) {
-            return null;
-        }
-        DaysOfWeekExtensibleEnum[] items = DaysOfWeekExtensibleEnum.values();
-        for (DaysOfWeekExtensibleEnum item : items) {
-            if (item.toString().equalsIgnoreCase(value)) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    /** {@inheritDoc} */
-    @JsonValue
-    @Override
-    public String toString() {
-        return this.value;
+    public static Collection<DaysOfWeekExtensibleEnum> values() {
+        return values(DaysOfWeekExtensibleEnum.class);
     }
 }
