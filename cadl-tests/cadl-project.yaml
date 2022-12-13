@@ -7,4 +7,3 @@ options:
     namer: true
     dev-options:
       generate-code-model: true
-      generate-convenience-apis: true

@@ -34,24 +34,24 @@ if (Test-Path ./cadl-output) {
     Remove-Item ./cadl-output -Recurse -Force
 }
 
-# generate without convenience APIs
-Copy-Item ./cadl-project.yaml ./cadl-project-backup.yaml
-Get-Content -path "cadl-project-backup.yaml" | % { $_ -Replace "      generate-convenience-apis: true", "      generate-convenience-apis: false" } |  Out-File "cadl-project.yaml"
-foreach ($cadlFile in (Get-Item ./cadl/* -Filter "*.cadl" -Exclude "*partialupdate*")) {
-    generate $cadlFile
-}
-Copy-Item ./cadl-project-backup.yaml ./cadl-project.yaml
-Remove-Item ./cadl-project-backup.yaml
-Invoke-Expression "mvn package ""-Dmaven.test.skip"""
-if ($LASTEXITCODE) {
-    exit $LASTEXITCODE
-}
-if (Test-Path ./src/main) {
-    Remove-Item ./src/main -Recurse -Force
-}
-if (Test-Path ./cadl-output) {
-    Remove-Item ./cadl-output -Recurse -Force
-}
+# # generate without convenience APIs
+# Copy-Item ./cadl-project.yaml ./cadl-project-backup.yaml
+# Get-Content -path "cadl-project-backup.yaml" | % { $_ -Replace "      generate-convenience-apis: true", "      generate-convenience-apis: false" } |  Out-File "cadl-project.yaml"
+# foreach ($cadlFile in (Get-Item ./cadl/* -Filter "*.cadl" -Exclude "*partialupdate*")) {
+#     generate $cadlFile
+# }
+# Copy-Item ./cadl-project-backup.yaml ./cadl-project.yaml
+# Remove-Item ./cadl-project-backup.yaml
+# Invoke-Expression "mvn package ""-Dmaven.test.skip"""
+# if ($LASTEXITCODE) {
+#     exit $LASTEXITCODE
+# }
+# if (Test-Path ./src/main) {
+#     Remove-Item ./src/main -Recurse -Force
+# }
+# if (Test-Path ./cadl-output) {
+#     Remove-Item ./cadl-output -Recurse -Force
+# }
 
 # run other local tests except partial update
 foreach ($cadlFile in (Get-Item ./cadl/* -Filter "*.cadl" -Exclude "*partialupdate*")) {

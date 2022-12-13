@@ -159,7 +159,7 @@ export class CodeModelBuilder {
     this.typeNameOptions = {
       // shorten type names by removing Cadl and service namespace
       namespaceFilter(ns) {
-        const name = program1.checker.getNamespaceString(ns);
+        const name = getNamespaceFullName(ns);
         return name !== "Cadl" && name !== namespace;
       },
     };
@@ -377,8 +377,8 @@ export class CodeModelBuilder {
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
-      } else if (this.options["dev-options"] && this.options["dev-options"]["generate-convenience-apis"]) {
-        // devOptions, add convenienceApi
+      } else if (!this.options["dev-options"] || (this.options["dev-options"]["generate-convenience-apis"] ?? true)) {
+        // add convenienceApi by default, unless devOptions says no
         codeModelOperation.convenienceApi = new ConvenienceApi(operation.name);
       }
     }
