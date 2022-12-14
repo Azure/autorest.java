@@ -5,6 +5,8 @@ $AZURE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-fol
 $PROTOCOL_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=protocol-tests --data-plane --generate-samples"
 $PROTOCOL_RESILIENCE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --data-plane"
 $SWAGGER_PATH = "node_modules/@microsoft.azure/autorest.testserver/swagger"
+$AZURE_DATAPLANE_ARGUMENTS = "--use=./ --output-folder=./azure-dataplane-tests"
+$AZURE_SDK_FOR_JAVA = "https://github.com/Azure/azure-sdk-for-java/blob/main/sdk"
 $PARALLELIZATION = 5
 if ($IsWindows) {
     $PARALLELIZATION = (Get-CIMInstance -Class 'CIM_Processor').NumberOfCores - 1
@@ -112,6 +114,14 @@ $job = @(
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true --output-model-immutable"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+$job | Wait-Job -Timeout 120
+$job | Receive-Job
+
+# Azure Data Plane
+$job = @(
+    "$AZURE_DATAPLANE_ARGUMENTS $AZURE_SDK_FOR_JAVA/schemaregistry/azure-data-schemaregistry/swagger/README.md"
+    "$AZURE_DATAPLANE_ARGUMENTS $AZURE_SDK_FOR_JAVA/containerregistry/azure-containers-containerregistry/swagger/autorest.md"
+)  | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
 $job | Wait-Job -Timeout 120
 $job | Receive-Job
 

@@ -316,6 +316,7 @@
       </activation>
       <modules>
         <module>./vanilla-tests</module>
+        <module>./azure-dataplane-tests</module>
       </modules>
     </profile>
     <profile>
@@ -382,6 +383,7 @@
     <module>./fluentnamer</module>
     <module>./androidgen</module>
     <module>./partial-update</module>
+    <module>./azure-dataplane-tests</module>
   </modules>
 
 </project>
