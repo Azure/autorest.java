@@ -527,12 +527,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             returnTypeHolder.syncReturnType = responseBodyType.getClientType();
         }
 
-        if (returnTypeHolder.syncReturnType == ClassType.BinaryData) {
-            returnTypeHolder.syncReturnWithResponse = GenericType.Response(ClassType.BinaryData);
-        } else {
-            returnTypeHolder.syncReturnWithResponse = createSyncReturnWithResponseType(returnTypeHolder.syncReturnType,
-                operation, isProtocolMethod, settings, isCustomHeaderIgnored);
-        }
+        returnTypeHolder.syncReturnWithResponse = createSyncReturnWithResponseType(returnTypeHolder.syncReturnType,
+            operation, isProtocolMethod, settings, isCustomHeaderIgnored);
 
         return returnTypeHolder;
     }
