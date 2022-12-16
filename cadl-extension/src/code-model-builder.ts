@@ -433,7 +433,7 @@ export class CodeModelBuilder {
     op.responses.map((it) => this.processResponse(codeModelOperation, it));
 
     this.processRouteForPaged(codeModelOperation, op.responses);
-    this.processRouteForLongRunning(codeModelOperation, operation, op.responses);
+    this.processRouteForLongRunning(codeModelOperation, groupName, operation, op.responses);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -467,7 +467,12 @@ export class CodeModelBuilder {
     }
   }
 
-  private processRouteForLongRunning(op: CodeModelOperation, operation: Operation, responses: HttpOperationResponse[]) {
+  private processRouteForLongRunning(
+    op: CodeModelOperation,
+    groupName: string,
+    operation: Operation,
+    responses: HttpOperationResponse[],
+  ) {
     let pollingFoundInOperationLinks = false;
     const operationLinks = getOperationLinks(this.program, operation);
     if (operationLinks) {
@@ -480,6 +485,9 @@ export class CodeModelBuilder {
 
         if (linkOperation.linkedOperation) {
           // Cadl requires linked operation written before
+          if (!this.operationCache.get(linkOperation.linkedOperation)) {
+            this.processRoute(groupName, linkOperation.linkedOperation);
+          }
           const opLink = new OperationLink(this.operationCache.get(linkOperation.linkedOperation)!);
           // parameters of operation link
           if (linkOperation.parameters) {
