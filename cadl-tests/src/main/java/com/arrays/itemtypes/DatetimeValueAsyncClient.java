@@ -103,8 +103,11 @@ public final class DatetimeValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<List<OffsetDateTime>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_OFFSET_DATE_TIME));
     }
+
+    private static final TypeReference<List<OffsetDateTime>> TYPE_REFERENCE_LIST_OFFSET_DATE_TIME =
+            new TypeReference<List<OffsetDateTime>>() {};
 
     /**
      * The put operation.

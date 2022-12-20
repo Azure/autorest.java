@@ -108,8 +108,11 @@ public final class ModelValueClient {
     public List<InnerModel> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<List<InnerModel>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_INNER_MODEL);
     }
+
+    private static final TypeReference<List<InnerModel>> TYPE_REFERENCE_LIST_INNER_MODEL =
+            new TypeReference<List<InnerModel>>() {};
 
     /**
      * The put operation.

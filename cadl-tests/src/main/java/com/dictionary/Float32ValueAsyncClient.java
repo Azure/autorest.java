@@ -102,8 +102,11 @@ public final class Float32ValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<Map<String, Double>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_DOUBLE));
     }
+
+    private static final TypeReference<Map<String, Double>> TYPE_REFERENCE_MAP_STRING_DOUBLE =
+            new TypeReference<Map<String, Double>>() {};
 
     /**
      * The put operation.

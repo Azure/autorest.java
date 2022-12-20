@@ -166,8 +166,11 @@ public final class ResponseAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getArrayWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<List<Resource>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_RESOURCE));
     }
+
+    private static final TypeReference<List<Resource>> TYPE_REFERENCE_LIST_RESOURCE =
+            new TypeReference<List<Resource>>() {};
 
     /**
      * The createWithHeaders operation.

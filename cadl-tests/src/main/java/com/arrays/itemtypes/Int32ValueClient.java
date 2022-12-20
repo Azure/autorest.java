@@ -97,8 +97,11 @@ public final class Int32ValueClient {
     public List<Integer> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<List<Integer>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_INTEGER);
     }
+
+    private static final TypeReference<List<Integer>> TYPE_REFERENCE_LIST_INTEGER =
+            new TypeReference<List<Integer>>() {};
 
     /**
      * The put operation.

@@ -113,10 +113,11 @@ public final class RecursiveModelValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(
-                        protocolMethodData ->
-                                protocolMethodData.toObject(new TypeReference<Map<String, InnerModel>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_INNER_MODEL));
     }
+
+    private static final TypeReference<Map<String, InnerModel>> TYPE_REFERENCE_MAP_STRING_INNER_MODEL =
+            new TypeReference<Map<String, InnerModel>>() {};
 
     /**
      * The put operation.

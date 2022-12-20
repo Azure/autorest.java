@@ -161,8 +161,11 @@ public final class ResponseClient {
     public List<Resource> getArray() {
         // Generated convenience method for getArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getArrayWithResponse(requestOptions).getValue().toObject(new TypeReference<List<Resource>>() {});
+        return getArrayWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_RESOURCE);
     }
+
+    private static final TypeReference<List<Resource>> TYPE_REFERENCE_LIST_RESOURCE =
+            new TypeReference<List<Resource>>() {};
 
     /**
      * The createWithHeaders operation.

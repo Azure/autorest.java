@@ -102,8 +102,11 @@ public final class Int32ValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<Map<String, Integer>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_INTEGER));
     }
+
+    private static final TypeReference<Map<String, Integer>> TYPE_REFERENCE_MAP_STRING_INTEGER =
+            new TypeReference<Map<String, Integer>>() {};
 
     /**
      * The put operation.

@@ -97,8 +97,11 @@ public final class BooleanValueClient {
     public List<Boolean> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<List<Boolean>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_BOOLEAN);
     }
+
+    private static final TypeReference<List<Boolean>> TYPE_REFERENCE_LIST_BOOLEAN =
+            new TypeReference<List<Boolean>>() {};
 
     /**
      * The put operation.

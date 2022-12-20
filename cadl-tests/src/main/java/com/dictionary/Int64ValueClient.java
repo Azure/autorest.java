@@ -97,8 +97,11 @@ public final class Int64ValueClient {
     public Map<String, Long> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<Map<String, Long>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_LONG);
     }
+
+    private static final TypeReference<Map<String, Long>> TYPE_REFERENCE_MAP_STRING_LONG =
+            new TypeReference<Map<String, Long>>() {};
 
     /**
      * The put operation.

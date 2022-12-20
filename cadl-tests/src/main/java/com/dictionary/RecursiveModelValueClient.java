@@ -108,8 +108,11 @@ public final class RecursiveModelValueClient {
     public Map<String, InnerModel> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<Map<String, InnerModel>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_INNER_MODEL);
     }
+
+    private static final TypeReference<Map<String, InnerModel>> TYPE_REFERENCE_MAP_STRING_INNER_MODEL =
+            new TypeReference<Map<String, InnerModel>>() {};
 
     /**
      * The put operation.

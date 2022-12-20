@@ -98,8 +98,11 @@ public final class DurationValueClient {
     public Map<String, Duration> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<Map<String, Duration>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_DURATION);
     }
+
+    private static final TypeReference<Map<String, Duration>> TYPE_REFERENCE_MAP_STRING_DURATION =
+            new TypeReference<Map<String, Duration>>() {};
 
     /**
      * The put operation.

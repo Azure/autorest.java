@@ -97,8 +97,11 @@ public final class Int32ValueClient {
     public Map<String, Integer> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<Map<String, Integer>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_INTEGER);
     }
+
+    private static final TypeReference<Map<String, Integer>> TYPE_REFERENCE_MAP_STRING_INTEGER =
+            new TypeReference<Map<String, Integer>>() {};
 
     /**
      * The put operation.
