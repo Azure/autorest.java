@@ -23,7 +23,6 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -33,19 +32,15 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<ConvenienceMethod, JavaClass> {
+abstract class ConvenienceMethodTemplateBase {
 
     protected ConvenienceMethodTemplateBase() {
     }
 
-    protected final Set<GenericType> typeReferenceStaticClasses = new HashSet<>();
-
-    public final void write(ConvenienceMethod convenienceMethodObj, JavaClass classBlock) {
+    public void write(ConvenienceMethod convenienceMethodObj, JavaClass classBlock, Set<GenericType> typeReferenceStaticClasses) {
         if (!isMethodIncluded(convenienceMethodObj)) {
             return;
         }
-
-        typeReferenceStaticClasses.clear();
 
         ClientMethod protocolMethod = convenienceMethodObj.getProtocolMethod();
         convenienceMethodObj.getConvenienceMethods().stream()
@@ -64,14 +59,9 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                     classBlock.publicMethod(methodDeclaration, methodBlock -> {
                         methodBlock.line("// Generated convenience method for " + getMethodName(protocolMethod));
 
-                        writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock);
+                        writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock, typeReferenceStaticClasses);
                     });
                 });
-
-        // static variables for TypeReference<T>
-        for (GenericType typeReferenceStaticClass : typeReferenceStaticClasses) {
-            TemplateUtil.writeTypeReferenceStaticVariable(classBlock, typeReferenceStaticClass);
-        }
     }
 
     /**
@@ -82,7 +72,10 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
      * @param methodBlock the code block.
      */
     protected void writeMethodImplementation(
-            ClientMethod protocolMethod, ClientMethod convenienceMethod, JavaBlock methodBlock) {
+            ClientMethod protocolMethod,
+            ClientMethod convenienceMethod,
+            JavaBlock methodBlock,
+            Set<GenericType> typeReferenceStaticClasses) {
 
         // RequestOptions
         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
@@ -142,7 +135,7 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                 .collect(Collectors.joining(", "));
 
         // write the invocation of protocol method, and related type conversion
-        writeInvocationAndConversion(convenienceMethod, protocolMethod, invocationExpression, methodBlock);
+        writeInvocationAndConversion(convenienceMethod, protocolMethod, invocationExpression, methodBlock, typeReferenceStaticClasses);
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
@@ -194,7 +187,8 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
     protected abstract void writeInvocationAndConversion(
             ClientMethod convenienceMethod, ClientMethod protocolMethod,
             String invocationExpression,
-            JavaBlock methodBlock);
+            JavaBlock methodBlock,
+            Set<GenericType> typeReferenceStaticClasses);
 
     protected boolean isModelOrBuiltin(IType type) {
         // TODO: other built-in types
