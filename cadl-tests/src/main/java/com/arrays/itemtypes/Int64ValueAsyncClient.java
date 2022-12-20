@@ -102,7 +102,7 @@ public final class Int64ValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<List<Long>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_LONG));
     }
 
     /**
@@ -124,4 +124,6 @@ public final class Int64ValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
+
+    private static final TypeReference<List<Long>> TYPE_REFERENCE_LIST_LONG = new TypeReference<List<Long>>() {};
 }

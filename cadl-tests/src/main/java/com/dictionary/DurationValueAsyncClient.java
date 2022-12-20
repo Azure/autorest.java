@@ -103,7 +103,7 @@ public final class DurationValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<Map<String, Duration>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_DURATION));
     }
 
     /**
@@ -125,4 +125,7 @@ public final class DurationValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
+
+    private static final TypeReference<Map<String, Duration>> TYPE_REFERENCE_MAP_STRING_DURATION =
+            new TypeReference<Map<String, Duration>>() {};
 }

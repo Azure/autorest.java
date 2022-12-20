@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaClass;
@@ -14,6 +15,7 @@ import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.TemplateUtil;
 
 import java.util.HashSet;
 import java.util.List;
@@ -137,7 +139,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
           writeMethod(clientMethod, classBlock);
         });
 
-    syncClient.getConvenienceMethods().forEach(m -> writeConvenienceMethods(m, classBlock));
+    writeConvenienceMethods(syncClient.getConvenienceMethods(), classBlock);
 
     ServiceAsyncClientTemplate.addEndpointMethod(classBlock, syncClient.getClientBuilder(), serviceClient, this.clientReference());
   }
@@ -170,7 +172,14 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     classBlock.annotation("Generated");
   }
 
-  private static void writeConvenienceMethods(ConvenienceMethod convenienceMethod, JavaClass classBlock) {
-    Templates.getConvenienceSyncMethodTemplate().write(convenienceMethod, classBlock);
+  private static void writeConvenienceMethods(List<ConvenienceMethod> convenienceMethods, JavaClass classBlock) {
+    Set<GenericType> typeReferenceStaticClasses = new HashSet<>();
+
+    convenienceMethods.forEach(m -> Templates.getConvenienceSyncMethodTemplate().write(m, classBlock, typeReferenceStaticClasses));
+
+    // static variables for TypeReference<T>
+    for (GenericType typeReferenceStaticClass : typeReferenceStaticClasses) {
+      TemplateUtil.writeTypeReferenceStaticVariable(classBlock, typeReferenceStaticClass);
+    }
   }
 }

@@ -98,7 +98,7 @@ public final class DatetimeValueClient {
     public List<OffsetDateTime> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<List<OffsetDateTime>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_OFFSET_DATE_TIME);
     }
 
     /**
@@ -119,4 +119,7 @@ public final class DatetimeValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<OffsetDateTime>> TYPE_REFERENCE_LIST_OFFSET_DATE_TIME =
+            new TypeReference<List<OffsetDateTime>>() {};
 }

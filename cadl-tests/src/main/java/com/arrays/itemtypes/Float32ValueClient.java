@@ -97,7 +97,7 @@ public final class Float32ValueClient {
     public List<Double> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<List<Double>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_DOUBLE);
     }
 
     /**
@@ -118,4 +118,6 @@ public final class Float32ValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<Double>> TYPE_REFERENCE_LIST_DOUBLE = new TypeReference<List<Double>>() {};
 }

@@ -102,7 +102,7 @@ public final class Int32ValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<List<Integer>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_INTEGER));
     }
 
     /**
@@ -124,4 +124,7 @@ public final class Int32ValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
+
+    private static final TypeReference<List<Integer>> TYPE_REFERENCE_LIST_INTEGER =
+            new TypeReference<List<Integer>>() {};
 }

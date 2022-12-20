@@ -383,7 +383,6 @@
     <module>./fluentnamer</module>
     <module>./androidgen</module>
     <module>./partial-update</module>
-    <module>./azure-dataplane-tests</module>
   </modules>
 
 </project>

@@ -86,6 +86,35 @@ public final class ResponseClient {
     }
 
     /**
+     * The getAnotherArray operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * [
+     *      (Required){
+     *         id: String (Required)
+     *         name: String (Required)
+     *         description: String (Optional)
+     *         type: String (Required)
+     *     }
+     * ]
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return array of Resource along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getAnotherArrayWithResponse(RequestOptions requestOptions) {
+        return this.client.getAnotherArrayWithResponse(requestOptions).block();
+    }
+
+    /**
      * The createWithHeaders operation.
      *
      * <p><strong>Response Body Schema</strong>
@@ -161,7 +190,25 @@ public final class ResponseClient {
     public List<Resource> getArray() {
         // Generated convenience method for getArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getArrayWithResponse(requestOptions).getValue().toObject(new TypeReference<List<Resource>>() {});
+        return getArrayWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_RESOURCE);
+    }
+
+    /**
+     * The getAnotherArray operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of Resource.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public List<Resource> getAnotherArray() {
+        // Generated convenience method for getAnotherArrayWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getAnotherArrayWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_RESOURCE);
     }
 
     /**
@@ -198,4 +245,7 @@ public final class ResponseClient {
         RequestOptions requestOptions = new RequestOptions();
         deleteWithHeadersWithResponse(requestOptions).getValue();
     }
+
+    private static final TypeReference<List<Resource>> TYPE_REFERENCE_LIST_RESOURCE =
+            new TypeReference<List<Resource>>() {};
 }
