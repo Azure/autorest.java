@@ -100,8 +100,6 @@ public final class Float32ValueClient {
         return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_DOUBLE);
     }
 
-    private static final TypeReference<List<Double>> TYPE_REFERENCE_LIST_DOUBLE = new TypeReference<List<Double>>() {};
-
     /**
      * The put operation.
      *
@@ -120,4 +118,6 @@ public final class Float32ValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<Double>> TYPE_REFERENCE_LIST_DOUBLE = new TypeReference<List<Double>>() {};
 }

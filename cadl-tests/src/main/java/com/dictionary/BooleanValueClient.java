@@ -100,9 +100,6 @@ public final class BooleanValueClient {
         return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_BOOLEAN);
     }
 
-    private static final TypeReference<Map<String, Boolean>> TYPE_REFERENCE_MAP_STRING_BOOLEAN =
-            new TypeReference<Map<String, Boolean>>() {};
-
     /**
      * The put operation.
      *
@@ -121,4 +118,7 @@ public final class BooleanValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<Map<String, Boolean>> TYPE_REFERENCE_MAP_STRING_BOOLEAN =
+            new TypeReference<Map<String, Boolean>>() {};
 }

@@ -116,9 +116,6 @@ public final class ModelValueAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_INNER_MODEL));
     }
 
-    private static final TypeReference<Map<String, InnerModel>> TYPE_REFERENCE_MAP_STRING_INNER_MODEL =
-            new TypeReference<Map<String, InnerModel>>() {};
-
     /**
      * The put operation.
      *
@@ -138,4 +135,7 @@ public final class ModelValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
+
+    private static final TypeReference<Map<String, InnerModel>> TYPE_REFERENCE_MAP_STRING_INNER_MODEL =
+            new TypeReference<Map<String, InnerModel>>() {};
 }

@@ -100,9 +100,6 @@ public final class Float32ValueClient {
         return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_DOUBLE);
     }
 
-    private static final TypeReference<Map<String, Double>> TYPE_REFERENCE_MAP_STRING_DOUBLE =
-            new TypeReference<Map<String, Double>>() {};
-
     /**
      * The put operation.
      *
@@ -121,4 +118,7 @@ public final class Float32ValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<Map<String, Double>> TYPE_REFERENCE_MAP_STRING_DOUBLE =
+            new TypeReference<Map<String, Double>>() {};
 }

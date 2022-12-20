@@ -100,8 +100,6 @@ public final class UnknownValueClient {
         return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_OBJECT);
     }
 
-    private static final TypeReference<List<Object>> TYPE_REFERENCE_LIST_OBJECT = new TypeReference<List<Object>>() {};
-
     /**
      * The put operation.
      *
@@ -120,4 +118,6 @@ public final class UnknownValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<Object>> TYPE_REFERENCE_LIST_OBJECT = new TypeReference<List<Object>>() {};
 }

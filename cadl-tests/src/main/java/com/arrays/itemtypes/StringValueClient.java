@@ -100,8 +100,6 @@ public final class StringValueClient {
         return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_STRING);
     }
 
-    private static final TypeReference<List<String>> TYPE_REFERENCE_LIST_STRING = new TypeReference<List<String>>() {};
-
     /**
      * The put operation.
      *
@@ -120,4 +118,6 @@ public final class StringValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<String>> TYPE_REFERENCE_LIST_STRING = new TypeReference<List<String>>() {};
 }

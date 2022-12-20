@@ -100,9 +100,6 @@ public final class StringValueClient {
         return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_STRING);
     }
 
-    private static final TypeReference<Map<String, String>> TYPE_REFERENCE_MAP_STRING_STRING =
-            new TypeReference<Map<String, String>>() {};
-
     /**
      * The put operation.
      *
@@ -121,4 +118,7 @@ public final class StringValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<Map<String, String>> TYPE_REFERENCE_MAP_STRING_STRING =
+            new TypeReference<Map<String, String>>() {};
 }

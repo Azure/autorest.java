@@ -101,9 +101,6 @@ public final class DurationValueClient {
         return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_DURATION);
     }
 
-    private static final TypeReference<Map<String, Duration>> TYPE_REFERENCE_MAP_STRING_DURATION =
-            new TypeReference<Map<String, Duration>>() {};
-
     /**
      * The put operation.
      *
@@ -122,4 +119,7 @@ public final class DurationValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<Map<String, Duration>> TYPE_REFERENCE_MAP_STRING_DURATION =
+            new TypeReference<Map<String, Duration>>() {};
 }

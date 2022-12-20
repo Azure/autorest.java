@@ -100,8 +100,6 @@ public final class Int64ValueClient {
         return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_LONG);
     }
 
-    private static final TypeReference<List<Long>> TYPE_REFERENCE_LIST_LONG = new TypeReference<List<Long>>() {};
-
     /**
      * The put operation.
      *
@@ -120,4 +118,6 @@ public final class Int64ValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<Long>> TYPE_REFERENCE_LIST_LONG = new TypeReference<List<Long>>() {};
 }

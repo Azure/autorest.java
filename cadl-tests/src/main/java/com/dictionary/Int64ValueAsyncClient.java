@@ -105,9 +105,6 @@ public final class Int64ValueAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_LONG));
     }
 
-    private static final TypeReference<Map<String, Long>> TYPE_REFERENCE_MAP_STRING_LONG =
-            new TypeReference<Map<String, Long>>() {};
-
     /**
      * The put operation.
      *
@@ -127,4 +124,7 @@ public final class Int64ValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
+
+    private static final TypeReference<Map<String, Long>> TYPE_REFERENCE_MAP_STRING_LONG =
+            new TypeReference<Map<String, Long>>() {};
 }

@@ -105,9 +105,6 @@ public final class BooleanValueAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_BOOLEAN));
     }
 
-    private static final TypeReference<List<Boolean>> TYPE_REFERENCE_LIST_BOOLEAN =
-            new TypeReference<List<Boolean>>() {};
-
     /**
      * The put operation.
      *
@@ -127,4 +124,7 @@ public final class BooleanValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
+
+    private static final TypeReference<List<Boolean>> TYPE_REFERENCE_LIST_BOOLEAN =
+            new TypeReference<List<Boolean>>() {};
 }

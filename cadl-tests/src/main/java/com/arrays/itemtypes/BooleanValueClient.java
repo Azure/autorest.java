@@ -100,9 +100,6 @@ public final class BooleanValueClient {
         return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_BOOLEAN);
     }
 
-    private static final TypeReference<List<Boolean>> TYPE_REFERENCE_LIST_BOOLEAN =
-            new TypeReference<List<Boolean>>() {};
-
     /**
      * The put operation.
      *
@@ -121,4 +118,7 @@ public final class BooleanValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<Boolean>> TYPE_REFERENCE_LIST_BOOLEAN =
+            new TypeReference<List<Boolean>>() {};
 }

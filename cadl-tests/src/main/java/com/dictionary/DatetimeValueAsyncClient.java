@@ -106,9 +106,6 @@ public final class DatetimeValueAsyncClient {
                 .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_OFFSET_DATE_TIME));
     }
 
-    private static final TypeReference<Map<String, OffsetDateTime>> TYPE_REFERENCE_MAP_STRING_OFFSET_DATE_TIME =
-            new TypeReference<Map<String, OffsetDateTime>>() {};
-
     /**
      * The put operation.
      *
@@ -128,4 +125,7 @@ public final class DatetimeValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
+
+    private static final TypeReference<Map<String, OffsetDateTime>> TYPE_REFERENCE_MAP_STRING_OFFSET_DATE_TIME =
+            new TypeReference<Map<String, OffsetDateTime>>() {};
 }

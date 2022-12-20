@@ -111,9 +111,6 @@ public final class ModelValueClient {
         return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_INNER_MODEL);
     }
 
-    private static final TypeReference<List<InnerModel>> TYPE_REFERENCE_LIST_INNER_MODEL =
-            new TypeReference<List<InnerModel>>() {};
-
     /**
      * The put operation.
      *
@@ -132,4 +129,7 @@ public final class ModelValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<InnerModel>> TYPE_REFERENCE_LIST_INNER_MODEL =
+            new TypeReference<List<InnerModel>>() {};
 }

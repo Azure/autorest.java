@@ -100,9 +100,6 @@ public final class Int32ValueClient {
         return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_INTEGER);
     }
 
-    private static final TypeReference<List<Integer>> TYPE_REFERENCE_LIST_INTEGER =
-            new TypeReference<List<Integer>>() {};
-
     /**
      * The put operation.
      *
@@ -121,4 +118,7 @@ public final class Int32ValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<Integer>> TYPE_REFERENCE_LIST_INTEGER =
+            new TypeReference<List<Integer>>() {};
 }
