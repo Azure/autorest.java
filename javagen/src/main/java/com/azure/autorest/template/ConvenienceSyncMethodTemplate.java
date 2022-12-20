@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.http.rest.SimpleResponse;
@@ -182,7 +183,8 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             return String.format("%1$s.from%2$s(%3$s)", responseBodyType, ((EnumType) responseBodyType).getElementType(), invocationExpression);
         } else if (responseBodyType instanceof GenericType) {
             // generic, e.g. list, map
-            return String.format("%2$s.toObject(new TypeReference<%1$s>() {})", responseBodyType, invocationExpression);
+            typeReferenceStaticClasses.add((GenericType) responseBodyType);
+            return String.format("%2$s.toObject(%1$s)", TemplateUtil.getTypeReferenceCreation(responseBodyType), invocationExpression);
         } else if (responseBodyType == ClassType.BinaryData) {
             // BinaryData
             return invocationExpression;

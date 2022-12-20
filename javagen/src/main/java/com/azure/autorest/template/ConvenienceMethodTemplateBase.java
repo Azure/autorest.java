@@ -9,6 +9,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
@@ -22,10 +23,12 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -35,10 +38,14 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
     protected ConvenienceMethodTemplateBase() {
     }
 
+    protected final Set<GenericType> typeReferenceStaticClasses = new HashSet<>();
+
     public final void write(ConvenienceMethod convenienceMethodObj, JavaClass classBlock) {
         if (!isMethodIncluded(convenienceMethodObj)) {
             return;
         }
+
+        typeReferenceStaticClasses.clear();
 
         ClientMethod protocolMethod = convenienceMethodObj.getProtocolMethod();
         convenienceMethodObj.getConvenienceMethods().stream()
@@ -60,6 +67,11 @@ abstract class ConvenienceMethodTemplateBase implements IJavaTemplate<Convenienc
                         writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock);
                     });
                 });
+
+        // static variables for TypeReference<T>
+        for (GenericType typeReferenceStaticClass : typeReferenceStaticClasses) {
+            TemplateUtil.writeTypeReferenceStaticVariable(classBlock, typeReferenceStaticClass);
+        }
     }
 
     /**

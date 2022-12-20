@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.util.CoreUtils;
@@ -141,7 +142,8 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
             mapExpression = String.format("%1$s::from%2$s", responseBodyType, ((EnumType) responseBodyType).getElementType());
         } else if (responseBodyType instanceof GenericType) {
             // generic, e.g. list, map
-            mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(new TypeReference<%1$s>() {})", responseBodyType);
+            typeReferenceStaticClasses.add((GenericType) responseBodyType);
+            mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(%1$s)", TemplateUtil.getTypeReferenceCreation(responseBodyType));
         } else if (responseBodyType == ClassType.BinaryData) {
             // BinaryData, no need to do the map in expressionConvertFromBinaryData
             mapExpression = null;
