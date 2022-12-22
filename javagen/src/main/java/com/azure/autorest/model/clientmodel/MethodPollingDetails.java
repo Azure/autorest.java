@@ -5,12 +5,15 @@ package com.azure.autorest.model.clientmodel;
 
 public class MethodPollingDetails {
     private final String pollingStrategy;
+    private final String syncPollingStrategy;
     private final IType intermediateType;
     private final IType finalType;
     private final int pollIntervalInSeconds;
 
-    public MethodPollingDetails(String pollingStrategy, IType intermediateType, IType finalType, int pollIntervalInSeconds) {
+    public MethodPollingDetails(String pollingStrategy, String syncPollingStrategy, IType intermediateType,
+                                IType finalType, int pollIntervalInSeconds) {
         this.pollingStrategy = pollingStrategy;
+        this.syncPollingStrategy = syncPollingStrategy;
         this.intermediateType = intermediateType;
         this.finalType = finalType;
         this.pollIntervalInSeconds = pollIntervalInSeconds;
@@ -18,6 +21,10 @@ public class MethodPollingDetails {
 
     public String getPollingStrategy() {
         return pollingStrategy;
+    }
+
+    public String getSyncPollingStrategy() {
+        return syncPollingStrategy;
     }
 
     public IType getIntermediateType() {

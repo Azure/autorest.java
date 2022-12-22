@@ -388,7 +388,7 @@ public class ClientMethod {
                 }
             }
 
-            if (type == ClientMethodType.LongRunningBeginAsync) {
+            if (type == ClientMethodType.LongRunningBeginAsync || type == ClientMethodType.LongRunningBeginSync) {
                 if (settings.isFluent()) {
                     if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
                         imports.add("com.fasterxml.jackson.core.type.TypeReference");
@@ -397,15 +397,23 @@ public class ClientMethod {
                     imports.add("com.azure.core.util.serializer.TypeReference");
                     imports.add("java.time.Duration");
 
-                    if (getMethodPollingDetails().getPollingStrategy() != null) {
+                    if (getMethodPollingDetails() != null) {
                         List<String> knownPollingStrategies = Arrays.asList(
                                 "DefaultPollingStrategy",
                                 "ChainedPollingStrategy",
                                 "OperationResourcePollingStrategy",
                                 "LocationPollingStrategy",
-                                "StatusCheckPollingStrategy");
+                                "StatusCheckPollingStrategy",
+                                "SyncDefaultPollingStrategy",
+                                "SyncChainedPollingStrategy",
+                                "SyncOperationResourcePollingStrategy",
+                                "SyncLocationPollingStrategy",
+                                "SyncStatusCheckPollingStrategy");
+
+
                         for (String pollingStrategy : knownPollingStrategies) {
-                            if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
+                            if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)
+                                    || getMethodPollingDetails().getSyncPollingStrategy().contains(pollingStrategy)) {
                                 imports.add("com.azure.core.util.polling." + pollingStrategy);
                             }
                         }

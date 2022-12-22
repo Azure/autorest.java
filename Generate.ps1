@@ -6,6 +6,7 @@ $PROTOCOL_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-
 $PROTOCOL_RESILIENCE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --data-plane"
 $SWAGGER_PATH = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 $AZURE_DATAPLANE_ARGUMENTS = "--use=./ --output-folder=./azure-dataplane-tests"
+$AZURE_DATAPLANE_PATH = "azure-dataplane-tests/swagger"
 $AZURE_SDK_FOR_JAVA = "https://github.com/Azure/azure-sdk-for-java/blob/main/sdk"
 $PARALLELIZATION = 5
 if ($IsWindows) {
@@ -121,6 +122,10 @@ $job | Receive-Job
 $job = @(
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_SDK_FOR_JAVA/schemaregistry/azure-data-schemaregistry/swagger/README.md"
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_SDK_FOR_JAVA/containerregistry/azure-containers-containerregistry/swagger/autorest.md"
+    # Form recognizer in Azure SDK for Java repo does not configure polling operations. So, using local configuration
+    # to generate polling methods.
+    "$AZURE_DATAPLANE_ARGUMENTS $AZURE_DATAPLANE_PATH/form-recognizer.md"
+    "$AZURE_DATAPLANE_ARGUMENTS $AZURE_DATAPLANE_PATH/form-recognizer-dpg.md"
 )  | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
 $job | Wait-Job -Timeout 120
 $job | Receive-Job

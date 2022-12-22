@@ -881,12 +881,22 @@ public class JavaSettings {
         private String finalType;
         @JsonProperty("poll-interval")
         private String pollInterval;
+        @JsonProperty("sync-strategy")
+        private String syncStrategy;
 
         public String getStrategy() {
             if (strategy == null || "default".equalsIgnoreCase(strategy)) {
                 return "new DefaultPollingStrategy<>({httpPipeline}, {endpoint}, null, {context})";
             } else {
                 return strategy;
+            }
+        }
+
+        public String getSyncStrategy() {
+            if (syncStrategy == null || "default".equalsIgnoreCase(syncStrategy)) {
+                return "new SyncDefaultPollingStrategy<>({httpPipeline}, {endpoint}, null, {context})";
+            } else {
+                return syncStrategy;
             }
         }
 

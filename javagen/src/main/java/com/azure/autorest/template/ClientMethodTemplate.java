@@ -544,7 +544,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 break;
 
             case LongRunningBeginSync:
-                generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
+                if (settings.isDataPlaneClient()) {
+                    generateProtocolLongRunningBeginSync(clientMethod, typeBlock);
+                } else {
+                    generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
+                }
                 break;
 
             case Resumable:
@@ -589,15 +593,50 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     protected void generateProtocolPagingPlainSync(ClientMethod clientMethod, JavaType typeBlock,
         ProxyMethod restAPIMethod, JavaSettings settings) {
-        generatePagingPlainSync(clientMethod, typeBlock, restAPIMethod, settings);
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+        if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+                addOptionalVariables(function, clientMethod);
+                function.line("RequestOptions requestOptionsForNextPage = new RequestOptions();");
+                function.line("requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);");
+                function.line("return new PagedIterable<>(");
+
+                String nextMethodArgs = clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage");
+                String firstPageArgs = clientMethod.getArgumentList();
+                if (clientMethod.getParameters()
+                        .stream()
+                        .noneMatch(p -> p.getClientType() == ClassType.Context)) {
+                    nextMethodArgs = nextMethodArgs.replace("context", "Context.NONE");
+
+                }
+                String effectiveNextMethodArgs = nextMethodArgs;
+                function.indent(() -> {
+                    function.line("() -> %s(%s),",
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(), firstPageArgs);
+                    function.line("nextLink -> %s(%s));",
+                            clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingSinglePageMethodName(),
+                            effectiveNextMethodArgs);
+                });
+            });
+        } else {
+            writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+                String firstPageArgs = clientMethod.getArgumentList();
+                if (clientMethod.getParameters()
+                        .stream()
+                        .noneMatch(p -> p.getClientType() == ClassType.Context)) {
+                }
+                addOptionalVariables(function, clientMethod);
+                function.line("return new PagedIterable<>(");
+                function.indent(() -> {
+                    function.line("() -> %s(%s));",
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(), firstPageArgs);
+                });
+            });
+        }
     }
 
     protected void generateProtocolPagingAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         generatePagingAsync(clientMethod, typeBlock, restAPIMethod, settings);
-    }
-
-    protected void generateProtocolPaging(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        generatePagingPlainSync(clientMethod, typeBlock, restAPIMethod, settings);
     }
 
     protected void generateProtocolPagingAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
@@ -1230,6 +1269,46 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     /**
+     * Extension to write LRO begin sync client method.
+     *
+     * @param clientMethod client method
+     * @param typeBlock type block
+     * @param restAPIMethod proxy method
+     * @param settings java settings
+     */
+    protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+        String contextParam;
+        if (clientMethod.getParameters().stream().anyMatch(p -> p.getClientType().equals(ClassType.Context))) {
+            contextParam = "context";
+        } else {
+            contextParam = "Context.NONE";
+        }
+        String pollingStrategy = getSyncPollingStrategy(clientMethod, contextParam);
+
+        String argumentList = clientMethod.getArgumentList();
+        if (CoreUtils.isNullOrEmpty(argumentList)) {
+            // If there are no arguments the argument is Context.NONE
+            argumentList = "Context.NONE";
+        } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context)) {
+            // If the arguments don't contain Context append Context.NONE
+            argumentList += ", Context.NONE";
+        }
+
+        String effectiveArgumentList = argumentList;
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            addOptionalVariables(function, clientMethod);
+            function.line("return SyncPoller.createPoller(Duration.ofSeconds(%s),",
+                    clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
+            function.increaseIndent();
+            function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleRestResponseMethodName(), effectiveArgumentList);
+            function.line(pollingStrategy + ",");
+            function.line(TemplateUtil.getLongRunningOperationTypeReferenceExpression(clientMethod.getMethodPollingDetails()) + ");");
+            function.decreaseIndent();
+        });
+    }
+
+    /**
      * Generate long-running begin async method for protocol client
      *
      * @param clientMethod client method
@@ -1244,6 +1323,22 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             function.line("return PollerFlux.create(Duration.ofSeconds(%s),", clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
             function.increaseIndent();
             function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
+            function.line(pollingStrategy + ",");
+            function.line(TemplateUtil.getLongRunningOperationTypeReferenceExpression(clientMethod.getMethodPollingDetails()) + ");");
+            function.decreaseIndent();
+        });
+    }
+
+    private void generateProtocolLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock) {
+        String contextParam = "requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE";
+        String pollingStrategy = getSyncPollingStrategy(clientMethod, contextParam);
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            addOptionalVariables(function, clientMethod);
+            function.line("return SyncPoller.createPoller(Duration.ofSeconds(%s),",
+                    clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
+            function.increaseIndent();
+            function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleRestResponseMethodName(), clientMethod.getArgumentList());
             function.line(pollingStrategy + ",");
             function.line(TemplateUtil.getLongRunningOperationTypeReferenceExpression(clientMethod.getMethodPollingDetails()) + ");");
             function.decreaseIndent();
@@ -1279,21 +1374,33 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
     }
 
-    /**
-     * Extension to write LRO begin sync client method.
-     *
-     * @param clientMethod client method
-     * @param typeBlock type block
-     * @param restAPIMethod proxy method
-     * @param settings java settings
-     */
-    protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
-        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            addOptionalVariables(function, clientMethod);
-            function.methodReturn(String.format("this.%sAsync(%s).getSyncPoller()",
-                clientMethod.getName(), clientMethod.getArgumentList()));
-        });
+    private String getSyncPollingStrategy(ClientMethod clientMethod, String contextParam) {
+        String endpoint = "null";
+        if (clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
+            if (clientMethod.getProxyMethod().getParameters().stream()
+                    .anyMatch(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI && "endpoint".equals(p.getName()))) {
+                // has EndpointTrait
+
+                final String baseUrl = clientMethod.getProxyMethod().getBaseUrl();
+                final String endpointReplacementExpr = clientMethod.getProxyMethod().getParameters().stream()
+                        .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
+                        .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
+                        .map(p -> String.format(".replace(%1$s, %2$s)",
+                                ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
+                                p.getParameterReference()
+                        )).collect(Collectors.joining());
+                if (!CoreUtils.isNullOrEmpty(endpointReplacementExpr)) {
+                    endpoint = ClassType.String.defaultValueExpression(baseUrl) + endpointReplacementExpr;
+                }
+            }
+        }
+        return clientMethod.getMethodPollingDetails().getSyncPollingStrategy()
+                .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
+                .replace("{endpoint}", endpoint)
+                .replace("{context}", contextParam)
+                .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
+                .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
+                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
     }
 
     protected void generateSendRequestAsync(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings) {
