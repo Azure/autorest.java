@@ -1,12 +1,34 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
 
 using Cadl.Http;
+using Cadl.Versioning;
 
 @service({
   title: "Flatten",
   version: "1.0.0",
 })
+@server(
+  "{endpoint}/openai",
+  "Flatten",
+  {
+    endpoint: string,
+  }
+)
+@versioned(ServiceApiVersions)
 namespace Cadl.Flatten;
+
+enum ServiceApiVersions {
+  v2022_06_01_preview: "2022-06-01-preview",
+}
+
+@doc("The ApiVersion query parameter.")
+model ApiVersionParameter {
+  @query("api-version")
+  @minLength(1)
+  @doc("The API version to use for this operation.")
+  apiVersion: string;
+}
 
 alias Request = {
   user?: string;
@@ -16,5 +38,5 @@ alias Request = {
 @route("/flatten")
 interface FlattenOp {
   @post
-  send(...Request): OkResponse;
+  send(@query id: string, ...Request, ...ApiVersionParameter): OkResponse;
 }
