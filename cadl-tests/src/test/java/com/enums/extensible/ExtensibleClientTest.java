@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 package com.enums.extensible;
 
 import com.enums.extensible.models.DaysOfWeekExtensibleEnum;

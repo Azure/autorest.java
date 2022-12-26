@@ -1,12 +1,11 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 package com.enums.fixed;
 
-import com.azure.core.exception.HttpResponseException;
-import com.enums.extensible.models.DaysOfWeekExtensibleEnum;
 import com.enums.fixed.models.DaysOfWeekEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class FixedClientTest {
 
