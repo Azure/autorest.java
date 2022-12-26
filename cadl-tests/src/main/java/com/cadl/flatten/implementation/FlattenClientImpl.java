@@ -170,7 +170,9 @@ public final class FlattenClientImpl {
      *
      * <pre>{@code
      * {
-     *     user: String (Optional)
+     *     user (Optional): {
+     *         user: String (Required)
+     *     }
      *     input: String (Required)
      * }
      * }</pre>
@@ -206,7 +208,9 @@ public final class FlattenClientImpl {
      *
      * <pre>{@code
      * {
-     *     user: String (Optional)
+     *     user (Optional): {
+     *         user: String (Required)
+     *     }
      *     input: String (Required)
      * }
      * }</pre>

@@ -31,9 +31,13 @@ model ApiVersionParameter {
 }
 
 alias Request = {
-  user?: string;
+  user?: User;
   input: string;
 };
+
+model User {
+  user: string;
+}
 
 @route("/flatten")
 interface FlattenOp {

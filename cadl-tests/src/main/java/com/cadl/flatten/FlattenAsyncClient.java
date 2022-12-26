@@ -40,7 +40,9 @@ public final class FlattenAsyncClient {
      *
      * <pre>{@code
      * {
-     *     user: String (Optional)
+     *     user (Optional): {
+     *         user: String (Required)
+     *     }
      *     input: String (Required)
      * }
      * }</pre>
