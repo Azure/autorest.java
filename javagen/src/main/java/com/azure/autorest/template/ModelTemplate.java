@@ -518,7 +518,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
                 comment -> comment.line(property.getDescription()));
 
-            addFieldAnnotations(property, classBlock, settings);
+            addFieldAnnotations(model, property, classBlock, settings);
 
             if (property.isPolymorphicDiscriminator()) {
                 classBlock.privateStaticFinalVariable(fieldSignature);
@@ -568,7 +568,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param classBlock The Java class.
      * @param settings Autorest generation settings.
      */
-    protected void addFieldAnnotations(ClientModelProperty property, JavaClass classBlock, JavaSettings settings) {
+    protected void addFieldAnnotations(ClientModel model, ClientModelProperty property, JavaClass classBlock, JavaSettings settings) {
         if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && property.getNeedsFlatten()) {
             classBlock.annotation("JsonFlatten");
         }
@@ -595,13 +595,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classBlock.annotation("JsonProperty(\"" + property.getXmlListElementName() + "\")");
         } else if (!CoreUtils.isNullOrEmpty(property.getAnnotationArguments())) {
             classBlock.annotation("JsonProperty(" + property.getAnnotationArguments() + ")");
-        }
-
-        if (!settings.isGenerateXmlSerialization() &&
-            !property.isAdditionalProperties()
-            && property.getClientType() instanceof MapType
-            && settings.isFluent()) {
-            classBlock.annotation("JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)");
         }
     }
 
