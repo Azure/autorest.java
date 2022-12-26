@@ -402,30 +402,32 @@ export class CodeModelBuilder {
     this.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
     op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it));
-    // Accept header
+    // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
-    if (op.parameters.bodyParameter) {
-      this.processParameterBody(codeModelOperation, op.parameters.bodyParameter);
-    } else if (op.parameters.bodyType) {
-      let bodyType = this.getEffectiveSchemaType(op.parameters.bodyType);
+    if (op.parameters.body) {
+      if (op.parameters.body.parameter) {
+        this.processParameterBody(codeModelOperation, op.parameters.body.parameter);
+      } else if (op.parameters.body.type) {
+        let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
 
-      if (bodyType.kind === "Model") {
-        // try use resource type as round-trip model
-        const resourceType = getResourceOperation(this.program, operation)?.resourceType;
-        if (resourceType && op.responses && op.responses.length > 0) {
-          const resp = op.responses[0];
-          if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
-            const responseBody = resp.responses[0].body;
-            const bodyTypeInResponse = this.findResponseBody(responseBody.type);
-            // response body type is reosurce type, and request body type (if templated) contains resource type
-            if (bodyTypeInResponse === resourceType && isModelReferredInTemplate(bodyType, resourceType)) {
-              bodyType = resourceType;
+        if (bodyType.kind === "Model") {
+          // try use resource type as round-trip model
+          const resourceType = getResourceOperation(this.program, operation)?.resourceType;
+          if (resourceType && op.responses && op.responses.length > 0) {
+            const resp = op.responses[0];
+            if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
+              const responseBody = resp.responses[0].body;
+              const bodyTypeInResponse = this.findResponseBody(responseBody.type);
+              // response body type is reosurce type, and request body type (if templated) contains resource type
+              if (bodyTypeInResponse === resourceType && isModelReferredInTemplate(bodyType, resourceType)) {
+                bodyType = resourceType;
+              }
             }
           }
-        }
 
-        this.processParameterBody(codeModelOperation, bodyType);
+          this.processParameterBody(codeModelOperation, bodyType);
+        }
       }
     }
 
