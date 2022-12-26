@@ -47,6 +47,7 @@ public class FluentModelTemplate extends ModelTemplate {
     protected void addFieldAnnotations(ClientModel model, ClientModelProperty property, JavaClass classBlock, JavaSettings settings) {
         super.addFieldAnnotations(model, property, classBlock, settings);
 
+        // JsonInclude
         if (!property.isAdditionalProperties()) {
             String propertyName = model.getName() + "." + property.getName();
             Set<String> propertiesAllowNull = FluentStatic.getFluentJavaSettings().getJavaNamesForPropertyIncludeAlways();

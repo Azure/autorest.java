@@ -564,6 +564,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     /**
      * Adds the annotations for a model field.
      *
+     * @param model The model.
      * @param property The property that represents the field.
      * @param classBlock The Java class.
      * @param settings Autorest generation settings.
