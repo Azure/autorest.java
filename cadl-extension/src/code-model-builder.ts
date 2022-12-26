@@ -419,7 +419,7 @@ export class CodeModelBuilder {
             if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
               const responseBody = resp.responses[0].body;
               const bodyTypeInResponse = this.findResponseBody(responseBody.type);
-              // response body type is reosurce type, and request body type (if templated) contains resource type
+              // response body type is resource type, and request body type (if templated) contains resource type
               if (bodyTypeInResponse === resourceType && isModelReferredInTemplate(bodyType, resourceType)) {
                 bodyType = resourceType;
               }
@@ -623,6 +623,15 @@ export class CodeModelBuilder {
 
     if (op.convenienceApi) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
+    }
+
+    if (!schema.language.default.name) {
+      // anonymous model
+      if (!parameter.language.default.name) {
+        // name the parameter for documentation
+        parameter.language.default.name = "request";
+      }
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
     }
   }
 
@@ -1508,7 +1517,9 @@ export class CodeModelBuilder {
 
     // Exclude context that not to be propagated
     const schemaUsage = {
-      usage: (schema as SchemaUsage).usage?.filter((it) => it !== SchemaContext.Paged),
+      usage: (schema as SchemaUsage).usage?.filter(
+        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous,
+      ),
       serializationFormats: (schema as SchemaUsage).serializationFormats,
     };
     // Propagate the usage of the initial schema itself

@@ -1,0 +1,20 @@
+import "@cadl-lang/rest";
+
+using Cadl.Http;
+
+@service({
+  title: "Flatten",
+  version: "1.0.0",
+})
+namespace Cadl.Flatten;
+
+alias Request = {
+  user?: string;
+  input: string;
+};
+
+@route("/flatten")
+interface FlattenOp {
+  @post
+  send(...Request): OkResponse;
+}
