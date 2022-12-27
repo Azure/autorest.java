@@ -544,10 +544,14 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 break;
 
             case LongRunningBeginSync:
-                if (settings.isDataPlaneClient()) {
-                    generateProtocolLongRunningBeginSync(clientMethod, typeBlock);
+                if (settings.isSyncStackEnabled()) {
+                    if (settings.isDataPlaneClient()) {
+                        generateProtocolLongRunningBeginSync(clientMethod, typeBlock);
+                    } else {
+                        generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
+                    }
                 } else {
-                    generateLongRunningBeginSync(clientMethod, typeBlock, restAPIMethod, settings);
+                    generateLongRunningBeginSyncOverAsync(clientMethod, typeBlock, restAPIMethod, settings);
                 }
                 break;
 
@@ -1276,6 +1280,24 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      * @param restAPIMethod proxy method
      * @param settings java settings
      */
+    protected void generateLongRunningBeginSyncOverAsync(ClientMethod clientMethod, JavaType typeBlock,
+                                                 ProxyMethod restAPIMethod, JavaSettings settings) {
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            addOptionalVariables(function, clientMethod);
+            function.methodReturn(String.format("this.%sAsync(%s).getSyncPoller()",
+                    clientMethod.getName(), clientMethod.getArgumentList()));
+        });
+    }
+
+    /**
+     * Extension to write LRO begin sync client method.
+     *
+     * @param clientMethod client method
+     * @param typeBlock type block
+     * @param restAPIMethod proxy method
+     * @param settings java settings
+     */
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         String contextParam;
@@ -1308,6 +1330,22 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         });
     }
 
+    private void generateProtocolLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock) {
+        String contextParam = "requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE";
+        String pollingStrategy = getSyncPollingStrategy(clientMethod, contextParam);
+        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            addOptionalVariables(function, clientMethod);
+            function.line("return SyncPoller.createPoller(Duration.ofSeconds(%s),",
+                    clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
+            function.increaseIndent();
+            function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleRestResponseMethodName(), clientMethod.getArgumentList());
+            function.line(pollingStrategy + ",");
+            function.line(TemplateUtil.getLongRunningOperationTypeReferenceExpression(clientMethod.getMethodPollingDetails()) + ");");
+            function.decreaseIndent();
+        });
+    }
+
     /**
      * Generate long-running begin async method for protocol client
      *
@@ -1329,21 +1367,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         });
     }
 
-    private void generateProtocolLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock) {
-        String contextParam = "requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE";
-        String pollingStrategy = getSyncPollingStrategy(clientMethod, contextParam);
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
-        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-            addOptionalVariables(function, clientMethod);
-            function.line("return SyncPoller.createPoller(Duration.ofSeconds(%s),",
-                    clientMethod.getMethodPollingDetails().getPollIntervalInSeconds());
-            function.increaseIndent();
-            function.line("() -> this.%s(%s),", clientMethod.getProxyMethod().getSimpleRestResponseMethodName(), clientMethod.getArgumentList());
-            function.line(pollingStrategy + ",");
-            function.line(TemplateUtil.getLongRunningOperationTypeReferenceExpression(clientMethod.getMethodPollingDetails()) + ");");
-            function.decreaseIndent();
-        });
-    }
+
 
     private String getPollingStrategy(ClientMethod clientMethod, String contextParam) {
         String endpoint = "null";

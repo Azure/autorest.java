@@ -35,6 +35,17 @@ import java.util.stream.Collectors;
  * A ClientMethod that exists on a ServiceClient or MethodGroupClient that eventually will call a ProxyMethod.
  */
 public class ClientMethod {
+    private static final List<String> KNOWN_POLLING_STRATEGIES = Arrays.asList(
+            "DefaultPollingStrategy",
+            "ChainedPollingStrategy",
+            "OperationResourcePollingStrategy",
+            "LocationPollingStrategy",
+            "StatusCheckPollingStrategy",
+            "SyncDefaultPollingStrategy",
+            "SyncChainedPollingStrategy",
+            "SyncOperationResourcePollingStrategy",
+            "SyncLocationPollingStrategy",
+            "SyncStatusCheckPollingStrategy");
     /**
      * The description of this ClientMethod.
      */
@@ -398,20 +409,7 @@ public class ClientMethod {
                     imports.add("java.time.Duration");
 
                     if (getMethodPollingDetails() != null) {
-                        List<String> knownPollingStrategies = Arrays.asList(
-                                "DefaultPollingStrategy",
-                                "ChainedPollingStrategy",
-                                "OperationResourcePollingStrategy",
-                                "LocationPollingStrategy",
-                                "StatusCheckPollingStrategy",
-                                "SyncDefaultPollingStrategy",
-                                "SyncChainedPollingStrategy",
-                                "SyncOperationResourcePollingStrategy",
-                                "SyncLocationPollingStrategy",
-                                "SyncStatusCheckPollingStrategy");
-
-
-                        for (String pollingStrategy : knownPollingStrategies) {
+                        for (String pollingStrategy : KNOWN_POLLING_STRATEGIES) {
                             if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)
                                     || getMethodPollingDetails().getSyncPollingStrategy().contains(pollingStrategy)) {
                                 imports.add("com.azure.core.util.polling." + pollingStrategy);

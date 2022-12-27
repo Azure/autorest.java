@@ -340,7 +340,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()
                     && (settings.isFluent() || settings.getPollingConfig("default") != null)
                     && !returnTypeHolder.syncReturnType.equals(ClassType.InputStream)) {         // temporary skip InputStream, no idea how to do this in PollerFlux
-                    // // Skip sync ProxyMethods for polling as sync polling isn't ready yet.
+                    // Skip sync ProxyMethods for polling as sync polling isn't ready yet.
                     if (proxyMethod.isSync()) {
                         continue;
                     }
@@ -851,26 +851,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, defaultOverloadType, false, isProtocolMethod))
                 .build());
 
-            // if (JavaSettings.getInstance().isSyncStackEnabled()) {
-            //     methods.add(builder
-            //             .returnValue(createLongRunningBeginSyncReturnValue(operation, syncReturnType, methodPollingDetails))
-            //             .name(syncMethodName)
-            //             .onlyRequiredParameters(false)
-            //             .type(ClientMethodType.LongRunningBeginSync)
-            //             .groupedParameterRequired(false)
-            //             .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, defaultOverloadType, false, isProtocolMethod))
-            //             .build());
-            //
-            //     // reset builder
-            //     builder.returnValue(createLongRunningBeginAsyncReturnValue(operation, syncReturnType, methodPollingDetails))
-            //             .name(asyncMethodName)
-            //             .onlyRequiredParameters(false)
-            //             .type(ClientMethodType.LongRunningBeginAsync)
-            //             .groupedParameterRequired(false)
-            //             .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync,
-            //                     defaultOverloadType, false, isProtocolMethod));
-            // }
-
             if (generateClientMethodWithOnlyRequiredParameters) {
                 methods.add(builder
                     .onlyRequiredParameters(true)
@@ -1304,7 +1284,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     protected JavaVisibility methodVisibility(ClientMethodType methodType, MethodOverloadType methodOverloadType,
         boolean hasContextParameter, boolean isProtocolMethod) {
 
-        JavaVisibility result = null;
         JavaSettings settings = JavaSettings.getInstance();
         if (settings.isDataPlaneClient()) {
             if (isProtocolMethod) {
@@ -1316,14 +1295,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 3. For async method, Context is not included in method (this rule is valid for all clients).
                  */
 
-                result = (methodType == ClientMethodType.SimpleAsync
+                return (methodType == ClientMethodType.SimpleAsync
                     || methodType == ClientMethodType.SimpleSync
                     || !hasContextParameter)
                     ? NOT_GENERATE
                     : (methodType == ClientMethodType.PagingAsyncSinglePage || methodType == ClientMethodType.PagingSyncSinglePage) ? NOT_VISIBLE : VISIBLE;
             } else {
                 // at present, only generate convenience method for simple API and pageable API (no LRO)
-                result = ((methodType == ClientMethodType.SimpleAsync && !hasContextParameter)
+                return ((methodType == ClientMethodType.SimpleAsync && !hasContextParameter)
                     || (methodType == ClientMethodType.SimpleSync && !hasContextParameter)
                     || (methodType == ClientMethodType.PagingAsync && !hasContextParameter)
                     || (methodType == ClientMethodType.PagingSync && !hasContextParameter)
@@ -1335,14 +1314,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
         } else {
             if (methodType == ClientMethodType.SimpleSyncRestResponse && !hasContextParameter) {
-                result = NOT_GENERATE;
+                return NOT_GENERATE;
             } else if (methodType == ClientMethodType.SimpleSync && hasContextParameter) {
-                result = NOT_GENERATE;
-            } else {
-                result = VISIBLE;
+                return NOT_GENERATE;
             }
+            return VISIBLE;
         }
-        return result;
     }
 
     @FunctionalInterface
