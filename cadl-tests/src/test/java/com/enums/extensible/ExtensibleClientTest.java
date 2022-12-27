@@ -1,16 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.extensibleenums;
+package com.enums.extensible;
 
-import com.extensibleenums.models.DaysOfWeekExtensibleEnum;
+import com.enums.extensible.models.DaysOfWeekExtensibleEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class ExtensibleEnumsClientTest {
+class ExtensibleClientTest {
 
-    ExtensibleEnumsClient client = new ExtensibleEnumsClientBuilder().buildClient();
-
+    ExtensibleClient client = new ExtensibleClientBuilder().buildClient();
     @Test
     void getKnownValue() {
         DaysOfWeekExtensibleEnum daysOfWeekExtensibleEnum = client.getKnownValue();
@@ -34,4 +33,5 @@ class ExtensibleEnumsClientTest {
         DaysOfWeekExtensibleEnum daysOfWeekExtensibleEnum = DaysOfWeekExtensibleEnum.fromString("Weekend");
         client.putUnknownValue(daysOfWeekExtensibleEnum);
     }
+
 }
