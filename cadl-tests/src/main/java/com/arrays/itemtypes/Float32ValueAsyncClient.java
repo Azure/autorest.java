@@ -102,7 +102,7 @@ public final class Float32ValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<List<Double>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_DOUBLE));
     }
 
     /**
@@ -124,4 +124,6 @@ public final class Float32ValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
+
+    private static final TypeReference<List<Double>> TYPE_REFERENCE_LIST_DOUBLE = new TypeReference<List<Double>>() {};
 }

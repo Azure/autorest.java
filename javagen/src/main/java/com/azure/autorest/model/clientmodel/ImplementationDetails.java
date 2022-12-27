@@ -45,7 +45,12 @@ public class ImplementationDetails {
         /**
          * Model used in paged response.
          */
-        PAGED("paged");
+        PAGED("paged"),
+
+        /**
+         * Anonymous model.
+         */
+        ANONYMOUS("anonymous");
 
         private final static Map<String, Usage> CONSTANTS = new HashMap<>();
         static {

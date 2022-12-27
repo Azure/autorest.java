@@ -106,7 +106,7 @@ public class TemplateUtil {
         for (ClientMethod clientMethod : clientMethods) {
             Templates.getClientMethodTemplate().write(clientMethod, classBlock);
 
-            // this is coupled with ClientMethodTemplate.generateLongRunningBeginAsync, see writeLongRunningOperationTypeReference
+            // this is coupled with ClientMethodTemplate.generateLongRunningBeginAsync, see getLongRunningOperationTypeReferenceExpression
             if (clientMethod.getType() == ClientMethodType.LongRunningBeginAsync && clientMethod.getMethodPollingDetails() != null) {
                 if (clientMethod.getMethodPollingDetails().getIntermediateType() instanceof GenericType) {
                     typeReferenceStaticClasses.add((GenericType) clientMethod.getMethodPollingDetails().getIntermediateType());
@@ -120,7 +120,7 @@ public class TemplateUtil {
 
         // static classes for LRO
         for (GenericType typeReferenceStaticClass : typeReferenceStaticClasses) {
-            writeTypeReferenceStaticClass(classBlock, typeReferenceStaticClass);
+            writeTypeReferenceStaticVariable(classBlock, typeReferenceStaticClass);
         }
 
         // helper methods for LLC
@@ -130,6 +130,12 @@ public class TemplateUtil {
         }
     }
 
+    /**
+     * Gets the expression of the intermediate and final type in LRO operation, used for "PollerFlux.create".
+     *
+     * @param details the MethodPollingDetails of LRO operation.
+     * @return the expression
+     */
     public static String getLongRunningOperationTypeReferenceExpression(MethodPollingDetails details) {
         // see writeTypeReferenceStaticClass
 
@@ -138,7 +144,14 @@ public class TemplateUtil {
             getTypeReferenceCreation(details.getFinalType()));
     }
 
-    private static String getTypeReferenceCreation(IType type) {
+    /**
+     * Gets the expression of the creation of TypeReference for different types.
+     * It uses a static varialbe for Generic type. See {@link #writeTypeReferenceStaticVariable(JavaClass, GenericType)}
+     *
+     * @param type the type.
+     * @return the expression
+     */
+    public static String getTypeReferenceCreation(IType type) {
         // see writeTypeReferenceStaticClass
 
         // Array, class, enum, and primitive types are all able to use TypeReference.createInstance which will create
@@ -149,8 +162,15 @@ public class TemplateUtil {
             : CodeNamer.getEnumMemberName("TypeReference" + ((GenericType) type).toJavaPropertyString());
     }
 
-    private static void writeTypeReferenceStaticClass(JavaClass classBlock, GenericType type) {
-        // see writeLongRunningOperationTypeReference
+    /**
+     * Writes a static final variable for TypeReference.
+     * See {@link #getTypeReferenceCreation(IType)}
+     *
+     * @param classBlock the class block to write the code.
+     * @param type the generic type.
+     */
+    public static void writeTypeReferenceStaticVariable(JavaClass classBlock, GenericType type) {
+        // see getLongRunningOperationTypeReferenceExpression
 
         classBlock.privateStaticFinalVariable(String.format("TypeReference<%1$s> %2$s = new TypeReference<%1$s>() {}",
             type, CodeNamer.getEnumMemberName("TypeReference" + type.toJavaPropertyString())));

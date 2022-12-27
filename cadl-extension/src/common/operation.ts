@@ -69,6 +69,8 @@ export class ConvenienceApi extends Metadata {
       initializer,
     );
   }
+
+  parameters?: Array<Parameter>;
 }
 
 export class OperationLink {

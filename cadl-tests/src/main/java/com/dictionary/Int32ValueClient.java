@@ -97,7 +97,7 @@ public final class Int32ValueClient {
     public Map<String, Integer> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<Map<String, Integer>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_INTEGER);
     }
 
     /**
@@ -118,4 +118,7 @@ public final class Int32ValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<Map<String, Integer>> TYPE_REFERENCE_MAP_STRING_INTEGER =
+            new TypeReference<Map<String, Integer>>() {};
 }

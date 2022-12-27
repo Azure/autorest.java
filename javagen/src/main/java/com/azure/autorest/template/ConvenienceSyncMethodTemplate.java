@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.http.rest.SimpleResponse;
@@ -70,7 +71,10 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
 
     @Override
     protected void writeMethodImplementation(
-            ClientMethod protocolMethod, ClientMethod convenienceMethod, JavaBlock methodBlock) {
+            ClientMethod protocolMethod,
+            ClientMethod convenienceMethod,
+            JavaBlock methodBlock,
+            Set<GenericType> typeReferenceStaticClasses) {
 
         if (protocolMethod.getType() == ClientMethodType.PagingSync) {
             // Call the convenience method from async client
@@ -85,7 +89,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
 
             methodBlock.methodReturn(methodInvoke);
         } else {
-            super.writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock);
+            super.writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock, typeReferenceStaticClasses);
         }
     }
 
@@ -101,9 +105,11 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
 
     @Override
     protected void writeInvocationAndConversion(
-            ClientMethod convenienceMethod, ClientMethod protocolMethod,
+            ClientMethod convenienceMethod,
+            ClientMethod protocolMethod,
             String invocationExpression,
-            JavaBlock methodBlock) {
+            JavaBlock methodBlock,
+            Set<GenericType> typeReferenceStaticClasses) {
 
         IType responseBodyType = getResponseBodyType(convenienceMethod);
 
@@ -117,7 +123,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             methodBlock.line(getProtocolMethodResponseStatement(protocolMethod, invocationExpression));
 
             // e.g. protocolMethodResponse.getValue().toObject(...)
-            String expressConversion = expressionConvertFromBinaryData(responseBodyType, "protocolMethodResponse.getValue()");
+            String expressConversion = expressionConvertFromBinaryData(responseBodyType, "protocolMethodResponse.getValue()", typeReferenceStaticClasses);
 
             if (isResponseBase(convenienceMethod.getReturnValue().getType())) {
                 IType headerType = ((GenericType) convenienceMethod.getReturnValue().getType()).getTypeArguments()[0];
@@ -132,7 +138,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                     getMethodName(protocolMethod),
                     invocationExpression,
                     convertFromResponse);
-            statement = expressionConvertFromBinaryData(responseBodyType, statement);
+            statement = expressionConvertFromBinaryData(responseBodyType, statement, typeReferenceStaticClasses);
             if (convenienceMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
                 if (isResponseBase(convenienceMethod.getReturnValue().getType())) {
                     IType headerType = ((GenericType) convenienceMethod.getReturnValue().getType()).getTypeArguments()[0];
@@ -176,13 +182,14 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         return type instanceof GenericType && ResponseBase.class.getSimpleName().equals(((GenericType) type).getName());
     }
 
-    protected String expressionConvertFromBinaryData(IType responseBodyType, String invocationExpression) {
+    protected String expressionConvertFromBinaryData(IType responseBodyType, String invocationExpression, Set<GenericType> typeReferenceStaticClasses) {
         if (responseBodyType instanceof EnumType) {
             // enum
             return String.format("%1$s.from%2$s(%3$s)", responseBodyType, ((EnumType) responseBodyType).getElementType(), invocationExpression);
         } else if (responseBodyType instanceof GenericType) {
             // generic, e.g. list, map
-            return String.format("%2$s.toObject(new TypeReference<%1$s>() {})", responseBodyType, invocationExpression);
+            typeReferenceStaticClasses.add((GenericType) responseBodyType);
+            return String.format("%2$s.toObject(%1$s)", TemplateUtil.getTypeReferenceCreation(responseBodyType), invocationExpression);
         } else if (responseBodyType == ClassType.BinaryData) {
             // BinaryData
             return invocationExpression;

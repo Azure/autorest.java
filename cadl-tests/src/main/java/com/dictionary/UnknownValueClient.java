@@ -97,7 +97,7 @@ public final class UnknownValueClient {
     public Map<String, Object> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<Map<String, Object>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_OBJECT);
     }
 
     /**
@@ -118,4 +118,7 @@ public final class UnknownValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<Map<String, Object>> TYPE_REFERENCE_MAP_STRING_OBJECT =
+            new TypeReference<Map<String, Object>>() {};
 }

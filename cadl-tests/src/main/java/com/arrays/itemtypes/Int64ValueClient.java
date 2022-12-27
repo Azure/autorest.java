@@ -97,7 +97,7 @@ public final class Int64ValueClient {
     public List<Long> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<List<Long>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_LONG);
     }
 
     /**
@@ -118,4 +118,6 @@ public final class Int64ValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<Long>> TYPE_REFERENCE_LIST_LONG = new TypeReference<List<Long>>() {};
 }

@@ -102,7 +102,7 @@ public final class StringValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<Map<String, String>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_STRING));
     }
 
     /**
@@ -124,4 +124,7 @@ public final class StringValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
+
+    private static final TypeReference<Map<String, String>> TYPE_REFERENCE_MAP_STRING_STRING =
+            new TypeReference<Map<String, String>>() {};
 }

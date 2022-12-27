@@ -108,7 +108,7 @@ public final class ModelValueClient {
     public Map<String, InnerModel> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<Map<String, InnerModel>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_INNER_MODEL);
     }
 
     /**
@@ -129,4 +129,7 @@ public final class ModelValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<Map<String, InnerModel>> TYPE_REFERENCE_MAP_STRING_INNER_MODEL =
+            new TypeReference<Map<String, InnerModel>>() {};
 }

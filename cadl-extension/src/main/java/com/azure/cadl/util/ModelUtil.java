@@ -16,7 +16,8 @@ public class ModelUtil {
     public static boolean isGeneratingModel(ClientModel model) {
         return model.getImplementationDetails() != null
                 && model.getImplementationDetails().isConvenienceMethod()
-                && !(isModelUsedOnlyInException(model.getImplementationDetails()));
+                && !(isModelUsedOnlyInException(model.getImplementationDetails()))
+                && !(isAnonymousModel(model.getImplementationDetails()));
     }
 
     public static boolean isGeneratingModel(EnumType model) {
@@ -40,5 +41,9 @@ public class ModelUtil {
 
     private static boolean isModelUsedOnlyInException(ImplementationDetails implementationDetails) {
         return (implementationDetails.isException() && !implementationDetails.isInput() && !implementationDetails.isOutput());
+    }
+
+    private static boolean isAnonymousModel(ImplementationDetails implementationDetails) {
+        return (implementationDetails.getUsages() != null && implementationDetails.getUsages().contains(ImplementationDetails.Usage.ANONYMOUS));
     }
 }

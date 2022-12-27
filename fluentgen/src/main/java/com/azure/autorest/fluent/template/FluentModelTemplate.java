@@ -3,18 +3,24 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.arm.ResourceClientModel;
+import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
+import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.template.ModelTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FluentModelTemplate extends ModelTemplate {
@@ -28,6 +34,34 @@ public class FluentModelTemplate extends ModelTemplate {
 
     public static FluentModelTemplate getInstance() {
         return INSTANCE;
+    }
+
+    @Override
+    protected void addSerializationImports(Set<String> imports, ClientModel model, JavaSettings settings) {
+        super.addSerializationImports(imports, model, settings);
+
+        imports.add(JsonInclude.class.getName());
+    }
+
+    @Override
+    protected void addFieldAnnotations(ClientModel model, ClientModelProperty property, JavaClass classBlock, JavaSettings settings) {
+        super.addFieldAnnotations(model, property, classBlock, settings);
+
+        // JsonInclude
+        if (!property.isAdditionalProperties()) {
+            String propertyName = model.getName() + "." + property.getName();
+            Set<String> propertiesAllowNull = FluentStatic.getFluentJavaSettings().getJavaNamesForPropertyIncludeAlways();
+            final boolean propertyAllowNull = propertiesAllowNull.contains(propertyName);
+
+            if (property.getClientType() instanceof MapType) {
+                String value = propertyAllowNull ? "JsonInclude.Include.ALWAYS" : "JsonInclude.Include.NON_NULL";
+                classBlock.annotation(String.format("JsonInclude(value = %1$s, content = JsonInclude.Include.ALWAYS)", value));
+            } else {
+                if (propertyAllowNull) {
+                    classBlock.annotation("JsonInclude(value = JsonInclude.Include.ALWAYS)");
+                }
+            }
+        }
     }
 
     @Override

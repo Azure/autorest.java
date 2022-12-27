@@ -89,6 +89,35 @@ public final class ResponseAsyncClient {
     }
 
     /**
+     * The getAnotherArray operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * [
+     *      (Required){
+     *         id: String (Required)
+     *         name: String (Required)
+     *         description: String (Optional)
+     *         type: String (Required)
+     *     }
+     * ]
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return array of Resource along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getAnotherArrayWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getAnotherArrayWithResponseAsync(requestOptions);
+    }
+
+    /**
      * The createWithHeaders operation.
      *
      * <p><strong>Response Body Schema</strong>
@@ -166,7 +195,27 @@ public final class ResponseAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getArrayWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<List<Resource>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_RESOURCE));
+    }
+
+    /**
+     * The getAnotherArray operation.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of Resource on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<List<Resource>> getAnotherArray() {
+        // Generated convenience method for getAnotherArrayWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getAnotherArrayWithResponse(requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_RESOURCE));
     }
 
     /**
@@ -206,4 +255,7 @@ public final class ResponseAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return deleteWithHeadersWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
+
+    private static final TypeReference<List<Resource>> TYPE_REFERENCE_LIST_RESOURCE =
+            new TypeReference<List<Resource>>() {};
 }

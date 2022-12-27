@@ -98,7 +98,7 @@ public final class DurationValueClient {
     public List<Duration> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<List<Duration>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_DURATION);
     }
 
     /**
@@ -119,4 +119,7 @@ public final class DurationValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<Duration>> TYPE_REFERENCE_LIST_DURATION =
+            new TypeReference<List<Duration>>() {};
 }

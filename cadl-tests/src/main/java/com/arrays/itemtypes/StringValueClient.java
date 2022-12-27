@@ -97,7 +97,7 @@ public final class StringValueClient {
     public List<String> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<List<String>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_STRING);
     }
 
     /**
@@ -118,4 +118,6 @@ public final class StringValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<List<String>> TYPE_REFERENCE_LIST_STRING = new TypeReference<List<String>>() {};
 }

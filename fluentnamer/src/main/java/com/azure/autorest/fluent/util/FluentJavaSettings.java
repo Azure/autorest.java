@@ -64,6 +64,8 @@ public class FluentJavaSettings {
 
     private final Map<String, String> renameModel = new HashMap<>();
 
+    private final Set<String> javaNamesForPropertyIncludeAlways = new HashSet<>();
+
     private String pomFilename = "pom.xml";
 
     private String artifactVersion;
@@ -128,6 +130,10 @@ public class FluentJavaSettings {
         return javaNamesForRemoveOperationGroup;
     }
 
+    public Set<String> getJavaNamesForPropertyIncludeAlways() {
+        return javaNamesForPropertyIncludeAlways;
+    }
+
     public String getPomFilename() {
         return pomFilename;
     }
@@ -179,6 +185,8 @@ public class FluentJavaSettings {
 //        loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
 
         loadStringSetting("name-for-ungrouped-operations", s -> nameForUngroupedOperations = s);
+
+        loadStringSetting("property-include-always", s -> splitStringToSet(s, javaNamesForPropertyIncludeAlways));
 
         loadStringSetting("pom-file", s -> pomFilename = s);
         loadStringSetting("package-version", s -> artifactVersion = s);

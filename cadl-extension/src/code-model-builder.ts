@@ -99,6 +99,7 @@ import {
   KeySecurityScheme,
   OperationGroup,
   UriSchema,
+  VirtualParameter,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient } from "./common/client.js";
@@ -402,30 +403,32 @@ export class CodeModelBuilder {
     this.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
     op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it));
-    // Accept header
+    // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
-    if (op.parameters.bodyParameter) {
-      this.processParameterBody(codeModelOperation, op.parameters.bodyParameter);
-    } else if (op.parameters.bodyType) {
-      let bodyType = this.getEffectiveSchemaType(op.parameters.bodyType);
+    if (op.parameters.body) {
+      if (op.parameters.body.parameter) {
+        this.processParameterBody(codeModelOperation, op.parameters.body.parameter, operation.parameters);
+      } else if (op.parameters.body.type) {
+        let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
 
-      if (bodyType.kind === "Model") {
-        // try use resource type as round-trip model
-        const resourceType = getResourceOperation(this.program, operation)?.resourceType;
-        if (resourceType && op.responses && op.responses.length > 0) {
-          const resp = op.responses[0];
-          if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
-            const responseBody = resp.responses[0].body;
-            const bodyTypeInResponse = this.findResponseBody(responseBody.type);
-            // response body type is reosurce type, and request body type (if templated) contains resource type
-            if (bodyTypeInResponse === resourceType && isModelReferredInTemplate(bodyType, resourceType)) {
-              bodyType = resourceType;
+        if (bodyType.kind === "Model") {
+          // try use resource type as round-trip model
+          const resourceType = getResourceOperation(this.program, operation)?.resourceType;
+          if (resourceType && op.responses && op.responses.length > 0) {
+            const resp = op.responses[0];
+            if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
+              const responseBody = resp.responses[0].body;
+              const bodyTypeInResponse = this.findResponseBody(responseBody.type);
+              // response body type is resource type, and request body type (if templated) contains resource type
+              if (bodyTypeInResponse === resourceType && isModelReferredInTemplate(bodyType, resourceType)) {
+                bodyType = resourceType;
+              }
             }
           }
-        }
 
-        this.processParameterBody(codeModelOperation, bodyType);
+          this.processParameterBody(codeModelOperation, bodyType, operation.parameters);
+        }
       }
     }
 
@@ -604,7 +607,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processParameterBody(op: CodeModelOperation, body: ModelProperty | Model) {
+  private processParameterBody(op: CodeModelOperation, body: ModelProperty | Model, parameters: Model) {
     const schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
       summary: this.getSummary(body),
@@ -621,6 +624,56 @@ export class CodeModelBuilder {
 
     if (op.convenienceApi) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
+    }
+
+    if (!schema.language.default.name && schema instanceof ObjectSchema) {
+      // anonymous model
+
+      if (!parameter.language.default.name) {
+        // name the parameter for documentation
+        parameter.language.default.name = "request";
+      }
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
+
+      if (op.convenienceApi && op.parameters) {
+        op.convenienceApi.parameters = [];
+        for (const [key, _] of parameters.properties) {
+          const existParameter = op.parameters.find((it) => it.language.default.serializedName === key);
+          if (existParameter) {
+            // parameter
+            if (
+              existParameter.implementation === ImplementationLocation.Method &&
+              (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true)
+            ) {
+              op.convenienceApi.parameters.push(existParameter);
+            }
+          } else {
+            // property from anonymous model
+            const existBodyProperty = schema.properties?.find((it) => it.serializedName === key);
+            if (existBodyProperty) {
+              op.convenienceApi.parameters.push(
+                new VirtualParameter(
+                  existBodyProperty.language.default.name,
+                  existBodyProperty.language.default.description,
+                  existBodyProperty.schema,
+                  {
+                    originalParameter: parameter,
+                    targetProperty: existBodyProperty,
+                    language: {
+                      default: {
+                        serializedName: existBodyProperty.serializedName,
+                      },
+                    },
+                  },
+                ),
+              );
+            }
+          }
+        }
+      }
+
+      // TODO remove the line after full support on anonymous model
+      op.convenienceApi = undefined;
     }
   }
 
@@ -1506,7 +1559,9 @@ export class CodeModelBuilder {
 
     // Exclude context that not to be propagated
     const schemaUsage = {
-      usage: (schema as SchemaUsage).usage?.filter((it) => it !== SchemaContext.Paged),
+      usage: (schema as SchemaUsage).usage?.filter(
+        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous,
+      ),
       serializationFormats: (schema as SchemaUsage).serializationFormats,
     };
     // Propagate the usage of the initial schema itself

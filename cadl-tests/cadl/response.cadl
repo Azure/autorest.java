@@ -62,7 +62,11 @@ interface ResponseOp {
     @body body: bytes;
   };
 
+  @route("/get-array")
   getArray(): ResourceArray;
+
+  @route("/get-another-array")
+  getAnotherArray(): ResourceArray;
 
   // response with headers
   @route("/create-with-headers")

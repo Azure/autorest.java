@@ -149,7 +149,7 @@ jobs:
         displayName: 'Upload to Cadl Ranch Coverage Report Dashboard'
         condition: eq(variables.isMain, 'true')
         inputs:
-          azureSubscription: "Azure SDK Playground"
+          azureSubscription: "Cadl Ranch Storage"
           scriptType: "bash"
           scriptLocation: "inlineScript"
-          inlineScript: node $(Build.SourcesDirectory)/cadl-tests/node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js upload-coverage --coverageFile $(Build.SourcesDirectory)/cadl-tests/cadl-ranch-coverage-java.json --generatorName java --storageAccountName cadlranchcoverage --generatorVersion $(node -p -e "require('./cadl-extension/package.json').version")
+          inlineScript: node $(Build.SourcesDirectory)/cadl-tests/node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js upload-coverage --coverageFile $(Build.SourcesDirectory)/cadl-tests/cadl-ranch-coverage-java.json --generatorName java --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./cadl-extension/package.json').version")

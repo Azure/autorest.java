@@ -97,7 +97,7 @@ public final class Float32ValueClient {
     public Map<String, Double> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(new TypeReference<Map<String, Double>>() {});
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_DOUBLE);
     }
 
     /**
@@ -118,4 +118,7 @@ public final class Float32ValueClient {
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    private static final TypeReference<Map<String, Double>> TYPE_REFERENCE_MAP_STRING_DOUBLE =
+            new TypeReference<Map<String, Double>>() {};
 }

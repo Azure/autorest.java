@@ -113,7 +113,7 @@ public final class ModelValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(new TypeReference<List<InnerModel>>() {}));
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_INNER_MODEL));
     }
 
     /**
@@ -135,4 +135,7 @@ public final class ModelValueAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
+
+    private static final TypeReference<List<InnerModel>> TYPE_REFERENCE_LIST_INNER_MODEL =
+            new TypeReference<List<InnerModel>>() {};
 }
