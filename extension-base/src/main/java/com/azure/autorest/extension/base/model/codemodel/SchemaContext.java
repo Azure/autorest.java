@@ -16,7 +16,9 @@ public enum SchemaContext {
 
     CONVENIENCE_API("convenience-api"),
 
-    PAGED("paged");
+    PAGED("paged"),
+
+    ANONYMOUS("anonymous");
 
     private final String value;
     private final static Map<String, SchemaContext> CONSTANTS = new HashMap<>();
