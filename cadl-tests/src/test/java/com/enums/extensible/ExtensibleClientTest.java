@@ -7,8 +7,6 @@ import com.enums.extensible.models.DaysOfWeekExtensibleEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ExtensibleClientTest {
 
     ExtensibleClient client = new ExtensibleClientBuilder().buildClient();
