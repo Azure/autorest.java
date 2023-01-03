@@ -671,9 +671,6 @@ export class CodeModelBuilder {
           }
         }
       }
-
-      // TODO remove the line after full support on anonymous model
-      op.convenienceApi = undefined;
     }
   }
 

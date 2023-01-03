@@ -88,14 +88,14 @@ abstract class ConvenienceMethodTemplateBase {
             MethodParameter parameter = entry.getKey();
             MethodParameter protocolParameter = entry.getValue();
 
-            if (parameter.getProxyMethodParameter().getOrigin() == ParameterSynthesizedOrigin.CONTEXT) {
+            if (parameter.getProxyMethodParameter() != null && parameter.getProxyMethodParameter().getOrigin() == ParameterSynthesizedOrigin.CONTEXT) {
                 // Context
                 methodBlock.line(String.format("requestOptions.setContext(%s);", parameter.getName()));
             } else if (protocolParameter != null) {
                 // protocol method parameter exists
                 String expression = expressionConvertToType(parameter.getName(), parameter);
                 parameterExpressionsMap.put(protocolParameter.getName(), expression);
-            } else {
+            } else if (parameter.getProxyMethodParameter() != null) {
                 // protocol method parameter not exist, set the parameter via RequestOptions
                 switch (parameter.getProxyMethodParameter().getRequestParameterLocation()) {
                     case HEADER:

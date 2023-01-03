@@ -126,6 +126,11 @@ public class Transformer {
         renameMethod(operation);
         if (operation.getConvenienceApi() != null) {
           renameMethod(operation.getConvenienceApi());
+          if (operation.getConvenienceApi().getParameters() != null) {
+            for (Parameter parameter : operation.getConvenienceApi().getParameters()) {
+              renameVariable(parameter);
+            }
+          }
         }
         for (Request request : operation.getRequests()) {
           Stream<Parameter> newParameters = Stream.concat(operation.getParameters().stream(), request.getParameters().stream());

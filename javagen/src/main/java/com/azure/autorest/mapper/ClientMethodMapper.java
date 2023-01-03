@@ -204,7 +204,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 Map<String, String> validateExpressions = new HashMap<>();
                 List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
-                List<Parameter> codeModelParameters = getCodeModelParameters(request, isProtocolMethod);
+                List<Parameter> codeModelParameters = getCodeModelParameters(operation, request, isProtocolMethod);
+                List<Parameter> codeModelSignatureParameters = getCodeModelSignatureParameters(operation, request, isProtocolMethod);
 
                 boolean isJsonPatch = request.getProtocol() != null && request.getProtocol().getHttp() != null
                     && request.getProtocol().getHttp().getMediaTypes() != null
@@ -228,7 +229,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         clientMethodParameter = updateClientMethodParameter(clientMethodParameter);
                     }
 
-                    if (request.getSignatureParameters().contains(parameter)) {
+                    if (codeModelSignatureParameters.contains(parameter)) {
                         parameters.add(clientMethodParameter);
                     }
 
@@ -533,7 +534,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return returnTypeHolder;
     }
 
-    private static List<Parameter> getCodeModelParameters(Request request, boolean isProtocolMethod) {
+    private static List<Parameter> getCodeModelParameters(Operation operation, Request request, boolean isProtocolMethod) {
         if (isProtocolMethod) {
             // Required path, body, header and query parameters are allowed
             return request.getParameters().stream().filter(p -> {
@@ -546,7 +547,23 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 })
                 .collect(Collectors.toList());
         } else {
-            return request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList());
+            if (operation.getConvenienceApi() != null && !CoreUtils.isNullOrEmpty(operation.getConvenienceApi().getParameters())) {
+                // use method signature from convenience API
+                return operation.getConvenienceApi().getParameters();
+            } else {
+                return request.getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList());
+            }
+        }
+    }
+
+    private static List<Parameter> getCodeModelSignatureParameters(Operation operation, Request request, boolean isProtocolMethod) {
+        if (!isProtocolMethod
+                && (operation.getConvenienceApi() != null && !CoreUtils.isNullOrEmpty(operation.getConvenienceApi().getParameters()))) {
+
+            // use method signature from convenience API
+            return operation.getConvenienceApi().getParameters();
+        } else {
+            return request.getSignatureParameters();
         }
     }
 
