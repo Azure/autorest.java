@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -23,12 +24,17 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -161,6 +167,28 @@ abstract class ConvenienceMethodTemplateBase {
             }
             methodBlock.line(String.format("BinaryData %1$s = BinaryData.fromObject(%2$s);", targetParameterName, targetParameterObjectName));
         }
+    }
+
+    protected void addImports(Set<String> imports, List<ConvenienceMethod> convenienceMethods) {
+        // methods
+        JavaSettings settings = JavaSettings.getInstance();
+        convenienceMethods.stream().flatMap(m -> m.getConvenienceMethods().stream())
+                .forEach(m -> m.addImportsTo(imports, false, settings));
+
+        ClassType.BinaryData.addImportsTo(imports, false);
+        ClassType.RequestOptions.addImportsTo(imports, false);
+        imports.add(Collectors.class.getName());
+        imports.add(Objects.class.getName());
+        imports.add(FluxUtil.class.getName());
+
+        // collection format
+        imports.add(JacksonAdapter.class.getName());
+        imports.add(CollectionFormat.class.getName());
+        imports.add(TypeReference.class.getName());
+
+        // flatten payload
+        imports.add(Map.class.getName());
+        imports.add(HashMap.class.getName());
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {

@@ -3,7 +3,6 @@
 
 package com.azure.autorest.template;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -16,16 +15,9 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.CoreUtils;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.TypeReference;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,22 +36,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
 
     public void addImports(Set<String> imports, List<ConvenienceMethod> convenienceMethods) {
         if (!CoreUtils.isNullOrEmpty(convenienceMethods)) {
-            JavaSettings settings = JavaSettings.getInstance();
-            convenienceMethods.stream().flatMap(m -> m.getConvenienceMethods().stream())
-                    .forEach(m -> m.addImportsTo(imports, false, settings));
-
-            ClassType.BinaryData.addImportsTo(imports, false);
-            ClassType.RequestOptions.addImportsTo(imports, false);
-            imports.add(SimpleResponse.class.getName());
-            imports.add(Collectors.class.getName());
-            imports.add(Objects.class.getName());
-            imports.add(JacksonAdapter.class.getName());
-            imports.add(CollectionFormat.class.getName());
-            imports.add(TypeReference.class.getName());
-
-            // flatten payload
-            imports.add(Map.class.getName());
-            imports.add(HashMap.class.getName());
+            super.addImports(imports, convenienceMethods);
         }
     }
 
