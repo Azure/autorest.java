@@ -12,6 +12,8 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.IterableType;
+import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
+import com.azure.autorest.model.clientmodel.ParameterMapping;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
@@ -80,6 +82,11 @@ abstract class ConvenienceMethodTemplateBase {
         // RequestOptions
         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 
+        // parameter transformation
+        if (convenienceMethod.getMethodTransformationDetails() != null) {
+            convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, methodBlock));
+        }
+
         // matched parameters from convenience method to protocol method
         Map<MethodParameter, MethodParameter> parametersMap =
                 findParametersForConvenienceMethod(convenienceMethod, protocolMethod);
@@ -136,6 +143,24 @@ abstract class ConvenienceMethodTemplateBase {
 
         // write the invocation of protocol method, and related type conversion
         writeInvocationAndConversion(convenienceMethod, protocolMethod, invocationExpression, methodBlock, typeReferenceStaticClasses);
+    }
+
+    private static void writeParameterTransformation(MethodTransformationDetail detail, ClientMethod convenienceMethod, JavaBlock methodBlock) {
+        ClientMethodParameter targetParameter = detail.getOutParameter();
+        if (targetParameter.getClientType() == ClassType.BinaryData) {
+            String targetParameterName = targetParameter.getName();
+            String targetParameterObjectName = targetParameterName + "Obj";
+            methodBlock.line(String.format("Map<String, Object> %1$s = new HashMap<>();", targetParameterObjectName));
+            for (ParameterMapping mapping : detail.getParameterMappings()) {
+                if (mapping.getInputParameter().isRequired() || !convenienceMethod.getOnlyRequiredParameters()) {
+                    methodBlock.line(String.format("%1$s.put(\"%2$s\", %3$s);",
+                            targetParameterObjectName,
+                            mapping.getOutputParameterProperty().getSerializedName(),
+                            mapping.getInputParameter().getName()));
+                }
+            }
+            methodBlock.line(String.format("BinaryData %1$s = BinaryData.fromObject(%2$s);", targetParameterName, targetParameterObjectName));
+        }
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {

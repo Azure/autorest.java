@@ -22,7 +22,9 @@ import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.TypeReference;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -54,6 +56,10 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             imports.add(JacksonAdapter.class.getName());
             imports.add(CollectionFormat.class.getName());
             imports.add(TypeReference.class.getName());
+
+            // flatten payload
+            imports.add(Map.class.getName());
+            imports.add(HashMap.class.getName());
         }
     }
 

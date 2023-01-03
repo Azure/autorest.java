@@ -22,7 +22,9 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import reactor.core.publisher.Flux;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -59,6 +61,10 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
             imports.add(PagedResponse.class.getName());
             imports.add(PagedResponseBase.class.getName());
             imports.add(Flux.class.getName());
+
+            // flatten payload
+            imports.add(Map.class.getName());
+            imports.add(HashMap.class.getName());
         }
     }
 

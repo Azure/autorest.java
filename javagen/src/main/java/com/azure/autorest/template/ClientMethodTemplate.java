@@ -264,7 +264,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             if (transformationOutputParameterModelType instanceof ClassType) {
                 generatedCompositeType = ((ClassType) transformationOutputParameterModelType).getPackage().startsWith(settings.getPackage());
             }
-            if (generatedCompositeType && transformation.getParameterMappings().stream().anyMatch(m -> m.getOutputParameterProperty() != null && !m.getOutputParameterProperty().isEmpty())) {
+            if (generatedCompositeType && transformation.getParameterMappings().stream().anyMatch(m -> m.getOutputParameterPropertyName() != null && !m.getOutputParameterPropertyName().isEmpty())) {
                 String transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelType.toString();
 
                 function.line("%s%s = new %s();",
@@ -287,8 +287,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
 
                 String getMapping;
-                if (mapping.getOutputParameterProperty() != null) {
-                    getMapping = String.format(".%s(%s)", CodeNamer.getModelNamer().modelPropertySetterName(mapping.getOutputParameterProperty()), inputPath);
+                if (mapping.getOutputParameterPropertyName() != null) {
+                    getMapping = String.format(".%s(%s)", CodeNamer.getModelNamer().modelPropertySetterName(mapping.getOutputParameterPropertyName()), inputPath);
                 } else {
                     getMapping = String.format(" = %s", inputPath);
                 }

@@ -284,7 +284,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             mapping.setInputParameter(clientMethodParameter);
                         }
                         if (parameter.getOriginalParameter() != null) {
-                            mapping.setOutputParameterProperty(parameter.getTargetProperty().getLanguage().getJava().getName());
+                            mapping.setOutputParameterProperty(Mappers.getModelPropertyMapper().map(parameter.getTargetProperty()));
+                            mapping.setOutputParameterPropertyName(parameter.getTargetProperty().getLanguage().getJava().getName());
                         }
                         detail.getParameterMappings().add(mapping);
                     }

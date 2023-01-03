@@ -8,7 +8,9 @@ public class ParameterMapping {
 
     private ClientModelProperty inputParameterProperty;
 
-    private String outputParameterProperty;
+    private String outputParameterPropertyName;
+
+    private ClientModelProperty outputParameterProperty;
 
     public ClientMethodParameter getInputParameter() {
         return inputParameter;
@@ -28,11 +30,20 @@ public class ParameterMapping {
         return this;
     }
 
-    public String getOutputParameterProperty() {
+    public String getOutputParameterPropertyName() {
+        return outputParameterPropertyName;
+    }
+
+    public ParameterMapping setOutputParameterPropertyName(String outputParameterPropertyName) {
+        this.outputParameterPropertyName = outputParameterPropertyName;
+        return this;
+    }
+
+    public ClientModelProperty getOutputParameterProperty() {
         return outputParameterProperty;
     }
 
-    public ParameterMapping setOutputParameterProperty(String outputParameterProperty) {
+    public ParameterMapping setOutputParameterProperty(ClientModelProperty outputParameterProperty) {
         this.outputParameterProperty = outputParameterProperty;
         return this;
     }
