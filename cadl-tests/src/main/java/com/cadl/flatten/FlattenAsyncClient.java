@@ -15,7 +15,11 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.cadl.flatten.implementation.FlattenClientImpl;
+import com.cadl.flatten.models.User;
+import java.util.HashMap;
+import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous FlattenClient type. */
@@ -60,5 +64,53 @@ public final class FlattenAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
         return this.serviceClient.sendWithResponseAsync(id, request, requestOptions);
+    }
+
+    /**
+     * The send operation.
+     *
+     * @param id The id parameter.
+     * @param user The user parameter.
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> send(String id, User user, String input) {
+        // Generated convenience method for sendWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        Map<String, Object> requestObj = new HashMap<>();
+        requestObj.put("user", user);
+        requestObj.put("input", input);
+        BinaryData request = BinaryData.fromObject(requestObj);
+        return sendWithResponse(id, request, requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The send operation.
+     *
+     * @param id The id parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> send(String id) {
+        // Generated convenience method for sendWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        Map<String, Object> requestObj = new HashMap<>();
+        BinaryData request = BinaryData.fromObject(requestObj);
+        return sendWithResponse(id, request, requestOptions).flatMap(FluxUtil::toMono);
     }
 }
