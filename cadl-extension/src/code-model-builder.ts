@@ -664,6 +664,10 @@ export class CodeModelBuilder {
                         serializedName: existBodyProperty.serializedName,
                       },
                     },
+                    summary: existBodyProperty.summary,
+                    implementation: ImplementationLocation.Method,
+                    required: existBodyProperty.required,
+                    nullable: existBodyProperty.nullable,
                   },
                 ),
               );

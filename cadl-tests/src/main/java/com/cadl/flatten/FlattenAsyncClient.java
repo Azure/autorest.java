@@ -70,8 +70,8 @@ public final class FlattenAsyncClient {
      * The send operation.
      *
      * @param id The id parameter.
-     * @param user The user parameter.
      * @param input The input parameter.
+     * @param user The user parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -82,7 +82,7 @@ public final class FlattenAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(String id, User user, String input) {
+    public Mono<Void> send(String id, String input, User user) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();
@@ -96,6 +96,7 @@ public final class FlattenAsyncClient {
      * The send operation.
      *
      * @param id The id parameter.
+     * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -106,10 +107,11 @@ public final class FlattenAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(String id) {
+    public Mono<Void> send(String id, String input) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();
+        requestObj.put("input", input);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(id, request, requestOptions).flatMap(FluxUtil::toMono);
     }

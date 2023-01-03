@@ -26,9 +26,14 @@ public class FlattenTests {
 
         FlattenAsyncClient client = new FlattenAsyncClient(impl);
 
-        client.send("id1", new User("user1"), "input1");
+        client.send("id1", "input1", new User("user1"));
 
         Assertions.assertEquals("id1", idCaptor.getValue());
         Assertions.assertEquals("{\"input\":\"input1\",\"user\":{\"user\":\"user1\"}}", payloadCaptor.getValue().toString());
+
+        client.send("id2", "input2");
+
+        Assertions.assertEquals("id2", idCaptor.getValue());
+        Assertions.assertEquals("{\"input\":\"input2\"}", payloadCaptor.getValue().toString());
     }
 }
