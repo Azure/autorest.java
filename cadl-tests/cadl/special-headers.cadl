@@ -25,7 +25,7 @@ model Resource {
 
 model SpecialHeaderParameters {
   @header("Repeatability-Request-ID") requestId?: string;
-  @header("Repeatability-First-Sent") firstSent?: string;
+  @header("Repeatability-First-Sent") firstSent?: zonedDateTime;
 }
 
 model Customizations {
@@ -36,29 +36,15 @@ model Customizations {
 interface SpecialHeadersOp {
   @get
   @doc("Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent")
-  get(
-    @header("Repeatability-Request-ID") requestId: string,
-    @header("Repeatability-First-Sent") firstSent?: string,
-    @path name: string
-  ): Resource | ErrorResponse;
+  get(...SpecialHeaderParameters, @path name: string): Resource | ErrorResponse;
 
   @put
   @doc("Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent")
-  put(
-    @header("Repeatability-Request-ID") requestId?: string,
-    @header("Repeatability-First-Sent") firstSent?: string,
-    @path name: string,
-    @body body: Resource
-  ): Resource | ErrorResponse;
+  put(...SpecialHeaderParameters, @path name: string, @body body: Resource): Resource | ErrorResponse;
 
   @post
   @doc("Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent")
-  post(
-    @header("Repeatability-Request-ID") requestId?: string,
-    @header("Repeatability-First-Sent") firstSent?: string,
-    @path name: string,
-    @body body: Resource
-  ): Resource | ErrorResponse;
+  post(...SpecialHeaderParameters, @path name: string, @body body: Resource): Resource | ErrorResponse;
 
   @put
   @doc("Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent")
