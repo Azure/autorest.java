@@ -35,6 +35,17 @@ import java.util.stream.Collectors;
  * A ClientMethod that exists on a ServiceClient or MethodGroupClient that eventually will call a ProxyMethod.
  */
 public class ClientMethod {
+    private static final List<String> KNOWN_POLLING_STRATEGIES = Arrays.asList(
+            "DefaultPollingStrategy",
+            "ChainedPollingStrategy",
+            "OperationResourcePollingStrategy",
+            "LocationPollingStrategy",
+            "StatusCheckPollingStrategy",
+            "SyncDefaultPollingStrategy",
+            "SyncChainedPollingStrategy",
+            "SyncOperationResourcePollingStrategy",
+            "SyncLocationPollingStrategy",
+            "SyncStatusCheckPollingStrategy");
     /**
      * The description of this ClientMethod.
      */
@@ -388,7 +399,7 @@ public class ClientMethod {
                 }
             }
 
-            if (type == ClientMethodType.LongRunningBeginAsync) {
+            if (type == ClientMethodType.LongRunningBeginAsync || type == ClientMethodType.LongRunningBeginSync) {
                 if (settings.isFluent()) {
                     if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
                         imports.add("com.fasterxml.jackson.core.type.TypeReference");
@@ -397,15 +408,10 @@ public class ClientMethod {
                     imports.add("com.azure.core.util.serializer.TypeReference");
                     imports.add("java.time.Duration");
 
-                    if (getMethodPollingDetails().getPollingStrategy() != null) {
-                        List<String> knownPollingStrategies = Arrays.asList(
-                                "DefaultPollingStrategy",
-                                "ChainedPollingStrategy",
-                                "OperationResourcePollingStrategy",
-                                "LocationPollingStrategy",
-                                "StatusCheckPollingStrategy");
-                        for (String pollingStrategy : knownPollingStrategies) {
-                            if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)) {
+                    if (getMethodPollingDetails() != null) {
+                        for (String pollingStrategy : KNOWN_POLLING_STRATEGIES) {
+                            if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)
+                                    || getMethodPollingDetails().getSyncPollingStrategy().contains(pollingStrategy)) {
                                 imports.add("com.azure.core.util.polling." + pollingStrategy);
                             }
                         }

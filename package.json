@@ -48,6 +48,6 @@
   ],
   "devDependencies": {
     "autorest": "^3.0.0",
-    "@microsoft.azure/autorest.testserver": "3.3.43"
+    "@microsoft.azure/autorest.testserver": "3.3.45"
   }
 }
