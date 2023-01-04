@@ -66,6 +66,8 @@ public class FluentJavaSettings {
 
     private final Set<String> javaNamesForPropertyIncludeAlways = new HashSet<>();
 
+    private final Map<String, String> renameOperationGroup = new HashMap<>();
+
     private String pomFilename = "pom.xml";
 
     private String artifactVersion;
@@ -134,6 +136,10 @@ public class FluentJavaSettings {
         return javaNamesForPropertyIncludeAlways;
     }
 
+    public Map<String, String> getJavaNamesForRenameOperationGroup() {
+        return renameOperationGroup;
+    }
+
     public String getPomFilename() {
         return pomFilename;
     }
@@ -181,6 +187,21 @@ public class FluentJavaSettings {
 
         loadStringSetting("remove-operation-group", s -> splitStringToSet(s, javaNamesForRemoveOperationGroup));
 
+        loadStringSetting("rename-operation-group", s -> {
+            if (!CoreUtils.isNullOrEmpty(s)) {
+                String[] renamePairs = s.split(Pattern.quote(","));
+                for (String pair : renamePairs) {
+                    String[] fromAndTo = pair.split(Pattern.quote(":"));
+                    if (fromAndTo.length == 2) {
+                        String from = fromAndTo[0];
+                        String to = fromAndTo[1];
+                        if (!CoreUtils.isNullOrEmpty(from) && !CoreUtils.isNullOrEmpty(to)) {
+                            renameOperationGroup.put(from, to);
+                        }
+                    }
+                }
+            }
+        });
 //        loadBooleanSetting("track1-naming", b -> track1Naming = b);
 //        loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
 
