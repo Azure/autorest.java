@@ -38,7 +38,7 @@ public class PrimitiveType implements IType {
         defaultValueExpression -> Integer.toString(defaultValueExpression.charAt(0)), "\u0000", "writeString",
         true, "getString().charAt(0)", "getStringAttribute(%s, %s).charAt(0)", "getStringElement().charAt(0)");
 
-    public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong, null, null,
+    public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong, defaultValueExpression -> defaultValueExpression + 'L', null,
         "writeString", true, "getNullable(nonNullReader -> new UnixTime(nonNullReader.getLong()))",
         "getNullableAttribute(%s, %s, UnixTime::new)", "getNullableElement(UnixTime::new)");
 
