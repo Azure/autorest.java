@@ -42,8 +42,8 @@ public class FluentTransformer {
 
     public CodeModel postTransform(CodeModel codeModel) {
         codeModel = new OperationGroupFilter(fluentJavaSettings.getJavaNamesForRemoveOperationGroup()).process(codeModel);
-        codeModel = new NamingConflictResolver().process(codeModel);
         codeModel = new OperationGroupRenamer(fluentJavaSettings.getJavaNamesForRenameOperationGroup()).process(codeModel);
+        codeModel = new NamingConflictResolver().process(codeModel);
         codeModel = new SchemaRenamer(fluentJavaSettings.getJavaNamesForRenameModel()).process(codeModel);
         codeModel = new OperationNameNormalization().process(codeModel);
         codeModel = new ResourceTypeNormalization().process(codeModel);
