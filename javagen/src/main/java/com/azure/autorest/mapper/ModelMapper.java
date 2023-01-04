@@ -433,7 +433,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ObjectSchema targetModelSchema = (ObjectSchema) property.getSchema();
         String originalFlattenedPropertyName = property.getLanguage().getJava().getName();  // not modelProperty.getName()
         ClientModel targetModel = this.map(targetModelSchema);
-        if (targetModel != null && !CoreUtils.isNullOrEmpty(targetModel.getProperties())) {
+        if (targetModel != null && targetModel.getProperties() != null) {
             // gather this type and its parents
             List<ObjectSchema> objectSchemaAndParents = new ArrayList<>();
             objectSchemaAndParents.add(compositeType);

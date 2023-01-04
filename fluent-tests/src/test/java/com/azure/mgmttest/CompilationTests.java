@@ -12,6 +12,7 @@ import com.azure.mgmttest.computegallery.fluent.models.SharedGalleryInner;
 import com.azure.mgmttest.hybridnetwork.fluent.models.DeviceInner;
 import com.azure.mgmttest.hybridnetwork.models.AzureStackEdgeFormat;
 import com.azure.mgmttest.hybridnetwork.models.DevicePropertiesFormat;
+import com.azure.mgmttest.monitor.fluent.models.DataCollectionRuleResourceInner;
 import com.azure.mgmttest.networkwatcher.fluent.models.PacketCaptureResultInner;
 import com.azure.mgmttest.trafficmanager.fluent.models.EndpointInner;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsGet;
@@ -119,6 +120,10 @@ public class CompilationTests {
         DeviceInner device = mock(DeviceInner.class);
         DevicePropertiesFormat devicePropertiesFormat = device.properties();
         DevicePropertiesFormat azureStackEdgeFormat = mock(AzureStackEdgeFormat.class);
+
+        // flatten the empty model which has non-empty parent model
+        DataCollectionRuleResourceInner dataCollectionRule = mock(DataCollectionRuleResourceInner.class);
+        dataCollectionRule.dataSources();
     }
 
     public void testProxyResourceOverride() {

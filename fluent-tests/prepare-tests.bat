@@ -59,6 +59,9 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 REM do not flatten if polymorphic in DevicePropertiesFormat
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/hybridnetwork/resource-manager/Microsoft.HybridNetwork/stable/2021-05-01/device.json --namespace=com.azure.mgmttest.hybridnetwork
 if %errorlevel% neq 0 exit /b %errorlevel%
+REM flatten the empty model which has non-empty parent model
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/monitor/resource-manager/Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json --namespace=com.azure.mgmttest.monitor
+if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM swagger customed Resource and ProxyResource
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2018-08-01/trafficmanager.json --namespace=com.azure.mgmttest.trafficmanager
