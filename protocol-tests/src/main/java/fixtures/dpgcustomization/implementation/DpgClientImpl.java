@@ -442,32 +442,6 @@ public final class DpgClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup
-     *     along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private PagedResponse<BinaryData> getPagesSinglePage(String mode, RequestOptions requestOptions) {
-        return getPagesSinglePageAsync(mode, requestOptions).block();
-    }
-
-    /**
-     * Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     * }
-     * }</pre>
-     *
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as
      *     paginated response with {@link PagedIterable}.
      */
@@ -669,31 +643,6 @@ public final class DpgClientImpl {
                                         getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     * }
-     * }</pre>
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private PagedResponse<BinaryData> getPagesNextSinglePage(String nextLink, RequestOptions requestOptions) {
-        return getPagesNextSinglePageAsync(nextLink, requestOptions).block();
     }
 
     private List<BinaryData> getValues(BinaryData binaryData, String path) {
