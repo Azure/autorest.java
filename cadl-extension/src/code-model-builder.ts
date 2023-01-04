@@ -636,7 +636,11 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
 
       if (op.convenienceApi && op.parameters) {
-        op.convenienceApi.parameters = [];
+        op.convenienceApi.requests = [];
+        const request = new Request();
+        request.parameters = [];
+        op.convenienceApi.requests.push(request);
+
         for (const [key, _] of parameters.properties) {
           const existParameter = op.parameters.find((it) => it.language.default.serializedName === key);
           if (existParameter) {
@@ -645,13 +649,13 @@ export class CodeModelBuilder {
               existParameter.implementation === ImplementationLocation.Method &&
               (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true)
             ) {
-              op.convenienceApi.parameters.push(existParameter);
+              request.parameters.push(existParameter);
             }
           } else {
             // property from anonymous model
             const existBodyProperty = schema.properties?.find((it) => it.serializedName === key);
             if (existBodyProperty) {
-              op.convenienceApi.parameters.push(
+              request.parameters.push(
                 new VirtualParameter(
                   existBodyProperty.language.default.name,
                   existBodyProperty.language.default.description,
@@ -674,6 +678,7 @@ export class CodeModelBuilder {
             }
           }
         }
+        request.signatureParameters = request.parameters;
       }
     }
   }
