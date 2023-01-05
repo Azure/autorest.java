@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
@@ -43,7 +44,6 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         Set<String> imports = new HashSet<>();
         model.addImportsTo(imports, JavaSettings.getInstance());
         ClassType.BinaryData.addImportsTo(imports, false);
-        imports.add("org.junit.jupiter.api.Test");
 
         String jsonStr;
         ExampleNode exampleNode;
@@ -59,11 +59,20 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         ModelExampleWriter writer = new ModelExampleWriter(exampleNode, "model");
         imports.addAll(writer.getImports());
 
+        boolean containsTest = containsTestInImports(imports);
+        if (!containsTest) {
+            imports.add("org.junit.jupiter.api.Test");
+        }
+
         javaFile.declareImport(imports);
 
         javaFile.publicFinalClass(model.getName() + "Tests", classBlock -> {
             // testDeserialize
-            classBlock.annotation("Test");
+            if (containsTest) {
+                classBlock.annotation("org.junit.jupiter.api.Test");
+            } else {
+                classBlock.annotation("Test");
+            }
             classBlock.publicMethod("void testDeserialize() throws Exception", methodBlock -> {
                 methodBlock.line(String.format("%1$s model = BinaryData.fromString(%2$s).toObject(%1$s.class);",
                         model.getName(), ClassType.String.defaultValueExpression(jsonStr)));
@@ -72,7 +81,11 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             if (!immutableOutputModel) {
                 // testSerialize
-                classBlock.annotation("Test");
+                if (containsTest) {
+                    classBlock.annotation("org.junit.jupiter.api.Test");
+                } else {
+                    classBlock.annotation("Test");
+                }
                 String methodSignature = "void testSerialize() throws Exception";
                 classBlock.publicMethod(methodSignature, methodBlock -> {
                     methodBlock.line(String.format("%1$s model = %2$s;",
@@ -87,5 +100,9 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
         });
+    }
+
+    private boolean containsTestInImports(Set<String> imports) {
+        return imports.stream().anyMatch(imp -> !imp.equals("org.junit.jupiter.api.Test") && (imp.endsWith(".Test") || imp.equals("Test")));
     }
 }
