@@ -206,30 +206,21 @@ class ResourceTypeNormalization {
     private static Optional<ResourceType> getSchemaResourceType(ObjectSchema compositeType) {
         ResourceType type = null;
 
-        switch (Utils.getJavaName(compositeType)) {
-            case ResourceTypeName.SUB_RESOURCE:
-            case ResourceTypeName.SUB_RESOURCE_AUTO_GENERATED:
-                type = ResourceType.SUB_RESOURCE;
-                break;
-            case ResourceTypeName.PROXY_RESOURCE:
-            case ResourceTypeName.PROXY_RESOURCE_AUTO_GENERATED:
-                type = ResourceType.PROXY_RESOURCE;
-                break;
-            case ResourceTypeName.TRACKED_RESOURCE:
-            case ResourceTypeName.TRACKED_RESOURCE_AUTO_GENERATED:
+        String javaName = Utils.getJavaName(compositeType);
+        if (javaName.equals(ResourceTypeName.SUB_RESOURCE) || javaName.startsWith(ResourceTypeName.SUB_RESOURCE_AUTO_GENERATED)) {
+            type = ResourceType.SUB_RESOURCE;
+        } else if (javaName.equals(ResourceTypeName.PROXY_RESOURCE) || javaName.startsWith(ResourceTypeName.PROXY_RESOURCE_AUTO_GENERATED)) {
+            type = ResourceType.PROXY_RESOURCE;
+        } else if (javaName.equals(ResourceTypeName.TRACKED_RESOURCE) || javaName.startsWith(ResourceTypeName.TRACKED_RESOURCE_AUTO_GENERATED)) {
+            type = ResourceType.RESOURCE;
+        } else if (javaName.equals(ResourceTypeName.RESOURCE) || javaName.startsWith(ResourceTypeName.RESOURCE_AUTO_GENERATED)
+                || javaName.equals(ResourceTypeName.AZURE_RESOURCE) || javaName.startsWith(ResourceTypeName.AZURE_RESOURCE_AUTO_GENERATED)) {
+            if (hasProperties(compositeType, RESOURCE_EXTRA_FIELDS)) {
                 type = ResourceType.RESOURCE;
-                break;
-            case ResourceTypeName.RESOURCE:
-            case ResourceTypeName.RESOURCE_AUTO_GENERATED:
-            {
-                if (hasProperties(compositeType, RESOURCE_EXTRA_FIELDS)) {
-                    type = ResourceType.RESOURCE;
-                } else if (hasProperties(compositeType, PROXY_RESOURCE_FIELDS)) {
-                    type = ResourceType.PROXY_RESOURCE;
-                } else if (hasProperties(compositeType, SUB_RESOURCE_FIELDS)) {
-                    type = ResourceType.SUB_RESOURCE;
-                }
-                break;
+            } else if (hasProperties(compositeType, PROXY_RESOURCE_FIELDS)) {
+                type = ResourceType.PROXY_RESOURCE;
+            } else if (hasProperties(compositeType, SUB_RESOURCE_FIELDS)) {
+                type = ResourceType.SUB_RESOURCE;
             }
         }
 
