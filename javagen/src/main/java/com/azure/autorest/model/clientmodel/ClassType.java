@@ -177,7 +177,10 @@ public class ClassType implements IType {
         .packageName("org.threeten.bp").name("OffsetDateTime")
         .build();
 
-    public static final ClassType UnixTimeLong = new ClassType.Builder(false).knownClass(java.lang.Long.class).build();
+    public static final ClassType UnixTimeLong = new ClassType.Builder(false)
+            .knownClass(java.lang.Long.class)
+            .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
+            .build();
 
     public static final ClassType HttpPipeline = new ClassType.Builder(false)
         .knownClass(com.azure.core.http.HttpPipeline.class)
