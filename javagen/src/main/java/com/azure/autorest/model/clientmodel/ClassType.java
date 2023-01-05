@@ -237,7 +237,7 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType Context = new Builder(false).knownClass(com.azure.core.util.Context.class)
-        .defaultValueExpressionConverter(epr -> "Context.NONE")
+        .defaultValueExpressionConverter(epr -> "com.azure.core.util.Context.NONE")
         .build();
 
     public static final ClassType AndroidContext = new ClassType.Builder(false)

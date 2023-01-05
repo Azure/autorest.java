@@ -177,7 +177,7 @@ public class ModelTestCaseUtil {
                 }
             } // else abort
             return map;
-        } else if (type instanceof ClassType) {
+        } else if (type instanceof ClassType && type != ClassType.Context) {
             ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (model != null) {
                 return jsonFromModel(depth + 1, model);

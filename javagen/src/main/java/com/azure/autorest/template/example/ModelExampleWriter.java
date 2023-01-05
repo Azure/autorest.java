@@ -183,7 +183,9 @@ public class ModelExampleWriter {
 
         public String accept(ExampleNode node) {
             if (node instanceof LiteralNode) {
-                node.getClientType().addImportsTo(imports, false);
+                if (node.getClientType() != ClassType.Context) {
+                    node.getClientType().addImportsTo(imports, false);
+                }
 
                 if (node.getClientType() == ClassType.URL) {
                     helperFeatures.add(ExampleHelperFeature.ThrowsIOException); // MalformedURLException from URL ctor
