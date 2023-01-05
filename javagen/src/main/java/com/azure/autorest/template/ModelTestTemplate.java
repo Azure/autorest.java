@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
