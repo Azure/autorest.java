@@ -70,7 +70,7 @@ export class ConvenienceApi extends Metadata {
     );
   }
 
-  parameters?: Array<Parameter>;
+  requests?: Array<Request>;
 }
 
 export class OperationLink {

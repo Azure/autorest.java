@@ -7,13 +7,13 @@ import java.util.List;
 
 public class ConvenienceApi extends Metadata {
 
-    private List<Parameter> parameters;
+    private List<Request> requests;
 
-    public List<Parameter> getParameters() {
-        return parameters;
+    public List<Request> getRequests() {
+        return requests;
     }
 
-    public void setParameters(List<Parameter> parameters) {
-        this.parameters = parameters;
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
     }
 }

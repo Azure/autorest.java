@@ -193,7 +193,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             builder.methodDocumentation(externalDocumentation);
         }
 
-        List<Request> requests = operation.getRequests();
+        List<Request> requests = getCodeModelRequests(operation, isProtocolMethod, proxyMethodsMap);
         for (Request request : requests) {
             List<ProxyMethod> proxyMethods = proxyMethodsMap.get(request);
             for (ProxyMethod proxyMethod : proxyMethods) {
@@ -285,7 +285,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             mapping.setInputParameter(clientMethodParameter);
                         }
                         if (parameter.getOriginalParameter() != null) {
-                            mapping.setOutputParameterProperty(parameter.getTargetProperty().getLanguage().getJava().getName());
+                            mapping.setOutputParameterProperty(Mappers.getModelPropertyMapper().map(parameter.getTargetProperty()));
+                            mapping.setOutputParameterPropertyName(parameter.getTargetProperty().getLanguage().getJava().getName());
                         }
                         detail.getParameterMappings().add(mapping);
                     }
@@ -573,6 +574,21 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             operation, isProtocolMethod, settings, isCustomHeaderIgnored);
 
         return returnTypeHolder;
+    }
+
+    private static List<Request> getCodeModelRequests(Operation operation, boolean isProtocolMethod,
+                                                      Map<Request, List<ProxyMethod>> proxyMethodsMap) {
+        if (!isProtocolMethod && operation.getConvenienceApi() != null && operation.getConvenienceApi().getRequests() != null) {
+            // convenience API of a protocol API
+            List<Request> requests = operation.getConvenienceApi().getRequests();
+            for (Request request : requests) {
+                // at present, just set the proxy methods
+                proxyMethodsMap.put(request, proxyMethodsMap.values().iterator().next());
+            }
+            return requests;
+        } else {
+            return operation.getRequests();
+        }
     }
 
     private static List<Parameter> getCodeModelParameters(Request request, boolean isProtocolMethod) {

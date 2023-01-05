@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -12,6 +13,8 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.IterableType;
+import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
+import com.azure.autorest.model.clientmodel.ParameterMapping;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
@@ -21,12 +24,17 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -80,6 +88,11 @@ abstract class ConvenienceMethodTemplateBase {
         // RequestOptions
         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 
+        // parameter transformation
+        if (convenienceMethod.getMethodTransformationDetails() != null) {
+            convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, methodBlock));
+        }
+
         // matched parameters from convenience method to protocol method
         Map<MethodParameter, MethodParameter> parametersMap =
                 findParametersForConvenienceMethod(convenienceMethod, protocolMethod);
@@ -88,14 +101,14 @@ abstract class ConvenienceMethodTemplateBase {
             MethodParameter parameter = entry.getKey();
             MethodParameter protocolParameter = entry.getValue();
 
-            if (parameter.getProxyMethodParameter().getOrigin() == ParameterSynthesizedOrigin.CONTEXT) {
+            if (parameter.getProxyMethodParameter() != null && parameter.getProxyMethodParameter().getOrigin() == ParameterSynthesizedOrigin.CONTEXT) {
                 // Context
                 methodBlock.line(String.format("requestOptions.setContext(%s);", parameter.getName()));
             } else if (protocolParameter != null) {
                 // protocol method parameter exists
                 String expression = expressionConvertToType(parameter.getName(), parameter);
                 parameterExpressionsMap.put(protocolParameter.getName(), expression);
-            } else {
+            } else if (parameter.getProxyMethodParameter() != null) {
                 // protocol method parameter not exist, set the parameter via RequestOptions
                 switch (parameter.getProxyMethodParameter().getRequestParameterLocation()) {
                     case HEADER:
@@ -136,6 +149,46 @@ abstract class ConvenienceMethodTemplateBase {
 
         // write the invocation of protocol method, and related type conversion
         writeInvocationAndConversion(convenienceMethod, protocolMethod, invocationExpression, methodBlock, typeReferenceStaticClasses);
+    }
+
+    private static void writeParameterTransformation(MethodTransformationDetail detail, ClientMethod convenienceMethod, JavaBlock methodBlock) {
+        ClientMethodParameter targetParameter = detail.getOutParameter();
+        if (targetParameter.getClientType() == ClassType.BinaryData) {
+            String targetParameterName = targetParameter.getName();
+            String targetParameterObjectName = targetParameterName + "Obj";
+            methodBlock.line(String.format("Map<String, Object> %1$s = new HashMap<>();", targetParameterObjectName));
+            for (ParameterMapping mapping : detail.getParameterMappings()) {
+                if (mapping.getInputParameter().isRequired() || !convenienceMethod.getOnlyRequiredParameters()) {
+                    methodBlock.line(String.format("%1$s.put(\"%2$s\", %3$s);",
+                            targetParameterObjectName,
+                            mapping.getOutputParameterProperty().getSerializedName(),
+                            mapping.getInputParameter().getName()));
+                }
+            }
+            methodBlock.line(String.format("BinaryData %1$s = BinaryData.fromObject(%2$s);", targetParameterName, targetParameterObjectName));
+        }
+    }
+
+    protected void addImports(Set<String> imports, List<ConvenienceMethod> convenienceMethods) {
+        // methods
+        JavaSettings settings = JavaSettings.getInstance();
+        convenienceMethods.stream().flatMap(m -> m.getConvenienceMethods().stream())
+                .forEach(m -> m.addImportsTo(imports, false, settings));
+
+        ClassType.BinaryData.addImportsTo(imports, false);
+        ClassType.RequestOptions.addImportsTo(imports, false);
+        imports.add(Collectors.class.getName());
+        imports.add(Objects.class.getName());
+        imports.add(FluxUtil.class.getName());
+
+        // collection format
+        imports.add(JacksonAdapter.class.getName());
+        imports.add(CollectionFormat.class.getName());
+        imports.add(TypeReference.class.getName());
+
+        // flatten payload
+        imports.add(Map.class.getName());
+        imports.add(HashMap.class.getName());
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
