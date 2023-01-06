@@ -141,7 +141,7 @@ public final class FlattenClientImpl {
     @Host("{endpoint}/openai")
     @ServiceInterface(name = "FlattenClient")
     public interface FlattenClientService {
-        @Post("/flatten")
+        @Post("/flatten/send")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -154,6 +154,27 @@ public final class FlattenClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> send(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("id") String id,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData request,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/flatten/send-long")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> sendLong(
                 @HostParam("endpoint") String endpoint,
                 @QueryParam("id") String id,
                 @QueryParam("api-version") String apiVersion,
@@ -227,5 +248,92 @@ public final class FlattenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
         return sendWithResponseAsync(id, request, requestOptions).block();
+    }
+
+    /**
+     * The sendLong operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     user (Optional): {
+     *         user: String (Required)
+     *     }
+     *     input: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param id The id parameter.
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> sendLongWithResponseAsync(
+            String id, BinaryData request, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.sendLong(
+                                this.getEndpoint(),
+                                id,
+                                this.getServiceVersion().getVersion(),
+                                accept,
+                                request,
+                                requestOptions,
+                                context));
+    }
+
+    /**
+     * The sendLong operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     user (Optional): {
+     *         user: String (Required)
+     *     }
+     *     input: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param id The id parameter.
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+        return sendLongWithResponseAsync(id, request, requestOptions).block();
     }
 }
