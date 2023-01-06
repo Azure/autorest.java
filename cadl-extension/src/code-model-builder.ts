@@ -664,6 +664,7 @@ export class CodeModelBuilder {
                         serializedName: existParameter.language.default.serializedName,
                       },
                     },
+                    protocol: existParameter.protocol,
                     summary: existParameter.summary,
                     implementation: ImplementationLocation.Method,
                     required: existParameter.required,

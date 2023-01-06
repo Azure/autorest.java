@@ -266,7 +266,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                     parameter, clientMethodParameter, isProtocolMethod);
                         }
                         if (parameter.getGroupedBy() != null) {
-                            processParameterTransformations(ParameterTransformationType.GROUP_BY,
+                            processParameterTransformations(ParameterTransformationType.GROUPING,
                                     methodTransformationDetails, originalParameters,
                                     parameter, clientMethodParameter, isProtocolMethod);
                         }
@@ -489,7 +489,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private enum ParameterTransformationType {
         FLATTEN,
-        GROUP_BY
+        GROUPING
     }
 
     private void processParameterTransformations(
@@ -514,7 +514,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             methodTransformationDetails.add(detail);
         }
         ParameterMapping mapping = new ParameterMapping();
-        if (parameter.getGroupedBy() != null && type == ParameterTransformationType.GROUP_BY) {
+        if (parameter.getGroupedBy() != null && type == ParameterTransformationType.GROUPING) {
             mapping.setInputParameter(Mappers.getClientParameterMapper().map(parameter.getGroupedBy(), isProtocolMethod));
             ClientModel groupModel = Mappers.getModelMapper().map((ObjectSchema) parameter.getGroupedBy().getSchema());
             ClientModelProperty inputProperty = groupModel.getProperties().stream()
@@ -524,7 +524,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         } else {
             mapping.setInputParameter(clientMethodParameter);
         }
-        if (parameter.getOriginalParameter() != null) {
+        if (parameter.getOriginalParameter() != null && type == ParameterTransformationType.FLATTEN) {
             mapping.setOutputParameterProperty(Mappers.getModelPropertyMapper().map(parameter.getTargetProperty()));
             mapping.setOutputParameterPropertyName(parameter.getTargetProperty().getLanguage().getJava().getName());
         }
