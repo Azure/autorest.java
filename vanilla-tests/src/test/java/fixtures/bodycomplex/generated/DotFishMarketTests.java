@@ -7,10 +7,9 @@ package fixtures.bodycomplex.generated;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.DotFishMarket;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class DotFishMarketTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         DotFishMarket model =
                 BinaryData.fromString(

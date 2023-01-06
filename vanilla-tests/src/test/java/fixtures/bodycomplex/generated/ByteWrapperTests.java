@@ -6,15 +6,14 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.ByteWrapper;
-import org.junit.jupiter.api.Test;
 
 public final class ByteWrapperTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         ByteWrapper model = BinaryData.fromString("{}").toObject(ByteWrapper.class);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         ByteWrapper model = new ByteWrapper();
         model = BinaryData.fromObject(model).toObject(ByteWrapper.class);

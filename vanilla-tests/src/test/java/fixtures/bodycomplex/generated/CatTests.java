@@ -9,10 +9,9 @@ import fixtures.bodycomplex.models.Cat;
 import fixtures.bodycomplex.models.Dog;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class CatTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Cat model =
                 BinaryData.fromString(
@@ -26,7 +25,7 @@ public final class CatTests {
         Assertions.assertEquals("cyzkohdbihanuf", model.getHates().get(0).getFood());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Cat model =
                 new Cat()

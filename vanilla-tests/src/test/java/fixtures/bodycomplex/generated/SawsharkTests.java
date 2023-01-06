@@ -10,10 +10,9 @@ import fixtures.bodycomplex.models.Sawshark;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class SawsharkTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Sawshark model =
                 BinaryData.fromString(
@@ -27,7 +26,7 @@ public final class SawsharkTests {
         Assertions.assertEquals(OffsetDateTime.parse("2021-06-30T08:44:34Z"), model.getBirthday());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Sawshark model =
                 new Sawshark(57.91524f, OffsetDateTime.parse("2021-06-30T08:44:34Z"))

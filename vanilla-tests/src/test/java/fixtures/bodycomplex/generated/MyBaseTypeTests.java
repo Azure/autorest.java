@@ -7,10 +7,9 @@ package fixtures.bodycomplex.generated;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.MyBaseType;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class MyBaseTypeTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         MyBaseType model =
                 BinaryData.fromString(

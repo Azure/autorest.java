@@ -8,16 +8,15 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.DurationWrapper;
 import java.time.Duration;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class DurationWrapperTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         DurationWrapper model = BinaryData.fromString("{\"field\":\"PT208H24M29S\"}").toObject(DurationWrapper.class);
         Assertions.assertEquals(Duration.parse("PT208H24M29S"), model.getField());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         DurationWrapper model = new DurationWrapper().setField(Duration.parse("PT208H24M29S"));
         model = BinaryData.fromObject(model).toObject(DurationWrapper.class);

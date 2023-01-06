@@ -8,10 +8,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.DatetimeWrapper;
 import java.time.OffsetDateTime;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class DatetimeWrapperTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         DatetimeWrapper model =
                 BinaryData.fromString("{\"field\":\"2021-06-29T08:49:50Z\",\"now\":\"2021-06-25T01:54:31Z\"}")
@@ -20,7 +19,7 @@ public final class DatetimeWrapperTests {
         Assertions.assertEquals(OffsetDateTime.parse("2021-06-25T01:54:31Z"), model.getNow());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         DatetimeWrapper model =
                 new DatetimeWrapper()

@@ -43,7 +43,6 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         Set<String> imports = new HashSet<>();
         model.addImportsTo(imports, JavaSettings.getInstance());
         ClassType.BinaryData.addImportsTo(imports, false);
-        imports.add("org.junit.jupiter.api.Test");
 
         String jsonStr;
         ExampleNode exampleNode;
@@ -63,7 +62,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         javaFile.publicFinalClass(model.getName() + "Tests", classBlock -> {
             // testDeserialize
-            classBlock.annotation("Test");
+            classBlock.annotation("org.junit.jupiter.api.Test");
             classBlock.publicMethod("void testDeserialize() throws Exception", methodBlock -> {
                 methodBlock.line(String.format("%1$s model = BinaryData.fromString(%2$s).toObject(%1$s.class);",
                         model.getName(), ClassType.String.defaultValueExpression(jsonStr)));
@@ -72,7 +71,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             if (!immutableOutputModel) {
                 // testSerialize
-                classBlock.annotation("Test");
+                classBlock.annotation("org.junit.jupiter.api.Test");
                 String methodSignature = "void testSerialize() throws Exception";
                 classBlock.publicMethod(methodSignature, methodBlock -> {
                     methodBlock.line(String.format("%1$s model = %2$s;",

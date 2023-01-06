@@ -7,10 +7,9 @@ package fixtures.bodycomplex.generated;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Error;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class ErrorTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Error model =
                 BinaryData.fromString("{\"status\":655985822,\"message\":\"bsphrupidgsybbe\"}").toObject(Error.class);

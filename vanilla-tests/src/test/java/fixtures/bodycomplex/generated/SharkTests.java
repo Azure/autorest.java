@@ -10,10 +10,9 @@ import fixtures.bodycomplex.models.Shark;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class SharkTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Shark model =
                 BinaryData.fromString(
@@ -27,7 +26,7 @@ public final class SharkTests {
         Assertions.assertEquals(OffsetDateTime.parse("2021-08-17T04:19:07Z"), model.getBirthday());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Shark model =
                 new Shark(75.88975f, OffsetDateTime.parse("2021-08-17T04:19:07Z"))

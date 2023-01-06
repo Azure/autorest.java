@@ -7,10 +7,9 @@ package fixtures.bodycomplex.generated;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Dog;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class DogTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Dog model =
                 BinaryData.fromString("{\"food\":\"cnpqxuhivyqniwby\",\"id\":143848779,\"name\":\"vd\"}")
@@ -20,7 +19,7 @@ public final class DogTests {
         Assertions.assertEquals("cnpqxuhivyqniwby", model.getFood());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Dog model = new Dog().setId(143848779).setName("vd").setFood("cnpqxuhivyqniwby");
         model = BinaryData.fromObject(model).toObject(Dog.class);
