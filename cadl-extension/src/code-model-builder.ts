@@ -653,7 +653,24 @@ export class CodeModelBuilder {
               existParameter.implementation === ImplementationLocation.Method &&
               (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true)
             ) {
-              request.parameters.push(existParameter);
+              request.parameters.push(
+                new Parameter(
+                  existParameter.language.default.name,
+                  existParameter.language.default.description,
+                  existParameter.schema,
+                  {
+                    language: {
+                      default: {
+                        serializedName: existParameter.language.default.serializedName,
+                      },
+                    },
+                    summary: existParameter.summary,
+                    implementation: ImplementationLocation.Method,
+                    required: existParameter.required,
+                    nullable: existParameter.nullable,
+                  },
+                ),
+              );
             }
           } else {
             // property from anonymous model
@@ -685,9 +702,10 @@ export class CodeModelBuilder {
         request.signatureParameters = request.parameters;
 
         if (request.signatureParameters.length > 6) {
-          // make an option bag
+          // create an option bag
           const name = op.language.default.name + "Options";
           const namespace = body.kind === "Model" ? getNamespace(body) : this.namespace;
+          // option bag schema
           const optionBagSchema = this.codeModel.schemas.add(
             new GroupSchema(name, `Options for ${op.language.default.name} API`, {
               language: {
@@ -715,6 +733,7 @@ export class CodeModelBuilder {
 
           this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input, SchemaContext.ConvenienceApi] });
 
+          // option bag parameter
           const optionBagParameter = new Parameter(
             "options",
             optionBagSchema.language.default.description,
