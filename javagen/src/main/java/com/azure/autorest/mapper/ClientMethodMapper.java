@@ -275,7 +275,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         }
                         ParameterMapping mapping = new ParameterMapping();
                         if (parameter.getGroupedBy() != null) {
-                            mapping.setInputParameter(Mappers.getClientParameterMapper().map(parameter.getGroupedBy()));
+                            mapping.setInputParameter(Mappers.getClientParameterMapper().map(parameter.getGroupedBy(), isProtocolMethod));
                             ClientModel groupModel = Mappers.getModelMapper().map((ObjectSchema) parameter.getGroupedBy().getSchema());
                             ClientModelProperty inputProperty = groupModel.getProperties().stream()
                                 .filter(p -> parameter.getLanguage().getJava().getName().equals(p.getName()))
