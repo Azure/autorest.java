@@ -7,10 +7,9 @@ package fixtures.bodycomplex.generated;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.IntWrapper;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class IntWrapperTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         IntWrapper model =
                 BinaryData.fromString("{\"field1\":318397575,\"field2\":1830732530}").toObject(IntWrapper.class);
@@ -18,7 +17,7 @@ public final class IntWrapperTests {
         Assertions.assertEquals(1830732530, model.getField2());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         IntWrapper model = new IntWrapper().setField1(318397575).setField2(1830732530);
         model = BinaryData.fromObject(model).toObject(IntWrapper.class);

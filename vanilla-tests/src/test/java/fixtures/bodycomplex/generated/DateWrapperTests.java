@@ -6,15 +6,14 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.DateWrapper;
-import org.junit.jupiter.api.Test;
 
 public final class DateWrapperTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         DateWrapper model = BinaryData.fromString("{}").toObject(DateWrapper.class);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         DateWrapper model = new DateWrapper();
         model = BinaryData.fromObject(model).toObject(DateWrapper.class);

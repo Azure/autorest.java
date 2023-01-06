@@ -7,17 +7,16 @@ package fixtures.bodycomplex.generated;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class ReadonlyObjTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         ReadonlyObj model =
                 BinaryData.fromString("{\"id\":\"lluwfzitonpeq\",\"size\":1432370634}").toObject(ReadonlyObj.class);
         Assertions.assertEquals(1432370634, model.getSize());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         ReadonlyObj model = new ReadonlyObj().setSize(1432370634);
         model = BinaryData.fromObject(model).toObject(ReadonlyObj.class);

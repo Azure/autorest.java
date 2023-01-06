@@ -10,10 +10,9 @@ import fixtures.bodycomplex.models.Fish;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class CookiecuttersharkTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Cookiecuttershark model =
                 BinaryData.fromString(
@@ -27,7 +26,7 @@ public final class CookiecuttersharkTests {
         Assertions.assertEquals(OffsetDateTime.parse("2021-05-27T22:50:20Z"), model.getBirthday());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Cookiecuttershark model =
                 new Cookiecuttershark(25.075048f, OffsetDateTime.parse("2021-05-27T22:50:20Z"))

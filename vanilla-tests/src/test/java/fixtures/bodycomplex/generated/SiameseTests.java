@@ -9,10 +9,9 @@ import fixtures.bodycomplex.models.Dog;
 import fixtures.bodycomplex.models.Siamese;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class SiameseTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Siamese model =
                 BinaryData.fromString(
@@ -27,7 +26,7 @@ public final class SiameseTests {
         Assertions.assertEquals("jofjd", model.getBreed());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Siamese model =
                 new Siamese()

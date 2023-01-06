@@ -8,10 +8,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.CMYKColors;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class BasicTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Basic model =
                 BinaryData.fromString("{\"id\":268043672,\"name\":\"quvgjxpybczme\",\"color\":\"blacK\"}")
@@ -21,7 +20,7 @@ public final class BasicTests {
         Assertions.assertEquals(CMYKColors.BLACK, model.getColor());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Basic model = new Basic().setId(268043672).setName("quvgjxpybczme").setColor(CMYKColors.BLACK);
         model = BinaryData.fromObject(model).toObject(Basic.class);

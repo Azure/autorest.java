@@ -8,10 +8,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Fish;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class FishTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Fish model =
                 BinaryData.fromString(
@@ -23,7 +22,7 @@ public final class FishTests {
         Assertions.assertEquals(26.373684f, model.getSiblings().get(0).getLength());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Fish model =
                 new Fish(32.04869f)

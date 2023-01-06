@@ -8,16 +8,15 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class ArrayWrapperTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         ArrayWrapper model = BinaryData.fromString("{\"array\":[\"bc\"]}").toObject(ArrayWrapper.class);
         Assertions.assertEquals("bc", model.getArray().get(0));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         ArrayWrapper model = new ArrayWrapper().setArray(Arrays.asList("bc"));
         model = BinaryData.fromObject(model).toObject(ArrayWrapper.class);

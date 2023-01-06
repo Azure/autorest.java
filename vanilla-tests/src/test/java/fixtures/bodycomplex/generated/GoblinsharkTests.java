@@ -11,10 +11,9 @@ import fixtures.bodycomplex.models.Goblinshark;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class GoblinsharkTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Goblinshark model =
                 BinaryData.fromString(
@@ -30,7 +29,7 @@ public final class GoblinsharkTests {
         Assertions.assertEquals(GoblinSharkColor.GRAY, model.getColor());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Goblinshark model =
                 new Goblinshark(56.1473f, OffsetDateTime.parse("2021-07-01T17:17:50Z"))

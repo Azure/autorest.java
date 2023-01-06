@@ -8,10 +8,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
 import java.time.OffsetDateTime;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class Datetimerfc1123WrapperTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Datetimerfc1123Wrapper model =
                 BinaryData.fromString(
@@ -21,7 +20,7 @@ public final class Datetimerfc1123WrapperTests {
         Assertions.assertEquals(OffsetDateTime.parse("2021-06-10T08:54:16Z"), model.getNow());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Datetimerfc1123Wrapper model =
                 new Datetimerfc1123Wrapper()

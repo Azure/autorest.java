@@ -7,10 +7,9 @@ package fixtures.bodycomplex.generated;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class BooleanWrapperTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         BooleanWrapper model =
                 BinaryData.fromString("{\"field_true\":false,\"field_false\":false}").toObject(BooleanWrapper.class);
@@ -18,7 +17,7 @@ public final class BooleanWrapperTests {
         Assertions.assertEquals(false, model.isFieldFalse());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         BooleanWrapper model = new BooleanWrapper().setFieldTrue(false).setFieldFalse(false);
         model = BinaryData.fromObject(model).toObject(BooleanWrapper.class);

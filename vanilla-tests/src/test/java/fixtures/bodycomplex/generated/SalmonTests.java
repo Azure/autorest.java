@@ -9,10 +9,9 @@ import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class SalmonTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         Salmon model =
                 BinaryData.fromString(
@@ -26,7 +25,7 @@ public final class SalmonTests {
         Assertions.assertEquals(true, model.iswild());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Salmon model =
                 new Salmon(25.12173f)

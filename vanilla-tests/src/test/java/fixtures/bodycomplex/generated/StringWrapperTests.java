@@ -7,10 +7,9 @@ package fixtures.bodycomplex.generated;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.StringWrapper;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class StringWrapperTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         StringWrapper model =
                 BinaryData.fromString("{\"field\":\"htbmuf\",\"empty\":\"wnoi\",\"null\":\"wlrxyb\"}")
@@ -20,7 +19,7 @@ public final class StringWrapperTests {
         Assertions.assertEquals("wlrxyb", model.getNullProperty());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         StringWrapper model = new StringWrapper().setField("htbmuf").setEmpty("wnoi").setNullProperty("wlrxyb");
         model = BinaryData.fromObject(model).toObject(StringWrapper.class);

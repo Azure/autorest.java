@@ -11,10 +11,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class SmartSalmonTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         SmartSalmon model =
                 BinaryData.fromString(
@@ -29,7 +28,7 @@ public final class SmartSalmonTests {
         Assertions.assertEquals("ayhuy", model.getCollegeDegree());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         SmartSalmon model =
                 new SmartSalmon(55.453957f)

@@ -7,10 +7,9 @@ package fixtures.bodycomplex.generated;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.FloatWrapper;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public final class FloatWrapperTests {
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         FloatWrapper model =
                 BinaryData.fromString("{\"field1\":32.06033,\"field2\":54.94055}").toObject(FloatWrapper.class);
@@ -18,7 +17,7 @@ public final class FloatWrapperTests {
         Assertions.assertEquals(54.94055F, model.getField2());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         FloatWrapper model = new FloatWrapper().setField1(32.06033F).setField2(54.94055F);
         model = BinaryData.fromObject(model).toObject(FloatWrapper.class);
