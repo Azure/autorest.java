@@ -58,20 +58,11 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         ModelExampleWriter writer = new ModelExampleWriter(exampleNode, "model");
         imports.addAll(writer.getImports());
 
-        boolean containsTest = containsTestInImports(imports);
-        if (!containsTest) {
-            imports.add("org.junit.jupiter.api.Test");
-        }
-
         javaFile.declareImport(imports);
 
         javaFile.publicFinalClass(model.getName() + "Tests", classBlock -> {
             // testDeserialize
-            if (containsTest) {
-                classBlock.annotation("org.junit.jupiter.api.Test");
-            } else {
-                classBlock.annotation("Test");
-            }
+            classBlock.annotation("org.junit.jupiter.api.Test");
             classBlock.publicMethod("void testDeserialize() throws Exception", methodBlock -> {
                 methodBlock.line(String.format("%1$s model = BinaryData.fromString(%2$s).toObject(%1$s.class);",
                         model.getName(), ClassType.String.defaultValueExpression(jsonStr)));
@@ -80,11 +71,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             if (!immutableOutputModel) {
                 // testSerialize
-                if (containsTest) {
-                    classBlock.annotation("org.junit.jupiter.api.Test");
-                } else {
-                    classBlock.annotation("Test");
-                }
+                classBlock.annotation("org.junit.jupiter.api.Test");
                 String methodSignature = "void testSerialize() throws Exception";
                 classBlock.publicMethod(methodSignature, methodBlock -> {
                     methodBlock.line(String.format("%1$s model = %2$s;",
@@ -99,9 +86,5 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
         });
-    }
-
-    private boolean containsTestInImports(Set<String> imports) {
-        return imports.stream().anyMatch(imp -> !imp.equals("org.junit.jupiter.api.Test") && (imp.endsWith(".Test") || imp.equals("Test")));
     }
 }
