@@ -1,0 +1,9 @@
+emit:
+  - "@azure-tools/cadl-java"
+options:
+  "@azure-tools/cadl-java":
+    partial-update: true
+    namer: true
+    dev-options:
+      generate-code-model: true
+
