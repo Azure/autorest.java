@@ -3,7 +3,6 @@ import {
   BooleanLiteral,
   Enum,
   getDoc,
-  getEffectiveModelType,
   getFormat,
   getFriendlyName,
   getKnownValues,
@@ -35,23 +34,24 @@ import {
   getNamespaceFullName,
   isNullType,
   NoTarget,
+  getEffectiveModelType,
 } from "@cadl-lang/compiler";
 import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
   getAuthentication,
-  getHeaderFieldName,
-  getPathParamName,
-  getQueryParamName,
   getServers,
   getStatusCodeDescription,
   HttpOperation,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
-  isStatusCode,
   ServiceAuthentication,
   StatusCode,
   getHttpOperation,
+  MetadataInfo,
+  createMetadataInfo,
+  Visibility,
+  getRequestVisibility,
 } from "@cadl-lang/rest/http";
 import { getVersion } from "@cadl-lang/versioning";
 import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/cadl-azure-core";
@@ -113,6 +113,7 @@ import { EmitterOptions } from "./emitter.js";
 
 export class CodeModelBuilder {
   private program: Program;
+  private metadataInfo: MetadataInfo;
   private typeNameOptions: TypeNameOptions;
   private version: string;
   private baseUri: string;
@@ -168,6 +169,22 @@ export class CodeModelBuilder {
         return name !== "Cadl" && name !== namespace1;
       },
     };
+
+    function canSharePropertyUsingReadonlyOrXMSMutability(prop: ModelProperty) {
+      const sharedVisibilities = ["read", "create", "update", "write"];
+      const visibilities = getVisibility(program1, prop);
+      if (visibilities) {
+        for (const visibility of visibilities) {
+          if (!sharedVisibilities.includes(visibility)) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+    this.metadataInfo = createMetadataInfo(this.program, {
+      canShareProperty: canSharePropertyUsingReadonlyOrXMSMutability,
+    });
 
     // init code model
     // let title = getServiceTitle(this.program);
@@ -363,6 +380,8 @@ export class CodeModelBuilder {
   private processRoute(groupName: string, operation: Operation): CodeModelOperation {
     const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
 
+    const visibility = getRequestVisibility(op.verb);
+
     const operationGroup = this.codeModel.getOperationGroup(groupName);
     const opId = groupName ? `${groupName}_${operation.name}` : `${operation.name}`;
 
@@ -414,7 +433,7 @@ export class CodeModelBuilder {
       if (op.parameters.body.parameter) {
         this.processParameterBody(codeModelOperation, op.parameters.body.parameter, operation.parameters);
       } else if (op.parameters.body.type) {
-        let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
+        let bodyType = this.getEffectiveSchemaType(op.parameters.body.type, visibility);
 
         if (bodyType.kind === "Model") {
           // try use resource type as round-trip model
@@ -756,7 +775,7 @@ export class CodeModelBuilder {
 
   private findResponseBody(bodyType: Type): Type {
     // find a type that possibly without http metadata like @statusCode
-    return this.getEffectiveSchemaType(bodyType);
+    return this.getEffectiveSchemaType(bodyType, Visibility.Read);
   }
 
   private processResponse(op: CodeModelOperation, resp: HttpOperationResponse) {
@@ -1301,19 +1320,12 @@ export class CodeModelBuilder {
     return objectSchema;
   }
 
-  private getEffectiveSchemaType(type: Type): Type {
-    const program = this.program;
-
-    function isSchemaProperty(property: ModelProperty) {
-      const headerInfo = getHeaderFieldName(program, property);
-      const queryInfo = getQueryParamName(program, property);
-      const pathInfo = getPathParamName(program, property);
-      const statusCodeInfo = isStatusCode(program, property);
-      return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
-    }
-
+  private getEffectiveSchemaType(type: Type, visibility: Visibility): Type {
+    // minor change to metadataInfo.getEffectivePayloadType
     if (type.kind === "Model") {
-      const effective = getEffectiveModelType(program, type, isSchemaProperty);
+      const effective = getEffectiveModelType(this.program, type, (p) =>
+        this.metadataInfo.isPayloadProperty(p, visibility)
+      );
       if (effective.name) {
         return effective;
       }
