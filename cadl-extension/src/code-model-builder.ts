@@ -100,6 +100,8 @@ import {
   OperationGroup,
   UriSchema,
   VirtualParameter,
+  GroupSchema,
+  GroupProperty,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient } from "./common/client.js";
@@ -115,6 +117,7 @@ export class CodeModelBuilder {
   private version: string;
   private baseUri: string;
   private hostParameters: Parameter[];
+  private namespace: string;
 
   private options: EmitterOptions;
 
@@ -136,8 +139,8 @@ export class CodeModelBuilder {
     }
 
     // java namespace
-    const namespace = getNamespaceFullName(serviceNamespace) || "Azure.Client";
-    const javaNamespace = getJavaNamespace(namespace);
+    this.namespace = getNamespaceFullName(serviceNamespace) || "Azure.Client";
+    const javaNamespace = getJavaNamespace(this.namespace);
 
     // API version
     const apiVersion = getDefaultApiVersion(this.program, serviceNamespace);
@@ -157,11 +160,12 @@ export class CodeModelBuilder {
       }
     }
 
+    const namespace1 = this.namespace;
     this.typeNameOptions = {
       // shorten type names by removing Cadl and service namespace
       namespaceFilter(ns) {
         const name = getNamespaceFullName(ns);
-        return name !== "Cadl" && name !== namespace;
+        return name !== "Cadl" && name !== namespace1;
       },
     };
 
@@ -182,7 +186,7 @@ export class CodeModelBuilder {
           name: title,
           description: description,
           summary: this.getSummary(serviceNamespace),
-          namespace: namespace,
+          namespace: this.namespace,
         },
         java: {
           namespace: javaNamespace,
@@ -649,7 +653,25 @@ export class CodeModelBuilder {
               existParameter.implementation === ImplementationLocation.Method &&
               (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true)
             ) {
-              request.parameters.push(existParameter);
+              request.parameters.push(
+                new Parameter(
+                  existParameter.language.default.name,
+                  existParameter.language.default.description,
+                  existParameter.schema,
+                  {
+                    language: {
+                      default: {
+                        serializedName: existParameter.language.default.serializedName,
+                      },
+                    },
+                    protocol: existParameter.protocol,
+                    summary: existParameter.summary,
+                    implementation: ImplementationLocation.Method,
+                    required: existParameter.required,
+                    nullable: existParameter.nullable,
+                  },
+                ),
+              );
             }
           } else {
             // property from anonymous model
@@ -679,6 +701,55 @@ export class CodeModelBuilder {
           }
         }
         request.signatureParameters = request.parameters;
+
+        if (request.signatureParameters.length >= 5) {
+          // create an option bag
+          const name = op.language.default.name + "Options";
+          const namespace = body.kind === "Model" ? getNamespace(body) : this.namespace;
+          // option bag schema
+          const optionBagSchema = this.codeModel.schemas.add(
+            new GroupSchema(name, `Options for ${op.language.default.name} API`, {
+              language: {
+                default: {
+                  namespace: namespace,
+                },
+                java: {
+                  namespace: getJavaNamespace(namespace),
+                },
+              },
+            }),
+          );
+          request.parameters.forEach((it) => {
+            optionBagSchema.add(
+              new GroupProperty(it.language.default.name, it.language.default.description, it.schema, {
+                originalParameter: [it],
+                summary: it.summary,
+                required: it.required,
+                nullable: it.nullable,
+                readOnly: false,
+                serializedName: it.language.default.serializedName,
+              }),
+            );
+          });
+
+          this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input, SchemaContext.ConvenienceApi] });
+
+          // option bag parameter
+          const optionBagParameter = new Parameter(
+            "options",
+            optionBagSchema.language.default.description,
+            optionBagSchema,
+            {
+              implementation: ImplementationLocation.Method,
+              required: true,
+              nullable: false,
+            },
+          );
+
+          request.signatureParameters = [optionBagParameter];
+          request.parameters.forEach((it) => (it.groupedBy = optionBagParameter));
+          request.parameters.push(optionBagParameter);
+        }
       }
     }
   }
@@ -1575,7 +1646,12 @@ export class CodeModelBuilder {
   }
 
   private trackSchemaUsage(schema: Schema, schemaUsage: SchemaUsage): void {
-    if (schema instanceof ObjectSchema || schema instanceof ChoiceSchema || schema instanceof SealedChoiceSchema) {
+    if (
+      schema instanceof ObjectSchema ||
+      schema instanceof GroupSchema ||
+      schema instanceof ChoiceSchema ||
+      schema instanceof SealedChoiceSchema
+    ) {
       if (schemaUsage.usage) {
         pushDistinct((schema.usage = schema.usage || []), ...schemaUsage.usage);
       }

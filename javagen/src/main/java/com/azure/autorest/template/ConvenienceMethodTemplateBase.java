@@ -24,6 +24,7 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
@@ -85,17 +86,18 @@ abstract class ConvenienceMethodTemplateBase {
             JavaBlock methodBlock,
             Set<GenericType> typeReferenceStaticClasses) {
 
+        // matched parameters from convenience method to protocol method
+        Map<MethodParameter, MethodParameter> parametersMap =
+                findParametersForConvenienceMethod(convenienceMethod, protocolMethod);
+
         // RequestOptions
         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 
         // parameter transformation
         if (convenienceMethod.getMethodTransformationDetails() != null) {
-            convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, methodBlock));
+            convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, protocolMethod, methodBlock, parametersMap));
         }
 
-        // matched parameters from convenience method to protocol method
-        Map<MethodParameter, MethodParameter> parametersMap =
-                findParametersForConvenienceMethod(convenienceMethod, protocolMethod);
         Map<String, String> parameterExpressionsMap = new HashMap<>();
         for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
             MethodParameter parameter = entry.getKey();
@@ -151,21 +153,65 @@ abstract class ConvenienceMethodTemplateBase {
         writeInvocationAndConversion(convenienceMethod, protocolMethod, invocationExpression, methodBlock, typeReferenceStaticClasses);
     }
 
-    private static void writeParameterTransformation(MethodTransformationDetail detail, ClientMethod convenienceMethod, JavaBlock methodBlock) {
-        ClientMethodParameter targetParameter = detail.getOutParameter();
-        if (targetParameter.getClientType() == ClassType.BinaryData) {
-            String targetParameterName = targetParameter.getName();
-            String targetParameterObjectName = targetParameterName + "Obj";
-            methodBlock.line(String.format("Map<String, Object> %1$s = new HashMap<>();", targetParameterObjectName));
-            for (ParameterMapping mapping : detail.getParameterMappings()) {
-                if (mapping.getInputParameter().isRequired() || !convenienceMethod.getOnlyRequiredParameters()) {
-                    methodBlock.line(String.format("%1$s.put(\"%2$s\", %3$s);",
-                            targetParameterObjectName,
-                            mapping.getOutputParameterProperty().getSerializedName(),
-                            mapping.getInputParameter().getName()));
+    private static boolean isGroupByTransformation(MethodTransformationDetail detail) {
+        return !CoreUtils.isNullOrEmpty(detail.getParameterMappings())
+                && detail.getParameterMappings().iterator().next().getOutputParameterPropertyName() == null;
+    }
+
+    private static void writeParameterTransformation(
+            MethodTransformationDetail detail,
+            ClientMethod convenienceMethod, ClientMethod protocolMethod,
+            JavaBlock methodBlock,
+            Map<MethodParameter, MethodParameter> parametersMap) {
+
+        if (isGroupByTransformation(detail)) {
+            // grouping
+
+            ParameterMapping mapping = detail.getParameterMappings().iterator().next();
+            ClientMethodParameter sourceParameter = mapping.getInputParameter();
+
+            methodBlock.line(String.format("%1$s %2$s = %3$s.%4$s();",
+                    detail.getOutParameter().getWireType(),
+                    detail.getOutParameter().getName(),
+                    sourceParameter.getName(),
+                    CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty())));
+
+            if (detail.getOutParameter().getRequestParameterLocation() != null) {
+                ClientMethodParameter clientMethodParameter = detail.getOutParameter();
+                ProxyMethodParameter proxyMethodParameter = convenienceMethod.getProxyMethod().getAllParameters().stream()
+                        .filter(p -> clientMethodParameter.getName().equals(CodeNamer.getEscapedReservedClientMethodParameterName(p.getName())))
+                        .findFirst().orElse(null);
+                if (proxyMethodParameter != null) {
+                    MethodParameter methodParameter = new MethodParameter(proxyMethodParameter, clientMethodParameter);
+                    parametersMap.put(methodParameter, findParameterForConvenienceMethod(methodParameter, protocolMethod));
                 }
             }
-            methodBlock.line(String.format("BinaryData %1$s = BinaryData.fromObject(%2$s);", targetParameterName, targetParameterObjectName));
+        } else {
+            // flatten (possible with grouping)
+
+            ClientMethodParameter targetParameter = detail.getOutParameter();
+            if (targetParameter.getClientType() == ClassType.BinaryData) {
+                String targetParameterName = targetParameter.getName();
+                String targetParameterObjectName = targetParameterName + "Obj";
+                methodBlock.line(String.format("Map<String, Object> %1$s = new HashMap<>();", targetParameterObjectName));
+                for (ParameterMapping mapping : detail.getParameterMappings()) {
+                    if (mapping.getInputParameter().isRequired() || !convenienceMethod.getOnlyRequiredParameters()) {
+                        String inputPath;
+                        if (mapping.getInputParameterProperty() != null) {
+                            inputPath = String.format("%s.%s()", mapping.getInputParameter().getName(),
+                                    CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty()));
+                        } else {
+                            inputPath = mapping.getInputParameter().getName();
+                        }
+
+                        methodBlock.line(String.format("%1$s.put(\"%2$s\", %3$s);",
+                                targetParameterObjectName,
+                                mapping.getOutputParameterProperty().getSerializedName(),
+                                inputPath));
+                    }
+                }
+                methodBlock.line(String.format("BinaryData %1$s = BinaryData.fromObject(%2$s);", targetParameterName, targetParameterObjectName));
+            }
         }
     }
 
@@ -350,6 +396,12 @@ abstract class ConvenienceMethodTemplateBase {
             parameterMap.put(convenienceParameter, clientParameters.get(name));
         }
         return parameterMap;
+    }
+
+    private static MethodParameter findParameterForConvenienceMethod(
+            MethodParameter parameter, ClientMethod protocolMethod) {
+        List<MethodParameter> protocolParameters = getParameters(protocolMethod, false);
+        return protocolParameters.stream().filter(p -> Objects.equals(parameter.getSerializedName(), p.getSerializedName())).findFirst().orElse(null);
     }
 
     private static List<MethodParameter> getParameters(ClientMethod method, boolean useAllParameters) {

@@ -35,12 +35,26 @@ alias Request = {
   input: string;
 };
 
+alias LongRequest = {
+  user?: User;
+  input: string;
+  dataInt: int32;
+  dataIntOptional?: int32;
+  dataLong?: int64;
+  data_float?: float64;
+};
+
 model User {
   user: string;
 }
 
 @route("/flatten")
 interface FlattenOp {
+  @route("send")
   @post
   send(@query id: string, ...Request, ...ApiVersionParameter): OkResponse;
+
+  @route("send-long")
+  @post
+  sendLong(@query id: string, @query filter?: string, ...LongRequest, ...ApiVersionParameter): OkResponse;
 }
