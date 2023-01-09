@@ -1324,7 +1324,7 @@ export class CodeModelBuilder {
     // minor change to metadataInfo.getEffectivePayloadType
     if (type.kind === "Model") {
       const effective = getEffectiveModelType(this.program, type, (p) =>
-        this.metadataInfo.isPayloadProperty(p, visibility)
+        this.metadataInfo.isPayloadProperty(p, visibility),
       );
       if (effective.name) {
         return effective;
