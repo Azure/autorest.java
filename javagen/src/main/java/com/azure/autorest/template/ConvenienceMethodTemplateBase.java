@@ -95,10 +95,7 @@ abstract class ConvenienceMethodTemplateBase {
 
         // parameter transformation
         if (convenienceMethod.getMethodTransformationDetails() != null) {
-            // sort the transformations, so that grouping is before flatten
-            convenienceMethod.getMethodTransformationDetails().stream()
-                    .sorted((d1, d2) -> Boolean.compare(!isGroupByTransformation(d1), !isGroupByTransformation(d2)))
-                    .forEach(d -> writeParameterTransformation(d, convenienceMethod, protocolMethod, methodBlock, parametersMap));
+            convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, protocolMethod, methodBlock, parametersMap));
         }
 
         Map<String, String> parameterExpressionsMap = new HashMap<>();
@@ -190,7 +187,7 @@ abstract class ConvenienceMethodTemplateBase {
                 }
             }
         } else {
-            // flatten
+            // flatten (possible with grouping)
 
             ClientMethodParameter targetParameter = detail.getOutParameter();
             if (targetParameter.getClientType() == ClassType.BinaryData) {
@@ -199,10 +196,18 @@ abstract class ConvenienceMethodTemplateBase {
                 methodBlock.line(String.format("Map<String, Object> %1$s = new HashMap<>();", targetParameterObjectName));
                 for (ParameterMapping mapping : detail.getParameterMappings()) {
                     if (mapping.getInputParameter().isRequired() || !convenienceMethod.getOnlyRequiredParameters()) {
+                        String inputPath;
+                        if (mapping.getInputParameterProperty() != null) {
+                            inputPath = String.format("%s.%s()", mapping.getInputParameter().getName(),
+                                    CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty()));
+                        } else {
+                            inputPath = mapping.getInputParameter().getName();
+                        }
+
                         methodBlock.line(String.format("%1$s.put(\"%2$s\", %3$s);",
                                 targetParameterObjectName,
                                 mapping.getOutputParameterProperty().getSerializedName(),
-                                mapping.getInputParameter().getName()));
+                                inputPath));
                     }
                 }
                 methodBlock.line(String.format("BinaryData %1$s = BinaryData.fromObject(%2$s);", targetParameterName, targetParameterObjectName));

@@ -169,19 +169,13 @@ public final class FlattenClient {
         RequestOptions requestOptions = new RequestOptions();
         String id = options.getId();
         String filter = options.getFilter();
-        User user = options.getUser();
-        String input = options.getInput();
-        int dataInt = options.getDataInt();
-        Integer dataIntOptional = options.getDataIntOptional();
-        Long dataLong = options.getDataLong();
-        Double dataFloat = options.getDataFloat();
         Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("user", user);
-        requestObj.put("input", input);
-        requestObj.put("dataInt", dataInt);
-        requestObj.put("dataIntOptional", dataIntOptional);
-        requestObj.put("dataLong", dataLong);
-        requestObj.put("data_float", dataFloat);
+        requestObj.put("user", options.getUser());
+        requestObj.put("input", options.getInput());
+        requestObj.put("dataInt", options.getDataInt());
+        requestObj.put("dataIntOptional", options.getDataIntOptional());
+        requestObj.put("dataLong", options.getDataLong());
+        requestObj.put("data_float", options.getDataFloat());
         BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter);

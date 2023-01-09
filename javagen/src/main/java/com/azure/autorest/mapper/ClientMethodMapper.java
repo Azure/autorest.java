@@ -260,16 +260,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     if ((parameter.getOriginalParameter() != null || parameter.getGroupedBy() != null)
                         && !(parameter.getSchema() instanceof ConstantSchema) && !isProtocolMethod) {
 
-                        if (parameter.getOriginalParameter() != null) {
-                            processParameterTransformations(ParameterTransformationType.FLATTEN,
-                                    methodTransformationDetails, originalParameters,
-                                    parameter, clientMethodParameter, isProtocolMethod);
-                        }
-                        if (parameter.getGroupedBy() != null) {
-                            processParameterTransformations(ParameterTransformationType.GROUPING,
-                                    methodTransformationDetails, originalParameters,
-                                    parameter, clientMethodParameter, isProtocolMethod);
-                        }
+                        processParameterTransformations(
+                                methodTransformationDetails, originalParameters,
+                                parameter, clientMethodParameter, isProtocolMethod);
                     }
                 }
 
@@ -487,20 +480,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .collect(Collectors.toList());
     }
 
-    private enum ParameterTransformationType {
-        FLATTEN,
-        GROUPING
-    }
-
     private void processParameterTransformations(
-            ParameterTransformationType type,
             List<MethodTransformationDetail> methodTransformationDetails,
             Set<Parameter> originalParameters,
             Parameter parameter, ClientMethodParameter clientMethodParameter,
             boolean isProtocolMethod) {
 
         ClientMethodParameter outParameter;
-        if (parameter.getOriginalParameter() != null && type == ParameterTransformationType.FLATTEN) {
+        if (parameter.getOriginalParameter() != null) {
             originalParameters.add(parameter.getOriginalParameter());
             outParameter = Mappers.getClientParameterMapper().map(parameter.getOriginalParameter());
         } else {
@@ -514,7 +501,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             methodTransformationDetails.add(detail);
         }
         ParameterMapping mapping = new ParameterMapping();
-        if (parameter.getGroupedBy() != null && type == ParameterTransformationType.GROUPING) {
+        if (parameter.getGroupedBy() != null) {
             mapping.setInputParameter(Mappers.getClientParameterMapper().map(parameter.getGroupedBy(), isProtocolMethod));
             ClientModel groupModel = Mappers.getModelMapper().map((ObjectSchema) parameter.getGroupedBy().getSchema());
             ClientModelProperty inputProperty = groupModel.getProperties().stream()
@@ -524,7 +511,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         } else {
             mapping.setInputParameter(clientMethodParameter);
         }
-        if (parameter.getOriginalParameter() != null && type == ParameterTransformationType.FLATTEN) {
+        if (parameter.getOriginalParameter() != null) {
             mapping.setOutputParameterProperty(Mappers.getModelPropertyMapper().map(parameter.getTargetProperty()));
             mapping.setOutputParameterPropertyName(parameter.getTargetProperty().getLanguage().getJava().getName());
         }
