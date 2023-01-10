@@ -15,6 +15,14 @@ public final class ModelAsStringRequiredOneValueNoDefaultEnum
     public static final ModelAsStringRequiredOneValueNoDefaultEnum VALUE1 = fromString("value1");
 
     /**
+     * Creates a new instance of ModelAsStringRequiredOneValueNoDefaultEnum value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public ModelAsStringRequiredOneValueNoDefaultEnum() {}
+
+    /**
      * Creates or finds a ModelAsStringRequiredOneValueNoDefaultEnum from its string representation.
      *
      * @param name a name to look for.

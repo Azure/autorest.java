@@ -44,6 +44,14 @@ public final class OperationResultStatus extends ExpandableStringEnum<OperationR
     public static final OperationResultStatus OK = fromString("OK");
 
     /**
+     * Creates a new instance of OperationResultStatus value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public OperationResultStatus() {}
+
+    /**
      * Creates or finds a OperationResultStatus from its string representation.
      *
      * @param name a name to look for.

@@ -18,6 +18,14 @@ public final class ModelAsStringRequiredTwoValueDefaultEnum
     public static final ModelAsStringRequiredTwoValueDefaultEnum VALUE2 = fromString("value2");
 
     /**
+     * Creates a new instance of ModelAsStringRequiredTwoValueDefaultEnum value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public ModelAsStringRequiredTwoValueDefaultEnum() {}
+
+    /**
      * Creates or finds a ModelAsStringRequiredTwoValueDefaultEnum from its string representation.
      *
      * @param name a name to look for.

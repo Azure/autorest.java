@@ -18,6 +18,14 @@ public final class ModelAsStringNoRequiredTwoValueDefaultEnum
     public static final ModelAsStringNoRequiredTwoValueDefaultEnum VALUE2 = fromString("value2");
 
     /**
+     * Creates a new instance of ModelAsStringNoRequiredTwoValueDefaultEnum value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public ModelAsStringNoRequiredTwoValueDefaultEnum() {}
+
+    /**
      * Creates or finds a ModelAsStringNoRequiredTwoValueDefaultEnum from its string representation.
      *
      * @param name a name to look for.

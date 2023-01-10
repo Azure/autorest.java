@@ -32,6 +32,14 @@ public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfW
     public static final DaysOfWeekExtensibleEnum SUNDAY = fromString("Sunday");
 
     /**
+     * Creates a new instance of DaysOfWeekExtensibleEnum value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public DaysOfWeekExtensibleEnum() {}
+
+    /**
      * Creates or finds a DaysOfWeekExtensibleEnum from its string representation.
      *
      * @param name a name to look for.

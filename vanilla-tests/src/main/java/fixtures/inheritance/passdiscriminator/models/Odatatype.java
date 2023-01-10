@@ -23,6 +23,14 @@ public final class Odatatype extends ExpandableStringEnum<Odatatype> {
             fromString("Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria");
 
     /**
+     * Creates a new instance of Odatatype value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public Odatatype() {}
+
+    /**
      * Creates or finds a Odatatype from its string representation.
      *
      * @param name a name to look for.

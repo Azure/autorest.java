@@ -20,6 +20,14 @@ public final class Enum0 extends ExpandableStringEnum<Enum0> {
     public static final Enum0 FOO3 = fromString("foo3");
 
     /**
+     * Creates a new instance of Enum0 value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public Enum0() {}
+
+    /**
      * Creates or finds a Enum0 from its string representation.
      *
      * @param name a name to look for.
