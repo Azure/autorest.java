@@ -62,6 +62,16 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     enumValue.getName(), pascalTypeName, elementType.defaultValueExpression(value)));
             }
 
+            // ctor, marked as Deprecated
+            classBlock.javadocComment(comment -> {
+                comment.description("Creates a new instance of " + enumName + " value.");
+                comment.deprecated(String.format("Use the {@link #fromString(%1$s)} factory method.", typeName));
+            });
+            classBlock.annotation("Deprecated");
+            classBlock.publicConstructor(enumName + "()", ctor -> {
+            });
+
+            // fromString(typeName)
             classBlock.javadocComment(comment -> {
                 comment.description("Creates or finds a " + enumName + " from its string representation.");
                 comment.param("name", "a name to look for");
@@ -78,6 +88,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     function.methodReturn("fromString(" + stringValue + ", " + enumName + ".class)");
                 });
 
+            // values()
             classBlock.javadocComment(comment -> {
                 comment.description("Gets known " + enumName + " values.");
                 comment.methodReturns("known " + enumName + " values");

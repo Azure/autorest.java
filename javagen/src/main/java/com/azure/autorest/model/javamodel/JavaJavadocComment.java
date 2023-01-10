@@ -65,4 +65,9 @@ public class JavaJavadocComment {
         addExpectedLineSeparator();
         contents.line("{@inheritDoc}");
     }
+
+    public final void deprecated(String description) {
+        addExpectedLineSeparator();
+        contents.line(String.format("@deprecated %1$s", description));
+    }
 }
