@@ -102,6 +102,6 @@ complete, and when results are uploaded.
   @doc("Cancels the processing of the fine-tune job specified by the given fine_tune_id.")
   @post
   @action("cancel")
-  @segmentSeparator("/")
+  @actionSeparator("/")
   CancelFineTune is ResourceAction<FineTune, {}, FineTune>;
 }
