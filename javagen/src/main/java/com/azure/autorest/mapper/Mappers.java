@@ -3,8 +3,6 @@
 
 package com.azure.autorest.mapper;
 
-import com.azure.autorest.model.clientmodel.ClientModel;
-
 public class Mappers {
 
     private static MapperFactory factory = new DefaultMapperFactory();

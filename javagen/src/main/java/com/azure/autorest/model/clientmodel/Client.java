@@ -276,7 +276,7 @@ public class Client {
             return this;
         }
 
-        public Builder unionModels(List<UnionModel> models) {
+        public Builder unionModels(List<UnionModel> unionModels) {
             this.unionModels = unionModels;
             return this;
         }

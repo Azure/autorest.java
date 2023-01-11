@@ -5,6 +5,7 @@ package com.azure.autorest.model.clientmodel;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class UnionModel {
 
@@ -41,7 +42,21 @@ public class UnionModel {
         this.implementationDetails = implementationDetails;
     }
 
-    public String getPackageName() {
+    public final String getFullName() {
+        return String.format("%1$s.%2$s", getPackage(), getName());
+    }
+
+    public void addImportsTo(Set<String> imports) {
+        imports.add(this.getFullName());
+
+        imports.addAll(getImports());
+
+        for (ClientModelProperty property : getProperties()) {
+            property.addImportsTo(imports, false);
+        }
+    }
+
+    public String getPackage() {
         return packageName;
     }
 
@@ -70,18 +85,8 @@ public class UnionModel {
         protected String name;
         protected List<String> imports = Collections.emptyList();
         protected String description;
-        protected boolean isPolymorphic;
-        protected String polymorphicDiscriminator;
-        protected String serializedName;
-        protected boolean needsFlatten = false;
-        protected String parentModelName;
         protected List<ClientModel> derivedModels = Collections.emptyList();
-        protected String xmlName;
         protected List<ClientModelProperty> properties;
-        protected String xmlNamespace;
-        protected List<ClientModelPropertyReference> propertyReferences;
-        protected IType modelType;
-        protected boolean stronglyTypedHeader;
         protected ImplementationDetails implementationDetails;
 
         /**

@@ -7,7 +7,6 @@ import com.azure.autorest.extension.base.model.codemodel.OrSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.UnionModel;
 import com.azure.autorest.model.clientmodel.UnionModels;
@@ -56,15 +55,15 @@ public class UnionModelMapper implements IMapper<OrSchema, UnionModel> {
             // properties
             List<ClientModelProperty> properties = new ArrayList<>();
             for (Property property : type.getAnyOf()) {
-                // import
-                IType propertyType = Mappers.getSchemaMapper().map(property.getSchema());
-                if (!property.isRequired()) {
-                    propertyType = propertyType.asNullable();
-                }
-                propertyType.addImportsTo(modelImports, false);
-
-                IType propertyClientType = Mappers.getSchemaMapper().map(property.getSchema()).getClientType();
-                propertyClientType.addImportsTo(modelImports, false);
+//                // import
+//                IType propertyType = Mappers.getSchemaMapper().map(property.getSchema());
+//                if (!property.isRequired()) {
+//                    propertyType = propertyType.asNullable();
+//                }
+//                propertyType.addImportsTo(modelImports, false);
+//
+//                IType propertyClientType = Mappers.getSchemaMapper().map(property.getSchema()).getClientType();
+//                propertyClientType.addImportsTo(modelImports, false);
 
                 // property
                 ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property);
