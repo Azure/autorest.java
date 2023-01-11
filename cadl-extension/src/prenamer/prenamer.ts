@@ -112,6 +112,11 @@ export class PreNamer {
       this.namingService.setName(schema, this.format.constant, `Constant${this.enum++}`, this.format.override);
     }
 
+    // ors
+    for (const schema of values(this.codeModel.schemas.ors)) {
+      this.namingService.setName(schema, this.format.type, `Union${this.enum++}`, this.format.override);
+    }
+
     // strings
     for (const schema of values(this.codeModel.schemas.strings)) {
       this.namingService.setName(schema, this.format.type, schema.type, this.format.override);

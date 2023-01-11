@@ -1,13 +1,6 @@
-import {
-  ChoiceValue,
-  PrimitiveSchema,
-  Schema,
-  SchemaType,
-  SchemaUsage,
-  StringSchema,
-  ValueSchema,
-} from "@autorest/codemodel";
+import { ChoiceValue, PrimitiveSchema, Schema, SchemaType, StringSchema, ValueSchema } from "@autorest/codemodel";
 import { DeepPartial } from "@azure-tools/codegen";
+import { SchemaUsage } from "./usage.js";
 
 /** a schema that represents a choice of several values (ie, an 'enum') */
 export interface ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema> extends ValueSchema, SchemaUsage {
