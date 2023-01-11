@@ -94,4 +94,8 @@ public class Mappers {
     public static BinaryMapper getBinaryMapper() {
         return factory.getBinaryMapper();
     }
+
+    public static UnionMapper getUnionMapper() {
+        return factory.getUnionMapper();
+    }
 }

@@ -10,7 +10,9 @@ import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.extension.base.model.codemodel.OrSchema;
 import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
+import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.model.clientmodel.IType;
@@ -65,6 +67,8 @@ public class SchemaMapper implements IMapper<Schema, IType> {
             return Mappers.getAnyMapper().map((AnySchema) value);
         } else if(value instanceof BinarySchema) {
             return Mappers.getBinaryMapper().map((BinarySchema) value);
+        } else if(value instanceof OrSchema) {
+            return Mappers.getUnionMapper().map((OrSchema) value);
         } else {
             throw new UnsupportedOperationException("Cannot find a mapper for schema type " + value.getClass()
                 + ". Key: " + value.get$key());
