@@ -45,6 +45,14 @@ interface CadlCoreOp {
 
   @doc("Lists the existing resources.")
   list is ResourceList<Resource>;
+
+  @doc("Creates a new resource with service provided name.")
+  createResource is ResourceCreateWithServiceProvidedName<
+    Resource,
+    {
+      response: Resource;
+    }
+  >;
 }
 
 @Azure.DPG.client({

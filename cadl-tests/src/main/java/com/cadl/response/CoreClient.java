@@ -16,7 +16,9 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.response.models.CustomResponseFields;
 import com.cadl.response.models.Resource;
+import com.cadl.response.models.ResourceCreateOrReplaceModelResource;
 
 /** Initializes a new instance of the synchronous CoreClient type. */
 @ServiceClient(builder = CoreClientBuilder.class)
@@ -147,6 +149,44 @@ public final class CoreClient {
     }
 
     /**
+     * Creates a new resource with service provided name.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param resourceCreateOrReplaceModel The template for adding updateable properties.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> createResourceWithResponse(
+            BinaryData resourceCreateOrReplaceModel, RequestOptions requestOptions) {
+        return this.client.createResourceWithResponse(resourceCreateOrReplaceModel, requestOptions).block();
+    }
+
+    /**
      * Creates a new resource or updates an existing one.
      *
      * @param name The name parameter.
@@ -223,5 +263,27 @@ public final class CoreClient {
     public PagedIterable<Resource> list() {
         // Generated convenience method for list
         return new PagedIterable<>(client.list());
+    }
+
+    /**
+     * Creates a new resource with service provided name.
+     *
+     * @param resourceCreateOrReplaceModel The template for adding updateable properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public CustomResponseFields createResource(ResourceCreateOrReplaceModelResource resourceCreateOrReplaceModel) {
+        // Generated convenience method for createResourceWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createResourceWithResponse(BinaryData.fromObject(resourceCreateOrReplaceModel), requestOptions)
+                .getValue()
+                .toObject(CustomResponseFields.class);
     }
 }
