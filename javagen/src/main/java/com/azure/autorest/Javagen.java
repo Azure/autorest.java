@@ -25,6 +25,7 @@ import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceVersion;
 import com.azure.autorest.model.clientmodel.TestContext;
+import com.azure.autorest.model.clientmodel.UnionModels;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.model.projectmodel.Project;
@@ -327,6 +328,7 @@ public class Javagen extends NewPlugin {
 
     private void clear() {
         ClientModels.getInstance().clear();
+        UnionModels.getInstance().clear();
         JavaSettings.clear();
     }
 

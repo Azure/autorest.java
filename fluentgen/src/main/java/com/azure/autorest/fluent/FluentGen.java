@@ -25,6 +25,7 @@ import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientModels;
+import com.azure.autorest.model.clientmodel.UnionModels;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
@@ -377,6 +378,7 @@ public class FluentGen extends Javagen {
 
         JavaSettings.clear();
         ClientModels.getInstance().clear();
+        UnionModels.getInstance().clear();
         fluentJavaSettings = null;
         fluentMapper = null;
         fluentPremiumExamples = null;

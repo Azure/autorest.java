@@ -61,6 +61,7 @@ public class Client {
     private final List<ClientBuilder> clientBuilders;
     private final List<ProtocolExample> protocolExamples;
     private final List<LiveTests> liveTests;
+    private final List<UnionModel> unionModels;
 
     /**
      * Create a new Client with the provided values.
@@ -86,7 +87,7 @@ public class Client {
                    ServiceClient serviceClient, List<ServiceClient> serviceClients, ModuleInfo moduleInfo,
                    List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
                    List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
-                   List<LiveTests> liveTests
+                   List<LiveTests> liveTests, List<UnionModel> unionModels
     ) {
         this.clientName = clientName;
         this.clientDescription = clientDescription;
@@ -105,6 +106,7 @@ public class Client {
         this.clientBuilders = clientBuilders;
         this.protocolExamples = protocolExamples;
         this.liveTests = liveTests;
+        this.unionModels = unionModels;
     }
 
     public final String getClientName() {
@@ -180,6 +182,10 @@ public class Client {
         return liveTests;
     }
 
+    public List<UnionModel> getUnionModels() {
+        return unionModels;
+    }
+
     public static class Builder {
         private String clientName;
         private String clientDescription;
@@ -198,6 +204,7 @@ public class Client {
         private List<ClientBuilder> clientBuilders = Collections.emptyList();
         private List<ProtocolExample> protocolExamples = Collections.emptyList();
         private List<LiveTests> liveTests = Collections.emptyList();
+        private List<UnionModel> unionModels = Collections.emptyList();
 
         /**
          * Sets the name of this service client.
@@ -266,6 +273,11 @@ public class Client {
          */
         public Builder models(List<ClientModel> models) {
             this.models = models;
+            return this;
+        }
+
+        public Builder unionModels(List<UnionModel> models) {
+            this.unionModels = unionModels;
             return this;
         }
 
@@ -384,7 +396,8 @@ public class Client {
                     asyncClients,
                     clientBuilders,
                     protocolExamples,
-                    liveTests
+                    liveTests,
+                    unionModels
                 );
         }
     }
