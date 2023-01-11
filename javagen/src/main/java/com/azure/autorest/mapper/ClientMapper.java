@@ -134,6 +134,14 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .filter(Objects::nonNull)
                 .distinct()
                 .collect(Collectors.toList());
+
+        clientModels.addAll(codeModel.getSchemas().getOrs().stream().distinct()
+                .map(schema -> Mappers.getUnionModelMapper().map(schema))
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.toList())
+        );
+
         builder.models(clientModels);
 
         // response model (subclass of Response with headers)

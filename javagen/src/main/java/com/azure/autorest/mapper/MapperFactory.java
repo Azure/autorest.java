@@ -48,4 +48,6 @@ public interface MapperFactory {
     BinaryMapper getBinaryMapper();
 
     UnionMapper getUnionMapper();
+
+    UnionModelMapper getUnionModelMapper();
 }

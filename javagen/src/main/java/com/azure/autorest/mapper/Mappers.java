@@ -3,6 +3,8 @@
 
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.model.clientmodel.ClientModel;
+
 public class Mappers {
 
     private static MapperFactory factory = new DefaultMapperFactory();
@@ -97,5 +99,9 @@ public class Mappers {
 
     public static UnionMapper getUnionMapper() {
         return factory.getUnionMapper();
+    }
+
+    public static UnionModelMapper getUnionModelMapper() {
+        return factory.getUnionModelMapper();
     }
 }

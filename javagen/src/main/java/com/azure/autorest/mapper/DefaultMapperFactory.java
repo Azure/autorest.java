@@ -113,4 +113,9 @@ public class DefaultMapperFactory implements MapperFactory {
     public UnionMapper getUnionMapper() {
         return UnionMapper.getInstance();
     }
+
+    @Override
+    public UnionModelMapper getUnionModelMapper() {
+        return UnionModelMapper.getInstance();
+    }
 }
