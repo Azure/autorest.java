@@ -85,4 +85,13 @@ interface ResponseOp {
     @header("operation-location")
     operationLocation: ResourceLocation<Resource>;
   };
+
+  // response with anonymous model
+  @doc("Creates a new resource with response as anonymous model.")
+  createResource is ResourceCreateWithServiceProvidedName<
+    Resource,
+    {
+      response: Resource
+    }
+  >;
 }
