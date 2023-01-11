@@ -156,7 +156,7 @@ public final class CoreAsyncClient {
     }
 
     /**
-     * Creates a new resource with response as anonymous model.
+     * Creates a new resource with service provided name.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -188,10 +188,9 @@ public final class CoreAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createWithAnonymousResponseModelWithResponse(
+    public Mono<Response<BinaryData>> createResourceWithResponse(
             BinaryData resourceCreateOrReplaceModel, RequestOptions requestOptions) {
-        return this.serviceClient.createWithAnonymousResponseModelWithResponseAsync(
-                resourceCreateOrReplaceModel, requestOptions);
+        return this.serviceClient.createResourceWithResponseAsync(resourceCreateOrReplaceModel, requestOptions);
     }
 
     /**
@@ -299,7 +298,7 @@ public final class CoreAsyncClient {
     }
 
     /**
-     * Creates a new resource with response as anonymous model.
+     * Creates a new resource with service provided name.
      *
      * @param resourceCreateOrReplaceModel The template for adding updateable properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -312,12 +311,11 @@ public final class CoreAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<CustomResponseFields> createWithAnonymousResponseModel(
+    public Mono<CustomResponseFields> createResource(
             ResourceCreateOrReplaceModelResource resourceCreateOrReplaceModel) {
-        // Generated convenience method for createWithAnonymousResponseModelWithResponse
+        // Generated convenience method for createResourceWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createWithAnonymousResponseModelWithResponse(
-                        BinaryData.fromObject(resourceCreateOrReplaceModel), requestOptions)
+        return createResourceWithResponse(BinaryData.fromObject(resourceCreateOrReplaceModel), requestOptions)
                 .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(CustomResponseFields.class));
     }

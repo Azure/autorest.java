@@ -242,7 +242,7 @@ public final class CoreClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createWithAnonymousResponseModel(
+        Mono<Response<BinaryData>> createResource(
                 @HostParam("endpoint") String endpoint,
                 @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
@@ -568,7 +568,7 @@ public final class CoreClientImpl {
     }
 
     /**
-     * Creates a new resource with response as anonymous model.
+     * Creates a new resource with service provided name.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -599,12 +599,12 @@ public final class CoreClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createWithAnonymousResponseModelWithResponseAsync(
+    public Mono<Response<BinaryData>> createResourceWithResponseAsync(
             BinaryData resourceCreateOrReplaceModel, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.createWithAnonymousResponseModel(
+                        service.createResource(
                                 this.getEndpoint(),
                                 this.getServiceVersion().getVersion(),
                                 accept,
@@ -614,7 +614,7 @@ public final class CoreClientImpl {
     }
 
     /**
-     * Creates a new resource with response as anonymous model.
+     * Creates a new resource with service provided name.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -645,9 +645,9 @@ public final class CoreClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createWithAnonymousResponseModelWithResponse(
+    public Response<BinaryData> createResourceWithResponse(
             BinaryData resourceCreateOrReplaceModel, RequestOptions requestOptions) {
-        return createWithAnonymousResponseModelWithResponseAsync(resourceCreateOrReplaceModel, requestOptions).block();
+        return createResourceWithResponseAsync(resourceCreateOrReplaceModel, requestOptions).block();
     }
 
     /**

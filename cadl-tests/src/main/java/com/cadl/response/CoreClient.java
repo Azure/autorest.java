@@ -149,7 +149,7 @@ public final class CoreClient {
     }
 
     /**
-     * Creates a new resource with response as anonymous model.
+     * Creates a new resource with service provided name.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -181,11 +181,9 @@ public final class CoreClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createWithAnonymousResponseModelWithResponse(
+    public Response<BinaryData> createResourceWithResponse(
             BinaryData resourceCreateOrReplaceModel, RequestOptions requestOptions) {
-        return this.client
-                .createWithAnonymousResponseModelWithResponse(resourceCreateOrReplaceModel, requestOptions)
-                .block();
+        return this.client.createResourceWithResponse(resourceCreateOrReplaceModel, requestOptions).block();
     }
 
     /**
@@ -268,7 +266,7 @@ public final class CoreClient {
     }
 
     /**
-     * Creates a new resource with response as anonymous model.
+     * Creates a new resource with service provided name.
      *
      * @param resourceCreateOrReplaceModel The template for adding updateable properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -281,12 +279,10 @@ public final class CoreClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public CustomResponseFields createWithAnonymousResponseModel(
-            ResourceCreateOrReplaceModelResource resourceCreateOrReplaceModel) {
-        // Generated convenience method for createWithAnonymousResponseModelWithResponse
+    public CustomResponseFields createResource(ResourceCreateOrReplaceModelResource resourceCreateOrReplaceModel) {
+        // Generated convenience method for createResourceWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createWithAnonymousResponseModelWithResponse(
-                        BinaryData.fromObject(resourceCreateOrReplaceModel), requestOptions)
+        return createResourceWithResponse(BinaryData.fromObject(resourceCreateOrReplaceModel), requestOptions)
                 .getValue()
                 .toObject(CustomResponseFields.class);
     }

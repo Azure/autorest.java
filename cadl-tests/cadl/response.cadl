@@ -46,9 +46,8 @@ interface CadlCoreOp {
   @doc("Lists the existing resources.")
   list is ResourceList<Resource>;
 
-  // response with anonymous model
-  @doc("Creates a new resource with response as anonymous model.")
-  createWithAnonymousResponseModel is ResourceCreateWithServiceProvidedName<
+  @doc("Creates a new resource with service provided name.")
+  createResource is ResourceCreateWithServiceProvidedName<
     Resource,
     {
       response: Resource
