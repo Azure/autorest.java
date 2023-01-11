@@ -50,7 +50,7 @@ interface CadlCoreOp {
   createResource is ResourceCreateWithServiceProvidedName<
     Resource,
     {
-      response: Resource
+      response: Resource;
     }
   >;
 }
