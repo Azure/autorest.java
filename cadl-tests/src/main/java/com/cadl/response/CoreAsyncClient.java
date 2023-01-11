@@ -20,7 +20,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.response.implementation.CoreClientImpl;
+import com.cadl.response.models.CustomResponseFields;
 import com.cadl.response.models.Resource;
+import com.cadl.response.models.ResourceCreateOrReplaceModelResource;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -154,6 +156,45 @@ public final class CoreAsyncClient {
     }
 
     /**
+     * Creates a new resource with response as anonymous model.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param resourceCreateOrReplaceModel The template for adding updateable properties.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> createWithAnonymousResponseModelWithResponse(
+            BinaryData resourceCreateOrReplaceModel, RequestOptions requestOptions) {
+        return this.serviceClient.createWithAnonymousResponseModelWithResponseAsync(
+                resourceCreateOrReplaceModel, requestOptions);
+    }
+
+    /**
      * Creates a new resource or updates an existing one.
      *
      * @param name The name parameter.
@@ -255,5 +296,29 @@ public final class CoreAsyncClient {
                                                     pagedResponse.getContinuationToken(),
                                                     null));
                         });
+    }
+
+    /**
+     * Creates a new resource with response as anonymous model.
+     *
+     * @param resourceCreateOrReplaceModel The template for adding updateable properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<CustomResponseFields> createWithAnonymousResponseModel(
+            ResourceCreateOrReplaceModelResource resourceCreateOrReplaceModel) {
+        // Generated convenience method for createWithAnonymousResponseModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createWithAnonymousResponseModelWithResponse(
+                        BinaryData.fromObject(resourceCreateOrReplaceModel), requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(CustomResponseFields.class));
     }
 }
