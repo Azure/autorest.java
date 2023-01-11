@@ -26,6 +26,14 @@ public final class FloatEnum extends ExpandableStringEnum<FloatEnum> {
     public static final FloatEnum FOUR_HUNDRED_TWENTY_NINE1 = fromFloat(429.1f);
 
     /**
+     * Creates a new instance of FloatEnum value.
+     *
+     * @deprecated Use the {@link #fromString(float)} factory method.
+     */
+    @Deprecated
+    public FloatEnum() {}
+
+    /**
      * Creates or finds a FloatEnum from its string representation.
      *
      * @param name a name to look for.

@@ -25,6 +25,14 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
     public static final GoblinSharkColor LOWER_RED = fromString("red");
 
     /**
+     * Creates a new instance of GoblinSharkColor value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public GoblinSharkColor() {}
+
+    /**
      * Creates or finds a GoblinSharkColor from its string representation.
      *
      * @param name a name to look for.

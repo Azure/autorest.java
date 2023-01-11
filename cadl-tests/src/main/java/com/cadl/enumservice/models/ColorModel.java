@@ -20,6 +20,14 @@ public final class ColorModel extends ExpandableStringEnum<ColorModel> {
     public static final ColorModel GREEN = fromString("Green");
 
     /**
+     * Creates a new instance of ColorModel value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public ColorModel() {}
+
+    /**
      * Creates or finds a ColorModel from its string representation.
      *
      * @param name a name to look for.

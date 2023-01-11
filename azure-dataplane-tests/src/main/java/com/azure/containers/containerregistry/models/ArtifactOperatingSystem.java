@@ -53,6 +53,14 @@ public final class ArtifactOperatingSystem extends ExpandableStringEnum<Artifact
     public static final ArtifactOperatingSystem WINDOWS = fromString("windows");
 
     /**
+     * Creates a new instance of ArtifactOperatingSystem value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public ArtifactOperatingSystem() {}
+
+    /**
      * Creates or finds a ArtifactOperatingSystem from its string representation.
      *
      * @param name a name to look for.

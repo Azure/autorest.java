@@ -18,6 +18,14 @@ public final class ModelAsStringRequiredTwoValueNoDefaultOpEnum
     public static final ModelAsStringRequiredTwoValueNoDefaultOpEnum VALUE2 = fromString("value2");
 
     /**
+     * Creates a new instance of ModelAsStringRequiredTwoValueNoDefaultOpEnum value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public ModelAsStringRequiredTwoValueNoDefaultOpEnum() {}
+
+    /**
      * Creates or finds a ModelAsStringRequiredTwoValueNoDefaultOpEnum from its string representation.
      *
      * @param name a name to look for.

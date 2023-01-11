@@ -20,6 +20,14 @@ public final class ArtifactTagOrder extends ExpandableStringEnum<ArtifactTagOrde
     public static final ArtifactTagOrder LAST_UPDATED_ON_ASCENDING = fromString("timeasc");
 
     /**
+     * Creates a new instance of ArtifactTagOrder value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public ArtifactTagOrder() {}
+
+    /**
      * Creates or finds a ArtifactTagOrder from its string representation.
      *
      * @param name a name to look for.

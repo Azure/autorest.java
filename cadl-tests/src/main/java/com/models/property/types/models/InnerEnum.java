@@ -17,6 +17,14 @@ public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
     public static final InnerEnum VALUE_TWO = fromString("ValueTwo");
 
     /**
+     * Creates a new instance of InnerEnum value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public InnerEnum() {}
+
+    /**
      * Creates or finds a InnerEnum from its string representation.
      *
      * @param name a name to look for.

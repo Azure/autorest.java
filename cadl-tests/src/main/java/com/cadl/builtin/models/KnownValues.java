@@ -17,6 +17,14 @@ public final class KnownValues extends ExpandableStringEnum<KnownValues> {
     public static final KnownValues VALUE2 = fromString("Value2");
 
     /**
+     * Creates a new instance of KnownValues value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public KnownValues() {}
+
+    /**
      * Creates or finds a KnownValues from its string representation.
      *
      * @param name a name to look for.

@@ -20,6 +20,14 @@ public final class PetFood extends ExpandableStringEnum<PetFood> {
     public static final PetFood PLANT = fromString("plant");
 
     /**
+     * Creates a new instance of PetFood value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public PetFood() {}
+
+    /**
      * Creates or finds a PetFood from its string representation.
      *
      * @param name a name to look for.

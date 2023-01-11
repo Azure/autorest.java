@@ -20,6 +20,14 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
     public static final IntEnum THREE = fromString("3");
 
     /**
+     * Creates a new instance of IntEnum value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public IntEnum() {}
+
+    /**
      * Creates or finds a IntEnum from its string representation.
      *
      * @param name a name to look for.

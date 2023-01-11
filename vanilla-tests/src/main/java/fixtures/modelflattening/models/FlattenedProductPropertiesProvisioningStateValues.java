@@ -45,6 +45,14 @@ public final class FlattenedProductPropertiesProvisioningStateValues
     public static final FlattenedProductPropertiesProvisioningStateValues OK = fromString("OK");
 
     /**
+     * Creates a new instance of FlattenedProductPropertiesProvisioningStateValues value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public FlattenedProductPropertiesProvisioningStateValues() {}
+
+    /**
      * Creates or finds a FlattenedProductPropertiesProvisioningStateValues from its string representation.
      *
      * @param name a name to look for.

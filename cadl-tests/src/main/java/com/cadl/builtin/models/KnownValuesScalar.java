@@ -17,6 +17,14 @@ public final class KnownValuesScalar extends ExpandableStringEnum<KnownValuesSca
     public static final KnownValuesScalar VALUE2 = fromString("Value2");
 
     /**
+     * Creates a new instance of KnownValuesScalar value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public KnownValuesScalar() {}
+
+    /**
      * Creates or finds a KnownValuesScalar from its string representation.
      *
      * @param name a name to look for.

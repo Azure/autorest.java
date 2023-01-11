@@ -14,6 +14,14 @@ public final class MyKind extends ExpandableStringEnum<MyKind> {
     public static final MyKind KIND1 = fromString("Kind1");
 
     /**
+     * Creates a new instance of MyKind value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public MyKind() {}
+
+    /**
      * Creates or finds a MyKind from its string representation.
      *
      * @param name a name to look for.

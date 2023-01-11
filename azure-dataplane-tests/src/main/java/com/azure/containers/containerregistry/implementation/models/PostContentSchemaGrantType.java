@@ -21,6 +21,14 @@ public final class PostContentSchemaGrantType extends ExpandableStringEnum<PostC
     public static final PostContentSchemaGrantType REFRESH_TOKEN = fromString("refresh_token");
 
     /**
+     * Creates a new instance of PostContentSchemaGrantType value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public PostContentSchemaGrantType() {}
+
+    /**
      * Creates or finds a PostContentSchemaGrantType from its string representation.
      *
      * @param name a name to look for.

@@ -15,6 +15,14 @@ public final class ModelAsStringRequiredOneValueNoDefaultOpEnum
     public static final ModelAsStringRequiredOneValueNoDefaultOpEnum VALUE1 = fromString("value1");
 
     /**
+     * Creates a new instance of ModelAsStringRequiredOneValueNoDefaultOpEnum value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public ModelAsStringRequiredOneValueNoDefaultOpEnum() {}
+
+    /**
      * Creates or finds a ModelAsStringRequiredOneValueNoDefaultOpEnum from its string representation.
      *
      * @param name a name to look for.

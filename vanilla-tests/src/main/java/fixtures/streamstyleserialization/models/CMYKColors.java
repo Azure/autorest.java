@@ -22,6 +22,14 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
     public static final CMYKColors BLACK = fromString("blacK");
 
     /**
+     * Creates a new instance of CMYKColors value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public CMYKColors() {}
+
+    /**
      * Creates or finds a CMYKColors from its string representation.
      *
      * @param name a name to look for.

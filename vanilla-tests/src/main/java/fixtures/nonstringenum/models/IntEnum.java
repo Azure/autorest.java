@@ -26,6 +26,14 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
     public static final IntEnum FOUR_HUNDRED_TWENTY_NINE = fromInt(429);
 
     /**
+     * Creates a new instance of IntEnum value.
+     *
+     * @deprecated Use the {@link #fromString(int)} factory method.
+     */
+    @Deprecated
+    public IntEnum() {}
+
+    /**
      * Creates or finds a IntEnum from its string representation.
      *
      * @param name a name to look for.

@@ -20,6 +20,14 @@ public final class ArtifactManifestOrder extends ExpandableStringEnum<ArtifactMa
     public static final ArtifactManifestOrder LAST_UPDATED_ON_ASCENDING = fromString("timeasc");
 
     /**
+     * Creates a new instance of ArtifactManifestOrder value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public ArtifactManifestOrder() {}
+
+    /**
      * Creates or finds a ArtifactManifestOrder from its string representation.
      *
      * @param name a name to look for.

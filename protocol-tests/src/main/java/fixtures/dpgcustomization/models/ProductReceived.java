@@ -17,6 +17,14 @@ public final class ProductReceived extends ExpandableStringEnum<ProductReceived>
     public static final ProductReceived MODEL = fromString("model");
 
     /**
+     * Creates a new instance of ProductReceived value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public ProductReceived() {}
+
+    /**
      * Creates or finds a ProductReceived from its string representation.
      *
      * @param name a name to look for.
