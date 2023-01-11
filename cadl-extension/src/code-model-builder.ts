@@ -703,7 +703,7 @@ export class CodeModelBuilder {
         }
         request.signatureParameters = request.parameters;
 
-        if (request.signatureParameters.length >= 5) {
+        if (request.signatureParameters.length > 6) {
           // create an option bag
           const name = op.language.default.name + "Options";
           const namespace = body.kind === "Model" ? getNamespace(body) : this.namespace;
