@@ -1588,6 +1588,21 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 } else {
                     // fallback to use response of this LRO as final type
                     finalType = SchemaUtil.getOperationResponseType(operation, settings);
+
+                    if (finalType == ClassType.Object) {
+                        // possible of multiple response types
+                        // fallback to use response of 200 as final type
+                        Schema schemaOf200StatusCode = operation.getResponses().stream()
+                                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null
+                                        && !CoreUtils.isNullOrEmpty(r.getProtocol().getHttp().getStatusCodes())
+                                        && r.getProtocol().getHttp().getStatusCodes().contains("200"))
+                                .findFirst()
+                                .map(Response::getSchema).filter(Objects::nonNull)
+                                .orElse(null);
+                        if (schemaOf200StatusCode != null) {
+                            finalType = Mappers.getSchemaMapper().map(schemaOf200StatusCode);
+                        }
+                    }
                 }
             }
 
