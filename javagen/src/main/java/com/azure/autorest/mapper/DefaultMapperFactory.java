@@ -108,4 +108,14 @@ public class DefaultMapperFactory implements MapperFactory {
     public BinaryMapper getBinaryMapper() {
         return BinaryMapper.getInstance();
     }
+
+    @Override
+    public UnionMapper getUnionMapper() {
+        return UnionMapper.getInstance();
+    }
+
+    @Override
+    public UnionModelMapper getUnionModelMapper() {
+        return UnionModelMapper.getInstance();
+    }
 }

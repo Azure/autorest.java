@@ -93,7 +93,7 @@ public class ClientModel {
      * @param derivedModels The models that derive from this model.
      * @param xmlName The name that will be used for this model's XML element representation.
      * @param properties The properties for this model.
-     * @param propertyReferences
+     * @param propertyReferences The property references for this model.
      * @param modelType the type of the model.
      * @param stronglyTypedHeader Whether this model is a strongly-typed HTTP headers class.
      */

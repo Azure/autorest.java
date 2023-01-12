@@ -66,6 +66,11 @@ public class CadlPlugin extends Javagen {
         client.getResponseModels().stream()
                 .filter(ModelUtil::isGeneratingModel)
                 .forEach(model -> javaPackage.addClientResponse(model.getPackage(), model.getName(), model));
+
+        // Union
+        client.getUnionModels().stream()
+                .filter(ModelUtil::isGeneratingModel)
+                .forEach(model -> javaPackage.addUnionModel(model));
     }
 
     @Override

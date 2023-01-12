@@ -108,6 +108,7 @@ import { Client as CodeModelClient } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
+import { OrSchema } from "./common/schemas/relationship.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
 
@@ -702,7 +703,7 @@ export class CodeModelBuilder {
         }
         request.signatureParameters = request.parameters;
 
-        if (request.signatureParameters.length >= 5) {
+        if (request.signatureParameters.length > 6) {
           // create an option bag
           const name = op.language.default.name + "Options";
           const namespace = body.kind === "Model" ? getNamespace(body) : this.namespace;
@@ -1411,27 +1412,63 @@ export class CodeModelBuilder {
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
 
-    const variantsMsg = nonNullVariants
-      .map((it) => {
-        if (
-          it.type.kind === "Model" ||
-          it.type.kind === "Scalar" ||
-          it.type.kind === "Intrinsic" ||
-          it.type.kind === "Enum"
-        ) {
-          return it.type.name;
-        } else {
-          return "";
-        }
-      })
-      .join(",");
-    this.logWarning(`Unsupported Union type: '${name}' for '${variantsMsg}'. Treated as Unknown.`);
-
-    return this.codeModel.schemas.add(
-      new AnySchema(this.getDoc(type), {
+    // TODO: name from cadl-dpg
+    const unionSchema = new OrSchema(name + "Model", this.getDoc(type), {
+      summary: this.getSummary(type),
+    });
+    unionSchema.anyOf = [];
+    nonNullVariants.forEach((it) => {
+      const variantName = this.getUnionVariantName(name, it.type, { depth: 0 });
+      const schema = this.processSchema(it.type, variantName);
+      const property = new Property(variantName, this.getDoc(type), schema, {
         summary: this.getSummary(type),
-      }),
-    );
+        required: false,
+        nullable: true,
+        readOnly: false,
+      });
+      unionSchema.anyOf.push(property);
+    });
+    return this.codeModel.schemas.add(unionSchema);
+  }
+
+  private getUnionVariantName(prefix: string, type: Type, option: any): string {
+    switch (type.kind) {
+      case "Scalar": {
+        const scalarName = type.name;
+        let name = type.name;
+        if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
+          name = scalarName === "safeint" || scalarName.includes("int64") ? "Long" : "Integer";
+        } else if (scalarName.startsWith("float")) {
+          name = "Double";
+        } else if (scalarName === "bytes") {
+          name = "ByteArray";
+        } else if (scalarName === "zonedDateTime") {
+          name = "Time";
+        }
+        return prefix + pascalCase(name);
+      }
+      case "Enum":
+        return prefix + pascalCase(type.name);
+      case "Model":
+        if (isArrayModelType(this.program, type)) {
+          ++option.depth;
+          if (option.depth == 1) {
+            return prefix + this.getUnionVariantName("", type.indexer.value, option) + "List";
+          } else {
+            return prefix + "ListOf" + this.getUnionVariantName("", type.indexer.value, option);
+          }
+        } else if (isRecordModelType(this.program, type)) {
+          ++option.depth;
+          if (option.depth == 1) {
+            return prefix + this.getUnionVariantName(prefix, type.indexer.value, option) + "Map";
+          } else {
+            return prefix + "MapOf" + this.getUnionVariantName("", type.indexer.value, option);
+          }
+        } else {
+          return prefix + pascalCase(type.name);
+        }
+    }
+    return prefix;
   }
 
   private isNullableType(type: Type): boolean {
@@ -1650,10 +1687,15 @@ export class CodeModelBuilder {
       schema instanceof ObjectSchema ||
       schema instanceof GroupSchema ||
       schema instanceof ChoiceSchema ||
-      schema instanceof SealedChoiceSchema
+      schema instanceof SealedChoiceSchema ||
+      schema instanceof OrSchema
     ) {
       if (schemaUsage.usage) {
         pushDistinct((schema.usage = schema.usage || []), ...schemaUsage.usage);
+      }
+
+      if (schema instanceof OrSchema) {
+        schema.anyOf.forEach((it) => this.trackSchemaUsage(it.schema, schemaUsage));
       }
     } else if (schema instanceof DictionarySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
@@ -1665,7 +1707,7 @@ export class CodeModelBuilder {
 
 /** Acts as a cache for processing inputs.
  *
- * If the input is undefined, the ouptut is always undefined.
+ * If the input is undefined, the output is always undefined.
  * for a given input, the process is only ever called once.
  *
  *
@@ -1761,6 +1803,14 @@ function operationContainsJsonMergePatch(op: HttpOperation): boolean {
     }
   }
   return false;
+}
+
+function pascalCase(name: string): string {
+  if (name.length > 0) {
+    return name[0].toUpperCase() + name.slice(1);
+  } else {
+    return name;
+  }
 }
 
 // function hasDecorator(type: DecoratedType, name: string): boolean {

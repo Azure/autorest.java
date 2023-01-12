@@ -20,6 +20,7 @@ import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceVersion;
 import com.azure.autorest.model.clientmodel.TestContext;
+import com.azure.autorest.model.clientmodel.UnionModel;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
@@ -179,6 +180,12 @@ public class JavaPackage {
     public final void addXmlSequenceWrapper(String packageKeyword, String name, XmlSequenceWrapper model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyword, name);
         Templates.getXmlSequenceWrapperTemplate().write(model, javaFile);
+        addJavaFile(javaFile);
+    }
+
+    public final void addUnionModel(UnionModel model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(model.getPackage(), model.getName());
+        Templates.getUnionModelTemplate().write(model, javaFile);
         addJavaFile(javaFile);
     }
 
