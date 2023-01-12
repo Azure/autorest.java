@@ -1418,7 +1418,7 @@ export class CodeModelBuilder {
     });
     unionSchema.anyOf = [];
     nonNullVariants.forEach((it) => {
-      const variantName = this.getUnionVariantName(name, it.type);
+      const variantName = this.getUnionVariantName(name, it.type, { depth: 0 });
       const schema = this.processSchema(it.type, variantName);
       const property = new Property(variantName, this.getDoc(type), schema, {
         summary: this.getSummary(type),
@@ -1431,17 +1431,35 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(unionSchema);
   }
 
-  private getUnionVariantName(prefix: string, type: Type): string {
+  private getUnionVariantName(prefix: string, type: Type, option: any): string {
     switch (type.kind) {
-      case "Scalar":
-        return prefix + pascalCase(type.name);
+      case "Scalar": {
+        const scalarName = type.name;
+        let name = type.name;
+        if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
+          name = scalarName === "safeint" || scalarName.includes("int64") ? "Long" : "Integer";
+        } else if (scalarName.startsWith("float")) {
+          name = "Double";
+        }
+        return prefix + pascalCase(name);
+      }
       case "Enum":
         return prefix + pascalCase(type.name);
       case "Model":
         if (isArrayModelType(this.program, type)) {
-          return this.getUnionVariantName(prefix, type.indexer.value) + "Array";
+          ++option.depth;
+          if (option.depth == 1) {
+            return prefix + this.getUnionVariantName("", type.indexer.value, option) + "List";
+          } else {
+            return prefix + "ListOf" + this.getUnionVariantName("", type.indexer.value, option);
+          }
         } else if (isRecordModelType(this.program, type)) {
-          return this.getUnionVariantName(prefix, type.indexer.value) + "Map";
+          ++option.depth;
+          if (option.depth == 1) {
+            return prefix + this.getUnionVariantName(prefix, type.indexer.value, option) + "Map";
+          } else {
+            return prefix + "MapOf" + this.getUnionVariantName("", type.indexer.value, option);
+          }
         } else {
           return prefix + pascalCase(type.name);
         }

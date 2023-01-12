@@ -11,11 +11,11 @@ import java.util.List;
 public final class InputModel {
     private String inputString;
 
-    private List<String> inputStringArray;
+    private List<String> inputStringList;
 
-    private List<Integer> inputIntegerArray;
+    private List<Integer> inputIntegerList;
 
-    private List<List<Integer>> inputIntegerArrayArray;
+    private List<List<Integer>> inputListOfIntegerList;
 
     /** Creates an instance of InputModel class. */
     public InputModel() {}
@@ -27,13 +27,13 @@ public final class InputModel {
             value = this.inputString;
         }
         if (value == null) {
-            value = this.inputStringArray;
+            value = this.inputStringList;
         }
         if (value == null) {
-            value = this.inputIntegerArray;
+            value = this.inputIntegerList;
         }
         if (value == null) {
-            value = this.inputIntegerArrayArray;
+            value = this.inputListOfIntegerList;
         }
         return value;
     }
@@ -63,8 +63,8 @@ public final class InputModel {
      *
      * @return the value if type is List&lt;String&gt;.
      */
-    public List<String> getInputStringArray() {
-        return this.inputStringArray;
+    public List<String> getInputStringList() {
+        return this.inputStringList;
     }
 
     /**
@@ -72,10 +72,10 @@ public final class InputModel {
      *
      * <p>Do not set more than one type to the value.
      *
-     * @param inputStringArray the value to set as List&lt;String&gt;.
+     * @param inputStringList the value to set as List&lt;String&gt;.
      */
-    public void setInputStringArray(List<String> inputStringArray) {
-        this.inputStringArray = inputStringArray;
+    public void setInputStringList(List<String> inputStringList) {
+        this.inputStringList = inputStringList;
     }
 
     /**
@@ -83,8 +83,8 @@ public final class InputModel {
      *
      * @return the value if type is List&lt;Integer&gt;.
      */
-    public List<Integer> getInputIntegerArray() {
-        return this.inputIntegerArray;
+    public List<Integer> getInputIntegerList() {
+        return this.inputIntegerList;
     }
 
     /**
@@ -92,10 +92,10 @@ public final class InputModel {
      *
      * <p>Do not set more than one type to the value.
      *
-     * @param inputIntegerArray the value to set as List&lt;Integer&gt;.
+     * @param inputIntegerList the value to set as List&lt;Integer&gt;.
      */
-    public void setInputIntegerArray(List<Integer> inputIntegerArray) {
-        this.inputIntegerArray = inputIntegerArray;
+    public void setInputIntegerList(List<Integer> inputIntegerList) {
+        this.inputIntegerList = inputIntegerList;
     }
 
     /**
@@ -103,8 +103,8 @@ public final class InputModel {
      *
      * @return the value if type is List&lt;List&lt;Integer&gt;&gt;.
      */
-    public List<List<Integer>> getInputIntegerArrayArray() {
-        return this.inputIntegerArrayArray;
+    public List<List<Integer>> getInputListOfIntegerList() {
+        return this.inputListOfIntegerList;
     }
 
     /**
@@ -112,9 +112,9 @@ public final class InputModel {
      *
      * <p>Do not set more than one type to the value.
      *
-     * @param inputIntegerArrayArray the value to set as List&lt;List&lt;Integer&gt;&gt;.
+     * @param inputListOfIntegerList the value to set as List&lt;List&lt;Integer&gt;&gt;.
      */
-    public void setInputIntegerArrayArray(List<List<Integer>> inputIntegerArrayArray) {
-        this.inputIntegerArrayArray = inputIntegerArrayArray;
+    public void setInputListOfIntegerList(List<List<Integer>> inputListOfIntegerList) {
+        this.inputListOfIntegerList = inputListOfIntegerList;
     }
 }
