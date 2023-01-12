@@ -50,8 +50,9 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
             classBlock.privateMethod("Object getValue()", methodBlock -> {
                 methodBlock.line("Object value = null;");
                 for (ClientModelProperty property : model.getProperties()) {
-                    methodBlock.ifBlock("value == null", ifBlock -> {
-                        methodBlock.line("value = this." + property.getName() + ";");
+                    String propertyExpression = "this." + property.getName();
+                    methodBlock.ifBlock(propertyExpression + " != null", ifBlock -> {
+                        methodBlock.line("value = " + property.getWireType().convertFromClientType(propertyExpression) + ";");
                     });
                 }
                 methodBlock.methodReturn("value");

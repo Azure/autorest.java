@@ -23,16 +23,16 @@ public final class InputModel {
     @JsonValue
     private Object getValue() {
         Object value = null;
-        if (value == null) {
+        if (this.inputString != null) {
             value = this.inputString;
         }
-        if (value == null) {
+        if (this.inputStringList != null) {
             value = this.inputStringList;
         }
-        if (value == null) {
+        if (this.inputIntegerList != null) {
             value = this.inputIntegerList;
         }
-        if (value == null) {
+        if (this.inputListOfIntegerList != null) {
             value = this.inputListOfIntegerList;
         }
         return value;

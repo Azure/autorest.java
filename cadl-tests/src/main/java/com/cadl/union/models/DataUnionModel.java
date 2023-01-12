@@ -5,6 +5,7 @@
 package com.cadl.union.models;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.time.OffsetDateTime;
 
 /** The DataUnionModel model. */
 public final class DataUnionModel {
@@ -12,17 +13,27 @@ public final class DataUnionModel {
 
     private ArrayData dataUnionArrayData;
 
+    private byte[] dataUnionByteArray;
+
+    private OffsetDateTime dataUnionTime;
+
     /** Creates an instance of DataUnionModel class. */
     public DataUnionModel() {}
 
     @JsonValue
     private Object getValue() {
         Object value = null;
-        if (value == null) {
+        if (this.dataUnionString != null) {
             value = this.dataUnionString;
         }
-        if (value == null) {
+        if (this.dataUnionArrayData != null) {
             value = this.dataUnionArrayData;
+        }
+        if (this.dataUnionByteArray != null) {
+            value = this.dataUnionByteArray;
+        }
+        if (this.dataUnionTime != null) {
+            value = this.dataUnionTime;
         }
         return value;
     }
@@ -65,5 +76,45 @@ public final class DataUnionModel {
      */
     public void setDataUnionArrayData(ArrayData dataUnionArrayData) {
         this.dataUnionArrayData = dataUnionArrayData;
+    }
+
+    /**
+     * Get the value if type is byte[].
+     *
+     * @return the value if type is byte[].
+     */
+    public byte[] getDataUnionByteArray() {
+        return this.dataUnionByteArray;
+    }
+
+    /**
+     * Set the value as byte[]
+     *
+     * <p>Do not set more than one type to the value.
+     *
+     * @param dataUnionByteArray the value to set as byte[].
+     */
+    public void setDataUnionByteArray(byte[] dataUnionByteArray) {
+        this.dataUnionByteArray = dataUnionByteArray;
+    }
+
+    /**
+     * Get the value if type is OffsetDateTime.
+     *
+     * @return the value if type is OffsetDateTime.
+     */
+    public OffsetDateTime getDataUnionTime() {
+        return this.dataUnionTime;
+    }
+
+    /**
+     * Set the value as OffsetDateTime
+     *
+     * <p>Do not set more than one type to the value.
+     *
+     * @param dataUnionTime the value to set as OffsetDateTime.
+     */
+    public void setDataUnionTime(OffsetDateTime dataUnionTime) {
+        this.dataUnionTime = dataUnionTime;
     }
 }

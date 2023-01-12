@@ -1440,6 +1440,10 @@ export class CodeModelBuilder {
           name = scalarName === "safeint" || scalarName.includes("int64") ? "Long" : "Integer";
         } else if (scalarName.startsWith("float")) {
           name = "Double";
+        } else if (scalarName === "bytes") {
+          name = "ByteArray";
+        } else if (scalarName === "zonedDateTime") {
+          name = "Time";
         }
         return prefix + pascalCase(name);
       }

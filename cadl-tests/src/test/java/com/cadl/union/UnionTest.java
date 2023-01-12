@@ -10,6 +10,9 @@ import com.cadl.union.models.SendLongOptions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.nio.charset.StandardCharsets;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +36,22 @@ public class UnionTest {
         request = createRequest(options);
 
         Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"dataUnion\":{\"data\":[\"item1\"]}}", request.toString());
+
+        dataUnion = new DataUnionModel();
+        dataUnion.setDataUnionByteArray("data".getBytes(StandardCharsets.UTF_8));
+        options = new SendLongOptions("id", "input", 1)
+                .setDataUnion(dataUnion);
+        request = createRequest(options);
+
+        Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"dataUnion\":\"ZGF0YQ==\"}", request.toString());
+
+        dataUnion = new DataUnionModel();
+        dataUnion.setDataUnionTime(OffsetDateTime.of(2020, 1, 1, 4, 30, 10, 0, ZoneOffset.UTC));
+        options = new SendLongOptions("id", "input", 1)
+                .setDataUnion(dataUnion);
+        request = createRequest(options);
+
+        Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"dataUnion\":\"2020-01-01T04:30:10Z\"}", request.toString());
     }
 
     private static BinaryData createRequest(SendLongOptions options) {
