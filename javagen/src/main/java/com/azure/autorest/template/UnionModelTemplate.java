@@ -6,6 +6,7 @@ package com.azure.autorest.template;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.UnionModel;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +27,8 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
         Set<String> imports = new HashSet<>();
         model.addImportsTo(imports);
 
+        imports.add(JsonValue.class.getName());
+
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(comment -> comment.description(model.getDescription()));
@@ -39,6 +42,18 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
             classBlock.javadocComment(comment ->
                     comment.description("Creates an instance of " + model.getName() + " class."));
             classBlock.publicConstructor(model.getName() + "()", ctor -> {
+            });
+
+            // getValue
+            classBlock.annotation("JsonValue");
+            classBlock.privateMethod("Object getValue()", methodBlock -> {
+                methodBlock.line("Object value = null;");
+                for (ClientModelProperty property : model.getProperties()) {
+                    methodBlock.ifBlock("value == null", ifBlock -> {
+                        methodBlock.line("value = this." + property.getName() + ";");
+                    });
+                }
+                methodBlock.methodReturn("value");
             });
 
             // getter/setters
