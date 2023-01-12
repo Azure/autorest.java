@@ -73,7 +73,7 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
 
                 // setter
                 classBlock.javadocComment(comment -> {
-                    comment.description(String.format("Set the value as %s", clientType));
+                    comment.description(String.format("Set the value as %s\n\nDo not set more than one type to the value.", clientType));
                     comment.param(property.getName(), String.format("the value to set as %s", clientType));
                 });
                 classBlock.publicMethod(String.format("void %1$s(%2$s %3$s)", property.getSetterName(), property.getClientType(), propertyName), methodBlock -> {

@@ -37,7 +37,9 @@ public final class DataUnionModel {
     }
 
     /**
-     * Set the value as String.
+     * Set the value as String
+     *
+     * <p>Do not set more than one type to the value.
      *
      * @param dataUnionString the value to set as String.
      */
@@ -55,7 +57,9 @@ public final class DataUnionModel {
     }
 
     /**
-     * Set the value as ArrayData.
+     * Set the value as ArrayData
+     *
+     * <p>Do not set more than one type to the value.
      *
      * @param dataUnionArrayData the value to set as ArrayData.
      */

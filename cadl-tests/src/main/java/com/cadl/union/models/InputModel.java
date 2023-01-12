@@ -48,7 +48,9 @@ public final class InputModel {
     }
 
     /**
-     * Set the value as String.
+     * Set the value as String
+     *
+     * <p>Do not set more than one type to the value.
      *
      * @param inputString the value to set as String.
      */
@@ -66,7 +68,9 @@ public final class InputModel {
     }
 
     /**
-     * Set the value as List&lt;String&gt;.
+     * Set the value as List&lt;String&gt;
+     *
+     * <p>Do not set more than one type to the value.
      *
      * @param inputStringArray the value to set as List&lt;String&gt;.
      */
@@ -84,7 +88,9 @@ public final class InputModel {
     }
 
     /**
-     * Set the value as List&lt;Integer&gt;.
+     * Set the value as List&lt;Integer&gt;
+     *
+     * <p>Do not set more than one type to the value.
      *
      * @param inputIntegerArray the value to set as List&lt;Integer&gt;.
      */
@@ -102,7 +108,9 @@ public final class InputModel {
     }
 
     /**
-     * Set the value as List&lt;List&lt;Integer&gt;&gt;.
+     * Set the value as List&lt;List&lt;Integer&gt;&gt;
+     *
+     * <p>Do not set more than one type to the value.
      *
      * @param inputIntegerArrayArray the value to set as List&lt;List&lt;Integer&gt;&gt;.
      */
