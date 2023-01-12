@@ -4,6 +4,7 @@
 
 package com.cadl.union.models;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.List;
 
 /** The InputModel model. */
@@ -19,73 +20,91 @@ public final class InputModel {
     /** Creates an instance of InputModel class. */
     public InputModel() {}
 
+    @JsonValue
+    private Object getValue() {
+        Object value = null;
+        if (value == null) {
+            value = this.inputString;
+        }
+        if (value == null) {
+            value = this.inputStringArray;
+        }
+        if (value == null) {
+            value = this.inputIntegerArray;
+        }
+        if (value == null) {
+            value = this.inputIntegerArrayArray;
+        }
+        return value;
+    }
+
     /**
-     * Get the inputString property: The inputString property.
+     * Get the value if type is String.
      *
-     * @return the inputString value.
+     * @return the value if type is String.
      */
     public String getInputString() {
         return this.inputString;
     }
 
     /**
-     * Set the inputString property: The inputString property.
+     * Set the value as String.
      *
-     * @param inputString the inputString value to set.
+     * @param inputString the value to set as String.
      */
     public void setInputString(String inputString) {
         this.inputString = inputString;
     }
 
     /**
-     * Get the inputStringArray property: The inputStringArray property.
+     * Get the value if type is List&lt;String&gt;.
      *
-     * @return the inputStringArray value.
+     * @return the value if type is List&lt;String&gt;.
      */
     public List<String> getInputStringArray() {
         return this.inputStringArray;
     }
 
     /**
-     * Set the inputStringArray property: The inputStringArray property.
+     * Set the value as List&lt;String&gt;.
      *
-     * @param inputStringArray the inputStringArray value to set.
+     * @param inputStringArray the value to set as List&lt;String&gt;.
      */
     public void setInputStringArray(List<String> inputStringArray) {
         this.inputStringArray = inputStringArray;
     }
 
     /**
-     * Get the inputIntegerArray property: The inputIntegerArray property.
+     * Get the value if type is List&lt;Integer&gt;.
      *
-     * @return the inputIntegerArray value.
+     * @return the value if type is List&lt;Integer&gt;.
      */
     public List<Integer> getInputIntegerArray() {
         return this.inputIntegerArray;
     }
 
     /**
-     * Set the inputIntegerArray property: The inputIntegerArray property.
+     * Set the value as List&lt;Integer&gt;.
      *
-     * @param inputIntegerArray the inputIntegerArray value to set.
+     * @param inputIntegerArray the value to set as List&lt;Integer&gt;.
      */
     public void setInputIntegerArray(List<Integer> inputIntegerArray) {
         this.inputIntegerArray = inputIntegerArray;
     }
 
     /**
-     * Get the inputIntegerArrayArray property: The inputIntegerArrayArray property.
+     * Get the value if type is List&lt;List&lt;Integer&gt;&gt;.
      *
-     * @return the inputIntegerArrayArray value.
+     * @return the value if type is List&lt;List&lt;Integer&gt;&gt;.
      */
     public List<List<Integer>> getInputIntegerArrayArray() {
         return this.inputIntegerArrayArray;
     }
 
     /**
-     * Set the inputIntegerArrayArray property: The inputIntegerArrayArray property.
+     * Set the value as List&lt;List&lt;Integer&gt;&gt;.
      *
-     * @param inputIntegerArrayArray the inputIntegerArrayArray value to set.
+     * @param inputIntegerArrayArray the value to set as List&lt;List&lt;Integer&gt;&gt;.
      */
     public void setInputIntegerArrayArray(List<List<Integer>> inputIntegerArrayArray) {
         this.inputIntegerArrayArray = inputIntegerArrayArray;

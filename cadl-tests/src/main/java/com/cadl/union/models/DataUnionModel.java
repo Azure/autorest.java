@@ -4,6 +4,8 @@
 
 package com.cadl.union.models;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /** The DataUnionModel model. */
 public final class DataUnionModel {
     private String dataUnionString;
@@ -13,37 +15,49 @@ public final class DataUnionModel {
     /** Creates an instance of DataUnionModel class. */
     public DataUnionModel() {}
 
+    @JsonValue
+    private Object getValue() {
+        Object value = null;
+        if (value == null) {
+            value = this.dataUnionString;
+        }
+        if (value == null) {
+            value = this.dataUnionArrayData;
+        }
+        return value;
+    }
+
     /**
-     * Get the dataUnionString property: The dataUnionString property.
+     * Get the value if type is String.
      *
-     * @return the dataUnionString value.
+     * @return the value if type is String.
      */
     public String getDataUnionString() {
         return this.dataUnionString;
     }
 
     /**
-     * Set the dataUnionString property: The dataUnionString property.
+     * Set the value as String.
      *
-     * @param dataUnionString the dataUnionString value to set.
+     * @param dataUnionString the value to set as String.
      */
     public void setDataUnionString(String dataUnionString) {
         this.dataUnionString = dataUnionString;
     }
 
     /**
-     * Get the dataUnionArrayData property: The dataUnionArrayData property.
+     * Get the value if type is ArrayData.
      *
-     * @return the dataUnionArrayData value.
+     * @return the value if type is ArrayData.
      */
     public ArrayData getDataUnionArrayData() {
         return this.dataUnionArrayData;
     }
 
     /**
-     * Set the dataUnionArrayData property: The dataUnionArrayData property.
+     * Set the value as ArrayData.
      *
-     * @param dataUnionArrayData the dataUnionArrayData value to set.
+     * @param dataUnionArrayData the value to set as ArrayData.
      */
     public void setDataUnionArrayData(ArrayData dataUnionArrayData) {
         this.dataUnionArrayData = dataUnionArrayData;

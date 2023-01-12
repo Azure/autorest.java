@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.UnionModel;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -58,22 +59,25 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
 
             // getter/setters
             for (ClientModelProperty property : model.getProperties()) {
+                String propertyName = property.getName();
+                IType clientType = property.getClientType();
+
                 // getter
                 classBlock.javadocComment(comment -> {
-                    comment.description(String.format("Get the %1$s property: %2$s", property.getName(), property.getDescription()));
-                    comment.methodReturns(String.format("the %1$s value", property.getName()));
+                    comment.description(String.format("Get the value if type is %s", clientType));
+                    comment.methodReturns(String.format("the value if type is %s", clientType));
                 });
                 classBlock.publicMethod(property.getClientType() + " " + property.getGetterName() + "()", methodBlock -> {
-                    methodBlock.methodReturn("this." + property.getName());
+                    methodBlock.methodReturn("this." + propertyName);
                 });
 
                 // setter
                 classBlock.javadocComment(comment -> {
-                    comment.description(String.format("Set the %s property: %s", property.getName(), property.getDescription()));
-                    comment.param(property.getName(), String.format("the %s value to set", property.getName()));
+                    comment.description(String.format("Set the value as %s", clientType));
+                    comment.param(property.getName(), String.format("the value to set as %s", clientType));
                 });
-                classBlock.publicMethod(String.format("void %1$s(%2$s %3$s)", property.getSetterName(), property.getClientType(), property.getName()), methodBlock -> {
-                    methodBlock.line(String.format("this.%1$s = %1$s;", property.getName()));
+                classBlock.publicMethod(String.format("void %1$s(%2$s %3$s)", property.getSetterName(), property.getClientType(), propertyName), methodBlock -> {
+                    methodBlock.line(String.format("this.%1$s = %1$s;", propertyName));
                 });
             }
         });
