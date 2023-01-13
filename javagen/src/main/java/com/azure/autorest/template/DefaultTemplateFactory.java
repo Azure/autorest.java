@@ -123,4 +123,9 @@ public class DefaultTemplateFactory implements TemplateFactory {
     public ConvenienceSyncMethodTemplate getConvenienceSyncMethodTemplate() {
         return ConvenienceSyncMethodTemplate.getInstance();
     }
+
+    @Override
+    public UnionModelTemplate getUnionModelTemplate() {
+        return UnionModelTemplate.getInstance();
+    }
 }

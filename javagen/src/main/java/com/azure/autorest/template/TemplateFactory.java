@@ -52,4 +52,6 @@ public interface TemplateFactory {
     ConvenienceAsyncMethodTemplate getConvenienceAsyncMethodTemplate();
 
     ConvenienceSyncMethodTemplate getConvenienceSyncMethodTemplate();
+
+    UnionModelTemplate getUnionModelTemplate();
 }

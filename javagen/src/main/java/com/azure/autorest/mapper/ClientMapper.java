@@ -136,6 +136,13 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .collect(Collectors.toList());
         builder.models(clientModels);
 
+        // union model (class)
+        builder.unionModels(codeModel.getSchemas().getOrs().stream().distinct()
+                .map(schema -> Mappers.getUnionModelMapper().map(schema))
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.toList()));
+
         // response model (subclass of Response with headers)
         final List<ClientResponse> responseModels = codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())

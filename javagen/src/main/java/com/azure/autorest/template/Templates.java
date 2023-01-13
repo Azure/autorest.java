@@ -109,4 +109,8 @@ public class Templates {
     public static ConvenienceSyncMethodTemplate getConvenienceSyncMethodTemplate() {
         return factory.getConvenienceSyncMethodTemplate();
     }
+
+    public static UnionModelTemplate getUnionModelTemplate() {
+        return factory.getUnionModelTemplate();
+    }
 }

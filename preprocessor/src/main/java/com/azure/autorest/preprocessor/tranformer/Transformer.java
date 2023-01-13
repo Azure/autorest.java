@@ -16,6 +16,7 @@ import com.azure.autorest.extension.base.model.codemodel.NumberSchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
+import com.azure.autorest.extension.base.model.codemodel.OrSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Protocol;
@@ -79,6 +80,12 @@ public class Transformer {
     }
     for (DictionarySchema dictionarySchema : schemas.getDictionaries()) {
       renameType(dictionarySchema);
+    }
+    for (OrSchema unionSchema : schemas.getOrs()) {
+      renameType(unionSchema);
+      for (Property property : unionSchema.getAnyOf()) {
+        renameProperty(property);
+      }
     }
   }
 

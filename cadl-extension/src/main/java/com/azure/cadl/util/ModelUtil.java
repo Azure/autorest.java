@@ -9,6 +9,7 @@ import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
+import com.azure.autorest.model.clientmodel.UnionModel;
 import com.azure.autorest.util.ClientModelUtil;
 
 public class ModelUtil {
@@ -37,6 +38,13 @@ public class ModelUtil {
             }
         }
         return ret;
+    }
+
+    public static boolean isGeneratingModel(UnionModel model) {
+        return model.getImplementationDetails() != null
+                && model.getImplementationDetails().isConvenienceMethod()
+                && !(isModelUsedOnlyInException(model.getImplementationDetails()))
+                && !(isAnonymousModel(model.getImplementationDetails()));
     }
 
     private static boolean isModelUsedOnlyInException(ImplementationDetails implementationDetails) {
