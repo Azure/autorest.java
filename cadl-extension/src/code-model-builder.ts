@@ -56,11 +56,12 @@ import {
 import { getVersion } from "@cadl-lang/versioning";
 import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/cadl-azure-core";
 import {
-  getConvenienceAPIName,
+  DpgContext,
   getDefaultApiVersion,
   listClients,
   listOperationGroups,
   listOperationsInOperationGroup,
+  shouldGenerateConvenient,
 } from "@azure-tools/cadl-dpg";
 import { fail } from "assert";
 import {
@@ -119,6 +120,7 @@ export class CodeModelBuilder {
   private baseUri: string;
   private hostParameters: Parameter[];
   private namespace: string;
+  private dpgContext: DpgContext;
 
   private options: EmitterOptions;
 
@@ -132,6 +134,8 @@ export class CodeModelBuilder {
   public constructor(program1: Program, options: EmitterOptions) {
     this.options = options;
     this.program = program1;
+    this.dpgContext = { program: this.program, generateProtocolMethods: true, generateConvenienceMethods: true };
+
 
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
@@ -1553,7 +1557,14 @@ export class CodeModelBuilder {
 
   private getConvenienceApiName(op: Operation): string | undefined {
     // check @convenienceMethod
-    return getConvenienceAPIName(this.program, op);
+    if (
+      shouldGenerateConvenient(
+        this.dpgContext,
+        op
+      )
+    ) {
+      return op.name;
+    }
   }
 
   private logWarning(msg: string) {

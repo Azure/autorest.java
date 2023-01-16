@@ -25,6 +25,6 @@ model Resource {
 
 @route("/paged")
 interface PagedOp {
-  @convenienceAPI("ListCONVENIENCE")
+  @convenientAPI("ListCONVENIENCE")
   list is ResourceList<Resource>;
 }
