@@ -6,6 +6,7 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.OrSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
@@ -15,7 +16,9 @@ import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class UnionModelMapper implements IMapper<OrSchema, List<UnionModel>> {
 
@@ -44,14 +47,7 @@ public class UnionModelMapper implements IMapper<OrSchema, List<UnionModel>> {
                     .implementationDetails(new ImplementationDetails.Builder()
                             .usages(SchemaUtil.mapSchemaContext(type.getUsage()))
                             .build());
-
-            String summary = type.getSummary();
-            String description = type.getLanguage().getJava() == null ? null : type.getLanguage().getJava().getDescription();
-            if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
-                builder.description(String.format("The %s model.", type.getLanguage().getJava().getName()));
-            } else {
-                builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
-            }
+            processDescription(builder, type);
 
             models.add(builder.build());
 
@@ -60,6 +56,12 @@ public class UnionModelMapper implements IMapper<OrSchema, List<UnionModel>> {
                 String name = subtype.getLanguage().getJava().getName();
                 builder.name(name)
                         .parentModelName(baseModelName);
+                processDescription(builder, subtype);
+
+                // import
+                Set<String> imports = new HashSet<>();
+                imports.add(baseModelType.getFullName());
+                builder.imports(new ArrayList<>(imports));
 
                 // property
                 List<ClientModelProperty> properties = new ArrayList<>();
@@ -75,5 +77,15 @@ public class UnionModelMapper implements IMapper<OrSchema, List<UnionModel>> {
             serviceModels.addModel(models);
         }
         return models;
+    }
+
+    private static void processDescription(UnionModel.Builder builder, Schema type) {
+        String summary = type.getSummary();
+        String description = type.getLanguage().getJava() == null ? null : type.getLanguage().getJava().getDescription();
+        if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
+            builder.description(String.format("The %s model.", type.getLanguage().getJava().getName()));
+        } else {
+            builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
+        }
     }
 }

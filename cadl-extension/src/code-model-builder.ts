@@ -1688,6 +1688,8 @@ export class CodeModelBuilder {
         innerApplySchemaUsage(schema.elementType, schemaUsage);
       } else if (schema instanceof ArraySchema) {
         innerApplySchemaUsage(schema.elementType, schemaUsage);
+      } else if (schema instanceof OrSchema) {
+        schema.anyOf?.forEach((it) => innerApplySchemaUsage(it, schemaUsage));
       }
     };
 
@@ -1712,10 +1714,6 @@ export class CodeModelBuilder {
     ) {
       if (schemaUsage.usage) {
         pushDistinct((schema.usage = schema.usage || []), ...schemaUsage.usage);
-      }
-
-      if (schema instanceof OrSchema) {
-        schema.anyOf.forEach((it) => this.trackSchemaUsage(it, schemaUsage));
       }
     } else if (schema instanceof DictionarySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
