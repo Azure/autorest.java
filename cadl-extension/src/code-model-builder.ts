@@ -1289,7 +1289,8 @@ export class CodeModelBuilder {
     for (const prop of type.properties.values()) {
       if (
         prop.name === discriminatorPropertyName || // skip the discriminator property
-        isNeverType(prop.type) // skip property of type "never"
+        isNeverType(prop.type) || // skip property of type "never"
+        !isPayloadProperty(this.program, prop)
       ) {
         continue;
       }
@@ -1304,13 +1305,8 @@ export class CodeModelBuilder {
 
   private getEffectiveSchemaType(type: Type): Type {
     const program = this.program;
-
     function isSchemaProperty(property: ModelProperty) {
-      const headerInfo = getHeaderFieldName(program, property);
-      const queryInfo = getQueryParamName(program, property);
-      const pathInfo = getPathParamName(program, property);
-      const statusCodeInfo = isStatusCode(program, property);
-      return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
+      return isPayloadProperty(program, property);
     }
 
     if (type.kind === "Model") {
@@ -1831,6 +1827,10 @@ function pascalCase(name: string): string {
   }
 }
 
-// function hasDecorator(type: DecoratedType, name: string): boolean {
-//   return type.decorators.find((it) => it.decorator.name === name) !== undefined;
-// }
+function isPayloadProperty(program: Program, property: ModelProperty) {
+  const headerInfo = getHeaderFieldName(program, property);
+  const queryInfo = getQueryParamName(program, property);
+  const pathInfo = getPathParamName(program, property);
+  const statusCodeInfo = isStatusCode(program, property);
+  return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
+}
