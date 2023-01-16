@@ -83,8 +83,13 @@ public class Transformer {
     }
     for (OrSchema unionSchema : schemas.getOrs()) {
       renameType(unionSchema);
-      for (Property property : unionSchema.getAnyOf()) {
-        renameProperty(property);
+
+      // these ObjectSchema is not added to codeModel.schemas
+      for (ObjectSchema objectSchema : unionSchema.getAnyOf()) {
+        renameType(objectSchema);
+        for (Property property : objectSchema.getProperties()) {
+          renameProperty(property);
+        }
       }
     }
   }

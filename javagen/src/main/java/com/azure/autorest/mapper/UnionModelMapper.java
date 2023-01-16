@@ -3,6 +3,7 @@
 
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.OrSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -14,10 +15,9 @@ import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
-public class UnionModelMapper implements IMapper<OrSchema, UnionModel> {
+public class UnionModelMapper implements IMapper<OrSchema, List<UnionModel>> {
 
     private static final UnionModelMapper INSTANCE = new UnionModelMapper();
     private final UnionModels serviceModels = UnionModels.getInstance();
@@ -30,14 +30,17 @@ public class UnionModelMapper implements IMapper<OrSchema, UnionModel> {
     }
 
     @Override
-    public UnionModel map(OrSchema type) {
-        ClassType modelType = Mappers.getUnionMapper().map(type);
-        String modelName = modelType.getName();
-        UnionModel model = serviceModels.getModel(modelType.getName());
-        if (model == null) {
+    public List<UnionModel> map(OrSchema type) {
+        ClassType baseModelType = Mappers.getUnionMapper().map(type);
+        String baseModelName = baseModelType.getName();
+        List<UnionModel> models = serviceModels.getModel(baseModelType.getName());
+        if (models == null) {
+            models = new ArrayList<>();
+
+            // superclass
             UnionModel.Builder builder = new UnionModel.Builder()
-                    .name(modelName)
-                    .packageName(modelType.getPackage())
+                    .name(baseModelName)
+                    .packageName(baseModelType.getPackage())
                     .implementationDetails(new ImplementationDetails.Builder()
                             .usages(SchemaUtil.mapSchemaContext(type.getUsage()))
                             .build());
@@ -50,33 +53,27 @@ public class UnionModelMapper implements IMapper<OrSchema, UnionModel> {
                 builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
             }
 
-            HashSet<String> modelImports = new HashSet<>();
+            models.add(builder.build());
 
-            // properties
-            List<ClientModelProperty> properties = new ArrayList<>();
-            for (Property property : type.getAnyOf()) {
-//                // import
-//                IType propertyType = Mappers.getSchemaMapper().map(property.getSchema());
-//                if (!property.isRequired()) {
-//                    propertyType = propertyType.asNullable();
-//                }
-//                propertyType.addImportsTo(modelImports, false);
-//
-//                IType propertyClientType = Mappers.getSchemaMapper().map(property.getSchema()).getClientType();
-//                propertyClientType.addImportsTo(modelImports, false);
+            // subclasses
+            for (ObjectSchema subtype : type.getAnyOf()) {
+                String name = subtype.getLanguage().getJava().getName();
+                builder.name(name)
+                        .parentModelName(baseModelName);
 
                 // property
-                ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property);
-                properties.add(modelProperty);
+                List<ClientModelProperty> properties = new ArrayList<>();
+                for (Property property : subtype.getProperties()) {
+                    ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property);
+                    properties.add(modelProperty);
+                }
+                builder.properties(properties);
+
+                models.add(builder.build());
             }
-            builder.properties(properties);
 
-            builder.imports(new ArrayList<>(modelImports));
-
-            model = builder.build();
-
-            serviceModels.addModel(model);
+            serviceModels.addModel(models);
         }
-        return model;
+        return models;
     }
 }

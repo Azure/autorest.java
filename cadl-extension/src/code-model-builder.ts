@@ -1423,19 +1423,18 @@ export class CodeModelBuilder {
       const modelName = variantName + pascalCase(name) + "Model";
       const propertyName = name + variantName;
 
-      const objectSchema = this.codeModel.schemas.add(
-        new ObjectSchema(modelName, this.getDoc(type), {
-          summary: this.getSummary(type),
-          language: {
-            default: {
-              namespace: namespace,
-            },
-            java: {
-              namespace: getJavaNamespace(namespace),
-            },
+      // these ObjectSchema is not added to codeModel.schemas
+      const objectSchema = new ObjectSchema(modelName, this.getDoc(type), {
+        summary: this.getSummary(type),
+        language: {
+          default: {
+            namespace: namespace,
           },
-        }),
-      );
+          java: {
+            namespace: getJavaNamespace(namespace),
+          },
+        },
+      });
 
       const variantSchema = this.processSchema(it.type, variantName);
       objectSchema.addProperty(
