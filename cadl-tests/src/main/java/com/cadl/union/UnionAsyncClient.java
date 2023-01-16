@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.union.implementation.UnionClientImpl;
-import com.cadl.union.models.InputModel;
+import com.cadl.union.models.InputModelBase;
 import com.cadl.union.models.SendLongOptions;
 import com.cadl.union.models.User;
 import java.util.HashMap;
@@ -49,7 +49,7 @@ public final class UnionAsyncClient {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModel (Required)
+     *     input: InputModelBase (Required)
      * }
      * }</pre>
      *
@@ -88,7 +88,7 @@ public final class UnionAsyncClient {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModel (Required)
+     *     input: InputModelBase (Required)
      * }
      * }</pre>
      *
@@ -123,7 +123,7 @@ public final class UnionAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(String id, InputModel input, User user) {
+    public Mono<Void> send(String id, InputModelBase input, User user) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();
@@ -148,7 +148,7 @@ public final class UnionAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(String id, InputModel input) {
+    public Mono<Void> send(String id, InputModelBase input) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();
