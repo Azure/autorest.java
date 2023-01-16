@@ -36,11 +36,11 @@
     "target/azure-cadl-extension-jar-with-dependencies.jar"
   ],
   "peerDependencies": {
-    "@cadl-lang/compiler": "~0.38.0",
-    "@cadl-lang/rest": "~0.38.0",
-    "@cadl-lang/versioning": "~0.38.0",
-    "@azure-tools/cadl-azure-core": "~0.24.0",
-    "@azure-tools/cadl-dpg": "~0.24.0"
+    "@cadl-lang/compiler": "~0.39.0",
+    "@cadl-lang/rest": "~0.39.0",
+    "@cadl-lang/versioning": "~0.39.0",
+    "@azure-tools/cadl-azure-core": "~0.25.0",
+    "@azure-tools/cadl-dpg": "~0.25.0"
   },
   "dependencies": {
     "@autorest/codemodel": "~4.19.2",
