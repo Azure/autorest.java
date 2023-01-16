@@ -1,5 +1,5 @@
 import { DeepPartial } from "@azure-tools/codegen";
-import { ComplexSchema, Property, Schema } from "@autorest/codemodel";
+import { ComplexSchema, ObjectSchema, Schema } from "@autorest/codemodel";
 import { SchemaType } from "@autorest/codemodel";
 import { SchemaUsage } from "./usage.js";
 
@@ -14,7 +14,7 @@ import { SchemaUsage } from "./usage.js";
  */
 export interface OrSchema extends ComplexSchema, SchemaUsage {
   /** the set of schemas that this schema is composed of. Every schema is optional  */
-  anyOf: Array<Property>;
+  anyOf: Array<ObjectSchema>;
 }
 export class OrSchema extends Schema implements OrSchema {
   constructor(name: string, description: string, objectInitializer?: DeepPartial<OrSchema>) {

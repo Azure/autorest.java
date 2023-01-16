@@ -1413,25 +1413,45 @@ export class CodeModelBuilder {
     }
 
     // TODO: name from cadl-dpg
-    const unionSchema = new OrSchema(name + "Model", this.getDoc(type), {
+    const namespace = getNamespace(type);
+    const unionSchema = new OrSchema(pascalCase(name) + "ModelBase", this.getDoc(type), {
       summary: this.getSummary(type),
     });
     unionSchema.anyOf = [];
     nonNullVariants.forEach((it) => {
-      const variantName = this.getUnionVariantName(name, it.type, { depth: 0 });
-      const schema = this.processSchema(it.type, variantName);
-      const property = new Property(variantName, this.getDoc(type), schema, {
-        summary: this.getSummary(type),
-        required: false,
-        nullable: true,
-        readOnly: false,
-      });
-      unionSchema.anyOf.push(property);
+      const variantName = this.getUnionVariantName(it.type, { depth: 0 });
+      const modelName = variantName + pascalCase(name) + "Model";
+      const propertyName = name + variantName;
+
+      const objectSchema = this.codeModel.schemas.add(
+        new ObjectSchema(modelName, this.getDoc(type), {
+          summary: this.getSummary(type),
+          language: {
+            default: {
+              namespace: namespace,
+            },
+            java: {
+              namespace: getJavaNamespace(namespace),
+            },
+          },
+        }),
+      );
+
+      const variantSchema = this.processSchema(it.type, variantName);
+      objectSchema.addProperty(
+        new Property(propertyName, this.getDoc(type), variantSchema, {
+          summary: this.getSummary(type),
+          required: false,
+          nullable: true,
+          readOnly: false,
+        }),
+      );
+      unionSchema.anyOf.push(objectSchema);
     });
     return this.codeModel.schemas.add(unionSchema);
   }
 
-  private getUnionVariantName(prefix: string, type: Type, option: any): string {
+  private getUnionVariantName(type: Type, option: any): string {
     switch (type.kind) {
       case "Scalar": {
         const scalarName = type.name;
@@ -1445,30 +1465,31 @@ export class CodeModelBuilder {
         } else if (scalarName === "zonedDateTime") {
           name = "Time";
         }
-        return prefix + pascalCase(name);
+        return pascalCase(name);
       }
       case "Enum":
-        return prefix + pascalCase(type.name);
+        return pascalCase(type.name);
       case "Model":
         if (isArrayModelType(this.program, type)) {
           ++option.depth;
           if (option.depth == 1) {
-            return prefix + this.getUnionVariantName("", type.indexer.value, option) + "List";
+            return this.getUnionVariantName(type.indexer.value, option) + "List";
           } else {
-            return prefix + "ListOf" + this.getUnionVariantName("", type.indexer.value, option);
+            return "ListOf" + this.getUnionVariantName(type.indexer.value, option);
           }
         } else if (isRecordModelType(this.program, type)) {
           ++option.depth;
           if (option.depth == 1) {
-            return prefix + this.getUnionVariantName(prefix, type.indexer.value, option) + "Map";
+            return this.getUnionVariantName(type.indexer.value, option) + "Map";
           } else {
-            return prefix + "MapOf" + this.getUnionVariantName("", type.indexer.value, option);
+            return "MapOf" + this.getUnionVariantName(type.indexer.value, option);
           }
         } else {
-          return prefix + pascalCase(type.name);
+          return pascalCase(type.name);
         }
+      default:
+        throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
     }
-    return prefix;
   }
 
   private isNullableType(type: Type): boolean {
@@ -1695,7 +1716,7 @@ export class CodeModelBuilder {
       }
 
       if (schema instanceof OrSchema) {
-        schema.anyOf.forEach((it) => this.trackSchemaUsage(it.schema, schemaUsage));
+        schema.anyOf.forEach((it) => this.trackSchemaUsage(it, schemaUsage));
       }
     } else if (schema instanceof DictionarySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
