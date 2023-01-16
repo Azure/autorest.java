@@ -5,3 +5,5 @@ options:
     emitter-output-dir: "{project-root}/cadl-output"
     partial-update: true
     namer: true
+    dev-options:
+      generate-code-model: true
