@@ -219,7 +219,12 @@ abstract class ConvenienceMethodTemplateBase {
         // methods
         JavaSettings settings = JavaSettings.getInstance();
         convenienceMethods.stream().flatMap(m -> m.getConvenienceMethods().stream())
-                .forEach(m -> m.addImportsTo(imports, false, settings));
+                .forEach(m -> {
+                    m.addImportsTo(imports, true, settings);
+                    for (ClientMethodParameter p : m.getParameters()) {
+                        p.getWireType().addImportsTo(imports, false);
+                    }
+                });
 
         ClassType.BinaryData.addImportsTo(imports, false);
         ClassType.RequestOptions.addImportsTo(imports, false);
@@ -342,6 +347,7 @@ abstract class ConvenienceMethodTemplateBase {
                 return String.format("String.valueOf(%1$s.%2$s())", name, enumType.getToJsonMethodName());
             }
         } else if (type instanceof IterableType) {
+            // array as CSV or CollectionFormat
             // TODO: explode
             String delimiter = parameter.getCollectionFormat().getDelimiter();
             IType elementType = ((IterableType) type).getElementType();
