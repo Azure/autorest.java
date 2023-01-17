@@ -124,7 +124,7 @@ abstract class ConvenienceMethodTemplateBase {
                     case BODY: {
                         Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
                                 String.format("requestOptions.setBody(%s);",
-                                        expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getClientType())));
+                                        expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType())));
                         if (!parameter.getClientMethodParameter().isRequired()) {
                             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
                                 writeLine.accept(ifBlock);
@@ -190,7 +190,7 @@ abstract class ConvenienceMethodTemplateBase {
             // flatten (possible with grouping)
 
             ClientMethodParameter targetParameter = detail.getOutParameter();
-            if (targetParameter.getClientType() == ClassType.BinaryData) {
+            if (targetParameter.getWireType() == ClassType.BinaryData) {
                 String targetParameterName = targetParameter.getName();
                 String targetParameterObjectName = targetParameterName + "Obj";
                 methodBlock.line(String.format("Map<String, Object> %1$s = new HashMap<>();", targetParameterObjectName));
@@ -306,7 +306,7 @@ abstract class ConvenienceMethodTemplateBase {
         Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
                 String.format("requestOptions.setHeader(%1$s, %2$s);",
                         ClassType.String.defaultValueExpression(parameter.getSerializedName()),
-                        expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getClientType(), parameter.getProxyMethodParameter())));
+                        expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter())));
         if (!parameter.getClientMethodParameter().isRequired()) {
             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
                 writeLine.accept(ifBlock);
@@ -320,7 +320,7 @@ abstract class ConvenienceMethodTemplateBase {
         Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
                 String.format("requestOptions.addQueryParam(%1$s, %2$s);",
                         ClassType.String.defaultValueExpression(parameter.getSerializedName()),
-                        expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getClientType(), parameter.getProxyMethodParameter())));
+                        expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter())));
         if (!parameter.getClientMethodParameter().isRequired()) {
             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
                 writeLine.accept(ifBlock);
@@ -355,16 +355,17 @@ abstract class ConvenienceMethodTemplateBase {
                         name, parameter.getCollectionFormat().toString().toUpperCase(Locale.ROOT));
             }
         } else {
-            // primitive
-            return String.format("String.valueOf(%s)", name);
+            // primitive or date-time
+            String conversionExpression = type.convertFromClientType(name);
+            return String.format("String.valueOf(%s)", conversionExpression);
         }
     }
 
     private static String expressionConvertToType(String name, MethodParameter convenienceParameter) {
         if (convenienceParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
-            return expressionConvertToBinaryData(name, convenienceParameter.getClientMethodParameter().getClientType());
+            return expressionConvertToBinaryData(name, convenienceParameter.getClientMethodParameter().getWireType());
         } else {
-            IType type = convenienceParameter.getClientMethodParameter().getClientType();
+            IType type = convenienceParameter.getClientMethodParameter().getWireType();
             if (type instanceof EnumType) {
                 return expressionConvertToString(name, type, convenienceParameter.getProxyMethodParameter());
             } else if (type instanceof IterableType && ((IterableType) type).getElementType() instanceof EnumType) {
