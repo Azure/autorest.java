@@ -220,7 +220,8 @@ abstract class ConvenienceMethodTemplateBase {
         JavaSettings settings = JavaSettings.getInstance();
         convenienceMethods.stream().flatMap(m -> m.getConvenienceMethods().stream())
                 .forEach(m -> {
-                    m.addImportsTo(imports, true, settings);
+                    m.addImportsTo(imports, false, settings);
+                    // hack, add wire type of parameters, as they are not added in ClientMethod, even when includeImplementationImports=true
                     for (ClientMethodParameter p : m.getParameters()) {
                         p.getWireType().addImportsTo(imports, false);
                     }
