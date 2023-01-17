@@ -539,7 +539,7 @@ export class CodeModelBuilder {
     } else {
       let schema;
       if (param.param.type.kind === "Scalar" && param.param.type.name === "zonedDateTime") {
-        // zonedTateTime in header maps to RFC1123
+        // zonedTateTime in header maps to RFC 5322
         schema = this.processDateTimeSchema(param.param.type, param.param.name, true);
       } else {
         schema = this.processSchema(param.param.type, param.param.name);
