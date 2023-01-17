@@ -136,7 +136,6 @@ export class CodeModelBuilder {
     this.program = program1;
     this.dpgContext = { program: this.program, generateProtocolMethods: true, generateConvenienceMethods: true };
 
-
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
@@ -387,9 +386,6 @@ export class CodeModelBuilder {
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
-      } else if (!this.options["dev-options"] || (this.options["dev-options"]["generate-convenience-apis"] ?? true)) {
-        // add convenienceApi by default, unless devOptions says no
-        codeModelOperation.convenienceApi = new ConvenienceApi(operation.name);
       }
     }
 
@@ -1557,12 +1553,7 @@ export class CodeModelBuilder {
 
   private getConvenienceApiName(op: Operation): string | undefined {
     // check @convenienceMethod
-    if (
-      shouldGenerateConvenient(
-        this.dpgContext,
-        op
-      )
-    ) {
+    if (shouldGenerateConvenient(this.dpgContext, op)) {
       return op.name;
     }
   }
