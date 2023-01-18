@@ -1112,7 +1112,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected static String nextLinkLine(ClientMethod clientMethod, String valueExpression) {
         return String.format("res.%3$s.%1$s()%2$s,",
             CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()),
-            (clientMethod.getMethodPageDetails().getNextLinkType() == ClassType.String ? "" : ".toString()"),   // nextLink could be type URL
+            // nextLink could be type URL
+            (clientMethod.getMethodPageDetails().getNextLinkType() == ClassType.URL ? ".toString()" : ""),
             valueExpression);
     }
 
