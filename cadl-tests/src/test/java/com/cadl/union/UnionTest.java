@@ -25,22 +25,22 @@ public class UnionTest {
     @Test
     public void testUnion() {
         SendLongOptions options = new SendLongOptions("id", "input", 1)
-                .setDataUnion(new StringDataUnionModel().setDataUnionString("dataString"));
+                .setDataUnion(new StringDataUnionModel("dataString"));
         BinaryData request = createRequest(options);
         Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"dataUnion\":\"dataString\"}", request.toString());
 
         options = new SendLongOptions("id", "input", 1)
-                .setDataUnion(new ArrayDataDataUnionModel().setDataUnionArrayData(new ArrayData(Collections.singletonList("item1"))));
+                .setDataUnion(new ArrayDataDataUnionModel(new ArrayData(Collections.singletonList("item1"))));
         request = createRequest(options);
         Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"dataUnion\":{\"data\":[\"item1\"]}}", request.toString());
 
         options = new SendLongOptions("id", "input", 1)
-                .setDataUnion(new ByteArrayDataUnionModel().setDataUnionByteArray("data".getBytes(StandardCharsets.UTF_8)));
+                .setDataUnion(new ByteArrayDataUnionModel("data".getBytes(StandardCharsets.UTF_8)));
         request = createRequest(options);
         Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"dataUnion\":\"ZGF0YQ==\"}", request.toString());
 
         options = new SendLongOptions("id", "input", 1)
-                .setDataUnion(new TimeDataUnionModel().setDataUnionTime(OffsetDateTime.of(2020, 1, 1, 4, 30, 10, 0, ZoneOffset.UTC)));
+                .setDataUnion(new TimeDataUnionModel(OffsetDateTime.of(2020, 1, 1, 4, 30, 10, 0, ZoneOffset.UTC)));
         request = createRequest(options);
         Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"dataUnion\":\"2020-01-01T04:30:10Z\"}", request.toString());
 
