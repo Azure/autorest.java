@@ -11,7 +11,7 @@ import java.time.OffsetDateTime;
 /** The TimeDataUnionModel model. */
 @Immutable
 public final class TimeDataUnionModel extends DataUnionModelBase {
-    private OffsetDateTime value;
+    private final OffsetDateTime value;
 
     /**
      * Creates an instance of TimeDataUnionModel class.

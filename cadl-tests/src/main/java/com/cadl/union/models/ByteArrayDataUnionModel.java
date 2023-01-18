@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** The ByteArrayDataUnionModel model. */
 @Immutable
 public final class ByteArrayDataUnionModel extends DataUnionModelBase {
-    private byte[] value;
+    private final byte[] value;
 
     /**
      * Creates an instance of ByteArrayDataUnionModel class.

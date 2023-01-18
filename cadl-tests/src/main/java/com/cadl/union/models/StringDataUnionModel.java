@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** The StringDataUnionModel model. */
 @Immutable
 public final class StringDataUnionModel extends DataUnionModelBase {
-    private String value;
+    private final String value;
 
     /**
      * Creates an instance of StringDataUnionModel class.

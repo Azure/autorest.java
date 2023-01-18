@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** The ArrayDataDataUnionModel model. */
 @Immutable
 public final class ArrayDataDataUnionModel extends DataUnionModelBase {
-    private ArrayData value;
+    private final ArrayData value;
 
     /**
      * Creates an instance of ArrayDataDataUnionModel class.
