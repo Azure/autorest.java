@@ -537,9 +537,15 @@ export class CodeModelBuilder {
         op.specialHeaders.push(param.name);
       }
     } else {
-      const schema = this.processSchema(param.param.type, param.param.name);
+      let schema;
+      if (param.param.type.kind === "Scalar" && param.param.type.name === "zonedDateTime") {
+        // zonedTateTime in header maps to RFC 5322
+        schema = this.processDateTimeSchema(param.param.type, param.param.name, true);
+      } else {
+        schema = this.processSchema(param.param.type, param.param.name);
+      }
       const nullable = this.isNullableType(param.param.type);
-      const parameter = new Parameter(param.name, this.getDoc(param.param), schema, {
+      const parameter = new Parameter(param.param.name, this.getDoc(param.param), schema, {
         summary: this.getSummary(param.param),
         implementation: ImplementationLocation.Method,
         required: !param.param.optional,

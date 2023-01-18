@@ -15,7 +15,9 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.DateTimeRfc1123;
 import com.cadl.builtin.models.Builtin;
+import java.time.OffsetDateTime;
 
 /** Initializes a new instance of the synchronous BuiltinClient type. */
 @ServiceClient(builder = BuiltinClientBuilder.class)
@@ -34,6 +36,26 @@ public final class BuiltinClient {
 
     /**
      * The read operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>x-ms-date</td><td>OffsetDateTime</td><td>No</td><td>The dateTime parameter</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -80,6 +102,33 @@ public final class BuiltinClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
         return this.client.readWithResponse(requestOptions).block();
+    }
+
+    /**
+     * The read operation.
+     *
+     * @param dateTime The dateTime parameter.
+     * @param filter The filter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Builtin read(OffsetDateTime dateTime, String filter) {
+        // Generated convenience method for readWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (dateTime != null) {
+            requestOptions.setHeader("x-ms-date", String.valueOf(new DateTimeRfc1123(dateTime)));
+        }
+        if (filter != null) {
+            requestOptions.addQueryParam("filter", filter);
+        }
+        return readWithResponse(requestOptions).getValue().toObject(Builtin.class);
     }
 
     /**
