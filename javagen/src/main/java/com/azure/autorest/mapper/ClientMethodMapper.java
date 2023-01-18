@@ -681,7 +681,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         ClientMethod nextMethod = (nextMethods == null) ? null
             : nextMethods.stream().filter(m -> m.getType() == nextMethodType).findFirst().orElse(null);
 
-        IType nextLinkType = getPageableNextLinkType(operation.getExtensions().getXmsPageable(), proxyMethod.getRawResponseBodyType() != null ? proxyMethod.getRawResponseBodyType() : proxyMethod.getResponseBodyType());
+        IType nextLinkType = getPageableNextLinkType(operation.getExtensions().getXmsPageable(),
+                (proxyMethod.getRawResponseBodyType() != null ? proxyMethod.getRawResponseBodyType() : proxyMethod.getResponseBodyType()).toString());
 
         MethodPageDetails details = new MethodPageDetails(CodeNamer.getPropertyName(nextLinkName), nextLinkType, pageableItemName,
             nextMethod, lroIntermediateType, nextLinkName, itemName);
@@ -1422,11 +1423,16 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .map(ClientModelProperty::getName).findAny().orElse(null);
     }
 
-    private static IType getPageableNextLinkType(XmsPageable xmsPageable, IType responseBodyType) {
-        ClientModel responseBodyModel = ClientModelUtil.getClientModel(responseBodyType.toString());
-        return responseBodyModel.getProperties().stream()
+    private static IType getPageableNextLinkType(XmsPageable xmsPageable, String clientModelName) {
+        ClientModel responseBodyModel = ClientModelUtil.getClientModel(clientModelName);
+        IType nextLinkType = responseBodyModel.getProperties().stream()
             .filter(p -> p.getSerializedName().equals(xmsPageable.getNextLinkName()))
             .map(ClientModelProperty::getClientType).findAny().orElse(null);
+        if (nextLinkType == null && !CoreUtils.isNullOrEmpty(responseBodyModel.getParentModelName())) {
+            return getPageableNextLinkType(xmsPageable, responseBodyModel.getParentModelName());
+        } else {
+            return nextLinkType;
+        }
     }
 
     private IType getPollingIntermediateType(JavaSettings.PollingDetails details, IType syncReturnType) {
