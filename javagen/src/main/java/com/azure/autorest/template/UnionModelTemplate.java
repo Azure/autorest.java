@@ -7,8 +7,10 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.UnionModel;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
-import com.azure.core.annotation.Fluent;
+import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -16,6 +18,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
 
@@ -30,13 +33,15 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
 
     @Override
     public void write(UnionModel model, JavaFile javaFile) {
+        // presently, subclass would only contain one "value" property.
+
         final boolean isAbstractClass = CoreUtils.isNullOrEmpty(model.getParentModelName());
         final String superClassName = model.getParentModelName();
 
         Set<String> imports = new HashSet<>();
         model.addImportsTo(imports);
 
-        imports.add(Fluent.class.getName());
+        imports.add(Immutable.class.getName());
         imports.add(JsonValue.class.getName());
 
         javaFile.declareImport(imports);
@@ -45,7 +50,7 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
         String classDeclaration = isAbstractClass ? model.getName() : (model.getName() + " extends " + superClassName);
         javaFile.javadocComment(comment -> comment.description(model.getDescription()));
         if (!isAbstractClass) {
-            javaFile.annotation("Fluent");
+            javaFile.annotation("Immutable");
         }
         javaFile.publicClass(modifiers, classDeclaration, classBlock -> {
             // properties as member variables
@@ -53,11 +58,35 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
                 classBlock.privateMemberVariable(property.getClientType() + " " + property.getName());
             }
 
-            if (!isAbstractClass) {
-                // ctor
+            // constructor
+            if (isAbstractClass) {
                 classBlock.javadocComment(comment ->
                         comment.description("Creates an instance of " + model.getName() + " class."));
-                classBlock.publicConstructor(model.getName() + "()", ctor -> {
+                classBlock.constructor(JavaVisibility.Protected, model.getName() + "()", constructor -> {
+                });
+            } else {
+                StringBuilder constructorProperties = new StringBuilder();
+
+                Consumer<JavaJavadocComment> javadocCommentConsumer = comment ->
+                        comment.description("Creates an instance of " + model.getName() + " class.");
+
+                for (ClientModelProperty property : model.getProperties()) {
+                    javadocCommentConsumer = javadocCommentConsumer.andThen(comment -> {
+                        comment.param(property.getName(), "the value");
+                    });
+
+                    if (constructorProperties.length() > 0) {
+                        constructorProperties.append(", ");
+                    }
+                    constructorProperties.append(property.getClientType()).append(" ").append(property.getName());
+                }
+
+                classBlock.javadocComment(javadocCommentConsumer);
+                classBlock.publicConstructor(String.format("%1$s(%2$s)", model.getName(), constructorProperties), constructor -> {
+                    for (ClientModelProperty property : model.getProperties()) {
+                        constructor.line("this." + property.getName() + " = " +
+                                property.getWireType().convertFromClientType(property.getName()) + ";");
+                    }
                 });
             }
 
@@ -72,19 +101,8 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
                     comment.methodReturns("the value");
                 });
                 classBlock.annotation("JsonValue");
-                classBlock.publicMethod(property.getClientType() + " " + property.getGetterName() + "()", methodBlock -> {
+                classBlock.publicMethod(clientType + " " + property.getGetterName() + "()", methodBlock -> {
                     methodBlock.methodReturn("this." + propertyName);
-                });
-
-                // setter
-                classBlock.javadocComment(comment -> {
-                    comment.description("Sets the value");
-                    comment.param(property.getName(), "the value to set");
-                    comment.methodReturns(String.format("the %s object itself.", model.getName()));
-                });
-                classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", model.getName(), property.getSetterName(), property.getClientType(), propertyName), methodBlock -> {
-                    methodBlock.line(String.format("this.%1$s = %1$s;", propertyName));
-                    methodBlock.methodReturn("this");
                 });
             }
         });

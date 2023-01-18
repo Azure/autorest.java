@@ -1423,7 +1423,7 @@ export class CodeModelBuilder {
     nonNullVariants.forEach((it) => {
       const variantName = this.getUnionVariantName(it.type, { depth: 0 });
       const modelName = variantName + pascalCase(name) + "Model";
-      const propertyName = name + variantName;
+      const propertyName = "value";
 
       // these ObjectSchema is not added to codeModel.schemas
       const objectSchema = new ObjectSchema(modelName, this.getDoc(type), {
@@ -1442,7 +1442,7 @@ export class CodeModelBuilder {
       objectSchema.addProperty(
         new Property(propertyName, this.getDoc(type), variantSchema, {
           summary: this.getSummary(type),
-          required: false,
+          required: true,
           nullable: true,
           readOnly: false,
         }),
