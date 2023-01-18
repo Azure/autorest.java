@@ -83,6 +83,57 @@ public final class BuiltinClient {
     }
 
     /**
+     * The write operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     formatString (Required): {
+     *         base64Encoded: Base64Url (Required)
+     *         binary: byte[] (Required)
+     *         dateTime: OffsetDateTime (Required)
+     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
+     *         password: String (Required)
+     *         uri: String (Required)
+     *         extensibleEnum: String(Value1/Value2) (Required)
+     *         extensibleEnumScalar: String(Value1/Value2) (Required)
+     *     }
+     *     boolean: boolean (Required)
+     *     string: String (Required)
+     *     bytes: byte[] (Required)
+     *     int: int (Required)
+     *     safeint: long (Required)
+     *     long: long (Required)
+     *     float: double (Required)
+     *     double: double (Required)
+     *     duration: Duration (Required)
+     *     dateTime: OffsetDateTime (Required)
+     *     stringList (Required): [
+     *         String (Required)
+     *     ]
+     *     bytesDict (Required): {
+     *         String: byte[] (Required)
+     *     }
+     *     url: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> writeWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.client.writeWithResponse(body, requestOptions).block();
+    }
+
+    /**
      * The read operation.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
