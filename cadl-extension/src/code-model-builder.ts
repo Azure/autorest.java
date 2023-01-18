@@ -1555,6 +1555,8 @@ export class CodeModelBuilder {
     // check @convenienceMethod
     if (shouldGenerateConvenient(this.dpgContext, op)) {
       return op.name;
+    } else {
+      return undefined;
     }
   }
 
