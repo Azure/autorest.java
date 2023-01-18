@@ -4,16 +4,22 @@
 
 package com.cadl.union.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /** The ArrayDataDataUnionModel model. */
-@Fluent
+@Immutable
 public final class ArrayDataDataUnionModel extends DataUnionModelBase {
-    private ArrayData dataUnionArrayData;
+    private ArrayData value;
 
-    /** Creates an instance of ArrayDataDataUnionModel class. */
-    public ArrayDataDataUnionModel() {}
+    /**
+     * Creates an instance of ArrayDataDataUnionModel class.
+     *
+     * @param value the value.
+     */
+    public ArrayDataDataUnionModel(ArrayData value) {
+        this.value = value;
+    }
 
     /**
      * Gets the value.
@@ -21,18 +27,7 @@ public final class ArrayDataDataUnionModel extends DataUnionModelBase {
      * @return the value.
      */
     @JsonValue
-    public ArrayData getDataUnionArrayData() {
-        return this.dataUnionArrayData;
-    }
-
-    /**
-     * Sets the value.
-     *
-     * @param dataUnionArrayData the value to set.
-     * @return the ArrayDataDataUnionModel object itself.
-     */
-    public ArrayDataDataUnionModel setDataUnionArrayData(ArrayData dataUnionArrayData) {
-        this.dataUnionArrayData = dataUnionArrayData;
-        return this;
+    public ArrayData getValue() {
+        return this.value;
     }
 }

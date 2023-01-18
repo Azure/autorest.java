@@ -4,16 +4,22 @@
 
 package com.cadl.union.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /** The ByteArrayDataUnionModel model. */
-@Fluent
+@Immutable
 public final class ByteArrayDataUnionModel extends DataUnionModelBase {
-    private byte[] dataUnionByteArray;
+    private byte[] value;
 
-    /** Creates an instance of ByteArrayDataUnionModel class. */
-    public ByteArrayDataUnionModel() {}
+    /**
+     * Creates an instance of ByteArrayDataUnionModel class.
+     *
+     * @param value the value.
+     */
+    public ByteArrayDataUnionModel(byte[] value) {
+        this.value = value;
+    }
 
     /**
      * Gets the value.
@@ -21,18 +27,7 @@ public final class ByteArrayDataUnionModel extends DataUnionModelBase {
      * @return the value.
      */
     @JsonValue
-    public byte[] getDataUnionByteArray() {
-        return this.dataUnionByteArray;
-    }
-
-    /**
-     * Sets the value.
-     *
-     * @param dataUnionByteArray the value to set.
-     * @return the ByteArrayDataUnionModel object itself.
-     */
-    public ByteArrayDataUnionModel setDataUnionByteArray(byte[] dataUnionByteArray) {
-        this.dataUnionByteArray = dataUnionByteArray;
-        return this;
+    public byte[] getValue() {
+        return this.value;
     }
 }

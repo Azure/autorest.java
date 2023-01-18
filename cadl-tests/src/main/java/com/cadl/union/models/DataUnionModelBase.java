@@ -5,4 +5,7 @@
 package com.cadl.union.models;
 
 /** The DataUnionModelBase model. */
-public abstract class DataUnionModelBase {}
+public abstract class DataUnionModelBase {
+    /** Creates an instance of DataUnionModelBase class. */
+    protected DataUnionModelBase() {}
+}

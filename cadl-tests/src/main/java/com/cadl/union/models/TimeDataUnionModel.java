@@ -4,17 +4,23 @@
 
 package com.cadl.union.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 
 /** The TimeDataUnionModel model. */
-@Fluent
+@Immutable
 public final class TimeDataUnionModel extends DataUnionModelBase {
-    private OffsetDateTime dataUnionTime;
+    private OffsetDateTime value;
 
-    /** Creates an instance of TimeDataUnionModel class. */
-    public TimeDataUnionModel() {}
+    /**
+     * Creates an instance of TimeDataUnionModel class.
+     *
+     * @param value the value.
+     */
+    public TimeDataUnionModel(OffsetDateTime value) {
+        this.value = value;
+    }
 
     /**
      * Gets the value.
@@ -22,18 +28,7 @@ public final class TimeDataUnionModel extends DataUnionModelBase {
      * @return the value.
      */
     @JsonValue
-    public OffsetDateTime getDataUnionTime() {
-        return this.dataUnionTime;
-    }
-
-    /**
-     * Sets the value.
-     *
-     * @param dataUnionTime the value to set.
-     * @return the TimeDataUnionModel object itself.
-     */
-    public TimeDataUnionModel setDataUnionTime(OffsetDateTime dataUnionTime) {
-        this.dataUnionTime = dataUnionTime;
-        return this;
+    public OffsetDateTime getValue() {
+        return this.value;
     }
 }

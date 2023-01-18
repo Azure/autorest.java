@@ -4,17 +4,23 @@
 
 package com.cadl.union.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.List;
 
 /** The ListOfIntegerListInputModel model. */
-@Fluent
+@Immutable
 public final class ListOfIntegerListInputModel extends InputModelBase {
-    private List<List<Integer>> inputListOfIntegerList;
+    private List<List<Integer>> value;
 
-    /** Creates an instance of ListOfIntegerListInputModel class. */
-    public ListOfIntegerListInputModel() {}
+    /**
+     * Creates an instance of ListOfIntegerListInputModel class.
+     *
+     * @param value the value.
+     */
+    public ListOfIntegerListInputModel(List<List<Integer>> value) {
+        this.value = value;
+    }
 
     /**
      * Gets the value.
@@ -22,18 +28,7 @@ public final class ListOfIntegerListInputModel extends InputModelBase {
      * @return the value.
      */
     @JsonValue
-    public List<List<Integer>> getInputListOfIntegerList() {
-        return this.inputListOfIntegerList;
-    }
-
-    /**
-     * Sets the value.
-     *
-     * @param inputListOfIntegerList the value to set.
-     * @return the ListOfIntegerListInputModel object itself.
-     */
-    public ListOfIntegerListInputModel setInputListOfIntegerList(List<List<Integer>> inputListOfIntegerList) {
-        this.inputListOfIntegerList = inputListOfIntegerList;
-        return this;
+    public List<List<Integer>> getValue() {
+        return this.value;
     }
 }

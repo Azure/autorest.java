@@ -4,17 +4,23 @@
 
 package com.cadl.union.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.List;
 
 /** The StringListInputModel model. */
-@Fluent
+@Immutable
 public final class StringListInputModel extends InputModelBase {
-    private List<String> inputStringList;
+    private List<String> value;
 
-    /** Creates an instance of StringListInputModel class. */
-    public StringListInputModel() {}
+    /**
+     * Creates an instance of StringListInputModel class.
+     *
+     * @param value the value.
+     */
+    public StringListInputModel(List<String> value) {
+        this.value = value;
+    }
 
     /**
      * Gets the value.
@@ -22,18 +28,7 @@ public final class StringListInputModel extends InputModelBase {
      * @return the value.
      */
     @JsonValue
-    public List<String> getInputStringList() {
-        return this.inputStringList;
-    }
-
-    /**
-     * Sets the value.
-     *
-     * @param inputStringList the value to set.
-     * @return the StringListInputModel object itself.
-     */
-    public StringListInputModel setInputStringList(List<String> inputStringList) {
-        this.inputStringList = inputStringList;
-        return this;
+    public List<String> getValue() {
+        return this.value;
     }
 }

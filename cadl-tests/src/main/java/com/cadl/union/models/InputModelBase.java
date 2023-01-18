@@ -5,4 +5,7 @@
 package com.cadl.union.models;
 
 /** The InputModelBase model. */
-public abstract class InputModelBase {}
+public abstract class InputModelBase {
+    /** Creates an instance of InputModelBase class. */
+    protected InputModelBase() {}
+}
