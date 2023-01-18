@@ -11,7 +11,7 @@ using Azure.Core.Foundations;
   title: "LongRunning",
   version: "1.0.0",
 })
-@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+@versionedDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Cadl.LongRunning;
 
 model Resource {
