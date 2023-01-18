@@ -1429,10 +1429,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .filter(p -> p.getSerializedName().equals(xmsPageable.getNextLinkName()))
             .map(ClientModelProperty::getClientType).findAny().orElse(null);
         if (nextLinkType == null && !CoreUtils.isNullOrEmpty(responseBodyModel.getParentModelName())) {
-            return getPageableNextLinkType(xmsPageable, responseBodyModel.getParentModelName());
-        } else {
-            return nextLinkType;
+            // try find nextLink property in parent model
+            nextLinkType = getPageableNextLinkType(xmsPageable, responseBodyModel.getParentModelName());
         }
+        return nextLinkType;
     }
 
     private IType getPollingIntermediateType(JavaSettings.PollingDetails details, IType syncReturnType) {
