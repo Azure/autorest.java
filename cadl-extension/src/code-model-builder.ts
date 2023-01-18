@@ -35,6 +35,7 @@ import {
   getNamespaceFullName,
   isNullType,
   NoTarget,
+  getTypeName,
 } from "@cadl-lang/compiler";
 import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
@@ -1526,7 +1527,7 @@ export class CodeModelBuilder {
       return friendlyName;
     } else {
       if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
-        const cadlName = this.program.checker.getTypeName(target, this.typeNameOptions);
+        const cadlName = getTypeName(target, this.typeNameOptions);
         const newName = getNameForTemplate(target);
         this.program.trace("cadl-java", `Rename Cadl model '${cadlName}' to '${newName}'`);
         return newName;
