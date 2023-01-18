@@ -3,7 +3,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: { project: "./tsconfig.json" },
   plugins: [
-    '@typescript-eslint',
+    '@typescript-eslint', 'deprecation'
   ],
   extends: [
     'eslint:recommended',
@@ -21,5 +21,6 @@ module.exports = {
     ],
     "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/no-misused-promises": "error",
+    "deprecation/deprecation": "warn"
   },
 };
