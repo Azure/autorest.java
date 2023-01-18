@@ -55,7 +55,7 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
         javaFile.publicClass(modifiers, classDeclaration, classBlock -> {
             // properties as member variables
             for (ClientModelProperty property : model.getProperties()) {
-                classBlock.privateMemberVariable(property.getClientType() + " " + property.getName());
+                classBlock.privateFinalMemberVariable(property.getClientType() + " " + property.getName());
             }
 
             // constructor
