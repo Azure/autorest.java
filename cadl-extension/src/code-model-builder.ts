@@ -1542,7 +1542,7 @@ export class CodeModelBuilder {
     if (friendlyName) {
       return friendlyName;
     } else {
-      if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
+      if (target.kind === "Model" && target.templateMapper && target.templateMapper.args && target.templateMapper.args.length > 0) {
         const cadlName = getTypeName(target, this.typeNameOptions);
         const newName = getNameForTemplate(target);
         this.program.trace("cadl-java", `Rename Cadl model '${cadlName}' to '${newName}'`);
@@ -1792,7 +1792,7 @@ function modelContainsDerivedModel(model: Model): boolean {
 function isModelReferredInTemplate(template: TemplatedTypeBase, target: Model): boolean {
   return (
     template === target ||
-    (template.templateArguments?.some((it) =>
+    ((template.templateMapper && template.templateMapper.args)?.some((it) =>
       it.kind === "Model" || it.kind === "Union" ? isModelReferredInTemplate(it, target) : false,
     ) ??
       false)
@@ -1803,8 +1803,8 @@ function getNameForTemplate(target: Type): string {
   switch (target.kind) {
     case "Model": {
       let name = target.name;
-      if (target.templateArguments) {
-        name = name + target.templateArguments.map((it) => getNameForTemplate(it)).join("");
+      if (target.templateMapper && target.templateMapper.args) {
+        name = name + target.templateMapper.args.map((it) => getNameForTemplate(it)).join("");
       }
       return name;
     }
