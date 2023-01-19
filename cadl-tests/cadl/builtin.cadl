@@ -63,9 +63,17 @@ enum KnownValues {
 @knownValues(KnownValues)
 scalar KnownValuesScalar extends string;
 
+model Request {
+  @header("x-ms-date")
+  dateTime?: zonedDateTime;
+
+  @query
+  filter?: string;
+}
+
 @route("/builtin")
 interface BuiltinOp {
-  read(): {
+  read(...Request): {
     @body body: Builtin;
   };
 

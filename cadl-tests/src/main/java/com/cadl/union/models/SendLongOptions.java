@@ -45,7 +45,7 @@ public final class SendLongOptions {
      * The dataUnion property.
      */
     @JsonProperty(value = "dataUnion")
-    private DataUnionModel dataUnion;
+    private DataUnionModelBase dataUnion;
 
     /*
      * The dataLong property.
@@ -148,7 +148,7 @@ public final class SendLongOptions {
      *
      * @return the dataUnion value.
      */
-    public DataUnionModel getDataUnion() {
+    public DataUnionModelBase getDataUnion() {
         return this.dataUnion;
     }
 
@@ -158,7 +158,7 @@ public final class SendLongOptions {
      * @param dataUnion the dataUnion value to set.
      * @return the SendLongOptions object itself.
      */
-    public SendLongOptions setDataUnion(DataUnionModel dataUnion) {
+    public SendLongOptions setDataUnion(DataUnionModelBase dataUnion) {
         this.dataUnion = dataUnion;
         return this;
     }

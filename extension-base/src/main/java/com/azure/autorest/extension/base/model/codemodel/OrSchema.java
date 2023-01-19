@@ -18,14 +18,14 @@ public class OrSchema extends ComplexSchema {
      * (Required)
      * 
      */
-    private List<Property> anyOf = new ArrayList<>();
+    private List<ObjectSchema> anyOf = new ArrayList<>();
 
     /**
      * the set of schemas that this schema is composed of. Every schema is optional
      * (Required)
      * 
      */
-    public List<Property> getAnyOf() {
+    public List<ObjectSchema> getAnyOf() {
         return anyOf;
     }
 
@@ -34,7 +34,7 @@ public class OrSchema extends ComplexSchema {
      * (Required)
      * 
      */
-    public void setAnyOf(List<Property> anyOf) {
+    public void setAnyOf(List<ObjectSchema> anyOf) {
         this.anyOf = anyOf;
     }
 

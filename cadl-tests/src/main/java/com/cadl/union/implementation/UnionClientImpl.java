@@ -194,7 +194,7 @@ public final class UnionClientImpl {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModel (Required)
+     *     input: InputModelBase (Required)
      * }
      * }</pre>
      *
@@ -232,7 +232,7 @@ public final class UnionClientImpl {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModel (Required)
+     *     input: InputModelBase (Required)
      * }
      * }</pre>
      *
@@ -270,7 +270,7 @@ public final class UnionClientImpl {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModel (Required)
+     *     input: InputModelBase (Required)
      * }
      * }</pre>
      *
@@ -319,7 +319,7 @@ public final class UnionClientImpl {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModel (Required)
+     *     input: InputModelBase (Required)
      * }
      * }</pre>
      *

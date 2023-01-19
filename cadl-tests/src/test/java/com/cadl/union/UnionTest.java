@@ -5,8 +5,11 @@ package com.cadl.union;
 
 import com.azure.core.util.BinaryData;
 import com.cadl.union.models.ArrayData;
-import com.cadl.union.models.DataUnionModel;
+import com.cadl.union.models.ArrayDataDataUnionModel;
+import com.cadl.union.models.ByteArrayDataUnionModel;
 import com.cadl.union.models.SendLongOptions;
+import com.cadl.union.models.StringDataUnionModel;
+import com.cadl.union.models.TimeDataUnionModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -21,37 +24,30 @@ public class UnionTest {
 
     @Test
     public void testUnion() {
-        DataUnionModel dataUnion = new DataUnionModel();
-        dataUnion.setDataUnionString("dataString");
         SendLongOptions options = new SendLongOptions("id", "input", 1)
-                .setDataUnion(dataUnion);
+                .setDataUnion(new StringDataUnionModel("dataString"));
         BinaryData request = createRequest(options);
-
         Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"dataUnion\":\"dataString\"}", request.toString());
 
-        dataUnion = new DataUnionModel();
-        dataUnion.setDataUnionArrayData(new ArrayData(Collections.singletonList("item1")));
         options = new SendLongOptions("id", "input", 1)
-                .setDataUnion(dataUnion);
+                .setDataUnion(new ArrayDataDataUnionModel(new ArrayData(Collections.singletonList("item1"))));
         request = createRequest(options);
-
         Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"dataUnion\":{\"data\":[\"item1\"]}}", request.toString());
 
-        dataUnion = new DataUnionModel();
-        dataUnion.setDataUnionByteArray("data".getBytes(StandardCharsets.UTF_8));
         options = new SendLongOptions("id", "input", 1)
-                .setDataUnion(dataUnion);
+                .setDataUnion(new ByteArrayDataUnionModel("data".getBytes(StandardCharsets.UTF_8)));
         request = createRequest(options);
-
         Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"dataUnion\":\"ZGF0YQ==\"}", request.toString());
 
-        dataUnion = new DataUnionModel();
-        dataUnion.setDataUnionTime(OffsetDateTime.of(2020, 1, 1, 4, 30, 10, 0, ZoneOffset.UTC));
         options = new SendLongOptions("id", "input", 1)
-                .setDataUnion(dataUnion);
+                .setDataUnion(new TimeDataUnionModel(OffsetDateTime.of(2020, 1, 1, 4, 30, 10, 0, ZoneOffset.UTC)));
         request = createRequest(options);
-
         Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"dataUnion\":\"2020-01-01T04:30:10Z\"}", request.toString());
+
+        options = new SendLongOptions("id", "input", 1)
+                .setDataFloat(3.5);
+        request = createRequest(options);
+        Assertions.assertEquals("{\"dataInt\":1,\"input\":\"input\",\"data_float\":3.5}", request.toString());
     }
 
     private static BinaryData createRequest(SendLongOptions options) {
