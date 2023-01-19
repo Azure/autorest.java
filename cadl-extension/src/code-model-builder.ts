@@ -1792,7 +1792,7 @@ function modelContainsDerivedModel(model: Model): boolean {
 function isModelReferredInTemplate(template: TemplatedTypeBase, target: Model): boolean {
   return (
     template === target ||
-    ((template.templateMapper && template.templateMapper.args)?.some((it) =>
+    (template?.templateMapper?.args?.some((it) =>
       it.kind === "Model" || it.kind === "Union" ? isModelReferredInTemplate(it, target) : false,
     ) ??
       false)
