@@ -1542,7 +1542,12 @@ export class CodeModelBuilder {
     if (friendlyName) {
       return friendlyName;
     } else {
-      if (target.kind === "Model" && target.templateMapper && target.templateMapper.args && target.templateMapper.args.length > 0) {
+      if (
+        target.kind === "Model" &&
+        target.templateMapper &&
+        target.templateMapper.args &&
+        target.templateMapper.args.length > 0
+      ) {
         const cadlName = getTypeName(target, this.typeNameOptions);
         const newName = getNameForTemplate(target);
         this.program.trace("cadl-java", `Rename Cadl model '${cadlName}' to '${newName}'`);
