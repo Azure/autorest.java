@@ -4,12 +4,13 @@
 package com.azure.autorest.model.clientmodel;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UnionModels {
 
     private static final UnionModels INSTANCE = new UnionModels();
-    private final Map<String, UnionModel> nameMap = new HashMap<>();
+    private final Map<String, List<UnionModel>> nameMap = new HashMap<>();
 
     private UnionModels() {
     }
@@ -28,11 +29,11 @@ public class UnionModels {
      * @param modelName the name of the model.
      * @return the UnionModel instance.
      */
-    public final UnionModel getModel(String modelName) {
+    public final List<UnionModel> getModel(String modelName) {
         return nameMap.get(modelName);
     }
 
-    public final void addModel(UnionModel model) {
-        nameMap.put(model.getName(), model);
+    public final void addModel(List<UnionModel> models) {
+        nameMap.put(models.iterator().next().getName(), models);
     }
 }

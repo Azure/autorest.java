@@ -1296,7 +1296,8 @@ export class CodeModelBuilder {
     for (const prop of type.properties.values()) {
       if (
         prop.name === discriminatorPropertyName || // skip the discriminator property
-        isNeverType(prop.type) // skip property of type "never"
+        isNeverType(prop.type) || // skip property of type "never"
+        !isPayloadProperty(this.program, prop)
       ) {
         continue;
       }
@@ -1311,13 +1312,8 @@ export class CodeModelBuilder {
 
   private getEffectiveSchemaType(type: Type): Type {
     const program = this.program;
-
     function isSchemaProperty(property: ModelProperty) {
-      const headerInfo = getHeaderFieldName(program, property);
-      const queryInfo = getQueryParamName(program, property);
-      const pathInfo = getPathParamName(program, property);
-      const statusCodeInfo = isStatusCode(program, property);
-      return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
+      return isPayloadProperty(program, property);
     }
 
     if (type.kind === "Model") {
@@ -1420,25 +1416,44 @@ export class CodeModelBuilder {
     }
 
     // TODO: name from cadl-dpg
-    const unionSchema = new OrSchema(name + "Model", this.getDoc(type), {
+    const namespace = getNamespace(type);
+    const unionSchema = new OrSchema(pascalCase(name) + "ModelBase", this.getDoc(type), {
       summary: this.getSummary(type),
     });
     unionSchema.anyOf = [];
     nonNullVariants.forEach((it) => {
-      const variantName = this.getUnionVariantName(name, it.type, { depth: 0 });
-      const schema = this.processSchema(it.type, variantName);
-      const property = new Property(variantName, this.getDoc(type), schema, {
+      const variantName = this.getUnionVariantName(it.type, { depth: 0 });
+      const modelName = variantName + pascalCase(name) + "Model";
+      const propertyName = "value";
+
+      // these ObjectSchema is not added to codeModel.schemas
+      const objectSchema = new ObjectSchema(modelName, this.getDoc(type), {
         summary: this.getSummary(type),
-        required: false,
-        nullable: true,
-        readOnly: false,
+        language: {
+          default: {
+            namespace: namespace,
+          },
+          java: {
+            namespace: getJavaNamespace(namespace),
+          },
+        },
       });
-      unionSchema.anyOf.push(property);
+
+      const variantSchema = this.processSchema(it.type, variantName);
+      objectSchema.addProperty(
+        new Property(propertyName, this.getDoc(type), variantSchema, {
+          summary: this.getSummary(type),
+          required: true,
+          nullable: true,
+          readOnly: false,
+        }),
+      );
+      unionSchema.anyOf.push(objectSchema);
     });
     return this.codeModel.schemas.add(unionSchema);
   }
 
-  private getUnionVariantName(prefix: string, type: Type, option: any): string {
+  private getUnionVariantName(type: Type, option: any): string {
     switch (type.kind) {
       case "Scalar": {
         const scalarName = type.name;
@@ -1452,30 +1467,31 @@ export class CodeModelBuilder {
         } else if (scalarName === "zonedDateTime") {
           name = "Time";
         }
-        return prefix + pascalCase(name);
+        return pascalCase(name);
       }
       case "Enum":
-        return prefix + pascalCase(type.name);
+        return pascalCase(type.name);
       case "Model":
         if (isArrayModelType(this.program, type)) {
           ++option.depth;
           if (option.depth == 1) {
-            return prefix + this.getUnionVariantName("", type.indexer.value, option) + "List";
+            return this.getUnionVariantName(type.indexer.value, option) + "List";
           } else {
-            return prefix + "ListOf" + this.getUnionVariantName("", type.indexer.value, option);
+            return "ListOf" + this.getUnionVariantName(type.indexer.value, option);
           }
         } else if (isRecordModelType(this.program, type)) {
           ++option.depth;
           if (option.depth == 1) {
-            return prefix + this.getUnionVariantName(prefix, type.indexer.value, option) + "Map";
+            return this.getUnionVariantName(type.indexer.value, option) + "Map";
           } else {
-            return prefix + "MapOf" + this.getUnionVariantName("", type.indexer.value, option);
+            return "MapOf" + this.getUnionVariantName(type.indexer.value, option);
           }
         } else {
-          return prefix + pascalCase(type.name);
+          return pascalCase(type.name);
         }
+      default:
+        throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
     }
-    return prefix;
   }
 
   private isNullableType(type: Type): boolean {
@@ -1675,6 +1691,8 @@ export class CodeModelBuilder {
         innerApplySchemaUsage(schema.elementType, schemaUsage);
       } else if (schema instanceof ArraySchema) {
         innerApplySchemaUsage(schema.elementType, schemaUsage);
+      } else if (schema instanceof OrSchema) {
+        schema.anyOf?.forEach((it) => innerApplySchemaUsage(it, schemaUsage));
       }
     };
 
@@ -1699,10 +1717,6 @@ export class CodeModelBuilder {
     ) {
       if (schemaUsage.usage) {
         pushDistinct((schema.usage = schema.usage || []), ...schemaUsage.usage);
-      }
-
-      if (schema instanceof OrSchema) {
-        schema.anyOf.forEach((it) => this.trackSchemaUsage(it.schema, schemaUsage));
       }
     } else if (schema instanceof DictionarySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
@@ -1820,6 +1834,10 @@ function pascalCase(name: string): string {
   }
 }
 
-// function hasDecorator(type: DecoratedType, name: string): boolean {
-//   return type.decorators.find((it) => it.decorator.name === name) !== undefined;
-// }
+function isPayloadProperty(program: Program, property: ModelProperty) {
+  const headerInfo = getHeaderFieldName(program, property);
+  const queryInfo = getQueryParamName(program, property);
+  const pathInfo = getPathParamName(program, property);
+  const statusCodeInfo = isStatusCode(program, property);
+  return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
+}

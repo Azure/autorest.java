@@ -7,10 +7,18 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.UnionModel;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaJavadocComment;
+import com.azure.autorest.model.javamodel.JavaModifier;
+import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.core.annotation.Immutable;
+import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
 
@@ -25,38 +33,62 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
 
     @Override
     public void write(UnionModel model, JavaFile javaFile) {
+        // presently, subclass would only contain one "value" property.
+
+        final boolean isAbstractClass = CoreUtils.isNullOrEmpty(model.getParentModelName());
+        final String superClassName = model.getParentModelName();
+
         Set<String> imports = new HashSet<>();
         model.addImportsTo(imports);
 
+        imports.add(Immutable.class.getName());
         imports.add(JsonValue.class.getName());
 
         javaFile.declareImport(imports);
 
+        List<JavaModifier> modifiers = Collections.singletonList(isAbstractClass ? JavaModifier.Abstract : JavaModifier.Final);
+        String classDeclaration = isAbstractClass ? model.getName() : (model.getName() + " extends " + superClassName);
         javaFile.javadocComment(comment -> comment.description(model.getDescription()));
-        javaFile.publicFinalClass(model.getName(), classBlock -> {
+        if (!isAbstractClass) {
+            javaFile.annotation("Immutable");
+        }
+        javaFile.publicClass(modifiers, classDeclaration, classBlock -> {
             // properties as member variables
             for (ClientModelProperty property : model.getProperties()) {
-                classBlock.privateMemberVariable(property.getClientType() + " " + property.getName());
+                classBlock.privateFinalMemberVariable(property.getClientType() + " " + property.getName());
             }
 
-            // ctor
-            classBlock.javadocComment(comment ->
-                    comment.description("Creates an instance of " + model.getName() + " class."));
-            classBlock.publicConstructor(model.getName() + "()", ctor -> {
-            });
+            // constructor
+            if (isAbstractClass) {
+                classBlock.javadocComment(comment ->
+                        comment.description("Creates an instance of " + model.getName() + " class."));
+                classBlock.constructor(JavaVisibility.Protected, model.getName() + "()", constructor -> {
+                });
+            } else {
+                StringBuilder constructorProperties = new StringBuilder();
 
-            // getValue
-            classBlock.annotation("JsonValue");
-            classBlock.privateMethod("Object getValue()", methodBlock -> {
-                methodBlock.line("Object value = null;");
+                Consumer<JavaJavadocComment> javadocCommentConsumer = comment ->
+                        comment.description("Creates an instance of " + model.getName() + " class.");
+
                 for (ClientModelProperty property : model.getProperties()) {
-                    String propertyExpression = "this." + property.getName();
-                    methodBlock.ifBlock(propertyExpression + " != null", ifBlock -> {
-                        methodBlock.line("value = " + property.getWireType().convertFromClientType(propertyExpression) + ";");
+                    javadocCommentConsumer = javadocCommentConsumer.andThen(comment -> {
+                        comment.param(property.getName(), "the value");
                     });
+
+                    if (constructorProperties.length() > 0) {
+                        constructorProperties.append(", ");
+                    }
+                    constructorProperties.append(property.getClientType()).append(" ").append(property.getName());
                 }
-                methodBlock.methodReturn("value");
-            });
+
+                classBlock.javadocComment(javadocCommentConsumer);
+                classBlock.publicConstructor(String.format("%1$s(%2$s)", model.getName(), constructorProperties), constructor -> {
+                    for (ClientModelProperty property : model.getProperties()) {
+                        constructor.line("this." + property.getName() + " = " +
+                                property.getWireType().convertFromClientType(property.getName()) + ";");
+                    }
+                });
+            }
 
             // getter/setters
             for (ClientModelProperty property : model.getProperties()) {
@@ -65,20 +97,12 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
 
                 // getter
                 classBlock.javadocComment(comment -> {
-                    comment.description(String.format("Get the value if type is %s", clientType));
-                    comment.methodReturns(String.format("the value if type is %s", clientType));
+                    comment.description("Gets the value");
+                    comment.methodReturns("the value");
                 });
-                classBlock.publicMethod(property.getClientType() + " " + property.getGetterName() + "()", methodBlock -> {
+                classBlock.annotation("JsonValue");
+                classBlock.publicMethod(clientType + " " + property.getGetterName() + "()", methodBlock -> {
                     methodBlock.methodReturn("this." + propertyName);
-                });
-
-                // setter
-                classBlock.javadocComment(comment -> {
-                    comment.description(String.format("Set the value as %s\n\nDo not set more than one type to the value.", clientType));
-                    comment.param(property.getName(), String.format("the value to set as %s", clientType));
-                });
-                classBlock.publicMethod(String.format("void %1$s(%2$s %3$s)", property.getSetterName(), property.getClientType(), propertyName), methodBlock -> {
-                    methodBlock.line(String.format("this.%1$s = %1$s;", propertyName));
                 });
             }
         });

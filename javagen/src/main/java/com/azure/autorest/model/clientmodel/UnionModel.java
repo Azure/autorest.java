@@ -26,6 +26,10 @@ public class UnionModel {
      */
     private final String description;
     /**
+     * Get the parent model of this model.
+     */
+    private final String parentModelName;
+    /**
      * Get the properties for this model.
      */
     private final List<ClientModelProperty> properties;
@@ -33,11 +37,14 @@ public class UnionModel {
 
     protected UnionModel(
             String packageKeyword, String name, List<String> imports, String description,
-            List<ClientModelProperty> properties, ImplementationDetails implementationDetails) {
+            String parentModelName,
+            List<ClientModelProperty> properties,
+            ImplementationDetails implementationDetails) {
         this.packageName = packageKeyword;
         this.name = name;
         this.imports = imports;
         this.description = description;
+        this.parentModelName = parentModelName;
         this.properties = properties;
         this.implementationDetails = implementationDetails;
     }
@@ -72,6 +79,10 @@ public class UnionModel {
         return description;
     }
 
+    public String getParentModelName() {
+        return parentModelName;
+    }
+
     public List<ClientModelProperty> getProperties() {
         return properties;
     }
@@ -81,13 +92,13 @@ public class UnionModel {
     }
 
     public static class Builder {
-        protected String packageName;
-        protected String name;
-        protected List<String> imports = Collections.emptyList();
-        protected String description;
-        protected List<ClientModel> derivedModels = Collections.emptyList();
-        protected List<ClientModelProperty> properties;
-        protected ImplementationDetails implementationDetails;
+        private String packageName;
+        private String name;
+        private List<String> imports = Collections.emptyList();
+        private String description;
+        private String parentModelName;
+        private List<ClientModelProperty> properties = Collections.emptyList();
+        private ImplementationDetails implementationDetails;
 
         /**
          * Sets the package that this model class belongs to.
@@ -130,6 +141,16 @@ public class UnionModel {
         }
 
         /**
+         * Sets the parent model of this model.
+         * @param parentModelName the parent model of this model
+         * @return the Builder itself
+         */
+        public Builder parentModelName(String parentModelName) {
+            this.parentModelName = parentModelName;
+            return this;
+        }
+
+        /**
          * Sets the properties for this model.
          * @param properties the properties for this model
          * @return the Builder itself
@@ -154,6 +175,7 @@ public class UnionModel {
                     name,
                     imports,
                     description,
+                    parentModelName,
                     properties,
                     implementationDetails);
         }

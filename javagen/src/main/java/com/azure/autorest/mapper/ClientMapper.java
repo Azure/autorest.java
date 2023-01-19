@@ -138,7 +138,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         // union model (class)
         builder.unionModels(codeModel.getSchemas().getOrs().stream().distinct()
-                .map(schema -> Mappers.getUnionModelMapper().map(schema))
+                .flatMap(schema -> Mappers.getUnionModelMapper().map(schema).stream())
                 .filter(Objects::nonNull)
                 .distinct()
                 .collect(Collectors.toList()));

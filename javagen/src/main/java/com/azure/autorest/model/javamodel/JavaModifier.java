@@ -9,7 +9,8 @@ package com.azure.autorest.model.javamodel;
 public enum JavaModifier {
     Final("final"),
 
-    Static("static");
+    Static("static"),
+    Abstract("abstract");
 
     private final String keyword;
 
