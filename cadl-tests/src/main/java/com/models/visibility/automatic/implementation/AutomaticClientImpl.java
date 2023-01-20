@@ -103,7 +103,7 @@ public final class AutomaticClientImpl {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AutomaticClient")
     public interface AutomaticClientService {
-        @Get("/models/visibility")
+        @Get("/models/visibility/automatic")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -121,7 +121,7 @@ public final class AutomaticClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Head("/models/visibility")
+        @Head("/models/visibility/automatic")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -139,7 +139,7 @@ public final class AutomaticClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Put("/models/visibility")
+        @Put("/models/visibility/automatic")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -157,7 +157,7 @@ public final class AutomaticClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Patch("/models/visibility")
+        @Patch("/models/visibility/automatic")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -175,7 +175,7 @@ public final class AutomaticClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/models/visibility")
+        @Post("/models/visibility/automatic")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -193,7 +193,7 @@ public final class AutomaticClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Delete("/models/visibility")
+        @Delete("/models/visibility/automatic")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,

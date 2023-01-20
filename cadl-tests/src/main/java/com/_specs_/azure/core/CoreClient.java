@@ -55,7 +55,7 @@ public final class CoreClient {
      * }</pre>
      *
      * @param id The user's id.
-     * @param user Details about a user.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -65,7 +65,7 @@ public final class CoreClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrUpdateWithResponse(int id, BinaryData user, RequestOptions requestOptions) {
-        return this.client.createOrUpdateWithResponse(id, user, requestOptions).block();
+    public Response<BinaryData> createOrUpdateWithResponse(int id, BinaryData resource, RequestOptions requestOptions) {
+        return this.client.createOrUpdateWithResponse(id, resource, requestOptions).block();
     }
 }
