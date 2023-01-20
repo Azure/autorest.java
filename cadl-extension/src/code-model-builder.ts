@@ -64,7 +64,7 @@ import {
   listOperationGroups,
   listOperationsInOperationGroup,
   shouldGenerateConvenient,
-  createDpgContext
+  createDpgContext,
 } from "@azure-tools/cadl-dpg";
 import { fail } from "assert";
 import {
@@ -134,18 +134,17 @@ export class CodeModelBuilder {
 
   private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
-  
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
     this.program = program1;
 
     const dpgEmitterOptions = {
       "generate-protocol-methods": true,
-      "generate-convenience-methods": this.options["dev-options"]?.["generate-convenience-apis"] ?? true
+      "generate-convenience-methods": this.options["dev-options"]?.["generate-convenience-apis"] ?? true,
     };
     const dpgEmitterContext = {
       ...context,
-      options: dpgEmitterOptions
+      options: dpgEmitterOptions,
     };
     this.dpgContext = createDpgContext(dpgEmitterContext);
     const service = listServices(this.program)[0];
