@@ -59,7 +59,7 @@ export const $lib = createCadlLibrary({
 export async function $onEmit(context: EmitContext<EmitterOptions>) {
   const program = context.program;
   const options = context.options;
-  const builder = new CodeModelBuilder(program, options);
+  const builder = new CodeModelBuilder(program, context);
   const codeModel = builder.build();
 
   if (!program.compilerOptions.noEmit && !program.hasError()) {

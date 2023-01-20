@@ -36,6 +36,7 @@ import {
   isNullType,
   NoTarget,
   getTypeName,
+  EmitContext,
 } from "@cadl-lang/compiler";
 import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
@@ -63,6 +64,7 @@ import {
   listOperationGroups,
   listOperationsInOperationGroup,
   shouldGenerateConvenient,
+  createDpgContext
 } from "@azure-tools/cadl-dpg";
 import { fail } from "assert";
 import {
@@ -132,11 +134,20 @@ export class CodeModelBuilder {
 
   private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
-  public constructor(program1: Program, options: EmitterOptions) {
-    this.options = options;
+  
+  public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
+    this.options = context.options;
     this.program = program1;
-    this.dpgContext = { program: this.program, generateProtocolMethods: true, generateConvenienceMethods: true };
 
+    const dpgEmitterOptions = {
+      "generate-protocol-methods": true,
+      "generate-convenience-methods": this.options["dev-options"]?.["generate-convenience-apis"] ?? true
+    };
+    const dpgEmitterContext = {
+      ...context,
+      options: dpgEmitterOptions
+    };
+    this.dpgContext = createDpgContext(dpgEmitterContext);
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
