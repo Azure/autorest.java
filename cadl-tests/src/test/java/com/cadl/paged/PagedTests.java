@@ -43,7 +43,7 @@ public class PagedTests {
 
         PagedAsyncClient client = new PagedAsyncClient(impl);
 
-        PagedFlux<Resource> resourcePagedFlux = client.listConvenience();
+        PagedFlux<Resource> resourcePagedFlux = client.list();
 
         // 5 items
         Assertions.assertEquals(5, resourcePagedFlux.count().block());

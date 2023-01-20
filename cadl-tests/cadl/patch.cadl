@@ -26,8 +26,7 @@ model Resource {
 
 @route("/patch")
 interface Patch {
-  // this convenienceAPI should be ignored
-  @convenienceAPI
+  // convenience methods will not be generated for patch operation for now.
   @patch
   createOrUpdate(
     @header("content-type") contentType: "application/merge-patch+json",

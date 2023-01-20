@@ -164,8 +164,8 @@ public final class CoreClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrUpdate(
                 @HostParam("endpoint") String endpoint,
-                @PathParam("name") String name,
                 @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData resource,
                 RequestOptions requestOptions,
@@ -185,8 +185,8 @@ public final class CoreClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get(
                 @HostParam("endpoint") String endpoint,
-                @PathParam("name") String name,
                 @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -205,8 +205,8 @@ public final class CoreClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete(
                 @HostParam("endpoint") String endpoint,
-                @PathParam("name") String name,
                 @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -242,11 +242,11 @@ public final class CoreClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createResource(
+        Mono<Response<Void>> createResource(
                 @HostParam("endpoint") String endpoint,
                 @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData resourceCreateOrReplaceModel,
+                @BodyParam("application/json") BinaryData resource,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -296,7 +296,7 @@ public final class CoreClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -312,8 +312,8 @@ public final class CoreClientImpl {
                 context ->
                         service.createOrUpdate(
                                 this.getEndpoint(),
-                                name,
                                 this.getServiceVersion().getVersion(),
+                                name,
                                 accept,
                                 resource,
                                 requestOptions,
@@ -346,7 +346,7 @@ public final class CoreClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -389,8 +389,8 @@ public final class CoreClientImpl {
                 context ->
                         service.get(
                                 this.getEndpoint(),
-                                name,
                                 this.getServiceVersion().getVersion(),
+                                name,
                                 accept,
                                 requestOptions,
                                 context));
@@ -441,8 +441,8 @@ public final class CoreClientImpl {
                 context ->
                         service.delete(
                                 this.getEndpoint(),
-                                name,
                                 this.getServiceVersion().getVersion(),
+                                name,
                                 accept,
                                 requestOptions,
                                 context));
@@ -574,15 +574,6 @@ public final class CoreClientImpl {
      *
      * <pre>{@code
      * {
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
@@ -590,17 +581,16 @@ public final class CoreClientImpl {
      * }
      * }</pre>
      *
-     * @param resourceCreateOrReplaceModel The template for adding updateable properties.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createResourceWithResponseAsync(
-            BinaryData resourceCreateOrReplaceModel, RequestOptions requestOptions) {
+    public Mono<Response<Void>> createResourceWithResponseAsync(BinaryData resource, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
@@ -608,7 +598,7 @@ public final class CoreClientImpl {
                                 this.getEndpoint(),
                                 this.getServiceVersion().getVersion(),
                                 accept,
-                                resourceCreateOrReplaceModel,
+                                resource,
                                 requestOptions,
                                 context));
     }
@@ -620,15 +610,6 @@ public final class CoreClientImpl {
      *
      * <pre>{@code
      * {
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
@@ -636,18 +617,17 @@ public final class CoreClientImpl {
      * }
      * }</pre>
      *
-     * @param resourceCreateOrReplaceModel The template for adding updateable properties.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createResourceWithResponse(
-            BinaryData resourceCreateOrReplaceModel, RequestOptions requestOptions) {
-        return createResourceWithResponseAsync(resourceCreateOrReplaceModel, requestOptions).block();
+    public Response<Void> createResourceWithResponse(BinaryData resource, RequestOptions requestOptions) {
+        return createResourceWithResponseAsync(resource, requestOptions).block();
     }
 
     /**
