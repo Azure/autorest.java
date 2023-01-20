@@ -36,6 +36,7 @@ import {
   isNullType,
   NoTarget,
   getTypeName,
+  EmitContext,
 } from "@cadl-lang/compiler";
 import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
@@ -57,11 +58,13 @@ import {
 import { getVersion } from "@cadl-lang/versioning";
 import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/cadl-azure-core";
 import {
-  getConvenienceAPIName,
+  DpgContext,
   getDefaultApiVersion,
   listClients,
   listOperationGroups,
   listOperationsInOperationGroup,
+  shouldGenerateConvenient,
+  createDpgContext,
 } from "@azure-tools/cadl-dpg";
 import { fail } from "assert";
 import {
@@ -120,6 +123,7 @@ export class CodeModelBuilder {
   private baseUri: string;
   private hostParameters: Parameter[];
   private namespace: string;
+  private dpgContext: DpgContext;
 
   private options: EmitterOptions;
 
@@ -130,10 +134,19 @@ export class CodeModelBuilder {
 
   private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
-  public constructor(program1: Program, options: EmitterOptions) {
-    this.options = options;
+  public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
+    this.options = context.options;
     this.program = program1;
 
+    const dpgEmitterOptions = {
+      "generate-protocol-methods": true,
+      "generate-convenience-methods": this.options["dev-options"]?.["generate-convenience-apis"] ?? true,
+    };
+    const dpgEmitterContext = {
+      ...context,
+      options: dpgEmitterOptions,
+    };
+    this.dpgContext = createDpgContext(dpgEmitterContext);
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
@@ -384,9 +397,6 @@ export class CodeModelBuilder {
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
-      } else if (!this.options["dev-options"] || (this.options["dev-options"]["generate-convenience-apis"] ?? true)) {
-        // add convenienceApi by default, unless devOptions says no
-        codeModelOperation.convenienceApi = new ConvenienceApi(operation.name);
       }
     }
 
@@ -1542,7 +1552,12 @@ export class CodeModelBuilder {
     if (friendlyName) {
       return friendlyName;
     } else {
-      if (target.kind === "Model" && target.templateArguments && target.templateArguments.length > 0) {
+      if (
+        target.kind === "Model" &&
+        target.templateMapper &&
+        target.templateMapper.args &&
+        target.templateMapper.args.length > 0
+      ) {
         const cadlName = getTypeName(target, this.typeNameOptions);
         const newName = getNameForTemplate(target);
         this.program.trace("cadl-java", `Rename Cadl model '${cadlName}' to '${newName}'`);
@@ -1576,7 +1591,11 @@ export class CodeModelBuilder {
 
   private getConvenienceApiName(op: Operation): string | undefined {
     // check @convenienceMethod
-    return getConvenienceAPIName(this.program, op);
+    if (shouldGenerateConvenient(this.dpgContext, op)) {
+      return op.name;
+    } else {
+      return undefined;
+    }
   }
 
   private logWarning(msg: string) {
@@ -1788,7 +1807,7 @@ function modelContainsDerivedModel(model: Model): boolean {
 function isModelReferredInTemplate(template: TemplatedTypeBase, target: Model): boolean {
   return (
     template === target ||
-    (template.templateArguments?.some((it) =>
+    (template?.templateMapper?.args?.some((it) =>
       it.kind === "Model" || it.kind === "Union" ? isModelReferredInTemplate(it, target) : false,
     ) ??
       false)
@@ -1799,8 +1818,8 @@ function getNameForTemplate(target: Type): string {
   switch (target.kind) {
     case "Model": {
       let name = target.name;
-      if (target.templateArguments) {
-        name = name + target.templateArguments.map((it) => getNameForTemplate(it)).join("");
+      if (target.templateMapper && target.templateMapper.args) {
+        name = name + target.templateMapper.args.map((it) => getNameForTemplate(it)).join("");
       }
       return name;
     }

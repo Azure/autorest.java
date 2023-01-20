@@ -93,7 +93,7 @@ public final class LongRunningClient {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -132,7 +132,7 @@ public final class LongRunningClient {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -275,7 +275,7 @@ public final class LongRunningClient {
      * The createOrReplace operation.
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

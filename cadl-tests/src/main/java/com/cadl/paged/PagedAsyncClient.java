@@ -75,7 +75,7 @@ public final class PagedAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Resource> listConvenience() {
+    public PagedFlux<Resource> list() {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);

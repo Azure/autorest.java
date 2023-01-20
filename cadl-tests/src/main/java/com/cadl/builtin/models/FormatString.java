@@ -76,7 +76,7 @@ public final class FormatString {
      * @param extensibleEnumScalar the extensibleEnumScalar value to set.
      */
     @JsonCreator
-    private FormatString(
+    public FormatString(
             @JsonProperty(value = "base64Encoded", required = true) byte[] base64Encoded,
             @JsonProperty(value = "binary", required = true) byte[] binary,
             @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,

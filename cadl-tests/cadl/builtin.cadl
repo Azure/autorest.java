@@ -1,6 +1,8 @@
 import "@cadl-lang/rest";
+import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
+using Azure.DPG;
 
 @service({
   title: "Builtin",
@@ -74,4 +76,7 @@ interface BuiltinOp {
   read(...Request): {
     @body body: Builtin;
   };
+
+  @convenientAPI(false)
+  write(@body body: Builtin): OkResponse;
 }

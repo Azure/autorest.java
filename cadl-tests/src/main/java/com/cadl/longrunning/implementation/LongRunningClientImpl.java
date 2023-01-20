@@ -168,9 +168,9 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> statusMonitor(
                 @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
                 @PathParam("name") String name,
                 @PathParam("operationId") String operationId,
-                @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -189,9 +189,9 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrUpdate(
                 @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
                 @PathParam("name") String name,
                 @HeaderParam("Content-Type") String contentType,
-                @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/merge-patch+json") BinaryData resource,
                 RequestOptions requestOptions,
@@ -211,8 +211,8 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrReplace(
                 @HostParam("endpoint") String endpoint,
-                @PathParam("name") String name,
                 @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData resource,
                 RequestOptions requestOptions,
@@ -232,8 +232,8 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get(
                 @HostParam("endpoint") String endpoint,
-                @PathParam("name") String name,
                 @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -252,8 +252,8 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> delete(
                 @HostParam("endpoint") String endpoint,
-                @PathParam("name") String name,
                 @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -272,9 +272,9 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> export(
                 @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
                 @PathParam("name") String name,
                 @QueryParam("projectFileVersion") String projectFileVersion,
-                @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -293,8 +293,8 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> importx(
                 @HostParam("endpoint") String endpoint,
-                @PathParam("name") String name,
                 @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData exportedResource,
                 RequestOptions requestOptions,
@@ -337,9 +337,9 @@ public final class LongRunningClientImpl {
                 context ->
                         service.statusMonitor(
                                 this.getEndpoint(),
+                                this.getServiceVersion().getVersion(),
                                 name,
                                 operationId,
-                                this.getServiceVersion().getVersion(),
                                 accept,
                                 requestOptions,
                                 context));
@@ -402,7 +402,7 @@ public final class LongRunningClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -419,9 +419,9 @@ public final class LongRunningClientImpl {
                 context ->
                         service.createOrUpdate(
                                 this.getEndpoint(),
+                                this.getServiceVersion().getVersion(),
                                 name,
                                 contentType,
-                                this.getServiceVersion().getVersion(),
                                 accept,
                                 resource,
                                 requestOptions,
@@ -452,7 +452,7 @@ public final class LongRunningClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -501,7 +501,7 @@ public final class LongRunningClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -539,7 +539,7 @@ public final class LongRunningClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -555,8 +555,8 @@ public final class LongRunningClientImpl {
                 context ->
                         service.createOrReplace(
                                 this.getEndpoint(),
-                                name,
                                 this.getServiceVersion().getVersion(),
+                                name,
                                 accept,
                                 resource,
                                 requestOptions,
@@ -587,7 +587,7 @@ public final class LongRunningClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -636,7 +636,7 @@ public final class LongRunningClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -674,7 +674,7 @@ public final class LongRunningClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -723,7 +723,7 @@ public final class LongRunningClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param resource The resource parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -765,8 +765,8 @@ public final class LongRunningClientImpl {
                 context ->
                         service.get(
                                 this.getEndpoint(),
-                                name,
                                 this.getServiceVersion().getVersion(),
+                                name,
                                 accept,
                                 requestOptions,
                                 context));
@@ -827,8 +827,8 @@ public final class LongRunningClientImpl {
                 context ->
                         service.delete(
                                 this.getEndpoint(),
-                                name,
                                 this.getServiceVersion().getVersion(),
+                                name,
                                 accept,
                                 requestOptions,
                                 context));
@@ -981,9 +981,9 @@ public final class LongRunningClientImpl {
                 context ->
                         service.export(
                                 this.getEndpoint(),
+                                this.getServiceVersion().getVersion(),
                                 name,
                                 projectFileVersion,
-                                this.getServiceVersion().getVersion(),
                                 accept,
                                 requestOptions,
                                 context));
@@ -1112,8 +1112,8 @@ public final class LongRunningClientImpl {
                 context ->
                         service.importx(
                                 this.getEndpoint(),
-                                name,
                                 this.getServiceVersion().getVersion(),
+                                name,
                                 accept,
                                 exportedResource,
                                 requestOptions,

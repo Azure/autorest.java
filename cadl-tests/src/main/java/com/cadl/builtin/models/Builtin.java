@@ -119,7 +119,7 @@ public final class Builtin {
      * @param url the url value to set.
      */
     @JsonCreator
-    private Builtin(
+    public Builtin(
             @JsonProperty(value = "formatString", required = true) FormatString formatString,
             @JsonProperty(value = "boolean", required = true) boolean booleanProperty,
             @JsonProperty(value = "string", required = true) String string,

@@ -4,11 +4,13 @@
 
 package com.cadl.builtin.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -132,6 +134,25 @@ public final class BuiltinClientImpl {
         Mono<Response<BinaryData>> read(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/builtin")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> write(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -273,5 +294,107 @@ public final class BuiltinClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
         return readWithResponseAsync(requestOptions).block();
+    }
+
+    /**
+     * The write operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     formatString (Required): {
+     *         base64Encoded: Base64Url (Required)
+     *         binary: byte[] (Required)
+     *         dateTime: OffsetDateTime (Required)
+     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
+     *         password: String (Required)
+     *         uri: String (Required)
+     *         extensibleEnum: String(Value1/Value2) (Required)
+     *         extensibleEnumScalar: String(Value1/Value2) (Required)
+     *     }
+     *     boolean: boolean (Required)
+     *     string: String (Required)
+     *     bytes: byte[] (Required)
+     *     int: int (Required)
+     *     safeint: long (Required)
+     *     long: long (Required)
+     *     float: double (Required)
+     *     double: double (Required)
+     *     duration: Duration (Required)
+     *     dateTime: OffsetDateTime (Required)
+     *     stringList (Required): [
+     *         String (Required)
+     *     ]
+     *     bytesDict (Required): {
+     *         String: byte[] (Required)
+     *     }
+     *     url: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> writeWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.write(this.getEndpoint(), accept, body, requestOptions, context));
+    }
+
+    /**
+     * The write operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     formatString (Required): {
+     *         base64Encoded: Base64Url (Required)
+     *         binary: byte[] (Required)
+     *         dateTime: OffsetDateTime (Required)
+     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
+     *         password: String (Required)
+     *         uri: String (Required)
+     *         extensibleEnum: String(Value1/Value2) (Required)
+     *         extensibleEnumScalar: String(Value1/Value2) (Required)
+     *     }
+     *     boolean: boolean (Required)
+     *     string: String (Required)
+     *     bytes: byte[] (Required)
+     *     int: int (Required)
+     *     safeint: long (Required)
+     *     long: long (Required)
+     *     float: double (Required)
+     *     double: double (Required)
+     *     duration: Duration (Required)
+     *     dateTime: OffsetDateTime (Required)
+     *     stringList (Required): [
+     *         String (Required)
+     *     ]
+     *     bytesDict (Required): {
+     *         String: byte[] (Required)
+     *     }
+     *     url: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> writeWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return writeWithResponseAsync(body, requestOptions).block();
     }
 }
