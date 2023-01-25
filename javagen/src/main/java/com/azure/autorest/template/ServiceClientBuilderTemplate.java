@@ -34,6 +34,8 @@ import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.tracing.Tracer;
+import com.azure.core.util.tracing.TracerProvider;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -151,6 +153,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 // sdk version
                 addGeneratedAnnotation(classBlock);
                 classBlock.privateStaticFinalVariable("String SDK_VERSION = \"version\"");
+
+                String rpNamespace = settings.getRpNamespace();
+                // sdk name
+                addGeneratedAnnotation(classBlock);
+                classBlock.privateStaticFinalVariable(String.format("String RESOURCE_PROVIDER_NAMESPACE = \"%s\"", 
+                    rpNamespace));
 
                 // default scope
                 Set<String> scopes = serviceClient.getSecurityInfo() != null ? serviceClient.getSecurityInfo().getScopes() : null;
@@ -461,6 +469,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add(AddDatePolicy.class.getName());
         imports.add(HttpPipelinePosition.class.getName());
         imports.add(Collectors.class.getName());
+        imports.add(Tracer.class.getName());
+        imports.add(TracerProvider.class.getName());
     }
 
     protected void addTraitsImports(ClientBuilder clientBuilder, Set<String> imports) {
@@ -531,6 +541,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("this.pipelinePolicies.stream()" +
                     ".filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)" +
                     ".forEach(p -> policies.add(p));");
+
+            function.line("TracingOptions tracingOptions = null;");
+            function.ifBlock(String.format("%s != null", localClientOptionsName), action -> {
+                function.line(String.format("tracingOptions = %s.getTracingOptions();", localClientOptionsName));
+            });
+
+            function.line("Tracer tracer = TracerProvider.getDefaultProvider()" + 
+                   ".createTracer(clientName, clientVersion, RESOURCE_PROVIDER_NAMESPACE, tracingOptions);");
+        
             function.line("HttpPolicyProviders.addAfterRetryPolicies(policies);");
 
             function.line("policies.add(new HttpLoggingPolicy(httpLogOptions));");
@@ -538,6 +557,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("HttpPipeline httpPipeline = new HttpPipelineBuilder()" +
                     ".policies(policies.toArray(new HttpPipelinePolicy[0]))" +
                     ".httpClient(httpClient)" +
+                    ".tracer(tracer)" +
                     String.format(".clientOptions(%s)", localClientOptionsName) +
                     ".build();");
             function.methodReturn("httpPipeline");

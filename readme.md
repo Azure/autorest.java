@@ -56,6 +56,7 @@ To debug, add `--java.debugger` to the argument list. The JVM will suspend at th
 - `generate-client-as-impl: true`, generate Client in implementation package, for customization.
 - `models-subpackage: implementation.models`, generate model classes in implementation package.
 - `custom-types-subpackage: models`, generate selected model classes in models package.
+- `rp-namespace`, Azure Resource provider namespace that describes primary service library is generated for.
 
 # Settings
 Settings can be provided on the command line through `--name:value` or in a README file through `name: value`. The list of settings for AutoRest in general can be found at https://github.com/Azure/autorest/blob/main/docs/user/command-line-interface.md. The list of settings for AutoRest.Java specifically are listed below:
@@ -90,6 +91,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--generic-response-type`|Indicates that generic response types are used instead of named response types that extend the generic type.|
 |`--output-model-immutable`|Indicates that output-only models be generated as immutable, and without public constructor.|
 |`--use-input-stream-for-binary`|Indicates that `InputStream` is used for binary response body. By default, `BinaryData` is used.|
+| `--rp-namespace` | Azure Resource provider namespace that describes primary service library is generated for | 
 
 ## Settings for minimal data-plane clients
 
@@ -390,6 +392,9 @@ help-content:
       - key: data-plane
         type: bool
         description:  Indicates whether to generate code for minimal clients. Default is false.
+      - key: rp-namespace
+        type: string
+        description:  Azure Resource provider namespace that describes primary service library is generated for - https://learn.microsoft.com/azure/azure-resource-manager/management/azure-services-resource-providers.
 
   javafluent:
     activationScope: fluent
