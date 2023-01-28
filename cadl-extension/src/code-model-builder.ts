@@ -65,7 +65,6 @@ import {
   listOperationsInOperationGroup,
   shouldGenerateConvenient,
   createDpgContext,
-  DpgEmitterOptions,
 } from "@azure-tools/cadl-dpg";
 import { fail } from "assert";
 import {
@@ -139,7 +138,7 @@ export class CodeModelBuilder {
     this.options = context.options;
     this.program = program1;
 
-    this.dpgContext = createDpgContext(context as EmitContext<DpgEmitterOptions>);
+    this.dpgContext = createDpgContext(context as EmitContext<any>);
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
