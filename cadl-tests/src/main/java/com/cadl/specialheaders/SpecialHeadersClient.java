@@ -34,7 +34,7 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
+     * The get operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -98,7 +98,7 @@ public final class SpecialHeadersClient {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param body The body parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -108,8 +108,8 @@ public final class SpecialHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
-        return this.client.putWithResponse(name, body, requestOptions).block();
+    public Response<BinaryData> putWithResponse(String name, BinaryData resource, RequestOptions requestOptions) {
+        return this.client.putWithResponse(name, resource, requestOptions).block();
     }
 
     /**
@@ -126,17 +126,6 @@ public final class SpecialHeadersClient {
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -149,7 +138,6 @@ public final class SpecialHeadersClient {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -159,12 +147,23 @@ public final class SpecialHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
-        return this.client.postWithResponse(name, body, requestOptions).block();
+    public Response<BinaryData> postWithResponse(String name, RequestOptions requestOptions) {
+        return this.client.postWithResponse(name, requestOptions).block();
     }
 
     /**
      * Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -205,7 +204,7 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
+     * The get operation.
      *
      * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -228,7 +227,7 @@ public final class SpecialHeadersClient {
      * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
      * @param name The name parameter.
-     * @param body The body parameter.
+     * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -239,17 +238,18 @@ public final class SpecialHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource put(String name, Resource body) {
+    public Resource put(String name, Resource resource) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(name, BinaryData.fromObject(body), requestOptions).getValue().toObject(Resource.class);
+        return putWithResponse(name, BinaryData.fromObject(resource), requestOptions)
+                .getValue()
+                .toObject(Resource.class);
     }
 
     /**
      * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
      * @param name The name parameter.
-     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -260,9 +260,9 @@ public final class SpecialHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource post(String name, Resource body) {
+    public Resource post(String name) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postWithResponse(name, BinaryData.fromObject(body), requestOptions).getValue().toObject(Resource.class);
+        return postWithResponse(name, requestOptions).getValue().toObject(Resource.class);
     }
 }

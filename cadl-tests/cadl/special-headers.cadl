@@ -3,13 +3,15 @@ import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
 using Cadl.Rest;
+using Cadl.Versioning;
 using Azure.Core;
-using Azure.Core.Foundations;
+using Azure.Core.Traits;
 
 @service({
   title: "SpecialHeaders",
   version: "1.0.0",
 })
+@versionedDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Cadl.SpecialHeaders;
 
 model Resource {
@@ -23,30 +25,23 @@ model Resource {
   type: string;
 }
 
-model SpecialHeaderParameters {
-  @header("Repeatability-Request-ID") requestId?: string;
-  @header("Repeatability-First-Sent") firstSent?: zonedDateTime;
-}
-
-model Customizations {
-  parameters: SpecialHeaderParameters;
-}
+interface ResourceOperations
+  extends Azure.Core.ResourceOperations<SupportsRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
 
 @route("/special-headers")
 interface SpecialHeadersOp {
   @get
-  @doc("Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent")
-  get(...SpecialHeaderParameters, @path name: string): Resource | ErrorResponse;
+  get is ResourceOperations.ResourceRead<Resource>;
 
   @put
   @doc("Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent")
-  put(...SpecialHeaderParameters, @path name: string, @body body: Resource): Resource | ErrorResponse;
+  put is ResourceOperations.ResourceCreateOrReplace<Resource>;
 
   @post
   @doc("Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent")
-  post(...SpecialHeaderParameters, @path name: string, @body body: Resource): Resource | ErrorResponse;
+  post is ResourceOperations.ResourceAction<Resource, {}, Resource>;
 
   @put
   @doc("Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent")
-  createLro is LongRunningResourceCreateOrUpdate<Resource, Customizations>;
+  createLro is ResourceOperations.LongRunningResourceCreateOrUpdate<Resource>;
 }

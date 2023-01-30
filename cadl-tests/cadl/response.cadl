@@ -5,6 +5,7 @@ import "@azure-tools/cadl-dpg";
 using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 using Azure.DPG;
 
 @service({
@@ -26,6 +27,9 @@ model Resource {
 
 model ResourceArray is Resource[];
 
+interface ResourceOperations
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
+
 // operation using Azure.Core
 @Azure.DPG.client({
   name: "CoreClient",
@@ -35,24 +39,16 @@ model ResourceArray is Resource[];
 @doc("Cadl Core")
 interface CadlCoreOp {
   @doc("Creates a new resource or updates an existing one.")
-  createOrUpdate is ResourceCreateOrReplace<Resource>;
+  createOrUpdate is ResourceOperations.ResourceCreateOrReplace<Resource>;
 
   @doc("Gets the details of a resource.")
-  get is ResourceRead<Resource>;
+  get is ResourceOperations.ResourceRead<Resource>;
 
   @doc("Deletes a resource.")
-  delete is ResourceDelete<Resource>;
+  delete is ResourceOperations.ResourceDelete<Resource>;
 
   @doc("Lists the existing resources.")
-  list is ResourceList<Resource>;
-
-  @doc("Creates a new resource with service provided name.")
-  createResource is ResourceCreateWithServiceProvidedName<
-    Resource,
-    {
-      response: Resource;
-    }
-  >;
+  list is ResourceOperations.ResourceList<Resource>;
 }
 
 @Azure.DPG.client({

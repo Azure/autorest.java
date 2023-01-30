@@ -2,7 +2,7 @@ import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
-using Versioning;
+using Cadl.Versioning;
 using Azure.Core.Foundations;
 
 @service({

@@ -156,7 +156,7 @@ public final class SpecialHeadersClientImpl {
     @Host("{endpoint}")
     @ServiceInterface(name = "SpecialHeadersClient")
     public interface SpecialHeadersClientService {
-        @Get("/special-headers/{name}")
+        @Get("/special-headers/resources/{name}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -170,13 +170,14 @@ public final class SpecialHeadersClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get(
                 @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
                 @PathParam("name") String name,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Put("/special-headers/{name}")
-        @ExpectedResponses({200})
+        @Put("/special-headers/resources/{name}")
+        @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -189,13 +190,14 @@ public final class SpecialHeadersClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put(
                 @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
                 @PathParam("name") String name,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
+                @BodyParam("application/json") BinaryData resource,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/special-headers/{name}")
+        @Post("/special-headers/resources/{name}:post")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -209,9 +211,9 @@ public final class SpecialHeadersClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> post(
                 @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
                 @PathParam("name") String name,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -239,7 +241,7 @@ public final class SpecialHeadersClientImpl {
     }
 
     /**
-     * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
+     * The get operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -263,11 +265,19 @@ public final class SpecialHeadersClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get(this.getEndpoint(), name, accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context ->
+                        service.get(
+                                this.getEndpoint(),
+                                this.getServiceVersion().getVersion(),
+                                name,
+                                accept,
+                                requestOptions,
+                                context));
     }
 
     /**
-     * Send a get request without header Repeatability-Request-ID and Repeatability-First-Sent.
+     * The get operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -330,7 +340,7 @@ public final class SpecialHeadersClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param body The body parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -340,14 +350,22 @@ public final class SpecialHeadersClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putWithResponseAsync(
-            String name, BinaryData body, RequestOptions requestOptions) {
+            String name, BinaryData resource, RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
                 "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return FluxUtil.withContext(
-                context -> service.put(this.getEndpoint(), name, accept, body, requestOptionsLocal, context));
+                context ->
+                        service.put(
+                                this.getEndpoint(),
+                                this.getServiceVersion().getVersion(),
+                                name,
+                                accept,
+                                resource,
+                                requestOptionsLocal,
+                                context));
     }
 
     /**
@@ -387,7 +405,7 @@ public final class SpecialHeadersClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param body The body parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -396,8 +414,8 @@ public final class SpecialHeadersClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
-        return putWithResponseAsync(name, body, requestOptions).block();
+    public Response<BinaryData> putWithResponse(String name, BinaryData resource, RequestOptions requestOptions) {
+        return putWithResponseAsync(name, resource, requestOptions).block();
     }
 
     /**
@@ -414,17 +432,6 @@ public final class SpecialHeadersClientImpl {
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -437,7 +444,6 @@ public final class SpecialHeadersClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -446,15 +452,21 @@ public final class SpecialHeadersClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postWithResponseAsync(
-            String name, BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> postWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
         requestOptionsLocal.setHeader(
                 "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return FluxUtil.withContext(
-                context -> service.post(this.getEndpoint(), name, accept, body, requestOptionsLocal, context));
+                context ->
+                        service.post(
+                                this.getEndpoint(),
+                                this.getServiceVersion().getVersion(),
+                                name,
+                                accept,
+                                requestOptionsLocal,
+                                context));
     }
 
     /**
@@ -471,17 +483,6 @@ public final class SpecialHeadersClientImpl {
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -494,7 +495,6 @@ public final class SpecialHeadersClientImpl {
      * }</pre>
      *
      * @param name The name parameter.
-     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -503,12 +503,23 @@ public final class SpecialHeadersClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
-        return postWithResponseAsync(name, body, requestOptions).block();
+    public Response<BinaryData> postWithResponse(String name, RequestOptions requestOptions) {
+        return postWithResponseAsync(name, requestOptions).block();
     }
 
     /**
      * Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -546,6 +557,10 @@ public final class SpecialHeadersClientImpl {
             String name, BinaryData resource, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader(
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return FluxUtil.withContext(
                 context ->
                         service.createLro(
@@ -555,12 +570,23 @@ public final class SpecialHeadersClientImpl {
                                 contentType,
                                 accept,
                                 resource,
-                                requestOptions,
+                                requestOptionsLocal,
                                 context));
     }
 
     /**
      * Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -612,6 +638,17 @@ public final class SpecialHeadersClientImpl {
 
     /**
      * Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *

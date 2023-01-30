@@ -147,34 +147,6 @@ public final class CoreClient {
     }
 
     /**
-     * Creates a new resource with service provided name.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param resource The resource instance.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> createResourceWithResponse(BinaryData resource, RequestOptions requestOptions) {
-        return this.client.createResourceWithResponse(resource, requestOptions).block();
-    }
-
-    /**
      * Creates a new resource or updates an existing one.
      *
      * @param name The name parameter.
@@ -251,24 +223,5 @@ public final class CoreClient {
     public PagedIterable<Resource> list() {
         // Generated convenience method for list
         return new PagedIterable<>(client.list());
-    }
-
-    /**
-     * Creates a new resource with service provided name.
-     *
-     * @param resource The resource instance.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void createResource(Resource resource) {
-        // Generated convenience method for createResourceWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        createResourceWithResponse(BinaryData.fromObject(resource), requestOptions).getValue();
     }
 }
