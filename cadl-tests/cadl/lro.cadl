@@ -3,7 +3,7 @@ import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
 using Cadl.Rest;
-using Versioning;
+using Cadl.Versioning;
 using Azure.Core;
 using Azure.Core.Foundations;
 
