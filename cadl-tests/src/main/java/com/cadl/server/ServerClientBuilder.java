@@ -177,6 +177,23 @@ public final class ServerClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated private ServerServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     *
+     * @param serviceVersion the serviceVersion value.
+     * @return the ServerClientBuilder.
+     */
+    @Generated
+    public ServerClientBuilder serviceVersion(ServerServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
@@ -203,9 +220,15 @@ public final class ServerClientBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localDomain = (domain != null) ? domain : "httpbin";
         String localTld = (tld != null) ? tld : "org";
+        ServerServiceVersion localServiceVersion =
+                (serviceVersion != null) ? serviceVersion : ServerServiceVersion.getLatest();
         ServerClientImpl client =
                 new ServerClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localDomain, localTld);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        localDomain,
+                        localTld,
+                        localServiceVersion);
         return client;
     }
 

@@ -30,6 +30,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import com.cadl.server.ServerServiceVersion;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the ServerClient type. */
@@ -61,6 +62,18 @@ public final class ServerClientImpl {
         return this.tld;
     }
 
+    /** Service version. */
+    private final ServerServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     *
+     * @return the serviceVersion value.
+     */
+    public ServerServiceVersion getServiceVersion() {
+        return this.serviceVersion;
+    }
+
     /** The HTTP pipeline to send requests through. */
     private final HttpPipeline httpPipeline;
 
@@ -90,15 +103,17 @@ public final class ServerClientImpl {
      *
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
+     * @param serviceVersion Service version.
      */
-    public ServerClientImpl(String domain, String tld) {
+    public ServerClientImpl(String domain, String tld, ServerServiceVersion serviceVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 domain,
-                tld);
+                tld,
+                serviceVersion);
     }
 
     /**
@@ -107,9 +122,10 @@ public final class ServerClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
+     * @param serviceVersion Service version.
      */
-    public ServerClientImpl(HttpPipeline httpPipeline, String domain, String tld) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), domain, tld);
+    public ServerClientImpl(HttpPipeline httpPipeline, String domain, String tld, ServerServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), domain, tld, serviceVersion);
     }
 
     /**
@@ -119,12 +135,19 @@ public final class ServerClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
+     * @param serviceVersion Service version.
      */
-    public ServerClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String domain, String tld) {
+    public ServerClientImpl(
+            HttpPipeline httpPipeline,
+            SerializerAdapter serializerAdapter,
+            String domain,
+            String tld,
+            ServerServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.domain = domain;
         this.tld = tld;
+        this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(ServerClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
@@ -149,6 +172,7 @@ public final class ServerClientImpl {
         Mono<Response<Void>> status(
                 @HostParam("domain") String domain,
                 @HostParam("tld") String tld,
+                @HostParam("ApiVersion") String apiVersion,
                 @PathParam("code") int code,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -170,7 +194,15 @@ public final class ServerClientImpl {
     public Mono<Response<Void>> statusWithResponseAsync(int code, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.status(this.getDomain(), this.getTld(), code, accept, requestOptions, context));
+                context ->
+                        service.status(
+                                this.getDomain(),
+                                this.getTld(),
+                                this.getServiceVersion().getVersion(),
+                                code,
+                                accept,
+                                requestOptions,
+                                context));
     }
 
     /**
