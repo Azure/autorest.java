@@ -154,7 +154,7 @@ public final class ServerClientImpl {
     /**
      * The interface defining all the services for ServerClient to be used by the proxy service to perform REST calls.
      */
-    @Host("https://{domain}.{tld}")
+    @Host("https://{domain}.{tld}/{ApiVersion}")
     @ServiceInterface(name = "ServerClient")
     public interface ServerClientService {
         @Get("/status/{code}")

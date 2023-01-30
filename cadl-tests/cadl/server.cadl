@@ -1,15 +1,13 @@
 import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
 
 using Cadl.Http;
-using Cadl.Versioning;
 
 @service({
   title: "Server",
   version: "1.0.0",
 })
 @server(
-  "https://{domain}.{tld}",
+  "https://{domain}.{tld}/{ApiVersion}",
   "Httpbin endpoint",
   {
     @doc("second-level domain, use httpbin")
@@ -20,17 +18,14 @@ using Cadl.Versioning;
 
     @doc("Api Version")
     @path
-    ApiVersion: APIVersion,
+    ApiVersion: APIVersions,
   }
 )
 namespace Cadl.Server;
 
-enum Versions {
+enum APIVersions {
   v1_0: "v1.0",
 }
-
-@knownValues(Versions)
-scalar APIVersion extends string;
 
 @route("/status/{code}")
 interface ServerOp {
