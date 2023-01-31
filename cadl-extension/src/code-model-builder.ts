@@ -139,15 +139,7 @@ export class CodeModelBuilder {
     this.options = context.options;
     this.program = program1;
 
-    const dpgEmitterOptions = {
-      "generate-protocol-methods": true,
-      "generate-convenience-methods": this.options["dev-options"]?.["generate-convenience-apis"] ?? true,
-    };
-    const dpgEmitterContext = {
-      ...context,
-      options: dpgEmitterOptions,
-    };
-    this.dpgContext = createDpgContext(dpgEmitterContext);
+    this.dpgContext = createDpgContext(context as EmitContext<any>);
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {

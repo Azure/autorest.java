@@ -154,34 +154,6 @@ public final class CoreAsyncClient {
     }
 
     /**
-     * Creates a new resource with service provided name.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param resource The resource instance.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> createResourceWithResponse(BinaryData resource, RequestOptions requestOptions) {
-        return this.serviceClient.createResourceWithResponseAsync(resource, requestOptions);
-    }
-
-    /**
      * Creates a new resource or updates an existing one.
      *
      * @param name The name parameter.
@@ -283,25 +255,5 @@ public final class CoreAsyncClient {
                                                     pagedResponse.getContinuationToken(),
                                                     null));
                         });
-    }
-
-    /**
-     * Creates a new resource with service provided name.
-     *
-     * @param resource The resource instance.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> createResource(Resource resource) {
-        // Generated convenience method for createResourceWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return createResourceWithResponse(BinaryData.fromObject(resource), requestOptions).flatMap(FluxUtil::toMono);
     }
 }
