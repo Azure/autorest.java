@@ -63,6 +63,7 @@ import {
   listClients,
   listOperationGroups,
   listOperationsInOperationGroup,
+  isApiVersion,
   shouldGenerateConvenient,
   createDpgContext,
 } from "@azure-tools/cadl-dpg";
@@ -234,7 +235,7 @@ export class CodeModelBuilder {
       server.parameters.forEach((it) => {
         let parameter;
 
-        if (it.name === "ApiVersion") {
+        if (isApiVersion(this.program, it as any)) {
           // TODO hack on "ApiVersion"
           const schema = this.codeModel.schemas.add(
             new ConstantSchema(it.name, `api-version: ${this.version}`, {
@@ -529,7 +530,7 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter) {
-    if (param.name.toLowerCase() === "api-version") {
+    if (isApiVersion(this.program, param)) {
       // TODO hack on "api-version"
       const parameter = this.apiVersionParameter;
       op.addParameter(parameter);
