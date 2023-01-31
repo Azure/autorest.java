@@ -19,10 +19,6 @@ using Cadl.Http;
 )
 namespace Cadl.Server;
 
-enum APIVersions {
-  v1_0: "v1.0",
-}
-
 @route("/status/{code}")
 interface ServerOp {
   status(@path code: int32): OkResponse | NoContentResponse;
