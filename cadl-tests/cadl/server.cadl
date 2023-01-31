@@ -7,7 +7,7 @@ using Cadl.Http;
   version: "1.0.0",
 })
 @server(
-  "https://{domain}.{tld}/{ApiVersion}",
+  "https://{domain}.{tld}",
   "Httpbin endpoint",
   {
     @doc("second-level domain, use httpbin")
@@ -15,10 +15,6 @@ using Cadl.Http;
 
     @doc("top-level domain, use org")
     tld?: string = "org",
-
-    @doc("Api Version")
-    @path
-    ApiVersion: APIVersions,
   }
 )
 namespace Cadl.Server;
