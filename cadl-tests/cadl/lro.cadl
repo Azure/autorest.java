@@ -36,11 +36,10 @@ model ExportedResource {
 
 @route("/long-running")
 interface LongRunningOp {
-  @pollingOperation(CustomCore.pollingOperation<Resource>)
-  createOrUpdate is LongRunningResourceCreateOrUpdate<Resource>;
+  createOrUpdate is ResourceCreateOrUpdate<Resource>;
 
   @pollingOperation(CustomCore.pollingOperation<Resource>)
-  createOrReplace is ResourceCreateOrReplace<Resource>;
+  createOrReplace is LongRunningResourceCreateOrReplace<Resource>;
 
   get is ResourceRead<Resource>;
 
