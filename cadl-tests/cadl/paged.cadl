@@ -5,6 +5,7 @@ import "@azure-tools/cadl-dpg";
 using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 using Azure.DPG;
 
 @service({
@@ -23,7 +24,12 @@ model Resource {
   type: string;
 }
 
+interface ResourceOperations extends Azure.Core.ResourceOperations<
+  NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId> {}
+
 @route("/paged")
 interface PagedOp {
-  list is ResourceList<Resource>;
+  list is ResourceOperations.ResourceList<Resource>;
 }
