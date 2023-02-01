@@ -63,34 +63,6 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
-     * A paging operation that gets an empty next link and should stop after page 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getEmptyNextLinkNamePages() {
-        return this.serviceClient.getEmptyNextLinkNamePages();
-    }
-
-    /**
-     * A paging operation that gets an empty next link and should stop after page 1.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getEmptyNextLinkNamePages(Context context) {
-        return this.serviceClient.getEmptyNextLinkNamePages(context);
-    }
-
-    /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
