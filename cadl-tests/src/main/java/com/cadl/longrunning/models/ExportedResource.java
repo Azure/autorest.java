@@ -30,7 +30,7 @@ public final class ExportedResource {
      * @param resourceUri the resourceUri value to set.
      */
     @JsonCreator
-    public ExportedResource(
+    private ExportedResource(
             @JsonProperty(value = "id", required = true) String id,
             @JsonProperty(value = "resourceUri", required = true) String resourceUri) {
         this.id = id;
