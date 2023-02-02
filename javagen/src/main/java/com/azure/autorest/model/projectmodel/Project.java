@@ -52,12 +52,12 @@ public class Project {
 
     public static class PackageVersions {
         private String azureClientSdkParentVersion = "1.7.0";
-        private String azureJsonVersion = "1.0.0-beta.1";
+        private String azureJsonVersion = "1.0.0-beta.2";
         private String azureXmlVersion = "1.0.0-beta.1";
-        private String azureCoreVersion = "1.35.0";
-        private String azureCoreManagementVersion = "1.10.0";
-        private String azureCoreHttpNettyVersion = "1.12.8";
-        private String azureCoreTestVersion = "1.14.0";
+        private String azureCoreVersion = "1.36.0";
+        private String azureCoreManagementVersion = "1.10.1";
+        private String azureCoreHttpNettyVersion = "1.13.0";
+        private String azureCoreTestVersion = "1.14.1";
         private String azureIdentityVersion = "1.7.3";
         private String junitVersion = "5.9.1";
         private String mockitoVersion = "4.5.1";
