@@ -24,10 +24,8 @@ model Resource {
   type: string;
 }
 
-interface ResourceOperations extends Azure.Core.ResourceOperations<
-  NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId> {}
+interface ResourceOperations
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
 
 @route("/paged")
 interface PagedOp {

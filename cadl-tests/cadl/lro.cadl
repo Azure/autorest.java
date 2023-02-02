@@ -35,10 +35,8 @@ model ExportedResource {
   resourceUri: string;
 }
 
-interface ResourceOperations extends Azure.Core.ResourceOperations<
-  NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId> {}
+interface ResourceOperations
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
 
 @route("/long-running")
 interface LongRunningOp {
@@ -56,10 +54,18 @@ interface LongRunningOp {
   delete is ResourceOperations.LongRunningResourceDelete<Resource>;
 
   @pollingOperation(LongRunningOp.statusMonitor)
-  export is ResourceOperations.ResourceAction<Resource, ExportParams, Cadl.Http.AcceptedResponse & LongRunningStatusLocation>;
+  export is ResourceOperations.ResourceAction<
+    Resource,
+    ExportParams,
+    Cadl.Http.AcceptedResponse & LongRunningStatusLocation
+  >;
 
   @pollingOperation(LongRunningOp.statusMonitor)
-  importx is ResourceOperations.ResourceAction<Resource, ExportedResource, Cadl.Http.AcceptedResponse & LongRunningStatusLocation>;
+  importx is ResourceOperations.ResourceAction<
+    Resource,
+    ExportedResource,
+    Cadl.Http.AcceptedResponse & LongRunningStatusLocation
+  >;
 }
 
 namespace CustomCore {
