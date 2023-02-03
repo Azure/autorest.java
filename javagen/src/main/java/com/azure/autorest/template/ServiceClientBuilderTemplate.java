@@ -500,9 +500,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line(String.format("%s.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));", localClientOptionsName));
             function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
 
-            function.line("policies.addAll(this.pipelinePolicies.stream()" +
+            function.line("this.pipelinePolicies.stream()" +
                     ".filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)" +
-                    ".collect(Collectors.toList()));");
+                    ".forEach(p -> policies.add(p));");
             function.line("HttpPolicyProviders.addBeforeRetryPolicies(policies);");
             function.line("policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new " +
                     "RetryPolicy()));");
@@ -528,9 +528,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", defaultCredentialScopes);
                 });
             }
-            function.line("policies.addAll(this.pipelinePolicies.stream()" +
+            function.line("this.pipelinePolicies.stream()" +
                     ".filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)" +
-                    ".collect(Collectors.toList()));");
+                    ".forEach(p -> policies.add(p));");
             function.line("HttpPolicyProviders.addAfterRetryPolicies(policies);");
 
             function.line("policies.add(new HttpLoggingPolicy(httpLogOptions));");
