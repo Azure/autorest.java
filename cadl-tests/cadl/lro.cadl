@@ -6,6 +6,7 @@ using Cadl.Rest;
 using Cadl.Versioning;
 using Azure.Core;
 using Azure.Core.Foundations;
+using Azure.Core.Traits;
 
 @service({
   title: "LongRunning",
@@ -34,20 +35,23 @@ model ExportedResource {
   resourceUri: string;
 }
 
+interface ResourceOperations
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
+
 @route("/long-running")
 interface LongRunningOp {
-  createOrUpdate is ResourceCreateOrUpdate<Resource>;
+  createOrUpdate is ResourceOperations.ResourceCreateOrUpdate<Resource>;
 
   @pollingOperation(CustomCore.pollingOperation<Resource>)
-  createOrReplace is LongRunningResourceCreateOrReplace<Resource>;
+  createOrReplace is ResourceOperations.LongRunningResourceCreateOrReplace<Resource>;
 
-  get is ResourceRead<Resource>;
+  get is ResourceOperations.ResourceRead<Resource>;
 
   @pollingOperation(CustomCore.pollingOperation<Resource>)
-  delete is LongRunningResourceDelete<Resource>;
+  delete is ResourceOperations.LongRunningResourceDelete<Resource>;
 
   @pollingOperation(CustomCore.pollingOperation<ExportedResource>)
-  export is LongRunningResourceAction<Resource, ExportParams, ExportedResource>;
+  export is ResourceOperations.LongRunningResourceAction<Resource, ExportParams, ExportedResource>;
 }
 
 namespace CustomCore {
@@ -57,5 +61,5 @@ namespace CustomCore {
   model OperationStatusResource<T> is OperationStatus<T>;
 
   @route("operations")
-  op pollingOperation<TCustom> is ResourceRead<OperationStatusResource<TCustom>>;
+  op pollingOperation<TCustom> is ResourceOperations.ResourceRead<OperationStatusResource<TCustom>>;
 }
