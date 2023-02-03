@@ -6,6 +6,7 @@ using Cadl.Rest;
 using Cadl.Versioning;
 using Azure.Core;
 using Azure.Core.Foundations;
+using Azure.Core.Traits;
 
 @service({
   title: "LongRunning",
@@ -34,26 +35,37 @@ model ExportedResource {
   resourceUri: string;
 }
 
+interface ResourceOperations
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
+
 @route("/long-running")
 interface LongRunningOp {
   statusMonitor is CustomCore.PollingOperation<Resource>;
 
   @pollingOperation(LongRunningOp.statusMonitor)
-  createOrUpdate is LongRunningResourceCreateOrUpdate<Resource>;
+  createOrUpdate is ResourceOperations.LongRunningResourceCreateOrUpdate<Resource>;
 
   @pollingOperation(LongRunningOp.statusMonitor)
-  createOrReplace is LongRunningResourceCreateOrReplace<Resource>;
+  createOrReplace is ResourceOperations.LongRunningResourceCreateOrReplace<Resource>;
 
-  get is ResourceRead<Resource>;
-
-  @pollingOperation(LongRunningOp.statusMonitor)
-  delete is LongRunningResourceDelete<Resource>;
+  get is ResourceOperations.ResourceRead<Resource>;
 
   @pollingOperation(LongRunningOp.statusMonitor)
-  export is ResourceAction<Resource, ExportParams, Cadl.Http.AcceptedResponse & LongRunningStatusLocation>;
+  delete is ResourceOperations.LongRunningResourceDelete<Resource>;
 
   @pollingOperation(LongRunningOp.statusMonitor)
-  importx is ResourceAction<Resource, ExportedResource, Cadl.Http.AcceptedResponse & LongRunningStatusLocation>;
+  export is ResourceOperations.ResourceAction<
+    Resource,
+    ExportParams,
+    Cadl.Http.AcceptedResponse & LongRunningStatusLocation
+  >;
+
+  @pollingOperation(LongRunningOp.statusMonitor)
+  importx is ResourceOperations.ResourceAction<
+    Resource,
+    ExportedResource,
+    Cadl.Http.AcceptedResponse & LongRunningStatusLocation
+  >;
 }
 
 namespace CustomCore {
@@ -62,5 +74,5 @@ namespace CustomCore {
   model OperationStatusResource<T> is OperationStatus<T>;
 
   @route("operations")
-  op PollingOperation<TCustom> is ResourceRead<OperationStatusResource<TCustom>>;
+  op PollingOperation<TCustom> is ResourceOperations.ResourceRead<OperationStatusResource<TCustom>>;
 }

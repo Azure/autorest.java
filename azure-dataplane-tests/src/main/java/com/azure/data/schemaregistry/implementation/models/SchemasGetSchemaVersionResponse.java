@@ -7,35 +7,44 @@ package com.azure.data.schemaregistry.implementation.models;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.ResponseBase;
-import com.azure.core.util.BinaryData;
+import java.io.Closeable;
+import java.nio.ByteBuffer;
+import reactor.core.publisher.Flux;
 
 /** Contains all response data for the getSchemaVersion operation. */
-public final class SchemasGetSchemaVersionResponse extends ResponseBase<SchemasGetSchemaVersionHeaders, BinaryData> {
+public final class SchemasGetSchemaVersionResponse
+        extends ResponseBase<SchemasGetSchemaVersionHeaders, Flux<ByteBuffer>> implements Closeable {
     /**
      * Creates an instance of SchemasGetSchemaVersionResponse.
      *
      * @param request the request which resulted in this SchemasGetSchemaVersionResponse.
      * @param statusCode the status code of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
-     * @param value the deserialized value of the HTTP response.
+     * @param value the content stream.
      * @param headers the deserialized headers of the HTTP response.
      */
     public SchemasGetSchemaVersionResponse(
             HttpRequest request,
             int statusCode,
             HttpHeaders rawHeaders,
-            BinaryData value,
+            Flux<ByteBuffer> value,
             SchemasGetSchemaVersionHeaders headers) {
         super(request, statusCode, rawHeaders, value, headers);
     }
 
     /**
-     * Gets the deserialized response body.
+     * Gets the response content stream.
      *
-     * @return the deserialized response body.
+     * @return the response content stream.
      */
     @Override
-    public BinaryData getValue() {
+    public Flux<ByteBuffer> getValue() {
         return super.getValue();
+    }
+
+    /** Disposes of the connection associated with this stream response. */
+    @Override
+    public void close() {
+        value().subscribe(bb -> {}, t -> {}).dispose();
     }
 }
