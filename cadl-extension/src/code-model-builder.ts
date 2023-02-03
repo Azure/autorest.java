@@ -349,7 +349,7 @@ export class CodeModelBuilder {
       const operationWithoutGroup = listOperationsInOperationGroup(this.program, client);
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
-        codeModelGroup.addOperation(this.processRoute("", operation));
+        codeModelGroup.addOperation(this.processOperation("", operation));
       }
       if (codeModelGroup.operations?.length > 0) {
         codeModelClient.operationGroups.push(codeModelGroup);
@@ -359,7 +359,7 @@ export class CodeModelBuilder {
         const operations = listOperationsInOperationGroup(this.program, operationGroup);
         codeModelGroup = new OperationGroup(operationGroup.type.name);
         for (const operation of operations) {
-          codeModelGroup.addOperation(this.processRoute(operationGroup.type.name, operation));
+          codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation));
         }
         codeModelClient.operationGroups.push(codeModelGroup);
       }
@@ -368,13 +368,14 @@ export class CodeModelBuilder {
     }
   }
 
-  private processRoute(groupName: string, operation: Operation): CodeModelOperation {
+  private processOperation(groupName: string, operation: Operation): CodeModelOperation {
     const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
 
     const operationGroup = this.codeModel.getOperationGroup(groupName);
-    const opId = groupName ? `${groupName}_${operation.name}` : `${operation.name}`;
+    const operationName = this.getName(operation);
+    const opId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
 
-    const codeModelOperation = new CodeModelOperation(operation.name, this.getDoc(operation), {
+    const codeModelOperation = new CodeModelOperation(operationName, this.getDoc(operation), {
       operationId: opId,
       summary: this.getSummary(operation),
       apiVersions: [
@@ -498,7 +499,7 @@ export class CodeModelBuilder {
         if (linkOperation.linkedOperation) {
           // Cadl requires linked operation written before
           if (!this.operationCache.get(linkOperation.linkedOperation)) {
-            this.processRoute(groupName, linkOperation.linkedOperation);
+            this.processOperation(groupName, linkOperation.linkedOperation);
           }
           const opLink = new OperationLink(this.operationCache.get(linkOperation.linkedOperation)!);
           // parameters of operation link
@@ -1540,7 +1541,7 @@ export class CodeModelBuilder {
     return getSummary(this.program, target);
   }
 
-  private getName(target: Model | Enum | ModelProperty | Scalar): string {
+  private getName(target: Model | Enum | ModelProperty | Scalar | Operation): string {
     const friendlyName = getFriendlyName(this.program, target);
     if (friendlyName) {
       return friendlyName;
@@ -1585,7 +1586,7 @@ export class CodeModelBuilder {
   private getConvenienceApiName(op: Operation): string | undefined {
     // check @convenienceMethod
     if (shouldGenerateConvenient(this.dpgContext, op)) {
-      return op.name;
+      return this.getName(op);
     } else {
       return undefined;
     }
