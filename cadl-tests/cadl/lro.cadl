@@ -40,39 +40,26 @@ interface ResourceOperations
 
 @route("/long-running")
 interface LongRunningOp {
-  statusMonitor is CustomCore.PollingOperation<Resource>;
+  createOrUpdate is ResourceOperations.ResourceCreateOrUpdate<Resource>;
 
-  @pollingOperation(LongRunningOp.statusMonitor)
-  createOrUpdate is ResourceOperations.LongRunningResourceCreateOrUpdate<Resource>;
-
-  @pollingOperation(LongRunningOp.statusMonitor)
+  @pollingOperation(CustomCore.pollingOperation<Resource>)
   createOrReplace is ResourceOperations.LongRunningResourceCreateOrReplace<Resource>;
 
   get is ResourceOperations.ResourceRead<Resource>;
 
-  @pollingOperation(LongRunningOp.statusMonitor)
+  @pollingOperation(CustomCore.pollingOperation<Resource>)
   delete is ResourceOperations.LongRunningResourceDelete<Resource>;
 
-  @pollingOperation(LongRunningOp.statusMonitor)
-  export is ResourceOperations.ResourceAction<
-    Resource,
-    ExportParams,
-    Cadl.Http.AcceptedResponse & LongRunningStatusLocation
-  >;
-
-  @pollingOperation(LongRunningOp.statusMonitor)
-  importx is ResourceOperations.ResourceAction<
-    Resource,
-    ExportedResource,
-    Cadl.Http.AcceptedResponse & LongRunningStatusLocation
-  >;
+  @pollingOperation(CustomCore.pollingOperation<ExportedResource>)
+  export is ResourceOperations.LongRunningResourceAction<Resource, ExportParams, ExportedResource>;
 }
 
 namespace CustomCore {
   @parentResource(T)
   @resource("operations")
+  @friendlyName("{name}Status", T)
   model OperationStatusResource<T> is OperationStatus<T>;
 
   @route("operations")
-  op PollingOperation<TCustom> is ResourceOperations.ResourceRead<OperationStatusResource<TCustom>>;
+  op pollingOperation<TCustom> is ResourceOperations.ResourceRead<OperationStatusResource<TCustom>>;
 }

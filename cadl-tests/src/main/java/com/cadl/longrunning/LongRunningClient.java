@@ -16,9 +16,10 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
-import com.cadl.longrunning.models.ExportedResource;
-import com.cadl.longrunning.models.OperationStatusResource;
+import com.cadl.longrunning.models.ExportedResourceStatus;
 import com.cadl.longrunning.models.Resource;
+import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResourceError;
+import com.cadl.longrunning.models.ResourceStatus;
 
 /** Initializes a new instance of the synchronous LongRunningClient type. */
 @ServiceClient(builder = LongRunningClientBuilder.class)
@@ -33,40 +34,6 @@ public final class LongRunningClient {
     @Generated
     LongRunningClient(LongRunningAsyncClient client) {
         this.client = client;
-    }
-
-    /**
-     * The statusMonitor operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         id: String (Required)
-     *         name: String (Required)
-     *         type: String (Required)
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param name The name parameter.
-     * @param operationId The unique ID of the operation.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> statusMonitorWithResponse(
-            String name, String operationId, RequestOptions requestOptions) {
-        return this.client.statusMonitorWithResponse(name, operationId, requestOptions).block();
     }
 
     /**
@@ -99,13 +66,13 @@ public final class LongRunningClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the response body along with {@link Response}.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateOrUpdate(
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> createOrUpdateWithResponse(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.client.beginCreateOrUpdate(name, resource, requestOptions).getSyncPoller();
+        return this.client.createOrUpdateWithResponse(name, resource, requestOptions).block();
     }
 
     /**
@@ -204,6 +171,20 @@ public final class LongRunningClient {
     /**
      * The export operation.
      *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     error: ResponseError (Optional)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         resourceUri: String (Required)
+     *     }
+     * }
+     * }</pre>
+     *
      * @param name The name parameter.
      * @param projectFileVersion The projectFileVersion parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -211,64 +192,13 @@ public final class LongRunningClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, Void> beginExport(
+    public SyncPoller<BinaryData, BinaryData> beginExport(
             String name, String projectFileVersion, RequestOptions requestOptions) {
         return this.client.beginExport(name, projectFileVersion, requestOptions).getSyncPoller();
-    }
-
-    /**
-     * The importx operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     resourceUri: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param name The name parameter.
-     * @param exportedResource The exportedResource parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, Void> beginImportx(
-            String name, BinaryData exportedResource, RequestOptions requestOptions) {
-        return this.client.beginImportx(name, exportedResource, requestOptions).getSyncPoller();
-    }
-
-    /**
-     * The statusMonitor operation.
-     *
-     * @param name The name parameter.
-     * @param operationId The unique ID of the operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return provides status details for long running operations.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public OperationStatusResource statusMonitor(String name, String operationId) {
-        // Generated convenience method for statusMonitorWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return statusMonitorWithResponse(name, operationId, requestOptions)
-                .getValue()
-                .toObject(OperationStatusResource.class);
     }
 
     /**
@@ -286,7 +216,7 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationStatusResource, Resource> beginCreateOrReplace(String name, Resource resource) {
+    public SyncPoller<ResourceStatus, Resource> beginCreateOrReplace(String name, Resource resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         return client.beginCreateOrReplace(name, resource).getSyncPoller();
     }
@@ -325,7 +255,7 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationStatusResource, Void> beginDelete(String name) {
+    public SyncPoller<ResourceStatus, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
         return client.beginDelete(name).getSyncPoller();
     }
@@ -341,32 +271,13 @@ public final class LongRunningClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationStatusResource, Void> beginExport(String name, String projectFileVersion) {
+    public SyncPoller<ExportedResourceStatus, ResourceOperationStatusResourceExportedResourceError> beginExport(
+            String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         return client.beginExport(name, projectFileVersion).getSyncPoller();
-    }
-
-    /**
-     * The importx operation.
-     *
-     * @param name The name parameter.
-     * @param exportedResource The exportedResource parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationStatusResource, Void> beginImportx(String name, ExportedResource exportedResource) {
-        // Generated convenience method for beginImportxWithModel
-        return client.beginImportx(name, exportedResource).getSyncPoller();
     }
 }

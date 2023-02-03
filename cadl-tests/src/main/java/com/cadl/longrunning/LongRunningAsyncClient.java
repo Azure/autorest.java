@@ -18,9 +18,10 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollerFlux;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
-import com.cadl.longrunning.models.ExportedResource;
-import com.cadl.longrunning.models.OperationStatusResource;
+import com.cadl.longrunning.models.ExportedResourceStatus;
 import com.cadl.longrunning.models.Resource;
+import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResourceError;
+import com.cadl.longrunning.models.ResourceStatus;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous LongRunningClient type. */
@@ -36,41 +37,6 @@ public final class LongRunningAsyncClient {
     @Generated
     LongRunningAsyncClient(LongRunningClientImpl serviceClient) {
         this.serviceClient = serviceClient;
-    }
-
-    /**
-     * The statusMonitor operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         id: String (Required)
-     *         name: String (Required)
-     *         type: String (Required)
-     *     }
-     * }
-     * }</pre>
-     *
-     * @param name The name parameter.
-     * @param operationId The unique ID of the operation.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response} on successful completion
-     *     of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> statusMonitorWithResponse(
-            String name, String operationId, RequestOptions requestOptions) {
-        return this.serviceClient.statusMonitorWithResponseAsync(name, operationId, requestOptions);
     }
 
     /**
@@ -103,13 +69,13 @@ public final class LongRunningAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCreateOrUpdate(
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> createOrUpdateWithResponse(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.serviceClient.beginCreateOrUpdateAsync(name, resource, requestOptions);
+        return this.serviceClient.createOrUpdateWithResponseAsync(name, resource, requestOptions);
     }
 
     /**
@@ -208,6 +174,20 @@ public final class LongRunningAsyncClient {
     /**
      * The export operation.
      *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     error: ResponseError (Optional)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         resourceUri: String (Required)
+     *     }
+     * }
+     * }</pre>
+     *
      * @param name The name parameter.
      * @param projectFileVersion The projectFileVersion parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -215,64 +195,13 @@ public final class LongRunningAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, Void> beginExport(
+    public PollerFlux<BinaryData, BinaryData> beginExport(
             String name, String projectFileVersion, RequestOptions requestOptions) {
         return this.serviceClient.beginExportAsync(name, projectFileVersion, requestOptions);
-    }
-
-    /**
-     * The importx operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     resourceUri: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param name The name parameter.
-     * @param exportedResource The exportedResource parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, Void> beginImportx(
-            String name, BinaryData exportedResource, RequestOptions requestOptions) {
-        return this.serviceClient.beginImportxAsync(name, exportedResource, requestOptions);
-    }
-
-    /**
-     * The statusMonitor operation.
-     *
-     * @param name The name parameter.
-     * @param operationId The unique ID of the operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return provides status details for long running operations on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<OperationStatusResource> statusMonitor(String name, String operationId) {
-        // Generated convenience method for statusMonitorWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return statusMonitorWithResponse(name, operationId, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(OperationStatusResource.class));
     }
 
     /**
@@ -290,7 +219,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationStatusResource, Resource> beginCreateOrReplace(String name, Resource resource) {
+    public PollerFlux<ResourceStatus, Resource> beginCreateOrReplace(String name, Resource resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateOrReplaceWithModelAsync(name, BinaryData.fromObject(resource), requestOptions);
@@ -332,7 +261,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationStatusResource, Void> beginDelete(String name) {
+    public PollerFlux<ResourceStatus, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginDeleteWithModelAsync(name, requestOptions);
@@ -349,34 +278,14 @@ public final class LongRunningAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationStatusResource, Void> beginExport(String name, String projectFileVersion) {
+    public PollerFlux<ExportedResourceStatus, ResourceOperationStatusResourceExportedResourceError> beginExport(
+            String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginExportWithModelAsync(name, projectFileVersion, requestOptions);
-    }
-
-    /**
-     * The importx operation.
-     *
-     * @param name The name parameter.
-     * @param exportedResource The exportedResource parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationStatusResource, Void> beginImportx(String name, ExportedResource exportedResource) {
-        // Generated convenience method for beginImportxWithModel
-        RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginImportxWithModelAsync(name, BinaryData.fromObject(exportedResource), requestOptions);
     }
 }
