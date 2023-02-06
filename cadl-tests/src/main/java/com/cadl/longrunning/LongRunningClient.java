@@ -150,11 +150,6 @@ public final class LongRunningClient {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         id: String (Required)
-     *         name: String (Required)
-     *         type: String (Required)
-     *     }
      * }
      * }</pre>
      *

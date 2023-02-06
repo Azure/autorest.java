@@ -874,33 +874,33 @@ export class CodeModelBuilder {
           bodyType.kind === "Model" &&
           bodyType.templateMapper &&
           bodyType.templateMapper.args &&
-          bodyType.templateMapper.args.length > 0 &&
-          // for LRO Action, the guide does not require a final type, hence it can be the same as intermediate type
-          // for LRO Delete, there is no final type
-          (verb === "post" || verb === "delete")
+          bodyType.templateMapper.args.length > 0
         ) {
-          // check if use candidateResponseSchema as response schema, for LRO ResourceAction
-          if ((candidateResponseSchema.properties?.length ?? 0) >= bodyType.properties.size) {
-            let match = true;
-            for (const prop of Array.from(bodyType.properties.values())) {
-              const name = this.getName(prop);
-              if (!candidateResponseSchema.properties?.find((it) => it.language.default.name === name)) {
-                match = false;
-                break;
-              }
-            }
-            if (match) {
-              schema = candidateResponseSchema;
-              this.program.trace(
-                "cadl-java",
-                `Replace Cadl model ${this.getName(bodyType)} with ${candidateResponseSchema.language.default.name}`,
-              );
+          if (verb === "post") {
+            // for LRO Action, the standard does not require a final type, hence it can be the same as intermediate type
+            // https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#long-running-action-operations
 
-              if (verb === "delete") {
-                // final type will be replaced to "Void" in convenience API
-                trackConvenienceApi = false;
+            // check if we can use candidateResponseSchema as response schema (instead of the templated Model), for LRO ResourceAction
+            if (candidateResponseSchema.properties?.length === bodyType.properties.size) {
+              let match = true;
+              for (const prop of Array.from(bodyType.properties.values())) {
+                const name = this.getName(prop);
+                if (!candidateResponseSchema.properties?.find((it) => it.language.default.name === name)) {
+                  match = false;
+                  break;
+                }
+              }
+              if (match) {
+                schema = candidateResponseSchema;
+                this.program.trace(
+                  "cadl-java",
+                  `Replace Cadl model ${this.getName(bodyType)} with ${candidateResponseSchema.language.default.name}`,
+                );
               }
             }
+          } else if (verb === "delete") {
+            // for LRO ResourceDelete, final type will be replaced to "Void" in convenience API, hence do not generate the class
+            trackConvenienceApi = false;
           }
         }
         if (!schema) {
