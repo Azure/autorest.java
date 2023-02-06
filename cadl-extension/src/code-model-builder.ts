@@ -877,7 +877,7 @@ export class CodeModelBuilder {
           bodyType.templateMapper.args.length > 0
         ) {
           if (verb === "post") {
-            // for LRO Action, the standard does not require a final type, hence it can be the same as intermediate type
+            // for LRO ResourceAction, the standard does not require a final type, hence it can be the same as intermediate type
             // https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#long-running-action-operations
 
             // check if we can use candidateResponseSchema as response schema (instead of the templated Model), for LRO ResourceAction
