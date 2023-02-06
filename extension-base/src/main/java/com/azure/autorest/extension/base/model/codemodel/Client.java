@@ -14,6 +14,8 @@ public class Client extends Metadata {
 
     private Security security;
 
+    private List<ApiVersion> apiVersions = new ArrayList<ApiVersion>();
+
     public String getSummary() {
         return summary;
     }
@@ -36,5 +38,13 @@ public class Client extends Metadata {
 
     public void setSecurity(Security security) {
         this.security = security;
+    }
+
+    public List<ApiVersion> getApiVersions() {
+        return apiVersions;
+    }
+
+    public void setApiVersions(List<ApiVersion> apiVersions) {
+        this.apiVersions = apiVersions;
     }
 }

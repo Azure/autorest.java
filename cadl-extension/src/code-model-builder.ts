@@ -107,6 +107,7 @@ import {
   VirtualParameter,
   GroupSchema,
   GroupProperty,
+  ApiVersion,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient } from "./common/client.js";
@@ -343,6 +344,16 @@ export class CodeModelBuilder {
         // at present, use global security definition
         security: this.codeModel.security,
       });
+
+      const versioning = getVersion(this.program, client.service);
+      if (versioning && versioning.getVersions()) {
+        codeModelClient.apiVersions = [];
+        for (const version of versioning.getVersions()) {
+          const apiVersion = new ApiVersion();
+          apiVersion.version = version.value;
+          codeModelClient.apiVersions.push(apiVersion);
+        }
+      }
 
       const operationGroups = listOperationGroups(this.program, client);
 
