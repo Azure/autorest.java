@@ -452,13 +452,13 @@ export class CodeModelBuilder {
     const pollingTypes = this.processLinkedOperation(codeModelOperation, groupName, operation);
 
     // responses
-    const candidateResponseSchema = pollingTypes?.[0]; // candidate: response body type of pollingOperation
+    const candidateResponseSchema = pollingTypes[1];  // candidate: response body type of pollingOperation
     op.responses.map((it) => this.processResponse(codeModelOperation, it, candidateResponseSchema));
 
     // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
-    this.processRouteForLongRunning(codeModelOperation, op.responses, pollingTypes);
+    this.processRouteForLongRunning(codeModelOperation, op.responses, pollingTypes[0]);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -496,14 +496,20 @@ export class CodeModelBuilder {
     op: CodeModelOperation,
     groupName: string,
     operation: Operation,
-  ): [Schema | undefined, Schema | undefined] | undefined {
+  ): [boolean, Schema | undefined, Schema | undefined] {
     let pollingSchema = undefined;
     let finalSchema = undefined;
+    let pollingFoundInOperationLinks = false;
     const operationLinks = getOperationLinks(this.program, operation);
     if (operationLinks) {
       op.operationLinks = {};
 
       for (const [linkType, linkOperation] of operationLinks) {
+        if (linkType === "polling" || linkType === "final") {
+          // some Cadl writes pollingOperation without the operation
+          pollingFoundInOperationLinks = true;
+        }
+
         if (linkOperation.linkedOperation) {
           // process linked operation, if not processed
           let linkedOperation = this.operationCache.get(linkOperation.linkedOperation);
@@ -539,11 +545,15 @@ export class CodeModelBuilder {
         }
       }
     }
-    return pollingSchema || finalSchema ? [pollingSchema, finalSchema] : undefined;
+    return [pollingFoundInOperationLinks, pollingSchema, finalSchema];
   }
 
-  private processRouteForLongRunning(op: CodeModelOperation, responses: HttpOperationResponse[], pollingTypes: any) {
-    if (pollingTypes) {
+  private processRouteForLongRunning(
+    op: CodeModelOperation,
+    responses: HttpOperationResponse[],
+    pollingFoundInOperationLinks: boolean,
+  ) {
+    if (pollingFoundInOperationLinks) {
       op.extensions = op.extensions ?? {};
       op.extensions["x-ms-long-running-operation"] = true;
       return;
