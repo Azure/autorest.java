@@ -452,7 +452,7 @@ export class CodeModelBuilder {
     const pollingTypes = this.processLinkedOperation(codeModelOperation, groupName, operation);
 
     // responses
-    const candidateResponseSchema = pollingTypes[1];  // candidate: response body type of pollingOperation
+    const candidateResponseSchema = pollingTypes[1]; // candidate: response body type of pollingOperation
     op.responses.map((it) => this.processResponse(codeModelOperation, it, candidateResponseSchema));
 
     // check for paged
