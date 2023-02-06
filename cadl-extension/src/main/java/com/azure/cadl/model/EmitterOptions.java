@@ -16,17 +16,26 @@ public class EmitterOptions {
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
     @JsonProperty(value="namespace")
     private String namespace;
+
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
     @JsonProperty(value="output-dir")
     private String outputDir;
+
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
     @JsonProperty(value="service-name")
     private String serviceName;
+
     @JsonProperty(value="partial-update")
     private Boolean partialUpdate;
 
     @JsonProperty(value="service-versions")
     private List<String> serviceVersions;
+
+    @JsonProperty(value = "generate-tests")
+    private Boolean generateTests;
+
+    @JsonProperty(value = "generate-examples")
+    private Boolean generateExamples;
 
     @JsonProperty(value="dev-options")
     private DevOptions devOptions;
@@ -45,6 +54,14 @@ public class EmitterOptions {
 
     public Boolean getPartialUpdate() {
         return partialUpdate;
+    }
+
+    public Boolean getGenerateTests() {
+        return generateTests;
+    }
+
+    public Boolean getGenerateExamples() {
+        return generateExamples;
     }
 
     public EmitterOptions setNamespace(String namespace) {
