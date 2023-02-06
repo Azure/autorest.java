@@ -20,7 +20,6 @@ import com.azure.core.util.polling.PollerFlux;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
 import com.cadl.longrunning.models.ExportedResourceStatus;
 import com.cadl.longrunning.models.Resource;
-import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResourceError;
 import com.cadl.longrunning.models.ResourceStatus;
 import reactor.core.publisher.Mono;
 
@@ -154,6 +153,11 @@ public final class LongRunningAsyncClient {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     error: ResponseError (Optional)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         name: String (Required)
+     *         type: String (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -282,7 +286,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ExportedResourceStatus, ResourceOperationStatusResourceExportedResourceError> beginExport(
+    public PollerFlux<ExportedResourceStatus, ExportedResourceStatus> beginExport(
             String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();

@@ -44,7 +44,6 @@ import com.azure.core.util.serializer.TypeReference;
 import com.cadl.longrunning.LongRunningServiceVersion;
 import com.cadl.longrunning.models.ExportedResourceStatus;
 import com.cadl.longrunning.models.Resource;
-import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResourceError;
 import com.cadl.longrunning.models.ResourceStatus;
 import java.time.Duration;
 import reactor.core.publisher.Mono;
@@ -642,6 +641,11 @@ public final class LongRunningClientImpl {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     error: ResponseError (Optional)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         name: String (Required)
+     *         type: String (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -678,6 +682,11 @@ public final class LongRunningClientImpl {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     error: ResponseError (Optional)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         name: String (Required)
+     *         type: String (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -715,6 +724,11 @@ public final class LongRunningClientImpl {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     error: ResponseError (Optional)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         name: String (Required)
+     *         type: String (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -741,6 +755,11 @@ public final class LongRunningClientImpl {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     error: ResponseError (Optional)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         name: String (Required)
+     *         type: String (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -778,6 +797,11 @@ public final class LongRunningClientImpl {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     error: ResponseError (Optional)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         name: String (Required)
+     *         type: String (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -939,8 +963,8 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ExportedResourceStatus, ResourceOperationStatusResourceExportedResourceError>
-            beginExportWithModelAsync(String name, String projectFileVersion, RequestOptions requestOptions) {
+    public PollerFlux<ExportedResourceStatus, ExportedResourceStatus> beginExportWithModelAsync(
+            String name, String projectFileVersion, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponseAsync(name, projectFileVersion, requestOptions),
@@ -952,7 +976,7 @@ public final class LongRunningClientImpl {
                                 ? requestOptions.getContext()
                                 : Context.NONE),
                 TypeReference.createInstance(ExportedResourceStatus.class),
-                TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class));
+                TypeReference.createInstance(ExportedResourceStatus.class));
     }
 
     /**
@@ -982,8 +1006,8 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ExportedResourceStatus, ResourceOperationStatusResourceExportedResourceError>
-            beginExportWithModel(String name, String projectFileVersion, RequestOptions requestOptions) {
+    public SyncPoller<ExportedResourceStatus, ExportedResourceStatus> beginExportWithModel(
+            String name, String projectFileVersion, RequestOptions requestOptions) {
         return this.beginExportWithModelAsync(name, projectFileVersion, requestOptions).getSyncPoller();
     }
 }
