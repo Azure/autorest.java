@@ -54,10 +54,12 @@ options:
     emitter-output-dir: "{project-root}/azure-ai-language-authoring"
     namespace: "com.azure.ai.language.authoring"
     service-name: "Authoring"
-    partial-update: true
+    partial-update: false
     service-versions:
       - "2022-05-15-preview"
-    namer: true
+    namer: false
+    generate-samples: true
+    generate-tests: true
 ```
 
 ## Convenience API
