@@ -155,8 +155,8 @@ public class CadlPlugin extends Javagen {
         if (!CoreUtils.isNullOrEmpty(options.getServiceVersions())) {
             SETTINGS_MAP.put("service-versions", options.getServiceVersions());
         }
-        if (options.getGenerateExamples() != null) {
-            SETTINGS_MAP.put("generate-examples", options.getGenerateExamples());
+        if (options.getGenerateSamples() != null) {
+            SETTINGS_MAP.put("generate-samples", options.getGenerateSamples());
         }
         if (options.getGenerateTests() != null) {
             SETTINGS_MAP.put("generate-tests", options.getGenerateTests());

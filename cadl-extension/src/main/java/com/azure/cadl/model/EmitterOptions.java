@@ -32,10 +32,10 @@ public class EmitterOptions {
     private List<String> serviceVersions;
 
     @JsonProperty(value = "generate-tests")
-    private Boolean generateTests;
+    private Boolean generateTests = true;
 
-    @JsonProperty(value = "generate-examples")
-    private Boolean generateExamples;
+    @JsonProperty(value = "generate-samples")
+    private Boolean generateSamples = true;
 
     @JsonProperty(value="dev-options")
     private DevOptions devOptions;
@@ -60,8 +60,8 @@ public class EmitterOptions {
         return generateTests;
     }
 
-    public Boolean getGenerateExamples() {
-        return generateExamples;
+    public Boolean getGenerateSamples() {
+        return generateSamples;
     }
 
     public EmitterOptions setNamespace(String namespace) {

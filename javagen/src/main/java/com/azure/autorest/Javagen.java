@@ -214,14 +214,14 @@ public class Javagen extends NewPlugin {
         }
 
         // Test
-        if (settings.isDataPlaneClient()) {
+        if (settings.isDataPlaneClient() && settings.isGenerateTests() ) {
             if (!client.getSyncClients().isEmpty() && client.getSyncClients().iterator().next().getClientBuilder() != null) {
                 TestContext testContext = new TestContext(client.getServiceClient(), client.getSyncClients());
 
                 // base test class
                 javaPackage.addProtocolTestBase(testContext);
 
-                if (settings.isGenerateTests() && !client.getProtocolExamples().isEmpty()) {
+                if (!client.getProtocolExamples().isEmpty()) {
                     // test cases as Disabled
                     client.getProtocolExamples().forEach(protocolExample -> javaPackage.addProtocolTest(new TestContext(testContext, protocolExample)));
                 }
