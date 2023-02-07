@@ -66,5 +66,17 @@
       <version>1.7.36</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-core-test</artifactId>
+      <version>1.14.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-identity</artifactId>
+      <version>1.7.3</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>
