@@ -155,6 +155,12 @@ public class CadlPlugin extends Javagen {
         if (!CoreUtils.isNullOrEmpty(options.getServiceVersions())) {
             SETTINGS_MAP.put("service-versions", options.getServiceVersions());
         }
+        if (options.getGenerateSamples() != null) {
+            SETTINGS_MAP.put("generate-samples", options.getGenerateSamples());
+        }
+        if (options.getGenerateTests() != null) {
+            SETTINGS_MAP.put("generate-tests", options.getGenerateTests());
+        }
 
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
         SETTINGS_MAP.put("regenerate-pom", sdkIntegration);
