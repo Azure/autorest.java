@@ -379,7 +379,11 @@ export class CodeModelBuilder {
     }
   }
 
-  private processOperation(groupName: string, operation: Operation): CodeModelOperation {
+  private processOperation(
+    groupName: string,
+    operation: Operation,
+    fromLinkedOperation: boolean = false,
+  ): CodeModelOperation {
     const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
 
     const operationGroup = this.codeModel.getOperationGroup(groupName);
@@ -396,7 +400,7 @@ export class CodeModelBuilder {
       ],
     });
 
-    if (!operationContainsJsonMergePatch(op)) {
+    if (fromLinkedOperation || !operationContainsJsonMergePatch(op)) {
       // do not generate convenience method for JSON Merge Patch
 
       const convenienceApiName = this.getConvenienceApiName(operation);
@@ -405,8 +409,10 @@ export class CodeModelBuilder {
       }
     }
 
-    // cache for later reference from operationLinks
-    this.operationCache.set(operation, codeModelOperation);
+    if (!fromLinkedOperation) {
+      // cache for later reference from operationLinks
+      this.operationCache.set(operation, codeModelOperation);
+    }
 
     codeModelOperation.addRequest(
       new Request({
@@ -453,11 +459,17 @@ export class CodeModelBuilder {
       }
     }
 
-    // responses
-    op.responses.map((it) => this.processResponse(codeModelOperation, it));
+    // linked operations
+    const pollingTypes = this.processLinkedOperation(codeModelOperation, groupName, operation);
 
+    // responses
+    const candidateResponseSchema = pollingTypes[1]; // candidate: response body type of pollingOperation
+    op.responses.map((it) => this.processResponse(codeModelOperation, it, candidateResponseSchema));
+
+    // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
-    this.processRouteForLongRunning(codeModelOperation, groupName, operation, op.responses);
+    // check for long-running operation
+    this.processRouteForLongRunning(codeModelOperation, op.responses, pollingTypes[0]);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -491,12 +503,13 @@ export class CodeModelBuilder {
     }
   }
 
-  private processRouteForLongRunning(
+  private processLinkedOperation(
     op: CodeModelOperation,
     groupName: string,
     operation: Operation,
-    responses: HttpOperationResponse[],
-  ) {
+  ): [boolean, Schema | undefined, Schema | undefined] {
+    let pollingSchema = undefined;
+    let finalSchema = undefined;
     let pollingFoundInOperationLinks = false;
     const operationLinks = getOperationLinks(this.program, operation);
     if (operationLinks) {
@@ -504,23 +517,53 @@ export class CodeModelBuilder {
 
       for (const [linkType, linkOperation] of operationLinks) {
         if (linkType === "polling" || linkType === "final") {
+          // some Cadl writes pollingOperation without the operation
           pollingFoundInOperationLinks = true;
         }
 
         if (linkOperation.linkedOperation) {
-          // Cadl requires linked operation written before
-          if (!this.operationCache.get(linkOperation.linkedOperation)) {
-            this.processOperation(groupName, linkOperation.linkedOperation);
+          // process linked operation, if not processed
+          let linkedOperation = this.operationCache.get(linkOperation.linkedOperation);
+          if (!linkedOperation) {
+            linkedOperation = this.processOperation(groupName, linkOperation.linkedOperation, true);
           }
-          const opLink = new OperationLink(this.operationCache.get(linkOperation.linkedOperation)!);
+
+          const opLink = new OperationLink(linkedOperation);
           // parameters of operation link
           if (linkOperation.parameters) {
             opLink.parameters = this.processSchema(linkOperation.parameters, "parameters");
           }
           op.operationLinks[linkType] = opLink;
+
+          const getResponse = (linkedOp: CodeModelOperation): Schema | undefined => {
+            if (linkedOp.responses) {
+              const response = linkedOp.responses.find((it) => it.protocol?.http?.statusCodes?.includes("200"));
+              if (response && response instanceof SchemaResponse) {
+                const schema = response.schema;
+                if (op.convenienceApi) {
+                  this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
+                }
+                return schema;
+              }
+            }
+            return undefined;
+          };
+          if (linkType === "polling") {
+            pollingSchema = getResponse(linkedOperation);
+          } else if (linkType === "final") {
+            finalSchema = getResponse(linkedOperation);
+          }
         }
       }
     }
+    return [pollingFoundInOperationLinks, pollingSchema, finalSchema];
+  }
+
+  private processRouteForLongRunning(
+    op: CodeModelOperation,
+    responses: HttpOperationResponse[],
+    pollingFoundInOperationLinks: boolean,
+  ) {
     if (pollingFoundInOperationLinks) {
       op.extensions = op.extensions ?? {};
       op.extensions["x-ms-long-running-operation"] = true;
@@ -782,10 +825,14 @@ export class CodeModelBuilder {
     return this.getEffectiveSchemaType(bodyType);
   }
 
-  private processResponse(op: CodeModelOperation, resp: HttpOperationResponse) {
+  private processResponse(
+    op: CodeModelOperation,
+    resp: HttpOperationResponse,
+    candidateResponseSchema: Schema | undefined = undefined,
+  ) {
     // TODO: what to do if more than 1 response?
-    let response;
-    let headers;
+    let response: Response;
+    let headers: Array<HttpHeader> | undefined = undefined;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].headers) {
       // headers
       headers = [];
@@ -803,6 +850,8 @@ export class CodeModelBuilder {
         );
       }
     }
+
+    let trackConvenienceApi = op.convenienceApi ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
       const bodyType = this.findResponseBody(responseBody.type);
@@ -826,7 +875,48 @@ export class CodeModelBuilder {
         });
       } else {
         // schema (usually JSON)
-        const schema = this.processSchema(bodyType, "response");
+        let schema: Schema | undefined = undefined;
+        const verb = op.requests?.[0].protocol?.http?.method;
+        if (
+          // LRO, candidateResponseSchema is Model/ObjectSchema
+          candidateResponseSchema &&
+          candidateResponseSchema instanceof ObjectSchema &&
+          // bodyType is templated Model
+          bodyType.kind === "Model" &&
+          bodyType.templateMapper &&
+          bodyType.templateMapper.args &&
+          bodyType.templateMapper.args.length > 0
+        ) {
+          if (verb === "post") {
+            // for LRO ResourceAction, the standard does not require a final type, hence it can be the same as intermediate type
+            // https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#long-running-action-operations
+
+            // check if we can use candidateResponseSchema as response schema (instead of the templated Model), for LRO ResourceAction
+            if (candidateResponseSchema.properties?.length === bodyType.properties.size) {
+              let match = true;
+              for (const prop of Array.from(bodyType.properties.values())) {
+                const name = this.getName(prop);
+                if (!candidateResponseSchema.properties?.find((it) => it.language.default.name === name)) {
+                  match = false;
+                  break;
+                }
+              }
+              if (match) {
+                schema = candidateResponseSchema;
+                this.program.trace(
+                  "cadl-java",
+                  `Replace Cadl model ${this.getName(bodyType)} with ${candidateResponseSchema.language.default.name}`,
+                );
+              }
+            }
+          } else if (verb === "delete") {
+            // for LRO ResourceDelete, final type will be replaced to "Void" in convenience API, hence do not generate the class
+            trackConvenienceApi = false;
+          }
+        }
+        if (!schema) {
+          schema = this.processSchema(bodyType, "response");
+        }
         response = new SchemaResponse(schema, {
           protocol: {
             http: {
@@ -873,7 +963,7 @@ export class CodeModelBuilder {
       if (response instanceof SchemaResponse) {
         this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
 
-        if (op.convenienceApi) {
+        if (trackConvenienceApi) {
           this.trackSchemaUsage(response.schema, { usage: [SchemaContext.ConvenienceApi] });
         }
       }
@@ -1565,7 +1655,7 @@ export class CodeModelBuilder {
       ) {
         const cadlName = getTypeName(target, this.typeNameOptions);
         const newName = getNameForTemplate(target);
-        this.program.trace("cadl-java", `Rename Cadl model '${cadlName}' to '${newName}'`);
+        this.logWarning(`Rename Cadl model '${cadlName}' to '${newName}'`);
         return newName;
       } else {
         return target.name;
@@ -1843,8 +1933,10 @@ function containsIgnoreCase(stringList: string[], str: string): boolean {
 
 function operationContainsJsonMergePatch(op: HttpOperation): boolean {
   for (const param of op.parameters.parameters) {
-    if (param.name.toLowerCase() === "content-type") {
-      return true;
+    if (param.type === "header" && param.name.toLowerCase() === "content-type") {
+      if (param.param.type.kind === "String" && param.param.type.value === "application/merge-patch+json") {
+        return true;
+      }
     }
   }
   return false;
