@@ -64,4 +64,7 @@ options:
 
 ## Convenience API
 
-Use "convenienceAPI" decorator from [cadl-dpg](https://github.com/Azure/cadl-azure/tree/main/packages/cadl-dpg).
+By default, Cadl-Java generates all protocol APIs and convenience APIs.
+A few exceptions are API of JSON Merge Patch, and API of long-running operation with ambiguous response type.
+
+See "convenientAPI" decorator from [cadl-dpg](https://github.com/Azure/cadl-azure/tree/main/packages/cadl-dpg).
