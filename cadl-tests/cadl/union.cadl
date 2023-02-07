@@ -19,6 +19,7 @@ using Cadl.Versioning;
 namespace Cadl.Union;
 
 enum ServiceApiVersions {
+  v2022_03_01_preview: "2022-03-01-preview",
   v2022_06_01_preview: "2022-06-01-preview",
 }
 

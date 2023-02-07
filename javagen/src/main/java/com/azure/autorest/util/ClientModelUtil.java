@@ -304,6 +304,13 @@ public class ClientModelUtil {
                 .orElse(null);
     }
 
+    public static List<String> getApiVersions(CodeModel codeModel) {
+        return codeModel.getClients().stream()
+                .filter(c -> !CoreUtils.isNullOrEmpty(c.getApiVersions()))
+                .map(c -> c.getApiVersions().stream().map(ApiVersion::getVersion).collect(Collectors.toList()))
+                .findFirst().orElse(null);
+    }
+
     public static String getArtifactId() {
         JavaSettings settings = JavaSettings.getInstance();
         String artifactId = settings.getArtifactId();

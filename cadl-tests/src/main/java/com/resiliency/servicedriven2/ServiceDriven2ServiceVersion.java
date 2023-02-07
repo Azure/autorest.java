@@ -8,6 +8,9 @@ import com.azure.core.util.ServiceVersion;
 
 /** Service version of ServiceDriven2Client. */
 public enum ServiceDriven2ServiceVersion implements ServiceVersion {
+    /** Enum value 1.0.0. */
+    V1_0_0("1.0.0"),
+
     /** Enum value 1.1.0. */
     V1_1_0("1.1.0");
 

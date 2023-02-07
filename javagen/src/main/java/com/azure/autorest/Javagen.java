@@ -231,12 +231,17 @@ public class Javagen extends NewPlugin {
         // Service version
         if (settings.isDataPlaneClient()) {
             List<String> serviceVersions = settings.getServiceVersions();
-            if (serviceVersions == null) {
-                String apiVersion = ClientModelUtil.getFirstApiVersion(codeModel);
-                if (apiVersion == null) {
-                    throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
+            if (CoreUtils.isNullOrEmpty(serviceVersions)) {
+                List<String> apiVersions = ClientModelUtil.getApiVersions(codeModel);
+                if (!CoreUtils.isNullOrEmpty(apiVersions)) {
+                    serviceVersions = apiVersions;
+                } else {
+                    String apiVersion = ClientModelUtil.getFirstApiVersion(codeModel);
+                    if (apiVersion == null) {
+                        throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
+                    }
+                    serviceVersions = Collections.singletonList(apiVersion);
                 }
-                serviceVersions = Collections.singletonList(apiVersion);
             }
 
             String packageName = settings.getPackage();
