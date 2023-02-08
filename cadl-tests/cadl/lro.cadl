@@ -42,24 +42,14 @@ interface ResourceOperations
 interface LongRunningOp {
   createOrUpdate is ResourceOperations.ResourceCreateOrUpdate<Resource>;
 
-  @pollingOperation(CustomCore.pollingOperation<Resource>)
+  @pollingOperation(ResourceOperations.GetResourceOperationStatus<Resource, never>)
   createOrReplace is ResourceOperations.LongRunningResourceCreateOrReplace<Resource>;
 
   get is ResourceOperations.ResourceRead<Resource>;
 
-  @pollingOperation(CustomCore.pollingOperation<Resource>)
+  @pollingOperation(ResourceOperations.GetResourceOperationStatus<Resource, never>)
   delete is ResourceOperations.LongRunningResourceDelete<Resource>;
 
-  @pollingOperation(CustomCore.pollingOperation<ExportedResource>)
+  @pollingOperation(ResourceOperations.GetResourceOperationStatus<Resource, ExportedResource>)
   export is ResourceOperations.LongRunningResourceAction<Resource, ExportParams, ExportedResource>;
-}
-
-namespace CustomCore {
-  @parentResource(T)
-  @resource("operations")
-  @friendlyName("{name}Status", T)
-  model OperationStatusResource<T> is OperationStatus<T>;
-
-  @route("operations")
-  op pollingOperation<TCustom> is ResourceOperations.ResourceRead<OperationStatusResource<TCustom>>;
 }

@@ -16,9 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
-import com.cadl.longrunning.models.ExportedResourceStatus;
 import com.cadl.longrunning.models.Resource;
-import com.cadl.longrunning.models.ResourceStatus;
+import com.cadl.longrunning.models.ResourceOperationStatusResourceError;
+import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResourceError;
 
 /** Initializes a new instance of the synchronous LongRunningClient type. */
 @ServiceClient(builder = LongRunningClientBuilder.class)
@@ -215,7 +215,8 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceStatus, Resource> beginCreateOrReplace(String name, Resource resource) {
+    public SyncPoller<ResourceOperationStatusResourceError, Resource> beginCreateOrReplace(
+            String name, Resource resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         return client.beginCreateOrReplace(name, resource).getSyncPoller();
     }
@@ -254,7 +255,7 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceStatus, Void> beginDelete(String name) {
+    public SyncPoller<ResourceOperationStatusResourceError, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
         return client.beginDelete(name).getSyncPoller();
     }
@@ -274,8 +275,10 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ExportedResourceStatus, ExportedResourceStatus> beginExport(
-            String name, String projectFileVersion) {
+    public SyncPoller<
+                    ResourceOperationStatusResourceExportedResourceError,
+                    ResourceOperationStatusResourceExportedResourceError>
+            beginExport(String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         return client.beginExport(name, projectFileVersion).getSyncPoller();
     }

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Provides status details for long running operations. */
 @Immutable
-public final class ExportedResourceStatus {
+public final class ResourceOperationStatusResourceError {
     /*
      * The unique ID of the operation.
      */
@@ -30,19 +30,14 @@ public final class ExportedResourceStatus {
     @JsonProperty(value = "error")
     private ResponseError error;
 
-    /*
-     * The result of the operation.
-     */
-    @JsonProperty(value = "result")
-    private ExportedResource result;
-
     /**
-     * Creates an instance of ExportedResourceStatus class.
+     * Creates an instance of ResourceOperationStatusResourceError class.
      *
      * @param status the status value to set.
      */
     @JsonCreator
-    private ExportedResourceStatus(@JsonProperty(value = "status", required = true) OperationState status) {
+    private ResourceOperationStatusResourceError(
+            @JsonProperty(value = "status", required = true) OperationState status) {
         this.status = status;
     }
 
@@ -71,14 +66,5 @@ public final class ExportedResourceStatus {
      */
     public ResponseError getError() {
         return this.error;
-    }
-
-    /**
-     * Get the result property: The result of the operation.
-     *
-     * @return the result value.
-     */
-    public ExportedResource getResult() {
-        return this.result;
     }
 }

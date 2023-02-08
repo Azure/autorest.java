@@ -42,9 +42,9 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import com.cadl.longrunning.LongRunningServiceVersion;
-import com.cadl.longrunning.models.ExportedResourceStatus;
 import com.cadl.longrunning.models.Resource;
-import com.cadl.longrunning.models.ResourceStatus;
+import com.cadl.longrunning.models.ResourceOperationStatusResourceError;
+import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResourceError;
 import java.time.Duration;
 import reactor.core.publisher.Mono;
 
@@ -516,7 +516,7 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceStatus, Resource> beginCreateOrReplaceWithModelAsync(
+    public PollerFlux<ResourceOperationStatusResourceError, Resource> beginCreateOrReplaceWithModelAsync(
             String name, BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -528,7 +528,7 @@ public final class LongRunningClientImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                TypeReference.createInstance(ResourceStatus.class),
+                TypeReference.createInstance(ResourceOperationStatusResourceError.class),
                 TypeReference.createInstance(Resource.class));
     }
 
@@ -565,7 +565,7 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceStatus, Resource> beginCreateOrReplaceWithModel(
+    public SyncPoller<ResourceOperationStatusResourceError, Resource> beginCreateOrReplaceWithModel(
             String name, BinaryData resource, RequestOptions requestOptions) {
         return this.beginCreateOrReplaceWithModelAsync(name, resource, requestOptions).getSyncPoller();
     }
@@ -752,7 +752,8 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceStatus, Void> beginDeleteWithModelAsync(String name, RequestOptions requestOptions) {
+    public PollerFlux<ResourceOperationStatusResourceError, Void> beginDeleteWithModelAsync(
+            String name, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponseAsync(name, requestOptions),
@@ -763,7 +764,7 @@ public final class LongRunningClientImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                TypeReference.createInstance(ResourceStatus.class),
+                TypeReference.createInstance(ResourceOperationStatusResourceError.class),
                 TypeReference.createInstance(Void.class));
     }
 
@@ -789,7 +790,8 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceStatus, Void> beginDeleteWithModel(String name, RequestOptions requestOptions) {
+    public SyncPoller<ResourceOperationStatusResourceError, Void> beginDeleteWithModel(
+            String name, RequestOptions requestOptions) {
         return this.beginDeleteWithModelAsync(name, requestOptions).getSyncPoller();
     }
 
@@ -938,8 +940,10 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ExportedResourceStatus, ExportedResourceStatus> beginExportWithModelAsync(
-            String name, String projectFileVersion, RequestOptions requestOptions) {
+    public PollerFlux<
+                    ResourceOperationStatusResourceExportedResourceError,
+                    ResourceOperationStatusResourceExportedResourceError>
+            beginExportWithModelAsync(String name, String projectFileVersion, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponseAsync(name, projectFileVersion, requestOptions),
@@ -950,8 +954,8 @@ public final class LongRunningClientImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                TypeReference.createInstance(ExportedResourceStatus.class),
-                TypeReference.createInstance(ExportedResourceStatus.class));
+                TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class),
+                TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class));
     }
 
     /**
@@ -981,8 +985,10 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ExportedResourceStatus, ExportedResourceStatus> beginExportWithModel(
-            String name, String projectFileVersion, RequestOptions requestOptions) {
+    public SyncPoller<
+                    ResourceOperationStatusResourceExportedResourceError,
+                    ResourceOperationStatusResourceExportedResourceError>
+            beginExportWithModel(String name, String projectFileVersion, RequestOptions requestOptions) {
         return this.beginExportWithModelAsync(name, projectFileVersion, requestOptions).getSyncPoller();
     }
 }
