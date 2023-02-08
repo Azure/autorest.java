@@ -12,7 +12,7 @@ using Azure.Core.Traits;
   title: "LongRunning",
   version: "1.0.0",
 })
-@versionedDependency(Azure.Core.Versions.v1_0_Preview_2)
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Cadl.LongRunning;
 
 model Resource {
