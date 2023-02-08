@@ -1646,30 +1646,30 @@ export class CodeModelBuilder {
   private getName(target: Model | Enum | ModelProperty | Scalar | Operation): string {
     // TODO: once getLibraryName API in cadl-dpg can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const languageProjectedName = getProjectedName(this.program, target, "java");
-    if (languageProjectedName && languageProjectedName != target.name) {
+    if (languageProjectedName) {
       return languageProjectedName;
     }
 
     const clientProjectedName = getProjectedName(this.program, target, "client");
-    if (clientProjectedName && clientProjectedName !== target.name) {
+    if (clientProjectedName) {
       return clientProjectedName;
     }
 
     const friendlyName = getFriendlyName(this.program, target);
-    if (friendlyName && friendlyName !== target.name) {
+    if (friendlyName) {
       return friendlyName;
     }
 
     // if no projectedName and friendlyName found, return the name of the target (including special handling for template)
-    if(
+    if (
       target.kind === "Model" &&
       target.templateMapper &&
       target.templateMapper.args &&
       target.templateMapper.args.length > 0
-      ) {
+    ) {
       const cadlName = getTypeName(target, this.typeNameOptions);
       const newName = getNameForTemplate(target);
-      this.program.trace("cadl-java", `Rename Cadl model '${cadlName}' to '${newName}'`);
+      this.logWarning(`Rename Cadl model '${cadlName}' to '${newName}'`);
       return newName;
     }
     return target.name;
