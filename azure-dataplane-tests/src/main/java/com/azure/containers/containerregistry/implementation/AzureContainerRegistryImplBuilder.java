@@ -260,6 +260,7 @@ public final class AzureContainerRegistryImplBuilder
                 new HttpPipelineBuilder()
                         .policies(policies.toArray(new HttpPipelinePolicy[0]))
                         .httpClient(httpClient)
+                        .clientOptions(localClientOptions)
                         .build();
         return httpPipeline;
     }

@@ -91,7 +91,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--generic-response-type`|Indicates that generic response types are used instead of named response types that extend the generic type.|
 |`--output-model-immutable`|Indicates that output-only models be generated as immutable, and without public constructor.|
 |`--use-input-stream-for-binary`|Indicates that `InputStream` is used for binary response body. By default, `BinaryData` is used.|
-| `--rp-namespace` | Azure Resource provider namespace that describes primary service library is generated for | 
+|`--rp-namespace` | Azure Resource provider namespace that describes primary service library is generated for | 
 
 ## Settings for minimal data-plane clients
 
