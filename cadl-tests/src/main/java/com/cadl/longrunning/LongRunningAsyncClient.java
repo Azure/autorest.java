@@ -19,8 +19,8 @@ import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollerFlux;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
 import com.cadl.longrunning.models.Resource;
-import com.cadl.longrunning.models.ResourceOperationStatusExportedResourceError;
 import com.cadl.longrunning.models.ResourceOperationStatusResourceError;
+import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResourceError;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous LongRunningClient type. */
@@ -282,7 +282,9 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusExportedResourceError, ResourceOperationStatusExportedResourceError>
+    public PollerFlux<
+                    ResourceOperationStatusResourceExportedResourceError,
+                    ResourceOperationStatusResourceExportedResourceError>
             beginExport(String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();

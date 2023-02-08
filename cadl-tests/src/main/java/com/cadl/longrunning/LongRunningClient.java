@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.longrunning.models.Resource;
-import com.cadl.longrunning.models.ResourceOperationStatusExportedResourceError;
 import com.cadl.longrunning.models.ResourceOperationStatusResourceError;
+import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResourceError;
 
 /** Initializes a new instance of the synchronous LongRunningClient type. */
 @ServiceClient(builder = LongRunningClientBuilder.class)
@@ -275,7 +275,9 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceOperationStatusExportedResourceError, ResourceOperationStatusExportedResourceError>
+    public SyncPoller<
+                    ResourceOperationStatusResourceExportedResourceError,
+                    ResourceOperationStatusResourceExportedResourceError>
             beginExport(String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         return client.beginExport(name, projectFileVersion).getSyncPoller();

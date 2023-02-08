@@ -30,12 +30,6 @@ public final class ResourceOperationStatusResourceError {
     @JsonProperty(value = "error")
     private ResponseError error;
 
-    /*
-     * The result of the operation.
-     */
-    @JsonProperty(value = "result")
-    private Resource result;
-
     /**
      * Creates an instance of ResourceOperationStatusResourceError class.
      *
@@ -72,14 +66,5 @@ public final class ResourceOperationStatusResourceError {
      */
     public ResponseError getError() {
         return this.error;
-    }
-
-    /**
-     * Get the result property: The result of the operation.
-     *
-     * @return the result value.
-     */
-    public Resource getResult() {
-        return this.result;
     }
 }
