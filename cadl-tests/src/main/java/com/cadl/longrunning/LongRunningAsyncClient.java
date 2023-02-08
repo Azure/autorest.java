@@ -18,9 +18,9 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollerFlux;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
-import com.cadl.longrunning.models.ExportedResourceStatus;
 import com.cadl.longrunning.models.Resource;
-import com.cadl.longrunning.models.ResourceStatus;
+import com.cadl.longrunning.models.ResourceOperationStatusExportedResourceError;
+import com.cadl.longrunning.models.ResourceOperationStatusResourceError;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous LongRunningClient type. */
@@ -218,7 +218,8 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceStatus, Resource> beginCreateOrReplace(String name, Resource resource) {
+    public PollerFlux<ResourceOperationStatusResourceError, Resource> beginCreateOrReplace(
+            String name, Resource resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateOrReplaceWithModelAsync(name, BinaryData.fromObject(resource), requestOptions);
@@ -260,7 +261,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceStatus, Void> beginDelete(String name) {
+    public PollerFlux<ResourceOperationStatusResourceError, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginDeleteWithModelAsync(name, requestOptions);
@@ -281,8 +282,8 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ExportedResourceStatus, ExportedResourceStatus> beginExport(
-            String name, String projectFileVersion) {
+    public PollerFlux<ResourceOperationStatusExportedResourceError, ResourceOperationStatusExportedResourceError>
+            beginExport(String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginExportWithModelAsync(name, projectFileVersion, requestOptions);
