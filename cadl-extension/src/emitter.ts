@@ -22,6 +22,8 @@ export interface EmitterOptions {
   "service-versions"?: Array<string>;
 
   "namer"?: boolean;
+  "generate-samples"?: boolean;
+  "generate-tests"?: boolean;
 
   "dev-options"?: DevOptions;
 }
@@ -37,11 +39,13 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   properties: {
     "namespace": { type: "string", nullable: true },
     "service-name": { type: "string", nullable: true },
-    "partial-update": { type: "boolean", nullable: true },
+    "partial-update": { type: "boolean", nullable: true, default: false },
     "output-dir": { type: "string", nullable: true },
     "service-versions": { type: "array", items: { type: "string" }, nullable: true },
 
-    "namer": { type: "boolean", nullable: true },
+    "namer": { type: "boolean", nullable: true, default: false },
+    "generate-samples": { type: "boolean", nullable: true, default: true },
+    "generate-tests": { type: "boolean", nullable: true, default: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },
