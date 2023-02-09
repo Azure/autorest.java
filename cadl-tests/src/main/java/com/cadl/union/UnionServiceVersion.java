@@ -8,6 +8,9 @@ import com.azure.core.util.ServiceVersion;
 
 /** Service version of UnionClient. */
 public enum UnionServiceVersion implements ServiceVersion {
+    /** Enum value 2022-03-01-preview. */
+    V2022_03_01_PREVIEW("2022-03-01-preview"),
+
     /** Enum value 2022-06-01-preview. */
     V2022_06_01_PREVIEW("2022-06-01-preview");
 
