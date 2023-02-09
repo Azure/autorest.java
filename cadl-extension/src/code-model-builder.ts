@@ -324,6 +324,7 @@ export class CodeModelBuilder {
 
       const versioning = getVersion(this.program, client.service);
       if (versioning && versioning.getVersions()) {
+        // @versioned in versioning
         codeModelClient.apiVersions = [];
         for (const version of versioning.getVersions()) {
           const apiVersion = new ApiVersion();
@@ -331,6 +332,7 @@ export class CodeModelBuilder {
           codeModelClient.apiVersions.push(apiVersion);
         }
       } else {
+        // fallback to @service.version
         const service = getService(this.program, client.service);
         if (service?.version) {
           codeModelClient.apiVersions = [];
