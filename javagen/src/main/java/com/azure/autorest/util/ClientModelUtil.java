@@ -292,7 +292,7 @@ public class ClientModelUtil {
         return clientDefaultValueOrConstantValue;
     }
 
-    public static String getFirstApiVersion(CodeModel codeModel) {
+    private static String getFirstApiVersionFromOperation(CodeModel codeModel) {
         return codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
                 .filter(o -> o.getApiVersions() != null)
@@ -305,10 +305,19 @@ public class ClientModelUtil {
     }
 
     public static List<String> getApiVersions(CodeModel codeModel) {
-        return codeModel.getClients().stream()
+        List<String> versions = codeModel.getClients().stream()
                 .filter(c -> !CoreUtils.isNullOrEmpty(c.getApiVersions()))
                 .map(c -> c.getApiVersions().stream().map(ApiVersion::getVersion).collect(Collectors.toList()))
                 .findFirst().orElse(null);
+        if (versions == null) {
+            String version = getFirstApiVersionFromOperation(codeModel);
+            if (version != null) {
+                versions = Collections.singletonList(version);
+            } else {
+                versions = Collections.emptyList();
+            }
+        }
+        return versions;
     }
 
     public static String getArtifactId() {

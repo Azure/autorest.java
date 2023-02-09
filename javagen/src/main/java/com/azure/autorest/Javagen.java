@@ -236,11 +236,7 @@ public class Javagen extends NewPlugin {
                 if (!CoreUtils.isNullOrEmpty(apiVersions)) {
                     serviceVersions = apiVersions;
                 } else {
-                    String apiVersion = ClientModelUtil.getFirstApiVersion(codeModel);
-                    if (apiVersion == null) {
-                        throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
-                    }
-                    serviceVersions = Collections.singletonList(apiVersion);
+                    throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
                 }
             }
 
@@ -272,7 +268,7 @@ public class Javagen extends NewPlugin {
         }
 
         if (settings.isDataPlaneClient()) {
-            Project project = new Project(client, ClientModelUtil.getFirstApiVersion(codeModel));
+            Project project = new Project(client, ClientModelUtil.getApiVersions(codeModel));
             if (settings.isSdkIntegration()) {
                 project.integrateWithSdk();
             }

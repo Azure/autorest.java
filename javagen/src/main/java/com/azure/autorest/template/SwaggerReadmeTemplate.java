@@ -11,7 +11,6 @@ import com.azure.core.util.CoreUtils;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +64,7 @@ public class SwaggerReadmeTemplate {
             }
         }
         // service-versions
-        objectNode.put("service-versions", Collections.singletonList(project.getApiVersion()));
+        objectNode.put("service-versions", project.getApiVersions());
 
         objectNode = removeDefaultOptions(objectNode);
 

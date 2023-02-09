@@ -46,7 +46,7 @@ public class Project {
     protected final List<String> pomDependencyIdentifiers = new ArrayList<>();
     protected String sdkRepositoryUri;
 
-    private String apiVersion;
+    private List<String> apiVersions;
 
     private boolean integratedWithSdk = false;
 
@@ -111,7 +111,7 @@ public class Project {
     protected Project() {
     }
 
-    public Project(Client client, String apiVersion) {
+    public Project(Client client, List<String> apiVersions) {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceName = settings.getServiceName();
         if (CoreUtils.isNullOrEmpty(serviceName)) {
@@ -124,7 +124,7 @@ public class Project {
 
         this.serviceDescription = String.format("This package contains Microsoft Azure %1$s client library.", serviceName);
 
-        this.apiVersion = apiVersion;
+        this.apiVersions = apiVersions;
     }
 
     public void integrateWithSdk() {
@@ -390,8 +390,8 @@ public class Project {
         return packageVersions;
     }
 
-    public String getApiVersion() {
-        return apiVersion;
+    public List<String> getApiVersions() {
+        return apiVersions;
     }
 
     public List<String> getPomDependencyIdentifiers() {
