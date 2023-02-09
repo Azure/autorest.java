@@ -214,7 +214,7 @@ export class CodeModelBuilder {
       server.parameters.forEach((it) => {
         let parameter;
 
-        if (isApiVersion(this.dpgContext, it as any)) {
+        if (isApiVersion(this.dpgContext, it)) {
           const schema = this.codeModel.schemas.add(
             new ConstantSchema(it.name, "api-version", {
               valueType: this.stringSchema,
