@@ -12,7 +12,7 @@ using Azure.Core.Traits;
   title: "LongRunning",
   version: "1.0.0",
 })
-@versionedDependency(Azure.Core.Versions.v1_0_Preview_2)
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Cadl.LongRunning;
 
 model Resource {
@@ -40,39 +40,16 @@ interface ResourceOperations
 
 @route("/long-running")
 interface LongRunningOp {
-  statusMonitor is CustomCore.PollingOperation<Resource>;
+  createOrUpdate is ResourceOperations.ResourceCreateOrUpdate<Resource>;
 
-  @pollingOperation(LongRunningOp.statusMonitor)
-  createOrUpdate is ResourceOperations.LongRunningResourceCreateOrUpdate<Resource>;
-
-  @pollingOperation(LongRunningOp.statusMonitor)
+  @pollingOperation(ResourceOperations.GetResourceOperationStatus<Resource, never>)
   createOrReplace is ResourceOperations.LongRunningResourceCreateOrReplace<Resource>;
 
   get is ResourceOperations.ResourceRead<Resource>;
 
-  @pollingOperation(LongRunningOp.statusMonitor)
+  @pollingOperation(ResourceOperations.GetResourceOperationStatus<Resource, never>)
   delete is ResourceOperations.LongRunningResourceDelete<Resource>;
 
-  @pollingOperation(LongRunningOp.statusMonitor)
-  export is ResourceOperations.ResourceAction<
-    Resource,
-    ExportParams,
-    Cadl.Http.AcceptedResponse & LongRunningStatusLocation
-  >;
-
-  @pollingOperation(LongRunningOp.statusMonitor)
-  importx is ResourceOperations.ResourceAction<
-    Resource,
-    ExportedResource,
-    Cadl.Http.AcceptedResponse & LongRunningStatusLocation
-  >;
-}
-
-namespace CustomCore {
-  @parentResource(T)
-  @resource("operations")
-  model OperationStatusResource<T> is OperationStatus<T>;
-
-  @route("operations")
-  op PollingOperation<TCustom> is ResourceOperations.ResourceRead<OperationStatusResource<TCustom>>;
+  @pollingOperation(ResourceOperations.GetResourceOperationStatus<Resource, ExportedResource>)
+  export is ResourceOperations.LongRunningResourceAction<Resource, ExportParams, ExportedResource>;
 }

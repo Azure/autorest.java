@@ -267,7 +267,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The createOrUpdate operation.
+     * Adds a user or updates a user's fields.
+     *
+     * <p>Creates or updates a User.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -314,7 +316,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The createOrUpdate operation.
+     * Adds a user or updates a user's fields.
+     *
+     * <p>Creates or updates a User.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -349,7 +353,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The createOrReplace operation.
+     * Adds a user or repalces a user's fields.
+     *
+     * <p>Creates or repalces a User.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -389,7 +395,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The createOrReplace operation.
+     * Adds a user or repalces a user's fields.
+     *
+     * <p>Creates or repalces a User.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -425,7 +433,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The get operation.
+     * Gets a user.
+     *
+     * <p>Gets a User.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -442,7 +452,7 @@ public final class CoreClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return details about a user along with {@link Response} on successful completion of {@link Mono}.
+     * @return a User along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(int id, RequestOptions requestOptions) {
@@ -452,7 +462,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The get operation.
+     * Gets a user.
+     *
+     * <p>Gets a User.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -469,7 +481,7 @@ public final class CoreClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return details about a user along with {@link Response}.
+     * @return a User along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(int id, RequestOptions requestOptions) {
@@ -477,7 +489,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The list operation.
+     * Lists all users.
+     *
+     * <p>Lists all Users.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -512,7 +526,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The list operation.
+     * Lists all users.
+     *
+     * <p>Lists all Users.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -543,7 +559,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The list operation.
+     * Lists all users.
+     *
+     * <p>Lists all Users.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -567,7 +585,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The delete operation.
+     * Deletes a user.
+     *
+     * <p>Deletes a User.
      *
      * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -585,7 +605,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The delete operation.
+     * Deletes a user.
+     *
+     * <p>Deletes a User.
      *
      * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -601,7 +623,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The export operation.
+     * Exports a user.
+     *
+     * <p>Exports a User.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -631,7 +655,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * The export operation.
+     * Exports a user.
+     *
+     * <p>Exports a User.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -657,7 +683,9 @@ public final class CoreClientImpl {
     }
 
     /**
-     * Get the next page of items.
+     * Lists all users.
+     *
+     * <p>Get the next page of items.
      *
      * <p><strong>Response Body Schema</strong>
      *

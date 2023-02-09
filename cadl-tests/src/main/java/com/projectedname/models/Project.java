@@ -20,13 +20,13 @@ public final class Project {
      * Only valid value is 'DPG'
      */
     @JsonProperty(value = "builtfrom")
-    private String builtfrom;
+    private String createdBy;
 
     /*
      * Only valid value is 'customers'
      */
     @JsonProperty(value = "wasMadeFor")
-    private String wasMadeFor;
+    private String madeForJava;
 
     /** Creates an instance of Project class. */
     public Project() {}
@@ -52,42 +52,42 @@ public final class Project {
     }
 
     /**
-     * Get the builtfrom property: Only valid value is 'DPG'.
+     * Get the createdBy property: Only valid value is 'DPG'.
      *
-     * @return the builtfrom value.
+     * @return the createdBy value.
      */
-    public String getBuiltfrom() {
-        return this.builtfrom;
+    public String getCreatedBy() {
+        return this.createdBy;
     }
 
     /**
-     * Set the builtfrom property: Only valid value is 'DPG'.
+     * Set the createdBy property: Only valid value is 'DPG'.
      *
-     * @param builtfrom the builtfrom value to set.
+     * @param createdBy the createdBy value to set.
      * @return the Project object itself.
      */
-    public Project setBuiltfrom(String builtfrom) {
-        this.builtfrom = builtfrom;
+    public Project setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
         return this;
     }
 
     /**
-     * Get the wasMadeFor property: Only valid value is 'customers'.
+     * Get the madeForJava property: Only valid value is 'customers'.
      *
-     * @return the wasMadeFor value.
+     * @return the madeForJava value.
      */
-    public String getWasMadeFor() {
-        return this.wasMadeFor;
+    public String getMadeForJava() {
+        return this.madeForJava;
     }
 
     /**
-     * Set the wasMadeFor property: Only valid value is 'customers'.
+     * Set the madeForJava property: Only valid value is 'customers'.
      *
-     * @param wasMadeFor the wasMadeFor value to set.
+     * @param madeForJava the madeForJava value to set.
      * @return the Project object itself.
      */
-    public Project setWasMadeFor(String wasMadeFor) {
-        this.wasMadeFor = wasMadeFor;
+    public Project setMadeForJava(String madeForJava) {
+        this.madeForJava = madeForJava;
         return this;
     }
 }
