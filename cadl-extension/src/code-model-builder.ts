@@ -153,7 +153,7 @@ export class CodeModelBuilder {
     const javaNamespace = getJavaNamespace(this.namespace);
 
     // API version
-    const apiVersion = getDefaultApiVersion(this.program, serviceNamespace);
+    const apiVersion = getDefaultApiVersion(this.dpgContext, serviceNamespace);
     if (apiVersion) {
       this.version = apiVersion.value;
     } else {
@@ -237,7 +237,7 @@ export class CodeModelBuilder {
       server.parameters.forEach((it) => {
         let parameter;
 
-        if (isApiVersion(this.program, it as any)) {
+        if (isApiVersion(this.dpgContext, it as any)) {
           // TODO hack on "ApiVersion"
           const schema = this.codeModel.schemas.add(
             new ConstantSchema(it.name, `api-version: ${this.version}`, {
@@ -337,7 +337,7 @@ export class CodeModelBuilder {
   }
 
   private processClients() {
-    const clients = listClients(this.program);
+    const clients = listClients(this.dpgContext);
     for (const client of clients) {
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
@@ -356,9 +356,9 @@ export class CodeModelBuilder {
         }
       }
 
-      const operationGroups = listOperationGroups(this.program, client);
+      const operationGroups = listOperationGroups(this.dpgContext, client);
 
-      const operationWithoutGroup = listOperationsInOperationGroup(this.program, client);
+      const operationWithoutGroup = listOperationsInOperationGroup(this.dpgContext, client);
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
         codeModelGroup.addOperation(this.processOperation("", operation));
@@ -368,7 +368,7 @@ export class CodeModelBuilder {
       }
 
       for (const operationGroup of operationGroups) {
-        const operations = listOperationsInOperationGroup(this.program, operationGroup);
+        const operations = listOperationsInOperationGroup(this.dpgContext, operationGroup);
         codeModelGroup = new OperationGroup(operationGroup.type.name);
         for (const operation of operations) {
           codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation));
@@ -586,7 +586,7 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter) {
-    if (isApiVersion(this.program, param)) {
+    if (isApiVersion(this.dpgContext, param)) {
       // TODO hack on "api-version"
       const parameter = this.apiVersionParameter;
       op.addParameter(parameter);

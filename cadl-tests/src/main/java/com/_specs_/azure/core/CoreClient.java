@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core;
 
+import com._specs_.azure.core.models.User;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -12,6 +13,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -67,5 +69,257 @@ public final class CoreClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(int id, BinaryData resource, RequestOptions requestOptions) {
         return this.client.createOrUpdateWithResponse(id, resource, requestOptions).block();
+    }
+
+    /**
+     * Adds a user or repalces a user's fields.
+     *
+     * <p>Creates or repalces a User.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param id The user's id.
+     * @param resource The resource instance.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return details about a user along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> createOrReplaceWithResponse(
+            int id, BinaryData resource, RequestOptions requestOptions) {
+        return this.client.createOrReplaceWithResponse(id, resource, requestOptions).block();
+    }
+
+    /**
+     * Gets a user.
+     *
+     * <p>Gets a User.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param id The user's id.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return a User along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getWithResponse(int id, RequestOptions requestOptions) {
+        return this.client.getWithResponse(id, requestOptions).block();
+    }
+
+    /**
+     * Lists all users.
+     *
+     * <p>Lists all Users.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of User items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
+        return new PagedIterable<>(this.client.list(requestOptions));
+    }
+
+    /**
+     * Deletes a user.
+     *
+     * <p>Deletes a User.
+     *
+     * @param id The user's id.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> deleteWithResponse(int id, RequestOptions requestOptions) {
+        return this.client.deleteWithResponse(id, requestOptions).block();
+    }
+
+    /**
+     * Exports a user.
+     *
+     * <p>Exports a User.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param id The user's id.
+     * @param format The format of the data.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return details about a user along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> exportWithResponse(int id, String format, RequestOptions requestOptions) {
+        return this.client.exportWithResponse(id, format, requestOptions).block();
+    }
+
+    /**
+     * Adds a user or repalces a user's fields.
+     *
+     * <p>Creates or repalces a User.
+     *
+     * @param id The user's id.
+     * @param resource The resource instance.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return details about a user.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public User createOrReplace(int id, User resource) {
+        // Generated convenience method for createOrReplaceWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createOrReplaceWithResponse(id, BinaryData.fromObject(resource), requestOptions)
+                .getValue()
+                .toObject(User.class);
+    }
+
+    /**
+     * Gets a user.
+     *
+     * <p>Gets a User.
+     *
+     * @param id The user's id.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return a User.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public User get(int id) {
+        // Generated convenience method for getWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getWithResponse(id, requestOptions).getValue().toObject(User.class);
+    }
+
+    /**
+     * Lists all users.
+     *
+     * <p>Lists all Users.
+     *
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return paged collection of User items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<User> list() {
+        // Generated convenience method for list
+        return new PagedIterable<>(client.list());
+    }
+
+    /**
+     * Deletes a user.
+     *
+     * <p>Deletes a User.
+     *
+     * @param id The user's id.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void delete(int id) {
+        // Generated convenience method for deleteWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        deleteWithResponse(id, requestOptions).getValue();
+    }
+
+    /**
+     * Exports a user.
+     *
+     * <p>Exports a User.
+     *
+     * @param id The user's id.
+     * @param format The format of the data.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return details about a user.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public User export(int id, String format) {
+        // Generated convenience method for exportWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return exportWithResponse(id, format, requestOptions).getValue().toObject(User.class);
     }
 }
