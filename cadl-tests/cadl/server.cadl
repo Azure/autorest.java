@@ -1,4 +1,5 @@
 import "@cadl-lang/rest";
+import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
 
@@ -17,9 +18,44 @@ using Cadl.Http;
     tld?: string = "org",
   }
 )
-namespace Cadl.Server;
+namespace Cadl.Server {
+  @Azure.DPG.client({
+    name: "ServerOpClient",
+    service: Cadl.Server,
+  })
+  @route("/status/{code}")
+  interface ServerOp {
+    status(@path code: int32): OkResponse | NoContentResponse;
+  }
+}
 
-@route("/status/{code}")
-interface ServerOp {
-  status(@path code: int32): OkResponse | NoContentResponse;
+@service({
+  title: "AnotherServer",
+  version: "v1",
+})
+@server(
+  "{Endpoint}/contoso/{ApiVersion}",
+  "Service endpoint",
+  {
+    @doc("Service endpoint")
+    Endpoint: string,
+
+    @doc("Api Version")
+    @path
+    ApiVersion: APIVersions,
+  }
+)
+namespace Cadl.AnotherServer {
+  enum APIVersions {
+    v1: "v1",
+  }
+
+  @Azure.DPG.client({
+    name: "AnotherServerOpClient",
+    service: Cadl.AnotherServer,
+  })
+  @route("/another-server")
+  interface AnotherServerOp {
+    get(@path code: int32): OkResponse | NoContentResponse;
+  }
 }
