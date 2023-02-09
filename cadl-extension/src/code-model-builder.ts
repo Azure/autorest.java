@@ -118,6 +118,7 @@ import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { OrSchema } from "./common/schemas/relationship.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
+import { LongRunningMetadata } from "./models.js";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -444,16 +445,16 @@ export class CodeModelBuilder {
     }
 
     // linked operations
-    const pollingTypes = this.processLinkedOperation(codeModelOperation, groupName, operation);
+    const lroMetadata = this.processLinkedOperation(codeModelOperation, groupName, operation);
 
     // responses
-    const candidateResponseSchema = pollingTypes[1]; // candidate: response body type of pollingOperation
+    const candidateResponseSchema = lroMetadata.pollResultType; // candidate: response body type of pollingOperation
     op.responses.map((it) => this.processResponse(codeModelOperation, it, candidateResponseSchema));
 
     // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
-    this.processRouteForLongRunning(codeModelOperation, op.responses, pollingTypes[0]);
+    this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata.longRunning);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -487,11 +488,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processLinkedOperation(
-    op: CodeModelOperation,
-    groupName: string,
-    operation: Operation,
-  ): [boolean, Schema | undefined, Schema | undefined] {
+  private processLinkedOperation(op: CodeModelOperation, groupName: string, operation: Operation): LongRunningMetadata {
     let pollingSchema = undefined;
     let finalSchema = undefined;
     let pollingFoundInOperationLinks = false;
@@ -540,7 +537,7 @@ export class CodeModelBuilder {
         }
       }
     }
-    return [pollingFoundInOperationLinks, pollingSchema, finalSchema];
+    return new LongRunningMetadata(pollingFoundInOperationLinks, pollingSchema, finalSchema);
   }
 
   private processRouteForLongRunning(
