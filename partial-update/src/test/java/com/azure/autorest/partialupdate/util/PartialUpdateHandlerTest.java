@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 
 import static com.github.javaparser.StaticJavaParser.parse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -242,6 +243,8 @@ public class PartialUpdateHandlerTest {
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
         CompilationUnit compilationUnit = parse(output);
+        assertNotNull(compilationUnit.getOrphanComments());
+        assertTrue(compilationUnit.getOrphanComments().size() > 0);
         assertEquals(true, compilationUnit.getModule().isPresent());
         assertEquals("com.azure.messaging.webpubsubnew", compilationUnit.getModule().get().getName().toString());
         assertEquals(3, compilationUnit.getModule().get().getDirectives().size());
