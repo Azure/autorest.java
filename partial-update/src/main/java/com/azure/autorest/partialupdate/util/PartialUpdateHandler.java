@@ -272,12 +272,12 @@ public class PartialUpdateHandler {
         compilationUnitForGeneratedFile.setModule(moduleDeclaration);
 
         // add comments as compilationUnitForGeneratedFile.toString() does not include comments
-        StringBuilder retModuleInfo = new StringBuilder();
+        StringBuilder comments = new StringBuilder();
         for (Comment comment : compilationUnitForGeneratedFile.getOrphanComments()) {
-            retModuleInfo.append(comment.toString());
+            comments.append(comment.toString());
         }
 
-        return retModuleInfo.toString() + compilationUnitForGeneratedFile.toString();
+        return comments.toString() + compilationUnitForGeneratedFile.toString();
     }
 
 
