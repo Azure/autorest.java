@@ -44,13 +44,11 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
-
 
 public class Javagen extends NewPlugin {
     private final Logger logger = new PluginLogger(this, Javagen.class);
@@ -236,11 +234,7 @@ public class Javagen extends NewPlugin {
                 if (!CoreUtils.isNullOrEmpty(apiVersions)) {
                     serviceVersions = apiVersions;
                 } else {
-                    String apiVersion = ClientModelUtil.getFirstApiVersion(codeModel);
-                    if (apiVersion == null) {
-                        throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
-                    }
-                    serviceVersions = Collections.singletonList(apiVersion);
+                    throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
                 }
             }
 
@@ -272,7 +266,7 @@ public class Javagen extends NewPlugin {
         }
 
         if (settings.isDataPlaneClient()) {
-            Project project = new Project(client, ClientModelUtil.getFirstApiVersion(codeModel));
+            Project project = new Project(client, ClientModelUtil.getApiVersions(codeModel));
             if (settings.isSdkIntegration()) {
                 project.integrateWithSdk();
             }

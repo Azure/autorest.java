@@ -38,6 +38,7 @@ import {
   getTypeName,
   EmitContext,
   getProjectedName,
+  getService,
 } from "@cadl-lang/compiler";
 import { getResourceOperation, getSegment } from "@cadl-lang/rest";
 import {
@@ -60,7 +61,6 @@ import { getVersion } from "@cadl-lang/versioning";
 import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/cadl-azure-core";
 import {
   DpgContext,
-  getDefaultApiVersion,
   listClients,
   listOperationGroups,
   listOperationsInOperationGroup,
@@ -122,7 +122,6 @@ import { EmitterOptions } from "./emitter.js";
 export class CodeModelBuilder {
   private program: Program;
   private typeNameOptions: TypeNameOptions;
-  private version: string;
   private baseUri: string;
   private hostParameters: Parameter[];
   private namespace: string;
@@ -152,24 +151,6 @@ export class CodeModelBuilder {
     this.namespace = getNamespaceFullName(serviceNamespace) || "Azure.Client";
     const javaNamespace = getJavaNamespace(this.namespace);
 
-    // API version
-    const apiVersion = getDefaultApiVersion(this.dpgContext, serviceNamespace);
-    if (apiVersion) {
-      this.version = apiVersion.value;
-    } else {
-      const versioning = getVersion(this.program, serviceNamespace);
-      if (versioning) {
-        // TODO: versioning support
-        this.version = versioning.getVersions()[0].value;
-      } else {
-        if (service.version) {
-          this.version = service.version;
-        } else {
-          throw new Error("API version not available.");
-        }
-      }
-    }
-
     const namespace1 = this.namespace;
     this.typeNameOptions = {
       // shorten type names by removing Cadl and service namespace
@@ -180,10 +161,6 @@ export class CodeModelBuilder {
     };
 
     // init code model
-    // let title = getServiceTitle(this.program);
-    // if (title === "(title)") {
-    //   title = namespace;
-    // }
     const title = serviceNamespace.name;
 
     const description = this.getDoc(serviceNamespace);
@@ -237,12 +214,11 @@ export class CodeModelBuilder {
       server.parameters.forEach((it) => {
         let parameter;
 
-        if (isApiVersion(this.dpgContext, it as any)) {
-          // TODO hack on "ApiVersion"
+        if (isApiVersion(this.dpgContext, it)) {
           const schema = this.codeModel.schemas.add(
-            new ConstantSchema(it.name, `api-version: ${this.version}`, {
+            new ConstantSchema(it.name, "api-version", {
               valueType: this.stringSchema,
-              value: new ConstantValue(this.version),
+              value: new ConstantValue(""),
             }),
           );
           parameter = new Parameter(it.name, this.getDoc(it), schema, {
@@ -348,11 +324,23 @@ export class CodeModelBuilder {
 
       const versioning = getVersion(this.program, client.service);
       if (versioning && versioning.getVersions()) {
+        // @versioned in versioning
         codeModelClient.apiVersions = [];
         for (const version of versioning.getVersions()) {
           const apiVersion = new ApiVersion();
           apiVersion.version = version.value;
           codeModelClient.apiVersions.push(apiVersion);
+        }
+      } else {
+        // fallback to @service.version
+        const service = getService(this.program, client.service);
+        if (service?.version) {
+          codeModelClient.apiVersions = [];
+          const apiVersion = new ApiVersion();
+          apiVersion.version = service.version;
+          codeModelClient.apiVersions.push(apiVersion);
+        } else {
+          throw new Error(`API version not available for client ${client.name}.`);
         }
       }
 
@@ -394,11 +382,6 @@ export class CodeModelBuilder {
     const codeModelOperation = new CodeModelOperation(operationName, this.getDoc(operation), {
       operationId: opId,
       summary: this.getSummary(operation),
-      apiVersions: [
-        {
-          version: this.version,
-        },
-      ],
     });
 
     if (fromLinkedOperation || !operationContainsJsonMergePatch(op)) {
@@ -587,7 +570,6 @@ export class CodeModelBuilder {
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter) {
     if (isApiVersion(this.dpgContext, param)) {
-      // TODO hack on "api-version"
       const parameter = this.apiVersionParameter;
       op.addParameter(parameter);
     } else if (this.specialHeaderNames.has(param.name.toLowerCase())) {
@@ -1759,9 +1741,9 @@ export class CodeModelBuilder {
         "api-version",
         "Version parameter",
         this.codeModel.schemas.add(
-          new ConstantSchema("accept", `api-version: ${this.version}`, {
+          new ConstantSchema("accept", "api-version", {
             valueType: this.stringSchema,
-            value: new ConstantValue(this.version),
+            value: new ConstantValue(""),
           }),
         ),
         {
@@ -1771,7 +1753,6 @@ export class CodeModelBuilder {
           protocol: {
             http: new HttpParameter(ParameterLocation.Query),
           },
-          clientDefaultValue: this.version,
           language: {
             default: {
               serializedName: "api-version",
