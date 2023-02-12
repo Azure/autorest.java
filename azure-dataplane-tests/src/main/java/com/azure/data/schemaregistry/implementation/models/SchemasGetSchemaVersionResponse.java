@@ -45,6 +45,6 @@ public final class SchemasGetSchemaVersionResponse
     /** Disposes of the connection associated with this stream response. */
     @Override
     public void close() {
-        value().subscribe(bb -> {}, t -> {}).dispose();
+        getValue().subscribe(bb -> {}, t -> {}).dispose();
     }
 }
