@@ -92,7 +92,7 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
             if (isStreamResponse) {
                 classBlock.javadocComment(javadoc -> javadoc.description("Disposes of the connection associated with this stream response."));
                 classBlock.annotation("Override");
-                classBlock.publicMethod("void close()", methodBlock -> methodBlock.line("value().subscribe(bb -> { }, t -> { }).dispose();"));
+                classBlock.publicMethod("void close()", methodBlock -> methodBlock.line("getValue().subscribe(bb -> { }, t -> { }).dispose();"));
             }
         });
     }
