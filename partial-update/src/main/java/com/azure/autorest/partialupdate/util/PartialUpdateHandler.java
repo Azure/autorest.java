@@ -277,7 +277,7 @@ public class PartialUpdateHandler {
             comments.append(comment.toString());
         }
 
-        return comments.toString() + compilationUnitForGeneratedFile.toString();
+        return comments + "\n" + compilationUnitForGeneratedFile;
     }
 
 
