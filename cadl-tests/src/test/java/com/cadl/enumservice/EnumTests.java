@@ -108,6 +108,31 @@ public class EnumTests {
                 ",100");
     }
 
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testStringArrayAsMulti() throws Exception {
+        EnumServiceClientImpl impl = Mockito.mock(EnumServiceClientImpl.class);
+
+        ArgumentCaptor<List<String>> enumArrayArgumentCaptor = ArgumentCaptor.forClass(List.class);
+        ArgumentCaptor<RequestOptions> requestOptionsArgumentCaptor = ArgumentCaptor.forClass(RequestOptions.class);
+
+        Mockito.when(impl.setStringEnumMultiWithResponseAsync(enumArrayArgumentCaptor.capture(), requestOptionsArgumentCaptor.capture()))
+                .thenReturn(Mono.just(new SimpleResponse<>(null, 200, new HttpHeaders(), BinaryData.fromString("\"OK\""))));
+
+        EnumServiceAsyncClient client = new EnumServiceAsyncClient(impl);
+
+        // normal case
+        client.setStringEnumMulti(Arrays.asList(ColorModel.BLUE, ColorModel.GREEN), Arrays.asList(ColorModel.GREEN, ColorModel.RED)).block();
+
+        Assertions.assertEquals(
+                Arrays.asList(ColorModel.BLUE.toString(), ColorModel.GREEN.toString()),
+                enumArrayArgumentCaptor.getValue());
+
+        HttpRequest request = new HttpRequest(HttpMethod.POST, "http://endpoint/");
+        getRequestCallback(requestOptionsArgumentCaptor.getValue()).accept(request);
+        Assertions.assertEquals("colorArrayOpt=Green&colorArrayOpt=Red", request.getUrl().getQuery());
+    }
+
     private static void verifyQuery(String query, String key, String value) throws UnsupportedEncodingException {
         Assertions.assertEquals(query, URLEncoder.encode(key, StandardCharsets.UTF_8.name()) + "=" + URLEncoder.encode( value, StandardCharsets.UTF_8.name()));
     }
