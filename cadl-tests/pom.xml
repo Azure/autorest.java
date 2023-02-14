@@ -77,11 +77,5 @@
       <version>1.14.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>azure-identity</artifactId>
-      <version>1.8.0</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>
