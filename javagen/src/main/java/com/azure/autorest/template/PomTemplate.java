@@ -10,12 +10,15 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Writes a ServiceClient to a JavaFile.
@@ -33,8 +36,13 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
     public final void write(Pom pom, XmlFile xmlFile) {
         // copyright
         xmlFile.blockComment(xmlLineComment -> {
-            xmlLineComment.line(" ~ Copyright (c) Microsoft Corporation. All rights reserved.");
-            xmlLineComment.line(" ~ Licensed under the MIT License.");
+            xmlLineComment.line(
+                    Arrays.stream(JavaSettings.getInstance()
+                            .getFileHeaderText()
+                            .split(System.lineSeparator()))
+                            .map(line -> " ~ " + line)
+                            .collect(Collectors.joining(System.lineSeparator()))
+            );
         });
 
         Map<String, String> projectAnnotations = new HashMap<>();
