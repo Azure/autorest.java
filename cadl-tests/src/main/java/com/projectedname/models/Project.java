@@ -13,7 +13,7 @@ public final class Project {
     /*
      * Only valid value is 'DPG'
      */
-    @JsonProperty(value = "producedBy")
+    @JsonProperty(value = "codegen")
     private String producedBy;
 
     /*

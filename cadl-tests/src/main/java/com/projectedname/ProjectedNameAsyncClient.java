@@ -42,7 +42,7 @@ public final class ProjectedNameAsyncClient {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }
@@ -69,7 +69,7 @@ public final class ProjectedNameAsyncClient {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }
@@ -96,7 +96,7 @@ public final class ProjectedNameAsyncClient {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }
