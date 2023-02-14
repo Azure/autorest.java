@@ -3,16 +3,14 @@
 
 package com.authentication.union;
 
-import com.authentication.apikey.AzureKeyCredentialPolicy;
-import com.authentication.oauth2.BearerTokenAuthenticationPolicy;
+import com.authentication.util.AzureKeyCredentialPolicy;
+import com.authentication.util.BearerTokenAuthenticationPolicy;
 import com.azure.core.credential.AccessToken;
 import com.azure.core.credential.AzureKeyCredential;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 
 import java.time.OffsetDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class UnionClientTest {
 
