@@ -16,6 +16,7 @@ import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
@@ -323,13 +324,36 @@ abstract class ConvenienceMethodTemplateBase {
     }
 
     private static void writeQueryParam(MethodParameter parameter, JavaBlock methodBlock) {
-        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
-                String.format("requestOptions.addQueryParam(%1$s, %2$s);",
+        Consumer<JavaBlock> writeLine;
+        if (parameter.proxyMethodParameter.getExplode() && parameter.getClientMethodParameter().getWireType() instanceof IterableType) {
+            // multi
+            IType elementType = ((IterableType) parameter.getClientMethodParameter().getWireType()).getElementType();
+            String elementTypeExpression = expressionConvertToString("paramItemValue", elementType, parameter.getProxyMethodParameter());
+            writeLine = javaBlock -> {
+                String addQueryParamLine = String.format("requestOptions.addQueryParam(%1$s, %2$s);",
                         ClassType.String.defaultValueExpression(parameter.getSerializedName()),
-                        expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter())));
+                        elementTypeExpression);
+
+                javaBlock.line(String.format("for (%1$s paramItemValue : %2$s) {", elementType, parameter.getName()));
+                javaBlock.indent(() -> {
+                    if (elementType instanceof PrimitiveType) {
+                        javaBlock.line(addQueryParamLine);
+                    } else {
+                        javaBlock.ifBlock("paramItemValue != null", ifBlock -> ifBlock.line(addQueryParamLine));
+                    }
+                });
+                javaBlock.line("}");
+            };
+        } else {
+            writeLine = javaBlock -> javaBlock.line(
+                    String.format("requestOptions.addQueryParam(%1$s, %2$s);",
+                            ClassType.String.defaultValueExpression(parameter.getSerializedName()),
+                            expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter())));
+        }
+        Consumer<JavaBlock> writeLineFinal = writeLine;
         if (!parameter.getClientMethodParameter().isRequired()) {
             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
-                writeLine.accept(ifBlock);
+                writeLineFinal.accept(ifBlock);
             });
         } else {
             writeLine.accept(methodBlock);
@@ -348,18 +372,21 @@ abstract class ConvenienceMethodTemplateBase {
                 return String.format("String.valueOf(%1$s.%2$s())", name, enumType.getToJsonMethodName());
             }
         } else if (type instanceof IterableType) {
-            // array as CSV or CollectionFormat
-            // TODO: explode
-            String delimiter = parameter.getCollectionFormat().getDelimiter();
-            IType elementType = ((IterableType) type).getElementType();
-            if (elementType == ClassType.String) {
-                return String.format(
-                        "%1$s.stream().map(paramItemValue -> Objects.toString(paramItemValue, \"\")).collect(Collectors.joining(\"%2$s\"))",
-                        name, delimiter);
+            if (parameter.getCollectionFormat() == CollectionFormat.MULTI && parameter.getExplode()) {
+                // multi, RestProxy will handle the array with "multipleQueryParams = true"
+                return name;
             } else {
-                return String.format(
-                        "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%1$s, CollectionFormat.%2$s)",
-                        name, parameter.getCollectionFormat().toString().toUpperCase(Locale.ROOT));
+                String delimiter = parameter.getCollectionFormat().getDelimiter();
+                IType elementType = ((IterableType) type).getElementType();
+                if (elementType == ClassType.String) {
+                    return String.format(
+                            "%1$s.stream().map(paramItemValue -> Objects.toString(paramItemValue, \"\")).collect(Collectors.joining(\"%2$s\"))",
+                            name, delimiter);
+                } else {
+                    return String.format(
+                            "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%1$s, CollectionFormat.%2$s)",
+                            name, parameter.getCollectionFormat().toString().toUpperCase(Locale.ROOT));
+                }
             }
         } else {
             // primitive or date-time

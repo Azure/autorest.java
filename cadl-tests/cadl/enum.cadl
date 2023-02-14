@@ -72,17 +72,103 @@ interface EnumOp {
 
   @post
   @route("operation/stringenumarray")
-  setStringEnumArray(@query colorArray: ColorModel[], @query colorArrayOpt?: ColorModel[]): string;
+  setStringEnumArray(
+    @query({
+      format: "csv",
+    })
+    colorArray: ColorModel[],
+
+    @query({
+      format: "csv",
+    })
+    colorArrayOpt?: ColorModel[]
+  ): string;
 
   @post
   @route("operation/intenumarray")
-  setIntEnumArray(@query priorityArray: Priority[], @query priorityArrayOpt?: Priority[]): string;
+  setIntEnumArray(
+    @query({
+      format: "csv",
+    })
+    priorityArray: Priority[],
+
+    @query({
+      format: "csv",
+    })
+    priorityArrayOpt?: Priority[]
+  ): string;
 
   @post
   @route("operation/stringarray")
-  setStringArray(@query stringArray: string[], @query stringArrayOpt?: string[]): string;
+  setStringArray(
+    @query({
+      format: "csv",
+    })
+    stringArray: string[],
+
+    @query({
+      format: "csv",
+    })
+    stringArrayOpt?: string[]
+  ): string;
 
   @post
   @route("operation/intarray")
-  setIntArray(@query intArray: int32[], @query intArrayOpt?: int32[]): string;
+  setIntArray(
+    @query({
+      format: "csv",
+    })
+    intArray: int32[],
+
+    @query({
+      format: "csv",
+    })
+    intArrayOpt?: int32[]
+  ): string;
+
+  @post
+  @route("operation/stringenummulti")
+  setStringEnumMulti(
+    @query({
+      format: "multi",
+    })
+    colorArray: ColorModel[],
+
+    @query({
+      format: "multi",
+    })
+    colorArrayOpt?: ColorModel[]
+  ): string;
+
+  @post
+  @route("operation/intenummulti")
+  setIntEnumMulti(
+    @query({
+      format: "multi",
+    })
+    priorityArray: Priority[],
+
+    @query({
+      format: "multi",
+    })
+    priorityArrayOpt?: Priority[]
+  ): string;
+
+  @post
+  @route("operation/stringmulti")
+  setStringMulti(@query stringArray: string[], @query stringArrayOpt?: string[]): string;
+
+  @post
+  @route("operation/intmulti")
+  setIntMulti(
+    @query({
+      format: "multi",
+    })
+    intArray: int32[],
+
+    @query({
+      format: "multi",
+    })
+    intArrayOpt?: int32[]
+  ): string;
 }

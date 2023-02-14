@@ -1,5 +1,11 @@
 # Release History
 
+## 0.4.1 (Unreleased)
+
+Compatible with compiler 0.40.
+
+- Supported `QueryParameterOptions` on `query` in Cadl source.
+
 ## 0.4.0 (2023-02-10)
 
 Compatible with compiler 0.40.

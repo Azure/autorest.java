@@ -56,6 +56,7 @@ import {
   ServiceAuthentication,
   StatusCode,
   getHttpOperation,
+  getQueryParamOptions,
 } from "@cadl-lang/rest/http";
 import { getVersion } from "@cadl-lang/versioning";
 import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/cadl-azure-core";
@@ -109,6 +110,7 @@ import {
   GroupSchema,
   GroupProperty,
   ApiVersion,
+  SerializationStyle,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient } from "./common/client.js";
@@ -579,13 +581,36 @@ export class CodeModelBuilder {
         op.specialHeaders.push(param.name);
       }
     } else {
+      // schema
       let schema;
-      if (param.param.type.kind === "Scalar" && param.param.type.name === "zonedDateTime") {
+      if (param.type === "header" && param.param.type.kind === "Scalar" && param.param.type.name === "zonedDateTime") {
         // zonedTateTime in header maps to RFC 5322
         schema = this.processDateTimeSchema(param.param.type, param.param.name, true);
       } else {
         schema = this.processSchema(param.param.type, param.param.name);
       }
+
+      // format if array
+      let style = undefined;
+      let explode = undefined;
+      if (
+        param.type === "query" &&
+        param.param.type.kind === "Model" &&
+        isArrayModelType(this.program, param.param.type)
+      ) {
+        const queryParamOptions = getQueryParamOptions(this.program, param.param);
+        switch (queryParamOptions?.format) {
+          case "csv":
+            style = SerializationStyle.Simple;
+            break;
+
+          case "multi":
+            style = SerializationStyle.Form;
+            explode = true;
+            break;
+        }
+      }
+
       const nullable = this.isNullableType(param.param.type);
       const parameter = new Parameter(param.param.name, this.getDoc(param.param), schema, {
         summary: this.getSummary(param.param),
@@ -593,7 +618,10 @@ export class CodeModelBuilder {
         required: !param.param.optional,
         nullable: nullable,
         protocol: {
-          http: new HttpParameter(param.type),
+          http: new HttpParameter(param.type, {
+            style: style,
+            explode: explode,
+          }),
         },
         // clientDefaultValue: this.getDefaultValue(param.param.default),
         language: {
