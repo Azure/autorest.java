@@ -4,13 +4,15 @@
 package com._specs_.azure.core;
 
 import com._specs_.azure.core.models.User;
+import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class CoreTests {
@@ -22,52 +24,82 @@ public class CoreTests {
     public void testCreateOrUpdate() {
         Map<String, String> body = new HashMap<>();
         body.put("name", "Madge");
-        Response<BinaryData> response = client.createOrUpdateWithResponse(1, BinaryData.fromObject(body), null).block();
+        Mono<Response<BinaryData>> response = client.createOrUpdateWithResponse(1, BinaryData.fromObject(body), null);
 
-        Assertions.assertEquals(200, response.getStatusCode());
-        Map<String, Object> responseBody = response.getValue().toObject(Map.class);
-        Assertions.assertEquals(1, responseBody.get("id"));
-        Assertions.assertEquals("Madge", responseBody.get("name"));
+        StepVerifier.create(response)
+                .assertNext(r -> {
+                    Assertions.assertEquals(200, r.getStatusCode());
+                    Map<String, Object> responseBody = r.getValue().toObject(Map.class);
+                    Assertions.assertEquals(1, responseBody.get("id"));
+                    Assertions.assertEquals("Madge", responseBody.get("name"));
+                })
+                .expectComplete()
+                .verify();
     }
 
     @Test
     public void testCreateOrReplace() {
-        User user = client.createOrReplace(1, new User("Madge")).block();
+        Mono<User> response = client.createOrReplace(1, new User("Madge"));
 
-        Assertions.assertEquals(1, user.getId());
-        Assertions.assertEquals("Madge", user.getName());
+        StepVerifier.create(response)
+                .assertNext(user -> {
+                    Assertions.assertEquals(1, user.getId());
+                    Assertions.assertEquals("Madge", user.getName());
+                })
+                .expectComplete()
+                .verify();
     }
 
     @Test
     public void testGet() {
-        User user = client.get(1).block();
+        Mono<User> response = client.get(1);
 
-        Assertions.assertEquals(1, user.getId());
-        Assertions.assertEquals("Madge", user.getName());
+        StepVerifier.create(response)
+                .assertNext(user -> {
+                    Assertions.assertEquals(1, user.getId());
+                    Assertions.assertEquals("Madge", user.getName());
+                })
+                .expectComplete()
+                .verify();
     }
 
     @Test
     public void testList() {
-        List<User> users = client.list().collectList().block();
+        PagedFlux<User> response = client.list();
 
-        Assertions.assertEquals(2, users.size());
-        Assertions.assertEquals(1, users.get(0).getId());
-        Assertions.assertEquals("Madge", users.get(0).getName());
-        Assertions.assertEquals(2, users.get(1).getId());
-        Assertions.assertEquals("John", users.get(1).getName());
+        StepVerifier.create(response)
+                .assertNext(user -> {
+                    Assertions.assertEquals(1, user.getId());
+                    Assertions.assertEquals("Madge", user.getName());
+                })
+                .assertNext(user -> {
+                    Assertions.assertEquals(2, user.getId());
+                    Assertions.assertEquals("John", user.getName());
+                })
+                .expectComplete()
+                .verify();
     }
 
 
     @Test
     public void testDelete() {
-        client.delete(1).block();
+        Mono<Void> response = client.delete(1);
+
+        StepVerifier.create(response)
+                .expectComplete()
+                .verify();
     }
 
     @Test
     public void testAction() {
-        User user = client.export(1, "json").block();
+        Mono<User> response = client.export(1, "json");
 
-        Assertions.assertEquals(1, user.getId());
-        Assertions.assertEquals("Madge", user.getName());
+        StepVerifier.create(response)
+                .assertNext(user -> {
+                    Assertions.assertEquals(1, user.getId());
+                    Assertions.assertEquals("Madge", user.getName());
+                })
+                .expectComplete()
+                .verify();
     }
 }
