@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.authentication.oauth2;
+package com.authentication.util;
 
 import com.azure.core.credential.AccessToken;
 import com.azure.core.credential.TokenCredential;

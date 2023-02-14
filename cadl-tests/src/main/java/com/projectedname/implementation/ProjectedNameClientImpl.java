@@ -161,7 +161,7 @@ public final class ProjectedNameClientImpl {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }
@@ -188,7 +188,7 @@ public final class ProjectedNameClientImpl {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }
@@ -214,7 +214,7 @@ public final class ProjectedNameClientImpl {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }
@@ -241,7 +241,7 @@ public final class ProjectedNameClientImpl {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }
@@ -267,7 +267,7 @@ public final class ProjectedNameClientImpl {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }
@@ -294,7 +294,7 @@ public final class ProjectedNameClientImpl {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }

@@ -1497,7 +1497,7 @@ export class CodeModelBuilder {
       nullable: nullable,
       readOnly: this.isReadOnly(prop),
       // clientDefaultValue: this.getDefaultValue(prop.default),
-      serializedName: prop.name,
+      serializedName: this.getSerializedName(prop),
     });
   }
 
@@ -1681,6 +1681,15 @@ export class CodeModelBuilder {
       const newName = getNameForTemplate(target);
       this.logWarning(`Rename Cadl model '${cadlName}' to '${newName}'`);
       return newName;
+    }
+    return target.name;
+  }
+
+  private getSerializedName(target: ModelProperty): string {
+    // First get projected name, if not found, return target.name
+    const jsonProjectedName = getProjectedName(this.program, target, "json");
+    if (jsonProjectedName) {
+      return jsonProjectedName;
     }
     return target.name;
   }

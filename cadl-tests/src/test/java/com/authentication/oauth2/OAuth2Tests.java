@@ -3,6 +3,7 @@
 
 package com.authentication.oauth2;
 
+import com.authentication.util.BearerTokenAuthenticationPolicy;
 import com.azure.core.credential.AccessToken;
 import com.azure.core.exception.HttpResponseException;
 import org.junit.jupiter.api.Assertions;
