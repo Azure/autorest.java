@@ -162,7 +162,7 @@ public class JavaSettings {
                 getBooleanValue(host, "include-read-only-in-constructor-args", false),
                 // setting the default as true as the Java design guideline recommends using String for URLs.
                 getBooleanValue(host, "url-as-string", true),
-                getStringValue(host, "rp-namespace", "UnknownNamespace")
+                getStringValue(host, "rp-namespace")
             );
         }
         return instance;

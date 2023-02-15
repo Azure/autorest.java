@@ -155,11 +155,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 classBlock.privateStaticFinalVariable("String SDK_VERSION = \"version\"");
 
                 String rpNamespace = settings.getRpNamespace();
-                // sdk name
+                
+                // resource provider namespace
                 addGeneratedAnnotation(classBlock);
-                classBlock.privateStaticFinalVariable(String.format("String RESOURCE_PROVIDER_NAMESPACE = \"%s\"", 
-                    rpNamespace));
-
+                rpNamespace = rpNamespace != null ? String.format("\"%s\"", rpNamespace) : "null";
+                classBlock.privateStaticFinalVariable(String.format("String RESOURCE_PROVIDER_NAMESPACE = %s;", rpNamespace));
+                
                 // default scope
                 Set<String> scopes = serviceClient.getSecurityInfo() != null ? serviceClient.getSecurityInfo().getScopes() : null;
                 if (scopes != null && !scopes.isEmpty()) {
