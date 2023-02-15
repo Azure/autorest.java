@@ -34,6 +34,7 @@ import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.TracingOptions;
 import com.azure.core.util.tracing.Tracer;
 import com.azure.core.util.tracing.TracerProvider;
 import org.slf4j.Logger;
@@ -159,7 +160,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 // resource provider namespace
                 addGeneratedAnnotation(classBlock);
                 rpNamespace = rpNamespace != null ? String.format("\"%s\"", rpNamespace) : "null";
-                classBlock.privateStaticFinalVariable(String.format("String RESOURCE_PROVIDER_NAMESPACE = %s;", rpNamespace));
+                classBlock.privateStaticFinalVariable(String.format("String RESOURCE_PROVIDER_NAMESPACE = %s", rpNamespace));
                 
                 // default scope
                 Set<String> scopes = serviceClient.getSecurityInfo() != null ? serviceClient.getSecurityInfo().getScopes() : null;
@@ -470,6 +471,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add(AddDatePolicy.class.getName());
         imports.add(HttpPipelinePosition.class.getName());
         imports.add(Collectors.class.getName());
+        imports.add(TracingOptions.class.getName());
         imports.add(Tracer.class.getName());
         imports.add(TracerProvider.class.getName());
     }
