@@ -3,6 +3,7 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.template.PomTemplate;
 
 public class FluentPomTemplate extends PomTemplate {
@@ -16,6 +17,14 @@ public class FluentPomTemplate extends PomTemplate {
 
     public static FluentPomTemplate getInstance() {
         return INSTANCE;
+    }
+
+    @Override
+    protected void writeJacoco(XmlBlock propertiesBlock) {
+        super.writeJacoco(propertiesBlock);
+
+        propertiesBlock.tag("jacoco.min.linecoverage", "0");
+        propertiesBlock.tag("jacoco.min.branchcoverage", "0");
     }
 
 //    public static void setProject(FluentProject project) {
