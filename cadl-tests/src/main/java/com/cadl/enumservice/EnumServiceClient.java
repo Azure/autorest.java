@@ -333,6 +333,138 @@ public final class EnumServiceClient {
     }
 
     /**
+     * The setStringEnumMulti operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param colorArray Array of ColorModel.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> setStringEnumMultiWithResponse(List<String> colorArray, RequestOptions requestOptions) {
+        return this.client.setStringEnumMultiWithResponse(colorArray, requestOptions).block();
+    }
+
+    /**
+     * The setIntEnumMulti operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Priority. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param priorityArray Array of Priority.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> setIntEnumMultiWithResponse(List<String> priorityArray, RequestOptions requestOptions) {
+        return this.client.setIntEnumMultiWithResponse(priorityArray, requestOptions).block();
+    }
+
+    /**
+     * The setStringMulti operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param stringArray Array of Response.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> setStringMultiWithResponse(List<String> stringArray, RequestOptions requestOptions) {
+        return this.client.setStringMultiWithResponse(stringArray, requestOptions).block();
+    }
+
+    /**
+     * The setIntMulti operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param intArray Array of IntArray.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> setIntMultiWithResponse(List<Integer> intArray, RequestOptions requestOptions) {
+        return this.client.setIntMultiWithResponse(intArray, requestOptions).block();
+    }
+
+    /**
      * The getColor operation.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
@@ -663,5 +795,223 @@ public final class EnumServiceClient {
         // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntArrayWithResponse(intArray, requestOptions).getValue().toObject(String.class);
+    }
+
+    /**
+     * The setStringEnumMulti operation.
+     *
+     * @param colorArray Array of ColorModel.
+     * @param colorArrayOpt Array of ColorModel.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String setStringEnumMulti(List<ColorModel> colorArray, List<ColorModel> colorArrayOpt) {
+        // Generated convenience method for setStringEnumMultiWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (colorArrayOpt != null) {
+            for (ColorModel paramItemValue : colorArrayOpt) {
+                if (paramItemValue != null) {
+                    requestOptions.addQueryParam("colorArrayOpt", paramItemValue.toString());
+                }
+            }
+        }
+        return setStringEnumMultiWithResponse(
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .getValue()
+                .toObject(String.class);
+    }
+
+    /**
+     * The setStringEnumMulti operation.
+     *
+     * @param colorArray Array of ColorModel.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String setStringEnumMulti(List<ColorModel> colorArray) {
+        // Generated convenience method for setStringEnumMultiWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return setStringEnumMultiWithResponse(
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .getValue()
+                .toObject(String.class);
+    }
+
+    /**
+     * The setIntEnumMulti operation.
+     *
+     * @param priorityArray Array of Priority.
+     * @param priorityArrayOpt Array of Priority.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String setIntEnumMulti(List<Priority> priorityArray, List<Priority> priorityArrayOpt) {
+        // Generated convenience method for setIntEnumMultiWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (priorityArrayOpt != null) {
+            for (Priority paramItemValue : priorityArrayOpt) {
+                if (paramItemValue != null) {
+                    requestOptions.addQueryParam("priorityArrayOpt", String.valueOf(paramItemValue.toLong()));
+                }
+            }
+        }
+        return setIntEnumMultiWithResponse(
+                        priorityArray.stream()
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .getValue()
+                .toObject(String.class);
+    }
+
+    /**
+     * The setIntEnumMulti operation.
+     *
+     * @param priorityArray Array of Priority.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String setIntEnumMulti(List<Priority> priorityArray) {
+        // Generated convenience method for setIntEnumMultiWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return setIntEnumMultiWithResponse(
+                        priorityArray.stream()
+                                .map(
+                                        paramItemValue ->
+                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .getValue()
+                .toObject(String.class);
+    }
+
+    /**
+     * The setStringMulti operation.
+     *
+     * @param stringArray Array of Response.
+     * @param stringArrayOpt Array of Response.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String setStringMulti(List<String> stringArray, List<String> stringArrayOpt) {
+        // Generated convenience method for setStringMultiWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (stringArrayOpt != null) {
+            for (String paramItemValue : stringArrayOpt) {
+                if (paramItemValue != null) {
+                    requestOptions.addQueryParam("stringArrayOpt", paramItemValue);
+                }
+            }
+        }
+        return setStringMultiWithResponse(stringArray, requestOptions).getValue().toObject(String.class);
+    }
+
+    /**
+     * The setStringMulti operation.
+     *
+     * @param stringArray Array of Response.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String setStringMulti(List<String> stringArray) {
+        // Generated convenience method for setStringMultiWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return setStringMultiWithResponse(stringArray, requestOptions).getValue().toObject(String.class);
+    }
+
+    /**
+     * The setIntMulti operation.
+     *
+     * @param intArray Array of IntArray.
+     * @param intArrayOpt Array of IntArray.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String setIntMulti(List<Integer> intArray, List<Integer> intArrayOpt) {
+        // Generated convenience method for setIntMultiWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (intArrayOpt != null) {
+            for (int paramItemValue : intArrayOpt) {
+                requestOptions.addQueryParam("intArrayOpt", String.valueOf(paramItemValue));
+            }
+        }
+        return setIntMultiWithResponse(intArray, requestOptions).getValue().toObject(String.class);
+    }
+
+    /**
+     * The setIntMulti operation.
+     *
+     * @param intArray Array of IntArray.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String setIntMulti(List<Integer> intArray) {
+        // Generated convenience method for setIntMultiWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return setIntMultiWithResponse(intArray, requestOptions).getValue().toObject(String.class);
     }
 }

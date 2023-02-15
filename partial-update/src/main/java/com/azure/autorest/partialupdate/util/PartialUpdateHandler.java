@@ -11,6 +11,7 @@ import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.CallableDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
+import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.modules.ModuleDeclaration;
 import com.github.javaparser.ast.modules.ModuleDirective;
@@ -184,9 +185,7 @@ public class PartialUpdateHandler {
 
     /**
      * Handle partial update for module-info.java file.
-     * We use a simple way to detect manual code change for now.
-     * We just compare if the two files have difference, if there is difference, then we consider the file is manually changed and we use existingFileContent.
-     * This solution can't reflect autorest codegen change on module-info.java, but is good enough for now.
+     * We will merge module-info.java file contents.
      *
      * @param generatedFileContent the newly generated file content
      * @param existingFileContent  the existing file content that contains user's manual update code
@@ -272,7 +271,13 @@ public class PartialUpdateHandler {
 
         compilationUnitForGeneratedFile.setModule(moduleDeclaration);
 
-        return compilationUnitForGeneratedFile.toString();
+        // add comments as compilationUnitForGeneratedFile.toString() does not include comments
+        StringBuilder comments = new StringBuilder();
+        for (Comment comment : compilationUnitForGeneratedFile.getOrphanComments()) {
+            comments.append(comment.toString());
+        }
+
+        return comments + "\n" + compilationUnitForGeneratedFile;
     }
 
 

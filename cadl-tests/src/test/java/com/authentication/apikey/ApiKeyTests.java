@@ -3,6 +3,7 @@
 
 package com.authentication.apikey;
 
+import com.authentication.util.AzureKeyCredentialPolicy;
 import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.exception.HttpResponseException;
 import org.junit.jupiter.api.Assertions;

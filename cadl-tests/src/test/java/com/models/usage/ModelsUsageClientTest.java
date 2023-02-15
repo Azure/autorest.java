@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-@Disabled("https://github.com/Azure/cadl-ranch/issues/157")
 class ModelsUsageClientTest {
 
     UsageClient client = new UsageClientBuilder().buildClient();

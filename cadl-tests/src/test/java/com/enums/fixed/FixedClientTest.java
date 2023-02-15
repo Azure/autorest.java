@@ -22,12 +22,10 @@ class FixedClientTest {
         client.putKnownValue(DaysOfWeekEnum.MONDAY);
     }
 
-//    client.putUnknownValue will throw below error, which will cause the request can not be sent to the test server.
-//    java.lang.NumberFormatException: Cannot parse null string
-//    at java.base/java.lang.Long.parseLong(Long.java:674)
-//    at java.base/java.lang.Long.parseLong(Long.java:836)
-    @Test
-    void putUnknownValue() {
-        Assertions.assertThrows(NumberFormatException.class, () -> client.putUnknownValue(DaysOfWeekEnum.fromString("Weekend")));
-    }
+
+    // Not a valid test for Java, as compiler will fail at "DaysOfWeekEnum.Weekend"
+//    @Test
+//    void putUnknownValue() {
+//        client.putUnknownValue(DaysOfWeekEnum.Weekend);
+//    }
 }

@@ -39,7 +39,7 @@ public final class ProjectedNameClient {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }
@@ -66,7 +66,7 @@ public final class ProjectedNameClient {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }
@@ -93,7 +93,7 @@ public final class ProjectedNameClient {
      *
      * <pre>{@code
      * {
-     *     producedBy: String (Optional)
+     *     codegen: String (Optional)
      *     builtfrom: String (Optional)
      *     wasMadeFor: String (Optional)
      * }
