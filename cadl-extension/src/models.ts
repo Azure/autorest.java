@@ -1,4 +1,4 @@
-import { Schema } from "@autorest/codemodel";
+import { Parameter, Schema } from "@autorest/codemodel";
 
 export class LongRunningMetadata {
   longRunning: boolean = false;
@@ -9,5 +9,15 @@ export class LongRunningMetadata {
     this.longRunning = longRunning;
     this.pollResultType = pollResultType;
     this.finalResultType = finalResultType;
+  }
+}
+
+export class ClientContext {
+  baseUri: string;
+  hostParameters: Parameter[];
+
+  constructor(baseUri: string, hostParameters: Parameter[]) {
+    this.baseUri = baseUri;
+    this.hostParameters = hostParameters;
   }
 }

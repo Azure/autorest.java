@@ -27,11 +27,6 @@ public class CodeModel extends Client {
      * 
      */
     private Schemas schemas;
-    /**
-     * all global parameters (ie, ImplementationLocation = client )
-     * 
-     */
-    private List<Parameter> globalParameters = new ArrayList<Parameter>();
 
     private List<Client> clients = new ArrayList<>();
 
@@ -74,22 +69,6 @@ public class CodeModel extends Client {
      */
     public void setSchemas(Schemas schemas) {
         this.schemas = schemas;
-    }
-
-    /**
-     * all global parameters (ie, ImplementationLocation = client )
-     * 
-     */
-    public List<Parameter> getGlobalParameters() {
-        return globalParameters;
-    }
-
-    /**
-     * all global parameters (ie, ImplementationLocation = client )
-     * 
-     */
-    public void setGlobalParameters(List<Parameter> globalParameters) {
-        this.globalParameters = globalParameters;
     }
 
     public List<Client> getClients() {

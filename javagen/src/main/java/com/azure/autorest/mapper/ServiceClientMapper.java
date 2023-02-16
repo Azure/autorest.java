@@ -3,6 +3,7 @@
 
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
@@ -94,7 +95,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             proxy = serviceClientMethodGroupClients.iterator().next().getProxy();
         }
 
-        processParametersAndConstructors(builder, codeModel, ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName), proxy);
+        processParametersAndConstructors(builder, codeModel, codeModel, ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName), proxy);
 
         return builder.build();
     }
@@ -182,12 +183,12 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         return proxy;
     }
 
-    protected void processParametersAndConstructors(ServiceClient.Builder builder, CodeModel codeModel, String serviceVersionClassName, Proxy proxy) {
+    protected void processParametersAndConstructors(ServiceClient.Builder builder, Client client, CodeModel codeModel, String serviceVersionClassName, Proxy proxy) {
         JavaSettings settings = JavaSettings.getInstance();
 
         List<ServiceClientProperty> serviceClientProperties = new ArrayList<>();
-        List<Parameter> clientParameters = Stream.concat(codeModel.getGlobalParameters().stream(),
-                        codeModel.getOperationGroups().stream()
+        List<Parameter> clientParameters = Stream.concat(client.getGlobalParameters().stream(),
+                        client.getOperationGroups().stream()
                                 .flatMap(og -> og.getOperations().stream())
                                 .flatMap(o -> o.getRequests().stream())
                                 .flatMap(r -> r.getParameters().stream()))

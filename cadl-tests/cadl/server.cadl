@@ -20,7 +20,7 @@ using Cadl.Http;
 )
 namespace Cadl.Server {
   @Azure.DPG.client({
-    name: "ServerOpClient",
+    name: "ServerClient",
     service: Cadl.Server,
   })
   @route("/status/{code}")
@@ -51,7 +51,7 @@ namespace Cadl.AnotherServer {
   }
 
   @Azure.DPG.client({
-    name: "AnotherServerOpClient",
+    name: "AnotherServerClient",
     service: Cadl.AnotherServer,
   })
   @route("/another-server")
