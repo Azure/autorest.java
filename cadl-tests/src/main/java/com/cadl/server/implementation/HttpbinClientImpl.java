@@ -32,10 +32,10 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the ServerClient type. */
-public final class ServerClientImpl {
+/** Initializes a new instance of the HttpbinClient type. */
+public final class HttpbinClientImpl {
     /** The proxy service used to perform REST calls. */
-    private final ServerClientService service;
+    private final HttpbinClientService service;
 
     /** second-level domain, use httpbin. */
     private final String domain;
@@ -86,12 +86,12 @@ public final class ServerClientImpl {
     }
 
     /**
-     * Initializes an instance of ServerClient client.
+     * Initializes an instance of HttpbinClient client.
      *
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
      */
-    public ServerClientImpl(String domain, String tld) {
+    public HttpbinClientImpl(String domain, String tld) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -102,38 +102,39 @@ public final class ServerClientImpl {
     }
 
     /**
-     * Initializes an instance of ServerClient client.
+     * Initializes an instance of HttpbinClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
      */
-    public ServerClientImpl(HttpPipeline httpPipeline, String domain, String tld) {
+    public HttpbinClientImpl(HttpPipeline httpPipeline, String domain, String tld) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), domain, tld);
     }
 
     /**
-     * Initializes an instance of ServerClient client.
+     * Initializes an instance of HttpbinClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
      */
-    public ServerClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String domain, String tld) {
+    public HttpbinClientImpl(
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String domain, String tld) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.domain = domain;
         this.tld = tld;
-        this.service = RestProxy.create(ServerClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service = RestProxy.create(HttpbinClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
-     * The interface defining all the services for ServerClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for HttpbinClient to be used by the proxy service to perform REST calls.
      */
     @Host("https://{domain}.{tld}")
-    @ServiceInterface(name = "ServerClient")
-    public interface ServerClientService {
+    @ServiceInterface(name = "HttpbinClient")
+    public interface HttpbinClientService {
         @Get("/status/{code}")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(

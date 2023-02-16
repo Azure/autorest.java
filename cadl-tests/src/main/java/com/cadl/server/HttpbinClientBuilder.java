@@ -30,16 +30,16 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.cadl.server.implementation.ServerClientImpl;
+import com.cadl.server.implementation.HttpbinClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the ServerClient type. */
-@ServiceClientBuilder(serviceClients = {ServerClient.class, ServerAsyncClient.class})
-public final class ServerClientBuilder
-        implements HttpTrait<ServerClientBuilder>, ConfigurationTrait<ServerClientBuilder> {
+/** A builder for creating a new instance of the HttpbinClient type. */
+@ServiceClientBuilder(serviceClients = {HttpbinClient.class, HttpbinAsyncClient.class})
+public final class HttpbinClientBuilder
+        implements HttpTrait<HttpbinClientBuilder>, ConfigurationTrait<HttpbinClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -48,9 +48,9 @@ public final class ServerClientBuilder
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the ServerClientBuilder. */
+    /** Create an instance of the HttpbinClientBuilder. */
     @Generated
-    public ServerClientBuilder() {
+    public HttpbinClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -62,7 +62,7 @@ public final class ServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServerClientBuilder pipeline(HttpPipeline pipeline) {
+    public HttpbinClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -75,7 +75,7 @@ public final class ServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServerClientBuilder httpClient(HttpClient httpClient) {
+    public HttpbinClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -88,7 +88,7 @@ public final class ServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServerClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public HttpbinClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -101,7 +101,7 @@ public final class ServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServerClientBuilder clientOptions(ClientOptions clientOptions) {
+    public HttpbinClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -114,7 +114,7 @@ public final class ServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServerClientBuilder retryOptions(RetryOptions retryOptions) {
+    public HttpbinClientBuilder retryOptions(RetryOptions retryOptions) {
         this.retryOptions = retryOptions;
         return this;
     }
@@ -122,7 +122,7 @@ public final class ServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServerClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public HttpbinClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
@@ -136,7 +136,7 @@ public final class ServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServerClientBuilder configuration(Configuration configuration) {
+    public HttpbinClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -150,10 +150,10 @@ public final class ServerClientBuilder
      * Sets second-level domain, use httpbin.
      *
      * @param domain the domain value.
-     * @return the ServerClientBuilder.
+     * @return the HttpbinClientBuilder.
      */
     @Generated
-    public ServerClientBuilder domain(String domain) {
+    public HttpbinClientBuilder domain(String domain) {
         this.domain = domain;
         return this;
     }
@@ -167,10 +167,10 @@ public final class ServerClientBuilder
      * Sets top-level domain, use org.
      *
      * @param tld the tld value.
-     * @return the ServerClientBuilder.
+     * @return the HttpbinClientBuilder.
      */
     @Generated
-    public ServerClientBuilder tld(String tld) {
+    public HttpbinClientBuilder tld(String tld) {
         this.tld = tld;
         return this;
     }
@@ -184,26 +184,26 @@ public final class ServerClientBuilder
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the ServerClientBuilder.
+     * @return the HttpbinClientBuilder.
      */
     @Generated
-    public ServerClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public HttpbinClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
 
     /**
-     * Builds an instance of ServerClientImpl with the provided parameters.
+     * Builds an instance of HttpbinClientImpl with the provided parameters.
      *
-     * @return an instance of ServerClientImpl.
+     * @return an instance of HttpbinClientImpl.
      */
     @Generated
-    private ServerClientImpl buildInnerClient() {
+    private HttpbinClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localDomain = (domain != null) ? domain : "httpbin";
         String localTld = (tld != null) ? tld : "org";
-        ServerClientImpl client =
-                new ServerClientImpl(
+        HttpbinClientImpl client =
+                new HttpbinClientImpl(
                         localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localDomain, localTld);
         return client;
     }
@@ -248,22 +248,22 @@ public final class ServerClientBuilder
     }
 
     /**
-     * Builds an instance of ServerAsyncClient class.
+     * Builds an instance of HttpbinAsyncClient class.
      *
-     * @return an instance of ServerAsyncClient.
+     * @return an instance of HttpbinAsyncClient.
      */
     @Generated
-    public ServerAsyncClient buildAsyncClient() {
-        return new ServerAsyncClient(buildInnerClient());
+    public HttpbinAsyncClient buildAsyncClient() {
+        return new HttpbinAsyncClient(buildInnerClient());
     }
 
     /**
-     * Builds an instance of ServerClient class.
+     * Builds an instance of HttpbinClient class.
      *
-     * @return an instance of ServerClient.
+     * @return an instance of HttpbinClient.
      */
     @Generated
-    public ServerClient buildClient() {
-        return new ServerClient(new ServerAsyncClient(buildInnerClient()));
+    public HttpbinClient buildClient() {
+        return new HttpbinClient(new HttpbinAsyncClient(buildInnerClient()));
     }
 }

@@ -12,28 +12,28 @@ import com.azure.core.test.TestMode;
 import com.azure.core.util.Configuration;
 import com.cadl.server.AnotherServerClient;
 import com.cadl.server.AnotherServerClientBuilder;
-import com.cadl.server.ServerClient;
-import com.cadl.server.ServerClientBuilder;
+import com.cadl.server.HttpbinClient;
+import com.cadl.server.HttpbinClientBuilder;
 
-class ServerClientTestBase extends TestBase {
-    protected ServerClient serverClient;
+class HttpbinClientTestBase extends TestBase {
+    protected HttpbinClient httpbinClient;
 
     protected AnotherServerClient anotherServerClient;
 
     @Override
     protected void beforeTest() {
-        ServerClientBuilder serverClientbuilder =
-                new ServerClientBuilder()
+        HttpbinClientBuilder httpbinClientbuilder =
+                new HttpbinClientBuilder()
                         .domain(Configuration.getGlobalConfiguration().get("DOMAIN", "httpbin"))
                         .tld(Configuration.getGlobalConfiguration().get("TLD", "org"))
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
-            serverClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+            httpbinClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
-            serverClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+            httpbinClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
-        serverClient = serverClientbuilder.buildClient();
+        httpbinClient = httpbinClientbuilder.buildClient();
 
         AnotherServerClientBuilder anotherServerClientbuilder =
                 new AnotherServerClientBuilder()

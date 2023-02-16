@@ -20,7 +20,7 @@ using Cadl.Http;
 )
 namespace Cadl.Server {
   @Azure.DPG.client({
-    name: "ServerClient",
+    name: "HttpbinClient",
     service: Cadl.Server,
   })
   @route("/status/{code}")
@@ -30,7 +30,7 @@ namespace Cadl.Server {
 }
 
 @service({
-  title: "AnotherServer",
+  title: "ContosoServer",
   version: "v1",
 })
 @server(
