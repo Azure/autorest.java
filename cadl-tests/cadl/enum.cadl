@@ -164,6 +164,7 @@ interface EnumOp {
       format: "multi",
     })
     stringArray: string[],
+
     @query({
       format: "multi",
     })
