@@ -44,6 +44,7 @@ model DataModel {
   data: bytes;
 }
 
+#suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "For testing"
 @summary("summary of Types")
 @doc("description of Types")
 @fixed

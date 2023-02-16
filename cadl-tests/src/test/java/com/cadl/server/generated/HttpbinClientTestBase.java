@@ -10,15 +10,15 @@ import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestBase;
 import com.azure.core.test.TestMode;
 import com.azure.core.util.Configuration;
-import com.cadl.server.AnotherServerClient;
-import com.cadl.server.AnotherServerClientBuilder;
+import com.cadl.server.ContosoClient;
+import com.cadl.server.ContosoClientBuilder;
 import com.cadl.server.HttpbinClient;
 import com.cadl.server.HttpbinClientBuilder;
 
 class HttpbinClientTestBase extends TestBase {
     protected HttpbinClient httpbinClient;
 
-    protected AnotherServerClient anotherServerClient;
+    protected ContosoClient contosoClient;
 
     @Override
     protected void beforeTest() {
@@ -35,16 +35,16 @@ class HttpbinClientTestBase extends TestBase {
         }
         httpbinClient = httpbinClientbuilder.buildClient();
 
-        AnotherServerClientBuilder anotherServerClientbuilder =
-                new AnotherServerClientBuilder()
+        ContosoClientBuilder contosoClientbuilder =
+                new ContosoClientBuilder()
                         .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
-            anotherServerClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+            contosoClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
-            anotherServerClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+            contosoClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
-        anotherServerClient = anotherServerClientbuilder.buildClient();
+        contosoClient = contosoClientbuilder.buildClient();
     }
 }

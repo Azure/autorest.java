@@ -159,7 +159,16 @@ interface EnumOp {
 
   @post
   @route("operation/stringmulti")
-  setStringMulti(@query stringArray: string[], @query stringArrayOpt?: string[]): string;
+  setStringMulti(
+    @query({
+      format: "multi",
+    })
+    stringArray: string[],
+    @query({
+      format: "multi",
+    })
+    stringArrayOpt?: string[]
+  ): string;
 
   @post
   @route("operation/intmulti")

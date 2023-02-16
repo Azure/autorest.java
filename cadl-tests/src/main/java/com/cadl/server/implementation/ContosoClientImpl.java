@@ -33,10 +33,10 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import com.cadl.server.ServerServiceVersion;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the AnotherServerClient type. */
-public final class AnotherServerClientImpl {
+/** Initializes a new instance of the ContosoClient type. */
+public final class ContosoClientImpl {
     /** The proxy service used to perform REST calls. */
-    private final AnotherServerClientService service;
+    private final ContosoClientService service;
 
     /** Service endpoint. */
     private final String endpoint;
@@ -87,12 +87,12 @@ public final class AnotherServerClientImpl {
     }
 
     /**
-     * Initializes an instance of AnotherServerClient client.
+     * Initializes an instance of ContosoClient client.
      *
      * @param endpoint Service endpoint.
      * @param serviceVersion Service version.
      */
-    public AnotherServerClientImpl(String endpoint, ServerServiceVersion serviceVersion) {
+    public ContosoClientImpl(String endpoint, ServerServiceVersion serviceVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -103,25 +103,25 @@ public final class AnotherServerClientImpl {
     }
 
     /**
-     * Initializes an instance of AnotherServerClient client.
+     * Initializes an instance of ContosoClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Service endpoint.
      * @param serviceVersion Service version.
      */
-    public AnotherServerClientImpl(HttpPipeline httpPipeline, String endpoint, ServerServiceVersion serviceVersion) {
+    public ContosoClientImpl(HttpPipeline httpPipeline, String endpoint, ServerServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
-     * Initializes an instance of AnotherServerClient client.
+     * Initializes an instance of ContosoClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Service endpoint.
      * @param serviceVersion Service version.
      */
-    public AnotherServerClientImpl(
+    public ContosoClientImpl(
             HttpPipeline httpPipeline,
             SerializerAdapter serializerAdapter,
             String endpoint,
@@ -130,18 +130,16 @@ public final class AnotherServerClientImpl {
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
-        this.service =
-                RestProxy.create(AnotherServerClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service = RestProxy.create(ContosoClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
-     * The interface defining all the services for AnotherServerClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for ContosoClient to be used by the proxy service to perform REST calls.
      */
     @Host("{Endpoint}/contoso/{ApiVersion}")
-    @ServiceInterface(name = "AnotherServerClient")
-    public interface AnotherServerClientService {
-        @Get("/another-server/{code}")
+    @ServiceInterface(name = "ContosoClient")
+    public interface ContosoClientService {
+        @Get("/contoso/{code}")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,

@@ -31,18 +31,18 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.cadl.server.implementation.AnotherServerClientImpl;
+import com.cadl.server.implementation.ContosoClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the AnotherServerClient type. */
-@ServiceClientBuilder(serviceClients = {AnotherServerClient.class, AnotherServerAsyncClient.class})
-public final class AnotherServerClientBuilder
-        implements HttpTrait<AnotherServerClientBuilder>,
-                ConfigurationTrait<AnotherServerClientBuilder>,
-                EndpointTrait<AnotherServerClientBuilder> {
+/** A builder for creating a new instance of the ContosoClient type. */
+@ServiceClientBuilder(serviceClients = {ContosoClient.class, ContosoAsyncClient.class})
+public final class ContosoClientBuilder
+        implements HttpTrait<ContosoClientBuilder>,
+                ConfigurationTrait<ContosoClientBuilder>,
+                EndpointTrait<ContosoClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -51,9 +51,9 @@ public final class AnotherServerClientBuilder
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the AnotherServerClientBuilder. */
+    /** Create an instance of the ContosoClientBuilder. */
     @Generated
-    public AnotherServerClientBuilder() {
+    public ContosoClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -65,7 +65,7 @@ public final class AnotherServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AnotherServerClientBuilder pipeline(HttpPipeline pipeline) {
+    public ContosoClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -78,7 +78,7 @@ public final class AnotherServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AnotherServerClientBuilder httpClient(HttpClient httpClient) {
+    public ContosoClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -91,7 +91,7 @@ public final class AnotherServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AnotherServerClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public ContosoClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -104,7 +104,7 @@ public final class AnotherServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AnotherServerClientBuilder clientOptions(ClientOptions clientOptions) {
+    public ContosoClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -117,7 +117,7 @@ public final class AnotherServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AnotherServerClientBuilder retryOptions(RetryOptions retryOptions) {
+    public ContosoClientBuilder retryOptions(RetryOptions retryOptions) {
         this.retryOptions = retryOptions;
         return this;
     }
@@ -125,7 +125,7 @@ public final class AnotherServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AnotherServerClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public ContosoClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
@@ -139,7 +139,7 @@ public final class AnotherServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AnotherServerClientBuilder configuration(Configuration configuration) {
+    public ContosoClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -152,7 +152,7 @@ public final class AnotherServerClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public AnotherServerClientBuilder endpoint(String endpoint) {
+    public ContosoClientBuilder endpoint(String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -166,10 +166,10 @@ public final class AnotherServerClientBuilder
      * Sets Service version.
      *
      * @param serviceVersion the serviceVersion value.
-     * @return the AnotherServerClientBuilder.
+     * @return the ContosoClientBuilder.
      */
     @Generated
-    public AnotherServerClientBuilder serviceVersion(ServerServiceVersion serviceVersion) {
+    public ContosoClientBuilder serviceVersion(ServerServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -183,26 +183,26 @@ public final class AnotherServerClientBuilder
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the AnotherServerClientBuilder.
+     * @return the ContosoClientBuilder.
      */
     @Generated
-    public AnotherServerClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public ContosoClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
 
     /**
-     * Builds an instance of AnotherServerClientImpl with the provided parameters.
+     * Builds an instance of ContosoClientImpl with the provided parameters.
      *
-     * @return an instance of AnotherServerClientImpl.
+     * @return an instance of ContosoClientImpl.
      */
     @Generated
-    private AnotherServerClientImpl buildInnerClient() {
+    private ContosoClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ServerServiceVersion localServiceVersion =
                 (serviceVersion != null) ? serviceVersion : ServerServiceVersion.getLatest();
-        AnotherServerClientImpl client =
-                new AnotherServerClientImpl(
+        ContosoClientImpl client =
+                new ContosoClientImpl(
                         localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
         return client;
     }
@@ -247,22 +247,22 @@ public final class AnotherServerClientBuilder
     }
 
     /**
-     * Builds an instance of AnotherServerAsyncClient class.
+     * Builds an instance of ContosoAsyncClient class.
      *
-     * @return an instance of AnotherServerAsyncClient.
+     * @return an instance of ContosoAsyncClient.
      */
     @Generated
-    public AnotherServerAsyncClient buildAsyncClient() {
-        return new AnotherServerAsyncClient(buildInnerClient());
+    public ContosoAsyncClient buildAsyncClient() {
+        return new ContosoAsyncClient(buildInnerClient());
     }
 
     /**
-     * Builds an instance of AnotherServerClient class.
+     * Builds an instance of ContosoClient class.
      *
-     * @return an instance of AnotherServerClient.
+     * @return an instance of ContosoClient.
      */
     @Generated
-    public AnotherServerClient buildClient() {
-        return new AnotherServerClient(new AnotherServerAsyncClient(buildInnerClient()));
+    public ContosoClient buildClient() {
+        return new ContosoClient(new ContosoAsyncClient(buildInnerClient()));
     }
 }

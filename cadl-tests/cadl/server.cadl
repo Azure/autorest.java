@@ -4,7 +4,7 @@ import "@azure-tools/cadl-dpg";
 using Cadl.Http;
 
 @service({
-  title: "Server",
+  title: "HttpbinServer",
   version: "1.0.0",
 })
 @server(
@@ -45,17 +45,17 @@ namespace Cadl.Server {
     ApiVersion: APIVersions,
   }
 )
-namespace Cadl.AnotherServer {
+namespace Cadl.ContosoServer {
   enum APIVersions {
     v1: "v1",
   }
 
   @Azure.DPG.client({
-    name: "AnotherServerClient",
-    service: Cadl.AnotherServer,
+    name: "ContosoClient",
+    service: Cadl.ContosoServer,
   })
-  @route("/another-server")
-  interface AnotherServerOp {
+  @route("/contoso")
+  interface ServerOp {
     get(@path code: int32): OkResponse | NoContentResponse;
   }
 }
