@@ -3,12 +3,9 @@
 
 package com.azure.mgmttest;
 
-import com.azure.core.credential.AccessToken;
-import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.Resource;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
-import com.azure.core.management.profile.AzureProfile;
 import com.azure.mgmttest.appservice.fluent.WebSiteManagementClient;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseErrorException;
 import com.azure.mgmttest.authorization.models.GraphError;
@@ -16,8 +13,6 @@ import com.azure.mgmttest.authorization.models.GraphErrorException;
 import com.azure.mgmttest.azurestack.fluent.models.ExtendedProductInner;
 import com.azure.mgmttest.compute.fluent.CloudServicesUpdateDomainsClient;
 import com.azure.mgmttest.computegallery.fluent.models.SharedGalleryInner;
-import com.azure.mgmttest.containerregistry.fluent.ContainerRegistryManagementClient;
-import com.azure.mgmttest.containerregistrylite.ContainerRegistryManager;
 import com.azure.mgmttest.cosmos.models.SqlDatabaseGetPropertiesResource;
 import com.azure.mgmttest.hybridnetwork.fluent.models.DeviceInner;
 import com.azure.mgmttest.hybridnetwork.models.AzureStackEdgeFormat;
@@ -36,11 +31,6 @@ import com.azure.mgmttest.storage.fluent.models.StorageAccountInner;
 import com.azure.mgmttest.trafficmanager.fluent.models.EndpointInner;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsListing;
-import org.mockito.Mockito;
-import reactor.core.publisher.Mono;
-
-import java.time.OffsetDateTime;
-import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
