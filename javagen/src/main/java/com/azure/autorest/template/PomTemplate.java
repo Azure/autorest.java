@@ -94,8 +94,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.block("properties", propertiesBlock -> {
                 propertiesBlock.tag("project.build.sourceEncoding", "UTF-8");
-                // skip jacoco coverage check
-                propertiesBlock.tag("jacoco.skip", "true");
+                writeJacoco(propertiesBlock);
             });
 
             if (pom.getDependencyIdentifiers() != null && pom.getDependencyIdentifiers().size() > 0) {
@@ -140,9 +139,18 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
     }
 
     /**
+     * Extension for writing jacoco configuration.
+     *
+     * @param propertiesBlock the "properties" xml block.
+     */
+    protected void writeJacoco(XmlBlock propertiesBlock) {
+        // NOOP for data-plane
+    }
+
+    /**
      * Extension for writing a "build" block, with array of "plugin" within.
      *
-     * @param projectBlock the project block.
+     * @param projectBlock the "project" xml block.
      * @param pom the pom model.
      */
     protected void writeBuildBlock(XmlBlock projectBlock, Pom pom) {
@@ -155,6 +163,11 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
         }
     }
 
+    /**
+     * Write a "maven-compiler-plugin" block, for SDK not using com.azure:azure-client-sdk-parent
+     *
+     * @param pluginsBlock the "plugins" xml block.
+     */
     protected void writeStandAlonePlugins(XmlBlock pluginsBlock) {
         // maven-compiler-plugin
         pluginsBlock.block("plugin", pluginBlock -> {
