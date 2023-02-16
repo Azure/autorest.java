@@ -67,10 +67,6 @@ REM swagger customed Resource and ProxyResource
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2018-08-01/trafficmanager.json --namespace=com.azure.mgmttest.trafficmanager
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-REM fluent premium uuid subscriptionId
-CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://github.com/Azure/azure-rest-api-specs/blob/0a2eb0d14f5132fcfd30222d584acf67713332ea/specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/stable/2022-12-01/containerregistry.json --namespace=com.azure.mgmttest.containerregistry
-if %errorlevel% neq 0 exit /b %errorlevel%
-
 REM fluent lite
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --pom-file=pom_generated_resources.xml https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/readme.md --tag=package-resources-2021-01 --java.namespace=com.azure.mgmtlitetest.resources
 if %errorlevel% neq 0 exit /b %errorlevel%

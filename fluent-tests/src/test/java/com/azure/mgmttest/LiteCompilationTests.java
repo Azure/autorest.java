@@ -3,6 +3,7 @@
 
 package com.azure.mgmttest;
 
+import com.azure.core.credential.AccessToken;
 import com.azure.core.credential.TokenCredential;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
@@ -14,6 +15,7 @@ import com.azure.core.management.Region;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Context;
 import com.azure.identity.EnvironmentCredentialBuilder;
+import com.azure.mgmtlitetest.containerregistrylite.ContainerRegistryManager;
 import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
 import com.azure.mgmtlitetest.mediaservices.models.MediaService;
 import com.azure.mgmtlitetest.mediaservices.models.SyncStorageKeysInput;
@@ -37,8 +39,10 @@ import com.azure.mgmtlitetest.storage.models.StorageAccountRegenerateKeyParamete
 import com.azure.mgmtlitetest.storage.models.StorageAccounts;
 import com.azure.mgmttest.azurestack.fluent.models.ExtendedProductInner;
 import com.azure.mgmttest.education.fluent.models.LabDetailsInner;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
+import java.time.OffsetDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -172,5 +176,12 @@ public class LiteCompilationTests {
         blobContainers.list(anyString(), anyString());
         // maximum parameters
         blobContainers.list(anyString(), anyString(), anyString(), anyString(), ListContainersInclude.DELETED, Context.NONE);
+    }
+
+    public void testLiteSubscriptionIdUuid() {
+        ContainerRegistryManager manager = ContainerRegistryManager
+            .authenticate(tokenRequestContext -> Mono.just(new AccessToken("this_is_a_token", OffsetDateTime.MAX)),
+                new AzureProfile("", "", AzureEnvironment.AZURE));
+        String subscriptionId = manager.serviceClient().getSubscriptionId();
     }
 }

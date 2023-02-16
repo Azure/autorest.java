@@ -143,19 +143,6 @@ public class CompilationTests {
         endpointInner.withName(endpointInner.name());
     }
 
-    public void testPremiumSubscriptionIdUuid() {
-        ContainerRegistryManagementClient managementClient = Mockito.mock(ContainerRegistryManagementClient.class);
-        String mockSubscriptionId = "mockSubscription";
-        Mockito.when(managementClient.getSubscriptionId()).thenReturn(mockSubscriptionId);
-    }
-
-    public void testLiteSubscriptionIdUuid() {
-        ContainerRegistryManager manager = ContainerRegistryManager
-            .authenticate(tokenRequestContext -> Mono.just(new AccessToken("this_is_a_token", OffsetDateTime.MAX)),
-                new AzureProfile("", "", AzureEnvironment.AZURE));
-        UUID subscriptionId = manager.serviceClient().getSubscriptionId();
-    }
-
 //    public void testIntEnum() {
 //        ContainerServiceMasterProfile containerServiceMasterProfile = new ContainerServiceMasterProfile();
 //        containerServiceMasterProfile.withCount(Count.THREE);

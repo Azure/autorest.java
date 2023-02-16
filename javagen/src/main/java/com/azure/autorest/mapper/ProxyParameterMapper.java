@@ -58,10 +58,6 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
 
         Schema parameterJvWireType = parameter.getSchema();
         IType wireType = Mappers.getSchemaMapper().map(parameterJvWireType);
-        // fluent premium treats subscriptionId as string in order not to break ManagementClients and client methods
-        if (settings.isFluentPremium() && "subscriptionId".equals(CodeNamer.getPropertyName(name))) {
-            wireType = ClassType.String;
-        }
         if (parameter.isNullable() || !parameter.isRequired()) {
             wireType = wireType.asNullable();
         }
