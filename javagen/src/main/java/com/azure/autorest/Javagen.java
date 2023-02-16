@@ -214,7 +214,7 @@ public class Javagen extends NewPlugin {
         // Test
         if (settings.isDataPlaneClient() && settings.isGenerateTests()) {
             if (!client.getSyncClients().isEmpty() && client.getSyncClients().iterator().next().getClientBuilder() != null) {
-                TestContext testContext = new TestContext(client.getServiceClient(), client.getSyncClients());
+                TestContext testContext = new TestContext(client.getServiceClients(), client.getSyncClients());
 
                 // base test class
                 javaPackage.addProtocolTestBase(testContext);

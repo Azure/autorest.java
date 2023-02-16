@@ -37,8 +37,7 @@ class HttpbinClientTestBase extends TestBase {
 
         AnotherServerClientBuilder anotherServerClientbuilder =
                 new AnotherServerClientBuilder()
-                        .domain(Configuration.getGlobalConfiguration().get("DOMAIN", "httpbin"))
-                        .tld(Configuration.getGlobalConfiguration().get("TLD", "org"))
+                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
