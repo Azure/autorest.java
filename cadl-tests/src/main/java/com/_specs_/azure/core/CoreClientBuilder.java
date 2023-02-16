@@ -29,8 +29,11 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.TracingOptions;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.tracing.Tracer;
+import com.azure.core.util.tracing.TracerProvider;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +45,8 @@ public final class CoreClientBuilder implements HttpTrait<CoreClientBuilder>, Co
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
+
+    @Generated private static final String RESOURCE_PROVIDER_NAMESPACE = null;
 
     @Generated
     private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("_specs_-azure-core.properties");
@@ -218,12 +223,20 @@ public final class CoreClientBuilder implements HttpTrait<CoreClientBuilder>, Co
         this.pipelinePolicies.stream()
                 .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
                 .forEach(p -> policies.add(p));
+        TracingOptions tracingOptions = null;
+        if (localClientOptions != null) {
+            tracingOptions = localClientOptions.getTracingOptions();
+        }
+        Tracer tracer =
+                TracerProvider.getDefaultProvider()
+                        .createTracer(clientName, clientVersion, RESOURCE_PROVIDER_NAMESPACE, tracingOptions);
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
         HttpPipeline httpPipeline =
                 new HttpPipelineBuilder()
                         .policies(policies.toArray(new HttpPipelinePolicy[0]))
                         .httpClient(httpClient)
+                        .tracer(tracer)
                         .clientOptions(localClientOptions)
                         .build();
         return httpPipeline;
