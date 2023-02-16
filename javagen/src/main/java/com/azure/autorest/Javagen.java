@@ -44,6 +44,7 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -214,7 +215,11 @@ public class Javagen extends NewPlugin {
         // Test
         if (settings.isDataPlaneClient() && settings.isGenerateTests()) {
             if (!client.getSyncClients().isEmpty() && client.getSyncClients().iterator().next().getClientBuilder() != null) {
-                TestContext testContext = new TestContext(client.getServiceClients(), client.getSyncClients());
+                List<ServiceClient> serviceClients = client.getServiceClients();
+                if (CoreUtils.isNullOrEmpty(serviceClients)) {
+                    serviceClients = Collections.singletonList(client.getServiceClient());
+                }
+                TestContext testContext = new TestContext(serviceClients, client.getSyncClients());
 
                 // base test class
                 javaPackage.addProtocolTestBase(testContext);
