@@ -10,11 +10,15 @@ import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestBase;
 import com.azure.core.test.TestMode;
 import com.azure.core.util.Configuration;
+import com.cadl.server.AnotherServerClient;
+import com.cadl.server.AnotherServerClientBuilder;
 import com.cadl.server.ServerClient;
 import com.cadl.server.ServerClientBuilder;
 
 class ServerClientTestBase extends TestBase {
     protected ServerClient serverClient;
+
+    protected AnotherServerClient anotherServerClient;
 
     @Override
     protected void beforeTest() {
@@ -30,5 +34,18 @@ class ServerClientTestBase extends TestBase {
             serverClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         serverClient = serverClientbuilder.buildClient();
+
+        AnotherServerClientBuilder anotherServerClientbuilder =
+                new AnotherServerClientBuilder()
+                        .domain(Configuration.getGlobalConfiguration().get("DOMAIN", "httpbin"))
+                        .tld(Configuration.getGlobalConfiguration().get("TLD", "org"))
+                        .httpClient(HttpClient.createDefault())
+                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            anotherServerClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            anotherServerClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        anotherServerClient = anotherServerClientbuilder.buildClient();
     }
 }
