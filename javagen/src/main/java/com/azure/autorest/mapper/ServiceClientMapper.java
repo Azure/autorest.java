@@ -205,6 +205,11 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 serviceClientPropertyClientType = serviceClientPropertyClientType.asNullable();
             }
 
+            // fluent premium treats subscriptionId as string in order not to break ManagementClients and client methods
+            if (settings.isFluentPremium() && "subscriptionId".equals(serviceClientPropertyName)) {
+                serviceClientPropertyClientType = ClassType.String;
+            }
+
             boolean serviceClientPropertyIsReadOnly = p.getSchema() instanceof ConstantSchema;
             if (!settings.isFluent()) {
                 serviceClientPropertyIsReadOnly = false;
