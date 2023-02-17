@@ -85,7 +85,7 @@ CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regener
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM UUID subscriptionId
-CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --input-file=https://github.com/Azure/azure-rest-api-specs/blob/0a2eb0d14f5132fcfd30222d584acf67713332ea/specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/stable/2022-12-01/containerregistry.json --namespace=com.azure.mgmtlitetest.containerregistrylite
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/0a2eb0d14f5132fcfd30222d584acf67713332ea/specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/stable/2022-12-01/containerregistry.json --namespace=com.azure.mgmtlitetest.containerregistrylite
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM multiple inheritance with conflict field

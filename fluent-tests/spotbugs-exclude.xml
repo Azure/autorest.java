@@ -10,4 +10,9 @@
     <Package name="~com\.azure\.mgmttest\.(.+)\.implementation"/>
     <Bug pattern="NP_LOAD_OF_KNOWN_NULL_VALUE,SIC_INNER_SHOULD_BE_STATIC_ANON,SKIPPED_CLASS_TOO_BIG"/>
   </Match>
+
+  <Match>
+    <Package name="com.azure.mgmtlitetest.mediaservices.models"/>
+    <Bug pattern="NM_CONFUSING"/>
+  </Match>
 </FindBugsFilter>
