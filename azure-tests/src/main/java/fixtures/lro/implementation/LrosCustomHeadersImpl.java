@@ -23,15 +23,6 @@ public final class LrosCustomHeadersImpl implements LrosCustomHeaders {
         this.serviceManager = serviceManager;
     }
 
-    public Product putAsyncRetrySucceeded(ProductInner product) {
-        ProductInner inner = this.serviceClient().putAsyncRetrySucceeded(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product putAsyncRetrySucceeded() {
         ProductInner inner = this.serviceClient().putAsyncRetrySucceeded();
         if (inner != null) {
@@ -43,15 +34,6 @@ public final class LrosCustomHeadersImpl implements LrosCustomHeaders {
 
     public Product putAsyncRetrySucceeded(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().putAsyncRetrySucceeded(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product put201CreatingSucceeded200(ProductInner product) {
-        ProductInner inner = this.serviceClient().put201CreatingSucceeded200(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -77,20 +59,12 @@ public final class LrosCustomHeadersImpl implements LrosCustomHeaders {
         }
     }
 
-    public void post202Retry200(ProductInner product) {
-        this.serviceClient().post202Retry200(product);
-    }
-
     public void post202Retry200() {
         this.serviceClient().post202Retry200();
     }
 
     public void post202Retry200(ProductInner product, Context context) {
         this.serviceClient().post202Retry200(product, context);
-    }
-
-    public void postAsyncRetrySucceeded(ProductInner product) {
-        this.serviceClient().postAsyncRetrySucceeded(product);
     }
 
     public void postAsyncRetrySucceeded() {

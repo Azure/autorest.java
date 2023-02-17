@@ -70,12 +70,6 @@ public final class PagingsImpl {
         Mono<Response<ProductResultValue>> getNoItemNamePages(
                 @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
-        @Get("/paging/emptynextlink")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResultValue>> getEmptyNextLinkNamePages(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
-
         @Get("/paging/nullnextlink")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
@@ -285,15 +279,6 @@ public final class PagingsImpl {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResultValue>> getNoItemNamePagesNext(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                Context context);
-
-        @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResultValue>> getEmptyNextLinkNamePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
@@ -598,143 +583,6 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getNoItemNamePages(Context context) {
         return new PagedIterable<>(getNoItemNamePagesAsync(context));
-    }
-
-    /**
-     * A paging operation that gets an empty next link and should stop after page 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getEmptyNextLinkNamePagesSinglePageAsync() {
-        if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context -> service.getEmptyNextLinkNamePages(this.client.getHost(), accept, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
-    }
-
-    /**
-     * A paging operation that gets an empty next link and should stop after page 1.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getEmptyNextLinkNamePagesSinglePageAsync(Context context) {
-        if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getEmptyNextLinkNamePages(this.client.getHost(), accept, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
-    }
-
-    /**
-     * A paging operation that gets an empty next link and should stop after page 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getEmptyNextLinkNamePagesAsync() {
-        return new PagedFlux<>(
-                () -> getEmptyNextLinkNamePagesSinglePageAsync(),
-                nextLink -> getEmptyNextLinkNamePagesNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * A paging operation that gets an empty next link and should stop after page 1.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getEmptyNextLinkNamePagesAsync(Context context) {
-        return new PagedFlux<>(
-                () -> getEmptyNextLinkNamePagesSinglePageAsync(context),
-                nextLink -> getEmptyNextLinkNamePagesNextSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * A paging operation that gets an empty next link and should stop after page 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getEmptyNextLinkNamePagesSinglePage() {
-        return getEmptyNextLinkNamePagesSinglePageAsync().block();
-    }
-
-    /**
-     * A paging operation that gets an empty next link and should stop after page 1.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getEmptyNextLinkNamePagesSinglePage(Context context) {
-        return getEmptyNextLinkNamePagesSinglePageAsync(context).block();
-    }
-
-    /**
-     * A paging operation that gets an empty next link and should stop after page 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getEmptyNextLinkNamePages() {
-        return new PagedIterable<>(getEmptyNextLinkNamePagesAsync());
-    }
-
-    /**
-     * A paging operation that gets an empty next link and should stop after page 1.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getEmptyNextLinkNamePages(Context context) {
-        return new PagedIterable<>(getEmptyNextLinkNamePagesAsync(context));
     }
 
     /**
@@ -4671,104 +4519,6 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getNoItemNamePagesNextSinglePage(String nextLink, Context context) {
         return getNoItemNamePagesNextSinglePageAsync(nextLink, context).block();
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getEmptyNextLinkNamePagesNextSinglePageAsync(String nextLink) {
-        if (nextLink == null) {
-            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
-        }
-        if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context ->
-                                service.getEmptyNextLinkNamePagesNext(nextLink, this.client.getHost(), accept, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getEmptyNextLinkNamePagesNextSinglePageAsync(String nextLink, Context context) {
-        if (nextLink == null) {
-            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
-        }
-        if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.getEmptyNextLinkNamePagesNext(nextLink, this.client.getHost(), accept, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getEmptyNextLinkNamePagesNextSinglePage(String nextLink) {
-        return getEmptyNextLinkNamePagesNextSinglePageAsync(nextLink).block();
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getEmptyNextLinkNamePagesNextSinglePage(String nextLink, Context context) {
-        return getEmptyNextLinkNamePagesNextSinglePageAsync(nextLink, context).block();
     }
 
     /**

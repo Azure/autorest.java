@@ -20,14 +20,12 @@ public interface LROsClient {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Succeeded(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Succeeded();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
@@ -42,19 +40,6 @@ public interface LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Succeeded(ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner put200Succeeded(ProductInner product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
@@ -85,14 +70,12 @@ public interface LROsClient {
      * Long running put request, service returns a 200 to the initial request with location header. We should not have
      * any subsequent calls after receiving this first response.
      *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch200SucceededIgnoreHeaders(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch200SucceededIgnoreHeaders();
 
     /**
      * Long running put request, service returns a 200 to the initial request with location header. We should not have
@@ -108,19 +91,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch200SucceededIgnoreHeaders(
         ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 200 to the initial request with location header. We should not have
-     * any subsequent calls after receiving this first response.
-     *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner patch200SucceededIgnoreHeaders(ProductInner product);
 
     /**
      * Long running put request, service returns a 200 to the initial request with location header. We should not have
@@ -150,14 +120,12 @@ public interface LROsClient {
     /**
      * Long running patch request, service returns a 201 to the initial request with async header.
      *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch201RetryWithAsyncHeader(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch201RetryWithAsyncHeader();
 
     /**
      * Long running patch request, service returns a 201 to the initial request with async header.
@@ -172,18 +140,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch201RetryWithAsyncHeader(
         ProductInner product, Context context);
-
-    /**
-     * Long running patch request, service returns a 201 to the initial request with async header.
-     *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner patch201RetryWithAsyncHeader(ProductInner product);
 
     /**
      * Long running patch request, service returns a 201 to the initial request with async header.
@@ -211,15 +167,12 @@ public interface LROsClient {
     /**
      * Long running patch request, service returns a 202 to the initial request with async and location header.
      *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch202RetryWithAsyncAndLocationHeader(
-        ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch202RetryWithAsyncAndLocationHeader();
 
     /**
      * Long running patch request, service returns a 202 to the initial request with async and location header.
@@ -234,18 +187,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch202RetryWithAsyncAndLocationHeader(
         ProductInner product, Context context);
-
-    /**
-     * Long running patch request, service returns a 202 to the initial request with async and location header.
-     *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner patch202RetryWithAsyncAndLocationHeader(ProductInner product);
 
     /**
      * Long running patch request, service returns a 202 to the initial request with async and location header.
@@ -274,14 +215,12 @@ public interface LROsClient {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201Succeeded(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201Succeeded();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
@@ -296,19 +235,6 @@ public interface LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201Succeeded(ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner put201Succeeded(ProductInner product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
@@ -387,14 +313,12 @@ public interface LROsClient {
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
      * ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200SucceededNoState(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200SucceededNoState();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
@@ -410,19 +334,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200SucceededNoState(
         ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
-     * ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner put200SucceededNoState(ProductInner product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
@@ -453,14 +364,12 @@ public interface LROsClient {
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a
      * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut202Retry200(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut202Retry200();
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a
@@ -475,19 +384,6 @@ public interface LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPut202Retry200(ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 202 to the initial request, with a location header that points to a
-     * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner put202Retry200(ProductInner product);
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a
@@ -519,14 +415,12 @@ public interface LROsClient {
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
@@ -543,20 +437,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200(
         ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner put201CreatingSucceeded200(ProductInner product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
@@ -590,14 +470,12 @@ public interface LROsClient {
      * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200UpdatingSucceeded204(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200UpdatingSucceeded204();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
@@ -614,20 +492,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200UpdatingSucceeded204(
         ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner put200UpdatingSucceeded204(ProductInner product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
@@ -661,14 +525,12 @@ public interface LROsClient {
      * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingFailed200(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingFailed200();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
@@ -685,20 +547,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingFailed200(
         ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner put201CreatingFailed200(ProductInner product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
@@ -732,14 +580,12 @@ public interface LROsClient {
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Acceptedcanceled200(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Acceptedcanceled200();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
@@ -756,20 +602,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Acceptedcanceled200(
         ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner put200Acceptedcanceled200(ProductInner product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
@@ -802,14 +634,12 @@ public interface LROsClient {
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
      * operation status do not contain location header.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNoHeaderInRetry(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNoHeaderInRetry();
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
@@ -824,19 +654,6 @@ public interface LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNoHeaderInRetry(ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
-     * operation status do not contain location header.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner putNoHeaderInRetry(ProductInner product);
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
@@ -868,14 +685,12 @@ public interface LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetrySucceeded(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetrySucceeded();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
@@ -892,20 +707,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetrySucceeded(
         ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner putAsyncRetrySucceeded(ProductInner product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
@@ -939,14 +740,12 @@ public interface LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrySucceeded(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrySucceeded();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
@@ -963,20 +762,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrySucceeded(
         ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner putAsyncNoRetrySucceeded(ProductInner product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
@@ -1010,14 +795,12 @@ public interface LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetryFailed(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetryFailed();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
@@ -1033,20 +816,6 @@ public interface LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetryFailed(ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner putAsyncRetryFailed(ProductInner product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
@@ -1080,14 +849,12 @@ public interface LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrycanceled(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrycanceled();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
@@ -1104,20 +871,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrycanceled(
         ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner putAsyncNoRetrycanceled(ProductInner product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
@@ -1150,14 +903,12 @@ public interface LROsClient {
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
      * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoHeaderInRetry(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoHeaderInRetry();
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
@@ -1173,19 +924,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoHeaderInRetry(
         ProductInner product, Context context);
-
-    /**
-     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
-     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner putAsyncNoHeaderInRetry(ProductInner product);
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
@@ -1215,14 +953,12 @@ public interface LROsClient {
     /**
      * Long running put request with non resource.
      *
-     * @param sku sku to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SkuInner>, SkuInner> beginPutNonResource(SkuInner sku);
+    SyncPoller<PollResult<SkuInner>, SkuInner> beginPutNonResource();
 
     /**
      * Long running put request with non resource.
@@ -1236,18 +972,6 @@ public interface LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<SkuInner>, SkuInner> beginPutNonResource(SkuInner sku, Context context);
-
-    /**
-     * Long running put request with non resource.
-     *
-     * @param sku sku to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    SkuInner putNonResource(SkuInner sku);
 
     /**
      * Long running put request with non resource.
@@ -1275,14 +999,12 @@ public interface LROsClient {
     /**
      * Long running put request with non resource.
      *
-     * @param sku Sku to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SkuInner>, SkuInner> beginPutAsyncNonResource(SkuInner sku);
+    SyncPoller<PollResult<SkuInner>, SkuInner> beginPutAsyncNonResource();
 
     /**
      * Long running put request with non resource.
@@ -1296,18 +1018,6 @@ public interface LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<SkuInner>, SkuInner> beginPutAsyncNonResource(SkuInner sku, Context context);
-
-    /**
-     * Long running put request with non resource.
-     *
-     * @param sku Sku to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    SkuInner putAsyncNonResource(SkuInner sku);
 
     /**
      * Long running put request with non resource.
@@ -1335,14 +1045,12 @@ public interface LROsClient {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutSubResource(SubProductInner product);
+    SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutSubResource();
 
     /**
      * Long running put request with sub resource.
@@ -1357,18 +1065,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutSubResource(
         SubProductInner product, Context context);
-
-    /**
-     * Long running put request with sub resource.
-     *
-     * @param product Sub Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    SubProductInner putSubResource(SubProductInner product);
 
     /**
      * Long running put request with sub resource.
@@ -1396,14 +1092,12 @@ public interface LROsClient {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutAsyncSubResource(SubProductInner product);
+    SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutAsyncSubResource();
 
     /**
      * Long running put request with sub resource.
@@ -1418,18 +1112,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutAsyncSubResource(
         SubProductInner product, Context context);
-
-    /**
-     * Long running put request with sub resource.
-     *
-     * @param product Sub Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    SubProductInner putAsyncSubResource(SubProductInner product);
 
     /**
      * Long running put request with sub resource.
@@ -2076,14 +1758,12 @@ public interface LROsClient {
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
      * headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<Void>, Void> beginPost202Retry200(ProductInner product);
+    SyncPoller<PollResult<Void>, Void> beginPost202Retry200();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
@@ -2098,18 +1778,6 @@ public interface LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<Void>, Void> beginPost202Retry200(ProductInner product, Context context);
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    void post202Retry200(ProductInner product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
@@ -2138,14 +1806,12 @@ public interface LROsClient {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
      * noresponse body after success.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPost202NoRetry204(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPost202NoRetry204();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
@@ -2160,19 +1826,6 @@ public interface LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPost202NoRetry204(ProductInner product, Context context);
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
-     * noresponse body after success.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner post202NoRetry204(ProductInner product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
@@ -2353,14 +2006,12 @@ public interface LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncRetrySucceeded(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncRetrySucceeded();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains
@@ -2377,20 +2028,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncRetrySucceeded(
         ProductInner product, Context context);
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner postAsyncRetrySucceeded(ProductInner product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains
@@ -2424,14 +2061,12 @@ public interface LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncNoRetrySucceeded(ProductInner product);
+    SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncNoRetrySucceeded();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains
@@ -2448,20 +2083,6 @@ public interface LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncNoRetrySucceeded(
         ProductInner product, Context context);
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ProductInner postAsyncNoRetrySucceeded(ProductInner product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains
@@ -2495,14 +2116,12 @@ public interface LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<Void>, Void> beginPostAsyncRetryFailed(ProductInner product);
+    SyncPoller<PollResult<Void>, Void> beginPostAsyncRetryFailed();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains
@@ -2518,19 +2137,6 @@ public interface LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<Void>, Void> beginPostAsyncRetryFailed(ProductInner product, Context context);
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    void postAsyncRetryFailed(ProductInner product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains
@@ -2562,14 +2168,12 @@ public interface LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<Void>, Void> beginPostAsyncRetrycanceled(ProductInner product);
+    SyncPoller<PollResult<Void>, Void> beginPostAsyncRetrycanceled();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains
@@ -2585,19 +2189,6 @@ public interface LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<Void>, Void> beginPostAsyncRetrycanceled(ProductInner product, Context context);
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    void postAsyncRetrycanceled(ProductInner product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains

@@ -45,6 +45,15 @@ public final class ProductPropertiesProvisioningStateValues
     public static final ProductPropertiesProvisioningStateValues OK = fromString("OK");
 
     /**
+     * Creates a new instance of ProductPropertiesProvisioningStateValues value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Deprecated
+    public ProductPropertiesProvisioningStateValues() {
+    }
+
+    /**
      * Creates or finds a ProductPropertiesProvisioningStateValues from its string representation.
      *
      * @param name a name to look for.

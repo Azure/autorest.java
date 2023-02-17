@@ -53,7 +53,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
      */
     @Host("http://{accountName}{host}")
     @ServiceInterface(name = "LroWithParamaterized")
-    private interface ResourceProvidersService {
+    public interface ResourceProvidersService {
         @Headers({"Content-Type: application/json"})
         @Post("/lroParameterizedEndpoints")
         @ExpectedResponses({200, 202})
@@ -175,7 +175,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<String>, String> beginPollWithParameterizedEndpoints(String accountName) {
-        return beginPollWithParameterizedEndpointsAsync(accountName).getSyncPoller();
+        return this.beginPollWithParameterizedEndpointsAsync(accountName).getSyncPoller();
     }
 
     /**
@@ -191,7 +191,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<String>, String> beginPollWithParameterizedEndpoints(
         String accountName, Context context) {
-        return beginPollWithParameterizedEndpointsAsync(accountName, context).getSyncPoller();
+        return this.beginPollWithParameterizedEndpointsAsync(accountName, context).getSyncPoller();
     }
 
     /**
@@ -365,7 +365,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<String>, String> beginPollWithConstantParameterizedEndpoints(String accountName) {
-        return beginPollWithConstantParameterizedEndpointsAsync(accountName).getSyncPoller();
+        return this.beginPollWithConstantParameterizedEndpointsAsync(accountName).getSyncPoller();
     }
 
     /**
@@ -381,7 +381,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<String>, String> beginPollWithConstantParameterizedEndpoints(
         String accountName, Context context) {
-        return beginPollWithConstantParameterizedEndpointsAsync(accountName, context).getSyncPoller();
+        return this.beginPollWithConstantParameterizedEndpointsAsync(accountName, context).getSyncPoller();
     }
 
     /**
