@@ -20,6 +20,7 @@ import com.azure.core.util.BinaryData;
 import com.cadl.odata.implementation.OdataClientImpl;
 import com.cadl.odata.models.Resource;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Flux;
 
@@ -51,8 +52,8 @@ public final class OdataAsyncClient {
      *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The skip parameter</td></tr>
      *     <tr><td>top</td><td>Integer</td><td>No</td><td>The top parameter</td></tr>
      *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maxPageSize parameter</td></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. In the form of "," separated string.</td></tr>
+     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -126,18 +127,18 @@ public final class OdataAsyncClient {
             requestOptions.addQueryParam("maxpagesize", String.valueOf(maxPageSize));
         }
         if (select != null) {
-            for (String paramItemValue : select) {
-                if (paramItemValue != null) {
-                    requestOptions.addQueryParam("select", paramItemValue);
-                }
-            }
+            requestOptions.addQueryParam(
+                    "select",
+                    select.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
         }
         if (expand != null) {
-            for (String paramItemValue : expand) {
-                if (paramItemValue != null) {
-                    requestOptions.addQueryParam("expand", paramItemValue);
-                }
-            }
+            requestOptions.addQueryParam(
+                    "expand",
+                    expand.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")));
         }
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
         return PagedFlux.create(
