@@ -7,6 +7,9 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.StringSchema;
+import com.azure.autorest.extension.base.model.codemodel.UuidSchema;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
@@ -36,6 +39,7 @@ public class FluentTransformer {
         codeModel = new SchemaNameNormalization(fluentJavaSettings.getNamingOverride()).process(codeModel);
         codeModel = new ConstantSchemaOptimization().process(codeModel);
         codeModel = renameHostParameter(codeModel);
+        codeModel = transformSubscriptionIdUuid(codeModel);
         //codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
     }
@@ -133,6 +137,34 @@ public class FluentTransformer {
                 .forEach(p -> {
                     p.getLanguage().getDefault().setName("endpoint");
                 });
+        return codeModel;
+    }
+
+    private CodeModel transformSubscriptionIdUuid(CodeModel codeModel) {
+        // if globalParameter has "subscriptionId" and is UuidSchema, then make the schema StringSchema
+        codeModel.getGlobalParameters().stream()
+            .filter(p -> "subscriptionId".equals(p.getLanguage().getDefault().getSerializedName())
+                && p.getSchema() instanceof UuidSchema)
+            .forEach(p -> {
+                Schema oldSchema = p.getSchema();
+                StringSchema newSchema = new StringSchema();
+                // copy schema metadata
+                newSchema.setLanguage(oldSchema.getLanguage());
+                newSchema.setProtocol(oldSchema.getProtocol());
+                newSchema.setExtensions(oldSchema.getExtensions());
+
+                newSchema.setType(Schema.AllSchemaTypes.STRING);
+                newSchema.setSummary(oldSchema.getSummary());
+                newSchema.setExample(oldSchema.getExample());
+                newSchema.setSerialization(oldSchema.getSerialization());
+                newSchema.set$key(oldSchema.get$key());
+                newSchema.setUid(oldSchema.getUid());
+                newSchema.setDescription(oldSchema.getDescription());
+                newSchema.setApiVersions(oldSchema.getApiVersions());
+                newSchema.setDeprecated(oldSchema.getDeprecated());
+                newSchema.setExternalDocs(oldSchema.getExternalDocs());
+                p.setSchema(newSchema);
+            });
         return codeModel;
     }
 
