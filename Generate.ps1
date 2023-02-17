@@ -141,15 +141,15 @@ $job = @(
 $job | Wait-Job -Timeout 120
 $job | Receive-Job
 
-# Azure but use Fluent
-$ARM_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false"
-$job = @(
-    "$ARM_ARGUMENTS --input-file=$SWAGGER_PATH/lro.json --namespace=fixtures.lro"
-    "$ARM_ARGUMENTS --input-file=$SWAGGER_PATH/lro-parameterized-endpoints.json --namespace=fixtures.lroparameterizedendpoints"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 120
-$job | Receive-Job
-Remove-Item ./azure-tests/src/main/java/module-info.java -Force
+# # Azure but use Fluent
+# $ARM_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false"
+# $job = @(
+#     "$ARM_ARGUMENTS --input-file=$SWAGGER_PATH/lro.json --namespace=fixtures.lro"
+#     "$ARM_ARGUMENTS --input-file=$SWAGGER_PATH/lro-parameterized-endpoints.json --namespace=fixtures.lroparameterizedendpoints"
+# ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+# $job | Wait-Job -Timeout 120
+# $job | Receive-Job
+# Remove-Item ./azure-tests/src/main/java/module-info.java -Force
 
 # Protocol
 Remove-Item ./protocol-tests/src/main -Recurse -Force | Out-Null
