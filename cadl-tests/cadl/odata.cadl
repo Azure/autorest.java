@@ -31,7 +31,15 @@ interface OdataOp {
     @query skip?: int32,
     @query top?: int32,
     @query maxpagesize?: int32,
-    @query select?: string[],
-    @query expand?: string[]
+
+    @query({
+      format: "csv",
+    })
+    select?: string[],
+
+    @query({
+      format: "csv",
+    })
+    expand?: string[]
   ): ResourceCollection;
 }

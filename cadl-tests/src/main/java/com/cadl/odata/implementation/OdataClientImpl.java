@@ -176,8 +176,8 @@ public final class OdataClientImpl {
      *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The skip parameter</td></tr>
      *     <tr><td>top</td><td>Integer</td><td>No</td><td>The top parameter</td></tr>
      *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maxPageSize parameter</td></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. In the form of "," separated string.</td></tr>
+     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -228,8 +228,8 @@ public final class OdataClientImpl {
      *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The skip parameter</td></tr>
      *     <tr><td>top</td><td>Integer</td><td>No</td><td>The top parameter</td></tr>
      *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maxPageSize parameter</td></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. In the form of "," separated string.</td></tr>
+     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -276,8 +276,8 @@ public final class OdataClientImpl {
      *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The skip parameter</td></tr>
      *     <tr><td>top</td><td>Integer</td><td>No</td><td>The top parameter</td></tr>
      *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maxPageSize parameter</td></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. In the form of "," separated string.</td></tr>
+     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Filter. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
