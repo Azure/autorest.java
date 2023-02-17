@@ -178,10 +178,15 @@ public class LiteCompilationTests {
         blobContainers.list(anyString(), anyString(), anyString(), anyString(), ListContainersInclude.DELETED, Context.NONE);
     }
 
-    public void testLiteSubscriptionIdUuid() {
+    public void testSubscriptionIdUuid() {
         ContainerRegistryManager manager = ContainerRegistryManager
             .authenticate(tokenRequestContext -> Mono.just(new AccessToken("this_is_a_token", OffsetDateTime.MAX)),
                 new AzureProfile("", "", AzureEnvironment.AZURE));
         String subscriptionId = manager.serviceClient().getSubscriptionId();
+    }
+
+    public void testLroPageable() {
+        MediaServicesManager manager = mock(MediaServicesManager.class);
+        manager.liveEvents().listGetStatus(anyString(), anyString(), anyString());
     }
 }
