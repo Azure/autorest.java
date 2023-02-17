@@ -10,13 +10,13 @@ import java.util.Objects;
 
 public class TestContext {
 
-    private final ServiceClient serviceClient;
+    private final List<ServiceClient> serviceClients;
     private final List<AsyncSyncClient> syncClients;
 
     private final ProtocolExample testCase;
 
-    public TestContext(ServiceClient serviceClient, List<AsyncSyncClient> syncClients) {
-        this.serviceClient = Objects.requireNonNull(serviceClient);
+    public TestContext(List<ServiceClient> serviceClients, List<AsyncSyncClient> syncClients) {
+        this.serviceClients = Objects.requireNonNull(serviceClients);
         this.syncClients = Objects.requireNonNull(syncClients);
         this.testCase = null;
     }
@@ -28,13 +28,13 @@ public class TestContext {
      * @param testCase an example as test case
      */
     public TestContext(TestContext testContext, ProtocolExample testCase) {
-        this.serviceClient = Objects.requireNonNull(testContext.getServiceClient());
+        this.serviceClients = Objects.requireNonNull(testContext.getServiceClients());
         this.syncClients = Objects.requireNonNull(testContext.getSyncClients());
         this.testCase = testCase;
     }
 
-    public ServiceClient getServiceClient() {
-        return serviceClient;
+    public List<ServiceClient> getServiceClients() {
+        return serviceClients;
     }
 
     public List<AsyncSyncClient> getSyncClients() {
@@ -50,6 +50,6 @@ public class TestContext {
     }
 
     public String getTestBaseClassName() {
-        return serviceClient.getInterfaceName() + "TestBase";
+        return serviceClients.iterator().next().getInterfaceName() + "TestBase";
     }
 }

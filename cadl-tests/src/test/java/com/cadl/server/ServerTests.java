@@ -12,11 +12,11 @@ public class ServerTests {
     @Test
     public void serverTests() {
         // use default server
-        ServerClient client = new ServerClientBuilder().buildClient();
+        HttpbinClient client = new HttpbinClientBuilder().buildClient();
         Assertions.assertEquals(200, client.statusWithResponse(200, new RequestOptions()).getStatusCode());
 
         // use specified server
-        client = new ServerClientBuilder()
+        client = new HttpbinClientBuilder()
                 .domain("httpbin")
                 .tld("org")
                 .buildClient();

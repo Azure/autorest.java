@@ -1,9 +1,11 @@
 import { DeepPartial } from "@azure-tools/codegen";
-import { Aspect, OperationGroup, Security } from "@autorest/codemodel";
+import { Aspect, OperationGroup, Parameter, Security } from "@autorest/codemodel";
 
 export interface Client extends Aspect {
   /** All operations  */
   operationGroups: Array<OperationGroup>;
+
+  globalParameters?: Array<Parameter>;
 
   security: Security;
 }
@@ -16,5 +18,13 @@ export class Client extends Aspect implements Client {
     this.security = new Security(false);
 
     this.applyTo(this, objectInitializer);
+  }
+
+  private get globals(): Array<Parameter> {
+    return this.globalParameters || (this.globalParameters = []);
+  }
+
+  addGlobalParameters(parameters: Parameter[]) {
+    this.globals.concat(parameters);
   }
 }

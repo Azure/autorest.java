@@ -23,6 +23,7 @@ import reactor.core.publisher.Mono;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -35,7 +36,8 @@ public class ProtocolTestWriter {
     private final Consumer<JavaBlock> clientInitializationWriter;
 
     public ProtocolTestWriter(TestContext testContext) {
-        final ServiceClient serviceClient = testContext.getServiceClient();
+        final List<ServiceClient> serviceClients = testContext.getServiceClients();
+        final ServiceClient serviceClient = serviceClients.iterator().next();
         final List<AsyncSyncClient> syncClients = testContext.getSyncClients();
         final boolean isTokenCredential = serviceClient.getSecurityInfo() != null && serviceClient.getSecurityInfo().getSecurityTypes() != null
                 && serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2);
@@ -70,15 +72,22 @@ public class ProtocolTestWriter {
         };
 
         this.clientInitializationWriter = methodBlock -> {
-            syncClients.forEach(c -> {
-                String clientVarName = CodeNamer.toCamelCase(c.getClassName());
-                String builderClassName = c.getClientBuilder().getClassName();
-                String builderVarName = CodeNamer.toCamelCase(c.getClassName()) + "builder";
+            Iterator<ServiceClient> serviceClientIterator = serviceClients.iterator();
+            ServiceClient currentServiceClient = null;
+            for (AsyncSyncClient syncClient : syncClients) {
+                if (serviceClientIterator.hasNext()) {
+                    // either a single serviceClient for all syncClients, or 1 serviceClient to 1 syncClient
+                    currentServiceClient = serviceClientIterator.next();
+                }
+
+                String clientVarName = CodeNamer.toCamelCase(syncClient.getClassName());
+                String builderClassName = syncClient.getClientBuilder().getClassName();
+                String builderVarName = CodeNamer.toCamelCase(syncClient.getClassName()) + "builder";
 
                 methodBlock.line(String.format("%1$s %2$s = new %3$s()", builderClassName, builderVarName, builderClassName));
                 methodBlock.increaseIndent();
                 // required service client properties
-                serviceClient.getProperties().stream().filter(ServiceClientProperty::isRequired).forEach(serviceClientProperty -> {
+                currentServiceClient.getProperties().stream().filter(ServiceClientProperty::isRequired).forEach(serviceClientProperty -> {
                     String defaultValueExpression = serviceClientProperty.getDefaultValueExpression();
                     String expr;
                     if (defaultValueExpression == null) {
@@ -116,9 +125,9 @@ public class ProtocolTestWriter {
                     });
                 }
 
-                methodBlock.line(String.format("%1$s = %2$s.%3$s();", clientVarName, builderVarName, c.getClientBuilder().getBuilderMethodNameForSyncClient(c)));
+                methodBlock.line(String.format("%1$s = %2$s.%3$s();", clientVarName, builderVarName, syncClient.getClientBuilder().getBuilderMethodNameForSyncClient(syncClient)));
                 methodBlock.line();
-            });
+            };
         };
     }
 

@@ -14,27 +14,24 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.util.FluxUtil;
-import com.cadl.server.implementation.ServerClientImpl;
-import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ServerClient type. */
-@ServiceClient(builder = ServerClientBuilder.class, isAsync = true)
-public final class ServerAsyncClient {
-    @Generated private final ServerClientImpl serviceClient;
+/** Initializes a new instance of the synchronous ContosoClient type. */
+@ServiceClient(builder = ContosoClientBuilder.class)
+public final class ContosoClient {
+    @Generated private final ContosoAsyncClient client;
 
     /**
-     * Initializes an instance of ServerAsyncClient class.
+     * Initializes an instance of ContosoClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param client the async client.
      */
     @Generated
-    ServerAsyncClient(ServerClientImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    ContosoClient(ContosoAsyncClient client) {
+        this.client = client;
     }
 
     /**
-     * The status operation.
+     * The get operation.
      *
      * @param code The code parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -42,16 +39,16 @@ public final class ServerAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> statusWithResponse(int code, RequestOptions requestOptions) {
-        return this.serviceClient.statusWithResponseAsync(code, requestOptions);
+    public Response<Void> getWithResponse(int code, RequestOptions requestOptions) {
+        return this.client.getWithResponse(code, requestOptions).block();
     }
 
     /**
-     * The status operation.
+     * The get operation.
      *
      * @param code The code parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -60,13 +57,12 @@ public final class ServerAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> status(int code) {
-        // Generated convenience method for statusWithResponse
+    public void get(int code) {
+        // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return statusWithResponse(code, requestOptions).flatMap(FluxUtil::toMono);
+        getWithResponse(code, requestOptions).getValue();
     }
 }

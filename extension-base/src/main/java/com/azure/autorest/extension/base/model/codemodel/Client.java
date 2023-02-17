@@ -12,6 +12,8 @@ public class Client extends Metadata {
 
     private List<OperationGroup> operationGroups = new ArrayList<OperationGroup>();
 
+    private List<Parameter> globalParameters = new ArrayList<Parameter>();
+
     private Security security;
 
     private List<ApiVersion> apiVersions = new ArrayList<ApiVersion>();
@@ -30,6 +32,22 @@ public class Client extends Metadata {
 
     public void setOperationGroups(List<OperationGroup> operationGroups) {
         this.operationGroups = operationGroups;
+    }
+
+    /**
+     * all global parameters (ie, ImplementationLocation = client )
+     *
+     */
+    public List<Parameter> getGlobalParameters() {
+        return globalParameters;
+    }
+
+    /**
+     * all global parameters (ie, ImplementationLocation = client )
+     *
+     */
+    public void setGlobalParameters(List<Parameter> globalParameters) {
+        this.globalParameters = globalParameters;
     }
 
     public Security getSecurity() {

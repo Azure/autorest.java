@@ -32,7 +32,6 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.cadl.response.ResponseServiceVersion;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the ResponseClient type. */
@@ -50,18 +49,6 @@ public final class ResponseClientImpl {
      */
     public String getEndpoint() {
         return this.endpoint;
-    }
-
-    /** Service version. */
-    private final ResponseServiceVersion serviceVersion;
-
-    /**
-     * Gets Service version.
-     *
-     * @return the serviceVersion value.
-     */
-    public ResponseServiceVersion getServiceVersion() {
-        return this.serviceVersion;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -92,16 +79,14 @@ public final class ResponseClientImpl {
      * Initializes an instance of ResponseClient client.
      *
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public ResponseClientImpl(String endpoint, ResponseServiceVersion serviceVersion) {
+    public ResponseClientImpl(String endpoint) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint,
-                serviceVersion);
+                endpoint);
     }
 
     /**
@@ -109,10 +94,9 @@ public final class ResponseClientImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public ResponseClientImpl(HttpPipeline httpPipeline, String endpoint, ResponseServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+    public ResponseClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -121,17 +105,11 @@ public final class ResponseClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public ResponseClientImpl(
-            HttpPipeline httpPipeline,
-            SerializerAdapter serializerAdapter,
-            String endpoint,
-            ResponseServiceVersion serviceVersion) {
+    public ResponseClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(ResponseClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 

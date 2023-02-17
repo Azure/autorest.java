@@ -15,18 +15,18 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 
-/** Initializes a new instance of the synchronous ServerClient type. */
-@ServiceClient(builder = ServerClientBuilder.class)
-public final class ServerClient {
-    @Generated private final ServerAsyncClient client;
+/** Initializes a new instance of the synchronous HttpbinClient type. */
+@ServiceClient(builder = HttpbinClientBuilder.class)
+public final class HttpbinClient {
+    @Generated private final HttpbinAsyncClient client;
 
     /**
-     * Initializes an instance of ServerClient class.
+     * Initializes an instance of HttpbinClient class.
      *
      * @param client the async client.
      */
     @Generated
-    ServerClient(ServerAsyncClient client) {
+    HttpbinClient(HttpbinAsyncClient client) {
         this.client = client;
     }
 

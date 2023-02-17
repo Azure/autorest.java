@@ -10,6 +10,7 @@ using Azure.Core;
 })
 namespace Cadl.EnumService;
 
+#suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "For testing"
 @fixed
 enum Color {
   Red,
@@ -23,12 +24,14 @@ enum ColorModel {
   Green,
 }
 
+#suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "For testing"
 @fixed
 enum Priority {
   High: 100,
   Low: 0,
 }
 
+#suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "For testing"
 @fixed
 enum OperationStateValues {
   Running,
@@ -156,7 +159,17 @@ interface EnumOp {
 
   @post
   @route("operation/stringmulti")
-  setStringMulti(@query stringArray: string[], @query stringArrayOpt?: string[]): string;
+  setStringMulti(
+    @query({
+      format: "multi",
+    })
+    stringArray: string[],
+
+    @query({
+      format: "multi",
+    })
+    stringArrayOpt?: string[]
+  ): string;
 
   @post
   @route("operation/intmulti")

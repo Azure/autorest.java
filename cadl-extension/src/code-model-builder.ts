@@ -120,12 +120,11 @@ import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { OrSchema } from "./common/schemas/relationship.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
+import { ClientContext, LongRunningMetadata } from "./models.js";
 
 export class CodeModelBuilder {
   private program: Program;
   private typeNameOptions: TypeNameOptions;
-  private baseUri: string;
-  private hostParameters: Parameter[];
   private namespace: string;
   private dpgContext: DpgContext;
 
@@ -183,16 +182,8 @@ export class CodeModelBuilder {
       },
     });
 
-    // host
-    this.baseUri = "{endpoint}";
-    const servers = getServers(this.program, serviceNamespace);
-    // TODO: multiple servers
-    if (servers && servers.length === 1) {
-      this.baseUri = servers[0].url;
-    }
-    this.hostParameters = [];
-    this.processHost(servers?.length === 1 ? servers[0] : undefined);
-
+    // auth
+    // TODO: it is not very likely, but different client could have different auth
     const auth = getAuthentication(this.program, serviceNamespace);
     if (auth) {
       this.processAuth(auth);
@@ -211,7 +202,8 @@ export class CodeModelBuilder {
     return this.codeModel;
   }
 
-  private processHost(server: HttpServer | undefined) {
+  private processHost(server: HttpServer | undefined): Parameter[] {
+    const hostParameters: Parameter[] = [];
     if (server) {
       server.parameters.forEach((it) => {
         let parameter;
@@ -255,10 +247,11 @@ export class CodeModelBuilder {
           });
         }
 
-        return this.hostParameters.push(this.codeModel.addGlobalParameter(parameter));
+        hostParameters.push(this.codeModel.addGlobalParameter(parameter));
       });
+      return hostParameters;
     } else {
-      this.hostParameters.push(
+      hostParameters.push(
         this.codeModel.addGlobalParameter(
           new Parameter("endpoint", "Server parameter", this.stringSchema, {
             implementation: ImplementationLocation.Client,
@@ -278,6 +271,7 @@ export class CodeModelBuilder {
           }),
         ),
       );
+      return hostParameters;
     }
   }
 
@@ -324,6 +318,7 @@ export class CodeModelBuilder {
         security: this.codeModel.security,
       });
 
+      // versioning
       const versioning = getVersion(this.program, client.service);
       if (versioning && versioning.getVersions()) {
         // @versioned in versioning
@@ -346,12 +341,22 @@ export class CodeModelBuilder {
         }
       }
 
+      // server
+      let baseUri = "{endpoint}";
+      const servers = getServers(this.program, client.service);
+      if (servers && servers.length === 1) {
+        baseUri = servers[0].url;
+      }
+      const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
+      codeModelClient.addGlobalParameters(hostParameters);
+      const clientContext = new ClientContext(baseUri, hostParameters);
+
       const operationGroups = listOperationGroups(this.dpgContext, client);
 
       const operationWithoutGroup = listOperationsInOperationGroup(this.dpgContext, client);
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
-        codeModelGroup.addOperation(this.processOperation("", operation));
+        codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
       }
       if (codeModelGroup.operations?.length > 0) {
         codeModelClient.operationGroups.push(codeModelGroup);
@@ -361,7 +366,7 @@ export class CodeModelBuilder {
         const operations = listOperationsInOperationGroup(this.dpgContext, operationGroup);
         codeModelGroup = new OperationGroup(operationGroup.type.name);
         for (const operation of operations) {
-          codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation));
+          codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
         }
         codeModelClient.operationGroups.push(codeModelGroup);
       }
@@ -373,6 +378,7 @@ export class CodeModelBuilder {
   private processOperation(
     groupName: string,
     operation: Operation,
+    clientContext: ClientContext,
     fromLinkedOperation: boolean = false,
   ): CodeModelOperation {
     const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
@@ -406,14 +412,14 @@ export class CodeModelBuilder {
           http: {
             path: op.path,
             method: op.verb,
-            uri: this.baseUri,
+            uri: clientContext.baseUri,
           },
         },
       }),
     );
 
     // host
-    this.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
+    clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
     op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it));
     // "accept" header
@@ -446,16 +452,16 @@ export class CodeModelBuilder {
     }
 
     // linked operations
-    const pollingTypes = this.processLinkedOperation(codeModelOperation, groupName, operation);
+    const lroMetadata = this.processLinkedOperation(codeModelOperation, groupName, operation, clientContext);
 
     // responses
-    const candidateResponseSchema = pollingTypes[1]; // candidate: response body type of pollingOperation
+    const candidateResponseSchema = lroMetadata.pollResultType; // candidate: response body type of pollingOperation
     op.responses.map((it) => this.processResponse(codeModelOperation, it, candidateResponseSchema));
 
     // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
-    this.processRouteForLongRunning(codeModelOperation, op.responses, pollingTypes[0]);
+    this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata.longRunning);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -493,7 +499,8 @@ export class CodeModelBuilder {
     op: CodeModelOperation,
     groupName: string,
     operation: Operation,
-  ): [boolean, Schema | undefined, Schema | undefined] {
+    clientContext: ClientContext,
+  ): LongRunningMetadata {
     let pollingSchema = undefined;
     let finalSchema = undefined;
     let pollingFoundInOperationLinks = false;
@@ -511,7 +518,7 @@ export class CodeModelBuilder {
           // process linked operation, if not processed
           let linkedOperation = this.operationCache.get(linkOperation.linkedOperation);
           if (!linkedOperation) {
-            linkedOperation = this.processOperation(groupName, linkOperation.linkedOperation, true);
+            linkedOperation = this.processOperation(groupName, linkOperation.linkedOperation, clientContext, true);
           }
 
           const opLink = new OperationLink(linkedOperation);
@@ -542,7 +549,7 @@ export class CodeModelBuilder {
         }
       }
     }
-    return [pollingFoundInOperationLinks, pollingSchema, finalSchema];
+    return new LongRunningMetadata(pollingFoundInOperationLinks, pollingSchema, finalSchema);
   }
 
   private processRouteForLongRunning(
