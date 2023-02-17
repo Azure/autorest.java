@@ -419,6 +419,13 @@ public class ClientMethod {
                 }
             }
 
+            if (type == ClientMethodType.PagingAsyncSinglePage || type == ClientMethodType.PagingSyncSinglePage && this.getMethodPageDetails() != null) {
+                if (this.getMethodPageDetails() != null && this.getMethodPageDetails().getLroIntermediateType() != null) {
+                    // pageable + LRO
+                    this.getMethodPageDetails().getLroIntermediateType().addImportsTo(imports, includeImplementationImports);
+                }
+            }
+
             if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
                 // Repeatable Requests
                 imports.add(UUID.class.getName());
