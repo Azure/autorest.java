@@ -10,12 +10,15 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.model.xmlmodel.XmlFile;
-import com.azure.autorest.model.clientmodel.Pom;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Writes a ServiceClient to a JavaFile.
@@ -31,6 +34,17 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
     }
 
     public final void write(Pom pom, XmlFile xmlFile) {
+        // copyright
+        xmlFile.blockComment(xmlLineComment -> {
+            xmlLineComment.line(
+                    Arrays.stream(JavaSettings.getInstance()
+                            .getFileHeaderText()
+                            .split(System.lineSeparator()))
+                            .map(line -> " ~ " + line)
+                            .collect(Collectors.joining(System.lineSeparator()))
+            );
+        });
+
         Map<String, String> projectAnnotations = new HashMap<>();
         projectAnnotations.put("xmlns", "http://maven.apache.org/POM/4.0.0");
         projectAnnotations.put("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
