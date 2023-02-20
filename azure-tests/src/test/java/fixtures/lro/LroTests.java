@@ -14,6 +14,7 @@ import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.exception.ManagementException;
+import com.azure.core.util.Context;
 import fixtures.lro.fluent.AutoRestLongRunningOperationTestService;
 import fixtures.lro.fluent.models.ProductInner;
 import fixtures.lro.fluent.models.SkuInner;
@@ -51,7 +52,7 @@ public class LroTests {
     public void put200Succeeded() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().put200Succeeded(product);
+        ProductInner response = client.getLROs().put200Succeeded(product, Context.NONE);
         Assertions.assertEquals("Succeeded", response.provisioningState());
     }
 
@@ -59,7 +60,7 @@ public class LroTests {
     public void put200SucceededNoState() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().put200SucceededNoState(product);
+        ProductInner response = client.getLROs().put200SucceededNoState(product, Context.NONE);
         Assertions.assertEquals("100", response.id());
     }
 
@@ -67,7 +68,7 @@ public class LroTests {
     public void put202Retry200() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().put202Retry200(product);
+        ProductInner response = client.getLROs().put202Retry200(product, Context.NONE);
         Assertions.assertEquals("100", response.id());
     }
 
@@ -75,7 +76,7 @@ public class LroTests {
     public void put201CreatingSucceeded200() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().put201CreatingSucceeded200(product);
+        ProductInner response = client.getLROs().put201CreatingSucceeded200(product, Context.NONE);
         Assertions.assertEquals("Succeeded", response.provisioningState());
     }
 
@@ -83,7 +84,7 @@ public class LroTests {
     public void put200UpdatingSucceeded204() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().put200UpdatingSucceeded204(product);
+        ProductInner response = client.getLROs().put200UpdatingSucceeded204(product, Context.NONE);
         Assertions.assertEquals("Succeeded", response.provisioningState());
     }
 
@@ -92,7 +93,7 @@ public class LroTests {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
         try {
-            ProductInner response = client.getLROs().put201CreatingFailed200(product);
+            ProductInner response = client.getLROs().put201CreatingFailed200(product, Context.NONE);
             Assertions.fail();
         } catch (ManagementException e) {
             Assertions.assertTrue(e.getMessage().toLowerCase(Locale.ROOT).contains("failed"));
@@ -104,7 +105,7 @@ public class LroTests {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
         try {
-            ProductInner response = client.getLROs().put200Acceptedcanceled200(product);
+            ProductInner response = client.getLROs().put200Acceptedcanceled200(product, Context.NONE);
             Assertions.fail();
         } catch (ManagementException e) {
             Assertions.assertTrue(e.getMessage().toLowerCase(Locale.ROOT).contains("failed"));
@@ -115,7 +116,7 @@ public class LroTests {
     public void putNoHeaderInRetry() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().putNoHeaderInRetry(product);
+        ProductInner response = client.getLROs().putNoHeaderInRetry(product, Context.NONE);
         Assertions.assertEquals("Succeeded", response.provisioningState());
     }
 
@@ -123,7 +124,7 @@ public class LroTests {
     public void putAsyncRetrySucceeded() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().putAsyncRetrySucceeded(product);
+        ProductInner response = client.getLROs().putAsyncRetrySucceeded(product, Context.NONE);
         Assertions.assertEquals("Succeeded", response.provisioningState());
     }
 
@@ -131,7 +132,7 @@ public class LroTests {
     public void putAsyncNoRetrySucceeded() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().putAsyncNoRetrySucceeded(product);
+        ProductInner response = client.getLROs().putAsyncNoRetrySucceeded(product, Context.NONE);
         Assertions.assertEquals("Succeeded", response.provisioningState());
     }
 
@@ -140,7 +141,7 @@ public class LroTests {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
         try {
-            ProductInner response = client.getLROs().putAsyncRetryFailed(product);
+            ProductInner response = client.getLROs().putAsyncRetryFailed(product, Context.NONE);
             Assertions.fail();
         } catch (ManagementException e) {
             Assertions.assertTrue(e.getMessage().toLowerCase(Locale.ROOT).contains("failed"));
@@ -152,7 +153,7 @@ public class LroTests {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
         try {
-            ProductInner response = client.getLROs().putAsyncNoRetrycanceled(product);
+            ProductInner response = client.getLROs().putAsyncNoRetrycanceled(product, Context.NONE);
             Assertions.fail();
         } catch (ManagementException e) {
             Assertions.assertTrue(e.getMessage().toLowerCase(Locale.ROOT).contains("failed"));
@@ -163,35 +164,35 @@ public class LroTests {
     public void putAsyncNoHeaderInRetry() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().putAsyncNoHeaderInRetry(product);
+        ProductInner response = client.getLROs().putAsyncNoHeaderInRetry(product, Context.NONE);
         Assertions.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Test
     public void putNonResource() throws Exception {
         SkuInner sku = new SkuInner();
-        SkuInner response = client.getLROs().putNonResource(sku);
+        SkuInner response = client.getLROs().putNonResource(sku, Context.NONE);
         Assertions.assertEquals("100", response.id());
     }
 
     @Test
     public void putAsyncNonResource() throws Exception {
         SkuInner sku = new SkuInner();
-        SkuInner response = client.getLROs().putAsyncNonResource(sku);
+        SkuInner response = client.getLROs().putAsyncNonResource(sku, Context.NONE);
         Assertions.assertEquals("100", response.id());
     }
 
     @Test
     public void putSubResource() throws Exception {
         SubProductInner subProduct = new SubProductInner();
-        SubProductInner response = client.getLROs().putSubResource(subProduct);
+        SubProductInner response = client.getLROs().putSubResource(subProduct, Context.NONE);
         Assertions.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Test
     public void putAsyncSubResource() throws Exception {
         SubProductInner subProduct = new SubProductInner();
-        SubProductInner response = client.getLROs().putAsyncSubResource(subProduct);
+        SubProductInner response = client.getLROs().putAsyncSubResource(subProduct, Context.NONE);
         Assertions.assertEquals("Succeeded", response.provisioningState());
     }
 
@@ -278,28 +279,28 @@ public class LroTests {
     public void post202Retry200() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        client.getLROs().post202Retry200(product);
+        client.getLROs().post202Retry200(product, Context.NONE);
     }
 
     @Test
     public void post202NoRetry204() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().post202NoRetry204(product);
+        ProductInner response = client.getLROs().post202NoRetry204(product, Context.NONE);
     }
 
     @Test
     public void postAsyncRetrySucceeded() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().postAsyncRetrySucceeded(product);
+        ProductInner response = client.getLROs().postAsyncRetrySucceeded(product, Context.NONE);
     }
 
     @Test
     public void postAsyncNoRetrySucceeded() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.getLROs().postAsyncNoRetrySucceeded(product);
+        ProductInner response = client.getLROs().postAsyncNoRetrySucceeded(product, Context.NONE);
     }
 
     @Test
@@ -307,7 +308,7 @@ public class LroTests {
         try {
             ProductInner product = new ProductInner();
             product.withLocation("West US");
-            client.getLROs().postAsyncRetryFailed(product);
+            client.getLROs().postAsyncRetryFailed(product, Context.NONE);
             Assertions.fail();
         } catch (ManagementException e) {
             Assertions.assertTrue(e.getMessage().toLowerCase(Locale.ROOT).contains("failed"));
@@ -319,7 +320,7 @@ public class LroTests {
         try {
             ProductInner product = new ProductInner();
             product.withLocation("West US");
-            client.getLROs().postAsyncRetrycanceled(product);
+            client.getLROs().postAsyncRetrycanceled(product, Context.NONE);
             Assertions.fail();
         } catch (ManagementException e) {
             Assertions.assertTrue(e.getMessage().toLowerCase(Locale.ROOT).contains("failed"));

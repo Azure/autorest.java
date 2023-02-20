@@ -60,7 +60,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestLongRunningO")
-    private interface LROsService {
+    public interface LROsService {
         @Headers({"Content-Type: application/json"})
         @Put("/lro/put/200/succeeded")
         @ExpectedResponses({200, 204})
@@ -528,6 +528,24 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut200SucceededAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = put200SucceededWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Succeeded’.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -550,15 +568,14 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Succeeded(ProductInner product) {
-        return beginPut200SucceededAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Succeeded() {
+        final ProductInner product = null;
+        return this.beginPut200SucceededAsync(product).getSyncPoller();
     }
 
     /**
@@ -575,7 +592,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Succeeded(
         ProductInner product, Context context) {
-        return beginPut200SucceededAsync(product, context).getSyncPoller();
+        return this.beginPut200SucceededAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -621,21 +638,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ProductInner> put200SucceededAsync(ProductInner product, Context context) {
         return beginPut200SucceededAsync(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner put200Succeeded(ProductInner product) {
-        return put200SucceededAsync(product).block();
     }
 
     /**
@@ -748,6 +750,24 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 200 to the initial request with location header. We should not have
      * any subsequent calls after receiving this first response.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPatch200SucceededIgnoreHeadersAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = patch200SucceededIgnoreHeadersWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     *
      * @param product Product to patch.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -770,16 +790,14 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 200 to the initial request with location header. We should not have
      * any subsequent calls after receiving this first response.
      *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch200SucceededIgnoreHeaders(
-        ProductInner product) {
-        return beginPatch200SucceededIgnoreHeadersAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch200SucceededIgnoreHeaders() {
+        final ProductInner product = null;
+        return this.beginPatch200SucceededIgnoreHeadersAsync(product).getSyncPoller();
     }
 
     /**
@@ -796,7 +814,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch200SucceededIgnoreHeaders(
         ProductInner product, Context context) {
-        return beginPatch200SucceededIgnoreHeadersAsync(product, context).getSyncPoller();
+        return this.beginPatch200SucceededIgnoreHeadersAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -844,21 +862,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPatch200SucceededIgnoreHeadersAsync(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request with location header. We should not have
-     * any subsequent calls after receiving this first response.
-     *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner patch200SucceededIgnoreHeaders(ProductInner product) {
-        return patch200SucceededIgnoreHeadersAsync(product).block();
     }
 
     /**
@@ -967,6 +970,23 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running patch request, service returns a 201 to the initial request with async header.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPatch201RetryWithAsyncHeaderAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = patch201RetryWithAsyncHeaderWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     *
      * @param product Product to patch.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -988,15 +1008,14 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running patch request, service returns a 201 to the initial request with async header.
      *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch201RetryWithAsyncHeader(ProductInner product) {
-        return beginPatch201RetryWithAsyncHeaderAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch201RetryWithAsyncHeader() {
+        final ProductInner product = null;
+        return this.beginPatch201RetryWithAsyncHeaderAsync(product).getSyncPoller();
     }
 
     /**
@@ -1012,7 +1031,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch201RetryWithAsyncHeader(
         ProductInner product, Context context) {
-        return beginPatch201RetryWithAsyncHeaderAsync(product, context).getSyncPoller();
+        return this.beginPatch201RetryWithAsyncHeaderAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1057,20 +1076,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPatch201RetryWithAsyncHeaderAsync(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running patch request, service returns a 201 to the initial request with async header.
-     *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner patch201RetryWithAsyncHeader(ProductInner product) {
-        return patch201RetryWithAsyncHeaderAsync(product).block();
     }
 
     /**
@@ -1180,6 +1185,23 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running patch request, service returns a 202 to the initial request with async and location header.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPatch202RetryWithAsyncAndLocationHeaderAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     *
      * @param product Product to patch.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1202,16 +1224,14 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running patch request, service returns a 202 to the initial request with async and location header.
      *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch202RetryWithAsyncAndLocationHeader(
-        ProductInner product) {
-        return beginPatch202RetryWithAsyncAndLocationHeaderAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch202RetryWithAsyncAndLocationHeader() {
+        final ProductInner product = null;
+        return this.beginPatch202RetryWithAsyncAndLocationHeaderAsync(product).getSyncPoller();
     }
 
     /**
@@ -1227,7 +1247,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPatch202RetryWithAsyncAndLocationHeader(
         ProductInner product, Context context) {
-        return beginPatch202RetryWithAsyncAndLocationHeaderAsync(product, context).getSyncPoller();
+        return this.beginPatch202RetryWithAsyncAndLocationHeaderAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1276,20 +1296,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPatch202RetryWithAsyncAndLocationHeaderAsync(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running patch request, service returns a 202 to the initial request with async and location header.
-     *
-     * @param product Product to patch.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner patch202RetryWithAsyncAndLocationHeader(ProductInner product) {
-        return patch202RetryWithAsyncAndLocationHeaderAsync(product).block();
     }
 
     /**
@@ -1397,6 +1403,24 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut201SucceededAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = put201SucceededWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Succeeded’.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1419,15 +1443,14 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201Succeeded(ProductInner product) {
-        return beginPut201SucceededAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201Succeeded() {
+        final ProductInner product = null;
+        return this.beginPut201SucceededAsync(product).getSyncPoller();
     }
 
     /**
@@ -1444,7 +1467,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201Succeeded(
         ProductInner product, Context context) {
-        return beginPut201SucceededAsync(product, context).getSyncPoller();
+        return this.beginPut201SucceededAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1490,21 +1513,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ProductInner> put201SucceededAsync(ProductInner product, Context context) {
         return beginPut201SucceededAsync(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner put201Succeeded(ProductInner product) {
-        return put201SucceededAsync(product).block();
     }
 
     /**
@@ -1641,7 +1649,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<List<ProductInner>>, List<ProductInner>> beginPost202List() {
-        return beginPost202ListAsync().getSyncPoller();
+        return this.beginPost202ListAsync().getSyncPoller();
     }
 
     /**
@@ -1656,7 +1664,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<List<ProductInner>>, List<ProductInner>> beginPost202List(Context context) {
-        return beginPost202ListAsync(context).getSyncPoller();
+        return this.beginPost202ListAsync(context).getSyncPoller();
     }
 
     /**
@@ -1793,6 +1801,24 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
      * ProvisioningState=’Succeeded’.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut200SucceededNoStateAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = put200SucceededNoStateWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
+     * ProvisioningState=’Succeeded’.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1815,15 +1841,14 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
      * ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200SucceededNoState(ProductInner product) {
-        return beginPut200SucceededNoStateAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200SucceededNoState() {
+        final ProductInner product = null;
+        return this.beginPut200SucceededNoStateAsync(product).getSyncPoller();
     }
 
     /**
@@ -1840,7 +1865,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200SucceededNoState(
         ProductInner product, Context context) {
-        return beginPut200SucceededNoStateAsync(product, context).getSyncPoller();
+        return this.beginPut200SucceededNoStateAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1886,21 +1911,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ProductInner> put200SucceededNoStateAsync(ProductInner product, Context context) {
         return beginPut200SucceededNoStateAsync(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
-     * ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner put200SucceededNoState(ProductInner product) {
-        return put200SucceededNoStateAsync(product).block();
     }
 
     /**
@@ -2010,6 +2020,24 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a
      * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut202Retry200Async() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = put202Retry200WithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a
+     * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2032,15 +2060,14 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a
      * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut202Retry200(ProductInner product) {
-        return beginPut202Retry200Async(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut202Retry200() {
+        final ProductInner product = null;
+        return this.beginPut202Retry200Async(product).getSyncPoller();
     }
 
     /**
@@ -2057,7 +2084,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut202Retry200(
         ProductInner product, Context context) {
-        return beginPut202Retry200Async(product, context).getSyncPoller();
+        return this.beginPut202Retry200Async(product, context).getSyncPoller();
     }
 
     /**
@@ -2103,21 +2130,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ProductInner> put202Retry200Async(ProductInner product, Context context) {
         return beginPut202Retry200Async(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 202 to the initial request, with a location header that points to a
-     * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner put202Retry200(ProductInner product) {
-        return put202Retry200Async(product).block();
     }
 
     /**
@@ -2234,6 +2246,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200Async() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = put201CreatingSucceeded200WithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2257,15 +2288,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200Async(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200() {
+        final ProductInner product = null;
+        return this.beginPut201CreatingSucceeded200Async(product).getSyncPoller();
     }
 
     /**
@@ -2283,7 +2313,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200(
         ProductInner product, Context context) {
-        return beginPut201CreatingSucceeded200Async(product, context).getSyncPoller();
+        return this.beginPut201CreatingSucceeded200Async(product, context).getSyncPoller();
     }
 
     /**
@@ -2334,22 +2364,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPut201CreatingSucceeded200Async(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner put201CreatingSucceeded200(ProductInner product) {
-        return put201CreatingSucceeded200Async(product).block();
     }
 
     /**
@@ -2468,6 +2482,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut200UpdatingSucceeded204Async() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = put200UpdatingSucceeded204WithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2491,15 +2524,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200UpdatingSucceeded204(ProductInner product) {
-        return beginPut200UpdatingSucceeded204Async(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200UpdatingSucceeded204() {
+        final ProductInner product = null;
+        return this.beginPut200UpdatingSucceeded204Async(product).getSyncPoller();
     }
 
     /**
@@ -2517,7 +2549,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200UpdatingSucceeded204(
         ProductInner product, Context context) {
-        return beginPut200UpdatingSucceeded204Async(product, context).getSyncPoller();
+        return this.beginPut200UpdatingSucceeded204Async(product, context).getSyncPoller();
     }
 
     /**
@@ -2568,22 +2600,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPut200UpdatingSucceeded204Async(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner put200UpdatingSucceeded204(ProductInner product) {
-        return put200UpdatingSucceeded204Async(product).block();
     }
 
     /**
@@ -2701,6 +2717,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut201CreatingFailed200Async() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = put201CreatingFailed200WithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Failed’.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2724,15 +2759,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingFailed200(ProductInner product) {
-        return beginPut201CreatingFailed200Async(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingFailed200() {
+        final ProductInner product = null;
+        return this.beginPut201CreatingFailed200Async(product).getSyncPoller();
     }
 
     /**
@@ -2750,7 +2784,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingFailed200(
         ProductInner product, Context context) {
-        return beginPut201CreatingFailed200Async(product, context).getSyncPoller();
+        return this.beginPut201CreatingFailed200Async(product, context).getSyncPoller();
     }
 
     /**
@@ -2801,22 +2835,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPut201CreatingFailed200Async(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner put201CreatingFailed200(ProductInner product) {
-        return put201CreatingFailed200Async(product).block();
     }
 
     /**
@@ -2935,6 +2953,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut200Acceptedcanceled200Async() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = put200Acceptedcanceled200WithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Canceled’.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2958,15 +2995,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Acceptedcanceled200(ProductInner product) {
-        return beginPut200Acceptedcanceled200Async(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Acceptedcanceled200() {
+        final ProductInner product = null;
+        return this.beginPut200Acceptedcanceled200Async(product).getSyncPoller();
     }
 
     /**
@@ -2984,7 +3020,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut200Acceptedcanceled200(
         ProductInner product, Context context) {
-        return beginPut200Acceptedcanceled200Async(product, context).getSyncPoller();
+        return this.beginPut200Acceptedcanceled200Async(product, context).getSyncPoller();
     }
 
     /**
@@ -3035,22 +3071,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPut200Acceptedcanceled200Async(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner put200Acceptedcanceled200(ProductInner product) {
-        return put200Acceptedcanceled200Async(product).block();
     }
 
     /**
@@ -3163,6 +3183,24 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
      * operation status do not contain location header.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutNoHeaderInRetryAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = putNoHeaderInRetryWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
+     * operation status do not contain location header.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3185,15 +3223,14 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
      * operation status do not contain location header.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNoHeaderInRetry(ProductInner product) {
-        return beginPutNoHeaderInRetryAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNoHeaderInRetry() {
+        final ProductInner product = null;
+        return this.beginPutNoHeaderInRetryAsync(product).getSyncPoller();
     }
 
     /**
@@ -3210,7 +3247,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutNoHeaderInRetry(
         ProductInner product, Context context) {
-        return beginPutNoHeaderInRetryAsync(product, context).getSyncPoller();
+        return this.beginPutNoHeaderInRetryAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -3256,21 +3293,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ProductInner> putNoHeaderInRetryAsync(ProductInner product, Context context) {
         return beginPutNoHeaderInRetryAsync(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
-     * operation status do not contain location header.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner putNoHeaderInRetry(ProductInner product) {
-        return putNoHeaderInRetryAsync(product).block();
     }
 
     /**
@@ -3385,6 +3407,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRetrySucceededAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = putAsyncRetrySucceededWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3408,15 +3449,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRetrySucceededAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetrySucceeded() {
+        final ProductInner product = null;
+        return this.beginPutAsyncRetrySucceededAsync(product).getSyncPoller();
     }
 
     /**
@@ -3434,7 +3474,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetrySucceeded(
         ProductInner product, Context context) {
-        return beginPutAsyncRetrySucceededAsync(product, context).getSyncPoller();
+        return this.beginPutAsyncRetrySucceededAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -3483,22 +3523,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, Context context) {
         return beginPutAsyncRetrySucceededAsync(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner putAsyncRetrySucceeded(ProductInner product) {
-        return putAsyncRetrySucceededAsync(product).block();
     }
 
     /**
@@ -3617,6 +3641,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrySucceededAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = putAsyncNoRetrySucceededWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3640,15 +3683,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrySucceeded(ProductInner product) {
-        return beginPutAsyncNoRetrySucceededAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrySucceeded() {
+        final ProductInner product = null;
+        return this.beginPutAsyncNoRetrySucceededAsync(product).getSyncPoller();
     }
 
     /**
@@ -3666,7 +3708,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrySucceeded(
         ProductInner product, Context context) {
-        return beginPutAsyncNoRetrySucceededAsync(product, context).getSyncPoller();
+        return this.beginPutAsyncNoRetrySucceededAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -3717,22 +3759,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPutAsyncNoRetrySucceededAsync(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner putAsyncNoRetrySucceeded(ProductInner product) {
-        return putAsyncNoRetrySucceededAsync(product).block();
     }
 
     /**
@@ -3849,6 +3875,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRetryFailedAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = putAsyncRetryFailedWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3872,15 +3917,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetryFailed(ProductInner product) {
-        return beginPutAsyncRetryFailedAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetryFailed() {
+        final ProductInner product = null;
+        return this.beginPutAsyncRetryFailedAsync(product).getSyncPoller();
     }
 
     /**
@@ -3898,7 +3942,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetryFailed(
         ProductInner product, Context context) {
-        return beginPutAsyncRetryFailedAsync(product, context).getSyncPoller();
+        return this.beginPutAsyncRetryFailedAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -3947,22 +3991,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ProductInner> putAsyncRetryFailedAsync(ProductInner product, Context context) {
         return beginPutAsyncRetryFailedAsync(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner putAsyncRetryFailed(ProductInner product) {
-        return putAsyncRetryFailedAsync(product).block();
     }
 
     /**
@@ -4080,6 +4108,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrycanceledAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = putAsyncNoRetrycanceledWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4103,15 +4150,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrycanceled(ProductInner product) {
-        return beginPutAsyncNoRetrycanceledAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrycanceled() {
+        final ProductInner product = null;
+        return this.beginPutAsyncNoRetrycanceledAsync(product).getSyncPoller();
     }
 
     /**
@@ -4129,7 +4175,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoRetrycanceled(
         ProductInner product, Context context) {
-        return beginPutAsyncNoRetrycanceledAsync(product, context).getSyncPoller();
+        return this.beginPutAsyncNoRetrycanceledAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -4180,22 +4226,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPutAsyncNoRetrycanceledAsync(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner putAsyncNoRetrycanceled(ProductInner product) {
-        return putAsyncNoRetrycanceledAsync(product).block();
     }
 
     /**
@@ -4309,6 +4339,24 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
      * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncNoHeaderInRetryAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = putAsyncNoHeaderInRetryWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
+     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4331,15 +4379,14 @@ public final class LROsClientImpl implements LROsClient {
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
      * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoHeaderInRetry(ProductInner product) {
-        return beginPutAsyncNoHeaderInRetryAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoHeaderInRetry() {
+        final ProductInner product = null;
+        return this.beginPutAsyncNoHeaderInRetryAsync(product).getSyncPoller();
     }
 
     /**
@@ -4356,7 +4403,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncNoHeaderInRetry(
         ProductInner product, Context context) {
-        return beginPutAsyncNoHeaderInRetryAsync(product, context).getSyncPoller();
+        return this.beginPutAsyncNoHeaderInRetryAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -4404,21 +4451,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPutAsyncNoHeaderInRetryAsync(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
-     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner putAsyncNoHeaderInRetry(ProductInner product) {
-        return putAsyncNoHeaderInRetryAsync(product).block();
     }
 
     /**
@@ -4524,6 +4556,23 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running put request with non resource.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<SkuInner>, SkuInner> beginPutNonResourceAsync() {
+        final SkuInner sku = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = putNonResourceWithResponseAsync(sku);
+        return this
+            .client
+            .<SkuInner, SkuInner>getLroResult(
+                mono, this.client.getHttpPipeline(), SkuInner.class, SkuInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
      * @param sku sku to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4544,15 +4593,14 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running put request with non resource.
      *
-     * @param sku sku to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SkuInner>, SkuInner> beginPutNonResource(SkuInner sku) {
-        return beginPutNonResourceAsync(sku).getSyncPoller();
+    public SyncPoller<PollResult<SkuInner>, SkuInner> beginPutNonResource() {
+        final SkuInner sku = null;
+        return this.beginPutNonResourceAsync(sku).getSyncPoller();
     }
 
     /**
@@ -4567,7 +4615,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<SkuInner>, SkuInner> beginPutNonResource(SkuInner sku, Context context) {
-        return beginPutNonResourceAsync(sku, context).getSyncPoller();
+        return this.beginPutNonResourceAsync(sku, context).getSyncPoller();
     }
 
     /**
@@ -4610,20 +4658,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<SkuInner> putNonResourceAsync(SkuInner sku, Context context) {
         return beginPutNonResourceAsync(sku, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request with non resource.
-     *
-     * @param sku sku to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public SkuInner putNonResource(SkuInner sku) {
-        return putNonResourceAsync(sku).block();
     }
 
     /**
@@ -4727,6 +4761,23 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running put request with non resource.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<SkuInner>, SkuInner> beginPutAsyncNonResourceAsync() {
+        final SkuInner sku = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = putAsyncNonResourceWithResponseAsync(sku);
+        return this
+            .client
+            .<SkuInner, SkuInner>getLroResult(
+                mono, this.client.getHttpPipeline(), SkuInner.class, SkuInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
      * @param sku Sku to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4747,15 +4798,14 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running put request with non resource.
      *
-     * @param sku Sku to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SkuInner>, SkuInner> beginPutAsyncNonResource(SkuInner sku) {
-        return beginPutAsyncNonResourceAsync(sku).getSyncPoller();
+    public SyncPoller<PollResult<SkuInner>, SkuInner> beginPutAsyncNonResource() {
+        final SkuInner sku = null;
+        return this.beginPutAsyncNonResourceAsync(sku).getSyncPoller();
     }
 
     /**
@@ -4770,7 +4820,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<SkuInner>, SkuInner> beginPutAsyncNonResource(SkuInner sku, Context context) {
-        return beginPutAsyncNonResourceAsync(sku, context).getSyncPoller();
+        return this.beginPutAsyncNonResourceAsync(sku, context).getSyncPoller();
     }
 
     /**
@@ -4813,20 +4863,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<SkuInner> putAsyncNonResourceAsync(SkuInner sku, Context context) {
         return beginPutAsyncNonResourceAsync(sku, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request with non resource.
-     *
-     * @param sku Sku to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public SkuInner putAsyncNonResource(SkuInner sku) {
-        return putAsyncNonResourceAsync(sku).block();
     }
 
     /**
@@ -4934,6 +4970,27 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running put request with sub resource.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<SubProductInner>, SubProductInner> beginPutSubResourceAsync() {
+        final SubProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = putSubResourceWithResponseAsync(product);
+        return this
+            .client
+            .<SubProductInner, SubProductInner>getLroResult(
+                mono,
+                this.client.getHttpPipeline(),
+                SubProductInner.class,
+                SubProductInner.class,
+                this.client.getContext());
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
      * @param product Sub Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4955,15 +5012,14 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutSubResource(SubProductInner product) {
-        return beginPutSubResourceAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutSubResource() {
+        final SubProductInner product = null;
+        return this.beginPutSubResourceAsync(product).getSyncPoller();
     }
 
     /**
@@ -4979,7 +5035,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutSubResource(
         SubProductInner product, Context context) {
-        return beginPutSubResourceAsync(product, context).getSyncPoller();
+        return this.beginPutSubResourceAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -5022,20 +5078,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<SubProductInner> putSubResourceAsync(SubProductInner product, Context context) {
         return beginPutSubResourceAsync(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request with sub resource.
-     *
-     * @param product Sub Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public SubProductInner putSubResource(SubProductInner product) {
-        return putSubResourceAsync(product).block();
     }
 
     /**
@@ -5145,6 +5187,27 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running put request with sub resource.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<SubProductInner>, SubProductInner> beginPutAsyncSubResourceAsync() {
+        final SubProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = putAsyncSubResourceWithResponseAsync(product);
+        return this
+            .client
+            .<SubProductInner, SubProductInner>getLroResult(
+                mono,
+                this.client.getHttpPipeline(),
+                SubProductInner.class,
+                SubProductInner.class,
+                this.client.getContext());
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
      * @param product Sub Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5166,15 +5229,14 @@ public final class LROsClientImpl implements LROsClient {
     /**
      * Long running put request with sub resource.
      *
-     * @param product Sub Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutAsyncSubResource(SubProductInner product) {
-        return beginPutAsyncSubResourceAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutAsyncSubResource() {
+        final SubProductInner product = null;
+        return this.beginPutAsyncSubResourceAsync(product).getSyncPoller();
     }
 
     /**
@@ -5190,7 +5252,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<SubProductInner>, SubProductInner> beginPutAsyncSubResource(
         SubProductInner product, Context context) {
-        return beginPutAsyncSubResourceAsync(product, context).getSyncPoller();
+        return this.beginPutAsyncSubResourceAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -5233,20 +5295,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<SubProductInner> putAsyncSubResourceAsync(SubProductInner product, Context context) {
         return beginPutAsyncSubResourceAsync(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running put request with sub resource.
-     *
-     * @param product Sub Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public SubProductInner putAsyncSubResource(SubProductInner product) {
-        return putAsyncSubResourceAsync(product).block();
     }
 
     /**
@@ -5378,7 +5426,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().getSyncPoller();
+        return this.beginDeleteProvisioning202Accepted200SucceededAsync().getSyncPoller();
     }
 
     /**
@@ -5395,7 +5443,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDeleteProvisioning202Accepted200Succeeded(
         Context context) {
-        return beginDeleteProvisioning202Accepted200SucceededAsync(context).getSyncPoller();
+        return this.beginDeleteProvisioning202Accepted200SucceededAsync(context).getSyncPoller();
     }
 
     /**
@@ -5561,7 +5609,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDeleteProvisioning202DeletingFailed200() {
-        return beginDeleteProvisioning202DeletingFailed200Async().getSyncPoller();
+        return this.beginDeleteProvisioning202DeletingFailed200Async().getSyncPoller();
     }
 
     /**
@@ -5578,7 +5626,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDeleteProvisioning202DeletingFailed200(
         Context context) {
-        return beginDeleteProvisioning202DeletingFailed200Async(context).getSyncPoller();
+        return this.beginDeleteProvisioning202DeletingFailed200Async(context).getSyncPoller();
     }
 
     /**
@@ -5743,7 +5791,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDeleteProvisioning202Deletingcanceled200() {
-        return beginDeleteProvisioning202Deletingcanceled200Async().getSyncPoller();
+        return this.beginDeleteProvisioning202Deletingcanceled200Async().getSyncPoller();
     }
 
     /**
@@ -5760,7 +5808,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDeleteProvisioning202Deletingcanceled200(
         Context context) {
-        return beginDeleteProvisioning202Deletingcanceled200Async(context).getSyncPoller();
+        return this.beginDeleteProvisioning202Deletingcanceled200Async(context).getSyncPoller();
     }
 
     /**
@@ -5913,7 +5961,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete204Succeeded() {
-        return beginDelete204SucceededAsync().getSyncPoller();
+        return this.beginDelete204SucceededAsync().getSyncPoller();
     }
 
     /**
@@ -5927,7 +5975,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete204Succeeded(Context context) {
-        return beginDelete204SucceededAsync(context).getSyncPoller();
+        return this.beginDelete204SucceededAsync(context).getSyncPoller();
     }
 
     /**
@@ -6072,7 +6120,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDelete202Retry200() {
-        return beginDelete202Retry200Async().getSyncPoller();
+        return this.beginDelete202Retry200Async().getSyncPoller();
     }
 
     /**
@@ -6087,7 +6135,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDelete202Retry200(Context context) {
-        return beginDelete202Retry200Async(context).getSyncPoller();
+        return this.beginDelete202Retry200Async(context).getSyncPoller();
     }
 
     /**
@@ -6238,7 +6286,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDelete202NoRetry204() {
-        return beginDelete202NoRetry204Async().getSyncPoller();
+        return this.beginDelete202NoRetry204Async().getSyncPoller();
     }
 
     /**
@@ -6253,7 +6301,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginDelete202NoRetry204(Context context) {
-        return beginDelete202NoRetry204Async(context).getSyncPoller();
+        return this.beginDelete202NoRetry204Async(context).getSyncPoller();
     }
 
     /**
@@ -6403,7 +6451,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteNoHeaderInRetry() {
-        return beginDeleteNoHeaderInRetryAsync().getSyncPoller();
+        return this.beginDeleteNoHeaderInRetryAsync().getSyncPoller();
     }
 
     /**
@@ -6418,7 +6466,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteNoHeaderInRetry(Context context) {
-        return beginDeleteNoHeaderInRetryAsync(context).getSyncPoller();
+        return this.beginDeleteNoHeaderInRetryAsync(context).getSyncPoller();
     }
 
     /**
@@ -6566,7 +6614,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncNoHeaderInRetry() {
-        return beginDeleteAsyncNoHeaderInRetryAsync().getSyncPoller();
+        return this.beginDeleteAsyncNoHeaderInRetryAsync().getSyncPoller();
     }
 
     /**
@@ -6581,7 +6629,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncNoHeaderInRetry(Context context) {
-        return beginDeleteAsyncNoHeaderInRetryAsync(context).getSyncPoller();
+        return this.beginDeleteAsyncNoHeaderInRetryAsync(context).getSyncPoller();
     }
 
     /**
@@ -6729,7 +6777,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRetrySucceeded() {
-        return beginDeleteAsyncRetrySucceededAsync().getSyncPoller();
+        return this.beginDeleteAsyncRetrySucceededAsync().getSyncPoller();
     }
 
     /**
@@ -6744,7 +6792,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRetrySucceeded(Context context) {
-        return beginDeleteAsyncRetrySucceededAsync(context).getSyncPoller();
+        return this.beginDeleteAsyncRetrySucceededAsync(context).getSyncPoller();
     }
 
     /**
@@ -6892,7 +6940,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncNoRetrySucceeded() {
-        return beginDeleteAsyncNoRetrySucceededAsync().getSyncPoller();
+        return this.beginDeleteAsyncNoRetrySucceededAsync().getSyncPoller();
     }
 
     /**
@@ -6907,7 +6955,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncNoRetrySucceeded(Context context) {
-        return beginDeleteAsyncNoRetrySucceededAsync(context).getSyncPoller();
+        return this.beginDeleteAsyncNoRetrySucceededAsync(context).getSyncPoller();
     }
 
     /**
@@ -7055,7 +7103,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRetryFailed() {
-        return beginDeleteAsyncRetryFailedAsync().getSyncPoller();
+        return this.beginDeleteAsyncRetryFailedAsync().getSyncPoller();
     }
 
     /**
@@ -7070,7 +7118,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRetryFailed(Context context) {
-        return beginDeleteAsyncRetryFailedAsync(context).getSyncPoller();
+        return this.beginDeleteAsyncRetryFailedAsync(context).getSyncPoller();
     }
 
     /**
@@ -7218,7 +7266,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRetrycanceled() {
-        return beginDeleteAsyncRetrycanceledAsync().getSyncPoller();
+        return this.beginDeleteAsyncRetrycanceledAsync().getSyncPoller();
     }
 
     /**
@@ -7233,7 +7281,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDeleteAsyncRetrycanceled(Context context) {
-        return beginDeleteAsyncRetrycanceledAsync(context).getSyncPoller();
+        return this.beginDeleteAsyncRetrycanceledAsync(context).getSyncPoller();
     }
 
     /**
@@ -7382,7 +7430,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<SkuInner>, SkuInner> beginPost200WithPayload() {
-        return beginPost200WithPayloadAsync().getSyncPoller();
+        return this.beginPost200WithPayloadAsync().getSyncPoller();
     }
 
     /**
@@ -7397,7 +7445,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<SkuInner>, SkuInner> beginPost200WithPayload(Context context) {
-        return beginPost200WithPayloadAsync(context).getSyncPoller();
+        return this.beginPost200WithPayloadAsync(context).getSyncPoller();
     }
 
     /**
@@ -7533,6 +7581,24 @@ public final class LROsClientImpl implements LROsClient {
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
      * headers, Polls return a 200 with a response body after success.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<Void>, Void> beginPost202Retry200Async() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = post202Retry200WithResponseAsync(product);
+        return this
+            .client
+            .<Void, Void>getLroResult(
+                mono, this.client.getHttpPipeline(), Void.class, Void.class, this.client.getContext());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
+     * headers, Polls return a 200 with a response body after success.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -7553,15 +7619,14 @@ public final class LROsClientImpl implements LROsClient {
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
      * headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<Void>, Void> beginPost202Retry200(ProductInner product) {
-        return beginPost202Retry200Async(product).getSyncPoller();
+    public SyncPoller<PollResult<Void>, Void> beginPost202Retry200() {
+        final ProductInner product = null;
+        return this.beginPost202Retry200Async(product).getSyncPoller();
     }
 
     /**
@@ -7577,7 +7642,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPost202Retry200(ProductInner product, Context context) {
-        return beginPost202Retry200Async(product, context).getSyncPoller();
+        return this.beginPost202Retry200Async(product, context).getSyncPoller();
     }
 
     /**
@@ -7623,20 +7688,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> post202Retry200Async(ProductInner product, Context context) {
         return beginPost202Retry200Async(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post202Retry200(ProductInner product) {
-        post202Retry200Async(product).block();
     }
 
     /**
@@ -7744,6 +7795,24 @@ public final class LROsClientImpl implements LROsClient {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
      * noresponse body after success.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPost202NoRetry204Async() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = post202NoRetry204WithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
+     * noresponse body after success.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -7766,15 +7835,14 @@ public final class LROsClientImpl implements LROsClient {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
      * noresponse body after success.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPost202NoRetry204(ProductInner product) {
-        return beginPost202NoRetry204Async(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPost202NoRetry204() {
+        final ProductInner product = null;
+        return this.beginPost202NoRetry204Async(product).getSyncPoller();
     }
 
     /**
@@ -7791,7 +7859,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPost202NoRetry204(
         ProductInner product, Context context) {
-        return beginPost202NoRetry204Async(product, context).getSyncPoller();
+        return this.beginPost202NoRetry204Async(product, context).getSyncPoller();
     }
 
     /**
@@ -7837,21 +7905,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ProductInner> post202NoRetry204Async(ProductInner product, Context context) {
         return beginPost202NoRetry204Async(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
-     * noresponse body after success.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner post202NoRetry204(ProductInner product) {
-        return post202NoRetry204Async(product).block();
     }
 
     /**
@@ -7978,7 +8031,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostDoubleHeadersFinalLocationGet() {
-        return beginPostDoubleHeadersFinalLocationGetAsync().getSyncPoller();
+        return this.beginPostDoubleHeadersFinalLocationGetAsync().getSyncPoller();
     }
 
     /**
@@ -7993,7 +8046,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostDoubleHeadersFinalLocationGet(Context context) {
-        return beginPostDoubleHeadersFinalLocationGetAsync(context).getSyncPoller();
+        return this.beginPostDoubleHeadersFinalLocationGetAsync(context).getSyncPoller();
     }
 
     /**
@@ -8148,7 +8201,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostDoubleHeadersFinalAzureHeaderGet() {
-        return beginPostDoubleHeadersFinalAzureHeaderGetAsync().getSyncPoller();
+        return this.beginPostDoubleHeadersFinalAzureHeaderGetAsync().getSyncPoller();
     }
 
     /**
@@ -8164,7 +8217,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostDoubleHeadersFinalAzureHeaderGet(
         Context context) {
-        return beginPostDoubleHeadersFinalAzureHeaderGetAsync(context).getSyncPoller();
+        return this.beginPostDoubleHeadersFinalAzureHeaderGetAsync(context).getSyncPoller();
     }
 
     /**
@@ -8326,7 +8379,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostDoubleHeadersFinalAzureHeaderGetDefault() {
-        return beginPostDoubleHeadersFinalAzureHeaderGetDefaultAsync().getSyncPoller();
+        return this.beginPostDoubleHeadersFinalAzureHeaderGetDefaultAsync().getSyncPoller();
     }
 
     /**
@@ -8343,7 +8396,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostDoubleHeadersFinalAzureHeaderGetDefault(
         Context context) {
-        return beginPostDoubleHeadersFinalAzureHeaderGetDefaultAsync(context).getSyncPoller();
+        return this.beginPostDoubleHeadersFinalAzureHeaderGetDefaultAsync(context).getSyncPoller();
     }
 
     /**
@@ -8493,6 +8546,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPostAsyncRetrySucceededAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = postAsyncRetrySucceededWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -8516,15 +8588,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncRetrySucceeded(ProductInner product) {
-        return beginPostAsyncRetrySucceededAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncRetrySucceeded() {
+        final ProductInner product = null;
+        return this.beginPostAsyncRetrySucceededAsync(product).getSyncPoller();
     }
 
     /**
@@ -8542,7 +8613,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncRetrySucceeded(
         ProductInner product, Context context) {
-        return beginPostAsyncRetrySucceededAsync(product, context).getSyncPoller();
+        return this.beginPostAsyncRetrySucceededAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -8593,22 +8664,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPostAsyncRetrySucceededAsync(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner postAsyncRetrySucceeded(ProductInner product) {
-        return postAsyncRetrySucceededAsync(product).block();
     }
 
     /**
@@ -8727,6 +8782,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPostAsyncNoRetrySucceededAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = postAsyncNoRetrySucceededWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -8750,15 +8824,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncNoRetrySucceeded(ProductInner product) {
-        return beginPostAsyncNoRetrySucceededAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncNoRetrySucceeded() {
+        final ProductInner product = null;
+        return this.beginPostAsyncNoRetrySucceededAsync(product).getSyncPoller();
     }
 
     /**
@@ -8776,7 +8849,7 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPostAsyncNoRetrySucceeded(
         ProductInner product, Context context) {
-        return beginPostAsyncNoRetrySucceededAsync(product, context).getSyncPoller();
+        return this.beginPostAsyncNoRetrySucceededAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -8827,22 +8900,6 @@ public final class LROsClientImpl implements LROsClient {
         return beginPostAsyncNoRetrySucceededAsync(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner postAsyncNoRetrySucceeded(ProductInner product) {
-        return postAsyncNoRetrySucceededAsync(product).block();
     }
 
     /**
@@ -8959,6 +9016,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<Void>, Void> beginPostAsyncRetryFailedAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = postAsyncRetryFailedWithResponseAsync(product);
+        return this
+            .client
+            .<Void, Void>getLroResult(
+                mono, this.client.getHttpPipeline(), Void.class, Void.class, this.client.getContext());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -8980,15 +9056,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<Void>, Void> beginPostAsyncRetryFailed(ProductInner product) {
-        return beginPostAsyncRetryFailedAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<Void>, Void> beginPostAsyncRetryFailed() {
+        final ProductInner product = null;
+        return this.beginPostAsyncRetryFailedAsync(product).getSyncPoller();
     }
 
     /**
@@ -9005,7 +9080,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRetryFailed(ProductInner product, Context context) {
-        return beginPostAsyncRetryFailedAsync(product, context).getSyncPoller();
+        return this.beginPostAsyncRetryFailedAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -9054,21 +9129,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> postAsyncRetryFailedAsync(ProductInner product, Context context) {
         return beginPostAsyncRetryFailedAsync(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void postAsyncRetryFailed(ProductInner product) {
-        postAsyncRetryFailedAsync(product).block();
     }
 
     /**
@@ -9183,6 +9243,25 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<Void>, Void> beginPostAsyncRetrycanceledAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = postAsyncRetrycanceledWithResponseAsync(product);
+        return this
+            .client
+            .<Void, Void>getLroResult(
+                mono, this.client.getHttpPipeline(), Void.class, Void.class, this.client.getContext());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -9204,15 +9283,14 @@ public final class LROsClientImpl implements LROsClient {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<Void>, Void> beginPostAsyncRetrycanceled(ProductInner product) {
-        return beginPostAsyncRetrycanceledAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<Void>, Void> beginPostAsyncRetrycanceled() {
+        final ProductInner product = null;
+        return this.beginPostAsyncRetrycanceledAsync(product).getSyncPoller();
     }
 
     /**
@@ -9229,7 +9307,7 @@ public final class LROsClientImpl implements LROsClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRetrycanceled(ProductInner product, Context context) {
-        return beginPostAsyncRetrycanceledAsync(product, context).getSyncPoller();
+        return this.beginPostAsyncRetrycanceledAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -9278,21 +9356,6 @@ public final class LROsClientImpl implements LROsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> postAsyncRetrycanceledAsync(ProductInner product, Context context) {
         return beginPostAsyncRetrycanceledAsync(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void postAsyncRetrycanceled(ProductInner product) {
-        postAsyncRetrycanceledAsync(product).block();
     }
 
     /**

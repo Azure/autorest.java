@@ -55,8 +55,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                                     serviceMethodCall));
 
                             IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
-                            function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), %s.class, %s.class, %s).last().flatMap(%s::getLroFinalResultOrError));",
-                                    clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam, clientMethod.getClientReference()));
+                            function.line(String.format("return Mono.zip(mono, %1$s.<%2$s, %2$s>getLroResult(mono, %1$s.getHttpPipeline(), %2$s.class, %2$s.class, %3$s).last().flatMap(%1$s::getLroFinalResultOrError));",
+                                    clientMethod.getClientReference(), classType, contextParam));
                         });
                         function.line("})");
                     }
@@ -70,8 +70,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                                 serviceMethodCall));
 
                         IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
-                        function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), %s.class, %s.class, %s).last().flatMap(%s::getLroFinalResultOrError))",
-                                clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam, clientMethod.getClientReference()));
+                        function.line(String.format("return Mono.zip(mono, %1$s.<%2$s, %2$s>getLroResult(mono, %1$s.getHttpPipeline(), %2$s.class, %2$s.class, %3$s).last().flatMap(%1$s::getLroFinalResultOrError))",
+                                clientMethod.getClientReference(), classType, contextParam));
                     }
                 }
                 function.indent(() -> {

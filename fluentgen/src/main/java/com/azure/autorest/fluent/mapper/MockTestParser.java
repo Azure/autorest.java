@@ -33,9 +33,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MockUnitTestParser extends ExampleParser {
+public class MockTestParser extends ExampleParser {
 
-    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), MockUnitTestParser.class);
+    private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), MockTestParser.class);
 
     public List<FluentMethodMockUnitTest> parseResourceCollectionForUnitTest(FluentResourceCollection resourceCollection) {
         List<FluentMethodMockUnitTest> fluentMethodMockUnitTests = new ArrayList<>();
@@ -192,12 +192,16 @@ public class MockUnitTestParser extends ExampleParser {
     private static boolean requiresExample(ClientMethod clientMethod) {
         if (clientMethod.getType() == ClientMethodType.SimpleSync
                 || clientMethod.getType() == ClientMethodType.SimpleSyncRestResponse
-                || clientMethod.getType() == ClientMethodType.PagingSync
-                // limit the scope of LRO to status code of 200
+                // pageable
+                || (clientMethod.getType() == ClientMethodType.PagingSync
+                    // not pageable + LRO
+                    && clientMethod.getMethodPageDetails().getLroIntermediateType() == null)
+                // LRO
                 || (clientMethod.getType() == ClientMethodType.LongRunningSync
-                && clientMethod.getProxyMethod().getResponseExpectedStatusCodes().contains(200)
-                // also azure-core-management does not support LRO from GET
-                && clientMethod.getProxyMethod().getHttpMethod() != HttpMethod.GET)) {
+                    // limit the scope of LRO to status code of 200
+                    && clientMethod.getProxyMethod().getResponseExpectedStatusCodes().contains(200)
+                    // also azure-core-management does not support LRO from GET
+                    && clientMethod.getProxyMethod().getHttpMethod() != HttpMethod.GET)) {
             // generate example for the method with full parameters
             return clientMethod.getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()));
         }

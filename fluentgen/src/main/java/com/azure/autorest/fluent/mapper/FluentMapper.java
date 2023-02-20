@@ -76,7 +76,7 @@ public class FluentMapper {
                             .collect(Collectors.toList()));
 
             // mock API tests
-            MockUnitTestParser mockUnitTestParser = new MockUnitTestParser();
+            MockTestParser mockUnitTestParser = new MockTestParser();
             fluentClient.getMockUnitTests().addAll(
                     fluentClient.getResourceCollections().stream()
                             .flatMap(rc -> mockUnitTestParser.parseResourceCollectionForUnitTest(rc).stream())

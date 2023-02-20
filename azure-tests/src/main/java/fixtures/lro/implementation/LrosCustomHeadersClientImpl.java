@@ -55,7 +55,7 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestLongRunningO")
-    private interface LrosCustomHeadersService {
+    public interface LrosCustomHeadersService {
         @Headers({"Content-Type: application/json"})
         @Put("/lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200})
@@ -183,6 +183,26 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPutAsyncRetrySucceededAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = putAsyncRetrySucceededWithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+     * running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -207,15 +227,14 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRetrySucceededAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetrySucceeded() {
+        final ProductInner product = null;
+        return this.beginPutAsyncRetrySucceededAsync(product).getSyncPoller();
     }
 
     /**
@@ -234,7 +253,7 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPutAsyncRetrySucceeded(
         ProductInner product, Context context) {
-        return beginPutAsyncRetrySucceededAsync(product, context).getSyncPoller();
+        return this.beginPutAsyncRetrySucceededAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -286,23 +305,6 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, Context context) {
         return beginPutAsyncRetrySucceededAsync(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
-     * running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner putAsyncRetrySucceeded(ProductInner product) {
-        return putAsyncRetrySucceededAsync(product).block();
     }
 
     /**
@@ -427,6 +429,26 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200Async() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = put201CreatingSucceeded200WithResponseAsync(product);
+        return this
+            .client
+            .<ProductInner, ProductInner>getLroResult(
+                mono, this.client.getHttpPipeline(), ProductInner.class, ProductInner.class, this.client.getContext());
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+     * running put request, service returns a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -451,15 +473,14 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200Async(product).getSyncPoller();
+    public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200() {
+        final ProductInner product = null;
+        return this.beginPut201CreatingSucceeded200Async(product).getSyncPoller();
     }
 
     /**
@@ -478,7 +499,7 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ProductInner>, ProductInner> beginPut201CreatingSucceeded200(
         ProductInner product, Context context) {
-        return beginPut201CreatingSucceeded200Async(product, context).getSyncPoller();
+        return this.beginPut201CreatingSucceeded200Async(product, context).getSyncPoller();
     }
 
     /**
@@ -532,23 +553,6 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
         return beginPut201CreatingSucceeded200Async(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
-     * running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ProductInner put201CreatingSucceeded200(ProductInner product) {
-        return put201CreatingSucceeded200Async(product).block();
     }
 
     /**
@@ -666,6 +670,25 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
      * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
      * Polls return a 200 with a response body after success.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<Void>, Void> beginPost202Retry200Async() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = post202Retry200WithResponseAsync(product);
+        return this
+            .client
+            .<Void, Void>getLroResult(
+                mono, this.client.getHttpPipeline(), Void.class, Void.class, this.client.getContext());
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+     * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
+     * Polls return a 200 with a response body after success.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -687,15 +710,14 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
      * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
      * Polls return a 200 with a response body after success.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<Void>, Void> beginPost202Retry200(ProductInner product) {
-        return beginPost202Retry200Async(product).getSyncPoller();
+    public SyncPoller<PollResult<Void>, Void> beginPost202Retry200() {
+        final ProductInner product = null;
+        return this.beginPost202Retry200Async(product).getSyncPoller();
     }
 
     /**
@@ -712,7 +734,7 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPost202Retry200(ProductInner product, Context context) {
-        return beginPost202Retry200Async(product, context).getSyncPoller();
+        return this.beginPost202Retry200Async(product, context).getSyncPoller();
     }
 
     /**
@@ -761,21 +783,6 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> post202Retry200Async(ProductInner product, Context context) {
         return beginPost202Retry200Async(product, context).last().flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
-     * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
-     * Polls return a 200 with a response body after success.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void post202Retry200(ProductInner product) {
-        post202Retry200Async(product).block();
     }
 
     /**
@@ -895,6 +902,26 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<Void>, Void> beginPostAsyncRetrySucceededAsync() {
+        final ProductInner product = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = postAsyncRetrySucceededWithResponseAsync(product);
+        return this
+            .client
+            .<Void, Void>getLroResult(
+                mono, this.client.getHttpPipeline(), Void.class, Void.class, this.client.getContext());
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
+     * running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     *
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -918,15 +945,14 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
      *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<Void>, Void> beginPostAsyncRetrySucceeded(ProductInner product) {
-        return beginPostAsyncRetrySucceededAsync(product).getSyncPoller();
+    public SyncPoller<PollResult<Void>, Void> beginPostAsyncRetrySucceeded() {
+        final ProductInner product = null;
+        return this.beginPostAsyncRetrySucceededAsync(product).getSyncPoller();
     }
 
     /**
@@ -944,7 +970,7 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginPostAsyncRetrySucceeded(ProductInner product, Context context) {
-        return beginPostAsyncRetrySucceededAsync(product, context).getSyncPoller();
+        return this.beginPostAsyncRetrySucceededAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -998,22 +1024,6 @@ public final class LrosCustomHeadersClientImpl implements LrosCustomHeadersClien
         return beginPostAsyncRetrySucceededAsync(product, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
-     * running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     *
-     * @param product Product to put.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void postAsyncRetrySucceeded(ProductInner product) {
-        postAsyncRetrySucceededAsync(product).block();
     }
 
     /**

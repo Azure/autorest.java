@@ -30,15 +30,6 @@ public final class LROsImpl implements LROs {
         this.serviceManager = serviceManager;
     }
 
-    public Product put200Succeeded(ProductInner product) {
-        ProductInner inner = this.serviceClient().put200Succeeded(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product put200Succeeded() {
         ProductInner inner = this.serviceClient().put200Succeeded();
         if (inner != null) {
@@ -50,15 +41,6 @@ public final class LROsImpl implements LROs {
 
     public Product put200Succeeded(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().put200Succeeded(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product patch200SucceededIgnoreHeaders(ProductInner product) {
-        ProductInner inner = this.serviceClient().patch200SucceededIgnoreHeaders(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -84,15 +66,6 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public Product patch201RetryWithAsyncHeader(ProductInner product) {
-        ProductInner inner = this.serviceClient().patch201RetryWithAsyncHeader(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product patch201RetryWithAsyncHeader() {
         ProductInner inner = this.serviceClient().patch201RetryWithAsyncHeader();
         if (inner != null) {
@@ -111,15 +84,6 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public Product patch202RetryWithAsyncAndLocationHeader(ProductInner product) {
-        ProductInner inner = this.serviceClient().patch202RetryWithAsyncAndLocationHeader(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product patch202RetryWithAsyncAndLocationHeader() {
         ProductInner inner = this.serviceClient().patch202RetryWithAsyncAndLocationHeader();
         if (inner != null) {
@@ -131,15 +95,6 @@ public final class LROsImpl implements LROs {
 
     public Product patch202RetryWithAsyncAndLocationHeader(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().patch202RetryWithAsyncAndLocationHeader(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product put201Succeeded(ProductInner product) {
-        ProductInner inner = this.serviceClient().put201Succeeded(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -187,15 +142,6 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public Product put200SucceededNoState(ProductInner product) {
-        ProductInner inner = this.serviceClient().put200SucceededNoState(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product put200SucceededNoState() {
         ProductInner inner = this.serviceClient().put200SucceededNoState();
         if (inner != null) {
@@ -207,15 +153,6 @@ public final class LROsImpl implements LROs {
 
     public Product put200SucceededNoState(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().put200SucceededNoState(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product put202Retry200(ProductInner product) {
-        ProductInner inner = this.serviceClient().put202Retry200(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -241,15 +178,6 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public Product put201CreatingSucceeded200(ProductInner product) {
-        ProductInner inner = this.serviceClient().put201CreatingSucceeded200(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product put201CreatingSucceeded200() {
         ProductInner inner = this.serviceClient().put201CreatingSucceeded200();
         if (inner != null) {
@@ -261,15 +189,6 @@ public final class LROsImpl implements LROs {
 
     public Product put201CreatingSucceeded200(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().put201CreatingSucceeded200(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product put200UpdatingSucceeded204(ProductInner product) {
-        ProductInner inner = this.serviceClient().put200UpdatingSucceeded204(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -295,15 +214,6 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public Product put201CreatingFailed200(ProductInner product) {
-        ProductInner inner = this.serviceClient().put201CreatingFailed200(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product put201CreatingFailed200() {
         ProductInner inner = this.serviceClient().put201CreatingFailed200();
         if (inner != null) {
@@ -315,15 +225,6 @@ public final class LROsImpl implements LROs {
 
     public Product put201CreatingFailed200(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().put201CreatingFailed200(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product put200Acceptedcanceled200(ProductInner product) {
-        ProductInner inner = this.serviceClient().put200Acceptedcanceled200(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -349,15 +250,6 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public Product putNoHeaderInRetry(ProductInner product) {
-        ProductInner inner = this.serviceClient().putNoHeaderInRetry(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product putNoHeaderInRetry() {
         ProductInner inner = this.serviceClient().putNoHeaderInRetry();
         if (inner != null) {
@@ -369,15 +261,6 @@ public final class LROsImpl implements LROs {
 
     public Product putNoHeaderInRetry(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().putNoHeaderInRetry(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product putAsyncRetrySucceeded(ProductInner product) {
-        ProductInner inner = this.serviceClient().putAsyncRetrySucceeded(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -403,15 +286,6 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public Product putAsyncNoRetrySucceeded(ProductInner product) {
-        ProductInner inner = this.serviceClient().putAsyncNoRetrySucceeded(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product putAsyncNoRetrySucceeded() {
         ProductInner inner = this.serviceClient().putAsyncNoRetrySucceeded();
         if (inner != null) {
@@ -423,15 +297,6 @@ public final class LROsImpl implements LROs {
 
     public Product putAsyncNoRetrySucceeded(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().putAsyncNoRetrySucceeded(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product putAsyncRetryFailed(ProductInner product) {
-        ProductInner inner = this.serviceClient().putAsyncRetryFailed(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -457,15 +322,6 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public Product putAsyncNoRetrycanceled(ProductInner product) {
-        ProductInner inner = this.serviceClient().putAsyncNoRetrycanceled(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product putAsyncNoRetrycanceled() {
         ProductInner inner = this.serviceClient().putAsyncNoRetrycanceled();
         if (inner != null) {
@@ -477,15 +333,6 @@ public final class LROsImpl implements LROs {
 
     public Product putAsyncNoRetrycanceled(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().putAsyncNoRetrycanceled(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product putAsyncNoHeaderInRetry(ProductInner product) {
-        ProductInner inner = this.serviceClient().putAsyncNoHeaderInRetry(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -511,15 +358,6 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public Sku putNonResource(SkuInner sku) {
-        SkuInner inner = this.serviceClient().putNonResource(sku);
-        if (inner != null) {
-            return new SkuImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Sku putNonResource() {
         SkuInner inner = this.serviceClient().putNonResource();
         if (inner != null) {
@@ -531,15 +369,6 @@ public final class LROsImpl implements LROs {
 
     public Sku putNonResource(SkuInner sku, Context context) {
         SkuInner inner = this.serviceClient().putNonResource(sku, context);
-        if (inner != null) {
-            return new SkuImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Sku putAsyncNonResource(SkuInner sku) {
-        SkuInner inner = this.serviceClient().putAsyncNonResource(sku);
         if (inner != null) {
             return new SkuImpl(inner, this.manager());
         } else {
@@ -565,15 +394,6 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public SubProduct putSubResource(SubProductInner product) {
-        SubProductInner inner = this.serviceClient().putSubResource(product);
-        if (inner != null) {
-            return new SubProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public SubProduct putSubResource() {
         SubProductInner inner = this.serviceClient().putSubResource();
         if (inner != null) {
@@ -585,15 +405,6 @@ public final class LROsImpl implements LROs {
 
     public SubProduct putSubResource(SubProductInner product, Context context) {
         SubProductInner inner = this.serviceClient().putSubResource(product, context);
-        if (inner != null) {
-            return new SubProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public SubProduct putAsyncSubResource(SubProductInner product) {
-        SubProductInner inner = this.serviceClient().putAsyncSubResource(product);
         if (inner != null) {
             return new SubProductImpl(inner, this.manager());
         } else {
@@ -783,25 +594,12 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public void post202Retry200(ProductInner product) {
-        this.serviceClient().post202Retry200(product);
-    }
-
     public void post202Retry200() {
         this.serviceClient().post202Retry200();
     }
 
     public void post202Retry200(ProductInner product, Context context) {
         this.serviceClient().post202Retry200(product, context);
-    }
-
-    public Product post202NoRetry204(ProductInner product) {
-        ProductInner inner = this.serviceClient().post202NoRetry204(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
     }
 
     public Product post202NoRetry204() {
@@ -876,15 +674,6 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public Product postAsyncRetrySucceeded(ProductInner product) {
-        ProductInner inner = this.serviceClient().postAsyncRetrySucceeded(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product postAsyncRetrySucceeded() {
         ProductInner inner = this.serviceClient().postAsyncRetrySucceeded();
         if (inner != null) {
@@ -896,15 +685,6 @@ public final class LROsImpl implements LROs {
 
     public Product postAsyncRetrySucceeded(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().postAsyncRetrySucceeded(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product postAsyncNoRetrySucceeded(ProductInner product) {
-        ProductInner inner = this.serviceClient().postAsyncNoRetrySucceeded(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -930,20 +710,12 @@ public final class LROsImpl implements LROs {
         }
     }
 
-    public void postAsyncRetryFailed(ProductInner product) {
-        this.serviceClient().postAsyncRetryFailed(product);
-    }
-
     public void postAsyncRetryFailed() {
         this.serviceClient().postAsyncRetryFailed();
     }
 
     public void postAsyncRetryFailed(ProductInner product, Context context) {
         this.serviceClient().postAsyncRetryFailed(product, context);
-    }
-
-    public void postAsyncRetrycanceled(ProductInner product) {
-        this.serviceClient().postAsyncRetrycanceled(product);
     }
 
     public void postAsyncRetrycanceled() {

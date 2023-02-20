@@ -23,15 +23,6 @@ public final class LrosaDsImpl implements LrosaDs {
         this.serviceManager = serviceManager;
     }
 
-    public Product putNonRetry400(ProductInner product) {
-        ProductInner inner = this.serviceClient().putNonRetry400(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product putNonRetry400() {
         ProductInner inner = this.serviceClient().putNonRetry400();
         if (inner != null) {
@@ -43,15 +34,6 @@ public final class LrosaDsImpl implements LrosaDs {
 
     public Product putNonRetry400(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().putNonRetry400(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product putNonRetry201Creating400(ProductInner product) {
-        ProductInner inner = this.serviceClient().putNonRetry201Creating400(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -77,15 +59,6 @@ public final class LrosaDsImpl implements LrosaDs {
         }
     }
 
-    public Product putNonRetry201Creating400InvalidJson(ProductInner product) {
-        ProductInner inner = this.serviceClient().putNonRetry201Creating400InvalidJson(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product putNonRetry201Creating400InvalidJson() {
         ProductInner inner = this.serviceClient().putNonRetry201Creating400InvalidJson();
         if (inner != null) {
@@ -97,15 +70,6 @@ public final class LrosaDsImpl implements LrosaDs {
 
     public Product putNonRetry201Creating400InvalidJson(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().putNonRetry201Creating400InvalidJson(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product putAsyncRelativeRetry400(ProductInner product) {
-        ProductInner inner = this.serviceClient().putAsyncRelativeRetry400(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -155,20 +119,12 @@ public final class LrosaDsImpl implements LrosaDs {
         this.serviceClient().deleteAsyncRelativeRetry400(context);
     }
 
-    public void postNonRetry400(ProductInner product) {
-        this.serviceClient().postNonRetry400(product);
-    }
-
     public void postNonRetry400() {
         this.serviceClient().postNonRetry400();
     }
 
     public void postNonRetry400(ProductInner product, Context context) {
         this.serviceClient().postNonRetry400(product, context);
-    }
-
-    public void post202NonRetry400(ProductInner product) {
-        this.serviceClient().post202NonRetry400(product);
     }
 
     public void post202NonRetry400() {
@@ -179,25 +135,12 @@ public final class LrosaDsImpl implements LrosaDs {
         this.serviceClient().post202NonRetry400(product, context);
     }
 
-    public void postAsyncRelativeRetry400(ProductInner product) {
-        this.serviceClient().postAsyncRelativeRetry400(product);
-    }
-
     public void postAsyncRelativeRetry400() {
         this.serviceClient().postAsyncRelativeRetry400();
     }
 
     public void postAsyncRelativeRetry400(ProductInner product, Context context) {
         this.serviceClient().postAsyncRelativeRetry400(product, context);
-    }
-
-    public Product putError201NoProvisioningStatePayload(ProductInner product) {
-        ProductInner inner = this.serviceClient().putError201NoProvisioningStatePayload(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
     }
 
     public Product putError201NoProvisioningStatePayload() {
@@ -218,15 +161,6 @@ public final class LrosaDsImpl implements LrosaDs {
         }
     }
 
-    public Product putAsyncRelativeRetryNoStatus(ProductInner product) {
-        ProductInner inner = this.serviceClient().putAsyncRelativeRetryNoStatus(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product putAsyncRelativeRetryNoStatus() {
         ProductInner inner = this.serviceClient().putAsyncRelativeRetryNoStatus();
         if (inner != null) {
@@ -238,15 +172,6 @@ public final class LrosaDsImpl implements LrosaDs {
 
     public Product putAsyncRelativeRetryNoStatus(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().putAsyncRelativeRetryNoStatus(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product putAsyncRelativeRetryNoStatusPayload(ProductInner product) {
-        ProductInner inner = this.serviceClient().putAsyncRelativeRetryNoStatusPayload(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -288,10 +213,6 @@ public final class LrosaDsImpl implements LrosaDs {
         this.serviceClient().deleteAsyncRelativeRetryNoStatus(context);
     }
 
-    public void post202NoLocation(ProductInner product) {
-        this.serviceClient().post202NoLocation(product);
-    }
-
     public void post202NoLocation() {
         this.serviceClient().post202NoLocation();
     }
@@ -300,25 +221,12 @@ public final class LrosaDsImpl implements LrosaDs {
         this.serviceClient().post202NoLocation(product, context);
     }
 
-    public void postAsyncRelativeRetryNoPayload(ProductInner product) {
-        this.serviceClient().postAsyncRelativeRetryNoPayload(product);
-    }
-
     public void postAsyncRelativeRetryNoPayload() {
         this.serviceClient().postAsyncRelativeRetryNoPayload();
     }
 
     public void postAsyncRelativeRetryNoPayload(ProductInner product, Context context) {
         this.serviceClient().postAsyncRelativeRetryNoPayload(product, context);
-    }
-
-    public Product put200InvalidJson(ProductInner product) {
-        ProductInner inner = this.serviceClient().put200InvalidJson(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
     }
 
     public Product put200InvalidJson() {
@@ -339,15 +247,6 @@ public final class LrosaDsImpl implements LrosaDs {
         }
     }
 
-    public Product putAsyncRelativeRetryInvalidHeader(ProductInner product) {
-        ProductInner inner = this.serviceClient().putAsyncRelativeRetryInvalidHeader(product);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Product putAsyncRelativeRetryInvalidHeader() {
         ProductInner inner = this.serviceClient().putAsyncRelativeRetryInvalidHeader();
         if (inner != null) {
@@ -359,15 +258,6 @@ public final class LrosaDsImpl implements LrosaDs {
 
     public Product putAsyncRelativeRetryInvalidHeader(ProductInner product, Context context) {
         ProductInner inner = this.serviceClient().putAsyncRelativeRetryInvalidHeader(product, context);
-        if (inner != null) {
-            return new ProductImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Product putAsyncRelativeRetryInvalidJsonPolling(ProductInner product) {
-        ProductInner inner = this.serviceClient().putAsyncRelativeRetryInvalidJsonPolling(product);
         if (inner != null) {
             return new ProductImpl(inner, this.manager());
         } else {
@@ -417,10 +307,6 @@ public final class LrosaDsImpl implements LrosaDs {
         this.serviceClient().deleteAsyncRelativeRetryInvalidJsonPolling(context);
     }
 
-    public void post202RetryInvalidHeader(ProductInner product) {
-        this.serviceClient().post202RetryInvalidHeader(product);
-    }
-
     public void post202RetryInvalidHeader() {
         this.serviceClient().post202RetryInvalidHeader();
     }
@@ -429,20 +315,12 @@ public final class LrosaDsImpl implements LrosaDs {
         this.serviceClient().post202RetryInvalidHeader(product, context);
     }
 
-    public void postAsyncRelativeRetryInvalidHeader(ProductInner product) {
-        this.serviceClient().postAsyncRelativeRetryInvalidHeader(product);
-    }
-
     public void postAsyncRelativeRetryInvalidHeader() {
         this.serviceClient().postAsyncRelativeRetryInvalidHeader();
     }
 
     public void postAsyncRelativeRetryInvalidHeader(ProductInner product, Context context) {
         this.serviceClient().postAsyncRelativeRetryInvalidHeader(product, context);
-    }
-
-    public void postAsyncRelativeRetryInvalidJsonPolling(ProductInner product) {
-        this.serviceClient().postAsyncRelativeRetryInvalidJsonPolling(product);
     }
 
     public void postAsyncRelativeRetryInvalidJsonPolling() {
