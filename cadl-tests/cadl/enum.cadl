@@ -188,10 +188,14 @@ interface EnumOp {
   @post
   @route("operation/stringenumarrayheader")
   setStringEnumArrayHeader(
-    @header({format: "csv"})
+    @header({
+      format: "csv",
+    })
     colorArray: ColorModel[],
 
-    @header({format: "csv"})
+    @header({
+      format: "csv",
+    })
     colorArrayOpt?: ColorModel[]
   ): string;
 }

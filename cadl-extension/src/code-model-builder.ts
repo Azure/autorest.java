@@ -601,10 +601,7 @@ export class CodeModelBuilder {
       // format if array
       let style = undefined;
       let explode = undefined;
-      if (
-        param.param.type.kind === "Model" &&
-        isArrayModelType(this.program, param.param.type)
-      ) {
+      if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
         if (param.type === "query") {
           const queryParamOptions = getQueryParamOptions(this.program, param.param);
           switch (queryParamOptions?.format) {
@@ -617,7 +614,7 @@ export class CodeModelBuilder {
               explode = true;
               break;
           }
-        } else (param.type === "header") {
+        } else if (param.type === "header") {
           const headerFieldOptions = getHeaderFieldOptions(this.program, param.param);
           switch (headerFieldOptions?.format) {
             case "csv":
