@@ -203,6 +203,7 @@ public final class BuiltinClientImpl {
      *     float: double (Required)
      *     double: double (Required)
      *     duration: Duration (Required)
+     *     date: LocalDate (Required)
      *     dateTime: OffsetDateTime (Required)
      *     stringList (Required): [
      *         String (Required)
@@ -273,6 +274,7 @@ public final class BuiltinClientImpl {
      *     float: double (Required)
      *     double: double (Required)
      *     duration: Duration (Required)
+     *     date: LocalDate (Required)
      *     dateTime: OffsetDateTime (Required)
      *     stringList (Required): [
      *         String (Required)
@@ -322,6 +324,7 @@ public final class BuiltinClientImpl {
      *     float: double (Required)
      *     double: double (Required)
      *     duration: Duration (Required)
+     *     date: LocalDate (Required)
      *     dateTime: OffsetDateTime (Required)
      *     stringList (Required): [
      *         String (Required)
@@ -374,6 +377,7 @@ public final class BuiltinClientImpl {
      *     float: double (Required)
      *     double: double (Required)
      *     duration: Duration (Required)
+     *     date: LocalDate (Required)
      *     dateTime: OffsetDateTime (Required)
      *     stringList (Required): [
      *         String (Required)

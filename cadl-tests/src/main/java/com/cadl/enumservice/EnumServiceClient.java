@@ -465,6 +465,40 @@ public final class EnumServiceClient {
     }
 
     /**
+     * The setStringEnumArrayHeader operation.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>color-array-opt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * String
+     * }</pre>
+     *
+     * @param colorArray Array of ColorModel.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> setStringEnumArrayHeaderWithResponse(
+            List<String> colorArray, RequestOptions requestOptions) {
+        return this.client.setStringEnumArrayHeaderWithResponse(colorArray, requestOptions).block();
+    }
+
+    /**
      * The getColor operation.
      *
      * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
@@ -1013,5 +1047,64 @@ public final class EnumServiceClient {
         // Generated convenience method for setIntMultiWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntMultiWithResponse(intArray, requestOptions).getValue().toObject(String.class);
+    }
+
+    /**
+     * The setStringEnumArrayHeader operation.
+     *
+     * @param colorArray Array of ColorModel.
+     * @param colorArrayOpt Array of ColorModel.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String setStringEnumArrayHeader(List<ColorModel> colorArray, List<ColorModel> colorArrayOpt) {
+        // Generated convenience method for setStringEnumArrayHeaderWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (colorArrayOpt != null) {
+            requestOptions.setHeader(
+                    "color-array-opt",
+                    JacksonAdapter.createDefaultSerializerAdapter()
+                            .serializeIterable(colorArrayOpt, CollectionFormat.CSV));
+        }
+        return setStringEnumArrayHeaderWithResponse(
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .getValue()
+                .toObject(String.class);
+    }
+
+    /**
+     * The setStringEnumArrayHeader operation.
+     *
+     * @param colorArray Array of ColorModel.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String setStringEnumArrayHeader(List<ColorModel> colorArray) {
+        // Generated convenience method for setStringEnumArrayHeaderWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return setStringEnumArrayHeaderWithResponse(
+                        colorArray.stream()
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                                .collect(Collectors.toList()),
+                        requestOptions)
+                .getValue()
+                .toObject(String.class);
     }
 }
