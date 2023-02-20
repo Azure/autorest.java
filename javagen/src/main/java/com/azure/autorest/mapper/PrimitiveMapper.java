@@ -36,7 +36,13 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
         return parsed.computeIfAbsent(primaryType, this::createPrimitiveType);
     }
 
-    private IType createPrimitiveType(PrimitiveSchema primaryType) {
+    /**
+     * Extension.
+     *
+     * @param primaryType the primitive schema.
+     * @return the client model type.
+     */
+    protected IType createPrimitiveType(PrimitiveSchema primaryType) {
         boolean isLowLevelClient = JavaSettings.getInstance().isDataPlaneClient();
         boolean urlAsString = JavaSettings.getInstance().urlAsString();
 

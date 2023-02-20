@@ -184,4 +184,18 @@ interface EnumOp {
     })
     intArrayOpt?: int32[]
   ): string;
+
+  @post
+  @route("operation/stringenumarrayheader")
+  setStringEnumArrayHeader(
+    @header({
+      format: "csv",
+    })
+    colorArray: ColorModel[],
+
+    @header({
+      format: "csv",
+    })
+    colorArrayOpt?: ColorModel[]
+  ): string;
 }

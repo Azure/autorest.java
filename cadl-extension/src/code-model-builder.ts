@@ -57,6 +57,7 @@ import {
   StatusCode,
   getHttpOperation,
   getQueryParamOptions,
+  getHeaderFieldOptions,
 } from "@cadl-lang/rest/http";
 import { getVersion } from "@cadl-lang/versioning";
 import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/cadl-azure-core";
@@ -600,21 +601,26 @@ export class CodeModelBuilder {
       // format if array
       let style = undefined;
       let explode = undefined;
-      if (
-        param.type === "query" &&
-        param.param.type.kind === "Model" &&
-        isArrayModelType(this.program, param.param.type)
-      ) {
-        const queryParamOptions = getQueryParamOptions(this.program, param.param);
-        switch (queryParamOptions?.format) {
-          case "csv":
-            style = SerializationStyle.Simple;
-            break;
+      if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
+        if (param.type === "query") {
+          const queryParamOptions = getQueryParamOptions(this.program, param.param);
+          switch (queryParamOptions?.format) {
+            case "csv":
+              style = SerializationStyle.Simple;
+              break;
 
-          case "multi":
-            style = SerializationStyle.Form;
-            explode = true;
-            break;
+            case "multi":
+              style = SerializationStyle.Form;
+              explode = true;
+              break;
+          }
+        } else if (param.type === "header") {
+          const headerFieldOptions = getHeaderFieldOptions(this.program, param.param);
+          switch (headerFieldOptions?.format) {
+            case "csv":
+              style = SerializationStyle.Simple;
+              break;
+          }
         }
       }
 

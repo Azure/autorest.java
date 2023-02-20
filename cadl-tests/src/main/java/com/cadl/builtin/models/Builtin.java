@@ -9,6 +9,7 @@ import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +78,12 @@ public final class Builtin {
     private Duration duration;
 
     /*
+     * The date property.
+     */
+    @JsonProperty(value = "date", required = true)
+    private LocalDate date;
+
+    /*
      * The dateTime property.
      */
     @JsonProperty(value = "dateTime", required = true)
@@ -113,6 +120,7 @@ public final class Builtin {
      * @param floatProperty the floatProperty value to set.
      * @param doubleProperty the doubleProperty value to set.
      * @param duration the duration value to set.
+     * @param date the date value to set.
      * @param dateTime the dateTime value to set.
      * @param stringList the stringList value to set.
      * @param bytesDict the bytesDict value to set.
@@ -130,6 +138,7 @@ public final class Builtin {
             @JsonProperty(value = "float", required = true) double floatProperty,
             @JsonProperty(value = "double", required = true) double doubleProperty,
             @JsonProperty(value = "duration", required = true) Duration duration,
+            @JsonProperty(value = "date", required = true) LocalDate date,
             @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
             @JsonProperty(value = "stringList", required = true) List<String> stringList,
             @JsonProperty(value = "bytesDict", required = true) Map<String, byte[]> bytesDict,
@@ -144,6 +153,7 @@ public final class Builtin {
         this.floatProperty = floatProperty;
         this.doubleProperty = doubleProperty;
         this.duration = duration;
+        this.date = date;
         this.dateTime = dateTime;
         this.stringList = stringList;
         this.bytesDict = bytesDict;
@@ -238,6 +248,15 @@ public final class Builtin {
      */
     public Duration getDuration() {
         return this.duration;
+    }
+
+    /**
+     * Get the date property: The date property.
+     *
+     * @return the date value.
+     */
+    public LocalDate getDate() {
+        return this.date;
     }
 
     /**
