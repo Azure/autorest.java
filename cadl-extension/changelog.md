@@ -1,6 +1,6 @@
 # Release History
 
-## 0.4.1 (Unreleased)
+## 0.4.1 (2023-02-20)
 
 Compatible with compiler 0.40.
 
