@@ -21,6 +21,7 @@ model Builtin {
   float: float32;
   double: float64;
   duration: duration;
+  date: plainDate;
   dateTime: zonedDateTime;
   stringList: string[];
   bytesDict: Record<bytes>;
