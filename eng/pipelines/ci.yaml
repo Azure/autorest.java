@@ -21,7 +21,7 @@ jobs:
 
     variables:
       JavaVersion: 1.8
-      NodeVersion: '14.x'
+      NodeVersion: '18.x'
 
     pool:
       name: "azsdk-pool-mms-ubuntu-2004-general"
