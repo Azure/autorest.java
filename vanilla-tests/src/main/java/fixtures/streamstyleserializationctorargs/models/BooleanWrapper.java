@@ -99,9 +99,9 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
                         reader.nextToken();
 
                         if ("field_true".equals(fieldName)) {
-                            fieldTrue = reader.getNullable(JsonReader::getBoolean);
+                            deserializedBooleanWrapper.fieldTrue = reader.getNullable(JsonReader::getBoolean);
                         } else if ("field_false".equals(fieldName)) {
-                            fieldFalse = reader.getNullable(JsonReader::getBoolean);
+                            deserializedBooleanWrapper.fieldFalse = reader.getNullable(JsonReader::getBoolean);
                         } else {
                             reader.skipChildren();
                         }

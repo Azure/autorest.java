@@ -91,11 +91,11 @@ public final class Dog extends Pet {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getNullable(JsonReader::getInt);
+                            deserializedDog.setId(reader.getNullable(JsonReader::getInt));
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getString();
+                            deserializedDog.setName(reader.getString());
                         } else if ("food".equals(fieldName)) {
-                            food = reader.getString();
+                            deserializedDog.food = reader.getString();
                         } else {
                             reader.skipChildren();
                         }

@@ -75,7 +75,8 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
                         reader.nextToken();
 
                         if ("defaultProgram".equals(fieldName)) {
-                            defaultProgram = reader.readMap(reader1 -> reader1.getString());
+                            Map<String, String> defaultProgram = reader.readMap(reader1 -> reader1.getString());
+                            deserializedDictionaryWrapper.defaultProgram = defaultProgram;
                         } else {
                             reader.skipChildren();
                         }

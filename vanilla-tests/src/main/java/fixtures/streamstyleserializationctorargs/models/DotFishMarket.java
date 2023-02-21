@@ -165,13 +165,15 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
                         reader.nextToken();
 
                         if ("sampleSalmon".equals(fieldName)) {
-                            sampleSalmon = DotSalmon.fromJson(reader);
+                            deserializedDotFishMarket.sampleSalmon = DotSalmon.fromJson(reader);
                         } else if ("salmons".equals(fieldName)) {
-                            salmons = reader.readArray(reader1 -> DotSalmon.fromJson(reader1));
+                            List<DotSalmon> salmons = reader.readArray(reader1 -> DotSalmon.fromJson(reader1));
+                            deserializedDotFishMarket.salmons = salmons;
                         } else if ("sampleFish".equals(fieldName)) {
-                            sampleFish = DotFish.fromJson(reader);
+                            deserializedDotFishMarket.sampleFish = DotFish.fromJson(reader);
                         } else if ("fishes".equals(fieldName)) {
-                            fishes = reader.readArray(reader1 -> DotFish.fromJson(reader1));
+                            List<DotFish> fishes = reader.readArray(reader1 -> DotFish.fromJson(reader1));
+                            deserializedDotFishMarket.fishes = fishes;
                         } else {
                             reader.skipChildren();
                         }

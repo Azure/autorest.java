@@ -106,10 +106,11 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = reader.getNullable(JsonReader::getDouble);
+                            deserializedDoubleWrapper.field1 = reader.getNullable(JsonReader::getDouble);
                         } else if ("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"
                                 .equals(fieldName)) {
-                            field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
+                            deserializedDoubleWrapper
+                                            .field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
                                     reader.getNullable(JsonReader::getDouble);
                         } else {
                             reader.skipChildren();

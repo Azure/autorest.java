@@ -116,13 +116,13 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field =
+                            deserializedDatetimerfc1123Wrapper.setField(
                                     reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()))
-                                            .getDateTime();
+                                            .getDateTime());
                         } else if ("now".equals(fieldName)) {
-                            now =
+                            deserializedDatetimerfc1123Wrapper.setNow(
                                     reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()))
-                                            .getDateTime();
+                                            .getDateTime());
                         } else {
                             reader.skipChildren();
                         }

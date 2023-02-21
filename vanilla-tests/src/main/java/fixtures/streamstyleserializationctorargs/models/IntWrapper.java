@@ -99,9 +99,9 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = reader.getNullable(JsonReader::getInt);
+                            deserializedIntWrapper.field1 = reader.getNullable(JsonReader::getInt);
                         } else if ("field2".equals(fieldName)) {
-                            field2 = reader.getNullable(JsonReader::getInt);
+                            deserializedIntWrapper.field2 = reader.getNullable(JsonReader::getInt);
                         } else {
                             reader.skipChildren();
                         }

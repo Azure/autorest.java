@@ -126,11 +126,11 @@ public class DotSalmon extends DotFish {
                                                 + "'.");
                             }
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getString();
+                            deserializedDotSalmon.setSpecies(reader.getString());
                         } else if ("location".equals(fieldName)) {
-                            location = reader.getString();
+                            deserializedDotSalmon.location = reader.getString();
                         } else if ("iswild".equals(fieldName)) {
-                            iswild = reader.getNullable(JsonReader::getBoolean);
+                            deserializedDotSalmon.iswild = reader.getNullable(JsonReader::getBoolean);
                         } else {
                             reader.skipChildren();
                         }

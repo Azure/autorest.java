@@ -74,7 +74,8 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
                         reader.nextToken();
 
                         if ("array".equals(fieldName)) {
-                            array = reader.readArray(reader1 -> reader1.getString());
+                            List<String> array = reader.readArray(reader1 -> reader1.getString());
+                            deserializedArrayWrapper.array = array;
                         } else {
                             reader.skipChildren();
                         }

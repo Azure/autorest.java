@@ -121,13 +121,14 @@ public class Cat extends Pet {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getNullable(JsonReader::getInt);
+                            deserializedCat.setId(reader.getNullable(JsonReader::getInt));
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getString();
+                            deserializedCat.setName(reader.getString());
                         } else if ("color".equals(fieldName)) {
-                            color = reader.getString();
+                            deserializedCat.color = reader.getString();
                         } else if ("hates".equals(fieldName)) {
-                            hates = reader.readArray(reader1 -> Dog.fromJson(reader1));
+                            List<Dog> hates = reader.readArray(reader1 -> Dog.fromJson(reader1));
+                            deserializedCat.hates = hates;
                         } else {
                             reader.skipChildren();
                         }

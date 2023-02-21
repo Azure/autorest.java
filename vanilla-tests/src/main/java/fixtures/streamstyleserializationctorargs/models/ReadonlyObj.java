@@ -88,9 +88,9 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getString();
+                            deserializedReadonlyObj.id = reader.getString();
                         } else if ("size".equals(fieldName)) {
-                            size = reader.getNullable(JsonReader::getInt);
+                            deserializedReadonlyObj.size = reader.getNullable(JsonReader::getInt);
                         } else {
                             reader.skipChildren();
                         }

@@ -164,8 +164,13 @@ public final class ClientModelPropertiesManager {
             }
         }
 
+        boolean requiredConstructorProperties = hasRequiredProperties && settings.isRequiredFieldsAsConstructorArgs();
+        boolean readOnlyConstructorProperties = settings.isRequiredFieldsAsConstructorArgs()
+            && settings.isIncludeReadOnlyInConstructorArgs()
+            && (!CoreUtils.isNullOrEmpty(readOnlyProperties) || !CoreUtils.isNullOrEmpty(superReadOnlyProperties));
+
         this.hasRequiredProperties = hasRequiredProperties;
-        this.hasConstructorArguments = hasRequiredProperties && settings.isRequiredFieldsAsConstructorArgs();
+        this.hasConstructorArguments = requiredConstructorProperties || readOnlyConstructorProperties;
         this.hasXmlElements = hasXmlElements;
         this.discriminatorProperty = discriminatorProperty;
         this.additionalProperties = additionalProperties;

@@ -99,9 +99,9 @@ public class Pet implements JsonSerializable<Pet> {
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getNullable(JsonReader::getInt);
+                            deserializedPet.id = reader.getNullable(JsonReader::getInt);
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getString();
+                            deserializedPet.name = reader.getString();
                         } else {
                             reader.skipChildren();
                         }

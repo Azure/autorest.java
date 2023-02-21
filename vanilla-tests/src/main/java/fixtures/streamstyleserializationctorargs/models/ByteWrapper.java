@@ -74,7 +74,7 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getBinary();
+                            deserializedByteWrapper.field = reader.getBinary();
                         } else {
                             reader.skipChildren();
                         }

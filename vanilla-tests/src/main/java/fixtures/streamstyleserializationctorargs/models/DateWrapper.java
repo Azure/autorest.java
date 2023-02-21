@@ -101,9 +101,11 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
+                            deserializedDateWrapper.field =
+                                    reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
                         } else if ("leap".equals(fieldName)) {
-                            leap = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
+                            deserializedDateWrapper.leap =
+                                    reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
                         } else {
                             reader.skipChildren();
                         }

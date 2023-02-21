@@ -99,9 +99,9 @@ public final class Error implements JsonSerializable<Error> {
                         reader.nextToken();
 
                         if ("status".equals(fieldName)) {
-                            status = reader.getNullable(JsonReader::getInt);
+                            deserializedError.status = reader.getNullable(JsonReader::getInt);
                         } else if ("message".equals(fieldName)) {
-                            message = reader.getString();
+                            deserializedError.message = reader.getString();
                         } else {
                             reader.skipChildren();
                         }
