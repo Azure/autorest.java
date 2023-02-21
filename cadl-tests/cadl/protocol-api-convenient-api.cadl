@@ -1,0 +1,89 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-dpg";
+
+using Cadl.Http;
+using Azure.DPG;
+
+
+@service({
+    title: "ProtocolAndConvenient",
+    version: "1.0.0",
+})
+namespace Cadl.ProtocolAndConvenient;
+
+model ResourceA {
+    @visibility("read")
+    id: string;
+
+    @key
+    name: string;
+    description?: string;
+    type: string;
+}
+
+model ResourceB {
+    @visibility("read")
+    id: string;
+
+    @key
+    name: string;
+    description?: string;
+    type: string;
+}
+
+model ResourceC {
+    @visibility("read")
+    id: string;
+
+    @key
+    name: string;
+    description?: string;
+    type: string;
+}
+
+model ResourceD {
+    @visibility("read")
+    id: string;
+
+    @key
+    name: string;
+    description?: string;
+    type: string;
+}
+
+
+@route("protocolandconvenient")
+interface ProtocolAndConvenienceOp {
+    @doc("When set protocol false and convenient true, then the protocol method should be package private")
+    @route("onlyConvenient")
+    @post
+    @convenientAPI(true)
+    @protocolAPI(false)
+    onlyConvenient(@body body: ResourceA): ResourceB;
+
+    @doc("When set protocol true and convenient false, only the protocol method should be generated, ResourceC and ResourceD should not be generated")
+    @route("onlyProtocol")
+    @post
+    @convenientAPI(false)
+    @protocolAPI(true)
+    onlyProtocol(@body body: ResourceC): ResourceD;
+
+    @doc("When set protocol false and convenient false")
+    @route("errorSetting")
+    @post
+    @convenientAPI(false)
+    @protocolAPI(false)
+    errorSetting(@body body: ResourceC): ResourceD;
+
+    @doc("Setting protocol true and convenient true, both convenient and protocol methods will be generated")
+    @route("bothConvenientAndProtocol")
+    @post
+    @convenientAPI(true)
+    @protocolAPI(true)
+    bothConvenientAndProtocol(@body body: ResourceA): ResourceB;
+
+    @doc("Default behavior is both convenient and protocol methods will be generated")
+    @route("default")
+    @post
+    default(@body body: ResourceA): ResourceB;
+}
