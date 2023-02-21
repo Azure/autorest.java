@@ -23,30 +23,14 @@ public final class ResourceB {
     @JsonProperty(value = "name", required = true)
     private String name;
 
-    /*
-     * The description property.
-     */
-    @JsonProperty(value = "description")
-    private String description;
-
-    /*
-     * The type property.
-     */
-    @JsonProperty(value = "type", required = true)
-    private String type;
-
     /**
      * Creates an instance of ResourceB class.
      *
      * @param name the name value to set.
-     * @param type the type value to set.
      */
     @JsonCreator
-    private ResourceB(
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "type", required = true) String type) {
+    private ResourceB(@JsonProperty(value = "name", required = true) String name) {
         this.name = name;
-        this.type = type;
     }
 
     /**
@@ -65,23 +49,5 @@ public final class ResourceB {
      */
     public String getName() {
         return this.name;
-    }
-
-    /**
-     * Get the description property: The description property.
-     *
-     * @return the description value.
-     */
-    public String getDescription() {
-        return this.description;
-    }
-
-    /**
-     * Get the type property: The type property.
-     *
-     * @return the type value.
-     */
-    public String getType() {
-        return this.type;
     }
 }

@@ -8,9 +8,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ResourceA model. */
+/** The ResourceE model. */
 @Immutable
-public final class ResourceA {
+public final class ResourceE {
     /*
      * The id property.
      */
@@ -24,12 +24,12 @@ public final class ResourceA {
     private String name;
 
     /**
-     * Creates an instance of ResourceA class.
+     * Creates an instance of ResourceE class.
      *
      * @param name the name value to set.
      */
     @JsonCreator
-    public ResourceA(@JsonProperty(value = "name", required = true) String name) {
+    public ResourceE(@JsonProperty(value = "name", required = true) String name) {
         this.name = name;
     }
 

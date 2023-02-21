@@ -17,8 +17,6 @@ model ResourceA {
 
     @key
     name: string;
-    description?: string;
-    type: string;
 }
 
 model ResourceB {
@@ -27,8 +25,6 @@ model ResourceB {
 
     @key
     name: string;
-    description?: string;
-    type: string;
 }
 
 model ResourceC {
@@ -37,8 +33,6 @@ model ResourceC {
 
     @key
     name: string;
-    description?: string;
-    type: string;
 }
 
 model ResourceD {
@@ -47,8 +41,22 @@ model ResourceD {
 
     @key
     name: string;
-    description?: string;
-    type: string;
+}
+
+model ResourceE {
+    @visibility("read")
+    id: string;
+
+    @key
+    name: string;
+}
+
+model ResourceF {
+    @visibility("read")
+    id: string;
+
+    @key
+    name: string;
 }
 
 
@@ -80,10 +88,5 @@ interface ProtocolAndConvenienceOp {
     @post
     @convenientAPI(true)
     @protocolAPI(true)
-    bothConvenientAndProtocol(@body body: ResourceA): ResourceB;
-
-    @doc("Default behavior is both convenient and protocol methods will be generated")
-    @route("default")
-    @post
-    default(@body body: ResourceA): ResourceB;
+    bothConvenientAndProtocol(@body body: ResourceE): ResourceF;
 }

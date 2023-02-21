@@ -197,25 +197,6 @@ public final class ProtocolAndConvenientClientImpl {
                 @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
-
-        @Post("/protocolandconvenient/default")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> defaultMethod(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
     }
 
     /**
@@ -227,8 +208,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -238,8 +217,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -267,8 +244,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -278,8 +253,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -306,8 +279,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -317,8 +288,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -347,8 +316,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -358,8 +325,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -385,8 +350,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -396,8 +359,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -425,8 +386,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -436,8 +395,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -463,8 +420,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -474,8 +429,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -505,8 +458,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -516,8 +467,6 @@ public final class ProtocolAndConvenientClientImpl {
      * {
      *     id: String (Required)
      *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
      * }
      * }</pre>
      *
@@ -532,83 +481,5 @@ public final class ProtocolAndConvenientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> bothConvenientAndProtocolWithResponse(BinaryData body, RequestOptions requestOptions) {
         return bothConvenientAndProtocolWithResponseAsync(body, requestOptions).block();
-    }
-
-    /**
-     * Default behavior is both convenient and protocol methods will be generated.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> defaultMethodWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.defaultMethod(this.getEndpoint(), accept, body, requestOptions, context));
-    }
-
-    /**
-     * Default behavior is both convenient and protocol methods will be generated.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> defaultMethodWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return defaultMethodWithResponseAsync(body, requestOptions).block();
     }
 }
