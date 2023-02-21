@@ -59,6 +59,22 @@ model ResourceF {
     name: string;
 }
 
+model ResourceG {
+    @visibility("read")
+    id: string;
+
+    @key
+    name: string;
+}
+
+model ResourceH {
+    @visibility("read")
+    id: string;
+
+    @key
+    name: string;
+}
+
 
 @route("protocolandconvenient")
 interface ProtocolAndConvenienceOp {
@@ -76,17 +92,17 @@ interface ProtocolAndConvenienceOp {
     @protocolAPI(true)
     onlyProtocol(@body body: ResourceC): ResourceD;
 
-    @doc("When set protocol false and convenient false")
-    @route("errorSetting")
-    @post
-    @convenientAPI(false)
-    @protocolAPI(false)
-    errorSetting(@body body: ResourceC): ResourceD;
-
     @doc("Setting protocol true and convenient true, both convenient and protocol methods will be generated")
     @route("bothConvenientAndProtocol")
     @post
     @convenientAPI(true)
     @protocolAPI(true)
     bothConvenientAndProtocol(@body body: ResourceE): ResourceF;
+
+    @doc("When set protocol false and convenient false")
+    @route("errorSetting")
+    @post
+    @convenientAPI(false)
+    @protocolAPI(false)
+    errorSetting(@body body: ResourceG): ResourceH;
 }
