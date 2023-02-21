@@ -23,21 +23,15 @@ public class Fish implements JsonSerializable<Fish> {
     /*
      * The length property.
      */
-    private final float length;
+    private float length;
 
     /*
      * The siblings property.
      */
     private List<Fish> siblings;
 
-    /**
-     * Creates an instance of Fish class.
-     *
-     * @param length the length value to set.
-     */
-    public Fish(float length) {
-        this.length = length;
-    }
+    /** Creates an instance of Fish class. */
+    public Fish() {}
 
     /**
      * Get the species property: The species property.
@@ -66,6 +60,17 @@ public class Fish implements JsonSerializable<Fish> {
      */
     public float getLength() {
         return this.length;
+    }
+
+    /**
+     * Set the length property: The length property.
+     *
+     * @param length the length value to set.
+     * @return the Fish object itself.
+     */
+    public Fish setLength(float length) {
+        this.length = length;
+        return this;
     }
 
     /**

@@ -94,11 +94,8 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
                 reader -> {
                     String language = reader.getStringAttribute(null, "language");
                     String content = reader.getStringElement();
-                    ObjectWithXMsTextProperty deserializedValue = new ObjectWithXMsTextProperty();
-                    deserializedValue.language = language;
-                    deserializedValue.content = content;
 
-                    return deserializedValue;
+                    return deserializedObjectWithXMsTextProperty;
                 });
     }
 }

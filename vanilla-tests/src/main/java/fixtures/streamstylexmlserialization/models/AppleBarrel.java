@@ -206,11 +206,8 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
                             reader.skipElement();
                         }
                     }
-                    AppleBarrel deserializedValue = new AppleBarrel();
-                    deserializedValue.setGoodApples(goodApples);
-                    deserializedValue.setBadApples(badApples);
 
-                    return deserializedValue;
+                    return deserializedAppleBarrel;
                 });
     }
 }

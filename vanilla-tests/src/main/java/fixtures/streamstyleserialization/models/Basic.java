@@ -122,29 +122,23 @@ public final class Basic implements JsonSerializable<Basic> {
     public static Basic fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    Integer id = null;
-                    String name = null;
-                    CMYKColors color = null;
+                    Basic deserializedBasic = new Basic();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getNullable(JsonReader::getInt);
+                            deserializedBasic.id = reader.getNullable(JsonReader::getInt);
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getString();
+                            deserializedBasic.name = reader.getString();
                         } else if ("color".equals(fieldName)) {
-                            color = CMYKColors.fromString(reader.getString());
+                            deserializedBasic.color = CMYKColors.fromString(reader.getString());
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    Basic deserializedValue = new Basic();
-                    deserializedValue.id = id;
-                    deserializedValue.name = name;
-                    deserializedValue.color = color;
 
-                    return deserializedValue;
+                    return deserializedBasic;
                 });
     }
 }

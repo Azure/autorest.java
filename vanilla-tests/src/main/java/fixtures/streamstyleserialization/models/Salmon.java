@@ -9,7 +9,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /** The Salmon model. */
@@ -30,14 +29,8 @@ public class Salmon extends Fish {
      */
     private Boolean iswild;
 
-    /**
-     * Creates an instance of Salmon class.
-     *
-     * @param length the length value to set.
-     */
-    public Salmon(float length) {
-        super(length);
-    }
+    /** Creates an instance of Salmon class. */
+    public Salmon() {}
 
     /**
      * Get the location property: The location property.
@@ -83,6 +76,13 @@ public class Salmon extends Fish {
     @Override
     public Salmon setSpecies(String species) {
         super.setSpecies(species);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Salmon setLength(float length) {
+        super.setLength(length);
         return this;
     }
 
@@ -174,12 +174,7 @@ public class Salmon extends Fish {
     static Salmon fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    boolean lengthFound = false;
-                    float length = 0.0f;
-                    String species = null;
-                    List<Fish> siblings = null;
-                    String location = null;
-                    Boolean iswild = null;
+                    Salmon deserializedSalmon = new Salmon();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
@@ -195,36 +190,22 @@ public class Salmon extends Fish {
                                                 + "'.");
                             }
                         } else if ("length".equals(fieldName)) {
-                            length = reader.getFloat();
-                            lengthFound = true;
+                            deserializedSalmon.setLength(reader.getFloat());
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getString();
+                            deserializedSalmon.setSpecies(reader.getString());
                         } else if ("siblings".equals(fieldName)) {
-                            siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                            List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                            deserializedSalmon.setSiblings(siblings);
                         } else if ("location".equals(fieldName)) {
-                            location = reader.getString();
+                            deserializedSalmon.location = reader.getString();
                         } else if ("iswild".equals(fieldName)) {
-                            iswild = reader.getNullable(JsonReader::getBoolean);
+                            deserializedSalmon.iswild = reader.getNullable(JsonReader::getBoolean);
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    if (lengthFound) {
-                        Salmon deserializedValue = new Salmon(length);
-                        deserializedValue.setSpecies(species);
-                        deserializedValue.setSiblings(siblings);
-                        deserializedValue.location = location;
-                        deserializedValue.iswild = iswild;
 
-                        return deserializedValue;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!lengthFound) {
-                        missingProperties.add("length");
-                    }
-
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                    return deserializedSalmon;
                 });
     }
 }

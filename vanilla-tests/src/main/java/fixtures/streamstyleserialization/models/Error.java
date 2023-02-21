@@ -93,25 +93,21 @@ public final class Error implements JsonSerializable<Error> {
     public static Error fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    Integer status = null;
-                    String message = null;
+                    Error deserializedError = new Error();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("status".equals(fieldName)) {
-                            status = reader.getNullable(JsonReader::getInt);
+                            deserializedError.status = reader.getNullable(JsonReader::getInt);
                         } else if ("message".equals(fieldName)) {
-                            message = reader.getString();
+                            deserializedError.message = reader.getString();
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    Error deserializedValue = new Error();
-                    deserializedValue.status = status;
-                    deserializedValue.message = message;
 
-                    return deserializedValue;
+                    return deserializedError;
                 });
     }
 }

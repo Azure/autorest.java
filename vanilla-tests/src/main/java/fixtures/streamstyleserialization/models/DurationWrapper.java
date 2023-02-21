@@ -69,21 +69,20 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
     public static DurationWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    Duration field = null;
+                    DurationWrapper deserializedDurationWrapper = new DurationWrapper();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
+                            deserializedDurationWrapper.field =
+                                    reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    DurationWrapper deserializedValue = new DurationWrapper();
-                    deserializedValue.field = field;
 
-                    return deserializedValue;
+                    return deserializedDurationWrapper;
                 });
     }
 }

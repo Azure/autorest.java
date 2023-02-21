@@ -95,27 +95,25 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
     public static DatetimeWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    OffsetDateTime field = null;
-                    OffsetDateTime now = null;
+                    DatetimeWrapper deserializedDatetimeWrapper = new DatetimeWrapper();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field =
+                            deserializedDatetimeWrapper.field =
                                     reader.getNullable(
                                             nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                         } else if ("now".equals(fieldName)) {
-                            now = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                            deserializedDatetimeWrapper.now =
+                                    reader.getNullable(
+                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    DatetimeWrapper deserializedValue = new DatetimeWrapper();
-                    deserializedValue.field = field;
-                    deserializedValue.now = now;
 
-                    return deserializedValue;
+                    return deserializedDatetimeWrapper;
                 });
     }
 }

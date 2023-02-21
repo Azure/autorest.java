@@ -119,29 +119,23 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
     public static StringWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    String field = null;
-                    String empty = null;
-                    String nullProperty = null;
+                    StringWrapper deserializedStringWrapper = new StringWrapper();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getString();
+                            deserializedStringWrapper.field = reader.getString();
                         } else if ("empty".equals(fieldName)) {
-                            empty = reader.getString();
+                            deserializedStringWrapper.empty = reader.getString();
                         } else if ("null".equals(fieldName)) {
-                            nullProperty = reader.getString();
+                            deserializedStringWrapper.nullProperty = reader.getString();
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    StringWrapper deserializedValue = new StringWrapper();
-                    deserializedValue.field = field;
-                    deserializedValue.empty = empty;
-                    deserializedValue.nullProperty = nullProperty;
 
-                    return deserializedValue;
+                    return deserializedStringWrapper;
                 });
     }
 }

@@ -100,28 +100,24 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
     public static DoubleWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    Double field1 = null;
-                    Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = null;
+                    DoubleWrapper deserializedDoubleWrapper = new DoubleWrapper();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = reader.getNullable(JsonReader::getDouble);
+                            deserializedDoubleWrapper.field1 = reader.getNullable(JsonReader::getDouble);
                         } else if ("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"
                                 .equals(fieldName)) {
-                            field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
+                            deserializedDoubleWrapper
+                                            .field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
                                     reader.getNullable(JsonReader::getDouble);
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    DoubleWrapper deserializedValue = new DoubleWrapper();
-                    deserializedValue.field1 = field1;
-                    deserializedValue.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose =
-                            field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
 
-                    return deserializedValue;
+                    return deserializedDoubleWrapper;
                 });
     }
 }

@@ -47,19 +47,6 @@ public final class AutoRestPagingTestServiceAsyncClient {
     }
 
     /**
-     * A paging operation that gets an empty next link and should stop after page 1.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getEmptyNextLinkNamePages() {
-        return this.serviceClient.getEmptyNextLinkNamePagesAsync();
-    }
-
-    /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      *
      * @throws HttpResponseException thrown if the request is rejected by server.

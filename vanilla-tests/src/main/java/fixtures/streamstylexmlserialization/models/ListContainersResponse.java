@@ -287,15 +287,8 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                             reader.skipElement();
                         }
                     }
-                    ListContainersResponse deserializedValue = new ListContainersResponse();
-                    deserializedValue.serviceEndpoint = serviceEndpoint;
-                    deserializedValue.prefix = prefix;
-                    deserializedValue.maxResults = maxResults;
-                    deserializedValue.nextMarker = nextMarker;
-                    deserializedValue.marker = marker;
-                    deserializedValue.setContainers(containers);
 
-                    return deserializedValue;
+                    return deserializedListContainersResponse;
                 });
     }
 }

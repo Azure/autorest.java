@@ -78,10 +78,8 @@ public final class JsonOutput implements XmlSerializable<JsonOutput> {
                             reader.skipElement();
                         }
                     }
-                    JsonOutput deserializedValue = new JsonOutput();
-                    deserializedValue.id = id;
 
-                    return deserializedValue;
+                    return deserializedJsonOutput;
                 });
     }
 }

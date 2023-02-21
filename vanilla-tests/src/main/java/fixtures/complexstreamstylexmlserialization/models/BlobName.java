@@ -94,11 +94,8 @@ public final class BlobName implements XmlSerializable<BlobName> {
                 reader -> {
                     Boolean encoded = reader.getNullableAttribute(null, "Encoded", Boolean::parseBoolean);
                     String content = reader.getStringElement();
-                    BlobName deserializedValue = new BlobName();
-                    deserializedValue.encoded = encoded;
-                    deserializedValue.content = content;
 
-                    return deserializedValue;
+                    return deserializedBlobName;
                 });
     }
 }

@@ -37,7 +37,9 @@ public final class ClientModelPropertiesManager {
     private static final Pattern SPLIT_KEY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
 
     private final ClientModel model;
+    private final String deserializedModelName;
     private final boolean hasRequiredProperties;
+    private final boolean hasConstructorArguments;
     private final List<ClientModelProperty> superConstructorProperties;
     private final List<ClientModelProperty> superRequiredProperties;
     private final List<ClientModelProperty> superSetterProperties;
@@ -70,6 +72,7 @@ public final class ClientModelPropertiesManager {
         Set<String> possibleXmlNameVariableNames = new LinkedHashSet<>(Arrays.asList(
             "elementName", "xmlElementName", "deserializationElementName"));
         this.model = model;
+        this.deserializedModelName = "deserialized" + model.getName();
         this.expectedDiscriminator = model.getSerializedName();
 
         Map<String, ClientModelPropertyWithMetadata> flattenedProperties = new LinkedHashMap<>();
@@ -162,6 +165,7 @@ public final class ClientModelPropertiesManager {
         }
 
         this.hasRequiredProperties = hasRequiredProperties;
+        this.hasConstructorArguments = hasRequiredProperties && settings.isRequiredFieldsAsConstructorArgs();
         this.hasXmlElements = hasXmlElements;
         this.discriminatorProperty = discriminatorProperty;
         this.additionalProperties = additionalProperties;
@@ -194,12 +198,31 @@ public final class ClientModelPropertiesManager {
     }
 
     /**
+     * Gets the name of the variable used when deserializing an instance of the {@link #getModel() model}.
+     *
+     * @return The name of the variable used during deserialization.
+     */
+    public String getDeserializedModelName() {
+        return deserializedModelName;
+    }
+
+    /**
      * Whether the {@link #getModel() model} contains required properties, either directly or through super classes.
      *
      * @return Whether the {@link #getModel() model} contains required properties.
      */
     public boolean hasRequiredProperties() {
         return hasRequiredProperties;
+    }
+
+    /**
+     * Whether the {@link #getModel() model} has constructor arguments, either directly or required through super
+     * classes.
+     *
+     * @return Whether the {@link #getModel() model} contains constructor arguments.
+     */
+    public boolean hasConstructorArguments() {
+        return hasConstructorArguments;
     }
 
     /**

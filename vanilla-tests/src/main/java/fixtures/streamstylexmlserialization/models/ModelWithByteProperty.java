@@ -79,10 +79,8 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
                             reader.skipElement();
                         }
                     }
-                    ModelWithByteProperty deserializedValue = new ModelWithByteProperty();
-                    deserializedValue.bytes = bytes;
 
-                    return deserializedValue;
+                    return deserializedModelWithByteProperty;
                 });
     }
 }

@@ -68,21 +68,20 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
     public static ArrayWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    List<String> array = null;
+                    ArrayWrapper deserializedArrayWrapper = new ArrayWrapper();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("array".equals(fieldName)) {
-                            array = reader.readArray(reader1 -> reader1.getString());
+                            List<String> array = reader.readArray(reader1 -> reader1.getString());
+                            deserializedArrayWrapper.array = array;
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    ArrayWrapper deserializedValue = new ArrayWrapper();
-                    deserializedValue.array = array;
 
-                    return deserializedValue;
+                    return deserializedArrayWrapper;
                 });
     }
 }

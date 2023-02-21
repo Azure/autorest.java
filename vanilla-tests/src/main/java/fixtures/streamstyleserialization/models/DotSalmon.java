@@ -110,9 +110,7 @@ public class DotSalmon extends DotFish {
     public static DotSalmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    String species = null;
-                    String location = null;
-                    Boolean iswild = null;
+                    DotSalmon deserializedDotSalmon = new DotSalmon();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
@@ -128,21 +126,17 @@ public class DotSalmon extends DotFish {
                                                 + "'.");
                             }
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getString();
+                            deserializedDotSalmon.setSpecies(reader.getString());
                         } else if ("location".equals(fieldName)) {
-                            location = reader.getString();
+                            deserializedDotSalmon.location = reader.getString();
                         } else if ("iswild".equals(fieldName)) {
-                            iswild = reader.getNullable(JsonReader::getBoolean);
+                            deserializedDotSalmon.iswild = reader.getNullable(JsonReader::getBoolean);
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    DotSalmon deserializedValue = new DotSalmon();
-                    deserializedValue.setSpecies(species);
-                    deserializedValue.location = location;
-                    deserializedValue.iswild = iswild;
 
-                    return deserializedValue;
+                    return deserializedDotSalmon;
                 });
     }
 }
