@@ -81,6 +81,11 @@ public class Operation extends Metadata {
 
     private ConvenienceApi convenienceApi;
 
+    /**
+     * a boolean to represent should generate protocol api or not
+     */
+    private boolean generateProtocolApi;
+
     // internal
     private OperationGroup operationGroup;
 
@@ -324,4 +329,14 @@ public class Operation extends Metadata {
     public void setConvenienceApi(ConvenienceApi convenienceApi) {
         this.convenienceApi = convenienceApi;
     }
+
+    public boolean isGenerateProtocolApi() {
+        return generateProtocolApi;
+    }
+
+    public void setGenerateProtocolApi(boolean generateProtocolApi) {
+        this.generateProtocolApi = generateProtocolApi;
+    }
+
+
 }
