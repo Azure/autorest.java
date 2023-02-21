@@ -7,7 +7,7 @@ $SWAGGER_PATH = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 $AZURE_DATAPLANE_ARGUMENTS = "--use=./ --output-folder=./azure-dataplane-tests"
 $AZURE_DATAPLANE_PATH = "azure-dataplane-tests/swagger"
 $AZURE_SDK_FOR_JAVA = "https://github.com/Azure/azure-sdk-for-java/blob/main/sdk"
-$PARALLELIZATION = 5
+$PARALLELIZATION = 4
 if ($IsWindows) {
     $PARALLELIZATION = (Get-CIMInstance -Class 'CIM_Processor').NumberOfCores - 1
 }
@@ -194,8 +194,8 @@ Remove-Item ./protocol-resilience-test/llcupdate1/src/main -Recurse -Force | Out
 $job = @(
     "$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial",
     "$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 30
+) | ForEach-Object -AsJob
+$job | Wait-Job -Timeout 60
 $job | Receive-Job
 
 Remove-Item ./protocol-resilience-test/llcinitial/src/main/java/module-info.java -Force | Out-Null
