@@ -241,6 +241,13 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
                             reader.skipElement();
                         }
                     }
+                    ContainerProperties deserializedContainerProperties = new ContainerProperties();
+                    deserializedContainerProperties.setLastModified(lastModified);
+                    deserializedContainerProperties.etag = etag;
+                    deserializedContainerProperties.leaseStatus = leaseStatus;
+                    deserializedContainerProperties.leaseState = leaseState;
+                    deserializedContainerProperties.leaseDuration = leaseDuration;
+                    deserializedContainerProperties.publicAccess = publicAccess;
 
                     return deserializedContainerProperties;
                 });

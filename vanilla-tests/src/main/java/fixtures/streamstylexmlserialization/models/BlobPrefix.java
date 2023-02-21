@@ -83,6 +83,8 @@ public final class BlobPrefix implements XmlSerializable<BlobPrefix> {
                             reader.skipElement();
                         }
                     }
+                    BlobPrefix deserializedBlobPrefix = new BlobPrefix();
+                    deserializedBlobPrefix.name = name;
 
                     return deserializedBlobPrefix;
                 });

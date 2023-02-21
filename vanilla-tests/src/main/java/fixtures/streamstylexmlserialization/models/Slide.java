@@ -144,6 +144,10 @@ public final class Slide implements XmlSerializable<Slide> {
                             reader.skipElement();
                         }
                     }
+                    Slide deserializedSlide = new Slide();
+                    deserializedSlide.type = type;
+                    deserializedSlide.title = title;
+                    deserializedSlide.items = items;
 
                     return deserializedSlide;
                 });

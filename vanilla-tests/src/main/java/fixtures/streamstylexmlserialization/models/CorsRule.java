@@ -229,6 +229,12 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
                             reader.skipElement();
                         }
                     }
+                    CorsRule deserializedCorsRule = new CorsRule();
+                    deserializedCorsRule.allowedOrigins = allowedOrigins;
+                    deserializedCorsRule.allowedMethods = allowedMethods;
+                    deserializedCorsRule.allowedHeaders = allowedHeaders;
+                    deserializedCorsRule.exposedHeaders = exposedHeaders;
+                    deserializedCorsRule.maxAgeInSeconds = maxAgeInSeconds;
 
                     return deserializedCorsRule;
                 });

@@ -299,6 +299,15 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
                             reader.skipElement();
                         }
                     }
+                    ListBlobsResponse deserializedListBlobsResponse = new ListBlobsResponse();
+                    deserializedListBlobsResponse.containerName = containerName;
+                    deserializedListBlobsResponse.prefix = prefix;
+                    deserializedListBlobsResponse.marker = marker;
+                    deserializedListBlobsResponse.maxResults = maxResults;
+                    deserializedListBlobsResponse.delimiter = delimiter;
+                    deserializedListBlobsResponse.blobs = blobs;
+                    deserializedListBlobsResponse.nextMarker = nextMarker;
+                    deserializedListBlobsResponse.serviceEndpoint = serviceEndpoint;
 
                     return deserializedListBlobsResponse;
                 });

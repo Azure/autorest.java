@@ -78,6 +78,8 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
                             reader.skipElement();
                         }
                     }
+                    ComplexTypeNoMeta deserializedComplexTypeNoMeta = new ComplexTypeNoMeta();
+                    deserializedComplexTypeNoMeta.id = id;
 
                     return deserializedComplexTypeNoMeta;
                 });

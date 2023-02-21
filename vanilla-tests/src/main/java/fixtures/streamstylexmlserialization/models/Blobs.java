@@ -131,6 +131,9 @@ public final class Blobs implements XmlSerializable<Blobs> {
                             reader.skipElement();
                         }
                     }
+                    Blobs deserializedBlobs = new Blobs();
+                    deserializedBlobs.blobPrefix = blobPrefix;
+                    deserializedBlobs.blob = blob;
 
                     return deserializedBlobs;
                 });

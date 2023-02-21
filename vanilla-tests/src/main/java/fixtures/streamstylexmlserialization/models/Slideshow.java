@@ -173,6 +173,11 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
                             reader.skipElement();
                         }
                     }
+                    Slideshow deserializedSlideshow = new Slideshow();
+                    deserializedSlideshow.title = title;
+                    deserializedSlideshow.date = date;
+                    deserializedSlideshow.author = author;
+                    deserializedSlideshow.slides = slides;
 
                     return deserializedSlideshow;
                 });

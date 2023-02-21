@@ -673,7 +673,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
 
         // Add the validation and return logic.
-        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, settings);
+        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, false, settings);
     }
 
     /**
@@ -1049,7 +1049,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param propertiesManager The property manager for the model.
      */
     private static void handleReadReturn(JavaBlock methodBlock, String modelName,
-        ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager, boolean isXml, JavaSettings settings) {
         StringBuilder constructorArgs = new StringBuilder();
 
         propertiesManager.forEachSuperConstructorProperty(arg -> addConstructorParameter(constructorArgs, arg.getName()));
@@ -1063,7 +1063,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             if (ifStatementBuilder.length() > 0) {
                 methodBlock.ifBlock(ifStatementBuilder.toString(), ifAction ->
-                    createJsonObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager));
+                    createJsonObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager,
+                        isXml));
 
                 methodBlock.line("List<String> missingProperties = new ArrayList<>();");
                 propertiesManager.forEachSuperRequiredProperty(property -> addFoundValidationIfCheck(methodBlock, property, settings));
@@ -1073,16 +1074,16 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line("throw new IllegalStateException(\"Missing required property/properties: \""
                     + "+ String.join(\", \", missingProperties));");
             } else {
-                createJsonObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager);
+                createJsonObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager, isXml);
             }
         } else {
-            createJsonObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager);
+            createJsonObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager, isXml);
         }
     }
 
     private static void createJsonObjectAndReturn(JavaBlock methodBlock, String modelName, String constructorArgs,
-        ClientModelPropertiesManager propertiesManager) {
-        if (propertiesManager.hasConstructorArguments()) {
+        ClientModelPropertiesManager propertiesManager, boolean isXml) {
+        if (propertiesManager.hasConstructorArguments() || isXml) {
             methodBlock.line(modelName + " " + propertiesManager.getDeserializedModelName() + " = new " + modelName
                 + "(" + constructorArgs + ");");
 
@@ -1521,7 +1522,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
 
         // Add the validation and return logic.
-        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, settings);
+        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, true, settings);
     }
 
     private static void deserializeXmlAttribute(JavaBlock methodBlock, ClientModelProperty attribute) {
