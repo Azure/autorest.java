@@ -443,12 +443,13 @@ public class ArrayTests {
 
     @Test
     public void getByteInvalidNull() throws Exception {
-        try {
-            List<byte[]> result = client.getArrays().getByteInvalidNull();
-        } catch (ErrorException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        List<byte[]> result = client.getArrays().getByteInvalidNull();
+
+        Assert.assertNotNull(result.get(0));
+        byte[] expected = new byte[]{(byte) 171, (byte) 172, (byte) 173};
+        Assert.assertArrayEquals(expected, result.get(0));
+
+        Assert.assertNull(result.get(1));
     }
 
     @Test
