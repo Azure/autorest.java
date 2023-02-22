@@ -7,7 +7,7 @@ $SWAGGER_PATH = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 $AZURE_DATAPLANE_ARGUMENTS = "--use=./ --output-folder=./azure-dataplane-tests"
 $AZURE_DATAPLANE_PATH = "azure-dataplane-tests/swagger"
 $AZURE_SDK_FOR_JAVA = "https://github.com/Azure/azure-sdk-for-java/blob/main/sdk"
-$PARALLELIZATION = 5
+$PARALLELIZATION = 4
 if ($IsWindows) {
     $PARALLELIZATION = (Get-CIMInstance -Class 'CIM_Processor').NumberOfCores - 1
 }
@@ -36,6 +36,27 @@ SUCCEEDED
 
     if ($global:ExitCode -ne 0) {
         exit $global:ExitCode
+    }
+}
+
+function singleThreadGenerate($arguments) {
+    $generateOutput = Invoke-Expression "autorest $arguments"
+    $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
+
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "
+========================
+autorest $arguments
+========================
+$([String]::Join("`n", $generateOutput))
+        "
+    } else {
+        Write-Host "
+========================
+autorest $arguments
+========================
+SUCCEEDED
+        "
     }
 }
 
@@ -191,31 +212,23 @@ Remove-Item ./protocol-tests/src/main/java/module-info.java -Force | Out-Null
 Remove-Item ./protocol-resilience-test/llcinitial/src/main -Recurse -Force | Out-Null
 Remove-Item ./protocol-resilience-test/llcupdate1/src/main -Recurse -Force | Out-Null
 
-$job = @(
-    "$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial",
-    "$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 30
-$job | Receive-Job
+singleThreadGenerate("$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial")
+singleThreadGenerate("$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1")
 
 Remove-Item ./protocol-resilience-test/llcinitial/src/main/java/module-info.java -Force | Out-Null
 Remove-Item ./protocol-resilience-test/llcupdate1/src/main/java/module-info.java -Force | Out-Null
 
 # customization
 Remove-Item ./customization-tests/src -Recurse -Force | Out-Null
-"--version=$AUTOREST_CORE_VERSION --use:. customization-tests/swagger" | ForEach-Object $generateScript
+singleThreadGenerate("--version=$AUTOREST_CORE_VERSION --use:. customization-tests/swagger")
 
 # partial update tests
-"--version=$AUTOREST_CORE_VERSION --use:. partial-update-tests/existing/swagger/README.md" | ForEach-Object $generateScript
+singleThreadGenerate("--version=$AUTOREST_CORE_VERSION --use:. partial-update-tests/existing/swagger/README.md")
 Remove-Item ./partial-update-tests/generated/src/main/java/module-info.java -Force | Out-Null
 
 # docs
-$job = @(
-    "--use:. docs/samples/specification/azure_key_credential/readme.md",
-    "--use:. docs/samples/specification/basic/readme.md",
-    "--use:. docs/samples/specification/management/readme.md"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 30
-$job | Receive-Job
+singleThreadGenerate("--use:. docs/samples/specification/azure_key_credential/readme.md")
+singleThreadGenerate("--use:. docs/samples/specification/basic/readme.md")
+singleThreadGenerate("--use:. docs/samples/specification/management/readme.md")
 
 exit $ExitCode
