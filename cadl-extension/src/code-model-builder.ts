@@ -245,6 +245,9 @@ export class CodeModelBuilder {
                 serializedName: it.name,
               },
             },
+            extensions: {
+              "x-ms-skip-url-encoding": schema instanceof UriSchema,
+            },
           });
         }
 
@@ -598,6 +601,16 @@ export class CodeModelBuilder {
         schema = this.processSchema(param.param.type, param.param.name);
       }
 
+      // skip-url-encoding
+      let extensions = undefined;
+      if (
+        (param.type === "query" || param.type === "path") &&
+        param.param.type.kind === "Scalar" &&
+        schema instanceof UriSchema
+      ) {
+        extensions = { "x-ms-skip-url-encoding": true };
+      }
+
       // format if array
       let style = undefined;
       let explode = undefined;
@@ -642,6 +655,7 @@ export class CodeModelBuilder {
             serializedName: param.name,
           },
         },
+        extensions: extensions,
       });
       op.addParameter(parameter);
 
@@ -759,6 +773,7 @@ export class CodeModelBuilder {
                     implementation: ImplementationLocation.Method,
                     required: existParameter.required,
                     nullable: existParameter.nullable,
+                    extensions: existParameter.extensions,
                   },
                 ),
               );
