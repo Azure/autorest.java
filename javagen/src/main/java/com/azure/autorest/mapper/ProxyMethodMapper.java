@@ -539,7 +539,10 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                     }
                 }
 
-                if (swaggerDefaultExceptionType == null) {
+                if (swaggerDefaultExceptionType == null
+                        && !CoreUtils.isNullOrEmpty(operation.getExceptions())
+                        // m4 could return Response without schema, when the Swagger uses e.g. "produces: [ application/x-rdp ]"
+                        && operation.getExceptions().get(0).getSchema() != null) {
                     // no default error, use the 1st to keep backward compatibility
                     swaggerDefaultExceptionType = processExceptionClassType(
                             (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema()), settings);

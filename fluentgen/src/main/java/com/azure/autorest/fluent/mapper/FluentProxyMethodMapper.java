@@ -76,6 +76,11 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
     }
 
     @Override
+    protected ClassType getHttpResponseExceptionType() {
+        return FluentType.ManagementException;
+    }
+
+    @Override
     protected boolean operationGroupNotNull(Operation operation, JavaSettings settings) {
         return super.operationGroupNotNull(operation, settings)
             // hack for Fluent, as Lite use "ResourceProvider" if operation group is unnamed
