@@ -110,7 +110,7 @@ public final class FlattenClient {
      * @param input The input parameter.
      * @param user The user parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -134,7 +134,7 @@ public final class FlattenClient {
      * @param id The id parameter.
      * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -156,7 +156,7 @@ public final class FlattenClient {
      *
      * @param options Options for sendLong API.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -178,7 +178,7 @@ public final class FlattenClient {
         requestObj.put("data_float", options.getDataFloat());
         BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
-            requestOptions.addQueryParam("filter", filter);
+            requestOptions.addQueryParam("filter", filter, false);
         }
         sendLongWithResponse(id, request, requestOptions).getValue();
     }

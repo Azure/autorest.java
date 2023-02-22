@@ -92,7 +92,7 @@ public final class OdataAsyncClient {
      * @param select Array of Filter.
      * @param expand Array of Filter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -112,33 +112,35 @@ public final class OdataAsyncClient {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         if (filter != null) {
-            requestOptions.addQueryParam("filter", filter);
+            requestOptions.addQueryParam("filter", filter, false);
         }
         if (orderBy != null) {
-            requestOptions.addQueryParam("orderby", orderBy);
+            requestOptions.addQueryParam("orderby", orderBy, false);
         }
         if (skip != null) {
-            requestOptions.addQueryParam("skip", String.valueOf(skip));
+            requestOptions.addQueryParam("skip", String.valueOf(skip), false);
         }
         if (top != null) {
-            requestOptions.addQueryParam("top", String.valueOf(top));
+            requestOptions.addQueryParam("top", String.valueOf(top), false);
         }
         if (maxPageSize != null) {
-            requestOptions.addQueryParam("maxpagesize", String.valueOf(maxPageSize));
+            requestOptions.addQueryParam("maxpagesize", String.valueOf(maxPageSize), false);
         }
         if (select != null) {
             requestOptions.addQueryParam(
                     "select",
                     select.stream()
                             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                            .collect(Collectors.joining(",")));
+                            .collect(Collectors.joining(",")),
+                    false);
         }
         if (expand != null) {
             requestOptions.addQueryParam(
                     "expand",
                     expand.stream()
                             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                            .collect(Collectors.joining(",")));
+                            .collect(Collectors.joining(",")),
+                    false);
         }
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
         return PagedFlux.create(
@@ -167,7 +169,7 @@ public final class OdataAsyncClient {
     /**
      * The list operation.
      *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.

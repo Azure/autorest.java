@@ -43,6 +43,8 @@ public final class BuiltinClient {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     *     <tr><td>query-opt</td><td>String</td><td>No</td><td>The queryParamOptional parameter</td></tr>
+     *     <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>The queryParamOptionalEncoded parameter</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -92,6 +94,8 @@ public final class BuiltinClient {
      * }
      * }</pre>
      *
+     * @param queryParam The queryParam parameter.
+     * @param queryParamEncoded The queryParamEncoded parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -101,8 +105,9 @@ public final class BuiltinClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
-        return this.client.readWithResponse(requestOptions).block();
+    public Response<BinaryData> readWithResponse(
+            String queryParam, String queryParamEncoded, RequestOptions requestOptions) {
+        return this.client.readWithResponse(queryParam, queryParamEncoded, requestOptions).block();
     }
 
     /**
@@ -160,10 +165,14 @@ public final class BuiltinClient {
     /**
      * The read operation.
      *
+     * @param queryParam The queryParam parameter.
+     * @param queryParamEncoded The queryParamEncoded parameter.
      * @param dateTime The dateTime parameter.
      * @param filter The filter parameter.
+     * @param queryParamOptional The queryParamOptional parameter.
+     * @param queryParamOptionalEncoded The queryParamOptionalEncoded parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -172,22 +181,37 @@ public final class BuiltinClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Builtin read(OffsetDateTime dateTime, String filter) {
+    public Builtin read(
+            String queryParam,
+            String queryParamEncoded,
+            OffsetDateTime dateTime,
+            String filter,
+            String queryParamOptional,
+            String queryParamOptionalEncoded) {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (dateTime != null) {
             requestOptions.setHeader("x-ms-date", String.valueOf(new DateTimeRfc1123(dateTime)));
         }
         if (filter != null) {
-            requestOptions.addQueryParam("filter", filter);
+            requestOptions.addQueryParam("filter", filter, false);
         }
-        return readWithResponse(requestOptions).getValue().toObject(Builtin.class);
+        if (queryParamOptional != null) {
+            requestOptions.addQueryParam("query-opt", queryParamOptional, false);
+        }
+        if (queryParamOptionalEncoded != null) {
+            requestOptions.addQueryParam("query-opt-encoded", queryParamOptionalEncoded, true);
+        }
+        return readWithResponse(queryParam, queryParamEncoded, requestOptions).getValue().toObject(Builtin.class);
     }
 
     /**
      * The read operation.
      *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @param queryParam The queryParam parameter.
+     * @param queryParamEncoded The queryParamEncoded parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -196,9 +220,9 @@ public final class BuiltinClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Builtin read() {
+    public Builtin read(String queryParam, String queryParamEncoded) {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions).getValue().toObject(Builtin.class);
+        return readWithResponse(queryParam, queryParamEncoded, requestOptions).getValue().toObject(Builtin.class);
     }
 }
