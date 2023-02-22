@@ -112,8 +112,14 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/lro.md",
     "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 360
-$job | Receive-Job
+$job | Wait-Job -Timeout 400
+if ($job.State -notin @('Completed', 'Failed')) {
+    Write-Error "Vanilla code generation failed to complete within 400 seconds."
+    $job | Stop-Job
+    exit 1
+} else {
+    $job | Receive-Job
+}
 
 if (Test-Path ./vanilla-tests/swagger/CoverageReporter.java) {
     Move-Item ./vanilla-tests/swagger/CoverageReporter.java ./vanilla-tests/src/main/java/fixtures/report/CoverageReporter.java -Force | Out-Null
@@ -135,8 +141,14 @@ $job = @(
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true --output-model-immutable"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 120
-$job | Receive-Job
+$job | Wait-Job -Timeout 180
+if ($job.State -notin @('Completed', 'Failed')) {
+    Write-Error "Local swagger code generation failed to complete within 180 seconds."
+    $job | Stop-Job
+    exit 1
+} else {
+    $job | Receive-Job
+}
 
 # Azure Data Plane
 $job = @(
@@ -146,9 +158,15 @@ $job = @(
     # to generate polling methods.
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_DATAPLANE_PATH/form-recognizer.md"
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_DATAPLANE_PATH/form-recognizer-dpg.md"
-)  | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
 $job | Wait-Job -Timeout 120
-$job | Receive-Job
+if ($job.State -notin @('Completed', 'Failed')) {
+    Write-Error "Azure Data Plane code generation failed to complete within 120 seconds."
+    $job | Stop-Job
+    exit 1
+} else {
+    $job | Receive-Job
+}
 
 # Azure
 $job = @(
@@ -159,8 +177,14 @@ $job = @(
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/subscriptionId-apiVersion.json --namespace=fixtures.subscriptionidapiversion --payload-flattening-threshold=1",
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 120
-$job | Receive-Job
+$job | Wait-Job -Timeout 180
+if ($job.State -notin @('Completed', 'Failed')) {
+    Write-Error "Azure code generation failed to complete within 180 seconds."
+    $job | Stop-Job
+    exit 1
+} else {
+    $job | Receive-Job
+}
 
 # # Azure but use Fluent
 # $ARM_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=azure-tests --azure-arm --fluent=lite --regenerate-pom=false"
@@ -201,8 +225,14 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/dpg-customization.md",
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/custom-http-exception-mapping.md"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
-$job | Wait-Job -Timeout 240
-$job | Receive-Job
+$job | Wait-Job -Timeout 300
+if ($job.State -notin @('Completed', 'Failed')) {
+    Write-Error "Protocol code generation failed to complete within 300 seconds."
+    $job | Stop-Job
+    exit 1
+} else {
+    $job | Receive-Job
+}
 
 New-Item ./protocol-tests/src/main/java/fixtures/headexceptions/models -ItemType Directory -Force | Out-Null
 Copy-Item -Path ./protocol-tests/swagger/CustomizedException.java -Destination ./protocol-tests/src/main/java/fixtures/headexceptions/models/CustomizedException.java -Force | Out-Null
