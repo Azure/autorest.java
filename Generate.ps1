@@ -114,8 +114,7 @@ $job = @(
 ) | ForEach-Object -Parallel $generateScript -AsJob -ThrottleLimit $PARALLELIZATION
 $job | Wait-Job -Timeout 400
 if ($job.State -notin @('Completed', 'Failed')) {
-    Write-Error "Vanilla code generation failed to complete within 400 seconds."
-    exit 1
+    throw "Vanilla code generation failed to complete within 400 seconds."
 } else {
     $job | Receive-Job
 }
@@ -142,8 +141,7 @@ $job = @(
 ) | ForEach-Object -Parallel $generateScript -AsJob -ThrottleLimit $PARALLELIZATION
 $job | Wait-Job -Timeout 180
 if ($job.State -notin @('Completed', 'Failed')) {
-    Write-Error "Local swagger code generation failed to complete within 180 seconds."
-    exit 1
+    throw "Local swagger code generation failed to complete within 180 seconds."
 } else {
     $job | Receive-Job
 }
@@ -159,8 +157,7 @@ $job = @(
 ) | ForEach-Object -Parallel $generateScript -AsJob -ThrottleLimit $PARALLELIZATION
 $job | Wait-Job -Timeout 120
 if ($job.State -notin @('Completed', 'Failed')) {
-    Write-Error "Azure Data Plane code generation failed to complete within 120 seconds."
-    exit 1
+    throw "Azure Data Plane code generation failed to complete within 120 seconds."
 } else {
     $job | Receive-Job
 }
@@ -176,8 +173,7 @@ $job = @(
 ) | ForEach-Object -Parallel $generateScript -AsJob -ThrottleLimit $PARALLELIZATION
 $job | Wait-Job -Timeout 180
 if ($job.State -notin @('Completed', 'Failed')) {
-    Write-Error "Azure code generation failed to complete within 180 seconds."
-    exit 1
+    throw "Azure code generation failed to complete within 180 seconds."
 } else {
     $job | Receive-Job
 }
@@ -223,8 +219,7 @@ $job = @(
 ) | ForEach-Object -Parallel $generateScript -AsJob -ThrottleLimit $PARALLELIZATION
 $job | Wait-Job -Timeout 300
 if ($job.State -notin @('Completed', 'Failed')) {
-    Write-Error "Protocol code generation failed to complete within 300 seconds."
-    exit 1
+    throw "Protocol code generation failed to complete within 300 seconds."
 } else {
     $job | Receive-Job
 }
