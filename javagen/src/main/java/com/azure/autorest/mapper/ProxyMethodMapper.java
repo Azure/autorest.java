@@ -63,6 +63,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
     private static final Pattern APOSTROPHE = Pattern.compile("'");
 
     private final Map<Request, List<ProxyMethod>> parsed = new ConcurrentHashMap<>();
+
     protected ProxyMethodMapper() {
     }
 
@@ -492,7 +493,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         }
     }
 
-    private static SwaggerExceptionDefinitions getSwaggerExceptionDefinitions(Operation operation,
+    private SwaggerExceptionDefinitions getSwaggerExceptionDefinitions(Operation operation,
         JavaSettings settings) {
 
         SwaggerExceptionDefinitions exceptionDefinitions = new SwaggerExceptionDefinitions();
@@ -557,7 +558,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         private Map<Integer, ClassType> exceptionTypeMapping;
     }
 
-    private static ClassType getExceptionType(Response exception, JavaSettings settings) {
+    private ClassType getExceptionType(Response exception, JavaSettings settings) {
         ClassType exceptionType = ClassType.HttpResponseException;  // default as HttpResponseException
 
         if (exception != null && exception.getSchema() != null) {
@@ -570,7 +571,14 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         return exceptionType;
     }
 
-    private static ClassType processExceptionClassType(ClassType errorType, JavaSettings settings) {
+    /**
+     * Extension for map error ClassType to exception ClassType.
+     *
+     * @param errorType the error class.
+     * @param settings the Java settings.
+     * @return the exception ClassType.
+     */
+    protected ClassType processExceptionClassType(ClassType errorType, JavaSettings settings) {
         if (errorType == null) {
             return null;
         }

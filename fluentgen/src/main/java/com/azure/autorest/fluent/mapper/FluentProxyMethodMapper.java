@@ -8,10 +8,10 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.util.Utils;
-import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.ProxyMethodMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.core.util.CoreUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,11 +28,8 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
     protected void buildUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder,
                                                          Operation operation, List<Integer> expectedStatusCodes,
                                                          JavaSettings settings) {
-        ClassType errorType = null;
-        if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
-            errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
-        }
-        if (errorType == null || !FluentType.nonManagementError(errorType)) {
+        if (CoreUtils.isNullOrEmpty(operation.getExceptions())) {
+            // use ManagementException
             builder.unexpectedResponseExceptionType(FluentType.ManagementException);
         } else {
             super.buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
@@ -67,6 +64,15 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
         }
         builder.unexpectedResponseExceptionTypes(unexpectedResponseExceptionTypes);
         */
+    }
+
+    @Override
+    protected ClassType processExceptionClassType(ClassType errorType, JavaSettings settings) {
+        if (!FluentType.nonManagementError(errorType)) {
+            return FluentType.ManagementException;
+        } else {
+            return super.processExceptionClassType(errorType, settings);
+        }
     }
 
     @Override
