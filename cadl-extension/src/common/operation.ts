@@ -51,6 +51,9 @@ export interface Operation extends Aspect {
   /** the name of convenience API */
   convenienceApi?: ConvenienceApi;
 
+  /** a boolean to represent should generate protocol api or not */
+  generateProtocolApi?: boolean;
+
   /** the operation links, referring to related operations, e.g. "polling" for long-running operation to the status monitor operation */
   operationLinks?: Record<string, OperationLink>;
 }
