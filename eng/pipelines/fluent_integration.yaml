@@ -23,7 +23,7 @@ jobs:
   steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '>=14.0.0'
+      versionSpec: '18.x'
 
   - script: npm install autorest -g
 

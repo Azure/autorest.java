@@ -23,7 +23,7 @@ jobs:
 
     variables:
       JavaVersion: 1.8
-      NodeVersion: '16.x'
+      NodeVersion: '18.x'
       isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
     pool:
