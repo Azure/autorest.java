@@ -314,7 +314,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
                 } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()
                     && (settings.isFluent() || settings.getPollingConfig("default") != null)
-                    && !returnTypeHolder.syncReturnType.equals(ClassType.InputStream)) {         // temporary skip InputStream, no idea how to do this in PollerFlux
+                    && !returnTypeHolder.syncReturnType.equals(ClassType.InputStream)) {
+                    // temporary skip InputStream, no idea how to do this in PollerFlux
                     // Skip sync ProxyMethods for polling as sync polling isn't ready yet.
                     if (proxyMethod.isSync()) {
                         continue;
@@ -809,7 +810,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .name(methodName)
             .type(methodType)
             .groupedParameterRequired(false)
-            .methodVisibility(visibilityFunction.methodVisibility(true, defaultOverloadType, false));
+            .methodVisibility(visibilityFunction.methodVisibility(true, defaultOverloadType, false))
+            .methodVisibilityInWrapperClient(operation.isGenerateProtocolApi() ? VISIBLE : NOT_VISIBLE);
         // Always generate an overload of WithResponse with non-required parameters without Context.
         // It is only for sync proxy method, and is usually filtered out in methodVisibility function.
         methods.add(builder.build());

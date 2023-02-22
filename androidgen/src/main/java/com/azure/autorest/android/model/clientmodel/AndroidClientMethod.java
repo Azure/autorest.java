@@ -46,7 +46,7 @@ public class AndroidClientMethod extends ClientMethod {
                                   String clientReference, List<String> requiredNullableParameterExpressions,
                                   boolean isGroupedParameterRequired, String groupedParameterTypeName,
                                   MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails,
-                                  JavaVisibility methodVisibility, MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation) {
+                                  JavaVisibility methodVisibility, JavaVisibility methodVisibilityInWrapperClient, MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation) {
         super(description,
                 returnValue,
                 name,
@@ -62,6 +62,7 @@ public class AndroidClientMethod extends ClientMethod {
                 methodPageDetails,
                 methodTransformationDetails,
                 methodVisibility,
+                methodVisibilityInWrapperClient,
                 null,
                 methodPollingDetails,
                 externalDocumentation);
@@ -119,6 +120,7 @@ public class AndroidClientMethod extends ClientMethod {
                     methodPageDetails,
                     methodTransformationDetails,
                     methodVisibility,
+                    methodVisibilityInWrapperClient,
                     methodPollingDetails,
                     externalDocumentation);
         }
