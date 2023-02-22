@@ -5,7 +5,6 @@
 package com.azure.containers.containerregistry.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /** Defines values for ArtifactOperatingSystem. */
@@ -66,7 +65,6 @@ public final class ArtifactOperatingSystem extends ExpandableStringEnum<Artifact
      * @param name a name to look for.
      * @return the corresponding ArtifactOperatingSystem.
      */
-    @JsonCreator
     public static ArtifactOperatingSystem fromString(String name) {
         return fromString(name, ArtifactOperatingSystem.class);
     }

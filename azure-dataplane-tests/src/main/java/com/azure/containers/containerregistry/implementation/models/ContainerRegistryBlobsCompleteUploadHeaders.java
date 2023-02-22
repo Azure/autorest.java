@@ -7,7 +7,6 @@ package com.azure.containers.containerregistry.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ContainerRegistryBlobsCompleteUploadHeaders model. */
 @Fluent
@@ -15,19 +14,16 @@ public final class ContainerRegistryBlobsCompleteUploadHeaders {
     /*
      * The Range property.
      */
-    @JsonProperty(value = "Range")
     private String range;
 
     /*
      * The Location property.
      */
-    @JsonProperty(value = "Location")
     private String location;
 
     /*
      * The Docker-Content-Digest property.
      */
-    @JsonProperty(value = "Docker-Content-Digest")
     private String dockerContentDigest;
 
     private static final HttpHeaderName DOCKER_CONTENT_DIGEST = HttpHeaderName.fromString("Docker-Content-Digest");

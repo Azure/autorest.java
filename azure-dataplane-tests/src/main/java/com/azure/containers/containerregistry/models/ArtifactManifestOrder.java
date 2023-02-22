@@ -5,7 +5,6 @@
 package com.azure.containers.containerregistry.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /** Sort options for ordering manifests in a collection. */
@@ -33,7 +32,6 @@ public final class ArtifactManifestOrder extends ExpandableStringEnum<ArtifactMa
      * @param name a name to look for.
      * @return the corresponding ArtifactManifestOrder.
      */
-    @JsonCreator
     public static ArtifactManifestOrder fromString(String name) {
         return fromString(name, ArtifactManifestOrder.class);
     }
