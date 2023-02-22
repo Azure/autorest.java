@@ -115,8 +115,6 @@ $job = @(
 $job | Wait-Job -Timeout 400
 if ($job.State -notin @('Completed', 'Failed')) {
     Write-Error "Vanilla code generation failed to complete within 400 seconds."
-    $job.ChildJobs | Stop-Job
-    $job | Stop-Job
     exit 1
 } else {
     $job | Receive-Job
@@ -145,8 +143,6 @@ $job = @(
 $job | Wait-Job -Timeout 180
 if ($job.State -notin @('Completed', 'Failed')) {
     Write-Error "Local swagger code generation failed to complete within 180 seconds."
-    $job.ChildJobs | Stop-Job
-    $job | Stop-Job
     exit 1
 } else {
     $job | Receive-Job
@@ -164,8 +160,6 @@ $job = @(
 $job | Wait-Job -Timeout 120
 if ($job.State -notin @('Completed', 'Failed')) {
     Write-Error "Azure Data Plane code generation failed to complete within 120 seconds."
-    $job.ChildJobs | Stop-Job
-    $job | Stop-Job
     exit 1
 } else {
     $job | Receive-Job
@@ -183,8 +177,6 @@ $job = @(
 $job | Wait-Job -Timeout 180
 if ($job.State -notin @('Completed', 'Failed')) {
     Write-Error "Azure code generation failed to complete within 180 seconds."
-    $job.ChildJobs | Stop-Job
-    $job | Stop-Job
     exit 1
 } else {
     $job | Receive-Job
@@ -232,8 +224,6 @@ $job = @(
 $job | Wait-Job -Timeout 300
 if ($job.State -notin @('Completed', 'Failed')) {
     Write-Error "Protocol code generation failed to complete within 300 seconds."
-    $job.ChildJobs | Stop-Job
-    $job | Stop-Job
     exit 1
 } else {
     $job | Receive-Job
