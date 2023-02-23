@@ -18,7 +18,8 @@ public class ModelUtil {
         return model.getImplementationDetails() != null
                 && model.getImplementationDetails().isConvenienceMethod()
                 && !(isModelUsedOnlyInException(model.getImplementationDetails()))
-                && !(isAnonymousModel(model.getImplementationDetails()));
+                && !(isAnonymousModel(model.getImplementationDetails()))
+                && !(isPagedModel(model.getImplementationDetails()));
     }
 
     public static boolean isGeneratingModel(EnumType model) {
@@ -49,6 +50,10 @@ public class ModelUtil {
 
     private static boolean isModelUsedOnlyInException(ImplementationDetails implementationDetails) {
         return (implementationDetails.isException() && !implementationDetails.isInput() && !implementationDetails.isOutput());
+    }
+
+    private static boolean isPagedModel(ImplementationDetails implementationDetails) {
+        return (implementationDetails.getUsages() != null && implementationDetails.getUsages().contains(ImplementationDetails.Usage.PAGED));
     }
 
     private static boolean isAnonymousModel(ImplementationDetails implementationDetails) {
