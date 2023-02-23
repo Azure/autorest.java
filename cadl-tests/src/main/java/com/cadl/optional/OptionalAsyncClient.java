@@ -165,7 +165,7 @@ public final class OptionalAsyncClient {
      * @param stringNullable The stringNullable parameter.
      * @param optional The optional parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -191,13 +191,13 @@ public final class OptionalAsyncClient {
             requestOptions.setHeader("request-header-optional", requestHeaderOptional);
         }
         if (booleanNullable != null) {
-            requestOptions.addQueryParam("booleanNullable", String.valueOf(booleanNullable));
+            requestOptions.addQueryParam("booleanNullable", String.valueOf(booleanNullable), false);
         }
         if (string != null) {
-            requestOptions.addQueryParam("string", string);
+            requestOptions.addQueryParam("string", string, false);
         }
         if (stringNullable != null) {
-            requestOptions.addQueryParam("stringNullable", stringNullable);
+            requestOptions.addQueryParam("stringNullable", stringNullable, false);
         }
         if (optional != null) {
             requestOptions.setBody(BinaryData.fromObject(optional));
@@ -222,7 +222,7 @@ public final class OptionalAsyncClient {
      * @param stringRequired The stringRequired parameter.
      * @param stringRequiredNullable The stringRequiredNullable parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.

@@ -190,7 +190,7 @@ public final class ServiceDriven1AsyncClient {
      * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
      * added.
      *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -211,7 +211,7 @@ public final class ServiceDriven1AsyncClient {
      *
      * @param parameter I am a required parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -236,7 +236,7 @@ public final class ServiceDriven1AsyncClient {
      * @param requiredParam I am a required parameter.
      * @param optionalParam I am an optional parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -249,7 +249,7 @@ public final class ServiceDriven1AsyncClient {
         // Generated convenience method for putRequiredOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
+            requestOptions.addQueryParam("optionalParam", optionalParam, false);
         }
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
                 .flatMap(FluxUtil::toMono)
@@ -262,7 +262,7 @@ public final class ServiceDriven1AsyncClient {
      *
      * @param requiredParam I am a required parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -284,7 +284,7 @@ public final class ServiceDriven1AsyncClient {
      *
      * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -307,7 +307,7 @@ public final class ServiceDriven1AsyncClient {
      *
      * @param optionalParam I am an optional parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -321,7 +321,7 @@ public final class ServiceDriven1AsyncClient {
         // Generated convenience method for getOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
+            requestOptions.addQueryParam("optionalParam", optionalParam, false);
         }
         return getOptionalWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
@@ -332,7 +332,7 @@ public final class ServiceDriven1AsyncClient {
      * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
      * parameter is added.
      *
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.

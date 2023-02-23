@@ -58,7 +58,7 @@ abstract class ConvenienceMethodTemplateBase {
                 .forEach(convenienceMethod -> {
                     // javadoc
                     classBlock.javadocComment(comment -> {
-                        ClientMethodTemplate.generateJavadoc(convenienceMethod, comment, convenienceMethod.getProxyMethod(), true);
+                        ClientMethodTemplate.generateJavadoc(convenienceMethod, comment, convenienceMethod.getProxyMethod(), false);
                     });
 
                     addGeneratedAnnotation(classBlock);
@@ -330,9 +330,10 @@ abstract class ConvenienceMethodTemplateBase {
             IType elementType = ((IterableType) parameter.getClientMethodParameter().getWireType()).getElementType();
             String elementTypeExpression = expressionConvertToString("paramItemValue", elementType, parameter.getProxyMethodParameter());
             writeLine = javaBlock -> {
-                String addQueryParamLine = String.format("requestOptions.addQueryParam(%1$s, %2$s);",
+                String addQueryParamLine = String.format("requestOptions.addQueryParam(%1$s, %2$s, %3$s);",
                         ClassType.String.defaultValueExpression(parameter.getSerializedName()),
-                        elementTypeExpression);
+                        elementTypeExpression,
+                        parameter.getProxyMethodParameter().getAlreadyEncoded());
 
                 javaBlock.line(String.format("for (%1$s paramItemValue : %2$s) {", elementType, parameter.getName()));
                 javaBlock.indent(() -> {
@@ -346,9 +347,10 @@ abstract class ConvenienceMethodTemplateBase {
             };
         } else {
             writeLine = javaBlock -> javaBlock.line(
-                    String.format("requestOptions.addQueryParam(%1$s, %2$s);",
+                    String.format("requestOptions.addQueryParam(%1$s, %2$s, %3$s);",
                             ClassType.String.defaultValueExpression(parameter.getSerializedName()),
-                            expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter())));
+                            expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter()),
+                            parameter.getProxyMethodParameter().getAlreadyEncoded()));
         }
         Consumer<JavaBlock> writeLineFinal = writeLine;
         if (!parameter.getClientMethodParameter().isRequired()) {

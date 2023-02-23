@@ -139,7 +139,7 @@ public final class ContosoClientImpl {
     @Host("{Endpoint}/contoso/{ApiVersion}")
     @ServiceInterface(name = "ContosoClient")
     public interface ContosoClientService {
-        @Get("/contoso/{code}")
+        @Get("/contoso/{group}")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -154,7 +154,7 @@ public final class ContosoClientImpl {
         Mono<Response<Void>> get(
                 @HostParam("Endpoint") String endpoint,
                 @HostParam("ApiVersion") String apiVersion,
-                @PathParam("code") int code,
+                @PathParam(value = "group", encoded = true) String group,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -163,7 +163,7 @@ public final class ContosoClientImpl {
     /**
      * The get operation.
      *
-     * @param code The code parameter.
+     * @param group The group parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -172,14 +172,14 @@ public final class ContosoClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getWithResponseAsync(int code, RequestOptions requestOptions) {
+    public Mono<Response<Void>> getWithResponseAsync(String group, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
                         service.get(
                                 this.getEndpoint(),
                                 this.getServiceVersion().getVersion(),
-                                code,
+                                group,
                                 accept,
                                 requestOptions,
                                 context));
@@ -188,7 +188,7 @@ public final class ContosoClientImpl {
     /**
      * The get operation.
      *
-     * @param code The code parameter.
+     * @param group The group parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -197,7 +197,7 @@ public final class ContosoClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getWithResponse(int code, RequestOptions requestOptions) {
-        return getWithResponseAsync(code, requestOptions).block();
+    public Response<Void> getWithResponse(String group, RequestOptions requestOptions) {
+        return getWithResponseAsync(group, requestOptions).block();
     }
 }

@@ -5,7 +5,6 @@
 package com.azure.containers.containerregistry.implementation.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /** Can take a value of access_token_refresh_token, or access_token, or refresh_token. */
@@ -34,7 +33,6 @@ public final class PostContentSchemaGrantType extends ExpandableStringEnum<PostC
      * @param name a name to look for.
      * @return the corresponding PostContentSchemaGrantType.
      */
-    @JsonCreator
     public static PostContentSchemaGrantType fromString(String name) {
         return fromString(name, PostContentSchemaGrantType.class);
     }

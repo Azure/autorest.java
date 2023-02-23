@@ -33,7 +33,7 @@ public final class ContosoClient {
     /**
      * The get operation.
      *
-     * @param code The code parameter.
+     * @param group The group parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -43,16 +43,16 @@ public final class ContosoClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getWithResponse(int code, RequestOptions requestOptions) {
-        return this.client.getWithResponse(code, requestOptions).block();
+    public Response<Void> getWithResponse(String group, RequestOptions requestOptions) {
+        return this.client.getWithResponse(group, requestOptions).block();
     }
 
     /**
      * The get operation.
      *
-     * @param code The code parameter.
+     * @param group The group parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -60,9 +60,9 @@ public final class ContosoClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void get(int code) {
+    public void get(String group) {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        getWithResponse(code, requestOptions).getValue();
+        getWithResponse(group, requestOptions).getValue();
     }
 }
