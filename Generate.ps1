@@ -243,7 +243,7 @@ Remove-Item ./customization-tests/src -Recurse -Force | Out-Null
 singleThreadGenerate("--version=$AUTOREST_CORE_VERSION --use:. customization-tests/swagger")
 
 # partial update tests
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION --use:. partial-update-tests/swagger/README.md")
+singleThreadGenerate("--version=$AUTOREST_CORE_VERSION --use:. partial-update-tests/existing/swagger/README.md")
 Remove-Item ./partial-update-tests/generated/src/main/java/module-info.java -Force | Out-Null
 
 # docs
