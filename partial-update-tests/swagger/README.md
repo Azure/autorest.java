@@ -21,7 +21,7 @@ This integration test tests the overall process for partial update in partial-up
 ```yaml
 input-file: ./specification/bodystring_updated.json
 java: true
-output-folder: ../../generated
+output-folder: ../generated
 namespace: fixtures.bodystring
 data-plane: true
 partial-update: true
