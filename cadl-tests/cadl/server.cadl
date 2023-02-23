@@ -38,7 +38,7 @@ namespace Cadl.Server {
   "Service endpoint",
   {
     @doc("Service endpoint")
-    Endpoint: string,
+    Endpoint: url,
 
     @doc("Api Version")
     @path
@@ -54,8 +54,8 @@ namespace Cadl.ContosoServer {
     name: "ContosoClient",
     service: Cadl.ContosoServer,
   })
-  @route("/contoso")
+  @route("/contoso/{group}")
   interface ServerOp {
-    get(@path code: int32): OkResponse | NoContentResponse;
+    get(@path group: url): OkResponse | NoContentResponse;
   }
 }

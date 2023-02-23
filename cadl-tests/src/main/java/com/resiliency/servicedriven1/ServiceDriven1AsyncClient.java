@@ -249,7 +249,7 @@ public final class ServiceDriven1AsyncClient {
         // Generated convenience method for putRequiredOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
+            requestOptions.addQueryParam("optionalParam", optionalParam, false);
         }
         return putRequiredOptionalWithResponse(requiredParam, requestOptions)
                 .flatMap(FluxUtil::toMono)
@@ -321,7 +321,7 @@ public final class ServiceDriven1AsyncClient {
         // Generated convenience method for getOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
+            requestOptions.addQueryParam("optionalParam", optionalParam, false);
         }
         return getOptionalWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)

@@ -76,10 +76,14 @@ javagen/*.yaml
 /fluent-tests/src/test/resources/mockito-extensions/
 /fluent-tests/pom_generated_*.xml
 
+# DPG
 /protocol-tests/src/main/java/module-info.java
 
 /protocol-sdk-integration-tests/sdk/
 !/protocol-sdk-integration-tests/sdk/parents/
+
+# vanilla
+/azure-dataplane-tests/src/main/java/module-info.java
 
 # Cadl output
 /cadl-tests/cadl-output/

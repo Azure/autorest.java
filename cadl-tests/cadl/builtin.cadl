@@ -70,6 +70,18 @@ model Request {
 
   @query
   filter?: string;
+
+  @query("query")
+  queryParam: string;
+
+  @query("query-encoded")
+  queryParamEncoded: url;
+
+  @query("query-opt")
+  queryParamOptional?: string;
+
+  @query("query-opt-encoded")
+  queryParamOptionalEncoded?: url;
 }
 
 @route("/builtin")

@@ -28,6 +28,7 @@ jobs:
   - script: npm install autorest -g
 
   - task: Maven@3
+    retryCountOnTaskFailure: 1
     inputs:
       mavenPomFile: 'pom.xml'
       mavenOptions: '-Xmx3072m'
