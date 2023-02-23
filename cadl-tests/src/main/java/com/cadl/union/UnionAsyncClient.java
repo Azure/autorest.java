@@ -185,7 +185,7 @@ public final class UnionAsyncClient {
         requestObj.put("data_float", options.getDataFloat());
         BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
-            requestOptions.addQueryParam("filter", filter);
+            requestOptions.addQueryParam("filter", filter, false);
         }
         return sendLongWithResponse(id, request, requestOptions).flatMap(FluxUtil::toMono);
     }

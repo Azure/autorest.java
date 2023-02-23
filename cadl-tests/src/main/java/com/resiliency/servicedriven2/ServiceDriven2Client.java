@@ -265,7 +265,7 @@ public final class ServiceDriven2Client {
         // Generated convenience method for headNoParamsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (newParameter != null) {
-            requestOptions.addQueryParam("new_parameter", newParameter);
+            requestOptions.addQueryParam("new_parameter", newParameter, false);
         }
         headNoParamsWithResponse(requestOptions).getValue();
     }
@@ -308,7 +308,7 @@ public final class ServiceDriven2Client {
         // Generated convenience method for getRequiredWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (newParameter != null) {
-            requestOptions.addQueryParam("new_parameter", newParameter);
+            requestOptions.addQueryParam("new_parameter", newParameter, false);
         }
         return getRequiredWithResponse(parameter, requestOptions).getValue().toObject(Message.class);
     }
@@ -355,10 +355,10 @@ public final class ServiceDriven2Client {
         // Generated convenience method for putRequiredOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
+            requestOptions.addQueryParam("optionalParam", optionalParam, false);
         }
         if (newParameter != null) {
-            requestOptions.addQueryParam("new_parameter", newParameter);
+            requestOptions.addQueryParam("new_parameter", newParameter, false);
         }
         return putRequiredOptionalWithResponse(requiredParam, requestOptions).getValue().toObject(Message.class);
     }
@@ -445,10 +445,10 @@ public final class ServiceDriven2Client {
         // Generated convenience method for getOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
+            requestOptions.addQueryParam("optionalParam", optionalParam, false);
         }
         if (newParameter != null) {
-            requestOptions.addQueryParam("new_parameter", newParameter);
+            requestOptions.addQueryParam("new_parameter", newParameter, false);
         }
         return getOptionalWithResponse(requestOptions).getValue().toObject(Message.class);
     }

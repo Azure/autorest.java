@@ -190,13 +190,13 @@ public final class OptionalClient {
             requestOptions.setHeader("request-header-optional", requestHeaderOptional);
         }
         if (booleanNullable != null) {
-            requestOptions.addQueryParam("booleanNullable", String.valueOf(booleanNullable));
+            requestOptions.addQueryParam("booleanNullable", String.valueOf(booleanNullable), false);
         }
         if (string != null) {
-            requestOptions.addQueryParam("string", string);
+            requestOptions.addQueryParam("string", string, false);
         }
         if (stringNullable != null) {
-            requestOptions.addQueryParam("stringNullable", stringNullable);
+            requestOptions.addQueryParam("stringNullable", stringNullable, false);
         }
         if (optional != null) {
             requestOptions.setBody(BinaryData.fromObject(optional));

@@ -239,7 +239,7 @@ public final class ServiceDriven1Client {
         // Generated convenience method for putRequiredOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
+            requestOptions.addQueryParam("optionalParam", optionalParam, false);
         }
         return putRequiredOptionalWithResponse(requiredParam, requestOptions).getValue().toObject(Message.class);
     }
@@ -306,7 +306,7 @@ public final class ServiceDriven1Client {
         // Generated convenience method for getOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (optionalParam != null) {
-            requestOptions.addQueryParam("optionalParam", optionalParam);
+            requestOptions.addQueryParam("optionalParam", optionalParam, false);
         }
         return getOptionalWithResponse(requestOptions).getValue().toObject(Message.class);
     }

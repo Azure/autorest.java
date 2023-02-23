@@ -636,7 +636,8 @@ public final class EnumServiceClient {
             requestOptions.addQueryParam(
                     "colorArrayOpt",
                     JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(colorArrayOpt, CollectionFormat.CSV));
+                            .serializeIterable(colorArrayOpt, CollectionFormat.CSV),
+                    false);
         }
         return setStringEnumArrayWithResponse(
                         colorArray.stream()
@@ -695,7 +696,8 @@ public final class EnumServiceClient {
             requestOptions.addQueryParam(
                     "priorityArrayOpt",
                     JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(priorityArrayOpt, CollectionFormat.CSV));
+                            .serializeIterable(priorityArrayOpt, CollectionFormat.CSV),
+                    false);
         }
         return setIntEnumArrayWithResponse(
                         priorityArray.stream()
@@ -759,7 +761,8 @@ public final class EnumServiceClient {
                     "stringArrayOpt",
                     stringArrayOpt.stream()
                             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                            .collect(Collectors.joining(",")));
+                            .collect(Collectors.joining(",")),
+                    false);
         }
         return setStringArrayWithResponse(stringArray, requestOptions).getValue().toObject(String.class);
     }
@@ -806,7 +809,8 @@ public final class EnumServiceClient {
             requestOptions.addQueryParam(
                     "intArrayOpt",
                     JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(intArrayOpt, CollectionFormat.CSV));
+                            .serializeIterable(intArrayOpt, CollectionFormat.CSV),
+                    false);
         }
         return setIntArrayWithResponse(intArray, requestOptions).getValue().toObject(String.class);
     }
@@ -852,7 +856,7 @@ public final class EnumServiceClient {
         if (colorArrayOpt != null) {
             for (ColorModel paramItemValue : colorArrayOpt) {
                 if (paramItemValue != null) {
-                    requestOptions.addQueryParam("colorArrayOpt", paramItemValue.toString());
+                    requestOptions.addQueryParam("colorArrayOpt", paramItemValue.toString(), false);
                 }
             }
         }
@@ -912,7 +916,7 @@ public final class EnumServiceClient {
         if (priorityArrayOpt != null) {
             for (Priority paramItemValue : priorityArrayOpt) {
                 if (paramItemValue != null) {
-                    requestOptions.addQueryParam("priorityArrayOpt", String.valueOf(paramItemValue.toLong()));
+                    requestOptions.addQueryParam("priorityArrayOpt", String.valueOf(paramItemValue.toLong()), false);
                 }
             }
         }
@@ -976,7 +980,7 @@ public final class EnumServiceClient {
         if (stringArrayOpt != null) {
             for (String paramItemValue : stringArrayOpt) {
                 if (paramItemValue != null) {
-                    requestOptions.addQueryParam("stringArrayOpt", paramItemValue);
+                    requestOptions.addQueryParam("stringArrayOpt", paramItemValue, false);
                 }
             }
         }
@@ -1023,7 +1027,7 @@ public final class EnumServiceClient {
         RequestOptions requestOptions = new RequestOptions();
         if (intArrayOpt != null) {
             for (int paramItemValue : intArrayOpt) {
-                requestOptions.addQueryParam("intArrayOpt", String.valueOf(paramItemValue));
+                requestOptions.addQueryParam("intArrayOpt", String.valueOf(paramItemValue), false);
             }
         }
         return setIntMultiWithResponse(intArray, requestOptions).getValue().toObject(String.class);

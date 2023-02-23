@@ -11,6 +11,7 @@ import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -133,6 +134,8 @@ public final class BuiltinClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> read(
                 @HostParam("endpoint") String endpoint,
+                @QueryParam("query") String queryParam,
+                @QueryParam(value = "query-encoded", encoded = true) String queryParamEncoded,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -166,6 +169,8 @@ public final class BuiltinClientImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     *     <tr><td>query-opt</td><td>String</td><td>No</td><td>The queryParamOptional parameter</td></tr>
+     *     <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>The queryParamOptionalEncoded parameter</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -215,6 +220,8 @@ public final class BuiltinClientImpl {
      * }
      * }</pre>
      *
+     * @param queryParam The queryParam parameter.
+     * @param queryParamEncoded The queryParamEncoded parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -223,9 +230,13 @@ public final class BuiltinClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> readWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> readWithResponseAsync(
+            String queryParam, String queryParamEncoded, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.read(this.getEndpoint(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context ->
+                        service.read(
+                                this.getEndpoint(), queryParam, queryParamEncoded, accept, requestOptions, context));
     }
 
     /**
@@ -237,6 +248,8 @@ public final class BuiltinClientImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     *     <tr><td>query-opt</td><td>String</td><td>No</td><td>The queryParamOptional parameter</td></tr>
+     *     <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>The queryParamOptionalEncoded parameter</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -286,6 +299,8 @@ public final class BuiltinClientImpl {
      * }
      * }</pre>
      *
+     * @param queryParam The queryParam parameter.
+     * @param queryParamEncoded The queryParamEncoded parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -294,8 +309,9 @@ public final class BuiltinClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
-        return readWithResponseAsync(requestOptions).block();
+    public Response<BinaryData> readWithResponse(
+            String queryParam, String queryParamEncoded, RequestOptions requestOptions) {
+        return readWithResponseAsync(queryParam, queryParamEncoded, requestOptions).block();
     }
 
     /**

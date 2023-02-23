@@ -179,7 +179,7 @@ public final class UnionClient {
         requestObj.put("data_float", options.getDataFloat());
         BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
-            requestOptions.addQueryParam("filter", filter);
+            requestOptions.addQueryParam("filter", filter, false);
         }
         sendLongWithResponse(id, request, requestOptions).getValue();
     }
