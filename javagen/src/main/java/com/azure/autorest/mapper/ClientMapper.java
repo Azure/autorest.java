@@ -36,6 +36,7 @@ import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
@@ -310,9 +311,11 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             Set<String> protocolExampleNameSet = new HashSet<>();
 
             BiConsumer<AsyncSyncClient, ClientMethod> handleExample = (c, m) -> {
-                if (m.getType() == ClientMethodType.SimpleSyncRestResponse
+                if (m.getMethodVisibility() == JavaVisibility.Public
+                        && !m.isImplementationOnly() &&
+                        (m.getType() == ClientMethodType.SimpleSyncRestResponse
                         || m.getType() == ClientMethodType.PagingSync
-                        || m.getType() == ClientMethodType.LongRunningBeginSync) {
+                        || m.getType() == ClientMethodType.LongRunningBeginSync)) {
                     ClientBuilder clientBuilder = c.getClientBuilder();
                     if (clientBuilder != null && m.getProxyMethod().getExamples() != null) {
                         m.getProxyMethod().getExamples().forEach((name, example) -> {
