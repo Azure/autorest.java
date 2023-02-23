@@ -58,7 +58,7 @@ abstract class ConvenienceMethodTemplateBase {
                 .forEach(convenienceMethod -> {
                     // javadoc
                     classBlock.javadocComment(comment -> {
-                        ClientMethodTemplate.generateJavadoc(convenienceMethod, comment, convenienceMethod.getProxyMethod(), true);
+                        ClientMethodTemplate.generateJavadoc(convenienceMethod, comment, convenienceMethod.getProxyMethod(), false);
                     });
 
                     addGeneratedAnnotation(classBlock);

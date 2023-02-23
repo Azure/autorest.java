@@ -140,7 +140,9 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
         if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
             for (Map.Entry<ClassType, List<Integer>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
-                commentBlock.methodThrows(exception.getKey().toString(),
+                commentBlock.methodThrows(useFullClassName
+                                ? exception.getKey().getFullName()
+                                : exception.getKey().getName(),
                         String.format("thrown if the request is rejected by server on status code %s",
                                 exception.getValue().stream().map(String::valueOf).collect(Collectors.joining(", "))));
             }
