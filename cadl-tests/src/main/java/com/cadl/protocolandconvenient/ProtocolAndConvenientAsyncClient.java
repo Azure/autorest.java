@@ -69,10 +69,6 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> onlyConvenientWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.onlyConvenientWithResponseAsync(body, requestOptions);
-    }
-
     /**
      * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and
      * ResourceD should not be generated.
@@ -176,10 +172,6 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> errorSettingWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.errorSettingWithResponseAsync(body, requestOptions);
-    }
-
     /**
      * When set protocol false and convenient true, then the protocol method should be package private.
      *

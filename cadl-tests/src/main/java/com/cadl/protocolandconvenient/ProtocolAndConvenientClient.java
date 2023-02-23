@@ -66,10 +66,6 @@ public final class ProtocolAndConvenientClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> onlyConvenientWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.onlyConvenientWithResponse(body, requestOptions).block();
-    }
-
     /**
      * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and
      * ResourceD should not be generated.
@@ -172,10 +168,6 @@ public final class ProtocolAndConvenientClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> errorSettingWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.errorSettingWithResponse(body, requestOptions).block();
-    }
-
     /**
      * When set protocol false and convenient true, then the protocol method should be package private.
      *
