@@ -69,6 +69,7 @@ import {
   isApiVersion,
   shouldGenerateConvenient,
   createDpgContext,
+  shouldGenerateProtocol,
 } from "@azure-tools/cadl-dpg";
 import { fail } from "assert";
 import {
@@ -466,6 +467,9 @@ export class CodeModelBuilder {
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
     this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata.longRunning);
+
+    // check for generating protocol api or not
+    codeModelOperation.generateProtocolApi = shouldGenerateProtocol(this.dpgContext, operation);
 
     operationGroup.addOperation(codeModelOperation);
 
