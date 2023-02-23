@@ -348,6 +348,15 @@ public final class StringOperationClient {
     }
 
     /**
+     * 4. manually added method to test partial update
+     *
+     * @return a string
+     */
+    public String manuallyAddedMethod() {
+        return "manuallyAddedMethod";
+    }
+
+    /**
      * This is an added method.
      *
      * <p><strong>Response Body Schema</strong>

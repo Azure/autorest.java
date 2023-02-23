@@ -346,4 +346,13 @@ public final class StringOperationClient {
     public Response<BinaryData> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullBase64UrlEncodedWithResponse(requestOptions);
     }
+
+    /**
+     * 4. manually added method to test partial update
+     *
+     * @return a string
+     */
+    public String manuallyAddedMethod() {
+        return "manuallyAddedMethod";
+    }
 }
