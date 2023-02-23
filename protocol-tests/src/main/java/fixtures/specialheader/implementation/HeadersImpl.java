@@ -357,7 +357,11 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> paramRepeatabilityRequestWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.paramRepeatabilityRequestSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader(
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
+        return service.paramRepeatabilityRequestSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -430,7 +434,12 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> paramRepeatabilityRequestPutWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.paramRepeatabilityRequestPutSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader(
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
+        return service.paramRepeatabilityRequestPutSync(
+                this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -549,7 +558,12 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> paramRepeatabilityRequestLroWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.paramRepeatabilityRequestLroSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader(
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
+        return service.paramRepeatabilityRequestLroSync(
+                this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
