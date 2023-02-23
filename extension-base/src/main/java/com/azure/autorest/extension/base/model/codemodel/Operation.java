@@ -82,9 +82,9 @@ public class Operation extends Metadata {
     private ConvenienceApi convenienceApi;
 
     /**
-     * a boolean to represent should generate protocol api or not
+     * a boolean to represent should generate protocol api or not, default is true
      */
-    private boolean generateProtocolApi;
+    private boolean generateProtocolApi = true;
 
     // internal
     private OperationGroup operationGroup;
