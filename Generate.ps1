@@ -161,6 +161,7 @@ if ($job.State -notin @('Completed', 'Failed')) {
 } else {
     $job | Receive-Job
 }
+Remove-Item ./azure-dataplane-tests/src/main/java/module-info.java -Force | Out-Null
 
 # Azure
 $job = @(
