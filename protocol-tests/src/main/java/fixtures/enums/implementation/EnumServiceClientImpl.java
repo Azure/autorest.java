@@ -140,6 +140,26 @@ public final class EnumServiceClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/enums/queryparam")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putQueryEnumsSync(
+                @HostParam("$host") String host,
+                @QueryParam("query-integer-enum") String queryIntegerEnum,
+                @QueryParam("query-boolean-enum") String queryBooleanEnum,
+                @QueryParam("query-required-enum") String queryRequiredEnum,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/enums/headerparam")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -153,6 +173,24 @@ public final class EnumServiceClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putHeaderEnums(
+                @HostParam("$host") String host,
+                @HeaderParam("header-required-string-enum") String headerRequiredStringEnum,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/enums/headerparam")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putHeaderEnumsSync(
                 @HostParam("$host") String host,
                 @HeaderParam("header-required-string-enum") String headerRequiredStringEnum,
                 RequestOptions requestOptions,
@@ -176,6 +214,24 @@ public final class EnumServiceClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/enums/required/body")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putRequiredBodyEnumsSync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData bodyRequiredEnum,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/enums/nonrequired/body")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -189,6 +245,21 @@ public final class EnumServiceClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNonRequiredBodyEnums(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Put("/enums/nonrequired/body")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putNonRequiredBodyEnumsSync(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
@@ -257,8 +328,8 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putQueryEnumsWithResponse(
             String queryIntegerEnum, String queryBooleanEnum, String queryRequiredEnum, RequestOptions requestOptions) {
-        return putQueryEnumsWithResponseAsync(queryIntegerEnum, queryBooleanEnum, queryRequiredEnum, requestOptions)
-                .block();
+        return service.putQueryEnumsSync(
+                this.getHost(), queryIntegerEnum, queryBooleanEnum, queryRequiredEnum, requestOptions, Context.NONE);
     }
 
     /**
@@ -314,7 +385,7 @@ public final class EnumServiceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putHeaderEnumsWithResponse(String headerRequiredStringEnum, RequestOptions requestOptions) {
-        return putHeaderEnumsWithResponseAsync(headerRequiredStringEnum, requestOptions).block();
+        return service.putHeaderEnumsSync(this.getHost(), headerRequiredStringEnum, requestOptions, Context.NONE);
     }
 
     /**
@@ -360,7 +431,7 @@ public final class EnumServiceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putRequiredBodyEnumsWithResponse(BinaryData bodyRequiredEnum, RequestOptions requestOptions) {
-        return putRequiredBodyEnumsWithResponseAsync(bodyRequiredEnum, requestOptions).block();
+        return service.putRequiredBodyEnumsSync(this.getHost(), bodyRequiredEnum, requestOptions, Context.NONE);
     }
 
     /**
@@ -423,6 +494,6 @@ public final class EnumServiceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNonRequiredBodyEnumsWithResponse(RequestOptions requestOptions) {
-        return putNonRequiredBodyEnumsWithResponseAsync(requestOptions).block();
+        return service.putNonRequiredBodyEnumsSync(this.getHost(), requestOptions, Context.NONE);
     }
 }

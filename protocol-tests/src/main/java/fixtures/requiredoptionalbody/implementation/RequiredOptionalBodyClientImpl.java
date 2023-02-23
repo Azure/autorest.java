@@ -140,6 +140,25 @@ public final class RequiredOptionalBodyClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/body/required/object")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createOrUpdateDeploymentSync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData deployment,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/body/optional/object")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -153,6 +172,24 @@ public final class RequiredOptionalBodyClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> optionalObject(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/body/optional/object")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> optionalObjectSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -271,7 +308,8 @@ public final class RequiredOptionalBodyClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateDeploymentWithResponse(
             BinaryData deployment, RequestOptions requestOptions) {
-        return createOrUpdateDeploymentWithResponseAsync(deployment, requestOptions).block();
+        final String accept = "application/json";
+        return service.createOrUpdateDeploymentSync(this.getHost(), deployment, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -398,6 +436,7 @@ public final class RequiredOptionalBodyClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> optionalObjectWithResponse(RequestOptions requestOptions) {
-        return optionalObjectWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.optionalObjectSync(this.getHost(), accept, requestOptions, Context.NONE);
     }
 }

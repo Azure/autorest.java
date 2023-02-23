@@ -71,6 +71,24 @@ public final class BasicsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/basic/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -84,6 +102,26 @@ public final class BasicsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putValid(
+                @HostParam("$host") String host,
+                @QueryParam("api-version") String apiVersion,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/basic/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putValidSync(
                 @HostParam("$host") String host,
                 @QueryParam("api-version") String apiVersion,
                 @BodyParam("application/json") BinaryData complexBody,
@@ -109,6 +147,24 @@ public final class BasicsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/basic/invalid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getInvalidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/complex/basic/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -122,6 +178,24 @@ public final class BasicsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getEmpty(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/complex/basic/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getEmptySync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -145,6 +219,24 @@ public final class BasicsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/basic/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/complex/basic/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -158,6 +250,24 @@ public final class BasicsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNotProvided(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/complex/basic/notprovided")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getNotProvidedSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -214,7 +324,8 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return getValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -275,7 +386,14 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putValidWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putValidSync(
+                this.client.getHost(),
+                this.client.getServiceVersion().getVersion(),
+                complexBody,
+                accept,
+                requestOptions,
+                Context.NONE);
     }
 
     /**
@@ -328,7 +446,8 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getInvalidWithResponse(RequestOptions requestOptions) {
-        return getInvalidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getInvalidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -380,7 +499,8 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
-        return getEmptyWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getEmptySync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -432,7 +552,8 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
-        return getNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -485,6 +606,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
-        return getNotProvidedWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNotProvidedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 }

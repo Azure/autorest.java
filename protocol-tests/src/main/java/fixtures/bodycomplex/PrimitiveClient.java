@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.bodycomplex.implementation.PrimitivesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = PrimitiveClientBuilder.class)
 public final class PrimitiveClient {
-    @Generated private final PrimitiveAsyncClient client;
+    @Generated private final PrimitivesImpl serviceClient;
 
     /**
      * Initializes an instance of PrimitiveClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    PrimitiveClient(PrimitiveAsyncClient client) {
-        this.client = client;
+    PrimitiveClient(PrimitivesImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -53,7 +54,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getIntWithResponse(RequestOptions requestOptions) {
-        return this.client.getIntWithResponse(requestOptions).block();
+        return this.serviceClient.getIntWithResponse(requestOptions);
     }
 
     /**
@@ -79,7 +80,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putIntWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putIntWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putIntWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -104,7 +105,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getLongWithResponse(RequestOptions requestOptions) {
-        return this.client.getLongWithResponse(requestOptions).block();
+        return this.serviceClient.getLongWithResponse(requestOptions);
     }
 
     /**
@@ -130,7 +131,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putLongWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putLongWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putLongWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -155,7 +156,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFloatWithResponse(RequestOptions requestOptions) {
-        return this.client.getFloatWithResponse(requestOptions).block();
+        return this.serviceClient.getFloatWithResponse(requestOptions);
     }
 
     /**
@@ -181,7 +182,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putFloatWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putFloatWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putFloatWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -206,7 +207,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDoubleWithResponse(RequestOptions requestOptions) {
-        return this.client.getDoubleWithResponse(requestOptions).block();
+        return this.serviceClient.getDoubleWithResponse(requestOptions);
     }
 
     /**
@@ -232,7 +233,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDoubleWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putDoubleWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putDoubleWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -257,7 +258,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBoolWithResponse(RequestOptions requestOptions) {
-        return this.client.getBoolWithResponse(requestOptions).block();
+        return this.serviceClient.getBoolWithResponse(requestOptions);
     }
 
     /**
@@ -283,7 +284,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBoolWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putBoolWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putBoolWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -309,7 +310,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getStringWithResponse(RequestOptions requestOptions) {
-        return this.client.getStringWithResponse(requestOptions).block();
+        return this.serviceClient.getStringWithResponse(requestOptions);
     }
 
     /**
@@ -336,7 +337,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putStringWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putStringWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putStringWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -361,7 +362,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateWithResponse(RequestOptions requestOptions) {
-        return this.client.getDateWithResponse(requestOptions).block();
+        return this.serviceClient.getDateWithResponse(requestOptions);
     }
 
     /**
@@ -387,7 +388,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putDateWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putDateWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -412,7 +413,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateTimeWithResponse(RequestOptions requestOptions) {
-        return this.client.getDateTimeWithResponse(requestOptions).block();
+        return this.serviceClient.getDateTimeWithResponse(requestOptions);
     }
 
     /**
@@ -438,7 +439,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putDateTimeWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putDateTimeWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -463,7 +464,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateTimeRfc1123WithResponse(RequestOptions requestOptions) {
-        return this.client.getDateTimeRfc1123WithResponse(requestOptions).block();
+        return this.serviceClient.getDateTimeRfc1123WithResponse(requestOptions);
     }
 
     /**
@@ -489,7 +490,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeRfc1123WithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putDateTimeRfc1123WithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putDateTimeRfc1123WithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -513,7 +514,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDurationWithResponse(RequestOptions requestOptions) {
-        return this.client.getDurationWithResponse(requestOptions).block();
+        return this.serviceClient.getDurationWithResponse(requestOptions);
     }
 
     /**
@@ -538,7 +539,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDurationWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putDurationWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putDurationWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -562,7 +563,7 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getByteWithResponse(RequestOptions requestOptions) {
-        return this.client.getByteWithResponse(requestOptions).block();
+        return this.serviceClient.getByteWithResponse(requestOptions);
     }
 
     /**
@@ -587,6 +588,6 @@ public final class PrimitiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putByteWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putByteWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putByteWithResponse(complexBody, requestOptions);
     }
 }

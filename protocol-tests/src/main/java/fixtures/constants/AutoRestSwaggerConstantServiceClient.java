@@ -14,20 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import fixtures.constants.implementation.ContantsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerConstantServiceClient type. */
 @ServiceClient(builder = AutoRestSwaggerConstantServiceClientBuilder.class)
 public final class AutoRestSwaggerConstantServiceClient {
-    @Generated private final AutoRestSwaggerConstantServiceAsyncClient client;
+    @Generated private final ContantsImpl serviceClient;
 
     /**
      * Initializes an instance of AutoRestSwaggerConstantServiceClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    AutoRestSwaggerConstantServiceClient(AutoRestSwaggerConstantServiceAsyncClient client) {
-        this.client = client;
+    AutoRestSwaggerConstantServiceClient(ContantsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -53,7 +54,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(requestOptions).block();
+        return this.serviceClient.putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(requestOptions);
     }
 
     /**
@@ -79,7 +80,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(requestOptions).block();
+        return this.serviceClient.putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(requestOptions);
     }
 
     /**
@@ -95,7 +96,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse(requestOptions).block();
+        return this.serviceClient.putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse(requestOptions);
     }
 
     /**
@@ -111,7 +112,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredOneValueDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putNoModelAsStringNoRequiredOneValueDefaultWithResponse(requestOptions).block();
+        return this.serviceClient.putNoModelAsStringNoRequiredOneValueDefaultWithResponse(requestOptions);
     }
 
     /**
@@ -129,7 +130,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return this.client.putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(input, requestOptions).block();
+        return this.serviceClient.putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(input, requestOptions);
     }
 
     /**
@@ -147,7 +148,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredTwoValueDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return this.client.putNoModelAsStringRequiredTwoValueDefaultWithResponse(input, requestOptions).block();
+        return this.serviceClient.putNoModelAsStringRequiredTwoValueDefaultWithResponse(input, requestOptions);
     }
 
     /**
@@ -163,7 +164,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putNoModelAsStringRequiredOneValueNoDefaultWithResponse(requestOptions).block();
+        return this.serviceClient.putNoModelAsStringRequiredOneValueNoDefaultWithResponse(requestOptions);
     }
 
     /**
@@ -179,7 +180,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredOneValueDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putNoModelAsStringRequiredOneValueDefaultWithResponse(requestOptions).block();
+        return this.serviceClient.putNoModelAsStringRequiredOneValueDefaultWithResponse(requestOptions);
     }
 
     /**
@@ -205,7 +206,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(requestOptions).block();
+        return this.serviceClient.putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(requestOptions);
     }
 
     /**
@@ -231,7 +232,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredTwoValueDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putModelAsStringNoRequiredTwoValueDefaultWithResponse(requestOptions).block();
+        return this.serviceClient.putModelAsStringNoRequiredTwoValueDefaultWithResponse(requestOptions);
     }
 
     /**
@@ -257,7 +258,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putModelAsStringNoRequiredOneValueNoDefaultWithResponse(requestOptions).block();
+        return this.serviceClient.putModelAsStringNoRequiredOneValueNoDefaultWithResponse(requestOptions);
     }
 
     /**
@@ -283,7 +284,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredOneValueDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.putModelAsStringNoRequiredOneValueDefaultWithResponse(requestOptions).block();
+        return this.serviceClient.putModelAsStringNoRequiredOneValueDefaultWithResponse(requestOptions);
     }
 
     /**
@@ -301,7 +302,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredTwoValueNoDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return this.client.putModelAsStringRequiredTwoValueNoDefaultWithResponse(input, requestOptions).block();
+        return this.serviceClient.putModelAsStringRequiredTwoValueNoDefaultWithResponse(input, requestOptions);
     }
 
     /**
@@ -319,7 +320,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredTwoValueDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return this.client.putModelAsStringRequiredTwoValueDefaultWithResponse(input, requestOptions).block();
+        return this.serviceClient.putModelAsStringRequiredTwoValueDefaultWithResponse(input, requestOptions);
     }
 
     /**
@@ -337,7 +338,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredOneValueNoDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return this.client.putModelAsStringRequiredOneValueNoDefaultWithResponse(input, requestOptions).block();
+        return this.serviceClient.putModelAsStringRequiredOneValueNoDefaultWithResponse(input, requestOptions);
     }
 
     /**
@@ -355,7 +356,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredOneValueDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return this.client.putModelAsStringRequiredOneValueDefaultWithResponse(input, requestOptions).block();
+        return this.serviceClient.putModelAsStringRequiredOneValueDefaultWithResponse(input, requestOptions);
     }
 
     /**
@@ -371,6 +372,6 @@ public final class AutoRestSwaggerConstantServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putClientConstantsWithResponse(RequestOptions requestOptions) {
-        return this.client.putClientConstantsWithResponse(requestOptions).block();
+        return this.serviceClient.putClientConstantsWithResponse(requestOptions);
     }
 }

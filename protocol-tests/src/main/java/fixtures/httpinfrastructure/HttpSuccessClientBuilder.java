@@ -248,6 +248,6 @@ public final class HttpSuccessClientBuilder
      */
     @Generated
     public HttpSuccessClient buildClient() {
-        return new HttpSuccessClient(new HttpSuccessAsyncClient(buildInnerClient().getHttpSuccess()));
+        return new HttpSuccessClient(buildInnerClient().getHttpSuccess());
     }
 }

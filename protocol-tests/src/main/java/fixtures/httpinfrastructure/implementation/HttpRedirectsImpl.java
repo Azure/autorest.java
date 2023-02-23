@@ -76,6 +76,24 @@ public final class HttpRedirectsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Head("/http/redirect/300")
+        @ExpectedResponses({200, 300})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> head300Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(
@@ -89,6 +107,24 @@ public final class HttpRedirectsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get300(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/redirect/300")
+        @ExpectedResponses({200, 300})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get300Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -112,6 +148,24 @@ public final class HttpRedirectsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Head("/http/redirect/301")
+        @ExpectedResponses({200, 301})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> head301Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/redirect/301")
         @ExpectedResponses({200, 301})
         @UnexpectedResponseExceptionType(
@@ -125,6 +179,24 @@ public final class HttpRedirectsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get301(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/redirect/301")
+        @ExpectedResponses({200, 301})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get301Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -149,6 +221,25 @@ public final class HttpRedirectsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/http/redirect/301")
+        @ExpectedResponses({301})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> put301Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Head("/http/redirect/302")
         @ExpectedResponses({200, 302})
         @UnexpectedResponseExceptionType(
@@ -162,6 +253,24 @@ public final class HttpRedirectsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> head302(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Head("/http/redirect/302")
+        @ExpectedResponses({200, 302})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> head302Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -185,6 +294,24 @@ public final class HttpRedirectsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/redirect/302")
+        @ExpectedResponses({200, 302})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get302Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Patch("/http/redirect/302")
         @ExpectedResponses({302})
         @UnexpectedResponseExceptionType(
@@ -198,6 +325,25 @@ public final class HttpRedirectsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> patch302(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Patch("/http/redirect/302")
+        @ExpectedResponses({302})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> patch302Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -223,6 +369,25 @@ public final class HttpRedirectsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/http/redirect/303")
+        @ExpectedResponses({200, 303})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> post303Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Head("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(
@@ -236,6 +401,24 @@ public final class HttpRedirectsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> head307(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Head("/http/redirect/307")
+        @ExpectedResponses({200, 307})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> head307Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -259,6 +442,24 @@ public final class HttpRedirectsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/redirect/307")
+        @ExpectedResponses({200, 307})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get307Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Options("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(
@@ -277,6 +478,24 @@ public final class HttpRedirectsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Options("/http/redirect/307")
+        @ExpectedResponses({200, 307})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> options307Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(
@@ -290,6 +509,25 @@ public final class HttpRedirectsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> put307(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/http/redirect/307")
+        @ExpectedResponses({200, 307})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> put307Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -315,6 +553,25 @@ public final class HttpRedirectsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Patch("/http/redirect/307")
+        @ExpectedResponses({200, 307})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> patch307Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(
@@ -334,6 +591,25 @@ public final class HttpRedirectsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/http/redirect/307")
+        @ExpectedResponses({200, 307})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> post307Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Delete("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(
@@ -347,6 +623,25 @@ public final class HttpRedirectsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete307(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Delete("/http/redirect/307")
+        @ExpectedResponses({200, 307})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> delete307Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -382,7 +677,8 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head300WithResponse(RequestOptions requestOptions) {
-        return head300WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.head300Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -429,7 +725,8 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get300WithResponse(RequestOptions requestOptions) {
-        return get300WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get300Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -460,7 +757,8 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head301WithResponse(RequestOptions requestOptions) {
-        return head301WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.head301Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -491,7 +789,8 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get301WithResponse(RequestOptions requestOptions) {
-        return get301WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get301Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -558,7 +857,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put301WithResponse(RequestOptions requestOptions) {
-        return put301WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put301Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -589,7 +890,8 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head302WithResponse(RequestOptions requestOptions) {
-        return head302WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.head302Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -620,7 +922,8 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get302WithResponse(RequestOptions requestOptions) {
-        return get302WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get302Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -687,7 +990,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch302WithResponse(RequestOptions requestOptions) {
-        return patch302WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch302Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -754,7 +1059,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post303WithResponse(RequestOptions requestOptions) {
-        return post303WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post303Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -785,7 +1092,8 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head307WithResponse(RequestOptions requestOptions) {
-        return head307WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.head307Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -816,7 +1124,8 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get307WithResponse(RequestOptions requestOptions) {
-        return get307WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get307Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -848,7 +1157,8 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> options307WithResponse(RequestOptions requestOptions) {
-        return options307WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.options307Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -913,7 +1223,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put307WithResponse(RequestOptions requestOptions) {
-        return put307WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put307Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -978,7 +1290,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch307WithResponse(RequestOptions requestOptions) {
-        return patch307WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch307Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1043,7 +1357,9 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post307WithResponse(RequestOptions requestOptions) {
-        return post307WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post307Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1108,6 +1424,8 @@ public final class HttpRedirectsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete307WithResponse(RequestOptions requestOptions) {
-        return delete307WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.delete307Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 }

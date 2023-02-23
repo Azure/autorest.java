@@ -14,20 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import fixtures.constantandclientparam.implementation.ConstantAndClientParameterServiceClientImpl;
 
 /** Initializes a new instance of the synchronous ConstantAndClientParameterServiceClient type. */
 @ServiceClient(builder = ConstantAndClientParameterServiceClientBuilder.class)
 public final class ConstantAndClientParameterServiceClient {
-    @Generated private final ConstantAndClientParameterServiceAsyncClient client;
+    @Generated private final ConstantAndClientParameterServiceClientImpl serviceClient;
 
     /**
      * Initializes an instance of ConstantAndClientParameterServiceClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ConstantAndClientParameterServiceClient(ConstantAndClientParameterServiceAsyncClient client) {
-        this.client = client;
+    ConstantAndClientParameterServiceClient(ConstantAndClientParameterServiceClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -43,6 +44,6 @@ public final class ConstantAndClientParameterServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putClientConstantsWithResponse(RequestOptions requestOptions) {
-        return this.client.putClientConstantsWithResponse(requestOptions).block();
+        return this.serviceClient.putClientConstantsWithResponse(requestOptions);
     }
 }

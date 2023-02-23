@@ -76,6 +76,24 @@ public final class HttpSuccessImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Head("/http/success/200")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> head200Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -89,6 +107,24 @@ public final class HttpSuccessImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> get200(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/success/200")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Boolean> get200Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -112,6 +148,24 @@ public final class HttpSuccessImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Options("/http/success/200")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Boolean> options200Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -125,6 +179,25 @@ public final class HttpSuccessImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> put200(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/http/success/200")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> put200Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -150,6 +223,25 @@ public final class HttpSuccessImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Patch("/http/success/200")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> patch200Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -163,6 +255,25 @@ public final class HttpSuccessImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> post200(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/http/success/200")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> post200Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -188,6 +299,25 @@ public final class HttpSuccessImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Delete("/http/success/200")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> delete200Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/http/success/201")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(
@@ -201,6 +331,25 @@ public final class HttpSuccessImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> put201(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/http/success/201")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> put201Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -226,6 +375,25 @@ public final class HttpSuccessImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/http/success/201")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> post201Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(
@@ -239,6 +407,25 @@ public final class HttpSuccessImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> put202(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/http/success/202")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> put202Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -264,6 +451,25 @@ public final class HttpSuccessImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Patch("/http/success/202")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> patch202Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(
@@ -277,6 +483,25 @@ public final class HttpSuccessImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> post202(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/http/success/202")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> post202Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -302,6 +527,25 @@ public final class HttpSuccessImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Delete("/http/success/202")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> delete202Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Head("/http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -320,6 +564,24 @@ public final class HttpSuccessImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Head("/http/success/204")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> head204Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -333,6 +595,25 @@ public final class HttpSuccessImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> put204(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/http/success/204")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> put204Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -358,6 +639,25 @@ public final class HttpSuccessImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Patch("/http/success/204")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> patch204Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -371,6 +671,25 @@ public final class HttpSuccessImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> post204(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/http/success/204")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> post204Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -396,6 +715,25 @@ public final class HttpSuccessImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Delete("/http/success/204")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> delete204Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Head("/http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(
@@ -406,6 +744,21 @@ public final class HttpSuccessImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> head404(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Head("/http/success/404")
+        @ExpectedResponses({204, 404})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Boolean> head404Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -440,7 +793,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head200WithResponse(RequestOptions requestOptions) {
-        return head200WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.head200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -483,7 +837,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> get200WithResponse(RequestOptions requestOptions) {
-        return get200WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -527,7 +882,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> options200WithResponse(RequestOptions requestOptions) {
-        return options200WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.options200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -592,7 +948,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put200WithResponse(RequestOptions requestOptions) {
-        return put200WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put200Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -657,7 +1015,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch200WithResponse(RequestOptions requestOptions) {
-        return patch200WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch200Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -722,7 +1082,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post200WithResponse(RequestOptions requestOptions) {
-        return post200WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post200Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -787,7 +1149,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete200WithResponse(RequestOptions requestOptions) {
-        return delete200WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.delete200Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -852,7 +1216,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put201WithResponse(RequestOptions requestOptions) {
-        return put201WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put201Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -917,7 +1283,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post201WithResponse(RequestOptions requestOptions) {
-        return post201WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post201Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -982,7 +1350,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put202WithResponse(RequestOptions requestOptions) {
-        return put202WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put202Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1047,7 +1417,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch202WithResponse(RequestOptions requestOptions) {
-        return patch202WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch202Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1112,7 +1484,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post202WithResponse(RequestOptions requestOptions) {
-        return post202WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post202Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1177,7 +1551,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete202WithResponse(RequestOptions requestOptions) {
-        return delete202WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.delete202Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1208,7 +1584,8 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head204WithResponse(RequestOptions requestOptions) {
-        return head204WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.head204Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1273,7 +1650,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put204WithResponse(RequestOptions requestOptions) {
-        return put204WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put204Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1338,7 +1717,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch204WithResponse(RequestOptions requestOptions) {
-        return patch204WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch204Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1403,7 +1784,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post204WithResponse(RequestOptions requestOptions) {
-        return post204WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post204Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1468,7 +1851,9 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete204WithResponse(RequestOptions requestOptions) {
-        return delete204WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.delete204Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1509,6 +1894,7 @@ public final class HttpSuccessImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> head404WithResponse(RequestOptions requestOptions) {
-        return head404WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.head404Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 }

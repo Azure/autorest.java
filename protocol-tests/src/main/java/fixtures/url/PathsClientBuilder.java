@@ -283,6 +283,6 @@ public final class PathsClientBuilder implements HttpTrait<PathsClientBuilder>, 
      */
     @Generated
     public PathsClient buildClient() {
-        return new PathsClient(new PathsAsyncClient(buildInnerClient().getPaths()));
+        return new PathsClient(buildInnerClient().getPaths());
     }
 }

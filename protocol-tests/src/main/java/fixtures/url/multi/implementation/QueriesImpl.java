@@ -67,6 +67,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/array/multi/string/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> arrayStringMultiNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/array/multi/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -85,6 +103,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/array/multi/string/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> arrayStringMultiEmptySync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/array/multi/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -98,6 +134,24 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringMultiValid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/array/multi/string/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> arrayStringMultiValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -154,7 +208,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringMultiNullWithResponse(RequestOptions requestOptions) {
-        return arrayStringMultiNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.arrayStringMultiNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -207,7 +262,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringMultiEmptyWithResponse(RequestOptions requestOptions) {
-        return arrayStringMultiEmptyWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.arrayStringMultiEmptySync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -261,6 +317,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringMultiValidWithResponse(RequestOptions requestOptions) {
-        return arrayStringMultiValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.arrayStringMultiValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 }

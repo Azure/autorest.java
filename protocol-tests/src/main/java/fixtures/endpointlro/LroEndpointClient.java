@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import fixtures.endpointlro.implementation.LROsImpl;
 
 /** Initializes a new instance of the synchronous LroEndpointClient type. */
 @ServiceClient(builder = LroEndpointClientBuilder.class)
 public final class LroEndpointClient {
-    @Generated private final LroEndpointAsyncClient client;
+    @Generated private final LROsImpl serviceClient;
 
     /**
      * Initializes an instance of LroEndpointClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    LroEndpointClient(LroEndpointAsyncClient client) {
-        this.client = client;
+    LroEndpointClient(LROsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -77,6 +78,6 @@ public final class LroEndpointClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPut200Succeeded(RequestOptions requestOptions) {
-        return this.client.beginPut200Succeeded(requestOptions).getSyncPoller();
+        return this.serviceClient.beginPut200Succeeded(requestOptions);
     }
 }

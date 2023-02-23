@@ -284,6 +284,6 @@ public final class PathItemsClientBuilder
      */
     @Generated
     public PathItemsClient buildClient() {
-        return new PathItemsClient(new PathItemsAsyncClient(buildInnerClient().getPathItems()));
+        return new PathItemsClient(buildInnerClient().getPathItems());
     }
 }

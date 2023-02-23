@@ -266,6 +266,6 @@ public final class ReadonlypropertyClientBuilder
      */
     @Generated
     public ReadonlypropertyClient buildClient() {
-        return new ReadonlypropertyClient(new ReadonlypropertyAsyncClient(buildInnerClient().getReadonlyproperties()));
+        return new ReadonlypropertyClient(buildInnerClient().getReadonlyproperties());
     }
 }

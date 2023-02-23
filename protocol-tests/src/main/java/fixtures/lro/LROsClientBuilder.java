@@ -245,6 +245,6 @@ public final class LROsClientBuilder implements HttpTrait<LROsClientBuilder>, Co
      */
     @Generated
     public LROsClient buildClient() {
-        return new LROsClient(new LROsAsyncClient(buildInnerClient().getLROs()));
+        return new LROsClient(buildInnerClient().getLROs());
     }
 }

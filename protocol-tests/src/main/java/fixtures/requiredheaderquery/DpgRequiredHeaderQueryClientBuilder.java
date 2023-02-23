@@ -249,6 +249,6 @@ public final class DpgRequiredHeaderQueryClientBuilder
      */
     @Generated
     public DpgRequiredHeaderQueryClient buildClient() {
-        return new DpgRequiredHeaderQueryClient(new DpgRequiredHeaderQueryAsyncClient(buildInnerClient().getParams()));
+        return new DpgRequiredHeaderQueryClient(buildInnerClient().getParams());
     }
 }

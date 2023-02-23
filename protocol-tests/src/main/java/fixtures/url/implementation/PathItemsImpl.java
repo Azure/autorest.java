@@ -76,6 +76,29 @@ public final class PathItemsImpl {
                 Context context);
 
         @Get(
+                "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getAllWithValuesSync(
+                @HostParam("$host") String host,
+                @PathParam("pathItemStringPath") String pathItemStringPath,
+                @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
+                @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get(
                 "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -89,6 +112,29 @@ public final class PathItemsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getGlobalQueryNull(
+                @HostParam("$host") String host,
+                @PathParam("pathItemStringPath") String pathItemStringPath,
+                @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
+                @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get(
+                "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getGlobalQueryNullSync(
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
@@ -122,6 +168,29 @@ public final class PathItemsImpl {
                 Context context);
 
         @Get(
+                "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getGlobalAndLocalQueryNullSync(
+                @HostParam("$host") String host,
+                @PathParam("pathItemStringPath") String pathItemStringPath,
+                @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
+                @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get(
                 "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -135,6 +204,29 @@ public final class PathItemsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getLocalPathItemQueryNull(
+                @HostParam("$host") String host,
+                @PathParam("pathItemStringPath") String pathItemStringPath,
+                @PathParam("globalStringPath") String globalStringPath,
+                @QueryParam("globalStringQuery") String globalStringQuery,
+                @PathParam("localStringPath") String localStringPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get(
+                "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getLocalPathItemQueryNullSync(
                 @HostParam("$host") String host,
                 @PathParam("pathItemStringPath") String pathItemStringPath,
                 @PathParam("globalStringPath") String globalStringPath,
@@ -215,7 +307,16 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getAllWithValuesWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        return getAllWithValuesWithResponseAsync(pathItemStringPath, localStringPath, requestOptions).block();
+        final String accept = "application/json";
+        return service.getAllWithValuesSync(
+                this.client.getHost(),
+                pathItemStringPath,
+                this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
+                localStringPath,
+                accept,
+                requestOptions,
+                Context.NONE);
     }
 
     /**
@@ -288,7 +389,16 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getGlobalQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        return getGlobalQueryNullWithResponseAsync(pathItemStringPath, localStringPath, requestOptions).block();
+        final String accept = "application/json";
+        return service.getGlobalQueryNullSync(
+                this.client.getHost(),
+                pathItemStringPath,
+                this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
+                localStringPath,
+                accept,
+                requestOptions,
+                Context.NONE);
     }
 
     /**
@@ -361,7 +471,16 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getGlobalAndLocalQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        return getGlobalAndLocalQueryNullWithResponseAsync(pathItemStringPath, localStringPath, requestOptions).block();
+        final String accept = "application/json";
+        return service.getGlobalAndLocalQueryNullSync(
+                this.client.getHost(),
+                pathItemStringPath,
+                this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
+                localStringPath,
+                accept,
+                requestOptions,
+                Context.NONE);
     }
 
     /**
@@ -434,6 +553,15 @@ public final class PathItemsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getLocalPathItemQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        return getLocalPathItemQueryNullWithResponseAsync(pathItemStringPath, localStringPath, requestOptions).block();
+        final String accept = "application/json";
+        return service.getLocalPathItemQueryNullSync(
+                this.client.getHost(),
+                pathItemStringPath,
+                this.client.getGlobalStringPath(),
+                this.client.getGlobalStringQuery(),
+                localStringPath,
+                accept,
+                requestOptions,
+                Context.NONE);
     }
 }

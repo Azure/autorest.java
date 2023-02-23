@@ -265,6 +265,6 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
      */
     @Generated
     public ArrayClient buildClient() {
-        return new ArrayClient(new ArrayAsyncClient(buildInnerClient().getArrays()));
+        return new ArrayClient(buildInnerClient().getArrays());
     }
 }

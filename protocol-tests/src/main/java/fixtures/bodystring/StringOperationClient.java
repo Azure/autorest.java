@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.bodystring.implementation.StringOperationsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type. */
 @ServiceClient(builder = StringOperationClientBuilder.class)
 public final class StringOperationClient {
-    @Generated private final StringOperationAsyncClient client;
+    @Generated private final StringOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of StringOperationClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    StringOperationClient(StringOperationAsyncClient client) {
-        this.client = client;
+    StringOperationClient(StringOperationsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -50,7 +51,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
-        return this.client.getNullWithResponse(requestOptions).block();
+        return this.serviceClient.getNullWithResponse(requestOptions);
     }
 
     /**
@@ -82,7 +83,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions) {
-        return this.client.putNullWithResponse(requestOptions).block();
+        return this.serviceClient.putNullWithResponse(requestOptions);
     }
 
     /**
@@ -104,7 +105,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
-        return this.client.getEmptyWithResponse(requestOptions).block();
+        return this.serviceClient.getEmptyWithResponse(requestOptions);
     }
 
     /**
@@ -126,7 +127,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(RequestOptions requestOptions) {
-        return this.client.putEmptyWithResponse(requestOptions).block();
+        return this.serviceClient.putEmptyWithResponse(requestOptions);
     }
 
     /**
@@ -149,7 +150,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getMbcsWithResponse(RequestOptions requestOptions) {
-        return this.client.getMbcsWithResponse(requestOptions).block();
+        return this.serviceClient.getMbcsWithResponse(requestOptions);
     }
 
     /**
@@ -171,7 +172,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putMbcsWithResponse(RequestOptions requestOptions) {
-        return this.client.putMbcsWithResponse(requestOptions).block();
+        return this.serviceClient.putMbcsWithResponse(requestOptions);
     }
 
     /**
@@ -196,7 +197,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWhitespaceWithResponse(RequestOptions requestOptions) {
-        return this.client.getWhitespaceWithResponse(requestOptions).block();
+        return this.serviceClient.getWhitespaceWithResponse(requestOptions);
     }
 
     /**
@@ -219,7 +220,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWhitespaceWithResponse(RequestOptions requestOptions) {
-        return this.client.putWhitespaceWithResponse(requestOptions).block();
+        return this.serviceClient.putWhitespaceWithResponse(requestOptions);
     }
 
     /**
@@ -241,7 +242,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
-        return this.client.getNotProvidedWithResponse(requestOptions).block();
+        return this.serviceClient.getNotProvidedWithResponse(requestOptions);
     }
 
     /**
@@ -263,7 +264,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<byte[]> getBase64EncodedWithResponse(RequestOptions requestOptions) {
-        return this.client.getBase64EncodedWithResponse(requestOptions).block();
+        return this.serviceClient.getBase64EncodedWithResponse(requestOptions);
     }
 
     /**
@@ -285,7 +286,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
-        return this.client.getBase64UrlEncodedWithResponse(requestOptions).block();
+        return this.serviceClient.getBase64UrlEncodedWithResponse(requestOptions);
     }
 
     /**
@@ -308,7 +309,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBase64UrlEncodedWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
-        return this.client.putBase64UrlEncodedWithResponse(stringBody, requestOptions).block();
+        return this.serviceClient.putBase64UrlEncodedWithResponse(stringBody, requestOptions);
     }
 
     /**
@@ -330,6 +331,6 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
-        return this.client.getNullBase64UrlEncodedWithResponse(requestOptions).block();
+        return this.serviceClient.getNullBase64UrlEncodedWithResponse(requestOptions);
     }
 }

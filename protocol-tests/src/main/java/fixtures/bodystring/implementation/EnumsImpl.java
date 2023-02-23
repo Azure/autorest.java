@@ -70,6 +70,24 @@ public final class EnumsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/string/enum/notExpandable")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<String> getNotExpandableSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -83,6 +101,25 @@ public final class EnumsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNotExpandable(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData stringBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/string/enum/notExpandable")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putNotExpandableSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData stringBody,
                 @HeaderParam("Accept") String accept,
@@ -107,6 +144,24 @@ public final class EnumsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/string/enum/Referenced")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<String> getReferencedSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -120,6 +175,25 @@ public final class EnumsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putReferenced(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData enumStringBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/string/enum/Referenced")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putReferencedSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData enumStringBody,
                 @HeaderParam("Accept") String accept,
@@ -144,6 +218,24 @@ public final class EnumsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/string/enum/ReferencedConstant")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getReferencedConstantSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -157,6 +249,25 @@ public final class EnumsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putReferencedConstant(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData enumStringBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/string/enum/ReferencedConstant")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putReferencedConstantSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData enumStringBody,
                 @HeaderParam("Accept") String accept,
@@ -207,7 +318,8 @@ public final class EnumsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions) {
-        return getNotExpandableWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNotExpandableSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -255,7 +367,8 @@ public final class EnumsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNotExpandableWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
-        return putNotExpandableWithResponseAsync(stringBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putNotExpandableSync(this.client.getHost(), stringBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -301,7 +414,8 @@ public final class EnumsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getReferencedWithResponse(RequestOptions requestOptions) {
-        return getReferencedWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getReferencedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -349,7 +463,8 @@ public final class EnumsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
-        return putReferencedWithResponseAsync(enumStringBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putReferencedSync(this.client.getHost(), enumStringBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -400,7 +515,8 @@ public final class EnumsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getReferencedConstantWithResponse(RequestOptions requestOptions) {
-        return getReferencedConstantWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getReferencedConstantSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -455,6 +571,8 @@ public final class EnumsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedConstantWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
-        return putReferencedConstantWithResponseAsync(enumStringBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putReferencedConstantSync(
+                this.client.getHost(), enumStringBody, accept, requestOptions, Context.NONE);
     }
 }

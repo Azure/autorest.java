@@ -140,6 +140,26 @@ public final class DpgMultiMediaTypesClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/mediatypes/jsonandbinary/jsonfirst")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndBinaryTypesJsonFirstSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("application/octet-stream") BinaryData input,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/mediatypes/jsonandbinary/binaryfirst")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -153,6 +173,26 @@ public final class DpgMultiMediaTypesClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> jsonAndBinaryTypesBinaryFirst(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("application/octet-stream") BinaryData input,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/mediatypes/jsonandbinary/binaryfirst")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndBinaryTypesBinaryFirstSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") String contentType,
                 @BodyParam("application/octet-stream") BinaryData input,
@@ -180,6 +220,26 @@ public final class DpgMultiMediaTypesClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/mediatypes/jsonandoctet/jsonfirst")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndOctectWithJsonFirstSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("application/octet-stream") BinaryData message,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/mediatypes/jsonandoctet/octetfirst")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -193,6 +253,26 @@ public final class DpgMultiMediaTypesClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> jsonAndOctectWithOctetFirst(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("application/octet-stream") BinaryData message,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/mediatypes/jsonandoctet/octetfirst")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndOctectWithOctetFirstSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") String contentType,
                 @BodyParam("application/octet-stream") BinaryData message,
@@ -220,6 +300,26 @@ public final class DpgMultiMediaTypesClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/mediatypes/jsonandencoding/jsonfirst")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndEncodingWithJsonFirstSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("application/octet-stream") BinaryData message,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/mediatypes/jsonandencoding/encodingfirst")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -233,6 +333,26 @@ public final class DpgMultiMediaTypesClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> jsonAndEncodingWithEncodingFirst(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("text/plain") BinaryData input,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/mediatypes/jsonandencoding/encodingfirst")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndEncodingWithEncodingFirstSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") String contentType,
                 @BodyParam("text/plain") BinaryData input,
@@ -260,6 +380,26 @@ public final class DpgMultiMediaTypesClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/mediatypes/jsonandtext/textfirst")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndTextWithTextFirstSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("text/plain") BinaryData input,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/mediatypes/jsonandtext/jsonfirst")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -273,6 +413,26 @@ public final class DpgMultiMediaTypesClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> jsonAndTextWithJsonFirst(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("text/plain") BinaryData input,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/mediatypes/jsonandtext/jsonfirst")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndTextWithJsonFirstSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") String contentType,
                 @BodyParam("text/plain") BinaryData input,
@@ -300,6 +460,26 @@ public final class DpgMultiMediaTypesClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/mediatypes/jsonandimage/jsonfirst/binary")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndImageWithJsonFirstSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("application/octet-stream") BinaryData input,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/mediatypes/jsonandimage/jsonfirst/object")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -313,6 +493,26 @@ public final class DpgMultiMediaTypesClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> jsonAndImageObjectTypeWithJsonFirst(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("image/jpeg") BinaryData input,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/mediatypes/jsonandimage/jsonfirst/object")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") String contentType,
                 @BodyParam("image/jpeg") BinaryData input,
@@ -338,6 +538,24 @@ public final class DpgMultiMediaTypesClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/mediatypes/image/binary/nonrequired")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> imageTypeWithNonRequiredBodySync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/mediatypes/jsonandimage/jsonfirst/binary/nonrequired")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -357,6 +575,25 @@ public final class DpgMultiMediaTypesClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/mediatypes/jsonandimage/jsonfirst/binary/nonrequired")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodySync(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/mediatypes/jsonandimage/jsonfirst/object/nonrequired")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -370,6 +607,24 @@ public final class DpgMultiMediaTypesClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> jsonAndImageObjectTypeJsonFirstWithNonRequiredBody(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/mediatypes/jsonandimage/jsonfirst/object/nonrequired")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodySync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -437,7 +692,9 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndBinaryTypesJsonFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return jsonAndBinaryTypesJsonFirstWithResponseAsync(contentType, input, requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndBinaryTypesJsonFirstSync(
+                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -501,7 +758,9 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndBinaryTypesBinaryFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return jsonAndBinaryTypesBinaryFirstWithResponseAsync(contentType, input, requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndBinaryTypesBinaryFirstSync(
+                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -565,7 +824,9 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndOctectWithJsonFirstWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return jsonAndOctectWithJsonFirstWithResponseAsync(contentType, message, requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndOctectWithJsonFirstSync(
+                this.getHost(), contentType, message, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -629,7 +890,9 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndOctectWithOctetFirstWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return jsonAndOctectWithOctetFirstWithResponseAsync(contentType, message, requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndOctectWithOctetFirstSync(
+                this.getHost(), contentType, message, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -693,7 +956,9 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndEncodingWithJsonFirstWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return jsonAndEncodingWithJsonFirstWithResponseAsync(contentType, message, requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndEncodingWithJsonFirstSync(
+                this.getHost(), contentType, message, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -757,7 +1022,9 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndEncodingWithEncodingFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return jsonAndEncodingWithEncodingFirstWithResponseAsync(contentType, input, requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndEncodingWithEncodingFirstSync(
+                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -821,7 +1088,9 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndTextWithTextFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return jsonAndTextWithTextFirstWithResponseAsync(contentType, input, requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndTextWithTextFirstSync(
+                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -885,7 +1154,9 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndTextWithJsonFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return jsonAndTextWithJsonFirstWithResponseAsync(contentType, input, requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndTextWithJsonFirstSync(
+                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -949,7 +1220,9 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndImageWithJsonFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return jsonAndImageWithJsonFirstWithResponseAsync(contentType, input, requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndImageWithJsonFirstSync(
+                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1013,7 +1286,9 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return jsonAndImageObjectTypeWithJsonFirstWithResponseAsync(contentType, input, requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndImageObjectTypeWithJsonFirstSync(
+                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1089,7 +1364,8 @@ public final class DpgMultiMediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> imageTypeWithNonRequiredBodyWithResponse(RequestOptions requestOptions) {
-        return imageTypeWithNonRequiredBodyWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.imageTypeWithNonRequiredBodySync(this.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1151,7 +1427,9 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse(
             String contentType, RequestOptions requestOptions) {
-        return jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponseAsync(contentType, requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodySync(
+                this.getHost(), contentType, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1231,6 +1509,8 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(
             RequestOptions requestOptions) {
-        return jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.jsonAndImageObjectTypeJsonFirstWithNonRequiredBodySync(
+                this.getHost(), accept, requestOptions, Context.NONE);
     }
 }

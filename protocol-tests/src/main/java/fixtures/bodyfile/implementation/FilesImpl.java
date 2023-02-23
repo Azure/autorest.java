@@ -68,6 +68,24 @@ public final class FilesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/files/stream/nonempty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getFileSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/files/stream/verylarge")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -86,6 +104,24 @@ public final class FilesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/files/stream/verylarge")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getFileLargeSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/files/stream/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -99,6 +135,24 @@ public final class FilesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getEmptyFile(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/files/stream/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getEmptyFileSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -145,7 +199,8 @@ public final class FilesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFileWithResponse(RequestOptions requestOptions) {
-        return getFileWithResponseAsync(requestOptions).block();
+        final String accept = "image/png, application/json";
+        return service.getFileSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -189,7 +244,8 @@ public final class FilesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFileLargeWithResponse(RequestOptions requestOptions) {
-        return getFileLargeWithResponseAsync(requestOptions).block();
+        final String accept = "image/png, application/json";
+        return service.getFileLargeSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -233,6 +289,7 @@ public final class FilesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyFileWithResponse(RequestOptions requestOptions) {
-        return getEmptyFileWithResponseAsync(requestOptions).block();
+        final String accept = "image/png, application/json";
+        return service.getEmptyFileSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 }

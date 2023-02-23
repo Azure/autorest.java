@@ -70,6 +70,24 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/200/A/204/none/default/Error/response/200/valid")
+        @ExpectedResponses({200, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200Model204NoModelDefaultError200ValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/200/A/204/none/default/Error/response/204/none")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(
@@ -83,6 +101,24 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get200Model204NoModelDefaultError204Valid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/200/A/204/none/default/Error/response/204/none")
+        @ExpectedResponses({200, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200Model204NoModelDefaultError204ValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -106,6 +142,24 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/200/A/204/none/default/Error/response/201/valid")
+        @ExpectedResponses({200, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200Model204NoModelDefaultError201InvalidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/200/A/204/none/default/Error/response/202/none")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(
@@ -119,6 +173,24 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get200Model204NoModelDefaultError202None(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/200/A/204/none/default/Error/response/202/none")
+        @ExpectedResponses({200, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200Model204NoModelDefaultError202NoneSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -142,6 +214,24 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/200/A/204/none/default/Error/response/400/valid")
+        @ExpectedResponses({200, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200Model204NoModelDefaultError400ValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/200/A/201/B/default/Error/response/200/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(
@@ -155,6 +245,24 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get200Model201ModelDefaultError200Valid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/200/A/201/B/default/Error/response/200/valid")
+        @ExpectedResponses({200, 201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200Model201ModelDefaultError200ValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -178,6 +286,24 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/200/A/201/B/default/Error/response/201/valid")
+        @ExpectedResponses({200, 201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200Model201ModelDefaultError201ValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/200/A/201/B/default/Error/response/400/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(
@@ -191,6 +317,24 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get200Model201ModelDefaultError400Valid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/200/A/201/B/default/Error/response/400/valid")
+        @ExpectedResponses({200, 201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200Model201ModelDefaultError400ValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -211,6 +355,21 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
+        @ExpectedResponses({200, 201, 404})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError200ValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(
@@ -221,6 +380,21 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError201Valid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
+        @ExpectedResponses({200, 201, 404})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError201ValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -241,6 +415,21 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
+        @ExpectedResponses({200, 201, 404})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError404ValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(
@@ -251,6 +440,21 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError400Valid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
+        @ExpectedResponses({200, 201, 404})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError400ValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -274,6 +478,24 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/202/none/204/none/default/Error/response/202/none")
+        @ExpectedResponses({202, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get202None204NoneDefaultError202NoneSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/202/none/204/none/default/Error/response/204/none")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(
@@ -287,6 +509,24 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get202None204NoneDefaultError204None(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/202/none/204/none/default/Error/response/204/none")
+        @ExpectedResponses({202, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get202None204NoneDefaultError204NoneSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -310,6 +550,24 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/202/none/204/none/default/Error/response/400/valid")
+        @ExpectedResponses({202, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get202None204NoneDefaultError400ValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/202/none/204/none/default/none/response/202/invalid")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(
@@ -323,6 +581,21 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get202None204NoneDefaultNone202Invalid(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Get("/http/payloads/202/none/204/none/default/none/response/202/invalid")
+        @ExpectedResponses({202, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get202None204NoneDefaultNone202InvalidSync(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/payloads/202/none/204/none/default/none/response/204/none")
@@ -340,6 +613,21 @@ public final class MultipleResponsesImpl {
         Mono<Response<Void>> get202None204NoneDefaultNone204None(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
+        @Get("/http/payloads/202/none/204/none/default/none/response/204/none")
+        @ExpectedResponses({202, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get202None204NoneDefaultNone204NoneSync(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
         @Get("/http/payloads/202/none/204/none/default/none/response/400/none")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(
@@ -353,6 +641,21 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get202None204NoneDefaultNone400None(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Get("/http/payloads/202/none/204/none/default/none/response/400/none")
+        @ExpectedResponses({202, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get202None204NoneDefaultNone400NoneSync(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/payloads/202/none/204/none/default/none/response/400/invalid")
@@ -370,6 +673,21 @@ public final class MultipleResponsesImpl {
         Mono<Response<Void>> get202None204NoneDefaultNone400Invalid(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
+        @Get("/http/payloads/202/none/204/none/default/none/response/400/invalid")
+        @ExpectedResponses({202, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get202None204NoneDefaultNone400InvalidSync(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
         @Get("/http/payloads/default/A/response/200/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -383,6 +701,24 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getDefaultModelA200Valid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/default/A/response/200/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getDefaultModelA200ValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -406,6 +742,24 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/default/A/response/200/none")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getDefaultModelA200NoneSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/default/A/response/400/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -419,6 +773,24 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getDefaultModelA400Valid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/default/A/response/400/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getDefaultModelA400ValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -442,6 +814,24 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/default/A/response/400/none")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getDefaultModelA400NoneSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/default/none/response/200/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -455,6 +845,21 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getDefaultNone200Invalid(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Get("/http/payloads/default/none/response/200/invalid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getDefaultNone200InvalidSync(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/payloads/default/none/response/200/none")
@@ -472,6 +877,21 @@ public final class MultipleResponsesImpl {
         Mono<Response<Void>> getDefaultNone200None(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
+        @Get("/http/payloads/default/none/response/200/none")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getDefaultNone200NoneSync(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
         @Get("/http/payloads/default/none/response/400/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -485,6 +905,21 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getDefaultNone400Invalid(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Get("/http/payloads/default/none/response/400/invalid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getDefaultNone400InvalidSync(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/http/payloads/default/none/response/400/none")
@@ -502,6 +937,21 @@ public final class MultipleResponsesImpl {
         Mono<Response<Void>> getDefaultNone400None(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
+        @Get("/http/payloads/default/none/response/400/none")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getDefaultNone400NoneSync(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
         @Get("/http/payloads/200/A/response/200/none")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -515,6 +965,24 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get200ModelA200None(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/200/A/response/200/none")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200ModelA200NoneSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -538,6 +1006,24 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/200/A/response/200/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200ModelA200ValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/200/A/response/200/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -551,6 +1037,24 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get200ModelA200Invalid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/200/A/response/200/invalid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200ModelA200InvalidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -574,6 +1078,24 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/200/A/response/400/none")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200ModelA400NoneSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/200/A/response/400/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -587,6 +1109,24 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get200ModelA400Valid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/200/A/response/400/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200ModelA400ValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -610,6 +1150,24 @@ public final class MultipleResponsesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/payloads/200/A/response/400/invalid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200ModelA400InvalidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/payloads/200/A/response/202/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -623,6 +1181,24 @@ public final class MultipleResponsesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get200ModelA202Valid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/payloads/200/A/response/202/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> get200ModelA202ValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -677,7 +1253,9 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError200ValidWithResponse(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError200ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200Model204NoModelDefaultError200ValidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -728,7 +1306,9 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError204ValidWithResponse(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError204ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200Model204NoModelDefaultError204ValidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -779,7 +1359,9 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError201InvalidWithResponse(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError201InvalidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200Model204NoModelDefaultError201InvalidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -830,7 +1412,9 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError202NoneWithResponse(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError202NoneWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200Model204NoModelDefaultError202NoneSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -881,7 +1465,9 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model204NoModelDefaultError400ValidWithResponse(RequestOptions requestOptions) {
-        return get200Model204NoModelDefaultError400ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200Model204NoModelDefaultError400ValidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -932,7 +1518,9 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError200ValidWithResponse(RequestOptions requestOptions) {
-        return get200Model201ModelDefaultError200ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200Model201ModelDefaultError200ValidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -983,7 +1571,9 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError201ValidWithResponse(RequestOptions requestOptions) {
-        return get200Model201ModelDefaultError201ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200Model201ModelDefaultError201ValidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1034,7 +1624,9 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200Model201ModelDefaultError400ValidWithResponse(RequestOptions requestOptions) {
-        return get200Model201ModelDefaultError400ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200Model201ModelDefaultError400ValidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1080,7 +1672,9 @@ public final class MultipleResponsesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(
             RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200ModelA201ModelC404ModelDDefaultError200ValidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1126,7 +1720,9 @@ public final class MultipleResponsesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(
             RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200ModelA201ModelC404ModelDDefaultError201ValidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1172,7 +1768,9 @@ public final class MultipleResponsesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(
             RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200ModelA201ModelC404ModelDDefaultError404ValidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1218,7 +1816,9 @@ public final class MultipleResponsesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(
             RequestOptions requestOptions) {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200ModelA201ModelC404ModelDDefaultError400ValidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1252,7 +1852,9 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError202NoneWithResponse(RequestOptions requestOptions) {
-        return get202None204NoneDefaultError202NoneWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get202None204NoneDefaultError202NoneSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1286,7 +1888,9 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError204NoneWithResponse(RequestOptions requestOptions) {
-        return get202None204NoneDefaultError204NoneWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get202None204NoneDefaultError204NoneSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1320,7 +1924,9 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError400ValidWithResponse(RequestOptions requestOptions) {
-        return get202None204NoneDefaultError400ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get202None204NoneDefaultError400ValidSync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1352,7 +1958,7 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone202InvalidWithResponse(RequestOptions requestOptions) {
-        return get202None204NoneDefaultNone202InvalidWithResponseAsync(requestOptions).block();
+        return service.get202None204NoneDefaultNone202InvalidSync(this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -1383,7 +1989,7 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone204NoneWithResponse(RequestOptions requestOptions) {
-        return get202None204NoneDefaultNone204NoneWithResponseAsync(requestOptions).block();
+        return service.get202None204NoneDefaultNone204NoneSync(this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -1414,7 +2020,7 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
-        return get202None204NoneDefaultNone400NoneWithResponseAsync(requestOptions).block();
+        return service.get202None204NoneDefaultNone400NoneSync(this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -1446,7 +2052,7 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
-        return get202None204NoneDefaultNone400InvalidWithResponseAsync(requestOptions).block();
+        return service.get202None204NoneDefaultNone400InvalidSync(this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -1494,7 +2100,8 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultModelA200ValidWithResponse(RequestOptions requestOptions) {
-        return getDefaultModelA200ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getDefaultModelA200ValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1542,7 +2149,8 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultModelA200NoneWithResponse(RequestOptions requestOptions) {
-        return getDefaultModelA200NoneWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getDefaultModelA200NoneSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1574,7 +2182,8 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400ValidWithResponse(RequestOptions requestOptions) {
-        return getDefaultModelA400ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getDefaultModelA400ValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1606,7 +2215,8 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400NoneWithResponse(RequestOptions requestOptions) {
-        return getDefaultModelA400NoneWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getDefaultModelA400NoneSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1637,7 +2247,7 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200InvalidWithResponse(RequestOptions requestOptions) {
-        return getDefaultNone200InvalidWithResponseAsync(requestOptions).block();
+        return service.getDefaultNone200InvalidSync(this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -1668,7 +2278,7 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200NoneWithResponse(RequestOptions requestOptions) {
-        return getDefaultNone200NoneWithResponseAsync(requestOptions).block();
+        return service.getDefaultNone200NoneSync(this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -1699,7 +2309,7 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400InvalidWithResponse(RequestOptions requestOptions) {
-        return getDefaultNone400InvalidWithResponseAsync(requestOptions).block();
+        return service.getDefaultNone400InvalidSync(this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -1730,7 +2340,7 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400NoneWithResponse(RequestOptions requestOptions) {
-        return getDefaultNone400NoneWithResponseAsync(requestOptions).block();
+        return service.getDefaultNone400NoneSync(this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -1780,7 +2390,8 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200NoneWithResponse(RequestOptions requestOptions) {
-        return get200ModelA200NoneWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200ModelA200NoneSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1828,7 +2439,8 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200ValidWithResponse(RequestOptions requestOptions) {
-        return get200ModelA200ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200ModelA200ValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1876,7 +2488,8 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA200InvalidWithResponse(RequestOptions requestOptions) {
-        return get200ModelA200InvalidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200ModelA200InvalidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1924,7 +2537,8 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400NoneWithResponse(RequestOptions requestOptions) {
-        return get200ModelA400NoneWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200ModelA400NoneSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1972,7 +2586,8 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400ValidWithResponse(RequestOptions requestOptions) {
-        return get200ModelA400ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200ModelA400ValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -2020,7 +2635,8 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA400InvalidWithResponse(RequestOptions requestOptions) {
-        return get200ModelA400InvalidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200ModelA400InvalidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -2068,6 +2684,7 @@ public final class MultipleResponsesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get200ModelA202ValidWithResponse(RequestOptions requestOptions) {
-        return get200ModelA202ValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get200ModelA202ValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 }

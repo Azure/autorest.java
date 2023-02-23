@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.requiredheaderquery.implementation.ParamsImpl;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -22,16 +23,16 @@ import java.util.List;
 /** Initializes a new instance of the synchronous DpgRequiredHeaderQueryClient type. */
 @ServiceClient(builder = DpgRequiredHeaderQueryClientBuilder.class)
 public final class DpgRequiredHeaderQueryClient {
-    @Generated private final DpgRequiredHeaderQueryAsyncClient client;
+    @Generated private final ParamsImpl serviceClient;
 
     /**
      * Initializes an instance of DpgRequiredHeaderQueryClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    DpgRequiredHeaderQueryClient(DpgRequiredHeaderQueryAsyncClient client) {
-        this.client = client;
+    DpgRequiredHeaderQueryClient(ParamsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -83,18 +84,16 @@ public final class DpgRequiredHeaderQueryClient {
             List<String> parameterMultiEnumArray,
             OffsetDateTime parameterDatetime,
             RequestOptions requestOptions) {
-        return this.client
-                .getRequiredQueryParamWithResponse(
-                        parameterInt,
-                        parameterBoolean,
-                        parameterCsvStringArray,
-                        parameterCsvIntArray,
-                        parameterMultiStringArray,
-                        parameterMultiIntArray,
-                        parameterMultiEnumArray,
-                        parameterDatetime,
-                        requestOptions)
-                .block();
+        return this.serviceClient.getRequiredQueryParamWithResponse(
+                parameterInt,
+                parameterBoolean,
+                parameterCsvStringArray,
+                parameterCsvIntArray,
+                parameterMultiStringArray,
+                parameterMultiIntArray,
+                parameterMultiEnumArray,
+                parameterDatetime,
+                requestOptions);
     }
 
     /**
@@ -129,15 +128,13 @@ public final class DpgRequiredHeaderQueryClient {
             OffsetDateTime parameterDatetime,
             Duration parameterDuration,
             RequestOptions requestOptions) {
-        return this.client
-                .getRequiredHeaderWithResponse(
-                        parameterInt,
-                        parameterBoolean,
-                        parameterCsvStringArray,
-                        parameterCsvIntArray,
-                        parameterDatetime,
-                        parameterDuration,
-                        requestOptions)
-                .block();
+        return this.serviceClient.getRequiredHeaderWithResponse(
+                parameterInt,
+                parameterBoolean,
+                parameterCsvStringArray,
+                parameterCsvIntArray,
+                parameterDatetime,
+                parameterDuration,
+                requestOptions);
     }
 }

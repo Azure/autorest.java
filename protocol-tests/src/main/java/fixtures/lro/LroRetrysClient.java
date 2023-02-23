@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import fixtures.lro.implementation.LroRetrysImpl;
 
 /** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestServiceClient type. */
 @ServiceClient(builder = LroRetrysClientBuilder.class)
 public final class LroRetrysClient {
-    @Generated private final LroRetrysAsyncClient client;
+    @Generated private final LroRetrysImpl serviceClient;
 
     /**
      * Initializes an instance of LroRetrysClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    LroRetrysClient(LroRetrysAsyncClient client) {
-        this.client = client;
+    LroRetrysClient(LroRetrysImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -92,7 +93,7 @@ public final class LroRetrysClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(RequestOptions requestOptions) {
-        return this.client.beginPut201CreatingSucceeded200(requestOptions).getSyncPoller();
+        return this.serviceClient.beginPut201CreatingSucceeded200(requestOptions);
     }
 
     /**
@@ -156,7 +157,7 @@ public final class LroRetrysClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPutAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
-        return this.client.beginPutAsyncRelativeRetrySucceeded(requestOptions).getSyncPoller();
+        return this.serviceClient.beginPutAsyncRelativeRetrySucceeded(requestOptions);
     }
 
     /**
@@ -192,7 +193,7 @@ public final class LroRetrysClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteProvisioning202Accepted200Succeeded(RequestOptions requestOptions) {
-        return this.client.beginDeleteProvisioning202Accepted200Succeeded(requestOptions).getSyncPoller();
+        return this.serviceClient.beginDeleteProvisioning202Accepted200Succeeded(requestOptions);
     }
 
     /**
@@ -209,7 +210,7 @@ public final class LroRetrysClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete202Retry200(RequestOptions requestOptions) {
-        return this.client.beginDelete202Retry200(requestOptions).getSyncPoller();
+        return this.serviceClient.beginDelete202Retry200(requestOptions);
     }
 
     /**
@@ -226,7 +227,7 @@ public final class LroRetrysClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
-        return this.client.beginDeleteAsyncRelativeRetrySucceeded(requestOptions).getSyncPoller();
+        return this.serviceClient.beginDeleteAsyncRelativeRetrySucceeded(requestOptions);
     }
 
     /**
@@ -271,7 +272,7 @@ public final class LroRetrysClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions) {
-        return this.client.beginPost202Retry200(requestOptions).getSyncPoller();
+        return this.serviceClient.beginPost202Retry200(requestOptions);
     }
 
     /**
@@ -317,6 +318,6 @@ public final class LroRetrysClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetrySucceeded(RequestOptions requestOptions) {
-        return this.client.beginPostAsyncRelativeRetrySucceeded(requestOptions).getSyncPoller();
+        return this.serviceClient.beginPostAsyncRelativeRetrySucceeded(requestOptions);
     }
 }

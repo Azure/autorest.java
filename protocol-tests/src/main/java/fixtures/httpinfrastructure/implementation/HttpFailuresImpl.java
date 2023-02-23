@@ -68,6 +68,24 @@ public final class HttpFailuresImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/failure/emptybody/error")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Boolean> getEmptyErrorSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/failure/nomodel/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -86,6 +104,24 @@ public final class HttpFailuresImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/http/failure/nomodel/error")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Boolean> getNoModelErrorSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/failure/nomodel/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -99,6 +135,24 @@ public final class HttpFailuresImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> getNoModelEmpty(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/failure/nomodel/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Boolean> getNoModelEmptySync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -146,7 +200,8 @@ public final class HttpFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions) {
-        return getEmptyErrorWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getEmptyErrorSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -190,7 +245,8 @@ public final class HttpFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions) {
-        return getNoModelErrorWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNoModelErrorSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -234,6 +290,7 @@ public final class HttpFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
-        return getNoModelEmptyWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNoModelEmptySync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 }

@@ -266,6 +266,6 @@ public final class InheritanceClientBuilder
      */
     @Generated
     public InheritanceClient buildClient() {
-        return new InheritanceClient(new InheritanceAsyncClient(buildInnerClient().getInheritances()));
+        return new InheritanceClient(buildInnerClient().getInheritances());
     }
 }

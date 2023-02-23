@@ -266,7 +266,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder
      */
     @Generated
     public StringOperationClient buildStringOperationClient() {
-        return new StringOperationClient(new StringOperationAsyncClient(buildInnerClient().getStringOperations()));
+        return new StringOperationClient(buildInnerClient().getStringOperations());
     }
 
     /**
@@ -276,7 +276,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder
      */
     @Generated
     public EnumClient buildEnumClient() {
-        return new EnumClient(new EnumAsyncClient(buildInnerClient().getEnums()));
+        return new EnumClient(buildInnerClient().getEnums());
     }
 
     @Generated

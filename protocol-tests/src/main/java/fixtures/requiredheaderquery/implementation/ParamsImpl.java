@@ -88,6 +88,35 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/required/query/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getRequiredQueryParamSync(
+                @HostParam("$host") String host,
+                @QueryParam("parameter_int") int parameterInt,
+                @QueryParam("parameter_boolean") boolean parameterBoolean,
+                @QueryParam("parameter_csv_string_array") String parameterCsvStringArray,
+                @QueryParam("parameter_csv_int_array") String parameterCsvIntArray,
+                @QueryParam(value = "parameter_multi_string_array", multipleQueryParams = true)
+                        List<String> parameterMultiStringArray,
+                @QueryParam(value = "parameter_multi_int_array", multipleQueryParams = true)
+                        List<String> parameterMultiIntArray,
+                @QueryParam(value = "parameter_multi_enum_array", multipleQueryParams = true)
+                        List<String> parameterMultiEnumArray,
+                @QueryParam("parameter_datetime") OffsetDateTime parameterDatetime,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/required/header/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -101,6 +130,30 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getRequiredHeader(
+                @HostParam("$host") String host,
+                @HeaderParam("parameter_int") int parameterInt,
+                @HeaderParam("parameter_boolean") boolean parameterBoolean,
+                @HeaderParam("parameter_csv_string_array") String parameterCsvStringArray,
+                @HeaderParam("parameter_csv_int_array") String parameterCsvIntArray,
+                @HeaderParam("parameter_datetime") DateTimeRfc1123 parameterDatetime,
+                @HeaderParam("parameter_duration") Duration parameterDuration,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/required/header/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getRequiredHeaderSync(
                 @HostParam("$host") String host,
                 @HeaderParam("parameter_int") int parameterInt,
                 @HeaderParam("parameter_boolean") boolean parameterBoolean,
@@ -240,17 +293,33 @@ public final class ParamsImpl {
             List<String> parameterMultiEnumArray,
             OffsetDateTime parameterDatetime,
             RequestOptions requestOptions) {
-        return getRequiredQueryParamWithResponseAsync(
-                        parameterInt,
-                        parameterBoolean,
-                        parameterCsvStringArray,
-                        parameterCsvIntArray,
-                        parameterMultiStringArray,
-                        parameterMultiIntArray,
-                        parameterMultiEnumArray,
-                        parameterDatetime,
-                        requestOptions)
-                .block();
+        final String accept = "application/json";
+        String parameterCsvStringArrayConverted =
+                parameterCsvStringArray.stream()
+                        .map(value -> Objects.toString(value, ""))
+                        .collect(Collectors.joining(","));
+        String parameterCsvIntArrayConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeIterable(parameterCsvIntArray, CollectionFormat.CSV);
+        List<String> parameterMultiStringArrayConverted =
+                parameterMultiStringArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> parameterMultiIntArrayConverted =
+                parameterMultiIntArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> parameterMultiEnumArrayConverted =
+                parameterMultiEnumArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        return service.getRequiredQueryParamSync(
+                this.client.getHost(),
+                parameterInt,
+                parameterBoolean,
+                parameterCsvStringArrayConverted,
+                parameterCsvIntArrayConverted,
+                parameterMultiStringArrayConverted,
+                parameterMultiIntArrayConverted,
+                parameterMultiEnumArrayConverted,
+                parameterDatetime,
+                accept,
+                requestOptions,
+                Context.NONE);
     }
 
     /**
@@ -339,14 +408,25 @@ public final class ParamsImpl {
             OffsetDateTime parameterDatetime,
             Duration parameterDuration,
             RequestOptions requestOptions) {
-        return getRequiredHeaderWithResponseAsync(
-                        parameterInt,
-                        parameterBoolean,
-                        parameterCsvStringArray,
-                        parameterCsvIntArray,
-                        parameterDatetime,
-                        parameterDuration,
-                        requestOptions)
-                .block();
+        final String accept = "application/json";
+        String parameterCsvStringArrayConverted =
+                parameterCsvStringArray.stream()
+                        .map(value -> Objects.toString(value, ""))
+                        .collect(Collectors.joining(","));
+        String parameterCsvIntArrayConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeIterable(parameterCsvIntArray, CollectionFormat.CSV);
+        DateTimeRfc1123 parameterDatetimeConverted = new DateTimeRfc1123(parameterDatetime);
+        return service.getRequiredHeaderSync(
+                this.client.getHost(),
+                parameterInt,
+                parameterBoolean,
+                parameterCsvStringArrayConverted,
+                parameterCsvIntArrayConverted,
+                parameterDatetimeConverted,
+                parameterDuration,
+                accept,
+                requestOptions,
+                Context.NONE);
     }
 }

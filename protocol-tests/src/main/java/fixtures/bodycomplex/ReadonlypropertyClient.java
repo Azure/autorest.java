@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.bodycomplex.implementation.ReadonlypropertiesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = ReadonlypropertyClientBuilder.class)
 public final class ReadonlypropertyClient {
-    @Generated private final ReadonlypropertyAsyncClient client;
+    @Generated private final ReadonlypropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of ReadonlypropertyClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ReadonlypropertyClient(ReadonlypropertyAsyncClient client) {
-        this.client = client;
+    ReadonlypropertyClient(ReadonlypropertiesImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -53,7 +54,7 @@ public final class ReadonlypropertyClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.client.getValidWithResponse(requestOptions).block();
+        return this.serviceClient.getValidWithResponse(requestOptions);
     }
 
     /**
@@ -79,6 +80,6 @@ public final class ReadonlypropertyClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putValidWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putValidWithResponse(complexBody, requestOptions);
     }
 }

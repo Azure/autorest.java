@@ -14,20 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import fixtures.parameterizedendpoint.implementation.ParmaterizedEndpointClientImpl;
 
 /** Initializes a new instance of the synchronous ParmaterizedEndpointClient type. */
 @ServiceClient(builder = ParmaterizedEndpointClientBuilder.class)
 public final class ParmaterizedEndpointClient {
-    @Generated private final ParmaterizedEndpointAsyncClient client;
+    @Generated private final ParmaterizedEndpointClientImpl serviceClient;
 
     /**
      * Initializes an instance of ParmaterizedEndpointClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ParmaterizedEndpointClient(ParmaterizedEndpointAsyncClient client) {
-        this.client = client;
+    ParmaterizedEndpointClient(ParmaterizedEndpointClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -43,6 +44,6 @@ public final class ParmaterizedEndpointClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 }
