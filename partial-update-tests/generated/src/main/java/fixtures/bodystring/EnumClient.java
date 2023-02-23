@@ -20,6 +20,18 @@ import fixtures.bodystring.implementation.EnumsImpl;
 @ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class)
 public final class EnumClient {
 
+    @Generated private final EnumsImpl serviceClient;
+
+    /**
+     * Initializes an instance of EnumClient class.
+     *
+     * @param serviceClient the service client implementation.
+     */
+    @Generated
+    EnumClient(EnumsImpl serviceClient) {
+        this.serviceClient = serviceClient;
+    }
+
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
@@ -110,17 +122,5 @@ public final class EnumClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
         return this.serviceClient.putReferencedWithResponse(enumStringBody, requestOptions);
-    }
-
-    @Generated private final EnumsImpl serviceClient;
-
-    /**
-     * Initializes an instance of EnumClient class.
-     *
-     * @param serviceClient the service client implementation.
-     */
-    @Generated
-    EnumClient(EnumsImpl serviceClient) {
-        this.serviceClient = serviceClient;
     }
 }

@@ -7,7 +7,6 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
 import com.azure.core.client.traits.HttpTrait;
-import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
@@ -35,7 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 /** A builder for creating a new instance of the AutoRestSwaggerBatServiceClient type. */
 @ServiceClientBuilder(
@@ -53,36 +51,15 @@ public final class AutoRestSwaggerBatServiceClientBuilder
 
     @Generated private static final String SDK_VERSION = "version";
 
+    @Generated
+    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("fixtures-bodystring.properties");
+
+    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+
     /** Create an instance of the AutoRestSwaggerBatServiceClientBuilder. */
     @Generated
     public AutoRestSwaggerBatServiceClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
-    }
-
-    /*
-     * server parameter
-     */
-    @Generated private String host;
-
-    private String connectionString;
-
-    private AzureKeyCredential keyCredential;
-
-    public AutoRestSwaggerBatServiceClientBuilder connectionString(String host) {
-        this.connectionString = connectionString;
-        return this;
-    }
-
-    /**
-     * Sets server parameter.
-     *
-     * @param host the host value.
-     * @return the AutoRestSwaggerBatServiceClientBuilder.
-     */
-    @Generated
-    public AutoRestSwaggerBatServiceClientBuilder host(String host) {
-        this.host = host;
-        return this;
     }
 
     /*
@@ -112,6 +89,54 @@ public final class AutoRestSwaggerBatServiceClientBuilder
     }
 
     /*
+     * The logging configuration for HTTP requests and responses.
+     */
+    @Generated private HttpLogOptions httpLogOptions;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public AutoRestSwaggerBatServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+        this.httpLogOptions = httpLogOptions;
+        return this;
+    }
+
+    /*
+     * The client options such as application ID and custom headers to set on a request.
+     */
+    @Generated private ClientOptions clientOptions;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public AutoRestSwaggerBatServiceClientBuilder clientOptions(ClientOptions clientOptions) {
+        this.clientOptions = clientOptions;
+        return this;
+    }
+
+    /*
+     * The retry options to configure retry policy for failed requests.
+     */
+    @Generated private RetryOptions retryOptions;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public AutoRestSwaggerBatServiceClientBuilder retryOptions(RetryOptions retryOptions) {
+        this.retryOptions = retryOptions;
+        return this;
+    }
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public AutoRestSwaggerBatServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
+        pipelinePolicies.add(customPolicy);
+        return this;
+    }
+
+    /*
      * The configuration store that is used during construction of the service client.
      */
     @Generated private Configuration configuration;
@@ -125,15 +150,19 @@ public final class AutoRestSwaggerBatServiceClientBuilder
     }
 
     /*
-     * The logging configuration for HTTP requests and responses.
+     * server parameter
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated private String host;
 
-    /** {@inheritDoc}. */
+    /**
+     * Sets server parameter.
+     *
+     * @param host the host value.
+     * @return the AutoRestSwaggerBatServiceClientBuilder.
+     */
     @Generated
-    @Override
-    public AutoRestSwaggerBatServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
-        this.httpLogOptions = httpLogOptions;
+    public AutoRestSwaggerBatServiceClientBuilder host(String host) {
+        this.host = host;
         return this;
     }
 
@@ -154,49 +183,18 @@ public final class AutoRestSwaggerBatServiceClientBuilder
         return this;
     }
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
-
-    /*
-     * The client options such as application ID and custom headers to set on a request.
-     */
-    @Generated private ClientOptions clientOptions;
-
-    /** {@inheritDoc}. */
-    @Generated
-    @Override
-    public AutoRestSwaggerBatServiceClientBuilder clientOptions(ClientOptions clientOptions) {
-        this.clientOptions = clientOptions;
-        return this;
-    }
-
-    /** {@inheritDoc}. */
-    @Generated
-    @Override
-    public AutoRestSwaggerBatServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
-        Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
-        pipelinePolicies.add(customPolicy);
-        return this;
-    }
-
     /**
      * Builds an instance of AutoRestSwaggerBatServiceClientImpl with the provided parameters.
      *
      * @return an instance of AutoRestSwaggerBatServiceClientImpl.
      */
+    @Generated
     private AutoRestSwaggerBatServiceClientImpl buildInnerClient() {
-        if (host == null) {
-            this.host = "http://localhost:3000";
-        }
-        if (connectionString != null) {
-            this.host = connectionString.split(Pattern.quote(";"))[0];
-            this.keyCredential = new AzureKeyCredential(connectionString.split(Pattern.quote(";"))[1]);
-        }
-        if (pipeline == null) {
-            this.pipeline = createHttpPipeline();
-        }
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestSwaggerBatServiceClientImpl client =
                 new AutoRestSwaggerBatServiceClientImpl(
-                        pipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 
@@ -277,21 +275,5 @@ public final class AutoRestSwaggerBatServiceClientBuilder
     @Generated
     public EnumClient buildEnumClient() {
         return new EnumClient(buildInnerClient().getEnums());
-    }
-
-    @Generated
-    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("fixtures-bodystring.properties");
-
-    /*
-     * The retry options to configure retry policy for failed requests.
-     */
-    @Generated private RetryOptions retryOptions;
-
-    /** {@inheritDoc}. */
-    @Generated
-    @Override
-    public AutoRestSwaggerBatServiceClientBuilder retryOptions(RetryOptions retryOptions) {
-        this.retryOptions = retryOptions;
-        return this;
     }
 }

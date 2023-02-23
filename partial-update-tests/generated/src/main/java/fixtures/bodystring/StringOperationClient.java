@@ -25,13 +25,25 @@ public final class StringOperationClient {
     private EnumsImpl enumClient;
 
     /**
-     * Initializes an instance of StringOperations class.
+     * 1. manually add one constructor
      *
-     * @param client the async client.
+     * @param serviceClient the async client.
      * @param test the parameter.
      */
-    StringOperationClient(StringOperationAsyncClient client, String test) {
-        this.client = client;
+    StringOperationClient(StringOperationsImpl serviceClient, String test) {
+        this.serviceClient = serviceClient;
+    }
+
+    @Generated private final StringOperationsImpl serviceClient;
+
+    /**
+     * Initializes an instance of StringOperationClient class.
+     *
+     * @param serviceClient the service client implementation.
+     */
+    @Generated
+    StringOperationClient(StringOperationsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -59,7 +71,15 @@ public final class StringOperationClient {
     /**
      * 2. manually update method signature
      *
-     * <p>Set string value null.
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -68,18 +88,20 @@ public final class StringOperationClient {
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @param test the parameter.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions, String test) {
-        return this.client.putNullWithResponse(requestOptions).block();
+        return this.serviceClient.putNullWithResponse(requestOptions);
     }
 
     /**
      * 3. manually update method access from public to private
-     *
-     * <p>Get empty string value value ''.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -89,11 +111,14 @@ public final class StringOperationClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return empty string value value ''.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return empty string value value '' along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
-        return this.client.getEmptyWithResponse(requestOptions).block();
+        return this.serviceClient.getEmptyWithResponse(requestOptions);
     }
 
     /**
@@ -301,15 +326,6 @@ public final class StringOperationClient {
     }
 
     /**
-     * Manually added method to test partial update
-     *
-     * @return a string
-     */
-    public String manuallyAddedMethod() {
-        return "manuallyAddedMethod";
-    }
-
-    /**
      * Get null value that is expected to be base64url encoded.
      *
      * <p><strong>Response Body Schema</strong>
@@ -330,8 +346,6 @@ public final class StringOperationClient {
     public Response<BinaryData> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNullBase64UrlEncodedWithResponse(requestOptions);
     }
-
-    @Generated private final StringOperationsImpl serviceClient;
 
     /**
      * This is an added method.
