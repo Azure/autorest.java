@@ -72,6 +72,24 @@ public final class StringOperationsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/string/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -90,6 +108,24 @@ public final class StringOperationsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/string/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -103,6 +139,24 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getEmpty(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/string/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getEmptySync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -127,6 +181,25 @@ public final class StringOperationsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/string/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putEmptySync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData stringBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -140,6 +213,24 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getMbcs(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/string/mbcs")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getMbcsSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -164,6 +255,25 @@ public final class StringOperationsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/string/mbcs")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putMbcsSync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData stringBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -177,6 +287,24 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getWhitespace(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/string/whitespace")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getWhitespaceSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -201,6 +329,25 @@ public final class StringOperationsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/string/whitespace")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putWhitespaceSync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData stringBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/string/notProvided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -214,6 +361,24 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNotProvided(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/string/notProvided")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getNotProvidedSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -237,6 +402,24 @@ public final class StringOperationsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/string/base64Encoding")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<byte[]> getBase64EncodedSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/string/base64UrlEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -250,6 +433,24 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getBase64UrlEncoded(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/string/base64UrlEncoding")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getBase64UrlEncodedSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -274,6 +475,25 @@ public final class StringOperationsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/string/base64UrlEncoding")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putBase64UrlEncodedSync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData stringBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/string/nullBase64UrlEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -287,6 +507,24 @@ public final class StringOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNullBase64UrlEncoded(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/string/nullBase64UrlEncoding")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getNullBase64UrlEncodedSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -333,7 +571,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
-        return getNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -396,7 +635,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions) {
-        return putNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.putNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -440,7 +680,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
-        return getEmptyWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getEmptySync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -485,7 +726,9 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(RequestOptions requestOptions) {
-        return putEmptyWithResponseAsync(requestOptions).block();
+        final BinaryData stringBody = BinaryData.fromObject("");
+        final String accept = "application/json";
+        return service.putEmptySync(this.client.getHost(), stringBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -530,7 +773,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getMbcsWithResponse(RequestOptions requestOptions) {
-        return getMbcsWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getMbcsSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -576,7 +820,10 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putMbcsWithResponse(RequestOptions requestOptions) {
-        return putMbcsWithResponseAsync(requestOptions).block();
+        final BinaryData stringBody =
+                BinaryData.fromObject("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
+        final String accept = "application/json";
+        return service.putMbcsSync(this.client.getHost(), stringBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -626,7 +873,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWhitespaceWithResponse(RequestOptions requestOptions) {
-        return getWhitespaceWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getWhitespaceSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -674,7 +922,10 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWhitespaceWithResponse(RequestOptions requestOptions) {
-        return putWhitespaceWithResponseAsync(requestOptions).block();
+        final BinaryData stringBody =
+                BinaryData.fromObject("    Now is the time for all good men to come to the aid of their country    ");
+        final String accept = "application/json";
+        return service.putWhitespaceSync(this.client.getHost(), stringBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -719,7 +970,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
-        return getNotProvidedWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNotProvidedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -763,7 +1015,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<byte[]> getBase64EncodedWithResponse(RequestOptions requestOptions) {
-        return getBase64EncodedWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getBase64EncodedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -807,7 +1060,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
-        return getBase64UrlEncodedWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getBase64UrlEncodedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -856,7 +1110,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBase64UrlEncodedWithResponse(BinaryData stringBody, RequestOptions requestOptions) {
-        return putBase64UrlEncodedWithResponseAsync(stringBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putBase64UrlEncodedSync(this.client.getHost(), stringBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -901,6 +1156,7 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullBase64UrlEncodedWithResponse(RequestOptions requestOptions) {
-        return getNullBase64UrlEncodedWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNullBase64UrlEncodedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 }

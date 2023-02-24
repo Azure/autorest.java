@@ -38,6 +38,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
@@ -151,6 +152,25 @@ public final class DpgClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/customization/model/{mode}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getModelSync(
+                @HostParam("$host") String host,
+                @PathParam(value = "mode", encoded = true) String mode,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/customization/model/{mode}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -164,6 +184,26 @@ public final class DpgClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postModel(
+                @HostParam("$host") String host,
+                @PathParam(value = "mode", encoded = true) String mode,
+                @BodyParam("application/json") BinaryData input,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/customization/model/{mode}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> postModelSync(
                 @HostParam("$host") String host,
                 @PathParam(value = "mode", encoded = true) String mode,
                 @BodyParam("application/json") BinaryData input,
@@ -190,6 +230,25 @@ public final class DpgClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/customization/paging/{mode}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getPagesSync(
+                @HostParam("$host") String host,
+                @PathParam(value = "mode", encoded = true) String mode,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/customization/lro/{mode}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -209,6 +268,25 @@ public final class DpgClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/customization/lro/{mode}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> lroSync(
+                @HostParam("$host") String host,
+                @PathParam(value = "mode", encoded = true) String mode,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -222,6 +300,25 @@ public final class DpgClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getPagesNext(
+                @PathParam(value = "nextLink", encoded = true) String nextLink,
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getPagesNextSync(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
@@ -279,7 +376,8 @@ public final class DpgClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(String mode, RequestOptions requestOptions) {
-        return getModelWithResponseAsync(mode, requestOptions).block();
+        final String accept = "application/json";
+        return service.getModelSync(this.getHost(), mode, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -352,7 +450,8 @@ public final class DpgClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postModelWithResponse(String mode, BinaryData input, RequestOptions requestOptions) {
-        return postModelWithResponseAsync(mode, input, requestOptions).block();
+        final String accept = "application/json";
+        return service.postModelSync(this.getHost(), mode, input, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -442,12 +541,53 @@ public final class DpgClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup
+     *     along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PagedResponse<BinaryData> getPagesSinglePage(String mode, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        Response<BinaryData> res = service.getPagesSync(this.getHost(), mode, accept, requestOptions, Context.NONE);
+        return new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                getValues(res.getValue(), "values"),
+                getNextLink(res.getValue(), "nextLink"),
+                null);
+    }
+
+    /**
+     * Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     received: String(raw/model) (Required)
+     * }
+     * }</pre>
+     *
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as
      *     paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPages(String mode, RequestOptions requestOptions) {
-        return new PagedIterable<>(getPagesAsync(mode, requestOptions));
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(
+                requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext()
+                        : Context.NONE);
+        return new PagedIterable<>(
+                () -> getPagesSinglePage(mode, requestOptions),
+                nextLink -> getPagesNextSinglePage(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -476,6 +616,34 @@ public final class DpgClientImpl {
     private Mono<Response<BinaryData>> lroWithResponseAsync(String mode, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.lro(this.getHost(), mode, accept, requestOptions, context));
+    }
+
+    /**
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
+     * of a model after the SDK has grown up.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     *     and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> lroWithResponse(String mode, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.lroSync(this.getHost(), mode, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -540,7 +708,18 @@ public final class DpgClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginLro(String mode, RequestOptions requestOptions) {
-        return this.beginLroAsync(mode, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.lroWithResponse(mode, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -605,7 +784,18 @@ public final class DpgClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<LroProduct, LroProduct> beginLroWithModel(String mode, RequestOptions requestOptions) {
-        return this.beginLroWithModelAsync(mode, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.lroWithResponse(mode, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(LroProduct.class),
+                TypeReference.createInstance(LroProduct.class));
     }
 
     /**
@@ -643,6 +833,40 @@ public final class DpgClientImpl {
                                         getValues(res.getValue(), "values"),
                                         getNextLink(res.getValue(), "nextLink"),
                                         null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     received: String(raw/model) (Required)
+     * }
+     * }</pre>
+     *
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PagedResponse<BinaryData> getPagesNextSinglePage(String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        Response<BinaryData> res =
+                service.getPagesNextSync(nextLink, this.getHost(), accept, requestOptions, Context.NONE);
+        return new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                getValues(res.getValue(), "values"),
+                getNextLink(res.getValue(), "nextLink"),
+                null);
     }
 
     private List<BinaryData> getValues(BinaryData binaryData, String path) {

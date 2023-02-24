@@ -245,6 +245,6 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
      */
     @Generated
     public DpgClient buildClient() {
-        return new DpgClient(new DpgAsyncClient(buildInnerClient().getParams()));
+        return new DpgClient(buildInnerClient().getParams());
     }
 }

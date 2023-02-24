@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.httpinfrastructure.implementation.HttpRedirectsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = HttpRedirectsClientBuilder.class)
 public final class HttpRedirectsClient {
-    @Generated private final HttpRedirectsAsyncClient client;
+    @Generated private final HttpRedirectsImpl serviceClient;
 
     /**
      * Initializes an instance of HttpRedirectsClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    HttpRedirectsClient(HttpRedirectsAsyncClient client) {
-        this.client = client;
+    HttpRedirectsClient(HttpRedirectsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -44,7 +45,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head300WithResponse(RequestOptions requestOptions) {
-        return this.client.head300WithResponse(requestOptions).block();
+        return this.serviceClient.head300WithResponse(requestOptions);
     }
 
     /**
@@ -68,7 +69,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> get300WithResponse(RequestOptions requestOptions) {
-        return this.client.get300WithResponse(requestOptions).block();
+        return this.serviceClient.get300WithResponse(requestOptions);
     }
 
     /**
@@ -84,7 +85,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head301WithResponse(RequestOptions requestOptions) {
-        return this.client.head301WithResponse(requestOptions).block();
+        return this.serviceClient.head301WithResponse(requestOptions);
     }
 
     /**
@@ -100,7 +101,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get301WithResponse(RequestOptions requestOptions) {
-        return this.client.get301WithResponse(requestOptions).block();
+        return this.serviceClient.get301WithResponse(requestOptions);
     }
 
     /**
@@ -133,7 +134,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put301WithResponse(RequestOptions requestOptions) {
-        return this.client.put301WithResponse(requestOptions).block();
+        return this.serviceClient.put301WithResponse(requestOptions);
     }
 
     /**
@@ -149,7 +150,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head302WithResponse(RequestOptions requestOptions) {
-        return this.client.head302WithResponse(requestOptions).block();
+        return this.serviceClient.head302WithResponse(requestOptions);
     }
 
     /**
@@ -165,7 +166,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get302WithResponse(RequestOptions requestOptions) {
-        return this.client.get302WithResponse(requestOptions).block();
+        return this.serviceClient.get302WithResponse(requestOptions);
     }
 
     /**
@@ -198,7 +199,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch302WithResponse(RequestOptions requestOptions) {
-        return this.client.patch302WithResponse(requestOptions).block();
+        return this.serviceClient.patch302WithResponse(requestOptions);
     }
 
     /**
@@ -231,7 +232,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post303WithResponse(RequestOptions requestOptions) {
-        return this.client.post303WithResponse(requestOptions).block();
+        return this.serviceClient.post303WithResponse(requestOptions);
     }
 
     /**
@@ -247,7 +248,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head307WithResponse(RequestOptions requestOptions) {
-        return this.client.head307WithResponse(requestOptions).block();
+        return this.serviceClient.head307WithResponse(requestOptions);
     }
 
     /**
@@ -263,7 +264,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get307WithResponse(RequestOptions requestOptions) {
-        return this.client.get307WithResponse(requestOptions).block();
+        return this.serviceClient.get307WithResponse(requestOptions);
     }
 
     /**
@@ -279,7 +280,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> options307WithResponse(RequestOptions requestOptions) {
-        return this.client.options307WithResponse(requestOptions).block();
+        return this.serviceClient.options307WithResponse(requestOptions);
     }
 
     /**
@@ -311,7 +312,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put307WithResponse(RequestOptions requestOptions) {
-        return this.client.put307WithResponse(requestOptions).block();
+        return this.serviceClient.put307WithResponse(requestOptions);
     }
 
     /**
@@ -343,7 +344,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch307WithResponse(RequestOptions requestOptions) {
-        return this.client.patch307WithResponse(requestOptions).block();
+        return this.serviceClient.patch307WithResponse(requestOptions);
     }
 
     /**
@@ -375,7 +376,7 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post307WithResponse(RequestOptions requestOptions) {
-        return this.client.post307WithResponse(requestOptions).block();
+        return this.serviceClient.post307WithResponse(requestOptions);
     }
 
     /**
@@ -407,6 +408,6 @@ public final class HttpRedirectsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete307WithResponse(RequestOptions requestOptions) {
-        return this.client.delete307WithResponse(requestOptions).block();
+        return this.serviceClient.delete307WithResponse(requestOptions);
     }
 }

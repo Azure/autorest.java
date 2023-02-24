@@ -310,7 +310,6 @@ public final class ConstantAndClientParameterServiceClientBuilder
      */
     @Generated
     public ConstantAndClientParameterServiceClient buildClient() {
-        return new ConstantAndClientParameterServiceClient(
-                new ConstantAndClientParameterServiceAsyncClient(buildInnerClient()));
+        return new ConstantAndClientParameterServiceClient(buildInnerClient());
     }
 }

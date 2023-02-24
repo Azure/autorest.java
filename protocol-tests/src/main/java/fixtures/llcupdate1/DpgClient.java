@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.llcupdate1.implementation.ParamsImpl;
 
 /** Initializes a new instance of the synchronous DpgClient type. */
 @ServiceClient(builder = DpgClientBuilder.class)
 public final class DpgClient {
-    @Generated private final DpgAsyncClient client;
+    @Generated private final ParamsImpl serviceClient;
 
     /**
      * Initializes an instance of DpgClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    DpgClient(DpgAsyncClient client) {
-        this.client = client;
+    DpgClient(ParamsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -61,7 +62,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> headNoParamsWithResponse(RequestOptions requestOptions) {
-        return this.client.headNoParamsWithResponse(requestOptions).block();
+        return this.serviceClient.headNoParamsWithResponse(requestOptions);
     }
 
     /**
@@ -95,7 +96,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(String parameter, RequestOptions requestOptions) {
-        return this.client.getRequiredWithResponse(parameter, requestOptions).block();
+        return this.serviceClient.getRequiredWithResponse(parameter, requestOptions);
     }
 
     /**
@@ -130,7 +131,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putRequiredOptionalWithResponse(String requiredParam, RequestOptions requestOptions) {
-        return this.client.putRequiredOptionalWithResponse(requiredParam, requestOptions).block();
+        return this.serviceClient.putRequiredOptionalWithResponse(requiredParam, requestOptions);
     }
 
     /**
@@ -162,7 +163,7 @@ public final class DpgClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(
             String contentType, BinaryData parameter, RequestOptions requestOptions) {
-        return this.client.postParametersWithResponse(contentType, parameter, requestOptions).block();
+        return this.serviceClient.postParametersWithResponse(contentType, parameter, requestOptions);
     }
 
     /**
@@ -179,7 +180,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions) {
-        return this.client.deleteParametersWithResponse(requestOptions).block();
+        return this.serviceClient.deleteParametersWithResponse(requestOptions);
     }
 
     /**
@@ -213,7 +214,7 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
-        return this.client.getOptionalWithResponse(requestOptions).block();
+        return this.serviceClient.getOptionalWithResponse(requestOptions);
     }
 
     /**
@@ -236,6 +237,6 @@ public final class DpgClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions) {
-        return this.client.getNewOperationWithResponse(requestOptions).block();
+        return this.serviceClient.getNewOperationWithResponse(requestOptions);
     }
 }

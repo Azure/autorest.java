@@ -114,7 +114,7 @@ public class SwaggerReadmeTemplate {
     private static Map<String, Object> loadDefaultOptions() {
         Map<String, Object> defaultOptions = new LinkedHashMap<>();
 
-        // the file is copied from preprocessor/readme.dpg.md to resources, using maven-resources-plugin
+        // the file is copied from preprocessor/data-plane.md to resources, using maven-resources-plugin
         String defaultDpgReadme = TemplateUtil.loadTextFromResource("data-plane.md");
         if (!CoreUtils.isNullOrEmpty(defaultDpgReadme)) {
             Matcher matcher = MARKDOWN_YAML_BLOCK.matcher(defaultDpgReadme);

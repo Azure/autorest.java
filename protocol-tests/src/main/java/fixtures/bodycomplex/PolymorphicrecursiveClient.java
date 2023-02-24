@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.bodycomplex.implementation.PolymorphicrecursivesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = PolymorphicrecursiveClientBuilder.class)
 public final class PolymorphicrecursiveClient {
-    @Generated private final PolymorphicrecursiveAsyncClient client;
+    @Generated private final PolymorphicrecursivesImpl serviceClient;
 
     /**
      * Initializes an instance of PolymorphicrecursiveClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    PolymorphicrecursiveClient(PolymorphicrecursiveAsyncClient client) {
-        this.client = client;
+    PolymorphicrecursiveClient(PolymorphicrecursivesImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -56,7 +57,7 @@ public final class PolymorphicrecursiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.client.getValidWithResponse(requestOptions).block();
+        return this.serviceClient.getValidWithResponse(requestOptions);
     }
 
     /**
@@ -91,6 +92,6 @@ public final class PolymorphicrecursiveClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putValidWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putValidWithResponse(complexBody, requestOptions);
     }
 }

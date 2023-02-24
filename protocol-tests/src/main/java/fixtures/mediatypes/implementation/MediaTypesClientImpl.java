@@ -138,6 +138,25 @@ public final class MediaTypesClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/mediatypes/analyze")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> analyzeBodySync(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/mediatypes/analyzeNoAccept")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(
@@ -151,6 +170,24 @@ public final class MediaTypesClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> analyzeBodyNoAcceptHeader(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/mediatypes/analyzeNoAccept")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> analyzeBodyNoAcceptHeaderSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") String contentType,
                 RequestOptions requestOptions,
@@ -174,6 +211,24 @@ public final class MediaTypesClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/mediatypes/contentTypeWithEncoding")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> contentTypeWithEncodingSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/mediatypes/binaryBodyTwoContentTypes")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -187,6 +242,26 @@ public final class MediaTypesClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> binaryBodyWithTwoContentTypes(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("application/octet-stream") BinaryData message,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/mediatypes/binaryBodyTwoContentTypes")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> binaryBodyWithTwoContentTypesSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") String contentType,
                 @BodyParam("application/octet-stream") BinaryData message,
@@ -214,6 +289,26 @@ public final class MediaTypesClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/mediatypes/binaryBodyThreeContentTypes")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> binaryBodyWithThreeContentTypesSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("application/octet-stream") BinaryData message,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/mediatypes/bodyThreeTypes")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -234,6 +329,26 @@ public final class MediaTypesClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/mediatypes/bodyThreeTypes")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> bodyThreeTypesSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("application/octet-stream") BinaryData message,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/mediatypes/textAndJson")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -247,6 +362,26 @@ public final class MediaTypesClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putTextAndJsonBody(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("text/plain") BinaryData message,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/mediatypes/textAndJson")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> putTextAndJsonBodySync(
                 @HostParam("$host") String host,
                 @HeaderParam("Content-Type") String contentType,
                 @BodyParam("text/plain") BinaryData message,
@@ -310,7 +445,8 @@ public final class MediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> analyzeBodyWithResponse(String contentType, RequestOptions requestOptions) {
-        return analyzeBodyWithResponseAsync(contentType, requestOptions).block();
+        final String accept = "application/json";
+        return service.analyzeBodySync(this.getHost(), contentType, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -356,7 +492,7 @@ public final class MediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(String contentType, RequestOptions requestOptions) {
-        return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, requestOptions).block();
+        return service.analyzeBodyNoAcceptHeaderSync(this.getHost(), contentType, requestOptions, Context.NONE);
     }
 
     /**
@@ -432,7 +568,8 @@ public final class MediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> contentTypeWithEncodingWithResponse(RequestOptions requestOptions) {
-        return contentTypeWithEncodingWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.contentTypeWithEncodingSync(this.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -498,7 +635,9 @@ public final class MediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithTwoContentTypesWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, requestOptions).block();
+        final String accept = "text/plain";
+        return service.binaryBodyWithTwoContentTypesSync(
+                this.getHost(), contentType, message, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -566,7 +705,9 @@ public final class MediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithThreeContentTypesWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, requestOptions).block();
+        final String accept = "text/plain";
+        return service.binaryBodyWithThreeContentTypesSync(
+                this.getHost(), contentType, message, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -635,7 +776,8 @@ public final class MediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> bodyThreeTypesWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return bodyThreeTypesWithResponseAsync(contentType, message, requestOptions).block();
+        final String accept = "text/plain";
+        return service.bodyThreeTypesSync(this.getHost(), contentType, message, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -699,6 +841,8 @@ public final class MediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putTextAndJsonBodyWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return putTextAndJsonBodyWithResponseAsync(contentType, message, requestOptions).block();
+        final String accept = "text/plain";
+        return service.putTextAndJsonBodySync(
+                this.getHost(), contentType, message, accept, requestOptions, Context.NONE);
     }
 }

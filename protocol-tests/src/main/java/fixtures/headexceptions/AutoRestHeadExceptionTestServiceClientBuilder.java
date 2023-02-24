@@ -252,7 +252,6 @@ public final class AutoRestHeadExceptionTestServiceClientBuilder
      */
     @Generated
     public AutoRestHeadExceptionTestServiceClient buildClient() {
-        return new AutoRestHeadExceptionTestServiceClient(
-                new AutoRestHeadExceptionTestServiceAsyncClient(buildInnerClient().getHeadExceptions()));
+        return new AutoRestHeadExceptionTestServiceClient(buildInnerClient().getHeadExceptions());
     }
 }

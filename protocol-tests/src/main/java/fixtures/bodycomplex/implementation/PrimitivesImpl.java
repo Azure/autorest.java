@@ -71,6 +71,24 @@ public final class PrimitivesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/primitive/integer")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getIntSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -84,6 +102,25 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putInt(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/primitive/integer")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putIntSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -108,6 +145,24 @@ public final class PrimitivesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/primitive/long")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getLongSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -121,6 +176,25 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putLong(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/primitive/long")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putLongSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -145,6 +219,24 @@ public final class PrimitivesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/primitive/float")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getFloatSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -158,6 +250,25 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putFloat(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/primitive/float")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putFloatSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -182,6 +293,24 @@ public final class PrimitivesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/primitive/double")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getDoubleSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -195,6 +324,25 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putDouble(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/primitive/double")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putDoubleSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -219,6 +367,24 @@ public final class PrimitivesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/primitive/bool")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getBoolSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -232,6 +398,25 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putBool(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/primitive/bool")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putBoolSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -256,6 +441,24 @@ public final class PrimitivesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/primitive/string")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getStringSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -269,6 +472,25 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putString(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/primitive/string")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putStringSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -293,6 +515,24 @@ public final class PrimitivesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/primitive/date")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getDateSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -306,6 +546,25 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putDate(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/primitive/date")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putDateSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -330,6 +589,24 @@ public final class PrimitivesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/primitive/datetime")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getDateTimeSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -343,6 +620,25 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putDateTime(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/primitive/datetime")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putDateTimeSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -367,6 +663,24 @@ public final class PrimitivesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/primitive/datetimerfc1123")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getDateTimeRfc1123Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -380,6 +694,25 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putDateTimeRfc1123(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/primitive/datetimerfc1123")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putDateTimeRfc1123Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -404,6 +737,24 @@ public final class PrimitivesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/primitive/duration")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getDurationSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -417,6 +768,25 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putDuration(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/primitive/duration")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putDurationSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -441,6 +811,24 @@ public final class PrimitivesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/primitive/byte")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getByteSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -454,6 +842,25 @@ public final class PrimitivesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putByte(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/primitive/byte")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putByteSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -508,7 +915,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getIntWithResponse(RequestOptions requestOptions) {
-        return getIntWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getIntSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -560,7 +968,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putIntWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putIntWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putIntSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -609,7 +1018,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getLongWithResponse(RequestOptions requestOptions) {
-        return getLongWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getLongSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -661,7 +1071,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putLongWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putLongWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putLongSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -711,7 +1122,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFloatWithResponse(RequestOptions requestOptions) {
-        return getFloatWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getFloatSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -763,7 +1175,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putFloatWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putFloatWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putFloatSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -814,7 +1227,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDoubleWithResponse(RequestOptions requestOptions) {
-        return getDoubleWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getDoubleSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -866,7 +1280,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDoubleWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putDoubleWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putDoubleSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -915,7 +1330,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBoolWithResponse(RequestOptions requestOptions) {
-        return getBoolWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getBoolSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -967,7 +1383,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putBoolWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putBoolWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putBoolSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1020,7 +1437,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getStringWithResponse(RequestOptions requestOptions) {
-        return getStringWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getStringSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1074,7 +1492,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putStringWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putStringWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putStringSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1123,7 +1542,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateWithResponse(RequestOptions requestOptions) {
-        return getDateWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getDateSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1175,7 +1595,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putDateWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putDateSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1226,7 +1647,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateTimeWithResponse(RequestOptions requestOptions) {
-        return getDateTimeWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getDateTimeSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1278,7 +1700,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putDateTimeWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putDateTimeSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1329,7 +1752,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDateTimeRfc1123WithResponse(RequestOptions requestOptions) {
-        return getDateTimeRfc1123WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getDateTimeRfc1123Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1384,7 +1808,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDateTimeRfc1123WithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putDateTimeRfc1123WithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putDateTimeRfc1123Sync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1433,7 +1858,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDurationWithResponse(RequestOptions requestOptions) {
-        return getDurationWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getDurationSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1483,7 +1909,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDurationWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putDurationWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putDurationSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1530,7 +1957,8 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getByteWithResponse(RequestOptions requestOptions) {
-        return getByteWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getByteSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1580,6 +2008,7 @@ public final class PrimitivesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putByteWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putByteWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putByteSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 }

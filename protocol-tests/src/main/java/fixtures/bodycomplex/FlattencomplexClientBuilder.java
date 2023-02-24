@@ -266,6 +266,6 @@ public final class FlattencomplexClientBuilder
      */
     @Generated
     public FlattencomplexClient buildClient() {
-        return new FlattencomplexClient(new FlattencomplexAsyncClient(buildInnerClient().getFlattencomplexes()));
+        return new FlattencomplexClient(buildInnerClient().getFlattencomplexes());
     }
 }

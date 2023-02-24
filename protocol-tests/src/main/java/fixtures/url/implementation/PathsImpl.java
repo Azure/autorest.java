@@ -75,6 +75,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/bool/true/{boolPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getBooleanTrueSync(
+                @HostParam("$host") String host,
+                @PathParam("boolPath") boolean boolPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/bool/false/{boolPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -88,6 +107,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getBooleanFalse(
+                @HostParam("$host") String host,
+                @PathParam("boolPath") boolean boolPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/bool/false/{boolPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getBooleanFalseSync(
                 @HostParam("$host") String host,
                 @PathParam("boolPath") boolean boolPath,
                 @HeaderParam("Accept") String accept,
@@ -113,6 +151,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/int/1000000/{intPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getIntOneMillionSync(
+                @HostParam("$host") String host,
+                @PathParam("intPath") int intPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/int/-1000000/{intPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -126,6 +183,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getIntNegativeOneMillion(
+                @HostParam("$host") String host,
+                @PathParam("intPath") int intPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/int/-1000000/{intPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getIntNegativeOneMillionSync(
                 @HostParam("$host") String host,
                 @PathParam("intPath") int intPath,
                 @HeaderParam("Accept") String accept,
@@ -151,6 +227,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/long/10000000000/{longPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getTenBillionSync(
+                @HostParam("$host") String host,
+                @PathParam("longPath") long longPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/long/-10000000000/{longPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -164,6 +259,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getNegativeTenBillion(
+                @HostParam("$host") String host,
+                @PathParam("longPath") long longPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/long/-10000000000/{longPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getNegativeTenBillionSync(
                 @HostParam("$host") String host,
                 @PathParam("longPath") long longPath,
                 @HeaderParam("Accept") String accept,
@@ -189,6 +303,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/float/1.034E+20/{floatPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> floatScientificPositiveSync(
+                @HostParam("$host") String host,
+                @PathParam("floatPath") float floatPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/float/-1.034E-20/{floatPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -202,6 +335,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> floatScientificNegative(
+                @HostParam("$host") String host,
+                @PathParam("floatPath") float floatPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/float/-1.034E-20/{floatPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> floatScientificNegativeSync(
                 @HostParam("$host") String host,
                 @PathParam("floatPath") float floatPath,
                 @HeaderParam("Accept") String accept,
@@ -227,6 +379,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/double/9999999.999/{doublePath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> doubleDecimalPositiveSync(
+                @HostParam("$host") String host,
+                @PathParam("doublePath") double doublePath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/double/-9999999.999/{doublePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -240,6 +411,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> doubleDecimalNegative(
+                @HostParam("$host") String host,
+                @PathParam("doublePath") double doublePath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/double/-9999999.999/{doublePath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> doubleDecimalNegativeSync(
                 @HostParam("$host") String host,
                 @PathParam("doublePath") double doublePath,
                 @HeaderParam("Accept") String accept,
@@ -265,6 +455,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/string/unicode/{stringPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> stringUnicodeSync(
+                @HostParam("$host") String host,
+                @PathParam("stringPath") String stringPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -278,6 +487,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> stringUrlEncoded(
+                @HostParam("$host") String host,
+                @PathParam("stringPath") String stringPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> stringUrlEncodedSync(
                 @HostParam("$host") String host,
                 @PathParam("stringPath") String stringPath,
                 @HeaderParam("Accept") String accept,
@@ -303,6 +531,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/string/begin!*'();:@&=+$,end/{stringPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> stringUrlNonEncodedSync(
+                @HostParam("$host") String host,
+                @PathParam(value = "stringPath", encoded = true) String stringPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/string/empty/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -316,6 +563,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> stringEmpty(
+                @HostParam("$host") String host,
+                @PathParam("stringPath") String stringPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/string/empty/{stringPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> stringEmptySync(
                 @HostParam("$host") String host,
                 @PathParam("stringPath") String stringPath,
                 @HeaderParam("Accept") String accept,
@@ -341,6 +607,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/string/null/{stringPath}")
+        @ExpectedResponses({400})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> stringNullSync(
+                @HostParam("$host") String host,
+                @PathParam("stringPath") String stringPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/enum/green%20color/{enumPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -354,6 +639,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> enumValid(
+                @HostParam("$host") String host,
+                @PathParam("enumPath") String enumPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/enum/green%20color/{enumPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> enumValidSync(
                 @HostParam("$host") String host,
                 @PathParam("enumPath") String enumPath,
                 @HeaderParam("Accept") String accept,
@@ -379,6 +683,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/string/null/{enumPath}")
+        @ExpectedResponses({400})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> enumNullSync(
+                @HostParam("$host") String host,
+                @PathParam("enumPath") String enumPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/byte/multibyte/{bytePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -392,6 +715,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> byteMultiByte(
+                @HostParam("$host") String host,
+                @PathParam("bytePath") String bytePath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/byte/multibyte/{bytePath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> byteMultiByteSync(
                 @HostParam("$host") String host,
                 @PathParam("bytePath") String bytePath,
                 @HeaderParam("Accept") String accept,
@@ -417,6 +759,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/byte/empty/{bytePath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> byteEmptySync(
+                @HostParam("$host") String host,
+                @PathParam("bytePath") String bytePath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/byte/null/{bytePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(
@@ -430,6 +791,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> byteNull(
+                @HostParam("$host") String host,
+                @PathParam("bytePath") String bytePath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/byte/null/{bytePath}")
+        @ExpectedResponses({400})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> byteNullSync(
                 @HostParam("$host") String host,
                 @PathParam("bytePath") String bytePath,
                 @HeaderParam("Accept") String accept,
@@ -455,6 +835,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/date/2012-01-01/{datePath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> dateValidSync(
+                @HostParam("$host") String host,
+                @PathParam("datePath") String datePath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/date/null/{datePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(
@@ -468,6 +867,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> dateNull(
+                @HostParam("$host") String host,
+                @PathParam("datePath") String datePath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/date/null/{datePath}")
+        @ExpectedResponses({400})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> dateNullSync(
                 @HostParam("$host") String host,
                 @PathParam("datePath") String datePath,
                 @HeaderParam("Accept") String accept,
@@ -493,6 +911,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> dateTimeValidSync(
+                @HostParam("$host") String host,
+                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/datetime/null/{dateTimePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(
@@ -512,6 +949,25 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/paths/datetime/null/{dateTimePath}")
+        @ExpectedResponses({400})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> dateTimeNullSync(
+                @HostParam("$host") String host,
+                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/string/bG9yZW0/{base64UrlPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -525,6 +981,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> base64Url(
+                @HostParam("$host") String host,
+                @PathParam("base64UrlPath") Base64Url base64UrlPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/string/bG9yZW0/{base64UrlPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> base64UrlSync(
                 @HostParam("$host") String host,
                 @PathParam("base64UrlPath") Base64Url base64UrlPath,
                 @HeaderParam("Accept") String accept,
@@ -551,6 +1026,26 @@ public final class PathsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get(
+                "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> arrayCsvInPathSync(
+                @HostParam("$host") String host,
+                @PathParam("arrayPath") String arrayPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/paths/int/1460505600/{unixTimeUrlPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -564,6 +1059,25 @@ public final class PathsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> unixTimeUrl(
+                @HostParam("$host") String host,
+                @PathParam("unixTimeUrlPath") long unixTimeUrlPath,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/paths/int/1460505600/{unixTimeUrlPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> unixTimeUrlSync(
                 @HostParam("$host") String host,
                 @PathParam("unixTimeUrlPath") long unixTimeUrlPath,
                 @HeaderParam("Accept") String accept,
@@ -601,7 +1115,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanTrueWithResponse(RequestOptions requestOptions) {
-        return getBooleanTrueWithResponseAsync(requestOptions).block();
+        final boolean boolPath = true;
+        final String accept = "application/json";
+        return service.getBooleanTrueSync(this.client.getHost(), boolPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -634,7 +1150,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanFalseWithResponse(RequestOptions requestOptions) {
-        return getBooleanFalseWithResponseAsync(requestOptions).block();
+        final boolean boolPath = false;
+        final String accept = "application/json";
+        return service.getBooleanFalseSync(this.client.getHost(), boolPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -667,7 +1185,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntOneMillionWithResponse(RequestOptions requestOptions) {
-        return getIntOneMillionWithResponseAsync(requestOptions).block();
+        final int intPath = 1000000;
+        final String accept = "application/json";
+        return service.getIntOneMillionSync(this.client.getHost(), intPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -702,7 +1222,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions) {
-        return getIntNegativeOneMillionWithResponseAsync(requestOptions).block();
+        final int intPath = -1000000;
+        final String accept = "application/json";
+        return service.getIntNegativeOneMillionSync(
+                this.client.getHost(), intPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -735,7 +1258,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getTenBillionWithResponse(RequestOptions requestOptions) {
-        return getTenBillionWithResponseAsync(requestOptions).block();
+        final long longPath = 10000000000L;
+        final String accept = "application/json";
+        return service.getTenBillionSync(this.client.getHost(), longPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -770,7 +1295,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getNegativeTenBillionWithResponse(RequestOptions requestOptions) {
-        return getNegativeTenBillionWithResponseAsync(requestOptions).block();
+        final long longPath = -10000000000L;
+        final String accept = "application/json";
+        return service.getNegativeTenBillionSync(this.client.getHost(), longPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -805,7 +1332,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
-        return floatScientificPositiveWithResponseAsync(requestOptions).block();
+        final float floatPath = 103400000000000000000f;
+        final String accept = "application/json";
+        return service.floatScientificPositiveSync(
+                this.client.getHost(), floatPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -840,7 +1370,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
-        return floatScientificNegativeWithResponseAsync(requestOptions).block();
+        final float floatPath = -1.034E-20f;
+        final String accept = "application/json";
+        return service.floatScientificNegativeSync(
+                this.client.getHost(), floatPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -875,7 +1408,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
-        return doubleDecimalPositiveWithResponseAsync(requestOptions).block();
+        final double doublePath = 9999999.999;
+        final String accept = "application/json";
+        return service.doubleDecimalPositiveSync(
+                this.client.getHost(), doublePath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -910,7 +1446,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
-        return doubleDecimalNegativeWithResponseAsync(requestOptions).block();
+        final double doublePath = -9999999.999;
+        final String accept = "application/json";
+        return service.doubleDecimalNegativeSync(
+                this.client.getHost(), doublePath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -944,7 +1483,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUnicodeWithResponse(RequestOptions requestOptions) {
-        return stringUnicodeWithResponseAsync(requestOptions).block();
+        final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
+        final String accept = "application/json";
+        return service.stringUnicodeSync(this.client.getHost(), stringPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -978,7 +1519,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUrlEncodedWithResponse(RequestOptions requestOptions) {
-        return stringUrlEncodedWithResponseAsync(requestOptions).block();
+        final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
+        final String accept = "application/json";
+        return service.stringUrlEncodedSync(this.client.getHost(), stringPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1017,7 +1560,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUrlNonEncodedWithResponse(RequestOptions requestOptions) {
-        return stringUrlNonEncodedWithResponseAsync(requestOptions).block();
+        final String stringPath = "begin!*'();:@&=+$,end";
+        final String accept = "application/json";
+        return service.stringUrlNonEncodedSync(this.client.getHost(), stringPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1050,7 +1595,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringEmptyWithResponse(RequestOptions requestOptions) {
-        return stringEmptyWithResponseAsync(requestOptions).block();
+        final String stringPath = "";
+        final String accept = "application/json";
+        return service.stringEmptySync(this.client.getHost(), stringPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1084,7 +1631,8 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringNullWithResponse(String stringPath, RequestOptions requestOptions) {
-        return stringNullWithResponseAsync(stringPath, requestOptions).block();
+        final String accept = "application/json";
+        return service.stringNullSync(this.client.getHost(), stringPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1119,7 +1667,8 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumValidWithResponse(String enumPath, RequestOptions requestOptions) {
-        return enumValidWithResponseAsync(enumPath, requestOptions).block();
+        final String accept = "application/json";
+        return service.enumValidSync(this.client.getHost(), enumPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1154,7 +1703,8 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumNullWithResponse(String enumPath, RequestOptions requestOptions) {
-        return enumNullWithResponseAsync(enumPath, requestOptions).block();
+        final String accept = "application/json";
+        return service.enumNullSync(this.client.getHost(), enumPath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1192,7 +1742,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteMultiByteWithResponse(byte[] bytePath, RequestOptions requestOptions) {
-        return byteMultiByteWithResponseAsync(bytePath, requestOptions).block();
+        final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteMultiByteSync(
+                this.client.getHost(), bytePathConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1227,7 +1780,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteEmptyWithResponse(RequestOptions requestOptions) {
-        return byteEmptyWithResponseAsync(requestOptions).block();
+        final byte[] bytePath = "".getBytes();
+        final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteEmptySync(this.client.getHost(), bytePathConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1262,7 +1818,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteNullWithResponse(byte[] bytePath, RequestOptions requestOptions) {
-        return byteNullWithResponseAsync(bytePath, requestOptions).block();
+        final String accept = "application/json";
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteNullSync(this.client.getHost(), bytePathConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1295,7 +1853,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateValidWithResponse(RequestOptions requestOptions) {
-        return dateValidWithResponseAsync(requestOptions).block();
+        final String datePath = "2012-01-01";
+        final String accept = "application/json";
+        return service.dateValidSync(this.client.getHost(), datePath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1331,7 +1891,8 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateNullWithResponse(String datePath, RequestOptions requestOptions) {
-        return dateNullWithResponseAsync(datePath, requestOptions).block();
+        final String accept = "application/json";
+        return service.dateNullSync(this.client.getHost(), datePath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1364,7 +1925,9 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
-        return dateTimeValidWithResponseAsync(requestOptions).block();
+        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
+        final String accept = "application/json";
+        return service.dateTimeValidSync(this.client.getHost(), dateTimePath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1401,7 +1964,8 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeNullWithResponse(OffsetDateTime dateTimePath, RequestOptions requestOptions) {
-        return dateTimeNullWithResponseAsync(dateTimePath, requestOptions).block();
+        final String accept = "application/json";
+        return service.dateTimeNullSync(this.client.getHost(), dateTimePath, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1439,7 +2003,10 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> base64UrlWithResponse(byte[] base64UrlPath, RequestOptions requestOptions) {
-        return base64UrlWithResponseAsync(base64UrlPath, requestOptions).block();
+        final String accept = "application/json";
+        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
+        return service.base64UrlSync(
+                this.client.getHost(), base64UrlPathConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1481,7 +2048,11 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayCsvInPathWithResponse(List<String> arrayPath, RequestOptions requestOptions) {
-        return arrayCsvInPathWithResponseAsync(arrayPath, requestOptions).block();
+        final String accept = "application/json";
+        String arrayPathConverted =
+                arrayPath.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return service.arrayCsvInPathSync(
+                this.client.getHost(), arrayPathConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1517,6 +2088,7 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unixTimeUrlWithResponse(long unixTimeUrlPath, RequestOptions requestOptions) {
-        return unixTimeUrlWithResponseAsync(unixTimeUrlPath, requestOptions).block();
+        final String accept = "application/json";
+        return service.unixTimeUrlSync(this.client.getHost(), unixTimeUrlPath, accept, requestOptions, Context.NONE);
     }
 }

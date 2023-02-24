@@ -252,7 +252,6 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
      */
     @Generated
     public AutoRestUrlMutliCollectionFormatTestServiceClient buildClient() {
-        return new AutoRestUrlMutliCollectionFormatTestServiceClient(
-                new AutoRestUrlMutliCollectionFormatTestServiceAsyncClient(buildInnerClient().getQueries()));
+        return new AutoRestUrlMutliCollectionFormatTestServiceClient(buildInnerClient().getQueries());
     }
 }

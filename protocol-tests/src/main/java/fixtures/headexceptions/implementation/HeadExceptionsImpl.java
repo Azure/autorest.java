@@ -63,6 +63,20 @@ public final class HeadExceptionsImpl {
         @UnexpectedResponseExceptionType(CustomizedException.class)
         Mono<Response<Void>> head200(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
+        @Head("/http/success/200")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(CustomizedException.class)
+        Response<Void> head200Sync(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
         @Head("/http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -77,6 +91,20 @@ public final class HeadExceptionsImpl {
         @UnexpectedResponseExceptionType(CustomizedException.class)
         Mono<Response<Void>> head204(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
+        @Head("/http/success/204")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(CustomizedException.class)
+        Response<Void> head204Sync(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
         @Head("/http/success/404")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -90,6 +118,20 @@ public final class HeadExceptionsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(CustomizedException.class)
         Mono<Response<Void>> head404(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Head("/http/success/404")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(CustomizedException.class)
+        Response<Void> head404Sync(@HostParam("$host") String host, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -119,7 +161,7 @@ public final class HeadExceptionsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head200WithResponse(RequestOptions requestOptions) {
-        return head200WithResponseAsync(requestOptions).block();
+        return service.head200Sync(this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -149,7 +191,7 @@ public final class HeadExceptionsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head204WithResponse(RequestOptions requestOptions) {
-        return head204WithResponseAsync(requestOptions).block();
+        return service.head204Sync(this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -179,6 +221,6 @@ public final class HeadExceptionsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head404WithResponse(RequestOptions requestOptions) {
-        return head404WithResponseAsync(requestOptions).block();
+        return service.head404Sync(this.client.getHost(), requestOptions, Context.NONE);
     }
 }

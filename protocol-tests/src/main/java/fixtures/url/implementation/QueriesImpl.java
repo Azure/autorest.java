@@ -71,6 +71,25 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/bool/true")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getBooleanTrueSync(
+                @HostParam("$host") String host,
+                @QueryParam("boolQuery") boolean boolQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -84,6 +103,25 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getBooleanFalse(
+                @HostParam("$host") String host,
+                @QueryParam("boolQuery") boolean boolQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/bool/false")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getBooleanFalseSync(
                 @HostParam("$host") String host,
                 @QueryParam("boolQuery") boolean boolQuery,
                 @HeaderParam("Accept") String accept,
@@ -108,6 +146,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/bool/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getBooleanNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/int/1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -121,6 +177,25 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getIntOneMillion(
+                @HostParam("$host") String host,
+                @QueryParam("intQuery") int intQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/int/1000000")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getIntOneMillionSync(
                 @HostParam("$host") String host,
                 @QueryParam("intQuery") int intQuery,
                 @HeaderParam("Accept") String accept,
@@ -146,6 +221,25 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/int/-1000000")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getIntNegativeOneMillionSync(
+                @HostParam("$host") String host,
+                @QueryParam("intQuery") int intQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -164,6 +258,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/int/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getIntNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/long/10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -177,6 +289,25 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getTenBillion(
+                @HostParam("$host") String host,
+                @QueryParam("longQuery") long longQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/long/10000000000")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getTenBillionSync(
                 @HostParam("$host") String host,
                 @QueryParam("longQuery") long longQuery,
                 @HeaderParam("Accept") String accept,
@@ -202,6 +333,25 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/long/-10000000000")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getNegativeTenBillionSync(
+                @HostParam("$host") String host,
+                @QueryParam("longQuery") long longQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/long/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -220,6 +370,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/long/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getLongNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/float/1.034E+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -233,6 +401,25 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> floatScientificPositive(
+                @HostParam("$host") String host,
+                @QueryParam("floatQuery") float floatQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/float/1.034E+20")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> floatScientificPositiveSync(
                 @HostParam("$host") String host,
                 @QueryParam("floatQuery") float floatQuery,
                 @HeaderParam("Accept") String accept,
@@ -258,6 +445,25 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/float/-1.034E-20")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> floatScientificNegativeSync(
+                @HostParam("$host") String host,
+                @QueryParam("floatQuery") float floatQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/float/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -276,6 +482,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/float/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> floatNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/double/9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -289,6 +513,25 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> doubleDecimalPositive(
+                @HostParam("$host") String host,
+                @QueryParam("doubleQuery") double doubleQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/double/9999999.999")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> doubleDecimalPositiveSync(
                 @HostParam("$host") String host,
                 @QueryParam("doubleQuery") double doubleQuery,
                 @HeaderParam("Accept") String accept,
@@ -314,6 +557,25 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/double/-9999999.999")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> doubleDecimalNegativeSync(
+                @HostParam("$host") String host,
+                @QueryParam("doubleQuery") double doubleQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/double/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -332,6 +594,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/double/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> doubleNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/string/unicode/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -345,6 +625,25 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> stringUnicode(
+                @HostParam("$host") String host,
+                @QueryParam("stringQuery") String stringQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/string/unicode/")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> stringUnicodeSync(
                 @HostParam("$host") String host,
                 @QueryParam("stringQuery") String stringQuery,
                 @HeaderParam("Accept") String accept,
@@ -370,6 +669,25 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> stringUrlEncodedSync(
+                @HostParam("$host") String host,
+                @QueryParam("stringQuery") String stringQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -383,6 +701,25 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> stringEmpty(
+                @HostParam("$host") String host,
+                @QueryParam("stringQuery") String stringQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/string/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> stringEmptySync(
                 @HostParam("$host") String host,
                 @QueryParam("stringQuery") String stringQuery,
                 @HeaderParam("Accept") String accept,
@@ -407,6 +744,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/string/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> stringNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/enum/green%20color")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -420,6 +775,24 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> enumValid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/enum/green%20color")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> enumValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -443,6 +816,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/enum/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> enumNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/byte/multibyte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -456,6 +847,24 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> byteMultiByte(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/byte/multibyte")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> byteMultiByteSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -480,6 +889,25 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/byte/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> byteEmptySync(
+                @HostParam("$host") String host,
+                @QueryParam("byteQuery") String byteQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -493,6 +921,24 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> byteNull(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/byte/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> byteNullSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -517,6 +963,25 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/date/2012-01-01")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> dateValidSync(
+                @HostParam("$host") String host,
+                @QueryParam("dateQuery") String dateQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -530,6 +995,24 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> dateNull(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/date/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> dateNullSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -554,6 +1037,25 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/datetime/2012-01-01T01%3A01%3A01Z")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> dateTimeValidSync(
+                @HostParam("$host") String host,
+                @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/datetime/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -567,6 +1069,24 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> dateTimeNull(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/datetime/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> dateTimeNullSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -590,6 +1110,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/array/csv/string/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> arrayStringCsvValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/array/csv/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -603,6 +1141,24 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringCsvNull(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/array/csv/string/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> arrayStringCsvNullSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -626,6 +1182,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/array/csv/string/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> arrayStringCsvEmptySync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/array/none/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -639,6 +1213,24 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringNoCollectionFormatEmpty(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/array/none/string/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> arrayStringNoCollectionFormatEmptySync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -662,6 +1254,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/array/ssv/string/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> arrayStringSsvValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/array/tsv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -680,6 +1290,24 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/queries/array/tsv/string/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> arrayStringTsvValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/queries/array/pipes/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -693,6 +1321,24 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> arrayStringPipesValid(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/queries/array/pipes/string/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> arrayStringPipesValidSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -729,7 +1375,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanTrueWithResponse(RequestOptions requestOptions) {
-        return getBooleanTrueWithResponseAsync(requestOptions).block();
+        final boolean boolQuery = true;
+        final String accept = "application/json";
+        return service.getBooleanTrueSync(this.client.getHost(), boolQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -762,7 +1410,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanFalseWithResponse(RequestOptions requestOptions) {
-        return getBooleanFalseWithResponseAsync(requestOptions).block();
+        final boolean boolQuery = false;
+        final String accept = "application/json";
+        return service.getBooleanFalseSync(this.client.getHost(), boolQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -815,7 +1465,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getBooleanNullWithResponse(RequestOptions requestOptions) {
-        return getBooleanNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getBooleanNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -848,7 +1499,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntOneMillionWithResponse(RequestOptions requestOptions) {
-        return getIntOneMillionWithResponseAsync(requestOptions).block();
+        final int intQuery = 1000000;
+        final String accept = "application/json";
+        return service.getIntOneMillionSync(this.client.getHost(), intQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -883,7 +1536,10 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions) {
-        return getIntNegativeOneMillionWithResponseAsync(requestOptions).block();
+        final int intQuery = -1000000;
+        final String accept = "application/json";
+        return service.getIntNegativeOneMillionSync(
+                this.client.getHost(), intQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -936,7 +1592,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getIntNullWithResponse(RequestOptions requestOptions) {
-        return getIntNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getIntNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -969,7 +1626,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getTenBillionWithResponse(RequestOptions requestOptions) {
-        return getTenBillionWithResponseAsync(requestOptions).block();
+        final long longQuery = 10000000000L;
+        final String accept = "application/json";
+        return service.getTenBillionSync(this.client.getHost(), longQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1004,7 +1663,10 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getNegativeTenBillionWithResponse(RequestOptions requestOptions) {
-        return getNegativeTenBillionWithResponseAsync(requestOptions).block();
+        final long longQuery = -10000000000L;
+        final String accept = "application/json";
+        return service.getNegativeTenBillionSync(
+                this.client.getHost(), longQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1057,7 +1719,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getLongNullWithResponse(RequestOptions requestOptions) {
-        return getLongNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getLongNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1092,7 +1755,10 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
-        return floatScientificPositiveWithResponseAsync(requestOptions).block();
+        final float floatQuery = 103400000000000000000f;
+        final String accept = "application/json";
+        return service.floatScientificPositiveSync(
+                this.client.getHost(), floatQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1127,7 +1793,10 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
-        return floatScientificNegativeWithResponseAsync(requestOptions).block();
+        final float floatQuery = -1.034E-20f;
+        final String accept = "application/json";
+        return service.floatScientificNegativeSync(
+                this.client.getHost(), floatQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1180,7 +1849,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatNullWithResponse(RequestOptions requestOptions) {
-        return floatNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.floatNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1215,7 +1885,10 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
-        return doubleDecimalPositiveWithResponseAsync(requestOptions).block();
+        final double doubleQuery = 9999999.999;
+        final String accept = "application/json";
+        return service.doubleDecimalPositiveSync(
+                this.client.getHost(), doubleQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1250,7 +1923,10 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
-        return doubleDecimalNegativeWithResponseAsync(requestOptions).block();
+        final double doubleQuery = -9999999.999;
+        final String accept = "application/json";
+        return service.doubleDecimalNegativeSync(
+                this.client.getHost(), doubleQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1303,7 +1979,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> doubleNullWithResponse(RequestOptions requestOptions) {
-        return doubleNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.doubleNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1337,7 +2014,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUnicodeWithResponse(RequestOptions requestOptions) {
-        return stringUnicodeWithResponseAsync(requestOptions).block();
+        final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
+        final String accept = "application/json";
+        return service.stringUnicodeSync(this.client.getHost(), stringQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1371,7 +2050,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUrlEncodedWithResponse(RequestOptions requestOptions) {
-        return stringUrlEncodedWithResponseAsync(requestOptions).block();
+        final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
+        final String accept = "application/json";
+        return service.stringUrlEncodedSync(this.client.getHost(), stringQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1404,7 +2085,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringEmptyWithResponse(RequestOptions requestOptions) {
-        return stringEmptyWithResponseAsync(requestOptions).block();
+        final String stringQuery = "";
+        final String accept = "application/json";
+        return service.stringEmptySync(this.client.getHost(), stringQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1456,7 +2139,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringNullWithResponse(RequestOptions requestOptions) {
-        return stringNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.stringNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1509,7 +2193,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumValidWithResponse(RequestOptions requestOptions) {
-        return enumValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.enumValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1561,7 +2246,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> enumNullWithResponse(RequestOptions requestOptions) {
-        return enumNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.enumNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1614,7 +2300,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteMultiByteWithResponse(RequestOptions requestOptions) {
-        return byteMultiByteWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.byteMultiByteSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1649,7 +2336,10 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteEmptyWithResponse(RequestOptions requestOptions) {
-        return byteEmptyWithResponseAsync(requestOptions).block();
+        final byte[] byteQuery = "".getBytes();
+        final String accept = "application/json";
+        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
+        return service.byteEmptySync(this.client.getHost(), byteQueryConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1702,7 +2392,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> byteNullWithResponse(RequestOptions requestOptions) {
-        return byteNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.byteNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1735,7 +2426,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateValidWithResponse(RequestOptions requestOptions) {
-        return dateValidWithResponseAsync(requestOptions).block();
+        final String dateQuery = "2012-01-01";
+        final String accept = "application/json";
+        return service.dateValidSync(this.client.getHost(), dateQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1788,7 +2481,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateNullWithResponse(RequestOptions requestOptions) {
-        return dateNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.dateNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1822,7 +2516,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
-        return dateTimeValidWithResponseAsync(requestOptions).block();
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
+        final String accept = "application/json";
+        return service.dateTimeValidSync(this.client.getHost(), dateTimeQuery, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1875,7 +2571,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeNullWithResponse(RequestOptions requestOptions) {
-        return dateTimeNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.dateTimeNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1929,7 +2626,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvValidWithResponse(RequestOptions requestOptions) {
-        return arrayStringCsvValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.arrayStringCsvValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -1982,7 +2680,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvNullWithResponse(RequestOptions requestOptions) {
-        return arrayStringCsvNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.arrayStringCsvNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -2035,7 +2734,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvEmptyWithResponse(RequestOptions requestOptions) {
-        return arrayStringCsvEmptyWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.arrayStringCsvEmptySync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -2091,7 +2791,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringNoCollectionFormatEmptyWithResponse(RequestOptions requestOptions) {
-        return arrayStringNoCollectionFormatEmptyWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.arrayStringNoCollectionFormatEmptySync(
+                this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -2145,7 +2847,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringSsvValidWithResponse(RequestOptions requestOptions) {
-        return arrayStringSsvValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.arrayStringSsvValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -2199,7 +2902,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringTsvValidWithResponse(RequestOptions requestOptions) {
-        return arrayStringTsvValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.arrayStringTsvValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -2255,6 +2959,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringPipesValidWithResponse(RequestOptions requestOptions) {
-        return arrayStringPipesValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.arrayStringPipesValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 }

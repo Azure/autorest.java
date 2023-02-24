@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.bodycomplex.implementation.BasicsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = BasicClientBuilder.class)
 public final class BasicClient {
-    @Generated private final BasicAsyncClient client;
+    @Generated private final BasicsImpl serviceClient;
 
     /**
      * Initializes an instance of BasicClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    BasicClient(BasicAsyncClient client) {
-        this.client = client;
+    BasicClient(BasicsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -54,7 +55,7 @@ public final class BasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.client.getValidWithResponse(requestOptions).block();
+        return this.serviceClient.getValidWithResponse(requestOptions);
     }
 
     /**
@@ -81,7 +82,7 @@ public final class BasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return this.client.putValidWithResponse(complexBody, requestOptions).block();
+        return this.serviceClient.putValidWithResponse(complexBody, requestOptions);
     }
 
     /**
@@ -107,7 +108,7 @@ public final class BasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getInvalidWithResponse(RequestOptions requestOptions) {
-        return this.client.getInvalidWithResponse(requestOptions).block();
+        return this.serviceClient.getInvalidWithResponse(requestOptions);
     }
 
     /**
@@ -133,7 +134,7 @@ public final class BasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
-        return this.client.getEmptyWithResponse(requestOptions).block();
+        return this.serviceClient.getEmptyWithResponse(requestOptions);
     }
 
     /**
@@ -159,7 +160,7 @@ public final class BasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
-        return this.client.getNullWithResponse(requestOptions).block();
+        return this.serviceClient.getNullWithResponse(requestOptions);
     }
 
     /**
@@ -185,6 +186,6 @@ public final class BasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
-        return this.client.getNotProvidedWithResponse(requestOptions).block();
+        return this.serviceClient.getNotProvidedWithResponse(requestOptions);
     }
 }

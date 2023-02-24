@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.bodycomplex.implementation.FlattencomplexesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
 @ServiceClient(builder = FlattencomplexClientBuilder.class)
 public final class FlattencomplexClient {
-    @Generated private final FlattencomplexAsyncClient client;
+    @Generated private final FlattencomplexesImpl serviceClient;
 
     /**
      * Initializes an instance of FlattencomplexClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    FlattencomplexClient(FlattencomplexAsyncClient client) {
-        this.client = client;
+    FlattencomplexClient(FlattencomplexesImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -55,6 +56,6 @@ public final class FlattencomplexClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return this.client.getValidWithResponse(requestOptions).block();
+        return this.serviceClient.getValidWithResponse(requestOptions);
     }
 }

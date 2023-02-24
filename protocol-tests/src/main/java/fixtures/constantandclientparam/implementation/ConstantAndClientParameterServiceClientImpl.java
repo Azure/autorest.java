@@ -219,6 +219,29 @@ public final class ConstantAndClientParameterServiceClientImpl {
                 @QueryParam("query-non-required-client-param") Integer queryNonRequiredClientParam,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Put("/constant/clientparam/path")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putClientConstantsSync(
+                @HostParam("$host") String host,
+                @HeaderParam("header-required-constant") boolean headerRequiredConstant,
+                @QueryParam("query-required-constant") int queryRequiredConstant,
+                @QueryParam("query-non-required-constant") Integer queryNonRequiredConstant,
+                @QueryParam("query-required-client-param") int queryRequiredClientParam,
+                @QueryParam("query-required-default-value-client-param") int queryRequiredDefaultValueClientParam,
+                @QueryParam("query-non-required-client-param") Integer queryNonRequiredClientParam,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -262,6 +285,18 @@ public final class ConstantAndClientParameterServiceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putClientConstantsWithResponse(RequestOptions requestOptions) {
-        return putClientConstantsWithResponseAsync(requestOptions).block();
+        final boolean headerRequiredConstant = true;
+        final int queryRequiredConstant = 100;
+        final Integer queryNonRequiredConstant = 100;
+        return service.putClientConstantsSync(
+                this.getHost(),
+                headerRequiredConstant,
+                queryRequiredConstant,
+                queryNonRequiredConstant,
+                this.getQueryRequiredClientParam(),
+                this.getQueryRequiredDefaultValueClientParam(),
+                this.getQueryNonRequiredClientParam(),
+                requestOptions,
+                Context.NONE);
     }
 }

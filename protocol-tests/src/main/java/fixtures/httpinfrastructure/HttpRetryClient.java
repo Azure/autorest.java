@@ -14,20 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import fixtures.httpinfrastructure.implementation.HttpRetriesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = HttpRetryClientBuilder.class)
 public final class HttpRetryClient {
-    @Generated private final HttpRetryAsyncClient client;
+    @Generated private final HttpRetriesImpl serviceClient;
 
     /**
      * Initializes an instance of HttpRetryClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    HttpRetryClient(HttpRetryAsyncClient client) {
-        this.client = client;
+    HttpRetryClient(HttpRetriesImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -43,7 +44,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head408WithResponse(RequestOptions requestOptions) {
-        return this.client.head408WithResponse(requestOptions).block();
+        return this.serviceClient.head408WithResponse(requestOptions);
     }
 
     /**
@@ -75,7 +76,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put500WithResponse(RequestOptions requestOptions) {
-        return this.client.put500WithResponse(requestOptions).block();
+        return this.serviceClient.put500WithResponse(requestOptions);
     }
 
     /**
@@ -107,7 +108,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch500WithResponse(RequestOptions requestOptions) {
-        return this.client.patch500WithResponse(requestOptions).block();
+        return this.serviceClient.patch500WithResponse(requestOptions);
     }
 
     /**
@@ -123,7 +124,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get502WithResponse(RequestOptions requestOptions) {
-        return this.client.get502WithResponse(requestOptions).block();
+        return this.serviceClient.get502WithResponse(requestOptions);
     }
 
     /**
@@ -145,7 +146,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> options502WithResponse(RequestOptions requestOptions) {
-        return this.client.options502WithResponse(requestOptions).block();
+        return this.serviceClient.options502WithResponse(requestOptions);
     }
 
     /**
@@ -177,7 +178,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post503WithResponse(RequestOptions requestOptions) {
-        return this.client.post503WithResponse(requestOptions).block();
+        return this.serviceClient.post503WithResponse(requestOptions);
     }
 
     /**
@@ -209,7 +210,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete503WithResponse(RequestOptions requestOptions) {
-        return this.client.delete503WithResponse(requestOptions).block();
+        return this.serviceClient.delete503WithResponse(requestOptions);
     }
 
     /**
@@ -241,7 +242,7 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put504WithResponse(RequestOptions requestOptions) {
-        return this.client.put504WithResponse(requestOptions).block();
+        return this.serviceClient.put504WithResponse(requestOptions);
     }
 
     /**
@@ -273,6 +274,6 @@ public final class HttpRetryClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch504WithResponse(RequestOptions requestOptions) {
-        return this.client.patch504WithResponse(requestOptions).block();
+        return this.serviceClient.patch504WithResponse(requestOptions);
     }
 }

@@ -14,20 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import fixtures.url.implementation.PathItemsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestUrlTestServiceClient type. */
 @ServiceClient(builder = PathItemsClientBuilder.class)
 public final class PathItemsClient {
-    @Generated private final PathItemsAsyncClient client;
+    @Generated private final PathItemsImpl serviceClient;
 
     /**
      * Initializes an instance of PathItemsClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    PathItemsClient(PathItemsAsyncClient client) {
-        this.client = client;
+    PathItemsClient(PathItemsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -59,7 +60,7 @@ public final class PathItemsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getAllWithValuesWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        return this.client.getAllWithValuesWithResponse(pathItemStringPath, localStringPath, requestOptions).block();
+        return this.serviceClient.getAllWithValuesWithResponse(pathItemStringPath, localStringPath, requestOptions);
     }
 
     /**
@@ -91,7 +92,7 @@ public final class PathItemsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getGlobalQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        return this.client.getGlobalQueryNullWithResponse(pathItemStringPath, localStringPath, requestOptions).block();
+        return this.serviceClient.getGlobalQueryNullWithResponse(pathItemStringPath, localStringPath, requestOptions);
     }
 
     /**
@@ -123,9 +124,8 @@ public final class PathItemsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getGlobalAndLocalQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        return this.client
-                .getGlobalAndLocalQueryNullWithResponse(pathItemStringPath, localStringPath, requestOptions)
-                .block();
+        return this.serviceClient.getGlobalAndLocalQueryNullWithResponse(
+                pathItemStringPath, localStringPath, requestOptions);
     }
 
     /**
@@ -157,8 +157,7 @@ public final class PathItemsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getLocalPathItemQueryNullWithResponse(
             String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        return this.client
-                .getLocalPathItemQueryNullWithResponse(pathItemStringPath, localStringPath, requestOptions)
-                .block();
+        return this.serviceClient.getLocalPathItemQueryNullWithResponse(
+                pathItemStringPath, localStringPath, requestOptions);
     }
 }

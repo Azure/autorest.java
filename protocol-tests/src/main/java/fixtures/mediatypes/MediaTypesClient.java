@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.mediatypes.implementation.MediaTypesClientImpl;
 
 /** Initializes a new instance of the synchronous MediaTypesClient type. */
 @ServiceClient(builder = MediaTypesClientBuilder.class)
 public final class MediaTypesClient {
-    @Generated private final MediaTypesAsyncClient client;
+    @Generated private final MediaTypesClientImpl serviceClient;
 
     /**
      * Initializes an instance of MediaTypesClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    MediaTypesClient(MediaTypesAsyncClient client) {
-        this.client = client;
+    MediaTypesClient(MediaTypesClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -57,7 +58,7 @@ public final class MediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> analyzeBodyWithResponse(String contentType, RequestOptions requestOptions) {
-        return this.client.analyzeBodyWithResponse(contentType, requestOptions).block();
+        return this.serviceClient.analyzeBodyWithResponse(contentType, requestOptions);
     }
 
     /**
@@ -80,7 +81,7 @@ public final class MediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(String contentType, RequestOptions requestOptions) {
-        return this.client.analyzeBodyNoAcceptHeaderWithResponse(contentType, requestOptions).block();
+        return this.serviceClient.analyzeBodyNoAcceptHeaderWithResponse(contentType, requestOptions);
     }
 
     /**
@@ -118,7 +119,7 @@ public final class MediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> contentTypeWithEncodingWithResponse(RequestOptions requestOptions) {
-        return this.client.contentTypeWithEncodingWithResponse(requestOptions).block();
+        return this.serviceClient.contentTypeWithEncodingWithResponse(requestOptions);
     }
 
     /**
@@ -150,7 +151,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithTwoContentTypesWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return this.client.binaryBodyWithTwoContentTypesWithResponse(contentType, message, requestOptions).block();
+        return this.serviceClient.binaryBodyWithTwoContentTypesWithResponse(contentType, message, requestOptions);
     }
 
     /**
@@ -183,7 +184,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> binaryBodyWithThreeContentTypesWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return this.client.binaryBodyWithThreeContentTypesWithResponse(contentType, message, requestOptions).block();
+        return this.serviceClient.binaryBodyWithThreeContentTypesWithResponse(contentType, message, requestOptions);
     }
 
     /**
@@ -217,7 +218,7 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> bodyThreeTypesWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return this.client.bodyThreeTypesWithResponse(contentType, message, requestOptions).block();
+        return this.serviceClient.bodyThreeTypesWithResponse(contentType, message, requestOptions);
     }
 
     /**
@@ -248,6 +249,6 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putTextAndJsonBodyWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return this.client.putTextAndJsonBodyWithResponse(contentType, message, requestOptions).block();
+        return this.serviceClient.putTextAndJsonBodyWithResponse(contentType, message, requestOptions);
     }
 }
