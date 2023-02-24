@@ -811,7 +811,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .type(methodType)
             .groupedParameterRequired(false)
             .methodVisibility(visibilityFunction.methodVisibility(true, defaultOverloadType, false))
-            .methodVisibilityInWrapperClient(operation.isGenerateProtocolApi() ? VISIBLE : NOT_VISIBLE);
+            .methodVisibilityInWrapperClient(operation.isGenerateProtocolApi() ? JavaVisibility.Public : JavaVisibility.PackagePrivate);
         // Always generate an overload of WithResponse with non-required parameters without Context.
         // It is only for sync proxy method, and is usually filtered out in methodVisibility function.
         methods.add(builder.build());
