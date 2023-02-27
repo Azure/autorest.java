@@ -12,13 +12,18 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.polling.SyncPoller;
 import com.cadl.protocolandconvenient.models.ResourceA;
 import com.cadl.protocolandconvenient.models.ResourceB;
 import com.cadl.protocolandconvenient.models.ResourceE;
 import com.cadl.protocolandconvenient.models.ResourceF;
+import com.cadl.protocolandconvenient.models.ResourceI;
+import com.cadl.protocolandconvenient.models.ResourceJ;
+import com.cadl.protocolandconvenient.models.ResourceOperationStatusResourceIError;
 
 /** Initializes a new instance of the synchronous ProtocolAndConvenientClient type. */
 @ServiceClient(builder = ProtocolAndConvenientClientBuilder.class)
@@ -66,6 +71,10 @@ public final class ProtocolAndConvenientClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<BinaryData> onlyConvenientWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.client.onlyConvenientWithResponse(body, requestOptions).block();
+    }
+
     /**
      * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and
      * ResourceD should not be generated.
@@ -168,6 +177,75 @@ public final class ProtocolAndConvenientClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<BinaryData> errorSettingWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.client.errorSettingWithResponse(body, requestOptions).block();
+    }
+
+    /**
+     * Long running operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param resource The resource instance.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(
+            String name, BinaryData resource, RequestOptions requestOptions) {
+        return this.client.beginCreateOrReplace(name, resource, requestOptions).getSyncPoller();
+    }
+
+    /**
+     * Paging operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of ResourceJ items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    PagedIterable<BinaryData> list(RequestOptions requestOptions) {
+        return new PagedIterable<>(this.client.list(requestOptions));
+    }
+
     /**
      * When set protocol false and convenient true, then the protocol method should be package private.
      *
@@ -210,5 +288,43 @@ public final class ProtocolAndConvenientClient {
         return bothConvenientAndProtocolWithResponse(BinaryData.fromObject(body), requestOptions)
                 .getValue()
                 .toObject(ResourceF.class);
+    }
+
+    /**
+     * Long running operation.
+     *
+     * @param name The name parameter.
+     * @param resource The resource instance.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<ResourceOperationStatusResourceIError, ResourceI> beginCreateOrReplace(
+            String name, ResourceI resource) {
+        // Generated convenience method for beginCreateOrReplaceWithModel
+        return client.beginCreateOrReplace(name, resource).getSyncPoller();
+    }
+
+    /**
+     * Paging operation.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return paged collection of ResourceJ items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<ResourceJ> list() {
+        // Generated convenience method for list
+        return new PagedIterable<>(client.list());
     }
 }
