@@ -142,5 +142,4 @@ interface ProtocolAndConvenienceOp {
   @doc("Paging operation")
   @protocolAPI(false)
   list is ResourceOperations.ResourceList<ResourceJ>;
-
 }
