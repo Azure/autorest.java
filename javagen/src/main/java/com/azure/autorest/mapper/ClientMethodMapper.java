@@ -283,7 +283,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     .requiredNullableParameterExpressions(requiredParameterExpressions)
                     .validateExpressions(validateExpressions)
                     .methodTransformationDetails(methodTransformationDetails)
-                    .methodVisibilityInWrapperClient(isProtocolMethod && operation.isGenerateProtocolApi() != null && operation.isGenerateProtocolApi() == Boolean.FALSE ? JavaVisibility.PackagePrivate : JavaVisibility.Public)
+                    .methodVisibilityInWrapperClient(isProtocolMethod && operation.isGenerateProtocolApi() == Boolean.FALSE ? JavaVisibility.PackagePrivate : JavaVisibility.Public)
                     .methodPageDetails(null);
 
                 if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null
