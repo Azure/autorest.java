@@ -246,6 +246,6 @@ public final class EnumClientBuilder implements HttpTrait<EnumClientBuilder>, Co
      */
     @Generated
     public EnumClient buildClient() {
-        return new EnumClient(new EnumAsyncClient(buildInnerClient().getEnums()));
+        return new EnumClient(buildInnerClient().getEnums());
     }
 }

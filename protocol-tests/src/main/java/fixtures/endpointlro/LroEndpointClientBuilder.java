@@ -262,6 +262,6 @@ public final class LroEndpointClientBuilder
      */
     @Generated
     public LroEndpointClient buildClient() {
-        return new LroEndpointClient(new LroEndpointAsyncClient(buildInnerClient().getLROs()));
+        return new LroEndpointClient(buildInnerClient().getLROs());
     }
 }

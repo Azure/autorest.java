@@ -66,6 +66,21 @@ public final class ContantsImpl {
         Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueNoDefault(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
+        @Put("/constants/putNoModelAsStringNoRequiredTwoValueNoDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putNoModelAsStringNoRequiredTwoValueNoDefaultSync(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
         @Put("/constants/putNoModelAsStringNoRequiredTwoValueDefault")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(
@@ -81,6 +96,21 @@ public final class ContantsImpl {
         Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueDefault(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
+        @Put("/constants/putNoModelAsStringNoRequiredTwoValueDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putNoModelAsStringNoRequiredTwoValueDefaultSync(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
         @Put("/constants/putNoModelAsStringNoRequiredOneValueNoDefault")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(
@@ -94,6 +124,24 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefault(
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/constants/putNoModelAsStringNoRequiredOneValueNoDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putNoModelAsStringNoRequiredOneValueNoDefaultSync(
                 @HostParam("$host") String host,
                 @QueryParam("input") String input,
                 RequestOptions requestOptions,
@@ -117,6 +165,24 @@ public final class ContantsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/constants/putNoModelAsStringNoRequiredOneValueDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putNoModelAsStringNoRequiredOneValueDefaultSync(
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/constants/putNoModelAsStringRequiredTwoValueNoDefault")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(
@@ -130,6 +196,24 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefault(
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/constants/putNoModelAsStringRequiredTwoValueNoDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putNoModelAsStringRequiredTwoValueNoDefaultSync(
                 @HostParam("$host") String host,
                 @QueryParam("input") String input,
                 RequestOptions requestOptions,
@@ -153,6 +237,24 @@ public final class ContantsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/constants/putNoModelAsStringRequiredTwoValueDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putNoModelAsStringRequiredTwoValueDefaultSync(
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/constants/putNoModelAsStringRequiredOneValueNoDefault")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(
@@ -166,6 +268,24 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringRequiredOneValueNoDefault(
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/constants/putNoModelAsStringRequiredOneValueNoDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putNoModelAsStringRequiredOneValueNoDefaultSync(
                 @HostParam("$host") String host,
                 @QueryParam("input") String input,
                 RequestOptions requestOptions,
@@ -189,6 +309,24 @@ public final class ContantsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/constants/putNoModelAsStringRequiredOneValueDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putNoModelAsStringRequiredOneValueDefaultSync(
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/constants/putModelAsStringNoRequiredTwoValueNoDefault")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(
@@ -202,6 +340,21 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringNoRequiredTwoValueNoDefault(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Put("/constants/putModelAsStringNoRequiredTwoValueNoDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putModelAsStringNoRequiredTwoValueNoDefaultSync(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredTwoValueDefault")
@@ -219,6 +372,21 @@ public final class ContantsImpl {
         Mono<Response<Void>> putModelAsStringNoRequiredTwoValueDefault(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
+        @Put("/constants/putModelAsStringNoRequiredTwoValueDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putModelAsStringNoRequiredTwoValueDefaultSync(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
         @Put("/constants/putModelAsStringNoRequiredOneValueNoDefault")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(
@@ -232,6 +400,21 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringNoRequiredOneValueNoDefault(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Put("/constants/putModelAsStringNoRequiredOneValueNoDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putModelAsStringNoRequiredOneValueNoDefaultSync(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredOneValueDefault")
@@ -249,6 +432,21 @@ public final class ContantsImpl {
         Mono<Response<Void>> putModelAsStringNoRequiredOneValueDefault(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
+        @Put("/constants/putModelAsStringNoRequiredOneValueDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putModelAsStringNoRequiredOneValueDefaultSync(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
         @Put("/constants/putModelAsStringRequiredTwoValueNoDefault")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(
@@ -262,6 +460,24 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringRequiredTwoValueNoDefault(
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/constants/putModelAsStringRequiredTwoValueNoDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putModelAsStringRequiredTwoValueNoDefaultSync(
                 @HostParam("$host") String host,
                 @QueryParam("input") String input,
                 RequestOptions requestOptions,
@@ -285,6 +501,24 @@ public final class ContantsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/constants/putModelAsStringRequiredTwoValueDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putModelAsStringRequiredTwoValueDefaultSync(
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/constants/putModelAsStringRequiredOneValueNoDefault")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(
@@ -298,6 +532,24 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringRequiredOneValueNoDefault(
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/constants/putModelAsStringRequiredOneValueNoDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putModelAsStringRequiredOneValueNoDefaultSync(
                 @HostParam("$host") String host,
                 @QueryParam("input") String input,
                 RequestOptions requestOptions,
@@ -321,6 +573,24 @@ public final class ContantsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/constants/putModelAsStringRequiredOneValueDefault")
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putModelAsStringRequiredOneValueDefaultSync(
+                @HostParam("$host") String host,
+                @QueryParam("input") String input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/constants/clientConstants/{path-constant}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -334,6 +604,26 @@ public final class ContantsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putClientConstants(
+                @HostParam("$host") String host,
+                @HeaderParam("header-constant") boolean headerConstant,
+                @QueryParam("query-constant") int queryConstant,
+                @PathParam("path-constant") String pathConstant,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/constants/clientConstants/{path-constant}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putClientConstantsSync(
                 @HostParam("$host") String host,
                 @HeaderParam("header-constant") boolean headerConstant,
                 @QueryParam("query-constant") int queryConstant,
@@ -393,7 +683,8 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(requestOptions).block();
+        return service.putNoModelAsStringNoRequiredTwoValueNoDefaultSync(
+                this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -447,7 +738,8 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(RequestOptions requestOptions) {
-        return putNoModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(requestOptions).block();
+        return service.putNoModelAsStringNoRequiredTwoValueDefaultSync(
+                this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -482,7 +774,9 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(requestOptions).block();
+        final String input = "value1";
+        return service.putNoModelAsStringNoRequiredOneValueNoDefaultSync(
+                this.client.getHost(), input, requestOptions, Context.NONE);
     }
 
     /**
@@ -517,7 +811,9 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredOneValueDefaultWithResponse(RequestOptions requestOptions) {
-        return putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync(requestOptions).block();
+        final String input = "value1";
+        return service.putNoModelAsStringNoRequiredOneValueDefaultSync(
+                this.client.getHost(), input, requestOptions, Context.NONE);
     }
 
     /**
@@ -554,7 +850,8 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, requestOptions).block();
+        return service.putNoModelAsStringRequiredTwoValueNoDefaultSync(
+                this.client.getHost(), input, requestOptions, Context.NONE);
     }
 
     /**
@@ -591,7 +888,8 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredTwoValueDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, requestOptions).block();
+        return service.putNoModelAsStringRequiredTwoValueDefaultSync(
+                this.client.getHost(), input, requestOptions, Context.NONE);
     }
 
     /**
@@ -626,7 +924,9 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return putNoModelAsStringRequiredOneValueNoDefaultWithResponseAsync(requestOptions).block();
+        final String input = "value1";
+        return service.putNoModelAsStringRequiredOneValueNoDefaultSync(
+                this.client.getHost(), input, requestOptions, Context.NONE);
     }
 
     /**
@@ -661,7 +961,9 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredOneValueDefaultWithResponse(RequestOptions requestOptions) {
-        return putNoModelAsStringRequiredOneValueDefaultWithResponseAsync(requestOptions).block();
+        final String input = "value1";
+        return service.putNoModelAsStringRequiredOneValueDefaultSync(
+                this.client.getHost(), input, requestOptions, Context.NONE);
     }
 
     /**
@@ -715,7 +1017,8 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return putModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(requestOptions).block();
+        return service.putModelAsStringNoRequiredTwoValueNoDefaultSync(
+                this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -769,7 +1072,8 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredTwoValueDefaultWithResponse(RequestOptions requestOptions) {
-        return putModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(requestOptions).block();
+        return service.putModelAsStringNoRequiredTwoValueDefaultSync(
+                this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -823,7 +1127,8 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return putModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(requestOptions).block();
+        return service.putModelAsStringNoRequiredOneValueNoDefaultSync(
+                this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -877,7 +1182,8 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredOneValueDefaultWithResponse(RequestOptions requestOptions) {
-        return putModelAsStringNoRequiredOneValueDefaultWithResponseAsync(requestOptions).block();
+        return service.putModelAsStringNoRequiredOneValueDefaultSync(
+                this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -914,7 +1220,8 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredTwoValueNoDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, requestOptions).block();
+        return service.putModelAsStringRequiredTwoValueNoDefaultSync(
+                this.client.getHost(), input, requestOptions, Context.NONE);
     }
 
     /**
@@ -951,7 +1258,8 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredTwoValueDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return putModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, requestOptions).block();
+        return service.putModelAsStringRequiredTwoValueDefaultSync(
+                this.client.getHost(), input, requestOptions, Context.NONE);
     }
 
     /**
@@ -988,7 +1296,8 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredOneValueNoDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(input, requestOptions).block();
+        return service.putModelAsStringRequiredOneValueNoDefaultSync(
+                this.client.getHost(), input, requestOptions, Context.NONE);
     }
 
     /**
@@ -1025,7 +1334,8 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringRequiredOneValueDefaultWithResponse(
             String input, RequestOptions requestOptions) {
-        return putModelAsStringRequiredOneValueDefaultWithResponseAsync(input, requestOptions).block();
+        return service.putModelAsStringRequiredOneValueDefaultSync(
+                this.client.getHost(), input, requestOptions, Context.NONE);
     }
 
     /**
@@ -1063,6 +1373,12 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putClientConstantsWithResponse(RequestOptions requestOptions) {
-        return putClientConstantsWithResponseAsync(requestOptions).block();
+        return service.putClientConstantsSync(
+                this.client.getHost(),
+                this.client.isHeaderConstant(),
+                this.client.getQueryConstant(),
+                this.client.getPathConstant(),
+                requestOptions,
+                Context.NONE);
     }
 }

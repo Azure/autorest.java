@@ -309,7 +309,6 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
      */
     @Generated
     public AutoRestSwaggerConstantServiceClient buildClient() {
-        return new AutoRestSwaggerConstantServiceClient(
-                new AutoRestSwaggerConstantServiceAsyncClient(buildInnerClient().getContants()));
+        return new AutoRestSwaggerConstantServiceClient(buildInnerClient().getContants());
     }
 }

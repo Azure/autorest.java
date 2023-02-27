@@ -133,6 +133,20 @@ public final class ParmaterizedEndpointClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get(
                 @HostParam("endpoint") String endpoint, RequestOptions requestOptions, Context context);
+
+        @Get("/parameterizedEndpoint/get")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -162,6 +176,6 @@ public final class ParmaterizedEndpointClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(RequestOptions requestOptions) {
-        return getWithResponseAsync(requestOptions).block();
+        return service.getSync(this.getEndpoint(), requestOptions, Context.NONE);
     }
 }

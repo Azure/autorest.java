@@ -284,6 +284,6 @@ public final class QueriesClientBuilder
      */
     @Generated
     public QueriesClient buildClient() {
-        return new QueriesClient(new QueriesAsyncClient(buildInnerClient().getQueries()));
+        return new QueriesClient(buildInnerClient().getQueries());
     }
 }

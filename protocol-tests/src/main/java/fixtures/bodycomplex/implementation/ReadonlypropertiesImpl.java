@@ -72,6 +72,24 @@ public final class ReadonlypropertiesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/readonlyproperty/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -85,6 +103,25 @@ public final class ReadonlypropertiesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putValid(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/readonlyproperty/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putValidSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -140,7 +177,8 @@ public final class ReadonlypropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return getValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -192,6 +230,7 @@ public final class ReadonlypropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putValidWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putValidSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 }

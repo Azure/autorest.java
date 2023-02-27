@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import fixtures.lro.implementation.LrosCustomHeadersImpl;
 
 /** Initializes a new instance of the synchronous AutoRestLongRunningOperationTestServiceClient type. */
 @ServiceClient(builder = LrosCustomHeaderClientBuilder.class)
 public final class LrosCustomHeaderClient {
-    @Generated private final LrosCustomHeaderAsyncClient client;
+    @Generated private final LrosCustomHeadersImpl serviceClient;
 
     /**
      * Initializes an instance of LrosCustomHeaderClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    LrosCustomHeaderClient(LrosCustomHeaderAsyncClient client) {
-        this.client = client;
+    LrosCustomHeaderClient(LrosCustomHeadersImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -93,7 +94,7 @@ public final class LrosCustomHeaderClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPutAsyncRetrySucceeded(RequestOptions requestOptions) {
-        return this.client.beginPutAsyncRetrySucceeded(requestOptions).getSyncPoller();
+        return this.serviceClient.beginPutAsyncRetrySucceeded(requestOptions);
     }
 
     /**
@@ -158,7 +159,7 @@ public final class LrosCustomHeaderClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPut201CreatingSucceeded200(RequestOptions requestOptions) {
-        return this.client.beginPut201CreatingSucceeded200(requestOptions).getSyncPoller();
+        return this.serviceClient.beginPut201CreatingSucceeded200(requestOptions);
     }
 
     /**
@@ -204,7 +205,7 @@ public final class LrosCustomHeaderClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202Retry200(RequestOptions requestOptions) {
-        return this.client.beginPost202Retry200(requestOptions).getSyncPoller();
+        return this.serviceClient.beginPost202Retry200(requestOptions);
     }
 
     /**
@@ -251,6 +252,6 @@ public final class LrosCustomHeaderClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrySucceeded(RequestOptions requestOptions) {
-        return this.client.beginPostAsyncRetrySucceeded(requestOptions).getSyncPoller();
+        return this.serviceClient.beginPostAsyncRetrySucceeded(requestOptions);
     }
 }

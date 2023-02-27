@@ -76,6 +76,24 @@ public final class HttpRetriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Head("/http/retry/408")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> head408Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -89,6 +107,25 @@ public final class HttpRetriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> put500(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/http/retry/500")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> put500Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -114,6 +151,25 @@ public final class HttpRetriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Patch("/http/retry/500")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> patch500Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/retry/502")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -127,6 +183,24 @@ public final class HttpRetriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get502(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/retry/502")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get502Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -150,6 +224,24 @@ public final class HttpRetriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Options("/http/retry/502")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Boolean> options502Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -163,6 +255,25 @@ public final class HttpRetriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> post503(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/http/retry/503")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> post503Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -188,6 +299,25 @@ public final class HttpRetriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Delete("/http/retry/503")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> delete503Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -207,6 +337,25 @@ public final class HttpRetriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/http/retry/504")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> put504Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Patch("/http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -220,6 +369,25 @@ public final class HttpRetriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> patch504(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Patch("/http/retry/504")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> patch504Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -255,7 +423,8 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head408WithResponse(RequestOptions requestOptions) {
-        return head408WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.head408Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -320,7 +489,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put500WithResponse(RequestOptions requestOptions) {
-        return put500WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put500Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -385,7 +556,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch500WithResponse(RequestOptions requestOptions) {
-        return patch500WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch500Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -416,7 +589,8 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get502WithResponse(RequestOptions requestOptions) {
-        return get502WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get502Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -460,7 +634,8 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> options502WithResponse(RequestOptions requestOptions) {
-        return options502WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.options502Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -525,7 +700,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post503WithResponse(RequestOptions requestOptions) {
-        return post503WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post503Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -590,7 +767,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete503WithResponse(RequestOptions requestOptions) {
-        return delete503WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.delete503Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -655,7 +834,9 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put504WithResponse(RequestOptions requestOptions) {
-        return put504WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.put504Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -720,6 +901,8 @@ public final class HttpRetriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch504WithResponse(RequestOptions requestOptions) {
-        return patch504WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.patch504Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 }

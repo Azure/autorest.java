@@ -246,6 +246,6 @@ public final class EnumServiceClientBuilder
      */
     @Generated
     public EnumServiceClient buildClient() {
-        return new EnumServiceClient(new EnumServiceAsyncClient(buildInnerClient()));
+        return new EnumServiceClient(buildInnerClient());
     }
 }

@@ -74,6 +74,24 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Head("/serviceDriven/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> headNoParamsSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/serviceDriven/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -93,6 +111,25 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/serviceDriven/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getRequiredSync(
+                @HostParam("$host") String host,
+                @QueryParam("parameter") String parameter,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/serviceDriven/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -106,6 +143,25 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putRequiredOptional(
+                @HostParam("$host") String host,
+                @QueryParam("requiredParam") String requiredParam,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/serviceDriven/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> putRequiredOptionalSync(
                 @HostParam("$host") String host,
                 @QueryParam("requiredParam") String requiredParam,
                 @HeaderParam("Accept") String accept,
@@ -132,6 +188,26 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/serviceDriven/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> postParametersSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Content-Type") String contentType,
+                @BodyParam("image/jpeg") BinaryData parameter,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Delete("/serviceDriven/parameters")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -145,6 +221,21 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteParameters(
+                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+
+        @Delete("/serviceDriven/parameters")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> deleteParametersSync(
                 @HostParam("$host") String host, RequestOptions requestOptions, Context context);
 
         @Get("/serviceDriven/moreParameters")
@@ -165,6 +256,24 @@ public final class ParamsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/serviceDriven/moreParameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getOptionalSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/serviceDriven/newPath")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -178,6 +287,24 @@ public final class ParamsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNewOperation(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/serviceDriven/newPath")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getNewOperationSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -247,7 +374,8 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> headNoParamsWithResponse(RequestOptions requestOptions) {
-        return headNoParamsWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.headNoParamsSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -316,7 +444,8 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(String parameter, RequestOptions requestOptions) {
-        return getRequiredWithResponseAsync(parameter, requestOptions).block();
+        final String accept = "application/json";
+        return service.getRequiredSync(this.client.getHost(), parameter, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -389,7 +518,9 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putRequiredOptionalWithResponse(String requiredParam, RequestOptions requestOptions) {
-        return putRequiredOptionalWithResponseAsync(requiredParam, requestOptions).block();
+        final String accept = "application/json";
+        return service.putRequiredOptionalSync(
+                this.client.getHost(), requiredParam, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -455,7 +586,9 @@ public final class ParamsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(
             String contentType, BinaryData parameter, RequestOptions requestOptions) {
-        return postParametersWithResponseAsync(contentType, parameter, requestOptions).block();
+        final String accept = "application/json";
+        return service.postParametersSync(
+                this.client.getHost(), contentType, parameter, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -488,7 +621,7 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions) {
-        return deleteParametersWithResponseAsync(requestOptions).block();
+        return service.deleteParametersSync(this.client.getHost(), requestOptions, Context.NONE);
     }
 
     /**
@@ -557,7 +690,8 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
-        return getOptionalWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getOptionalSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -603,6 +737,7 @@ public final class ParamsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions) {
-        return getNewOperationWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNewOperationSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 }

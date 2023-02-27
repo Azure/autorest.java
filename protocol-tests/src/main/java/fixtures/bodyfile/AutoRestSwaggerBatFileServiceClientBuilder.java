@@ -249,7 +249,6 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
      */
     @Generated
     public AutoRestSwaggerBatFileServiceClient buildClient() {
-        return new AutoRestSwaggerBatFileServiceClient(
-                new AutoRestSwaggerBatFileServiceAsyncClient(buildInnerClient().getFiles()));
+        return new AutoRestSwaggerBatFileServiceClient(buildInnerClient().getFiles());
     }
 }

@@ -71,6 +71,24 @@ public final class DictionariesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/dictionary/typed/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -84,6 +102,25 @@ public final class DictionariesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putValid(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/dictionary/typed/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putValidSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -108,6 +145,24 @@ public final class DictionariesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/dictionary/typed/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getEmptySync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -121,6 +176,25 @@ public final class DictionariesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putEmpty(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/dictionary/typed/empty")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putEmptySync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -145,6 +219,24 @@ public final class DictionariesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/dictionary/typed/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getNullSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/complex/dictionary/typed/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -158,6 +250,24 @@ public final class DictionariesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNotProvided(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/complex/dictionary/typed/notprovided")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getNotProvidedSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -214,7 +324,8 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return getValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -270,7 +381,8 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putValidWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putValidSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -323,7 +435,8 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
-        return getEmptyWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getEmptySync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -377,7 +490,8 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putEmptyWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putEmptySync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -429,7 +543,8 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
-        return getNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNullSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -483,6 +598,7 @@ public final class DictionariesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {
-        return getNotProvidedWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNotProvidedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 }

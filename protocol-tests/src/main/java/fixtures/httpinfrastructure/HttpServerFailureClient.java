@@ -14,20 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import fixtures.httpinfrastructure.implementation.HttpServerFailuresImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
 @ServiceClient(builder = HttpServerFailureClientBuilder.class)
 public final class HttpServerFailureClient {
-    @Generated private final HttpServerFailureAsyncClient client;
+    @Generated private final HttpServerFailuresImpl serviceClient;
 
     /**
      * Initializes an instance of HttpServerFailureClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    HttpServerFailureClient(HttpServerFailureAsyncClient client) {
-        this.client = client;
+    HttpServerFailureClient(HttpServerFailuresImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -43,7 +44,7 @@ public final class HttpServerFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head501WithResponse(RequestOptions requestOptions) {
-        return this.client.head501WithResponse(requestOptions).block();
+        return this.serviceClient.head501WithResponse(requestOptions);
     }
 
     /**
@@ -59,7 +60,7 @@ public final class HttpServerFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get501WithResponse(RequestOptions requestOptions) {
-        return this.client.get501WithResponse(requestOptions).block();
+        return this.serviceClient.get501WithResponse(requestOptions);
     }
 
     /**
@@ -91,7 +92,7 @@ public final class HttpServerFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post505WithResponse(RequestOptions requestOptions) {
-        return this.client.post505WithResponse(requestOptions).block();
+        return this.serviceClient.post505WithResponse(requestOptions);
     }
 
     /**
@@ -123,6 +124,6 @@ public final class HttpServerFailureClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete505WithResponse(RequestOptions requestOptions) {
-        return this.client.delete505WithResponse(requestOptions).block();
+        return this.serviceClient.delete505WithResponse(requestOptions);
     }
 }

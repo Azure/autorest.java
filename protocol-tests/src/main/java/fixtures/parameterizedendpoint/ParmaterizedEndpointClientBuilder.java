@@ -246,6 +246,6 @@ public final class ParmaterizedEndpointClientBuilder
      */
     @Generated
     public ParmaterizedEndpointClient buildClient() {
-        return new ParmaterizedEndpointClient(new ParmaterizedEndpointAsyncClient(buildInnerClient()));
+        return new ParmaterizedEndpointClient(buildInnerClient());
     }
 }

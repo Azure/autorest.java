@@ -246,6 +246,6 @@ public final class LrosCustomHeaderClientBuilder
      */
     @Generated
     public LrosCustomHeaderClient buildClient() {
-        return new LrosCustomHeaderClient(new LrosCustomHeaderAsyncClient(buildInnerClient().getLrosCustomHeaders()));
+        return new LrosCustomHeaderClient(buildInnerClient().getLrosCustomHeaders());
     }
 }

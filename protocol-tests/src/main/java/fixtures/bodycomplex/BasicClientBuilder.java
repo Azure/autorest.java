@@ -265,6 +265,6 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
      */
     @Generated
     public BasicClient buildClient() {
-        return new BasicClient(new BasicAsyncClient(buildInnerClient().getBasics()));
+        return new BasicClient(buildInnerClient().getBasics());
     }
 }

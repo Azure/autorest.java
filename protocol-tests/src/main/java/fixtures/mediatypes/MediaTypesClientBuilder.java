@@ -246,6 +246,6 @@ public final class MediaTypesClientBuilder
      */
     @Generated
     public MediaTypesClient buildClient() {
-        return new MediaTypesClient(new MediaTypesAsyncClient(buildInnerClient()));
+        return new MediaTypesClient(buildInnerClient());
     }
 }

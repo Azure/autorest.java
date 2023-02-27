@@ -248,6 +248,6 @@ public final class RequiredOptionalBodyClientBuilder
      */
     @Generated
     public RequiredOptionalBodyClient buildClient() {
-        return new RequiredOptionalBodyClient(new RequiredOptionalBodyAsyncClient(buildInnerClient()));
+        return new RequiredOptionalBodyClient(buildInnerClient());
     }
 }

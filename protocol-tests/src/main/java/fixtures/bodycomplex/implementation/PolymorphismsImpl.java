@@ -71,6 +71,24 @@ public final class PolymorphismsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/polymorphism/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getValidSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -84,6 +102,25 @@ public final class PolymorphismsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putValid(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/polymorphism/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putValidSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -108,6 +145,24 @@ public final class PolymorphismsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/polymorphism/dotsyntax")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getDotSyntaxSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/complex/polymorphism/composedWithDiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -121,6 +176,24 @@ public final class PolymorphismsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getComposedWithDiscriminator(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/complex/polymorphism/composedWithDiscriminator")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getComposedWithDiscriminatorSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -144,6 +217,24 @@ public final class PolymorphismsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/polymorphism/composedWithoutDiscriminator")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getComposedWithoutDiscriminatorSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -162,6 +253,24 @@ public final class PolymorphismsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/complex/polymorphism/complicated")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getComplicatedSync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -175,6 +284,25 @@ public final class PolymorphismsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putComplicated(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/polymorphism/complicated")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putComplicatedSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -200,6 +328,25 @@ public final class PolymorphismsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/complex/polymorphism/missingdiscriminator")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> putMissingDiscriminatorSync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -213,6 +360,25 @@ public final class PolymorphismsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putValidMissingRequired(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData complexBody,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/complex/polymorphism/missingrequired/invalid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putValidMissingRequiredSync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData complexBody,
                 @HeaderParam("Accept") String accept,
@@ -273,7 +439,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return getValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getValidSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -341,7 +508,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putValidWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putValidSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -390,7 +558,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDotSyntaxWithResponse(RequestOptions requestOptions) {
-        return getDotSyntaxWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getDotSyntaxSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -469,7 +638,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComposedWithDiscriminatorWithResponse(RequestOptions requestOptions) {
-        return getComposedWithDiscriminatorWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getComposedWithDiscriminatorSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -549,7 +719,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComposedWithoutDiscriminatorWithResponse(RequestOptions requestOptions) {
-        return getComposedWithoutDiscriminatorWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getComposedWithoutDiscriminatorSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -623,7 +794,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComplicatedWithResponse(RequestOptions requestOptions) {
-        return getComplicatedWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getComplicatedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -697,7 +869,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putComplicatedWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putComplicatedWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putComplicatedSync(this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -815,7 +988,9 @@ public final class PolymorphismsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putMissingDiscriminatorWithResponse(
             BinaryData complexBody, RequestOptions requestOptions) {
-        return putMissingDiscriminatorWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putMissingDiscriminatorSync(
+                this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -886,6 +1061,8 @@ public final class PolymorphismsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidMissingRequiredWithResponse(BinaryData complexBody, RequestOptions requestOptions) {
-        return putValidMissingRequiredWithResponseAsync(complexBody, requestOptions).block();
+        final String accept = "application/json";
+        return service.putValidMissingRequiredSync(
+                this.client.getHost(), complexBody, accept, requestOptions, Context.NONE);
     }
 }

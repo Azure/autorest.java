@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.requiredoptionalbody.implementation.RequiredOptionalBodyClientImpl;
 
 /** Initializes a new instance of the synchronous RequiredOptionalBodyClient type. */
 @ServiceClient(builder = RequiredOptionalBodyClientBuilder.class)
 public final class RequiredOptionalBodyClient {
-    @Generated private final RequiredOptionalBodyAsyncClient client;
+    @Generated private final RequiredOptionalBodyClientImpl serviceClient;
 
     /**
      * Initializes an instance of RequiredOptionalBodyClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    RequiredOptionalBodyClient(RequiredOptionalBodyAsyncClient client) {
-        this.client = client;
+    RequiredOptionalBodyClient(RequiredOptionalBodyClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -85,7 +86,7 @@ public final class RequiredOptionalBodyClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateDeploymentWithResponse(
             BinaryData deployment, RequestOptions requestOptions) {
-        return this.client.createOrUpdateDeploymentWithResponse(deployment, requestOptions).block();
+        return this.serviceClient.createOrUpdateDeploymentWithResponse(deployment, requestOptions);
     }
 
     /**
@@ -149,6 +150,6 @@ public final class RequiredOptionalBodyClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> optionalObjectWithResponse(RequestOptions requestOptions) {
-        return this.client.optionalObjectWithResponse(requestOptions).block();
+        return this.serviceClient.optionalObjectWithResponse(requestOptions);
     }
 }

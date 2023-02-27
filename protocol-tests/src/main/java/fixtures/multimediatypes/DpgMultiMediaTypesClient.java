@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.multimediatypes.implementation.DpgMultiMediaTypesClientImpl;
 
 /** Initializes a new instance of the synchronous DpgMultiMediaTypesClient type. */
 @ServiceClient(builder = DpgMultiMediaTypesClientBuilder.class)
 public final class DpgMultiMediaTypesClient {
-    @Generated private final DpgMultiMediaTypesAsyncClient client;
+    @Generated private final DpgMultiMediaTypesClientImpl serviceClient;
 
     /**
      * Initializes an instance of DpgMultiMediaTypesClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    DpgMultiMediaTypesClient(DpgMultiMediaTypesAsyncClient client) {
-        this.client = client;
+    DpgMultiMediaTypesClient(DpgMultiMediaTypesClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -59,7 +60,7 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndBinaryTypesJsonFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return this.client.jsonAndBinaryTypesJsonFirstWithResponse(contentType, input, requestOptions).block();
+        return this.serviceClient.jsonAndBinaryTypesJsonFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
@@ -90,7 +91,7 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndBinaryTypesBinaryFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return this.client.jsonAndBinaryTypesBinaryFirstWithResponse(contentType, input, requestOptions).block();
+        return this.serviceClient.jsonAndBinaryTypesBinaryFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
@@ -121,7 +122,7 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndOctectWithJsonFirstWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return this.client.jsonAndOctectWithJsonFirstWithResponse(contentType, message, requestOptions).block();
+        return this.serviceClient.jsonAndOctectWithJsonFirstWithResponse(contentType, message, requestOptions);
     }
 
     /**
@@ -152,7 +153,7 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndOctectWithOctetFirstWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return this.client.jsonAndOctectWithOctetFirstWithResponse(contentType, message, requestOptions).block();
+        return this.serviceClient.jsonAndOctectWithOctetFirstWithResponse(contentType, message, requestOptions);
     }
 
     /**
@@ -183,7 +184,7 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndEncodingWithJsonFirstWithResponse(
             String contentType, BinaryData message, RequestOptions requestOptions) {
-        return this.client.jsonAndEncodingWithJsonFirstWithResponse(contentType, message, requestOptions).block();
+        return this.serviceClient.jsonAndEncodingWithJsonFirstWithResponse(contentType, message, requestOptions);
     }
 
     /**
@@ -214,7 +215,7 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndEncodingWithEncodingFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return this.client.jsonAndEncodingWithEncodingFirstWithResponse(contentType, input, requestOptions).block();
+        return this.serviceClient.jsonAndEncodingWithEncodingFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
@@ -245,7 +246,7 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndTextWithTextFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return this.client.jsonAndTextWithTextFirstWithResponse(contentType, input, requestOptions).block();
+        return this.serviceClient.jsonAndTextWithTextFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
@@ -276,7 +277,7 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndTextWithJsonFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return this.client.jsonAndTextWithJsonFirstWithResponse(contentType, input, requestOptions).block();
+        return this.serviceClient.jsonAndTextWithJsonFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
@@ -307,7 +308,7 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndImageWithJsonFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return this.client.jsonAndImageWithJsonFirstWithResponse(contentType, input, requestOptions).block();
+        return this.serviceClient.jsonAndImageWithJsonFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
@@ -338,7 +339,7 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstWithResponse(
             String contentType, BinaryData input, RequestOptions requestOptions) {
-        return this.client.jsonAndImageObjectTypeWithJsonFirstWithResponse(contentType, input, requestOptions).block();
+        return this.serviceClient.jsonAndImageObjectTypeWithJsonFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
@@ -376,7 +377,7 @@ public final class DpgMultiMediaTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> imageTypeWithNonRequiredBodyWithResponse(RequestOptions requestOptions) {
-        return this.client.imageTypeWithNonRequiredBodyWithResponse(requestOptions).block();
+        return this.serviceClient.imageTypeWithNonRequiredBodyWithResponse(requestOptions);
     }
 
     /**
@@ -406,9 +407,8 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse(
             String contentType, RequestOptions requestOptions) {
-        return this.client
-                .jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse(contentType, requestOptions)
-                .block();
+        return this.serviceClient.jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse(
+                contentType, requestOptions);
     }
 
     /**
@@ -447,6 +447,6 @@ public final class DpgMultiMediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(
             RequestOptions requestOptions) {
-        return this.client.jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(requestOptions).block();
+        return this.serviceClient.jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(requestOptions);
     }
 }

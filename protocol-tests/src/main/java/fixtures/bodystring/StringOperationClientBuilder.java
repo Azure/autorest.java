@@ -247,6 +247,6 @@ public final class StringOperationClientBuilder
      */
     @Generated
     public StringOperationClient buildClient() {
-        return new StringOperationClient(new StringOperationAsyncClient(buildInnerClient().getStringOperations()));
+        return new StringOperationClient(buildInnerClient().getStringOperations());
     }
 }

@@ -72,6 +72,23 @@ public final class HttpServerFailuresImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Head("/http/failure/server/501")
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> head501Sync(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/http/failure/server/501")
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -84,6 +101,23 @@ public final class HttpServerFailuresImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get501(
+                @HostParam("$host") String host,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/http/failure/server/501")
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> get501Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -107,6 +141,24 @@ public final class HttpServerFailuresImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/http/failure/server/505")
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> post505Sync(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Delete("/http/failure/server/505")
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -119,6 +171,24 @@ public final class HttpServerFailuresImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete505(
+                @HostParam("$host") String host,
+                @BodyParam("application/json") BinaryData booleanValue,
+                @HeaderParam("Accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Delete("/http/failure/server/505")
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> delete505Sync(
                 @HostParam("$host") String host,
                 @BodyParam("application/json") BinaryData booleanValue,
                 @HeaderParam("Accept") String accept,
@@ -154,7 +224,8 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head501WithResponse(RequestOptions requestOptions) {
-        return head501WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.head501Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -185,7 +256,8 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get501WithResponse(RequestOptions requestOptions) {
-        return get501WithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.get501Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -250,7 +322,9 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post505WithResponse(RequestOptions requestOptions) {
-        return post505WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.post505Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -315,6 +389,8 @@ public final class HttpServerFailuresImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete505WithResponse(RequestOptions requestOptions) {
-        return delete505WithResponseAsync(requestOptions).block();
+        final BinaryData booleanValue = BinaryData.fromObject("true");
+        final String accept = "application/json";
+        return service.delete505Sync(this.client.getHost(), booleanValue, accept, requestOptions, Context.NONE);
     }
 }

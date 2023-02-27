@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.enums.implementation.EnumServiceClientImpl;
 
 /** Initializes a new instance of the synchronous EnumServiceClient type. */
 @ServiceClient(builder = EnumServiceClientBuilder.class)
 public final class EnumServiceClient {
-    @Generated private final EnumServiceAsyncClient client;
+    @Generated private final EnumServiceClientImpl serviceClient;
 
     /**
      * Initializes an instance of EnumServiceClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    EnumServiceClient(EnumServiceAsyncClient client) {
-        this.client = client;
+    EnumServiceClient(EnumServiceClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -59,9 +60,8 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putQueryEnumsWithResponse(
             String queryIntegerEnum, String queryBooleanEnum, String queryRequiredEnum, RequestOptions requestOptions) {
-        return this.client
-                .putQueryEnumsWithResponse(queryIntegerEnum, queryBooleanEnum, queryRequiredEnum, requestOptions)
-                .block();
+        return this.serviceClient.putQueryEnumsWithResponse(
+                queryIntegerEnum, queryBooleanEnum, queryRequiredEnum, requestOptions);
     }
 
     /**
@@ -89,7 +89,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putHeaderEnumsWithResponse(String headerRequiredStringEnum, RequestOptions requestOptions) {
-        return this.client.putHeaderEnumsWithResponse(headerRequiredStringEnum, requestOptions).block();
+        return this.serviceClient.putHeaderEnumsWithResponse(headerRequiredStringEnum, requestOptions);
     }
 
     /**
@@ -112,7 +112,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putRequiredBodyEnumsWithResponse(BinaryData bodyRequiredEnum, RequestOptions requestOptions) {
-        return this.client.putRequiredBodyEnumsWithResponse(bodyRequiredEnum, requestOptions).block();
+        return this.serviceClient.putRequiredBodyEnumsWithResponse(bodyRequiredEnum, requestOptions);
     }
 
     /**
@@ -144,6 +144,6 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNonRequiredBodyEnumsWithResponse(RequestOptions requestOptions) {
-        return this.client.putNonRequiredBodyEnumsWithResponse(requestOptions).block();
+        return this.serviceClient.putNonRequiredBodyEnumsWithResponse(requestOptions);
     }
 }

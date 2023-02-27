@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import fixtures.bodyfile.implementation.FilesImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatFileServiceClient type. */
 @ServiceClient(builder = AutoRestSwaggerBatFileServiceClientBuilder.class)
 public final class AutoRestSwaggerBatFileServiceClient {
-    @Generated private final AutoRestSwaggerBatFileServiceAsyncClient client;
+    @Generated private final FilesImpl serviceClient;
 
     /**
      * Initializes an instance of AutoRestSwaggerBatFileServiceClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    AutoRestSwaggerBatFileServiceClient(AutoRestSwaggerBatFileServiceAsyncClient client) {
-        this.client = client;
+    AutoRestSwaggerBatFileServiceClient(FilesImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -50,7 +51,7 @@ public final class AutoRestSwaggerBatFileServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFileWithResponse(RequestOptions requestOptions) {
-        return this.client.getFileWithResponse(requestOptions).block();
+        return this.serviceClient.getFileWithResponse(requestOptions);
     }
 
     /**
@@ -72,7 +73,7 @@ public final class AutoRestSwaggerBatFileServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFileLargeWithResponse(RequestOptions requestOptions) {
-        return this.client.getFileLargeWithResponse(requestOptions).block();
+        return this.serviceClient.getFileLargeWithResponse(requestOptions);
     }
 
     /**
@@ -94,6 +95,6 @@ public final class AutoRestSwaggerBatFileServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getEmptyFileWithResponse(RequestOptions requestOptions) {
-        return this.client.getEmptyFileWithResponse(requestOptions).block();
+        return this.serviceClient.getEmptyFileWithResponse(requestOptions);
     }
 }

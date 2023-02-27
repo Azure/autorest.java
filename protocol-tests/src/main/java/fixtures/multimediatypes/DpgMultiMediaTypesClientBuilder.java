@@ -248,6 +248,6 @@ public final class DpgMultiMediaTypesClientBuilder
      */
     @Generated
     public DpgMultiMediaTypesClient buildClient() {
-        return new DpgMultiMediaTypesClient(new DpgMultiMediaTypesAsyncClient(buildInnerClient()));
+        return new DpgMultiMediaTypesClient(buildInnerClient());
     }
 }

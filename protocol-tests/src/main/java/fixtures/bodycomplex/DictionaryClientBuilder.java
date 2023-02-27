@@ -266,6 +266,6 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public DictionaryClient buildClient() {
-        return new DictionaryClient(new DictionaryAsyncClient(buildInnerClient().getDictionaries()));
+        return new DictionaryClient(buildInnerClient().getDictionaries());
     }
 }

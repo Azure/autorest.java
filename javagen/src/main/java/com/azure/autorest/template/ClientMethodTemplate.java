@@ -967,7 +967,14 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             applyParameterTransformations(function, clientMethod, settings);
             convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
 
-            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod.toSync(), false,
+            boolean requestOptionsLocal = false;
+            if (settings.isDataPlaneClient()) {
+                requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
+            } else {
+                addSpecialHeadersToLocalVariables(function, clientMethod);
+            }
+
+            String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod.toSync(), requestOptionsLocal,
                 settings);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
