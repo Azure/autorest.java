@@ -283,6 +283,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     .requiredNullableParameterExpressions(requiredParameterExpressions)
                     .validateExpressions(validateExpressions)
                     .methodTransformationDetails(methodTransformationDetails)
+                    .methodVisibilityInWrapperClient(isProtocolMethod && operation.isGenerateProtocolApi() != null && operation.isGenerateProtocolApi() == Boolean.FALSE ? JavaVisibility.PackagePrivate : JavaVisibility.Public)
                     .methodPageDetails(null);
 
                 if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null
@@ -810,8 +811,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .name(methodName)
             .type(methodType)
             .groupedParameterRequired(false)
-            .methodVisibility(visibilityFunction.methodVisibility(true, defaultOverloadType, false))
-            .methodVisibilityInWrapperClient(operation.isGenerateProtocolApi() ? JavaVisibility.Public : JavaVisibility.PackagePrivate);
+            .methodVisibility(visibilityFunction.methodVisibility(true, defaultOverloadType, false));
         // Always generate an overload of WithResponse with non-required parameters without Context.
         // It is only for sync proxy method, and is usually filtered out in methodVisibility function.
         methods.add(builder.build());

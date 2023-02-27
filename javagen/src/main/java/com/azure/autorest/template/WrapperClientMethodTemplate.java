@@ -74,9 +74,9 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
         };
         if (clientMethod.getMethodVisibilityInWrapperClient() == JavaVisibility.Public) {
             typeBlock.publicMethod(declaration, method);
-        } else if (typeBlock instanceof JavaClass && clientMethod.getMethodVisibilityInWrapperClient() == JavaVisibility.PackagePrivate) {
+        } else if (typeBlock instanceof JavaClass) {
             JavaClass classBlock = (JavaClass) typeBlock;
-            classBlock.packagePrivateMethod(declaration, method);
+            classBlock.method(clientMethod.getMethodVisibilityInWrapperClient(), null, declaration, method);
         }
 
     }
