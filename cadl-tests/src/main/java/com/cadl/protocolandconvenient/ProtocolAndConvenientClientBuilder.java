@@ -160,6 +160,23 @@ public final class ProtocolAndConvenientClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated private ProtocolAndConvenientServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     *
+     * @param serviceVersion the serviceVersion value.
+     * @return the ProtocolAndConvenientClientBuilder.
+     */
+    @Generated
+    public ProtocolAndConvenientClientBuilder serviceVersion(ProtocolAndConvenientServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
@@ -184,9 +201,11 @@ public final class ProtocolAndConvenientClientBuilder
     @Generated
     private ProtocolAndConvenientClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        ProtocolAndConvenientServiceVersion localServiceVersion =
+                (serviceVersion != null) ? serviceVersion : ProtocolAndConvenientServiceVersion.getLatest();
         ProtocolAndConvenientClientImpl client =
                 new ProtocolAndConvenientClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
         return client;
     }
 

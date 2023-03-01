@@ -11,10 +11,13 @@ import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaType;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.TemplateUtil;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -57,7 +60,7 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
         }
 
         String declaration = String.format("%1$s %2$s(%3$s)", clientMethod.getReturnValue().getType(), methodName, clientMethod.getParametersDeclaration());
-        typeBlock.publicMethod(declaration, function -> {
+        Consumer<JavaBlock> method = function -> {
 
             boolean shouldReturn = true;
             if (clientMethod.getReturnValue() != null && clientMethod.getReturnValue().getType() instanceof PrimitiveType) {
@@ -68,7 +71,14 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
             }
 
             writeMethodInvocation(clientMethod, function, shouldReturn);
-        });
+        };
+        if (clientMethod.getMethodVisibilityInWrapperClient() == JavaVisibility.Public) {
+            typeBlock.publicMethod(declaration, method);
+        } else if (typeBlock instanceof JavaClass) {
+            JavaClass classBlock = (JavaClass) typeBlock;
+            classBlock.method(clientMethod.getMethodVisibilityInWrapperClient(), null, declaration, method);
+        }
+
     }
 
     /**

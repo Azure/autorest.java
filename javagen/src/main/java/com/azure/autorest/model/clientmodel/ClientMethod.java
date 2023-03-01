@@ -105,6 +105,8 @@ public class ClientMethod {
 
     private JavaVisibility methodVisibility;
 
+    private JavaVisibility methodVisibilityInWrapperClient;
+
     private final ImplementationDetails implementationDetails;
 
     private MethodPollingDetails methodPollingDetails;
@@ -136,7 +138,7 @@ public class ClientMethod {
                            boolean isGroupedParameterRequired, String groupedParameterTypeName,
                            MethodPageDetails methodPageDetails,
                            List<MethodTransformationDetail> methodTransformationDetails,
-                           JavaVisibility methodVisibility, ImplementationDetails implementationDetails,
+                           JavaVisibility methodVisibility, JavaVisibility methodVisibilityInWrapperClient, ImplementationDetails implementationDetails,
                            MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation) {
         this.description = description;
         this.returnValue = returnValue;
@@ -156,6 +158,7 @@ public class ClientMethod {
         this.implementationDetails = implementationDetails;
         this.methodPollingDetails = methodPollingDetails;
         this.externalDocumentation = externalDocumentation;
+        this.methodVisibilityInWrapperClient = methodVisibilityInWrapperClient;
     }
 
     @Override
@@ -324,6 +327,10 @@ public class ClientMethod {
         return methodVisibility;
     }
 
+    public JavaVisibility getMethodVisibilityInWrapperClient() {
+        return methodVisibilityInWrapperClient;
+    }
+
     public ImplementationDetails getImplementationDetails() {
         return implementationDetails;
     }
@@ -485,6 +492,7 @@ public class ClientMethod {
         protected MethodPageDetails methodPageDetails;
         protected List<MethodTransformationDetail> methodTransformationDetails;
         protected JavaVisibility methodVisibility = JavaVisibility.Public;
+        protected JavaVisibility methodVisibilityInWrapperClient = JavaVisibility.Public;
         protected ImplementationDetails implementationDetails;
         protected MethodPollingDetails methodPollingDetails;
         protected ExternalDocumentation externalDocumentation;
@@ -640,6 +648,16 @@ public class ClientMethod {
         }
 
         /**
+         * Sets the parameter method visibility in wrapper client.
+         * @param methodVisibilityInWrapperClient the method visibility in wrapper client, default is Public.
+         * @return the Builder itself
+         */
+        public Builder methodVisibilityInWrapperClient(JavaVisibility methodVisibilityInWrapperClient) {
+            this.methodVisibilityInWrapperClient = methodVisibilityInWrapperClient;
+            return this;
+        }
+
+        /**
          * Sets the polling information if this is a long running method.
          * @param methodPollingDetails the polling information
          * @return the Builder itself
@@ -689,6 +707,7 @@ public class ClientMethod {
                     methodPageDetails,
                     methodTransformationDetails,
                     methodVisibility,
+                    methodVisibilityInWrapperClient,
                     implementationDetails,
                     methodPollingDetails,
                     externalDocumentation);
