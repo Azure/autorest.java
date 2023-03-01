@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @Disabled("Pending on fix pr: https://github.com/Azure/cadl-ranch/pull/216")
 class CollectionFormatClientTest {
 
