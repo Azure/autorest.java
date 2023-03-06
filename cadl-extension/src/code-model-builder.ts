@@ -39,8 +39,8 @@ import {
   EmitContext,
   getProjectedName,
   getService,
-} from "@cadl-lang/compiler";
-import { getResourceOperation, getSegment } from "@cadl-lang/rest";
+} from "@typespec/compiler";
+import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
   getAuthentication,
   getHeaderFieldName,
@@ -58,9 +58,9 @@ import {
   getHttpOperation,
   getQueryParamOptions,
   getHeaderFieldOptions,
-} from "@cadl-lang/rest/http";
-import { getVersion } from "@cadl-lang/versioning";
-import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/cadl-azure-core";
+} from "@typespec/http";
+import { getVersion } from "@typespec/versioning";
+import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/typespec-azure-core";
 import {
   DpgContext,
   listClients,
@@ -70,7 +70,7 @@ import {
   shouldGenerateConvenient,
   createDpgContext,
   shouldGenerateProtocol,
-} from "@azure-tools/cadl-dpg";
+} from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
   AnySchema,
@@ -1544,7 +1544,7 @@ export class CodeModelBuilder {
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
 
-    // TODO: name from cadl-dpg
+    // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(type);
     const unionSchema = new OrSchema(pascalCase(name) + "ModelBase", this.getDoc(type), {
       summary: this.getSummary(type),
@@ -1667,7 +1667,7 @@ export class CodeModelBuilder {
   }
 
   private getName(target: Model | Enum | ModelProperty | Scalar | Operation): string {
-    // TODO: once getLibraryName API in cadl-dpg can get projected name from language and client, as well as can handle template case, use getLibraryName API
+    // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const languageProjectedName = getProjectedName(this.program, target, "java");
     if (languageProjectedName) {
       return languageProjectedName;

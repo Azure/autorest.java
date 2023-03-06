@@ -8,14 +8,14 @@
     "start-test-server": "npx cadl-ranch serve ./node_modules/@azure-tools/cadl-ranch-specs/http  --coverageFile ./cadl-ranch-coverage-java.json"
   },
   "dependencies": {
-    "@cadl-lang/openapi": "~0.40.0",
-    "@azure-tools/cadl-autorest": "~0.26.0",
+    "@typespec/openapi": "~0.41.0",
+    "@azure-tools/typespec-autorest": "~0.27.0",
     "@azure-tools/cadl-ranch-specs": "~0.8.0",
     "@azure-tools/cadl-ranch-expect": "~0.1.16",
     "@azure-tools/cadl-java": "file:/../cadl-extension/azure-tools-cadl-java-0.4.2.tgz"
   },
   "devDependencies": {
-    "@cadl-lang/prettier-plugin-cadl": "~0.40.0",
+    "@typespec/prettier-plugin-typespec": "~0.41.0",
     "prettier": "~2.8.1"
   },
   "private": true
