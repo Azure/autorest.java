@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.collectionformat.implementation.CollectionFormatClientImpl;
+import com.collectionformat.models.MessageResponse;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
@@ -41,7 +42,9 @@ public final class CollectionFormatAsyncClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     message: String (Required)
+     * }
      * }</pre>
      *
      * @param colors Possible values for colors are [blue,red,green].
@@ -64,7 +67,9 @@ public final class CollectionFormatAsyncClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     message: String (Required)
+     * }
      * }</pre>
      *
      * @param colors Possible values for colors are [blue,red,green].
@@ -95,12 +100,12 @@ public final class CollectionFormatAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> testMulti(List<String> colors) {
+    public Mono<MessageResponse> testMulti(List<String> colors) {
         // Generated convenience method for testMultiWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return testMultiWithResponse(colors, requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(MessageResponse.class));
     }
 
     /**
@@ -117,11 +122,11 @@ public final class CollectionFormatAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> testCsv(List<String> colors) {
+    public Mono<MessageResponse> testCsv(List<String> colors) {
         // Generated convenience method for testCsvWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return testCsvWithResponse(colors, requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+                .map(protocolMethodData -> protocolMethodData.toObject(MessageResponse.class));
     }
 }
