@@ -26,6 +26,7 @@ op uploadSimple(@body body: bytes, @header contentType: "application/octet-strea
 @doc("multiple data types map to multiple content types using `@overload`")
 @route("/upload")
 @post
+@convenientAPI(false)
 op upload(
   @body data: string | bytes | Resource,
   @header contentType: "text/plain" | "application/json" | "application/octet-stream" | "image/jpeg" | "image/png"
