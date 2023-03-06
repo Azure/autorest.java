@@ -71,7 +71,7 @@ public class CoreTests {
         PagedFlux<User> response = client.list(5, 10, 100,
                 Collections.singletonList("id"),
                 "id lt 10",
-                Arrays.asList("id", "orders", "ETag"),
+                Arrays.asList("id", "orders", "etag"),
                 Collections.singletonList("orders"));
 
         StepVerifier.create(response)
