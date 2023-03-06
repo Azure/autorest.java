@@ -1821,6 +1821,7 @@ export class CodeModelBuilder {
   get apiVersionParameterInPath(): Parameter {
     return (
       this._apiVersionParameterInPath ||
+      // TODO: hardcode as "apiVersion", as it is what we get from compiler
       (this._apiVersionParameterInPath = this.createApiVersionParameter("apiVersion", ParameterLocation.Path))
     );
   }
