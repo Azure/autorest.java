@@ -157,7 +157,7 @@ public final class TraitsClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete(
-                @QueryParam("api-version") String apiVersion,
+                @PathParam("apiVersion") String apiVersion,
                 @PathParam("id") int id,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,

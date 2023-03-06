@@ -3,7 +3,6 @@
 
 package com._specs_.azure.traits;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
@@ -25,7 +24,6 @@ public class TraitsTests {
                 unmodifiedSince, modifiedSince, UUID.randomUUID().toString());
     }
 
-    @Disabled("https://github.com/Azure/autorest.java/issues/2008")
     @Test
     public void testDelete() {
         client.delete(1, UUID.randomUUID().toString());
