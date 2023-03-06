@@ -211,26 +211,7 @@ export class CodeModelBuilder {
         let parameter;
 
         if (isApiVersion(this.dpgContext, it)) {
-          const schema = this.codeModel.schemas.add(
-            new ConstantSchema(it.name, "api-version", {
-              valueType: this.stringSchema,
-              value: new ConstantValue(""),
-            }),
-          );
-          parameter = new Parameter(it.name, this.getDoc(it), schema, {
-            implementation: ImplementationLocation.Client,
-            origin: "modelerfour:synthesized/api-version",
-            required: true,
-            protocol: {
-              http: new HttpParameter(ParameterLocation.Uri),
-            },
-            clientDefaultValue: this.getDefaultValue(it.default),
-            language: {
-              default: {
-                serializedName: it.name,
-              },
-            },
-          });
+          parameter = this.createApiVersionParameter(it.name, ParameterLocation.Uri);
         } else {
           const schema = this.processSchema(it.type, it.name);
           parameter = new Parameter(it.name, this.getDoc(it), schema, {
@@ -587,7 +568,7 @@ export class CodeModelBuilder {
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter) {
     if (isApiVersion(this.dpgContext, param)) {
-      const parameter = this.apiVersionParameter;
+      const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
     } else if (this.specialHeaderNames.has(param.name.toLowerCase())) {
       // special headers
@@ -1798,37 +1779,49 @@ export class CodeModelBuilder {
   }
 
   private _anySchema?: AnySchema;
-  public get anySchema(): AnySchema {
+  get anySchema(): AnySchema {
     return this._anySchema ?? (this._anySchema = this.codeModel.schemas.add(new AnySchema("Anything")));
+  }
+
+  private createApiVersionParameter(serializedName: string, parameterLocation: ParameterLocation): Parameter {
+    return new Parameter(
+      serializedName,
+      "Version parameter",
+      this.codeModel.schemas.add(
+        new ConstantSchema(serializedName, "API Version", {
+          valueType: this.stringSchema,
+          value: new ConstantValue(""),
+        }),
+      ),
+      {
+        implementation: ImplementationLocation.Client,
+        origin: "modelerfour:synthesized/api-version",
+        required: true,
+        protocol: {
+          http: new HttpParameter(parameterLocation),
+        },
+        language: {
+          default: {
+            serializedName: serializedName,
+          },
+        },
+      },
+    );
   }
 
   private _apiVersionParameter?: Parameter;
   get apiVersionParameter(): Parameter {
     return (
       this._apiVersionParameter ||
-      (this._apiVersionParameter = new Parameter(
-        "api-version",
-        "Version parameter",
-        this.codeModel.schemas.add(
-          new ConstantSchema("accept", "api-version", {
-            valueType: this.stringSchema,
-            value: new ConstantValue(""),
-          }),
-        ),
-        {
-          implementation: ImplementationLocation.Client,
-          origin: "modelerfour:synthesized/api-version",
-          required: true,
-          protocol: {
-            http: new HttpParameter(ParameterLocation.Query),
-          },
-          language: {
-            default: {
-              serializedName: "api-version",
-            },
-          },
-        },
-      ))
+      (this._apiVersionParameter = this.createApiVersionParameter("api-version", ParameterLocation.Query))
+    );
+  }
+
+  private _apiVersionParameterInPath?: Parameter;
+  get apiVersionParameterInPath(): Parameter {
+    return (
+      this._apiVersionParameterInPath ||
+      (this._apiVersionParameterInPath = this.createApiVersionParameter("apiVersion", ParameterLocation.Path))
     );
   }
 
