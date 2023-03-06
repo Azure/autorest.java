@@ -145,7 +145,9 @@ public final class CollectionFormatClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     message: String (Required)
+     * }
      * }</pre>
      *
      * @param colors Possible values for colors are [blue,red,green].
@@ -170,7 +172,9 @@ public final class CollectionFormatClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     message: String (Required)
+     * }
      * }</pre>
      *
      * @param colors Possible values for colors are [blue,red,green].
@@ -192,7 +196,9 @@ public final class CollectionFormatClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     message: String (Required)
+     * }
      * }</pre>
      *
      * @param colors Possible values for colors are [blue,red,green].
@@ -217,7 +223,9 @@ public final class CollectionFormatClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     message: String (Required)
+     * }
      * }</pre>
      *
      * @param colors Possible values for colors are [blue,red,green].
