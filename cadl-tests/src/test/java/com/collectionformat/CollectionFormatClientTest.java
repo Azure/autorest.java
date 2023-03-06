@@ -3,12 +3,10 @@
 
 package com.collectionformat;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-@Disabled("Pending on fix pr: https://github.com/Azure/cadl-ranch/pull/216")
 class CollectionFormatClientTest {
 
     CollectionFormatClient client = new CollectionFormatClientBuilder().buildClient();
