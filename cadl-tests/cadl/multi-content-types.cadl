@@ -18,21 +18,19 @@ model Resource {
   name: string;
 }
 
-
-
 @doc("one data type maps to multiple content types")
 @route("simple")
 @post
 op uploadSimple(@body body: bytes, @header contentType: "application/octet-stream" | "image/jpeg" | "image/png"): void;
 
-
 @doc("multiple data types map to multiple content types using `@overload`")
 @route("/upload")
 @post
-op upload(@body data: string | bytes | Resource, @header contentType: "text/plain" | "application/json" | "application/octet-stream" | "image/jpeg" | "image/png"): void;
+op upload(
+  @body data: string | bytes | Resource,
+  @header contentType: "text/plain" | "application/json" | "application/octet-stream" | "image/jpeg" | "image/png"
+): void;
 @overload(upload)
-op uploadString(@body data: string, @header contentType: "text/plain" ): void;
+op uploadString(@body data: string, @header contentType: "text/plain"): void;
 @overload(upload)
 op uploadBytes(@body data: bytes, @header contentType: "application/octet-stream" | "image/jpeg" | "image/png"): void;
-
-
