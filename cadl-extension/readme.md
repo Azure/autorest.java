@@ -4,31 +4,31 @@ Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node
 
 Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by `java --version`)
 
-Install [Cadl](https://github.com/microsoft/cadl/) 0.40. 
+Install [TypeSpec](https://github.com/microsoft/typespec/) 0.41. 
 
-# Initialize Cadl Project
+# Initialize TypeSpec Project
 
-Follow [Cadl Getting Started](https://github.com/microsoft/cadl/#using-node--npm) to initialize your Cadl project.
+Follow [TypeSpec Getting Started](https://github.com/microsoft/typespec/#using-node--npm) to initialize your TypeSpec project.
 
-Make sure `npx cadl compile .` runs correctly.
+Make sure `npx tsp compile .` runs correctly.
 
 # Add Cadl-Java
 
-Make sure the version of [Cadl-java release](https://github.com/Azure/autorest.java/releases) depends on same version of "@cadl-lang/compiler" as in your Cadl project.
+Make sure the version of [Cadl-java release](https://github.com/Azure/autorest.java/releases) depends on same version of "@typespec/compiler" as in your TypeSpec project.
 
 Modify `package.json`, add one line under `dependencies`:
 ```diff
     "dependencies": {
-      "@cadl-lang/compiler": "latest",
-      "@cadl-lang/rest": "latest",
-      "@azure-tools/cadl-azure-core": "latest",
+      "@typespec/compiler": "latest",
+      "@typespec/rest": "latest",
+      "@azure-tools/typespec-azure-core": "latest",
 +      "@azure-tools/cadl-java": "latest"
     },
 ```
 
 Run `npm install` again to install `@azure-tools/cadl-java`.
 
-Modify (or create) `cadl-project.yaml`, specify emit as `@azure-tools/cadl-java`:
+Modify (or create) `tspconfig.yaml`, specify emit as `@azure-tools/cadl-java`:
 ```diff
 emit:
   - "@azure-tools/cadl-java"
@@ -36,7 +36,7 @@ emit:
 
 # Generate Java
 
-`npx cadl compile client.cadl --emit=@azure-tools/cadl-java` or `npx cadl compile client.cadl --emit=@azure-tools/cadl-java --options='@azure-tools/cadl-java.emitter-output-dir=<target=folder>`.
+`npx tsp compile client.tsp --emit=@azure-tools/cadl-java` or `npx tsp compile client.tsp --emit=@azure-tools/cadl-java --options='@azure-tools/cadl-java.emitter-output-dir=<target=folder>`.
 
 If `emitter-output-dir` option is not provided, generated Java code will be under `cadl-output/@azure-tools` folder.
 
@@ -67,4 +67,4 @@ options:
 By default, Cadl-Java generates all protocol APIs and convenience APIs.
 A few exceptions are API of JSON Merge Patch, and API of long-running operation with ambiguous response type.
 
-See "convenientAPI" decorator from [cadl-dpg](https://github.com/Azure/cadl-azure/tree/main/packages/cadl-dpg).
+See "convenientAPI" decorator from [typespec-client-generator-core](https://github.com/Azure/typespec-azure/tree/main/packages/typespec-client-generator-core).
