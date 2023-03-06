@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.collectionformat.models.MessageResponse;
 import java.util.List;
 
 /** Initializes a new instance of the synchronous CollectionFormatClient type. */
@@ -38,7 +39,9 @@ public final class CollectionFormatClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     message: String (Required)
+     * }
      * }</pre>
      *
      * @param colors Possible values for colors are [blue,red,green].
@@ -61,7 +64,9 @@ public final class CollectionFormatClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     message: String (Required)
+     * }
      * }</pre>
      *
      * @param colors Possible values for colors are [blue,red,green].
@@ -92,10 +97,10 @@ public final class CollectionFormatClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public String testMulti(List<String> colors) {
+    public MessageResponse testMulti(List<String> colors) {
         // Generated convenience method for testMultiWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return testMultiWithResponse(colors, requestOptions).getValue().toObject(String.class);
+        return testMultiWithResponse(colors, requestOptions).getValue().toObject(MessageResponse.class);
     }
 
     /**
@@ -112,9 +117,9 @@ public final class CollectionFormatClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public String testCsv(List<String> colors) {
+    public MessageResponse testCsv(List<String> colors) {
         // Generated convenience method for testCsvWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return testCsvWithResponse(colors, requestOptions).getValue().toObject(String.class);
+        return testCsvWithResponse(colors, requestOptions).getValue().toObject(MessageResponse.class);
     }
 }

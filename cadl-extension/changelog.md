@@ -1,10 +1,11 @@
 # Release History
 
-## 0.4.2 (Unreleased)
+## 0.4.2 (2023-03-07)
 
 Compatible with compiler 0.40.
 
 - Supported type `url` in path or query parameter, to skip URL encoding.
+- Supported `protocolAPI` from cadl-dpg.
 
 ## 0.4.1 (2023-02-20)
 

@@ -4,12 +4,13 @@
 
 package com._specs_.azure.core.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 /** Details about a user. */
-@Immutable
+@Fluent
 public final class User {
     /*
      * The user's id.
@@ -22,6 +23,18 @@ public final class User {
      */
     @JsonProperty(value = "name", required = true)
     private String name;
+
+    /*
+     * The user's order list
+     */
+    @JsonProperty(value = "orders")
+    private List<UserOrder> orders;
+
+    /*
+     * The entity tag for this resource.
+     */
+    @JsonProperty(value = "etag", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    private String etag;
 
     /**
      * Creates an instance of User class.
@@ -49,5 +62,34 @@ public final class User {
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Get the orders property: The user's order list.
+     *
+     * @return the orders value.
+     */
+    public List<UserOrder> getOrders() {
+        return this.orders;
+    }
+
+    /**
+     * Set the orders property: The user's order list.
+     *
+     * @param orders the orders value to set.
+     * @return the User object itself.
+     */
+    public User setOrders(List<UserOrder> orders) {
+        this.orders = orders;
+        return this;
+    }
+
+    /**
+     * Get the etag property: The entity tag for this resource.
+     *
+     * @return the etag value.
+     */
+    public String getEtag() {
+        return this.etag;
     }
 }

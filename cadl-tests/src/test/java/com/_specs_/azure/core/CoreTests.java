@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +60,7 @@ public class CoreTests {
                 .assertNext(user -> {
                     Assertions.assertEquals(1, user.getId());
                     Assertions.assertEquals("Madge", user.getName());
+                    Assertions.assertEquals("11bdc430-65e8-45ad-81d9-8ffa60d55b59", user.getEtag());
                 })
                 .expectComplete()
                 .verify();
@@ -65,12 +68,18 @@ public class CoreTests {
 
     @Test
     public void testList() {
-        PagedFlux<User> response = client.list();
+        PagedFlux<User> response = client.list(5, 10, 100,
+                Collections.singletonList("id"),
+                "id lt 10",
+                Arrays.asList("id", "orders", "etag"),
+                Collections.singletonList("orders"));
 
         StepVerifier.create(response)
                 .assertNext(user -> {
                     Assertions.assertEquals(1, user.getId());
                     Assertions.assertEquals("Madge", user.getName());
+                    Assertions.assertNotNull(user.getEtag());
+                    Assertions.assertNotNull(user.getOrders());
                 })
                 .assertNext(user -> {
                     Assertions.assertEquals(2, user.getId());
@@ -78,6 +87,8 @@ public class CoreTests {
                 })
                 .expectComplete()
                 .verify();
+
+        client.listWithPage().blockLast();
     }
 
 
