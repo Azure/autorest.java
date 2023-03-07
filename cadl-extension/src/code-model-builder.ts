@@ -879,7 +879,7 @@ export class CodeModelBuilder {
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
       const bodyType = this.findResponseBody(responseBody.type);
-      if (bodyType.kind === "Model" && bodyType.name === "bytes") {
+      if (bodyType.kind === "Scalar" && bodyType.name === "bytes") {
         // binary
         response = new BinaryResponse({
           protocol: {
