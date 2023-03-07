@@ -1,12 +1,12 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-dpg";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
-using Azure.DPG;
+using Azure.ClientGenerator.Core;
 
 @service({
   title: "Response",
@@ -14,12 +14,13 @@ using Azure.DPG;
 })
 namespace Cadl.Response;
 
+@resource("resources")
 model Resource {
   @visibility("read")
   id: string;
 
   @key
-  @segment("resources")
+  @visibility("create", "update")
   name: string;
   description?: string;
   type: string;
@@ -31,7 +32,7 @@ interface ResourceOperations
   extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
 
 // operation using Azure.Core
-@Azure.DPG.client({
+@Azure.ClientGenerator.Core.client({
   name: "CoreClient",
   service: Cadl.Response,
 })
@@ -51,7 +52,7 @@ interface CadlCoreOp {
   list is ResourceOperations.ResourceList<Resource>;
 }
 
-@Azure.DPG.client({
+@Azure.ClientGenerator.Core.client({
   name: "ResponseClient",
   service: Cadl.Response,
 })

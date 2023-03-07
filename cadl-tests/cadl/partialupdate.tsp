@@ -1,12 +1,12 @@
-import "@cadl-lang/rest";
+import "@typespec/rest";
 
-using Cadl.Http;
+using TypeSpec.Http;
 
 @service({
   title: "PartialUpdate",
   version: "1.0.0",
 })
-namespace Cadl.PartialUpdate;
+namespace TypeSpec.PartialUpdate;
 
 model PartialUpdateModel {
   boolean: boolean;

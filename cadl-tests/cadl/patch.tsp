@@ -1,11 +1,11 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-dpg";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core.Foundations;
-using Azure.DPG;
+using Azure.ClientGenerator.Core;
 
 @service({
   title: "Patch",
@@ -13,12 +13,13 @@ using Azure.DPG;
 })
 namespace Cadl.Patch;
 
+@resource("resources")
 model Resource {
   @visibility("read")
   id: string;
 
   @key
-  @segment("resources")
+  @visibility("create", "update")
   name: string;
   description?: string;
   type: string;

@@ -1,9 +1,9 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Foundations;
 using Azure.Core.Traits;
@@ -15,12 +15,13 @@ using Azure.Core.Traits;
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Cadl.LongRunning;
 
+@resource("resources")
 model Resource {
   @visibility("read")
   id: string;
 
   @key
-  @segment("resources")
+  @visibility("create", "update")
   name: string;
   type: string;
 }

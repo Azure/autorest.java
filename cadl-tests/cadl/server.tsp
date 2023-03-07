@@ -1,7 +1,7 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-dpg";
+import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 
-using Cadl.Http;
+using TypeSpec.Http;
 
 @service({
   title: "HttpbinServer",
@@ -19,7 +19,7 @@ using Cadl.Http;
   }
 )
 namespace Cadl.Server {
-  @Azure.DPG.client({
+  @Azure.ClientGenerator.Core.client({
     name: "HttpbinClient",
     service: Cadl.Server,
   })
@@ -50,7 +50,7 @@ namespace Cadl.ContosoServer {
     v1: "v1",
   }
 
-  @Azure.DPG.client({
+  @Azure.ClientGenerator.Core.client({
     name: "ContosoClient",
     service: Cadl.ContosoServer,
   })

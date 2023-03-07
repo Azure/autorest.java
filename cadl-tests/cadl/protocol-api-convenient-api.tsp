@@ -1,14 +1,14 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-dpg";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Foundations;
 using Azure.Core.Traits;
-using Azure.DPG;
+using Azure.ClientGenerator.Core;
 
 @service({
   title: "ProtocolAndConvenient",
@@ -21,7 +21,6 @@ model ResourceA {
   @visibility("read")
   id: string;
 
-  @key
   name: string;
 }
 
@@ -29,7 +28,7 @@ model ResourceB {
   @visibility("read")
   id: string;
 
-  @key
+  
   name: string;
 }
 
@@ -37,7 +36,7 @@ model ResourceC {
   @visibility("read")
   id: string;
 
-  @key
+  
   name: string;
 }
 
@@ -45,7 +44,7 @@ model ResourceD {
   @visibility("read")
   id: string;
 
-  @key
+  
   name: string;
 }
 
@@ -53,7 +52,7 @@ model ResourceE {
   @visibility("read")
   id: string;
 
-  @key
+  
   name: string;
 }
 
@@ -61,7 +60,7 @@ model ResourceF {
   @visibility("read")
   id: string;
 
-  @key
+  
   name: string;
 }
 
@@ -69,34 +68,34 @@ model ResourceG {
   @visibility("read")
   id: string;
 
-  @key
+  
   name: string;
 }
 
 model ResourceH {
   @visibility("read")
   id: string;
-
-  @key
   name: string;
 }
 
+@resource("resources")
 model ResourceI {
   @visibility("read")
   id: string;
 
+  @visibility("create", "update")
   @key
-  @segment("resources")
   name: string;
   type: string;
 }
 
+@resource("resources")
 model ResourceJ {
   @visibility("read")
   id: string;
 
+  @visibility("create", "update")
   @key
-  @segment("resources")
   name: string;
   type: string;
 }

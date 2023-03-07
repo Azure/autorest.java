@@ -1,7 +1,7 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
+using TypeSpec.Http;
 using Azure.Core;
 
 @service({
@@ -10,7 +10,7 @@ using Azure.Core;
 })
 namespace Cadl.EnumService;
 
-#suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "For testing"
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
 @fixed
 enum Color {
   Red,
@@ -24,14 +24,14 @@ enum ColorModel {
   Green,
 }
 
-#suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "For testing"
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
 @fixed
 enum Priority {
   High: 100,
   Low: 0,
 }
 
-#suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "For testing"
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
 @fixed
 enum OperationStateValues {
   Running,

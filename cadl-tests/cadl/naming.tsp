@@ -1,7 +1,7 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
+using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Foundations;
 
@@ -44,7 +44,7 @@ model DataModel {
   data: bytes;
 }
 
-#suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "For testing"
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
 @summary("summary of Types")
 @doc("description of Types")
 @fixed
