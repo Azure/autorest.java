@@ -20,11 +20,10 @@ model Resource {
   id: string;
 
   @key
-@visibility("create", "update")
+  @visibility("create", "update")
   name: string;
   type: string;
 }
-
 
 interface ResourceOperations
   extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
