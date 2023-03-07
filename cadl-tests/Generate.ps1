@@ -1,6 +1,6 @@
-function Generate($CadlFile) {
-  Write-Host "npx cadl compile $CadlFile --trace import-resolution --trace projection --trace cadl-java"
-  Invoke-Expression "npx cadl compile $CadlFile --trace import-resolution --trace projection --trace cadl-java"
+function Generate($tspFile) {
+  Write-Host "npx tsp compile $tspFile --trace import-resolution --trace projection --trace cadl-java"
+  Invoke-Expression "npx tsp compile $tspFile --trace import-resolution --trace projection --trace cadl-java"
 
   if ($LASTEXITCODE) {
     exit $LASTEXITCODE
@@ -54,19 +54,19 @@ if (Test-Path ./cadl-output) {
 # }
 
 # run other local tests except partial update
-foreach ($cadlFile in (Get-Item ./cadl/* -Filter "*.cadl" -Exclude "*partialupdate*")) {
-    generate $cadlFile
+foreach ($tspFile in (Get-Item ./cadl/* -Filter "*.tsp" -Exclude "*partialupdate*")) {
+    generate $tspFile
 }
 
 # partial update test
-npx cadl compile ./cadl/partialupdate.cadl --options="@azure-tools/cadl-java.emitter-output-dir={project-root}/existingcode"
+npx tsp compile ./cadl/partialupdate.tsp --options="@azure-tools/cadl-java.emitter-output-dir={project-root}/existingcode"
 Copy-Item -Path ./existingcode/src/main/java/com/cadl/partialupdate -Destination ./src/main/java/com/cadl/partialupdate -Recurse -Force
 Remove-Item ./existingcode -Recurse -Force
 
 # run cadl ranch tests sources
 Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
 
-foreach ($cadlFile in (Get-ChildItem ./http -Filter "*.cadl" -File -Name -Recurse)) {
-    generate "./http/$cadlFile"
+foreach ($tspFile in (Get-ChildItem ./http -Filter "*.tsp" -File -Name -Recurse)) {
+    generate "./http/$tspFile"
 }
 Remove-Item ./http -Recurse -Force
