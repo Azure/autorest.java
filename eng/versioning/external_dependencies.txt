@@ -7,6 +7,7 @@ com.azure:azure-json
 
 com.fasterxml.jackson.core:jackson-core
 com.fasterxml.jackson.core:jackson-databind
+com.fasterxml.jackson.dataformat:jackson-dataformat-xml
 org.slf4j:slf4j-api
 org.slf4j:slf4j-nop
 org.slf4j:slf4j-simple
