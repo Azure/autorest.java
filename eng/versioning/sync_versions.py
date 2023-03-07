@@ -52,6 +52,7 @@ def fill_versions(package_versions: Dict[Package, str],
             for versions in versions_list:
                 if package in versions:
                     version = versions[package]
+                    logging.info(f'package {package.artifact}: {version}')
                     break
         if not version:
             raise ValueError(f'version not found for package {package.group}:{package.artifact}')
