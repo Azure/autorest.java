@@ -57,7 +57,7 @@ public class Project {
         private String azureCoreVersion = "1.37.0";
         private String azureCoreManagementVersion = "1.10.2";
         private String azureCoreHttpNettyVersion = "1.13.1";
-        private String azureCoreTestVersion = "1.14.1";
+        private String azureCoreTestVersion = "1.15.0";
         private String azureIdentityVersion = "1.8.1";
         private String junitVersion = "5.9.1";
         private String mockitoVersion = "4.5.1";
