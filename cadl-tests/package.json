@@ -4,7 +4,7 @@
   "scripts": {
     "format": "npm run -s prettier -- --write",
     "check-format": "npm run prettier -- --check",
-    "prettier": "prettier --config ./.prettierrc.yaml **/*.cadl",
+    "prettier": "prettier --config ./.prettierrc.yaml **/*.tsp",
     "start-test-server": "npx cadl-ranch serve ./node_modules/@azure-tools/cadl-ranch-specs/http  --coverageFile ./cadl-ranch-coverage-java.json"
   },
   "dependencies": {
