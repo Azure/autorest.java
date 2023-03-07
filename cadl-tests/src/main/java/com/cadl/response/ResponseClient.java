@@ -40,7 +40,7 @@ public final class ResponseClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * byte[]
+     * BinaryData
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -52,7 +52,7 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<byte[]> getBinaryWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getBinaryWithResponse(RequestOptions requestOptions) {
         return this.client.getBinaryWithResponse(requestOptions).block();
     }
 
@@ -169,7 +169,7 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public byte[] getBinary() {
+    public BinaryData getBinary() {
         // Generated convenience method for getBinaryWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getBinaryWithResponse(requestOptions).getValue();
