@@ -25,9 +25,6 @@ import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeId;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -123,7 +120,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             if (!compositeTypeProperties.isEmpty()) {
                 if (settings.isGenerateXmlSerialization()) {
-                    modelImports.add(JacksonXmlRootElement.class.getName());
+                    modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
 
                     if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema() instanceof ArraySchema)) {
                         modelImports.add(ArrayList.class.getName());
@@ -137,7 +134,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                         XmlSerlializationFormat xmlSchema = p.getSchema().getSerialization().getXml();
                         return xmlSchema.isAttribute() || xmlSchema.getNamespace() != null;
                     })) {
-                        modelImports.add(JacksonXmlProperty.class.getName());
+                        modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
                     }
 
                     if (compositeTypeProperties.stream().anyMatch(p -> {
@@ -147,7 +144,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
                         return p.getSchema().getSerialization().getXml().isText();
                     })) {
-                        modelImports.add(JacksonXmlText.class.getName());
+                        modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText");
                     }
 
                     if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() == null

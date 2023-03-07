@@ -12,9 +12,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 import java.util.HashMap;
 import java.util.List;
@@ -292,12 +289,12 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         }
 
         if (shouldGenerateXmlSerialization) {
-            imports.add(JacksonXmlRootElement.class.getName());
+            imports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
             if (isXmlWrapper()) {
-                imports.add(JacksonXmlProperty.class.getName());
+                imports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
             }
             if (isXmlText()) {
-                imports.add(JacksonXmlText.class.getName());
+                imports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText");
             }
         } else {
             imports.add(JsonProperty.class.getName());
