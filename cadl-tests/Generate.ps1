@@ -60,7 +60,7 @@ foreach ($tspFile in (Get-Item ./cadl/* -Filter "*.tsp" -Exclude "*partialupdate
 
 # partial update test
 npx tsp compile ./cadl/partialupdate.tsp --options="@azure-tools/cadl-java.emitter-output-dir={project-root}/existingcode"
-Copy-Item -Path ./existingcode/src/main/java/com/cadl/partialupdate -Destination ./src/main/java/com/cadl/partialupdate -Recurse -Force
+Copy-Item -Path ./existingcode/src/main/java/com/cadl/partialupdate -Destination ./src/main/java/com/cadl/ -Recurse -Force
 Remove-Item ./existingcode -Recurse -Force
 
 # run cadl ranch tests sources
