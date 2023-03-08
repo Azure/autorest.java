@@ -6,7 +6,7 @@ using TypeSpec.Http;
   title: "PartialUpdate",
   version: "1.0.0",
 })
-namespace TypeSpec.PartialUpdate;
+namespace Cadl.PartialUpdate;
 
 model PartialUpdateModel {
   boolean: boolean;

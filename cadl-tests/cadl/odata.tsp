@@ -17,7 +17,7 @@ model Resource {
   id: string;
 
   @key
-  @visibility("create", "update")
+  @visibility("read")
   name: string;
   type: string;
 }

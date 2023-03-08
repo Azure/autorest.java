@@ -70,7 +70,7 @@ model ResourceI {
   @visibility("read")
   id: string;
 
-  @visibility("create", "update")
+  @visibility("read")
   @key
   name: string;
   type: string;
@@ -81,7 +81,7 @@ model ResourceJ {
   @visibility("read")
   id: string;
 
-  @visibility("create", "update")
+  @visibility("read")
   @key
   name: string;
   type: string;
