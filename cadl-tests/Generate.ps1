@@ -27,8 +27,8 @@ if (Test-Path ./src/main/java/com/cadl/partialupdate) {
     Copy-Item -Path ./src/main/java/com/cadl/partialupdate -Destination ./existingcode/src/main/java/com/cadl/partialupdate -Recurse -Force
 }
 
-if (Test-Path ./src/main) {
-    Remove-Item ./src/main -Recurse -Force
+if (Test-Path ./src/main/cadl) {
+    Remove-Item ./src/main/cadl -Recurse -Force
 }
 if (Test-Path ./cadl-output) {
     Remove-Item ./cadl-output -Recurse -Force
