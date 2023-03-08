@@ -10,6 +10,8 @@
   "dependencies": {
     "@typespec/openapi": "~0.41.0",
     "@azure-tools/typespec-autorest": "~0.27.0",
+    "@azure-tools/cadl-ranch-specs": "~0.8.0",
+    "@azure-tools/cadl-ranch-expect": "~0.1.16",
     "@azure-tools/cadl-java": "file:/../cadl-extension/azure-tools-cadl-java-0.4.2.tgz"
   },
   "devDependencies": {
