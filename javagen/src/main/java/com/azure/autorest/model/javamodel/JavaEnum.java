@@ -4,13 +4,14 @@
 package com.azure.autorest.model.javamodel;
 
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.core.util.CoreUtils;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
 public class JavaEnum {
-    private JavaFileContents contents;
+    private final JavaFileContents contents;
     private boolean previouslyAddedValue;
     private boolean addNewLine;
 
@@ -53,29 +54,29 @@ public class JavaEnum {
 
     public final void value(String name, String value) {
         addExpectedCommaAndNewLine();
-        contents.javadocComment(String.format("Enum value %1$s.", value));
-        contents.text(String.format("%1$s(\"%2$s\")", name, value));
+        contents.javadocComment("Enum value " + value + ".");
+        contents.text(name + "(\"" + value + "\")");
         previouslyAddedValue = true;
         addNewLine = true;
     }
 
-    public final void value(String name, String value, IType type) {
+    public final void value(String name, String value, String description, IType type) {
         addExpectedCommaAndNewLine();
-        contents.javadocComment(String.format("Enum value %1$s.", value));
-        contents.text(String.format("%1$s(%2$s)", name, type.defaultValueExpression(value)));
+        contents.javadocComment(CoreUtils.isNullOrEmpty(description) ? "Enum value " + value + "." : description);
+        contents.text(name + "(" + type.defaultValueExpression(value) + ")");
         previouslyAddedValue = true;
         addNewLine = true;
     }
 
     public final void privateFinalMemberVariable(String variableType, String variableName) {
         addExpectedSemicolonAndNewLine();
-        contents.line(String.format("private final %1$s %2$s;", variableType, variableName));
+        contents.line("private final " + variableType + " " + variableName + ";");
         addNewLine = true;
     }
 
     public final void constructor(String constructorSignature, Consumer<JavaBlock> constructor) {
         addExpectedSemicolonAndNewLine();
-        contents.block(String.format("%1$s", constructorSignature), constructor);
+        contents.block(constructorSignature, constructor);
         previouslyAddedValue = false;
         addNewLine = true;
     }

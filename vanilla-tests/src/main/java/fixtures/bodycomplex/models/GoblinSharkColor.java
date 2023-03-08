@@ -19,10 +19,10 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
     /** Static value brown for GoblinSharkColor. */
     public static final GoblinSharkColor BROWN = fromString("brown");
 
-    /** Static value RED for GoblinSharkColor. */
+    /** Uppercase RED. */
     public static final GoblinSharkColor UPPER_RED = fromString("RED");
 
-    /** Static value red for GoblinSharkColor. */
+    /** Lowercase RED. */
     public static final GoblinSharkColor LOWER_RED = fromString("red");
 
     /**
