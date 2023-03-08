@@ -48,57 +48,11 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
-      - task: Npm@1
-        displayName: 'Install Dependencies for Cadl Java'
-        inputs:
-          command: install
-          workingDir: ./cadl-extension
-
-      - task: Npm@1
-        displayName: 'Build Cadl Java'
-        inputs:
-          command: custom
-          customCommand: run build
-          workingDir: ./cadl-extension
-
-      - task: Npm@1
-        displayName: 'Lint Cadl Java'
-        inputs:
-          command: custom
-          customCommand: run lint
-          workingDir: ./cadl-extension
-
-      - task: Npm@1
-        displayName: 'Check-Format Cadl Java'
-        inputs:
-          command: custom
-          customCommand: run check-format
-          workingDir: ./cadl-extension
-
-      - task: Npm@1
-        displayName: 'Pack Cadl Java'
-        inputs:
-          command: custom
-          customCommand: pack
-          workingDir: ./cadl-extension
-
-      - script: |
-          npm install -g @cadl-lang/compiler
-        displayName: 'Install Cadl'
-
       - task: PowerShell@2
         displayName: 'Generate Code'
         inputs:
           pwsh: true
-          filePath: cadl-tests/Generate.ps1
-          workingDirectory: ./cadl-tests
-
-      - task: Npm@1
-        displayName: 'Check-Format Cadl Tests'
-        inputs:
-          command: custom
-          customCommand: run check-format
-          workingDir: ./cadl-tests
+          filePath: Generate-Cadl.ps1
 
       - script: |
           git status
