@@ -33,7 +33,7 @@
     "lib/*.tsp",
     "dist/**",
     "!dist/test/**",
-    "target/azure-cadl-extension-jar-with-dependencies.jar"
+    "target/azure-typespec-extension-jar-with-dependencies.jar"
   ],
   "peerDependencies": {
     "@typespec/compiler": "~0.41.0",
