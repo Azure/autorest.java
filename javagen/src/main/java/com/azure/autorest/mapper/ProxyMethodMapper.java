@@ -103,7 +103,10 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
         if (settings.isDataPlaneClient()) {
             builder.rawResponseBodyType(responseBodyType);
-            if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
+            if (responseBodyType instanceof ClassType
+                    || responseBodyType instanceof ListType
+                    || responseBodyType instanceof MapType
+                    || responseBodyType == GenericType.FluxByteBuffer) {
                 responseBodyType = ClassType.BinaryData;
             } else if (responseBodyType instanceof EnumType) {
                 responseBodyType = ClassType.String;

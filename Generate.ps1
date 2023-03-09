@@ -147,6 +147,10 @@ if ($job.State -notin @('Completed', 'Failed')) {
 }
 
 # Azure Data Plane
+if (Test-Path ./azure-dataplane-tests/src/main) {
+    Remove-Item ./azure-dataplane-tests/src/main -Recurse -Force | Out-Null
+}
+
 $job = @(
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_SDK_FOR_JAVA/schemaregistry/azure-data-schemaregistry/swagger/README.md"
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_SDK_FOR_JAVA/containerregistry/azure-containers-containerregistry/swagger/autorest.md"
@@ -190,8 +194,12 @@ if ($job.State -notin @('Completed', 'Failed')) {
 # Remove-Item ./azure-tests/src/main/java/module-info.java -Force
 
 # Protocol
-Remove-Item ./protocol-tests/src/main -Recurse -Force | Out-Null
-Remove-Item ./protocol-tests/src/samples -Recurse -Force | Out-Null
+if (Test-Path ./protocol-tests/src/main) {
+    Remove-Item ./protocol-tests/src/main -Recurse -Force | Out-Null
+}
+if (Test-Path ./protocol-tests/src/samples) {
+    Remove-Item ./protocol-tests/src/samples -Recurse -Force | Out-Null
+}
 
 $job = @(
     "$PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/body-string.json --namespace=fixtures.bodystring",
