@@ -1,8 +1,8 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
 
 @service({
@@ -11,12 +11,13 @@ using Azure.Core;
 })
 namespace Cadl.Odata;
 
+@resource("resources")
 model Resource {
   @visibility("read")
   id: string;
 
   @key
-  @segment("resources")
+  @visibility("read")
   name: string;
   type: string;
 }

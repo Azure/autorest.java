@@ -1,24 +1,25 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
+import "@typespec/rest";
+import "@typespec/versioning";
 
-using Cadl.Http;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 @service({
-  title: "Flatten",
+  title: "Union",
   version: "1.0.0",
 })
 @server(
   "{endpoint}/openai",
-  "Flatten",
+  "Union",
   {
     endpoint: string,
   }
 )
 @versioned(ServiceApiVersions)
-namespace Cadl.Flatten;
+namespace Cadl.Union;
 
 enum ServiceApiVersions {
+  v2022_03_01_preview: "2022-03-01-preview",
   v2022_06_01_preview: "2022-06-01-preview",
 }
 
@@ -32,20 +33,24 @@ model ApiVersionParameter {
 
 alias Request = {
   user?: User;
-  input: string;
+  input: string | string[] | integer[] | integer[][];
 };
 
 alias LongRequest = {
   user?: User;
   input: string;
   dataInt: int32;
-  dataIntOptional?: int32;
+  dataUnion?: string | ArrayData | bytes | zonedDateTime;
   dataLong?: int64;
   data_float?: float64;
 };
 
 model User {
   user: string;
+}
+
+model ArrayData {
+  data: string[];
 }
 
 @route("/flatten")

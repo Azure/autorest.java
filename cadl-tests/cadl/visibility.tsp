@@ -1,8 +1,8 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-dpg";
+import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 
-using Cadl.Http;
-using Azure.DPG;
+using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 @service({
   title: "Visibility",

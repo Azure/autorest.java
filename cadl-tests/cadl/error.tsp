@@ -1,8 +1,8 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core.Foundations;
 
 @service({
