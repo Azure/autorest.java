@@ -52,7 +52,7 @@ jobs:
         displayName: 'Generate Code'
         inputs:
           pwsh: true
-          filePath: Generate-Cadl.ps1
+          filePath: Generate-TypeSpec.ps1
 
       - script: |
           git status
