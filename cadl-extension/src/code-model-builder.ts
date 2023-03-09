@@ -929,7 +929,7 @@ export class CodeModelBuilder {
                 schema = candidateResponseSchema;
                 this.program.trace(
                   "typespec-java",
-                  `Replace Cadl model ${this.getName(bodyType)} with ${candidateResponseSchema.language.default.name}`,
+                  `Replace TypeSpec model ${this.getName(bodyType)} with ${candidateResponseSchema.language.default.name}`,
                 );
               }
             }
