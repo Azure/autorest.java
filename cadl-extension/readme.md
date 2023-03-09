@@ -22,21 +22,21 @@ Modify `package.json`, add one line under `dependencies`:
       "@typespec/compiler": "latest",
       "@typespec/rest": "latest",
       "@azure-tools/typespec-azure-core": "latest",
-+      "@azure-tools/cadl-java": "latest"
++      "@azure-tools/typespec-java": "latest"
     },
 ```
 
-Run `npm install` again to install `@azure-tools/cadl-java`.
+Run `npm install` again to install `@azure-tools/typespec-java`.
 
-Modify (or create) `tspconfig.yaml`, specify emit as `@azure-tools/cadl-java`:
+Modify (or create) `tspconfig.yaml`, specify emit as `@azure-tools/typespec-java`:
 ```diff
 emit:
-  - "@azure-tools/cadl-java"
+  - "@azure-tools/typespec-java"
 ```
 
 # Generate Java
 
-`npx tsp compile client.tsp --emit=@azure-tools/cadl-java` or `npx tsp compile client.tsp --emit=@azure-tools/cadl-java --options='@azure-tools/cadl-java.emitter-output-dir=<target=folder>`.
+`npx tsp compile client.tsp --emit=@azure-tools/typespec-java` or `npx tsp compile client.tsp --emit=@azure-tools/typespec-java --options='@azure-tools/typespec-java.emitter-output-dir=<target=folder>`.
 
 If `emitter-output-dir` option is not provided, generated Java code will be under `cadl-output/@azure-tools` folder.
 
@@ -44,13 +44,13 @@ If `emitter-output-dir` option is not provided, generated Java code will be unde
 
 ## SDK
 
-One can further configure the SDK generated, using the emitter options on `@azure-tools/cadl-java`.
+One can further configure the SDK generated, using the emitter options on `@azure-tools/typespec-java`.
 
 ```yaml
 emit:
-  - "@azure-tools/cadl-java"
+  - "@azure-tools/typespec-java"
 options:
-  "@azure-tools/cadl-java":
+  "@azure-tools/typespec-java":
     emitter-output-dir: "{project-root}/azure-ai-language-authoring"
     namespace: "com.azure.ai.language.authoring"
     service-name: "Authoring"

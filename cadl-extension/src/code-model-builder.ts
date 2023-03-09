@@ -928,7 +928,7 @@ export class CodeModelBuilder {
               if (match) {
                 schema = candidateResponseSchema;
                 this.program.trace(
-                  "cadl-java",
+                  "typespec-java",
                   `Replace Cadl model ${this.getName(bodyType)} with ${candidateResponseSchema.language.default.name}`,
                 );
               }
@@ -1738,9 +1738,9 @@ export class CodeModelBuilder {
   }
 
   private logWarning(msg: string) {
-    this.program.trace("cadl-java", msg);
+    this.program.trace("typespec-java", msg);
     this.program.reportDiagnostic({
-      code: "cadl-java",
+      code: "typespec-java",
       severity: "warning",
       message: msg,
       target: NoTarget,

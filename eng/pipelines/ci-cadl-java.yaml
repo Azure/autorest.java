@@ -49,42 +49,42 @@ jobs:
           publishJUnitResults: false
 
       - task: Npm@1
-        displayName: 'Install Dependencies for Cadl Java'
+        displayName: 'Install Dependencies for TypeSpec Java'
         inputs:
           command: install
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Build Cadl Java'
+        displayName: 'Build TypeSpec Java'
         inputs:
           command: custom
           customCommand: run build
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Lint Cadl Java'
+        displayName: 'Lint TypeSpec Java'
         inputs:
           command: custom
           customCommand: run lint
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Check-Format Cadl Java'
+        displayName: 'Check-Format TypeSpec Java'
         inputs:
           command: custom
           customCommand: run check-format
           workingDir: ./cadl-extension
 
       - task: Npm@1
-        displayName: 'Pack Cadl Java'
+        displayName: 'Pack TypeSpec Java'
         inputs:
           command: custom
           customCommand: pack
           workingDir: ./cadl-extension
 
       - script: |
-          npm install -g @cadl-lang/compiler
-        displayName: 'Install Cadl'
+          npm install -g @typespec/compiler
+        displayName: 'Install TypeSpec'
 
       - task: PowerShell@2
         displayName: 'Generate Code'
@@ -94,7 +94,7 @@ jobs:
           workingDirectory: ./cadl-tests
 
       - task: Npm@1
-        displayName: 'Check-Format Cadl Tests'
+        displayName: 'Check-Format TypeSpec Tests'
         inputs:
           command: custom
           customCommand: run check-format
