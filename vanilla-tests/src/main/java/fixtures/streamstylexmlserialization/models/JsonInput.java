@@ -78,10 +78,10 @@ public final class JsonInput implements XmlSerializable<JsonInput> {
                             reader.skipElement();
                         }
                     }
-                    JsonInput deserializedValue = new JsonInput();
-                    deserializedValue.id = id;
+                    JsonInput deserializedJsonInput = new JsonInput();
+                    deserializedJsonInput.id = id;
 
-                    return deserializedValue;
+                    return deserializedJsonInput;
                 });
     }
 }

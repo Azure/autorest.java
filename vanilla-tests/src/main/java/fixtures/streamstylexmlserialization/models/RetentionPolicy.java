@@ -111,11 +111,11 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
                             reader.skipElement();
                         }
                     }
-                    RetentionPolicy deserializedValue = new RetentionPolicy();
-                    deserializedValue.enabled = enabled;
-                    deserializedValue.days = days;
+                    RetentionPolicy deserializedRetentionPolicy = new RetentionPolicy();
+                    deserializedRetentionPolicy.enabled = enabled;
+                    deserializedRetentionPolicy.days = days;
 
-                    return deserializedValue;
+                    return deserializedRetentionPolicy;
                 });
     }
 }

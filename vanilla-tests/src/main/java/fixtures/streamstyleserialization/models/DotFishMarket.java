@@ -159,33 +159,27 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
     public static DotFishMarket fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    DotSalmon sampleSalmon = null;
-                    List<DotSalmon> salmons = null;
-                    DotFish sampleFish = null;
-                    List<DotFish> fishes = null;
+                    DotFishMarket deserializedDotFishMarket = new DotFishMarket();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("sampleSalmon".equals(fieldName)) {
-                            sampleSalmon = DotSalmon.fromJson(reader);
+                            deserializedDotFishMarket.sampleSalmon = DotSalmon.fromJson(reader);
                         } else if ("salmons".equals(fieldName)) {
-                            salmons = reader.readArray(reader1 -> DotSalmon.fromJson(reader1));
+                            List<DotSalmon> salmons = reader.readArray(reader1 -> DotSalmon.fromJson(reader1));
+                            deserializedDotFishMarket.salmons = salmons;
                         } else if ("sampleFish".equals(fieldName)) {
-                            sampleFish = DotFish.fromJson(reader);
+                            deserializedDotFishMarket.sampleFish = DotFish.fromJson(reader);
                         } else if ("fishes".equals(fieldName)) {
-                            fishes = reader.readArray(reader1 -> DotFish.fromJson(reader1));
+                            List<DotFish> fishes = reader.readArray(reader1 -> DotFish.fromJson(reader1));
+                            deserializedDotFishMarket.fishes = fishes;
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    DotFishMarket deserializedValue = new DotFishMarket();
-                    deserializedValue.sampleSalmon = sampleSalmon;
-                    deserializedValue.salmons = salmons;
-                    deserializedValue.sampleFish = sampleFish;
-                    deserializedValue.fishes = fishes;
 
-                    return deserializedValue;
+                    return deserializedDotFishMarket;
                 });
     }
 }

@@ -93,25 +93,21 @@ public class Pet implements JsonSerializable<Pet> {
     public static Pet fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    Integer id = null;
-                    String name = null;
+                    Pet deserializedPet = new Pet();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getNullable(JsonReader::getInt);
+                            deserializedPet.id = reader.getNullable(JsonReader::getInt);
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getString();
+                            deserializedPet.name = reader.getString();
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    Pet deserializedValue = new Pet();
-                    deserializedValue.id = id;
-                    deserializedValue.name = name;
 
-                    return deserializedValue;
+                    return deserializedPet;
                 });
     }
 }

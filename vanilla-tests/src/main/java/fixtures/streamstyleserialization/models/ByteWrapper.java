@@ -68,21 +68,19 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
     public static ByteWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    byte[] field = new byte[0];
+                    ByteWrapper deserializedByteWrapper = new ByteWrapper();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getBinary();
+                            deserializedByteWrapper.field = reader.getBinary();
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    ByteWrapper deserializedValue = new ByteWrapper();
-                    deserializedValue.field = field;
 
-                    return deserializedValue;
+                    return deserializedByteWrapper;
                 });
     }
 }
