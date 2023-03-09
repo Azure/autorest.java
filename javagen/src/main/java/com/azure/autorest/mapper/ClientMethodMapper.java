@@ -560,7 +560,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
         if (isProtocolMethod) {
-            if (responseBodyType instanceof ClassType || responseBodyType instanceof ListType || responseBodyType instanceof MapType) {
+            if (responseBodyType instanceof ClassType
+                    || responseBodyType instanceof ListType
+                    || responseBodyType instanceof MapType
+                    || responseBodyType == GenericType.FluxByteBuffer) {
                 responseBodyType = ClassType.BinaryData;
             } else if (responseBodyType instanceof EnumType) {
                 responseBodyType = ClassType.String;
