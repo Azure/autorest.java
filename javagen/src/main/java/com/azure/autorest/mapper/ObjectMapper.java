@@ -9,10 +9,10 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 public class ObjectMapper implements IMapper<ObjectSchema, IType> {
     private static final ObjectMapper INSTANCE = new ObjectMapper();
     Map<ObjectSchema, ClassType> parsed = new ConcurrentHashMap<>();
