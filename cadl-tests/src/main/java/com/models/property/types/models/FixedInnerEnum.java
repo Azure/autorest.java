@@ -9,10 +9,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /** Enum that will be used as a property for model EnumProperty. Non-extensible. */
 public enum FixedInnerEnum {
-    /** Enum value ValueOne. */
+    /** First value. */
     VALUE_ONE("ValueOne"),
 
-    /** Enum value ValueTwo. */
+    /** Second value. */
     VALUE_TWO("ValueTwo");
 
     /** The actual serialized value for a FixedInnerEnum instance. */

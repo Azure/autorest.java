@@ -10,55 +10,42 @@ import java.util.Objects;
 
 /**
  * a schema that represents a choice of several values (ie, an 'enum')
- * 
  */
 public class ChoiceSchema extends ValueSchema {
 
     /**
-     * a Schema that represents a string value
-     * (Required)
-     * 
+     * a Schema that represents a string value (Required)
      */
     private Schema choiceType;
     /**
-     * the possible choices for in the set
-     * (Required)
-     * 
+     * the possible choices for in the set (Required)
      */
-    private List<ChoiceValue> choices = new ArrayList<ChoiceValue>();
+    private List<ChoiceValue> choices = new ArrayList<>();
     private String summary;
 
     /**
-     * a Schema that represents a string value
-     * (Required)
-     * 
+     * a Schema that represents a string value (Required)
      */
     public Schema getChoiceType() {
         return choiceType;
     }
 
     /**
-     * a Schema that represents a string value
-     * (Required)
-     * 
+     * a Schema that represents a string value (Required)
      */
     public void setChoiceType(Schema choiceType) {
         this.choiceType = choiceType;
     }
 
     /**
-     * the possible choices for in the set
-     * (Required)
-     * 
+     * the possible choices for in the set (Required)
      */
     public List<ChoiceValue> getChoices() {
         return choices;
     }
 
     /**
-     * the possible choices for in the set
-     * (Required)
-     * 
+     * the possible choices for in the set (Required)
      */
     public void setChoices(List<ChoiceValue> choices) {
         this.choices = choices;
@@ -73,21 +60,22 @@ public class ChoiceSchema extends ValueSchema {
     public void setSummary(String summary) {
         this.summary = summary;
     }
-    
+
     @Override
     public String toString() {
+        return sharedToString(this, ChoiceSchema.class.getName());
+    }
+
+    static String sharedToString(ChoiceSchema value, String className) {
         StringBuilder sb = new StringBuilder();
-        sb.append(ChoiceSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("choiceType");
-        sb.append('=');
-        sb.append(((this.choiceType == null)?"<null>":this.choiceType));
+        sb.append(className).append('@').append(Integer.toHexString(System.identityHashCode(value))).append('[');
+        sb.append("choiceType=");
+        sb.append(((value.choiceType == null) ? "<null>" : value.choiceType));
+        sb.append(",choices=");
+        sb.append(((value.choices == null) ? "<null>" : value.choices));
         sb.append(',');
-        sb.append("choices");
-        sb.append('=');
-        sb.append(((this.choices == null)?"<null>":this.choices));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
+        if (sb.charAt((sb.length() - 1)) == ',') {
+            sb.setCharAt((sb.length() - 1), ']');
         } else {
             sb.append(']');
         }
@@ -96,10 +84,14 @@ public class ChoiceSchema extends ValueSchema {
 
     @Override
     public int hashCode() {
+        return sharedHashCode(this);
+    }
+
+    static int sharedHashCode(ChoiceSchema value) {
         int result = 1;
-        result = ((result* 31)+((this.choiceType == null)? 0 :this.choiceType.hashCode()));
-        result = ((result* 31)+((this.choices == null)? 0 :this.choices.hashCode()));
-        result = ((result* 31)+((this.getLanguage().getJava().getName() == null)? 0 :this.getLanguage().getJava().getName().hashCode()));
+        result = ((result * 31) + Objects.hashCode(value.choiceType));
+        result = ((result * 31) + Objects.hashCode(value.choices));
+        result = ((result * 31) + Objects.hashCode(value.getLanguage().getJava().getName()));
         return result;
     }
 
@@ -108,12 +100,16 @@ public class ChoiceSchema extends ValueSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof ChoiceSchema) == false) {
+        if (!(other instanceof ChoiceSchema)) {
             return false;
         }
-        ChoiceSchema rhs = ((ChoiceSchema) other);
-        return Objects.equals(this.choiceType, rhs.choiceType) && Objects.equals(this.choices, rhs.choices)
-                && Objects.equals(this.getLanguage().getJava().getName(), rhs.getLanguage().getJava().getName());
+
+        return sharedEquals(this, (ChoiceSchema) other);
     }
 
+    static boolean sharedEquals(ChoiceSchema lhs, ChoiceSchema rhs) {
+        return Objects.equals(lhs.choiceType, rhs.choiceType)
+            && Objects.equals(lhs.choices, rhs.choices)
+            && Objects.equals(lhs.getLanguage().getJava().getName(), rhs.getLanguage().getJava().getName());
+    }
 }

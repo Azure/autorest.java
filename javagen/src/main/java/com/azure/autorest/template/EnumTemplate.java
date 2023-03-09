@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -57,7 +58,9 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             String pascalTypeName = CodeNamer.toPascalCase(typeName);
             for (ClientEnumValue enumValue : enumType.getValues()) {
                 String value = enumValue.getValue();
-                classBlock.javadocComment("Static value " + value + " for " + enumName + ".");
+                classBlock.javadocComment(CoreUtils.isNullOrEmpty(enumValue.getDescription())
+                    ? "Static value " + value + " for " + enumName + "."
+                    : enumValue.getDescription());
                 classBlock.publicStaticFinalVariable(String.format("%1$s %2$s = from%3$s(%4$s)", enumName,
                     enumValue.getName(), pascalTypeName, elementType.defaultValueExpression(value)));
             }
@@ -111,7 +114,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         javaFile.javadocComment(comment -> comment.description(enumType.getDescription()));
         javaFile.publicEnum(enumType.getName(), enumBlock -> {
             for (ClientEnumValue value : enumType.getValues()) {
-                enumBlock.value(value.getName(), value.getValue(), elementType);
+                enumBlock.value(value.getName(), value.getValue(), value.getDescription(), elementType);
             }
 
             String enumName = enumType.getName();
