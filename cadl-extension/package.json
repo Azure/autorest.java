@@ -1,9 +1,9 @@
 {
-  "name": "@azure-tools/cadl-java",
-  "version": "0.4.2",
-  "description": "Java client emitter for CADL compiler",
+  "name": "@azure-tools/typespec-java",
+  "version": "0.5.0",
+  "description": "Java client emitter for TypeSpec compiler",
   "keywords": [
-    "cadl"
+    "TypeSpec"
   ],
   "author": "weidxu",
   "license": "MIT",

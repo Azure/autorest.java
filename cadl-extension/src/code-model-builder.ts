@@ -156,7 +156,7 @@ export class CodeModelBuilder {
 
     const namespace1 = this.namespace;
     this.typeNameOptions = {
-      // shorten type names by removing Cadl and service namespace
+      // shorten type names by removing TypeSpec and service namespace
       namespaceFilter(ns) {
         const name = getNamespaceFullName(ns);
         return name !== "Cadl" && name !== namespace1;
@@ -499,7 +499,7 @@ export class CodeModelBuilder {
 
       for (const [linkType, linkOperation] of operationLinks) {
         if (linkType === "polling" || linkType === "final") {
-          // some Cadl writes pollingOperation without the operation
+          // some TypeSpec writes pollingOperation without the operation
           pollingFoundInOperationLinks = true;
         }
 
@@ -928,8 +928,10 @@ export class CodeModelBuilder {
               if (match) {
                 schema = candidateResponseSchema;
                 this.program.trace(
-                  "cadl-java",
-                  `Replace Cadl model ${this.getName(bodyType)} with ${candidateResponseSchema.language.default.name}`,
+                  "typespec-java",
+                  `Replace TypeSpec model ${this.getName(bodyType)} with ${
+                    candidateResponseSchema.language.default.name
+                  }`,
                 );
               }
             }
@@ -1690,9 +1692,9 @@ export class CodeModelBuilder {
       target.templateMapper.args &&
       target.templateMapper.args.length > 0
     ) {
-      const cadlName = getTypeName(target, this.typeNameOptions);
+      const tspName = getTypeName(target, this.typeNameOptions);
       const newName = getNameForTemplate(target);
-      this.logWarning(`Rename Cadl model '${cadlName}' to '${newName}'`);
+      this.logWarning(`Rename TypeSpec model '${tspName}' to '${newName}'`);
       return newName;
     }
     return target.name;
@@ -1738,9 +1740,9 @@ export class CodeModelBuilder {
   }
 
   private logWarning(msg: string) {
-    this.program.trace("cadl-java", msg);
+    this.program.trace("typespec-java", msg);
     this.program.reportDiagnostic({
-      code: "cadl-java",
+      code: "typespec-java",
       severity: "warning",
       message: msg,
       target: NoTarget,

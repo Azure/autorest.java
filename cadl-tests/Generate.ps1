@@ -1,6 +1,6 @@
 function Generate($tspFile) {
-  Write-Host "npx tsp compile $tspFile --trace import-resolution --trace projection --trace cadl-java"
-  Invoke-Expression "npx tsp compile $tspFile --trace import-resolution --trace projection --trace cadl-java"
+  Write-Host "npx tsp compile $tspFile --trace import-resolution --trace projection --trace typespec-java"
+  Invoke-Expression "npx tsp compile $tspFile --trace import-resolution --trace projection --trace typespec-java"
 
   if ($LASTEXITCODE) {
     exit $LASTEXITCODE
@@ -59,7 +59,7 @@ foreach ($tspFile in (Get-Item ./cadl/* -Filter "*.tsp" -Exclude "*partialupdate
 }
 
 # partial update test
-npx tsp compile ./cadl/partialupdate.tsp --options="@azure-tools/cadl-java.emitter-output-dir={project-root}/existingcode"
+npx tsp compile ./cadl/partialupdate.tsp --options="@azure-tools/typespec-java.emitter-output-dir={project-root}/existingcode"
 Copy-Item -Path ./existingcode/src/main/java/com/cadl/partialupdate -Destination ./src/main/java/com/cadl/ -Recurse -Force
 Remove-Item ./existingcode -Recurse -Force
 
