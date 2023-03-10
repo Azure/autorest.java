@@ -10,7 +10,11 @@
 function invokeExpressionAndCaptureOutput([string]$expression) {
     $output = Invoke-Expression $expression
     if ($LASTEXITCODE -ne 0) {
+        $ExitCode = $LASTEXITCODE
+
         Write-Host $output
+
+        exit $ExitCode
     }
 }
 
