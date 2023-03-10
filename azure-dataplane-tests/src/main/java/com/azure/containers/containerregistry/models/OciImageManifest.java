@@ -139,33 +139,26 @@ public final class OciImageManifest implements JsonSerializable<OciImageManifest
     public static OciImageManifest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    OciDescriptor config = null;
-                    List<OciDescriptor> layers = null;
-                    OciAnnotations annotations = null;
-                    Integer schemaVersion = null;
+                    OciImageManifest deserializedOciImageManifest = new OciImageManifest();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("config".equals(fieldName)) {
-                            config = OciDescriptor.fromJson(reader);
+                            deserializedOciImageManifest.config = OciDescriptor.fromJson(reader);
                         } else if ("layers".equals(fieldName)) {
-                            layers = reader.readArray(reader1 -> OciDescriptor.fromJson(reader1));
+                            List<OciDescriptor> layers = reader.readArray(reader1 -> OciDescriptor.fromJson(reader1));
+                            deserializedOciImageManifest.layers = layers;
                         } else if ("annotations".equals(fieldName)) {
-                            annotations = OciAnnotations.fromJson(reader);
+                            deserializedOciImageManifest.annotations = OciAnnotations.fromJson(reader);
                         } else if ("schemaVersion".equals(fieldName)) {
-                            schemaVersion = reader.getNullable(JsonReader::getInt);
+                            deserializedOciImageManifest.schemaVersion = reader.getNullable(JsonReader::getInt);
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    OciImageManifest deserializedValue = new OciImageManifest();
-                    deserializedValue.config = config;
-                    deserializedValue.layers = layers;
-                    deserializedValue.annotations = annotations;
-                    deserializedValue.schemaVersion = schemaVersion;
 
-                    return deserializedValue;
+                    return deserializedOciImageManifest;
                 });
     }
 }
