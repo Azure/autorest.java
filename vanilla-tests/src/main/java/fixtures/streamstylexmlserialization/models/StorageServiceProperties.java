@@ -295,15 +295,15 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
                             reader.skipElement();
                         }
                     }
-                    StorageServiceProperties deserializedValue = new StorageServiceProperties();
-                    deserializedValue.logging = logging;
-                    deserializedValue.hourMetrics = hourMetrics;
-                    deserializedValue.minuteMetrics = minuteMetrics;
-                    deserializedValue.setCors(cors);
-                    deserializedValue.defaultServiceVersion = defaultServiceVersion;
-                    deserializedValue.deleteRetentionPolicy = deleteRetentionPolicy;
+                    StorageServiceProperties deserializedStorageServiceProperties = new StorageServiceProperties();
+                    deserializedStorageServiceProperties.logging = logging;
+                    deserializedStorageServiceProperties.hourMetrics = hourMetrics;
+                    deserializedStorageServiceProperties.minuteMetrics = minuteMetrics;
+                    deserializedStorageServiceProperties.setCors(cors);
+                    deserializedStorageServiceProperties.defaultServiceVersion = defaultServiceVersion;
+                    deserializedStorageServiceProperties.deleteRetentionPolicy = deleteRetentionPolicy;
 
-                    return deserializedValue;
+                    return deserializedStorageServiceProperties;
                 });
     }
 }

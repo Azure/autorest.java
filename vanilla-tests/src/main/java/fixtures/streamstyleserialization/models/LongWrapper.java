@@ -93,25 +93,21 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
     public static LongWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    Long field1 = null;
-                    Long field2 = null;
+                    LongWrapper deserializedLongWrapper = new LongWrapper();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field1".equals(fieldName)) {
-                            field1 = reader.getNullable(JsonReader::getLong);
+                            deserializedLongWrapper.field1 = reader.getNullable(JsonReader::getLong);
                         } else if ("field2".equals(fieldName)) {
-                            field2 = reader.getNullable(JsonReader::getLong);
+                            deserializedLongWrapper.field2 = reader.getNullable(JsonReader::getLong);
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    LongWrapper deserializedValue = new LongWrapper();
-                    deserializedValue.field1 = field1;
-                    deserializedValue.field2 = field2;
 
-                    return deserializedValue;
+                    return deserializedLongWrapper;
                 });
     }
 }

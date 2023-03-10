@@ -76,7 +76,8 @@ $job = @(
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-boolean.json --namespace=fixtures.bodyboolean --client-logger",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-boolean.quirks.json --namespace=fixtures.bodyboolean.quirks",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-complex.json --namespace=fixtures.bodycomplex --required-fields-as-ctor-args --client-logger --output-model-immutable --generate-tests",
-    "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-complex.json --namespace=fixtures.streamstyleserialization --enable-sync-stack --stream-style-serialization --required-fields-as-ctor-args --client-logger --pass-discriminator-to-child-deserialization",
+    "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-complex.json --namespace=fixtures.streamstyleserialization --enable-sync-stack --stream-style-serialization --client-logger --pass-discriminator-to-child-deserialization",
+    "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-complex.json --namespace=fixtures.streamstyleserializationctorargs --enable-sync-stack --stream-style-serialization --required-fields-as-ctor-args --client-logger --pass-discriminator-to-child-deserialization",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-file.json --namespace=fixtures.bodyfile",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-string.json --namespace=fixtures.bodystring --generate-client-interfaces",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/custom-baseUrl.json --namespace=fixtures.custombaseuri",
@@ -147,6 +148,10 @@ if ($job.State -notin @('Completed', 'Failed')) {
 }
 
 # Azure Data Plane
+if (Test-Path ./azure-dataplane-tests/src/main) {
+    Remove-Item ./azure-dataplane-tests/src/main -Recurse -Force | Out-Null
+}
+
 $job = @(
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_SDK_FOR_JAVA/schemaregistry/azure-data-schemaregistry/swagger/README.md"
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_SDK_FOR_JAVA/containerregistry/azure-containers-containerregistry/swagger/autorest.md"
@@ -190,8 +195,12 @@ if ($job.State -notin @('Completed', 'Failed')) {
 # Remove-Item ./azure-tests/src/main/java/module-info.java -Force
 
 # Protocol
-Remove-Item ./protocol-tests/src/main -Recurse -Force | Out-Null
-Remove-Item ./protocol-tests/src/samples -Recurse -Force | Out-Null
+if (Test-Path ./protocol-tests/src/main) {
+    Remove-Item ./protocol-tests/src/main -Recurse -Force | Out-Null
+}
+if (Test-Path ./protocol-tests/src/samples) {
+    Remove-Item ./protocol-tests/src/samples -Recurse -Force | Out-Null
+}
 
 $job = @(
     "$PROTOCOL_ARGUMENTS --input-file=$SWAGGER_PATH/body-string.json --namespace=fixtures.bodystring",

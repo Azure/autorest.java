@@ -229,14 +229,14 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
                             reader.skipElement();
                         }
                     }
-                    CorsRule deserializedValue = new CorsRule();
-                    deserializedValue.allowedOrigins = allowedOrigins;
-                    deserializedValue.allowedMethods = allowedMethods;
-                    deserializedValue.allowedHeaders = allowedHeaders;
-                    deserializedValue.exposedHeaders = exposedHeaders;
-                    deserializedValue.maxAgeInSeconds = maxAgeInSeconds;
+                    CorsRule deserializedCorsRule = new CorsRule();
+                    deserializedCorsRule.allowedOrigins = allowedOrigins;
+                    deserializedCorsRule.allowedMethods = allowedMethods;
+                    deserializedCorsRule.allowedHeaders = allowedHeaders;
+                    deserializedCorsRule.exposedHeaders = exposedHeaders;
+                    deserializedCorsRule.maxAgeInSeconds = maxAgeInSeconds;
 
-                    return deserializedValue;
+                    return deserializedCorsRule;
                 });
     }
 }

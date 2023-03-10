@@ -9,7 +9,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -58,6 +57,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
             classPackage = settings.getPackage(settings.getFluentModelsSubpackage());
         } else if (settings.isDataPlaneClient() && isPageModel(compositeType)) {
             // put class of Page<> type to implementation package
+            // For Cadl, these are not generated to class
             classPackage = settings.getPackage(settings.getImplementationSubpackage(), settings.getModelsSubpackage());
         } else {
             classPackage = settings.getPackage(settings.getModelsSubpackage());
@@ -115,17 +115,6 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
 
         if (compositeType.getUsage() != null && compositeType.getUsage().contains(SchemaContext.PAGED)) {
             ret = true;
-        } else if (compositeType.getLanguage() != null && compositeType.getLanguage().getDefault() != null) {
-            String namespace = compositeType.getLanguage().getDefault().getNamespace();
-            String name = compositeType.getLanguage().getDefault().getName();
-
-            if (!CoreUtils.isNullOrEmpty(namespace) && !CoreUtils.isNullOrEmpty(name)) {
-                // both is Template, hence we may improve the logic with finer info about the ObjectSchema
-                if (("Azure.Core.Foundations".equals(namespace) && name.startsWith("CustomPage"))
-                        || ("Azure.Core".equals(namespace) && name.startsWith("Page"))) {
-                    ret = true;
-                }
-            }
         }
         return ret;
     }

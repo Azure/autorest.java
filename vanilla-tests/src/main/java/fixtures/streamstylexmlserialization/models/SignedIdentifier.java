@@ -117,11 +117,11 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
                             reader.skipElement();
                         }
                     }
-                    SignedIdentifier deserializedValue = new SignedIdentifier();
-                    deserializedValue.id = id;
-                    deserializedValue.accessPolicy = accessPolicy;
+                    SignedIdentifier deserializedSignedIdentifier = new SignedIdentifier();
+                    deserializedSignedIdentifier.id = id;
+                    deserializedSignedIdentifier.accessPolicy = accessPolicy;
 
-                    return deserializedValue;
+                    return deserializedSignedIdentifier;
                 });
     }
 }

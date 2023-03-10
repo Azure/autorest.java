@@ -78,10 +78,10 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
                             reader.skipElement();
                         }
                     }
-                    ComplexTypeWithMeta deserializedValue = new ComplexTypeWithMeta();
-                    deserializedValue.id = id;
+                    ComplexTypeWithMeta deserializedComplexTypeWithMeta = new ComplexTypeWithMeta();
+                    deserializedComplexTypeWithMeta.id = id;
 
-                    return deserializedValue;
+                    return deserializedComplexTypeWithMeta;
                 });
     }
 }

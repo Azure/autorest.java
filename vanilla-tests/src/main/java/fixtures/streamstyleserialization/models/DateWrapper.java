@@ -95,25 +95,23 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
     public static DateWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    LocalDate field = null;
-                    LocalDate leap = null;
+                    DateWrapper deserializedDateWrapper = new DateWrapper();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field".equals(fieldName)) {
-                            field = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
+                            deserializedDateWrapper.field =
+                                    reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
                         } else if ("leap".equals(fieldName)) {
-                            leap = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
+                            deserializedDateWrapper.leap =
+                                    reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    DateWrapper deserializedValue = new DateWrapper();
-                    deserializedValue.field = field;
-                    deserializedValue.leap = leap;
 
-                    return deserializedValue;
+                    return deserializedDateWrapper;
                 });
     }
 }

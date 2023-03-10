@@ -97,9 +97,7 @@ public final class MyDerivedType extends MyBaseType {
     public static MyDerivedType fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    String propB1 = null;
-                    String propBH1 = null;
-                    String propD1 = null;
+                    MyDerivedType deserializedMyDerivedType = new MyDerivedType();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
@@ -115,16 +113,16 @@ public final class MyDerivedType extends MyBaseType {
                                                 + "'.");
                             }
                         } else if ("propB1".equals(fieldName)) {
-                            propB1 = reader.getString();
+                            deserializedMyDerivedType.setPropB1(reader.getString());
                         } else if ("propD1".equals(fieldName)) {
-                            propD1 = reader.getString();
+                            deserializedMyDerivedType.propD1 = reader.getString();
                         } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
                             while (reader.nextToken() != JsonToken.END_OBJECT) {
                                 fieldName = reader.getFieldName();
                                 reader.nextToken();
 
                                 if ("propBH1".equals(fieldName)) {
-                                    propBH1 = reader.getString();
+                                    deserializedMyDerivedType.setPropBH1(reader.getString());
                                 } else {
                                     reader.skipChildren();
                                 }
@@ -133,12 +131,8 @@ public final class MyDerivedType extends MyBaseType {
                             reader.skipChildren();
                         }
                     }
-                    MyDerivedType deserializedValue = new MyDerivedType();
-                    deserializedValue.setPropB1(propB1);
-                    deserializedValue.setPropBH1(propBH1);
-                    deserializedValue.propD1 = propD1;
 
-                    return deserializedValue;
+                    return deserializedMyDerivedType;
                 });
     }
 }

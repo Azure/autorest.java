@@ -82,25 +82,21 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
     public static ReadonlyObj fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    String id = null;
-                    Integer size = null;
+                    ReadonlyObj deserializedReadonlyObj = new ReadonlyObj();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getString();
+                            deserializedReadonlyObj.id = reader.getString();
                         } else if ("size".equals(fieldName)) {
-                            size = reader.getNullable(JsonReader::getInt);
+                            deserializedReadonlyObj.size = reader.getNullable(JsonReader::getInt);
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    ReadonlyObj deserializedValue = new ReadonlyObj();
-                    deserializedValue.id = id;
-                    deserializedValue.size = size;
 
-                    return deserializedValue;
+                    return deserializedReadonlyObj;
                 });
     }
 }

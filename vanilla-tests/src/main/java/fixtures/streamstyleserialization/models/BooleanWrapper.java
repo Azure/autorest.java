@@ -93,25 +93,21 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
     public static BooleanWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    Boolean fieldTrue = null;
-                    Boolean fieldFalse = null;
+                    BooleanWrapper deserializedBooleanWrapper = new BooleanWrapper();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("field_true".equals(fieldName)) {
-                            fieldTrue = reader.getNullable(JsonReader::getBoolean);
+                            deserializedBooleanWrapper.fieldTrue = reader.getNullable(JsonReader::getBoolean);
                         } else if ("field_false".equals(fieldName)) {
-                            fieldFalse = reader.getNullable(JsonReader::getBoolean);
+                            deserializedBooleanWrapper.fieldFalse = reader.getNullable(JsonReader::getBoolean);
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    BooleanWrapper deserializedValue = new BooleanWrapper();
-                    deserializedValue.fieldTrue = fieldTrue;
-                    deserializedValue.fieldFalse = fieldFalse;
 
-                    return deserializedValue;
+                    return deserializedBooleanWrapper;
                 });
     }
 }
