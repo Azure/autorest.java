@@ -138,12 +138,12 @@ public final class Banana implements XmlSerializable<Banana> {
                             reader.skipElement();
                         }
                     }
-                    Banana deserializedValue = new Banana();
-                    deserializedValue.name = name;
-                    deserializedValue.flavor = flavor;
-                    deserializedValue.expiration = expiration;
+                    Banana deserializedBanana = new Banana();
+                    deserializedBanana.name = name;
+                    deserializedBanana.flavor = flavor;
+                    deserializedBanana.expiration = expiration;
 
-                    return deserializedValue;
+                    return deserializedBanana;
                 });
     }
 }

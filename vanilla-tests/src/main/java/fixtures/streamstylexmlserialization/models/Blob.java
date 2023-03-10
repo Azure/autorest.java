@@ -220,14 +220,14 @@ public final class Blob implements XmlSerializable<Blob> {
                             reader.skipElement();
                         }
                     }
-                    Blob deserializedValue = new Blob();
-                    deserializedValue.name = name;
-                    deserializedValue.deleted = deleted;
-                    deserializedValue.snapshot = snapshot;
-                    deserializedValue.properties = properties;
-                    deserializedValue.metadata = metadata;
+                    Blob deserializedBlob = new Blob();
+                    deserializedBlob.name = name;
+                    deserializedBlob.deleted = deleted;
+                    deserializedBlob.snapshot = snapshot;
+                    deserializedBlob.properties = properties;
+                    deserializedBlob.metadata = metadata;
 
-                    return deserializedValue;
+                    return deserializedBlob;
                 });
     }
 }

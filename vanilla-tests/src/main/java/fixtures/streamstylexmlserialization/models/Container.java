@@ -159,12 +159,12 @@ public final class Container implements XmlSerializable<Container> {
                             reader.skipElement();
                         }
                     }
-                    Container deserializedValue = new Container();
-                    deserializedValue.name = name;
-                    deserializedValue.properties = properties;
-                    deserializedValue.metadata = metadata;
+                    Container deserializedContainer = new Container();
+                    deserializedContainer.name = name;
+                    deserializedContainer.properties = properties;
+                    deserializedContainer.metadata = metadata;
 
-                    return deserializedValue;
+                    return deserializedContainer;
                 });
     }
 }

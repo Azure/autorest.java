@@ -893,37 +893,37 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
                             reader.skipElement();
                         }
                     }
-                    BlobProperties deserializedValue = new BlobProperties();
-                    deserializedValue.setLastModified(lastModified);
-                    deserializedValue.etag = etag;
-                    deserializedValue.contentLength = contentLength;
-                    deserializedValue.contentType = contentType;
-                    deserializedValue.contentEncoding = contentEncoding;
-                    deserializedValue.contentLanguage = contentLanguage;
-                    deserializedValue.contentMD5 = contentMD5;
-                    deserializedValue.contentDisposition = contentDisposition;
-                    deserializedValue.cacheControl = cacheControl;
-                    deserializedValue.blobSequenceNumber = blobSequenceNumber;
-                    deserializedValue.blobType = blobType;
-                    deserializedValue.leaseStatus = leaseStatus;
-                    deserializedValue.leaseState = leaseState;
-                    deserializedValue.leaseDuration = leaseDuration;
-                    deserializedValue.copyId = copyId;
-                    deserializedValue.copyStatus = copyStatus;
-                    deserializedValue.copySource = copySource;
-                    deserializedValue.copyProgress = copyProgress;
-                    deserializedValue.setCopyCompletionTime(copyCompletionTime);
-                    deserializedValue.copyStatusDescription = copyStatusDescription;
-                    deserializedValue.serverEncrypted = serverEncrypted;
-                    deserializedValue.incrementalCopy = incrementalCopy;
-                    deserializedValue.destinationSnapshot = destinationSnapshot;
-                    deserializedValue.setDeletedTime(deletedTime);
-                    deserializedValue.remainingRetentionDays = remainingRetentionDays;
-                    deserializedValue.accessTier = accessTier;
-                    deserializedValue.accessTierInferred = accessTierInferred;
-                    deserializedValue.archiveStatus = archiveStatus;
+                    BlobProperties deserializedBlobProperties = new BlobProperties();
+                    deserializedBlobProperties.setLastModified(lastModified);
+                    deserializedBlobProperties.etag = etag;
+                    deserializedBlobProperties.contentLength = contentLength;
+                    deserializedBlobProperties.contentType = contentType;
+                    deserializedBlobProperties.contentEncoding = contentEncoding;
+                    deserializedBlobProperties.contentLanguage = contentLanguage;
+                    deserializedBlobProperties.contentMD5 = contentMD5;
+                    deserializedBlobProperties.contentDisposition = contentDisposition;
+                    deserializedBlobProperties.cacheControl = cacheControl;
+                    deserializedBlobProperties.blobSequenceNumber = blobSequenceNumber;
+                    deserializedBlobProperties.blobType = blobType;
+                    deserializedBlobProperties.leaseStatus = leaseStatus;
+                    deserializedBlobProperties.leaseState = leaseState;
+                    deserializedBlobProperties.leaseDuration = leaseDuration;
+                    deserializedBlobProperties.copyId = copyId;
+                    deserializedBlobProperties.copyStatus = copyStatus;
+                    deserializedBlobProperties.copySource = copySource;
+                    deserializedBlobProperties.copyProgress = copyProgress;
+                    deserializedBlobProperties.setCopyCompletionTime(copyCompletionTime);
+                    deserializedBlobProperties.copyStatusDescription = copyStatusDescription;
+                    deserializedBlobProperties.serverEncrypted = serverEncrypted;
+                    deserializedBlobProperties.incrementalCopy = incrementalCopy;
+                    deserializedBlobProperties.destinationSnapshot = destinationSnapshot;
+                    deserializedBlobProperties.setDeletedTime(deletedTime);
+                    deserializedBlobProperties.remainingRetentionDays = remainingRetentionDays;
+                    deserializedBlobProperties.accessTier = accessTier;
+                    deserializedBlobProperties.accessTierInferred = accessTierInferred;
+                    deserializedBlobProperties.archiveStatus = archiveStatus;
 
-                    return deserializedValue;
+                    return deserializedBlobProperties;
                 });
     }
 }

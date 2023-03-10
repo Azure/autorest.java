@@ -1,0 +1,65 @@
+import "@typespec/rest";
+import "@typespec/versioning";
+
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+
+@service({
+  title: "Union",
+  version: "1.0.0",
+})
+@server(
+  "{endpoint}/openai",
+  "Union",
+  {
+    endpoint: string,
+  }
+)
+@versioned(ServiceApiVersions)
+namespace Cadl.Union;
+
+enum ServiceApiVersions {
+  v2022_03_01_preview: "2022-03-01-preview",
+  v2022_06_01_preview: "2022-06-01-preview",
+}
+
+@doc("The ApiVersion query parameter.")
+model ApiVersionParameter {
+  @query("api-version")
+  @minLength(1)
+  @doc("The API version to use for this operation.")
+  apiVersion: string;
+}
+
+alias Request = {
+  user?: User;
+  input: string | string[] | integer[] | integer[][];
+};
+
+alias LongRequest = {
+  user?: User;
+  input: string;
+  dataInt: int32;
+  dataUnion?: string | ArrayData | bytes | zonedDateTime;
+  dataLong?: int64;
+  data_float?: float64;
+};
+
+model User {
+  user: string;
+}
+
+model ArrayData {
+  data: string[];
+}
+
+@route("/flatten")
+interface FlattenOp {
+  @route("send")
+  @post
+  send(@query id: string, ...Request, ...ApiVersionParameter): OkResponse;
+
+  @route("send-long")
+  @post
+  sendLong(@query id: string, @query filter?: string, ...LongRequest, ...ApiVersionParameter): OkResponse;
+}

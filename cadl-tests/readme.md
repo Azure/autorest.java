@@ -1,11 +1,11 @@
 # Install and Test on Cadl-Java
 
-## Install Cadl
+## Install TypeSpec
 
-Install Node.js and [Cadl](https://github.com/microsoft/cadl/).
+Install Node.js and [TypeSpec](https://github.com/microsoft/typespec/).
 
 ```shell
-npm install -g @cadl-lang/compiler
+npm install -g @typespec/compiler
 ```
 
 ## Build JAR
@@ -22,13 +22,13 @@ It makes the npm package in `./cadl-extension`, then install it to `./cadl-tests
 
 ## Generate Code
 
-`cadl compile <target.cadl>` in `./cadl-tests` folder.
+`tsp compile <target.tsp>` in `./cadl-tests` folder.
 
 Generated code will be at `./cadl-tests/cadl-output/` folder.
 
 ## Troubleshooting
 
-### New version of `@cadl-lang/compiler` etc.
+### New version of `@typespec/compiler` etc.
 
 Force an installation of new version via deleting `package-lock.json` and `node_modules` in `./cadl-extension` folder.
 

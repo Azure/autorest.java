@@ -204,14 +204,14 @@ public final class Logging implements XmlSerializable<Logging> {
                             reader.skipElement();
                         }
                     }
-                    Logging deserializedValue = new Logging();
-                    deserializedValue.version = version;
-                    deserializedValue.delete = delete;
-                    deserializedValue.read = read;
-                    deserializedValue.write = write;
-                    deserializedValue.retentionPolicy = retentionPolicy;
+                    Logging deserializedLogging = new Logging();
+                    deserializedLogging.version = version;
+                    deserializedLogging.delete = delete;
+                    deserializedLogging.read = read;
+                    deserializedLogging.write = write;
+                    deserializedLogging.retentionPolicy = retentionPolicy;
 
-                    return deserializedValue;
+                    return deserializedLogging;
                 });
     }
 }

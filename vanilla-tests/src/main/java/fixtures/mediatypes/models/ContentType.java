@@ -9,16 +9,16 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /** Content type for upload. */
 public enum ContentType {
-    /** Enum value application/pdf. */
+    /** Content Type 'application/pdf'. */
     APPLICATION_PDF("application/pdf"),
 
-    /** Enum value image/jpeg. */
+    /** Content Type 'image/jpeg'. */
     IMAGE_JPEG("image/jpeg"),
 
-    /** Enum value image/png. */
+    /** Content Type 'image/png'. */
     IMAGE_PNG("image/png"),
 
-    /** Enum value image/tiff. */
+    /** Content Type 'image/tiff'. */
     IMAGE_TIFF("image/tiff");
 
     /** The actual serialized value for a ContentType instance. */

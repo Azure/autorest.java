@@ -111,11 +111,11 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
                             reader.skipElement();
                         }
                     }
-                    RootWithRefAndNoMeta deserializedValue = new RootWithRefAndNoMeta();
-                    deserializedValue.refToModel = refToModel;
-                    deserializedValue.something = something;
+                    RootWithRefAndNoMeta deserializedRootWithRefAndNoMeta = new RootWithRefAndNoMeta();
+                    deserializedRootWithRefAndNoMeta.refToModel = refToModel;
+                    deserializedRootWithRefAndNoMeta.something = something;
 
-                    return deserializedValue;
+                    return deserializedRootWithRefAndNoMeta;
                 });
     }
 }

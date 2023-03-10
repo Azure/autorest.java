@@ -107,11 +107,11 @@ public final class Error implements XmlSerializable<Error> {
                             reader.skipElement();
                         }
                     }
-                    Error deserializedValue = new Error();
-                    deserializedValue.status = status;
-                    deserializedValue.message = message;
+                    Error deserializedError = new Error();
+                    deserializedError.status = status;
+                    deserializedError.message = message;
 
-                    return deserializedValue;
+                    return deserializedError;
                 });
     }
 }

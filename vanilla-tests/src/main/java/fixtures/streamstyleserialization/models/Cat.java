@@ -115,33 +115,26 @@ public class Cat extends Pet {
     public static Cat fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    Integer id = null;
-                    String name = null;
-                    String color = null;
-                    List<Dog> hates = null;
+                    Cat deserializedCat = new Cat();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getNullable(JsonReader::getInt);
+                            deserializedCat.setId(reader.getNullable(JsonReader::getInt));
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getString();
+                            deserializedCat.setName(reader.getString());
                         } else if ("color".equals(fieldName)) {
-                            color = reader.getString();
+                            deserializedCat.color = reader.getString();
                         } else if ("hates".equals(fieldName)) {
-                            hates = reader.readArray(reader1 -> Dog.fromJson(reader1));
+                            List<Dog> hates = reader.readArray(reader1 -> Dog.fromJson(reader1));
+                            deserializedCat.hates = hates;
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    Cat deserializedValue = new Cat();
-                    deserializedValue.setId(id);
-                    deserializedValue.setName(name);
-                    deserializedValue.color = color;
-                    deserializedValue.hates = hates;
 
-                    return deserializedValue;
+                    return deserializedCat;
                 });
     }
 }

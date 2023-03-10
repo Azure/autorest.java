@@ -10,7 +10,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,15 +31,8 @@ public final class Goblinshark extends Shark {
      */
     private GoblinSharkColor color;
 
-    /**
-     * Creates an instance of Goblinshark class.
-     *
-     * @param length the length value to set.
-     * @param birthday the birthday value to set.
-     */
-    public Goblinshark(float length, OffsetDateTime birthday) {
-        super(length, birthday);
-    }
+    /** Creates an instance of Goblinshark class. */
+    public Goblinshark() {}
 
     /**
      * Get the jawsize property: The jawsize property.
@@ -91,8 +83,22 @@ public final class Goblinshark extends Shark {
 
     /** {@inheritDoc} */
     @Override
+    public Goblinshark setBirthday(OffsetDateTime birthday) {
+        super.setBirthday(birthday);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public Goblinshark setSpecies(String species) {
         super.setSpecies(species);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Goblinshark setLength(float length) {
+        super.setLength(length);
         return this;
     }
 
@@ -140,15 +146,7 @@ public final class Goblinshark extends Shark {
     public static Goblinshark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    boolean lengthFound = false;
-                    float length = 0.0f;
-                    boolean birthdayFound = false;
-                    OffsetDateTime birthday = null;
-                    String species = null;
-                    List<Fish> siblings = null;
-                    Integer age = null;
-                    Integer jawsize = null;
-                    GoblinSharkColor color = null;
+                    Goblinshark deserializedGoblinshark = new Goblinshark();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
@@ -164,47 +162,28 @@ public final class Goblinshark extends Shark {
                                                 + "'.");
                             }
                         } else if ("length".equals(fieldName)) {
-                            length = reader.getFloat();
-                            lengthFound = true;
+                            deserializedGoblinshark.setLength(reader.getFloat());
                         } else if ("birthday".equals(fieldName)) {
-                            birthday =
+                            deserializedGoblinshark.setBirthday(
                                     reader.getNullable(
-                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                            birthdayFound = true;
+                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
                         } else if ("species".equals(fieldName)) {
-                            species = reader.getString();
+                            deserializedGoblinshark.setSpecies(reader.getString());
                         } else if ("siblings".equals(fieldName)) {
-                            siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                            List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                            deserializedGoblinshark.setSiblings(siblings);
                         } else if ("age".equals(fieldName)) {
-                            age = reader.getNullable(JsonReader::getInt);
+                            deserializedGoblinshark.setAge(reader.getNullable(JsonReader::getInt));
                         } else if ("jawsize".equals(fieldName)) {
-                            jawsize = reader.getNullable(JsonReader::getInt);
+                            deserializedGoblinshark.jawsize = reader.getNullable(JsonReader::getInt);
                         } else if ("color".equals(fieldName)) {
-                            color = GoblinSharkColor.fromString(reader.getString());
+                            deserializedGoblinshark.color = GoblinSharkColor.fromString(reader.getString());
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    if (lengthFound && birthdayFound) {
-                        Goblinshark deserializedValue = new Goblinshark(length, birthday);
-                        deserializedValue.setSpecies(species);
-                        deserializedValue.setSiblings(siblings);
-                        deserializedValue.setAge(age);
-                        deserializedValue.jawsize = jawsize;
-                        deserializedValue.color = color;
 
-                        return deserializedValue;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!lengthFound) {
-                        missingProperties.add("length");
-                    }
-                    if (!birthdayFound) {
-                        missingProperties.add("birthday");
-                    }
-
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                    return deserializedGoblinshark;
                 });
     }
 }

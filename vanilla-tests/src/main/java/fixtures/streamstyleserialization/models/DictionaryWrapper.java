@@ -69,21 +69,20 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
     public static DictionaryWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    Map<String, String> defaultProgram = null;
+                    DictionaryWrapper deserializedDictionaryWrapper = new DictionaryWrapper();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("defaultProgram".equals(fieldName)) {
-                            defaultProgram = reader.readMap(reader1 -> reader1.getString());
+                            Map<String, String> defaultProgram = reader.readMap(reader1 -> reader1.getString());
+                            deserializedDictionaryWrapper.defaultProgram = defaultProgram;
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    DictionaryWrapper deserializedValue = new DictionaryWrapper();
-                    deserializedValue.defaultProgram = defaultProgram;
 
-                    return deserializedValue;
+                    return deserializedDictionaryWrapper;
                 });
     }
 }

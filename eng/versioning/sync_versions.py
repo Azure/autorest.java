@@ -52,6 +52,7 @@ def fill_versions(package_versions: Dict[Package, str],
             for versions in versions_list:
                 if package in versions:
                     version = versions[package]
+                    logging.info(f'package {package.artifact}: {version}')
                     break
         if not version:
             raise ValueError(f'version not found for package {package.group}:{package.artifact}')
@@ -81,6 +82,7 @@ def update_pom(package_versions: List[PackageVersion]):
         if path.isdir(path.join(root_path, folder)) and path.isfile(path.join(root_path, folder, 'pom.xml')):
             pom_files.append(path.join(folder, 'pom.xml'))
 
+    # POMs
     for pom_file in pom_files:
         with open(path.join(root_path, pom_file), encoding='utf-8') as f_in:
             lines = f_in.readlines()
@@ -102,6 +104,41 @@ def update_pom(package_versions: List[PackageVersion]):
             with open(path.join(root_path, pom_file), 'w', encoding='utf-8') as f_out:
                 f_out.write(''.join(new_lines))
                 logging.info(f'update POM {pom_file}')
+
+    # javagen/src/main/java/com/azure/autorest/model/projectmodel/Project.java
+    project_file = 'javagen/src/main/java/com/azure/autorest/model/projectmodel/Project.java'
+    with open(path.join(root_path, project_file)) as f_in:
+        lines = f_in.readlines()
+        new_lines = []
+        for line in lines:
+            match = re.match(r'( *private String )(azure.*)Version = \"(.*)\";\n', line)
+            if match:
+                package = Package('com.azure', re.sub('([A-Z]+)', r'-\1', match.group(2)).lower())
+                if package in versions:
+                    line = f'{match.group(1)}{match.group(2)}Version = "{versions[package]}";\n'
+            new_lines.append(line)
+    if not lines == new_lines:
+        with open(path.join(root_path, project_file), 'w', encoding='utf-8') as f_out:
+            f_out.write(''.join(new_lines))
+            logging.info(f'update Project.java {project_file}')
+
+    # protocol-sdk-integration-tests/eng/versioning/version_client.txt
+    version_client_file = 'protocol-sdk-integration-tests/eng/versioning/version_client.txt'
+    with open(path.join(root_path, version_client_file)) as f_in:
+        lines = f_in.readlines()
+        new_lines = []
+        for line in lines:
+            match = re.match(r'(.*?):(.*?);(.*?);(.*?)\n', line)
+            if match:
+                package = Package(match.group(1), match.group(2))
+                if package in versions:
+                    version = versions[package]
+                    line = f'{match.group(1)}:{match.group(2)};{version};{version}\n'
+            new_lines.append(line)
+    if not lines == new_lines:
+        with open(path.join(root_path, version_client_file), 'w', encoding='utf-8') as f_out:
+            f_out.write(''.join(new_lines))
+            logging.info(f'update version_client.txt {version_client_file}')
 
 
 def main():

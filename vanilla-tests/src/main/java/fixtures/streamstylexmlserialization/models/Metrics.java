@@ -172,13 +172,13 @@ public final class Metrics implements XmlSerializable<Metrics> {
                             reader.skipElement();
                         }
                     }
-                    Metrics deserializedValue = new Metrics();
-                    deserializedValue.enabled = enabled;
-                    deserializedValue.version = version;
-                    deserializedValue.includeAPIs = includeAPIs;
-                    deserializedValue.retentionPolicy = retentionPolicy;
+                    Metrics deserializedMetrics = new Metrics();
+                    deserializedMetrics.enabled = enabled;
+                    deserializedMetrics.version = version;
+                    deserializedMetrics.includeAPIs = includeAPIs;
+                    deserializedMetrics.retentionPolicy = retentionPolicy;
 
-                    return deserializedValue;
+                    return deserializedMetrics;
                 });
     }
 }

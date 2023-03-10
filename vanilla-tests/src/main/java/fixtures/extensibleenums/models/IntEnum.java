@@ -10,13 +10,16 @@ import java.util.Collection;
 
 /** Defines values for IntEnum. */
 public final class IntEnum extends ExpandableStringEnum<IntEnum> {
-    /** Static value 1 for IntEnum. */
+    /**
+     * This is a really long comment to see what wrapping looks like. This comment is really long and it should wrap for
+     * readability. Please wrap. This should wrap.
+     */
     public static final IntEnum ONE = fromString("1");
 
-    /** Static value 2 for IntEnum. */
+    /** two. */
     public static final IntEnum TWO = fromString("2");
 
-    /** Static value 3 for IntEnum. */
+    /** three. */
     public static final IntEnum THREE = fromString("3");
 
     /**

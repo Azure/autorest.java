@@ -80,10 +80,10 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
                             reader.skipElement();
                         }
                     }
-                    ModelWithUrlProperty deserializedValue = new ModelWithUrlProperty();
-                    deserializedValue.url = url;
+                    ModelWithUrlProperty deserializedModelWithUrlProperty = new ModelWithUrlProperty();
+                    deserializedModelWithUrlProperty.url = url;
 
-                    return deserializedValue;
+                    return deserializedModelWithUrlProperty;
                 });
     }
 }

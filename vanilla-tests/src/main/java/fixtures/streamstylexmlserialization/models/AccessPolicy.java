@@ -149,12 +149,12 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
                             reader.skipElement();
                         }
                     }
-                    AccessPolicy deserializedValue = new AccessPolicy();
-                    deserializedValue.start = start;
-                    deserializedValue.expiry = expiry;
-                    deserializedValue.permission = permission;
+                    AccessPolicy deserializedAccessPolicy = new AccessPolicy();
+                    deserializedAccessPolicy.start = start;
+                    deserializedAccessPolicy.expiry = expiry;
+                    deserializedAccessPolicy.permission = permission;
 
-                    return deserializedValue;
+                    return deserializedAccessPolicy;
                 });
     }
 }

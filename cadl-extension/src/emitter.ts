@@ -4,8 +4,8 @@ import {
   EmitContext,
   NoTarget,
   JSONSchemaType,
-  createCadlLibrary,
-} from "@cadl-lang/compiler";
+  createTypeSpecLibrary,
+} from "@typespec/compiler";
 import { dump } from "js-yaml";
 import { promisify } from "util";
 import { execFile } from "child_process";
@@ -52,7 +52,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   required: [],
 };
 
-export const $lib = createCadlLibrary({
+export const $lib = createTypeSpecLibrary({
   name: "JavaEmitter",
   diagnostics: {},
   emitter: {

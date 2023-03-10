@@ -1,0 +1,22 @@
+import "@typespec/rest";
+
+using TypeSpec.Http;
+
+@service({
+  title: "Auth",
+  version: "1.0.0",
+})
+@useAuth(OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">)
+namespace Cadl.Auth;
+
+model AuthFlow {
+  type: OAuth2FlowType.clientCredentials;
+  tokenUrl: "https://api.example.com/oauth2/token";
+  refreshUrl: "https://api.example.com/oauth2/refresh";
+  scopes: ["https://api.example.com/.default"];
+}
+
+@route("/auth")
+interface AuthOp {
+  get(): string;
+}

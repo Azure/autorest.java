@@ -85,29 +85,23 @@ public final class Dog extends Pet {
     public static Dog fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(
                 reader -> {
-                    Integer id = null;
-                    String name = null;
-                    String food = null;
+                    Dog deserializedDog = new Dog();
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();
 
                         if ("id".equals(fieldName)) {
-                            id = reader.getNullable(JsonReader::getInt);
+                            deserializedDog.setId(reader.getNullable(JsonReader::getInt));
                         } else if ("name".equals(fieldName)) {
-                            name = reader.getString();
+                            deserializedDog.setName(reader.getString());
                         } else if ("food".equals(fieldName)) {
-                            food = reader.getString();
+                            deserializedDog.food = reader.getString();
                         } else {
                             reader.skipChildren();
                         }
                     }
-                    Dog deserializedValue = new Dog();
-                    deserializedValue.setId(id);
-                    deserializedValue.setName(name);
-                    deserializedValue.food = food;
 
-                    return deserializedValue;
+                    return deserializedDog;
                 });
     }
 }
