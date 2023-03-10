@@ -83,13 +83,13 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
 
     await program.host.writeFile(codeModelFileName, dump(codeModel));
 
-    program.trace("cadl-java", `Code model file written to ${codeModelFileName}`);
+    program.trace("typespec-java", `Code model file written to ${codeModelFileName}`);
 
     const emitterOptions = JSON.stringify(options);
-    program.trace("cadl-java", `Emitter options ${emitterOptions}`);
+    program.trace("typespec-java", `Emitter options ${emitterOptions}`);
 
     const jarFileName = resolvePath(moduleRoot, "target", "azure-cadl-extension-jar-with-dependencies.jar");
-    program.trace("cadl-java", `Exec JAR ${jarFileName}`);
+    program.trace("typespec-java", `Exec JAR ${jarFileName}`);
 
     try {
       const output = await promisify(execFile)("java", [
@@ -98,13 +98,13 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
         jarFileName,
         codeModelFileName,
       ]);
-      program.trace("cadl-java", output.stdout ? output.stdout : output.stderr);
+      program.trace("typespec-java", output.stdout ? output.stdout : output.stderr);
     } catch (err: any) {
       if ("code" in err && err.code === "ENOENT") {
         const msg = "'java' is not on PATH. Please install JDK 11 or above.";
-        program.trace("cadl-java", msg);
+        program.trace("typespec-java", msg);
         program.reportDiagnostic({
-          code: "cadl-java",
+          code: "typespec-java",
           severity: "error",
           message: msg,
           target: NoTarget,

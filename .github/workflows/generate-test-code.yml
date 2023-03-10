@@ -42,7 +42,7 @@ jobs:
         run: |
           ./Generate.ps1
 
-      - name: Generate test code for cadl-java
+      - name: Generate test code for typespec-java
         if: ${{ inputs.scope == 'all' || inputs.scope == 'cadl' }}
         shell: pwsh
         run: |
