@@ -1000,9 +1000,7 @@ export class CodeModelBuilder {
 
   private getResponseDescription(resp: HttpOperationResponse): string {
     return (
-      resp.description ||
-      (resp.statusCode === "*" ? "An unexpected error response" : getStatusCodeDescription(resp.statusCode)) ||
-      ""
+      resp.description || (resp.statusCode === "*" ? "An unexpected error response" : getStatusCodeDescription(resp.statusCode)) || ""
     );
   }
 
