@@ -10,10 +10,10 @@ import java.util.Collection;
 
 /** Enum that will be used as a property for model EnumProperty. Non-extensible. */
 public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
-    /** First value. */
+    /** Static value ValueOne for InnerEnum. */
     public static final InnerEnum VALUE_ONE = fromString("ValueOne");
 
-    /** Second value. */
+    /** Static value ValueTwo for InnerEnum. */
     public static final InnerEnum VALUE_TWO = fromString("ValueTwo");
 
     /**

@@ -137,6 +137,42 @@ public final class CollectionFormatClientImpl {
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Get("/collectionFormat/csvHeader")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> testCsvHeader(
+                @HeaderParam("colors") String colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/collectionFormat/defaultHeader")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> testDefaultHeader(
+                @HeaderParam("colors") String colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -239,5 +275,110 @@ public final class CollectionFormatClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> testCsvWithResponse(List<String> colors, RequestOptions requestOptions) {
         return testCsvWithResponseAsync(colors, requestOptions).block();
+    }
+
+    /**
+     * The testCsvHeader operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     message: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> testCsvHeaderWithResponseAsync(
+            List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String colorsConverted =
+                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return FluxUtil.withContext(context -> service.testCsvHeader(colorsConverted, accept, requestOptions, context));
+    }
+
+    /**
+     * The testCsvHeader operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     message: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> testCsvHeaderWithResponse(List<String> colors, RequestOptions requestOptions) {
+        return testCsvHeaderWithResponseAsync(colors, requestOptions).block();
+    }
+
+    /**
+     * The testDefaultHeader operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     message: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> testDefaultHeaderWithResponseAsync(
+            List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String colorsConverted =
+                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return FluxUtil.withContext(
+                context -> service.testDefaultHeader(colorsConverted, accept, requestOptions, context));
+    }
+
+    /**
+     * The testDefaultHeader operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     message: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> testDefaultHeaderWithResponse(List<String> colors, RequestOptions requestOptions) {
+        return testDefaultHeaderWithResponseAsync(colors, requestOptions).block();
     }
 }

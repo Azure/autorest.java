@@ -84,6 +84,56 @@ public final class CollectionFormatClient {
     }
 
     /**
+     * The testCsvHeader operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     message: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> testCsvHeaderWithResponse(List<String> colors, RequestOptions requestOptions) {
+        return this.client.testCsvHeaderWithResponse(colors, requestOptions).block();
+    }
+
+    /**
+     * The testDefaultHeader operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     message: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> testDefaultHeaderWithResponse(List<String> colors, RequestOptions requestOptions) {
+        return this.client.testDefaultHeaderWithResponse(colors, requestOptions).block();
+    }
+
+    /**
      * The testMulti operation.
      *
      * @param colors Possible values for colors are [blue,red,green].
@@ -121,5 +171,45 @@ public final class CollectionFormatClient {
         // Generated convenience method for testCsvWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return testCsvWithResponse(colors, requestOptions).getValue().toObject(MessageResponse.class);
+    }
+
+    /**
+     * The testCsvHeader operation.
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MessageResponse testCsvHeader(List<String> colors) {
+        // Generated convenience method for testCsvHeaderWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return testCsvHeaderWithResponse(colors, requestOptions).getValue().toObject(MessageResponse.class);
+    }
+
+    /**
+     * The testDefaultHeader operation.
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MessageResponse testDefaultHeader(List<String> colors) {
+        // Generated convenience method for testDefaultHeaderWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return testDefaultHeaderWithResponse(colors, requestOptions).getValue().toObject(MessageResponse.class);
     }
 }

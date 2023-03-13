@@ -20,4 +20,15 @@ class CollectionFormatClientTest {
     void testCsv() {
         client.testCsv(Arrays.asList("blue", "red", "green"));
     }
+
+    @Test
+    void testCsvHeader() {
+        client.testCsvHeader(Arrays.asList("blue", "red", "green"));
+    }
+
+    @Test
+    void testDefaultHeader() {
+        client.testDefaultHeader(Arrays.asList("blue", "red", "green"));
+    }
+
 }

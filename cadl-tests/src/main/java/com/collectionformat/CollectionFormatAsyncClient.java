@@ -87,6 +87,57 @@ public final class CollectionFormatAsyncClient {
     }
 
     /**
+     * The testCsvHeader operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     message: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> testCsvHeaderWithResponse(List<String> colors, RequestOptions requestOptions) {
+        return this.serviceClient.testCsvHeaderWithResponseAsync(colors, requestOptions);
+    }
+
+    /**
+     * The testDefaultHeader operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     message: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> testDefaultHeaderWithResponse(
+            List<String> colors, RequestOptions requestOptions) {
+        return this.serviceClient.testDefaultHeaderWithResponseAsync(colors, requestOptions);
+    }
+
+    /**
      * The testMulti operation.
      *
      * @param colors Possible values for colors are [blue,red,green].
@@ -126,6 +177,50 @@ public final class CollectionFormatAsyncClient {
         // Generated convenience method for testCsvWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return testCsvWithResponse(colors, requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(MessageResponse.class));
+    }
+
+    /**
+     * The testCsvHeader operation.
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<MessageResponse> testCsvHeader(List<String> colors) {
+        // Generated convenience method for testCsvHeaderWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return testCsvHeaderWithResponse(colors, requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(MessageResponse.class));
+    }
+
+    /**
+     * The testDefaultHeader operation.
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<MessageResponse> testDefaultHeader(List<String> colors) {
+        // Generated convenience method for testDefaultHeaderWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return testDefaultHeaderWithResponse(colors, requestOptions)
                 .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(MessageResponse.class));
     }
