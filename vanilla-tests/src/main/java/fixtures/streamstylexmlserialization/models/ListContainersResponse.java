@@ -10,7 +10,6 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -265,7 +264,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                     String prefix = null;
                     String marker = null;
                     int maxResults = 0;
-                    List<Container> containers = null;
+                    ContainersWrapper containers = null;
                     String nextMarker = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
@@ -277,10 +276,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                         } else if ("MaxResults".equals(fieldName.getLocalPart())) {
                             maxResults = reader.getIntElement();
                         } else if ("Containers".equals(fieldName.getLocalPart())) {
-                            if (containers == null) {
-                                containers = new LinkedList<>();
-                            }
-                            containers.add(Container.fromXml(reader));
+                            containers = ContainersWrapper.fromXml(reader);
                         } else if ("NextMarker".equals(fieldName.getLocalPart())) {
                             nextMarker = reader.getStringElement();
                         } else {
@@ -293,7 +289,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                     deserializedListContainersResponse.maxResults = maxResults;
                     deserializedListContainersResponse.nextMarker = nextMarker;
                     deserializedListContainersResponse.marker = marker;
-                    deserializedListContainersResponse.setContainers(containers);
+                    deserializedListContainersResponse.containers = containers;
 
                     return deserializedListContainersResponse;
                 });

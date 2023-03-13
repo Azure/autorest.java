@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.util.ClientModelUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,47 +18,47 @@ public class ClientModel {
     /**
      * The package that this model class belongs to.
      */
-    private String packageName;
+    private final String packageName;
     /**
      * Get the name of this model.
      */
-    private String name;
+    private final String name;
     /**
      * Get the imports for this model.
      */
-    private List<String> imports;
+    private final List<String> imports;
     /**
      * Get the description of this model.
      */
-    private String description;
+    private final String description;
     /**
      * Get whether this model has model types that derive from it.
      */
-    private boolean isPolymorphic;
+    private final boolean isPolymorphic;
     /**
      * Get the name of the property that determines which polymorphic model type to create.
      */
-    private String polymorphicDiscriminator;
+    private final String polymorphicDiscriminator;
     /**
      * Get the name that is used for this model when it is serialized.
      */
-    private String serializedName;
+    private final String serializedName;
     /**
      * Get whether this model needs serialization flattening.
      */
-    private boolean needsFlatten;
+    private final boolean needsFlatten;
     /**
      * Get the parent model of this model.
      */
-    private String parentModelName;
+    private final String parentModelName;
     /**
      * Get the models that derive from this model.
      */
-    private List<ClientModel> derivedModels;
+    private final List<ClientModel> derivedModels;
     /**
      * Get the name that will be used for this model's XML element representation.
      */
-    private String xmlName;
+    private final String xmlName;
 
     /**
      * The xml namesapce for a model.
@@ -67,11 +68,11 @@ public class ClientModel {
     /**
      * Get the properties for this model.
      */
-    private List<ClientModelProperty> properties;
+    private final List<ClientModelProperty> properties;
 
-    private List<ClientModelPropertyReference> propertyReferences;
+    private final List<ClientModelPropertyReference> propertyReferences;
 
-    private IType modelType;
+    private final IType modelType;
 
     /*
      * Whether this model is a strongly-typed HTTP headers class.
@@ -249,7 +250,7 @@ public class ClientModel {
         }
 
         for (ClientModelProperty property : getProperties()) {
-            property.addImportsTo(imports, settings.isGenerateXmlSerialization());
+            property.addImportsTo(imports, ClientModelUtil.treatAsXml(settings, this));
         }
     }
 
