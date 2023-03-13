@@ -64,9 +64,9 @@ Copy-Item -Path ./existingcode/src/main/java/com/cadl/partialupdate -Destination
 Remove-Item ./existingcode -Recurse -Force
 
 # run cadl ranch tests sources
-# Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
+Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
 
-# foreach ($tspFile in (Get-ChildItem ./http -Filter "*.tsp" -File -Name -Recurse)) {
-#     generate "./http/$tspFile"
-# }
-# Remove-Item ./http -Recurse -Force
+foreach ($tspFile in (Get-ChildItem ./http -Filter "*.tsp" -File -Name -Recurse)) {
+    generate "./http/$tspFile"
+}
+Remove-Item ./http -Recurse -Force
