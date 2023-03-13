@@ -86,7 +86,7 @@ public class Preprocessor extends NewPlugin {
     codeModel = new Transformer().transform(codeModel);
     performPosttransformUpdates(codeModel);
 
-    Representer representer = new Representer() {
+    Representer representer = new Representer(new DumperOptions()) {
       @Override
       protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
           Tag customTag) {

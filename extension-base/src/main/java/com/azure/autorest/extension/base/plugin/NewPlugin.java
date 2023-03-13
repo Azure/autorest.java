@@ -195,7 +195,7 @@ public abstract class NewPlugin {
             .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
             .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
             .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
-        Representer representer = new Representer();
+        Representer representer = new Representer(new DumperOptions());
         representer.setPropertyUtils(new AnnotatedPropertyUtils());
         representer.getPropertyUtils().setSkipMissingProperties(true);
         LoaderOptions loaderOptions = new LoaderOptions();

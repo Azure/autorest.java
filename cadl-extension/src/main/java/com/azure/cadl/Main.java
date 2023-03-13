@@ -179,7 +179,7 @@ public class Main {
     private static CodeModel loadCodeModel(String filename) throws IOException {
         String file = readFile(filename);
 
-        Representer representer = new Representer();
+        Representer representer = new Representer(new DumperOptions());
         representer.setPropertyUtils(new AnnotatedPropertyUtils());
         representer.getPropertyUtils().setSkipMissingProperties(true);
         LoaderOptions loaderOptions = new LoaderOptions();

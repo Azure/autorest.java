@@ -155,7 +155,7 @@ public class FluentGen extends Javagen {
     }
 
     CodeModel handleYaml(String yamlContent) {
-        Representer representer = new Representer() {
+        Representer representer = new Representer(new DumperOptions()) {
             @Override
             protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue, Tag customTag) {
                 // if value of property is null, ignore it.

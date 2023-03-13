@@ -18,7 +18,7 @@ public class YamlPropertyTest {
     @Test
     public void test() {
 
-        Representer representer = new Representer();
+        Representer representer = new Representer(new DumperOptions());
 
         representer.setPropertyUtils(new AnnotatedPropertyUtils());
         representer.getPropertyUtils().setSkipMissingProperties(true);

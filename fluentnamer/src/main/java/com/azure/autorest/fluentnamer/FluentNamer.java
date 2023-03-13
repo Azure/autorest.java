@@ -101,7 +101,7 @@ public class FluentNamer extends Preprocessor {
     }
 
     private Yaml createYaml() {
-        Representer representer = new Representer() {
+        Representer representer = new Representer(new DumperOptions()) {
             @Override
             protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
                                                           Tag customTag) {

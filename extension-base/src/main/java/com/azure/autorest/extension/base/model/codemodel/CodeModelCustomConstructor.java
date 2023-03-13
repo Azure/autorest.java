@@ -19,12 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CodeModelCustomConstructor extends Constructor {
-    public CodeModelCustomConstructor() {
-        super();
-        yamlClassConstructors.put(NodeId.scalar, new TypeEnumConstruct());
-        yamlClassConstructors.put(NodeId.mapping, new TypeMapConstruct());
-    }
-
     public CodeModelCustomConstructor(LoaderOptions loaderOptions) {
         super(loaderOptions);
         yamlClassConstructors.put(NodeId.scalar, new TypeEnumConstruct());

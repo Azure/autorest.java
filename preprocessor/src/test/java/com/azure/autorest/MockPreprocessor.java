@@ -72,7 +72,7 @@ public class MockPreprocessor extends Preprocessor {
     }
 
     public String dump(CodeModel codeModel) {
-        Representer representer = new Representer() {
+        Representer representer = new Representer(new DumperOptions()) {
             @Override
             protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
                                                           Tag customTag) {

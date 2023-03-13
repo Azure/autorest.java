@@ -67,7 +67,7 @@ public class Androidgen extends Javagen {
         try {
             // Step 1: Parse input yaml as CodeModel
             String file = readFile(files.get(0));
-            Representer representer = new Representer() {
+            Representer representer = new Representer(new DumperOptions()) {
                 @Override
                 protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
                                                               Tag customTag) {
