@@ -168,7 +168,7 @@ public final class DevDrivenClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/resiliency/devdriven/products")
+        @Get("/resiliency/devdriven/customization/paging/protocol/products")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -180,7 +180,25 @@ public final class DevDrivenClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getPages(
+        Mono<Response<BinaryData>> getProtocolPages(
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/resiliency/devdriven/customization/paging/convenience/products")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> getConveniencePages(
                 @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -216,7 +234,25 @@ public final class DevDrivenClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getPagesNext(
+        Mono<Response<BinaryData>> getProtocolPagesNext(
+                @PathParam(value = "nextLink", encoded = true) String nextLink,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> getConveniencePagesNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -357,7 +393,7 @@ public final class DevDrivenClientImpl {
     }
 
     /**
-     * Get pages that you will either return to users in pages of raw bodies, or pages of models following group.
+     * Get pages of protocol bodies.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -373,15 +409,14 @@ public final class DevDrivenClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following group
-     *     along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return pages of protocol bodies along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<BinaryData>> getPagesSinglePageAsync(RequestOptions requestOptions) {
+    private Mono<PagedResponse<BinaryData>> getProtocolPagesSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                         context ->
-                                service.getPages(
+                                service.getProtocolPages(
                                         this.getServiceVersion().getVersion(), accept, requestOptions, context))
                 .map(
                         res ->
@@ -395,7 +430,7 @@ public final class DevDrivenClientImpl {
     }
 
     /**
-     * Get pages that you will either return to users in pages of raw bodies, or pages of models following group.
+     * Get pages of protocol bodies.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -411,23 +446,22 @@ public final class DevDrivenClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following group as
-     *     paginated response with {@link PagedFlux}.
+     * @return pages of protocol bodies as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> getPagesAsync(RequestOptions requestOptions) {
+    public PagedFlux<BinaryData> getProtocolPagesAsync(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
                 requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE);
         return new PagedFlux<>(
-                () -> getPagesSinglePageAsync(requestOptions),
-                nextLink -> getPagesNextSinglePageAsync(nextLink, requestOptionsForNextPage));
+                () -> getProtocolPagesSinglePageAsync(requestOptions),
+                nextLink -> getProtocolPagesNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
-     * Get pages that you will either return to users in pages of raw bodies, or pages of models following group.
+     * Get pages of protocol bodies.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -443,12 +477,103 @@ public final class DevDrivenClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following group as
-     *     paginated response with {@link PagedIterable}.
+     * @return pages of protocol bodies as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getPages(RequestOptions requestOptions) {
-        return new PagedIterable<>(getPagesAsync(requestOptions));
+    public PagedIterable<BinaryData> getProtocolPages(RequestOptions requestOptions) {
+        return new PagedIterable<>(getProtocolPagesAsync(requestOptions));
+    }
+
+    /**
+     * Get pages of models.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     key: String (Required)
+     *     received: String(raw/model) (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return pages of models along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<BinaryData>> getConveniencePagesSinglePageAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                        context ->
+                                service.getConveniencePages(
+                                        this.getServiceVersion().getVersion(), accept, requestOptions, context))
+                .map(
+                        res ->
+                                new PagedResponseBase<>(
+                                        res.getRequest(),
+                                        res.getStatusCode(),
+                                        res.getHeaders(),
+                                        getValues(res.getValue(), "value"),
+                                        getNextLink(res.getValue(), "nextLink"),
+                                        null));
+    }
+
+    /**
+     * Get pages of models.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     key: String (Required)
+     *     received: String(raw/model) (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return pages of models as paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> getConveniencePagesAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(
+                requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext()
+                        : Context.NONE);
+        return new PagedFlux<>(
+                () -> getConveniencePagesSinglePageAsync(requestOptions),
+                nextLink -> getConveniencePagesNextSinglePageAsync(nextLink, requestOptionsForNextPage));
+    }
+
+    /**
+     * Get pages of models.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     key: String (Required)
+     *     received: String(raw/model) (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return pages of models as paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> getConveniencePages(RequestOptions requestOptions) {
+        return new PagedIterable<>(getConveniencePagesAsync(requestOptions));
     }
 
     /**
@@ -533,10 +658,49 @@ public final class DevDrivenClientImpl {
      *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<BinaryData>> getPagesNextSinglePageAsync(
+    private Mono<PagedResponse<BinaryData>> getProtocolPagesNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getPagesNext(nextLink, accept, requestOptions, context))
+        return FluxUtil.withContext(context -> service.getProtocolPagesNext(nextLink, accept, requestOptions, context))
+                .map(
+                        res ->
+                                new PagedResponseBase<>(
+                                        res.getRequest(),
+                                        res.getStatusCode(),
+                                        res.getHeaders(),
+                                        getValues(res.getValue(), "value"),
+                                        getNextLink(res.getValue(), "nextLink"),
+                                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     key: String (Required)
+     *     received: String(raw/model) (Required)
+     * }
+     * }</pre>
+     *
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of Product items along with {@link PagedResponse} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<BinaryData>> getConveniencePagesNextSinglePageAsync(
+            String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                        context -> service.getConveniencePagesNext(nextLink, accept, requestOptions, context))
                 .map(
                         res ->
                                 new PagedResponseBase<>(
