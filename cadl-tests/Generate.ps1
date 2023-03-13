@@ -27,8 +27,8 @@ if (Test-Path ./src/main/java/com/cadl/partialupdate) {
     Copy-Item -Path ./src/main/java/com/cadl/partialupdate -Destination ./existingcode/src/main/java/com/cadl/partialupdate -Recurse -Force
 }
 
-if (Test-Path ./src/main/cadl) {
-    Remove-Item ./src/main/cadl -Recurse -Force
+if (Test-Path ./src/main) {
+    Remove-Item ./src/main -Recurse -Force
 }
 if (Test-Path ./cadl-output) {
     Remove-Item ./cadl-output -Recurse -Force
@@ -66,7 +66,7 @@ Remove-Item ./existingcode -Recurse -Force
 # run cadl ranch tests sources
 Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
 
-foreach ($tspFile in (Get-ChildItem ./http -Filter "*.tsp" -File -Name -Recurse)) {
+foreach ($tspFile in (Get-ChildItem ./http -Filter "*.cadl" -File -Name -Recurse)) {
     generate "./http/$tspFile"
 }
 Remove-Item ./http -Recurse -Force
