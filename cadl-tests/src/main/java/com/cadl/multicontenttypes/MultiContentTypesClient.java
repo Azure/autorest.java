@@ -16,7 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.multicontenttypes.models.ContentType;
-import com.cadl.multicontenttypes.models.DataModelBase;
 
 /** Initializes a new instance of the synchronous MultiContentTypesClient type. */
 @ServiceClient(builder = MultiContentTypesClientBuilder.class)
@@ -34,90 +33,62 @@ public final class MultiContentTypesClient {
     }
 
     /**
+     * response is binary.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> downloadImageWithResponse(RequestOptions requestOptions) {
+        return this.client.downloadImageWithResponse(requestOptions).block();
+    }
+
+    /**
+     * request is binary.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @param data data.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> uploadImageWithResponse(BinaryData data, RequestOptions requestOptions) {
+        return this.client.uploadImageWithResponse(data, requestOptions).block();
+    }
+
+    /**
      * one data type maps to multiple content types.
      *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * byte[]
+     * BinaryData
      * }</pre>
      *
      * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
      *     "image/png".
-     * @param body The body parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadSimpleWithResponse(String contentType, BinaryData body, RequestOptions requestOptions) {
-        return this.client.uploadSimpleWithResponse(contentType, body, requestOptions).block();
-    }
-
-    /**
-     * multiple data types map to multiple content types using `@overload`.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * DataModelBase
-     * }</pre>
-     *
-     * @param contentType The contentType parameter. Allowed values: "text/plain", "application/json",
-     *     "application/octet-stream", "image/jpeg", "image/png".
-     * @param data The data parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadWithResponse(String contentType, BinaryData data, RequestOptions requestOptions) {
-        return this.client.uploadWithResponse(contentType, data, requestOptions).block();
-    }
-
-    /**
-     * The uploadString operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param data The data parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadStringWithResponse(BinaryData data, RequestOptions requestOptions) {
-        return this.client.uploadStringWithResponse(data, requestOptions).block();
-    }
-
-    /**
-     * The uploadBytes operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * byte[]
-     * }</pre>
-     *
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
-     *     "image/png".
-     * @param data The data parameter.
+     * @param data data.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -132,10 +103,47 @@ public final class MultiContentTypesClient {
     }
 
     /**
+     * response is binary.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public BinaryData downloadImage() {
+        // Generated convenience method for downloadImageWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return downloadImageWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * request is binary.
+     *
+     * @param data data.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void uploadImage(BinaryData data) {
+        // Generated convenience method for uploadImageWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        uploadImageWithResponse(data, requestOptions).getValue();
+    }
+
+    /**
      * one data type maps to multiple content types.
      *
      * @param contentType The contentType parameter.
-     * @param body The body parameter.
+     * @param data data.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -145,68 +153,9 @@ public final class MultiContentTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void uploadSimple(ContentType contentType, byte[] body) {
-        // Generated convenience method for uploadSimpleWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        uploadSimpleWithResponse(contentType.toString(), BinaryData.fromObject(body), requestOptions).getValue();
-    }
-
-    /**
-     * multiple data types map to multiple content types using `@overload`.
-     *
-     * @param contentType The contentType parameter.
-     * @param data The data parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void upload(ContentType contentType, DataModelBase data) {
-        // Generated convenience method for uploadWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        uploadWithResponse(contentType.toString(), BinaryData.fromObject(data), requestOptions).getValue();
-    }
-
-    /**
-     * The uploadString operation.
-     *
-     * @param data The data parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void uploadString(String data) {
-        // Generated convenience method for uploadStringWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        uploadStringWithResponse(BinaryData.fromObject(data), requestOptions).getValue();
-    }
-
-    /**
-     * The uploadBytes operation.
-     *
-     * @param contentType The contentType parameter.
-     * @param data The data parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void uploadBytes(ContentType contentType, byte[] data) {
+    public void uploadBytes(ContentType contentType, BinaryData data) {
         // Generated convenience method for uploadBytesWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        uploadBytesWithResponse(contentType.toString(), BinaryData.fromObject(data), requestOptions).getValue();
+        uploadBytesWithResponse(contentType.toString(), data, requestOptions).getValue();
     }
 }
