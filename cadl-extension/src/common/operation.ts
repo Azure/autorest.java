@@ -59,7 +59,7 @@ export interface Operation extends Aspect {
 }
 
 export class ConvenienceApi extends Metadata {
-  constructor(name: string, initializer?: ConvenienceApi) {
+  constructor(name: string, initializer?: DeepPartial<ConvenienceApi>) {
     super();
     this.apply(
       {

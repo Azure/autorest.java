@@ -1,5 +1,5 @@
 import { DeepPartial } from "@azure-tools/codegen";
-import { Aspect, OperationGroup, Parameter, Security } from "@autorest/codemodel";
+import { Aspect, Metadata, OperationGroup, Parameter, Security } from "@autorest/codemodel";
 
 export interface Client extends Aspect {
   /** All operations  */
@@ -8,6 +8,8 @@ export interface Client extends Aspect {
   globalParameters?: Array<Parameter>;
 
   security: Security;
+
+  serviceVersion?: ServiceVersion; // apiVersions is in Aspect
 }
 
 export class Client extends Aspect implements Client {
@@ -26,5 +28,22 @@ export class Client extends Aspect implements Client {
 
   addGlobalParameters(parameters: Parameter[]) {
     this.globals.push(...parameters);
+  }
+}
+
+export class ServiceVersion extends Metadata {
+  constructor(name: string, description: string, initializer?: DeepPartial<ServiceVersion>) {
+    super();
+    this.apply(
+      {
+        language: {
+          default: {
+            name: name,
+            description: description,
+          },
+        },
+      },
+      initializer,
+    );
   }
 }
