@@ -18,6 +18,7 @@ import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
+import org.yaml.snakeyaml.inspector.TrustedTagInspector;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
@@ -117,6 +118,7 @@ public class FluentNamer extends Preprocessor {
         loaderOptions.setCodePointLimit(50 * 1024 * 1024);
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
         loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
+        loaderOptions.setTagInspector(new TrustedTagInspector());
         return new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
     }
 
