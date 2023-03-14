@@ -565,7 +565,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
     }
 
     private ClassType getExceptionType(Response exception, JavaSettings settings) {
-        ClassType exceptionType = ClassType.HttpResponseException;  // default as HttpResponseException
+        ClassType exceptionType = getHttpResponseExceptionType();  // default as HttpResponseException
 
         if (exception != null && exception.getSchema() != null) {
             ClassType errorType = (ClassType) Mappers.getSchemaMapper().map(exception.getSchema());

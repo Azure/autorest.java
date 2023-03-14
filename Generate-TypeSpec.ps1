@@ -19,36 +19,41 @@ function invokeExpressionAndCaptureOutput([string]$expression) {
 }
 
 Write-Host "Changing directory to './cadl-extension'"
-Set-Location ./cadl-extension
+try {
+  Push-Location ./cadl-extension
 
-Write-Host "Installing dependencies for TypeSpec Java ('npm install')"
-invokeExpressionAndCaptureOutput("npm install")
+  Write-Host "Installing dependencies for TypeSpec Java ('npm install')"
+  invokeExpressionAndCaptureOutput("npm install")
 
-Write-Host "Building TypeSpec Java ('npm run build')"
-invokeExpressionAndCaptureOutput("npm run build")
+  Write-Host "Building TypeSpec Java ('npm run build')"
+  invokeExpressionAndCaptureOutput("npm run build")
 
-Write-Host "Linting TypeSpec Java ('npm run lint')"
-invokeExpressionAndCaptureOutput("npm run lint")
+  Write-Host "Linting TypeSpec Java ('npm run lint')"
+  invokeExpressionAndCaptureOutput("npm run lint")
 
-Write-Host "Checking TypeSpec Java format ('npm run check-format')"
-invokeExpressionAndCaptureOutput("npm run check-format")
+  Write-Host "Checking TypeSpec Java format ('npm run check-format')"
+  invokeExpressionAndCaptureOutput("npm run check-format")
 
-Write-Host "Packing TypeSpec Java ('npm pack')"
-invokeExpressionAndCaptureOutput("npm pack")
+  Write-Host "Packing TypeSpec Java ('npm pack')"
+  invokeExpressionAndCaptureOutput("npm pack")
 
-Write-Host "Returning to root directory ('..')"
-Set-Location ..
+  Write-Host "Returning to root directory ('..')"
+} finally {
+  Pop-Location
+}
 
 Write-Host "Installing TypeSpec ('npm install -g @typespec/compiler')"
 invokeExpressionAndCaptureOutput("npm install -g @typespec/compiler")
 
-Write-Host "Changing directory to './cadl-tests'"
-Set-Location ./cadl-tests
+try {
+  Write-Host "Changing directory to './cadl-tests'"
+  Push-Location ./cadl-tests
 
-Write-Host "Generating code ('Generate.ps1' in './cadl-tests')"
-invokeExpressionAndCaptureOutput("./Generate.ps1")
+  Write-Host "Generating code ('Generate.ps1' in './cadl-tests')"
+  invokeExpressionAndCaptureOutput("./Generate.ps1")
 
-Write-Host "Checking format of generated code ('npm run check-format')"
-invokeExpressionAndCaptureOutput("npm run check-format")
-
-Set-Location ..
+  Write-Host "Checking format of generated code ('npm run check-format')"
+  invokeExpressionAndCaptureOutput("npm run check-format")
+} finally {
+  Pop-Location
+}

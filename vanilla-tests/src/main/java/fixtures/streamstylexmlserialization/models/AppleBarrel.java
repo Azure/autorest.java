@@ -10,7 +10,6 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -187,28 +186,22 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
         return xmlReader.readObject(
                 "AppleBarrel",
                 reader -> {
-                    List<String> goodApples = null;
-                    List<String> badApples = null;
+                    GoodApplesWrapper goodApples = null;
+                    BadApplesWrapper badApples = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName fieldName = reader.getElementName();
 
                         if ("GoodApples".equals(fieldName.getLocalPart())) {
-                            if (goodApples == null) {
-                                goodApples = new LinkedList<>();
-                            }
-                            goodApples.add(reader.getStringElement());
+                            goodApples = GoodApplesWrapper.fromXml(reader);
                         } else if ("BadApples".equals(fieldName.getLocalPart())) {
-                            if (badApples == null) {
-                                badApples = new LinkedList<>();
-                            }
-                            badApples.add(reader.getStringElement());
+                            badApples = BadApplesWrapper.fromXml(reader);
                         } else {
                             reader.skipElement();
                         }
                     }
                     AppleBarrel deserializedAppleBarrel = new AppleBarrel();
-                    deserializedAppleBarrel.setGoodApples(goodApples);
-                    deserializedAppleBarrel.setBadApples(badApples);
+                    deserializedAppleBarrel.goodApples = goodApples;
+                    deserializedAppleBarrel.badApples = badApples;
 
                     return deserializedAppleBarrel;
                 });

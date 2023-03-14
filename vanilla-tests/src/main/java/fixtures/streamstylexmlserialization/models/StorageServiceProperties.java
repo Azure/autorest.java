@@ -10,7 +10,6 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -270,7 +269,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
                     Logging logging = null;
                     Metrics hourMetrics = null;
                     Metrics minuteMetrics = null;
-                    List<CorsRule> cors = null;
+                    CorsWrapper cors = null;
                     String defaultServiceVersion = null;
                     RetentionPolicy deleteRetentionPolicy = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
@@ -283,10 +282,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
                         } else if ("MinuteMetrics".equals(fieldName.getLocalPart())) {
                             minuteMetrics = Metrics.fromXml(reader);
                         } else if ("Cors".equals(fieldName.getLocalPart())) {
-                            if (cors == null) {
-                                cors = new LinkedList<>();
-                            }
-                            cors.add(CorsRule.fromXml(reader));
+                            cors = CorsWrapper.fromXml(reader);
                         } else if ("DefaultServiceVersion".equals(fieldName.getLocalPart())) {
                             defaultServiceVersion = reader.getStringElement();
                         } else if ("DeleteRetentionPolicy".equals(fieldName.getLocalPart())) {
@@ -299,7 +295,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
                     deserializedStorageServiceProperties.logging = logging;
                     deserializedStorageServiceProperties.hourMetrics = hourMetrics;
                     deserializedStorageServiceProperties.minuteMetrics = minuteMetrics;
-                    deserializedStorageServiceProperties.setCors(cors);
+                    deserializedStorageServiceProperties.cors = cors;
                     deserializedStorageServiceProperties.defaultServiceVersion = defaultServiceVersion;
                     deserializedStorageServiceProperties.deleteRetentionPolicy = deleteRetentionPolicy;
 

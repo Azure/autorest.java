@@ -52,6 +52,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.azure.autorest.util.ClientModelUtil.treatAsXml;
+
 /**
  * Writes a ClientModel to a JavaFile.
  */
@@ -95,6 +97,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
         final boolean immutableOutputModel = settings.isOutputModelImmutable()
             && model.getImplementationDetails() != null && !model.getImplementationDetails().isInput();
+        boolean treatAsXml = treatAsXml(settings, model);
 
         // Handle adding annotations if the model is polymorphic.
         handlePolymorphism(model, hasDerivedModels, settings.isDiscriminatorPassedToChildDeserialization(), javaFile);
@@ -164,14 +167,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
 
                 classBlock.method(methodVisibility, null, propertyClientType + " " + getGetterName(model, property) + "()",
-                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, settings, methodBlock));
+                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml, methodBlock));
 
                 if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputModel) {
                     generateSetterJavadoc(classBlock, model, property);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
                     classBlock.method(methodVisibility, null,
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
-                        methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, settings, methodBlock));
+                        methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml, methodBlock));
                 }
 
                 // If the property is additional properties, and stream-style serialization isn't being used, add a
@@ -411,7 +414,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings Autorest generation settings.
      */
     protected void addClassLevelAnnotations(ClientModel model, JavaFile javaFile, JavaSettings settings) {
-        if (settings.isGenerateXmlSerialization()) {
+        if (treatAsXml(settings, model)) {
             if (!CoreUtils.isNullOrEmpty(model.getXmlNamespace())) {
                 javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\", namespace = \"%2$s\")",
                     model.getXmlName(), model.getXmlNamespace()));
@@ -478,7 +481,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             IType propertyType = property.getWireType();
 
             String fieldSignature;
-            if (settings.isGenerateXmlSerialization()) {
+            if (treatAsXml(settings, model)) {
                 if (property.isXmlWrapper()) {
                     String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
 
@@ -502,8 +505,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     fieldSignature = propertyType + " " + propertyName + " = new " + propertyType + "()";
                 } else {
                     // handle x-ms-client-default
-                    if (property.getDefaultValue() != null
-                        && (!settings.isStreamStyleSerialization() || property.isPolymorphicDiscriminator())) {
+                    if (property.getDefaultValue() != null) {
                         if (property.isPolymorphicDiscriminator()) {
                             fieldSignature = propertyType + " " + CodeNamer.getEnumMemberName(propertyName) + " = " + property.getDefaultValue();
                         } else {
@@ -582,17 +584,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classBlock.annotation("JsonTypeId");
         }
 
+        boolean treatAsXml = treatAsXml(settings, model);
         if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
             classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
-        } else if (settings.isGenerateXmlSerialization() && property.isXmlAttribute()) {
+        } else if (treatAsXml && property.isXmlAttribute()) {
             classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", isAttribute = true)");
-        } else if (settings.isGenerateXmlSerialization() && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
+        } else if (treatAsXml && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
             classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", namespace = \"" + property.getXmlNamespace() + "\")");
-        } else if (settings.isGenerateXmlSerialization() && property.isXmlText()) {
+        } else if (treatAsXml && property.isXmlText()) {
             classBlock.annotation("JacksonXmlText");
         } else if (property.isAdditionalProperties()) {
             classBlock.annotation("JsonIgnore");
-        } else if (settings.isGenerateXmlSerialization() && property.getWireType() instanceof ListType && !property.isXmlWrapper()) {
+        } else if (treatAsXml && property.getWireType() instanceof ListType && !property.isXmlWrapper()) {
             classBlock.annotation("JsonProperty(\"" + property.getXmlListElementName() + "\")");
         } else if (!CoreUtils.isNullOrEmpty(property.getAnnotationArguments())) {
             classBlock.annotation("JsonProperty(" + property.getAnnotationArguments() + ")");
@@ -738,11 +741,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param propertyWireType The property wire type.
      * @param propertyClientType The client property type.
      * @param property The property.
-     * @param settings AutoRest configuration settings.
+     * @param treatAsXml Whether the getter should treat the property as XML.
      * @param methodBlock Where the getter method is being added.
      */
     private static void addGetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
-        JavaSettings settings, JavaBlock methodBlock) {
+        boolean treatAsXml, JavaBlock methodBlock) {
         String sourceTypeName = propertyWireType.toString();
         String targetTypeName = propertyClientType.toString();
         String expression = property.isPolymorphicDiscriminator()
@@ -753,8 +756,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         if (sourceTypeName.equals(targetTypeName)) {
-            if (settings.isGenerateXmlSerialization() && property.isXmlWrapper()
-                && (property.getWireType() instanceof IterableType)) {
+            if (treatAsXml && property.isXmlWrapper() && (property.getWireType() instanceof IterableType)) {
                 methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
                     ifBlock.line("this.%s = new %s(new ArrayList<%s>());", property.getName(),
                         getPropertyXmlWrapperClassName(property),
@@ -784,11 +786,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param propertyWireType The property wire type.
      * @param propertyClientType The client property type.
      * @param property The property.
-     * @param settings AutoRest configuration settings.
+     * @param treatAsXml Whether the setter should treat the property as XML.
      * @param methodBlock Where the setter method is being added.
      */
     private static void addSetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
-        JavaSettings settings, JavaBlock methodBlock) {
+        boolean treatAsXml, JavaBlock methodBlock) {
         String expression = (propertyClientType.equals(ArrayType.ByteArray))
             ? "CoreUtils.clone(" + property.getName() + ")"
             : property.getName();
@@ -802,7 +804,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 .elseBlock(elseBlock ->
                     elseBlock.line("this.%s = %s;", property.getName(), propertyWireType.convertFromClientType(expression)));
         } else {
-            if (settings.isGenerateXmlSerialization() && property.isXmlWrapper()) {
+            if (treatAsXml && property.isXmlWrapper()) {
                 methodBlock.line("this.%s = new %s(%s);", property.getName(),
                     getPropertyXmlWrapperClassName(property), expression);
             } else {

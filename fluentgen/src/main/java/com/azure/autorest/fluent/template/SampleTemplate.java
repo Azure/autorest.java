@@ -80,7 +80,7 @@ public class SampleTemplate {
         content = String.join(System.lineSeparator(), formattedLines);
 
         if (!JavaSettings.getInstance().isSkipFormatting()) {
-            content = new JavaFormatter(content, path).format(false);
+            content = new JavaFormatter(content, path).format();
         }
         return content;
     }
