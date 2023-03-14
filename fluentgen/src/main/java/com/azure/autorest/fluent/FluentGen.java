@@ -51,6 +51,7 @@ import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
+import org.yaml.snakeyaml.inspector.TrustedTagInspector;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
@@ -155,7 +156,7 @@ public class FluentGen extends Javagen {
     }
 
     CodeModel handleYaml(String yamlContent) {
-        Representer representer = new Representer() {
+        Representer representer = new Representer(new DumperOptions()) {
             @Override
             protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue, Tag customTag) {
                 // if value of property is null, ignore it.
@@ -171,6 +172,7 @@ public class FluentGen extends Javagen {
         loaderOptions.setCodePointLimit(50 * 1024 * 1024);
         loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
         loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
+        loaderOptions.setTagInspector(new TrustedTagInspector());
         Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
         CodeModel codeModel = newYaml.loadAs(yamlContent, CodeModel.class);
         return codeModel;
