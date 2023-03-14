@@ -21,8 +21,6 @@ public class CadlPrimitiveMapper extends PrimitiveMapper {
     protected IType createPrimitiveType(PrimitiveSchema primaryType) {
         if (primaryType.getType() == Schema.AllSchemaTypes.DATE) {
             return ClassType.LocalDate;
-        } else if (primaryType.getType() == Schema.AllSchemaTypes.BINARY){
-            return ClassType.BinaryData;
         } else {
             return super.createPrimitiveType(primaryType);
         }
