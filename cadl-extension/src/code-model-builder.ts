@@ -704,7 +704,6 @@ export class CodeModelBuilder {
     let schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
     // handle for binary body
     if (
-      parameters.properties.has("contentType") &&
       body.kind === "ModelProperty" &&
       body.type.kind === "Scalar" &&
       body.type.name === "bytes"
