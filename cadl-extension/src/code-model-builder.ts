@@ -703,11 +703,7 @@ export class CodeModelBuilder {
   private processParameterBody(op: CodeModelOperation, body: ModelProperty | Model, parameters: Model) {
     let schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
     // handle for binary body
-    if (
-      body.kind === "ModelProperty" &&
-      body.type.kind === "Scalar" &&
-      body.type.name === "bytes"
-    ) {
+    if (body.kind === "ModelProperty" && body.type.kind === "Scalar" && body.type.name === "bytes") {
       schema = new BinarySchema(body.name);
     }
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
