@@ -134,10 +134,12 @@ export class CodeModelBuilder {
 
   private codeModel: CodeModel;
 
-  private schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
-  private operationCache = new Map<Operation, CodeModelOperation>();
+  readonly schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
+  readonly operationCache = new Map<Operation, CodeModelOperation>();
 
-  private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
+  readonly specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
+
+  readonly originApiVersion = "modelerfour:synthesized/api-version";
 
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
@@ -1797,7 +1799,7 @@ export class CodeModelBuilder {
       ),
       {
         implementation: ImplementationLocation.Client,
-        origin: "modelerfour:synthesized/api-version",
+        origin: this.originApiVersion,
         required: true,
         protocol: {
           http: new HttpParameter(parameterLocation),

@@ -25,6 +25,6 @@ export class Client extends Aspect implements Client {
   }
 
   addGlobalParameters(parameters: Parameter[]) {
-    this.globals.concat(parameters);
+    this.globals.push(...parameters);
   }
 }
