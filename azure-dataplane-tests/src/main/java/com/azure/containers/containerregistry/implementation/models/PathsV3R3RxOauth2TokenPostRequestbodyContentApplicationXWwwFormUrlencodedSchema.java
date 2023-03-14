@@ -35,7 +35,7 @@ public final class PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFo
     /*
      * Grant type is expected to be refresh_token
      */
-    private TokenGrantType grantType;
+    private TokenGrantType grantType = TokenGrantType.REFRESH_TOKEN;
 
     /** Creates an instance of PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema class. */
     public PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {}
