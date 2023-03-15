@@ -59,13 +59,13 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ClientModel result = serviceModels.getModel(modelType.getName());
         if (result == null && !ObjectMapper.isPlainObject(compositeType) && !isPredefinedModel(modelType)) {
             ClientModel.Builder builder = createModelBuilder()
-                    .name(modelName)
-                    .packageName(modelType.getPackage())
-                    .type(modelType)
-                    .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
-                    .implementationDetails(new ImplementationDetails.Builder()
-                            .usages(SchemaUtil.mapSchemaContext(compositeType.getUsage()))
-                            .build());
+                .name(modelName)
+                .packageName(modelType.getPackage())
+                .type(modelType)
+                .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
+                .implementationDetails(new ImplementationDetails.Builder()
+                    .usages(SchemaUtil.mapSchemaContext(compositeType.getUsage()))
+                    .build());
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
             builder.polymorphic(isPolymorphic);
@@ -77,7 +77,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             List<ObjectSchema> parentsNeedFlatten = Collections.emptyList();
             if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null) {
                 hasAdditionalProperties = compositeType.getParents().getImmediate().stream()
-                        .anyMatch(s -> s instanceof DictionarySchema);
+                    .anyMatch(s -> s instanceof DictionarySchema);
 
                 ParentSchemaInfo parentSchemaInfo = getParentSchemaInfo(compositeType);
                 if (parentSchemaInfo.hasParentSchema()) {
@@ -91,19 +91,19 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.parentModelName(parentModelName);
 
             List<Property> compositeTypeProperties = compositeType.getProperties()
-                    .stream().filter(p -> !p.isIsDiscriminator()).collect(Collectors.toList());
+                .stream().filter(p -> !p.isIsDiscriminator()).collect(Collectors.toList());
             if (!parentsNeedFlatten.isEmpty()) {
                 // Take properties from base class of multiple inheritance as properties of this class.
                 for (ObjectSchema parent : parentsNeedFlatten) {
                     compositeTypeProperties.addAll(parent.getProperties().stream()
-                            .filter(p -> !p.isIsDiscriminator())
-                            .collect(Collectors.toList()));
+                        .filter(p -> !p.isIsDiscriminator())
+                        .collect(Collectors.toList()));
                     if (parent.getParents() != null) {
                         compositeTypeProperties.addAll(parent.getParents().getAll().stream()
-                                .filter(s -> s instanceof ObjectSchema)
-                                .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
-                                .filter(p -> !p.isIsDiscriminator())
-                                .collect(Collectors.toList()));
+                            .filter(s -> s instanceof ObjectSchema)
+                            .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
+                            .filter(p -> !p.isIsDiscriminator())
+                            .collect(Collectors.toList()));
                     }
                 }
             }
@@ -119,7 +119,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             if (!compositeTypeProperties.isEmpty()) {
-                if (settings.isGenerateXmlSerialization()) {
+                if (settings.isGenerateXmlSerialization()
+                    || (compositeType.getSerialization() != null && compositeType.getSerialization().getXml() != null)) {
                     modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
 
                     if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema() instanceof ArraySchema)) {
@@ -198,19 +199,23 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
             builder.derivedModels(derivedTypes);
 
+            // Only configure XML information in the ClientModel if XML is defined in the object or 'enable-xml' is true
             if (compositeType.getSerialization() != null && compositeType.getSerialization().getXml() != null) {
                 final XmlSerlializationFormat xml = compositeType.getSerialization().getXml();
-                 builder.xmlName(xml.getName());
-                 builder.xmlNamespace(xml.getNamespace());
-            } else if (compositeType.getLanguage().getDefault() != null) {
-                 builder.xmlName(compositeType.getLanguage().getDefault().getName());
+                String xmlName = CoreUtils.isNullOrEmpty(xml.getName())
+                    ? compositeType.getLanguage().getDefault().getName()
+                    : xml.getName();
+                builder.xmlName(xmlName);
+                builder.xmlNamespace(xml.getNamespace());
+            } else if (compositeType.getLanguage().getDefault() != null && settings.isGenerateXmlSerialization()) {
+                builder.xmlName(compositeType.getLanguage().getDefault().getName());
             }
 
             List<ClientModelProperty> properties = new ArrayList<>();
 
             boolean needsFlatten = false;
             if (settings.getModelerSettings().isFlattenModel()  // enabled by modelerfour
-                    && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
+                && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
                 needsFlatten = hasFlattenedProperty(compositeType, parentsNeedFlatten);
                 if (isPolymorphic) {
                     String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
@@ -254,8 +259,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             if (hasAdditionalProperties) {
                 DictionarySchema schema = (DictionarySchema) compositeType.getParents().getImmediate().stream()
-                        .filter(s -> s instanceof DictionarySchema)
-                        .findFirst().get();
+                    .filter(s -> s instanceof DictionarySchema)
+                    .findFirst().get();
                 Property additionalProperties = new Property();
                 additionalProperties.setReadOnly(false);
                 additionalProperties.setSchema(schema);
@@ -309,8 +314,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     /**
      * Separate all immediate parents into: one to keep, and the rest to flatten.
      * <p>
-     * If schema is not polymorphic, keep the first parent of type ObjectSchema.
-     * If schema is polymorphic (but not the supertype), keep the parent in polymorphic hierarchy.
+     * If schema is not polymorphic, keep the first parent of type ObjectSchema. If schema is polymorphic (but not the
+     * supertype), keep the parent in polymorphic hierarchy.
      *
      * @param compositeType the object schema
      * @return the info on parent schema.
@@ -324,7 +329,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 if (parent instanceof ObjectSchema) {
                     ObjectSchema parentAsObjectSchema = (ObjectSchema) parent;
                     if (parentSchema == null
-                            && (parentAsObjectSchema.getDiscriminatorValue() != null || parentAsObjectSchema.getDiscriminator() != null)) {
+                        && (parentAsObjectSchema.getDiscriminatorValue() != null || parentAsObjectSchema.getDiscriminator() != null)) {
                         parentSchema = parentAsObjectSchema;
                     } else {
                         flattenedParentSchemas.add((ObjectSchema) parent);
@@ -418,13 +423,13 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
      * @param compositeType the model
      * @param property the property of the model that specified to be flattened
      * @param modelProperty the ClientModelProperty of the property
-     * @param existingPropertyReferences the list of existing property references from previously flattened models,
-     *                                   for disambiguate purpose
+     * @param existingPropertyReferences the list of existing property references from previously flattened models, for
+     * disambiguate purpose
      * @return the list of property references from flattened model.
      */
     private List<ClientModelPropertyReference> collectPropertiesFromFlattenedModel(
-            ObjectSchema compositeType, Property property, ClientModelProperty modelProperty,
-            List<ClientModelPropertyReference> existingPropertyReferences) {
+        ObjectSchema compositeType, Property property, ClientModelProperty modelProperty,
+        List<ClientModelPropertyReference> existingPropertyReferences) {
 
         List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
         ObjectSchema targetModelSchema = (ObjectSchema) property.getSchema();
@@ -436,21 +441,21 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             objectSchemaAndParents.add(compositeType);
             if (compositeType.getParents() != null && compositeType.getParents().getAll() != null) {
                 objectSchemaAndParents.addAll(
-                        compositeType.getParents().getAll().stream()
-                                .filter(p -> p instanceof ObjectSchema)
-                                .map(p -> (ObjectSchema) p)
-                                .collect(Collectors.toList()));
+                    compositeType.getParents().getAll().stream()
+                        .filter(p -> p instanceof ObjectSchema)
+                        .map(p -> (ObjectSchema) p)
+                        .collect(Collectors.toList()));
             }
             // gather property names for disambiguate
             Set<String> propertyNames = objectSchemaAndParents.stream()
-                    .flatMap(o -> o.getProperties().stream())
-                    .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
-                    .map(p -> p.getLanguage().getJava().getName())
-                    .collect(Collectors.toSet());
+                .flatMap(o -> o.getProperties().stream())
+                .filter(p -> p.getExtensions() == null || !p.getExtensions().isXmsClientFlatten())
+                .map(p -> p.getLanguage().getJava().getName())
+                .collect(Collectors.toSet());
             propertyNames.addAll(existingPropertyReferences.stream().map(ClientModelPropertyReference::getName).collect(Collectors.toList()));
             // additional properties
             if (compositeType.getParents() != null && compositeType.getParents().getAll() != null
-                    && compositeType.getParents().getAll().stream().anyMatch(s -> s instanceof DictionarySchema)) {
+                && compositeType.getParents().getAll().stream().anyMatch(s -> s instanceof DictionarySchema)) {
                 propertyNames.add(PROPERTY_NAME_ADDITIONAL_PROPERTIES);
             }
 
@@ -483,11 +488,11 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     Stream.concat(
                             Stream.of(parentSchema),
                             parentSchema.getParents() != null && parentSchema.getParents().getAll() != null
-                                    ? parentSchema.getParents().getAll().stream()
-                                    : Stream.empty())
-                    .filter(o -> o instanceof ObjectSchema)
-                    .map(o -> (ObjectSchema) o)
-                    .forEach(objectSchema1 -> objectSchema1.getProperties().stream()
+                                ? parentSchema.getParents().getAll().stream()
+                                : Stream.empty())
+                        .filter(o -> o instanceof ObjectSchema)
+                        .map(o -> (ObjectSchema) o)
+                        .forEach(objectSchema1 -> objectSchema1.getProperties().stream()
                             .filter(p -> !p.isIsDiscriminator())
                             .forEach(property1 -> {
                                 if (property1.getExtensions() == null || !property1.getExtensions().isXmsClientFlatten()) {
@@ -502,7 +507,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                                     if (property1.getSchema() instanceof ObjectSchema && !ObjectMapper.isPlainObject((ObjectSchema) property.getSchema())) {
                                         ClientModelProperty modelProperty1 = Mappers.getModelPropertyMapper().map(property1);
                                         List<ClientModelPropertyReference> nestedReferences = collectPropertiesFromFlattenedModel(
-                                                objectSchema1, property1, modelProperty1, existingPropertyReferences);
+                                            objectSchema1, property1, modelProperty1, existingPropertyReferences);
                                         nestedReferences.forEach(property2 -> {
                                             String name = disambiguatePropertyNameOfFlattenedSchema(propertyNames, originalFlattenedPropertyName, property2.getName());
                                             if (!referencePropertyNames.contains(name)) {
@@ -521,14 +526,14 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
     private static boolean hasFlattenedProperty(ObjectSchema compositeType, Collection<ObjectSchema> parentsNeedFlatten) {
         boolean ret = compositeType.getProperties().stream()
-                .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+            .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
         if (!ret && !parentsNeedFlatten.isEmpty()) {
             // Check properties from base class of multiple inheritance as properties of this class.
             ret = parentsNeedFlatten.stream()
-                    .flatMap(s -> (s.getParents() != null && s.getParents().getAll() != null) ? Stream.concat(Stream.of(s), s.getParents().getAll().stream()) : Stream.of(s))
-                    .filter(s -> s instanceof ObjectSchema)
-                    .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
-                    .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+                .flatMap(s -> (s.getParents() != null && s.getParents().getAll() != null) ? Stream.concat(Stream.of(s), s.getParents().getAll().stream()) : Stream.of(s))
+                .filter(s -> s instanceof ObjectSchema)
+                .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
+                .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
         }
         return ret;
     }
