@@ -108,12 +108,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // Add Fluent or Immutable based on whether the model has any setters.
         addFluentOrImmutableAnnotation(model, immutableOutputModel, propertyReferences, javaFile, settings);
 
-        // TODO (alzimmer): Determine if this is still required based on the mentioned bug being resolved.
         List<JavaModifier> classModifiers = null;
         if (!hasDerivedModels && !model.getNeedsFlatten()) {
-            if (!settings.isFluent() || !model.getName().endsWith("Identity")) {    // bug https://github.com/Azure/azure-sdk-for-java/issues/8372
-                classModifiers = Collections.singletonList(JavaModifier.Final);
-            }
+            classModifiers = Collections.singletonList(JavaModifier.Final);
         }
 
         String classNameWithBaseType = model.getName();
