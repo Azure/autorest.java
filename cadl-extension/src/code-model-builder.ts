@@ -1591,9 +1591,7 @@ export class CodeModelBuilder {
   }
 
   private processBinarySchema(name: string): BinarySchema {
-    return this.codeModel.schemas.add( 
-      new BinarySchema(name), 
-    ); 
+    return this.codeModel.schemas.add(new BinarySchema(name));
   }
 
   private getUnionVariantName(type: Type, option: any): string {
