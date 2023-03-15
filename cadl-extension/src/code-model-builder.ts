@@ -704,7 +704,7 @@ export class CodeModelBuilder {
     let schema: Schema;
     if (body.kind === "ModelProperty" && body.type.kind === "Scalar" && body.type.name === "bytes") {
       //handle for binary body
-      schema = new BinarySchema(body.name);
+      schema = this.processBinarySchema(body.name);
     } else {
       schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
     }
@@ -1588,6 +1588,12 @@ export class CodeModelBuilder {
       unionSchema.anyOf.push(objectSchema);
     });
     return this.codeModel.schemas.add(unionSchema);
+  }
+
+  private processBinarySchema(name: string): BinarySchema {
+    return this.codeModel.schemas.add( 
+      new BinarySchema(name), 
+    ); 
   }
 
   private getUnionVariantName(type: Type, option: any): string {
