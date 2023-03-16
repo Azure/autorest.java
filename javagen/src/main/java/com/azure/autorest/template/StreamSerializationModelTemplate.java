@@ -68,7 +68,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     @Override
     protected void addSerializationImports(Set<String> imports, ClientModel model, JavaSettings settings) {
-        if (settings.isGenerateXmlSerialization() && model.getXmlName() != null) {
+        if (model.getXmlName() != null) {
             imports.add(QName.class.getName());
             imports.add(XMLStreamException.class.getName());
 
@@ -112,7 +112,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             return classSignature;
         }
 
-        String interfaceName = (settings.isGenerateXmlSerialization() && model.getXmlName() != null)
+        String interfaceName = (model.getXmlName() != null)
             ? XmlSerializable.class.getSimpleName()
             : JsonSerializable.class.getSimpleName();
 
@@ -219,7 +219,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         ClientModelPropertiesManager propertiesManager = new ClientModelPropertiesManager(model, settings);
 
-        if (settings.isGenerateXmlSerialization() && model.getXmlName() != null) {
+        if (model.getXmlName() != null) {
             writeToXml(classBlock, propertiesManager);
             writeFromXml(classBlock, model, propertiesManager, settings);
         } else {
@@ -782,7 +782,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // Always instantiate the local variable.
         IType clientType = property.getClientType();
-        methodBlock.line(clientType + " " + property.getName() + " = " + clientType.defaultValueExpression() + ";");
+        if (property.isXmlWrapper()) {
+            methodBlock.line(getPropertyXmlWrapperClassName(property) + " " + property.getName() + " = "
+                + clientType.defaultValueExpression() + ";");
+        } else {
+            methodBlock.line(clientType + " " + property.getName() + " = " + clientType.defaultValueExpression() + ";");
+        }
     }
 
     /**
@@ -1143,7 +1148,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         ClientModelProperty property, String value, boolean fromSuper) {
         // If the property is defined in a super class or doesn't match the wire type use the setter as this will
         // be able to set the value in the super class definition or handle converting the wire type.
-        if (fromSuper || property.getWireType() != property.getClientType() || property.isXmlWrapper()) {
+        if (fromSuper || property.getWireType() != property.getClientType()) {
             methodBlock.line(modelVariableName + "." + property.getSetterName() + "(" + value + ");");
         } else {
             methodBlock.line(modelVariableName + "." + property.getName() + " = " + value + ";");
@@ -1568,6 +1573,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         JavaSettings settings) {
         IType wireType = property.getWireType();
         IType clientType = property.getClientType();
+
+        // XML wrappers implement XmlSerializable and always use fromXml, check for this first as it's an early out.
+        if (property.isXmlWrapper()) {
+            String className = getPropertyXmlWrapperClassName(property);
+            deserializationBlock.line(property.getName() + " = " + className + ".fromXml(reader);");
+            return;
+        }
 
         // Attempt to determine whether the wire type is simple deserialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
