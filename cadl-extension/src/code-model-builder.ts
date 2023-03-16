@@ -113,9 +113,10 @@ import {
   GroupProperty,
   ApiVersion,
   SerializationStyle,
+  ApiVersions,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
-import { Client as CodeModelClient } from "./common/client.js";
+import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
@@ -123,6 +124,8 @@ import { OrSchema } from "./common/schemas/relationship.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
 import { ClientContext, LongRunningMetadata } from "./models.js";
+import pkg from "lodash";
+const { isEqual } = pkg;
 
 export class CodeModelBuilder {
   private program: Program;
@@ -134,10 +137,8 @@ export class CodeModelBuilder {
 
   private codeModel: CodeModel;
 
-  private schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
-  private operationCache = new Map<Operation, CodeModelOperation>();
-
-  private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
+  readonly schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
+  readonly operationCache = new Map<Operation, CodeModelOperation>();
 
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
@@ -335,7 +336,7 @@ export class CodeModelBuilder {
       }
       const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
       codeModelClient.addGlobalParameters(hostParameters);
-      const clientContext = new ClientContext(baseUri, hostParameters);
+      const clientContext = new ClientContext(baseUri, hostParameters, codeModelClient.globalParameters!);
 
       const operationGroups = listOperationGroups(this.dpgContext, client);
 
@@ -358,6 +359,38 @@ export class CodeModelBuilder {
       }
 
       this.codeModel.clients.push(codeModelClient);
+    }
+
+    // postprocess for ServiceVersion
+    let apiVersionSameForAllClients = true;
+    let sharedApiVersions = undefined;
+    for (const client of this.codeModel.clients) {
+      const apiVersions = getClientApiVersions(client);
+      if (!apiVersions) {
+        // client does not have apiVersions
+        apiVersionSameForAllClients = false;
+      } else if (!sharedApiVersions) {
+        // first client, set it to sharedApiVersions
+        sharedApiVersions = apiVersions;
+      } else {
+        apiVersionSameForAllClients = isEqual(sharedApiVersions, apiVersions);
+      }
+      if (!apiVersionSameForAllClients) {
+        break;
+      }
+    }
+    if (apiVersionSameForAllClients) {
+      const serviceVersion = getServiceVersion(this.codeModel);
+      for (const client of this.codeModel.clients) {
+        client.serviceVersion = serviceVersion;
+      }
+    } else {
+      for (const client of this.codeModel.clients) {
+        const apiVersions = getClientApiVersions(client);
+        if (apiVersions) {
+          client.serviceVersion = getServiceVersion(client);
+        }
+      }
     }
   }
 
@@ -407,7 +440,7 @@ export class CodeModelBuilder {
     // host
     clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
-    op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it));
+    op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it, clientContext));
     // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
@@ -566,11 +599,12 @@ export class CodeModelBuilder {
     }
   }
 
-  private processParameter(op: CodeModelOperation, param: HttpOperationParameter) {
+  private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
     if (isApiVersion(this.dpgContext, param)) {
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
-    } else if (this.specialHeaderNames.has(param.name.toLowerCase())) {
+      clientContext.addGlobalParameter(parameter);
+    } else if (specialHeaderNames.has(param.name.toLowerCase())) {
       // special headers
       op.specialHeaders = op.specialHeaders ?? [];
       if (!containsIgnoreCase(op.specialHeaders, param.name)) {
@@ -1807,7 +1841,7 @@ export class CodeModelBuilder {
       ),
       {
         implementation: ImplementationLocation.Client,
-        origin: "modelerfour:synthesized/api-version",
+        origin: originApiVersion,
         required: true,
         protocol: {
           http: new HttpParameter(parameterLocation),
@@ -2025,3 +2059,31 @@ function isPayloadProperty(program: Program, property: ModelProperty) {
   const statusCodeInfo = isStatusCode(program, property);
   return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
 }
+
+function getClientApiVersions(client: CodeModelClient): ApiVersions | undefined {
+  if (client.globalParameters?.find((it) => it.origin === originApiVersion)) {
+    return client.apiVersions;
+  } else {
+    return undefined;
+  }
+}
+
+function getServiceVersion(client: CodeModelClient | CodeModel): ServiceVersion {
+  let name = client.language.default.name;
+  let description = name;
+  if (name.endsWith("Client")) {
+    name = name.substring(0, name.length - "Client".length);
+  } else {
+    description = description + "Client";
+  }
+  if (name.endsWith("Service")) {
+    name = name + "Version";
+  } else {
+    name = name + "ServiceVersion";
+  }
+  return new ServiceVersion(name, description);
+}
+
+const specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
+
+const originApiVersion = "modelerfour:synthesized/api-version";

@@ -18,6 +18,8 @@ public class Client extends Metadata {
 
     private List<ApiVersion> apiVersions = new ArrayList<ApiVersion>();
 
+    private ServiceVersion serviceVersion;
+
     public String getSummary() {
         return summary;
     }
@@ -64,5 +66,13 @@ public class Client extends Metadata {
 
     public void setApiVersions(List<ApiVersion> apiVersions) {
         this.apiVersions = apiVersions;
+    }
+
+    public ServiceVersion getServiceVersion() {
+        return serviceVersion;
+    }
+
+    public void setServiceVersion(ServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
     }
 }

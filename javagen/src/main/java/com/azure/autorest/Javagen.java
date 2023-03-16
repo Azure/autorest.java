@@ -4,6 +4,7 @@
 package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
+import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
@@ -32,6 +33,7 @@ import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
 import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
@@ -170,7 +172,7 @@ public class Javagen extends NewPlugin {
                 .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                     client.getServiceClient());
         } else {
-            // multi-client
+            // multi-client from TypeSpec
             for (ServiceClient serviceClient : client.getServiceClients()) {
                 javaPackage.addServiceClient(serviceClient.getPackage(), serviceClient.getClassName(), serviceClient);
             }
@@ -235,25 +237,38 @@ public class Javagen extends NewPlugin {
 
         // Service version
         if (settings.isDataPlaneClient()) {
-            List<String> serviceVersions = settings.getServiceVersions();
-            if (CoreUtils.isNullOrEmpty(serviceVersions)) {
-                List<String> apiVersions = ClientModelUtil.getApiVersions(codeModel);
-                if (!CoreUtils.isNullOrEmpty(apiVersions)) {
-                    serviceVersions = apiVersions;
+            String packageName = settings.getPackage();
+            if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+                List<String> serviceVersions = settings.getServiceVersions();
+                if (CoreUtils.isNullOrEmpty(serviceVersions)) {
+                    List<String> apiVersions = ClientModelUtil.getApiVersions(codeModel);
+                    if (!CoreUtils.isNullOrEmpty(apiVersions)) {
+                        serviceVersions = apiVersions;
+                    } else {
+                        throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
+                    }
+                }
+
+                String serviceName;
+                if (settings.getServiceName() == null) {
+                    serviceName = client.getServiceClient().getInterfaceName();
                 } else {
-                    throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
+                    serviceName = settings.getServiceName();
+                }
+                String className = ClientModelUtil.getServiceVersionClassName(ClientModelUtil.getClientInterfaceName(codeModel));
+                javaPackage.addServiceVersion(packageName, new ServiceVersion(className, serviceName, serviceVersions));
+            } else {
+                // multi-client from TypeSpec
+                for (com.azure.autorest.extension.base.model.codemodel.Client client1 : codeModel.getClients()) {
+                    if (client1.getServiceVersion() != null) {
+                        javaPackage.addServiceVersion(packageName,
+                                new ServiceVersion(
+                                        SchemaUtil.getJavaName(client1.getServiceVersion()),
+                                        client1.getServiceVersion().getLanguage().getDefault().getDescription(),
+                                        client1.getApiVersions().stream().map(ApiVersion::getVersion).collect(Collectors.toList())));
+                    }
                 }
             }
-
-            String packageName = settings.getPackage();
-            String serviceName;
-            if (settings.getServiceName() == null) {
-                serviceName = client.getServiceClient().getInterfaceName();
-            } else {
-                serviceName = settings.getServiceName();
-            }
-            String className = ClientModelUtil.getServiceVersionClassName(ClientModelUtil.getClientInterfaceName(codeModel));
-            javaPackage.addServiceVersion(packageName, new ServiceVersion(className, serviceName, serviceVersions));
         }
 
         writeClientModels(client, javaPackage, settings);

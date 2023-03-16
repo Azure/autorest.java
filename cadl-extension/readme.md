@@ -4,7 +4,7 @@ Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node
 
 Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by `java --version`)
 
-Install [TypeSpec](https://github.com/microsoft/typespec/) 0.41. 
+Install [TypeSpec](https://github.com/microsoft/typespec/) 0.41.
 
 # Initialize TypeSpec Project
 
@@ -12,9 +12,9 @@ Follow [TypeSpec Getting Started](https://github.com/microsoft/typespec/#using-n
 
 Make sure `npx tsp compile .` runs correctly.
 
-# Add Cadl-Java
+# Add TypeSpec-Java
 
-Make sure the version of [Cadl-java release](https://github.com/Azure/autorest.java/releases) depends on same version of "@typespec/compiler" as in your TypeSpec project.
+Make sure the version of [TypeSpec-java release](https://github.com/Azure/autorest.java/releases) depends on same version of "@typespec/compiler" as in your TypeSpec project.
 
 Modify `package.json`, add one line under `dependencies`:
 ```diff
@@ -38,7 +38,7 @@ emit:
 
 `npx tsp compile client.tsp --emit=@azure-tools/typespec-java` or `npx tsp compile client.tsp --emit=@azure-tools/typespec-java --options='@azure-tools/typespec-java.emitter-output-dir=<target=folder>`.
 
-If `emitter-output-dir` option is not provided, generated Java code will be under `cadl-output/@azure-tools` folder.
+If `emitter-output-dir` option is not provided, generated Java code will be under `tsp-output/@azure-tools/typespec-java` folder.
 
 # Optional Configuration
 
@@ -64,7 +64,11 @@ options:
 
 ## Convenience API
 
-By default, Cadl-Java generates all protocol APIs and convenience APIs.
+By default, TypeSpec-Java generates all protocol APIs and convenience APIs.
 A few exceptions are API of JSON Merge Patch, and API of long-running operation with ambiguous response type.
 
 See "convenientAPI" decorator from [typespec-client-generator-core](https://github.com/Azure/typespec-azure/tree/main/packages/typespec-client-generator-core).
+
+# Changelog
+
+See [changelog](https://github.com/Azure/autorest.java/blob/main/cadl-extension/changelog.md).
