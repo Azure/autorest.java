@@ -38,7 +38,7 @@ emit:
 
 `npx tsp compile client.tsp --emit=@azure-tools/typespec-java` or `npx tsp compile client.tsp --emit=@azure-tools/typespec-java --options='@azure-tools/typespec-java.emitter-output-dir=<target=folder>`.
 
-If `emitter-output-dir` option is not provided, generated Java code will be under `typespec-output/@azure-tools` folder.
+If `emitter-output-dir` option is not provided, generated Java code will be under `tsp-output/@azure-tools/typespec-java` folder.
 
 # Optional Configuration
 
