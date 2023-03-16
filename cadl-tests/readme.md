@@ -1,4 +1,4 @@
-# Install and Test on Cadl-Java
+# Install and Test on TypeSpec-Java
 
 ## Install TypeSpec
 
@@ -14,7 +14,7 @@ npm install -g @typespec/compiler
 
 This will build `./cadl-extension`, which is basically `preprocessor` and `javagen` combined.
 
-## Build and Install Cadl-Java
+## Build and Install TypeSpec-Java
 
 `pwsh Setup.ps1` in `./cadl-tests` folder.
 
