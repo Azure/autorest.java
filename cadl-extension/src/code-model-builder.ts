@@ -701,7 +701,13 @@ export class CodeModelBuilder {
   }
 
   private processParameterBody(op: CodeModelOperation, body: ModelProperty | Model, parameters: Model) {
-    const schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
+    let schema: Schema;
+    if (body.kind === "ModelProperty" && body.type.kind === "Scalar" && body.type.name === "bytes") {
+      //handle for binary body
+      schema = this.processBinarySchema(body.name);
+    } else {
+      schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
+    }
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
@@ -1582,6 +1588,10 @@ export class CodeModelBuilder {
       unionSchema.anyOf.push(objectSchema);
     });
     return this.codeModel.schemas.add(unionSchema);
+  }
+
+  private processBinarySchema(name: string): BinarySchema {
+    return this.codeModel.schemas.add(new BinarySchema(name));
   }
 
   private getUnionVariantName(type: Type, option: any): string {
