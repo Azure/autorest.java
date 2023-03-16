@@ -52,7 +52,9 @@ public class CadlServiceClientMapper extends ServiceClientMapper {
         }
 
         // TODO (weidxu): security definition could be different for different client
-        processParametersAndConstructors(builder, client, codeModel, ClientModelUtil.getServiceVersionClassName(ClientModelUtil.getClientInterfaceName(codeModel)), proxy);
+        processParametersAndConstructors(builder, client, codeModel,
+                client.getServiceVersion() == null ? null : client.getServiceVersion().getLanguage().getJava().getName(),
+                proxy);
 
         return builder.build();
     }

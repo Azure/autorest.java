@@ -2,7 +2,7 @@
 
 ## 0.5.0 (2023-03-16)
 
-Compatible with compiler 0.42.
+Compatible with compiler 0.42 (now `@typespec/compiler`).
 
 ## 0.4.2 (2023-03-07)
 

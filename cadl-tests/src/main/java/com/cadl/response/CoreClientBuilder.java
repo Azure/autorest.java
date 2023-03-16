@@ -161,7 +161,7 @@ public final class CoreClientBuilder
     /*
      * Service version
      */
-    @Generated private ResponseServiceVersion serviceVersion;
+    @Generated private CoreServiceVersion serviceVersion;
 
     /**
      * Sets Service version.
@@ -170,7 +170,7 @@ public final class CoreClientBuilder
      * @return the CoreClientBuilder.
      */
     @Generated
-    public CoreClientBuilder serviceVersion(ResponseServiceVersion serviceVersion) {
+    public CoreClientBuilder serviceVersion(CoreServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -200,8 +200,8 @@ public final class CoreClientBuilder
     @Generated
     private CoreClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ResponseServiceVersion localServiceVersion =
-                (serviceVersion != null) ? serviceVersion : ResponseServiceVersion.getLatest();
+        CoreServiceVersion localServiceVersion =
+                (serviceVersion != null) ? serviceVersion : CoreServiceVersion.getLatest();
         CoreClientImpl client =
                 new CoreClientImpl(
                         localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);

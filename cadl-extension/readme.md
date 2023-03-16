@@ -14,7 +14,7 @@ Make sure `npx tsp compile .` runs correctly.
 
 # Add TypeSpec-Java
 
-Make sure the version of [typespec-java release](https://github.com/Azure/autorest.java/releases) depends on same version of "@typespec/compiler" as in your TypeSpec project.
+Make sure the version of [TypeSpec-java release](https://github.com/Azure/autorest.java/releases) depends on same version of "@typespec/compiler" as in your TypeSpec project.
 
 Modify `package.json`, add one line under `dependencies`:
 ```diff
@@ -38,7 +38,7 @@ emit:
 
 `npx tsp compile client.tsp --emit=@azure-tools/typespec-java` or `npx tsp compile client.tsp --emit=@azure-tools/typespec-java --options='@azure-tools/typespec-java.emitter-output-dir=<target=folder>`.
 
-If `emitter-output-dir` option is not provided, generated Java code will be under `tsp-output/@azure-tools` folder.
+If `emitter-output-dir` option is not provided, generated Java code will be under `tsp-output/@azure-tools/typespec-java` folder.
 
 # Optional Configuration
 
@@ -68,3 +68,7 @@ By default, TypeSpec-Java generates all protocol APIs and convenience APIs.
 A few exceptions are API of JSON Merge Patch, and API of long-running operation with ambiguous response type.
 
 See "convenientAPI" decorator from [typespec-client-generator-core](https://github.com/Azure/typespec-azure/tree/main/packages/typespec-client-generator-core).
+
+# Changelog
+
+See [changelog](https://github.com/Azure/autorest.java/blob/main/cadl-extension/changelog.md).

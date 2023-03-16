@@ -96,12 +96,11 @@ public class Transformer {
 
   private void transformClients(List<Client> clients, CodeModel codeModel) {
     for (Client client : clients) {
-      Language language = client.getLanguage().getDefault();
-      Language java = addJavaLanguage(client);
-      java.setName(CodeNamer.toPascalCase(language.getName())); // Name of client should always ends with Client, hence it should not require escaping
-      java.setSerializedName(language.getSerializedName());
-      java.setDescription(language.getDescription());
-      client.getLanguage().setJava(java);
+      renameClient(client);
+
+      if (client.getServiceVersion() != null) {
+        renameClient(client.getServiceVersion());
+      }
 
       if (client.getOperationGroups() != null) {
         for (OperationGroup operationGroup : client.getOperationGroups()) {
@@ -453,6 +452,15 @@ public class Transformer {
     java.setName(CodeNamer.getMethodName(language.getName()));
     java.setSerializedName(language.getSerializedName());
     java.setDescription(language.getDescription());
+  }
+
+  private void renameClient(Metadata client) {
+    Language language = client.getLanguage().getDefault();
+    Language java = addJavaLanguage(client);
+    java.setName(CodeNamer.toPascalCase(language.getName())); // Name of client should always ends with Client, hence it should not require escaping
+    java.setSerializedName(language.getSerializedName());
+    java.setDescription(language.getDescription());
+    client.getLanguage().setJava(java);
   }
 
   private Language addJavaLanguage(Metadata schema) {
