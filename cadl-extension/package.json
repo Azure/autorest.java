@@ -6,7 +6,7 @@
     "TypeSpec"
   ],
   "author": "Microsoft Corporation",
-  "homepage": "https://github.com/Microsoft/typespec",
+  "homepage": "https://github.com/Azure/autorest.java",
   "readme": "https://github.com/Azure/autorest.java/blob/main/cadl-extension/readme.md",
   "repository": {
     "type": "git",
