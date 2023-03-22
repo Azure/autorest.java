@@ -9,6 +9,7 @@ import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.SyncPoller;
 
+import com.azure.lro.core.models.OperationState;
 import com.azure.lro.core.models.ResourceOperationStatusUserError;
 import com.azure.lro.core.models.ResourceOperationStatusUserExportedUserError;
 import com.azure.lro.core.models.User;
@@ -38,6 +39,7 @@ public class LroCoreTests {
         PollResponse<ResourceOperationStatusUserError> response = poller.waitForCompletion();
 
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
+        Assertions.assertEquals(OperationState.SUCCEEDED, response.getValue().getStatus());
     }
 
     @Test
@@ -48,6 +50,11 @@ public class LroCoreTests {
         PollResponse<ResourceOperationStatusUserExportedUserError> response = poller.waitForCompletion();
 
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
+        Assertions.assertEquals(OperationState.SUCCEEDED, response.getValue().getStatus());
+        Assertions.assertNotNull(response.getValue().getResult());
+
+        ResourceOperationStatusUserExportedUserError finalResult = poller.getFinalResult();
+        Assertions.assertEquals(OperationState.SUCCEEDED, finalResult.getStatus());
         Assertions.assertNotNull(response.getValue().getResult());
     }
 }
