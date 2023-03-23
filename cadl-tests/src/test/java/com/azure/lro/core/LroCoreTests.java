@@ -5,6 +5,7 @@ package com.azure.lro.core;
 
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.SyncPoller;
@@ -28,12 +29,22 @@ public class LroCoreTests {
 
     @Test
     public void testPut() {
-        SyncPoller<ResourceOperationStatusUserError, User> poller = client.beginCreateOrReplace(
-                "madge", new User("contributor"));
+//        SyncPoller<ResourceOperationStatusUserError, User> poller = client.beginCreateOrReplace(
+//                "madge", new User("contributor"));
+//
+//        PollResponse<ResourceOperationStatusUserError> response = poller.waitForCompletion();
+//
+//        Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
 
-        PollResponse<ResourceOperationStatusUserError> response = poller.waitForCompletion();
+        SyncPoller<BinaryData, BinaryData> poller = client.beginCreateOrReplace(
+                "madge", BinaryData.fromObject(new User("contributor")), null);
 
+        PollResponse<BinaryData> response = poller.waitForCompletion();
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
+
+        BinaryData finalResult = poller.getFinalResult();
+        User finalUser = finalResult.toObject(User.class);
+        Assertions.assertEquals("madge", finalUser.getName());
     }
 
     @Test
@@ -41,7 +52,6 @@ public class LroCoreTests {
         SyncPoller<ResourceOperationStatusUserError, Void> poller = client.beginDelete("madge");
 
         PollResponse<ResourceOperationStatusUserError> response = poller.waitForCompletion();
-
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
         Assertions.assertEquals(OperationState.SUCCEEDED, response.getValue().getStatus());
     }
@@ -52,7 +62,6 @@ public class LroCoreTests {
                 "madge", "json");
 
         PollResponse<ResourceOperationStatusUserExportedUserError> response = poller.waitForCompletion();
-
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
         Assertions.assertEquals(OperationState.SUCCEEDED, response.getValue().getStatus());
         Assertions.assertNotNull(response.getValue().getResult());
