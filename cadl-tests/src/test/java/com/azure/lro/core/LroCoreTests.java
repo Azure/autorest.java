@@ -29,13 +29,18 @@ public class LroCoreTests {
 
     @Test
     public void testPut() {
-//        SyncPoller<ResourceOperationStatusUserError, User> poller = client.beginCreateOrReplace(
-//                "madge", new User("contributor"));
-//
-//        PollResponse<ResourceOperationStatusUserError> response = poller.waitForCompletion();
-//
-//        Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
+        SyncPoller<ResourceOperationStatusUserError, User> poller = client.beginCreateOrReplace(
+                "madge", new User("contributor"));
 
+        PollResponse<ResourceOperationStatusUserError> response = poller.waitForCompletion();
+        Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
+
+        User user = poller.getFinalResult();
+        Assertions.assertEquals("madge", user.getName());
+    }
+
+    @Test
+    public void testPutProtocol() {
         SyncPoller<BinaryData, BinaryData> poller = client.beginCreateOrReplace(
                 "madge", BinaryData.fromObject(new User("contributor")), null);
 
@@ -43,8 +48,8 @@ public class LroCoreTests {
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
 
         BinaryData finalResult = poller.getFinalResult();
-        User finalUser = finalResult.toObject(User.class);
-        Assertions.assertEquals("madge", finalUser.getName());
+        User user = finalResult.toObject(User.class);
+        Assertions.assertEquals("madge", user.getName());
     }
 
     @Test
