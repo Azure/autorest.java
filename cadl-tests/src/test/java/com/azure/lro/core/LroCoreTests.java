@@ -17,6 +17,7 @@ import com.azure.lro.core.models.User;
 import com.azure.lro.rpc.RpcClient;
 import com.azure.lro.rpc.RpcClientBuilder;
 import com.azure.lro.rpc.models.JobData;
+import com.azure.lro.rpc.models.JobPollResult;
 import com.azure.lro.rpc.models.JobResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -73,7 +74,7 @@ public class LroCoreTests {
 
         ResourceOperationStatusUserExportedUserError finalResult = poller.getFinalResult();
         Assertions.assertEquals(OperationState.SUCCEEDED, finalResult.getStatus());
-        Assertions.assertNotNull(response.getValue().getResult());
+        Assertions.assertNotNull(finalResult.getResult());
     }
 
     @Test
@@ -92,6 +93,24 @@ public class LroCoreTests {
 
         JobResult finalResult = poller.getFinalResult();
         Assertions.assertEquals(com.azure.lro.rpc.models.OperationState.SUCCEEDED, finalResult.getStatus());
-        Assertions.assertNotNull(response.getValue().getResults());
+        Assertions.assertNotNull(finalResult.getResults());
+    }
+
+    @Test
+    public void testRpcFinalOnLocation() {
+        RpcClient client = new RpcClientBuilder()
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+                .buildClient();
+
+        SyncPoller<JobPollResult, JobResult> poller = client.beginCreateJobFinalOnLocation(new JobData("async job"));
+
+        PollResponse<JobPollResult> response = poller.waitForCompletion();
+
+        Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
+        Assertions.assertEquals(com.azure.lro.rpc.models.OperationState.SUCCEEDED, response.getValue().getStatus());
+
+        JobResult finalResult = poller.getFinalResult();
+        Assertions.assertEquals(com.azure.lro.rpc.models.OperationState.SUCCEEDED, finalResult.getStatus());
+        Assertions.assertNotNull(finalResult.getResults());
     }
 }
