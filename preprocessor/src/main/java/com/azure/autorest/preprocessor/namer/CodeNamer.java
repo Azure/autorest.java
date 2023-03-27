@@ -86,7 +86,7 @@ public class CodeNamer {
                 "Get", "Put", "Post", "Patch", "Delete", "Headers",
                 "ExpectedResponses", "UnexpectedResponseExceptionType", "UnexpectedResponseExceptionTypes",
                 "HostParam", "PathParam", "QueryParam", "HeaderParam", "FormParam", "BodyParam",
-                "Fluent", "Immutable", "JsonFlatten"
+                "Fluent", "Immutable", "JsonFlatten", "Override"
         ));
     }
 

@@ -1,11 +1,20 @@
 {
   "name": "@azure-tools/typespec-java",
   "version": "0.5.0",
-  "description": "Java client emitter for TypeSpec compiler",
+  "description": "TypeSpec library for emitting Java client from the TypeSpec REST protocol binding",
   "keywords": [
     "TypeSpec"
   ],
-  "author": "weidxu",
+  "author": "Microsoft Corporation",
+  "homepage": "https://github.com/Azure/autorest.java",
+  "readme": "https://github.com/Azure/autorest.java/blob/main/cadl-extension/readme.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.java.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Azure/autorest.java/issues"
+  },
   "license": "MIT",
   "type": "module",
   "main": "dist/src/emitter.js",
