@@ -285,6 +285,10 @@ export class CodeModelBuilder {
               securitySchemes.push(keyScheme);
             }
             break;
+          case "http":
+          {
+            this.logWarning(scheme.scheme + " auth method is currently not supported.");
+          }
         }
       }
     }
