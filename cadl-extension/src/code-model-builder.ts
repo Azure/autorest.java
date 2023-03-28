@@ -286,9 +286,10 @@ export class CodeModelBuilder {
             }
             break;
           case "http":
-          {
-            this.logWarning(scheme.scheme + " auth method is currently not supported.");
-          }
+            {
+              this.logWarning(scheme.scheme + " auth method is currently not supported.");
+            }
+            break;
         }
       }
     }
