@@ -21,10 +21,10 @@ function Generate($tspFile) {
 
 ./Setup.ps1
 
-New-Item -Path ./existingcode/src/main/java/com/tsp/ -ItemType Directory -Force
+New-Item -Path ./existingcode/src/main/java/com/cadl/ -ItemType Directory -Force
 
-if (Test-Path ./src/main/java/com/tsp/partialupdate) {
-    Copy-Item -Path ./src/main/java/com/tsp/partialupdate -Destination ./existingcode/src/main/java/com/tsp/partialupdate -Recurse -Force
+if (Test-Path ./src/main/java/com/cadl/partialupdate) {
+    Copy-Item -Path ./src/main/java/com/cadl/partialupdate -Destination ./existingcode/src/main/java/com/cadl/partialupdate -Recurse -Force
 }
 
 if (Test-Path ./src/main) {
@@ -41,7 +41,7 @@ foreach ($tspFile in (Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*
 
 # partial update test
 npx tsp compile ./tsp/partialupdate.tsp --options="@azure-tools/typespec-java.emitter-output-dir={project-root}/existingcode"
-Copy-Item -Path ./existingcode/src/main/java/com/tsp/partialupdate -Destination ./src/main/java/com/tsp/ -Recurse -Force
+Copy-Item -Path ./existingcode/src/main/java/com/cadl/partialupdate -Destination ./src/main/java/com/cadl/ -Recurse -Force
 Remove-Item ./existingcode -Recurse -Force
 
 # run cadl ranch tests sources
