@@ -8,6 +8,7 @@ import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
+import com.azure.lro.models.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -17,16 +18,16 @@ public class LroTests {
     private final LroAsyncClient client = new LroClientBuilder()
             .buildAsyncClient();
 
-    @Disabled("response of poll is {status: Succeeded}, not a String")
+    @Disabled("MismatchedInputException")
     @Test
     public void testLro() {
-        PollerFlux<String, String> lroFlux = client.beginCreate();
-        SyncPoller<String, String> lroPoller = lroFlux.getSyncPoller();
+        PollerFlux<User, User> lroFlux = client.beginCreate();
+        SyncPoller<User, User> lroPoller = lroFlux.getSyncPoller();
 
-        PollResponse<String> pollResponse = lroPoller.waitForCompletion();
+        PollResponse<User> pollResponse = lroPoller.waitForCompletion();
 
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, pollResponse.getStatus());
-        Assertions.assertEquals("Test for polling succeed", lroPoller.getFinalResult());
+        Assertions.assertEquals("Test for polling succeed", lroPoller.getFinalResult().getName());
     }
 
     @Test
@@ -37,6 +38,6 @@ public class LroTests {
         PollResponse<BinaryData> pollResponse = lroPoller.waitForCompletion();
 
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, pollResponse.getStatus());
-        Assertions.assertEquals("Test for polling succeed", lroPoller.getFinalResult().toObject(String.class));
+        Assertions.assertEquals("bob", lroPoller.getFinalResult().toObject(User.class).getName());
     }
 }

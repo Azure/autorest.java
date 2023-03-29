@@ -49,6 +49,7 @@ import java.util.Objects;
             UnknownValueClient.class,
             ModelValueClient.class,
             RecursiveModelValueClient.class,
+            NullableFloatValueClient.class,
             Int32ValueAsyncClient.class,
             Int64ValueAsyncClient.class,
             BooleanValueAsyncClient.class,
@@ -58,7 +59,8 @@ import java.util.Objects;
             DurationValueAsyncClient.class,
             UnknownValueAsyncClient.class,
             ModelValueAsyncClient.class,
-            RecursiveModelValueAsyncClient.class
+            RecursiveModelValueAsyncClient.class,
+            NullableFloatValueAsyncClient.class
         })
 public final class DictionaryClientBuilder
         implements HttpTrait<DictionaryClientBuilder>, ConfigurationTrait<DictionaryClientBuilder> {
@@ -333,6 +335,16 @@ public final class DictionaryClientBuilder
     }
 
     /**
+     * Builds an instance of NullableFloatValueAsyncClient class.
+     *
+     * @return an instance of NullableFloatValueAsyncClient.
+     */
+    @Generated
+    public NullableFloatValueAsyncClient buildNullableFloatValueAsyncClient() {
+        return new NullableFloatValueAsyncClient(buildInnerClient().getNullableFloatValues());
+    }
+
+    /**
      * Builds an instance of Int32ValueClient class.
      *
      * @return an instance of Int32ValueClient.
@@ -431,5 +443,16 @@ public final class DictionaryClientBuilder
     public RecursiveModelValueClient buildRecursiveModelValueClient() {
         return new RecursiveModelValueClient(
                 new RecursiveModelValueAsyncClient(buildInnerClient().getRecursiveModelValues()));
+    }
+
+    /**
+     * Builds an instance of NullableFloatValueClient class.
+     *
+     * @return an instance of NullableFloatValueClient.
+     */
+    @Generated
+    public NullableFloatValueClient buildNullableFloatValueClient() {
+        return new NullableFloatValueClient(
+                new NullableFloatValueAsyncClient(buildInnerClient().getNullableFloatValues()));
     }
 }
