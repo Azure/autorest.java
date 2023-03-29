@@ -30,7 +30,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
-import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
@@ -39,10 +38,9 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import com.azure.lro.rpc.RpcServiceVersion;
+import com.azure.lro.rpc.models.JobPollResult;
 import com.azure.lro.rpc.models.JobResult;
 import java.time.Duration;
-import java.time.OffsetDateTime;
-import java.util.UUID;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the RpcClient type. */
@@ -129,7 +127,7 @@ public final class RpcClientImpl {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "RpcClient")
     public interface RpcClientService {
-        @Post("/azure/lro/rpc/jobs")
+        @Post("/azure/lro/rpc/same-poll-result/jobs")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -148,7 +146,7 @@ public final class RpcClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/azure/lro/rpc/jobs/{jobId}")
+        @Get("/azure/lro/rpc/same-poll-result/jobs/{jobId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -166,21 +164,48 @@ public final class RpcClientImpl {
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Post("/azure/lro/rpc/different-poll-result/jobs")
+        @ExpectedResponses({200, 202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> createJobFinalOnLocation(
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData jobData,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/azure/lro/rpc/different-poll-result/jobs/operations/{operationId}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> getPoll(
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("operationId") String operationId,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
      * Creates a Job.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -219,29 +244,14 @@ public final class RpcClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createJobWithResponseAsync(BinaryData jobData, RequestOptions requestOptions) {
         final String accept = "application/json";
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
-        requestOptionsLocal.setHeader(
-                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
         return FluxUtil.withContext(
                 context ->
                         service.createJob(
-                                this.getServiceVersion().getVersion(), accept, jobData, requestOptionsLocal, context));
+                                this.getServiceVersion().getVersion(), accept, jobData, requestOptions, context));
     }
 
     /**
      * Creates a Job.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -296,17 +306,6 @@ public final class RpcClientImpl {
     /**
      * Creates a Job.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
@@ -348,17 +347,6 @@ public final class RpcClientImpl {
 
     /**
      * Creates a Job.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -413,17 +401,6 @@ public final class RpcClientImpl {
 
     /**
      * Creates a Job.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -533,5 +510,300 @@ public final class RpcClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getJobWithResponse(String jobId, RequestOptions requestOptions) {
         return getJobWithResponseAsync(jobId, requestOptions).block();
+    }
+
+    /**
+     * Creates a Job.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     comment: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error: ResponseError (Required)
+     *         }
+     *     ]
+     *     results (Required): [
+     *         String (Required)
+     *     ]
+     * }
+     * }</pre>
+     *
+     * @param jobData Data of the job.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return result of the job along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<BinaryData>> createJobFinalOnLocationWithResponseAsync(
+            BinaryData jobData, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.createJobFinalOnLocation(
+                                this.getServiceVersion().getVersion(), accept, jobData, requestOptions, context));
+    }
+
+    /**
+     * Creates a Job.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     comment: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error: ResponseError (Required)
+     *         }
+     *     ]
+     *     results (Required): [
+     *         String (Required)
+     *     ]
+     * }
+     * }</pre>
+     *
+     * @param jobData Data of the job.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of result of the job.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginCreateJobFinalOnLocationAsync(
+            BinaryData jobData, RequestOptions requestOptions) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.createJobFinalOnLocationWithResponseAsync(jobData, requestOptions),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Creates a Job.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     comment: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error: ResponseError (Required)
+     *         }
+     *     ]
+     *     results (Required): [
+     *         String (Required)
+     *     ]
+     * }
+     * }</pre>
+     *
+     * @param jobData Data of the job.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of result of the job.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginCreateJobFinalOnLocation(
+            BinaryData jobData, RequestOptions requestOptions) {
+        return this.beginCreateJobFinalOnLocationAsync(jobData, requestOptions).getSyncPoller();
+    }
+
+    /**
+     * Creates a Job.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     comment: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error: ResponseError (Required)
+     *         }
+     *     ]
+     *     results (Required): [
+     *         String (Required)
+     *     ]
+     * }
+     * }</pre>
+     *
+     * @param jobData Data of the job.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of result of the job.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<JobPollResult, JobResult> beginCreateJobFinalOnLocationWithModelAsync(
+            BinaryData jobData, RequestOptions requestOptions) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.createJobFinalOnLocationWithResponseAsync(jobData, requestOptions),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(JobPollResult.class),
+                TypeReference.createInstance(JobResult.class));
+    }
+
+    /**
+     * Creates a Job.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     comment: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error: ResponseError (Required)
+     *         }
+     *     ]
+     *     results (Required): [
+     *         String (Required)
+     *     ]
+     * }
+     * }</pre>
+     *
+     * @param jobData Data of the job.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of result of the job.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<JobPollResult, JobResult> beginCreateJobFinalOnLocationWithModel(
+            BinaryData jobData, RequestOptions requestOptions) {
+        return this.beginCreateJobFinalOnLocationWithModelAsync(jobData, requestOptions).getSyncPoller();
+    }
+
+    /**
+     * Gets the status of a Job.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     operationId: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     * }
+     * }</pre>
+     *
+     * @param operationId Operation identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the status of a Job along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getPollWithResponseAsync(String operationId, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.getPoll(
+                                this.getServiceVersion().getVersion(), operationId, accept, requestOptions, context));
+    }
+
+    /**
+     * Gets the status of a Job.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     operationId: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     * }
+     * }</pre>
+     *
+     * @param operationId Operation identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the status of a Job along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getPollWithResponse(String operationId, RequestOptions requestOptions) {
+        return getPollWithResponseAsync(operationId, requestOptions).block();
     }
 }
