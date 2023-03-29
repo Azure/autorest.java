@@ -12,6 +12,7 @@ import com.arrays.itemtypes.Int32ValueClient;
 import com.arrays.itemtypes.Int64ValueClient;
 import com.arrays.itemtypes.ItemTypesClientBuilder;
 import com.arrays.itemtypes.ModelValueClient;
+import com.arrays.itemtypes.NullableFloatValueClient;
 import com.arrays.itemtypes.StringValueClient;
 import com.arrays.itemtypes.UnknownValueClient;
 import com.azure.core.http.HttpClient;
@@ -38,6 +39,8 @@ class ItemTypesClientTestBase extends TestBase {
     protected UnknownValueClient unknownValueClient;
 
     protected ModelValueClient modelValueClient;
+
+    protected NullableFloatValueClient nullableFloatValueClient;
 
     @Override
     protected void beforeTest() {
@@ -139,5 +142,16 @@ class ItemTypesClientTestBase extends TestBase {
             modelValueClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         modelValueClient = modelValueClientbuilder.buildModelValueClient();
+
+        ItemTypesClientBuilder nullableFloatValueClientbuilder =
+                new ItemTypesClientBuilder()
+                        .httpClient(HttpClient.createDefault())
+                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            nullableFloatValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            nullableFloatValueClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        nullableFloatValueClient = nullableFloatValueClientbuilder.buildNullableFloatValueClient();
     }
 }

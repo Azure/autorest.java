@@ -146,6 +146,18 @@ public final class ItemTypesClientImpl {
         return this.modelValues;
     }
 
+    /** The NullableFloatValuesImpl object to access its operations. */
+    private final NullableFloatValuesImpl nullableFloatValues;
+
+    /**
+     * Gets the NullableFloatValuesImpl object to access its operations.
+     *
+     * @return the NullableFloatValuesImpl object.
+     */
+    public NullableFloatValuesImpl getNullableFloatValues() {
+        return this.nullableFloatValues;
+    }
+
     /** Initializes an instance of ItemTypesClient client. */
     public ItemTypesClientImpl() {
         this(
@@ -182,5 +194,6 @@ public final class ItemTypesClientImpl {
         this.durationValues = new DurationValuesImpl(this);
         this.unknownValues = new UnknownValuesImpl(this);
         this.modelValues = new ModelValuesImpl(this);
+        this.nullableFloatValues = new NullableFloatValuesImpl(this);
     }
 }

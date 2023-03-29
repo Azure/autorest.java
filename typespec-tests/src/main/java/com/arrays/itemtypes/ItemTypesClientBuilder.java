@@ -48,6 +48,7 @@ import java.util.Objects;
             DurationValueClient.class,
             UnknownValueClient.class,
             ModelValueClient.class,
+            NullableFloatValueClient.class,
             Int32ValueAsyncClient.class,
             Int64ValueAsyncClient.class,
             BooleanValueAsyncClient.class,
@@ -56,7 +57,8 @@ import java.util.Objects;
             DatetimeValueAsyncClient.class,
             DurationValueAsyncClient.class,
             UnknownValueAsyncClient.class,
-            ModelValueAsyncClient.class
+            ModelValueAsyncClient.class,
+            NullableFloatValueAsyncClient.class
         })
 public final class ItemTypesClientBuilder
         implements HttpTrait<ItemTypesClientBuilder>, ConfigurationTrait<ItemTypesClientBuilder> {
@@ -322,6 +324,16 @@ public final class ItemTypesClientBuilder
     }
 
     /**
+     * Builds an instance of NullableFloatValueAsyncClient class.
+     *
+     * @return an instance of NullableFloatValueAsyncClient.
+     */
+    @Generated
+    public NullableFloatValueAsyncClient buildNullableFloatValueAsyncClient() {
+        return new NullableFloatValueAsyncClient(buildInnerClient().getNullableFloatValues());
+    }
+
+    /**
      * Builds an instance of Int32ValueClient class.
      *
      * @return an instance of Int32ValueClient.
@@ -409,5 +421,16 @@ public final class ItemTypesClientBuilder
     @Generated
     public ModelValueClient buildModelValueClient() {
         return new ModelValueClient(new ModelValueAsyncClient(buildInnerClient().getModelValues()));
+    }
+
+    /**
+     * Builds an instance of NullableFloatValueClient class.
+     *
+     * @return an instance of NullableFloatValueClient.
+     */
+    @Generated
+    public NullableFloatValueClient buildNullableFloatValueClient() {
+        return new NullableFloatValueClient(
+                new NullableFloatValueAsyncClient(buildInnerClient().getNullableFloatValues()));
     }
 }
