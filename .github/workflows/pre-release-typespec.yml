@@ -19,7 +19,7 @@ jobs:
           VERSION: ${{ github.event.inputs.version }}
         run: |
           echo "TAG_NAME=@azure-tools/typespec-java_$VERSION" >> $GITHUB_ENV
-          echo "RELEASE_ARTIFACT=cadl-extension/azure-tools-typespec-java-$VERSION.tgz" >> $GITHUB_ENV
+          echo "RELEASE_ARTIFACT=typespec-extension/azure-tools-typespec-java-$VERSION.tgz" >> $GITHUB_ENV
 
       - name: Checkout branch
         uses: actions/checkout@v3
@@ -34,7 +34,7 @@ jobs:
       - name: Build and Package
         run: |
           mvn package -f pom.xml -P local,cadl --no-transfer-progress
-          cd cadl-extension
+          cd typespec-extension
           npm install
           npm run build
           npm run lint

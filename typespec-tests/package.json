@@ -1,5 +1,5 @@
 {
-  "name": "cadl-tests",
+  "name": "typespec-tests",
   "type": "module",
   "scripts": {
     "format": "npm run -s prettier -- --write",

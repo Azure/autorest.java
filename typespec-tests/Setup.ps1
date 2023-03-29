@@ -1,5 +1,5 @@
 # re-build java-client-emitter
-Set-Location ../cadl-extension/
+Set-Location ../typespec-extension/
 # Remove-Item node_modules -Recurse -Force
 # Remove-Item package-lock.json
 npm install
@@ -8,7 +8,7 @@ npm run lint
 npm pack
 
 # re-install
-Set-Location ../cadl-tests/
+Set-Location ../typespec-tests/
 if (Test-Path node_modules) {
     Remove-Item node_modules -Recurse -Force
 }
@@ -20,6 +20,6 @@ if (Test-Path package-lock.json) {
 npm install
 
 # delete output
-if (Test-Path cadl-output) {
-    Remove-Item cadl-output -Recurse -Force
+if (Test-Path tsp-output) {
+    Remove-Item tsp-output -Recurse -Force
 }

@@ -86,10 +86,10 @@ javagen/*.yaml
 /azure-dataplane-tests/src/main/java/module-info.java
 
 # Cadl output
-/cadl-tests/cadl-output/
-/cadl-tests/cadl-ranch-coverage.json
-/cadl-tests/cadl-ranch-coverage-java.json
-/cadl-tests/cadl-src/
+/typespec-tests/tsp-output/
+/typespec-tests/cadl-ranch-coverage.json
+/typespec-tests/cadl-ranch-coverage-java.json
+/typespec-tests/tsp-src/
 
 # Coverage report
 /coverage/

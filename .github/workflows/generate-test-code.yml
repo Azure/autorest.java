@@ -10,7 +10,7 @@ on:
         options:
           - all
           - autorest
-          - cadl
+          - typespec
 
 jobs:
   build:
@@ -43,10 +43,10 @@ jobs:
           ./Generate.ps1
 
       - name: Generate test code for typespec-java
-        if: ${{ inputs.scope == 'all' || inputs.scope == 'cadl' }}
+        if: ${{ inputs.scope == 'all' || inputs.scope == 'typespec' }}
         shell: pwsh
         run: |
-          cd cadl-tests
+          cd typespec-tests
           ./Generate.ps1
           cd ..
 

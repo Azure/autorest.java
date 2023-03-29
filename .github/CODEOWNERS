@@ -16,6 +16,6 @@
 /partial-update-tests       @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar
 /partial-update             @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar
 
-# cadl
-/cadl-extension             @srnagar @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
-/cadl-tests                 @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
+# typespec
+/typespec-extension         @srnagar @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
+/typespec-tests             @weidongxu-microsoft @haolingdong-msft @XiaofeiCao

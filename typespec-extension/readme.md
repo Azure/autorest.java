@@ -71,4 +71,4 @@ See "convenientAPI" decorator from [typespec-client-generator-core](https://gith
 
 # Changelog
 
-See [changelog](https://github.com/Azure/autorest.java/blob/main/cadl-extension/changelog.md).
+See [changelog](https://github.com/Azure/autorest.java/blob/main/typespec-extension/changelog.md).
