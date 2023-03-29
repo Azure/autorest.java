@@ -3,10 +3,10 @@
 
 export SPEC_REPO=https://github.com/Azure/azure-rest-api-specs.git
 export CADL_PATH=specification/cognitiveservices/OpenAI.Inference
-export CADL_BRANCH=feature/cognitiveservices/openai-cadl
+export CADL_BRANCH=main
 
-mkdir cadl-repo
-cd cadl-repo
+mkdir tsp-repo
+cd tsp-repo
 git init
 git config core.sparseCheckout true
 git remote add -f origin $SPEC_REPO
@@ -14,5 +14,5 @@ echo $CADL_PATH > .git/info/sparse-checkout
 git checkout $CADL_BRANCH
 cd ..
 
-cp -rf cadl-repo/$CADL_PATH cadl-src
-rm -rf cadl-repo
+cp -rf tsp-repo/$CADL_PATH tsp-src
+rm -rf tsp-repo

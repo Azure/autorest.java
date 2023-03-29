@@ -15,7 +15,7 @@
   </parent>
 
   <groupId>com.azure.tools</groupId>
-  <artifactId>azure-cadl-extension</artifactId>
+  <artifactId>azure-typespec-extension</artifactId>
   <version>1.0.0-beta.1</version>
 
   <repositories>

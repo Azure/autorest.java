@@ -7,7 +7,7 @@
   ],
   "author": "Microsoft Corporation",
   "homepage": "https://github.com/Azure/autorest.java",
-  "readme": "https://github.com/Azure/autorest.java/blob/main/cadl-extension/readme.md",
+  "readme": "https://github.com/Azure/autorest.java/blob/main/typespec-extension/readme.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Azure/autorest.java.git"
@@ -42,7 +42,7 @@
     "lib/*.tsp",
     "dist/**",
     "!dist/test/**",
-    "target/azure-cadl-extension-jar-with-dependencies.jar"
+    "target/azure-typespec-extension-jar-with-dependencies.jar"
   ],
   "peerDependencies": {
     "@typespec/compiler": "~0.42.0",

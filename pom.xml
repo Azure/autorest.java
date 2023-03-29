@@ -354,7 +354,7 @@
         <module>./preprocessor</module>
         <module>./partial-update</module>
         <module>./extension-base</module>
-        <module>./cadl-extension</module>
+        <module>./typespec-extension</module>
       </modules>
     </profile>
 
@@ -366,7 +366,7 @@
         </property>
       </activation>
       <modules>
-        <module>./cadl-tests</module>
+        <module>./typespec-tests</module>
       </modules>
     </profile>
 

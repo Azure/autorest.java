@@ -18,9 +18,9 @@ function invokeExpressionAndCaptureOutput([string]$expression) {
     }
 }
 
-Write-Host "Changing directory to './cadl-extension'"
+Write-Host "Changing directory to './typespec-extension'"
 try {
-  Push-Location ./cadl-extension
+  Push-Location ./typespec-extension
 
   Write-Host "Installing dependencies for TypeSpec Java ('npm install')"
   invokeExpressionAndCaptureOutput("npm install")
@@ -46,10 +46,10 @@ Write-Host "Installing TypeSpec ('npm install -g @typespec/compiler')"
 invokeExpressionAndCaptureOutput("npm install -g @typespec/compiler")
 
 try {
-  Write-Host "Changing directory to './cadl-tests'"
-  Push-Location ./cadl-tests
+  Write-Host "Changing directory to './typespec-tests'"
+  Push-Location ./typespec-tests
 
-  Write-Host "Generating code ('Generate.ps1' in './cadl-tests')"
+  Write-Host "Generating code ('Generate.ps1' in './typespec-tests')"
   invokeExpressionAndCaptureOutput("./Generate.ps1")
 
   Write-Host "Checking format of generated code ('npm run check-format')"

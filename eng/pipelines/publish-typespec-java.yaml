@@ -32,42 +32,42 @@ jobs:
           publishJUnitResults: false
 
       - task: Npm@1
-        displayName: 'Install Dependencies for Cadl Java'
+        displayName: 'Install Dependencies for TypeSpec Java'
         inputs:
           command: install
-          workingDir: ./cadl-extension
+          workingDir: ./typespec-extension
 
       - task: Npm@1
-        displayName: 'Build Cadl Java'
+        displayName: 'Build TypeSpec Java'
         inputs:
           command: custom
           customCommand: run build
-          workingDir: ./cadl-extension
+          workingDir: ./typespec-extension
 
       - task: Npm@1
-        displayName: 'Lint Cadl Java'
+        displayName: 'Lint TypeSpec Java'
         inputs:
           command: custom
           customCommand: run lint
-          workingDir: ./cadl-extension
+          workingDir: ./typespec-extension
 
       - task: Npm@1
-        displayName: 'Check-Format Cadl Java'
+        displayName: 'Check-Format TypeSpec Java'
         inputs:
           command: custom
           customCommand: run check-format
-          workingDir: ./cadl-extension
+          workingDir: ./typespec-extension
 
       - task: Npm@1
-        displayName: 'Pack Cadl Java'
+        displayName: 'Pack TypeSpec Java'
         inputs:
           command: custom
           customCommand: pack
-          workingDir: ./cadl-extension
+          workingDir: ./typespec-extension
 
       - script: |
           npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
           ls *.tgz | npm publish -0 --access public
           npm config delete //registry.npmjs.org/:_authToken
-        displayName: 'Publish Cadl Java to NPM'
-        workingDirectory: ./cadl-extension
+        displayName: 'Publish TypeSpec Java to NPM'
+        workingDirectory: ./typespec-extension

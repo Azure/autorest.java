@@ -50,11 +50,11 @@ public class Main {
                 .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
     }
 
-    // java -jar target/azure-cadl-extension-jar-with-dependencies.jar
+    // java -jar target/azure-typespec-extension-jar-with-dependencies.jar
 
     public static void main(String[] args) throws IOException {
         // parameters
-        String inputYamlFileName = "cadl-tests/cadl-output/code-model.yaml";
+        String inputYamlFileName = "typespec-tests/tsp-output/code-model.yaml";
         if (args.length >= 1) {
             inputYamlFileName = args[0];
         }
@@ -157,7 +157,7 @@ public class Main {
 
                 // output path
                 if (CoreUtils.isNullOrEmpty(options.getOutputDir())) {
-                    options.setOutputDir("cadl-tests/cadl-output/");
+                    options.setOutputDir("typespec-tests/tsp-output/");
                 } else if (!options.getOutputDir().endsWith("/")) {
                     options.setOutputDir(options.getOutputDir() + "/");
                 }
@@ -169,7 +169,7 @@ public class Main {
         if (options == null) {
             // default if emitterOptions fails
             options = new EmitterOptions();
-            options.setOutputDir("cadl-tests/cadl-output/");
+            options.setOutputDir("typespec-tests/tsp-output/");
             if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
                 options.setNamespace(codeModel.getLanguage().getJava().getNamespace());
             }

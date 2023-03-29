@@ -361,7 +361,7 @@ public final class SupportedLanguage {
 ```
 ### Property types
 
-Built-in models and a few `@format` decorator is supported ([cases](https://github.com/Azure/autorest.java/blob/main/cadl-tests/cadl/builtin.cadl)).
+Built-in models and a few `@format` decorator is supported ([cases](https://github.com/Azure/autorest.java/blob/main/typespec-tests/tsp/builtin.cadl)).
 
 
 ### Enums
