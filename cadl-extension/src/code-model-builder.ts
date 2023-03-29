@@ -165,7 +165,7 @@ export class CodeModelBuilder {
     };
 
     // init code model
-    const title = serviceNamespace.name;
+    const title = this.options["service-name"] ?? serviceNamespace.name;
 
     const description = this.getDoc(serviceNamespace);
     this.codeModel = new CodeModel(title, false, {
