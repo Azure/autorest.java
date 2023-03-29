@@ -20,6 +20,7 @@ import com.azure.lro.rpc.models.JobData;
 import com.azure.lro.rpc.models.JobPollResult;
 import com.azure.lro.rpc.models.JobResult;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class LroCoreTests {
@@ -28,6 +29,7 @@ public class LroCoreTests {
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
             .buildClient();
 
+    @Disabled("PR https://github.com/Azure/azure-sdk-for-java/pull/34174")
     @Test
     public void testPut() {
         SyncPoller<ResourceOperationStatusUserError, User> poller = client.beginCreateOrReplace(

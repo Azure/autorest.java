@@ -158,6 +158,18 @@ public final class DictionaryClientImpl {
         return this.recursiveModelValues;
     }
 
+    /** The NullableFloatValuesImpl object to access its operations. */
+    private final NullableFloatValuesImpl nullableFloatValues;
+
+    /**
+     * Gets the NullableFloatValuesImpl object to access its operations.
+     *
+     * @return the NullableFloatValuesImpl object.
+     */
+    public NullableFloatValuesImpl getNullableFloatValues() {
+        return this.nullableFloatValues;
+    }
+
     /** Initializes an instance of DictionaryClient client. */
     public DictionaryClientImpl() {
         this(
@@ -195,5 +207,6 @@ public final class DictionaryClientImpl {
         this.unknownValues = new UnknownValuesImpl(this);
         this.modelValues = new ModelValuesImpl(this);
         this.recursiveModelValues = new RecursiveModelValuesImpl(this);
+        this.nullableFloatValues = new NullableFloatValuesImpl(this);
     }
 }

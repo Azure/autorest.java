@@ -97,9 +97,9 @@ public final class CoreAsyncClient {
     }
 
     /**
-     * Adds a user or repalces a user's fields.
+     * Adds a user or replaces a user's fields.
      *
-     * <p>Creates or repalces a User.
+     * <p>Creates or replaces a User.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -328,9 +328,9 @@ public final class CoreAsyncClient {
     }
 
     /**
-     * Adds a user or repalces a user's fields.
+     * Adds a user or replaces a user's fields.
      *
-     * <p>Creates or repalces a User.
+     * <p>Creates or replaces a User.
      *
      * @param id The user's id.
      * @param resource The resource instance.

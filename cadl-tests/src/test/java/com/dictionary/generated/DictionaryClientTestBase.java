@@ -17,6 +17,7 @@ import com.dictionary.Float32ValueClient;
 import com.dictionary.Int32ValueClient;
 import com.dictionary.Int64ValueClient;
 import com.dictionary.ModelValueClient;
+import com.dictionary.NullableFloatValueClient;
 import com.dictionary.RecursiveModelValueClient;
 import com.dictionary.StringValueClient;
 import com.dictionary.UnknownValueClient;
@@ -41,6 +42,8 @@ class DictionaryClientTestBase extends TestBase {
     protected ModelValueClient modelValueClient;
 
     protected RecursiveModelValueClient recursiveModelValueClient;
+
+    protected NullableFloatValueClient nullableFloatValueClient;
 
     @Override
     protected void beforeTest() {
@@ -153,5 +156,16 @@ class DictionaryClientTestBase extends TestBase {
             recursiveModelValueClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         recursiveModelValueClient = recursiveModelValueClientbuilder.buildRecursiveModelValueClient();
+
+        DictionaryClientBuilder nullableFloatValueClientbuilder =
+                new DictionaryClientBuilder()
+                        .httpClient(HttpClient.createDefault())
+                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            nullableFloatValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            nullableFloatValueClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        nullableFloatValueClient = nullableFloatValueClientbuilder.buildNullableFloatValueClient();
     }
 }

@@ -34,6 +34,7 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
+import com.azure.lro.models.User;
 import java.time.Duration;
 import reactor.core.publisher.Mono;
 
@@ -152,7 +153,9 @@ public final class LroClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     name: String (Required)
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -160,7 +163,7 @@ public final class LroClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return details about a user along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createWithResponseAsync(RequestOptions requestOptions) {
@@ -174,7 +177,9 @@ public final class LroClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     name: String (Required)
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -182,7 +187,7 @@ public final class LroClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCreateAsync(RequestOptions requestOptions) {
@@ -206,7 +211,9 @@ public final class LroClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     name: String (Required)
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -214,7 +221,7 @@ public final class LroClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreate(RequestOptions requestOptions) {
@@ -227,7 +234,9 @@ public final class LroClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     name: String (Required)
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -235,10 +244,10 @@ public final class LroClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<String, String> beginCreateWithModelAsync(RequestOptions requestOptions) {
+    public PollerFlux<User, User> beginCreateWithModelAsync(RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.createWithResponseAsync(requestOptions),
@@ -249,8 +258,8 @@ public final class LroClientImpl {
                         requestOptions != null && requestOptions.getContext() != null
                                 ? requestOptions.getContext()
                                 : Context.NONE),
-                TypeReference.createInstance(String.class),
-                TypeReference.createInstance(String.class));
+                TypeReference.createInstance(User.class),
+                TypeReference.createInstance(User.class));
     }
 
     /**
@@ -259,7 +268,9 @@ public final class LroClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     name: String (Required)
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -267,10 +278,10 @@ public final class LroClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<String, String> beginCreateWithModel(RequestOptions requestOptions) {
+    public SyncPoller<User, User> beginCreateWithModel(RequestOptions requestOptions) {
         return this.beginCreateWithModelAsync(requestOptions).getSyncPoller();
     }
 
@@ -280,7 +291,9 @@ public final class LroClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     name: String (Required)
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -288,7 +301,7 @@ public final class LroClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return details about a user along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> pollingWithResponseAsync(RequestOptions requestOptions) {
@@ -302,7 +315,9 @@ public final class LroClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     name: String (Required)
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -310,7 +325,7 @@ public final class LroClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return details about a user along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> pollingWithResponse(RequestOptions requestOptions) {
@@ -323,7 +338,9 @@ public final class LroClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     name: String (Required)
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -331,7 +348,7 @@ public final class LroClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return details about a user along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(RequestOptions requestOptions) {
@@ -345,7 +362,9 @@ public final class LroClientImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * String
+     * {
+     *     name: String (Required)
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -353,7 +372,7 @@ public final class LroClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return details about a user along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
