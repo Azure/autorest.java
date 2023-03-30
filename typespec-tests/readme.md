@@ -10,7 +10,7 @@ npm install -g @typespec/compiler
 
 ## Build JAR
 
-`mvn package -P local,cadl` in project root.
+`mvn package -P local,tsp` in project root.
 
 This will build `./typespec-extension`, which is basically `preprocessor` and `javagen` combined.
 
