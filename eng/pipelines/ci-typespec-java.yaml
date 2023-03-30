@@ -42,7 +42,7 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean verify package install'
-          options: '-P local,cadl -T 1C --no-transfer-progress'
+          options: '-P local,typespec -T 1C --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -78,7 +78,7 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
-          options: '-PtestCadl -pl typespec-tests -DtrimStackTrace=false --no-transfer-progress'
+          options: '-PtestTypespec -pl typespec-tests -DtrimStackTrace=false --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'

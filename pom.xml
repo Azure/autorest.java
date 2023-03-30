@@ -343,10 +343,10 @@
     </profile>
 
     <profile>
-      <id>cadl</id>
+      <id>typespec</id>
       <activation>
         <property>
-          <name>cadl</name>
+          <name>typespec</name>
         </property>
       </activation>
       <modules>
@@ -359,10 +359,10 @@
     </profile>
 
     <profile>
-      <id>testCadl</id>
+      <id>testTypespec</id>
       <activation>
         <property>
-          <name>testCadl</name>
+          <name>testTypespec</name>
         </property>
       </activation>
       <modules>
