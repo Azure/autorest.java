@@ -343,10 +343,10 @@
     </profile>
 
     <profile>
-      <id>typespec</id>
+      <id>tsp</id>
       <activation>
         <property>
-          <name>typespec</name>
+          <name>tsp</name>
         </property>
       </activation>
       <modules>
@@ -359,10 +359,10 @@
     </profile>
 
     <profile>
-      <id>testTypespec</id>
+      <id>testTsp</id>
       <activation>
         <property>
-          <name>testTypespec</name>
+          <name>testTsp</name>
         </property>
       </activation>
       <modules>

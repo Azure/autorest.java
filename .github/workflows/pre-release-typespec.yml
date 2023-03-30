@@ -33,7 +33,7 @@ jobs:
 
       - name: Build and Package
         run: |
-          mvn package -f pom.xml -P local,typespec --no-transfer-progress
+          mvn package -f pom.xml -P local,tsp --no-transfer-progress
           cd typespec-extension
           npm install
           npm run build

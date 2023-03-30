@@ -25,7 +25,7 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean verify package install'
-          options: '-P local,typespec -T 1C --no-transfer-progress'
+          options: '-P local,tsp -T 1C --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
