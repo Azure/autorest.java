@@ -11,6 +11,7 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
+import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.cadl.model.EmitterOptions;
 import com.azure.cadl.mapper.CadlMapperFactory;
@@ -38,6 +39,7 @@ public class CadlPlugin extends Javagen {
 
     public Client processClient(CodeModel codeModel) {
         // transform code model
+        codeModel = Preprocessor.convertOptionalConstantsToEnum(codeModel);
         codeModel = new Transformer().transform(codeModel);
 
         // map to client model
