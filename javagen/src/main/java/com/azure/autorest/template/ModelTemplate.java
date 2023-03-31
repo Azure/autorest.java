@@ -581,6 +581,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classBlock.annotation("JsonTypeId");
         }
 
+        if (settings.isDataPlaneClient()
+                && !property.isAdditionalProperties()
+                && property.getClientType() instanceof MapType
+                && ((MapType) (property.getClientType())).isValueNullable()) {
+            classBlock.annotation("JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)");
+        }
+
         boolean treatAsXml = treatAsXml(settings, model);
         if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
             classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");

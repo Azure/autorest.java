@@ -26,6 +26,7 @@ model Builtin {
   stringList: string[];
   bytesDict: Record<bytes>;
   url: url;
+  nullableFloatDict: Record<float64 | null>;
 }
 
 model FormatString {
