@@ -94,6 +94,9 @@ public final class BuiltinAsyncClient {
      *         String: byte[] (Required)
      *     }
      *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -148,6 +151,9 @@ public final class BuiltinAsyncClient {
      *         String: byte[] (Required)
      *     }
      *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      *

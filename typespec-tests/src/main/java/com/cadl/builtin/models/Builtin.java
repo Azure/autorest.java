@@ -7,6 +7,7 @@ package com.cadl.builtin.models;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -107,6 +108,13 @@ public final class Builtin {
     @JsonProperty(value = "url", required = true)
     private String url;
 
+    /*
+     * The nullableFloatDict property.
+     */
+    @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
+    @JsonProperty(value = "nullableFloatDict", required = true)
+    private Map<String, Double> nullableFloatDict;
+
     /**
      * Creates an instance of Builtin class.
      *
@@ -125,6 +133,7 @@ public final class Builtin {
      * @param stringList the stringList value to set.
      * @param bytesDict the bytesDict value to set.
      * @param url the url value to set.
+     * @param nullableFloatDict the nullableFloatDict value to set.
      */
     @JsonCreator
     public Builtin(
@@ -142,7 +151,8 @@ public final class Builtin {
             @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
             @JsonProperty(value = "stringList", required = true) List<String> stringList,
             @JsonProperty(value = "bytesDict", required = true) Map<String, byte[]> bytesDict,
-            @JsonProperty(value = "url", required = true) String url) {
+            @JsonProperty(value = "url", required = true) String url,
+            @JsonProperty(value = "nullableFloatDict", required = true) Map<String, Double> nullableFloatDict) {
         this.formatString = formatString;
         this.booleanProperty = booleanProperty;
         this.string = string;
@@ -158,6 +168,7 @@ public final class Builtin {
         this.stringList = stringList;
         this.bytesDict = bytesDict;
         this.url = url;
+        this.nullableFloatDict = nullableFloatDict;
     }
 
     /**
@@ -293,5 +304,14 @@ public final class Builtin {
      */
     public String getUrl() {
         return this.url;
+    }
+
+    /**
+     * Get the nullableFloatDict property: The nullableFloatDict property.
+     *
+     * @return the nullableFloatDict value.
+     */
+    public Map<String, Double> getNullableFloatDict() {
+        return this.nullableFloatDict;
     }
 }

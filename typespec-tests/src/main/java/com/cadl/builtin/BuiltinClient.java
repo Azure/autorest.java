@@ -91,6 +91,9 @@ public final class BuiltinClient {
      *         String: byte[] (Required)
      *     }
      *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -145,6 +148,9 @@ public final class BuiltinClient {
      *         String: byte[] (Required)
      *     }
      *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      *
