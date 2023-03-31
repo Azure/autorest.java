@@ -17,10 +17,10 @@ model Model {
 
 alias Request = {
   @query
-  literalParam: "literal";
+  literalParam: "literalParam";
 
   @query
-  optionalLiteralParam?: "optionalLiteral";
+  optionalLiteralParam?: "optionalLiteralParam";
 };
 
 @route("/literal")

@@ -80,8 +80,6 @@ import {
   BooleanSchema,
   ByteArraySchema,
   ChoiceValue,
-  ConstantSchema,
-  ConstantValue,
   DateTimeSchema,
   DateSchema,
   DictionarySchema,
@@ -120,6 +118,7 @@ import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
+import { ConstantSchema, ConstantValue } from "./common/schemas/constant.js";
 import { OrSchema } from "./common/schemas/relationship.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
@@ -1934,7 +1933,8 @@ export class CodeModelBuilder {
       schema instanceof GroupSchema ||
       schema instanceof ChoiceSchema ||
       schema instanceof SealedChoiceSchema ||
-      schema instanceof OrSchema
+      schema instanceof OrSchema ||
+      schema instanceof ConstantSchema
     ) {
       if (schemaUsage.usage) {
         pushDistinct((schema.usage = schema.usage || []), ...schemaUsage.usage);
