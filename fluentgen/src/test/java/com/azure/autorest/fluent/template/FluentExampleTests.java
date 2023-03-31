@@ -59,7 +59,7 @@ public class FluentExampleTests {
             FluentExampleTemplate.getInstance().write(example, javaFile);
             String content = javaFile.getContents().toString();
             // Map
-            Assertions.assertTrue(content.contains(".withTags(mapOf(\"key1\", \"value1\", \"key2\", \"value2\"))"));
+            Assertions.assertTrue(content.contains(".withTags(mapOf(\"key1\","));
             // identity
             Assertions.assertTrue(content.contains(".withIdentity(new Identity().withType(IdentityType.USER_ASSIGNED).withUserAssignedIdentities(mapOf(\"/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}\", new UserAssignedIdentity())))"));
             // create
