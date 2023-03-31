@@ -2,7 +2,7 @@
 #
 # The purpose of this script is to compact the steps required to regenerate TypeSpec into a single script.
 #
-# Before running this script the 'cadl' profile must be built, 'mvn install -P local,cadl'.
+# Before running this script the 'tsp' profile must be built, 'mvn install -P local,tsp'.
 #
 # This script can only be ran from the root of the repository.
 
