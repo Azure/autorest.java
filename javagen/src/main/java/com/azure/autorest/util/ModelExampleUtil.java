@@ -83,7 +83,14 @@ public class ModelExampleUtil {
 
                 Map<String, Object> dict = (Map<String, Object>) objectValue;
                 for (Map.Entry<String, Object> entry : dict.entrySet()) {
-                    ExampleNode childNode = parseNode(elementType, entry.getValue());
+                    Object value = entry.getValue();
+
+                    // redact possible credential
+                    if (elementType == ClassType.String && entry.getValue() instanceof String) {
+                        value = ModelTestCaseUtil.redactStringValue(Collections.singletonList(entry.getKey()), (String) value);
+                    }
+
+                    ExampleNode childNode = parseNode(elementType, value);
                     node.getChildNodes().add(childNode);
                     mapNode.getKeys().add(entry.getKey());
                 }
