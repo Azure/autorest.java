@@ -24,6 +24,7 @@ export interface EmitterOptions {
   "namer"?: boolean;
   "generate-samples"?: boolean;
   "generate-tests"?: boolean;
+  "enable-sync-stack"?: boolean;
 
   "dev-options"?: DevOptions;
 }
