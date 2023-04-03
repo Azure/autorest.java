@@ -99,33 +99,22 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
         return jsonReader.readObject(
                 reader -> {
                     String discriminatorValue = null;
-                    JsonReader readerToUse = null;
+                    JsonReader readerToUse = reader.bufferObject();
 
-                    // Read the first field name and determine if it's the discriminator field.
-                    reader.nextToken();
-                    if ("kind".equals(reader.getFieldName())) {
-                        reader.nextToken();
-                        discriminatorValue = reader.getString();
-                        readerToUse = reader;
-                    } else {
-                        // If it isn't the discriminator field buffer the JSON to make it replayable and find the
-                        // discriminator field value.
-                        JsonReader replayReader = reader.bufferObject();
-                        replayReader.nextToken(); // Prepare for reading
-                        while (replayReader.nextToken() != JsonToken.END_OBJECT) {
-                            String fieldName = replayReader.getFieldName();
-                            replayReader.nextToken();
-                            if ("kind".equals(fieldName)) {
-                                discriminatorValue = replayReader.getString();
-                                break;
-                            } else {
-                                replayReader.skipChildren();
-                            }
+                    readerToUse.nextToken(); // Prepare for reading
+                    while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = readerToUse.getFieldName();
+                        readerToUse.nextToken();
+                        if ("kind".equals(fieldName)) {
+                            discriminatorValue = readerToUse.getString();
+                            break;
+                        } else {
+                            readerToUse.skipChildren();
                         }
+                    }
 
-                        if (discriminatorValue != null) {
-                            readerToUse = replayReader.reset();
-                        }
+                    if (discriminatorValue != null) {
+                        readerToUse = readerToUse.reset();
                     }
                     // Use the discriminator value to determine which subtype should be deserialized.
                     if ("Kind1".equals(discriminatorValue)) {

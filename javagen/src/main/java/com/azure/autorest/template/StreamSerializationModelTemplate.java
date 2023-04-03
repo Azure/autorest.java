@@ -509,34 +509,27 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
         ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
         readJsonObject(classBlock, propertiesManager, false, methodBlock -> {
+            // For now, reading polymorphic types will always buffer the current object.
+            // In the future this can be enhanced to switch if the first property is the discriminator field and to use
+            // a Map to contain all properties found while searching for the discriminator field.
             methodBlock.line(String.join("\n",
                 "String discriminatorValue = null;",
-                "JsonReader readerToUse = null;",
+                "JsonReader readerToUse = reader.bufferObject();",
                 "",
-                "// Read the first field name and determine if it's the discriminator field.",
-                "reader.nextToken();",
-                "if (\"" + discriminatorProperty.getSerializedName() + "\".equals(reader.getFieldName())) {",
-                "    reader.nextToken();",
-                "    discriminatorValue = reader.getString();",
-                "    readerToUse = reader;",
-                "} else {",
-                "    // If it isn't the discriminator field buffer the JSON to make it replayable and find the discriminator field value.",
-                "    JsonReader replayReader = reader.bufferObject();",
-                "    replayReader.nextToken(); // Prepare for reading",
-                "    while (replayReader.nextToken() != JsonToken.END_OBJECT) {",
-                "        String " + fieldNameVariableName + " = replayReader.getFieldName();",
-                "        replayReader.nextToken();",
-                "        if (\"" + discriminatorProperty.getSerializedName() + "\".equals(" + fieldNameVariableName + ")) {",
-                "            discriminatorValue = replayReader.getString();",
-                "            break;",
-                "        } else {",
-                "            replayReader.skipChildren();",
-                "        }",
+                "readerToUse.nextToken(); // Prepare for reading",
+                "while (readerToUse.nextToken() != JsonToken.END_OBJECT) {",
+                "    String " + fieldNameVariableName + " = readerToUse.getFieldName();",
+                "    readerToUse.nextToken();",
+                "    if (\"" + discriminatorProperty.getSerializedName() + "\".equals(" + fieldNameVariableName + ")) {",
+                "        discriminatorValue = readerToUse.getString();",
+                "        break;",
+                "    } else {",
+                "        readerToUse.skipChildren();",
                 "    }",
+                "}",
                 "",
-                "    if (discriminatorValue != null) {",
-                "        readerToUse = replayReader.reset();",
-                "    }",
+                "if (discriminatorValue != null) {",
+                "    readerToUse = readerToUse.reset();",
                 "}"
             ));
 
