@@ -483,7 +483,9 @@ export class CodeModelBuilder {
     }
 
     // linked operations
-    const lroMetadata = this.processLinkedOperation(codeModelOperation, groupName, operation, clientContext);
+    const lroMetadata = fromLinkedOperation
+      ? new LongRunningMetadata(false)
+      : this.processLinkedOperation(codeModelOperation, groupName, operation, clientContext);
 
     // responses
     const candidateResponseSchema = lroMetadata.pollResultType; // candidate: response body type of pollingOperation
