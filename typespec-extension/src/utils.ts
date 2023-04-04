@@ -25,7 +25,7 @@ import { ApiVersions } from "@autorest/codemodel";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
-import { getVersion } from "@typespec/versioning/*";
+import { getVersion } from "@typespec/versioning";
 
 export const specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
