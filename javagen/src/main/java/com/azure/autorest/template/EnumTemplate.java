@@ -68,7 +68,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             // ctor, marked as Deprecated
             classBlock.javadocComment(comment -> {
                 comment.description("Creates a new instance of " + enumName + " value.");
-                comment.deprecated(String.format("Use the {@link #fromString(%1$s)} factory method.", typeName));
+                comment.deprecated(String.format("Use the {@link #from%1$s(%2$s)} factory method.", pascalTypeName, typeName));
             });
             classBlock.annotation("Deprecated");
             classBlock.publicConstructor(enumName + "()", ctor -> {
