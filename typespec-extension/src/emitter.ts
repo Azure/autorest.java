@@ -26,6 +26,8 @@ export interface EmitterOptions {
   "generate-tests"?: boolean;
 
   "dev-options"?: DevOptions;
+
+  "examples-directory"?: string;
 }
 
 export interface DevOptions {
@@ -48,6 +50,8 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "generate-tests": { type: "boolean", nullable: true, default: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
+
+    "examples-directory": { type: "string", nullable: true },
   },
   required: [],
 };
@@ -64,7 +68,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
   const program = context.program;
   const options = context.options;
   const builder = new CodeModelBuilder(program, context);
-  const codeModel = builder.build();
+  const codeModel = await builder.build();
 
   if (!program.compilerOptions.noEmit && !program.hasError()) {
     const __dirname = dirname(fileURLToPath(import.meta.url));

@@ -2,18 +2,29 @@ import {
   Enum,
   Model,
   ModelProperty,
+  NoTarget,
   Operation,
   Program,
   TemplatedTypeBase,
   Type,
   Union,
+  ignoreDiagnostics,
   isTemplateDeclaration,
   isTemplateInstance,
+  resolvePath,
 } from "@typespec/compiler";
-import { HttpOperation, getHeaderFieldName, getQueryParamName, getPathParamName, isStatusCode } from "@typespec/http";
+import {
+  HttpOperation,
+  getHeaderFieldName,
+  getQueryParamName,
+  getPathParamName,
+  isStatusCode,
+  getAllHttpServices,
+} from "@typespec/http";
 import { ApiVersions } from "@autorest/codemodel";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
+import { EmitterOptions } from "./emitter.js";
 
 export const specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
@@ -58,6 +69,68 @@ export function pushDistinct<T>(targetArray: Array<T>, ...items: Array<T>): Arra
     }
   }
   return targetArray;
+}
+
+export function logWarning(program: Program, msg: string) {
+  program.trace("typespec-java", msg);
+  program.reportDiagnostic({
+    code: "typespec-java",
+    severity: "warning",
+    message: msg,
+    target: NoTarget,
+  });
+}
+
+export async function loadExamples(
+  program: Program,
+  options: EmitterOptions,
+  version?: string,
+): Promise<Map<Operation, any>> {
+  const operationExamplesMap = new Map<Operation, any>();
+  if (options["examples-directory"]) {
+    const operationIdExamplesMap = new Map<string, any>();
+
+    const exampleDir = version
+      ? resolvePath(options["examples-directory"], version)
+      : resolvePath(options["examples-directory"]);
+    try {
+      if (!(await program.host.stat(exampleDir)).isDirectory()) return operationExamplesMap;
+    } catch (err) {
+      logWarning(program, `Examples directory '${exampleDir}' does not exist.`);
+      return operationExamplesMap;
+    }
+    const exampleFiles = await program.host.readDir(exampleDir);
+    for (const fileName of exampleFiles) {
+      try {
+        const exampleFile = await program.host.readFile(resolvePath(exampleDir, fileName));
+        const example = JSON.parse(exampleFile.text);
+        if (!example.operationId) {
+          logWarning(program, `Example file '${fileName}' is missing operationId.`);
+          continue;
+        }
+
+        if (!operationIdExamplesMap.has(example.operationId)) {
+          operationIdExamplesMap.set(example.operationId, example);
+        }
+      } catch (err) {
+        logWarning(program, `Failed to load example file '${fileName}'.`);
+      }
+    }
+
+    if (operationIdExamplesMap.size > 0) {
+      const services = ignoreDiagnostics(getAllHttpServices(program));
+      const routes = services[0].operations;
+      routes.forEach((it) => {
+        const operationId = pascalCase(
+          it.operation.interface ? `${it.operation.interface.name}_${it.operation.name}` : it.operation.name,
+        );
+        if (operationIdExamplesMap.has(operationId)) {
+          operationExamplesMap.set(it.operation, operationIdExamplesMap.get(operationId));
+        }
+      });
+    }
+  }
+  return operationExamplesMap;
 }
 
 export function getNamespace(type: Model | Enum | Union | Operation): string | undefined {
