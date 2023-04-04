@@ -13,8 +13,6 @@ import {
   IntrinsicType,
   isArrayModelType,
   isRecordModelType,
-  isTemplateDeclaration,
-  isTemplateInstance,
   isUnknownType,
   Model,
   ModelProperty,
@@ -23,7 +21,6 @@ import {
   Program,
   RecordModelType,
   StringLiteral,
-  TemplatedTypeBase,
   Type,
   TypeNameOptions,
   Union,
@@ -43,16 +40,11 @@ import {
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
   getAuthentication,
-  getHeaderFieldName,
-  getPathParamName,
-  getQueryParamName,
   getServers,
   getStatusCodeDescription,
-  HttpOperation,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
-  isStatusCode,
   ServiceAuthentication,
   StatusCode,
   getHttpOperation,
@@ -111,10 +103,9 @@ import {
   GroupProperty,
   ApiVersion,
   SerializationStyle,
-  ApiVersions,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
-import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
+import { Client as CodeModelClient } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
@@ -123,6 +114,23 @@ import { OrSchema } from "./common/schemas/relationship.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
 import { ClientContext, LongRunningMetadata } from "./models.js";
+import {
+  ProcessingCache,
+  stringArrayContainsIgnoreCase,
+  getClientApiVersions,
+  getJavaNamespace,
+  getServiceVersion,
+  isModelReferredInTemplate,
+  operationContainsJsonMergePatch,
+  getNamespace,
+  pushDistinct,
+  isPayloadProperty,
+  modelContainsDerivedModel,
+  pascalCase,
+  getNameForTemplate,
+  originApiVersion,
+  specialHeaderNames,
+} from "./utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
 
@@ -611,7 +619,7 @@ export class CodeModelBuilder {
     } else if (specialHeaderNames.has(param.name.toLowerCase())) {
       // special headers
       op.specialHeaders = op.specialHeaders ?? [];
-      if (!containsIgnoreCase(op.specialHeaders, param.name)) {
+      if (!stringArrayContainsIgnoreCase(op.specialHeaders, param.name)) {
         op.specialHeaders.push(param.name);
       }
     } else {
@@ -741,8 +749,8 @@ export class CodeModelBuilder {
   private processParameterBody(op: CodeModelOperation, body: ModelProperty | Model, parameters: Model) {
     let schema: Schema;
     if (body.kind === "ModelProperty" && body.type.kind === "Scalar" && body.type.name === "bytes") {
-      //handle for binary body
-      schema = this.processBinarySchema(body.name);
+      // handle binary request body
+      schema = this.processBinarySchema(body.type);
     } else {
       schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
     }
@@ -1178,11 +1186,7 @@ export class CodeModelBuilder {
   }
 
   private processAnySchema(type: IntrinsicType, name: string): AnySchema {
-    return this.codeModel.schemas.add(
-      new AnySchema(this.getDoc(type), {
-        summary: this.getSummary(type),
-      }),
-    );
+    return this.anySchema;
   }
 
   private processStringSchema(type: Scalar, name: string): StringSchema {
@@ -1633,8 +1637,12 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(unionSchema);
   }
 
-  private processBinarySchema(name: string): BinarySchema {
-    return this.codeModel.schemas.add(new BinarySchema(name));
+  private processBinarySchema(type: Scalar): BinarySchema {
+    return this.codeModel.schemas.add(
+      new BinarySchema(this.getDoc(type), {
+        summary: this.getSummary(type),
+      }),
+    );
   }
 
   private getUnionVariantName(type: Type, option: any): string {
@@ -1828,11 +1836,6 @@ export class CodeModelBuilder {
     );
   }
 
-  private _binarySchema?: BinarySchema;
-  get binarySchema(): BinarySchema {
-    return this._binarySchema || (this._binarySchema = this.codeModel.schemas.add(new BinarySchema("binary")));
-  }
-
   private _anySchema?: AnySchema;
   get anySchema(): AnySchema {
     return this._anySchema ?? (this._anySchema = this.codeModel.schemas.add(new AnySchema("Anything")));
@@ -1951,149 +1954,3 @@ export class CodeModelBuilder {
     }
   }
 }
-
-/** Acts as a cache for processing inputs.
- *
- * If the input is undefined, the output is always undefined.
- * for a given input, the process is only ever called once.
- *
- *
- */
-class ProcessingCache<In, Out> {
-  private results = new Map<In, Out>();
-  constructor(private transform: (orig: In, ...args: Array<any>) => Out) {}
-  has(original: In | undefined) {
-    return !!original && !!this.results.get(original);
-  }
-  set(original: In, result: Out) {
-    this.results.set(original, result);
-    return result;
-  }
-  process(original: In | undefined, ...args: Array<any>): Out | undefined {
-    if (original) {
-      const result: Out = this.results.get(original) || this.transform(original, ...args);
-      this.results.set(original, result);
-      return result;
-    }
-    return undefined;
-  }
-}
-
-/** adds only if the item is not in the collection already
- *
- * @note  While this isn't very efficient, it doesn't disturb the original
- * collection, so you won't get inadvertent side effects from using Set, etc.
- */
-function pushDistinct<T>(targetArray: Array<T>, ...items: Array<T>): Array<T> {
-  for (const i of items) {
-    if (!targetArray.includes(i)) {
-      targetArray.push(i);
-    }
-  }
-  return targetArray;
-}
-
-function getNamespace(type: Model | Enum | Union | Operation): string | undefined {
-  let namespaceRef = type.namespace;
-  let namespaceStr: string | undefined = undefined;
-  while (namespaceRef && namespaceRef.name.length !== 0) {
-    namespaceStr = namespaceRef.name + (namespaceStr ? "." + namespaceStr : "");
-    namespaceRef = namespaceRef.namespace;
-  }
-  return namespaceStr;
-}
-
-function getJavaNamespace(namespace: string | undefined): string | undefined {
-  return namespace ? "com." + namespace.toLowerCase() : undefined;
-}
-
-function modelContainsDerivedModel(model: Model): boolean {
-  return !isTemplateDeclaration(model) && !(isTemplateInstance(model) && model.derivedModels.length === 0);
-}
-
-function isModelReferredInTemplate(template: TemplatedTypeBase, target: Model): boolean {
-  return (
-    template === target ||
-    (template?.templateMapper?.args?.some((it) =>
-      it.kind === "Model" || it.kind === "Union" ? isModelReferredInTemplate(it, target) : false,
-    ) ??
-      false)
-  );
-}
-
-function getNameForTemplate(target: Type): string {
-  switch (target.kind) {
-    case "Model": {
-      let name = target.name;
-      if (target.templateMapper && target.templateMapper.args) {
-        name = name + target.templateMapper.args.map((it) => getNameForTemplate(it)).join("");
-      }
-      return name;
-    }
-
-    case "String":
-      return target.value;
-
-    default:
-      return "";
-  }
-}
-
-function containsIgnoreCase(stringList: string[], str: string): boolean {
-  return stringList && str ? stringList.findIndex((s) => s.toLowerCase() === str.toLowerCase()) != -1 : false;
-}
-
-function operationContainsJsonMergePatch(op: HttpOperation): boolean {
-  for (const param of op.parameters.parameters) {
-    if (param.type === "header" && param.name.toLowerCase() === "content-type") {
-      if (param.param.type.kind === "String" && param.param.type.value === "application/merge-patch+json") {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-function pascalCase(name: string): string {
-  if (name.length > 0) {
-    return name[0].toUpperCase() + name.slice(1);
-  } else {
-    return name;
-  }
-}
-
-function isPayloadProperty(program: Program, property: ModelProperty) {
-  const headerInfo = getHeaderFieldName(program, property);
-  const queryInfo = getQueryParamName(program, property);
-  const pathInfo = getPathParamName(program, property);
-  const statusCodeInfo = isStatusCode(program, property);
-  return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
-}
-
-function getClientApiVersions(client: CodeModelClient): ApiVersions | undefined {
-  if (client.globalParameters?.find((it) => it.origin === originApiVersion)) {
-    return client.apiVersions;
-  } else {
-    return undefined;
-  }
-}
-
-function getServiceVersion(client: CodeModelClient | CodeModel): ServiceVersion {
-  let name = client.language.default.name;
-  let description = name;
-  if (name.endsWith("Client")) {
-    name = name.substring(0, name.length - "Client".length);
-  } else {
-    description = description + "Client";
-  }
-  if (name.endsWith("Service")) {
-    name = name + "Version";
-  } else {
-    name = name + "ServiceVersion";
-  }
-  return new ServiceVersion(name, description);
-}
-
-const specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
-
-const originApiVersion = "modelerfour:synthesized/api-version";
