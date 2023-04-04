@@ -25,6 +25,7 @@ import { ApiVersions } from "@autorest/codemodel";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
+import { getVersion } from "@typespec/versioning/*";
 
 export const specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
@@ -81,12 +82,14 @@ export function logWarning(program: Program, msg: string) {
   });
 }
 
-export async function loadExamples(
-  program: Program,
-  options: EmitterOptions,
-  version?: string,
-): Promise<Map<Operation, any>> {
+export async function loadExamples(program: Program, options: EmitterOptions): Promise<Map<Operation, any>> {
   const operationExamplesMap = new Map<Operation, any>();
+  const service = ignoreDiagnostics(getAllHttpServices(program))[0];
+  const versioning = getVersion(program, service.namespace);
+  let version = undefined;
+  if (versioning && versioning.getVersions()) {
+    version = versioning.getVersions()[versioning.getVersions().length - 1].value;
+  }
   if (options["examples-directory"]) {
     const operationIdExamplesMap = new Map<string, any>();
 
