@@ -217,6 +217,9 @@ public final class BuiltinClientImpl {
      *         String: byte[] (Required)
      *     }
      *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -296,6 +299,9 @@ public final class BuiltinClientImpl {
      *         String: byte[] (Required)
      *     }
      *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -349,6 +355,9 @@ public final class BuiltinClientImpl {
      *         String: byte[] (Required)
      *     }
      *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -402,6 +411,9 @@ public final class BuiltinClientImpl {
      *         String: byte[] (Required)
      *     }
      *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      *

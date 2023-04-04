@@ -1246,6 +1246,11 @@ export class CodeModelBuilder {
     const elementSchema = this.processSchema(type.indexer.value, name);
     dictSchema.elementType = elementSchema;
 
+    if (type.indexer.value.kind === "Union") {
+      dictSchema.nullableItems =
+        Array.from(type.indexer.value.variants.values()).findIndex((it) => isNullType(it.type)) >= 0;
+    }
+
     return this.codeModel.schemas.add(dictSchema);
   }
 

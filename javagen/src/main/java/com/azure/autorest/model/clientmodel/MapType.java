@@ -9,12 +9,20 @@ import java.util.Set;
  * A map type used by a client.
  */
 public class MapType extends GenericType {
+
+    private boolean valueNullable = false;
+
     /**
      * Create a new MapType from the provided properties.
      * @param valueType The type of values that are stored in this dictionary.
      */
     public MapType(IType valueType) {
+        this(valueType, false);
+    }
+
+    public MapType(IType valueType, boolean valueNullable) {
         super("java.util", "Map", ClassType.String, valueType);
+        this.valueNullable = valueNullable;
     }
 
     /**
@@ -22,6 +30,10 @@ public class MapType extends GenericType {
      */
     public final IType getValueType() {
         return getTypeArguments()[1];
+    }
+
+    public boolean isValueNullable() {
+        return valueNullable;
     }
 
     @Override
