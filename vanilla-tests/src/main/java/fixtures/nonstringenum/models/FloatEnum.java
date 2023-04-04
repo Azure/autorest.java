@@ -28,7 +28,7 @@ public final class FloatEnum extends ExpandableStringEnum<FloatEnum> {
     /**
      * Creates a new instance of FloatEnum value.
      *
-     * @deprecated Use the {@link #fromString(float)} factory method.
+     * @deprecated Use the {@link #fromFloat(float)} factory method.
      */
     @Deprecated
     public FloatEnum() {}
