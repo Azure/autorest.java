@@ -25,9 +25,9 @@ export interface EmitterOptions {
   "generate-samples"?: boolean;
   "generate-tests"?: boolean;
 
-  "dev-options"?: DevOptions;
-
   "examples-directory"?: string;
+
+  "dev-options"?: DevOptions;
 }
 
 export interface DevOptions {
@@ -49,9 +49,9 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "generate-samples": { type: "boolean", nullable: true, default: true },
     "generate-tests": { type: "boolean", nullable: true, default: true },
 
-    "dev-options": { type: "object", additionalProperties: true, nullable: true },
-
     "examples-directory": { type: "string", nullable: true },
+
+    "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },
   required: [],
 };
