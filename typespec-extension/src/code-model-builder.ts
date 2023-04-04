@@ -423,7 +423,7 @@ export class CodeModelBuilder {
       summary: this.getSummary(operation),
     });
 
-    if (fromLinkedOperation || !operationContainsJsonMergePatch(op)) {
+    if (!operationContainsJsonMergePatch(op)) {
       // do not generate convenience method for JSON Merge Patch
 
       const convenienceApiName = this.getConvenienceApiName(operation);
