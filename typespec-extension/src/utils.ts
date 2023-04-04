@@ -9,6 +9,8 @@ import {
   Type,
   Union,
   ignoreDiagnostics,
+  isGlobalNamespace,
+  isService,
   isTemplateDeclaration,
   isTemplateInstance,
   resolvePath,
@@ -84,14 +86,16 @@ export function logWarning(program: Program, msg: string) {
 
 export async function loadExamples(program: Program, options: EmitterOptions): Promise<Map<Operation, any>> {
   const operationExamplesMap = new Map<Operation, any>();
-  const service = ignoreDiagnostics(getAllHttpServices(program))[0];
-  const versioning = getVersion(program, service.namespace);
-  let version = undefined;
-  if (versioning && versioning.getVersions()) {
-    version = versioning.getVersions()[versioning.getVersions().length - 1].value;
-  }
   if (options["examples-directory"]) {
     const operationIdExamplesMap = new Map<string, any>();
+
+    const service = ignoreDiagnostics(getAllHttpServices(program))[0];
+    let version = undefined;
+    const versioning = getVersion(program, service.namespace);
+    if (versioning && versioning.getVersions()) {
+      const versions = versioning.getVersions();
+      version = versions[versions.length - 1].value;
+    }
 
     const exampleDir = version
       ? resolvePath(options["examples-directory"], version)
@@ -121,12 +125,9 @@ export async function loadExamples(program: Program, options: EmitterOptions): P
     }
 
     if (operationIdExamplesMap.size > 0) {
-      const services = ignoreDiagnostics(getAllHttpServices(program));
-      const routes = services[0].operations;
+      const routes = service.operations;
       routes.forEach((it) => {
-        const operationId = pascalCase(
-          it.operation.interface ? `${it.operation.interface.name}_${it.operation.name}` : it.operation.name,
-        );
+        const operationId = pascalCase(resolveOperationId(program, it.operation));
         if (operationIdExamplesMap.has(operationId)) {
           operationExamplesMap.set(it.operation, operationIdExamplesMap.get(operationId));
         }
@@ -134,6 +135,23 @@ export async function loadExamples(program: Program, options: EmitterOptions): P
     }
   }
   return operationExamplesMap;
+}
+
+export function resolveOperationId(program: Program, operation: Operation) {
+  // const explicitOperationId = getOperationId(program, operation);
+  // if (explicitOperationId) {
+  //   return explicitOperationId;
+  // }
+
+  if (operation.interface) {
+    return `${operation.interface.name}_${operation.name}`;
+  }
+  const namespace = operation.namespace;
+  if (namespace === undefined || isGlobalNamespace(program, namespace) || isService(program, namespace)) {
+    return operation.name;
+  }
+
+  return `${namespace.name}_${operation.name}`;
 }
 
 export function getNamespace(type: Model | Enum | Union | Operation): string | undefined {

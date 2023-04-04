@@ -423,11 +423,15 @@ export class CodeModelBuilder {
     const operationName = this.getName(operation);
     const opId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
 
+    const operationExample = this.operationExamples.get(operation);
+
     const codeModelOperation = new CodeModelOperation(operationName, this.getDoc(operation), {
       operationId: opId,
       summary: this.getSummary(operation),
       extensions: {
-        "x-ms-examples": this.operationExamples.get(operation),
+        "x-ms-examples": operationExample
+          ? { [operationExample.title ?? operationExample.operationId ?? operation.name]: operationExample }
+          : undefined,
       },
     });
 
