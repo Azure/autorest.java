@@ -44,15 +44,20 @@
     "!dist/test/**",
     "target/azure-typespec-extension-jar-with-dependencies.jar"
   ],
-  "peerDependencies": {
-    "@typespec/compiler": "~0.42.0",
-    "@typespec/rest": "~0.42.0",
-    "@typespec/versioning": "~0.42.0",
-    "@azure-tools/typespec-azure-core": "~0.28.0",
-    "@azure-tools/typespec-client-generator-core": "~0.28.0"
-  },
   "dependencies": {
     "@autorest/codemodel": "~4.19.2",
+    "@autorest/java": "4.1.16",
+    "@azure-tools/typespec-autorest": "0.28.0",
+    "@azure-tools/typespec-azure-core": "0.28.0",
+    "@azure-tools/typespec-client-generator-core": "0.28.0",
+    "@typespec/compiler": "0.42.0",
+    "@typespec/eslint-config-typespec": "0.6.0",
+    "@typespec/eslint-plugin": "0.42.0",
+    "@typespec/http": "0.42.0",
+    "@typespec/library-linter": "0.42.0",
+    "@typespec/openapi": "0.42.0",
+    "@typespec/rest": "0.42.0",
+    "@typespec/versioning": "0.42.0",
     "lodash": "~4.17.20",
     "js-yaml": "~4.1.0"
   },
