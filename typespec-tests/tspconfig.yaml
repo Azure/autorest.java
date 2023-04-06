@@ -6,6 +6,5 @@ options:
     partial-update: true
     namer: true
     generate-samples: false
-    enable-sync-stack: true
     dev-options:
       generate-code-model: true

@@ -46,7 +46,6 @@ interface SyncStackOp {
   get is ResourceOperations.ResourceRead<Resource>;
   
   // pageable
-  @convenientAPI(true)
   list is ResourceOperations.ResourceList<Resource>;
 
   // lro
