@@ -30,9 +30,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Utilities for client model.
@@ -60,25 +62,11 @@ public class ClientModelUtil {
                     .packageName(packageName)
                     .serviceClient(serviceClient);
 
-            final List<ConvenienceMethod> convenienceMethods = new ArrayList<>();
-            client.getOperationGroups().stream()
+            final List<ConvenienceMethod> convenienceMethods = client.getOperationGroups().stream()
                     .filter(og -> CoreUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))    // no resource group
                     .findAny()
-                    .ifPresent(og -> {
-                        og.getOperations().stream()
-                                .filter(o -> o.getConvenienceApi() != null)
-                                .forEach(o -> {
-                                    List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false).stream()
-                                            .filter(m -> m.getMethodVisibility() == JavaVisibility.Public)
-                                            .collect(Collectors.toList());
-                                    if (!cMethods.isEmpty()) {
-                                        String methodName = cMethods.iterator().next().getProxyMethod().getName();
-                                        serviceClient.getClientMethods().stream()
-                                                .filter(m -> methodName.equals(m.getProxyMethod().getName()) && m.getMethodVisibility() == JavaVisibility.Public)
-                                                .forEach(m -> convenienceMethods.add(new ConvenienceMethod(m, cMethods)));
-                                    }
-                                });
-                    });
+                    .map(og -> getConvenienceMethods(serviceClient, og))
+                    .orElse(Collections.emptyList());
             builder.convenienceMethods(convenienceMethods);
 
             String asyncClassName = clientNameToAsyncClientName(serviceClient.getClientBaseName());
@@ -100,25 +88,11 @@ public class ClientModelUtil {
                     .serviceClient(serviceClient)
                     .methodGroupClient(methodGroupClient);
 
-            final List<ConvenienceMethod> convenienceMethods = new ArrayList<>();
-            client.getOperationGroups().stream()
+            final List<ConvenienceMethod> convenienceMethods = client.getOperationGroups().stream()
                     .filter(og -> methodGroupClient.getClassBaseName().equals(og.getLanguage().getJava().getName()))
                     .findAny()
-                    .ifPresent(og -> {
-                        og.getOperations().stream()
-                                .filter(o -> o.getConvenienceApi() != null)
-                                .forEach(o -> {
-                                    List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false).stream()
-                                            .filter(m -> m.getMethodVisibility() == JavaVisibility.Public)
-                                            .collect(Collectors.toList());
-                                    if (!cMethods.isEmpty()) {
-                                        String methodName = cMethods.iterator().next().getProxyMethod().getName();
-                                        methodGroupClient.getClientMethods().stream()
-                                                .filter(m -> methodName.equals(m.getProxyMethod().getName()) && m.getMethodVisibility() == JavaVisibility.Public)
-                                                .forEach(m -> convenienceMethods.add(new ConvenienceMethod(m, cMethods)));
-                                    }
-                                });
-                    });
+                    .map(og -> getConvenienceMethods(serviceClient, og))
+                    .orElse(Collections.emptyList());
             builder.convenienceMethods(convenienceMethods);
 
             if (count == 1) {
@@ -147,6 +121,28 @@ public class ClientModelUtil {
                 }
             }
         }
+    }
+
+    private static List<ConvenienceMethod> getConvenienceMethods(ServiceClient serviceClient, com.azure.autorest.extension.base.model.codemodel.OperationGroup og) {
+        return og.getOperations().stream()
+                .filter(o -> o.getConvenienceApi() != null)
+                .flatMap(o -> {
+                    List<ClientMethod> cMethods = Mappers.getClientMethodMapper().map(o, false)
+                            .stream()
+                            .filter(m -> m.getMethodVisibility() == JavaVisibility.Public)
+                            .collect(Collectors.toList());
+                    if (!cMethods.isEmpty()) {
+                        // sync stack generates additional proxy methods with name suffix "Sync"
+                        Set<String> proxyMethodNames = cMethods.stream()
+                                .map(m -> m.getProxyMethod().getName())
+                                .collect(Collectors.toSet());
+                        return serviceClient.getClientMethods().stream()
+                                .filter(m -> proxyMethodNames.contains(m.getProxyMethod().getName()) && m.getMethodVisibility() == JavaVisibility.Public)
+                                .map(m -> new ConvenienceMethod(m, cMethods));
+                    } else {
+                        return Stream.empty();
+                    }
+                }).collect(Collectors.toList());
     }
 
     /**
