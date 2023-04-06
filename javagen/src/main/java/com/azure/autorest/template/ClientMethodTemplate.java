@@ -449,13 +449,24 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     private static boolean addSpecialHeadersToRequestOptions(JavaBlock function, ClientMethod clientMethod) {
         boolean requestOptionsLocal = false;
+        addSpecialHeadersToLocalVariables(function, clientMethod);
         if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod())) {
             requestOptionsLocal = true;
             function.line("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;");
-            function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", UUID.randomUUID().toString());", MethodUtil.REPEATABILITY_REQUEST_ID_HEADER));
-            function.line(String.format("requestOptionsLocal.setHeader(\"%1$s\", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));", MethodUtil.REPEATABILITY_FIRST_SENT_HEADER));
+            requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME, MethodUtil.REPEATABILITY_REQUEST_ID_HEADER);
+            requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME, MethodUtil.REPEATABILITY_FIRST_SENT_HEADER);
         }
         return requestOptionsLocal;
+    }
+
+    private static void requestOptionsSetHeaderIfAbsent(JavaBlock function, String variableName, String headerName) {
+        function.line("requestOptionsLocal.addRequestCallback(requestLocal -> {");
+        function.indent(() -> {
+            function.ifBlock(String.format("requestLocal.getHeaders().get(\"%1$s\") == null", headerName), ifBlock -> {
+                function.line(String.format("requestLocal.getHeaders().set(\"%1$s\", %2$s);", headerName, variableName));
+            });
+        });
+        function.line("});");
     }
 
     protected static void addSpecialHeadersToLocalVariables(JavaBlock function, ClientMethod clientMethod) {
