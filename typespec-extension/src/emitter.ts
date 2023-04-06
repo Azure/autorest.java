@@ -47,6 +47,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "namer": { type: "boolean", nullable: true, default: false },
     "generate-samples": { type: "boolean", nullable: true, default: true },
     "generate-tests": { type: "boolean", nullable: true, default: true },
+    "enable-sync-stack": { type: "boolean", nullable: true, default: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },
