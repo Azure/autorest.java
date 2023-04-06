@@ -5,7 +5,6 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -13,19 +12,17 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.util.CoreUtils;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase {
 
     private static final ConvenienceSyncMethodTemplate INSTANCE = new ConvenienceSyncMethodTemplate();
-
-    private static final String ASYNC_CLIENT_VAR_NAME = "client";
 
     protected ConvenienceSyncMethodTemplate() {
     }
@@ -53,40 +50,6 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     }
 
     @Override
-    protected void writeMethodImplementation(
-            ClientMethod protocolMethod,
-            ClientMethod convenienceMethod,
-            JavaBlock methodBlock,
-            Set<GenericType> typeReferenceStaticClasses) {
-
-        if (protocolMethod.getType() == ClientMethodType.PagingSync) {
-            // Call the convenience method from async client
-            // It would need rework, when underlying sync method in Impl is switched to sync protocol method
-
-            String methodInvoke = "new PagedIterable<>(" + getMethodInvokeViaAsyncClient(convenienceMethod) + ")";
-
-            methodBlock.methodReturn(methodInvoke);
-        } else if (protocolMethod.getType() == ClientMethodType.LongRunningBeginSync) {
-            // Call the convenience method from async client
-            String methodInvoke = getMethodInvokeViaAsyncClient(convenienceMethod) + ".getSyncPoller()";
-
-            methodBlock.methodReturn(methodInvoke);
-        } else {
-            super.writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock, typeReferenceStaticClasses);
-        }
-    }
-
-    private static String getMethodInvokeViaAsyncClient(ClientMethod convenienceMethod) {
-        List<String> parameterNames = convenienceMethod.getMethodInputParameters().stream()
-                .map(ClientMethodParameter::getName).collect(Collectors.toList());
-
-        String methodInvoke = String.format("%1$s.%2$s(%3$s)",
-                ASYNC_CLIENT_VAR_NAME, convenienceMethod.getName(), String.join(", ", parameterNames));
-
-        return methodInvoke;
-    }
-
-    @Override
     protected void writeInvocationAndConversion(
             ClientMethod convenienceMethod,
             ClientMethod protocolMethod,
@@ -99,7 +62,16 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         String convertFromResponse = convenienceMethod.getType() == ClientMethodType.SimpleSyncRestResponse
                 ? "" : ".getValue()";
 
-        if (convenienceMethod.getType() == ClientMethodType.SimpleSyncRestResponse
+        if (protocolMethod.getType() == ClientMethodType.PagingSync) {
+            methodBlock.methodReturn(String.format(
+                    "serviceClient.%1$s(%2$s).mapPage(value -> %3$s)",
+                    protocolMethod.getName(),
+                    invocationExpression,
+                    expressionConvertFromBinaryData(responseBodyType, "value", typeReferenceStaticClasses)));
+        } else if (protocolMethod.getType() == ClientMethodType.LongRunningBeginSync){
+            String methodName = protocolMethod.getName();
+            methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));
+        } else if (convenienceMethod.getType() == ClientMethodType.SimpleSyncRestResponse
                 && !(responseBodyType.asNullable() == ClassType.Void || responseBodyType == ClassType.BinaryData)) {
 
             // protocolMethodResponse = ...
@@ -153,7 +125,10 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
 
     private IType getResponseBodyType(ClientMethod method) {
         IType type =  method.getReturnValue().getType();
-        if (type instanceof GenericType && Response.class.getSimpleName().equals(((GenericType) type).getName())) {
+        if (type instanceof GenericType
+                && (
+                Response.class.getSimpleName().equals(((GenericType) type).getName())
+                        || (PagedIterable.class.getSimpleName().equals(((GenericType) type).getName())))) {
             type = ((GenericType) type).getTypeArguments()[0];
         } else if (isResponseBase(type)) {
             type = ((GenericType) type).getTypeArguments()[1];

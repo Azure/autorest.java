@@ -44,7 +44,7 @@ interface ResourceOperations
 interface SyncStackOp {
   // get
   get is ResourceOperations.ResourceRead<Resource>;
-  
+
   // pageable
   list is ResourceOperations.ResourceList<Resource>;
 
