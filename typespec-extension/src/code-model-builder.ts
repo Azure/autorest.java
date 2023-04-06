@@ -130,6 +130,7 @@ import {
   getNameForTemplate,
   originApiVersion,
   specialHeaderNames,
+  loadExamples,
 } from "./utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -146,6 +147,8 @@ export class CodeModelBuilder {
 
   readonly schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
   readonly operationCache = new Map<Operation, CodeModelOperation>();
+
+  private operationExamples: Map<Operation, any> = new Map<Operation, any>();
 
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
@@ -200,7 +203,9 @@ export class CodeModelBuilder {
     }
   }
 
-  public build(): CodeModel {
+  public async build(): Promise<CodeModel> {
+    this.operationExamples = await loadExamples(this.program, this.options);
+
     this.processClients();
 
     this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
@@ -418,12 +423,19 @@ export class CodeModelBuilder {
     const operationName = this.getName(operation);
     const opId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
 
+    const operationExample = this.operationExamples.get(operation);
+
     const codeModelOperation = new CodeModelOperation(operationName, this.getDoc(operation), {
       operationId: opId,
       summary: this.getSummary(operation),
+      extensions: {
+        "x-ms-examples": operationExample
+          ? { [operationExample.title ?? operationExample.operationId ?? operation.name]: operationExample }
+          : undefined,
+      },
     });
 
-    if (fromLinkedOperation || !operationContainsJsonMergePatch(op)) {
+    if (!operationContainsJsonMergePatch(op)) {
       // do not generate convenience method for JSON Merge Patch
 
       const convenienceApiName = this.getConvenienceApiName(operation);
@@ -483,7 +495,9 @@ export class CodeModelBuilder {
     }
 
     // linked operations
-    const lroMetadata = this.processLinkedOperation(codeModelOperation, groupName, operation, clientContext);
+    const lroMetadata = fromLinkedOperation
+      ? new LongRunningMetadata(false)
+      : this.processLinkedOperation(codeModelOperation, groupName, operation, clientContext);
 
     // responses
     const candidateResponseSchema = lroMetadata.pollResultType; // candidate: response body type of pollingOperation

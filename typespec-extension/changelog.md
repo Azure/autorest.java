@@ -1,8 +1,14 @@
 # Release History
 
+## 0.5.2 (Unreleased)
+
+Compatible with compiler 0.42.
+
+- Supported `examples-directory` as emitter option. Follow same pattern as [typespec-autorest](https://github.com/Azure/typespec-azure/tree/main/packages/typespec-autorest#examples-directory).
+
 ## 0.5.1 (2023-03-29)
 
-Compatible with compiler 0.42 (now `@typespec/compiler`).
+Compatible with compiler 0.42.
 
 ## 0.5.0 (2023-03-16)
 

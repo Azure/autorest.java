@@ -60,6 +60,7 @@ options:
     namer: false
     generate-samples: true
     generate-tests: true
+    examples-directory: "./examples"
 ```
 
 ## Convenience API

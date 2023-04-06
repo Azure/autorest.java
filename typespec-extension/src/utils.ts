@@ -2,18 +2,32 @@ import {
   Enum,
   Model,
   ModelProperty,
+  NoTarget,
   Operation,
   Program,
   TemplatedTypeBase,
   Type,
   Union,
+  ignoreDiagnostics,
+  isGlobalNamespace,
+  isService,
   isTemplateDeclaration,
   isTemplateInstance,
+  resolvePath,
 } from "@typespec/compiler";
-import { HttpOperation, getHeaderFieldName, getQueryParamName, getPathParamName, isStatusCode } from "@typespec/http";
+import {
+  HttpOperation,
+  getHeaderFieldName,
+  getQueryParamName,
+  getPathParamName,
+  isStatusCode,
+  getAllHttpServices,
+} from "@typespec/http";
 import { ApiVersions } from "@autorest/codemodel";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
+import { EmitterOptions } from "./emitter.js";
+import { getVersion } from "@typespec/versioning";
 
 export const specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
@@ -58,6 +72,86 @@ export function pushDistinct<T>(targetArray: Array<T>, ...items: Array<T>): Arra
     }
   }
   return targetArray;
+}
+
+export function logWarning(program: Program, msg: string) {
+  program.trace("typespec-java", msg);
+  program.reportDiagnostic({
+    code: "typespec-java",
+    severity: "warning",
+    message: msg,
+    target: NoTarget,
+  });
+}
+
+export async function loadExamples(program: Program, options: EmitterOptions): Promise<Map<Operation, any>> {
+  const operationExamplesMap = new Map<Operation, any>();
+  if (options["examples-directory"]) {
+    const operationIdExamplesMap = new Map<string, any>();
+
+    const service = ignoreDiagnostics(getAllHttpServices(program))[0];
+    let version = undefined;
+    const versioning = getVersion(program, service.namespace);
+    if (versioning && versioning.getVersions()) {
+      const versions = versioning.getVersions();
+      version = versions[versions.length - 1].value;
+    }
+
+    const exampleDir = version
+      ? resolvePath(options["examples-directory"], version)
+      : resolvePath(options["examples-directory"]);
+    try {
+      if (!(await program.host.stat(exampleDir)).isDirectory()) return operationExamplesMap;
+    } catch (err) {
+      logWarning(program, `Examples directory '${exampleDir}' does not exist.`);
+      return operationExamplesMap;
+    }
+    const exampleFiles = await program.host.readDir(exampleDir);
+    for (const fileName of exampleFiles) {
+      try {
+        const exampleFile = await program.host.readFile(resolvePath(exampleDir, fileName));
+        const example = JSON.parse(exampleFile.text);
+        if (!example.operationId) {
+          logWarning(program, `Example file '${fileName}' is missing operationId.`);
+          continue;
+        }
+
+        if (!operationIdExamplesMap.has(example.operationId)) {
+          operationIdExamplesMap.set(example.operationId, example);
+        }
+      } catch (err) {
+        logWarning(program, `Failed to load example file '${fileName}'.`);
+      }
+    }
+
+    if (operationIdExamplesMap.size > 0) {
+      const routes = service.operations;
+      routes.forEach((it) => {
+        const operationId = pascalCase(resolveOperationId(program, it.operation));
+        if (operationIdExamplesMap.has(operationId)) {
+          operationExamplesMap.set(it.operation, operationIdExamplesMap.get(operationId));
+        }
+      });
+    }
+  }
+  return operationExamplesMap;
+}
+
+export function resolveOperationId(program: Program, operation: Operation) {
+  // const explicitOperationId = getOperationId(program, operation);
+  // if (explicitOperationId) {
+  //   return explicitOperationId;
+  // }
+
+  if (operation.interface) {
+    return `${operation.interface.name}_${operation.name}`;
+  }
+  const namespace = operation.namespace;
+  if (namespace === undefined || isGlobalNamespace(program, namespace) || isService(program, namespace)) {
+    return operation.name;
+  }
+
+  return `${namespace.name}_${operation.name}`;
 }
 
 export function getNamespace(type: Model | Enum | Union | Operation): string | undefined {
