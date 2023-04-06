@@ -136,6 +136,25 @@ public final class NamingClientImpl {
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Post("/naming")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> postSync(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("name") String name,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -224,6 +243,7 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postWithResponse(String name, RequestOptions requestOptions) {
-        return postWithResponseAsync(name, requestOptions).block();
+        final String accept = "application/json";
+        return service.postSync(this.getEndpoint(), name, accept, requestOptions, Context.NONE);
     }
 }

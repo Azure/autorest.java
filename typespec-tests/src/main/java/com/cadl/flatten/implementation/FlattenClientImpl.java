@@ -162,6 +162,27 @@ public final class FlattenClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/flatten/send")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> sendSync(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("id") String id,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData request,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/flatten/send-long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -175,6 +196,27 @@ public final class FlattenClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> sendLong(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("id") String id,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData request,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/flatten/send-long")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> sendLongSync(
                 @HostParam("endpoint") String endpoint,
                 @QueryParam("id") String id,
                 @QueryParam("api-version") String apiVersion,
@@ -247,7 +289,15 @@ public final class FlattenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        return sendWithResponseAsync(id, request, requestOptions).block();
+        final String accept = "application/json";
+        return service.sendSync(
+                this.getEndpoint(),
+                id,
+                this.getServiceVersion().getVersion(),
+                accept,
+                request,
+                requestOptions,
+                Context.NONE);
     }
 
     /**
@@ -334,6 +384,14 @@ public final class FlattenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        return sendLongWithResponseAsync(id, request, requestOptions).block();
+        final String accept = "application/json";
+        return service.sendLongSync(
+                this.getEndpoint(),
+                id,
+                this.getServiceVersion().getVersion(),
+                accept,
+                request,
+                requestOptions,
+                Context.NONE);
     }
 }

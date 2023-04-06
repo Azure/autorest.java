@@ -71,6 +71,25 @@ public final class VisibilityWritesImpl {
                 @BodyParam("application/json") BinaryData dog,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Put("/write")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createSync(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData dog,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -140,6 +159,7 @@ public final class VisibilityWritesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createWithResponse(BinaryData dog, RequestOptions requestOptions) {
-        return createWithResponseAsync(dog, requestOptions).block();
+        final String accept = "application/json";
+        return service.createSync(this.client.getEndpoint(), accept, dog, requestOptions, Context.NONE);
     }
 }

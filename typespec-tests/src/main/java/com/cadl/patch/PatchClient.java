@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.patch.implementation.PatchClientImpl;
 
 /** Initializes a new instance of the synchronous PatchClient type. */
 @ServiceClient(builder = PatchClientBuilder.class)
 public final class PatchClient {
-    @Generated private final PatchAsyncClient client;
+    @Generated private final PatchClientImpl serviceClient;
 
     /**
      * Initializes an instance of PatchClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    PatchClient(PatchAsyncClient client) {
-        this.client = client;
+    PatchClient(PatchClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -69,6 +70,6 @@ public final class PatchClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(
             String name, BinaryData body, RequestOptions requestOptions) {
-        return this.client.createOrUpdateWithResponse(name, body, requestOptions).block();
+        return this.serviceClient.createOrUpdateWithResponse(name, body, requestOptions);
     }
 }

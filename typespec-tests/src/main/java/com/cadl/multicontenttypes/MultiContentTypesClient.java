@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.multicontenttypes.implementation.MultiContentTypesClientImpl;
 import com.cadl.multicontenttypes.models.ContentType;
 
 /** Initializes a new instance of the synchronous MultiContentTypesClient type. */
 @ServiceClient(builder = MultiContentTypesClientBuilder.class)
 public final class MultiContentTypesClient {
-    @Generated private final MultiContentTypesAsyncClient client;
+    @Generated private final MultiContentTypesClientImpl serviceClient;
 
     /**
      * Initializes an instance of MultiContentTypesClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    MultiContentTypesClient(MultiContentTypesAsyncClient client) {
-        this.client = client;
+    MultiContentTypesClient(MultiContentTypesClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -51,7 +52,7 @@ public final class MultiContentTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> downloadImageWithResponse(RequestOptions requestOptions) {
-        return this.client.downloadImageWithResponse(requestOptions).block();
+        return this.serviceClient.downloadImageWithResponse(requestOptions);
     }
 
     /**
@@ -74,7 +75,7 @@ public final class MultiContentTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadImageWithResponse(BinaryData data, RequestOptions requestOptions) {
-        return this.client.uploadImageWithResponse(data, requestOptions).block();
+        return this.serviceClient.uploadImageWithResponse(data, requestOptions);
     }
 
     /**
@@ -99,7 +100,7 @@ public final class MultiContentTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadBytesWithResponse(String contentType, BinaryData data, RequestOptions requestOptions) {
-        return this.client.uploadBytesWithResponse(contentType, data, requestOptions).block();
+        return this.serviceClient.uploadBytesWithResponse(contentType, data, requestOptions);
     }
 
     /**

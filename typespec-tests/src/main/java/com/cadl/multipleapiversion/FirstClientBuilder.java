@@ -264,6 +264,6 @@ public final class FirstClientBuilder
      */
     @Generated
     public FirstClient buildClient() {
-        return new FirstClient(new FirstAsyncClient(buildInnerClient()));
+        return new FirstClient(buildInnerClient());
     }
 }

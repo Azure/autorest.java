@@ -243,6 +243,6 @@ public final class PatchClientBuilder
      */
     @Generated
     public PatchClient buildClient() {
-        return new PatchClient(new PatchAsyncClient(buildInnerClient()));
+        return new PatchClient(buildInnerClient());
     }
 }

@@ -63,6 +63,21 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> forMethod(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/special-words/operation/for")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> forMethodSync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -93,6 +108,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> forMethodWithResponse(RequestOptions requestOptions) {
-        return forMethodWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.forMethodSync(accept, requestOptions, Context.NONE);
     }
 }

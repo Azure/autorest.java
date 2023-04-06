@@ -16,21 +16,22 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import com.cadl.specialheaders.implementation.SpecialHeadersClientImpl;
 import com.cadl.specialheaders.models.Resource;
 
 /** Initializes a new instance of the synchronous SpecialHeadersClient type. */
 @ServiceClient(builder = SpecialHeadersClientBuilder.class)
 public final class SpecialHeadersClient {
-    @Generated private final SpecialHeadersAsyncClient client;
+    @Generated private final SpecialHeadersClientImpl serviceClient;
 
     /**
      * Initializes an instance of SpecialHeadersClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    SpecialHeadersClient(SpecialHeadersAsyncClient client) {
-        this.client = client;
+    SpecialHeadersClient(SpecialHeadersClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -58,7 +59,7 @@ public final class SpecialHeadersClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(String name, RequestOptions requestOptions) {
-        return this.client.getWithResponse(name, requestOptions).block();
+        return this.serviceClient.getWithResponse(name, requestOptions);
     }
 
     /**
@@ -109,7 +110,7 @@ public final class SpecialHeadersClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putWithResponse(String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.client.putWithResponse(name, resource, requestOptions).block();
+        return this.serviceClient.putWithResponse(name, resource, requestOptions);
     }
 
     /**
@@ -148,7 +149,7 @@ public final class SpecialHeadersClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postWithResponse(String name, RequestOptions requestOptions) {
-        return this.client.postWithResponse(name, requestOptions).block();
+        return this.serviceClient.postWithResponse(name, requestOptions);
     }
 
     /**
@@ -200,7 +201,7 @@ public final class SpecialHeadersClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateLro(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.client.beginCreateLro(name, resource, requestOptions).getSyncPoller();
+        return this.serviceClient.beginCreateLro(name, resource, requestOptions);
     }
 
     /**

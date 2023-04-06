@@ -243,6 +243,6 @@ public final class NamingClientBuilder
      */
     @Generated
     public NamingClient buildClient() {
-        return new NamingClient(new NamingAsyncClient(buildInnerClient()));
+        return new NamingClient(buildInnerClient());
     }
 }

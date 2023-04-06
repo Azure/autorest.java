@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
+import com.cadl.paged.implementation.PagedClientImpl;
 import com.cadl.paged.models.Resource;
 
 /** Initializes a new instance of the synchronous PagedClient type. */
 @ServiceClient(builder = PagedClientBuilder.class)
 public final class PagedClient {
-    @Generated private final PagedAsyncClient client;
+    @Generated private final PagedClientImpl serviceClient;
 
     /**
      * Initializes an instance of PagedClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    PagedClient(PagedAsyncClient client) {
-        this.client = client;
+    PagedClient(PagedClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -55,7 +56,7 @@ public final class PagedClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.list(requestOptions));
+        return this.serviceClient.list(requestOptions);
     }
 
     /**
@@ -72,6 +73,7 @@ public final class PagedClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Resource> list() {
         // Generated convenience method for list
-        return new PagedIterable<>(client.list());
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(Resource.class));
     }
 }

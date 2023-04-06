@@ -14,20 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.cadl.server.implementation.HttpbinClientImpl;
 
 /** Initializes a new instance of the synchronous HttpbinClient type. */
 @ServiceClient(builder = HttpbinClientBuilder.class)
 public final class HttpbinClient {
-    @Generated private final HttpbinAsyncClient client;
+    @Generated private final HttpbinClientImpl serviceClient;
 
     /**
      * Initializes an instance of HttpbinClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    HttpbinClient(HttpbinAsyncClient client) {
-        this.client = client;
+    HttpbinClient(HttpbinClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -44,7 +45,7 @@ public final class HttpbinClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> statusWithResponse(int code, RequestOptions requestOptions) {
-        return this.client.statusWithResponse(code, requestOptions).block();
+        return this.serviceClient.statusWithResponse(code, requestOptions);
     }
 
     /**

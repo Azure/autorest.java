@@ -244,6 +244,6 @@ public final class ParameterizedClientBuilder
      */
     @Generated
     public ParameterizedClient buildClient() {
-        return new ParameterizedClient(new ParameterizedAsyncClient(buildInnerClient()));
+        return new ParameterizedClient(buildInnerClient());
     }
 }

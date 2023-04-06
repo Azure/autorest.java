@@ -158,6 +158,26 @@ public final class ContosoClientImpl {
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Get("/contoso/{group}")
+        @ExpectedResponses({200, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getSync(
+                @HostParam("Endpoint") String endpoint,
+                @HostParam("ApiVersion") String apiVersion,
+                @PathParam(value = "group", encoded = true) String group,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -198,6 +218,8 @@ public final class ContosoClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(String group, RequestOptions requestOptions) {
-        return getWithResponseAsync(group, requestOptions).block();
+        final String accept = "application/json";
+        return service.getSync(
+                this.getEndpoint(), this.getServiceVersion().getVersion(), group, accept, requestOptions, Context.NONE);
     }
 }

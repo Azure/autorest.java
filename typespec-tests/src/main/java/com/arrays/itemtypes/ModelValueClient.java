@@ -4,7 +4,7 @@
 
 package com.arrays.itemtypes;
 
-import com.arrays.itemtypes.models.InnerModel;
+import com.arrays.itemtypes.implementation.ModelValuesImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -16,22 +16,20 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.serializer.TypeReference;
-import java.util.List;
 
 /** Initializes a new instance of the synchronous ItemTypesClient type. */
 @ServiceClient(builder = ItemTypesClientBuilder.class)
 public final class ModelValueClient {
-    @Generated private final ModelValueAsyncClient client;
+    @Generated private final ModelValuesImpl serviceClient;
 
     /**
      * Initializes an instance of ModelValueClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ModelValueClient(ModelValueAsyncClient client) {
-        this.client = client;
+    ModelValueClient(ModelValuesImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -60,7 +58,7 @@ public final class ModelValueClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 
     /**
@@ -90,46 +88,6 @@ public final class ModelValueClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putWithResponse(body, requestOptions).block();
+        return this.serviceClient.putWithResponse(body, requestOptions);
     }
-
-    /**
-     * The get operation.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return array of InnerModel.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public List<InnerModel> get() {
-        // Generated convenience method for getWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_INNER_MODEL);
-    }
-
-    /**
-     * The put operation.
-     *
-     * @param body Array of InnerModel.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put(List<InnerModel> body) {
-        // Generated convenience method for putWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
-    }
-
-    private static final TypeReference<List<InnerModel>> TYPE_REFERENCE_LIST_INNER_MODEL =
-            new TypeReference<List<InnerModel>>() {};
 }

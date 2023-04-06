@@ -140,6 +140,26 @@ public final class BuiltinClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/builtin")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> readSync(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("query") String queryParam,
+                @QueryParam(value = "query-encoded", encoded = true) String queryParamEncoded,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/builtin")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -153,6 +173,25 @@ public final class BuiltinClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> write(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/builtin")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> writeSync(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData body,
@@ -311,7 +350,9 @@ public final class BuiltinClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(
             String queryParam, String queryParamEncoded, RequestOptions requestOptions) {
-        return readWithResponseAsync(queryParam, queryParamEncoded, requestOptions).block();
+        final String accept = "application/json";
+        return service.readSync(
+                this.getEndpoint(), queryParam, queryParamEncoded, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -415,6 +456,7 @@ public final class BuiltinClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> writeWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return writeWithResponseAsync(body, requestOptions).block();
+        final String accept = "application/json";
+        return service.writeSync(this.getEndpoint(), accept, body, requestOptions, Context.NONE);
     }
 }

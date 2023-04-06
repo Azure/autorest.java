@@ -140,6 +140,26 @@ public final class LiteralServiceClientImpl {
                 @BodyParam("application/json") BinaryData model,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Put("/literal/put")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> putSync(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("literalParam") String literalParam,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData model,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -230,6 +250,8 @@ public final class LiteralServiceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putWithResponse(BinaryData model, RequestOptions requestOptions) {
-        return putWithResponseAsync(model, requestOptions).block();
+        final String literalParam = "literalParam";
+        final String accept = "application/json";
+        return service.putSync(this.getEndpoint(), literalParam, accept, model, requestOptions, Context.NONE);
     }
 }

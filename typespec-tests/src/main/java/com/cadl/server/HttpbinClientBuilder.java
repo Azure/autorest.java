@@ -264,6 +264,6 @@ public final class HttpbinClientBuilder
      */
     @Generated
     public HttpbinClient buildClient() {
-        return new HttpbinClient(new HttpbinAsyncClient(buildInnerClient()));
+        return new HttpbinClient(buildInnerClient());
     }
 }

@@ -17,6 +17,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import com.cadl.protocolandconvenient.implementation.ProtocolAndConvenientClientImpl;
 import com.cadl.protocolandconvenient.models.ResourceA;
 import com.cadl.protocolandconvenient.models.ResourceB;
 import com.cadl.protocolandconvenient.models.ResourceE;
@@ -28,16 +29,16 @@ import com.cadl.protocolandconvenient.models.ResourceOperationStatusResourceIErr
 /** Initializes a new instance of the synchronous ProtocolAndConvenientClient type. */
 @ServiceClient(builder = ProtocolAndConvenientClientBuilder.class)
 public final class ProtocolAndConvenientClient {
-    @Generated private final ProtocolAndConvenientAsyncClient client;
+    @Generated private final ProtocolAndConvenientClientImpl serviceClient;
 
     /**
      * Initializes an instance of ProtocolAndConvenientClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ProtocolAndConvenientClient(ProtocolAndConvenientAsyncClient client) {
-        this.client = client;
+    ProtocolAndConvenientClient(ProtocolAndConvenientClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -72,7 +73,7 @@ public final class ProtocolAndConvenientClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<BinaryData> onlyConvenientWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.onlyConvenientWithResponse(body, requestOptions).block();
+        return this.serviceClient.onlyConvenientWithResponse(body, requestOptions);
     }
 
     /**
@@ -108,7 +109,7 @@ public final class ProtocolAndConvenientClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> onlyProtocolWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.onlyProtocolWithResponse(body, requestOptions).block();
+        return this.serviceClient.onlyProtocolWithResponse(body, requestOptions);
     }
 
     /**
@@ -143,7 +144,7 @@ public final class ProtocolAndConvenientClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> bothConvenientAndProtocolWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.bothConvenientAndProtocolWithResponse(body, requestOptions).block();
+        return this.serviceClient.bothConvenientAndProtocolWithResponse(body, requestOptions);
     }
 
     /**
@@ -178,7 +179,7 @@ public final class ProtocolAndConvenientClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<BinaryData> errorSettingWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.errorSettingWithResponse(body, requestOptions).block();
+        return this.serviceClient.errorSettingWithResponse(body, requestOptions);
     }
 
     /**
@@ -217,7 +218,7 @@ public final class ProtocolAndConvenientClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.client.beginCreateOrReplace(name, resource, requestOptions).getSyncPoller();
+        return this.serviceClient.beginCreateOrReplace(name, resource, requestOptions);
     }
 
     /**
@@ -243,7 +244,7 @@ public final class ProtocolAndConvenientClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<BinaryData> list(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.list(requestOptions));
+        return this.serviceClient.list(requestOptions);
     }
 
     /**
@@ -308,7 +309,8 @@ public final class ProtocolAndConvenientClient {
     public SyncPoller<ResourceOperationStatusResourceIError, ResourceI> beginCreateOrReplace(
             String name, ResourceI resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
-        return client.beginCreateOrReplace(name, resource).getSyncPoller();
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginCreateOrReplaceWithModel(name, BinaryData.fromObject(resource), requestOptions);
     }
 
     /**
@@ -325,6 +327,7 @@ public final class ProtocolAndConvenientClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<ResourceJ> list() {
         // Generated convenience method for list
-        return new PagedIterable<>(client.list());
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(ResourceJ.class));
     }
 }

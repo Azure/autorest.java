@@ -272,7 +272,7 @@ public final class VisibilityClientBuilder
      */
     @Generated
     public VisibilityClient buildClient() {
-        return new VisibilityClient(new VisibilityAsyncClient(buildInnerClient()));
+        return new VisibilityClient(buildInnerClient());
     }
 
     /**
@@ -282,7 +282,7 @@ public final class VisibilityClientBuilder
      */
     @Generated
     public VisibilityReadClient buildVisibilityReadClient() {
-        return new VisibilityReadClient(new VisibilityReadAsyncClient(buildInnerClient().getVisibilityReads()));
+        return new VisibilityReadClient(buildInnerClient().getVisibilityReads());
     }
 
     /**
@@ -292,6 +292,6 @@ public final class VisibilityClientBuilder
      */
     @Generated
     public VisibilityWriteClient buildVisibilityWriteClient() {
-        return new VisibilityWriteClient(new VisibilityWriteAsyncClient(buildInnerClient().getVisibilityWrites()));
+        return new VisibilityWriteClient(buildInnerClient().getVisibilityWrites());
     }
 }

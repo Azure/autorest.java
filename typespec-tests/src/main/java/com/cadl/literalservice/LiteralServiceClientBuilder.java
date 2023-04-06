@@ -244,6 +244,6 @@ public final class LiteralServiceClientBuilder
      */
     @Generated
     public LiteralServiceClient buildClient() {
-        return new LiteralServiceClient(new LiteralServiceAsyncClient(buildInnerClient()));
+        return new LiteralServiceClient(buildInnerClient());
     }
 }

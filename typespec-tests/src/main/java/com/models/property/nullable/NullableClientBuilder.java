@@ -293,7 +293,7 @@ public final class NullableClientBuilder
      */
     @Generated
     public StringOperationClient buildStringOperationClient() {
-        return new StringOperationClient(new StringOperationAsyncClient(buildInnerClient().getStringOperations()));
+        return new StringOperationClient(buildInnerClient().getStringOperations());
     }
 
     /**
@@ -303,7 +303,7 @@ public final class NullableClientBuilder
      */
     @Generated
     public BytesClient buildBytesClient() {
-        return new BytesClient(new BytesAsyncClient(buildInnerClient().getBytes()));
+        return new BytesClient(buildInnerClient().getBytes());
     }
 
     /**
@@ -313,8 +313,7 @@ public final class NullableClientBuilder
      */
     @Generated
     public DatetimeOperationClient buildDatetimeOperationClient() {
-        return new DatetimeOperationClient(
-                new DatetimeOperationAsyncClient(buildInnerClient().getDatetimeOperations()));
+        return new DatetimeOperationClient(buildInnerClient().getDatetimeOperations());
     }
 
     /**
@@ -324,8 +323,7 @@ public final class NullableClientBuilder
      */
     @Generated
     public DurationOperationClient buildDurationOperationClient() {
-        return new DurationOperationClient(
-                new DurationOperationAsyncClient(buildInnerClient().getDurationOperations()));
+        return new DurationOperationClient(buildInnerClient().getDurationOperations());
     }
 
     /**
@@ -335,7 +333,7 @@ public final class NullableClientBuilder
      */
     @Generated
     public CollectionsByteClient buildCollectionsByteClient() {
-        return new CollectionsByteClient(new CollectionsByteAsyncClient(buildInnerClient().getCollectionsBytes()));
+        return new CollectionsByteClient(buildInnerClient().getCollectionsBytes());
     }
 
     /**
@@ -345,6 +343,6 @@ public final class NullableClientBuilder
      */
     @Generated
     public CollectionsModelClient buildCollectionsModelClient() {
-        return new CollectionsModelClient(new CollectionsModelAsyncClient(buildInnerClient().getCollectionsModels()));
+        return new CollectionsModelClient(buildInnerClient().getCollectionsModels());
     }
 }

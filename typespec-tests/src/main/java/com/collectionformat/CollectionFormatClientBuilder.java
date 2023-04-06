@@ -228,6 +228,6 @@ public final class CollectionFormatClientBuilder
      */
     @Generated
     public CollectionFormatClient buildClient() {
-        return new CollectionFormatClient(new CollectionFormatAsyncClient(buildInnerClient()));
+        return new CollectionFormatClient(buildInnerClient());
     }
 }

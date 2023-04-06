@@ -227,6 +227,6 @@ public final class InternalClientBuilder
      */
     @Generated
     public InternalClient buildClient() {
-        return new InternalClient(new InternalAsyncClient(buildInnerClient()));
+        return new InternalClient(buildInnerClient());
     }
 }

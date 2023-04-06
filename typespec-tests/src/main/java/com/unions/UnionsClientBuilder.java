@@ -226,6 +226,6 @@ public final class UnionsClientBuilder
      */
     @Generated
     public UnionsClient buildClient() {
-        return new UnionsClient(new UnionsAsyncClient(buildInnerClient()));
+        return new UnionsClient(buildInnerClient());
     }
 }

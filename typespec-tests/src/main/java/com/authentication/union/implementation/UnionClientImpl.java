@@ -110,6 +110,21 @@ public final class UnionClientImpl {
         Mono<Response<Void>> validKey(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Get("/authentication/union/validkey")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> validKeySync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Get("/authentication/union/validtoken")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -123,6 +138,21 @@ public final class UnionClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> validToken(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/authentication/union/validtoken")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> validTokenSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
@@ -154,7 +184,8 @@ public final class UnionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validKeyWithResponse(RequestOptions requestOptions) {
-        return validKeyWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.validKeySync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -185,6 +216,7 @@ public final class UnionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validTokenWithResponse(RequestOptions requestOptions) {
-        return validTokenWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.validTokenSync(accept, requestOptions, Context.NONE);
     }
 }

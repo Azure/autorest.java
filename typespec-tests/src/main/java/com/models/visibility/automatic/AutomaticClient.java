@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.models.visibility.automatic.implementation.AutomaticClientImpl;
 import com.models.visibility.automatic.models.VisibilityModel;
 
 /** Initializes a new instance of the synchronous AutomaticClient type. */
 @ServiceClient(builder = AutomaticClientBuilder.class)
 public final class AutomaticClient {
-    @Generated private final AutomaticAsyncClient client;
+    @Generated private final AutomaticClientImpl serviceClient;
 
     /**
      * Initializes an instance of AutomaticClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    AutomaticClient(AutomaticAsyncClient client) {
-        this.client = client;
+    AutomaticClient(AutomaticClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -78,7 +79,7 @@ public final class AutomaticClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.client.getModelWithResponse(input, requestOptions).block();
+        return this.serviceClient.getModelWithResponse(input, requestOptions);
     }
 
     /**
@@ -111,7 +112,7 @@ public final class AutomaticClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> headModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.client.headModelWithResponse(input, requestOptions).block();
+        return this.serviceClient.headModelWithResponse(input, requestOptions);
     }
 
     /**
@@ -144,7 +145,7 @@ public final class AutomaticClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.client.putModelWithResponse(input, requestOptions).block();
+        return this.serviceClient.putModelWithResponse(input, requestOptions);
     }
 
     /**
@@ -177,7 +178,7 @@ public final class AutomaticClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.client.patchModelWithResponse(input, requestOptions).block();
+        return this.serviceClient.patchModelWithResponse(input, requestOptions);
     }
 
     /**
@@ -210,7 +211,7 @@ public final class AutomaticClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.client.postModelWithResponse(input, requestOptions).block();
+        return this.serviceClient.postModelWithResponse(input, requestOptions);
     }
 
     /**
@@ -243,7 +244,7 @@ public final class AutomaticClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.client.deleteModelWithResponse(input, requestOptions).block();
+        return this.serviceClient.deleteModelWithResponse(input, requestOptions);
     }
 
     /**

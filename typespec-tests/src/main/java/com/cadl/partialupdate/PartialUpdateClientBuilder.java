@@ -244,6 +244,6 @@ public final class PartialUpdateClientBuilder
      */
     @Generated
     public PartialUpdateClient buildClient() {
-        return new PartialUpdateClient(new PartialUpdateAsyncClient(buildInnerClient()));
+        return new PartialUpdateClient(buildInnerClient());
     }
 }

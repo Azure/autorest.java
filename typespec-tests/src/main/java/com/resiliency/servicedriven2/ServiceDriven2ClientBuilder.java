@@ -245,6 +245,6 @@ public final class ServiceDriven2ClientBuilder
      */
     @Generated
     public ServiceDriven2Client buildClient() {
-        return new ServiceDriven2Client(new ServiceDriven2AsyncClient(buildInnerClient()));
+        return new ServiceDriven2Client(buildInnerClient());
     }
 }

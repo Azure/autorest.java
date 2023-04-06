@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.projectedname.implementation.ProjectedNameClientImpl;
 import com.projectedname.models.Project;
 
 /** Initializes a new instance of the synchronous ProjectedNameClient type. */
 @ServiceClient(builder = ProjectedNameClientBuilder.class)
 public final class ProjectedNameClient {
-    @Generated private final ProjectedNameAsyncClient client;
+    @Generated private final ProjectedNameClientImpl serviceClient;
 
     /**
      * Initializes an instance of ProjectedNameClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ProjectedNameClient(ProjectedNameAsyncClient client) {
-        this.client = client;
+    ProjectedNameClient(ProjectedNameClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -56,7 +57,7 @@ public final class ProjectedNameClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> jsonProjectionWithResponse(BinaryData project, RequestOptions requestOptions) {
-        return this.client.jsonProjectionWithResponse(project, requestOptions).block();
+        return this.serviceClient.jsonProjectionWithResponse(project, requestOptions);
     }
 
     /**
@@ -83,7 +84,7 @@ public final class ProjectedNameClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> clientProjectionWithResponse(BinaryData project, RequestOptions requestOptions) {
-        return this.client.clientProjectionWithResponse(project, requestOptions).block();
+        return this.serviceClient.clientProjectionWithResponse(project, requestOptions);
     }
 
     /**
@@ -110,7 +111,7 @@ public final class ProjectedNameClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> languageProjectionWithResponse(BinaryData project, RequestOptions requestOptions) {
-        return this.client.languageProjectionWithResponse(project, requestOptions).block();
+        return this.serviceClient.languageProjectionWithResponse(project, requestOptions);
     }
 
     /**

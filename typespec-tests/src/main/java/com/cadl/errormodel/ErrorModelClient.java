@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.errormodel.implementation.ErrorModelClientImpl;
 import com.cadl.errormodel.models.Diagnostic;
 
 /** Initializes a new instance of the synchronous ErrorModelClient type. */
 @ServiceClient(builder = ErrorModelClientBuilder.class)
 public final class ErrorModelClient {
-    @Generated private final ErrorModelAsyncClient client;
+    @Generated private final ErrorModelClientImpl serviceClient;
 
     /**
      * Initializes an instance of ErrorModelClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ErrorModelClient(ErrorModelAsyncClient client) {
-        this.client = client;
+    ErrorModelClient(ErrorModelClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -54,7 +55,7 @@ public final class ErrorModelClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
-        return this.client.readWithResponse(requestOptions).block();
+        return this.serviceClient.readWithResponse(requestOptions);
     }
 
     /**

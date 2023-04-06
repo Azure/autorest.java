@@ -114,6 +114,21 @@ public final class ExtensibleClientImpl {
         Mono<Response<String>> getKnownValue(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Get("/enums/extensible/string/known-value")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<String> getKnownValueSync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Get("/enums/extensible/string/unknown-value")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -127,6 +142,21 @@ public final class ExtensibleClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> getUnknownValue(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/enums/extensible/string/unknown-value")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<String> getUnknownValueSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/enums/extensible/string/known-value")
@@ -147,6 +177,24 @@ public final class ExtensibleClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/enums/extensible/string/known-value")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putKnownValueSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/enums/extensible/string/unknown-value")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -160,6 +208,24 @@ public final class ExtensibleClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putUnknownValue(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/enums/extensible/string/unknown-value")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putUnknownValueSync(
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
@@ -206,7 +272,8 @@ public final class ExtensibleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getKnownValueWithResponse(RequestOptions requestOptions) {
-        return getKnownValueWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getKnownValueSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -249,7 +316,8 @@ public final class ExtensibleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getUnknownValueWithResponse(RequestOptions requestOptions) {
-        return getUnknownValueWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getUnknownValueSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -294,7 +362,8 @@ public final class ExtensibleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putKnownValueWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return putKnownValueWithResponseAsync(body, requestOptions).block();
+        final String accept = "application/json";
+        return service.putKnownValueSync(accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -339,6 +408,7 @@ public final class ExtensibleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putUnknownValueWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return putUnknownValueWithResponseAsync(body, requestOptions).block();
+        final String accept = "application/json";
+        return service.putUnknownValueSync(accept, body, requestOptions, Context.NONE);
     }
 }

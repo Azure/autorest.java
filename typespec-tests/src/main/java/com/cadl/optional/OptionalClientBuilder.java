@@ -244,6 +244,6 @@ public final class OptionalClientBuilder
      */
     @Generated
     public OptionalClient buildClient() {
-        return new OptionalClient(new OptionalAsyncClient(buildInnerClient()));
+        return new OptionalClient(buildInnerClient());
     }
 }

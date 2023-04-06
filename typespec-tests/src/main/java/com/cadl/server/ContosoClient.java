@@ -14,20 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.cadl.server.implementation.ContosoClientImpl;
 
 /** Initializes a new instance of the synchronous ContosoClient type. */
 @ServiceClient(builder = ContosoClientBuilder.class)
 public final class ContosoClient {
-    @Generated private final ContosoAsyncClient client;
+    @Generated private final ContosoClientImpl serviceClient;
 
     /**
      * Initializes an instance of ContosoClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ContosoClient(ContosoAsyncClient client) {
-        this.client = client;
+    ContosoClient(ContosoClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -44,7 +45,7 @@ public final class ContosoClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(String group, RequestOptions requestOptions) {
-        return this.client.getWithResponse(group, requestOptions).block();
+        return this.serviceClient.getWithResponse(group, requestOptions);
     }
 
     /**

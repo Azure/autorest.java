@@ -121,6 +121,24 @@ public final class AutomaticClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/models/visibility/automatic")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getModelSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Head("/models/visibility/automatic")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -134,6 +152,24 @@ public final class AutomaticClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> headModel(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Head("/models/visibility/automatic")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> headModelSync(
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData input,
                 RequestOptions requestOptions,
@@ -157,6 +193,24 @@ public final class AutomaticClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/models/visibility/automatic")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putModelSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Patch("/models/visibility/automatic")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -170,6 +224,24 @@ public final class AutomaticClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> patchModel(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Patch("/models/visibility/automatic")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> patchModelSync(
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData input,
                 RequestOptions requestOptions,
@@ -193,6 +265,24 @@ public final class AutomaticClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/models/visibility/automatic")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> postModelSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Delete("/models/visibility/automatic")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -206,6 +296,24 @@ public final class AutomaticClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteModel(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Delete("/models/visibility/automatic")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> deleteModelSync(
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData input,
                 RequestOptions requestOptions,
@@ -307,7 +415,8 @@ public final class AutomaticClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return getModelWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.getModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -372,7 +481,8 @@ public final class AutomaticClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> headModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return headModelWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.headModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -437,7 +547,8 @@ public final class AutomaticClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return putModelWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.putModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -502,7 +613,8 @@ public final class AutomaticClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return patchModelWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.patchModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -567,7 +679,8 @@ public final class AutomaticClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return postModelWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.postModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -632,6 +745,7 @@ public final class AutomaticClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return deleteModelWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.deleteModelSync(accept, input, requestOptions, Context.NONE);
     }
 }

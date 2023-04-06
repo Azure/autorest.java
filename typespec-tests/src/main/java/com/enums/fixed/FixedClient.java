@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.enums.fixed.implementation.FixedClientImpl;
 import com.enums.fixed.models.DaysOfWeekEnum;
 
 /** Initializes a new instance of the synchronous FixedClient type. */
 @ServiceClient(builder = FixedClientBuilder.class)
 public final class FixedClient {
-    @Generated private final FixedAsyncClient client;
+    @Generated private final FixedClientImpl serviceClient;
 
     /**
      * Initializes an instance of FixedClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    FixedClient(FixedAsyncClient client) {
-        this.client = client;
+    FixedClient(FixedClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -51,7 +52,7 @@ public final class FixedClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getKnownValueWithResponse(RequestOptions requestOptions) {
-        return this.client.getKnownValueWithResponse(requestOptions).block();
+        return this.serviceClient.getKnownValueWithResponse(requestOptions);
     }
 
     /**
@@ -74,7 +75,7 @@ public final class FixedClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putKnownValueWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putKnownValueWithResponse(body, requestOptions).block();
+        return this.serviceClient.putKnownValueWithResponse(body, requestOptions);
     }
 
     /**
@@ -97,7 +98,7 @@ public final class FixedClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putUnknownValueWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putUnknownValueWithResponse(body, requestOptions).block();
+        return this.serviceClient.putUnknownValueWithResponse(body, requestOptions);
     }
 
     /**

@@ -246,6 +246,6 @@ public final class CoreClientBuilder implements HttpTrait<CoreClientBuilder>, Co
      */
     @Generated
     public CoreClient buildClient() {
-        return new CoreClient(new CoreAsyncClient(buildInnerClient()));
+        return new CoreClient(buildInnerClient());
     }
 }

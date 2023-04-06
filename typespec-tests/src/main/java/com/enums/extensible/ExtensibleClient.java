@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.enums.extensible.implementation.ExtensibleClientImpl;
 import com.enums.extensible.models.DaysOfWeekExtensibleEnum;
 
 /** Initializes a new instance of the synchronous ExtensibleClient type. */
 @ServiceClient(builder = ExtensibleClientBuilder.class)
 public final class ExtensibleClient {
-    @Generated private final ExtensibleAsyncClient client;
+    @Generated private final ExtensibleClientImpl serviceClient;
 
     /**
      * Initializes an instance of ExtensibleClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ExtensibleClient(ExtensibleAsyncClient client) {
-        this.client = client;
+    ExtensibleClient(ExtensibleClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -51,7 +52,7 @@ public final class ExtensibleClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getKnownValueWithResponse(RequestOptions requestOptions) {
-        return this.client.getKnownValueWithResponse(requestOptions).block();
+        return this.serviceClient.getKnownValueWithResponse(requestOptions);
     }
 
     /**
@@ -73,7 +74,7 @@ public final class ExtensibleClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getUnknownValueWithResponse(RequestOptions requestOptions) {
-        return this.client.getUnknownValueWithResponse(requestOptions).block();
+        return this.serviceClient.getUnknownValueWithResponse(requestOptions);
     }
 
     /**
@@ -96,7 +97,7 @@ public final class ExtensibleClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putKnownValueWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putKnownValueWithResponse(body, requestOptions).block();
+        return this.serviceClient.putKnownValueWithResponse(body, requestOptions);
     }
 
     /**
@@ -119,7 +120,7 @@ public final class ExtensibleClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putUnknownValueWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putUnknownValueWithResponse(body, requestOptions).block();
+        return this.serviceClient.putUnknownValueWithResponse(body, requestOptions);
     }
 
     /**

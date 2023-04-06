@@ -285,6 +285,6 @@ public final class AuthClientBuilder
      */
     @Generated
     public AuthClient buildClient() {
-        return new AuthClient(new AuthAsyncClient(buildInnerClient()));
+        return new AuthClient(buildInnerClient());
     }
 }

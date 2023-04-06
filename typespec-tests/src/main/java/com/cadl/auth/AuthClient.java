@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.auth.implementation.AuthClientImpl;
 
 /** Initializes a new instance of the synchronous AuthClient type. */
 @ServiceClient(builder = AuthClientBuilder.class)
 public final class AuthClient {
-    @Generated private final AuthAsyncClient client;
+    @Generated private final AuthClientImpl serviceClient;
 
     /**
      * Initializes an instance of AuthClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    AuthClient(AuthAsyncClient client) {
-        this.client = client;
+    AuthClient(AuthClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -50,7 +51,7 @@ public final class AuthClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 
     /**

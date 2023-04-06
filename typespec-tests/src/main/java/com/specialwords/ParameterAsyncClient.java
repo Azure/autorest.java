@@ -14,7 +14,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.util.FluxUtil;
 import com.specialwords.implementation.ParametersImpl;
 import reactor.core.publisher.Mono;
 
@@ -65,45 +64,5 @@ public final class ParameterAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithFilterWithResponse(String filter, RequestOptions requestOptions) {
         return this.serviceClient.getWithFilterWithResponseAsync(filter, requestOptions);
-    }
-
-    /**
-     * The getWithIf operation.
-     *
-     * @param ifParameter The ifParameter parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getWithIf(String ifParameter) {
-        // Generated convenience method for getWithIfWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getWithIfWithResponse(ifParameter, requestOptions).flatMap(FluxUtil::toMono);
-    }
-
-    /**
-     * The getWithFilter operation.
-     *
-     * @param filter The filter parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getWithFilter(String filter) {
-        // Generated convenience method for getWithFilterWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getWithFilterWithResponse(filter, requestOptions).flatMap(FluxUtil::toMono);
     }
 }
