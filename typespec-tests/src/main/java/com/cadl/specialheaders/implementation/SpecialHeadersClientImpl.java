@@ -438,10 +438,21 @@ public final class SpecialHeadersClientImpl {
     public Mono<Response<BinaryData>> putWithResponseAsync(
             String name, BinaryData resource, RequestOptions requestOptions) {
         final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
-        requestOptionsLocal.setHeader(
-                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
+                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    }
+                });
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
+                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    }
+                });
         return FluxUtil.withContext(
                 context ->
                         service.put(
@@ -502,10 +513,21 @@ public final class SpecialHeadersClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putWithResponse(String name, BinaryData resource, RequestOptions requestOptions) {
         final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
-        requestOptionsLocal.setHeader(
-                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
+                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    }
+                });
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
+                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    }
+                });
         return service.putSync(
                 this.getEndpoint(),
                 this.getServiceVersion().getVersion(),
@@ -552,10 +574,21 @@ public final class SpecialHeadersClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
-        requestOptionsLocal.setHeader(
-                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
+                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    }
+                });
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
+                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    }
+                });
         return FluxUtil.withContext(
                 context ->
                         service.post(
@@ -603,10 +636,21 @@ public final class SpecialHeadersClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
-        requestOptionsLocal.setHeader(
-                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
+                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    }
+                });
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
+                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    }
+                });
         return service.postSync(
                 this.getEndpoint(),
                 this.getServiceVersion().getVersion(),
@@ -666,10 +710,21 @@ public final class SpecialHeadersClientImpl {
             String name, BinaryData resource, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
-        requestOptionsLocal.setHeader(
-                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
+                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    }
+                });
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
+                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    }
+                });
         return FluxUtil.withContext(
                 context ->
                         service.createLro(
@@ -733,10 +788,21 @@ public final class SpecialHeadersClientImpl {
             String name, BinaryData resource, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
-        requestOptionsLocal.setHeader(
-                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
+                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    }
+                });
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
+                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    }
+                });
         return service.createLroSync(
                 this.getEndpoint(),
                 this.getServiceVersion().getVersion(),

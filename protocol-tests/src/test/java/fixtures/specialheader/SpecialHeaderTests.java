@@ -14,13 +14,16 @@ import com.azure.core.http.HttpResponse;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
+import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.DateTimeRfc1123;
 import fixtures.MockHttpResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -133,5 +136,23 @@ public class SpecialHeaderTests {
                 () -> client.paramRepeatabilityRequestPutWithResponse(null));
 
         Assertions.assertTrue(VALIDATION_POLICY.isValidationPass());
+    }
+
+    @Test
+    public void testRepeatabilityRequestUserProvidedHeader() {
+        VALIDATION_POLICY.clear();
+
+        final String id = UUID.randomUUID().toString();
+        final String date = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now().minusMinutes(1));
+
+        Assertions.assertThrows(HttpResponseException.class,
+                () -> client.paramRepeatabilityRequestWithResponse(new RequestOptions()
+                        .setHeader("Repeatability-Request-ID", id)
+                        .setHeader("Repeatability-First-Sent", date)));
+
+        Assertions.assertTrue(VALIDATION_POLICY.isValidationPass());
+
+        Assertions.assertEquals(id, VALIDATION_POLICY.repeatabilityRequestId);
+        Assertions.assertEquals(date, VALIDATION_POLICY.repeatabilityFirstSent);
     }
 }
