@@ -361,10 +361,21 @@ public final class TraitsClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithResponse(int id, RequestOptions requestOptions) {
         final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
-        requestOptionsLocal.setHeader(
-                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
+                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    }
+                });
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
+                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    }
+                });
         return service.deleteSync(this.getServiceVersion().getVersion(), id, accept, requestOptionsLocal, Context.NONE);
     }
 }
