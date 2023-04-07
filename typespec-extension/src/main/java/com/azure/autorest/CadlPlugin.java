@@ -121,7 +121,8 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("generate-sync-async-clients", true);
         SETTINGS_MAP.put("generate-builder-per-client", false);
         SETTINGS_MAP.put("sync-methods", "all");
-        SETTINGS_MAP.put("enable-sync-stack", true);
+        // TODO(xiaofei) set to true when PagedIterable::mapPage is fixed in azure-core
+        SETTINGS_MAP.put("enable-sync-stack", false);
 
         SETTINGS_MAP.put("use-default-http-status-code-to-exception-type-mapping", true);
         SETTINGS_MAP.put("polling", new HashMap<String, Object>());

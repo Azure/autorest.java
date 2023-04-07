@@ -122,7 +122,8 @@ public class CoreTests {
     }
 
     @Test
-    @Disabled("enable when PagedIterable::mapPage is fixed in azure-core")
+    @Disabled
+    // TODO(xiaofei) enable when PagedIterable::mapPage is fixed in azure-core
     public void testListSync() {
         PagedIterable<User> response = syncClient.list(5, 10, 100,
                 Collections.singletonList("id"),
