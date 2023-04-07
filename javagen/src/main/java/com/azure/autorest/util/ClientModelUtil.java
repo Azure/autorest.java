@@ -135,11 +135,11 @@ public class ClientModelUtil {
                             .collect(Collectors.toList());
                     if (!cMethods.isEmpty()) {
                         // sync stack generates additional proxy methods with name suffix "Sync"
-                        Set<String> proxyMethodNames = cMethods.stream()
-                                .map(m -> m.getProxyMethod().getName())
-                                .collect(Collectors.toSet());
+                        String proxyMethodBaseName = cMethods.iterator().next().getProxyMethod().getBaseName();
                         return clientMethods.get().stream()
-                                .filter(m -> proxyMethodNames.contains(m.getProxyMethod().getName()) && m.getMethodVisibility() == JavaVisibility.Public)
+                                .filter(m ->
+                                        proxyMethodBaseName.equals(m.getProxyMethod().getBaseName())
+                                                && m.getMethodVisibility() == JavaVisibility.Public)
                                 .map(m -> new ConvenienceMethod(m, cMethods));
                     } else {
                         return Stream.empty();
