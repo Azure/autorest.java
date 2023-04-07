@@ -5,4 +5,4 @@ endOfLine: auto
 arrowParens: always
 plugins:
   - "./node_modules/@typespec/prettier-plugin-typespec"
-overrides: [{ "files": "*.cadl", "options": { "parser": "cadl" } }]
+overrides: [{ "files": "*.tsp", "options": { "parser": "typespec" } }]
