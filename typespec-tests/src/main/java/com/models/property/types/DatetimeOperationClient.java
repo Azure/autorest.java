@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.models.property.types.implementation.DatetimeOperationsImpl;
+import com.models.property.types.models.DatetimeProperty;
 
 /** Initializes a new instance of the synchronous TypesClient type. */
 @ServiceClient(builder = TypesClientBuilder.class)
@@ -79,5 +80,42 @@ public final class DatetimeOperationClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.putWithResponse(body, requestOptions);
+    }
+
+    /**
+     * Get call.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return call.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DatetimeProperty get() {
+        // Generated convenience method for getWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getWithResponse(requestOptions).getValue().toObject(DatetimeProperty.class);
+    }
+
+    /**
+     * Put operation.
+     *
+     * @param body body.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void put(DatetimeProperty body) {
+        // Generated convenience method for putWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 }

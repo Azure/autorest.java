@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.models.property.nullable.implementation.CollectionsModelsImpl;
+import com.models.property.nullable.models.CollectionsModelProperty;
 
 /** Initializes a new instance of the synchronous NullableClient type. */
 @ServiceClient(builder = NullableClientBuilder.class)
@@ -152,5 +153,41 @@ public final class CollectionsModelClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchNullWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.patchNullWithResponse(body, requestOptions);
+    }
+
+    /**
+     * Get models that will return all properties in the model.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return models that will return all properties in the model.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public CollectionsModelProperty getNonNull() {
+        // Generated convenience method for getNonNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getNonNullWithResponse(requestOptions).getValue().toObject(CollectionsModelProperty.class);
+    }
+
+    /**
+     * Get models that will return the default object.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return models that will return the default object.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public CollectionsModelProperty getNull() {
+        // Generated convenience method for getNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getNullWithResponse(requestOptions).getValue().toObject(CollectionsModelProperty.class);
     }
 }

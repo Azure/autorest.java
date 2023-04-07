@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.FluxUtil;
 import com.specialwords.implementation.OperationsImpl;
 import reactor.core.publisher.Mono;
 
@@ -46,5 +47,23 @@ public final class OperationAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> forMethodWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.forMethodWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * The forMethod operation.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> forMethod() {
+        // Generated convenience method for forMethodWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return forMethodWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 }

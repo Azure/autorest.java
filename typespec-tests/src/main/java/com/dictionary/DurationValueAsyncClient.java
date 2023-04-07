@@ -15,7 +15,11 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.serializer.TypeReference;
 import com.dictionary.implementation.DurationValuesImpl;
+import java.time.Duration;
+import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous DictionaryClient type. */
@@ -81,4 +85,47 @@ public final class DurationValueAsyncClient {
     public Mono<Response<Void>> putWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.putWithResponseAsync(body, requestOptions);
     }
+
+    /**
+     * The get operation.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return dictionary of Response on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Map<String, Duration>> get() {
+        // Generated convenience method for getWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getWithResponse(requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_DURATION));
+    }
+
+    /**
+     * The put operation.
+     *
+     * @param body Dictionary of Response.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> put(Map<String, Duration> body) {
+        // Generated convenience method for putWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    private static final TypeReference<Map<String, Duration>> TYPE_REFERENCE_MAP_STRING_DURATION =
+            new TypeReference<Map<String, Duration>>() {};
 }

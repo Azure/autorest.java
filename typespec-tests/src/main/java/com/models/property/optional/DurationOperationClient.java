@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.models.property.optional.implementation.DurationOperationsImpl;
+import com.models.property.optional.models.DurationProperty;
 
 /** Initializes a new instance of the synchronous OptionalClient type. */
 @ServiceClient(builder = OptionalClientBuilder.class)
@@ -128,5 +129,79 @@ public final class DurationOperationClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDefaultWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.putDefaultWithResponse(body, requestOptions);
+    }
+
+    /**
+     * Get models that will return all properties in the model.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return models that will return all properties in the model.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DurationProperty getAll() {
+        // Generated convenience method for getAllWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getAllWithResponse(requestOptions).getValue().toObject(DurationProperty.class);
+    }
+
+    /**
+     * Get models that will return the default object.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return models that will return the default object.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public DurationProperty getDefault() {
+        // Generated convenience method for getDefaultWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getDefaultWithResponse(requestOptions).getValue().toObject(DurationProperty.class);
+    }
+
+    /**
+     * Put a body with all properties present.
+     *
+     * @param body Model with a duration property.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putAll(DurationProperty body) {
+        // Generated convenience method for putAllWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putAllWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+    }
+
+    /**
+     * Put a body with default properties.
+     *
+     * @param body Model with a duration property.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putDefault(DurationProperty body) {
+        // Generated convenience method for putDefaultWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putDefaultWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 }

@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.models.property.optional.implementation.RequiredAndOptionalsImpl;
+import com.models.property.optional.models.RequiredAndOptionalProperty;
 
 /** Initializes a new instance of the synchronous OptionalClient type. */
 @ServiceClient(builder = OptionalClientBuilder.class)
@@ -132,5 +133,79 @@ public final class RequiredAndOptionalClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putRequiredOnlyWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.putRequiredOnlyWithResponse(body, requestOptions);
+    }
+
+    /**
+     * Get models that will return all properties in the model.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return models that will return all properties in the model.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public RequiredAndOptionalProperty getAll() {
+        // Generated convenience method for getAllWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getAllWithResponse(requestOptions).getValue().toObject(RequiredAndOptionalProperty.class);
+    }
+
+    /**
+     * Get models that will return only the required properties.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return models that will return only the required properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public RequiredAndOptionalProperty getRequiredOnly() {
+        // Generated convenience method for getRequiredOnlyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getRequiredOnlyWithResponse(requestOptions).getValue().toObject(RequiredAndOptionalProperty.class);
+    }
+
+    /**
+     * Put a body with all properties present.
+     *
+     * @param body Model with required and optional properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putAll(RequiredAndOptionalProperty body) {
+        // Generated convenience method for putAllWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putAllWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+    }
+
+    /**
+     * Put a body with only required properties.
+     *
+     * @param body Model with required and optional properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putRequiredOnly(RequiredAndOptionalProperty body) {
+        // Generated convenience method for putRequiredOnlyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putRequiredOnlyWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 }

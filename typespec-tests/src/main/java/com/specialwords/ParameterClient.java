@@ -64,4 +64,42 @@ public final class ParameterClient {
     public Response<Void> getWithFilterWithResponse(String filter, RequestOptions requestOptions) {
         return this.serviceClient.getWithFilterWithResponse(filter, requestOptions);
     }
+
+    /**
+     * The getWithIf operation.
+     *
+     * @param ifParameter The ifParameter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getWithIf(String ifParameter) {
+        // Generated convenience method for getWithIfWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getWithIfWithResponse(ifParameter, requestOptions).getValue();
+    }
+
+    /**
+     * The getWithFilter operation.
+     *
+     * @param filter The filter parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getWithFilter(String filter) {
+        // Generated convenience method for getWithFilterWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        getWithFilterWithResponse(filter, requestOptions).getValue();
+    }
 }

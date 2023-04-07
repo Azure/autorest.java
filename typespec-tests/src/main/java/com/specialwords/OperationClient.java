@@ -46,4 +46,21 @@ public final class OperationClient {
     public Response<Void> forMethodWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.forMethodWithResponse(requestOptions);
     }
+
+    /**
+     * The forMethod operation.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void forMethod() {
+        // Generated convenience method for forMethodWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        forMethodWithResponse(requestOptions).getValue();
+    }
 }

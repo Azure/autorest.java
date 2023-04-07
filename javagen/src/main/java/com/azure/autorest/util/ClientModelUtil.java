@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
 import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
@@ -32,6 +33,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -65,7 +67,7 @@ public class ClientModelUtil {
             final List<ConvenienceMethod> convenienceMethods = client.getOperationGroups().stream()
                     .filter(og -> CoreUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))    // no resource group
                     .findAny()
-                    .map(og -> getConvenienceMethods(serviceClient, og))
+                    .map(og -> getConvenienceMethods(serviceClient::getClientMethods, og))
                     .orElse(Collections.emptyList());
             builder.convenienceMethods(convenienceMethods);
 
@@ -91,7 +93,7 @@ public class ClientModelUtil {
             final List<ConvenienceMethod> convenienceMethods = client.getOperationGroups().stream()
                     .filter(og -> methodGroupClient.getClassBaseName().equals(og.getLanguage().getJava().getName()))
                     .findAny()
-                    .map(og -> getConvenienceMethods(serviceClient, og))
+                    .map(og -> getConvenienceMethods(methodGroupClient::getClientMethods, og))
                     .orElse(Collections.emptyList());
             builder.convenienceMethods(convenienceMethods);
 
@@ -123,7 +125,7 @@ public class ClientModelUtil {
         }
     }
 
-    private static List<ConvenienceMethod> getConvenienceMethods(ServiceClient serviceClient, com.azure.autorest.extension.base.model.codemodel.OperationGroup og) {
+    private static List<ConvenienceMethod> getConvenienceMethods(Supplier<List<ClientMethod>> clientMethods, OperationGroup og) {
         return og.getOperations().stream()
                 .filter(o -> o.getConvenienceApi() != null)
                 .flatMap(o -> {
@@ -136,7 +138,7 @@ public class ClientModelUtil {
                         Set<String> proxyMethodNames = cMethods.stream()
                                 .map(m -> m.getProxyMethod().getName())
                                 .collect(Collectors.toSet());
-                        return serviceClient.getClientMethods().stream()
+                        return clientMethods.get().stream()
                                 .filter(m -> proxyMethodNames.contains(m.getProxyMethod().getName()) && m.getMethodVisibility() == JavaVisibility.Public)
                                 .map(m -> new ConvenienceMethod(m, cMethods));
                     } else {

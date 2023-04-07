@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.specialwords.implementation.ModelsImpl;
+import com.specialwords.models.BaseModel;
 
 /** Initializes a new instance of the synchronous SpecialWordsClient type. */
 @ServiceClient(builder = SpecialWordsClientBuilder.class)
@@ -77,5 +78,42 @@ public final class ModelClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.putWithResponse(body, requestOptions);
+    }
+
+    /**
+     * The get operation.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is a base model has discriminator name containing dot.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public BaseModel get() {
+        // Generated convenience method for getWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getWithResponse(requestOptions).getValue().toObject(BaseModel.class);
+    }
+
+    /**
+     * The put operation.
+     *
+     * @param body This is a base model has discriminator name containing dot.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void put(BaseModel body) {
+        // Generated convenience method for putWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 }
