@@ -144,6 +144,26 @@ public final class TraitsClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/azure/traits/user/{id}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getSync(
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("id") int id,
+                @HeaderParam("foo") String foo,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Delete("/azure/traits/api/{apiVersion}/user/{id}")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -157,6 +177,25 @@ public final class TraitsClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete(
+                @PathParam("apiVersion") String apiVersion,
+                @PathParam("id") int id,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Delete("/azure/traits/api/{apiVersion}/user/{id}")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> deleteSync(
                 @PathParam("apiVersion") String apiVersion,
                 @PathParam("id") int id,
                 @HeaderParam("accept") String accept,
@@ -245,7 +284,8 @@ public final class TraitsClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(int id, String foo, RequestOptions requestOptions) {
-        return getWithResponseAsync(id, foo, requestOptions).block();
+        final String accept = "application/json";
+        return service.getSync(this.getServiceVersion().getVersion(), id, foo, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -320,6 +360,11 @@ public final class TraitsClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithResponse(int id, RequestOptions requestOptions) {
-        return deleteWithResponseAsync(id, requestOptions).block();
+        final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.setHeader("repeatability-request-id", UUID.randomUUID().toString());
+        requestOptionsLocal.setHeader(
+                "repeatability-first-sent", DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
+        return service.deleteSync(this.getServiceVersion().getVersion(), id, accept, requestOptionsLocal, Context.NONE);
     }
 }

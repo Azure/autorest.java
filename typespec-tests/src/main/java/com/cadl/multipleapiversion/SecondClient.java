@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.multipleapiversion.implementation.SecondClientImpl;
 import com.cadl.multipleapiversion.models.Resource;
 
 /** Initializes a new instance of the synchronous SecondClient type. */
 @ServiceClient(builder = SecondClientBuilder.class)
 public final class SecondClient {
-    @Generated private final SecondAsyncClient client;
+    @Generated private final SecondClientImpl serviceClient;
 
     /**
      * Initializes an instance of SecondClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    SecondClient(SecondAsyncClient client) {
-        this.client = client;
+    SecondClient(SecondClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -56,7 +57,7 @@ public final class SecondClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(String name, RequestOptions requestOptions) {
-        return this.client.getWithResponse(name, requestOptions).block();
+        return this.serviceClient.getWithResponse(name, requestOptions);
     }
 
     /**

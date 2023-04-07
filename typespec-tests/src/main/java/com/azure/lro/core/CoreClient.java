@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import com.azure.lro.core.implementation.CoreClientImpl;
 import com.azure.lro.core.models.ResourceOperationStatusUserError;
 import com.azure.lro.core.models.ResourceOperationStatusUserExportedUserError;
 import com.azure.lro.core.models.User;
@@ -22,16 +23,16 @@ import com.azure.lro.core.models.User;
 /** Initializes a new instance of the synchronous CoreClient type. */
 @ServiceClient(builder = CoreClientBuilder.class)
 public final class CoreClient {
-    @Generated private final CoreAsyncClient client;
+    @Generated private final CoreClientImpl serviceClient;
 
     /**
      * Initializes an instance of CoreClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    CoreClient(CoreAsyncClient client) {
-        this.client = client;
+    CoreClient(CoreClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -70,7 +71,7 @@ public final class CoreClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.client.beginCreateOrReplace(name, resource, requestOptions).getSyncPoller();
+        return this.serviceClient.beginCreateOrReplace(name, resource, requestOptions);
     }
 
     /**
@@ -99,7 +100,7 @@ public final class CoreClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete(String name, RequestOptions requestOptions) {
-        return this.client.beginDelete(name, requestOptions).getSyncPoller();
+        return this.serviceClient.beginDelete(name, requestOptions);
     }
 
     /**
@@ -133,7 +134,7 @@ public final class CoreClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginExport(String name, String format, RequestOptions requestOptions) {
-        return this.client.beginExport(name, format, requestOptions).getSyncPoller();
+        return this.serviceClient.beginExport(name, format, requestOptions);
     }
 
     /**
@@ -155,7 +156,8 @@ public final class CoreClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<ResourceOperationStatusUserError, User> beginCreateOrReplace(String name, User resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
-        return client.beginCreateOrReplace(name, resource).getSyncPoller();
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginCreateOrReplaceWithModel(name, BinaryData.fromObject(resource), requestOptions);
     }
 
     /**
@@ -176,7 +178,8 @@ public final class CoreClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<ResourceOperationStatusUserError, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
-        return client.beginDelete(name).getSyncPoller();
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginDeleteWithModel(name, requestOptions);
     }
 
     /**
@@ -199,6 +202,7 @@ public final class CoreClient {
     public SyncPoller<ResourceOperationStatusUserExportedUserError, ResourceOperationStatusUserExportedUserError>
             beginExport(String name, String format) {
         // Generated convenience method for beginExportWithModel
-        return client.beginExport(name, format).getSyncPoller();
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginExportWithModel(name, format, requestOptions);
     }
 }

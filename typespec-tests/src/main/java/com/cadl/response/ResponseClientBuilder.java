@@ -244,6 +244,6 @@ public final class ResponseClientBuilder
      */
     @Generated
     public ResponseClient buildClient() {
-        return new ResponseClient(new ResponseAsyncClient(buildInnerClient()));
+        return new ResponseClient(buildInnerClient());
     }
 }

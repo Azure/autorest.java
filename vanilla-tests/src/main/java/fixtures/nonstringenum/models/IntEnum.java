@@ -28,7 +28,7 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
     /**
      * Creates a new instance of IntEnum value.
      *
-     * @deprecated Use the {@link #fromString(int)} factory method.
+     * @deprecated Use the {@link #fromInt(int)} factory method.
      */
     @Deprecated
     public IntEnum() {}

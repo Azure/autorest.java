@@ -265,6 +265,6 @@ public final class ProtocolAndConvenientClientBuilder
      */
     @Generated
     public ProtocolAndConvenientClient buildClient() {
-        return new ProtocolAndConvenientClient(new ProtocolAndConvenientAsyncClient(buildInnerClient()));
+        return new ProtocolAndConvenientClient(buildInnerClient());
     }
 }

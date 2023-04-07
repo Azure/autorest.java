@@ -2,7 +2,7 @@
 # Licensed under the MIT License.
 
 export SPEC_REPO=https://github.com/Azure/azure-rest-api-specs.git
-export CADL_PATH=specification/cognitiveservices/OpenAI.Inference
+export CADL_PATH=specification/cognitiveservices/AnomalyDetector
 export CADL_BRANCH=main
 
 mkdir tsp-repo

@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.flatten.implementation.FlattenClientImpl;
 import com.cadl.flatten.models.SendLongOptions;
 import com.cadl.flatten.models.User;
 import java.util.HashMap;
@@ -23,16 +24,16 @@ import java.util.Map;
 /** Initializes a new instance of the synchronous FlattenClient type. */
 @ServiceClient(builder = FlattenClientBuilder.class)
 public final class FlattenClient {
-    @Generated private final FlattenAsyncClient client;
+    @Generated private final FlattenClientImpl serviceClient;
 
     /**
      * Initializes an instance of FlattenClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    FlattenClient(FlattenAsyncClient client) {
-        this.client = client;
+    FlattenClient(FlattenClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -61,7 +62,7 @@ public final class FlattenClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        return this.client.sendWithResponse(id, request, requestOptions).block();
+        return this.serviceClient.sendWithResponse(id, request, requestOptions);
     }
 
     /**
@@ -100,7 +101,7 @@ public final class FlattenClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        return this.client.sendLongWithResponse(id, request, requestOptions).block();
+        return this.serviceClient.sendLongWithResponse(id, request, requestOptions);
     }
 
     /**

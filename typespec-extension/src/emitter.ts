@@ -24,6 +24,9 @@ export interface EmitterOptions {
   "namer"?: boolean;
   "generate-samples"?: boolean;
   "generate-tests"?: boolean;
+  "enable-sync-stack"?: boolean;
+
+  "examples-directory"?: string;
 
   "dev-options"?: DevOptions;
 }
@@ -46,6 +49,9 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "namer": { type: "boolean", nullable: true, default: false },
     "generate-samples": { type: "boolean", nullable: true, default: true },
     "generate-tests": { type: "boolean", nullable: true, default: true },
+    "enable-sync-stack": { type: "boolean", nullable: true, default: true },
+
+    "examples-directory": { type: "string", nullable: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },
@@ -64,7 +70,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
   const program = context.program;
   const options = context.options;
   const builder = new CodeModelBuilder(program, context);
-  const codeModel = builder.build();
+  const codeModel = await builder.build();
 
   if (!program.compilerOptions.noEmit && !program.hasError()) {
     const __dirname = dirname(fileURLToPath(import.meta.url));

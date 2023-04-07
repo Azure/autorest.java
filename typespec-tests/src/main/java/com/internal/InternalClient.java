@@ -15,22 +15,23 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.internal.implementation.InternalClientImpl;
 import com.internal.models.InternalModel;
 import com.internal.models.ModelOnlyUsedByInternalOperation;
 
 /** Initializes a new instance of the synchronous InternalClient type. */
 @ServiceClient(builder = InternalClientBuilder.class)
 public final class InternalClient {
-    @Generated private final InternalAsyncClient client;
+    @Generated private final InternalClientImpl serviceClient;
 
     /**
      * Initializes an instance of InternalClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    InternalClient(InternalAsyncClient client) {
-        this.client = client;
+    InternalClient(InternalClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -55,7 +56,7 @@ public final class InternalClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getInternalWithResponse(String name, RequestOptions requestOptions) {
-        return this.client.getInternalWithResponse(name, requestOptions).block();
+        return this.serviceClient.getInternalWithResponse(name, requestOptions);
     }
 
     /**
@@ -90,7 +91,7 @@ public final class InternalClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.postInternalWithResponse(body, requestOptions).block();
+        return this.serviceClient.postInternalWithResponse(body, requestOptions);
     }
 
     /**

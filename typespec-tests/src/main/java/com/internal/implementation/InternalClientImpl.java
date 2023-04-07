@@ -117,6 +117,24 @@ public final class InternalClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/internal/getInternal")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getInternalSync(
+                @QueryParam("name") String name,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/internal/postInternal")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -130,6 +148,24 @@ public final class InternalClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postInternal(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/internal/postInternal")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> postInternalSync(
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
@@ -182,7 +218,8 @@ public final class InternalClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getInternalWithResponse(String name, RequestOptions requestOptions) {
-        return getInternalWithResponseAsync(name, requestOptions).block();
+        final String accept = "application/json";
+        return service.getInternalSync(name, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -252,6 +289,7 @@ public final class InternalClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return postInternalWithResponseAsync(body, requestOptions).block();
+        final String accept = "application/json";
+        return service.postInternalSync(accept, body, requestOptions, Context.NONE);
     }
 }

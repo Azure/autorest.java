@@ -68,6 +68,21 @@ public final class DatetimeOperationsImpl {
         Mono<Response<BinaryData>> getAll(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Get("/models/properties/optional/datetime/all")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getAllSync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Get("/models/properties/optional/datetime/default")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -81,6 +96,21 @@ public final class DatetimeOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getDefault(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/models/properties/optional/datetime/default")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getDefaultSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/models/properties/optional/datetime/all")
@@ -101,6 +131,24 @@ public final class DatetimeOperationsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/models/properties/optional/datetime/all")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putAllSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/models/properties/optional/datetime/default")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -114,6 +162,24 @@ public final class DatetimeOperationsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putDefault(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/models/properties/optional/datetime/default")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putDefaultSync(
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
@@ -165,7 +231,8 @@ public final class DatetimeOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAllWithResponse(RequestOptions requestOptions) {
-        return getAllWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getAllSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -213,7 +280,8 @@ public final class DatetimeOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultWithResponse(RequestOptions requestOptions) {
-        return getDefaultWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getDefaultSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -262,7 +330,8 @@ public final class DatetimeOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putAllWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return putAllWithResponseAsync(body, requestOptions).block();
+        final String accept = "application/json";
+        return service.putAllSync(accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -311,6 +380,7 @@ public final class DatetimeOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDefaultWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return putDefaultWithResponseAsync(body, requestOptions).block();
+        final String accept = "application/json";
+        return service.putDefaultSync(accept, body, requestOptions, Context.NONE);
     }
 }

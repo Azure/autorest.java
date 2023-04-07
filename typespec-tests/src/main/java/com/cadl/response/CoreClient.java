@@ -16,21 +16,22 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.response.implementation.CoreClientImpl;
 import com.cadl.response.models.Resource;
 
 /** Initializes a new instance of the synchronous CoreClient type. */
 @ServiceClient(builder = CoreClientBuilder.class)
 public final class CoreClient {
-    @Generated private final CoreAsyncClient client;
+    @Generated private final CoreClientImpl serviceClient;
 
     /**
      * Initializes an instance of CoreClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    CoreClient(CoreAsyncClient client) {
-        this.client = client;
+    CoreClient(CoreClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -71,7 +72,7 @@ public final class CoreClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.client.createOrUpdateWithResponse(name, resource, requestOptions).block();
+        return this.serviceClient.createOrUpdateWithResponse(name, resource, requestOptions);
     }
 
     /**
@@ -99,7 +100,7 @@ public final class CoreClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(String name, RequestOptions requestOptions) {
-        return this.client.getWithResponse(name, requestOptions).block();
+        return this.serviceClient.getWithResponse(name, requestOptions);
     }
 
     /**
@@ -116,7 +117,7 @@ public final class CoreClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithResponse(String name, RequestOptions requestOptions) {
-        return this.client.deleteWithResponse(name, requestOptions).block();
+        return this.serviceClient.deleteWithResponse(name, requestOptions);
     }
 
     /**
@@ -143,7 +144,7 @@ public final class CoreClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.list(requestOptions));
+        return this.serviceClient.list(requestOptions);
     }
 
     /**
@@ -222,6 +223,7 @@ public final class CoreClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Resource> list() {
         // Generated convenience method for list
-        return new PagedIterable<>(client.list());
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(Resource.class));
     }
 }

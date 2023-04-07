@@ -15,22 +15,25 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
+import com.cadl.odata.implementation.OdataClientImpl;
 import com.cadl.odata.models.Resource;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /** Initializes a new instance of the synchronous OdataClient type. */
 @ServiceClient(builder = OdataClientBuilder.class)
 public final class OdataClient {
-    @Generated private final OdataAsyncClient client;
+    @Generated private final OdataClientImpl serviceClient;
 
     /**
      * Initializes an instance of OdataClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    OdataClient(OdataAsyncClient client) {
-        this.client = client;
+    OdataClient(OdataClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -72,7 +75,7 @@ public final class OdataClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.list(requestOptions));
+        return this.serviceClient.list(requestOptions);
     }
 
     /**
@@ -104,7 +107,39 @@ public final class OdataClient {
             List<String> select,
             List<String> expand) {
         // Generated convenience method for list
-        return new PagedIterable<>(client.list(filter, orderBy, skip, top, maxPageSize, select, expand));
+        RequestOptions requestOptions = new RequestOptions();
+        if (filter != null) {
+            requestOptions.addQueryParam("filter", filter, false);
+        }
+        if (orderBy != null) {
+            requestOptions.addQueryParam("orderby", orderBy, false);
+        }
+        if (skip != null) {
+            requestOptions.addQueryParam("skip", String.valueOf(skip), false);
+        }
+        if (top != null) {
+            requestOptions.addQueryParam("top", String.valueOf(top), false);
+        }
+        if (maxPageSize != null) {
+            requestOptions.addQueryParam("maxpagesize", String.valueOf(maxPageSize), false);
+        }
+        if (select != null) {
+            requestOptions.addQueryParam(
+                    "select",
+                    select.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")),
+                    false);
+        }
+        if (expand != null) {
+            requestOptions.addQueryParam(
+                    "expand",
+                    expand.stream()
+                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                            .collect(Collectors.joining(",")),
+                    false);
+        }
+        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(Resource.class));
     }
 
     /**
@@ -121,6 +156,7 @@ public final class OdataClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Resource> list() {
         // Generated convenience method for list
-        return new PagedIterable<>(client.list());
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(Resource.class));
     }
 }

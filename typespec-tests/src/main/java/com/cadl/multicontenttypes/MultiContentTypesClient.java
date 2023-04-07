@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.multicontenttypes.implementation.MultiContentTypesClientImpl;
 import com.cadl.multicontenttypes.models.ContentType;
 
 /** Initializes a new instance of the synchronous MultiContentTypesClient type. */
 @ServiceClient(builder = MultiContentTypesClientBuilder.class)
 public final class MultiContentTypesClient {
-    @Generated private final MultiContentTypesAsyncClient client;
+    @Generated private final MultiContentTypesClientImpl serviceClient;
 
     /**
      * Initializes an instance of MultiContentTypesClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    MultiContentTypesClient(MultiContentTypesAsyncClient client) {
-        this.client = client;
+    MultiContentTypesClient(MultiContentTypesClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -51,7 +52,7 @@ public final class MultiContentTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> downloadImageWithResponse(RequestOptions requestOptions) {
-        return this.client.downloadImageWithResponse(requestOptions).block();
+        return this.serviceClient.downloadImageWithResponse(requestOptions);
     }
 
     /**
@@ -63,7 +64,7 @@ public final class MultiContentTypesClient {
      * BinaryData
      * }</pre>
      *
-     * @param data data.
+     * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -74,7 +75,7 @@ public final class MultiContentTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadImageWithResponse(BinaryData data, RequestOptions requestOptions) {
-        return this.client.uploadImageWithResponse(data, requestOptions).block();
+        return this.serviceClient.uploadImageWithResponse(data, requestOptions);
     }
 
     /**
@@ -88,7 +89,7 @@ public final class MultiContentTypesClient {
      *
      * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
      *     "image/png".
-     * @param data data.
+     * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -99,7 +100,7 @@ public final class MultiContentTypesClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadBytesWithResponse(String contentType, BinaryData data, RequestOptions requestOptions) {
-        return this.client.uploadBytesWithResponse(contentType, data, requestOptions).block();
+        return this.serviceClient.uploadBytesWithResponse(contentType, data, requestOptions);
     }
 
     /**
@@ -123,7 +124,7 @@ public final class MultiContentTypesClient {
     /**
      * request is binary.
      *
-     * @param data data.
+     * @param data The data parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -143,7 +144,7 @@ public final class MultiContentTypesClient {
      * one data type maps to multiple content types.
      *
      * @param contentType The contentType parameter.
-     * @param data data.
+     * @param data The data parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

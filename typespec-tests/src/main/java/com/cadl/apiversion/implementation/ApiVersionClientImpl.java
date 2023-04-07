@@ -158,6 +158,25 @@ public final class ApiVersionClientImpl {
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Get("/apiversion")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> readSync(
+                @HostParam("endpoint") String endpoint,
+                @HostParam("ApiVersion") String apiVersion,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -207,6 +226,8 @@ public final class ApiVersionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
-        return readWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.readSync(
+                this.getEndpoint(), this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
     }
 }

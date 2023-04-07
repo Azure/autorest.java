@@ -16,22 +16,23 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.DateTimeRfc1123;
+import com.cadl.builtin.implementation.BuiltinClientImpl;
 import com.cadl.builtin.models.Builtin;
 import java.time.OffsetDateTime;
 
 /** Initializes a new instance of the synchronous BuiltinClient type. */
 @ServiceClient(builder = BuiltinClientBuilder.class)
 public final class BuiltinClient {
-    @Generated private final BuiltinAsyncClient client;
+    @Generated private final BuiltinClientImpl serviceClient;
 
     /**
      * Initializes an instance of BuiltinClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    BuiltinClient(BuiltinAsyncClient client) {
-        this.client = client;
+    BuiltinClient(BuiltinClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -91,6 +92,9 @@ public final class BuiltinClient {
      *         String: byte[] (Required)
      *     }
      *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -107,7 +111,7 @@ public final class BuiltinClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(
             String queryParam, String queryParamEncoded, RequestOptions requestOptions) {
-        return this.client.readWithResponse(queryParam, queryParamEncoded, requestOptions).block();
+        return this.serviceClient.readWithResponse(queryParam, queryParamEncoded, requestOptions);
     }
 
     /**
@@ -145,6 +149,9 @@ public final class BuiltinClient {
      *         String: byte[] (Required)
      *     }
      *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      *
@@ -159,7 +166,7 @@ public final class BuiltinClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> writeWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.writeWithResponse(body, requestOptions).block();
+        return this.serviceClient.writeWithResponse(body, requestOptions);
     }
 
     /**

@@ -244,6 +244,6 @@ public final class ErrorModelClientBuilder
      */
     @Generated
     public ErrorModelClient buildClient() {
-        return new ErrorModelClient(new ErrorModelAsyncClient(buildInnerClient()));
+        return new ErrorModelClient(buildInnerClient());
     }
 }

@@ -33,6 +33,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
@@ -146,6 +147,25 @@ public final class RpcClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/azure/lro/rpc/same-poll-result/jobs")
+        @ExpectedResponses({200, 202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createJobSync(
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData jobData,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/azure/lro/rpc/same-poll-result/jobs/{jobId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -159,6 +179,25 @@ public final class RpcClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getJob(
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("jobId") String jobId,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/azure/lro/rpc/same-poll-result/jobs/{jobId}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getJobSync(
                 @QueryParam("api-version") String apiVersion,
                 @PathParam("jobId") String jobId,
                 @HeaderParam("accept") String accept,
@@ -184,6 +223,25 @@ public final class RpcClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/azure/lro/rpc/different-poll-result/jobs")
+        @ExpectedResponses({200, 202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createJobFinalOnLocationSync(
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData jobData,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/azure/lro/rpc/different-poll-result/jobs/operations/{operationId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -197,6 +255,25 @@ public final class RpcClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getPoll(
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("operationId") String operationId,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/azure/lro/rpc/different-poll-result/jobs/operations/{operationId}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getPollSync(
                 @QueryParam("api-version") String apiVersion,
                 @PathParam("operationId") String operationId,
                 @HeaderParam("accept") String accept,
@@ -248,6 +325,50 @@ public final class RpcClientImpl {
                 context ->
                         service.createJob(
                                 this.getServiceVersion().getVersion(), accept, jobData, requestOptions, context));
+    }
+
+    /**
+     * Creates a Job.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     comment: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error: ResponseError (Required)
+     *         }
+     *     ]
+     *     results (Required): [
+     *         String (Required)
+     *     ]
+     * }
+     * }</pre>
+     *
+     * @param jobData Data of the job.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return result of the job along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> createJobWithResponse(BinaryData jobData, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.createJobSync(
+                this.getServiceVersion().getVersion(), accept, jobData, requestOptions, Context.NONE);
     }
 
     /**
@@ -342,7 +463,18 @@ public final class RpcClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
-        return this.beginCreateJobAsync(jobData, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.createJobWithResponse(jobData, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -438,7 +570,18 @@ public final class RpcClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<JobResult, JobResult> beginCreateJobWithModel(BinaryData jobData, RequestOptions requestOptions) {
-        return this.beginCreateJobWithModelAsync(jobData, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.createJobWithResponse(jobData, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(JobResult.class),
+                TypeReference.createInstance(JobResult.class));
     }
 
     /**
@@ -509,7 +652,8 @@ public final class RpcClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getJobWithResponse(String jobId, RequestOptions requestOptions) {
-        return getJobWithResponseAsync(jobId, requestOptions).block();
+        final String accept = "application/json";
+        return service.getJobSync(this.getServiceVersion().getVersion(), jobId, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -557,6 +701,51 @@ public final class RpcClientImpl {
                 context ->
                         service.createJobFinalOnLocation(
                                 this.getServiceVersion().getVersion(), accept, jobData, requestOptions, context));
+    }
+
+    /**
+     * Creates a Job.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     comment: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error: ResponseError (Required)
+     *         }
+     *     ]
+     *     results (Required): [
+     *         String (Required)
+     *     ]
+     * }
+     * }</pre>
+     *
+     * @param jobData Data of the job.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return result of the job along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> createJobFinalOnLocationWithResponse(
+            BinaryData jobData, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.createJobFinalOnLocationSync(
+                this.getServiceVersion().getVersion(), accept, jobData, requestOptions, Context.NONE);
     }
 
     /**
@@ -653,7 +842,18 @@ public final class RpcClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateJobFinalOnLocation(
             BinaryData jobData, RequestOptions requestOptions) {
-        return this.beginCreateJobFinalOnLocationAsync(jobData, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.createJobFinalOnLocationWithResponse(jobData, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -750,7 +950,18 @@ public final class RpcClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<JobPollResult, JobResult> beginCreateJobFinalOnLocationWithModel(
             BinaryData jobData, RequestOptions requestOptions) {
-        return this.beginCreateJobFinalOnLocationWithModelAsync(jobData, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.createJobFinalOnLocationWithResponse(jobData, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(JobPollResult.class),
+                TypeReference.createInstance(JobResult.class));
     }
 
     /**
@@ -804,6 +1015,8 @@ public final class RpcClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getPollWithResponse(String operationId, RequestOptions requestOptions) {
-        return getPollWithResponseAsync(operationId, requestOptions).block();
+        final String accept = "application/json";
+        return service.getPollSync(
+                this.getServiceVersion().getVersion(), operationId, accept, requestOptions, Context.NONE);
     }
 }

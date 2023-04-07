@@ -264,6 +264,6 @@ public final class CoreClientBuilder
      */
     @Generated
     public CoreClient buildClient() {
-        return new CoreClient(new CoreAsyncClient(buildInnerClient()));
+        return new CoreClient(buildInnerClient());
     }
 }

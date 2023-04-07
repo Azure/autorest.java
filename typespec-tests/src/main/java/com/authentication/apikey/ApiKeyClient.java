@@ -4,6 +4,7 @@
 
 package com.authentication.apikey;
 
+import com.authentication.apikey.implementation.ApiKeyClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -18,16 +19,16 @@ import com.azure.core.http.rest.Response;
 /** Initializes a new instance of the synchronous ApiKeyClient type. */
 @ServiceClient(builder = ApiKeyClientBuilder.class)
 public final class ApiKeyClient {
-    @Generated private final ApiKeyAsyncClient client;
+    @Generated private final ApiKeyClientImpl serviceClient;
 
     /**
      * Initializes an instance of ApiKeyClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ApiKeyClient(ApiKeyAsyncClient client) {
-        this.client = client;
+    ApiKeyClient(ApiKeyClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -43,7 +44,7 @@ public final class ApiKeyClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validWithResponse(RequestOptions requestOptions) {
-        return this.client.validWithResponse(requestOptions).block();
+        return this.serviceClient.validWithResponse(requestOptions);
     }
 
     /**
@@ -59,7 +60,7 @@ public final class ApiKeyClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> invalidWithResponse(RequestOptions requestOptions) {
-        return this.client.invalidWithResponse(requestOptions).block();
+        return this.serviceClient.invalidWithResponse(requestOptions);
     }
 
     /**

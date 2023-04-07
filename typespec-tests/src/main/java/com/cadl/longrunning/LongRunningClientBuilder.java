@@ -264,6 +264,6 @@ public final class LongRunningClientBuilder
      */
     @Generated
     public LongRunningClient buildClient() {
-        return new LongRunningClient(new LongRunningAsyncClient(buildInnerClient()));
+        return new LongRunningClient(buildInnerClient());
     }
 }

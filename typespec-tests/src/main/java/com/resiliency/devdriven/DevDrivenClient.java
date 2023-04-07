@@ -16,6 +16,7 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.resiliency.devdriven.implementation.DevDrivenClientImpl;
 import com.resiliency.devdriven.models.Input;
 import com.resiliency.devdriven.models.LroProduct;
 import com.resiliency.devdriven.models.Mode;
@@ -24,16 +25,16 @@ import com.resiliency.devdriven.models.Product;
 /** Initializes a new instance of the synchronous DevDrivenClient type. */
 @ServiceClient(builder = DevDrivenClientBuilder.class)
 public final class DevDrivenClient {
-    @Generated private final DevDrivenAsyncClient client;
+    @Generated private final DevDrivenClientImpl serviceClient;
 
     /**
      * Initializes an instance of DevDrivenClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    DevDrivenClient(DevDrivenAsyncClient client) {
-        this.client = client;
+    DevDrivenClient(DevDrivenClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -62,7 +63,7 @@ public final class DevDrivenClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(String mode, RequestOptions requestOptions) {
-        return this.client.getModelWithResponse(mode, requestOptions).block();
+        return this.serviceClient.getModelWithResponse(mode, requestOptions);
     }
 
     /**
@@ -100,7 +101,7 @@ public final class DevDrivenClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postModelWithResponse(String mode, BinaryData input, RequestOptions requestOptions) {
-        return this.client.postModelWithResponse(mode, input, requestOptions).block();
+        return this.serviceClient.postModelWithResponse(mode, input, requestOptions);
     }
 
     /**
@@ -125,7 +126,7 @@ public final class DevDrivenClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getProtocolPages(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.getProtocolPages(requestOptions));
+        return this.serviceClient.getProtocolPages(requestOptions);
     }
 
     /**
@@ -150,7 +151,7 @@ public final class DevDrivenClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<BinaryData> getConveniencePages(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.getConveniencePages(requestOptions));
+        return this.serviceClient.getConveniencePages(requestOptions);
     }
 
     /**
@@ -180,7 +181,7 @@ public final class DevDrivenClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> lroWithResponse(String mode, RequestOptions requestOptions) {
-        return this.client.lroWithResponse(mode, requestOptions).block();
+        return this.serviceClient.lroWithResponse(mode, requestOptions);
     }
 
     /**
@@ -243,7 +244,8 @@ public final class DevDrivenClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getConveniencePages() {
         // Generated convenience method for getConveniencePages
-        return new PagedIterable<>(client.getConveniencePages());
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.getConveniencePages(requestOptions).mapPage(value -> value.toObject(Product.class));
     }
 
     /**

@@ -120,6 +120,24 @@ public final class CollectionFormatClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/collectionFormat/multi")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> testMultiSync(
+                @QueryParam(value = "colors", multipleQueryParams = true) List<String> colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/collectionFormat/csv")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -133,6 +151,24 @@ public final class CollectionFormatClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> testCsv(
+                @QueryParam("colors") String colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/collectionFormat/csv")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> testCsvSync(
                 @QueryParam("colors") String colors,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -156,6 +192,24 @@ public final class CollectionFormatClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/collectionFormat/csvHeader")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> testCsvHeaderSync(
+                @HeaderParam("colors") String colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/collectionFormat/defaultHeader")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -169,6 +223,24 @@ public final class CollectionFormatClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> testDefaultHeader(
+                @HeaderParam("colors") String colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/collectionFormat/defaultHeader")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> testDefaultHeaderSync(
                 @HeaderParam("colors") String colors,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -223,7 +295,10 @@ public final class CollectionFormatClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> testMultiWithResponse(List<String> colors, RequestOptions requestOptions) {
-        return testMultiWithResponseAsync(colors, requestOptions).block();
+        final String accept = "application/json";
+        List<String> colorsConverted =
+                colors.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        return service.testMultiSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -274,7 +349,10 @@ public final class CollectionFormatClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> testCsvWithResponse(List<String> colors, RequestOptions requestOptions) {
-        return testCsvWithResponseAsync(colors, requestOptions).block();
+        final String accept = "application/json";
+        String colorsConverted =
+                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return service.testCsvSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -326,7 +404,10 @@ public final class CollectionFormatClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> testCsvHeaderWithResponse(List<String> colors, RequestOptions requestOptions) {
-        return testCsvHeaderWithResponseAsync(colors, requestOptions).block();
+        final String accept = "application/json";
+        String colorsConverted =
+                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return service.testCsvHeaderSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -379,6 +460,9 @@ public final class CollectionFormatClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> testDefaultHeaderWithResponse(List<String> colors, RequestOptions requestOptions) {
-        return testDefaultHeaderWithResponseAsync(colors, requestOptions).block();
+        final String accept = "application/json";
+        String colorsConverted =
+                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return service.testDefaultHeaderSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 }

@@ -15,22 +15,23 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.literalservice.implementation.LiteralServiceClientImpl;
 import com.cadl.literalservice.models.Model;
 import com.cadl.literalservice.models.OptionalLiteralParam;
 
 /** Initializes a new instance of the synchronous LiteralServiceClient type. */
 @ServiceClient(builder = LiteralServiceClientBuilder.class)
 public final class LiteralServiceClient {
-    @Generated private final LiteralServiceAsyncClient client;
+    @Generated private final LiteralServiceClientImpl serviceClient;
 
     /**
      * Initializes an instance of LiteralServiceClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    LiteralServiceClient(LiteralServiceAsyncClient client) {
-        this.client = client;
+    LiteralServiceClient(LiteralServiceClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -75,7 +76,7 @@ public final class LiteralServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putWithResponse(BinaryData model, RequestOptions requestOptions) {
-        return this.client.putWithResponse(model, requestOptions).block();
+        return this.serviceClient.putWithResponse(model, requestOptions);
     }
 
     /**

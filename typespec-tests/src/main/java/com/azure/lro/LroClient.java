@@ -16,21 +16,22 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import com.azure.lro.implementation.LroClientImpl;
 import com.azure.lro.models.User;
 
 /** Initializes a new instance of the synchronous LroClient type. */
 @ServiceClient(builder = LroClientBuilder.class)
 public final class LroClient {
-    @Generated private final LroAsyncClient client;
+    @Generated private final LroClientImpl serviceClient;
 
     /**
      * Initializes an instance of LroClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    LroClient(LroAsyncClient client) {
-        this.client = client;
+    LroClient(LroClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -54,7 +55,7 @@ public final class LroClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreate(RequestOptions requestOptions) {
-        return this.client.beginCreate(requestOptions).getSyncPoller();
+        return this.serviceClient.beginCreate(requestOptions);
     }
 
     /**
@@ -78,7 +79,7 @@ public final class LroClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> pollingWithResponse(RequestOptions requestOptions) {
-        return this.client.pollingWithResponse(requestOptions).block();
+        return this.serviceClient.pollingWithResponse(requestOptions);
     }
 
     /**
@@ -102,7 +103,7 @@ public final class LroClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 
     /**
@@ -119,7 +120,8 @@ public final class LroClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<User, User> beginCreate() {
         // Generated convenience method for beginCreateWithModel
-        return client.beginCreate().getSyncPoller();
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginCreateWithModel(requestOptions);
     }
 
     /**

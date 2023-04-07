@@ -66,7 +66,7 @@ public final class MultiContentTypesAsyncClient {
      * BinaryData
      * }</pre>
      *
-     * @param data data.
+     * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -91,7 +91,7 @@ public final class MultiContentTypesAsyncClient {
      *
      * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
      *     "image/png".
-     * @param data data.
+     * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -127,7 +127,7 @@ public final class MultiContentTypesAsyncClient {
     /**
      * request is binary.
      *
-     * @param data data.
+     * @param data The data parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -148,7 +148,7 @@ public final class MultiContentTypesAsyncClient {
      * one data type maps to multiple content types.
      *
      * @param contentType The contentType parameter.
-     * @param data data.
+     * @param data The data parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -14,20 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.specialwords.implementation.OperationsImpl;
 
 /** Initializes a new instance of the synchronous SpecialWordsClient type. */
 @ServiceClient(builder = SpecialWordsClientBuilder.class)
 public final class OperationClient {
-    @Generated private final OperationAsyncClient client;
+    @Generated private final OperationsImpl serviceClient;
 
     /**
      * Initializes an instance of OperationClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    OperationClient(OperationAsyncClient client) {
-        this.client = client;
+    OperationClient(OperationsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -43,7 +44,7 @@ public final class OperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> forMethodWithResponse(RequestOptions requestOptions) {
-        return this.client.forMethodWithResponse(requestOptions).block();
+        return this.serviceClient.forMethodWithResponse(requestOptions);
     }
 
     /**

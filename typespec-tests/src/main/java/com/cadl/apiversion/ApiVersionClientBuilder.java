@@ -264,6 +264,6 @@ public final class ApiVersionClientBuilder
      */
     @Generated
     public ApiVersionClient buildClient() {
-        return new ApiVersionClient(new ApiVersionAsyncClient(buildInnerClient()));
+        return new ApiVersionClient(buildInnerClient());
     }
 }

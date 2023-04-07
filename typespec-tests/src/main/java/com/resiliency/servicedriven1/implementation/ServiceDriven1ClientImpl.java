@@ -119,6 +119,21 @@ public final class ServiceDriven1ClientImpl {
         Mono<Response<Void>> headNoParams(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Head("/resiliency/servicedriven1/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> headNoParamsSync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Get("/resiliency/servicedriven1/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -137,6 +152,24 @@ public final class ServiceDriven1ClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/resiliency/servicedriven1/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getRequiredSync(
+                @QueryParam("parameter") String parameter,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/resiliency/servicedriven1/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -150,6 +183,24 @@ public final class ServiceDriven1ClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putRequiredOptional(
+                @QueryParam("requiredParam") String requiredParam,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/resiliency/servicedriven1/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> putRequiredOptionalSync(
                 @QueryParam("requiredParam") String requiredParam,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -174,6 +225,25 @@ public final class ServiceDriven1ClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/resiliency/servicedriven1/parameters/{contentTypePath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> postParametersSync(
+                @PathParam("contentTypePath") String contentTypePath,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData parameter,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/resiliency/servicedriven1/moreParameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -187,6 +257,21 @@ public final class ServiceDriven1ClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getOptional(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/resiliency/servicedriven1/moreParameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getOptionalSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
@@ -220,7 +305,8 @@ public final class ServiceDriven1ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> headNoParamsWithResponse(RequestOptions requestOptions) {
-        return headNoParamsWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.headNoParamsSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -272,7 +358,8 @@ public final class ServiceDriven1ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(String parameter, RequestOptions requestOptions) {
-        return getRequiredWithResponseAsync(parameter, requestOptions).block();
+        final String accept = "application/json";
+        return service.getRequiredSync(parameter, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -345,7 +432,8 @@ public final class ServiceDriven1ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putRequiredOptionalWithResponse(String requiredParam, RequestOptions requestOptions) {
-        return putRequiredOptionalWithResponseAsync(requiredParam, requestOptions).block();
+        final String accept = "application/json";
+        return service.putRequiredOptionalSync(requiredParam, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -413,7 +501,9 @@ public final class ServiceDriven1ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(BinaryData parameter, RequestOptions requestOptions) {
-        return postParametersWithResponseAsync(parameter, requestOptions).block();
+        final String contentTypePath = "json";
+        final String accept = "application/json";
+        return service.postParametersSync(contentTypePath, accept, parameter, requestOptions, Context.NONE);
     }
 
     /**
@@ -483,6 +573,7 @@ public final class ServiceDriven1ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
-        return getOptionalWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getOptionalSync(accept, requestOptions, Context.NONE);
     }
 }

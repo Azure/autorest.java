@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.visibility.implementation.VisibilityClientImpl;
 import com.cadl.visibility.models.Dog;
 import com.cadl.visibility.models.ReadDog;
 import com.cadl.visibility.models.WriteDog;
@@ -22,16 +23,16 @@ import com.cadl.visibility.models.WriteDog;
 /** Initializes a new instance of the synchronous VisibilityClient type. */
 @ServiceClient(builder = VisibilityClientBuilder.class)
 public final class VisibilityClient {
-    @Generated private final VisibilityAsyncClient client;
+    @Generated private final VisibilityClientImpl serviceClient;
 
     /**
      * Initializes an instance of VisibilityClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    VisibilityClient(VisibilityAsyncClient client) {
-        this.client = client;
+    VisibilityClient(VisibilityClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -57,7 +58,7 @@ public final class VisibilityClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 
     /**
@@ -92,7 +93,7 @@ public final class VisibilityClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createWithResponse(BinaryData dog, RequestOptions requestOptions) {
-        return this.client.createWithResponse(dog, requestOptions).block();
+        return this.serviceClient.createWithResponse(dog, requestOptions);
     }
 
     /**
@@ -128,7 +129,7 @@ public final class VisibilityClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> queryWithResponse(BinaryData dog, RequestOptions requestOptions) {
-        return this.client.queryWithResponse(dog, requestOptions).block();
+        return this.serviceClient.queryWithResponse(dog, requestOptions);
     }
 
     /**

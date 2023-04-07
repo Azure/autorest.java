@@ -229,6 +229,6 @@ public final class AutomaticClientBuilder
      */
     @Generated
     public AutomaticClient buildClient() {
-        return new AutomaticClient(new AutomaticAsyncClient(buildInnerClient()));
+        return new AutomaticClient(buildInnerClient());
     }
 }

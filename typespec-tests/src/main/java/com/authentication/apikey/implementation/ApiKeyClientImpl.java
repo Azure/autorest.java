@@ -110,6 +110,20 @@ public final class ApiKeyClientImpl {
         Mono<Response<Void>> valid(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Get("/authentication/api-key/valid")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> validSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Get("/authentication/api-key/invalid")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -123,6 +137,21 @@ public final class ApiKeyClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> invalid(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/authentication/api-key/invalid")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> invalidSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
@@ -154,7 +183,8 @@ public final class ApiKeyClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validWithResponse(RequestOptions requestOptions) {
-        return validWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.validSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -185,6 +215,7 @@ public final class ApiKeyClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> invalidWithResponse(RequestOptions requestOptions) {
-        return invalidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.invalidSync(accept, requestOptions, Context.NONE);
     }
 }

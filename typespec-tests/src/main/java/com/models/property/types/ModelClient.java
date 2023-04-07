@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.models.property.types.implementation.ModelsImpl;
 import com.models.property.types.models.ModelProperty;
 
 /** Initializes a new instance of the synchronous TypesClient type. */
 @ServiceClient(builder = TypesClientBuilder.class)
 public final class ModelClient {
-    @Generated private final ModelAsyncClient client;
+    @Generated private final ModelsImpl serviceClient;
 
     /**
      * Initializes an instance of ModelClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ModelClient(ModelAsyncClient client) {
-        this.client = client;
+    ModelClient(ModelsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -55,7 +56,7 @@ public final class ModelClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 
     /**
@@ -82,7 +83,7 @@ public final class ModelClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putWithResponse(body, requestOptions).block();
+        return this.serviceClient.putWithResponse(body, requestOptions);
     }
 
     /**

@@ -250,6 +250,6 @@ public final class OAuth2ClientBuilder
      */
     @Generated
     public OAuth2Client buildClient() {
-        return new OAuth2Client(new OAuth2AsyncClient(buildInnerClient()));
+        return new OAuth2Client(buildInnerClient());
     }
 }

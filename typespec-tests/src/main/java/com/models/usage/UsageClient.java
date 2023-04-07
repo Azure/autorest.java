@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.models.usage.implementation.UsageClientImpl;
 import com.models.usage.models.InputOutputRecord;
 import com.models.usage.models.InputRecord;
 import com.models.usage.models.OutputRecord;
@@ -22,16 +23,16 @@ import com.models.usage.models.OutputRecord;
 /** Initializes a new instance of the synchronous UsageClient type. */
 @ServiceClient(builder = UsageClientBuilder.class)
 public final class UsageClient {
-    @Generated private final UsageAsyncClient client;
+    @Generated private final UsageClientImpl serviceClient;
 
     /**
      * Initializes an instance of UsageClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    UsageClient(UsageAsyncClient client) {
-        this.client = client;
+    UsageClient(UsageClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -56,7 +57,7 @@ public final class UsageClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> inputWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.client.inputWithResponse(input, requestOptions).block();
+        return this.serviceClient.inputWithResponse(input, requestOptions);
     }
 
     /**
@@ -80,7 +81,7 @@ public final class UsageClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> outputWithResponse(RequestOptions requestOptions) {
-        return this.client.outputWithResponse(requestOptions).block();
+        return this.serviceClient.outputWithResponse(requestOptions);
     }
 
     /**
@@ -113,7 +114,7 @@ public final class UsageClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> inputAndOutputWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.inputAndOutputWithResponse(body, requestOptions).block();
+        return this.serviceClient.inputAndOutputWithResponse(body, requestOptions);
     }
 
     /**

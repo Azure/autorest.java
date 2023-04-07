@@ -229,6 +229,6 @@ public final class ServiceDriven1ClientBuilder
      */
     @Generated
     public ServiceDriven1Client buildClient() {
-        return new ServiceDriven1Client(new ServiceDriven1AsyncClient(buildInnerClient()));
+        return new ServiceDriven1Client(buildInnerClient());
     }
 }

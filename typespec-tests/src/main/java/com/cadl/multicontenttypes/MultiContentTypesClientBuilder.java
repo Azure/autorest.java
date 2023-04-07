@@ -245,6 +245,6 @@ public final class MultiContentTypesClientBuilder
      */
     @Generated
     public MultiContentTypesClient buildClient() {
-        return new MultiContentTypesClient(new MultiContentTypesAsyncClient(buildInnerClient()));
+        return new MultiContentTypesClient(buildInnerClient());
     }
 }

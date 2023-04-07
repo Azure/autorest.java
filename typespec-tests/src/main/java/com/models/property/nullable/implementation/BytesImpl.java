@@ -66,6 +66,21 @@ public final class BytesImpl {
         Mono<Response<BinaryData>> getNonNull(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Get("/models/properties/nullable/bytes/non-null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getNonNullSync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Get("/models/properties/nullable/bytes/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -79,6 +94,21 @@ public final class BytesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNull(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/models/properties/nullable/bytes/null")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getNullSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Patch("/models/properties/nullable/bytes/non-null")
@@ -100,6 +130,25 @@ public final class BytesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Patch("/models/properties/nullable/bytes/non-null")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> patchNonNullSync(
+                @HeaderParam("Content-Type") String contentType,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/merge-patch+json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
         @Patch("/models/properties/nullable/bytes/null")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -113,6 +162,25 @@ public final class BytesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> patchNull(
+                @HeaderParam("Content-Type") String contentType,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/merge-patch+json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Patch("/models/properties/nullable/bytes/null")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> patchNullSync(
                 @HeaderParam("Content-Type") String contentType,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/merge-patch+json") BinaryData body,
@@ -167,7 +235,8 @@ public final class BytesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNonNullWithResponse(RequestOptions requestOptions) {
-        return getNonNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNonNullSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -217,7 +286,8 @@ public final class BytesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
-        return getNullWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNullSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -272,7 +342,9 @@ public final class BytesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchNonNullWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return patchNonNullWithResponseAsync(body, requestOptions).block();
+        final String contentType = "application/merge-patch+json";
+        final String accept = "application/json";
+        return service.patchNonNullSync(contentType, accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -326,6 +398,8 @@ public final class BytesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchNullWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return patchNullWithResponseAsync(body, requestOptions).block();
+        final String contentType = "application/merge-patch+json";
+        final String accept = "application/json";
+        return service.patchNullSync(contentType, accept, body, requestOptions, Context.NONE);
     }
 }

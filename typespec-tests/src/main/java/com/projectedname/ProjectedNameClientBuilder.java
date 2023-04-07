@@ -228,6 +228,6 @@ public final class ProjectedNameClientBuilder
      */
     @Generated
     public ProjectedNameClient buildClient() {
-        return new ProjectedNameClient(new ProjectedNameAsyncClient(buildInnerClient()));
+        return new ProjectedNameClient(buildInnerClient());
     }
 }

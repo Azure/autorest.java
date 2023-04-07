@@ -140,6 +140,24 @@ public final class PolymorphismClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/Pets")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> readSync(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/Pets")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -159,6 +177,25 @@ public final class PolymorphismClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/Pets")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> writeSync(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/Pets")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -172,6 +209,25 @@ public final class PolymorphismClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> task(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/Pets")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> taskSync(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData body,
@@ -225,7 +281,8 @@ public final class PolymorphismClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
-        return readWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.readSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -291,7 +348,8 @@ public final class PolymorphismClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> writeWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return writeWithResponseAsync(body, requestOptions).block();
+        final String accept = "application/json";
+        return service.writeSync(this.getEndpoint(), accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -352,6 +410,7 @@ public final class PolymorphismClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> taskWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return taskWithResponseAsync(body, requestOptions).block();
+        final String accept = "application/json";
+        return service.taskSync(this.getEndpoint(), accept, body, requestOptions, Context.NONE);
     }
 }

@@ -248,6 +248,6 @@ public final class DevDrivenClientBuilder
      */
     @Generated
     public DevDrivenClient buildClient() {
-        return new DevDrivenClient(new DevDrivenAsyncClient(buildInnerClient()));
+        return new DevDrivenClient(buildInnerClient());
     }
 }

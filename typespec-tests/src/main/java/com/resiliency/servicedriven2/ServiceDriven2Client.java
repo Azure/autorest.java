@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.resiliency.servicedriven2.implementation.ServiceDriven2ClientImpl;
 import com.resiliency.servicedriven2.models.ContentTypePath;
 import com.resiliency.servicedriven2.models.Message;
 import com.resiliency.servicedriven2.models.PostInput;
@@ -22,16 +23,16 @@ import com.resiliency.servicedriven2.models.PostInput;
 /** Initializes a new instance of the synchronous ServiceDriven2Client type. */
 @ServiceClient(builder = ServiceDriven2ClientBuilder.class)
 public final class ServiceDriven2Client {
-    @Generated private final ServiceDriven2AsyncClient client;
+    @Generated private final ServiceDriven2ClientImpl serviceClient;
 
     /**
      * Initializes an instance of ServiceDriven2Client class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ServiceDriven2Client(ServiceDriven2AsyncClient client) {
-        this.client = client;
+    ServiceDriven2Client(ServiceDriven2ClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -58,7 +59,7 @@ public final class ServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> headNoParamsWithResponse(RequestOptions requestOptions) {
-        return this.client.headNoParamsWithResponse(requestOptions).block();
+        return this.serviceClient.headNoParamsWithResponse(requestOptions);
     }
 
     /**
@@ -94,7 +95,7 @@ public final class ServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(String parameter, RequestOptions requestOptions) {
-        return this.client.getRequiredWithResponse(parameter, requestOptions).block();
+        return this.serviceClient.getRequiredWithResponse(parameter, requestOptions);
     }
 
     /**
@@ -131,7 +132,7 @@ public final class ServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putRequiredOptionalWithResponse(String requiredParam, RequestOptions requestOptions) {
-        return this.client.putRequiredOptionalWithResponse(requiredParam, requestOptions).block();
+        return this.serviceClient.putRequiredOptionalWithResponse(requiredParam, requestOptions);
     }
 
     /**
@@ -166,7 +167,7 @@ public final class ServiceDriven2Client {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(
             String contentTypePath, BinaryData parameter, RequestOptions requestOptions) {
-        return this.client.postParametersWithResponse(contentTypePath, parameter, requestOptions).block();
+        return this.serviceClient.postParametersWithResponse(contentTypePath, parameter, requestOptions);
     }
 
     /**
@@ -183,7 +184,7 @@ public final class ServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions) {
-        return this.client.deleteParametersWithResponse(requestOptions).block();
+        return this.serviceClient.deleteParametersWithResponse(requestOptions);
     }
 
     /**
@@ -219,7 +220,7 @@ public final class ServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
-        return this.client.getOptionalWithResponse(requestOptions).block();
+        return this.serviceClient.getOptionalWithResponse(requestOptions);
     }
 
     /**
@@ -244,7 +245,7 @@ public final class ServiceDriven2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions) {
-        return this.client.getNewOperationWithResponse(requestOptions).block();
+        return this.serviceClient.getNewOperationWithResponse(requestOptions);
     }
 
     /**

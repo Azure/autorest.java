@@ -14,23 +14,12 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.partialupdate.implementation.PartialUpdateClientImpl;
 import com.cadl.partialupdate.models.PartialUpdateModel;
 
 /** Initializes a new instance of the synchronous PartialUpdateClient type. */
 @ServiceClient(builder = PartialUpdateClientBuilder.class)
 public final class PartialUpdateClient {
-
-    @Generated private final PartialUpdateAsyncClient client;
-
-    /**
-     * Initializes an instance of PartialUpdateClient class.
-     *
-     * @param client the async client.
-     */
-    @Generated
-    PartialUpdateClient(PartialUpdateAsyncClient client) {
-        this.client = client;
-    }
 
     /**
      * The read operation.
@@ -55,7 +44,7 @@ public final class PartialUpdateClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
-        return this.client.readWithResponse(requestOptions).block();
+        return this.serviceClient.readWithResponse(requestOptions);
     }
 
     /**
@@ -74,5 +63,17 @@ public final class PartialUpdateClient {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions).getValue().toObject(PartialUpdateModel.class);
+    }
+
+    @Generated private final PartialUpdateClientImpl serviceClient;
+
+    /**
+     * Initializes an instance of PartialUpdateClient class.
+     *
+     * @param serviceClient the service client implementation.
+     */
+    @Generated
+    PartialUpdateClient(PartialUpdateClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 }

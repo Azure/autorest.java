@@ -4,6 +4,7 @@
 package com.azure.autorest.extension.base.model.codemodel;
 
 
+import java.util.Objects;
 
 /**
  * a schema that represents a key-value collection
@@ -17,6 +18,8 @@ public class DictionarySchema extends ComplexSchema {
      * 
      */
     private Schema elementType;
+
+    private Boolean nullableItems;
 
     /**
      * 
@@ -36,6 +39,14 @@ public class DictionarySchema extends ComplexSchema {
         this.elementType = elementType;
     }
 
+    public Boolean getNullableItems() {
+        return nullableItems;
+    }
+
+    public void setNullableItems(Boolean nullableItems) {
+        this.nullableItems = nullableItems;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -53,22 +64,15 @@ public class DictionarySchema extends ComplexSchema {
     }
 
     @Override
-    public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.elementType == null)? 0 :this.elementType.hashCode()));
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DictionarySchema that = (DictionarySchema) o;
+        return Objects.equals(elementType, that.elementType) && Objects.equals(nullableItems, that.nullableItems);
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof DictionarySchema) == false) {
-            return false;
-        }
-        DictionarySchema rhs = ((DictionarySchema) other);
-        return ((this.elementType == rhs.elementType)||((this.elementType!= null)&&this.elementType.equals(rhs.elementType)));
+    public int hashCode() {
+        return Objects.hash(elementType, nullableItems);
     }
-
 }

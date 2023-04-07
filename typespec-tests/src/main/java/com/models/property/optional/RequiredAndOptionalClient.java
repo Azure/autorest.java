@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.models.property.optional.implementation.RequiredAndOptionalsImpl;
 import com.models.property.optional.models.RequiredAndOptionalProperty;
 
 /** Initializes a new instance of the synchronous OptionalClient type. */
 @ServiceClient(builder = OptionalClientBuilder.class)
 public final class RequiredAndOptionalClient {
-    @Generated private final RequiredAndOptionalAsyncClient client;
+    @Generated private final RequiredAndOptionalsImpl serviceClient;
 
     /**
      * Initializes an instance of RequiredAndOptionalClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    RequiredAndOptionalClient(RequiredAndOptionalAsyncClient client) {
-        this.client = client;
+    RequiredAndOptionalClient(RequiredAndOptionalsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -54,7 +55,7 @@ public final class RequiredAndOptionalClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAllWithResponse(RequestOptions requestOptions) {
-        return this.client.getAllWithResponse(requestOptions).block();
+        return this.serviceClient.getAllWithResponse(requestOptions);
     }
 
     /**
@@ -79,7 +80,7 @@ public final class RequiredAndOptionalClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredOnlyWithResponse(RequestOptions requestOptions) {
-        return this.client.getRequiredOnlyWithResponse(requestOptions).block();
+        return this.serviceClient.getRequiredOnlyWithResponse(requestOptions);
     }
 
     /**
@@ -105,7 +106,7 @@ public final class RequiredAndOptionalClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putAllWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putAllWithResponse(body, requestOptions).block();
+        return this.serviceClient.putAllWithResponse(body, requestOptions);
     }
 
     /**
@@ -131,7 +132,7 @@ public final class RequiredAndOptionalClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putRequiredOnlyWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putRequiredOnlyWithResponse(body, requestOptions).block();
+        return this.serviceClient.putRequiredOnlyWithResponse(body, requestOptions);
     }
 
     /**

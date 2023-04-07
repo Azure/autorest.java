@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import com.azure.lro.rpc.implementation.RpcClientImpl;
 import com.azure.lro.rpc.models.JobData;
 import com.azure.lro.rpc.models.JobPollResult;
 import com.azure.lro.rpc.models.JobResult;
@@ -23,16 +24,16 @@ import com.azure.lro.rpc.models.JobResult;
 /** Initializes a new instance of the synchronous RpcClient type. */
 @ServiceClient(builder = RpcClientBuilder.class)
 public final class RpcClient {
-    @Generated private final RpcAsyncClient client;
+    @Generated private final RpcClientImpl serviceClient;
 
     /**
      * Initializes an instance of RpcClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    RpcClient(RpcAsyncClient client) {
-        this.client = client;
+    RpcClient(RpcClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -75,7 +76,7 @@ public final class RpcClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
-        return this.client.beginCreateJob(jobData, requestOptions).getSyncPoller();
+        return this.serviceClient.beginCreateJob(jobData, requestOptions);
     }
 
     /**
@@ -110,7 +111,7 @@ public final class RpcClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getJobWithResponse(String jobId, RequestOptions requestOptions) {
-        return this.client.getJobWithResponse(jobId, requestOptions).block();
+        return this.serviceClient.getJobWithResponse(jobId, requestOptions);
     }
 
     /**
@@ -154,7 +155,7 @@ public final class RpcClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateJobFinalOnLocation(
             BinaryData jobData, RequestOptions requestOptions) {
-        return this.client.beginCreateJobFinalOnLocation(jobData, requestOptions).getSyncPoller();
+        return this.serviceClient.beginCreateJobFinalOnLocation(jobData, requestOptions);
     }
 
     /**
@@ -180,7 +181,7 @@ public final class RpcClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getPollWithResponse(String operationId, RequestOptions requestOptions) {
-        return this.client.getPollWithResponse(operationId, requestOptions).block();
+        return this.serviceClient.getPollWithResponse(operationId, requestOptions);
     }
 
     /**
@@ -199,7 +200,8 @@ public final class RpcClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<JobResult, JobResult> beginCreateJob(JobData jobData) {
         // Generated convenience method for beginCreateJobWithModel
-        return client.beginCreateJob(jobData).getSyncPoller();
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginCreateJobWithModel(BinaryData.fromObject(jobData), requestOptions);
     }
 
     /**
@@ -238,7 +240,8 @@ public final class RpcClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<JobPollResult, JobResult> beginCreateJobFinalOnLocation(JobData jobData) {
         // Generated convenience method for beginCreateJobFinalOnLocationWithModel
-        return client.beginCreateJobFinalOnLocation(jobData).getSyncPoller();
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginCreateJobFinalOnLocationWithModel(BinaryData.fromObject(jobData), requestOptions);
     }
 
     /**

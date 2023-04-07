@@ -248,6 +248,6 @@ public final class ApiKeyClientBuilder
      */
     @Generated
     public ApiKeyClient buildClient() {
-        return new ApiKeyClient(new ApiKeyAsyncClient(buildInnerClient()));
+        return new ApiKeyClient(buildInnerClient());
     }
 }

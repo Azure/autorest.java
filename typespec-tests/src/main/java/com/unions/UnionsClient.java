@@ -15,22 +15,23 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.unions.implementation.UnionsClientImpl;
 import com.unions.models.ModelWithNamedUnionProperty;
 import com.unions.models.ModelWithSimpleUnionProperty;
 
 /** Initializes a new instance of the synchronous UnionsClient type. */
 @ServiceClient(builder = UnionsClientBuilder.class)
 public final class UnionsClient {
-    @Generated private final UnionsAsyncClient client;
+    @Generated private final UnionsClientImpl serviceClient;
 
     /**
      * Initializes an instance of UnionsClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    UnionsClient(UnionsAsyncClient client) {
-        this.client = client;
+    UnionsClient(UnionsClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -55,7 +56,7 @@ public final class UnionsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendIntWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.client.sendIntWithResponse(input, requestOptions).block();
+        return this.serviceClient.sendIntWithResponse(input, requestOptions);
     }
 
     /**
@@ -80,7 +81,7 @@ public final class UnionsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendIntArrayWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.client.sendIntArrayWithResponse(input, requestOptions).block();
+        return this.serviceClient.sendIntArrayWithResponse(input, requestOptions);
     }
 
     /**
@@ -105,7 +106,7 @@ public final class UnionsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendFirstNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.client.sendFirstNamedUnionValueWithResponse(input, requestOptions).block();
+        return this.serviceClient.sendFirstNamedUnionValueWithResponse(input, requestOptions);
     }
 
     /**
@@ -130,7 +131,7 @@ public final class UnionsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendSecondNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.client.sendSecondNamedUnionValueWithResponse(input, requestOptions).block();
+        return this.serviceClient.sendSecondNamedUnionValueWithResponse(input, requestOptions);
     }
 
     /**

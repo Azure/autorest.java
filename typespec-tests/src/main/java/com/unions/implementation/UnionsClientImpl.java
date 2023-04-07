@@ -115,6 +115,24 @@ public final class UnionsClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/unions/int")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> sendIntSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/unions/int-array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -128,6 +146,24 @@ public final class UnionsClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> sendIntArray(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/unions/int-array")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> sendIntArraySync(
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData input,
                 RequestOptions requestOptions,
@@ -151,6 +187,24 @@ public final class UnionsClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/unions/model1")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> sendFirstNamedUnionValueSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/unions/model2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -164,6 +218,24 @@ public final class UnionsClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> sendSecondNamedUnionValue(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/unions/model2")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> sendSecondNamedUnionValueSync(
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData input,
                 RequestOptions requestOptions,
@@ -216,7 +288,8 @@ public final class UnionsClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendIntWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return sendIntWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.sendIntSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -265,7 +338,8 @@ public final class UnionsClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendIntArrayWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return sendIntArrayWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.sendIntArraySync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -316,7 +390,8 @@ public final class UnionsClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendFirstNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return sendFirstNamedUnionValueWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.sendFirstNamedUnionValueSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -367,6 +442,7 @@ public final class UnionsClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendSecondNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return sendSecondNamedUnionValueWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.sendSecondNamedUnionValueSync(accept, input, requestOptions, Context.NONE);
     }
 }

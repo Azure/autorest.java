@@ -243,6 +243,6 @@ public final class OdataClientBuilder
      */
     @Generated
     public OdataClient buildClient() {
-        return new OdataClient(new OdataAsyncClient(buildInnerClient()));
+        return new OdataClient(buildInnerClient());
     }
 }

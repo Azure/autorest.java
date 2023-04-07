@@ -14,20 +14,21 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.server.parameterized.implementation.ParameterizedClientImpl;
 
 /** Initializes a new instance of the synchronous ParameterizedClient type. */
 @ServiceClient(builder = ParameterizedClientBuilder.class)
 public final class ParameterizedClient {
-    @Generated private final ParameterizedAsyncClient client;
+    @Generated private final ParameterizedClientImpl serviceClient;
 
     /**
      * Initializes an instance of ParameterizedClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ParameterizedClient(ParameterizedAsyncClient client) {
-        this.client = client;
+    ParameterizedClient(ParameterizedClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -43,7 +44,7 @@ public final class ParameterizedClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> myOpWithResponse(RequestOptions requestOptions) {
-        return this.client.myOpWithResponse(requestOptions).block();
+        return this.serviceClient.myOpWithResponse(requestOptions);
     }
 
     /**

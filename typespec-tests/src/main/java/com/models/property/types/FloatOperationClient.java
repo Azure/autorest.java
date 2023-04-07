@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.models.property.types.implementation.FloatOperationsImpl;
 import com.models.property.types.models.FloatProperty;
 
 /** Initializes a new instance of the synchronous TypesClient type. */
 @ServiceClient(builder = TypesClientBuilder.class)
 public final class FloatOperationClient {
-    @Generated private final FloatOperationAsyncClient client;
+    @Generated private final FloatOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of FloatOperationClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    FloatOperationClient(FloatOperationAsyncClient client) {
-        this.client = client;
+    FloatOperationClient(FloatOperationsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -53,7 +54,7 @@ public final class FloatOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 
     /**
@@ -78,7 +79,7 @@ public final class FloatOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putWithResponse(body, requestOptions).block();
+        return this.serviceClient.putWithResponse(body, requestOptions);
     }
 
     /**

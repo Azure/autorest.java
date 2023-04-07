@@ -4,6 +4,7 @@
 
 package com._specs_.azure.traits;
 
+import com._specs_.azure.traits.implementation.TraitsClientImpl;
 import com._specs_.azure.traits.models.User;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
@@ -22,16 +23,16 @@ import java.time.OffsetDateTime;
 /** Initializes a new instance of the synchronous TraitsClient type. */
 @ServiceClient(builder = TraitsClientBuilder.class)
 public final class TraitsClient {
-    @Generated private final TraitsAsyncClient client;
+    @Generated private final TraitsClientImpl serviceClient;
 
     /**
      * Initializes an instance of TraitsClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    TraitsClient(TraitsAsyncClient client) {
-        this.client = client;
+    TraitsClient(TraitsClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -72,7 +73,7 @@ public final class TraitsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(int id, String foo, RequestOptions requestOptions) {
-        return this.client.getWithResponse(id, foo, requestOptions).block();
+        return this.serviceClient.getWithResponse(id, foo, requestOptions);
     }
 
     /**
@@ -101,7 +102,7 @@ public final class TraitsClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithResponse(int id, RequestOptions requestOptions) {
-        return this.client.deleteWithResponse(id, requestOptions).block();
+        return this.serviceClient.deleteWithResponse(id, requestOptions);
     }
 
     /**

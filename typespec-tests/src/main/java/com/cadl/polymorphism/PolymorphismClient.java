@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.polymorphism.implementation.PolymorphismClientImpl;
 import com.cadl.polymorphism.models.BaseType;
 import com.cadl.polymorphism.models.Pet;
 import com.cadl.polymorphism.models.Task;
@@ -22,16 +23,16 @@ import com.cadl.polymorphism.models.Task;
 /** Initializes a new instance of the synchronous PolymorphismClient type. */
 @ServiceClient(builder = PolymorphismClientBuilder.class)
 public final class PolymorphismClient {
-    @Generated private final PolymorphismAsyncClient client;
+    @Generated private final PolymorphismClientImpl serviceClient;
 
     /**
      * Initializes an instance of PolymorphismClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    PolymorphismClient(PolymorphismAsyncClient client) {
-        this.client = client;
+    PolymorphismClient(PolymorphismClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -56,7 +57,7 @@ public final class PolymorphismClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
-        return this.client.readWithResponse(requestOptions).block();
+        return this.serviceClient.readWithResponse(requestOptions);
     }
 
     /**
@@ -89,7 +90,7 @@ public final class PolymorphismClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> writeWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.writeWithResponse(body, requestOptions).block();
+        return this.serviceClient.writeWithResponse(body, requestOptions);
     }
 
     /**
@@ -120,7 +121,7 @@ public final class PolymorphismClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> taskWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.taskWithResponse(body, requestOptions).block();
+        return this.serviceClient.taskWithResponse(body, requestOptions);
     }
 
     /**

@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
+import com.cadl.enumservice.implementation.EnumServiceClientImpl;
 import com.cadl.enumservice.models.Color;
 import com.cadl.enumservice.models.ColorModel;
 import com.cadl.enumservice.models.Operation;
@@ -29,16 +30,16 @@ import java.util.stream.Collectors;
 /** Initializes a new instance of the synchronous EnumServiceClient type. */
 @ServiceClient(builder = EnumServiceClientBuilder.class)
 public final class EnumServiceClient {
-    @Generated private final EnumServiceAsyncClient client;
+    @Generated private final EnumServiceClientImpl serviceClient;
 
     /**
      * Initializes an instance of EnumServiceClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    EnumServiceClient(EnumServiceAsyncClient client) {
-        this.client = client;
+    EnumServiceClient(EnumServiceClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -60,7 +61,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getColorWithResponse(RequestOptions requestOptions) {
-        return this.client.getColorWithResponse(requestOptions).block();
+        return this.serviceClient.getColorWithResponse(requestOptions);
     }
 
     /**
@@ -82,7 +83,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getColorModelWithResponse(RequestOptions requestOptions) {
-        return this.client.getColorModelWithResponse(requestOptions).block();
+        return this.serviceClient.getColorModelWithResponse(requestOptions);
     }
 
     /**
@@ -111,7 +112,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setColorModelWithResponse(String color, RequestOptions requestOptions) {
-        return this.client.setColorModelWithResponse(color, requestOptions).block();
+        return this.serviceClient.setColorModelWithResponse(color, requestOptions);
     }
 
     /**
@@ -140,7 +141,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setPriorityWithResponse(String priority, RequestOptions requestOptions) {
-        return this.client.setPriorityWithResponse(priority, requestOptions).block();
+        return this.serviceClient.setPriorityWithResponse(priority, requestOptions);
     }
 
     /**
@@ -168,7 +169,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRunningOperationWithResponse(RequestOptions requestOptions) {
-        return this.client.getRunningOperationWithResponse(requestOptions).block();
+        return this.serviceClient.getRunningOperationWithResponse(requestOptions);
     }
 
     /**
@@ -197,7 +198,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOperationWithResponse(String state, RequestOptions requestOptions) {
-        return this.client.getOperationWithResponse(state, requestOptions).block();
+        return this.serviceClient.getOperationWithResponse(state, requestOptions);
     }
 
     /**
@@ -230,7 +231,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringEnumArrayWithResponse(List<String> colorArray, RequestOptions requestOptions) {
-        return this.client.setStringEnumArrayWithResponse(colorArray, requestOptions).block();
+        return this.serviceClient.setStringEnumArrayWithResponse(colorArray, requestOptions);
     }
 
     /**
@@ -263,7 +264,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntEnumArrayWithResponse(List<String> priorityArray, RequestOptions requestOptions) {
-        return this.client.setIntEnumArrayWithResponse(priorityArray, requestOptions).block();
+        return this.serviceClient.setIntEnumArrayWithResponse(priorityArray, requestOptions);
     }
 
     /**
@@ -296,7 +297,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringArrayWithResponse(List<String> stringArray, RequestOptions requestOptions) {
-        return this.client.setStringArrayWithResponse(stringArray, requestOptions).block();
+        return this.serviceClient.setStringArrayWithResponse(stringArray, requestOptions);
     }
 
     /**
@@ -329,7 +330,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntArrayWithResponse(List<Integer> intArray, RequestOptions requestOptions) {
-        return this.client.setIntArrayWithResponse(intArray, requestOptions).block();
+        return this.serviceClient.setIntArrayWithResponse(intArray, requestOptions);
     }
 
     /**
@@ -362,7 +363,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringEnumMultiWithResponse(List<String> colorArray, RequestOptions requestOptions) {
-        return this.client.setStringEnumMultiWithResponse(colorArray, requestOptions).block();
+        return this.serviceClient.setStringEnumMultiWithResponse(colorArray, requestOptions);
     }
 
     /**
@@ -395,7 +396,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntEnumMultiWithResponse(List<String> priorityArray, RequestOptions requestOptions) {
-        return this.client.setIntEnumMultiWithResponse(priorityArray, requestOptions).block();
+        return this.serviceClient.setIntEnumMultiWithResponse(priorityArray, requestOptions);
     }
 
     /**
@@ -428,7 +429,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringMultiWithResponse(List<String> stringArray, RequestOptions requestOptions) {
-        return this.client.setStringMultiWithResponse(stringArray, requestOptions).block();
+        return this.serviceClient.setStringMultiWithResponse(stringArray, requestOptions);
     }
 
     /**
@@ -461,7 +462,7 @@ public final class EnumServiceClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntMultiWithResponse(List<Integer> intArray, RequestOptions requestOptions) {
-        return this.client.setIntMultiWithResponse(intArray, requestOptions).block();
+        return this.serviceClient.setIntMultiWithResponse(intArray, requestOptions);
     }
 
     /**
@@ -495,7 +496,7 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringEnumArrayHeaderWithResponse(
             List<String> colorArray, RequestOptions requestOptions) {
-        return this.client.setStringEnumArrayHeaderWithResponse(colorArray, requestOptions).block();
+        return this.serviceClient.setStringEnumArrayHeaderWithResponse(colorArray, requestOptions);
     }
 
     /**
