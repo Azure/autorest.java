@@ -248,6 +248,6 @@ public final class TraitsClientBuilder
      */
     @Generated
     public TraitsClient buildClient() {
-        return new TraitsClient(new TraitsAsyncClient(buildInnerClient()));
+        return new TraitsClient(buildInnerClient());
     }
 }

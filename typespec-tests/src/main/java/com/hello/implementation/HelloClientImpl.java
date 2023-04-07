@@ -110,6 +110,21 @@ public final class HelloClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> world(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/hello/world")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> worldSync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -152,6 +167,7 @@ public final class HelloClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> worldWithResponse(RequestOptions requestOptions) {
-        return worldWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.worldSync(accept, requestOptions, Context.NONE);
     }
 }

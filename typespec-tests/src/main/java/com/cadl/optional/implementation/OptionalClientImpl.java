@@ -140,6 +140,29 @@ public final class OptionalClientImpl {
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Put("/optional/put")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> putSync(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("request-header-required") String requestHeaderRequired,
+                @QueryParam("booleanRequired") boolean booleanRequired,
+                @QueryParam("booleanRequiredNullable") Boolean booleanRequiredNullable,
+                @QueryParam("stringRequired") String stringRequired,
+                @QueryParam("stringRequiredNullable") String stringRequiredNullable,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -367,13 +390,16 @@ public final class OptionalClientImpl {
             String stringRequired,
             String stringRequiredNullable,
             RequestOptions requestOptions) {
-        return putWithResponseAsync(
-                        requestHeaderRequired,
-                        booleanRequired,
-                        booleanRequiredNullable,
-                        stringRequired,
-                        stringRequiredNullable,
-                        requestOptions)
-                .block();
+        final String accept = "application/json";
+        return service.putSync(
+                this.getEndpoint(),
+                requestHeaderRequired,
+                booleanRequired,
+                booleanRequiredNullable,
+                stringRequired,
+                stringRequiredNullable,
+                accept,
+                requestOptions,
+                Context.NONE);
     }
 }

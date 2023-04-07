@@ -263,6 +263,6 @@ public final class ContosoClientBuilder
      */
     @Generated
     public ContosoClient buildClient() {
-        return new ContosoClient(new ContosoAsyncClient(buildInnerClient()));
+        return new ContosoClient(buildInnerClient());
     }
 }

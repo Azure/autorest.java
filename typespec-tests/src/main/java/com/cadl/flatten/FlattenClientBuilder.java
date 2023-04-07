@@ -263,6 +263,6 @@ public final class FlattenClientBuilder
      */
     @Generated
     public FlattenClient buildClient() {
-        return new FlattenClient(new FlattenAsyncClient(buildInnerClient()));
+        return new FlattenClient(buildInnerClient());
     }
 }

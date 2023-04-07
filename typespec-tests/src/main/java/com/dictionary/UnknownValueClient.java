@@ -16,21 +16,22 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.serializer.TypeReference;
+import com.dictionary.implementation.UnknownValuesImpl;
 import java.util.Map;
 
 /** Initializes a new instance of the synchronous DictionaryClient type. */
 @ServiceClient(builder = DictionaryClientBuilder.class)
 public final class UnknownValueClient {
-    @Generated private final UnknownValueAsyncClient client;
+    @Generated private final UnknownValuesImpl serviceClient;
 
     /**
      * Initializes an instance of UnknownValueClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    UnknownValueClient(UnknownValueAsyncClient client) {
-        this.client = client;
+    UnknownValueClient(UnknownValuesImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -54,7 +55,7 @@ public final class UnknownValueClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 
     /**
@@ -79,7 +80,7 @@ public final class UnknownValueClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putWithResponse(body, requestOptions).block();
+        return this.serviceClient.putWithResponse(body, requestOptions);
     }
 
     /**

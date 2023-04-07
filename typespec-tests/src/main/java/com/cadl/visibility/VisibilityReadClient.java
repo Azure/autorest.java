@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.visibility.implementation.VisibilityReadsImpl;
 import com.cadl.visibility.models.Dog;
 
 /** Initializes a new instance of the synchronous VisibilityClient type. */
 @ServiceClient(builder = VisibilityClientBuilder.class)
 public final class VisibilityReadClient {
-    @Generated private final VisibilityReadAsyncClient client;
+    @Generated private final VisibilityReadsImpl serviceClient;
 
     /**
      * Initializes an instance of VisibilityReadClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    VisibilityReadClient(VisibilityReadAsyncClient client) {
-        this.client = client;
+    VisibilityReadClient(VisibilityReadsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -55,7 +56,7 @@ public final class VisibilityReadClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 
     /**

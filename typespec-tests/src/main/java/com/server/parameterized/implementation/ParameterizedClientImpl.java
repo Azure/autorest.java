@@ -135,6 +135,24 @@ public final class ParameterizedClientImpl {
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Head("/server/parameterized/myOp")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> myOpSync(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -165,6 +183,7 @@ public final class ParameterizedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> myOpWithResponse(RequestOptions requestOptions) {
-        return myOpWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.myOpSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

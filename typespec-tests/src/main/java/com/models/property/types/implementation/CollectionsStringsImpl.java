@@ -68,6 +68,21 @@ public final class CollectionsStringsImpl {
         Mono<Response<BinaryData>> get(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Get("/models/properties/types/collections/string")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getSync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Put("/models/properties/types/collections/string")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -81,6 +96,24 @@ public final class CollectionsStringsImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> put(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/models/properties/types/collections/string")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putSync(
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
@@ -135,7 +168,8 @@ public final class CollectionsStringsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return getWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -188,6 +222,7 @@ public final class CollectionsStringsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return putWithResponseAsync(body, requestOptions).block();
+        final String accept = "application/json";
+        return service.putSync(accept, body, requestOptions, Context.NONE);
     }
 }

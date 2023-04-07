@@ -165,6 +165,24 @@ public final class VisibilityClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/visibility/read")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getSync(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/visibility/write")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -184,6 +202,25 @@ public final class VisibilityClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/visibility/write")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createSync(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData dog,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/visibility/query")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -197,6 +234,25 @@ public final class VisibilityClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> query(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData dog,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/visibility/query")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> querySync(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData dog,
@@ -252,7 +308,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return getWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -322,7 +379,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createWithResponse(BinaryData dog, RequestOptions requestOptions) {
-        return createWithResponseAsync(dog, requestOptions).block();
+        final String accept = "application/json";
+        return service.createSync(this.getEndpoint(), accept, dog, requestOptions, Context.NONE);
     }
 
     /**
@@ -393,6 +451,7 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> queryWithResponse(BinaryData dog, RequestOptions requestOptions) {
-        return queryWithResponseAsync(dog, requestOptions).block();
+        final String accept = "application/json";
+        return service.querySync(this.getEndpoint(), accept, dog, requestOptions, Context.NONE);
     }
 }

@@ -263,6 +263,6 @@ public final class PagedClientBuilder
      */
     @Generated
     public PagedClient buildClient() {
-        return new PagedClient(new PagedAsyncClient(buildInnerClient()));
+        return new PagedClient(buildInnerClient());
     }
 }

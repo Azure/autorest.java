@@ -246,6 +246,6 @@ public final class RpcClientBuilder implements HttpTrait<RpcClientBuilder>, Conf
      */
     @Generated
     public RpcClient buildClient() {
-        return new RpcClient(new RpcAsyncClient(buildInnerClient()));
+        return new RpcClient(buildInnerClient());
     }
 }

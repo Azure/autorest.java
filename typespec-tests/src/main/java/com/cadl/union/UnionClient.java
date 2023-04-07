@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.union.implementation.UnionClientImpl;
 import com.cadl.union.models.InputModelBase;
 import com.cadl.union.models.SendLongOptions;
 import com.cadl.union.models.User;
@@ -24,16 +25,16 @@ import java.util.Map;
 /** Initializes a new instance of the synchronous UnionClient type. */
 @ServiceClient(builder = UnionClientBuilder.class)
 public final class UnionClient {
-    @Generated private final UnionAsyncClient client;
+    @Generated private final UnionClientImpl serviceClient;
 
     /**
      * Initializes an instance of UnionClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    UnionClient(UnionAsyncClient client) {
-        this.client = client;
+    UnionClient(UnionClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -62,7 +63,7 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        return this.client.sendWithResponse(id, request, requestOptions).block();
+        return this.serviceClient.sendWithResponse(id, request, requestOptions);
     }
 
     /**
@@ -101,7 +102,7 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        return this.client.sendLongWithResponse(id, request, requestOptions).block();
+        return this.serviceClient.sendLongWithResponse(id, request, requestOptions);
     }
 
     /**

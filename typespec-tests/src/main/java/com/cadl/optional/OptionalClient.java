@@ -15,22 +15,23 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.optional.implementation.OptionalClientImpl;
 import com.cadl.optional.models.AllPropertiesOptional;
 import com.cadl.optional.models.Optional;
 
 /** Initializes a new instance of the synchronous OptionalClient type. */
 @ServiceClient(builder = OptionalClientBuilder.class)
 public final class OptionalClient {
-    @Generated private final OptionalAsyncClient client;
+    @Generated private final OptionalClientImpl serviceClient;
 
     /**
      * Initializes an instance of OptionalClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    OptionalClient(OptionalAsyncClient client) {
-        this.client = client;
+    OptionalClient(OptionalClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -139,15 +140,13 @@ public final class OptionalClient {
             String stringRequired,
             String stringRequiredNullable,
             RequestOptions requestOptions) {
-        return this.client
-                .putWithResponse(
-                        requestHeaderRequired,
-                        booleanRequired,
-                        booleanRequiredNullable,
-                        stringRequired,
-                        stringRequiredNullable,
-                        requestOptions)
-                .block();
+        return this.serviceClient.putWithResponse(
+                requestHeaderRequired,
+                booleanRequired,
+                booleanRequiredNullable,
+                stringRequired,
+                stringRequiredNullable,
+                requestOptions);
     }
 
     /**

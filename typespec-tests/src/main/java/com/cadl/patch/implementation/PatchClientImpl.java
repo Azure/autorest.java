@@ -139,6 +139,27 @@ public final class PatchClientImpl {
                 @BodyParam("application/merge-patch+json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Patch("/patch/{name}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createOrUpdateSync(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("content-type") String contentType,
+                @PathParam("name") String name,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/merge-patch+json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -223,6 +244,9 @@ public final class PatchClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(
             String name, BinaryData body, RequestOptions requestOptions) {
-        return createOrUpdateWithResponseAsync(name, body, requestOptions).block();
+        final String contentType = "application/merge-patch+json";
+        final String accept = "application/json";
+        return service.createOrUpdateSync(
+                this.getEndpoint(), contentType, name, accept, body, requestOptions, Context.NONE);
     }
 }

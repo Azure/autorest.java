@@ -15,22 +15,23 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.collectionformat.implementation.CollectionFormatClientImpl;
 import com.collectionformat.models.MessageResponse;
 import java.util.List;
 
 /** Initializes a new instance of the synchronous CollectionFormatClient type. */
 @ServiceClient(builder = CollectionFormatClientBuilder.class)
 public final class CollectionFormatClient {
-    @Generated private final CollectionFormatAsyncClient client;
+    @Generated private final CollectionFormatClientImpl serviceClient;
 
     /**
      * Initializes an instance of CollectionFormatClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    CollectionFormatClient(CollectionFormatAsyncClient client) {
-        this.client = client;
+    CollectionFormatClient(CollectionFormatClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -55,7 +56,7 @@ public final class CollectionFormatClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> testMultiWithResponse(List<String> colors, RequestOptions requestOptions) {
-        return this.client.testMultiWithResponse(colors, requestOptions).block();
+        return this.serviceClient.testMultiWithResponse(colors, requestOptions);
     }
 
     /**
@@ -80,7 +81,7 @@ public final class CollectionFormatClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> testCsvWithResponse(List<String> colors, RequestOptions requestOptions) {
-        return this.client.testCsvWithResponse(colors, requestOptions).block();
+        return this.serviceClient.testCsvWithResponse(colors, requestOptions);
     }
 
     /**
@@ -105,7 +106,7 @@ public final class CollectionFormatClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> testCsvHeaderWithResponse(List<String> colors, RequestOptions requestOptions) {
-        return this.client.testCsvHeaderWithResponse(colors, requestOptions).block();
+        return this.serviceClient.testCsvHeaderWithResponse(colors, requestOptions);
     }
 
     /**
@@ -130,7 +131,7 @@ public final class CollectionFormatClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> testDefaultHeaderWithResponse(List<String> colors, RequestOptions requestOptions) {
-        return this.client.testDefaultHeaderWithResponse(colors, requestOptions).block();
+        return this.serviceClient.testDefaultHeaderWithResponse(colors, requestOptions);
     }
 
     /**

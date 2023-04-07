@@ -4,6 +4,7 @@
 
 package com.arrays.itemtypes;
 
+import com.arrays.itemtypes.implementation.ModelValuesImpl;
 import com.arrays.itemtypes.models.InnerModel;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
@@ -22,16 +23,16 @@ import java.util.List;
 /** Initializes a new instance of the synchronous ItemTypesClient type. */
 @ServiceClient(builder = ItemTypesClientBuilder.class)
 public final class ModelValueClient {
-    @Generated private final ModelValueAsyncClient client;
+    @Generated private final ModelValuesImpl serviceClient;
 
     /**
      * Initializes an instance of ModelValueClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ModelValueClient(ModelValueAsyncClient client) {
-        this.client = client;
+    ModelValueClient(ModelValuesImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -60,7 +61,7 @@ public final class ModelValueClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 
     /**
@@ -90,7 +91,7 @@ public final class ModelValueClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putWithResponse(body, requestOptions).block();
+        return this.serviceClient.putWithResponse(body, requestOptions);
     }
 
     /**

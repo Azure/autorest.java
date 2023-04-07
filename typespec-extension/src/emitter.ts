@@ -24,6 +24,7 @@ export interface EmitterOptions {
   "namer"?: boolean;
   "generate-samples"?: boolean;
   "generate-tests"?: boolean;
+  "enable-sync-stack"?: boolean;
 
   "examples-directory"?: string;
 
@@ -48,6 +49,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "namer": { type: "boolean", nullable: true, default: false },
     "generate-samples": { type: "boolean", nullable: true, default: true },
     "generate-tests": { type: "boolean", nullable: true, default: true },
+    "enable-sync-stack": { type: "boolean", nullable: true, default: true },
 
     "examples-directory": { type: "string", nullable: true },
 

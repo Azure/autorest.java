@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.naming.implementation.NamingClientImpl;
 import com.cadl.naming.models.DataResponse;
 
 /** Initializes a new instance of the synchronous NamingClient type. */
 @ServiceClient(builder = NamingClientBuilder.class)
 public final class NamingClient {
-    @Generated private final NamingAsyncClient client;
+    @Generated private final NamingClientImpl serviceClient;
 
     /**
      * Initializes an instance of NamingClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    NamingClient(NamingAsyncClient client) {
-        this.client = client;
+    NamingClient(NamingClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -74,7 +75,7 @@ public final class NamingClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postWithResponse(String name, RequestOptions requestOptions) {
-        return this.client.postWithResponse(name, requestOptions).block();
+        return this.serviceClient.postWithResponse(name, requestOptions);
     }
 
     /**

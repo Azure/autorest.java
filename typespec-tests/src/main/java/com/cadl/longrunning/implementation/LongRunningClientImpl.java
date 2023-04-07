@@ -37,6 +37,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
@@ -177,6 +178,28 @@ public final class LongRunningClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Patch("/long-running/resources/{name}")
+        @ExpectedResponses({200, 201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createOrUpdateSync(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
+                @HeaderParam("Content-Type") String contentType,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/merge-patch+json") BinaryData resource,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/long-running/resources/{name}")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(
@@ -190,6 +213,27 @@ public final class LongRunningClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrReplace(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData resource,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/long-running/resources/{name}")
+        @ExpectedResponses({200, 201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createOrReplaceSync(
                 @HostParam("endpoint") String endpoint,
                 @QueryParam("api-version") String apiVersion,
                 @PathParam("name") String name,
@@ -218,6 +262,26 @@ public final class LongRunningClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/long-running/resources/{name}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getSync(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Delete("/long-running/resources/{name}")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(
@@ -238,6 +302,26 @@ public final class LongRunningClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Delete("/long-running/resources/{name}")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> deleteSync(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/long-running/resources/{name}:export")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(
@@ -251,6 +335,27 @@ public final class LongRunningClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> export(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
+                @QueryParam("projectFileVersion") String projectFileVersion,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/long-running/resources/{name}:export")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> exportSync(
                 @HostParam("endpoint") String endpoint,
                 @QueryParam("api-version") String apiVersion,
                 @PathParam("name") String name,
@@ -345,7 +450,17 @@ public final class LongRunningClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return createOrUpdateWithResponseAsync(name, resource, requestOptions).block();
+        final String contentType = "application/merge-patch+json";
+        final String accept = "application/json";
+        return service.createOrUpdateSync(
+                this.getEndpoint(),
+                this.getServiceVersion().getVersion(),
+                name,
+                contentType,
+                accept,
+                resource,
+                requestOptions,
+                Context.NONE);
     }
 
     /**
@@ -394,6 +509,52 @@ public final class LongRunningClientImpl {
                                 resource,
                                 requestOptions,
                                 context));
+    }
+
+    /**
+     * The createOrReplace operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param resource The resource instance.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> createOrReplaceWithResponse(
+            String name, BinaryData resource, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.createOrReplaceSync(
+                this.getEndpoint(),
+                this.getServiceVersion().getVersion(),
+                name,
+                accept,
+                resource,
+                requestOptions,
+                Context.NONE);
     }
 
     /**
@@ -480,7 +641,18 @@ public final class LongRunningClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.beginCreateOrReplaceAsync(name, resource, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -567,7 +739,18 @@ public final class LongRunningClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<ResourceOperationStatusResourceError, Resource> beginCreateOrReplaceWithModel(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.beginCreateOrReplaceWithModelAsync(name, resource, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(ResourceOperationStatusResourceError.class),
+                TypeReference.createInstance(Resource.class));
     }
 
     /**
@@ -628,7 +811,9 @@ public final class LongRunningClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(String name, RequestOptions requestOptions) {
-        return getWithResponseAsync(name, requestOptions).block();
+        final String accept = "application/json";
+        return service.getSync(
+                this.getEndpoint(), this.getServiceVersion().getVersion(), name, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -665,6 +850,34 @@ public final class LongRunningClientImpl {
                                 accept,
                                 requestOptions,
                                 context));
+    }
+
+    /**
+     * The delete operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     error: ResponseError (Optional)
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return provides status details for long running operations along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> deleteWithResponse(String name, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.deleteSync(
+                this.getEndpoint(), this.getServiceVersion().getVersion(), name, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -727,7 +940,18 @@ public final class LongRunningClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete(String name, RequestOptions requestOptions) {
-        return this.beginDeleteAsync(name, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.deleteWithResponse(name, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -792,7 +1016,18 @@ public final class LongRunningClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<ResourceOperationStatusResourceError, Void> beginDeleteWithModel(
             String name, RequestOptions requestOptions) {
-        return this.beginDeleteWithModelAsync(name, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.deleteWithResponse(name, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(ResourceOperationStatusResourceError.class),
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -836,6 +1071,46 @@ public final class LongRunningClientImpl {
                                 accept,
                                 requestOptions,
                                 context));
+    }
+
+    /**
+     * The export operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     error: ResponseError (Optional)
+     *     result (Optional): {
+     *         id: String (Required)
+     *         resourceUri: String (Required)
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param name The name parameter.
+     * @param projectFileVersion The projectFileVersion parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return provides status details for long running operations along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> exportWithResponse(
+            String name, String projectFileVersion, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.exportSync(
+                this.getEndpoint(),
+                this.getServiceVersion().getVersion(),
+                name,
+                projectFileVersion,
+                accept,
+                requestOptions,
+                Context.NONE);
     }
 
     /**
@@ -910,7 +1185,18 @@ public final class LongRunningClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginExport(
             String name, String projectFileVersion, RequestOptions requestOptions) {
-        return this.beginExportAsync(name, projectFileVersion, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.exportWithResponse(name, projectFileVersion, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -989,6 +1275,17 @@ public final class LongRunningClientImpl {
                     ResourceOperationStatusResourceExportedResourceError,
                     ResourceOperationStatusResourceExportedResourceError>
             beginExportWithModel(String name, String projectFileVersion, RequestOptions requestOptions) {
-        return this.beginExportWithModelAsync(name, projectFileVersion, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.exportWithResponse(name, projectFileVersion, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class),
+                TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class));
     }
 }

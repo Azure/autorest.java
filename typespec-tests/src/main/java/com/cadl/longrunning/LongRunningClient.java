@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import com.cadl.longrunning.implementation.LongRunningClientImpl;
 import com.cadl.longrunning.models.Resource;
 import com.cadl.longrunning.models.ResourceOperationStatusResourceError;
 import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResourceError;
@@ -23,16 +24,16 @@ import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResour
 /** Initializes a new instance of the synchronous LongRunningClient type. */
 @ServiceClient(builder = LongRunningClientBuilder.class)
 public final class LongRunningClient {
-    @Generated private final LongRunningAsyncClient client;
+    @Generated private final LongRunningClientImpl serviceClient;
 
     /**
      * Initializes an instance of LongRunningClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    LongRunningClient(LongRunningAsyncClient client) {
-        this.client = client;
+    LongRunningClient(LongRunningClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -71,7 +72,7 @@ public final class LongRunningClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.client.createOrUpdateWithResponse(name, resource, requestOptions).block();
+        return this.serviceClient.createOrUpdateWithResponse(name, resource, requestOptions);
     }
 
     /**
@@ -110,7 +111,7 @@ public final class LongRunningClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.client.beginCreateOrReplace(name, resource, requestOptions).getSyncPoller();
+        return this.serviceClient.beginCreateOrReplace(name, resource, requestOptions);
     }
 
     /**
@@ -137,7 +138,7 @@ public final class LongRunningClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(String name, RequestOptions requestOptions) {
-        return this.client.getWithResponse(name, requestOptions).block();
+        return this.serviceClient.getWithResponse(name, requestOptions);
     }
 
     /**
@@ -164,7 +165,7 @@ public final class LongRunningClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete(String name, RequestOptions requestOptions) {
-        return this.client.beginDelete(name, requestOptions).getSyncPoller();
+        return this.serviceClient.beginDelete(name, requestOptions);
     }
 
     /**
@@ -197,7 +198,7 @@ public final class LongRunningClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginExport(
             String name, String projectFileVersion, RequestOptions requestOptions) {
-        return this.client.beginExport(name, projectFileVersion, requestOptions).getSyncPoller();
+        return this.serviceClient.beginExport(name, projectFileVersion, requestOptions);
     }
 
     /**
@@ -218,7 +219,8 @@ public final class LongRunningClient {
     public SyncPoller<ResourceOperationStatusResourceError, Resource> beginCreateOrReplace(
             String name, Resource resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
-        return client.beginCreateOrReplace(name, resource).getSyncPoller();
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginCreateOrReplaceWithModel(name, BinaryData.fromObject(resource), requestOptions);
     }
 
     /**
@@ -257,7 +259,8 @@ public final class LongRunningClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<ResourceOperationStatusResourceError, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
-        return client.beginDelete(name).getSyncPoller();
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginDeleteWithModel(name, requestOptions);
     }
 
     /**
@@ -280,6 +283,7 @@ public final class LongRunningClient {
                     ResourceOperationStatusResourceExportedResourceError>
             beginExport(String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
-        return client.beginExport(name, projectFileVersion).getSyncPoller();
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginExportWithModel(name, projectFileVersion, requestOptions);
     }
 }

@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.models.property.nullable.implementation.DurationOperationsImpl;
 import com.models.property.nullable.models.DurationProperty;
 
 /** Initializes a new instance of the synchronous NullableClient type. */
 @ServiceClient(builder = NullableClientBuilder.class)
 public final class DurationOperationClient {
-    @Generated private final DurationOperationAsyncClient client;
+    @Generated private final DurationOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of DurationOperationClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    DurationOperationClient(DurationOperationAsyncClient client) {
-        this.client = client;
+    DurationOperationClient(DurationOperationsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -54,7 +55,7 @@ public final class DurationOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNonNullWithResponse(RequestOptions requestOptions) {
-        return this.client.getNonNullWithResponse(requestOptions).block();
+        return this.serviceClient.getNonNullWithResponse(requestOptions);
     }
 
     /**
@@ -79,7 +80,7 @@ public final class DurationOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
-        return this.client.getNullWithResponse(requestOptions).block();
+        return this.serviceClient.getNullWithResponse(requestOptions);
     }
 
     /**
@@ -105,7 +106,7 @@ public final class DurationOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchNonNullWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.patchNonNullWithResponse(body, requestOptions).block();
+        return this.serviceClient.patchNonNullWithResponse(body, requestOptions);
     }
 
     /**
@@ -131,7 +132,7 @@ public final class DurationOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchNullWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.patchNullWithResponse(body, requestOptions).block();
+        return this.serviceClient.patchNullWithResponse(body, requestOptions);
     }
 
     /**

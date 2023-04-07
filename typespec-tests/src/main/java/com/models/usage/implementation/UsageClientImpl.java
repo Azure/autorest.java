@@ -116,6 +116,24 @@ public final class UsageClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/models/usage/input")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> inputSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/models/usage/output")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -131,6 +149,21 @@ public final class UsageClientImpl {
         Mono<Response<BinaryData>> output(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Get("/models/usage/output")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> outputSync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Post("/models/usage/input-output")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -144,6 +177,24 @@ public final class UsageClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> inputAndOutput(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData body,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/models/usage/input-output")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> inputAndOutputSync(
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
@@ -196,7 +247,8 @@ public final class UsageClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> inputWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return inputWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.inputSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -244,7 +296,8 @@ public final class UsageClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> outputWithResponse(RequestOptions requestOptions) {
-        return outputWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.outputSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -310,6 +363,7 @@ public final class UsageClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> inputAndOutputWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return inputAndOutputWithResponseAsync(body, requestOptions).block();
+        final String accept = "application/json";
+        return service.inputAndOutputSync(accept, body, requestOptions, Context.NONE);
     }
 }

@@ -225,6 +225,6 @@ public final class LroClientBuilder implements HttpTrait<LroClientBuilder>, Conf
      */
     @Generated
     public LroClient buildClient() {
-        return new LroClient(new LroAsyncClient(buildInnerClient()));
+        return new LroClient(buildInnerClient());
     }
 }

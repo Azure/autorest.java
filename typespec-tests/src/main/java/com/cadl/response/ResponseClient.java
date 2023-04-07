@@ -16,22 +16,23 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.serializer.TypeReference;
+import com.cadl.response.implementation.ResponseClientImpl;
 import com.cadl.response.models.Resource;
 import java.util.List;
 
 /** Initializes a new instance of the synchronous ResponseClient type. */
 @ServiceClient(builder = ResponseClientBuilder.class)
 public final class ResponseClient {
-    @Generated private final ResponseAsyncClient client;
+    @Generated private final ResponseClientImpl serviceClient;
 
     /**
      * Initializes an instance of ResponseClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    ResponseClient(ResponseAsyncClient client) {
-        this.client = client;
+    ResponseClient(ResponseClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -53,7 +54,7 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBinaryWithResponse(RequestOptions requestOptions) {
-        return this.client.getBinaryWithResponse(requestOptions).block();
+        return this.serviceClient.getBinaryWithResponse(requestOptions);
     }
 
     /**
@@ -82,7 +83,7 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getArrayWithResponse(RequestOptions requestOptions) {
-        return this.client.getArrayWithResponse(requestOptions).block();
+        return this.serviceClient.getArrayWithResponse(requestOptions);
     }
 
     /**
@@ -111,7 +112,7 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAnotherArrayWithResponse(RequestOptions requestOptions) {
-        return this.client.getAnotherArrayWithResponse(requestOptions).block();
+        return this.serviceClient.getAnotherArrayWithResponse(requestOptions);
     }
 
     /**
@@ -138,7 +139,7 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createWithHeadersWithResponse(RequestOptions requestOptions) {
-        return this.client.createWithHeadersWithResponse(requestOptions).block();
+        return this.serviceClient.createWithHeadersWithResponse(requestOptions);
     }
 
     /**
@@ -154,7 +155,7 @@ public final class ResponseClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithHeadersWithResponse(RequestOptions requestOptions) {
-        return this.client.deleteWithHeadersWithResponse(requestOptions).block();
+        return this.serviceClient.deleteWithHeadersWithResponse(requestOptions);
     }
 
     /**

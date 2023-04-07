@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.models.property.types.implementation.StringOperationsImpl;
 import com.models.property.types.models.StringProperty;
 
 /** Initializes a new instance of the synchronous TypesClient type. */
 @ServiceClient(builder = TypesClientBuilder.class)
 public final class StringOperationClient {
-    @Generated private final StringOperationAsyncClient client;
+    @Generated private final StringOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of StringOperationClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    StringOperationClient(StringOperationAsyncClient client) {
-        this.client = client;
+    StringOperationClient(StringOperationsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -53,7 +54,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return this.client.getWithResponse(requestOptions).block();
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 
     /**
@@ -78,7 +79,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putWithResponse(body, requestOptions).block();
+        return this.serviceClient.putWithResponse(body, requestOptions);
     }
 
     /**

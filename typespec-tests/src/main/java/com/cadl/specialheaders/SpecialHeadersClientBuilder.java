@@ -264,6 +264,6 @@ public final class SpecialHeadersClientBuilder
      */
     @Generated
     public SpecialHeadersClient buildClient() {
-        return new SpecialHeadersClient(new SpecialHeadersAsyncClient(buildInnerClient()));
+        return new SpecialHeadersClient(buildInnerClient());
     }
 }

@@ -225,6 +225,6 @@ public final class FixedClientBuilder implements HttpTrait<FixedClientBuilder>, 
      */
     @Generated
     public FixedClient buildClient() {
-        return new FixedClient(new FixedAsyncClient(buildInnerClient()));
+        return new FixedClient(buildInnerClient());
     }
 }

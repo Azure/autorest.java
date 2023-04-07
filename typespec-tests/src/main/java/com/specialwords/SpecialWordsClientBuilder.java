@@ -255,7 +255,7 @@ public final class SpecialWordsClientBuilder
      */
     @Generated
     public OperationClient buildOperationClient() {
-        return new OperationClient(new OperationAsyncClient(buildInnerClient().getOperations()));
+        return new OperationClient(buildInnerClient().getOperations());
     }
 
     /**
@@ -265,7 +265,7 @@ public final class SpecialWordsClientBuilder
      */
     @Generated
     public ParameterClient buildParameterClient() {
-        return new ParameterClient(new ParameterAsyncClient(buildInnerClient().getParameters()));
+        return new ParameterClient(buildInnerClient().getParameters());
     }
 
     /**
@@ -275,6 +275,6 @@ public final class SpecialWordsClientBuilder
      */
     @Generated
     public ModelClient buildModelClient() {
-        return new ModelClient(new ModelAsyncClient(buildInnerClient().getModels()));
+        return new ModelClient(buildInnerClient().getModels());
     }
 }

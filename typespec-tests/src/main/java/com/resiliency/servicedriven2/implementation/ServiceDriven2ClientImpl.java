@@ -144,6 +144,24 @@ public final class ServiceDriven2ClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Head("/serviceDriven2/serviceDriven/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> headNoParamsSync(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/serviceDriven2/serviceDriven/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -163,6 +181,25 @@ public final class ServiceDriven2ClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/serviceDriven2/serviceDriven/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getRequiredSync(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("parameter") String parameter,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Put("/serviceDriven2/serviceDriven/parameters")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -176,6 +213,25 @@ public final class ServiceDriven2ClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putRequiredOptional(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("requiredParam") String requiredParam,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Put("/serviceDriven2/serviceDriven/parameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> putRequiredOptionalSync(
                 @HostParam("endpoint") String endpoint,
                 @QueryParam("requiredParam") String requiredParam,
                 @HeaderParam("accept") String accept,
@@ -202,6 +258,26 @@ public final class ServiceDriven2ClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/serviceDriven2/serviceDriven/parameters/{contentTypePath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> postParametersSync(
+                @HostParam("endpoint") String endpoint,
+                @PathParam("contentTypePath") String contentTypePath,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData parameter,
+                RequestOptions requestOptions,
+                Context context);
+
         @Delete("/serviceDriven2/serviceDriven/parameters")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -215,6 +291,24 @@ public final class ServiceDriven2ClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteParameters(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Delete("/serviceDriven2/serviceDriven/parameters")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> deleteParametersSync(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -238,6 +332,24 @@ public final class ServiceDriven2ClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/serviceDriven2/serviceDriven/moreParameters")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getOptionalSync(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/serviceDriven2/serviceDriven/newPath")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -251,6 +363,24 @@ public final class ServiceDriven2ClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getNewOperation(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/serviceDriven2/serviceDriven/newPath")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getNewOperationSync(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -308,7 +438,8 @@ public final class ServiceDriven2ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> headNoParamsWithResponse(RequestOptions requestOptions) {
-        return headNoParamsWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.headNoParamsSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -381,7 +512,8 @@ public final class ServiceDriven2ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(String parameter, RequestOptions requestOptions) {
-        return getRequiredWithResponseAsync(parameter, requestOptions).block();
+        final String accept = "application/json";
+        return service.getRequiredSync(this.getEndpoint(), parameter, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -458,7 +590,8 @@ public final class ServiceDriven2ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putRequiredOptionalWithResponse(String requiredParam, RequestOptions requestOptions) {
-        return putRequiredOptionalWithResponseAsync(requiredParam, requestOptions).block();
+        final String accept = "application/json";
+        return service.putRequiredOptionalSync(this.getEndpoint(), requiredParam, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -530,7 +663,9 @@ public final class ServiceDriven2ClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postParametersWithResponse(
             String contentTypePath, BinaryData parameter, RequestOptions requestOptions) {
-        return postParametersWithResponseAsync(contentTypePath, parameter, requestOptions).block();
+        final String accept = "application/json";
+        return service.postParametersSync(
+                this.getEndpoint(), contentTypePath, accept, parameter, requestOptions, Context.NONE);
     }
 
     /**
@@ -564,7 +699,8 @@ public final class ServiceDriven2ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteParametersWithResponse(RequestOptions requestOptions) {
-        return deleteParametersWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.deleteParametersSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -637,7 +773,8 @@ public final class ServiceDriven2ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
-        return getOptionalWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getOptionalSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -687,6 +824,7 @@ public final class ServiceDriven2ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNewOperationWithResponse(RequestOptions requestOptions) {
-        return getNewOperationWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getNewOperationSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

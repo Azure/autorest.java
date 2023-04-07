@@ -15,22 +15,23 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.visibility.implementation.VisibilityWritesImpl;
 import com.cadl.visibility.models.Dog;
 import com.cadl.visibility.models.WriteDog;
 
 /** Initializes a new instance of the synchronous VisibilityClient type. */
 @ServiceClient(builder = VisibilityClientBuilder.class)
 public final class VisibilityWriteClient {
-    @Generated private final VisibilityWriteAsyncClient client;
+    @Generated private final VisibilityWritesImpl serviceClient;
 
     /**
      * Initializes an instance of VisibilityWriteClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    VisibilityWriteClient(VisibilityWriteAsyncClient client) {
-        this.client = client;
+    VisibilityWriteClient(VisibilityWritesImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -65,7 +66,7 @@ public final class VisibilityWriteClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createWithResponse(BinaryData dog, RequestOptions requestOptions) {
-        return this.client.createWithResponse(dog, requestOptions).block();
+        return this.serviceClient.createWithResponse(dog, requestOptions);
     }
 
     /**

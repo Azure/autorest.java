@@ -34,6 +34,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
@@ -149,6 +150,26 @@ public final class CoreClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/azure/lro/core/users/{name}")
+        @ExpectedResponses({200, 201})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createOrReplaceSync(
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData resource,
+                RequestOptions requestOptions,
+                Context context);
+
         @Delete("/azure/lro/core/users/{name}")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(
@@ -168,6 +189,25 @@ public final class CoreClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Delete("/azure/lro/core/users/{name}")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> deleteSync(
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Post("/azure/lro/core/users/{name}:export")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(
@@ -181,6 +221,26 @@ public final class CoreClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> export(
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("name") String name,
+                @QueryParam("format") String format,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/azure/lro/core/users/{name}:export")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> exportSync(
                 @QueryParam("api-version") String apiVersion,
                 @PathParam("name") String name,
                 @QueryParam("format") String format,
@@ -234,6 +294,46 @@ public final class CoreClientImpl {
                                 resource,
                                 requestOptions,
                                 context));
+    }
+
+    /**
+     * Adds a user or replaces a user's fields.
+     *
+     * <p>Creates or replaces a User.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     *     role: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     *     role: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param name The name of user.
+     * @param resource The resource instance.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return details about a user along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> createOrReplaceWithResponse(
+            String name, BinaryData resource, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.createOrReplaceSync(
+                this.getServiceVersion().getVersion(), name, accept, resource, requestOptions, Context.NONE);
     }
 
     /**
@@ -320,7 +420,18 @@ public final class CoreClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.beginCreateOrReplaceAsync(name, resource, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -407,7 +518,18 @@ public final class CoreClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<ResourceOperationStatusUserError, User> beginCreateOrReplaceWithModel(
             String name, BinaryData resource, RequestOptions requestOptions) {
-        return this.beginCreateOrReplaceWithModelAsync(name, resource, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(ResourceOperationStatusUserError.class),
+                TypeReference.createInstance(User.class));
     }
 
     /**
@@ -440,6 +562,35 @@ public final class CoreClientImpl {
         return FluxUtil.withContext(
                 context ->
                         service.delete(this.getServiceVersion().getVersion(), name, accept, requestOptions, context));
+    }
+
+    /**
+     * Deletes a user.
+     *
+     * <p>Deletes a User.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     error: ResponseError (Optional)
+     * }
+     * }</pre>
+     *
+     * @param name The name of user.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return provides status details for long running operations along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> deleteWithResponse(String name, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.deleteSync(this.getServiceVersion().getVersion(), name, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -506,7 +657,18 @@ public final class CoreClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete(String name, RequestOptions requestOptions) {
-        return this.beginDeleteAsync(name, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.deleteWithResponse(name, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -575,7 +737,18 @@ public final class CoreClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<ResourceOperationStatusUserError, Void> beginDeleteWithModel(
             String name, RequestOptions requestOptions) {
-        return this.beginDeleteWithModelAsync(name, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.deleteWithResponse(name, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(ResourceOperationStatusUserError.class),
+                TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -615,6 +788,41 @@ public final class CoreClientImpl {
                 context ->
                         service.export(
                                 this.getServiceVersion().getVersion(), name, format, accept, requestOptions, context));
+    }
+
+    /**
+     * Exports a user.
+     *
+     * <p>Exports a User.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     error: ResponseError (Optional)
+     *     result (Optional): {
+     *         name: String (Required)
+     *         resourceUri: String (Required)
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param name The name of user.
+     * @param format The format of the data.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return provides status details for long running operations along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> exportWithResponse(String name, String format, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.exportSync(
+                this.getServiceVersion().getVersion(), name, format, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -692,7 +900,18 @@ public final class CoreClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginExport(String name, String format, RequestOptions requestOptions) {
-        return this.beginExportAsync(name, format, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.exportWithResponse(name, format, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -771,6 +990,17 @@ public final class CoreClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<ResourceOperationStatusUserExportedUserError, ResourceOperationStatusUserExportedUserError>
             beginExportWithModel(String name, String format, RequestOptions requestOptions) {
-        return this.beginExportWithModelAsync(name, format, requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.exportWithResponse(name, format, requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(ResourceOperationStatusUserExportedUserError.class),
+                TypeReference.createInstance(ResourceOperationStatusUserExportedUserError.class));
     }
 }

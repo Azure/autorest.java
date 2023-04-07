@@ -15,20 +15,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.hello.implementation.HelloClientImpl;
 
 /** Initializes a new instance of the synchronous HelloClient type. */
 @ServiceClient(builder = HelloClientBuilder.class)
 public final class HelloClient {
-    @Generated private final HelloAsyncClient client;
+    @Generated private final HelloClientImpl serviceClient;
 
     /**
      * Initializes an instance of HelloClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    HelloClient(HelloAsyncClient client) {
-        this.client = client;
+    HelloClient(HelloClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -50,7 +51,7 @@ public final class HelloClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> worldWithResponse(RequestOptions requestOptions) {
-        return this.client.worldWithResponse(requestOptions).block();
+        return this.serviceClient.worldWithResponse(requestOptions);
     }
 
     /**

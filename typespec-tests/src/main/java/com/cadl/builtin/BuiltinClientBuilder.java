@@ -243,6 +243,6 @@ public final class BuiltinClientBuilder
      */
     @Generated
     public BuiltinClient buildClient() {
-        return new BuiltinClient(new BuiltinAsyncClient(buildInnerClient()));
+        return new BuiltinClient(buildInnerClient());
     }
 }

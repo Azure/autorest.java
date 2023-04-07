@@ -264,6 +264,6 @@ public final class SecondClientBuilder
      */
     @Generated
     public SecondClient buildClient() {
-        return new SecondClient(new SecondAsyncClient(buildInnerClient()));
+        return new SecondClient(buildInnerClient());
     }
 }

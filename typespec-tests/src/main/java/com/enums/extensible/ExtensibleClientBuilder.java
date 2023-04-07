@@ -228,6 +228,6 @@ public final class ExtensibleClientBuilder
      */
     @Generated
     public ExtensibleClient buildClient() {
-        return new ExtensibleClient(new ExtensibleAsyncClient(buildInnerClient()));
+        return new ExtensibleClient(buildInnerClient());
     }
 }

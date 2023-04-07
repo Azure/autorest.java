@@ -15,21 +15,22 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.models.property.optional.implementation.CollectionsModelsImpl;
 import com.models.property.optional.models.CollectionsModelProperty;
 
 /** Initializes a new instance of the synchronous OptionalClient type. */
 @ServiceClient(builder = OptionalClientBuilder.class)
 public final class CollectionsModelClient {
-    @Generated private final CollectionsModelAsyncClient client;
+    @Generated private final CollectionsModelsImpl serviceClient;
 
     /**
      * Initializes an instance of CollectionsModelClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    CollectionsModelClient(CollectionsModelAsyncClient client) {
-        this.client = client;
+    CollectionsModelClient(CollectionsModelsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -57,7 +58,7 @@ public final class CollectionsModelClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAllWithResponse(RequestOptions requestOptions) {
-        return this.client.getAllWithResponse(requestOptions).block();
+        return this.serviceClient.getAllWithResponse(requestOptions);
     }
 
     /**
@@ -85,7 +86,7 @@ public final class CollectionsModelClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultWithResponse(RequestOptions requestOptions) {
-        return this.client.getDefaultWithResponse(requestOptions).block();
+        return this.serviceClient.getDefaultWithResponse(requestOptions);
     }
 
     /**
@@ -114,7 +115,7 @@ public final class CollectionsModelClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putAllWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putAllWithResponse(body, requestOptions).block();
+        return this.serviceClient.putAllWithResponse(body, requestOptions);
     }
 
     /**
@@ -143,7 +144,7 @@ public final class CollectionsModelClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDefaultWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.client.putDefaultWithResponse(body, requestOptions).block();
+        return this.serviceClient.putDefaultWithResponse(body, requestOptions);
     }
 
     /**

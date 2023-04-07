@@ -68,6 +68,24 @@ public final class ParametersImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/special-words/parameter/if")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getWithIfSync(
+                @HeaderParam("if") String ifParameter,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/special-words/parameter/filter")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -81,6 +99,24 @@ public final class ParametersImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getWithFilter(
+                @QueryParam("filter") String filter,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/special-words/parameter/filter")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getWithFilterSync(
                 @QueryParam("filter") String filter,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -117,7 +153,8 @@ public final class ParametersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithIfWithResponse(String ifParameter, RequestOptions requestOptions) {
-        return getWithIfWithResponseAsync(ifParameter, requestOptions).block();
+        final String accept = "application/json";
+        return service.getWithIfSync(ifParameter, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -150,6 +187,7 @@ public final class ParametersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithFilterWithResponse(String filter, RequestOptions requestOptions) {
-        return getWithFilterWithResponseAsync(filter, requestOptions).block();
+        final String accept = "application/json";
+        return service.getWithFilterSync(filter, accept, requestOptions, Context.NONE);
     }
 }

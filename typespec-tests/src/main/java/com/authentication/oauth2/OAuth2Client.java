@@ -4,6 +4,7 @@
 
 package com.authentication.oauth2;
 
+import com.authentication.oauth2.implementation.OAuth2ClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -18,16 +19,16 @@ import com.azure.core.http.rest.Response;
 /** Initializes a new instance of the synchronous OAuth2Client type. */
 @ServiceClient(builder = OAuth2ClientBuilder.class)
 public final class OAuth2Client {
-    @Generated private final OAuth2AsyncClient client;
+    @Generated private final OAuth2ClientImpl serviceClient;
 
     /**
      * Initializes an instance of OAuth2Client class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    OAuth2Client(OAuth2AsyncClient client) {
-        this.client = client;
+    OAuth2Client(OAuth2ClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -43,7 +44,7 @@ public final class OAuth2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validWithResponse(RequestOptions requestOptions) {
-        return this.client.validWithResponse(requestOptions).block();
+        return this.serviceClient.validWithResponse(requestOptions);
     }
 
     /**
@@ -59,7 +60,7 @@ public final class OAuth2Client {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> invalidWithResponse(RequestOptions requestOptions) {
-        return this.client.invalidWithResponse(requestOptions).block();
+        return this.serviceClient.invalidWithResponse(requestOptions);
     }
 
     /**

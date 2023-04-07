@@ -30,6 +30,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
@@ -116,6 +117,21 @@ public final class LroClientImpl {
         Mono<Response<BinaryData>> create(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Put("/lro/basic/put")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createSync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Get("/lro/basic/put/polling")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -131,6 +147,21 @@ public final class LroClientImpl {
         Mono<Response<BinaryData>> polling(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Get("/lro/basic/put/polling")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> pollingSync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Get("/lro/basic/put")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -144,6 +175,21 @@ public final class LroClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/lro/basic/put")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
@@ -169,6 +215,30 @@ public final class LroClientImpl {
     private Mono<Response<BinaryData>> createWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.create(accept, requestOptions, context));
+    }
+
+    /**
+     * Test for basic lro of put.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return details about a user along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> createWithResponse(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.createSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -225,7 +295,18 @@ public final class LroClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreate(RequestOptions requestOptions) {
-        return this.beginCreateAsync(requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.createWithResponse(requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -282,7 +363,18 @@ public final class LroClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<User, User> beginCreateWithModel(RequestOptions requestOptions) {
-        return this.beginCreateWithModelAsync(requestOptions).getSyncPoller();
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.createWithResponse(requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        null,
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(User.class),
+                TypeReference.createInstance(User.class));
     }
 
     /**
@@ -329,7 +421,8 @@ public final class LroClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> pollingWithResponse(RequestOptions requestOptions) {
-        return pollingWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.pollingSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -376,6 +469,7 @@ public final class LroClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
-        return getWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getSync(accept, requestOptions, Context.NONE);
     }
 }

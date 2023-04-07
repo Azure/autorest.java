@@ -398,7 +398,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public BooleanOperationClient buildBooleanOperationClient() {
-        return new BooleanOperationClient(new BooleanOperationAsyncClient(buildInnerClient().getBooleanOperations()));
+        return new BooleanOperationClient(buildInnerClient().getBooleanOperations());
     }
 
     /**
@@ -408,7 +408,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public StringOperationClient buildStringOperationClient() {
-        return new StringOperationClient(new StringOperationAsyncClient(buildInnerClient().getStringOperations()));
+        return new StringOperationClient(buildInnerClient().getStringOperations());
     }
 
     /**
@@ -418,7 +418,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public BytesClient buildBytesClient() {
-        return new BytesClient(new BytesAsyncClient(buildInnerClient().getBytes()));
+        return new BytesClient(buildInnerClient().getBytes());
     }
 
     /**
@@ -428,7 +428,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public IntClient buildIntClient() {
-        return new IntClient(new IntAsyncClient(buildInnerClient().getInts()));
+        return new IntClient(buildInnerClient().getInts());
     }
 
     /**
@@ -438,7 +438,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public FloatOperationClient buildFloatOperationClient() {
-        return new FloatOperationClient(new FloatOperationAsyncClient(buildInnerClient().getFloatOperations()));
+        return new FloatOperationClient(buildInnerClient().getFloatOperations());
     }
 
     /**
@@ -448,8 +448,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public DatetimeOperationClient buildDatetimeOperationClient() {
-        return new DatetimeOperationClient(
-                new DatetimeOperationAsyncClient(buildInnerClient().getDatetimeOperations()));
+        return new DatetimeOperationClient(buildInnerClient().getDatetimeOperations());
     }
 
     /**
@@ -459,8 +458,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public DurationOperationClient buildDurationOperationClient() {
-        return new DurationOperationClient(
-                new DurationOperationAsyncClient(buildInnerClient().getDurationOperations()));
+        return new DurationOperationClient(buildInnerClient().getDurationOperations());
     }
 
     /**
@@ -470,7 +468,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public EnumClient buildEnumClient() {
-        return new EnumClient(new EnumAsyncClient(buildInnerClient().getEnums()));
+        return new EnumClient(buildInnerClient().getEnums());
     }
 
     /**
@@ -480,7 +478,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public ExtensibleEnumClient buildExtensibleEnumClient() {
-        return new ExtensibleEnumClient(new ExtensibleEnumAsyncClient(buildInnerClient().getExtensibleEnums()));
+        return new ExtensibleEnumClient(buildInnerClient().getExtensibleEnums());
     }
 
     /**
@@ -490,7 +488,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public ModelClient buildModelClient() {
-        return new ModelClient(new ModelAsyncClient(buildInnerClient().getModels()));
+        return new ModelClient(buildInnerClient().getModels());
     }
 
     /**
@@ -500,8 +498,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public CollectionsStringClient buildCollectionsStringClient() {
-        return new CollectionsStringClient(
-                new CollectionsStringAsyncClient(buildInnerClient().getCollectionsStrings()));
+        return new CollectionsStringClient(buildInnerClient().getCollectionsStrings());
     }
 
     /**
@@ -511,7 +508,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public CollectionsIntClient buildCollectionsIntClient() {
-        return new CollectionsIntClient(new CollectionsIntAsyncClient(buildInnerClient().getCollectionsInts()));
+        return new CollectionsIntClient(buildInnerClient().getCollectionsInts());
     }
 
     /**
@@ -521,7 +518,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public CollectionsModelClient buildCollectionsModelClient() {
-        return new CollectionsModelClient(new CollectionsModelAsyncClient(buildInnerClient().getCollectionsModels()));
+        return new CollectionsModelClient(buildInnerClient().getCollectionsModels());
     }
 
     /**
@@ -531,7 +528,7 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public DictionaryStringClient buildDictionaryStringClient() {
-        return new DictionaryStringClient(new DictionaryStringAsyncClient(buildInnerClient().getDictionaryStrings()));
+        return new DictionaryStringClient(buildInnerClient().getDictionaryStrings());
     }
 
     /**
@@ -541,6 +538,6 @@ public final class TypesClientBuilder implements HttpTrait<TypesClientBuilder>, 
      */
     @Generated
     public NeverClient buildNeverClient() {
-        return new NeverClient(new NeverAsyncClient(buildInnerClient().getNevers()));
+        return new NeverClient(buildInnerClient().getNevers());
     }
 }

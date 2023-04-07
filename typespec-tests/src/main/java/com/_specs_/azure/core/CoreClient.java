@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core;
 
+import com._specs_.azure.core.implementation.CoreClientImpl;
 import com._specs_.azure.core.models.User;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
@@ -22,16 +23,16 @@ import java.util.List;
 /** Initializes a new instance of the synchronous CoreClient type. */
 @ServiceClient(builder = CoreClientBuilder.class)
 public final class CoreClient {
-    @Generated private final CoreAsyncClient client;
+    @Generated private final CoreClientImpl serviceClient;
 
     /**
      * Initializes an instance of CoreClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    CoreClient(CoreAsyncClient client) {
-        this.client = client;
+    CoreClient(CoreClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
@@ -85,7 +86,7 @@ public final class CoreClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(int id, BinaryData resource, RequestOptions requestOptions) {
-        return this.client.createOrUpdateWithResponse(id, resource, requestOptions).block();
+        return this.serviceClient.createOrUpdateWithResponse(id, resource, requestOptions);
     }
 
     /**
@@ -140,7 +141,7 @@ public final class CoreClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrReplaceWithResponse(
             int id, BinaryData resource, RequestOptions requestOptions) {
-        return this.client.createOrReplaceWithResponse(id, resource, requestOptions).block();
+        return this.serviceClient.createOrReplaceWithResponse(id, resource, requestOptions);
     }
 
     /**
@@ -176,7 +177,7 @@ public final class CoreClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(int id, RequestOptions requestOptions) {
-        return this.client.getWithResponse(id, requestOptions).block();
+        return this.serviceClient.getWithResponse(id, requestOptions);
     }
 
     /**
@@ -227,7 +228,7 @@ public final class CoreClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.list(requestOptions));
+        return this.serviceClient.list(requestOptions);
     }
 
     /**
@@ -260,7 +261,7 @@ public final class CoreClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listWithPage(RequestOptions requestOptions) {
-        return new PagedIterable<>(this.client.listWithPage(requestOptions));
+        return this.serviceClient.listWithPage(requestOptions);
     }
 
     /**
@@ -279,7 +280,7 @@ public final class CoreClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithResponse(int id, RequestOptions requestOptions) {
-        return this.client.deleteWithResponse(id, requestOptions).block();
+        return this.serviceClient.deleteWithResponse(id, requestOptions);
     }
 
     /**
@@ -316,7 +317,7 @@ public final class CoreClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> exportWithResponse(int id, String format, RequestOptions requestOptions) {
-        return this.client.exportWithResponse(id, format, requestOptions).block();
+        return this.serviceClient.exportWithResponse(id, format, requestOptions);
     }
 
     /**
@@ -397,7 +398,41 @@ public final class CoreClient {
             List<String> select,
             List<String> expand) {
         // Generated convenience method for list
-        return new PagedIterable<>(client.list(top, skip, maxPageSize, orderBy, filter, select, expand));
+        RequestOptions requestOptions = new RequestOptions();
+        if (top != null) {
+            requestOptions.addQueryParam("top", String.valueOf(top), false);
+        }
+        if (skip != null) {
+            requestOptions.addQueryParam("skip", String.valueOf(skip), false);
+        }
+        if (maxPageSize != null) {
+            requestOptions.addQueryParam("maxpagesize", String.valueOf(maxPageSize), false);
+        }
+        if (orderBy != null) {
+            for (String paramItemValue : orderBy) {
+                if (paramItemValue != null) {
+                    requestOptions.addQueryParam("orderby", paramItemValue, false);
+                }
+            }
+        }
+        if (filter != null) {
+            requestOptions.addQueryParam("filter", filter, false);
+        }
+        if (select != null) {
+            for (String paramItemValue : select) {
+                if (paramItemValue != null) {
+                    requestOptions.addQueryParam("select", paramItemValue, false);
+                }
+            }
+        }
+        if (expand != null) {
+            for (String paramItemValue : expand) {
+                if (paramItemValue != null) {
+                    requestOptions.addQueryParam("expand", paramItemValue, false);
+                }
+            }
+        }
+        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(User.class));
     }
 
     /**
@@ -416,7 +451,8 @@ public final class CoreClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<User> list() {
         // Generated convenience method for list
-        return new PagedIterable<>(client.list());
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(User.class));
     }
 
     /**
@@ -433,7 +469,8 @@ public final class CoreClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<User> listWithPage() {
         // Generated convenience method for listWithPage
-        return new PagedIterable<>(client.listWithPage());
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.listWithPage(requestOptions).mapPage(value -> value.toObject(User.class));
     }
 
     /**

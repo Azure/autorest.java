@@ -118,6 +118,24 @@ public final class InheritanceClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Post("/models/inheritance/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> postValidSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/models/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -131,6 +149,21 @@ public final class InheritanceClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getValid(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/models/inheritance/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getValidSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/models/inheritance/valid")
@@ -151,6 +184,24 @@ public final class InheritanceClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/models/inheritance/valid")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> putValidSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/models/inheritance/discriminated/model")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -164,6 +215,21 @@ public final class InheritanceClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getModel(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/models/inheritance/discriminated/model")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getModelSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/models/inheritance/discriminated/model")
@@ -184,6 +250,24 @@ public final class InheritanceClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/models/inheritance/discriminated/model")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putModelSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/models/inheritance/discriminated/recursivemodel")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -197,6 +281,21 @@ public final class InheritanceClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getRecursiveModel(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/models/inheritance/discriminated/recursivemodel")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getRecursiveModelSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/models/inheritance/discriminated/recursivemodel")
@@ -217,6 +316,24 @@ public final class InheritanceClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Put("/models/inheritance/discriminated/recursivemodel")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> putRecursiveModelSync(
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData input,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/models/inheritance/discriminated/missingdiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -232,6 +349,21 @@ public final class InheritanceClientImpl {
         Mono<Response<BinaryData>> getMissingDiscriminator(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Get("/models/inheritance/discriminated/missingdiscriminator")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getMissingDiscriminatorSync(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Get("/models/inheritance/discriminated/wrongdiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
@@ -245,6 +377,21 @@ public final class InheritanceClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getWrongDiscriminator(
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/models/inheritance/discriminated/wrongdiscriminator")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getWrongDiscriminatorSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
@@ -298,7 +445,8 @@ public final class InheritanceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postValidWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return postValidWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.postValidSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -350,7 +498,8 @@ public final class InheritanceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getValidWithResponse(RequestOptions requestOptions) {
-        return getValidWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getValidSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -424,7 +573,8 @@ public final class InheritanceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putValidWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return putValidWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.putValidSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -473,7 +623,8 @@ public final class InheritanceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(RequestOptions requestOptions) {
-        return getModelWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getModelSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -522,7 +673,8 @@ public final class InheritanceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return putModelWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.putModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -571,7 +723,8 @@ public final class InheritanceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRecursiveModelWithResponse(RequestOptions requestOptions) {
-        return getRecursiveModelWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getRecursiveModelSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -620,7 +773,8 @@ public final class InheritanceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putRecursiveModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return putRecursiveModelWithResponseAsync(input, requestOptions).block();
+        final String accept = "application/json";
+        return service.putRecursiveModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -669,7 +823,8 @@ public final class InheritanceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getMissingDiscriminatorWithResponse(RequestOptions requestOptions) {
-        return getMissingDiscriminatorWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getMissingDiscriminatorSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -718,6 +873,7 @@ public final class InheritanceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWrongDiscriminatorWithResponse(RequestOptions requestOptions) {
-        return getWrongDiscriminatorWithResponseAsync(requestOptions).block();
+        final String accept = "application/json";
+        return service.getWrongDiscriminatorSync(accept, requestOptions, Context.NONE);
     }
 }

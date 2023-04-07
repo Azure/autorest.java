@@ -225,6 +225,6 @@ public final class UsageClientBuilder implements HttpTrait<UsageClientBuilder>, 
      */
     @Generated
     public UsageClient buildClient() {
-        return new UsageClient(new UsageAsyncClient(buildInnerClient()));
+        return new UsageClient(buildInnerClient());
     }
 }

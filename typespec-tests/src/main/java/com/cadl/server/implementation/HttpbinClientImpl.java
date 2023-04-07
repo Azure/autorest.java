@@ -154,6 +154,26 @@ public final class HttpbinClientImpl {
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Get("/status/{code}")
+        @ExpectedResponses({200, 204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> statusSync(
+                @HostParam("domain") String domain,
+                @HostParam("tld") String tld,
+                @PathParam("code") int code,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -187,6 +207,7 @@ public final class HttpbinClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> statusWithResponse(int code, RequestOptions requestOptions) {
-        return statusWithResponseAsync(code, requestOptions).block();
+        final String accept = "application/json";
+        return service.statusSync(this.getDomain(), this.getTld(), code, accept, requestOptions, Context.NONE);
     }
 }

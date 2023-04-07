@@ -351,7 +351,7 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public Int32ValueClient buildInt32ValueClient() {
-        return new Int32ValueClient(new Int32ValueAsyncClient(buildInnerClient().getInt32Values()));
+        return new Int32ValueClient(buildInnerClient().getInt32Values());
     }
 
     /**
@@ -361,7 +361,7 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public Int64ValueClient buildInt64ValueClient() {
-        return new Int64ValueClient(new Int64ValueAsyncClient(buildInnerClient().getInt64Values()));
+        return new Int64ValueClient(buildInnerClient().getInt64Values());
     }
 
     /**
@@ -371,7 +371,7 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public BooleanValueClient buildBooleanValueClient() {
-        return new BooleanValueClient(new BooleanValueAsyncClient(buildInnerClient().getBooleanValues()));
+        return new BooleanValueClient(buildInnerClient().getBooleanValues());
     }
 
     /**
@@ -381,7 +381,7 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public StringValueClient buildStringValueClient() {
-        return new StringValueClient(new StringValueAsyncClient(buildInnerClient().getStringValues()));
+        return new StringValueClient(buildInnerClient().getStringValues());
     }
 
     /**
@@ -391,7 +391,7 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public Float32ValueClient buildFloat32ValueClient() {
-        return new Float32ValueClient(new Float32ValueAsyncClient(buildInnerClient().getFloat32Values()));
+        return new Float32ValueClient(buildInnerClient().getFloat32Values());
     }
 
     /**
@@ -401,7 +401,7 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public DatetimeValueClient buildDatetimeValueClient() {
-        return new DatetimeValueClient(new DatetimeValueAsyncClient(buildInnerClient().getDatetimeValues()));
+        return new DatetimeValueClient(buildInnerClient().getDatetimeValues());
     }
 
     /**
@@ -411,7 +411,7 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public DurationValueClient buildDurationValueClient() {
-        return new DurationValueClient(new DurationValueAsyncClient(buildInnerClient().getDurationValues()));
+        return new DurationValueClient(buildInnerClient().getDurationValues());
     }
 
     /**
@@ -421,7 +421,7 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public UnknownValueClient buildUnknownValueClient() {
-        return new UnknownValueClient(new UnknownValueAsyncClient(buildInnerClient().getUnknownValues()));
+        return new UnknownValueClient(buildInnerClient().getUnknownValues());
     }
 
     /**
@@ -431,7 +431,7 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public ModelValueClient buildModelValueClient() {
-        return new ModelValueClient(new ModelValueAsyncClient(buildInnerClient().getModelValues()));
+        return new ModelValueClient(buildInnerClient().getModelValues());
     }
 
     /**
@@ -441,8 +441,7 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public RecursiveModelValueClient buildRecursiveModelValueClient() {
-        return new RecursiveModelValueClient(
-                new RecursiveModelValueAsyncClient(buildInnerClient().getRecursiveModelValues()));
+        return new RecursiveModelValueClient(buildInnerClient().getRecursiveModelValues());
     }
 
     /**
@@ -452,7 +451,6 @@ public final class DictionaryClientBuilder
      */
     @Generated
     public NullableFloatValueClient buildNullableFloatValueClient() {
-        return new NullableFloatValueClient(
-                new NullableFloatValueAsyncClient(buildInnerClient().getNullableFloatValues()));
+        return new NullableFloatValueClient(buildInnerClient().getNullableFloatValues());
     }
 }
