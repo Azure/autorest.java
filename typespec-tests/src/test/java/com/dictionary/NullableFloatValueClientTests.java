@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -20,7 +19,6 @@ public class NullableFloatValueClientTests {
 
     private final NullableFloatValueClient client = new DictionaryClientBuilder().buildNullableFloatValueClient();
 
-    @Disabled("cadl-ranch bug")
     @Test
     public void get() {
 
@@ -30,13 +28,12 @@ public class NullableFloatValueClientTests {
         Assertions.assertNull(result.get("k3"));
     }
 
-    @Disabled("cadl-ranch bug")
     @Test
     public void put() throws Exception {
         MapModel model = new MapModel();
         model.map = new HashMap<>();
-        model.map.put("k1", 1.1);
-        model.map.put("k2", 2.1);
+        model.map.put("k1", 1.2);
+        model.map.put("k2", 0.5);
         model.map.put("k3", null);
 
         // Map as request does not work
