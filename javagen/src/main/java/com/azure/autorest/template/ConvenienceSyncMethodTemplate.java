@@ -3,8 +3,10 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -19,10 +21,12 @@ import com.azure.core.util.CoreUtils;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase {
 
     private static final ConvenienceSyncMethodTemplate INSTANCE = new ConvenienceSyncMethodTemplate();
+    private static final String ASYNC_CLIENT_VAR_NAME = "client";
 
     protected ConvenienceSyncMethodTemplate() {
     }
@@ -63,14 +67,26 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                 ? "" : ".getValue()";
 
         if (convenienceMethod.getType() == ClientMethodType.PagingSync) {
-            methodBlock.methodReturn(String.format(
-                    "serviceClient.%1$s(%2$s).mapPage(value -> %3$s)",
-                    protocolMethod.getName(),
-                    invocationExpression,
-                    expressionConvertFromBinaryData(responseBodyType, "value", typeReferenceStaticClasses)));
+            if (JavaSettings.getInstance().isSyncStackEnabled()) {
+                methodBlock.methodReturn(String.format(
+                        "serviceClient.%1$s(%2$s).mapPage(value -> %3$s)",
+                        protocolMethod.getName(),
+                        invocationExpression,
+                        expressionConvertFromBinaryData(responseBodyType, "value", typeReferenceStaticClasses)));
+            } else {
+                // Call the convenience method from async client
+                String methodInvoke = "new PagedIterable<>(" + getMethodInvokeViaAsyncClient(convenienceMethod) + ")";
+                methodBlock.methodReturn(methodInvoke);
+            }
         } else if (convenienceMethod.getType() == ClientMethodType.LongRunningBeginSync){
-            String methodName = protocolMethod.getName();
-            methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));
+            if (JavaSettings.getInstance().isSyncStackEnabled()) {
+                String methodName = protocolMethod.getName();
+                methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));
+            } else {
+                // Call the convenience method from async client
+                String methodInvoke = getMethodInvokeViaAsyncClient(convenienceMethod) + ".getSyncPoller()";
+                methodBlock.methodReturn(methodInvoke);
+            }
         } else if (convenienceMethod.getType() == ClientMethodType.SimpleSyncRestResponse
                 && !(responseBodyType.asNullable() == ClassType.Void || responseBodyType == ClassType.BinaryData)) {
 
@@ -111,6 +127,14 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                 methodBlock.methodReturn(statement);
             }
         }
+    }
+
+    private static String getMethodInvokeViaAsyncClient(ClientMethod convenienceMethod) {
+        List<String> parameterNames = convenienceMethod.getMethodInputParameters().stream()
+                .map(ClientMethodParameter::getName).collect(Collectors.toList());
+
+        return String.format("%1$s.%2$s(%3$s)",
+                ASYNC_CLIENT_VAR_NAME, convenienceMethod.getName(), String.join(", ", parameterNames));
     }
 
     private String getProtocolMethodResponseStatement(ClientMethod protocolMethod, String invocationExpression) {
