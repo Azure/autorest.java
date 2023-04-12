@@ -40,7 +40,7 @@ alias LongRequest = {
   user?: User;
   input: string;
   dataInt: int32;
-  dataUnion?: string | ArrayData | bytes | zonedDateTime;
+  dataUnion?: string | ArrayData | bytes | utcDateTime;
   dataLong?: int64;
   data_float?: float64;
 };

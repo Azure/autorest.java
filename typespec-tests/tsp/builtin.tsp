@@ -22,7 +22,7 @@ model Builtin {
   double: float64;
   duration: duration;
   date: plainDate;
-  dateTime: zonedDateTime;
+  dateTime: utcDateTime;
   stringList: string[];
   bytesDict: Record<bytes>;
   url: url;
@@ -67,7 +67,7 @@ scalar KnownValuesScalar extends string;
 
 model Request {
   @header("x-ms-date")
-  dateTime?: zonedDateTime;
+  dateTime?: utcDateTime;
 
   @query
   filter?: string;
