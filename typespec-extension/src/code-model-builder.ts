@@ -54,13 +54,13 @@ import {
 import { getVersion } from "@typespec/versioning";
 import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/typespec-azure-core";
 import {
-  DpgContext,
+  SdkContext,
   listClients,
   listOperationGroups,
   listOperationsInOperationGroup,
   isApiVersion,
   shouldGenerateConvenient,
-  createDpgContext,
+  createSdkContext,
   shouldGenerateProtocol,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
@@ -139,7 +139,7 @@ export class CodeModelBuilder {
   private program: Program;
   private typeNameOptions: TypeNameOptions;
   private namespace: string;
-  private dpgContext: DpgContext;
+  private sdkContext: SdkContext;
 
   private options: EmitterOptions;
 
@@ -154,7 +154,7 @@ export class CodeModelBuilder {
     this.options = context.options;
     this.program = program1;
 
-    this.dpgContext = createDpgContext(context as EmitContext<any>);
+    this.sdkContext = createSdkContext(context as EmitContext<any>);
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
@@ -223,7 +223,7 @@ export class CodeModelBuilder {
       server.parameters.forEach((it) => {
         let parameter;
 
-        if (isApiVersion(this.dpgContext, it)) {
+        if (isApiVersion(this.sdkContext, it)) {
           parameter = this.createApiVersionParameter(it.name, ParameterLocation.Uri);
         } else {
           const schema = this.processSchema(it.type, it.name);
@@ -313,7 +313,7 @@ export class CodeModelBuilder {
   }
 
   private processClients() {
-    const clients = listClients(this.dpgContext);
+    const clients = listClients(this.sdkContext);
     for (const client of clients) {
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
@@ -355,9 +355,9 @@ export class CodeModelBuilder {
       codeModelClient.addGlobalParameters(hostParameters);
       const clientContext = new ClientContext(baseUri, hostParameters, codeModelClient.globalParameters!);
 
-      const operationGroups = listOperationGroups(this.dpgContext, client);
+      const operationGroups = listOperationGroups(this.sdkContext, client);
 
-      const operationWithoutGroup = listOperationsInOperationGroup(this.dpgContext, client);
+      const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
         codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
@@ -367,7 +367,7 @@ export class CodeModelBuilder {
       }
 
       for (const operationGroup of operationGroups) {
-        const operations = listOperationsInOperationGroup(this.dpgContext, operationGroup);
+        const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
         codeModelGroup = new OperationGroup(operationGroup.type.name);
         for (const operation of operations) {
           codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
@@ -509,7 +509,7 @@ export class CodeModelBuilder {
     this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata.longRunning);
 
     // check for generating protocol api or not
-    codeModelOperation.generateProtocolApi = shouldGenerateProtocol(this.dpgContext, operation);
+    codeModelOperation.generateProtocolApi = shouldGenerateProtocol(this.sdkContext, operation);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -626,7 +626,7 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
-    if (isApiVersion(this.dpgContext, param)) {
+    if (isApiVersion(this.sdkContext, param)) {
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
       clientContext.addGlobalParameter(parameter);
@@ -639,8 +639,12 @@ export class CodeModelBuilder {
     } else {
       // schema
       let schema;
-      if (param.type === "header" && param.param.type.kind === "Scalar" && param.param.type.name === "zonedDateTime") {
-        // zonedTateTime in header maps to RFC 5322
+      if (
+        param.type === "header" &&
+        param.param.type.kind === "Scalar" &&
+        (param.param.type.name === "utcDateTime" || param.param.type.name === "offsetDateTime")
+      ) {
+        // utcDateTime in header maps to RFC 5322
         schema = this.processDateTimeSchema(param.param.type, param.param.name, true);
       } else {
         schema = this.processSchema(param.param.type, param.param.name);
@@ -1154,7 +1158,8 @@ export class CodeModelBuilder {
         case "plainDate":
           return this.processDateSchema(type, nameHint);
 
-        case "zonedDateTime":
+        case "utcDateTime":
+        case "offsetDateTime":
           return this.processDateTimeSchema(type, nameHint, false);
 
         case "duration":
@@ -1670,7 +1675,7 @@ export class CodeModelBuilder {
           name = "Double";
         } else if (scalarName === "bytes") {
           name = "ByteArray";
-        } else if (scalarName === "zonedDateTime") {
+        } else if (scalarName === "utcDateTime" || scalarName === "offsetDateTime") {
           name = "Time";
         }
         return pascalCase(name);
@@ -1807,7 +1812,7 @@ export class CodeModelBuilder {
 
   private getConvenienceApiName(op: Operation): string | undefined {
     // check @convenienceMethod
-    if (shouldGenerateConvenient(this.dpgContext, op)) {
+    if (shouldGenerateConvenient(this.sdkContext, op)) {
       return this.getName(op);
     } else {
       return undefined;

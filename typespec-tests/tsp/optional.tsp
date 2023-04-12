@@ -23,7 +23,7 @@ model Optional {
   float?: float32;
   double?: float64;
   duration?: duration;
-  dateTime?: zonedDateTime;
+  dateTime?: utcDateTime;
   stringList?: string[];
   bytesDict?: Record<bytes>;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/typespec-java",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "TypeSpec library for emitting Java client from the TypeSpec REST protocol binding",
   "keywords": [
     "TypeSpec"
@@ -45,11 +45,11 @@
     "target/azure-typespec-extension-jar-with-dependencies.jar"
   ],
   "peerDependencies": {
-    "@typespec/compiler": "~0.42.0",
-    "@typespec/rest": "~0.42.0",
-    "@typespec/versioning": "~0.42.0",
-    "@azure-tools/typespec-azure-core": "~0.28.0",
-    "@azure-tools/typespec-client-generator-core": "~0.28.0"
+    "@typespec/compiler": "~0.43.0",
+    "@typespec/rest": "~0.43.0",
+    "@typespec/versioning": "~0.43.0",
+    "@azure-tools/typespec-azure-core": "~0.29.0",
+    "@azure-tools/typespec-client-generator-core": "~0.29.0"
   },
   "dependencies": {
     "@autorest/codemodel": "~4.19.2",

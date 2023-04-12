@@ -1,10 +1,11 @@
 # Release History
 
-## 0.5.2 (Unreleased)
+## 0.6.0 (2023-04-12)
 
-Compatible with compiler 0.42.
+Compatible with compiler 0.43.
 
 - Supported `examples-directory` as emitter option. Follow same pattern as [typespec-autorest](https://github.com/Azure/typespec-azure/tree/main/packages/typespec-autorest#examples-directory).
+- Supported `enable-sync-stack` as emitter option. Currently default to `false`.
 
 ## 0.5.1 (2023-03-29)
 
