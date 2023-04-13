@@ -45,8 +45,7 @@ public final class CollectionsModelAsyncClient {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -76,8 +75,7 @@ public final class CollectionsModelAsyncClient {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -107,8 +105,7 @@ public final class CollectionsModelAsyncClient {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -138,8 +135,7 @@ public final class CollectionsModelAsyncClient {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }

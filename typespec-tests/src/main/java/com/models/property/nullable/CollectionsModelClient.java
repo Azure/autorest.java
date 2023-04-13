@@ -43,8 +43,7 @@ public final class CollectionsModelClient {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -73,8 +72,7 @@ public final class CollectionsModelClient {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -103,8 +101,7 @@ public final class CollectionsModelClient {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -134,8 +131,7 @@ public final class CollectionsModelClient {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
