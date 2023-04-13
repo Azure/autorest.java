@@ -22,7 +22,7 @@ public final class CollectionsModelProperty {
      * Property
      */
     @JsonProperty(value = "nullableProperty", required = true)
-    private List<StringProperty> nullableProperty;
+    private List<InnerModel> nullableProperty;
 
     /**
      * Creates an instance of CollectionsModelProperty class.
@@ -33,7 +33,7 @@ public final class CollectionsModelProperty {
     @JsonCreator
     public CollectionsModelProperty(
             @JsonProperty(value = "requiredProperty", required = true) String requiredProperty,
-            @JsonProperty(value = "nullableProperty", required = true) List<StringProperty> nullableProperty) {
+            @JsonProperty(value = "nullableProperty", required = true) List<InnerModel> nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }
@@ -52,7 +52,7 @@ public final class CollectionsModelProperty {
      *
      * @return the nullableProperty value.
      */
-    public List<StringProperty> getNullableProperty() {
+    public List<InnerModel> getNullableProperty() {
         return this.nullableProperty;
     }
 }

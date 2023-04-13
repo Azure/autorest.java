@@ -200,8 +200,7 @@ public final class CollectionsModelsImpl {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -231,8 +230,7 @@ public final class CollectionsModelsImpl {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -261,8 +259,7 @@ public final class CollectionsModelsImpl {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -292,8 +289,7 @@ public final class CollectionsModelsImpl {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -322,8 +318,7 @@ public final class CollectionsModelsImpl {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -355,8 +350,7 @@ public final class CollectionsModelsImpl {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -387,8 +381,7 @@ public final class CollectionsModelsImpl {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
@@ -419,8 +412,7 @@ public final class CollectionsModelsImpl {
      *     requiredProperty: String (Required)
      *     nullableProperty (Required): [
      *          (Required){
-     *             requiredProperty: String (Required)
-     *             nullableProperty: String (Required)
+     *             property: String (Required)
      *         }
      *     ]
      * }
