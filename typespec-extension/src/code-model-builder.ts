@@ -62,6 +62,7 @@ import {
   shouldGenerateConvenient,
   createSdkContext,
   shouldGenerateProtocol,
+  isInternal,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -510,6 +511,12 @@ export class CodeModelBuilder {
 
     // check for generating protocol api or not
     codeModelOperation.generateProtocolApi = shouldGenerateProtocol(this.sdkContext, operation);
+
+    // currently we treat @Internal the same as @convenientAPI(false) and @protocolAPI(false) combined
+    if(isInternal(this.sdkContext, operation)) {
+      codeModelOperation.generateProtocolApi = false;
+      codeModelOperation.convenienceApi = undefined;
+    }
 
     operationGroup.addOperation(codeModelOperation);
 
