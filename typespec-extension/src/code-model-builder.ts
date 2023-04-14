@@ -436,7 +436,8 @@ export class CodeModelBuilder {
       },
     });
 
-    if (!operationContainsJsonMergePatch(op)) { // do not generate convenience method for JSON Merge Patch
+    if (!operationContainsJsonMergePatch(op)) {
+      // do not generate convenience method for JSON Merge Patch
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName && !isInternal(this.sdkContext, operation)) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
@@ -444,7 +445,8 @@ export class CodeModelBuilder {
     }
 
     // check for generating protocol api or not
-    codeModelOperation.generateProtocolApi = shouldGenerateProtocol(this.sdkContext, operation) && !isInternal(this.sdkContext, operation);
+    codeModelOperation.generateProtocolApi =
+      shouldGenerateProtocol(this.sdkContext, operation) && !isInternal(this.sdkContext, operation);
 
     if (!fromLinkedOperation) {
       // cache for later reference from operationLinks
