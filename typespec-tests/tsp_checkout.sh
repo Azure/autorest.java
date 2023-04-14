@@ -2,17 +2,17 @@
 # Licensed under the MIT License.
 
 export SPEC_REPO=https://github.com/Azure/azure-rest-api-specs.git
-export CADL_PATH=specification/cognitiveservices/AnomalyDetector
-export CADL_BRANCH=main
+export TSP_PATH=specification/eventgrid/Azure.Messaging.EventGrid
+export REPO_BRANCH=feature/eventgrid/typespec
 
 mkdir tsp-repo
 cd tsp-repo
 git init
 git config core.sparseCheckout true
 git remote add -f origin $SPEC_REPO
-echo $CADL_PATH > .git/info/sparse-checkout
-git checkout $CADL_BRANCH
+echo $TSP_PATH > .git/info/sparse-checkout
+git checkout $REPO_BRANCH
 cd ..
 
-cp -rf tsp-repo/$CADL_PATH tsp-src
+cp -rf tsp-repo/$TSP_PATH tsp-src
 rm -rf tsp-repo
