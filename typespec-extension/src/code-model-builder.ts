@@ -62,6 +62,7 @@ import {
   shouldGenerateConvenient,
   createSdkContext,
   shouldGenerateProtocol,
+  isInternal,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -437,12 +438,15 @@ export class CodeModelBuilder {
 
     if (!operationContainsJsonMergePatch(op)) {
       // do not generate convenience method for JSON Merge Patch
-
       const convenienceApiName = this.getConvenienceApiName(operation);
-      if (convenienceApiName) {
+      if (convenienceApiName && !isInternal(this.sdkContext, operation)) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
       }
     }
+
+    // check for generating protocol api or not
+    codeModelOperation.generateProtocolApi =
+      shouldGenerateProtocol(this.sdkContext, operation) && !isInternal(this.sdkContext, operation);
 
     if (!fromLinkedOperation) {
       // cache for later reference from operationLinks
@@ -507,9 +511,6 @@ export class CodeModelBuilder {
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
     this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata.longRunning);
-
-    // check for generating protocol api or not
-    codeModelOperation.generateProtocolApi = shouldGenerateProtocol(this.sdkContext, operation);
 
     operationGroup.addOperation(codeModelOperation);
 

@@ -16,8 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.internal.implementation.InternalClientImpl;
-import com.internal.models.InternalModel;
-import com.internal.models.ModelOnlyUsedByInternalOperation;
 
 /** Initializes a new instance of the synchronous InternalClient type. */
 @ServiceClient(builder = InternalClientBuilder.class)
@@ -55,7 +53,7 @@ public final class InternalClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getInternalWithResponse(String name, RequestOptions requestOptions) {
+    Response<BinaryData> getInternalWithResponse(String name, RequestOptions requestOptions) {
         return this.serviceClient.getInternalWithResponse(name, requestOptions);
     }
 
@@ -90,49 +88,7 @@ public final class InternalClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
+    Response<BinaryData> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.postInternalWithResponse(body, requestOptions);
-    }
-
-    /**
-     * The getInternal operation.
-     *
-     * @param name The name parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is an internal model.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public InternalModel getInternal(String name) {
-        // Generated convenience method for getInternalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getInternalWithResponse(name, requestOptions).getValue().toObject(InternalModel.class);
-    }
-
-    /**
-     * The postInternal operation.
-     *
-     * @param body This is a non-internal model only used by internal operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is a non-internal model only used by internal operation.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ModelOnlyUsedByInternalOperation postInternal(ModelOnlyUsedByInternalOperation body) {
-        // Generated convenience method for postInternalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return postInternalWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(ModelOnlyUsedByInternalOperation.class);
     }
 }
