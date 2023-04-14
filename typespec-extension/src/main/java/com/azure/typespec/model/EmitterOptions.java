@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.cadl.model;
+package com.azure.typespec.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParser;
@@ -42,6 +42,12 @@ public class EmitterOptions {
 
     @JsonProperty(value="dev-options")
     private DevOptions devOptions;
+
+    @JsonProperty(value="custom-types")
+    private String customTypes;
+
+    @JsonProperty(value="custom-types-subpackage")
+    private String customTypeSubpackage;
 
     public String getNamespace() {
         return namespace;
@@ -87,6 +93,14 @@ public class EmitterOptions {
 
     public DevOptions getDevOptions() {
         return devOptions;
+    }
+
+    public String getCustomTypes() {
+        return customTypes;
+    }
+
+    public String getCustomTypeSubpackage() {
+        return customTypeSubpackage;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {

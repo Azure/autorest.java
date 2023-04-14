@@ -1,13 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.cadl.util;
+package com.azure.typespec.util;
 
-import com.azure.autorest.CadlPlugin;
+import com.azure.autorest.TypeSpecPlugin;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
-import com.azure.cadl.model.EmitterOptions;
+import com.azure.typespec.model.EmitterOptions;
+import com.azure.typespec.util.ModelUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class ModelUtilTests {
     // sadly ModelUtil.isGeneratingModel queries JavaSettings
     @BeforeAll
     public static void ensurePlugin() {
-        CadlPlugin plugin = new CadlPlugin(new EmitterOptions().setNamespace("com.azure.client"), false);
+        TypeSpecPlugin plugin = new TypeSpecPlugin(new EmitterOptions().setNamespace("com.azure.client"), false);
     }
 
     @Test

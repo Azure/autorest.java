@@ -13,9 +13,9 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
-import com.azure.cadl.model.EmitterOptions;
-import com.azure.cadl.mapper.CadlMapperFactory;
-import com.azure.cadl.util.ModelUtil;
+import com.azure.typespec.model.EmitterOptions;
+import com.azure.typespec.mapper.TypeSpecMapperFactory;
+import com.azure.typespec.util.ModelUtil;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +31,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CadlPlugin extends Javagen {
+public class TypeSpecPlugin extends Javagen {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CadlPlugin.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TypeSpecPlugin.class);
 
     private final EmitterOptions emitterOptions;
 
@@ -143,7 +143,7 @@ public class CadlPlugin extends Javagen {
 
     }
 
-    public CadlPlugin(EmitterOptions options, boolean sdkIntegration) {
+    public TypeSpecPlugin(EmitterOptions options, boolean sdkIntegration) {
         super(new MockConnection(), "dummy", "dummy");
         this.emitterOptions = options;
         SETTINGS_MAP.put("namespace", options.getNamespace());
@@ -172,11 +172,19 @@ public class CadlPlugin extends Javagen {
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
         SETTINGS_MAP.put("regenerate-pom", sdkIntegration);
 
+        if (options.getCustomTypes() != null) {
+            SETTINGS_MAP.put("custom-types", options.getCustomTypes());
+        }
+
+        if (options.getCustomTypeSubpackage() != null) {
+            SETTINGS_MAP.put("custom-types-subpackage", options.getCustomTypeSubpackage());
+        }
+
         JavaSettingsAccessor.setHost(this);
         LOGGER.info("Output folder: {}", options.getOutputDir());
         LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());
 
-        Mappers.setFactory(new CadlMapperFactory());
+        Mappers.setFactory(new TypeSpecMapperFactory());
     }
 
     @SuppressWarnings("unchecked")

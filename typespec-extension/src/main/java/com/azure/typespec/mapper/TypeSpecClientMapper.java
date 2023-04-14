@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.cadl.mapper;
+package com.azure.typespec.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
@@ -10,7 +10,7 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.ServiceClient;
-import com.azure.cadl.util.ModelUtil;
+import com.azure.typespec.util.ModelUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -19,21 +19,21 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CadlClientMapper extends ClientMapper {
+public class TypeSpecClientMapper extends ClientMapper {
 
-    private static final ClientMapper INSTANCE = new CadlClientMapper();
+    private static final ClientMapper INSTANCE = new TypeSpecClientMapper();
 
     public static ClientMapper getInstance() {
         return INSTANCE;
     }
 
-    protected CadlClientMapper() {
+    protected TypeSpecClientMapper() {
     }
 
     @Override
     protected Map<ServiceClient, Client> processClients(List<Client> clients, CodeModel codeModel) {
         Map<ServiceClient, Client> serviceClientsMap = new LinkedHashMap<>();
-        CadlServiceClientMapper mapper = new CadlServiceClientMapper();
+        TypeSpecServiceClientMapper mapper = new TypeSpecServiceClientMapper();
         for (Client client : clients) {
             serviceClientsMap.put(mapper.map(client, codeModel), client);
         }

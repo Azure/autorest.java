@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.cadl.mapper;
+package com.azure.typespec.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CadlServiceClientMapper extends ServiceClientMapper {
+public class TypeSpecServiceClientMapper extends ServiceClientMapper {
 
     public ServiceClient map(Client client, CodeModel codeModel) {
         ServiceClient.Builder builder = createClientBuilder();
