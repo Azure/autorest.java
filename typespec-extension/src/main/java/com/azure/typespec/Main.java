@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.cadl;
+package com.azure.typespec;
 
-import com.azure.autorest.CadlPlugin;
+import com.azure.autorest.TypeSpecPlugin;
 import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
@@ -11,7 +11,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.cadl.model.EmitterOptions;
+import com.azure.typespec.model.EmitterOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -82,13 +82,13 @@ public class Main {
         }
 
         // initialize plugin
-        CadlPlugin cadlPlugin = new CadlPlugin(emitterOptions, sdkIntegration);
+        TypeSpecPlugin typeSpecPlugin = new TypeSpecPlugin(emitterOptions, sdkIntegration);
 
         // client
-        Client client = cadlPlugin.processClient(codeModel);
+        Client client = typeSpecPlugin.processClient(codeModel);
 
         // template
-        JavaPackage javaPackage = cadlPlugin.processTemplates(codeModel, client, JavaSettings.getInstance());
+        JavaPackage javaPackage = typeSpecPlugin.processTemplates(codeModel, client, JavaSettings.getInstance());
 
         LOGGER.info("Count of Java files: {}", javaPackage.getJavaFiles().size());
         LOGGER.info("Count of XML files: {}", javaPackage.getXmlFiles().size());
@@ -99,7 +99,7 @@ public class Main {
         JavaSettings settings = JavaSettings.getInstance();
         javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
             if (settings.isHandlePartialUpdate()) {
-                javaFiles.put(javaFile.getFilePath(), cadlPlugin.handlePartialUpdate(javaFile.getFilePath(), javaFile.getContents().toString()));
+                javaFiles.put(javaFile.getFilePath(), typeSpecPlugin.handlePartialUpdate(javaFile.getFilePath(), javaFile.getContents().toString()));
             } else {
                 javaFiles.put(javaFile.getFilePath(), javaFile.getContents().toString());
             }
@@ -124,16 +124,16 @@ public class Main {
 
         // write output
         // java files
-        formattedFiles.forEach((filePath, formattedSource) -> cadlPlugin.writeFile(filePath, formattedSource, null));
+        formattedFiles.forEach((filePath, formattedSource) -> typeSpecPlugin.writeFile(filePath, formattedSource, null));
 
         // XML include POM
-        javaPackage.getXmlFiles().forEach(xmlFile -> cadlPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
+        javaPackage.getXmlFiles().forEach(xmlFile -> typeSpecPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
         // Others
-        javaPackage.getTextFiles().forEach(textFile -> cadlPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
+        javaPackage.getTextFiles().forEach(textFile -> typeSpecPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
         // resources
         String artifactId = ClientModelUtil.getArtifactId();
         if (!CoreUtils.isNullOrEmpty(artifactId)) {
-            cadlPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
+            typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
                     "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
         }
 

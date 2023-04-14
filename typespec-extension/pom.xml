@@ -110,7 +110,7 @@
                 <configuration>
                   <archive>
                     <manifest>
-                      <mainClass>com.azure.cadl.Main</mainClass>
+                      <mainClass>com.azure.typespec.Main</mainClass>
                     </manifest>
                   </archive>
                   <descriptorRefs>
