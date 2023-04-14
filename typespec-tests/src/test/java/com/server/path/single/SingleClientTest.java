@@ -5,8 +5,6 @@ package com.server.path.single;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SingleClientTest {
 
     SingleClient client = new SingleClientBuilder().endpoint("http://localhost:3000").buildClient();

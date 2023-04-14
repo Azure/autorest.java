@@ -3,15 +3,12 @@
 
 package com.arrays.itemtypes;
 
-import com.azure.core.http.rest.Response;
-import com.azure.core.util.BinaryData;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NullableFloatValueClientTest {
 

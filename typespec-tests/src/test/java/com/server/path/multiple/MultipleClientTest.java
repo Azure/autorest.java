@@ -5,8 +5,6 @@ package com.server.path.multiple;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class MultipleClientTest {
 
     MultipleClient client = new MultipleClientBuilder().endpoint("http://localhost:3000").buildClient();
