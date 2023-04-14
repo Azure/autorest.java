@@ -1,5 +1,11 @@
 # Release History
 
+## 0.6.1 (2023-04-14)
+
+Compatible with compiler 0.43.
+
+- Supported `internal` from typespec-client-generator-core.
+
 ## 0.6.0 (2023-04-12)
 
 Compatible with compiler 0.43.
