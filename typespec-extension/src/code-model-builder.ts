@@ -513,7 +513,7 @@ export class CodeModelBuilder {
     codeModelOperation.generateProtocolApi = shouldGenerateProtocol(this.sdkContext, operation);
 
     // currently we treat @Internal the same as @convenientAPI(false) and @protocolAPI(false) combined
-    if(isInternal(this.sdkContext, operation)) {
+    if (isInternal(this.sdkContext, operation)) {
       codeModelOperation.generateProtocolApi = false;
       codeModelOperation.convenienceApi = undefined;
     }
