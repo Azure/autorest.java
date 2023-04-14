@@ -15,10 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.FluxUtil;
 import com.internal.implementation.InternalClientImpl;
-import com.internal.models.InternalModel;
-import com.internal.models.ModelOnlyUsedByInternalOperation;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous InternalClient type. */
@@ -57,7 +54,7 @@ public final class InternalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getInternalWithResponse(String name, RequestOptions requestOptions) {
+    Mono<Response<BinaryData>> getInternalWithResponse(String name, RequestOptions requestOptions) {
         return this.serviceClient.getInternalWithResponseAsync(name, requestOptions);
     }
 
@@ -93,51 +90,7 @@ public final class InternalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
+    Mono<Response<BinaryData>> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.postInternalWithResponseAsync(body, requestOptions);
-    }
-
-    /**
-     * The getInternal operation.
-     *
-     * @param name The name parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is an internal model on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<InternalModel> getInternal(String name) {
-        // Generated convenience method for getInternalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getInternalWithResponse(name, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(InternalModel.class));
-    }
-
-    /**
-     * The postInternal operation.
-     *
-     * @param body This is a non-internal model only used by internal operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is a non-internal model only used by internal operation on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ModelOnlyUsedByInternalOperation> postInternal(ModelOnlyUsedByInternalOperation body) {
-        // Generated convenience method for postInternalWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return postInternalWithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(ModelOnlyUsedByInternalOperation.class));
     }
 }
