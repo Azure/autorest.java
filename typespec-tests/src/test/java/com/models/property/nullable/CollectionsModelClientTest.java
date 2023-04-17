@@ -4,11 +4,14 @@
 package com.models.property.nullable;
 
 import com.azure.core.util.BinaryData;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonWriter;
 import com.models.property.nullable.models.CollectionsModelProperty;
 import com.models.property.nullable.models.InnerModel;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -24,11 +27,16 @@ class CollectionsModelClientTest {
         client.patchNonNullWithResponse(BinaryData.fromObject(property), null);
     }
 
-    @Disabled("patch null not supported yet, com.azure.core.exception.HttpResponseException: Status code 400, \"{\"message\":\"Body provided doesn't match expected body\",\"expected\":{\"requiredProperty\":\"foo\",\"nullableProperty\":null},\"actual\":{\"requiredProperty\":\"foo\"}}\"\n")
     @Test
-    void patchNullWithResponse() {
-        CollectionsModelProperty property = new CollectionsModelProperty("foo", null);
-        client.patchNonNullWithResponse(BinaryData.fromObject(property), null);
+    void patchNullWithResponse() throws IOException {
+        StringWriter writer = new StringWriter();
+        JsonWriter jsonWriter = JsonProviders.createWriter(writer);
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("requiredProperty", "foo");
+        jsonWriter.writeNullField("nullableProperty");
+        jsonWriter.writeEndObject();
+        jsonWriter.close();
+        client.patchNullWithResponse(BinaryData.fromString(writer.toString()), null);
     }
 
     @Test
