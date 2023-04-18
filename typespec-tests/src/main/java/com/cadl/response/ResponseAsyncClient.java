@@ -256,6 +256,7 @@ public final class ResponseAsyncClient {
         return deleteWithHeadersWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
+    @Generated
     private static final TypeReference<List<Resource>> TYPE_REFERENCE_LIST_RESOURCE =
             new TypeReference<List<Resource>>() {};
 }

@@ -126,6 +126,7 @@ public final class DurationValueAsyncClient {
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
+    @Generated
     private static final TypeReference<List<Duration>> TYPE_REFERENCE_LIST_DURATION =
             new TypeReference<List<Duration>>() {};
 }

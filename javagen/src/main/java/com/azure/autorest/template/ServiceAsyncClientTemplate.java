@@ -188,13 +188,14 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     }
   }
 
-  private static void writeConvenienceMethods(List<ConvenienceMethod> convenienceMethods, JavaClass classBlock) {
+  private void writeConvenienceMethods(List<ConvenienceMethod> convenienceMethods, JavaClass classBlock) {
     Set<GenericType> typeReferenceStaticClasses = new HashSet<>();
 
     convenienceMethods.forEach(m -> Templates.getConvenienceAsyncMethodTemplate().write(m, classBlock, typeReferenceStaticClasses));
 
     // static variables for TypeReference<T>
     for (GenericType typeReferenceStaticClass : typeReferenceStaticClasses) {
+      addGeneratedAnnotation(classBlock);
       TemplateUtil.writeTypeReferenceStaticVariable(classBlock, typeReferenceStaticClass);
     }
   }

@@ -120,5 +120,6 @@ public final class Float32ValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<List<Double>> TYPE_REFERENCE_LIST_DOUBLE = new TypeReference<List<Double>>() {};
 }

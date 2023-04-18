@@ -126,6 +126,7 @@ public final class DurationValueAsyncClient {
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
+    @Generated
     private static final TypeReference<Map<String, Duration>> TYPE_REFERENCE_MAP_STRING_DURATION =
             new TypeReference<Map<String, Duration>>() {};
 }

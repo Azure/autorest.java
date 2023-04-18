@@ -125,6 +125,7 @@ public final class Int32ValueAsyncClient {
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
+    @Generated
     private static final TypeReference<Map<String, Integer>> TYPE_REFERENCE_MAP_STRING_INTEGER =
             new TypeReference<Map<String, Integer>>() {};
 }

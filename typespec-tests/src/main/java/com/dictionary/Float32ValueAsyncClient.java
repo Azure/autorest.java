@@ -125,6 +125,7 @@ public final class Float32ValueAsyncClient {
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
+    @Generated
     private static final TypeReference<Map<String, Double>> TYPE_REFERENCE_MAP_STRING_DOUBLE =
             new TypeReference<Map<String, Double>>() {};
 }

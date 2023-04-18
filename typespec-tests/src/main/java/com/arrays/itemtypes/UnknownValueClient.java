@@ -120,5 +120,6 @@ public final class UnknownValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<List<Object>> TYPE_REFERENCE_LIST_OBJECT = new TypeReference<List<Object>>() {};
 }

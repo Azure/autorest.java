@@ -120,5 +120,6 @@ public final class StringValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<List<String>> TYPE_REFERENCE_LIST_STRING = new TypeReference<List<String>>() {};
 }

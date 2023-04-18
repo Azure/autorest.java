@@ -125,6 +125,7 @@ public final class StringValueAsyncClient {
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
+    @Generated
     private static final TypeReference<Map<String, String>> TYPE_REFERENCE_MAP_STRING_STRING =
             new TypeReference<Map<String, String>>() {};
 }

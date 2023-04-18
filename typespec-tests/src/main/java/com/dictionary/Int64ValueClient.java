@@ -120,6 +120,7 @@ public final class Int64ValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<Map<String, Long>> TYPE_REFERENCE_MAP_STRING_LONG =
             new TypeReference<Map<String, Long>>() {};
 }

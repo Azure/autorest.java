@@ -121,6 +121,7 @@ public final class DatetimeValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<Map<String, OffsetDateTime>> TYPE_REFERENCE_MAP_STRING_OFFSET_DATE_TIME =
             new TypeReference<Map<String, OffsetDateTime>>() {};
 }

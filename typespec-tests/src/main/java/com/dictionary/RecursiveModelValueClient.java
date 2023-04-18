@@ -131,6 +131,7 @@ public final class RecursiveModelValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<Map<String, InnerModel>> TYPE_REFERENCE_MAP_STRING_INNER_MODEL =
             new TypeReference<Map<String, InnerModel>>() {};
 }

@@ -120,6 +120,7 @@ public final class Int32ValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<List<Integer>> TYPE_REFERENCE_LIST_INTEGER =
             new TypeReference<List<Integer>>() {};
 }

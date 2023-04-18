@@ -121,6 +121,7 @@ public final class DurationValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<List<Duration>> TYPE_REFERENCE_LIST_DURATION =
             new TypeReference<List<Duration>>() {};
 }

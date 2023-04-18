@@ -125,6 +125,7 @@ public final class Int32ValueAsyncClient {
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
+    @Generated
     private static final TypeReference<List<Integer>> TYPE_REFERENCE_LIST_INTEGER =
             new TypeReference<List<Integer>>() {};
 }
