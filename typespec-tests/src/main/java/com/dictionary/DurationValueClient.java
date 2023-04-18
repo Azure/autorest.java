@@ -121,6 +121,7 @@ public final class DurationValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<Map<String, Duration>> TYPE_REFERENCE_MAP_STRING_DURATION =
             new TypeReference<Map<String, Duration>>() {};
 }

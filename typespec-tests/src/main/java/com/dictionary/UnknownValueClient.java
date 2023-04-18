@@ -120,6 +120,7 @@ public final class UnknownValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<Map<String, Object>> TYPE_REFERENCE_MAP_STRING_OBJECT =
             new TypeReference<Map<String, Object>>() {};
 }

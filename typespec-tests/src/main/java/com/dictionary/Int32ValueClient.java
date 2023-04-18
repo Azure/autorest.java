@@ -120,6 +120,7 @@ public final class Int32ValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<Map<String, Integer>> TYPE_REFERENCE_MAP_STRING_INTEGER =
             new TypeReference<Map<String, Integer>>() {};
 }

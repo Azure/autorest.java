@@ -120,6 +120,7 @@ public final class StringValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<Map<String, String>> TYPE_REFERENCE_MAP_STRING_STRING =
             new TypeReference<Map<String, String>>() {};
 }

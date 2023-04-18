@@ -120,6 +120,7 @@ public final class BooleanValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<List<Boolean>> TYPE_REFERENCE_LIST_BOOLEAN =
             new TypeReference<List<Boolean>>() {};
 }

@@ -125,6 +125,7 @@ public final class Int64ValueAsyncClient {
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
+    @Generated
     private static final TypeReference<Map<String, Long>> TYPE_REFERENCE_MAP_STRING_LONG =
             new TypeReference<Map<String, Long>>() {};
 }

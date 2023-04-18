@@ -136,6 +136,7 @@ public final class RecursiveModelValueAsyncClient {
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
+    @Generated
     private static final TypeReference<Map<String, InnerModel>> TYPE_REFERENCE_MAP_STRING_INNER_MODEL =
             new TypeReference<Map<String, InnerModel>>() {};
 }

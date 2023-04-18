@@ -120,5 +120,6 @@ public final class Int64ValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<List<Long>> TYPE_REFERENCE_LIST_LONG = new TypeReference<List<Long>>() {};
 }

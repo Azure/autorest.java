@@ -125,5 +125,6 @@ public final class Int64ValueAsyncClient {
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
+    @Generated
     private static final TypeReference<List<Long>> TYPE_REFERENCE_LIST_LONG = new TypeReference<List<Long>>() {};
 }

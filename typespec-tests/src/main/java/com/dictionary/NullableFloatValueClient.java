@@ -120,6 +120,7 @@ public final class NullableFloatValueClient {
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<Map<String, Double>> TYPE_REFERENCE_MAP_STRING_DOUBLE =
             new TypeReference<Map<String, Double>>() {};
 }

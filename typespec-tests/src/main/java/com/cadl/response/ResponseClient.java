@@ -247,6 +247,7 @@ public final class ResponseClient {
         deleteWithHeadersWithResponse(requestOptions).getValue();
     }
 
+    @Generated
     private static final TypeReference<List<Resource>> TYPE_REFERENCE_LIST_RESOURCE =
             new TypeReference<List<Resource>>() {};
 }
