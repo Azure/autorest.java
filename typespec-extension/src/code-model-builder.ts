@@ -1920,7 +1920,17 @@ export class CodeModelBuilder {
       processedSchemas.add(schema);
       if (schema instanceof ObjectSchema) {
         if (schemaUsage.usage || schemaUsage.serializationFormats) {
-          schema.properties?.forEach((p) => innerApplySchemaUsage(p.schema, schemaUsage));
+          schema.properties?.forEach((p) => {
+            if (p.readOnly && schemaUsage.usage?.includes(SchemaContext.Input)) {
+              const schemaUsageWithoutInput = {
+                usage: schemaUsage.usage.filter((it) => it != SchemaContext.Input),
+                serializationFormats: schemaUsage.serializationFormats,
+              };
+              innerApplySchemaUsage(p.schema, schemaUsageWithoutInput);
+            } else {
+              innerApplySchemaUsage(p.schema, schemaUsage);
+            }
+          });
 
           schema.parents?.all?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
           schema.parents?.immediate?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
