@@ -31,13 +31,16 @@ public class PartialUpdateHandlerTest {
 
         CompilationUnit compilationUnit = parse(output);
         assertEquals(1, compilationUnit.getTypes().size());
-        assertEquals(6, compilationUnit.getTypes().get(0).getMembers().size());
+        assertEquals(8, compilationUnit.getTypes().get(0).getMembers().size());
         assertEquals(2, compilationUnit.getTypes().get(0).getConstructors().size());
-        assertEquals(2, compilationUnit.getTypes().get(0).getFields().size());
+        assertEquals(4, compilationUnit.getTypes().get(0).getFields().size());
         assertEquals(2, compilationUnit.getTypes().get(0).getMethods().size());
 
         assertEquals(1, compilationUnit.getTypes().get(0).getMethodsByName("addedMethod").size());
         assertTrue(compilationUnit.getTypes().get(0).getFieldByName("enumsClient").isPresent());
+        assertTrue(compilationUnit.getTypes().get(0).getFieldByName("CUSTOMIZED_FIELD").isPresent());
+        assertTrue(compilationUnit.getTypes().get(0).getFieldByName("GENERATED_FIELD").isPresent());
+        assertTrue(compilationUnit.getTypes().get(0).getFieldByName("GENERATED_FIELD").get().isAnnotationPresent("Generated"));
         assertEquals(2, compilationUnit.getTypes().get(0).getConstructors().get(1).getParameters().size());
 
     }

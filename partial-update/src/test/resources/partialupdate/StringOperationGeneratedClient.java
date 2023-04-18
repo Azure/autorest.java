@@ -11,6 +11,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.github.javaparser.ast.Generated;
 import fixtures.bodystring.implementation.StringOperationsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatService type. */
@@ -18,6 +19,11 @@ import fixtures.bodystring.implementation.StringOperationsImpl;
 public final class StringOperationGeneratedClient {
 
     @Generated private final StringOperationsImpl serviceClient;
+
+    @Generated
+    private static final TypeReference<List<TransliteratedText>> GENERATED_FIELD =
+            new TypeReference<List<TransliteratedText>>() {};
+
 
     /**
      * Initializes an instance of StringOperations client.

@@ -11,6 +11,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.github.javaparser.ast.Generated;
 import fixtures.bodystring.implementation.StringOperationsImpl;
 
 /** Initializes a new instance of the synchronous AutoRestSwaggerBatService type. */

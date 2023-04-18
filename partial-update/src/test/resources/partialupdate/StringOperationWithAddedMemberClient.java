@@ -11,6 +11,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.github.javaparser.ast.Generated;
 import fixtures.bodystring.implementation.StringOperationsImpl;
 import fixtures.bodystring.implementation.EnumsImpl;
 
@@ -19,6 +20,13 @@ import fixtures.bodystring.implementation.EnumsImpl;
 public final class StringOperationWithAddedMemberClient {
 
     @Generated private final StringOperationsImpl serviceClient;
+
+    private static final TypeReference<List<TransliteratedText>> CUSTOMIZED_FIELD =
+            new TypeReference<List<TransliteratedText>>() {};
+
+    @Generated
+    private static final TypeReference<List<TransliteratedText>> GENERATED_FIELD =
+            new TypeReference<List<TransliteratedText>>() {};
 
     // manually add field
     private EnumsImpl enumsClient;
