@@ -34,6 +34,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
@@ -375,12 +376,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -424,12 +425,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -473,12 +474,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusUserError.class),
                 TypeReference.createInstance(User.class));
     }
@@ -522,12 +523,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusUserError.class),
                 TypeReference.createInstance(User.class));
     }
@@ -622,12 +623,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponseAsync(name, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -661,12 +662,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponse(name, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -701,12 +702,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponseAsync(name, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusUserError.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -741,12 +742,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponse(name, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusUserError.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -860,12 +861,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponseAsync(name, format, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -904,12 +905,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponse(name, format, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -949,12 +950,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponseAsync(name, format, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusUserExportedUserError.class),
                 TypeReference.createInstance(ResourceOperationStatusUserExportedUserError.class));
     }
@@ -994,12 +995,12 @@ public final class CoreClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponse(name, format, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusUserExportedUserError.class),
                 TypeReference.createInstance(ResourceOperationStatusUserExportedUserError.class));
     }

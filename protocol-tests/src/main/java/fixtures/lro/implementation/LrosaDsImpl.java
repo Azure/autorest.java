@@ -27,6 +27,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
@@ -1182,12 +1183,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putNonRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1254,12 +1255,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putNonRetry400WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1451,12 +1452,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putNonRetry201Creating400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1523,12 +1524,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putNonRetry201Creating400WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1725,12 +1726,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putNonRetry201Creating400InvalidJsonWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1797,12 +1798,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putNonRetry201Creating400InvalidJsonWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1997,12 +1998,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2070,12 +2071,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetry400WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2129,12 +2130,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteNonRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2155,12 +2156,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteNonRetry400WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2214,12 +2215,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.delete202NonRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2240,12 +2241,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.delete202NonRetry400WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2302,12 +2303,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2329,12 +2330,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetry400WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2472,12 +2473,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.postNonRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2526,12 +2527,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.postNonRetry400WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2669,12 +2670,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.post202NonRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2723,12 +2724,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.post202NonRetry400WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2869,12 +2870,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetry400WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2924,12 +2925,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetry400WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3126,12 +3127,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putError201NoProvisioningStatePayloadWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3199,12 +3200,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putError201NoProvisioningStatePayloadWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3403,12 +3404,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryNoStatusWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3477,12 +3478,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryNoStatusWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3685,12 +3686,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryNoStatusPayloadWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3759,12 +3760,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryNoStatusPayloadWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3818,12 +3819,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.delete204SucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -3844,12 +3845,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.delete204SucceededWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -3909,12 +3910,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryNoStatusWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -3936,12 +3937,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryNoStatusWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4079,12 +4080,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.post202NoLocationWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4133,12 +4134,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.post202NoLocationWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4284,12 +4285,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetryNoPayloadWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4340,12 +4341,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetryNoPayloadWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4537,12 +4538,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.put200InvalidJsonWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4609,12 +4610,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.put200InvalidJsonWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4814,12 +4815,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4887,12 +4888,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryInvalidHeaderWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5095,12 +5096,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5170,12 +5171,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetryInvalidJsonPollingWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5232,12 +5233,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.delete202RetryInvalidHeaderWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5259,12 +5260,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.delete202RetryInvalidHeaderWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5324,12 +5325,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5351,12 +5352,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryInvalidHeaderWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5418,12 +5419,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5445,12 +5446,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetryInvalidJsonPollingWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5591,12 +5592,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.post202RetryInvalidHeaderWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5646,12 +5647,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.post202RetryInvalidHeaderWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5796,12 +5797,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5851,12 +5852,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetryInvalidHeaderWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -6005,12 +6006,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -6062,12 +6063,12 @@ public final class LrosaDsImpl {
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetryInvalidJsonPollingWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.client.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }

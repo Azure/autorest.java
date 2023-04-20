@@ -39,6 +39,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
@@ -855,12 +856,12 @@ public final class ProtocolAndConvenientClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -904,12 +905,12 @@ public final class ProtocolAndConvenientClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -953,12 +954,12 @@ public final class ProtocolAndConvenientClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusResourceIError.class),
                 TypeReference.createInstance(ResourceI.class));
     }
@@ -1002,12 +1003,12 @@ public final class ProtocolAndConvenientClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusResourceIError.class),
                 TypeReference.createInstance(ResourceI.class));
     }
