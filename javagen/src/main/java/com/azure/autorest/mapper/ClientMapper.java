@@ -158,7 +158,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Map<ServiceClient, com.azure.autorest.extension.base.model.codemodel.Client> serviceClientsMap = new LinkedHashMap<>();
         if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
             serviceClientsMap = processClients(codeModel.getClients(), codeModel);
-            builder.serviceClients(new ArrayList(serviceClientsMap.keySet()));
+            builder.serviceClients(new ArrayList<>(serviceClientsMap.keySet()));
         } else {
             // service client
             ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
@@ -169,71 +169,51 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         // package info
         Map<String, PackageInfo> packageInfos = new HashMap<>();
+        settings.getCustomPackageInfoDescriptions().forEach((packageName, description) ->
+            packageInfos.put(packageName, new PackageInfo(packageName, description)));
         if (settings.isGenerateClientInterfaces() || !settings.isGenerateClientAsImpl()
                 || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()
                 || settings.isFluent() || settings.isGenerateSyncAsyncClients() || settings.isDataPlaneClient()) {
-            packageInfos.put(settings.getPackage(), new PackageInfo(
-                settings.getPackage(),
-                String.format("Package containing the classes for %s.\n%s", serviceClientName,
-                    serviceClientDescription)));
+            packageInfos.computeIfAbsent(settings.getPackage(), name -> new PackageInfo(name, String.format(
+                "Package containing the classes for %s.\n%s", serviceClientName, serviceClientDescription)));
         }
         if (settings.isFluent()) {
             if (settings.isFluentLite() && !CoreUtils.isNullOrEmpty(settings.getImplementationSubpackage())) {
-                String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
-                if (!packageInfos.containsKey(implementationPackage)) {
-                    packageInfos.put(implementationPackage, new PackageInfo(
-                            implementationPackage,
-                            String.format("Package containing the implementations for %s.\n%s",
-                                    serviceClientName, serviceClientDescription)));
-                }
+                packageInfos.computeIfAbsent(settings.getPackage(settings.getImplementationSubpackage()), name ->
+                    new PackageInfo(name, String.format("Package containing the implementations for %s.\n%s",
+                        serviceClientName, serviceClientDescription)));
             }
+
             if (!CoreUtils.isNullOrEmpty(settings.getFluentSubpackage())) {
-                String fluentPackage = settings.getPackage(settings.getFluentSubpackage());
-                if (!packageInfos.containsKey(fluentPackage)) {
-                    packageInfos.put(fluentPackage, new PackageInfo(
-                            fluentPackage,
-                            String.format("Package containing the service clients for %s.\n%s",
-                                    serviceClientName, serviceClientDescription)));
-                }
-                String fluentInnerPackage = settings.getPackage(settings.getFluentModelsSubpackage());
-                if (!packageInfos.containsKey(fluentInnerPackage)) {
-                    packageInfos.put(fluentInnerPackage, new PackageInfo(
-                        fluentInnerPackage,
-                        String.format("Package containing the inner data models for %s.\n%s",
-                            serviceClientName, serviceClientDescription)));
-                }
+                packageInfos.computeIfAbsent(settings.getPackage(settings.getFluentSubpackage()), name ->
+                    new PackageInfo(name, String.format("Package containing the service clients for %s.\n%s",
+                        serviceClientName, serviceClientDescription)));
+
+                packageInfos.computeIfAbsent(settings.getPackage(settings.getFluentModelsSubpackage()), name ->
+                    new PackageInfo(name, String.format("Package containing the inner data models for %s.\n%s",
+                        serviceClientName, serviceClientDescription)));
             }
+
         } else {
             if (settings.isGenerateClientAsImpl() && settings.getImplementationSubpackage() != null
                     && !settings.getImplementationSubpackage().isEmpty()) {
-
-                String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
-                if (!packageInfos.containsKey(implementationPackage)) {
-                    packageInfos.put(implementationPackage, new PackageInfo(
-                        implementationPackage,
-                        String.format("Package containing the implementations for %s.\n%s",
-                            serviceClientName, serviceClientDescription)));
-                }
+                packageInfos.computeIfAbsent(settings.getPackage(settings.getImplementationSubpackage()), name ->
+                    new PackageInfo(name, String.format("Package containing the implementations for %s.\n%s",
+                        serviceClientName, serviceClientDescription)));
             }
         }
+
         final List<String> modelsPackages = getModelsPackages(clientModels, enumTypes, responseModels);
         for (String modelsPackage : modelsPackages) {
-            if (!packageInfos.containsKey(modelsPackage)) {
-                packageInfos.put(modelsPackage, new PackageInfo(
-                        modelsPackage,
-                        String.format("Package containing the data models for %s.\n%s", serviceClientName,
-                                serviceClientDescription)));
-            }
+            packageInfos.computeIfAbsent(modelsPackage, name -> new PackageInfo(name, String.format(
+                "Package containing the data models for %s.\n%s", serviceClientName, serviceClientDescription)));
         }
+
         if (settings.getCustomTypes() != null && !settings.getCustomTypes().isEmpty()
                 && settings.getCustomTypesSubpackage() != null && !settings.getCustomTypesSubpackage().isEmpty()) {
-            String customTypesPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-            if (!packageInfos.containsKey(customTypesPackage)) {
-                packageInfos.put(customTypesPackage, new PackageInfo(
-                        customTypesPackage,
-                        String.format("Package containing classes for %s.\n%s", serviceClientName,
-                                serviceClientDescription)));
-            }
+            packageInfos.computeIfAbsent(settings.getPackage(settings.getCustomTypesSubpackage()), name ->
+                new PackageInfo(name, String.format("Package containing classes for %s.\n%s",
+                    serviceClientName, serviceClientDescription)));
         }
         builder.packageInfos(new ArrayList<>(packageInfos.values()));
 
@@ -347,7 +327,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
      * Extension for processing multi-client. Supported in Cadl.
      *
      * @param clients List of clients.
-     * @return List of service clients.
+     * @return Map of service clients.
      */
     protected Map<ServiceClient, com.azure.autorest.extension.base.model.codemodel.Client> processClients(List<com.azure.autorest.extension.base.model.codemodel.Client> clients, CodeModel codeModel) {
         return Collections.emptyMap();

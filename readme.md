@@ -94,6 +94,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--required-fields-as-ctor-args`|Indicates that class models have constructor taking required properties.|
 |`--output-model-immutable`|Indicates that output-only models be generated as immutable, and without public constructor.|
 |`--use-input-stream-for-binary`|Indicates that `InputStream` is used for binary response body. By default, `BinaryData` is used.|
+|`--custom-package-info-descriptions`|Custom Javadoc descriptions for package-infos.|
 
 ## Settings for minimal data-plane clients
 
