@@ -19,6 +19,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
+import com.azure.core.util.polling.PollingStrategyOptions;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -414,6 +415,7 @@ public class ClientMethod {
                 } else {
                     imports.add("com.azure.core.util.serializer.TypeReference");
                     imports.add("java.time.Duration");
+                    imports.add(PollingStrategyOptions.class.getName());
 
                     if (getMethodPollingDetails() != null) {
                         for (String pollingStrategy : KNOWN_POLLING_STRATEGIES) {

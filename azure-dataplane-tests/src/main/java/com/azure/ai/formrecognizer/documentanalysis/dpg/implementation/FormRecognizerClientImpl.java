@@ -40,6 +40,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
@@ -860,12 +861,12 @@ public final class FormRecognizerClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.analyzeDocumentWithResponseAsync(modelId, contentType, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -910,12 +911,12 @@ public final class FormRecognizerClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.analyzeDocumentWithResponse(modelId, contentType, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1516,12 +1517,12 @@ public final class FormRecognizerClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.buildDocumentModelWithResponseAsync(buildRequest, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1563,12 +1564,12 @@ public final class FormRecognizerClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.buildDocumentModelWithResponse(buildRequest, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1697,12 +1698,12 @@ public final class FormRecognizerClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.composeDocumentModelWithResponseAsync(composeRequest, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1744,12 +1745,12 @@ public final class FormRecognizerClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.composeDocumentModelWithResponse(composeRequest, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1980,12 +1981,12 @@ public final class FormRecognizerClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.copyDocumentModelToWithResponseAsync(modelId, copyToRequest, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2024,12 +2025,12 @@ public final class FormRecognizerClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.copyDocumentModelToWithResponse(modelId, copyToRequest, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }

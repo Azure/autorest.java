@@ -37,6 +37,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
@@ -596,12 +597,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -645,12 +646,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -694,12 +695,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusResourceError.class),
                 TypeReference.createInstance(Resource.class));
     }
@@ -743,12 +744,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusResourceError.class),
                 TypeReference.createInstance(Resource.class));
     }
@@ -907,12 +908,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponseAsync(name, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -944,12 +945,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponse(name, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -982,12 +983,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponseAsync(name, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusResourceError.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -1020,12 +1021,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponse(name, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusResourceError.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -1146,12 +1147,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponseAsync(name, projectFileVersion, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1189,12 +1190,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponse(name, projectFileVersion, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1234,12 +1235,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponseAsync(name, projectFileVersion, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class),
                 TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class));
     }
@@ -1279,12 +1280,12 @@ public final class LongRunningClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponse(name, projectFileVersion, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class),
                 TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class));
     }

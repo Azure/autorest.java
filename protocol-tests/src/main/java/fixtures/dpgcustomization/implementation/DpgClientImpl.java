@@ -38,6 +38,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
@@ -674,12 +675,12 @@ public final class DpgClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.lroWithResponseAsync(mode, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -712,12 +713,12 @@ public final class DpgClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.lroWithResponse(mode, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -750,12 +751,12 @@ public final class DpgClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.lroWithResponseAsync(mode, requestOptions),
                 new DefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(LroProduct.class),
                 TypeReference.createInstance(LroProduct.class));
     }
@@ -788,12 +789,12 @@ public final class DpgClientImpl {
                 Duration.ofSeconds(1),
                 () -> this.lroWithResponse(mode, requestOptions),
                 new SyncDefaultPollingStrategy<>(
-                        this.getHttpPipeline(),
-                        null,
-                        null,
-                        requestOptions != null && requestOptions.getContext() != null
-                                ? requestOptions.getContext()
-                                : Context.NONE),
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
                 TypeReference.createInstance(LroProduct.class),
                 TypeReference.createInstance(LroProduct.class));
     }
