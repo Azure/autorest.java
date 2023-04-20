@@ -1,4 +1,5 @@
 com.azure:azure-core
+com.azure:azure-core-experimental
 com.azure:azure-core-http-netty
 com.azure:azure-core-management
 com.azure:azure-core-test

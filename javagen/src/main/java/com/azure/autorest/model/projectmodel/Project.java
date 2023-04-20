@@ -58,6 +58,7 @@ public class Project {
         private String azureCoreManagementVersion = "1.11.0";
         private String azureCoreHttpNettyVersion = "1.13.2";
         private String azureCoreTestVersion = "1.16.0";
+        private String azureCoreExperimentalVersion = "1.0.0-beta.38";
         private String azureIdentityVersion = "1.8.2";
         private String junitVersion = "5.9.1";
         private String mockitoVersion = "4.5.1";
@@ -89,6 +90,10 @@ public class Project {
 
         public String getAzureCoreTestVersion() {
             return azureCoreTestVersion;
+        }
+
+        public String getAzureCoreExperimentalVersion() {
+            return azureCoreExperimentalVersion;
         }
 
         public String getAzureIdentityVersion() {
@@ -262,6 +267,7 @@ public class Project {
                 checkArtifact(line, "com.azure:azure-core-management").ifPresent(v -> packageVersions.azureCoreManagementVersion = v);
                 checkArtifact(line, "com.azure:azure-core-http-netty").ifPresent(v -> packageVersions.azureCoreHttpNettyVersion = v);
                 checkArtifact(line, "com.azure:azure-core-test").ifPresent(v -> packageVersions.azureCoreTestVersion = v);
+                checkArtifact(line, "com.azure:azure-core-experimental").ifPresent(v -> packageVersions.azureCoreExperimentalVersion = v);
                 checkArtifact(line, "com.azure:azure-identity").ifPresent(v -> packageVersions.azureIdentityVersion = v);
                 checkArtifact(line, "org.slf4j:slf4j-simple").ifPresent(v -> packageVersions.slf4jSimpleVersion = v);
             });

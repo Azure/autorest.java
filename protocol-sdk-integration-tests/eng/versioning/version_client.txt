@@ -1,4 +1,5 @@
 com.azure:azure-core;1.38.0;1.38.0
+com.azure:azure-core-experimental;1.0.0-beta.38;1.0.0-beta.39
 com.azure:azure-core-http-netty;1.13.2;1.13.2
 com.azure:azure-core-management;1.11.0;1.11.0
 com.azure:azure-core-test;1.16.0;1.16.0
