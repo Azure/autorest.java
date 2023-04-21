@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -120,7 +121,7 @@ public final class LroAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<User, User> beginCreate() {
+    public PollerFlux<PollResult, User> beginCreate() {
         // Generated convenience method for beginCreateWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateWithModelAsync(requestOptions);

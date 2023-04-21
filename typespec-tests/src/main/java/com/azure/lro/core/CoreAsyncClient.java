@@ -12,12 +12,12 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.lro.core.implementation.CoreClientImpl;
-import com.azure.lro.core.models.ResourceOperationStatusUserError;
-import com.azure.lro.core.models.ResourceOperationStatusUserExportedUserError;
+import com.azure.lro.core.models.ExportedUser;
 import com.azure.lro.core.models.User;
 
 /** Initializes a new instance of the asynchronous CoreClient type. */
@@ -111,15 +111,7 @@ public final class CoreAsyncClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         name: String (Required)
-     *         resourceUri: String (Required)
-     *     }
-     * }
+     * PollResult
      * }</pre>
      *
      * @param name The name of user.
@@ -129,7 +121,7 @@ public final class CoreAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -154,7 +146,7 @@ public final class CoreAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusUserError, User> beginCreateOrReplace(String name, User resource) {
+    public PollerFlux<PollResult, User> beginCreateOrReplace(String name, User resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateOrReplaceWithModelAsync(name, BinaryData.fromObject(resource), requestOptions);
@@ -176,7 +168,7 @@ public final class CoreAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusUserError, Void> beginDelete(String name) {
+    public PollerFlux<PollResult, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginDeleteWithModelAsync(name, requestOptions);
@@ -195,12 +187,11 @@ public final class CoreAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusUserExportedUserError, ResourceOperationStatusUserExportedUserError>
-            beginExport(String name, String format) {
+    public PollerFlux<PollResult, ExportedUser> beginExport(String name, String format) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginExportWithModelAsync(name, format, requestOptions);

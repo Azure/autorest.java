@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
@@ -24,7 +25,6 @@ import com.cadl.protocolandconvenient.models.ResourceE;
 import com.cadl.protocolandconvenient.models.ResourceF;
 import com.cadl.protocolandconvenient.models.ResourceI;
 import com.cadl.protocolandconvenient.models.ResourceJ;
-import com.cadl.protocolandconvenient.models.ResourceOperationStatusResourceIError;
 
 /** Initializes a new instance of the synchronous ProtocolAndConvenientClient type. */
 @ServiceClient(builder = ProtocolAndConvenientClientBuilder.class)
@@ -306,8 +306,7 @@ public final class ProtocolAndConvenientClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceOperationStatusResourceIError, ResourceI> beginCreateOrReplace(
-            String name, ResourceI resource) {
+    public SyncPoller<PollResult, ResourceI> beginCreateOrReplace(String name, ResourceI resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateOrReplaceWithModel(name, BinaryData.fromObject(resource), requestOptions);
