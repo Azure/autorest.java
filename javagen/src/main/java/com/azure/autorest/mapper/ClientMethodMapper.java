@@ -6,6 +6,7 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ConvenienceApi;
+import com.azure.autorest.extension.base.model.codemodel.LongRunningMetadata;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationLink;
@@ -283,7 +284,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     .requiredNullableParameterExpressions(requiredParameterExpressions)
                     .validateExpressions(validateExpressions)
                     .methodTransformationDetails(methodTransformationDetails)
-                    .methodVisibilityInWrapperClient(isProtocolMethod && operation.isGenerateProtocolApi() == Boolean.FALSE ? JavaVisibility.PackagePrivate : JavaVisibility.Public)
+                    .methodVisibilityInWrapperClient(isProtocolMethod && operation.getGenerateProtocolApi() == Boolean.FALSE ? JavaVisibility.PackagePrivate : JavaVisibility.Public)
                     .methodPageDetails(null);
 
                 if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null
@@ -395,7 +396,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                     if (pollingDetails != null) {
                         // try operationLinks from Cadl
-                        methodPollingDetails = methodPollingDetailsFromOperationLinks(operation, pollingDetails, settings);
+                        methodPollingDetails = methodPollingDetailsFromMetadata(operation, pollingDetails, settings);
 
                         // fallback to JavaSettings.PollingDetails
                         if (methodPollingDetails == null) {
@@ -1567,18 +1568,42 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return description;
     }
 
-    private static MethodPollingDetails methodPollingDetailsFromOperationLinks(
+    private static MethodPollingDetails methodPollingDetailsFromMetadata(
         Operation operation,
         JavaSettings.PollingDetails pollingDetails,
         JavaSettings settings) {
 
-        if (operation.getOperationLinks() == null || pollingDetails == null || operation.getConvenienceApi() == null) {
+        if (pollingDetails == null || operation.getConvenienceApi() == null) {
             return null;
         }
 
         MethodPollingDetails methodPollingDetails = null;
-        if (operation.getOperationLinks() != null) {
-            // Only Cadl would have operationLinks
+        if (operation.getLroMetadata() != null) {
+            // Only Typespec would have longRunningMetadata
+
+            LongRunningMetadata metadata = operation.getLroMetadata();
+            ObjectMapper objectMapper = Mappers.getObjectMapper();
+            IType intermediateType = objectMapper.map(metadata.getPollResultType());
+            IType finalType = metadata.getFinalResultType() == null
+                    ? PrimitiveType.Void
+                    : objectMapper.map(metadata.getFinalResultType());
+
+            String pollingStrategy = metadata.getPollingStrategy() == null
+                    ? pollingDetails.getStrategy()
+                    : String.format(JavaSettings.PollingDetails.DEFAULT_POLLING_STRATEGY_FORMAT, metadata.getPollingStrategy().getLanguage().getJava().getNamespace() + "." + metadata.getPollingStrategy().getLanguage().getJava().getName());
+            String syncPollingStrategy = metadata.getPollingStrategy() == null
+                    ? pollingDetails.getSyncStrategy()
+                    : String.format(JavaSettings.PollingDetails.DEFAULT_POLLING_STRATEGY_FORMAT, metadata.getPollingStrategy().getLanguage().getJava().getNamespace() + ".Sync" + metadata.getPollingStrategy().getLanguage().getJava().getName());
+
+            methodPollingDetails = new MethodPollingDetails(
+                    pollingStrategy,
+                    syncPollingStrategy,
+                    intermediateType,
+                    finalType,
+                    pollingDetails.getPollIntervalInSeconds());
+        }
+        if (methodPollingDetails == null && operation.getOperationLinks() != null) {
+            // Only Typespec  would have operationLinks
             // If operationLinks is provided, it will override JavaSettings.PollingDetails
 
             IType intermediateType = null;
@@ -1611,7 +1636,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                                         && !CoreUtils.isNullOrEmpty(r.getProtocol().getHttp().getStatusCodes())
                                         && r.getProtocol().getHttp().getStatusCodes().contains("200"))
                                 .findFirst()
-                                .map(Response::getSchema).filter(Objects::nonNull)
+                                .map(Response::getSchema)
                                 .orElse(null);
                         if (schemaOf200StatusCode != null) {
                             finalType = Mappers.getSchemaMapper().map(schemaOf200StatusCode);

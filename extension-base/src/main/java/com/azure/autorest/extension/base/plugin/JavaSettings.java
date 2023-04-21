@@ -884,19 +884,14 @@ public class JavaSettings {
         @JsonProperty("sync-strategy")
         private String syncStrategy;
 
-        private static final String DEFAULT_POLLING_CODE = String.join("\n",
-                "new DefaultPollingStrategy<>(new PollingStrategyOptions({httpPipeline})",
-                "    .setEndpoint({endpoint})",
-                "    .setContext({context}))");
-
-        private static final String DEFAULT_SYNC_POLLING_CODE = String.join("\n",
-                "new SyncDefaultPollingStrategy<>(new PollingStrategyOptions({httpPipeline})",
+        public static final String DEFAULT_POLLING_STRATEGY_FORMAT = String.join("\n",
+                "new %s<>(new PollingStrategyOptions({httpPipeline})",
                 "    .setEndpoint({endpoint})",
                 "    .setContext({context}))");
 
         public String getStrategy() {
             if (strategy == null || "default".equalsIgnoreCase(strategy)) {
-                return DEFAULT_POLLING_CODE;
+                return String.format(DEFAULT_POLLING_STRATEGY_FORMAT, "DefaultPollingStrategy");
             } else {
                 return strategy;
             }
@@ -904,7 +899,7 @@ public class JavaSettings {
 
         public String getSyncStrategy() {
             if (syncStrategy == null || "default".equalsIgnoreCase(syncStrategy)) {
-                return DEFAULT_SYNC_POLLING_CODE;
+                return String.format(DEFAULT_POLLING_STRATEGY_FORMAT, "SyncDefaultPollingStrategy");
             } else {
                 return syncStrategy;
             }

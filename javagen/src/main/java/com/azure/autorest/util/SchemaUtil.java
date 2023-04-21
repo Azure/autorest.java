@@ -236,6 +236,16 @@ public class SchemaUtil {
                         classType = ClassType.ResponseInnerError;
                     }
                     // ErrorResponse is not available
+
+                    if ("PollResult".equals(name)
+                            && compositeType.getLanguage().getJava() != null
+                            && compositeType.getLanguage().getJava().getNamespace() != null
+                            && compositeType.getLanguage().getJava().getNamespace().startsWith("com.azure.core")) {
+                        classType = new ClassType.Builder()
+                                .name(name)
+                                .packageName(compositeType.getLanguage().getJava().getNamespace())
+                                .build();
+                    }
                 }
             }
         }

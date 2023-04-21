@@ -42,6 +42,7 @@ import {
   getAuthentication,
   getServers,
   getStatusCodeDescription,
+  HttpOperation,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
@@ -52,7 +53,14 @@ import {
   getHeaderFieldOptions,
 } from "@typespec/http";
 import { getVersion } from "@typespec/versioning";
-import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/typespec-azure-core";
+import {
+  isPollingLocation,
+  getPagedResult,
+  getOperationLinks,
+  isFixed,
+  getLroMetadata,
+  FinalStateValue,
+} from "@azure-tools/typespec-azure-core";
 import {
   SdkContext,
   listClients,
@@ -104,6 +112,7 @@ import {
   GroupProperty,
   ApiVersion,
   SerializationStyle,
+  Metadata,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient } from "./common/client.js";
@@ -501,7 +510,7 @@ export class CodeModelBuilder {
     // linked operations
     const lroMetadata = fromLinkedOperation
       ? new LongRunningMetadata(false)
-      : this.processLinkedOperation(codeModelOperation, groupName, operation, clientContext);
+      : this.processLroMetadata(codeModelOperation, groupName, op, clientContext);
 
     // responses
     const candidateResponseSchema = lroMetadata.pollResultType; // candidate: response body type of pollingOperation
@@ -510,7 +519,7 @@ export class CodeModelBuilder {
     // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
-    this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata.longRunning);
+    this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -544,15 +553,99 @@ export class CodeModelBuilder {
     }
   }
 
-  private processLinkedOperation(
+  private processLroMetadata(
     op: CodeModelOperation,
     groupName: string,
-    operation: Operation,
+    httpOperation: HttpOperation,
     clientContext: ClientContext,
   ): LongRunningMetadata {
+    const operation = httpOperation.operation;
+
     let pollingSchema = undefined;
     let finalSchema = undefined;
     let pollingFoundInOperationLinks = false;
+
+    const lroMetadata = getLroMetadata(this.program, operation);
+    if (lroMetadata && lroMetadata.statusMonitorStep?.responseModel) {
+      const verb = httpOperation.verb;
+      let useLroMetadata = false;
+      let useNewPollStrategy = false;
+      if (verb === "put" && !lroMetadata.finalStep) {
+        // PUT without last GET on resource
+        useLroMetadata = true;
+        useNewPollStrategy = true;
+      } else if (
+        verb === "post" &&
+        lroMetadata.finalStep &&
+        lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
+        lroMetadata.finalStep.target.name === "result"
+      ) {
+        // POST with final result in "result" property
+        useLroMetadata = true;
+        useNewPollStrategy = true;
+      } else if (
+        verb === "delete" &&
+        lroMetadata.finalStateVia === FinalStateValue.operationLocation &&
+        lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
+        getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
+      ) {
+        // DELETE with poll result as "OperationStatus"
+        useLroMetadata = true;
+      }
+
+      if (useLroMetadata) {
+        let pollingStrategy: Metadata | undefined = undefined;
+        if (useNewPollStrategy) {
+          pollingStrategy = new Metadata({
+            language: {
+              java: {
+                name: "OperationLocationPollingStrategy",
+                namespace: "com.azure.core.experimental.util.polling",
+              },
+            },
+          });
+        }
+
+        // pollingSchema
+        if (useNewPollStrategy) {
+          // com.azure.core.experimental.models.PollResult
+          pollingSchema = this.pollResultSchema;
+        } else {
+          if (
+            lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
+            getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
+          ) {
+            pollingSchema = this.pollResultSchema;
+          } else {
+            pollingSchema = this.processSchema(lroMetadata.statusMonitorStep.responseModel, "pollResult");
+          }
+        }
+
+        // finalSchema
+        if (lroMetadata.finalStep?.responseModel) {
+          finalSchema = this.processSchema(lroMetadata.finalStep.responseModel, "finalResult");
+        } else if (verb !== "delete" && lroMetadata.logicalResult) {
+          finalSchema = this.processSchema(lroMetadata.logicalResult, "finalResult");
+        }
+
+        if (pollingSchema) {
+          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
+          if (op.convenienceApi) {
+            this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.ConvenienceApi] });
+          }
+        }
+        if (finalSchema) {
+          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
+          if (op.convenienceApi) {
+            this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.ConvenienceApi] });
+          }
+        }
+
+        op.lroMetadata = new LongRunningMetadata(true, pollingSchema, finalSchema, pollingStrategy);
+        return op.lroMetadata;
+      }
+    }
+
     const operationLinks = getOperationLinks(this.program, operation);
     if (operationLinks) {
       op.operationLinks = {};
@@ -604,9 +697,9 @@ export class CodeModelBuilder {
   private processRouteForLongRunning(
     op: CodeModelOperation,
     responses: HttpOperationResponse[],
-    pollingFoundInOperationLinks: boolean,
+    lroMetadata: LongRunningMetadata,
   ) {
-    if (pollingFoundInOperationLinks) {
+    if (lroMetadata.longRunning) {
       op.extensions = op.extensions ?? {};
       op.extensions["x-ms-long-running-operation"] = true;
       return;
@@ -1012,7 +1105,12 @@ export class CodeModelBuilder {
           }
         }
         if (!schema) {
-          schema = this.processSchema(bodyType, "response");
+          if (verb === "post" && op.lroMetadata && op.lroMetadata.pollResultType) {
+            // for standard LRO action, return type is the pollResultType
+            schema = op.lroMetadata.pollResultType;
+          } else {
+            schema = this.processSchema(bodyType, "response");
+          }
         }
         response = new SchemaResponse(schema, {
           protocol: {
@@ -1859,6 +1957,25 @@ export class CodeModelBuilder {
   private _anySchema?: AnySchema;
   get anySchema(): AnySchema {
     return this._anySchema ?? (this._anySchema = this.codeModel.schemas.add(new AnySchema("Anything")));
+  }
+
+  private _pollResultSchema?: ObjectSchema;
+  get pollResultSchema(): ObjectSchema {
+    return (
+      this._pollResultSchema ??
+      (this._pollResultSchema = this.codeModel.schemas.add(
+        new ObjectSchema("PollResult", "Status details for long running operations", {
+          language: {
+            default: {
+              namespace: "Azure.Core.Foundations",
+            },
+            java: {
+              namespace: "com.azure.core.experimental.models",
+            },
+          },
+        }),
+      ))
+    );
   }
 
   private createApiVersionParameter(serializedName: string, parameterLocation: ParameterLocation): Parameter {
