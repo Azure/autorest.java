@@ -88,6 +88,114 @@ public final class QueriesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
+        @Get("/parameters/collection-format/query/ssv")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> ssv(
+                @QueryParam("colors") String colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/parameters/collection-format/query/ssv")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> ssvSync(
+                @QueryParam("colors") String colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/parameters/collection-format/query/tsv")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> tsv(
+                @QueryParam("colors") String colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/parameters/collection-format/query/tsv")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> tsvSync(
+                @QueryParam("colors") String colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/parameters/collection-format/query/pipes")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> pipes(
+                @QueryParam("colors") String colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/parameters/collection-format/query/pipes")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> pipesSync(
+                @QueryParam("colors") String colors,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
         @Get("/parameters/collection-format/query/csv")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
@@ -161,6 +269,120 @@ public final class QueriesImpl {
         List<String> colorsConverted =
                 colors.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return service.multiSync(colorsConverted, accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * The ssv operation.
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> ssvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String colorsConverted =
+                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return FluxUtil.withContext(context -> service.ssv(colorsConverted, accept, requestOptions, context));
+    }
+
+    /**
+     * The ssv operation.
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> ssvWithResponse(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String colorsConverted =
+                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return service.ssvSync(colorsConverted, accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * The tsv operation.
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> tsvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String colorsConverted =
+                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return FluxUtil.withContext(context -> service.tsv(colorsConverted, accept, requestOptions, context));
+    }
+
+    /**
+     * The tsv operation.
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> tsvWithResponse(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String colorsConverted =
+                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return service.tsvSync(colorsConverted, accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * The pipes operation.
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> pipesWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String colorsConverted =
+                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return FluxUtil.withContext(context -> service.pipes(colorsConverted, accept, requestOptions, context));
+    }
+
+    /**
+     * The pipes operation.
+     *
+     * @param colors Possible values for colors are [blue,red,green].
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> pipesWithResponse(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String colorsConverted =
+                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+        return service.pipesSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
