@@ -3,6 +3,7 @@
 
 package com.azure.lro.core;
 
+import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.BinaryData;
@@ -10,9 +11,7 @@ import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.SyncPoller;
 
-import com.azure.lro.core.models.OperationState;
-import com.azure.lro.core.models.ResourceOperationStatusUserError;
-import com.azure.lro.core.models.ResourceOperationStatusUserExportedUserError;
+import com.azure.lro.core.models.ExportedUser;
 import com.azure.lro.core.models.User;
 import com.azure.lro.rpc.RpcClient;
 import com.azure.lro.rpc.RpcClientBuilder;
@@ -20,7 +19,6 @@ import com.azure.lro.rpc.models.JobData;
 import com.azure.lro.rpc.models.JobPollResult;
 import com.azure.lro.rpc.models.JobResult;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class LroCoreTests {
@@ -29,13 +27,12 @@ public class LroCoreTests {
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
             .buildClient();
 
-    @Disabled("PR https://github.com/Azure/azure-sdk-for-java/pull/34174")
     @Test
     public void testPut() {
-        SyncPoller<ResourceOperationStatusUserError, User> poller = client.beginCreateOrReplace(
+        SyncPoller<PollResult, User> poller = client.beginCreateOrReplace(
                 "madge", new User("contributor"));
 
-        PollResponse<ResourceOperationStatusUserError> response = poller.waitForCompletion();
+        PollResponse<PollResult> response = poller.waitForCompletion();
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
 
         User user = poller.getFinalResult();
@@ -57,26 +54,22 @@ public class LroCoreTests {
 
     @Test
     public void testDelete() {
-        SyncPoller<ResourceOperationStatusUserError, Void> poller = client.beginDelete("madge");
+        SyncPoller<PollResult, Void> poller = client.beginDelete("madge");
 
-        PollResponse<ResourceOperationStatusUserError> response = poller.waitForCompletion();
+        PollResponse<PollResult> response = poller.waitForCompletion();
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
-        Assertions.assertEquals(OperationState.SUCCEEDED, response.getValue().getStatus());
     }
 
     @Test
     public void testPost() {
-        SyncPoller<ResourceOperationStatusUserExportedUserError, ResourceOperationStatusUserExportedUserError> poller = client.beginExport(
+        SyncPoller<PollResult, ExportedUser> poller = client.beginExport(
                 "madge", "json");
 
-        PollResponse<ResourceOperationStatusUserExportedUserError> response = poller.waitForCompletion();
+        PollResponse<PollResult> response = poller.waitForCompletion();
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
-        Assertions.assertEquals(OperationState.SUCCEEDED, response.getValue().getStatus());
-        Assertions.assertNotNull(response.getValue().getResult());
 
-        ResourceOperationStatusUserExportedUserError finalResult = poller.getFinalResult();
-        Assertions.assertEquals(OperationState.SUCCEEDED, finalResult.getStatus());
-        Assertions.assertNotNull(finalResult.getResult());
+        ExportedUser finalResult = poller.getFinalResult();
+        Assertions.assertEquals("madge", finalResult.getName());
     }
 
     @Test

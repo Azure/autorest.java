@@ -21,10 +21,10 @@ public class LroTests {
     @Disabled("MismatchedInputException")
     @Test
     public void testLro() {
-        PollerFlux<User, User> lroFlux = client.beginCreate();
-        SyncPoller<User, User> lroPoller = lroFlux.getSyncPoller();
+        PollerFlux<?, User> lroFlux = client.beginCreate();
+        SyncPoller<?, User> lroPoller = lroFlux.getSyncPoller();
 
-        PollResponse<User> pollResponse = lroPoller.waitForCompletion();
+        PollResponse<?> pollResponse = lroPoller.waitForCompletion();
 
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, pollResponse.getStatus());
         Assertions.assertEquals("Test for polling succeed", lroPoller.getFinalResult().getName());
