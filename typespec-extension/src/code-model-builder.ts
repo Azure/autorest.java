@@ -59,7 +59,6 @@ import {
   getOperationLinks,
   isFixed,
   getLroMetadata,
-  FinalStateValue,
 } from "@azure-tools/typespec-azure-core";
 import {
   SdkContext,
