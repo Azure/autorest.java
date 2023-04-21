@@ -566,13 +566,19 @@ export class CodeModelBuilder {
     let pollingFoundInOperationLinks = false;
 
     const lroMetadata = getLroMetadata(this.program, operation);
-    if (lroMetadata && lroMetadata.statusMonitorStep?.responseModel) {
+    if (
+      lroMetadata &&
+      // we know those operation with OperationStatus is from Azure.Core,
+      // which is validated that "getLroMetadata" gives correct metadata.
+      // there are known cases that on legacy LRO, "getLroMetadata" gives wrong metadata.
+      lroMetadata.statusMonitorStep?.responseModel &&
+      lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
+      getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
+    ) {
       const verb = httpOperation.verb;
-      let useLroMetadata = false;
       let useNewPollStrategy = false;
       if (verb === "put" && !lroMetadata.finalStep) {
         // PUT without last GET on resource
-        useLroMetadata = true;
         useNewPollStrategy = true;
       } else if (
         verb === "post" &&
@@ -581,69 +587,58 @@ export class CodeModelBuilder {
         lroMetadata.finalStep.target.name === "result"
       ) {
         // POST with final result in "result" property
-        useLroMetadata = true;
         useNewPollStrategy = true;
-      } else if (
-        verb === "delete" &&
-        lroMetadata.finalStateVia === FinalStateValue.operationLocation &&
-        lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
-        getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
-      ) {
-        // DELETE with poll result as "OperationStatus"
-        useLroMetadata = true;
       }
 
-      if (useLroMetadata) {
-        let pollingStrategy: Metadata | undefined = undefined;
-        if (useNewPollStrategy) {
-          pollingStrategy = new Metadata({
-            language: {
-              java: {
-                name: "OperationLocationPollingStrategy",
-                namespace: "com.azure.core.experimental.util.polling",
-              },
+      let pollingStrategy: Metadata | undefined = undefined;
+      if (useNewPollStrategy) {
+        pollingStrategy = new Metadata({
+          language: {
+            java: {
+              name: "OperationLocationPollingStrategy",
+              namespace: "com.azure.core.experimental.util.polling",
             },
-          });
-        }
+          },
+        });
+      }
 
-        // pollingSchema
-        if (useNewPollStrategy) {
-          // com.azure.core.experimental.models.PollResult
+      // pollingSchema
+      if (useNewPollStrategy) {
+        // com.azure.core.experimental.models.PollResult
+        pollingSchema = this.pollResultSchema;
+      } else {
+        if (
+          lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
+          getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
+        ) {
           pollingSchema = this.pollResultSchema;
         } else {
-          if (
-            lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
-            getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
-          ) {
-            pollingSchema = this.pollResultSchema;
-          } else {
-            pollingSchema = this.processSchema(lroMetadata.statusMonitorStep.responseModel, "pollResult");
-          }
+          pollingSchema = this.processSchema(lroMetadata.statusMonitorStep.responseModel, "pollResult");
         }
-
-        // finalSchema
-        if (lroMetadata.finalStep?.responseModel) {
-          finalSchema = this.processSchema(lroMetadata.finalStep.responseModel, "finalResult");
-        } else if (verb !== "delete" && lroMetadata.logicalResult) {
-          finalSchema = this.processSchema(lroMetadata.logicalResult, "finalResult");
-        }
-
-        if (pollingSchema) {
-          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
-          if (op.convenienceApi) {
-            this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.ConvenienceApi] });
-          }
-        }
-        if (finalSchema) {
-          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
-          if (op.convenienceApi) {
-            this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.ConvenienceApi] });
-          }
-        }
-
-        op.lroMetadata = new LongRunningMetadata(true, pollingSchema, finalSchema, pollingStrategy);
-        return op.lroMetadata;
       }
+
+      // finalSchema
+      if (lroMetadata.finalStep?.responseModel) {
+        finalSchema = this.processSchema(lroMetadata.finalStep.responseModel, "finalResult");
+      } else if (verb !== "delete" && lroMetadata.logicalResult) {
+        finalSchema = this.processSchema(lroMetadata.logicalResult, "finalResult");
+      }
+
+      if (pollingSchema) {
+        this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
+        if (op.convenienceApi) {
+          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.ConvenienceApi] });
+        }
+      }
+      if (finalSchema) {
+        this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
+        if (op.convenienceApi) {
+          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.ConvenienceApi] });
+        }
+      }
+
+      op.lroMetadata = new LongRunningMetadata(true, pollingSchema, finalSchema, pollingStrategy);
+      return op.lroMetadata;
     }
 
     const operationLinks = getOperationLinks(this.program, operation);
