@@ -8,20 +8,14 @@ import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.projectmodel.Project;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PomMapper implements IMapper<Project, Pom> {
 
     protected static final String TEST_SUFFIX = ":test";
-
-    private static final List<String> KNOWN_DEPENDENCY_PREFIXES;
-    static {
-        KNOWN_DEPENDENCY_PREFIXES = Arrays.stream(Project.Dependency.values())
-                .map(dependency -> dependency.getGroupId() + ":" + dependency.getArtifactId() + ":")
-                .collect(Collectors.toList());
-    }
 
     @Override
     public Pom map(Project project) {
@@ -33,21 +27,34 @@ public class PomMapper implements IMapper<Project, Pom> {
         pom.setServiceName(project.getServiceName() + " Management");
         pom.setServiceDescription(project.getServiceDescriptionForPom());
 
+        Set<String> addedDependencyPrefixes = new HashSet<>();
         List<String> dependencyIdentifiers = new ArrayList<>();
         if (JavaSettings.getInstance().isStreamStyleSerialization()) {
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.AZURE_JSON, true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.AZURE_XML, true);
             dependencyIdentifiers.add(Project.Dependency.AZURE_JSON.getDependencyIdentifier());
             dependencyIdentifiers.add(Project.Dependency.AZURE_XML.getDependencyIdentifier());
         }
-        dependencyIdentifiers.add(Project.Dependency.AZURE_CORE.getDependencyIdentifier());
-        dependencyIdentifiers.add(Project.Dependency.AZURE_CORE_HTTP_NETTY.getDependencyIdentifier());
-        dependencyIdentifiers.add(Project.Dependency.JUNIT_JUPITER_API.getDependencyIdentifier());
-        dependencyIdentifiers.add(Project.Dependency.JUNIT_JUPITER_ENGINE.getDependencyIdentifier());
-        dependencyIdentifiers.add(Project.Dependency.MOCKITO_CORE.getDependencyIdentifier());
-        dependencyIdentifiers.add(Project.Dependency.AZURE_CORE_TEST.getDependencyIdentifier() + TEST_SUFFIX);
-        dependencyIdentifiers.add(Project.Dependency.AZURE_IDENTITY.getDependencyIdentifier() + TEST_SUFFIX);
-        dependencyIdentifiers.add(Project.Dependency.SLF4J_SIMPLE.getDependencyIdentifier() + TEST_SUFFIX);
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                Project.Dependency.AZURE_CORE, false);
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                Project.Dependency.AZURE_CORE_HTTP_NETTY, false);
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                Project.Dependency.JUNIT_JUPITER_API, true);
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                Project.Dependency.JUNIT_JUPITER_ENGINE, true);
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                Project.Dependency.MOCKITO_CORE, true);
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                Project.Dependency.AZURE_CORE_TEST, true);
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                Project.Dependency.AZURE_IDENTITY, true);
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                Project.Dependency.SLF4J_SIMPLE, true);
         dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
-                .filter(dependencyIdentifier -> KNOWN_DEPENDENCY_PREFIXES.stream().noneMatch(dependencyIdentifier::startsWith))
+                .filter(dependencyIdentifier -> addedDependencyPrefixes.stream().noneMatch(dependencyIdentifier::startsWith))
                 .collect(Collectors.toList()));
         pom.setDependencyIdentifiers(dependencyIdentifiers);
 
@@ -59,5 +66,11 @@ public class PomMapper implements IMapper<Project, Pom> {
         pom.setRequireCompilerPlugins(!project.isIntegratedWithSdk());
 
         return pom;
+    }
+
+    protected static void addDependencyIdentifier(List<String> dependencyIdentifiers, Set<String> prefixes,
+                                                Project.Dependency dependency, boolean isTestScope) {
+        prefixes.add(dependency.getGroupId() + "." + dependency.getArtifactId());
+        dependencyIdentifiers.add(dependency.getDependencyIdentifier() + (isTestScope ? TEST_SUFFIX : ""));
     }
 }

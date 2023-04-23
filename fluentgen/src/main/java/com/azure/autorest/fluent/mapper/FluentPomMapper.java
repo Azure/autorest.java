@@ -64,10 +64,4 @@ public class FluentPomMapper extends PomMapper {
 
         return pom;
     }
-
-    private static void addDependencyIdentifier(List<String> dependencyIdentifiers, Set<String> prefixes,
-                                                Project.Dependency dependency, boolean isTestScope) {
-        prefixes.add(dependency.getGroupId() + "." + dependency.getArtifactId());
-        dependencyIdentifiers.add(dependency.getDependencyIdentifier() + (isTestScope ? TEST_SUFFIX : ""));
-    }
 }
