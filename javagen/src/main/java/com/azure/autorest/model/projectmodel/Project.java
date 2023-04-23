@@ -49,18 +49,16 @@ public class Project {
 
     private boolean integratedWithSdk = false;
 
-    private static final String AZURE_GROUP_ID = "com.azure";
-
     public enum Dependency {
         // azure
-        AZURE_CLIENT_SDK_PARENT(AZURE_GROUP_ID, "azure-client-sdk-parent", "1.7.0"),
-        AZURE_JSON(AZURE_GROUP_ID, "azure-json", "1.0.0"),
-        AZURE_XML(AZURE_GROUP_ID, "azure-xml", "1.0.0-beta.1"),
-        AZURE_CORE(AZURE_GROUP_ID, "azure-core", "1.38.0"),
-        AZURE_CORE_MANAGEMENT(AZURE_GROUP_ID, "azure-core-management", "1.11.0"),
-        AZURE_CORE_HTTP_NETTY(AZURE_GROUP_ID, "azure-core-http-netty", "1.13.2"),
-        AZURE_CORE_TEST(AZURE_GROUP_ID, "azure-core-test", "1.16.0"),
-        AZURE_IDENTITY(AZURE_GROUP_ID, "azure-identity", "1.8.2"),
+        AZURE_CLIENT_SDK_PARENT("com.azure", "azure-client-sdk-parent", "1.7.0"),
+        AZURE_JSON("com.azure", "azure-json", "1.0.0"),
+        AZURE_XML("com.azure", "azure-xml", "1.0.0-beta.1"),
+        AZURE_CORE("com.azure", "azure-core", "1.38.0"),
+        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.0"),
+        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.2"),
+        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.16.2"),
+        AZURE_IDENTITY("com.azure", "azure-identity", "1.8.2"),
 
         // external
         JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.1"),
