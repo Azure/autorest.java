@@ -70,7 +70,7 @@ public class PomMapper implements IMapper<Project, Pom> {
 
     protected static void addDependencyIdentifier(List<String> dependencyIdentifiers, Set<String> prefixes,
                                                 Project.Dependency dependency, boolean isTestScope) {
-        prefixes.add(dependency.getGroupId() + "." + dependency.getArtifactId());
+        prefixes.add(dependency.getGroupId() + ":" + dependency.getArtifactId() + ":");
         dependencyIdentifiers.add(dependency.getDependencyIdentifier() + (isTestScope ? TEST_SUFFIX : ""));
     }
 }
