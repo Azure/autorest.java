@@ -68,12 +68,12 @@ public class Project {
 
         private final String groupId;
         private final String artifactId;
-        private String version;
+        private String version; // version could be updated in place, from "version_client.txt" or "external_dependencies.txt", on findPackageVersions method
 
-        Dependency(String groupId, String artifactId, String version) {
+        Dependency(String groupId, String artifactId, String defaultVersion) {
             this.groupId = groupId;
             this.artifactId = artifactId;
-            this.version = version;
+            this.version = defaultVersion;
         }
 
         public String getGroupId() {
@@ -101,8 +101,6 @@ public class Project {
     }
 
     public Project(Client client, List<String> apiVersions) {
-        super();
-
         JavaSettings settings = JavaSettings.getInstance();
         String serviceName = settings.getServiceName();
         if (CoreUtils.isNullOrEmpty(serviceName)) {
@@ -245,7 +243,7 @@ public class Project {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
                 for (Dependency dependency : Dependency.values()) {
-                    String artifact = dependency.getGroupId() + "." + dependency.getArtifactId();
+                    String artifact = dependency.getGroupId() + ":" + dependency.getArtifactId();
                     checkArtifact(line, artifact).ifPresent(dependency::setVersion);
                 }
             });

@@ -50,9 +50,12 @@ public class FluentPomMapper extends PomMapper {
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     Project.Dependency.SLF4J_SIMPLE, true);
         }
+
+        // merge dependencies in POM and dependencies added above
         dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
                 .filter(dependencyIdentifier -> addedDependencyPrefixes.stream().noneMatch(dependencyIdentifier::startsWith))
                 .collect(Collectors.toList()));
+
         pom.setDependencyIdentifiers(dependencyIdentifiers);
 
         if (project.isIntegratedWithSdk()) {
