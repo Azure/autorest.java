@@ -42,7 +42,6 @@ public class Project {
     protected String groupId = "com.azure";
     protected String artifactId;
     protected String version = "1.0.0-beta.1";
-    protected final PackageVersions packageVersions = new PackageVersions();
     protected final List<String> pomDependencyIdentifiers = new ArrayList<>();
     protected String sdkRepositoryUri;
 
@@ -50,66 +49,53 @@ public class Project {
 
     private boolean integratedWithSdk = false;
 
-    public static class PackageVersions {
-        private String azureClientSdkParentVersion = "1.7.0";
-        private String azureJsonVersion = "1.0.0";
-        private String azureXmlVersion = "1.0.0-beta.1";
-        private String azureCoreVersion = "1.38.0";
-        private String azureCoreManagementVersion = "1.11.0";
-        private String azureCoreHttpNettyVersion = "1.13.2";
-        private String azureCoreTestVersion = "1.16.0";
-        private String azureCoreExperimentalVersion = "1.0.0-beta.38";
-        private String azureIdentityVersion = "1.8.2";
-        private String junitVersion = "5.9.1";
-        private String mockitoVersion = "4.5.1";
-        private String slf4jSimpleVersion = "1.7.36";
+    private static final String AZURE_GROUP_ID = "com.azure";
 
-        public String getAzureClientSdkParentVersion() {
-            return azureClientSdkParentVersion;
+    public enum Dependency {
+        // azure
+        AZURE_CLIENT_SDK_PARENT(AZURE_GROUP_ID, "azure-client-sdk-parent", "1.7.0"),
+        AZURE_JSON(AZURE_GROUP_ID, "azure-json", "1.0.0"),
+        AZURE_XML(AZURE_GROUP_ID, "azure-xml", "1.0.0-beta.1"),
+        AZURE_CORE(AZURE_GROUP_ID, "azure-core", "1.38.0"),
+        AZURE_CORE_MANAGEMENT(AZURE_GROUP_ID, "azure-core-management", "1.11.0"),
+        AZURE_CORE_HTTP_NETTY(AZURE_GROUP_ID, "azure-core-http-netty", "1.13.2"),
+        AZURE_CORE_TEST(AZURE_GROUP_ID, "azure-core-test", "1.16.0"),
+        AZURE_IDENTITY(AZURE_GROUP_ID, "azure-identity", "1.8.2"),
+
+        // external
+        JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.1"),
+        JUNIT_JUPITER_ENGINE("org.junit.jupiter", "junit-jupiter-engine", "5.9.1"),
+        MOCKITO_CORE("org.mockito", "mockito-core", "4.5.1"),
+        SLF4J_SIMPLE("org.slf4j", "slf4j-simple", "1.7.36");
+
+        private final String groupId;
+        private final String artifactId;
+        private String version;
+
+        Dependency(String groupId, String artifactId, String version) {
+            this.groupId = groupId;
+            this.artifactId = artifactId;
+            this.version = version;
         }
 
-        public String getAzureJsonVersion() {
-            return azureJsonVersion;
+        public String getGroupId() {
+            return groupId;
         }
 
-        public String getAzureXmlVersion() {
-            return azureXmlVersion;
+        public String getArtifactId() {
+            return artifactId;
         }
 
-        public String getAzureCoreVersion() {
-            return azureCoreVersion;
+        public String getVersion() {
+            return version;
         }
 
-        public String getAzureCoreManagementVersion() {
-            return azureCoreManagementVersion;
+        public void setVersion(String version) {
+            this.version = version;
         }
 
-        public String getAzureCoreHttpNettyVersion() {
-            return azureCoreHttpNettyVersion;
-        }
-
-        public String getAzureCoreTestVersion() {
-            return azureCoreTestVersion;
-        }
-
-        public String getAzureCoreExperimentalVersion() {
-            return azureCoreExperimentalVersion;
-        }
-
-        public String getAzureIdentityVersion() {
-            return azureIdentityVersion;
-        }
-
-        public String getJunitVersion() {
-            return junitVersion;
-        }
-
-        public String getMockitoVersion() {
-            return mockitoVersion;
-        }
-
-        public String getSlf4jSimpleVersion() {
-            return slf4jSimpleVersion;
+        public String getDependencyIdentifier() {
+            return String.format("%s:%s:%s", groupId, artifactId, version);
         }
     }
 
@@ -117,6 +103,8 @@ public class Project {
     }
 
     public Project(Client client, List<String> apiVersions) {
+        super();
+
         JavaSettings settings = JavaSettings.getInstance();
         String serviceName = settings.getServiceName();
         if (CoreUtils.isNullOrEmpty(serviceName)) {
@@ -258,18 +246,10 @@ public class Project {
     private void findPackageVersions(Path path) throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
-                checkArtifact(line, "org.junit.jupiter:junit-jupiter-api").ifPresent(v -> packageVersions.junitVersion = v);
-                checkArtifact(line, "org.mockito:mockito-core").ifPresent(v -> packageVersions.mockitoVersion = v);
-                checkArtifact(line, "com.azure:azure-client-sdk-parent").ifPresent(v -> packageVersions.azureClientSdkParentVersion = v);
-                checkArtifact(line, "com.azure:azure-json").ifPresent(v -> packageVersions.azureJsonVersion = v);
-                checkArtifact(line, "com.azure:azure-xml").ifPresent(v -> packageVersions.azureXmlVersion = v);
-                checkArtifact(line, "com.azure:azure-core").ifPresent(v -> packageVersions.azureCoreVersion = v);
-                checkArtifact(line, "com.azure:azure-core-management").ifPresent(v -> packageVersions.azureCoreManagementVersion = v);
-                checkArtifact(line, "com.azure:azure-core-http-netty").ifPresent(v -> packageVersions.azureCoreHttpNettyVersion = v);
-                checkArtifact(line, "com.azure:azure-core-test").ifPresent(v -> packageVersions.azureCoreTestVersion = v);
-                checkArtifact(line, "com.azure:azure-core-experimental").ifPresent(v -> packageVersions.azureCoreExperimentalVersion = v);
-                checkArtifact(line, "com.azure:azure-identity").ifPresent(v -> packageVersions.azureIdentityVersion = v);
-                checkArtifact(line, "org.slf4j:slf4j-simple").ifPresent(v -> packageVersions.slf4jSimpleVersion = v);
+                for (Dependency dependency : Dependency.values()) {
+                    String artifact = dependency.getGroupId() + "." + dependency.getArtifactId();
+                    checkArtifact(line, artifact).ifPresent(dependency::setVersion);
+                }
             });
         }
     }
@@ -390,10 +370,6 @@ public class Project {
 
     public String getVersion() {
         return version;
-    }
-
-    public PackageVersions getPackageVersions() {
-        return packageVersions;
     }
 
     public List<String> getApiVersions() {
