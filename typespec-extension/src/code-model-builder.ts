@@ -140,6 +140,8 @@ import {
   originApiVersion,
   specialHeaderNames,
   loadExamples,
+  isLroMetadataSupported,
+  isLroNewPollingStrategy,
 } from "./utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -570,24 +572,11 @@ export class CodeModelBuilder {
       // we know those operation with OperationStatus is from Azure.Core,
       // which is validated that "getLroMetadata" gives correct metadata.
       // there are known cases that on legacy LRO, "getLroMetadata" gives wrong metadata.
-      lroMetadata.statusMonitorStep?.responseModel &&
-      lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
-      getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
+      lroMetadata.statusMonitorStep &&
+      isLroMetadataSupported(operation, lroMetadata)
     ) {
       const verb = httpOperation.verb;
-      let useNewPollStrategy = false;
-      if (verb === "put" && !lroMetadata.finalStep) {
-        // PUT without last GET on resource
-        useNewPollStrategy = true;
-      } else if (
-        verb === "post" &&
-        lroMetadata.finalStep &&
-        lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
-        lroMetadata.finalStep.target.name === "result"
-      ) {
-        // POST with final result in "result" property
-        useNewPollStrategy = true;
-      }
+      const useNewPollStrategy = isLroNewPollingStrategy(operation, lroMetadata);
 
       let pollingStrategy: Metadata | undefined = undefined;
       if (useNewPollStrategy) {
@@ -623,6 +612,7 @@ export class CodeModelBuilder {
         finalSchema = this.processSchema(lroMetadata.logicalResult, "finalResult");
       }
 
+      // track usage
       if (pollingSchema) {
         this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
         if (op.convenienceApi) {

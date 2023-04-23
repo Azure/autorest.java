@@ -5,6 +5,7 @@ import {
   NoTarget,
   Operation,
   Program,
+  SyntaxKind,
   TemplatedTypeBase,
   Type,
   Union,
@@ -28,6 +29,7 @@ import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
 import { getVersion } from "@typespec/versioning";
+import { LroMetadata } from "@azure-tools/typespec-azure-core/*";
 
 export const specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
@@ -253,4 +255,41 @@ export function getServiceVersion(client: CodeModelClient | CodeModel): ServiceV
     name = name + "ServiceVersion";
   }
   return new ServiceVersion(name, description);
+}
+
+export function isLroMetadataSupported(operation: Operation, lroMetadata: LroMetadata): boolean {
+  const azureCoreLroSvs = [
+    "LongRunningResourceCreateOrReplace",
+    "LongRunningResourceCreateOrUpdate",
+    "LongRunningResourceDelete",
+    "LongRunningResourceAction",
+  ];
+
+  let ret = false;
+  if (operation.node.signature.kind === SyntaxKind.OperationSignatureReference) {
+    if (operation.node.signature.baseOperation.target.kind === SyntaxKind.MemberExpression) {
+      const sv = operation.node.signature.baseOperation.target.id.sv;
+      ret = azureCoreLroSvs.includes(sv);
+    }
+  }
+  return ret;
+}
+
+export function isLroNewPollingStrategy(operation: Operation, lroMetadata: LroMetadata): boolean {
+  // at present, it is same as isLroMetadataSupported, which checks if operation uses template from Azure.Core
+  // will change later when isLroMetadataSupported extends to other types of operations
+  return true;
+
+  // if (verb === "put" && !lroMetadata.finalStep) {
+  //   // PUT without last GET on resource
+  //   useNewPollStrategy = true;
+  // } else if (
+  //   verb === "post" &&
+  //   lroMetadata.finalStep &&
+  //   lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
+  //   lroMetadata.finalStep.target.name === "result"
+  // ) {
+  //   // POST with final result in "result" property
+  //   useNewPollStrategy = true;
+  // }
 }
