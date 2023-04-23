@@ -85,7 +85,14 @@ public final class StandardAsyncClient {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      *
@@ -111,7 +118,18 @@ public final class StandardAsyncClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * PollResult
+     * {
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
+     * }
      * }</pre>
      *
      * @param name The name of user.

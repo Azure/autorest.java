@@ -123,6 +123,7 @@ import { OrSchema } from "./common/schemas/relationship.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
 import { ClientContext, LongRunningMetadata } from "./models.js";
+import { createPollResultSchema } from "./external-schemas.js";
 import {
   ProcessingCache,
   stringArrayContainsIgnoreCase,
@@ -1947,18 +1948,7 @@ export class CodeModelBuilder {
   get pollResultSchema(): ObjectSchema {
     return (
       this._pollResultSchema ??
-      (this._pollResultSchema = this.codeModel.schemas.add(
-        new ObjectSchema("PollResult", "Status details for long running operations", {
-          language: {
-            default: {
-              namespace: "Azure.Core.Foundations",
-            },
-            java: {
-              namespace: "com.azure.core.experimental.models",
-            },
-          },
-        }),
-      ))
+      (this._pollResultSchema = createPollResultSchema(this.codeModel.schemas, this.stringSchema))
     );
   }
 

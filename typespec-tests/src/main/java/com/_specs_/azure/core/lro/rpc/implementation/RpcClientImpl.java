@@ -302,7 +302,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -348,7 +359,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -392,7 +414,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -445,7 +478,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -498,7 +542,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -552,7 +607,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -597,7 +663,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -634,7 +711,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -677,7 +765,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -724,7 +823,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -769,7 +879,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -823,7 +944,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -877,7 +1009,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -931,7 +1074,18 @@ public final class RpcClientImpl {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Required): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Required)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [

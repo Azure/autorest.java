@@ -50,7 +50,12 @@ public class ImplementationDetails {
         /**
          * Anonymous model.
          */
-        ANONYMOUS("anonymous");
+        ANONYMOUS("anonymous"),
+
+        /**
+         * External model.
+         */
+        EXTERNAL("external");
 
         private final static Map<String, Usage> CONSTANTS = new HashMap<>();
         static {

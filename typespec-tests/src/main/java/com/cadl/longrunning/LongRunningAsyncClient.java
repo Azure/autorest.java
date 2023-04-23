@@ -152,7 +152,18 @@ public final class LongRunningAsyncClient {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
      * }</pre>
      *
@@ -176,7 +187,22 @@ public final class LongRunningAsyncClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * PollResult
+     * {
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
+     * }
      * }</pre>
      *
      * @param name The name parameter.

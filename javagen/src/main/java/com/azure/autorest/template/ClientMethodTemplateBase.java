@@ -203,7 +203,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
     private static void bodySchemaJavadoc(IType type, JavaJavadocComment commentBlock, String indent, String name, Set<IType> typesInJavadoc, boolean isRequired, boolean isRootSchema) {
         String nextIndent = indent + "    ";
-        if (ClientModelUtil.isClientModel(type) && !typesInJavadoc.contains(type)) {
+        if ((ClientModelUtil.isClientModel(type) || ClientModelUtil.isExternalModel(type)) && !typesInJavadoc.contains(type)) {
             typesInJavadoc.add(type);
             ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (name != null) {

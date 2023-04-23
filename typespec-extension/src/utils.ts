@@ -266,10 +266,16 @@ export function isLroMetadataSupported(operation: Operation, lroMetadata: LroMet
   ];
 
   let ret = false;
-  if (operation.node.signature.kind === SyntaxKind.OperationSignatureReference) {
-    if (operation.node.signature.baseOperation.target.kind === SyntaxKind.MemberExpression) {
-      const sv = operation.node.signature.baseOperation.target.id.sv;
-      ret = azureCoreLroSvs.includes(sv);
+  if (
+    lroMetadata.statusMonitorStep &&
+    lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
+    getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
+  ) {
+    if (operation.node.signature.kind === SyntaxKind.OperationSignatureReference) {
+      if (operation.node.signature.baseOperation.target.kind === SyntaxKind.MemberExpression) {
+        const sv = operation.node.signature.baseOperation.target.id.sv;
+        ret = azureCoreLroSvs.includes(sv);
+      }
     }
   }
   return ret;
