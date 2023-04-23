@@ -1,6 +1,12 @@
 function Generate($tspFile) {
   Write-Host "npx tsp compile $tspFile --trace import-resolution --trace projection --trace typespec-java"
-  Invoke-Expression "npx tsp compile $tspFile --trace import-resolution --trace projection --trace typespec-java"
+  if ($tspFile -match "type[\\/]enum[\\/]extensible[\\/]*") {
+    Invoke-Expression "npx tsp compile $tspFile --options=""@azure-tools/typespec-java.namespace=com.type.enums.extensible"" --trace import-resolution --trace projection --trace typespec-java"
+  } elseif ($tspFile -match "type[\\/]enum[\\/]fixed[\\/]*") {
+    Invoke-Expression "npx tsp compile $tspFile --options=""@azure-tools/typespec-java.namespace=com.type.enums.fixed"" --trace import-resolution --trace projection --trace typespec-java"
+  } else {
+    Invoke-Expression "npx tsp compile $tspFile --trace import-resolution --trace projection --trace typespec-java"
+  }
 
   if ($LASTEXITCODE) {
     exit $LASTEXITCODE
@@ -24,14 +30,14 @@ function Generate($tspFile) {
 New-Item -Path ./existingcode/src/main/java/com/cadl/ -ItemType Directory -Force
 
 if (Test-Path ./src/main/java/com/cadl/partialupdate) {
-    Copy-Item -Path ./src/main/java/com/cadl/partialupdate -Destination ./existingcode/src/main/java/com/cadl/partialupdate -Recurse -Force
+  Copy-Item -Path ./src/main/java/com/cadl/partialupdate -Destination ./existingcode/src/main/java/com/cadl/partialupdate -Recurse -Force
 }
 
 if (Test-Path ./src/main) {
-    Remove-Item ./src/main -Recurse -Force
+  Remove-Item ./src/main -Recurse -Force
 }
 if (Test-Path ./tsp-output) {
-    Remove-Item ./tsp-output -Recurse -Force
+  Remove-Item ./tsp-output -Recurse -Force
 }
 
 # run other local tests except partial update
@@ -48,6 +54,7 @@ Remove-Item ./existingcode -Recurse -Force
 Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
 
 foreach ($tspFile in (Get-ChildItem ./http -Filter "main.tsp" -File -Name -Recurse)) {
-    generate "./http/$tspFile"
+  Write-Host $tspFile
+  generate "./http/$tspFile"
 }
 Remove-Item ./http -Recurse -Force
