@@ -60,8 +60,14 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         if (result == null && !ObjectMapper.isPlainObject(compositeType)) {
             Set<ImplementationDetails.Usage> usages = SchemaUtil.mapSchemaContext(compositeType.getUsage());
             if (isPredefinedModel(modelType)) {
-                usages = new HashSet<>(usages);
-                usages.add(ImplementationDetails.Usage.EXTERNAL);
+                if (settings.isDataPlaneClient()) {
+                    usages = new HashSet<>(usages);
+                    usages.add(ImplementationDetails.Usage.EXTERNAL);
+                } else {
+                    // abort handling external model, if not DPG
+                    // vanilla and fluent currently does not have mechanism to handle model that not to be outputted.
+                    return result;
+                }
             }
 
             ClientModel.Builder builder = createModelBuilder()
