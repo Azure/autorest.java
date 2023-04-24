@@ -24,7 +24,7 @@ public class PomMapper implements IMapper<Project, Pom> {
         pom.setArtifactId(project.getArtifactId());
         pom.setVersion(project.getVersion());
 
-        pom.setServiceName(project.getServiceName() + " Management");
+        pom.setServiceName(project.getServiceName());
         pom.setServiceDescription(project.getServiceDescriptionForPom());
 
         Set<String> addedDependencyPrefixes = new HashSet<>();
