@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.mapper.PomMapper;
 import com.azure.autorest.model.clientmodel.Pom;
+import com.azure.autorest.model.projectmodel.Project;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,8 +16,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FluentPomMapper extends PomMapper {
-
-    protected static final String CORE_MANAGEMENT_PREFIX = "com.azure:azure-core-management:";
 
     public Pom map(FluentProject project) {
         Pom pom = new Pom();
@@ -31,44 +30,41 @@ public class FluentPomMapper extends PomMapper {
         List<String> dependencyIdentifiers = new ArrayList<>();
         if (JavaSettings.getInstance().isStreamStyleSerialization()) {
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                JSON_PREFIX, project.getPackageVersions().getAzureJsonVersion(), false);
+                Project.Dependency.AZURE_JSON, false);
         }
         addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                CORE_PREFIX, project.getPackageVersions().getAzureCoreVersion(), false);
+                Project.Dependency.AZURE_CORE, false);
         addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                CORE_MANAGEMENT_PREFIX, project.getPackageVersions().getAzureCoreManagementVersion(), false);
+                Project.Dependency.AZURE_CORE_MANAGEMENT, false);
         if (JavaSettings.getInstance().isGenerateTests()) {
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                    CORE_TEST_PREFIX, project.getPackageVersions().getAzureCoreTestVersion(), true);
+                    Project.Dependency.AZURE_CORE_TEST, true);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                    IDENTITY_PREFIX, project.getPackageVersions().getAzureIdentityVersion(), true);
+                    Project.Dependency.AZURE_IDENTITY, true);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                    JUNIT_JUPITER_API_PREFIX, project.getPackageVersions().getJunitVersion(), true);
+                    Project.Dependency.JUNIT_JUPITER_API, true);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                    JUNIT_JUPITER_ENGINE_PREFIX, project.getPackageVersions().getJunitVersion(), true);
+                    Project.Dependency.JUNIT_JUPITER_ENGINE, true);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                    MOCKITO_CORE_PREFIX, project.getPackageVersions().getMockitoVersion(), true);
+                    Project.Dependency.MOCKITO_CORE, true);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                    SLF4J_SIMPLE_PREFIX, project.getPackageVersions().getSlf4jSimpleVersion(), true);
+                    Project.Dependency.SLF4J_SIMPLE, true);
         }
+
+        // merge dependencies in POM and dependencies added above
         dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
                 .filter(dependencyIdentifier -> addedDependencyPrefixes.stream().noneMatch(dependencyIdentifier::startsWith))
                 .collect(Collectors.toList()));
+
         pom.setDependencyIdentifiers(dependencyIdentifiers);
 
         if (project.isIntegratedWithSdk()) {
-            pom.setParentIdentifier(CLIENT_SDK_PARENT_PREFIX + project.getPackageVersions().getAzureClientSdkParentVersion());
+            pom.setParentIdentifier(Project.Dependency.AZURE_CLIENT_SDK_PARENT.getDependencyIdentifier());
             pom.setParentRelativePath("../../parents/azure-client-sdk-parent");
         }
 
         pom.setRequireCompilerPlugins(!project.isIntegratedWithSdk());
 
         return pom;
-    }
-
-    private static void addDependencyIdentifier(List<String> dependencyIdentifiers, Set<String> prefixes,
-                                                String prefix, String version, boolean isTestScope) {
-        prefixes.add(prefix);
-        dependencyIdentifiers.add(prefix + version + (isTestScope ? TEST_SUFFIX : ""));
     }
 }
