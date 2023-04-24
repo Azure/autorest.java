@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.Client;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
 public class FluentGenTests {
 
     private static FluentGenAccessor fluentgenAccessor;
@@ -22,7 +23,7 @@ public class FluentGenTests {
     }
 
     @Test
-    @Disabled("no validation")
+    @Disabled
     public void testProcess() {
         CodeModel codeModel = TestUtils.loadCodeModel(fluentgenAccessor, "code-model-fluentnamer-locks.yaml");
         Client client = FluentStatic.getClient();
