@@ -88,9 +88,9 @@ public class TestUtils {
 
     // autorest --use=. --java --fluent=lite --namespace=com.azure.resourcemanager.locks --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
     // autorest --use=. --java --fluent=lite --namespace=com.azure.resourcemanager.storage fluent-tests/swagger/readme.storage.md
-    // autorest --use=. --java --fluent=lite --namespace=com.azure.resourcemanager.botservice --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/botservice/resource-manager/Microsoft.BotService/stable/2022-09-15/botservice.json
     // autorest --use=. --java --fluent=lite --namespace=com.azure.resourcemanager.policy https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/readme.md --tag=package-policy-2020-09
     // autorest --use=. --java --fluent=lite --namespace=com.azure.resourcemanager.signalr --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/signalr/resource-manager/Microsoft.SignalRService/stable/2023-02-01/signalr.json
+    // autorest --use=. --java --fluent=lite --namespace=com.azure.resourcemanager.botservice --input-file=https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/botservice.json
 
     // cp fluentgen/code-model.yaml fluentgen/src/test/resources/code-model-fluentnamer-###.yaml
 
