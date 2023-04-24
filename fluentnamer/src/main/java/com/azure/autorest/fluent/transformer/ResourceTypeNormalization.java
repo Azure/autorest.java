@@ -199,10 +199,6 @@ class ResourceTypeNormalization {
         }
     }
 
-//    private static Optional<ResourceType> getParentSchemaResourceType(ObjectSchema compositeType, ObjectSchema parantType) {
-//        return getSchemaResourceType(parantType);
-//    }
-
     private static Optional<ResourceType> getSchemaResourceType(ObjectSchema compositeType) {
         ResourceType type = null;
 
@@ -281,11 +277,11 @@ class ResourceTypeNormalization {
                     replaceDummyParentType(compositeType, DUMMY_RESOURCE);
                     break;
                 }
-               case PROXY_RESOURCE:
-               {
-                   replaceDummyParentType(compositeType, DUMMY_PROXY_RESOURCE);
-                   break;
-               }
+                case PROXY_RESOURCE:
+                {
+                    replaceDummyParentType(compositeType, DUMMY_PROXY_RESOURCE);
+                    break;
+                }
                 case SUB_RESOURCE:
                 {
                     replaceDummyParentType(compositeType, DUMMY_SUB_RESOURCE);
@@ -294,6 +290,35 @@ class ResourceTypeNormalization {
             }
 
             LOGGER.info("Change parent from '{}' to '{}', for '{}'", Utils.getJavaName(parentType), type.getClassName(), Utils.getJavaName(compositeType));
+        }
+
+        if (type.getClassName().equals(Utils.getJavaName(compositeType))) {
+            // replace the compositeType to the ResourceType
+            compositeType.getParents().getImmediate().clear();
+            compositeType.getParents().getAll().clear();
+
+            String previousName = Utils.getJavaName(compositeType);
+            compositeType.getLanguage().getJava().setName(type.getClassName());
+
+            switch (type) {
+                case RESOURCE:
+                {
+                    compositeType.setProperties(DUMMY_RESOURCE.getProperties());
+                    break;
+                }
+                case PROXY_RESOURCE:
+                {
+                    compositeType.setProperties(DUMMY_PROXY_RESOURCE.getProperties());
+                    break;
+                }
+                case SUB_RESOURCE:
+                {
+                    compositeType.setProperties(DUMMY_SUB_RESOURCE.getProperties());
+                    break;
+                }
+            }
+
+            LOGGER.info("Rename schema from '{}' to '{}'", previousName, type.getClassName());
         }
     }
 
