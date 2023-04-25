@@ -41,14 +41,14 @@ public final class VisibilityClient {
      * <pre>{@code
      * {
      *     readProp: String (Required)
-     *     queryProp: int (Required)
+     *     queryProp: Integer (Required)
      *     createProp (Required): [
      *         String (Required)
      *     ]
      *     updateProp (Required): [
      *         int (Required)
      *     ]
-     *     deleteProp: boolean (Required)
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      *
@@ -57,14 +57,14 @@ public final class VisibilityClient {
      * <pre>{@code
      * {
      *     readProp: String (Required)
-     *     queryProp: int (Required)
+     *     queryProp: Integer (Required)
      *     createProp (Required): [
      *         String (Required)
      *     ]
      *     updateProp (Required): [
      *         int (Required)
      *     ]
-     *     deleteProp: boolean (Required)
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      *
@@ -90,14 +90,14 @@ public final class VisibilityClient {
      * <pre>{@code
      * {
      *     readProp: String (Required)
-     *     queryProp: int (Required)
+     *     queryProp: Integer (Required)
      *     createProp (Required): [
      *         String (Required)
      *     ]
      *     updateProp (Required): [
      *         int (Required)
      *     ]
-     *     deleteProp: boolean (Required)
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      *
@@ -123,14 +123,14 @@ public final class VisibilityClient {
      * <pre>{@code
      * {
      *     readProp: String (Required)
-     *     queryProp: int (Required)
+     *     queryProp: Integer (Required)
      *     createProp (Required): [
      *         String (Required)
      *     ]
      *     updateProp (Required): [
      *         int (Required)
      *     ]
-     *     deleteProp: boolean (Required)
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      *
@@ -156,14 +156,14 @@ public final class VisibilityClient {
      * <pre>{@code
      * {
      *     readProp: String (Required)
-     *     queryProp: int (Required)
+     *     queryProp: Integer (Required)
      *     createProp (Required): [
      *         String (Required)
      *     ]
      *     updateProp (Required): [
      *         int (Required)
      *     ]
-     *     deleteProp: boolean (Required)
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      *
@@ -189,14 +189,14 @@ public final class VisibilityClient {
      * <pre>{@code
      * {
      *     readProp: String (Required)
-     *     queryProp: int (Required)
+     *     queryProp: Integer (Required)
      *     createProp (Required): [
      *         String (Required)
      *     ]
      *     updateProp (Required): [
      *         int (Required)
      *     ]
-     *     deleteProp: boolean (Required)
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      *
@@ -222,14 +222,14 @@ public final class VisibilityClient {
      * <pre>{@code
      * {
      *     readProp: String (Required)
-     *     queryProp: int (Required)
+     *     queryProp: Integer (Required)
      *     createProp (Required): [
      *         String (Required)
      *     ]
      *     updateProp (Required): [
      *         int (Required)
      *     ]
-     *     deleteProp: boolean (Required)
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      *

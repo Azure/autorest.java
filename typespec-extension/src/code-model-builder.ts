@@ -1577,13 +1577,15 @@ export class CodeModelBuilder {
 
   private processModelProperty(prop: ModelProperty): Property {
     const schema = this.processSchema(prop, prop.name);
-    const nullable = this.isNullableType(prop.type);
+    let nullable = this.isNullableType(prop.type);
 
     let extensions = undefined;
     if (this.isSecret(prop)) {
       extensions = {
         "x-ms-secret": true,
       };
+      // if the property does not return in response, it had to be nullable
+      nullable = true;
     }
 
     return new Property(this.getName(prop), this.getDoc(prop), schema, {
