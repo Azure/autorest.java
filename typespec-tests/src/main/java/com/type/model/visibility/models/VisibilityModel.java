@@ -21,25 +21,25 @@ public final class VisibilityModel {
     /*
      * Required int32, illustrating a query property.
      */
-    @JsonProperty(value = "queryProp", required = true)
+    @JsonProperty(value = "queryProp")
     private int queryProp;
 
     /*
      * Required string[], illustrating a create property.
      */
-    @JsonProperty(value = "createProp", required = true)
+    @JsonProperty(value = "createProp")
     private List<String> createProp;
 
     /*
      * Required int32[], illustrating a update property.
      */
-    @JsonProperty(value = "updateProp", required = true)
+    @JsonProperty(value = "updateProp")
     private List<Integer> updateProp;
 
     /*
      * Required bool, illustrating a delete property.
      */
-    @JsonProperty(value = "deleteProp", required = true)
+    @JsonProperty(value = "deleteProp")
     private boolean deleteProp;
 
     /**
@@ -52,10 +52,10 @@ public final class VisibilityModel {
      */
     @JsonCreator
     public VisibilityModel(
-            @JsonProperty(value = "queryProp", required = true) int queryProp,
-            @JsonProperty(value = "createProp", required = true) List<String> createProp,
-            @JsonProperty(value = "updateProp", required = true) List<Integer> updateProp,
-            @JsonProperty(value = "deleteProp", required = true) boolean deleteProp) {
+            @JsonProperty(value = "queryProp") int queryProp,
+            @JsonProperty(value = "createProp") List<String> createProp,
+            @JsonProperty(value = "updateProp") List<Integer> updateProp,
+            @JsonProperty(value = "deleteProp") boolean deleteProp) {
         this.queryProp = queryProp;
         this.createProp = createProp;
         this.updateProp = updateProp;

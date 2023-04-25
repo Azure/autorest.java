@@ -20,7 +20,7 @@ public final class RoundTripModel {
     /*
      * The secretName property.
      */
-    @JsonProperty(value = "secretName", required = true)
+    @JsonProperty(value = "secretName")
     private String secretName;
 
     /**
@@ -32,7 +32,7 @@ public final class RoundTripModel {
     @JsonCreator
     public RoundTripModel(
             @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "secretName", required = true) String secretName) {
+            @JsonProperty(value = "secretName") String secretName) {
         this.name = name;
         this.secretName = secretName;
     }
