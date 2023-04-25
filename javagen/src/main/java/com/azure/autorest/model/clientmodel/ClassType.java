@@ -170,7 +170,13 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType UnixTimeDateTime = new ClassType.Builder(false)
+        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression))
         .knownClass(java.time.OffsetDateTime.class)
+        .wrapSerializationWithObjectsToString(true)
+        .jsonDeserializationMethod("getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()))")
+        .serializationMethodBase("writeString")
+        .xmlElementDeserializationMethod("getNullableElement(OffsetDateTime::parse)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, OffsetDateTime::parse)")
         .build();
 
     public static final ClassType AndroidDateTime = new ClassType.Builder(false)
@@ -178,9 +184,13 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType UnixTimeLong = new ClassType.Builder(false)
-            .knownClass(java.lang.Long.class)
-            .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
-            .build();
+        .knownClass(java.lang.Long.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
+        .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
+        .serializationMethodBase("writeNumber")
+        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
+        .build();
 
     public static final ClassType HttpPipeline = new ClassType.Builder(false)
         .knownClass(com.azure.core.http.HttpPipeline.class)
@@ -681,22 +691,26 @@ public class ClassType implements IType {
         }
     }
 
-    private static final Map<Character, String> ESCAPE_REPLACEMENT = new HashMap<Character, String>() {{
-        put('\\', "\\\\");
-        put('\t', "\\t");
-        put('\b', "\\b");
-        put('\n', "\\n");
-        put('\r', "\\r");
-        put('\f', "\\f");
-        put('\"', "\\\"");
-    }};
+    private static final String[] ESCAPE_REPLACEMENT;
+
+    static {
+        ESCAPE_REPLACEMENT = new String[256];
+        ESCAPE_REPLACEMENT['\\'] = "\\\\";
+        ESCAPE_REPLACEMENT['\t'] = "\\t";
+        ESCAPE_REPLACEMENT['\b'] = "\\b";
+        ESCAPE_REPLACEMENT['\n'] = "\\n";
+        ESCAPE_REPLACEMENT['\r'] = "\\r";
+        ESCAPE_REPLACEMENT['\f'] = "\\f";
+        ESCAPE_REPLACEMENT['\"'] = "\\\"";
+    }
 
     private static String escapeString(String str) {
         StringBuilder builder = null;
 
         int last = 0;
         for (int i = 0; i < str.length(); i++) {
-            String replacement = ESCAPE_REPLACEMENT.get(str.charAt(i));
+            char c = str.charAt(i);
+            String replacement = c < 256 ? ESCAPE_REPLACEMENT[c] : null;
 
             if (replacement == null) {
                 continue;
