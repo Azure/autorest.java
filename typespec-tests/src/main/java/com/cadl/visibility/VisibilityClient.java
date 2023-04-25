@@ -18,6 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.cadl.visibility.implementation.VisibilityClientImpl;
 import com.cadl.visibility.models.Dog;
 import com.cadl.visibility.models.ReadDog;
+import com.cadl.visibility.models.RoundTripModel;
 import com.cadl.visibility.models.WriteDog;
 
 /** Initializes a new instance of the synchronous VisibilityClient type. */
@@ -133,6 +134,41 @@ public final class VisibilityClient {
     }
 
     /**
+     * The roundtrip operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     *     secretName: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     *     secretName: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> roundtripWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.roundtripWithResponse(body, requestOptions);
+    }
+
+    /**
      * The get operation.
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -188,5 +224,27 @@ public final class VisibilityClient {
         // Generated convenience method for queryWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return queryWithResponse(BinaryData.fromObject(dog), requestOptions).getValue().toObject(Dog.class);
+    }
+
+    /**
+     * The roundtrip operation.
+     *
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public RoundTripModel roundtrip(RoundTripModel body) {
+        // Generated convenience method for roundtripWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return roundtripWithResponse(BinaryData.fromObject(body), requestOptions)
+                .getValue()
+                .toObject(RoundTripModel.class);
     }
 }
