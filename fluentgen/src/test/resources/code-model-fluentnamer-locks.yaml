@@ -1,4 +1,6 @@
 &id004 !!com.azure.autorest.extension.base.model.codemodel.CodeModel
+apiVersions: []
+clients: []
 globalParameters:
   - &id024
     apiVersions: []
@@ -23,6 +25,7 @@ globalParameters:
           examples:
             List management locks at subscription level:
               parameters: {api-version: '2016-09-01', subscriptionId: subscriptionId}
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_ListAtSubscriptionLevel.json
               responses:
                 '200':
                   body:
@@ -67,6 +70,7 @@ globalParameters:
                               properties: {level: ReadOnly}
                             resourceGroupName: resourcegroupname
                             subscriptionId: subscriptionId
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_CreateOrUpdateAtResourceGroupLevel.json
                           responses:
                             '200':
                               body:
@@ -88,13 +92,16 @@ globalParameters:
                     child resources inherit the same lock. To create management locks,
                     you must have access to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
-                    are granted those actions.', name: CreateOrUpdateAtResourceGroupLevel}
+                    are granted those actions.', name: CreateOrUpdateAtResourceGroupLevel,
+                              summary: Creates or updates a management lock at the resource group
+                                level.}
                     java: {description: 'When you apply a lock at a parent scope, all
                     child resources inherit the same lock. To create management locks,
                     you must have access to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
                     are granted those actions.', name: createOrUpdateAtResourceGroupLevel}
                   operationGroup: *id005
+                  operationId: ManagementLocks_CreateOrUpdateAtResourceGroupLevel
                   parameters:
                     - &id011
                       apiVersions: []
@@ -118,6 +125,7 @@ globalParameters:
                             examples:
                               List management locks at scope:
                                 parameters: {api-version: '2016-09-01', scope: subscriptions/subscriptionId}
+                                x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_ListAtScope.json
                                 responses:
                                   '200':
                                     body:
@@ -161,7 +169,7 @@ globalParameters:
                                       nullable: false
                                       operation: *id010
                                       protocol:
-                                        http: {in: PATH}
+                                        http: {explode: false, in: PATH}
                                       required: true
                                       schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                                         apiVersions: []
@@ -171,7 +179,6 @@ globalParameters:
                                     - *id011
                                     - &id021
                                       apiVersions: []
-                                      clientDefaultValue: application/json
                                       flattened: false
                                       implementation: METHOD
                                       language:
@@ -180,8 +187,9 @@ globalParameters:
                                         java: {description: Accept header, name: accept, serializedName: Accept}
                                       nullable: false
                                       operation: *id012
+                                      origin: modelerfour:synthesized/accept
                                       protocol:
-                                        http: {in: HEADER}
+                                        http: {explode: false, in: HEADER}
                                       required: true
                                       schema: &id028 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
                                         apiVersions: []
@@ -200,7 +208,8 @@ globalParameters:
                                           protocol: {}
                                           type: STRING
                                   protocol:
-                                    http: {method: get, path: '{nextLink}', uri: '{$host}'}
+                                    http: {explode: false, method: get, path: '{nextLink}',
+                                           uri: '{$host}'}
                                   signatureParameters:
                                     - *id013
                               responses: &id022
@@ -209,14 +218,17 @@ globalParameters:
                                                 locks., name: ''}
                                   protocol:
                                     http:
+                                      explode: false
                                       knownMediaType: JSON
                                       mediaTypes: [application/json]
                                       statusCodes: ['200']
                                   schema: &id083 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                                     apiVersions:
                                       - {version: '2016-09-01'}
+                                    flattenedSchema: false
                                     language:
-                                      default: {description: The list of locks., name: ManagementLockListResult}
+                                      default: {description: The list of locks., name: ManagementLockListResult,
+                                                namespace: ''}
                                       java: {description: The list of locks., name: ManagementLockListResult}
                                     maxProperties: 0.0
                                     minProperties: 0.0
@@ -239,9 +251,10 @@ globalParameters:
                                             extensions: {xmsAzureResource: true, xmsClientFlatten: false,
                                                          xmsFlattened: false, xmsLongRunningOperation: false,
                                                          xmsSkipUrlEncoding: false}
+                                            flattenedSchema: false
                                             language:
                                               default: {description: The lock information.,
-                                                        name: ManagementLockObject}
+                                                        name: ManagementLockObject, namespace: ''}
                                               java: {description: The lock information., name: ManagementLockObject}
                                             maxProperties: 0.0
                                             minProperties: 0.0
@@ -252,154 +265,236 @@ globalParameters:
                                                   extensions: {xmsAzureResource: true, xmsClientFlatten: false,
                                                                xmsFlattened: false, xmsLongRunningOperation: false,
                                                                xmsSkipUrlEncoding: false}
+                                                  flattenedSchema: false
                                                   language:
                                                     java: {name: ProxyResource}
                                                   maxProperties: 0.0
                                                   minProperties: 0.0
-                                                  properties: []
+                                                  properties:
+                                                    - apiVersions: []
+                                                      isDiscriminator: false
+                                                      language:
+                                                        java: {description: the fully qualified
+                                                                 resource ID for the resource, name: id}
+                                                      nullable: false
+                                                      readOnly: true
+                                                      required: false
+                                                      schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        apiVersions: []
+                                                        maxLength: 0.0
+                                                        minLength: 0.0
+                                                      serializedName: id
+                                                    - apiVersions: []
+                                                      isDiscriminator: false
+                                                      language:
+                                                        java: {description: the name of the resource,
+                                                               name: name}
+                                                      nullable: false
+                                                      readOnly: true
+                                                      required: false
+                                                      schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        apiVersions: []
+                                                        maxLength: 0.0
+                                                        minLength: 0.0
+                                                      serializedName: name
+                                                    - apiVersions: []
+                                                      isDiscriminator: false
+                                                      language:
+                                                        java: {description: the type of the resource,
+                                                               name: type}
+                                                      nullable: false
+                                                      readOnly: true
+                                                      required: false
+                                                      schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        apiVersions: []
+                                                        maxLength: 0.0
+                                                        minLength: 0.0
+                                                      serializedName: type
+                                                  stronglyTypedHeader: false
                                               immediate:
                                                 - *id014
                                             properties:
                                               - apiVersions: []
-                                                flattenedNames: [properties, level]
+                                                extensions: {xmsAzureResource: false, xmsClientFlatten: true,
+                                                             xmsFlattened: false, xmsLongRunningOperation: false,
+                                                             xmsSkipUrlEncoding: false}
                                                 isDiscriminator: false
                                                 language:
-                                                  default: {description: 'The level of the lock.
-                                          Possible values are: NotSpecified, CanNotDelete,
-                                          ReadOnly. CanNotDelete means authorized
-                                          users are able to read and modify the resources,
-                                          but not delete. ReadOnly means authorized
-                                          users can only read from a resource, but
-                                          they can''t modify or delete it.', name: level}
-                                                  java: {description: 'The level of the lock.
-                                          Possible values are: NotSpecified, CanNotDelete,
-                                          ReadOnly. CanNotDelete means authorized
-                                          users are able to read and modify the resources,
-                                          but not delete. ReadOnly means authorized
-                                          users can only read from a resource, but
-                                          they can''t modify or delete it.', name: level}
+                                                  default: {description: The properties of the
+                                                              lock., name: properties}
+                                                  java: {description: The properties of the lock.,
+                                                         name: properties}
                                                 nullable: false
                                                 protocol: {}
                                                 readOnly: false
                                                 required: true
-                                                schema: &id127 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                                schema: &id132 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                                                   apiVersions:
                                                     - {version: '2016-09-01'}
-                                                  choiceType: *id015
-                                                  choices:
-                                                    - language:
-                                                        default: {description: '', name: NOT_SPECIFIED}
-                                                      value: NotSpecified
-                                                    - language:
-                                                        default: {description: '', name: CAN_NOT_DELETE}
-                                                      value: CanNotDelete
-                                                    - language:
-                                                        default: {description: '', name: READ_ONLY}
-                                                      value: ReadOnly
+                                                  flattenedSchema: true
                                                   language:
-                                                    default: {description: 'The level of the lock.
-                                            Possible values are: NotSpecified, CanNotDelete,
-                                            ReadOnly. CanNotDelete means authorized
-                                            users are able to read and modify the
-                                            resources, but not delete. ReadOnly means
-                                            authorized users can only read from a
-                                            resource, but they can''t modify or delete
-                                            it.', name: LockLevel}
-                                                    java: {description: 'The level of the lock.
-                                            Possible values are: NotSpecified, CanNotDelete,
-                                            ReadOnly. CanNotDelete means authorized
-                                            users are able to read and modify the
-                                            resources, but not delete. ReadOnly means
-                                            authorized users can only read from a
-                                            resource, but they can''t modify or delete
-                                            it.', name: LockLevel}
-                                                  protocol: {}
-                                                  type: CHOICE
-                                                serializedName: level
-                                              - apiVersions: []
-                                                flattenedNames: [properties, notes]
-                                                isDiscriminator: false
-                                                language:
-                                                  default: {description: Notes about the lock.
-                                                              Maximum of 512 characters., name: notes}
-                                                  java: {description: Notes about the lock. Maximum
-                                                           of 512 characters., name: notes}
-                                                nullable: false
-                                                protocol: {}
-                                                readOnly: false
-                                                required: false
-                                                schema: &id138 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
-                                                  apiVersions:
-                                                    - {version: '2016-09-01'}
-                                                  language:
-                                                    default: {description: Notes about the lock.
-                                                                Maximum of 512 characters., name: ManagementLockPropertiesNotes}
-                                                  maxLength: 0.0
-                                                  minLength: 0.0
-                                                  protocol: {}
-                                                  type: STRING
-                                                serializedName: notes
-                                              - apiVersions: []
-                                                flattenedNames: [properties, owners]
-                                                isDiscriminator: false
-                                                language:
-                                                  default: {description: The owners of the lock.,
-                                                            name: owners}
-                                                  java: {description: The owners of the lock.,
-                                                         name: owners}
-                                                nullable: false
-                                                protocol: {}
-                                                readOnly: false
-                                                required: false
-                                                schema: &id125 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
-                                                  apiVersions:
-                                                    - {version: '2016-09-01'}
-                                                  elementType: &id132 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
-                                                    apiVersions:
-                                                      - {version: '2016-09-01'}
-                                                    language:
-                                                      default: {description: Lock owner properties.,
-                                                                name: ManagementLockOwner}
-                                                      java: {description: Lock owner properties.,
-                                                             name: ManagementLockOwner}
-                                                    maxProperties: 0.0
-                                                    minProperties: 0.0
-                                                    properties:
-                                                      - apiVersions: []
-                                                        isDiscriminator: false
+                                                    default: {description: The lock properties.,
+                                                              name: ManagementLockProperties, namespace: ''}
+                                                    java: {description: The lock properties.,
+                                                           name: ManagementLockProperties}
+                                                  maxProperties: 0.0
+                                                  minProperties: 0.0
+                                                  properties:
+                                                    - apiVersions: []
+                                                      isDiscriminator: false
+                                                      language:
+                                                        default: {description: 'The level of the
+                                              lock. Possible values are: NotSpecified,
+                                              CanNotDelete, ReadOnly. CanNotDelete
+                                              means authorized users are able to read
+                                              and modify the resources, but not delete.
+                                              ReadOnly means authorized users can
+                                              only read from a resource, but they
+                                              can''t modify or delete it.', name: level}
+                                                        java: {description: 'The level of the lock.
+                                              Possible values are: NotSpecified, CanNotDelete,
+                                              ReadOnly. CanNotDelete means authorized
+                                              users are able to read and modify the
+                                              resources, but not delete. ReadOnly
+                                              means authorized users can only read
+                                              from a resource, but they can''t modify
+                                              or delete it.', name: level}
+                                                      nullable: false
+                                                      protocol: {}
+                                                      readOnly: false
+                                                      required: true
+                                                      schema: &id127 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                                        apiVersions:
+                                                          - {version: '2016-09-01'}
+                                                        choiceType: *id015
+                                                        choices:
+                                                          - language:
+                                                              default: {description: '', name: NOT_SPECIFIED}
+                                                            value: NotSpecified
+                                                          - language:
+                                                              default: {description: '', name: CAN_NOT_DELETE}
+                                                            value: CanNotDelete
+                                                          - language:
+                                                              default: {description: '', name: READ_ONLY}
+                                                            value: ReadOnly
                                                         language:
-                                                          default: {description: The application
-                                                                      ID of the lock owner., name: applicationId}
-                                                          java: {description: The application ID
-                                                                   of the lock owner., name: applicationId}
-                                                        nullable: false
+                                                          default: {description: 'The level of the
+                                                lock. Possible values are: NotSpecified,
+                                                CanNotDelete, ReadOnly. CanNotDelete
+                                                means authorized users are able to
+                                                read and modify the resources, but
+                                                not delete. ReadOnly means authorized
+                                                users can only read from a resource,
+                                                but they can''t modify or delete it.',
+                                                                    name: LockLevel}
+                                                          java: {description: 'The level of the
+                                                lock. Possible values are: NotSpecified,
+                                                CanNotDelete, ReadOnly. CanNotDelete
+                                                means authorized users are able to
+                                                read and modify the resources, but
+                                                not delete. ReadOnly means authorized
+                                                users can only read from a resource,
+                                                but they can''t modify or delete it.',
+                                                                 name: LockLevel}
                                                         protocol: {}
-                                                        readOnly: false
-                                                        required: false
-                                                        schema: &id139 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        type: CHOICE
+                                                      serializedName: level
+                                                    - apiVersions: []
+                                                      isDiscriminator: false
+                                                      language:
+                                                        default: {description: Notes about the lock.
+                                                                    Maximum of 512 characters., name: notes}
+                                                        java: {description: Notes about the lock.
+                                                                 Maximum of 512 characters., name: notes}
+                                                      nullable: false
+                                                      protocol: {}
+                                                      readOnly: false
+                                                      required: false
+                                                      schema: &id139 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        apiVersions:
+                                                          - {version: '2016-09-01'}
+                                                        language:
+                                                          default: {description: Notes about the
+                                                                      lock. Maximum of 512 characters.,
+                                                                    name: ManagementLockPropertiesNotes}
+                                                        maxLength: 0.0
+                                                        minLength: 0.0
+                                                        protocol: {}
+                                                        type: STRING
+                                                      serializedName: notes
+                                                    - apiVersions: []
+                                                      isDiscriminator: false
+                                                      language:
+                                                        default: {description: The owners of the
+                                                                    lock., name: owners}
+                                                        java: {description: The owners of the lock.,
+                                                               name: owners}
+                                                      nullable: false
+                                                      protocol: {}
+                                                      readOnly: false
+                                                      required: false
+                                                      schema: &id125 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                                        apiVersions:
+                                                          - {version: '2016-09-01'}
+                                                        elementType: &id133 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                                                           apiVersions:
                                                             - {version: '2016-09-01'}
+                                                          flattenedSchema: false
                                                           language:
-                                                            default: {description: The application
-                                                                        ID of the lock owner., name: ManagementLockOwnerApplicationId}
-                                                          maxLength: 0.0
-                                                          minLength: 0.0
+                                                            default: {description: Lock owner properties.,
+                                                                      name: ManagementLockOwner, namespace: ''}
+                                                            java: {description: Lock owner properties.,
+                                                                   name: ManagementLockOwner}
+                                                          maxProperties: 0.0
+                                                          minProperties: 0.0
+                                                          properties:
+                                                            - apiVersions: []
+                                                              isDiscriminator: false
+                                                              language:
+                                                                default: {description: The application
+                                                                            ID of the lock owner., name: applicationId}
+                                                                java: {description: The application
+                                                                         ID of the lock owner., name: applicationId}
+                                                              nullable: false
+                                                              protocol: {}
+                                                              readOnly: false
+                                                              required: false
+                                                              schema: &id140 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                                apiVersions:
+                                                                  - {version: '2016-09-01'}
+                                                                language:
+                                                                  default: {description: The application
+                                                                              ID of the lock owner., name: ManagementLockOwnerApplicationId}
+                                                                maxLength: 0.0
+                                                                minLength: 0.0
+                                                                protocol: {}
+                                                                type: STRING
+                                                              serializedName: applicationId
                                                           protocol: {}
-                                                          type: STRING
-                                                        serializedName: applicationId
-                                                    protocol: {}
-                                                    type: OBJECT
-                                                  language:
-                                                    default: {description: The owners of the lock.,
-                                                              name: ManagementLockPropertiesOwners}
-                                                  maxItems: 0.0
-                                                  minItems: 0.0
+                                                          stronglyTypedHeader: false
+                                                          type: OBJECT
+                                                          usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                                                        !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                                                        language:
+                                                          default: {description: The owners of the
+                                                                      lock., name: ManagementLockPropertiesOwners}
+                                                        maxItems: 0.0
+                                                        minItems: 0.0
+                                                        protocol: {}
+                                                        type: ARRAY
+                                                        uniqueItems: false
+                                                      serializedName: owners
                                                   protocol: {}
-                                                  type: ARRAY
-                                                  uniqueItems: false
-                                                serializedName: owners
+                                                  stronglyTypedHeader: false
+                                                  type: OBJECT
+                                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                                                serializedName: properties
                                             protocol: {}
+                                            stronglyTypedHeader: false
                                             type: OBJECT
+                                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                           language:
                                             default: {description: The list of locks., name: ManagementLockListResultValue}
                                           maxItems: 0.0
@@ -419,7 +514,7 @@ globalParameters:
                                         protocol: {}
                                         readOnly: false
                                         required: false
-                                        schema: &id140 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                        schema: &id141 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                                           apiVersions:
                                             - {version: '2016-09-01'}
                                           language:
@@ -431,11 +526,14 @@ globalParameters:
                                           type: STRING
                                         serializedName: nextLink
                                     protocol: {}
+                                    stronglyTypedHeader: false
                                     type: OBJECT
+                                    usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                               signatureParameters: []
                           xmsSkipUrlEncoding: false
                         language: *id016
                         operationGroup: *id005
+                        operationId: ManagementLocks_ListByScope
                         parameters:
                           - *id011
                           - &id018
@@ -456,7 +554,7 @@ globalParameters:
                             nullable: false
                             operation: *id012
                             protocol:
-                              http: {in: PATH}
+                              http: {explode: false, in: PATH}
                             required: true
                             schema: &id017 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                               apiVersions:
@@ -479,12 +577,11 @@ globalParameters:
                             nullable: false
                             operation: *id012
                             protocol:
-                              http: {in: QUERY}
+                              http: {explode: false, in: QUERY}
                             required: false
                             schema: *id017
                           - &id020
                             apiVersions: []
-                            clientDefaultValue: '2016-09-01'
                             flattened: false
                             implementation: CLIENT
                             language:
@@ -492,8 +589,9 @@ globalParameters:
                               java: {description: Api Version, name: apiVersion, serializedName: api-version}
                             nullable: false
                             operation: *id012
+                            origin: modelerfour:synthesized/api-version
                             protocol:
-                              http: {in: QUERY}
+                              http: {explode: false, in: QUERY}
                             required: true
                             schema: &id128 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
                               apiVersions: []
@@ -514,7 +612,7 @@ globalParameters:
                               - *id020
                               - *id021
                             protocol:
-                              http: {method: get, path: '/{scope}/providers/Microsoft.Authorization/locks',
+                              http: {explode: false, method: get, path: '/{scope}/providers/Microsoft.Authorization/locks',
                                      uri: '{$host}'}
                             signatureParameters:
                               - *id018
@@ -523,8 +621,9 @@ globalParameters:
                         signatureParameters:
                           - *id018
                           - *id019
+                      origin: modelerfour:synthesized/host
                       protocol:
-                        http: {in: URI}
+                        http: {explode: false, in: URI}
                       required: true
                       schema: *id015
                     - &id025
@@ -539,7 +638,7 @@ globalParameters:
                       nullable: false
                       operation: *id023
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: &id031 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions:
@@ -565,7 +664,7 @@ globalParameters:
                       nullable: false
                       operation: *id023
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -590,11 +689,10 @@ globalParameters:
                           nullable: false
                           operation: *id023
                           protocol:
-                            http: {in: BODY, style: JSON}
+                            http: {explode: false, in: BODY, style: JSON}
                           required: true
                           schema: *id027
                         - apiVersions: []
-                          clientDefaultValue: application/json
                           flattened: false
                           implementation: METHOD
                           language:
@@ -602,12 +700,14 @@ globalParameters:
                             java: {description: Accept header, name: accept, serializedName: Accept}
                           nullable: false
                           operation: *id023
+                          origin: modelerfour:synthesized/accept
                           protocol:
-                            http: {in: HEADER}
+                            http: {explode: false, in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           method: put
@@ -623,6 +723,7 @@ globalParameters:
                                   name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['200']
@@ -632,6 +733,7 @@ globalParameters:
                                   name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['201']
@@ -651,6 +753,7 @@ globalParameters:
                         Delete management lock at resource group level:
                           parameters: {api-version: '2016-09-01', lockName: testlock,
                                        resourceGroupName: resourcegroupname, subscriptionId: subscriptionId}
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_DeleteAtResourceGroupLevel.json
                           responses:
                             '200': {}
                             '204': {}
@@ -661,12 +764,14 @@ globalParameters:
                     default: {description: 'To delete management locks, you must have
                     access to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
-                    are granted those actions.', name: DeleteAtResourceGroupLevel}
+                    are granted those actions.', name: DeleteAtResourceGroupLevel,
+                              summary: Deletes a management lock at the resource group level.}
                     java: {description: 'To delete management locks, you must have access
                     to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
                     are granted those actions.', name: delete}
                   operationGroup: *id005
+                  operationId: ManagementLocks_DeleteAtResourceGroupLevel
                   parameters:
                     - *id011
                     - &id032
@@ -681,7 +786,7 @@ globalParameters:
                       nullable: false
                       operation: *id030
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id031
                     - &id033
@@ -696,7 +801,7 @@ globalParameters:
                       nullable: false
                       operation: *id030
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -712,7 +817,7 @@ globalParameters:
                         - *id020
                         - *id024
                       protocol:
-                        http: {method: delete, path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/locks/{lockName}',
+                        http: {explode: false, method: delete, path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/locks/{lockName}',
                                uri: '{$host}'}
                       signatureParameters:
                         - *id032
@@ -722,11 +827,13 @@ globalParameters:
                         default: {description: OK, name: ''}
                       protocol:
                         http:
+                          explode: false
                           statusCodes: ['200']
                     - language:
                         default: {description: NoContent, name: ''}
                       protocol:
                         http:
+                          explode: false
                           statusCodes: ['204']
                   signatureParameters:
                     - *id032
@@ -743,6 +850,7 @@ globalParameters:
                         Get management lock at resource group level:
                           parameters: {api-version: '2016-09-01', lockName: testlock,
                                        resourceGroupName: resourcegroupname, subscriptionId: subscriptionId}
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_GetAtResourceGroupLevel.json
                           responses:
                             '200':
                               body:
@@ -759,6 +867,7 @@ globalParameters:
                     java: {description: Gets a management lock at the resource group level.,
                            name: getByResourceGroup}
                   operationGroup: *id005
+                  operationId: ManagementLocks_GetAtResourceGroupLevel
                   parameters:
                     - *id011
                     - &id035
@@ -773,7 +882,7 @@ globalParameters:
                       nullable: false
                       operation: *id034
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id031
                     - &id036
@@ -788,7 +897,7 @@ globalParameters:
                       nullable: false
                       operation: *id034
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -804,7 +913,6 @@ globalParameters:
                         - *id020
                         - *id024
                         - apiVersions: []
-                          clientDefaultValue: application/json
                           flattened: false
                           implementation: METHOD
                           language:
@@ -812,12 +920,13 @@ globalParameters:
                             java: {description: Accept header, name: accept, serializedName: Accept}
                           nullable: false
                           operation: *id034
+                          origin: modelerfour:synthesized/accept
                           protocol:
-                            http: {in: HEADER}
+                            http: {explode: false, in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
-                        http: {method: get, path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/locks/{lockName}',
+                        http: {explode: false, method: get, path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/locks/{lockName}',
                                uri: '{$host}'}
                       signatureParameters:
                         - *id035
@@ -828,6 +937,7 @@ globalParameters:
                                   name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['200']
@@ -851,6 +961,7 @@ globalParameters:
                             parameters:
                               properties: {level: ReadOnly}
                             scope: subscriptions/subscriptionId
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_CreateOrUpdateAtScope.json
                           responses:
                             '200':
                               body:
@@ -873,6 +984,7 @@ globalParameters:
                     java: {description: Create or update a management lock by scope.,
                            name: createOrUpdateByScope}
                   operationGroup: *id005
+                  operationId: ManagementLocks_CreateOrUpdateByScope
                   parameters:
                     - *id011
                     - &id038
@@ -893,7 +1005,7 @@ globalParameters:
                       nullable: false
                       operation: *id037
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id039
@@ -906,7 +1018,7 @@ globalParameters:
                       nullable: false
                       operation: *id037
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -931,11 +1043,10 @@ globalParameters:
                           nullable: false
                           operation: *id037
                           protocol:
-                            http: {in: BODY, style: JSON}
+                            http: {explode: false, in: BODY, style: JSON}
                           required: true
                           schema: *id027
                         - apiVersions: []
-                          clientDefaultValue: application/json
                           flattened: false
                           implementation: METHOD
                           language:
@@ -943,12 +1054,14 @@ globalParameters:
                             java: {description: Accept header, name: accept, serializedName: Accept}
                           nullable: false
                           operation: *id037
+                          origin: modelerfour:synthesized/accept
                           protocol:
-                            http: {in: HEADER}
+                            http: {explode: false, in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           method: put
@@ -963,6 +1076,7 @@ globalParameters:
                         default: {description: OK, name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['200']
@@ -971,6 +1085,7 @@ globalParameters:
                         default: {description: Created, name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['201']
@@ -990,6 +1105,7 @@ globalParameters:
                         Delete management lock at scope:
                           parameters: {api-version: '2016-09-01', lockName: testlock,
                                        scope: subscriptions/subscriptionId}
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_DeleteAtScope.json
                           responses:
                             '200': {}
                             '204': {}
@@ -1000,6 +1116,7 @@ globalParameters:
                     default: {description: Delete a management lock by scope., name: DeleteByScope}
                     java: {description: Delete a management lock by scope., name: deleteByScope}
                   operationGroup: *id005
+                  operationId: ManagementLocks_DeleteByScope
                   parameters:
                     - *id011
                     - &id042
@@ -1013,7 +1130,7 @@ globalParameters:
                       nullable: false
                       operation: *id041
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id043
@@ -1026,7 +1143,7 @@ globalParameters:
                       nullable: false
                       operation: *id041
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1040,7 +1157,7 @@ globalParameters:
                         - *id043
                         - *id020
                       protocol:
-                        http: {method: delete, path: '/{scope}/providers/Microsoft.Authorization/locks/{lockName}',
+                        http: {explode: false, method: delete, path: '/{scope}/providers/Microsoft.Authorization/locks/{lockName}',
                                uri: '{$host}'}
                       signatureParameters:
                         - *id042
@@ -1050,11 +1167,13 @@ globalParameters:
                         default: {description: OK, name: ''}
                       protocol:
                         http:
+                          explode: false
                           statusCodes: ['200']
                     - language:
                         default: {description: NoContent, name: ''}
                       protocol:
                         http:
+                          explode: false
                           statusCodes: ['204']
                   signatureParameters:
                     - *id042
@@ -1071,6 +1190,7 @@ globalParameters:
                         Get management lock at scope:
                           parameters: {api-version: '2016-09-01', lockName: testlock,
                                        scope: subscriptions/subscriptionId}
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_GetAtScope.json
                           responses:
                             '200':
                               body:
@@ -1085,6 +1205,7 @@ globalParameters:
                     default: {description: Get a management lock by scope., name: GetByScope}
                     java: {description: Get a management lock by scope., name: getByScope}
                   operationGroup: *id005
+                  operationId: ManagementLocks_GetByScope
                   parameters:
                     - *id011
                     - &id045
@@ -1098,7 +1219,7 @@ globalParameters:
                       nullable: false
                       operation: *id044
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id046
@@ -1111,7 +1232,7 @@ globalParameters:
                       nullable: false
                       operation: *id044
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1125,7 +1246,6 @@ globalParameters:
                         - *id046
                         - *id020
                         - apiVersions: []
-                          clientDefaultValue: application/json
                           flattened: false
                           implementation: METHOD
                           language:
@@ -1133,12 +1253,13 @@ globalParameters:
                             java: {description: Accept header, name: accept, serializedName: Accept}
                           nullable: false
                           operation: *id044
+                          origin: modelerfour:synthesized/accept
                           protocol:
-                            http: {in: HEADER}
+                            http: {explode: false, in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
-                        http: {method: get, path: '/{scope}/providers/Microsoft.Authorization/locks/{lockName}',
+                        http: {explode: false, method: get, path: '/{scope}/providers/Microsoft.Authorization/locks/{lockName}',
                                uri: '{$host}'}
                       signatureParameters:
                         - *id045
@@ -1148,6 +1269,7 @@ globalParameters:
                         default: {description: OK, name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['200']
@@ -1176,6 +1298,7 @@ globalParameters:
                             resourceProviderNamespace: Microsoft.Storage
                             resourceType: storageAccounts
                             subscriptionId: subscriptionId
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_CreateOrUpdateAtResourceLevel.json
                           responses:
                             '200':
                               body:
@@ -1197,13 +1320,16 @@ globalParameters:
                     child resources inherit the same lock. To create management locks,
                     you must have access to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
-                    are granted those actions.', name: CreateOrUpdateAtResourceLevel}
+                    are granted those actions.', name: CreateOrUpdateAtResourceLevel,
+                              summary: Creates or updates a management lock at the resource level
+                                or any level below the resource.}
                     java: {description: 'When you apply a lock at a parent scope, all
                     child resources inherit the same lock. To create management locks,
                     you must have access to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
                     are granted those actions.', name: createOrUpdateAtResourceLevel}
                   operationGroup: *id005
+                  operationId: ManagementLocks_CreateOrUpdateAtResourceLevel
                   parameters:
                     - *id011
                     - &id048
@@ -1218,7 +1344,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id031
                     - &id049
@@ -1233,7 +1359,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id050
@@ -1250,7 +1376,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id051
@@ -1267,7 +1393,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id052
@@ -1282,7 +1408,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id053
@@ -1299,7 +1425,7 @@ globalParameters:
                       nullable: false
                       operation: *id047
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1330,11 +1456,10 @@ globalParameters:
                           nullable: false
                           operation: *id047
                           protocol:
-                            http: {in: BODY, style: JSON}
+                            http: {explode: false, in: BODY, style: JSON}
                           required: true
                           schema: *id027
                         - apiVersions: []
-                          clientDefaultValue: application/json
                           flattened: false
                           implementation: METHOD
                           language:
@@ -1342,12 +1467,14 @@ globalParameters:
                             java: {description: Accept header, name: accept, serializedName: Accept}
                           nullable: false
                           operation: *id047
+                          origin: modelerfour:synthesized/accept
                           protocol:
-                            http: {in: HEADER}
+                            http: {explode: false, in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           method: put
@@ -1367,6 +1494,7 @@ globalParameters:
                                   name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['200']
@@ -1376,6 +1504,7 @@ globalParameters:
                                   name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['201']
@@ -1401,6 +1530,7 @@ globalParameters:
                                        parentResourcePath: parentResourcePath, resourceGroupName: resourcegroupname,
                                        resourceName: teststorageaccount, resourceProviderNamespace: Microsoft.Storage,
                                        resourceType: storageAccounts, subscriptionId: subscriptionId}
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_DeleteAtResourceLevel.json
                           responses:
                             '200': {}
                             '204': {}
@@ -1411,12 +1541,14 @@ globalParameters:
                     default: {description: 'To delete management locks, you must have
                     access to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
-                    are granted those actions.', name: DeleteAtResourceLevel}
+                    are granted those actions.', name: DeleteAtResourceLevel, summary: Deletes
+                      the management lock of a resource or any level below the resource.}
                     java: {description: 'To delete management locks, you must have access
                     to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
                     are granted those actions.', name: deleteAtResourceLevel}
                   operationGroup: *id005
+                  operationId: ManagementLocks_DeleteAtResourceLevel
                   parameters:
                     - *id011
                     - &id056
@@ -1433,7 +1565,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id031
                     - &id057
@@ -1448,7 +1580,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id058
@@ -1465,7 +1597,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id059
@@ -1482,7 +1614,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id060
@@ -1497,7 +1629,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id061
@@ -1512,7 +1644,7 @@ globalParameters:
                       nullable: false
                       operation: *id055
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1532,7 +1664,7 @@ globalParameters:
                         - *id020
                         - *id024
                       protocol:
-                        http: {method: delete, path: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks/{lockName}',
+                        http: {explode: false, method: delete, path: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks/{lockName}',
                                uri: '{$host}'}
                       signatureParameters:
                         - *id056
@@ -1546,11 +1678,13 @@ globalParameters:
                         default: {description: OK, name: ''}
                       protocol:
                         http:
+                          explode: false
                           statusCodes: ['200']
                     - language:
                         default: {description: NoContent, name: ''}
                       protocol:
                         http:
+                          explode: false
                           statusCodes: ['204']
                   signatureParameters:
                     - *id056
@@ -1573,6 +1707,7 @@ globalParameters:
                                        parentResourcePath: parentResourcePath, resourceGroupName: resourcegroupname,
                                        resourceName: teststorageaccount, resourceProviderNamespace: Microsoft.Storage,
                                        resourceType: storageAccounts, subscriptionId: subscriptionId}
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_GetAtResourceLevel.json
                           responses:
                             '200':
                               body:
@@ -1589,6 +1724,7 @@ globalParameters:
                     java: {description: Get the management lock of a resource or any level
                              below resource., name: getAtResourceLevel}
                   operationGroup: *id005
+                  operationId: ManagementLocks_GetAtResourceLevel
                   parameters:
                     - *id011
                     - &id063
@@ -1603,7 +1739,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id031
                     - &id064
@@ -1618,7 +1754,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id065
@@ -1635,7 +1771,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id066
@@ -1652,7 +1788,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id067
@@ -1667,7 +1803,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id068
@@ -1680,7 +1816,7 @@ globalParameters:
                       nullable: false
                       operation: *id062
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1700,7 +1836,6 @@ globalParameters:
                         - *id020
                         - *id024
                         - apiVersions: []
-                          clientDefaultValue: application/json
                           flattened: false
                           implementation: METHOD
                           language:
@@ -1708,12 +1843,13 @@ globalParameters:
                             java: {description: Accept header, name: accept, serializedName: Accept}
                           nullable: false
                           operation: *id062
+                          origin: modelerfour:synthesized/accept
                           protocol:
-                            http: {in: HEADER}
+                            http: {explode: false, in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
-                        http: {method: get, path: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks/{lockName}',
+                        http: {explode: false, method: get, path: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks/{lockName}',
                                uri: '{$host}'}
                       signatureParameters:
                         - *id063
@@ -1727,6 +1863,7 @@ globalParameters:
                         default: {description: OK, name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['200']
@@ -1754,6 +1891,7 @@ globalParameters:
                             parameters:
                               properties: {level: ReadOnly}
                             subscriptionId: subscriptionId
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_CreateOrUpdateAtSubscriptionLevel.json
                           responses:
                             '200':
                               body:
@@ -1775,13 +1913,16 @@ globalParameters:
                     child resources inherit the same lock. To create management locks,
                     you must have access to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
-                    are granted those actions.', name: CreateOrUpdateAtSubscriptionLevel}
+                    are granted those actions.', name: CreateOrUpdateAtSubscriptionLevel,
+                              summary: Creates or updates a management lock at the subscription
+                                level.}
                     java: {description: 'When you apply a lock at a parent scope, all
                     child resources inherit the same lock. To create management locks,
                     you must have access to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
                     are granted those actions.', name: createOrUpdateAtSubscriptionLevel}
                   operationGroup: *id005
+                  operationId: ManagementLocks_CreateOrUpdateAtSubscriptionLevel
                   parameters:
                     - *id011
                     - &id070
@@ -1798,7 +1939,7 @@ globalParameters:
                       nullable: false
                       operation: *id069
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1822,11 +1963,10 @@ globalParameters:
                           nullable: false
                           operation: *id069
                           protocol:
-                            http: {in: BODY, style: JSON}
+                            http: {explode: false, in: BODY, style: JSON}
                           required: true
                           schema: *id027
                         - apiVersions: []
-                          clientDefaultValue: application/json
                           flattened: false
                           implementation: METHOD
                           language:
@@ -1834,12 +1974,14 @@ globalParameters:
                             java: {description: Accept header, name: accept, serializedName: Accept}
                           nullable: false
                           operation: *id069
+                          origin: modelerfour:synthesized/accept
                           protocol:
-                            http: {in: HEADER}
+                            http: {explode: false, in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           method: put
@@ -1854,6 +1996,7 @@ globalParameters:
                                   name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['200']
@@ -1863,6 +2006,7 @@ globalParameters:
                                   name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['201']
@@ -1881,6 +2025,7 @@ globalParameters:
                         Delete management lock at subscription level:
                           parameters: {api-version: '2016-09-01', lockName: testlock,
                                        subscriptionId: subscriptionId}
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_DeleteAtSubscriptionLevel.json
                           responses:
                             '200': {}
                             '204': {}
@@ -1891,12 +2036,14 @@ globalParameters:
                     default: {description: 'To delete management locks, you must have
                     access to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
-                    are granted those actions.', name: DeleteAtSubscriptionLevel}
+                    are granted those actions.', name: DeleteAtSubscriptionLevel,
+                              summary: Deletes the management lock at the subscription level.}
                     java: {description: 'To delete management locks, you must have access
                     to Microsoft.Authorization/* or Microsoft.Authorization/locks/*
                     actions. Of the built-in roles, only Owner and User Access Administrator
                     are granted those actions.', name: deleteAtSubscriptionLevel}
                   operationGroup: *id005
+                  operationId: ManagementLocks_DeleteAtSubscriptionLevel
                   parameters:
                     - *id011
                     - &id073
@@ -1911,7 +2058,7 @@ globalParameters:
                       nullable: false
                       operation: *id072
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -1926,7 +2073,7 @@ globalParameters:
                         - *id020
                         - *id024
                       protocol:
-                        http: {method: delete, path: '/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks/{lockName}',
+                        http: {explode: false, method: delete, path: '/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks/{lockName}',
                                uri: '{$host}'}
                       signatureParameters:
                         - *id073
@@ -1935,11 +2082,13 @@ globalParameters:
                         default: {description: OK, name: ''}
                       protocol:
                         http:
+                          explode: false
                           statusCodes: ['200']
                     - language:
                         default: {description: NoContent, name: ''}
                       protocol:
                         http:
+                          explode: false
                           statusCodes: ['204']
                   signatureParameters:
                     - *id073
@@ -1955,6 +2104,7 @@ globalParameters:
                         Get management lock at subscription level:
                           parameters: {api-version: '2016-09-01', lockName: testlock,
                                        resourceGroupName: resourcegroupname, subscriptionId: subscriptionId}
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_GetAtSubscriptionLevel.json
                           responses:
                             '200':
                               body:
@@ -1971,6 +2121,7 @@ globalParameters:
                     java: {description: Gets a management lock at the subscription level.,
                            name: getAtSubscriptionLevel}
                   operationGroup: *id005
+                  operationId: ManagementLocks_GetAtSubscriptionLevel
                   parameters:
                     - *id011
                     - &id075
@@ -1985,7 +2136,7 @@ globalParameters:
                       nullable: false
                       operation: *id074
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - *id020
@@ -2000,7 +2151,6 @@ globalParameters:
                         - *id020
                         - *id024
                         - apiVersions: []
-                          clientDefaultValue: application/json
                           flattened: false
                           implementation: METHOD
                           language:
@@ -2008,12 +2158,13 @@ globalParameters:
                             java: {description: Accept header, name: accept, serializedName: Accept}
                           nullable: false
                           operation: *id074
+                          origin: modelerfour:synthesized/accept
                           protocol:
-                            http: {in: HEADER}
+                            http: {explode: false, in: HEADER}
                           required: true
                           schema: *id028
                       protocol:
-                        http: {method: get, path: '/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks/{lockName}',
+                        http: {explode: false, method: get, path: '/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks/{lockName}',
                                uri: '{$host}'}
                       signatureParameters:
                         - *id075
@@ -2023,6 +2174,7 @@ globalParameters:
                                   name: ''}
                       protocol:
                         http:
+                          explode: false
                           knownMediaType: JSON
                           mediaTypes: [application/json]
                           statusCodes: ['200']
@@ -2041,6 +2193,7 @@ globalParameters:
                         List management groups at resource group level:
                           parameters: {api-version: '2016-09-01', resourceGroupName: resourcegroupname,
                                        subscriptionId: subscriptionId}
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_ListAtResourceGroupLevel.json
                           responses:
                             '200':
                               body:
@@ -2083,7 +2236,7 @@ globalParameters:
                                 nullable: false
                                 operation: *id080
                                 protocol:
-                                  http: {in: PATH}
+                                  http: {explode: false, in: PATH}
                                 required: true
                                 schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                                   apiVersions: []
@@ -2093,7 +2246,6 @@ globalParameters:
                               - *id011
                               - &id087
                                 apiVersions: []
-                                clientDefaultValue: application/json
                                 flattened: false
                                 implementation: METHOD
                                 language:
@@ -2101,12 +2253,13 @@ globalParameters:
                                   java: {description: Accept header, name: accept, serializedName: Accept}
                                 nullable: false
                                 operation: *id081
+                                origin: modelerfour:synthesized/accept
                                 protocol:
-                                  http: {in: HEADER}
+                                  http: {explode: false, in: HEADER}
                                 required: true
                                 schema: *id028
                             protocol:
-                              http: {method: get, path: '{nextLink}', uri: '{$host}'}
+                              http: {explode: false, method: get, path: '{nextLink}', uri: '{$host}'}
                             signatureParameters:
                               - *id082
                         responses: &id088
@@ -2115,6 +2268,7 @@ globalParameters:
                                         name: ''}
                             protocol:
                               http:
+                                explode: false
                                 knownMediaType: JSON
                                 mediaTypes: [application/json]
                                 statusCodes: ['200']
@@ -2123,6 +2277,7 @@ globalParameters:
                     xmsSkipUrlEncoding: false
                   language: *id084
                   operationGroup: *id005
+                  operationId: ManagementLocks_ListAtResourceGroupLevel
                   parameters:
                     - *id011
                     - &id085
@@ -2137,7 +2292,7 @@ globalParameters:
                       nullable: false
                       operation: *id081
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id031
                     - &id086
@@ -2152,7 +2307,7 @@ globalParameters:
                       nullable: false
                       operation: *id081
                       protocol:
-                        http: {in: QUERY}
+                        http: {explode: false, in: QUERY}
                       required: false
                       schema: *id017
                     - *id020
@@ -2169,7 +2324,7 @@ globalParameters:
                         - *id024
                         - *id087
                       protocol:
-                        http: {method: get, path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/locks',
+                        http: {explode: false, method: get, path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/locks',
                                uri: '{$host}'}
                       signatureParameters:
                         - *id085
@@ -2192,6 +2347,7 @@ globalParameters:
                                        resourceGroupName: resourcegroupname, resourceName: teststorageaccount,
                                        resourceProviderNamespace: Microsoft.Storage, resourceType: storageAccounts,
                                        subscriptionId: subscriptionId}
+                          x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ManagementLocks_ListAtResourceLevel.json
                           responses:
                             '200':
                               body:
@@ -2234,7 +2390,7 @@ globalParameters:
                                 nullable: false
                                 operation: *id093
                                 protocol:
-                                  http: {in: PATH}
+                                  http: {explode: false, in: PATH}
                                 required: true
                                 schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                                   apiVersions: []
@@ -2244,7 +2400,6 @@ globalParameters:
                               - *id011
                               - &id103
                                 apiVersions: []
-                                clientDefaultValue: application/json
                                 flattened: false
                                 implementation: METHOD
                                 language:
@@ -2252,12 +2407,13 @@ globalParameters:
                                   java: {description: Accept header, name: accept, serializedName: Accept}
                                 nullable: false
                                 operation: *id094
+                                origin: modelerfour:synthesized/accept
                                 protocol:
-                                  http: {in: HEADER}
+                                  http: {explode: false, in: HEADER}
                                 required: true
                                 schema: *id028
                             protocol:
-                              http: {method: get, path: '{nextLink}', uri: '{$host}'}
+                              http: {explode: false, method: get, path: '{nextLink}', uri: '{$host}'}
                             signatureParameters:
                               - *id095
                         responses: &id104
@@ -2266,6 +2422,7 @@ globalParameters:
                                         name: ''}
                             protocol:
                               http:
+                                explode: false
                                 knownMediaType: JSON
                                 mediaTypes: [application/json]
                                 statusCodes: ['200']
@@ -2274,6 +2431,7 @@ globalParameters:
                     xmsSkipUrlEncoding: false
                   language: *id096
                   operationGroup: *id005
+                  operationId: ManagementLocks_ListAtResourceLevel
                   parameters:
                     - *id011
                     - &id097
@@ -2290,7 +2448,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id031
                     - &id098
@@ -2305,7 +2463,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id099
@@ -2322,7 +2480,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id100
@@ -2339,7 +2497,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id101
@@ -2354,7 +2512,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: *id017
                     - &id102
@@ -2369,7 +2527,7 @@ globalParameters:
                       nullable: false
                       operation: *id094
                       protocol:
-                        http: {in: QUERY}
+                        http: {explode: false, in: QUERY}
                       required: false
                       schema: *id017
                     - *id020
@@ -2390,7 +2548,7 @@ globalParameters:
                         - *id024
                         - *id103
                       protocol:
-                        http: {method: get, path: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks',
+                        http: {explode: false, method: get, path: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks',
                                uri: '{$host}'}
                       signatureParameters:
                         - *id097
@@ -2435,7 +2593,7 @@ globalParameters:
                     nullable: false
                     operation: *id106
                     protocol:
-                      http: {in: PATH}
+                      http: {explode: false, in: PATH}
                     required: true
                     schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                       apiVersions: []
@@ -2445,7 +2603,6 @@ globalParameters:
                   - *id011
                   - &id111
                     apiVersions: []
-                    clientDefaultValue: application/json
                     flattened: false
                     implementation: METHOD
                     language:
@@ -2453,12 +2610,13 @@ globalParameters:
                       java: {description: Accept header, name: accept, serializedName: Accept}
                     nullable: false
                     operation: *id105
+                    origin: modelerfour:synthesized/accept
                     protocol:
-                      http: {in: HEADER}
+                      http: {explode: false, in: HEADER}
                     required: true
                     schema: *id028
                 protocol:
-                  http: {method: get, path: '{nextLink}', uri: '{$host}'}
+                  http: {explode: false, method: get, path: '{nextLink}', uri: '{$host}'}
                 signatureParameters:
                   - *id108
             responses: &id112
@@ -2466,6 +2624,7 @@ globalParameters:
                   default: {description: OK - Returns an array of resource locks., name: ''}
                 protocol:
                   http:
+                    explode: false
                     knownMediaType: JSON
                     mediaTypes: [application/json]
                     statusCodes: ['200']
@@ -2474,6 +2633,7 @@ globalParameters:
         xmsSkipUrlEncoding: false
       language: *id109
       operationGroup: *id005
+      operationId: ManagementLocks_ListAtSubscriptionLevel
       parameters:
         - *id011
         - &id110
@@ -2487,7 +2647,7 @@ globalParameters:
           nullable: false
           operation: *id105
           protocol:
-            http: {in: QUERY}
+            http: {explode: false, in: QUERY}
           required: false
           schema: *id017
         - *id020
@@ -2503,7 +2663,7 @@ globalParameters:
             - *id024
             - *id111
           protocol:
-            http: {method: get, path: '/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks',
+            http: {explode: false, method: get, path: '/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks',
                    uri: '{$host}'}
           signatureParameters:
             - *id110
@@ -2511,7 +2671,7 @@ globalParameters:
       signatureParameters:
         - *id110
     protocol:
-      http: {in: PATH}
+      http: {explode: false, in: PATH}
     required: true
     schema: *id017
   - *id011
@@ -2540,6 +2700,7 @@ operationGroups:
             examples:
               List provider operations:
                 parameters: {api-version: '2016-09-01'}
+                x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/examples/ListProviderOperations.json
                 responses:
                   '200':
                     body:
@@ -2581,7 +2742,7 @@ operationGroups:
                       nullable: false
                       operation: *id118
                       protocol:
-                        http: {in: PATH}
+                        http: {explode: false, in: PATH}
                       required: true
                       schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                         apiVersions: []
@@ -2591,7 +2752,6 @@ operationGroups:
                     - *id011
                     - &id122
                       apiVersions: []
-                      clientDefaultValue: application/json
                       flattened: false
                       implementation: METHOD
                       language:
@@ -2599,12 +2759,13 @@ operationGroups:
                         java: {description: Accept header, name: accept, serializedName: Accept}
                       nullable: false
                       operation: *id119
+                      origin: modelerfour:synthesized/accept
                       protocol:
-                        http: {in: HEADER}
+                        http: {explode: false, in: HEADER}
                       required: true
                       schema: *id028
                   protocol:
-                    http: {method: get, path: '{nextLink}', uri: '{$host}'}
+                    http: {explode: false, method: get, path: '{nextLink}', uri: '{$host}'}
                   signatureParameters:
                     - *id120
               responses: &id123
@@ -2612,16 +2773,18 @@ operationGroups:
                     default: {description: OK. The request has succeeded., name: ''}
                   protocol:
                     http:
+                      explode: false
                       knownMediaType: JSON
                       mediaTypes: [application/json]
                       statusCodes: ['200']
                   schema: &id129 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                     apiVersions:
                       - {version: '2016-09-01'}
+                    flattenedSchema: false
                     language:
                       default: {description: Result of the request to list Microsoft.Authorization
                                   operations. It contains a list of operations and a URL link to
-                                  get the next set of results., name: OperationListResult}
+                                  get the next set of results., name: OperationListResult, namespace: ''}
                       java: {description: Result of the request to list Microsoft.Authorization
                                operations. It contains a list of operations and a URL link to
                                get the next set of results., name: OperationListResult}
@@ -2645,8 +2808,10 @@ operationGroups:
                           elementType: &id130 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                             apiVersions:
                               - {version: '2016-09-01'}
+                            flattenedSchema: false
                             language:
-                              default: {description: Microsoft.Authorization operation, name: Operation}
+                              default: {description: Microsoft.Authorization operation, name: Operation,
+                                        namespace: ''}
                               java: {description: Microsoft.Authorization operation, name: Operation}
                             maxProperties: 0.0
                             minProperties: 0.0
@@ -2662,7 +2827,7 @@ operationGroups:
                                 protocol: {}
                                 readOnly: false
                                 required: false
-                                schema: &id133 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                schema: &id134 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                                   apiVersions:
                                     - {version: '2016-09-01'}
                                   language:
@@ -2687,16 +2852,10 @@ operationGroups:
                                 schema: &id131 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                                   apiVersions:
                                     - {version: '2016-09-01'}
-                                  extensions:
-                                    xmsAzureResource: false
-                                    xmsClientFlatten: false
-                                    xmsFlattened: false
-                                    xmsInternalAutorestAnonymousSchema: {anonymous: true}
-                                    xmsLongRunningOperation: false
-                                    xmsSkipUrlEncoding: false
+                                  flattenedSchema: false
                                   language:
                                     default: {description: The object that represents the operation.,
-                                              name: OperationDisplay}
+                                              name: OperationDisplay, namespace: ''}
                                     java: {description: The object that represents the operation.,
                                            name: OperationDisplay}
                                   maxProperties: 0.0
@@ -2713,7 +2872,7 @@ operationGroups:
                                       protocol: {}
                                       readOnly: false
                                       required: false
-                                      schema: &id134 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                      schema: &id135 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                                         apiVersions:
                                           - {version: '2016-09-01'}
                                         language:
@@ -2735,7 +2894,7 @@ operationGroups:
                                       protocol: {}
                                       readOnly: false
                                       required: false
-                                      schema: &id135 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                      schema: &id136 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                                         apiVersions:
                                           - {version: '2016-09-01'}
                                         language:
@@ -2757,7 +2916,7 @@ operationGroups:
                                       protocol: {}
                                       readOnly: false
                                       required: false
-                                      schema: &id136 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                      schema: &id137 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                                         apiVersions:
                                           - {version: '2016-09-01'}
                                         language:
@@ -2769,10 +2928,14 @@ operationGroups:
                                         type: STRING
                                       serializedName: operation
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: display
                             protocol: {}
+                            stronglyTypedHeader: false
                             type: OBJECT
+                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                           language:
                             default: {description: List of Microsoft.Authorization operations.,
                                       name: OperationListResultValue}
@@ -2793,7 +2956,7 @@ operationGroups:
                         protocol: {}
                         readOnly: false
                         required: false
-                        schema: &id137 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                        schema: &id138 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
                           apiVersions:
                             - {version: '2016-09-01'}
                           language:
@@ -2805,11 +2968,14 @@ operationGroups:
                           type: STRING
                         serializedName: nextLink
                     protocol: {}
+                    stronglyTypedHeader: false
                     type: OBJECT
+                    usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
               signatureParameters: []
           xmsSkipUrlEncoding: false
         language: *id121
         operationGroup: *id116
+        operationId: AuthorizationOperations_List
         parameters:
           - *id011
           - *id020
@@ -2822,7 +2988,8 @@ operationGroups:
               - *id020
               - *id122
             protocol:
-              http: {method: get, path: /providers/Microsoft.Authorization/operations, uri: '{$host}'}
+              http: {explode: false, method: get, path: /providers/Microsoft.Authorization/operations,
+                     uri: '{$host}'}
             signatureParameters: []
         responses: *id123
         signatureParameters: []
@@ -2830,7 +2997,7 @@ operationGroups:
     protocol: {}
   - *id005
 protocol:
-  http: {}
+  http: {explode: false}
 schemas:
   ands: []
   arrays:
@@ -2860,6 +3027,7 @@ schemas:
     - *id131
     - *id027
     - *id132
+    - *id133
     - *id083
   odataQueries: []
   ors: []
@@ -2868,15 +3036,15 @@ schemas:
   streams: []
   strings:
     - *id015
-    - *id133
     - *id134
     - *id135
     - *id136
     - *id137
+    - *id138
     - *id031
     - *id017
-    - *id138
     - *id139
+    - *id140
     - apiVersions:
         - {version: '2016-09-01'}
       language:
@@ -2902,9 +3070,14 @@ schemas:
       minLength: 0.0
       protocol: {}
       type: STRING
-    - *id140
+    - *id141
   unixtimes: []
   unknowns: []
   uris: []
   uuids: []
   xors: []
+security:
+  authenticationRequired: true
+  schemes:
+    - scopes: !!set {user_impersonation: null}
+      type: OAUTH2
