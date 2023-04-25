@@ -34,6 +34,8 @@ public class XmsExtensions {
 
     private XmsExamples xmsExamples;
 
+    private Boolean xmsSecret;
+
     public XmsEnum getXmsEnum() {
         return xmsEnum;
     }
@@ -144,5 +146,13 @@ public class XmsExtensions {
 
     public void setXmsExamples(XmsExamples xmsExamples) {
         this.xmsExamples = xmsExamples;
+    }
+
+    public Boolean getXmsSecret() {
+        return xmsSecret;
+    }
+
+    public void setXmsSecret(Boolean xmsSecret) {
+        this.xmsSecret = xmsSecret;
     }
 }
