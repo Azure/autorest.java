@@ -101,6 +101,13 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             builder.additionalProperties(true);
         }
 
+        boolean propertyIsSecret = false;
+        if (property.getExtensions() != null) {
+            if (property.getExtensions().getXmsSecret() != null) {
+                propertyIsSecret = property.getExtensions().getXmsSecret();
+            }
+        }
+
         XmlSerlializationFormat xmlSerlializationFormat = null;
         if (property.getSchema().getSerialization() != null) {
             xmlSerlializationFormat = property.getSchema().getSerialization().getXml();
@@ -129,7 +136,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         List<String> annotationArgumentList = new ArrayList<String>() {{
             add(String.format("value = \"%s\"", xmlParamName));
         }};
-        if (property.isRequired()) {
+        if (property.isRequired() && !propertyIsSecret) {
             annotationArgumentList.add("required = true");
         }
 

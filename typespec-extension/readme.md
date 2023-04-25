@@ -61,6 +61,8 @@ options:
     generate-samples: true
     generate-tests: true
     examples-directory: "./examples"
+    custom-types-subpackage: "implementation.models"
+    custom-types: InternalModel1,InternalModel2
 ```
 
 ## Convenience API
