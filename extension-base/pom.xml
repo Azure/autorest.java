@@ -10,18 +10,24 @@
   <parent>
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-autorest-parent</artifactId>
-    <version>1.0.0-beta.3</version>
+    <version>1.0.0-beta.4</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-extension</artifactId>
-  <version>1.0.0-beta.3</version>
+  <version>1.0.0-beta.4</version>
 
   <name>Microsoft Azure AutoRest for Java Extension</name>
   <description>This module contains the base classes an utilities needed for writing an AutoRest extension in Java.</description>
   <url>https://github.com/Azure/autorest.java</url>
 
   <dependencies>
+    <!-- Needed to override json-smart dependency in jsonrpc2-base -->
+    <dependency>
+      <groupId>net.minidev</groupId>
+      <artifactId>json-smart</artifactId>
+      <version>2.4.10</version>
+    </dependency>
     <dependency>
       <groupId>com.thetransactioncompany</groupId>
       <artifactId>jsonrpc2-base</artifactId>
