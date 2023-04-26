@@ -120,10 +120,11 @@ import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { ConstantSchema, ConstantValue } from "./common/schemas/constant.js";
 import { OrSchema } from "./common/schemas/relationship.js";
+import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
-import { ClientContext, LongRunningMetadata } from "./models.js";
 import { createPollResultSchema } from "./external-schemas.js";
+import { ClientContext } from "./models.js";
 import {
   ProcessingCache,
   stringArrayContainsIgnoreCase,
