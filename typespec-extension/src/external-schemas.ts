@@ -63,7 +63,7 @@ export function createPollResultSchema(schemas: Schemas, stringSchema: StringSch
   });
   schemas.add(pollResultSchema);
   pollResultSchema.addProperty(
-    new Property("id", "The unique ID of the operation.", stringSchema, {
+    new Property("operationId", "The unique ID of the operation.", stringSchema, {
       serializedName: "id",
       required: true,
       nullable: false,
