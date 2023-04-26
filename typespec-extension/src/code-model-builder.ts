@@ -688,7 +688,7 @@ export class CodeModelBuilder {
       }
 
       const nullable = this.isNullableType(param.param.type);
-      const parameter = new Parameter(param.param.name, this.getDoc(param.param), schema, {
+      const parameter = new Parameter(this.getName(param.param), this.getDoc(param.param), schema, {
         summary: this.getSummary(param.param),
         implementation: ImplementationLocation.Method,
         required: !param.param.optional,

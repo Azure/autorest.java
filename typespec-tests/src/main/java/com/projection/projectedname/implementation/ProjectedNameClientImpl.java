@@ -154,7 +154,7 @@ public final class ProjectedNameClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> parameter(
-                @QueryParam("default-name") String defaultName,
+                @QueryParam("default-name") String clientName,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -172,7 +172,7 @@ public final class ProjectedNameClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> parameterSync(
-                @QueryParam("default-name") String defaultName,
+                @QueryParam("default-name") String clientName,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -213,7 +213,7 @@ public final class ProjectedNameClientImpl {
     /**
      * The parameter operation.
      *
-     * @param defaultName The defaultName parameter.
+     * @param clientName The clientName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -222,15 +222,15 @@ public final class ProjectedNameClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> parameterWithResponseAsync(String defaultName, RequestOptions requestOptions) {
+    public Mono<Response<Void>> parameterWithResponseAsync(String clientName, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.parameter(defaultName, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.parameter(clientName, accept, requestOptions, context));
     }
 
     /**
      * The parameter operation.
      *
-     * @param defaultName The defaultName parameter.
+     * @param clientName The clientName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -239,8 +239,8 @@ public final class ProjectedNameClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> parameterWithResponse(String defaultName, RequestOptions requestOptions) {
+    public Response<Void> parameterWithResponse(String clientName, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.parameterSync(defaultName, accept, requestOptions, Context.NONE);
+        return service.parameterSync(clientName, accept, requestOptions, Context.NONE);
     }
 }
