@@ -18,6 +18,7 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
@@ -27,6 +28,7 @@ import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
@@ -939,6 +941,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model, JavaSettings settings) {
         // No-op, meant for StreamSerializationModelTemplate.
+    }
+
+    protected void addGeneratedImport(Set<String> imports) {
+        imports.add(Generated.class.getName());
+    }
+
+    protected void addGeneratedAnnotation(JavaContext classBlock) {
+        classBlock.annotation("Generated");
     }
 
     // Javadoc for getter method

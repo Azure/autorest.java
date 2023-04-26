@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.template.ModelTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
@@ -117,6 +118,14 @@ public class FluentModelTemplate extends ModelTemplate {
         }
 
         return propertyReferences;
+    }
+
+    @Override
+    protected void addGeneratedImport(Set<String> imports) {
+    }
+
+    @Override
+    protected void addGeneratedAnnotation(JavaContext classBlock) {
     }
 
     private Optional<ClientModel> getPredefinedModel(String modelName) {
