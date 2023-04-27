@@ -95,7 +95,15 @@ public class CoreTests {
                 .expectComplete()
                 .verify();
 
+    }
+
+    @Test
+    public void testListNoModel() {
+        // verification here is that there is no Page or CustomPage class generated in models
+
         client.listWithPage().blockLast();
+
+        client.listWithCustomPageModel().blockLast();
     }
 
 
