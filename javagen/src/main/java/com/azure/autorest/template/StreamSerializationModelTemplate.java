@@ -16,7 +16,6 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
-import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -227,14 +226,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             writeToJson(classBlock, propertiesManager);
             writeFromJson(classBlock, model, propertiesManager, settings);
         }
-    }
-
-    @Override
-    protected void addGeneratedImport(Set<String> imports) {
-    }
-
-    @Override
-    protected void addGeneratedAnnotation(JavaContext classBlock) {
     }
 
     private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
