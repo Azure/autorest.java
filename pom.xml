@@ -6,7 +6,7 @@
 
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-parent</artifactId>
-  <version>1.0.0-beta.3</version>
+  <version>1.0.0-beta.4</version>
   <packaging>pom</packaging>
 
   <name>Microsoft Azure AutoRest for Java</name>
@@ -16,14 +16,14 @@
   <licenses>
     <license>
       <name>The MIT License (MIT)</name>
-      <url>http://opensource.org/licenses/MIT</url>
+      <url>https://opensource.org/licenses/MIT</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
 
   <organization>
     <name>Microsoft Corporation</name>
-    <url>http://microsoft.com</url>
+    <url>https://microsoft.com</url>
   </organization>
 
   <developers>
