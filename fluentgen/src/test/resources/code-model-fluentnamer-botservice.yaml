@@ -1,4 +1,6 @@
 &id001 !!com.azure.autorest.extension.base.model.codemodel.CodeModel
+apiVersions: []
+clients: []
 globalParameters:
 - &id005
   apiVersions: []
@@ -29,7 +31,7 @@ globalParameters:
         - {version: 2021-05-01-preview}
         flattenedSchema: false
         language:
-          default: {description: Bot Service error object., name: Error}
+          default: {description: Bot Service error object., name: Error, namespace: ''}
           java: {description: Bot Service error object., name: ManagementError}
         maxProperties: 0.0
         minProperties: 0.0
@@ -48,7 +50,7 @@ globalParameters:
             - {version: 2021-05-01-preview}
             flattenedSchema: false
             language:
-              default: {description: Bot Service error body., name: ErrorBody}
+              default: {description: Bot Service error body., name: ErrorBody, namespace: ''}
               java: {description: Bot Service error body., name: ManagementError}
             maxProperties: 0.0
             minProperties: 0.0
@@ -92,10 +94,14 @@ globalParameters:
                 type: STRING
               serializedName: message
             protocol: {}
+            stronglyTypedHeader: false
             type: OBJECT
+            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'EXCEPTION': null}
           serializedName: error
         protocol: {}
+        stronglyTypedHeader: false
         type: OBJECT
+        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'EXCEPTION': null}
     extensions:
       xmsAzureResource: false
       xmsClientFlatten: false
@@ -104,7 +110,7 @@ globalParameters:
           List Private Link Resources:
             parameters: {api-version: 2021-05-01-preview, resourceGroupName: res6977,
               resourceName: sto2527, subscriptionId: '{subscription-id}'}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListPrivateLinkResources.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListPrivateLinkResources.json
             responses:
               '200':
                 body:
@@ -133,6 +139,7 @@ globalParameters:
       operations:
       - *id002
       protocol: {}
+    operationId: PrivateLinkResources_ListByBotResource
     parameters:
     - &id006
       apiVersions: []
@@ -268,7 +275,8 @@ globalParameters:
         - {version: 2021-05-01-preview}
         flattenedSchema: false
         language:
-          default: {description: A list of private link resources, name: PrivateLinkResourceListResult}
+          default: {description: A list of private link resources, name: PrivateLinkResourceListResult,
+            namespace: ''}
           java: {description: A list of private link resources, name: PrivateLinkResourceListResult}
         maxProperties: 0.0
         minProperties: 0.0
@@ -290,7 +298,8 @@ globalParameters:
               - {version: 2021-05-01-preview}
               flattenedSchema: false
               language:
-                default: {description: A private link resource, name: PrivateLinkResource}
+                default: {description: A private link resource, name: PrivateLinkResource,
+                  namespace: ''}
                 java: {description: A private link resource, name: PrivateLinkResource}
               maxProperties: 0.0
               minProperties: 0.0
@@ -307,7 +316,7 @@ globalParameters:
                       flattenedSchema: false
                       language:
                         default: {description: The Private Endpoint Connection resource.,
-                          name: PrivateEndpointConnection}
+                          name: PrivateEndpointConnection, namespace: ''}
                         java: {description: The Private Endpoint Connection resource.,
                           name: PrivateEndpointConnection}
                       maxProperties: 0.0
@@ -362,6 +371,7 @@ globalParameters:
                               maxLength: 0.0
                               minLength: 0.0
                             serializedName: type
+                          stronglyTypedHeader: false
                         immediate:
                         - *id010
                       properties:
@@ -382,7 +392,7 @@ globalParameters:
                           flattenedSchema: true
                           language:
                             default: {description: Properties of the PrivateEndpointConnectProperties.,
-                              name: PrivateEndpointConnectionProperties}
+                              name: PrivateEndpointConnectionProperties, namespace: ''}
                             java: {description: Properties of the PrivateEndpointConnectProperties.,
                               name: PrivateEndpointConnectionProperties}
                           maxProperties: 0.0
@@ -405,7 +415,7 @@ globalParameters:
                               flattenedSchema: false
                               language:
                                 default: {description: The Private Endpoint resource.,
-                                  name: PrivateEndpoint}
+                                  name: PrivateEndpoint, namespace: ''}
                                 java: {description: The Private Endpoint resource.,
                                   name: PrivateEndpoint}
                               maxProperties: 0.0
@@ -434,7 +444,10 @@ globalParameters:
                                   type: STRING
                                 serializedName: id
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             serializedName: privateEndpoint
                           - apiVersions: []
                             isDiscriminator: false
@@ -456,7 +469,8 @@ globalParameters:
                               language:
                                 default: {description: A collection of information
                                     about the state of the connection between service
-                                    consumer and provider., name: PrivateLinkServiceConnectionState}
+                                    consumer and provider., name: PrivateLinkServiceConnectionState,
+                                  namespace: ''}
                                 java: {description: A collection of information about
                                     the state of the connection between service consumer
                                     and provider., name: PrivateLinkServiceConnectionState}
@@ -546,7 +560,10 @@ globalParameters:
                                   type: STRING
                                 serializedName: actionsRequired
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             serializedName: privateLinkServiceConnectionState
                           - apiVersions: []
                             isDiscriminator: false
@@ -585,10 +602,16 @@ globalParameters:
                               type: CHOICE
                             serializedName: provisioningState
                           protocol: {}
+                          stronglyTypedHeader: false
                           type: OBJECT
+                          usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                            !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                         serializedName: properties
                       protocol: {}
+                      stronglyTypedHeader: false
                       type: OBJECT
+                      usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
+                        !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
                     - *id011
                     immediate:
                     - *id012
@@ -598,7 +621,8 @@ globalParameters:
                   flattenedSchema: false
                   language:
                     default: {description: Common fields that are returned in the
-                        response for all BotService Private Link Resources, name: PrivateLinkResourceBase}
+                        response for all BotService Private Link Resources, name: PrivateLinkResourceBase,
+                      namespace: '', summary: Private Link Resource Base}
                     java: {description: Common fields that are returned in the response
                         for all BotService Private Link Resources, name: PrivateLinkResourceBase}
                   maxProperties: 0.0
@@ -610,8 +634,11 @@ globalParameters:
                     - *id013
                   properties: []
                   protocol: {}
+                  stronglyTypedHeader: false
                   summary: Private Link Resource Base
                   type: OBJECT
+                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                 - *id013
                 immediate:
                 - *id010
@@ -633,7 +660,7 @@ globalParameters:
                   flattenedSchema: true
                   language:
                     default: {description: Properties of a private link resource.,
-                      name: PrivateLinkResourceProperties}
+                      name: PrivateLinkResourceProperties, namespace: ''}
                     java: {description: Properties of a private link resource., name: PrivateLinkResourceProperties}
                   maxProperties: 0.0
                   minProperties: 0.0
@@ -724,10 +751,16 @@ globalParameters:
                       uniqueItems: false
                     serializedName: requiredZoneNames
                   protocol: {}
+                  stronglyTypedHeader: false
                   type: OBJECT
+                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                 serializedName: properties
               protocol: {}
+              stronglyTypedHeader: false
               type: OBJECT
+              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
             language:
               default: {description: Array of private link resources, name: PrivateLinkResourceListResultValue}
             maxItems: 0.0
@@ -737,7 +770,9 @@ globalParameters:
             uniqueItems: false
           serializedName: value
         protocol: {}
+        stronglyTypedHeader: false
         type: OBJECT
+        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
     signatureParameters:
     - *id007
     - *id008
@@ -818,7 +853,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/CreateBot.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/CreateBot.json
             responses:
               '200':
                 body:
@@ -885,6 +920,7 @@ operationGroups:
       java: {description: Creates a Bot Service. Bot Service is a resource group wide
           resource type., name: create}
     operationGroup: *id015
+    operationId: Bots_Create
     parameters:
     - *id006
     - &id017
@@ -945,7 +981,7 @@ operationGroups:
           - {version: 2021-05-01-preview}
           flattenedSchema: false
           language:
-            default: {description: Bot resource definition, name: Bot}
+            default: {description: Bot resource definition, name: Bot, namespace: ''}
             java: {description: Bot resource definition, name: Bot}
           maxProperties: 0.0
           minProperties: 0.0
@@ -968,7 +1004,8 @@ operationGroups:
                       flattenedSchema: false
                       language:
                         default: {description: The ARM channel of list channel with
-                            keys operation response., name: ListChannelWithKeysResponse}
+                            keys operation response., name: ListChannelWithKeysResponse,
+                          namespace: ''}
                         java: {description: The ARM channel of list channel with keys
                             operation response., name: ListChannelWithKeysResponse}
                       maxProperties: 0.0
@@ -1005,7 +1042,8 @@ operationGroups:
                                 xmsSkipUrlEncoding: false}
                               flattenedSchema: false
                               language:
-                                default: {description: Alexa channel definition, name: AlexaChannel}
+                                default: {description: Alexa channel definition, name: AlexaChannel,
+                                  namespace: ''}
                                 java: {description: Alexa channel definition, name: AlexaChannel}
                               maxProperties: 0.0
                               minProperties: 0.0
@@ -1032,7 +1070,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Alexa channel., name: AlexaChannelProperties}
+                                        for the Alexa channel., name: AlexaChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Alexa channel., name: AlexaChannelProperties}
                                   maxProperties: 0.0
@@ -1122,10 +1161,16 @@ operationGroups:
                                       type: BOOLEAN
                                     serializedName: isEnabled
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id030 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -1136,7 +1181,7 @@ operationGroups:
                               flattenedSchema: false
                               language:
                                 default: {description: Facebook channel definition,
-                                  name: FacebookChannel}
+                                  name: FacebookChannel, namespace: ''}
                                 java: {description: Facebook channel definition, name: FacebookChannel}
                               maxProperties: 0.0
                               minProperties: 0.0
@@ -1163,7 +1208,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Facebook channel., name: FacebookChannelProperties}
+                                        for the Facebook channel., name: FacebookChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Facebook channel., name: FacebookChannelProperties}
                                   maxProperties: 0.0
@@ -1220,7 +1266,8 @@ operationGroups:
                                         flattenedSchema: false
                                         language:
                                           default: {description: A Facebook page for
-                                              Facebook channel registration, name: FacebookPage}
+                                              Facebook channel registration, name: FacebookPage,
+                                            namespace: ''}
                                           java: {description: A Facebook page for
                                               Facebook channel registration, name: FacebookPage}
                                         maxProperties: 0.0
@@ -1280,7 +1327,10 @@ operationGroups:
                                             type: STRING
                                           serializedName: accessToken
                                         protocol: {}
+                                        stronglyTypedHeader: false
                                         type: OBJECT
+                                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                       language:
                                         default: {description: The list of Facebook
                                             pages, name: FacebookChannelPropertiesPages}
@@ -1379,10 +1429,16 @@ operationGroups:
                                     schema: *id023
                                     serializedName: isEnabled
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id031 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -1392,7 +1448,8 @@ operationGroups:
                                 xmsSkipUrlEncoding: false}
                               flattenedSchema: false
                               language:
-                                default: {description: Email channel definition, name: EmailChannel}
+                                default: {description: Email channel definition, name: EmailChannel,
+                                  namespace: ''}
                                 java: {description: Email channel definition, name: EmailChannel}
                               maxProperties: 0.0
                               minProperties: 0.0
@@ -1419,7 +1476,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Email channel., name: EmailChannelProperties}
+                                        for the Email channel., name: EmailChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Email channel., name: EmailChannelProperties}
                                   maxProperties: 0.0
@@ -1487,10 +1545,16 @@ operationGroups:
                                     schema: *id023
                                     serializedName: isEnabled
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id032 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -1501,7 +1565,7 @@ operationGroups:
                               flattenedSchema: false
                               language:
                                 default: {description: Microsoft Teams channel definition,
-                                  name: MsTeamsChannel}
+                                  name: MsTeamsChannel, namespace: ''}
                                 java: {description: Microsoft Teams channel definition,
                                   name: MsTeamsChannel}
                               maxProperties: 0.0
@@ -1529,7 +1593,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Microsoft Teams channel., name: MsTeamsChannelProperties}
+                                        for the Microsoft Teams channel., name: MsTeamsChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Microsoft Teams channel., name: MsTeamsChannelProperties}
                                   maxProperties: 0.0
@@ -1653,10 +1718,16 @@ operationGroups:
                                       type: BOOLEAN
                                     serializedName: acceptedTerms
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id033 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -1666,7 +1737,8 @@ operationGroups:
                                 xmsSkipUrlEncoding: false}
                               flattenedSchema: false
                               language:
-                                default: {description: Skype channel definition, name: SkypeChannel}
+                                default: {description: Skype channel definition, name: SkypeChannel,
+                                  namespace: ''}
                                 java: {description: Skype channel definition, name: SkypeChannel}
                               maxProperties: 0.0
                               minProperties: 0.0
@@ -1693,7 +1765,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Microsoft Teams channel., name: SkypeChannelProperties}
+                                        for the Microsoft Teams channel., name: SkypeChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Microsoft Teams channel., name: SkypeChannelProperties}
                                   maxProperties: 0.0
@@ -1893,10 +1966,16 @@ operationGroups:
                                     schema: *id023
                                     serializedName: isEnabled
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id034 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -1906,7 +1985,8 @@ operationGroups:
                                 xmsSkipUrlEncoding: false}
                               flattenedSchema: false
                               language:
-                                default: {description: Kik channel definition, name: KikChannel}
+                                default: {description: Kik channel definition, name: KikChannel,
+                                  namespace: ''}
                                 java: {description: Kik channel definition, name: KikChannel}
                               maxProperties: 0.0
                               minProperties: 0.0
@@ -1933,7 +2013,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Kik channel., name: KikChannelProperties}
+                                        for the Kik channel., name: KikChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Kik channel., name: KikChannelProperties}
                                   maxProperties: 0.0
@@ -2017,10 +2098,16 @@ operationGroups:
                                     schema: *id023
                                     serializedName: isEnabled
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id035 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -2031,7 +2118,7 @@ operationGroups:
                               flattenedSchema: false
                               language:
                                 default: {description: Web Chat channel definition,
-                                  name: WebChatChannel}
+                                  name: WebChatChannel, namespace: ''}
                                 java: {description: Web Chat channel definition, name: WebChatChannel}
                               maxProperties: 0.0
                               minProperties: 0.0
@@ -2058,7 +2145,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Web Chat channel., name: WebChatChannelProperties}
+                                        for the Web Chat channel., name: WebChatChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Web Chat channel., name: WebChatChannelProperties}
                                   maxProperties: 0.0
@@ -2125,7 +2213,7 @@ operationGroups:
                                             flattenedSchema: false
                                             language:
                                               default: {description: A site for the
-                                                  channel, name: Site}
+                                                  channel, name: Site, namespace: ''}
                                               java: {description: A site for the channel,
                                                 name: Site}
                                             maxProperties: 0.0
@@ -2144,7 +2232,8 @@ operationGroups:
                                                 flattenedSchema: false
                                                 language:
                                                   default: {description: A site for
-                                                      the Direct Line channel, name: DirectLineSite}
+                                                      the Direct Line channel, name: DirectLineSite,
+                                                    namespace: ''}
                                                   java: {description: A site for the
                                                       Direct Line channel, name: DirectLineSite}
                                                 maxProperties: 0.0
@@ -2445,7 +2534,10 @@ operationGroups:
                                                     uniqueItems: false
                                                   serializedName: trustedOrigins
                                                 protocol: {}
+                                                stronglyTypedHeader: false
                                                 type: OBJECT
+                                                usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                                  !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                               immediate:
                                               - *id024
                                               - *id027
@@ -2494,13 +2586,16 @@ operationGroups:
                                                 type: STRING
                                               serializedName: eTag
                                             protocol: {}
+                                            stronglyTypedHeader: false
                                             type: OBJECT
+                                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                              !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                           immediate:
                                           - *id025
                                         flattenedSchema: false
                                         language:
                                           default: {description: A site for the Webchat
-                                              channel, name: WebChatSite}
+                                              channel, name: WebChatSite, namespace: ''}
                                           java: {description: A site for the Webchat
                                               channel, name: WebChatSite}
                                         maxProperties: 0.0
@@ -2688,7 +2783,10 @@ operationGroups:
                                             type: BOOLEAN
                                           serializedName: isWebchatPreviewEnabled
                                         protocol: {}
+                                        stronglyTypedHeader: false
                                         type: OBJECT
+                                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                       language:
                                         default: {description: The list of Web Chat
                                             sites, name: WebChatChannelPropertiesSites}
@@ -2699,10 +2797,16 @@ operationGroups:
                                       uniqueItems: false
                                     serializedName: sites
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id036 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -2713,7 +2817,7 @@ operationGroups:
                               flattenedSchema: false
                               language:
                                 default: {description: Direct Line channel definition,
-                                  name: DirectLineChannel}
+                                  name: DirectLineChannel, namespace: ''}
                                 java: {description: Direct Line channel definition,
                                   name: DirectLineChannel}
                               maxProperties: 0.0
@@ -2741,7 +2845,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Direct Line channel., name: DirectLineChannelProperties}
+                                        for the Direct Line channel., name: DirectLineChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Direct Line channel., name: DirectLineChannelProperties}
                                   maxProperties: 0.0
@@ -2794,10 +2899,16 @@ operationGroups:
                                       type: STRING
                                     serializedName: DirectLineEmbedCode
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id037 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -2808,7 +2919,7 @@ operationGroups:
                               flattenedSchema: false
                               language:
                                 default: {description: Telegram channel definition,
-                                  name: TelegramChannel}
+                                  name: TelegramChannel, namespace: ''}
                                 java: {description: Telegram channel definition, name: TelegramChannel}
                               maxProperties: 0.0
                               minProperties: 0.0
@@ -2835,7 +2946,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Telegram channel., name: TelegramChannelProperties}
+                                        for the Telegram channel., name: TelegramChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Telegram channel., name: TelegramChannelProperties}
                                   maxProperties: 0.0
@@ -2902,10 +3014,16 @@ operationGroups:
                                     schema: *id023
                                     serializedName: isEnabled
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id038 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -2915,7 +3033,8 @@ operationGroups:
                                 xmsSkipUrlEncoding: false}
                               flattenedSchema: false
                               language:
-                                default: {description: Sms channel definition, name: SmsChannel}
+                                default: {description: Sms channel definition, name: SmsChannel,
+                                  namespace: ''}
                                 java: {description: Sms channel definition, name: SmsChannel}
                               maxProperties: 0.0
                               minProperties: 0.0
@@ -2942,7 +3061,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Sms channel., name: SmsChannelProperties}
+                                        for the Sms channel., name: SmsChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Sms channel., name: SmsChannelProperties}
                                   maxProperties: 0.0
@@ -3054,10 +3174,16 @@ operationGroups:
                                     schema: *id023
                                     serializedName: isEnabled
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id039 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -3067,7 +3193,8 @@ operationGroups:
                                 xmsSkipUrlEncoding: false}
                               flattenedSchema: false
                               language:
-                                default: {description: Slack channel definition, name: SlackChannel}
+                                default: {description: Slack channel definition, name: SlackChannel,
+                                  namespace: ''}
                                 java: {description: Slack channel definition, name: SlackChannel}
                               maxProperties: 0.0
                               minProperties: 0.0
@@ -3094,7 +3221,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Slack channel., name: SlackChannelProperties}
+                                        for the Slack channel., name: SlackChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Slack channel., name: SlackChannelProperties}
                                   maxProperties: 0.0
@@ -3352,10 +3480,16 @@ operationGroups:
                                     schema: *id023
                                     serializedName: isEnabled
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id040 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -3365,7 +3499,8 @@ operationGroups:
                                 xmsSkipUrlEncoding: false}
                               flattenedSchema: false
                               language:
-                                default: {description: Line channel definition, name: LineChannel}
+                                default: {description: Line channel definition, name: LineChannel,
+                                  namespace: ''}
                                 java: {description: Line channel definition, name: LineChannel}
                               maxProperties: 0.0
                               minProperties: 0.0
@@ -3392,7 +3527,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the Line channel., name: LineChannelProperties}
+                                        for the Line channel., name: LineChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the Line channel., name: LineChannelProperties}
                                   maxProperties: 0.0
@@ -3418,7 +3554,8 @@ operationGroups:
                                         flattenedSchema: false
                                         language:
                                           default: {description: The properties corresponding
-                                              to a line channel registration, name: LineRegistration}
+                                              to a line channel registration, name: LineRegistration,
+                                            namespace: ''}
                                           java: {description: The properties corresponding
                                               to a line channel registration, name: LineRegistration}
                                         maxProperties: 0.0
@@ -3519,7 +3656,10 @@ operationGroups:
                                             type: STRING
                                           serializedName: channelAccessToken
                                         protocol: {}
+                                        stronglyTypedHeader: false
                                         type: OBJECT
+                                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                       language:
                                         default: {description: The list of line channel
                                             registrations, name: LineChannelPropertiesLineRegistrations}
@@ -3565,10 +3705,16 @@ operationGroups:
                                     schema: *id028
                                     serializedName: isValidated
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             - &id041 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                               apiVersions:
                               - {version: 2021-05-01-preview}
@@ -3579,7 +3725,7 @@ operationGroups:
                               flattenedSchema: false
                               language:
                                 default: {description: DirectLine Speech channel definition,
-                                  name: DirectLineSpeechChannel}
+                                  name: DirectLineSpeechChannel, namespace: ''}
                                 java: {description: DirectLine Speech channel definition,
                                   name: DirectLineSpeechChannel}
                               maxProperties: 0.0
@@ -3607,7 +3753,8 @@ operationGroups:
                                   flattenedSchema: false
                                   language:
                                     default: {description: The parameters to provide
-                                        for the DirectLine Speech channel., name: DirectLineSpeechChannelProperties}
+                                        for the DirectLine Speech channel., name: DirectLineSpeechChannelProperties,
+                                      namespace: ''}
                                     java: {description: The parameters to provide
                                         for the DirectLine Speech channel., name: DirectLineSpeechChannelProperties}
                                   maxProperties: 0.0
@@ -3752,10 +3899,16 @@ operationGroups:
                                       type: BOOLEAN
                                     serializedName: isDefaultBotForCogSvcAccount
                                   protocol: {}
+                                  stronglyTypedHeader: false
                                   type: OBJECT
+                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                                 serializedName: properties
                               protocol: {}
+                              stronglyTypedHeader: false
                               type: OBJECT
+                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                             immediate:
                             - *id029
                             - *id030
@@ -3821,7 +3974,8 @@ operationGroups:
                               serializedName: channelName
                           flattenedSchema: false
                           language:
-                            default: {description: Channel definition, name: Channel}
+                            default: {description: Channel definition, name: Channel,
+                              namespace: ''}
                             java: {description: Channel definition, name: Channel}
                           maxProperties: 0.0
                           minProperties: 0.0
@@ -3893,7 +4047,10 @@ operationGroups:
                               type: STRING
                             serializedName: location
                           protocol: {}
+                          stronglyTypedHeader: false
                           type: OBJECT
+                          usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                            !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                         serializedName: resource
                       - apiVersions: []
                         isDiscriminator: false
@@ -3909,7 +4066,8 @@ operationGroups:
                           - {version: 2021-05-01-preview}
                           flattenedSchema: false
                           language:
-                            default: {description: Channel settings definition, name: ChannelSettings}
+                            default: {description: Channel settings definition, name: ChannelSettings,
+                              namespace: ''}
                             java: {description: Channel settings definition, name: ChannelSettings}
                           maxProperties: 0.0
                           minProperties: 0.0
@@ -4085,7 +4243,10 @@ operationGroups:
                               type: BOOLEAN
                             serializedName: disableLocalAuth
                           protocol: {}
+                          stronglyTypedHeader: false
                           type: OBJECT
+                          usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                            !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                         serializedName: setting
                       - apiVersions: []
                         isDiscriminator: false
@@ -4148,12 +4309,16 @@ operationGroups:
                           type: STRING
                         serializedName: changedTime
                       protocol: {}
+                      stronglyTypedHeader: false
                       type: OBJECT
+                      usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
+                        !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
                     immediate:
                     - *id043
                   flattenedSchema: false
                   language:
-                    default: {description: Bot channel resource definition, name: BotChannel}
+                    default: {description: Bot channel resource definition, name: BotChannel,
+                      namespace: ''}
                     java: {description: Bot channel resource definition, name: BotChannel}
                   maxProperties: 0.0
                   minProperties: 0.0
@@ -4193,7 +4358,7 @@ operationGroups:
                       flattenedSchema: false
                       language:
                         default: {description: The SKU of the cognitive services account.,
-                          name: Sku}
+                          name: Sku, namespace: ''}
                         java: {description: The SKU of the cognitive services account.,
                           name: Sku}
                       maxProperties: 0.0
@@ -4256,7 +4421,10 @@ operationGroups:
                           type: CHOICE
                         serializedName: tier
                       protocol: {}
+                      stronglyTypedHeader: false
                       type: OBJECT
+                      usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                        !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                     serializedName: sku
                   - &id045
                     apiVersions: []
@@ -4350,14 +4518,18 @@ operationGroups:
                       uniqueItems: false
                     serializedName: zones
                   protocol: {}
+                  stronglyTypedHeader: false
                   type: OBJECT
+                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                 - *id043
                 - &id048 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                   apiVersions:
                   - {version: 2021-05-01-preview}
                   flattenedSchema: false
                   language:
-                    default: {description: Bot channel resource definition, name: ConnectionSetting}
+                    default: {description: Bot channel resource definition, name: ConnectionSetting,
+                      namespace: ''}
                     java: {description: Bot channel resource definition, name: ConnectionSetting}
                   maxProperties: 0.0
                   minProperties: 0.0
@@ -4384,7 +4556,7 @@ operationGroups:
                       flattenedSchema: false
                       language:
                         default: {description: Properties for a Connection Setting
-                            Item, name: ConnectionSettingProperties}
+                            Item, name: ConnectionSettingProperties, namespace: ''}
                         java: {description: Properties for a Connection Setting Item,
                           name: ConnectionSettingProperties}
                       maxProperties: 0.0
@@ -4591,7 +4763,8 @@ operationGroups:
                             language:
                               default: {description: Extra Parameter in a Connection
                                   Setting Properties to indicate service provider
-                                  specific properties, name: ConnectionSettingParameter}
+                                  specific properties, name: ConnectionSettingParameter,
+                                namespace: ''}
                               java: {description: Extra Parameter in a Connection
                                   Setting Properties to indicate service provider
                                   specific properties, name: ConnectionSettingParameter}
@@ -4643,7 +4816,10 @@ operationGroups:
                                 type: STRING
                               serializedName: value
                             protocol: {}
+                            stronglyTypedHeader: false
                             type: OBJECT
+                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                              !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                           language:
                             default: {description: Service Provider Parameters associated
                                 with the Connection Setting, name: ConnectionSettingPropertiesParameters}
@@ -4676,14 +4852,20 @@ operationGroups:
                           type: STRING
                         serializedName: provisioningState
                       protocol: {}
+                      stronglyTypedHeader: false
                       type: OBJECT
+                      usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                        !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                     serializedName: properties
                   - *id044
                   - *id045
                   - *id046
                   - *id047
                   protocol: {}
+                  stronglyTypedHeader: false
                   type: OBJECT
+                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
+                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
                 immediate:
                 - *id019
                 - *id020
@@ -4692,7 +4874,7 @@ operationGroups:
                 xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
               flattenedSchema: false
               language:
-                default: {description: Azure resource, name: Resource}
+                default: {description: Azure resource, name: Resource, namespace: ''}
                 java: {description: Azure resource, name: Resource}
               maxProperties: 0.0
               minProperties: 0.0
@@ -4802,7 +4984,10 @@ operationGroups:
               - *id046
               - *id047
               protocol: {}
+              stronglyTypedHeader: false
               type: OBJECT
+              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
             immediate:
             - *id021
           properties:
@@ -4822,7 +5007,8 @@ operationGroups:
               - {version: 2021-05-01-preview}
               flattenedSchema: false
               language:
-                default: {description: The parameters to provide for the Bot., name: BotProperties}
+                default: {description: The parameters to provide for the Bot., name: BotProperties,
+                  namespace: ''}
                 java: {description: The parameters to provide for the Bot., name: BotProperties}
               maxProperties: 0.0
               minProperties: 0.0
@@ -5549,14 +5735,20 @@ operationGroups:
                   type: STRING
                 serializedName: publishingCredentials
               protocol: {}
+              stronglyTypedHeader: false
               type: OBJECT
+              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
             serializedName: properties
           - *id044
           - *id045
           - *id046
           - *id047
           protocol: {}
+          stronglyTypedHeader: false
           type: OBJECT
+          usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null,
+            !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
       - apiVersions: []
         flattened: false
         implementation: METHOD
@@ -5657,7 +5849,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateBot.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateBot.json
             responses:
               '200':
                 body:
@@ -5724,6 +5916,7 @@ operationGroups:
       default: {description: Updates a Bot Service, name: Update}
       java: {description: Updates a Bot Service, name: update}
     operationGroup: *id015
+    operationId: Bots_Update
     parameters:
     - *id006
     - &id054
@@ -5853,7 +6046,7 @@ operationGroups:
           Delete Bot:
             parameters: {api-version: 2021-05-01-preview, resourceGroupName: OneResourceGroupName,
               resourceName: samplebotname, subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DeleteBot.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DeleteBot.json
             responses:
               '200': {}
               '204': {}
@@ -5864,6 +6057,7 @@ operationGroups:
       default: {description: 'Deletes a Bot Service from the resource group. ', name: Delete}
       java: {description: 'Deletes a Bot Service from the resource group. ', name: delete}
     operationGroup: *id015
+    operationId: Bots_Delete
     parameters:
     - *id006
     - &id058
@@ -5967,7 +6161,7 @@ operationGroups:
           Get Bot:
             parameters: {api-version: 2021-05-01-preview, resourceGroupName: OneResourceGroupName,
               resourceName: samplebotname, subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetBot.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetBot.json
             responses:
               '200':
                 body:
@@ -6012,6 +6206,7 @@ operationGroups:
       default: {description: Returns a BotService specified by the parameters., name: Get}
       java: {description: Returns a BotService specified by the parameters., name: getByResourceGroup}
     operationGroup: *id015
+    operationId: Bots_Get
     parameters:
     - *id006
     - &id061
@@ -6111,7 +6306,7 @@ operationGroups:
           List Bots by Resource Group:
             parameters: {api-version: 2021-05-01-preview, resourceGroupName: OneResourceGroupName,
               subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListBotsByResourceGroup.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListBotsByResourceGroup.json
             responses:
               '200':
                 body:
@@ -6241,7 +6436,7 @@ operationGroups:
               flattenedSchema: false
               language:
                 default: {description: The list of  bot service operation response.,
-                  name: BotResponseList}
+                  name: BotResponseList, namespace: ''}
                 java: {description: The list of  bot service operation response.,
                   name: BotResponseList}
               maxProperties: 0.0
@@ -6294,11 +6489,14 @@ operationGroups:
                   uniqueItems: false
                 serializedName: value
               protocol: {}
+              stronglyTypedHeader: false
               type: OBJECT
+              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
           signatureParameters: []
       xmsSkipUrlEncoding: false
     language: *id070
     operationGroup: *id015
+    operationId: Bots_ListByResourceGroup
     parameters:
     - *id006
     - &id071
@@ -6357,7 +6555,7 @@ operationGroups:
         examples:
           List Bots by Subscription:
             parameters: {api-version: 2021-05-01-preview, subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListBotsBySubscription.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListBotsBySubscription.json
             responses:
               '200':
                 body:
@@ -6474,6 +6672,7 @@ operationGroups:
       xmsSkipUrlEncoding: false
     language: *id082
     operationGroup: *id015
+    operationId: Bots_List
     parameters:
     - *id006
     - *id009
@@ -6516,7 +6715,7 @@ operationGroups:
             parameters:
               api-version: 2021-05-01-preview
               parameters: {name: testbotname, type: string}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/CheckNameAvailability.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/CheckNameAvailability.json
             responses:
               '200':
                 body: {message: custom message from server, valid: true}
@@ -6527,6 +6726,7 @@ operationGroups:
       default: {description: Check whether a bot name is available., name: GetCheckNameAvailability}
       java: {description: Check whether a bot name is available., name: getCheckNameAvailability}
     operationGroup: *id015
+    operationId: Bots_GetCheckNameAvailability
     parameters:
     - *id006
     - *id009
@@ -6557,7 +6757,8 @@ operationGroups:
           flattenedSchema: false
           language:
             default: {description: The request body for a request to Bot Service Management
-                to check availability of a bot name., name: CheckNameAvailabilityRequestBody}
+                to check availability of a bot name., name: CheckNameAvailabilityRequestBody,
+              namespace: ''}
             java: {description: The request body for a request to Bot Service Management
                 to check availability of a bot name., name: CheckNameAvailabilityRequestBody}
           maxProperties: 0.0
@@ -6608,7 +6809,9 @@ operationGroups:
               type: STRING
             serializedName: type
           protocol: {}
+          stronglyTypedHeader: false
           type: OBJECT
+          usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
       - apiVersions: []
         flattened: false
         implementation: METHOD
@@ -6657,7 +6860,8 @@ operationGroups:
         flattenedSchema: false
         language:
           default: {description: The response body returned for a request to Bot Service
-              Management to check availability of a bot name., name: CheckNameAvailabilityResponseBody}
+              Management to check availability of a bot name., name: CheckNameAvailabilityResponseBody,
+            namespace: ''}
           java: {description: The response body returned for a request to Bot Service
               Management to check availability of a bot name., name: CheckNameAvailabilityResponseBody}
         maxProperties: 0.0
@@ -6702,7 +6906,9 @@ operationGroups:
             type: STRING
           serializedName: message
         protocol: {}
+        stronglyTypedHeader: false
         type: OBJECT
+        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
     signatureParameters: []
   - *id067
   - *id078
@@ -6746,7 +6952,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutDirectLineSpeechChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutDirectLineSpeechChannel.json
             responses:
               '200':
                 body:
@@ -6774,7 +6980,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutChannel.json
             responses:
               '200':
                 body:
@@ -6800,7 +7006,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutAlexaChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutAlexaChannel.json
             responses:
               '200':
                 body:
@@ -6830,7 +7036,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutLineChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutLineChannel.json
             responses:
               '200':
                 body:
@@ -6859,6 +7065,7 @@ operationGroups:
       default: {description: Creates a Channel registration for a Bot Service, name: Create}
       java: {description: Creates a Channel registration for a Bot Service, name: create}
     operationGroup: *id087
+    operationId: Channels_Create
     parameters:
     - *id006
     - &id089
@@ -6948,6 +7155,9 @@ operationGroups:
         - language:
             default: {description: '', name: DIRECT_LINE_SPEECH_CHANNEL}
           value: DirectLineSpeechChannel
+        - language:
+            default: {description: '', name: OUTLOOK_CHANNEL}
+          value: OutlookChannel
         language:
           default: {description: '', name: ChannelName}
           java: {description: '', name: ChannelName}
@@ -7063,7 +7273,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateDirectLineSpeechChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateDirectLineSpeechChannel.json
             responses:
               '200':
                 body:
@@ -7091,7 +7301,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateChannel.json
             responses:
               '200':
                 body:
@@ -7119,7 +7329,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateLineChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateLineChannel.json
             responses:
               '200':
                 body:
@@ -7153,7 +7363,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateAlexaChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateAlexaChannel.json
             responses:
               '200':
                 body:
@@ -7176,6 +7386,7 @@ operationGroups:
       default: {description: Updates a Channel registration for a Bot Service, name: Update}
       java: {description: Updates a Channel registration for a Bot Service, name: update}
     operationGroup: *id087
+    operationId: Channels_Update
     parameters:
     - *id006
     - &id095
@@ -7324,7 +7535,7 @@ operationGroups:
             parameters: {api-version: 2021-05-01-preview, channelName: EmailChannel,
               resourceGroupName: OneResourceGroupName, resourceName: samplebotname,
               subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DeleteChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DeleteChannel.json
             responses:
               '200': {}
               '204': {}
@@ -7332,7 +7543,7 @@ operationGroups:
             parameters: {api-version: 2021-05-01-preview, channelName: DirectLineSpeechChannel,
               resourceGroupName: OneResourceGroupName, resourceName: samplebotname,
               subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DeleteDirectLineSpeechChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DeleteDirectLineSpeechChannel.json
             responses:
               '200': {}
               '204': {}
@@ -7343,6 +7554,7 @@ operationGroups:
       default: {description: Deletes a Channel registration from a Bot Service, name: Delete}
       java: {description: Deletes a Channel registration from a Bot Service, name: delete}
     operationGroup: *id087
+    operationId: Channels_Delete
     parameters:
     - *id006
     - &id100
@@ -7463,7 +7675,7 @@ operationGroups:
             parameters: {api-version: 2021-05-01-preview, channelName: DirectLineSpeechChannel,
               resourceGroupName: OneResourceGroupName, resourceName: samplebotname,
               subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetDirectLineSpeechChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetDirectLineSpeechChannel.json
             responses:
               '200':
                 body:
@@ -7477,7 +7689,7 @@ operationGroups:
             parameters: {api-version: 2021-05-01-preview, channelName: LineChannel,
               resourceGroupName: OneResourceGroupName, resourceName: samplebotname,
               subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetLineChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetLineChannel.json
             responses:
               '200':
                 body:
@@ -7493,7 +7705,7 @@ operationGroups:
             parameters: {api-version: 2021-05-01-preview, channelName: EmailChannel,
               resourceGroupName: OneResourceGroupName, resourceName: samplebotname,
               subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetChannel.json
             responses:
               '200':
                 body:
@@ -7505,7 +7717,7 @@ operationGroups:
             parameters: {api-version: 2021-05-01-preview, channelName: AlexaChannel,
               resourceGroupName: OneResourceGroupName, resourceName: samplebotname,
               subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetAlexaChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetAlexaChannel.json
             responses:
               '200':
                 body:
@@ -7523,6 +7735,7 @@ operationGroups:
       java: {description: Returns a BotService Channel registration specified by the
           parameters., name: get}
     operationGroup: *id087
+    operationId: Channels_Get
     parameters:
     - *id006
     - &id104
@@ -7642,7 +7855,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListChannel.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListChannel.json
             responses:
               '200':
                 body:
@@ -7698,6 +7911,7 @@ operationGroups:
       java: {description: Lists a Channel registration for a Bot Service including
           secrets, name: listWithKeys}
     operationGroup: *id087
+    operationId: Channels_ListWithKeys
     parameters:
     - *id006
     - &id108
@@ -7815,7 +8029,7 @@ operationGroups:
           List Bots by Resource Group:
             parameters: {api-version: 2021-05-01-preview, resourceGroupName: OneResourceGroupName,
               resourceName: samplebotname, subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListChannelsByBotService.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListChannelsByBotService.json
             responses:
               '200':
                 body:
@@ -7931,7 +8145,7 @@ operationGroups:
               flattenedSchema: false
               language:
                 default: {description: The list of bot service channel operation response.,
-                  name: ChannelResponseList}
+                  name: ChannelResponseList, namespace: ''}
                 java: {description: The list of bot service channel operation response.,
                   name: ChannelResponseList}
               maxProperties: 0.0
@@ -7984,11 +8198,14 @@ operationGroups:
                   uniqueItems: false
                 serializedName: value
               protocol: {}
+              stronglyTypedHeader: false
               type: OBJECT
+              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
           signatureParameters: []
       xmsSkipUrlEncoding: false
     language: *id118
     operationGroup: *id087
+    operationId: Channels_ListByResourceGroup
     parameters:
     - *id006
     - &id119
@@ -8080,7 +8297,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DirectlineRegenerateKeys.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DirectlineRegenerateKeys.json
             responses:
               '200':
                 body:
@@ -8099,7 +8316,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/WebChatRegenerateKeys.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/WebChatRegenerateKeys.json
             responses:
               '200':
                 body:
@@ -8119,6 +8336,7 @@ operationGroups:
       java: {description: Regenerates secret keys and returns them for the DirectLine
           Channel of a particular BotService resource, name: regenerateKeys}
     operationGroup: *id123
+    operationId: DirectLine_RegenerateKeys
     parameters:
     - *id006
     - &id125
@@ -8211,7 +8429,7 @@ operationGroups:
           flattenedSchema: false
           language:
             default: {description: Site information for WebChat or DirectLine Channels
-                to identify which site to regenerate keys for., name: SiteInfo}
+                to identify which site to regenerate keys for., name: SiteInfo, namespace: ''}
             java: {description: Site information for WebChat or DirectLine Channels
                 to identify which site to regenerate keys for., name: SiteInfo}
           maxProperties: 0.0
@@ -8264,7 +8482,9 @@ operationGroups:
               type: SEALED_CHOICE
             serializedName: key
           protocol: {}
+          stronglyTypedHeader: false
           type: OBJECT
+          usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
       - apiVersions: []
         flattened: false
         implementation: METHOD
@@ -8355,7 +8575,7 @@ operationGroups:
         examples:
           Get Operations:
             parameters: {api-version: 2021-05-01-preview}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetOperations.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetOperations.json
             responses:
               '200':
                 body:
@@ -8453,7 +8673,7 @@ operationGroups:
               flattenedSchema: false
               language:
                 default: {description: The list of bot service operation response.,
-                  name: OperationEntityListResult}
+                  name: OperationEntityListResult, namespace: ''}
                 java: {description: The list of bot service operation response., name: OperationEntityListResult}
               maxProperties: 0.0
               minProperties: 0.0
@@ -8498,7 +8718,7 @@ operationGroups:
                     flattenedSchema: false
                     language:
                       default: {description: The operations supported by Bot Service
-                          Management., name: OperationEntity}
+                          Management., name: OperationEntity, namespace: ''}
                       java: {description: The operations supported by Bot Service
                           Management., name: OperationEntity}
                     maxProperties: 0.0
@@ -8543,7 +8763,7 @@ operationGroups:
                         flattenedSchema: false
                         language:
                           default: {description: The operation supported by Bot Service
-                              Management., name: OperationDisplayInfo}
+                              Management., name: OperationDisplayInfo, namespace: ''}
                           java: {description: The operation supported by Bot Service
                               Management., name: OperationDisplayInfo}
                         maxProperties: 0.0
@@ -8638,7 +8858,9 @@ operationGroups:
                             type: STRING
                           serializedName: resource
                         protocol: {}
+                        stronglyTypedHeader: false
                         type: OBJECT
+                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                       serializedName: display
                     - apiVersions: []
                       isDiscriminator: false
@@ -8676,7 +8898,9 @@ operationGroups:
                         type: ANY_OBJECT
                       serializedName: properties
                     protocol: {}
+                    stronglyTypedHeader: false
                     type: OBJECT
+                    usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                   language:
                     default: {description: The list of operations., name: OperationEntityListResultValue}
                   maxItems: 0.0
@@ -8686,11 +8910,14 @@ operationGroups:
                   uniqueItems: false
                 serializedName: value
               protocol: {}
+              stronglyTypedHeader: false
               type: OBJECT
+              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
           signatureParameters: []
       xmsSkipUrlEncoding: false
     language: *id137
     operationGroup: *id132
+    operationId: Operations_List
     parameters:
     - *id006
     - *id009
@@ -8738,7 +8965,7 @@ operationGroups:
         examples:
           List Auth Service Providers:
             parameters: {api-version: 2021-05-01-preview, subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListServiceProviders.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListServiceProviders.json
             responses:
               '200':
                 body:
@@ -8762,6 +8989,7 @@ operationGroups:
       java: {description: Lists the available Service Providers for creating Connection
           Settings, name: listServiceProviders}
     operationGroup: *id140
+    operationId: BotConnection_ListServiceProviders
     parameters:
     - *id006
     - *id009
@@ -8806,7 +9034,8 @@ operationGroups:
         - {version: 2021-05-01-preview}
         flattenedSchema: false
         language:
-          default: {description: The list of bot service providers response., name: ServiceProviderResponseList}
+          default: {description: The list of bot service providers response., name: ServiceProviderResponseList,
+            namespace: ''}
           java: {description: The list of bot service providers response., name: ServiceProviderResponseList}
         maxProperties: 0.0
         minProperties: 0.0
@@ -8852,7 +9081,8 @@ operationGroups:
               - {version: 2021-05-01-preview}
               flattenedSchema: false
               language:
-                default: {description: Service Provider Definition, name: ServiceProvider}
+                default: {description: Service Provider Definition, name: ServiceProvider,
+                  namespace: ''}
                 java: {description: Service Provider Definition, name: ServiceProvider}
               maxProperties: 0.0
               minProperties: 0.0
@@ -8874,7 +9104,8 @@ operationGroups:
                   flattenedSchema: false
                   language:
                     default: {description: The Object used to describe a Service Provider
-                        supported by Bot Service, name: ServiceProviderProperties}
+                        supported by Bot Service, name: ServiceProviderProperties,
+                      namespace: ''}
                     java: {description: The Object used to describe a Service Provider
                         supported by Bot Service, name: ServiceProviderProperties}
                   maxProperties: 0.0
@@ -9003,7 +9234,7 @@ operationGroups:
                         flattenedSchema: false
                         language:
                           default: {description: Extra Parameters specific to each
-                              Service Provider, name: ServiceProviderParameter}
+                              Service Provider, name: ServiceProviderParameter, namespace: ''}
                           java: {description: Extra Parameters specific to each Service
                               Provider, name: ServiceProviderParameter}
                         maxProperties: 0.0
@@ -9151,17 +9382,10 @@ operationGroups:
                           schema: &id276 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                             apiVersions:
                             - {version: 2021-05-01-preview}
-                            extensions:
-                              xmsAzureResource: false
-                              xmsClientFlatten: false
-                              xmsFlattened: false
-                              xmsInternalAutorestAnonymousSchema: {anonymous: true}
-                              xmsLongRunningOperation: false
-                              xmsSkipUrlEncoding: false
                             flattenedSchema: false
                             language:
                               default: {description: Meta data for the Service Provider,
-                                name: ServiceProviderParameterMetadata}
+                                name: ServiceProviderParameterMetadata, namespace: ''}
                               java: {description: Meta data for the Service Provider,
                                 name: ServiceProviderParameterMetadata}
                             maxProperties: 0.0
@@ -9181,17 +9405,11 @@ operationGroups:
                               schema: &id277 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
                                 apiVersions:
                                 - {version: 2021-05-01-preview}
-                                extensions:
-                                  xmsAzureResource: false
-                                  xmsClientFlatten: false
-                                  xmsFlattened: false
-                                  xmsInternalAutorestAnonymousSchema: {anonymous: true}
-                                  xmsLongRunningOperation: false
-                                  xmsSkipUrlEncoding: false
                                 flattenedSchema: false
                                 language:
                                   default: {description: the constraints of the bot
-                                      meta data., name: ServiceProviderParameterMetadataConstraints}
+                                      meta data., name: ServiceProviderParameterMetadataConstraints,
+                                    namespace: ''}
                                   java: {description: the constraints of the bot meta
                                       data., name: ServiceProviderParameterMetadataConstraints}
                                 maxProperties: 0.0
@@ -9217,13 +9435,19 @@ operationGroups:
                                     type: BOOLEAN
                                   serializedName: required
                                 protocol: {}
+                                stronglyTypedHeader: false
                                 type: OBJECT
+                                usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                               serializedName: constraints
                             protocol: {}
+                            stronglyTypedHeader: false
                             type: OBJECT
+                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                           serializedName: metadata
                         protocol: {}
+                        stronglyTypedHeader: false
                         type: OBJECT
+                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                       language:
                         default: {description: The list of parameters for the Service
                             Provider, name: ServiceProviderPropertiesParameters}
@@ -9234,10 +9458,14 @@ operationGroups:
                       uniqueItems: false
                     serializedName: parameters
                   protocol: {}
+                  stronglyTypedHeader: false
                   type: OBJECT
+                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
                 serializedName: properties
               protocol: {}
+              stronglyTypedHeader: false
               type: OBJECT
+              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
             language:
               default: {description: Gets the list of bot service providers and their
                   properties., name: ServiceProviderResponseListValue}
@@ -9248,7 +9476,9 @@ operationGroups:
             uniqueItems: false
           serializedName: value
         protocol: {}
+        stronglyTypedHeader: false
         type: OBJECT
+        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
     signatureParameters: []
   - &id142
     apiVersions:
@@ -9274,7 +9504,7 @@ operationGroups:
             parameters: {api-version: 2021-05-01-preview, connectionName: sampleConnection,
               resourceGroupName: OneResourceGroupName, resourceName: samplebotname,
               subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetConnection.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetConnection.json
             responses:
               '200':
                 body:
@@ -9300,6 +9530,7 @@ operationGroups:
       java: {description: Get a Connection Setting registration for a Bot Service,
         name: listWithSecrets}
     operationGroup: *id140
+    operationId: BotConnection_ListWithSecrets
     parameters:
     - *id006
     - &id143
@@ -9440,7 +9671,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutConnection.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutConnection.json
             responses:
               '200':
                 body:
@@ -9479,6 +9710,7 @@ operationGroups:
       default: {description: Register a new Auth Connection for a Bot Service, name: Create}
       java: {description: Register a new Auth Connection for a Bot Service, name: create}
     operationGroup: *id140
+    operationId: BotConnection_Create
     parameters:
     - *id006
     - &id148
@@ -9642,7 +9874,7 @@ operationGroups:
               resourceGroupName: OneResourceGroupName
               resourceName: samplebotname
               subscriptionId: subscription-id
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateConnection.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/UpdateConnection.json
             responses:
               '200':
                 body:
@@ -9682,6 +9914,7 @@ operationGroups:
       java: {description: Updates a Connection Setting registration for a Bot Service,
         name: update}
     operationGroup: *id140
+    operationId: BotConnection_Update
     parameters:
     - *id006
     - &id153
@@ -9831,7 +10064,7 @@ operationGroups:
             parameters: {api-version: 2021-05-01-preview, connectionName: sampleConnection,
               resourceGroupName: OneResourceGroupName, resourceName: samplebotname,
               subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetConnection.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetConnection.json
             responses:
               '200':
                 body:
@@ -9857,6 +10090,7 @@ operationGroups:
       java: {description: Get a Connection Setting registration for a Bot Service,
         name: get}
     operationGroup: *id140
+    operationId: BotConnection_Get
     parameters:
     - *id006
     - &id158
@@ -9974,7 +10208,7 @@ operationGroups:
             parameters: {api-version: 2021-05-01-preview, connectionName: sampleConnection,
               resourceGroupName: OneResourceGroupName, resourceName: samplebotname,
               subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DeleteConnection.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DeleteConnection.json
             responses:
               '200': {}
               '204': {}
@@ -9987,6 +10221,7 @@ operationGroups:
       java: {description: Deletes a Connection Setting registration for a Bot Service,
         name: delete}
     operationGroup: *id140
+    operationId: BotConnection_Delete
     parameters:
     - *id006
     - &id162
@@ -10108,7 +10343,7 @@ operationGroups:
           List Connection Settings:
             parameters: {api-version: 2021-05-01-preview, resourceGroupName: OneResourceGroupName,
               resourceName: samplebotname, subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListConnectionsByBotService.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListConnectionsByBotService.json
             responses:
               '200':
                 body:
@@ -10220,7 +10455,7 @@ operationGroups:
               flattenedSchema: false
               language:
                 default: {description: The list of bot service connection settings
-                    response., name: ConnectionSettingResponseList}
+                    response., name: ConnectionSettingResponseList, namespace: ''}
                 java: {description: The list of bot service connection settings response.,
                   name: ConnectionSettingResponseList}
               maxProperties: 0.0
@@ -10273,11 +10508,14 @@ operationGroups:
                   uniqueItems: false
                 serializedName: value
               protocol: {}
+              stronglyTypedHeader: false
               type: OBJECT
+              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
           signatureParameters: []
       xmsSkipUrlEncoding: false
     language: *id172
     operationGroup: *id140
+    operationId: BotConnection_ListByBotService
     parameters:
     - *id006
     - &id173
@@ -10362,7 +10600,7 @@ operationGroups:
         examples:
           Get Bot Host Settings:
             parameters: {api-version: 2021-05-01-preview, subscriptionId: subscription-id}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetHostSettings.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetHostSettings.json
             responses:
               '200':
                 body: {BotOpenIdMetadata: 'https://login.botframework.com/v1/.well-known/openidconfiguration',
@@ -10379,6 +10617,7 @@ operationGroups:
       java: {description: Get per subscription settings needed to host bot in compute
           resource such as Azure App Service, name: get}
     operationGroup: *id177
+    operationId: HostSettings_Get
     parameters:
     - *id006
     - *id009
@@ -10424,7 +10663,8 @@ operationGroups:
         flattenedSchema: false
         language:
           default: {description: The response body returned for a request to Bot Service
-              Management to check per subscription hostSettings, name: HostSettingsResponse}
+              Management to check per subscription hostSettings, name: HostSettingsResponse,
+            namespace: ''}
           java: {description: The response body returned for a request to Bot Service
               Management to check per subscription hostSettings, name: HostSettingsResponse}
         maxProperties: 0.0
@@ -10599,7 +10839,9 @@ operationGroups:
             type: STRING
           serializedName: BotOpenIdMetadata
         protocol: {}
+        stronglyTypedHeader: false
         type: OBJECT
+        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
     signatureParameters: []
   protocol: {}
 - &id179
@@ -10632,7 +10874,7 @@ operationGroups:
           Get operation result:
             parameters: {api-version: 2021-05-01-preview, operationResultId: exampleid,
               subscriptionId: subid}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/OperationResultsGet.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/OperationResultsGet.json
             responses:
               '200':
                 body: {name: servicename, id: /subscriptions/subid/providers/Microsoft.BotService/locations/westus/operationresults/exampleid,
@@ -10647,6 +10889,7 @@ operationGroups:
       java: {description: Get the operation result for a long running operation.,
         name: get}
     operationGroup: *id179
+    operationId: OperationResults_Get
     parameters:
     - *id006
     - *id009
@@ -10709,7 +10952,7 @@ operationGroups:
         flattenedSchema: false
         language:
           default: {description: The properties indicating the operation result of
-              an operation on a service., name: OperationResultsDescription}
+              an operation on a service., name: OperationResultsDescription, namespace: ''}
           java: {description: The properties indicating the operation result of an
               operation on a service., name: OperationResultsDescription}
         maxProperties: 0.0
@@ -10808,7 +11051,9 @@ operationGroups:
             type: DATE_TIME
           serializedName: startTime
         protocol: {}
+        stronglyTypedHeader: false
         type: OBJECT
+        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
     - language:
         default: {description: Accepted - Get request accepted; the operation will
             complete asynchronously., name: ''}
@@ -10849,7 +11094,7 @@ operationGroups:
           List Private Endpoint Connections:
             parameters: {api-version: 2021-05-01-preview, resourceGroupName: res6977,
               resourceName: sto2527, subscriptionId: '{subscription-id}'}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListPrivateEndpointConnections.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/ListPrivateEndpointConnections.json
             responses:
               '200':
                 body:
@@ -10880,6 +11125,7 @@ operationGroups:
       java: {description: List all the private endpoint connections associated with
           the Bot., name: list}
     operationGroup: *id182
+    operationId: PrivateEndpointConnections_List
     parameters:
     - *id006
     - &id184
@@ -10958,7 +11204,8 @@ operationGroups:
         flattenedSchema: false
         language:
           default: {description: List of private endpoint connection associated with
-              the specified storage account, name: PrivateEndpointConnectionListResult}
+              the specified storage account, name: PrivateEndpointConnectionListResult,
+            namespace: ''}
           java: {description: List of private endpoint connection associated with
               the specified storage account, name: PrivateEndpointConnectionListResult}
         maxProperties: 0.0
@@ -10986,7 +11233,9 @@ operationGroups:
             uniqueItems: false
           serializedName: value
         protocol: {}
+        stronglyTypedHeader: false
         type: OBJECT
+        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
     signatureParameters:
     - *id184
     - *id185
@@ -11014,7 +11263,7 @@ operationGroups:
           Get Private Endpoint Connection:
             parameters: {api-version: 2021-05-01-preview, privateEndpointConnectionName: '{privateEndpointConnectionName}',
               resourceGroupName: res6977, resourceName: sto2527, subscriptionId: '{subscription-id}'}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetPrivateEndpointConnection.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/GetPrivateEndpointConnection.json
             responses:
               '200':
                 body:
@@ -11035,6 +11284,7 @@ operationGroups:
       java: {description: Gets the specified private endpoint connection associated
           with the Bot., name: get}
     operationGroup: *id182
+    operationId: PrivateEndpointConnections_Get
     parameters:
     - *id006
     - &id187
@@ -11169,7 +11419,7 @@ operationGroups:
               resourceGroupName: res7687
               resourceName: sto9699
               subscriptionId: '{subscription-id}'
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutPrivateEndpointConnection.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/PutPrivateEndpointConnection.json
             responses:
               '200':
                 body:
@@ -11190,6 +11440,7 @@ operationGroups:
       java: {description: Update the state of specified private endpoint connection
           associated with the Bot., name: create}
     operationGroup: *id182
+    operationId: PrivateEndpointConnections_Create
     parameters:
     - *id006
     - &id192
@@ -11327,7 +11578,7 @@ operationGroups:
           Delete Private Endpoint Connection:
             parameters: {api-version: 2021-05-01-preview, privateEndpointConnectionName: '{privateEndpointConnectionName}',
               resourceGroupName: res6977, resourceName: sto2527, subscriptionId: '{subscription-id}'}
-            x-ms-original-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DeletePrivateEndpointConnection.json
+            x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/eecf176ecfdcf43bfc98219740a89103c9644599/specification/botservice/resource-manager/Microsoft.BotService/preview/2021-05-01-preview/examples/DeletePrivateEndpointConnection.json
             responses:
               '200': {}
               '204': {}
@@ -11340,6 +11591,7 @@ operationGroups:
       java: {description: Deletes the specified private endpoint connection associated
           with the Bot., name: delete}
     operationGroup: *id182
+    operationId: PrivateEndpointConnections_Delete
     parameters:
     - *id006
     - &id197
@@ -11795,3 +12047,6 @@ schemas:
   uris: []
   uuids: []
   xors: []
+security:
+  authenticationRequired: false
+  schemes: []

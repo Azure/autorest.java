@@ -111,11 +111,11 @@ def update_pom(package_versions: List[PackageVersion]):
         lines = f_in.readlines()
         new_lines = []
         for line in lines:
-            match = re.match(r'( *private String )(azure.*)Version = \"(.*)\";\n', line)
+            match = re.match(r'( *[_A-Z]*\(\")(.*?)(\", \")(.*?)(\", \")(.*)(\"\)[,;]\n)', line)
             if match:
-                package = Package('com.azure', re.sub('([A-Z]+)', r'-\1', match.group(2)).lower())
+                package = Package(match.group(2), match.group(4))
                 if package in versions:
-                    line = f'{match.group(1)}{match.group(2)}Version = "{versions[package]}";\n'
+                    line = f'{match.group(1)}{match.group(2)}{match.group(3)}{match.group(4)}{match.group(5)}{versions[package]}{match.group(7)}'
             new_lines.append(line)
     if not lines == new_lines:
         with open(path.join(root_path, project_file), 'w', encoding='utf-8') as f_out:

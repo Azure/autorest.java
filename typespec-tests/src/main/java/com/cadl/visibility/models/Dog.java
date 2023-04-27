@@ -22,8 +22,12 @@ public final class Dog {
     /*
      * The secretName property.
      */
+<<<<<<< HEAD
     @Generated
     @JsonProperty(value = "secretName", required = true)
+=======
+    @JsonProperty(value = "secretName")
+>>>>>>> remote/main
     private String secretName;
 
     /*
@@ -42,7 +46,7 @@ public final class Dog {
     @Generated
     @JsonCreator
     private Dog(
-            @JsonProperty(value = "secretName", required = true) String secretName,
+            @JsonProperty(value = "secretName") String secretName,
             @JsonProperty(value = "name", required = true) String name) {
         this.secretName = secretName;
         this.name = name;

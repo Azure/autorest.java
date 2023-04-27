@@ -24,29 +24,29 @@ public final class VisibilityModel {
      * Required int32, illustrating a query property.
      */
     @Generated
-    @JsonProperty(value = "queryProp", required = true)
-    private int queryProp;
+    @JsonProperty(value = "queryProp")
+    private Integer queryProp;
 
     /*
      * Required string[], illustrating a create property.
      */
     @Generated
-    @JsonProperty(value = "createProp", required = true)
+    @JsonProperty(value = "createProp")
     private List<String> createProp;
 
     /*
      * Required int32[], illustrating a update property.
      */
     @Generated
-    @JsonProperty(value = "updateProp", required = true)
+    @JsonProperty(value = "updateProp")
     private List<Integer> updateProp;
 
     /*
      * Required bool, illustrating a delete property.
      */
     @Generated
-    @JsonProperty(value = "deleteProp", required = true)
-    private boolean deleteProp;
+    @JsonProperty(value = "deleteProp")
+    private Boolean deleteProp;
 
     /**
      * Creates an instance of VisibilityModel class.
@@ -59,10 +59,10 @@ public final class VisibilityModel {
     @Generated
     @JsonCreator
     public VisibilityModel(
-            @JsonProperty(value = "queryProp", required = true) int queryProp,
-            @JsonProperty(value = "createProp", required = true) List<String> createProp,
-            @JsonProperty(value = "updateProp", required = true) List<Integer> updateProp,
-            @JsonProperty(value = "deleteProp", required = true) boolean deleteProp) {
+            @JsonProperty(value = "queryProp") Integer queryProp,
+            @JsonProperty(value = "createProp") List<String> createProp,
+            @JsonProperty(value = "updateProp") List<Integer> updateProp,
+            @JsonProperty(value = "deleteProp") Boolean deleteProp) {
         this.queryProp = queryProp;
         this.createProp = createProp;
         this.updateProp = updateProp;
@@ -85,7 +85,7 @@ public final class VisibilityModel {
      * @return the queryProp value.
      */
     @Generated
-    public int getQueryProp() {
+    public Integer getQueryProp() {
         return this.queryProp;
     }
 
@@ -115,7 +115,7 @@ public final class VisibilityModel {
      * @return the deleteProp value.
      */
     @Generated
-    public boolean isDeleteProp() {
+    public Boolean isDeleteProp() {
         return this.deleteProp;
     }
 }

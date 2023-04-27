@@ -30,4 +30,14 @@ class ProjectedNameClientTest {
         LanguageProjectedNameModel project = new LanguageProjectedNameModel(true);
         propertyClient.language(project);
     }
+
+    @Test
+    public void testClient() {
+
+        // method name be clientName
+        client.clientName();
+
+        // parameter name be clientName
+        client.parameter("true");
+    }
 }

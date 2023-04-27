@@ -316,7 +316,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 serializedName, propertyValueGetter, 0);
         } else {
             // TODO (alzimmer): Resolve this as deserialization logic generation needs to handle all cases.
-            throw new RuntimeException("Unknown wire type " + wireType + " in serialization. Need to add support for it.");
+            throw new RuntimeException("Unknown wire type " + wireType.getClass() + " in serialization. Need to add support for it.");
         }
     }
 

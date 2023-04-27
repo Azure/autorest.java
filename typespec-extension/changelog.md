@@ -1,5 +1,11 @@
 # Release History
 
+## 0.6.2 (2023-04-25)
+
+Compatible with compiler 0.43.
+
+- Supported `custom-types` and `custom-types-subpackage` as emitter option. See [readme](https://github.com/Azure/autorest.java/blob/main/readme.md).
+
 ## 0.6.1 (2023-04-14)
 
 Compatible with compiler 0.43.

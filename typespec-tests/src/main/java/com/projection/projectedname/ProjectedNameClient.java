@@ -50,7 +50,7 @@ public final class ProjectedNameClient {
     /**
      * The parameter operation.
      *
-     * @param defaultName The defaultName parameter.
+     * @param clientName The clientName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,8 +60,8 @@ public final class ProjectedNameClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> parameterWithResponse(String defaultName, RequestOptions requestOptions) {
-        return this.serviceClient.parameterWithResponse(defaultName, requestOptions);
+    public Response<Void> parameterWithResponse(String clientName, RequestOptions requestOptions) {
+        return this.serviceClient.parameterWithResponse(clientName, requestOptions);
     }
 
     /**
@@ -84,7 +84,7 @@ public final class ProjectedNameClient {
     /**
      * The parameter operation.
      *
-     * @param defaultName The defaultName parameter.
+     * @param clientName The clientName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -94,9 +94,9 @@ public final class ProjectedNameClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void parameter(String defaultName) {
+    public void parameter(String clientName) {
         // Generated convenience method for parameterWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        parameterWithResponse(defaultName, requestOptions).getValue();
+        parameterWithResponse(clientName, requestOptions).getValue();
     }
 }

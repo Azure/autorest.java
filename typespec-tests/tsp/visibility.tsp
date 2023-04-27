@@ -18,6 +18,11 @@ model Dog {
   name: string;
 }
 
+model RoundTripModel {
+  name: string;
+  @visibility("create", "update") secretName: string;
+}
+
 // The spread operator will copy all the properties of Dog into ReadDog,
 // and withVisibility will remove any that don't match the current
 // visibility setting
@@ -50,4 +55,8 @@ interface VisibilityOp extends VisibilityRead, VisibilityWrite {
   @post
   @route("/query")
   query(@body dog: ReadDog): Dog;
+
+  @put
+  @route("/roundtrip")
+  roundtrip(@body body: RoundTripModel): RoundTripModel;
 }

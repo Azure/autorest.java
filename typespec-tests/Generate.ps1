@@ -42,7 +42,7 @@ if (Test-Path ./tsp-output) {
 
 # run other local tests except partial update
 foreach ($tspFile in (Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*")) {
-    generate $tspFile
+  generate $tspFile
 }
 
 # partial update test

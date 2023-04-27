@@ -317,6 +317,14 @@ public class CodeModelCustomConstructor extends Constructor {
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),
                                         extension.getValueNode()));
+                            } else if ("x-ms-secret".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsSecret",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
                             } else {
                                 // handle properties that do not contain hyphen in name
                                 actualValues.add(new NodeTuple(keyNode, extension.getValueNode()));

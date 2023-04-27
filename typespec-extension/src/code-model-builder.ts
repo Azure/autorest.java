@@ -688,7 +688,7 @@ export class CodeModelBuilder {
       }
 
       const nullable = this.isNullableType(param.param.type);
-      const parameter = new Parameter(param.param.name, this.getDoc(param.param), schema, {
+      const parameter = new Parameter(this.getName(param.param), this.getDoc(param.param), schema, {
         summary: this.getSummary(param.param),
         implementation: ImplementationLocation.Method,
         required: !param.param.optional,
@@ -1577,7 +1577,16 @@ export class CodeModelBuilder {
 
   private processModelProperty(prop: ModelProperty): Property {
     const schema = this.processSchema(prop, prop.name);
-    const nullable = this.isNullableType(prop.type);
+    let nullable = this.isNullableType(prop.type);
+
+    let extensions = undefined;
+    if (this.isSecret(prop)) {
+      extensions = {
+        "x-ms-secret": true,
+      };
+      // if the property does not return in response, it had to be nullable
+      nullable = true;
+    }
 
     return new Property(this.getName(prop), this.getDoc(prop), schema, {
       summary: this.getSummary(prop),
@@ -1586,6 +1595,7 @@ export class CodeModelBuilder {
       readOnly: this.isReadOnly(prop),
       // clientDefaultValue: this.getDefaultValue(prop.default),
       serializedName: this.getSerializedName(prop),
+      extensions: extensions,
     });
   }
 
@@ -1808,6 +1818,15 @@ export class CodeModelBuilder {
       } else {
         return false;
       }
+    }
+  }
+
+  private isSecret(target: ModelProperty): boolean {
+    const visibility = getVisibility(this.program, target);
+    if (visibility) {
+      return !visibility.includes("read");
+    } else {
+      return false;
     }
   }
 
