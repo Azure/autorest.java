@@ -15,6 +15,7 @@ org.slf4j:slf4j-simple
 junit:junit
 org.junit.jupiter:junit-jupiter-api
 org.junit.jupiter:junit-jupiter-engine
+org.junit.jupiter:junit-jupiter-params
 io.projectreactor:reactor-test
 
 org.apache.maven.plugins:maven-antrun-plugin
