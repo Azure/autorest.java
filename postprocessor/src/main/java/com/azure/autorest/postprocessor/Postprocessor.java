@@ -71,11 +71,6 @@ public class Postprocessor extends NewPlugin {
         }
 
         if (className == null) {
-            try {
-                writeToFiles(fileContents);
-            } catch (Exception e) {
-                return false;
-            }
             return true;
         }
 

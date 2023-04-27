@@ -18,7 +18,7 @@ import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.EnumType;;
+import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.Pom;
@@ -53,6 +53,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
+
+;
 
 public class Javagen extends NewPlugin {
     private final Logger logger = new PluginLogger(this, Javagen.class);
@@ -91,34 +93,36 @@ public class Javagen extends NewPlugin {
             JavaPackage javaPackage = writeToTemplates(codeModel, client, settings, true);
 
             //Step 4: Print to files
-            Map<String, String> formattedFiles = new ConcurrentHashMap<>();
-            Formatter formatter = new Formatter();
+            // Only run formatting is it isn't being skipped and there won't be post-processing customizations applied.
+            if (!settings.isSkipFormatting() && CoreUtils.isNullOrEmpty(settings.getCustomizationClass())) {
+                Map<String, String> formattedFiles = new ConcurrentHashMap<>();
+                Formatter formatter = new Formatter();
 
-            // Formatting Java source files can be expensive but can be run in parallel.
-            // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
-            // complete.
-            AtomicBoolean failedFormatting = new AtomicBoolean();
-            javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
-                String formattedSource = javaFile.getContents().toString();
-                if (!settings.isSkipFormatting()) {
+                // Formatting Java source files can be expensive but can be run in parallel.
+                // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
+                // complete.
+                AtomicBoolean failedFormatting = new AtomicBoolean();
+                javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
                     try {
-                        formattedSource = formatter.formatSourceAndFixImports(formattedSource);
+                        formattedFiles.put(javaFile.getFilePath(),
+                            formatter.formatSourceAndFixImports(javaFile.getContents().toString()));
                     } catch (Exception e) {
                         logger.error("Unable to format output file " + javaFile.getFilePath(), e);
                         failedFormatting.set(true);
                     }
+                });
+
+                if (failedFormatting.get()) {
+                    throw new RuntimeException("Failed to format Java files.");
                 }
 
-                formattedFiles.put(javaFile.getFilePath(), formattedSource);
-            });
-
-            if (failedFormatting.get()) {
-                throw new RuntimeException("Failed to format Java files.");
+                // Then for each formatted file write the file. This is done synchronously as there is potential race
+                // conditions that can lead to deadlocking.
+                formattedFiles.forEach((filePath, formattedSource) -> writeFile(filePath, formattedSource, null));
+            } else {
+                javaPackage.getJavaFiles().forEach(javaFile ->
+                    writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null));
             }
-
-            // Then for each formatted file write the file. This is done synchronously as there is potential race
-            // conditions that can lead to deadlocking.
-            formattedFiles.forEach((filePath, formattedSource) -> writeFile(filePath, formattedSource, null));
 
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
                 writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
@@ -164,7 +168,7 @@ public class Javagen extends NewPlugin {
     }
 
     JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings,
-                                 boolean generateSwaggerMarkdown) {
+        boolean generateSwaggerMarkdown) {
         JavaPackage javaPackage = new JavaPackage(this);
         // Service client
         if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
@@ -262,10 +266,10 @@ public class Javagen extends NewPlugin {
                 for (com.azure.autorest.extension.base.model.codemodel.Client client1 : codeModel.getClients()) {
                     if (client1.getServiceVersion() != null) {
                         javaPackage.addServiceVersion(packageName,
-                                new ServiceVersion(
-                                        SchemaUtil.getJavaName(client1.getServiceVersion()),
-                                        client1.getServiceVersion().getLanguage().getDefault().getDescription(),
-                                        client1.getApiVersions().stream().map(ApiVersion::getVersion).collect(Collectors.toList())));
+                            new ServiceVersion(
+                                SchemaUtil.getJavaName(client1.getServiceVersion()),
+                                client1.getServiceVersion().getLanguage().getDefault().getDescription(),
+                                client1.getApiVersions().stream().map(ApiVersion::getVersion).collect(Collectors.toList())));
                     }
                 }
             }
@@ -342,7 +346,7 @@ public class Javagen extends NewPlugin {
             // XML sequence wrapper
             for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
                 javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
-                        xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
+                    xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
             }
         }
     }
