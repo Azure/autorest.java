@@ -4,6 +4,8 @@ function Generate($tspFile) {
     Invoke-Expression "npx tsp compile $tspFile --options=""@azure-tools/typespec-java.namespace=com.type.enums.extensible"" --trace import-resolution --trace projection --trace typespec-java"
   } elseif ($tspFile -match "type[\\/]enum[\\/]fixed[\\/]*") {
     Invoke-Expression "npx tsp compile $tspFile --options=""@azure-tools/typespec-java.namespace=com.type.enums.fixed"" --trace import-resolution --trace projection --trace typespec-java"
+  } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]old.tsp") {
+    Invoke-Expression "npx tsp compile $tspFile --options=""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"" --trace import-resolution --trace projection --trace typespec-java"
   } else {
     Invoke-Expression "npx tsp compile $tspFile --trace import-resolution --trace projection --trace typespec-java"
   }
@@ -53,7 +55,7 @@ Remove-Item ./existingcode -Recurse -Force
 # run cadl ranch tests sources
 Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
 
-foreach ($tspFile in (Get-ChildItem ./http -Filter "main.tsp" -File -Name -Recurse)) {
+foreach ($tspFile in (Get-ChildItem ./http -Include "main.tsp","old.tsp" -File -Name -Recurse)) {
   Write-Host $tspFile
   generate "./http/$tspFile"
 }
