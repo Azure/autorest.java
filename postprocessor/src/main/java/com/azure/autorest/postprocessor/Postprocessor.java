@@ -49,9 +49,6 @@ public class Postprocessor extends NewPlugin {
     public boolean processInternal() {
         this.clear();
 
-        List<String> files = listInputs();
-        Map<String, String> fileContents = files.stream().collect(Collectors.toMap(f -> f, this::readFile));
-
         String jarPath = JavaSettings.getInstance().getCustomizationJarPath();
         String className = JavaSettings.getInstance().getCustomizationClass();
         String readme = null;
@@ -71,6 +68,7 @@ public class Postprocessor extends NewPlugin {
         }
 
         if (className == null) {
+            listInputs().forEach(file -> writeFile(file, readFile(file), null));
             return true;
         }
 
@@ -119,14 +117,15 @@ public class Postprocessor extends NewPlugin {
             try {
                 Customization customization = customizationClass.getConstructor().newInstance();
                 logger.info("Running customization, this may take a while...");
+                List<String> files = listInputs();
+                Map<String, String> fileContents = files.stream().collect(Collectors.toMap(f -> f, this::readFile));
                 fileContents = customization.run(fileContents, logger);
+                //Step 2: Print to files
+                writeToFiles(fileContents);
             } catch (Exception e) {
                 logger.error("Unable to complete customization", e);
                 return false;
             }
-
-            //Step 2: Print to files
-            writeToFiles(fileContents);
         } catch (Exception e) {
             logger.error("Failed to complete postprocessing.", e);
             return false;
