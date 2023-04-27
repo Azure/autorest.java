@@ -5,6 +5,7 @@
 package com.type.property.optional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,10 +15,12 @@ public final class BytesProperty {
     /*
      * Property
      */
+    @Generated
     @JsonProperty(value = "property")
     private byte[] property;
 
     /** Creates an instance of BytesProperty class. */
+    @Generated
     public BytesProperty() {}
 
     /**
@@ -25,6 +28,7 @@ public final class BytesProperty {
      *
      * @return the property value.
      */
+    @Generated
     public byte[] getProperty() {
         return CoreUtils.clone(this.property);
     }
@@ -35,6 +39,7 @@ public final class BytesProperty {
      * @param property the property value to set.
      * @return the BytesProperty object itself.
      */
+    @Generated
     public BytesProperty setProperty(byte[] property) {
         this.property = CoreUtils.clone(property);
         return this;

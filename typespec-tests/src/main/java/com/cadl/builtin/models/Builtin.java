@@ -4,6 +4,7 @@
 
 package com.cadl.builtin.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -21,96 +22,112 @@ public final class Builtin {
     /*
      * The formatString property.
      */
+    @Generated
     @JsonProperty(value = "formatString", required = true)
     private FormatString formatString;
 
     /*
      * The boolean property.
      */
+    @Generated
     @JsonProperty(value = "boolean", required = true)
     private boolean booleanProperty;
 
     /*
      * The string property.
      */
+    @Generated
     @JsonProperty(value = "string", required = true)
     private String string;
 
     /*
      * The bytes property.
      */
+    @Generated
     @JsonProperty(value = "bytes", required = true)
     private byte[] bytes;
 
     /*
      * The int property.
      */
+    @Generated
     @JsonProperty(value = "int", required = true)
     private int intProperty;
 
     /*
      * The safeint property.
      */
+    @Generated
     @JsonProperty(value = "safeint", required = true)
     private long safeint;
 
     /*
      * The long property.
      */
+    @Generated
     @JsonProperty(value = "long", required = true)
     private long longProperty;
 
     /*
      * The float property.
      */
+    @Generated
     @JsonProperty(value = "float", required = true)
     private double floatProperty;
 
     /*
      * The double property.
      */
+    @Generated
     @JsonProperty(value = "double", required = true)
     private double doubleProperty;
 
     /*
      * The duration property.
      */
+    @Generated
     @JsonProperty(value = "duration", required = true)
     private Duration duration;
 
     /*
      * The date property.
      */
+    @Generated
     @JsonProperty(value = "date", required = true)
     private LocalDate date;
 
     /*
      * The dateTime property.
      */
+    @Generated
     @JsonProperty(value = "dateTime", required = true)
     private OffsetDateTime dateTime;
 
     /*
      * The stringList property.
      */
+    @Generated
     @JsonProperty(value = "stringList", required = true)
     private List<String> stringList;
 
     /*
      * The bytesDict property.
      */
+    @Generated
     @JsonProperty(value = "bytesDict", required = true)
     private Map<String, byte[]> bytesDict;
 
     /*
      * The url property.
      */
+    @Generated
     @JsonProperty(value = "url", required = true)
     private String url;
 
     /*
      * The nullableFloatDict property.
      */
+    @Generated
     @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
     @JsonProperty(value = "nullableFloatDict", required = true)
     private Map<String, Double> nullableFloatDict;
@@ -135,6 +152,7 @@ public final class Builtin {
      * @param url the url value to set.
      * @param nullableFloatDict the nullableFloatDict value to set.
      */
+    @Generated
     @JsonCreator
     public Builtin(
             @JsonProperty(value = "formatString", required = true) FormatString formatString,
@@ -176,6 +194,7 @@ public final class Builtin {
      *
      * @return the formatString value.
      */
+    @Generated
     public FormatString getFormatString() {
         return this.formatString;
     }
@@ -185,6 +204,7 @@ public final class Builtin {
      *
      * @return the booleanProperty value.
      */
+    @Generated
     public boolean isBooleanProperty() {
         return this.booleanProperty;
     }
@@ -194,6 +214,7 @@ public final class Builtin {
      *
      * @return the string value.
      */
+    @Generated
     public String getString() {
         return this.string;
     }
@@ -203,6 +224,7 @@ public final class Builtin {
      *
      * @return the bytes value.
      */
+    @Generated
     public byte[] getBytes() {
         return CoreUtils.clone(this.bytes);
     }
@@ -212,6 +234,7 @@ public final class Builtin {
      *
      * @return the intProperty value.
      */
+    @Generated
     public int getIntProperty() {
         return this.intProperty;
     }
@@ -221,6 +244,7 @@ public final class Builtin {
      *
      * @return the safeint value.
      */
+    @Generated
     public long getSafeint() {
         return this.safeint;
     }
@@ -230,6 +254,7 @@ public final class Builtin {
      *
      * @return the longProperty value.
      */
+    @Generated
     public long getLongProperty() {
         return this.longProperty;
     }
@@ -239,6 +264,7 @@ public final class Builtin {
      *
      * @return the floatProperty value.
      */
+    @Generated
     public double getFloatProperty() {
         return this.floatProperty;
     }
@@ -248,6 +274,7 @@ public final class Builtin {
      *
      * @return the doubleProperty value.
      */
+    @Generated
     public double getDoubleProperty() {
         return this.doubleProperty;
     }
@@ -257,6 +284,7 @@ public final class Builtin {
      *
      * @return the duration value.
      */
+    @Generated
     public Duration getDuration() {
         return this.duration;
     }
@@ -266,6 +294,7 @@ public final class Builtin {
      *
      * @return the date value.
      */
+    @Generated
     public LocalDate getDate() {
         return this.date;
     }
@@ -275,6 +304,7 @@ public final class Builtin {
      *
      * @return the dateTime value.
      */
+    @Generated
     public OffsetDateTime getDateTime() {
         return this.dateTime;
     }
@@ -284,6 +314,7 @@ public final class Builtin {
      *
      * @return the stringList value.
      */
+    @Generated
     public List<String> getStringList() {
         return this.stringList;
     }
@@ -293,6 +324,7 @@ public final class Builtin {
      *
      * @return the bytesDict value.
      */
+    @Generated
     public Map<String, byte[]> getBytesDict() {
         return this.bytesDict;
     }
@@ -302,6 +334,7 @@ public final class Builtin {
      *
      * @return the url value.
      */
+    @Generated
     public String getUrl() {
         return this.url;
     }
@@ -311,6 +344,7 @@ public final class Builtin {
      *
      * @return the nullableFloatDict value.
      */
+    @Generated
     public Map<String, Double> getNullableFloatDict() {
         return this.nullableFloatDict;
     }

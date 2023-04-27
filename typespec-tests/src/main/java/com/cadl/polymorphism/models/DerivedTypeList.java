@@ -5,6 +5,7 @@
 package com.cadl.polymorphism.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -15,6 +16,7 @@ public final class DerivedTypeList extends DerivedType {
     /*
      * The items property.
      */
+    @Generated
     @JsonProperty(value = "items", required = true)
     private List<BaseType> items;
 
@@ -24,6 +26,7 @@ public final class DerivedTypeList extends DerivedType {
      * @param name the name value to set.
      * @param items the items value to set.
      */
+    @Generated
     @JsonCreator
     public DerivedTypeList(
             @JsonProperty(value = "name", required = true) String name,
@@ -37,11 +40,13 @@ public final class DerivedTypeList extends DerivedType {
      *
      * @return the items value.
      */
+    @Generated
     public List<BaseType> getItems() {
         return this.items;
     }
 
     /** {@inheritDoc} */
+    @Generated
     @Override
     public DerivedTypeList setDescription(String description) {
         super.setDescription(description);

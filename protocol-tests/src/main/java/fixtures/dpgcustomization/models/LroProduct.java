@@ -4,6 +4,7 @@
 
 package fixtures.dpgcustomization.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,7 @@ public final class LroProduct extends Product {
     /*
      * The provisioningState property.
      */
+    @Generated
     @JsonProperty(value = "provisioningState", required = true)
     private String provisioningState;
 
@@ -23,6 +25,7 @@ public final class LroProduct extends Product {
      * @param received the received value to set.
      * @param provisioningState the provisioningState value to set.
      */
+    @Generated
     @JsonCreator
     public LroProduct(
             @JsonProperty(value = "received", required = true) ProductReceived received,
@@ -36,6 +39,7 @@ public final class LroProduct extends Product {
      *
      * @return the provisioningState value.
      */
+    @Generated
     public String getProvisioningState() {
         return this.provisioningState;
     }

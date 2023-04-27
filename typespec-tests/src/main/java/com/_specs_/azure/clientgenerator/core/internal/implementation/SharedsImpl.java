@@ -17,100 +17,40 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the InternalClient type. */
-public final class InternalClientImpl {
+/** An instance of this class provides access to all the operations defined in Shareds. */
+public final class SharedsImpl {
     /** The proxy service used to perform REST calls. */
-    private final InternalClientService service;
+    private final SharedsService service;
 
-    /** The HTTP pipeline to send requests through. */
-    private final HttpPipeline httpPipeline;
+    /** The service client containing this operation class. */
+    private final InternalClientImpl client;
 
     /**
-     * Gets The HTTP pipeline to send requests through.
+     * Initializes an instance of SharedsImpl.
      *
-     * @return the httpPipeline value.
+     * @param client the instance of the service client containing this operation class.
      */
-    public HttpPipeline getHttpPipeline() {
-        return this.httpPipeline;
-    }
-
-    /** The serializer to serialize an object into a string. */
-    private final SerializerAdapter serializerAdapter;
-
-    /**
-     * Gets The serializer to serialize an object into a string.
-     *
-     * @return the serializerAdapter value.
-     */
-    public SerializerAdapter getSerializerAdapter() {
-        return this.serializerAdapter;
-    }
-
-    /** The SharedsImpl object to access its operations. */
-    private final SharedsImpl shareds;
-
-    /**
-     * Gets the SharedsImpl object to access its operations.
-     *
-     * @return the SharedsImpl object.
-     */
-    public SharedsImpl getShareds() {
-        return this.shareds;
-    }
-
-    /** Initializes an instance of InternalClient client. */
-    public InternalClientImpl() {
-        this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+    SharedsImpl(InternalClientImpl client) {
+        this.service = RestProxy.create(SharedsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.client = client;
     }
 
     /**
-     * Initializes an instance of InternalClient client.
-     *
-     * @param httpPipeline The HTTP pipeline to send requests through.
-     */
-    public InternalClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
-    }
-
-    /**
-     * Initializes an instance of InternalClient client.
-     *
-     * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param serializerAdapter The serializer to serialize an object into a string.
-     */
-    public InternalClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
-        this.httpPipeline = httpPipeline;
-        this.serializerAdapter = serializerAdapter;
-        this.shareds = new SharedsImpl(this);
-        this.service = RestProxy.create(InternalClientService.class, this.httpPipeline, this.getSerializerAdapter());
-    }
-
-    /**
-     * The interface defining all the services for InternalClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for InternalClientShareds to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "InternalClient")
-    public interface InternalClientService {
-        @Get("/azure/client-generator-core/internal/public")
+    @ServiceInterface(name = "InternalClientShared")
+    public interface SharedsService {
+        @Get("/azure/client-generator-core/internal/shared/public")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -122,13 +62,13 @@ public final class InternalClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> publicOnly(
+        Mono<Response<BinaryData>> publicMethod(
                 @QueryParam("name") String name,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/azure/client-generator-core/internal/public")
+        @Get("/azure/client-generator-core/internal/shared/public")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -140,13 +80,13 @@ public final class InternalClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> publicOnlySync(
+        Response<BinaryData> publicMethodSync(
                 @QueryParam("name") String name,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/azure/client-generator-core/internal/internal")
+        @Get("/azure/client-generator-core/internal/shared/internal")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -158,13 +98,13 @@ public final class InternalClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> internalOnly(
+        Mono<Response<BinaryData>> internal(
                 @QueryParam("name") String name,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/azure/client-generator-core/internal/internal")
+        @Get("/azure/client-generator-core/internal/shared/internal")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -176,7 +116,7 @@ public final class InternalClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> internalOnlySync(
+        Response<BinaryData> internalSync(
                 @QueryParam("name") String name,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -184,7 +124,7 @@ public final class InternalClientImpl {
     }
 
     /**
-     * The publicOnly operation.
+     * The publicMethod operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -200,17 +140,17 @@ public final class InternalClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is a model only used by public operation along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * @return this is a model used by both public and internal operation along with {@link Response} on successful
+     *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> publicOnlyWithResponseAsync(String name, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> publicMethodWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.publicOnly(name, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.publicMethod(name, accept, requestOptions, context));
     }
 
     /**
-     * The publicOnly operation.
+     * The publicMethod operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -226,16 +166,16 @@ public final class InternalClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is a model only used by public operation along with {@link Response}.
+     * @return this is a model used by both public and internal operation along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> publicOnlyWithResponse(String name, RequestOptions requestOptions) {
+    public Response<BinaryData> publicMethodWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.publicOnlySync(name, accept, requestOptions, Context.NONE);
+        return service.publicMethodSync(name, accept, requestOptions, Context.NONE);
     }
 
     /**
-     * The internalOnly operation.
+     * The internal operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -251,17 +191,17 @@ public final class InternalClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is a model only used by public operation along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * @return this is a model used by both public and internal operation along with {@link Response} on successful
+     *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> internalOnlyWithResponseAsync(String name, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> internalWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.internalOnly(name, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.internal(name, accept, requestOptions, context));
     }
 
     /**
-     * The internalOnly operation.
+     * The internal operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -277,11 +217,11 @@ public final class InternalClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is a model only used by public operation along with {@link Response}.
+     * @return this is a model used by both public and internal operation along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> internalOnlyWithResponse(String name, RequestOptions requestOptions) {
+    public Response<BinaryData> internalWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.internalOnlySync(name, accept, requestOptions, Context.NONE);
+        return service.internalSync(name, accept, requestOptions, Context.NONE);
     }
 }

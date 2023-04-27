@@ -4,6 +4,7 @@
 
 package com.cadl.polymorphism.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,6 +16,7 @@ public final class DerivedTypeData extends BaseType {
     /*
      * The data property.
      */
+    @Generated
     @JsonProperty(value = "data", required = true)
     private byte[] data;
 
@@ -24,6 +26,7 @@ public final class DerivedTypeData extends BaseType {
      * @param name the name value to set.
      * @param data the data value to set.
      */
+    @Generated
     @JsonCreator
     public DerivedTypeData(
             @JsonProperty(value = "name", required = true) String name,
@@ -37,6 +40,7 @@ public final class DerivedTypeData extends BaseType {
      *
      * @return the data value.
      */
+    @Generated
     public byte[] getData() {
         return CoreUtils.clone(this.data);
     }

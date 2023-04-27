@@ -4,6 +4,7 @@
 
 package com.projection.projectedname.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,7 @@ public final class LanguageProjectedNameModel {
     /*
      * Pass in true
      */
+    @Generated
     @JsonProperty(value = "defaultName", required = true)
     private boolean javaName;
 
@@ -22,6 +24,7 @@ public final class LanguageProjectedNameModel {
      *
      * @param javaName the javaName value to set.
      */
+    @Generated
     @JsonCreator
     public LanguageProjectedNameModel(@JsonProperty(value = "defaultName", required = true) boolean javaName) {
         this.javaName = javaName;
@@ -32,6 +35,7 @@ public final class LanguageProjectedNameModel {
      *
      * @return the javaName value.
      */
+    @Generated
     public boolean isJavaName() {
         return this.javaName;
     }

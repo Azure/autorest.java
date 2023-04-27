@@ -4,6 +4,7 @@
 
 package com.cadl.polymorphism.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -20,5 +21,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Immutable
 public class Task {
     /** Creates an instance of Task class. */
+    @Generated
     public Task() {}
 }

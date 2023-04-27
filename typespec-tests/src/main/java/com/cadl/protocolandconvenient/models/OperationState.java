@@ -4,6 +4,7 @@
 
 package com.cadl.protocolandconvenient.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
@@ -11,22 +12,23 @@ import java.util.Collection;
 /** Defines values for OperationState. */
 public final class OperationState extends ExpandableStringEnum<OperationState> {
     /** Static value InProgress for OperationState. */
-    public static final OperationState IN_PROGRESS = fromString("InProgress");
+    @Generated public static final OperationState IN_PROGRESS = fromString("InProgress");
 
     /** Static value Succeeded for OperationState. */
-    public static final OperationState SUCCEEDED = fromString("Succeeded");
+    @Generated public static final OperationState SUCCEEDED = fromString("Succeeded");
 
     /** Static value Failed for OperationState. */
-    public static final OperationState FAILED = fromString("Failed");
+    @Generated public static final OperationState FAILED = fromString("Failed");
 
     /** Static value Canceled for OperationState. */
-    public static final OperationState CANCELED = fromString("Canceled");
+    @Generated public static final OperationState CANCELED = fromString("Canceled");
 
     /**
      * Creates a new instance of OperationState value.
      *
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public OperationState() {}
 
@@ -36,6 +38,7 @@ public final class OperationState extends ExpandableStringEnum<OperationState> {
      * @param name a name to look for.
      * @return the corresponding OperationState.
      */
+    @Generated
     @JsonCreator
     public static OperationState fromString(String name) {
         return fromString(name, OperationState.class);
@@ -46,6 +49,7 @@ public final class OperationState extends ExpandableStringEnum<OperationState> {
      *
      * @return known OperationState values.
      */
+    @Generated
     public static Collection<OperationState> values() {
         return values(OperationState.class);
     }

@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.lro.standard.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,18 +16,21 @@ public final class ResourceOperationStatusUserError {
     /*
      * The unique ID of the operation.
      */
+    @Generated
     @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
      * The status of the operation
      */
+    @Generated
     @JsonProperty(value = "status", required = true)
     private OperationState status;
 
     /*
      * Error object that describes the error when status is "Failed".
      */
+    @Generated
     @JsonProperty(value = "error")
     private ResponseError error;
 
@@ -35,6 +39,7 @@ public final class ResourceOperationStatusUserError {
      *
      * @param status the status value to set.
      */
+    @Generated
     @JsonCreator
     private ResourceOperationStatusUserError(@JsonProperty(value = "status", required = true) OperationState status) {
         this.status = status;
@@ -45,6 +50,7 @@ public final class ResourceOperationStatusUserError {
      *
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -54,6 +60,7 @@ public final class ResourceOperationStatusUserError {
      *
      * @return the status value.
      */
+    @Generated
     public OperationState getStatus() {
         return this.status;
     }
@@ -63,6 +70,7 @@ public final class ResourceOperationStatusUserError {
      *
      * @return the error value.
      */
+    @Generated
     public ResponseError getError() {
         return this.error;
     }

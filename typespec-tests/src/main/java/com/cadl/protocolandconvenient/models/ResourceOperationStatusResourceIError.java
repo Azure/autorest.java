@@ -4,6 +4,7 @@
 
 package com.cadl.protocolandconvenient.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,18 +16,21 @@ public final class ResourceOperationStatusResourceIError {
     /*
      * The unique ID of the operation.
      */
+    @Generated
     @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
      * The status of the operation
      */
+    @Generated
     @JsonProperty(value = "status", required = true)
     private OperationState status;
 
     /*
      * Error object that describes the error when status is "Failed".
      */
+    @Generated
     @JsonProperty(value = "error")
     private ResponseError error;
 
@@ -35,6 +39,7 @@ public final class ResourceOperationStatusResourceIError {
      *
      * @param status the status value to set.
      */
+    @Generated
     @JsonCreator
     private ResourceOperationStatusResourceIError(
             @JsonProperty(value = "status", required = true) OperationState status) {
@@ -46,6 +51,7 @@ public final class ResourceOperationStatusResourceIError {
      *
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -55,6 +61,7 @@ public final class ResourceOperationStatusResourceIError {
      *
      * @return the status value.
      */
+    @Generated
     public OperationState getStatus() {
         return this.status;
     }
@@ -64,6 +71,7 @@ public final class ResourceOperationStatusResourceIError {
      *
      * @return the error value.
      */
+    @Generated
     public ResponseError getError() {
         return this.error;
     }

@@ -8,6 +8,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceClient;
 import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceClientBuilder;
+import java.util.Arrays;
 
 public class QueriesArrayStringMultiValid {
     public static void main(String[] args) {
@@ -16,15 +17,10 @@ public class QueriesArrayStringMultiValid {
                         .host("http://localhost:3000")
                         .buildClient();
         // BEGIN:fixtures.url.multi.generated.queriesarraystringmultivalid.queriesarraystringmultivalid
-        RequestOptions requestOptions =
-                new RequestOptions()
-                        .addQueryParam("arrayQuery", "ArrayQuery1")
-                        .addQueryParam("arrayQuery", "begin!*'();:@ &= $")
-                        .addQueryParam("arrayQuery", "/?#[]end")
-                        .addQueryParam("arrayQuery", "")
-                        .addQueryParam("arrayQuery", "");
+        RequestOptions requestOptions = new RequestOptions();
         Response<Void> response =
-                autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiValidWithResponse(requestOptions);
+                autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiValidWithResponse(
+                        Arrays.asList("ArrayQuery1", "begin!*'();:@ &= $", "/?#[]end", "", ""), requestOptions);
         // END:fixtures.url.multi.generated.queriesarraystringmultivalid.queriesarraystringmultivalid
     }
 }

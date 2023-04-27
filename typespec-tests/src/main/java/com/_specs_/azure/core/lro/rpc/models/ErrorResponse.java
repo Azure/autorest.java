@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.lro.rpc.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,6 +16,7 @@ public final class ErrorResponse {
     /*
      * The error object.
      */
+    @Generated
     @JsonProperty(value = "error", required = true)
     private ResponseError error;
 
@@ -23,6 +25,7 @@ public final class ErrorResponse {
      *
      * @param error the error value to set.
      */
+    @Generated
     @JsonCreator
     private ErrorResponse(@JsonProperty(value = "error", required = true) ResponseError error) {
         this.error = error;
@@ -33,6 +36,7 @@ public final class ErrorResponse {
      *
      * @return the error value.
      */
+    @Generated
     public ResponseError getError() {
         return this.error;
     }

@@ -4,6 +4,7 @@
 
 package com.cadl.polymorphism.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,6 +19,7 @@ public final class Cat extends Pet {
     /*
      * The meow property.
      */
+    @Generated
     @JsonProperty(value = "meow", required = true)
     private int meow;
 
@@ -27,6 +29,7 @@ public final class Cat extends Pet {
      * @param name the name value to set.
      * @param meow the meow value to set.
      */
+    @Generated
     @JsonCreator
     private Cat(
             @JsonProperty(value = "name", required = true) String name,
@@ -40,6 +43,7 @@ public final class Cat extends Pet {
      *
      * @return the meow value.
      */
+    @Generated
     public int getMeow() {
         return this.meow;
     }

@@ -4,6 +4,7 @@
 
 package com.cadl.optional.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,112 +19,131 @@ public final class AllPropertiesOptional {
     /*
      * The boolean property.
      */
+    @Generated
     @JsonProperty(value = "boolean")
     private Boolean booleanProperty;
 
     /*
      * The booleanNullable property.
      */
+    @Generated
     @JsonProperty(value = "booleanNullable")
     private Boolean booleanNullable;
 
     /*
      * The booleanRequired property.
      */
+    @Generated
     @JsonProperty(value = "booleanRequired")
     private Boolean booleanRequired;
 
     /*
      * The booleanRequiredNullable property.
      */
+    @Generated
     @JsonProperty(value = "booleanRequiredNullable")
     private Boolean booleanRequiredNullable;
 
     /*
      * The string property.
      */
+    @Generated
     @JsonProperty(value = "string")
     private String string;
 
     /*
      * The stringNullable property.
      */
+    @Generated
     @JsonProperty(value = "stringNullable")
     private String stringNullable;
 
     /*
      * The stringRequired property.
      */
+    @Generated
     @JsonProperty(value = "stringRequired")
     private String stringRequired;
 
     /*
      * The stringRequiredNullable property.
      */
+    @Generated
     @JsonProperty(value = "stringRequiredNullable")
     private String stringRequiredNullable;
 
     /*
      * The bytes property.
      */
+    @Generated
     @JsonProperty(value = "bytes")
     private byte[] bytes;
 
     /*
      * The int property.
      */
+    @Generated
     @JsonProperty(value = "int")
     private Integer intProperty;
 
     /*
      * The long property.
      */
+    @Generated
     @JsonProperty(value = "long")
     private Long longProperty;
 
     /*
      * The float property.
      */
+    @Generated
     @JsonProperty(value = "float")
     private Double floatProperty;
 
     /*
      * The double property.
      */
+    @Generated
     @JsonProperty(value = "double")
     private Double doubleProperty;
 
     /*
      * The duration property.
      */
+    @Generated
     @JsonProperty(value = "duration")
     private Duration duration;
 
     /*
      * The dateTime property.
      */
+    @Generated
     @JsonProperty(value = "dateTime")
     private OffsetDateTime dateTime;
 
     /*
      * The stringList property.
      */
+    @Generated
     @JsonProperty(value = "stringList")
     private List<String> stringList;
 
     /*
      * The bytesDict property.
      */
+    @Generated
     @JsonProperty(value = "bytesDict")
     private Map<String, byte[]> bytesDict;
 
     /*
      * The immutable property.
      */
+    @Generated
     @JsonProperty(value = "immutable")
     private ImmutableModel immutable;
 
     /** Creates an instance of AllPropertiesOptional class. */
+    @Generated
     private AllPropertiesOptional() {}
 
     /**
@@ -131,6 +151,7 @@ public final class AllPropertiesOptional {
      *
      * @return the booleanProperty value.
      */
+    @Generated
     public Boolean isBooleanProperty() {
         return this.booleanProperty;
     }
@@ -140,6 +161,7 @@ public final class AllPropertiesOptional {
      *
      * @return the booleanNullable value.
      */
+    @Generated
     public Boolean isBooleanNullable() {
         return this.booleanNullable;
     }
@@ -149,6 +171,7 @@ public final class AllPropertiesOptional {
      *
      * @return the booleanRequired value.
      */
+    @Generated
     public Boolean isBooleanRequired() {
         return this.booleanRequired;
     }
@@ -158,6 +181,7 @@ public final class AllPropertiesOptional {
      *
      * @return the booleanRequiredNullable value.
      */
+    @Generated
     public Boolean isBooleanRequiredNullable() {
         return this.booleanRequiredNullable;
     }
@@ -167,6 +191,7 @@ public final class AllPropertiesOptional {
      *
      * @return the string value.
      */
+    @Generated
     public String getString() {
         return this.string;
     }
@@ -176,6 +201,7 @@ public final class AllPropertiesOptional {
      *
      * @return the stringNullable value.
      */
+    @Generated
     public String getStringNullable() {
         return this.stringNullable;
     }
@@ -185,6 +211,7 @@ public final class AllPropertiesOptional {
      *
      * @return the stringRequired value.
      */
+    @Generated
     public String getStringRequired() {
         return this.stringRequired;
     }
@@ -194,6 +221,7 @@ public final class AllPropertiesOptional {
      *
      * @return the stringRequiredNullable value.
      */
+    @Generated
     public String getStringRequiredNullable() {
         return this.stringRequiredNullable;
     }
@@ -203,6 +231,7 @@ public final class AllPropertiesOptional {
      *
      * @return the bytes value.
      */
+    @Generated
     public byte[] getBytes() {
         return CoreUtils.clone(this.bytes);
     }
@@ -212,6 +241,7 @@ public final class AllPropertiesOptional {
      *
      * @return the intProperty value.
      */
+    @Generated
     public Integer getIntProperty() {
         return this.intProperty;
     }
@@ -221,6 +251,7 @@ public final class AllPropertiesOptional {
      *
      * @return the longProperty value.
      */
+    @Generated
     public Long getLongProperty() {
         return this.longProperty;
     }
@@ -230,6 +261,7 @@ public final class AllPropertiesOptional {
      *
      * @return the floatProperty value.
      */
+    @Generated
     public Double getFloatProperty() {
         return this.floatProperty;
     }
@@ -239,6 +271,7 @@ public final class AllPropertiesOptional {
      *
      * @return the doubleProperty value.
      */
+    @Generated
     public Double getDoubleProperty() {
         return this.doubleProperty;
     }
@@ -248,6 +281,7 @@ public final class AllPropertiesOptional {
      *
      * @return the duration value.
      */
+    @Generated
     public Duration getDuration() {
         return this.duration;
     }
@@ -257,6 +291,7 @@ public final class AllPropertiesOptional {
      *
      * @return the dateTime value.
      */
+    @Generated
     public OffsetDateTime getDateTime() {
         return this.dateTime;
     }
@@ -266,6 +301,7 @@ public final class AllPropertiesOptional {
      *
      * @return the stringList value.
      */
+    @Generated
     public List<String> getStringList() {
         return this.stringList;
     }
@@ -275,6 +311,7 @@ public final class AllPropertiesOptional {
      *
      * @return the bytesDict value.
      */
+    @Generated
     public Map<String, byte[]> getBytesDict() {
         return this.bytesDict;
     }
@@ -284,6 +321,7 @@ public final class AllPropertiesOptional {
      *
      * @return the immutable value.
      */
+    @Generated
     public ImmutableModel getImmutable() {
         return this.immutable;
     }

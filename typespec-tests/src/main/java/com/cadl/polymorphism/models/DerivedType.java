@@ -5,6 +5,7 @@
 package com.cadl.polymorphism.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,6 +15,7 @@ public class DerivedType extends BaseType {
     /*
      * The description property.
      */
+    @Generated
     @JsonProperty(value = "description")
     private String description;
 
@@ -22,6 +24,7 @@ public class DerivedType extends BaseType {
      *
      * @param name the name value to set.
      */
+    @Generated
     @JsonCreator
     public DerivedType(@JsonProperty(value = "name", required = true) String name) {
         super(name);
@@ -32,6 +35,7 @@ public class DerivedType extends BaseType {
      *
      * @return the description value.
      */
+    @Generated
     public String getDescription() {
         return this.description;
     }
@@ -42,6 +46,7 @@ public class DerivedType extends BaseType {
      * @param description the description value to set.
      * @return the DerivedType object itself.
      */
+    @Generated
     public DerivedType setDescription(String description) {
         this.description = description;
         return this;

@@ -37,7 +37,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /** A builder for creating a new instance of the InternalClient type. */
-@ServiceClientBuilder(serviceClients = {InternalClient.class, InternalAsyncClient.class})
+@ServiceClientBuilder(
+        serviceClients = {InternalClient.class, SharedClient.class, InternalAsyncClient.class, SharedAsyncClient.class})
 public final class InternalClientBuilder
         implements HttpTrait<InternalClientBuilder>, ConfigurationTrait<InternalClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
@@ -223,6 +224,16 @@ public final class InternalClientBuilder
     }
 
     /**
+     * Builds an instance of SharedAsyncClient class.
+     *
+     * @return an instance of SharedAsyncClient.
+     */
+    @Generated
+    public SharedAsyncClient buildSharedAsyncClient() {
+        return new SharedAsyncClient(buildInnerClient().getShareds());
+    }
+
+    /**
      * Builds an instance of InternalClient class.
      *
      * @return an instance of InternalClient.
@@ -230,5 +241,15 @@ public final class InternalClientBuilder
     @Generated
     public InternalClient buildClient() {
         return new InternalClient(buildInnerClient());
+    }
+
+    /**
+     * Builds an instance of SharedClient class.
+     *
+     * @return an instance of SharedClient.
+     */
+    @Generated
+    public SharedClient buildSharedClient() {
+        return new SharedClient(buildInnerClient().getShareds());
     }
 }

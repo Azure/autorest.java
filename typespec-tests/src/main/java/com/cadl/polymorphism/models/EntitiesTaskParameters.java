@@ -5,6 +5,7 @@
 package com.cadl.polymorphism.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The EntitiesTaskParameters model. */
@@ -13,10 +14,12 @@ public final class EntitiesTaskParameters extends Parameter {
     /*
      * The entity property.
      */
+    @Generated
     @JsonProperty(value = "entity")
     private String entity;
 
     /** Creates an instance of EntitiesTaskParameters class. */
+    @Generated
     public EntitiesTaskParameters() {}
 
     /**
@@ -24,6 +27,7 @@ public final class EntitiesTaskParameters extends Parameter {
      *
      * @return the entity value.
      */
+    @Generated
     public String getEntity() {
         return this.entity;
     }
@@ -34,6 +38,7 @@ public final class EntitiesTaskParameters extends Parameter {
      * @param entity the entity value to set.
      * @return the EntitiesTaskParameters object itself.
      */
+    @Generated
     public EntitiesTaskParameters setEntity(String entity) {
         this.entity = entity;
         return this;

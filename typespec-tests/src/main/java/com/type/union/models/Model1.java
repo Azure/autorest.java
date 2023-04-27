@@ -4,6 +4,7 @@
 
 package com.type.union.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,7 @@ public final class Model1 extends BaseModel {
     /*
      * The prop1 property.
      */
+    @Generated
     @JsonProperty(value = "prop1", required = true)
     private int prop1;
 
@@ -23,6 +25,7 @@ public final class Model1 extends BaseModel {
      * @param name the name value to set.
      * @param prop1 the prop1 value to set.
      */
+    @Generated
     @JsonCreator
     public Model1(
             @JsonProperty(value = "name", required = true) String name,
@@ -36,6 +39,7 @@ public final class Model1 extends BaseModel {
      *
      * @return the prop1 value.
      */
+    @Generated
     public int getProp1() {
         return this.prop1;
     }

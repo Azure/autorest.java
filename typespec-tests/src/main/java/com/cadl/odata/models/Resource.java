@@ -4,6 +4,7 @@
 
 package com.cadl.odata.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,18 +15,21 @@ public final class Resource {
     /*
      * The id property.
      */
+    @Generated
     @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
      * The name property.
      */
+    @Generated
     @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /*
      * The type property.
      */
+    @Generated
     @JsonProperty(value = "type", required = true)
     private String type;
 
@@ -34,6 +38,7 @@ public final class Resource {
      *
      * @param type the type value to set.
      */
+    @Generated
     @JsonCreator
     private Resource(@JsonProperty(value = "type", required = true) String type) {
         this.type = type;
@@ -44,6 +49,7 @@ public final class Resource {
      *
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -53,6 +59,7 @@ public final class Resource {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -62,6 +69,7 @@ public final class Resource {
      *
      * @return the type value.
      */
+    @Generated
     public String getType() {
         return this.type;
     }

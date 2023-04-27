@@ -19,7 +19,6 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.url.multi.models.ErrorException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -55,7 +54,7 @@ public final class Queries {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiNull(
                 @HostParam("$host") String host,
-                @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
+                @QueryParam("arrayQuery") String arrayQuery,
                 @HeaderParam("Accept") String accept,
                 Context context);
 
@@ -64,7 +63,7 @@ public final class Queries {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiEmpty(
                 @HostParam("$host") String host,
-                @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
+                @QueryParam("arrayQuery") String arrayQuery,
                 @HeaderParam("Accept") String accept,
                 Context context);
 
@@ -73,7 +72,7 @@ public final class Queries {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiValid(
                 @HostParam("$host") String host,
-                @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
+                @QueryParam("arrayQuery") String arrayQuery,
                 @HeaderParam("Accept") String accept,
                 Context context);
     }
@@ -95,10 +94,12 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
+        String arrayQueryConverted =
                 (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -121,10 +122,12 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
+        String arrayQueryConverted =
                 (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
@@ -227,10 +230,12 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
+        String arrayQueryConverted =
                 (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -253,10 +258,12 @@ public final class Queries {
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
+        String arrayQueryConverted =
                 (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+                        ? null
+                        : arrayQuery.stream()
+                                .map(value -> Objects.toString(value, ""))
+                                .collect(Collectors.joining(","));
         return service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
@@ -359,11 +366,12 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        if (arrayQuery == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayQuery is required and cannot be null."));
+        }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
-                (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        String arrayQueryConverted =
+                arrayQuery.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -386,11 +394,12 @@ public final class Queries {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
+        if (arrayQuery == null) {
+            return Mono.error(new IllegalArgumentException("Parameter arrayQuery is required and cannot be null."));
+        }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
-                (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        String arrayQueryConverted =
+                arrayQuery.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
         return service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
@@ -407,20 +416,6 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringMultiValidAsync(List<String> arrayQuery) {
-        return arrayStringMultiValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array
-     *     format on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> arrayStringMultiValidAsync() {
-        final List<String> arrayQuery = null;
         return arrayStringMultiValidWithResponseAsync(arrayQuery).flatMap(ignored -> Mono.empty());
     }
 
@@ -469,18 +464,6 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayStringMultiValid(List<String> arrayQuery) {
-        arrayStringMultiValidWithResponse(arrayQuery, Context.NONE);
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
-     *
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void arrayStringMultiValid() {
-        final List<String> arrayQuery = null;
         arrayStringMultiValidWithResponse(arrayQuery, Context.NONE);
     }
 }

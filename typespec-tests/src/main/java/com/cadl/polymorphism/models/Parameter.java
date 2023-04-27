@@ -4,11 +4,13 @@
 
 package com.cadl.polymorphism.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 
 /** The Parameter model. */
 @Immutable
 public class Parameter {
     /** Creates an instance of Parameter class. */
+    @Generated
     public Parameter() {}
 }

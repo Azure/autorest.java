@@ -5,6 +5,7 @@
 package com.cadl.polymorphism.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -18,12 +19,14 @@ public final class EntityTask extends Task {
     /*
      * The name property.
      */
+    @Generated
     @JsonProperty(value = "name", required = true)
     private String name;
 
     /*
      * The parameters property.
      */
+    @Generated
     @JsonProperty(value = "parameters")
     private EntitiesTaskParameters parameters;
 
@@ -32,6 +35,7 @@ public final class EntityTask extends Task {
      *
      * @param name the name value to set.
      */
+    @Generated
     @JsonCreator
     public EntityTask(@JsonProperty(value = "name", required = true) String name) {
         this.name = name;
@@ -42,6 +46,7 @@ public final class EntityTask extends Task {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -51,6 +56,7 @@ public final class EntityTask extends Task {
      *
      * @return the parameters value.
      */
+    @Generated
     public EntitiesTaskParameters getParameters() {
         return this.parameters;
     }
@@ -61,6 +67,7 @@ public final class EntityTask extends Task {
      * @param parameters the parameters value to set.
      * @return the EntityTask object itself.
      */
+    @Generated
     public EntityTask setParameters(EntitiesTaskParameters parameters) {
         this.parameters = parameters;
         return this;

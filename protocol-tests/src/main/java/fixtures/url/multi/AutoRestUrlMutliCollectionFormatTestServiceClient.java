@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.url.multi.implementation.QueriesImpl;
+import java.util.List;
 
 /** Initializes a new instance of the synchronous AutoRestUrlMutliCollectionFormatTestServiceClient type. */
 @ServiceClient(builder = AutoRestUrlMutliCollectionFormatTestServiceClientBuilder.class)
@@ -39,7 +40,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the multi-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the multi-array format. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -65,7 +66,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the multi-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the multi-array format. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -86,16 +87,8 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
      *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     *     mult-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -106,7 +99,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> arrayStringMultiValidWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.arrayStringMultiValidWithResponse(requestOptions);
+    public Response<Void> arrayStringMultiValidWithResponse(List<String> arrayQuery, RequestOptions requestOptions) {
+        return this.serviceClient.arrayStringMultiValidWithResponse(arrayQuery, requestOptions);
     }
 }
