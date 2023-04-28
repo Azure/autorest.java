@@ -1,14 +1,28 @@
+$tspPattern2NamespaceMapping = @{
+  # override namespace for reserved keyword "enum"
+  "type[\\/]enum[\\/]extensible[\\/]*" = "com.type.enums.extensible";
+  "type[\\/]enum[\\/]fixed[\\/]*" = "com.type.enums.fixed";
+
+  # override namespace for "resiliency/srv-driven/old.tsp" (make it different to that from "main.tsp")
+  "resiliency[\\/]srv-driven[\\/]old.tsp" = "com.resiliency.servicedriven.v1"
+}
+
 function Generate($tspFile) {
-  Write-Host "npx tsp compile $tspFile --trace import-resolution --trace projection --trace typespec-java"
-  if ($tspFile -match "type[\\/]enum[\\/]extensible[\\/]*") {
-    Invoke-Expression "npx tsp compile $tspFile --options=""@azure-tools/typespec-java.namespace=com.type.enums.extensible"" --trace import-resolution --trace projection --trace typespec-java"
-  } elseif ($tspFile -match "type[\\/]enum[\\/]fixed[\\/]*") {
-    Invoke-Expression "npx tsp compile $tspFile --options=""@azure-tools/typespec-java.namespace=com.type.enums.fixed"" --trace import-resolution --trace projection --trace typespec-java"
-  } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]old.tsp") {
-    Invoke-Expression "npx tsp compile $tspFile --options=""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"" --trace import-resolution --trace projection --trace typespec-java"
-  } else {
-    Invoke-Expression "npx tsp compile $tspFile --trace import-resolution --trace projection --trace typespec-java"
+  $overridedNamespace = $null
+  foreach ($tspPattern in $tspPattern2NamespaceMapping.Keys) {
+    if ($tspFile -match $tspPattern) {
+      $overridedNamespace = $tspPattern2NamespaceMapping[$tspPattern]
+      break
+    }
   }
+  $tspOptions = ""
+  if ($overridedNamespace) {
+    $tspOptions = "--options=""@azure-tools/typespec-java.namespace=$overridedNamespace"""
+  }
+  $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"
+  $tspCommand = "npx tsp compile $tspFile $tspOptions $tspTrace"
+  Write-Host $tspCommand
+  Invoke-Expression $tspCommand
 
   if ($LASTEXITCODE) {
     exit $LASTEXITCODE
