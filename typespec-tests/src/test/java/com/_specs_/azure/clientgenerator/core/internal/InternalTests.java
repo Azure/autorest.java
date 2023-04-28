@@ -46,7 +46,7 @@ public class InternalTests {
         SharedModel modelResponseBody = sharedClient.publicMethod(name);
         Assertions.assertEquals(name, modelResponseBody.getName());
 
-        Response<BinaryData> response = sharedClient.publicMethodWithResponse(name, new RequestOptions());
+        Response<BinaryData> response = sharedClient.internalWithResponse(name, new RequestOptions());
         Assertions.assertEquals(200, response.getStatusCode());
         Map responseBody = response.getValue().toObject(Map.class);
         Assertions.assertEquals(name, responseBody.get("name"));
