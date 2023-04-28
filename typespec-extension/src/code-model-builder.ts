@@ -298,9 +298,10 @@ export class CodeModelBuilder {
               securitySchemes.push(keyScheme);
             }
             break;
+
           case "http":
             {
-              this.logWarning(scheme.scheme + " auth method is currently not supported.");
+              this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
             }
             break;
         }
@@ -676,12 +677,26 @@ export class CodeModelBuilder {
               style = SerializationStyle.Form;
               explode = true;
               break;
+
+            // TODO there is bug in @typespec/http that ssv etc. is not in queryParamOptions.format
+
+            default:
+              if (queryParamOptions?.format) {
+                this.logWarning(`Unrecognized query parameter format: '${queryParamOptions?.format}'.`);
+              }
+              break;
           }
         } else if (param.type === "header") {
           const headerFieldOptions = getHeaderFieldOptions(this.program, param.param);
           switch (headerFieldOptions?.format) {
             case "csv":
               style = SerializationStyle.Simple;
+              break;
+
+            default:
+              if (headerFieldOptions?.format) {
+                this.logWarning(`Unrecognized header parameter format: '${headerFieldOptions?.format}'.`);
+              }
               break;
           }
         }
