@@ -54,6 +54,10 @@ import java.util.Objects;
             CollectionsModelClient.class,
             DictionaryStringClient.class,
             NeverClient.class,
+            UnknownStringClient.class,
+            UnknownIntClient.class,
+            UnknownDictClient.class,
+            UnknownArrayClient.class,
             BooleanOperationAsyncClient.class,
             StringOperationAsyncClient.class,
             BytesAsyncClient.class,
@@ -68,7 +72,11 @@ import java.util.Objects;
             CollectionsIntAsyncClient.class,
             CollectionsModelAsyncClient.class,
             DictionaryStringAsyncClient.class,
-            NeverAsyncClient.class
+            NeverAsyncClient.class,
+            UnknownStringAsyncClient.class,
+            UnknownIntAsyncClient.class,
+            UnknownDictAsyncClient.class,
+            UnknownArrayAsyncClient.class
         })
 public final class ValueTypesClientBuilder
         implements HttpTrait<ValueTypesClientBuilder>, ConfigurationTrait<ValueTypesClientBuilder> {
@@ -395,6 +403,46 @@ public final class ValueTypesClientBuilder
     }
 
     /**
+     * Builds an instance of UnknownStringAsyncClient class.
+     *
+     * @return an instance of UnknownStringAsyncClient.
+     */
+    @Generated
+    public UnknownStringAsyncClient buildUnknownStringAsyncClient() {
+        return new UnknownStringAsyncClient(buildInnerClient().getUnknownStrings());
+    }
+
+    /**
+     * Builds an instance of UnknownIntAsyncClient class.
+     *
+     * @return an instance of UnknownIntAsyncClient.
+     */
+    @Generated
+    public UnknownIntAsyncClient buildUnknownIntAsyncClient() {
+        return new UnknownIntAsyncClient(buildInnerClient().getUnknownInts());
+    }
+
+    /**
+     * Builds an instance of UnknownDictAsyncClient class.
+     *
+     * @return an instance of UnknownDictAsyncClient.
+     */
+    @Generated
+    public UnknownDictAsyncClient buildUnknownDictAsyncClient() {
+        return new UnknownDictAsyncClient(buildInnerClient().getUnknownDicts());
+    }
+
+    /**
+     * Builds an instance of UnknownArrayAsyncClient class.
+     *
+     * @return an instance of UnknownArrayAsyncClient.
+     */
+    @Generated
+    public UnknownArrayAsyncClient buildUnknownArrayAsyncClient() {
+        return new UnknownArrayAsyncClient(buildInnerClient().getUnknownArrays());
+    }
+
+    /**
      * Builds an instance of BooleanOperationClient class.
      *
      * @return an instance of BooleanOperationClient.
@@ -542,5 +590,45 @@ public final class ValueTypesClientBuilder
     @Generated
     public NeverClient buildNeverClient() {
         return new NeverClient(buildInnerClient().getNevers());
+    }
+
+    /**
+     * Builds an instance of UnknownStringClient class.
+     *
+     * @return an instance of UnknownStringClient.
+     */
+    @Generated
+    public UnknownStringClient buildUnknownStringClient() {
+        return new UnknownStringClient(buildInnerClient().getUnknownStrings());
+    }
+
+    /**
+     * Builds an instance of UnknownIntClient class.
+     *
+     * @return an instance of UnknownIntClient.
+     */
+    @Generated
+    public UnknownIntClient buildUnknownIntClient() {
+        return new UnknownIntClient(buildInnerClient().getUnknownInts());
+    }
+
+    /**
+     * Builds an instance of UnknownDictClient class.
+     *
+     * @return an instance of UnknownDictClient.
+     */
+    @Generated
+    public UnknownDictClient buildUnknownDictClient() {
+        return new UnknownDictClient(buildInnerClient().getUnknownDicts());
+    }
+
+    /**
+     * Builds an instance of UnknownArrayClient class.
+     *
+     * @return an instance of UnknownArrayClient.
+     */
+    @Generated
+    public UnknownArrayClient buildUnknownArrayClient() {
+        return new UnknownArrayClient(buildInnerClient().getUnknownArrays());
     }
 }
