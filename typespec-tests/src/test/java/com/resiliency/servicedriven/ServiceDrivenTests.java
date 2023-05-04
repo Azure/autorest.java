@@ -7,26 +7,40 @@ import org.junit.jupiter.api.Test;
 
 public class ServiceDrivenTests {
 
-    private final ResiliencyServiceDrivenClient client1 = new ResiliencyServiceDrivenClientBuilder()
+    private final com.resiliency.servicedriven.v1.ResiliencyServiceDrivenClient oldClient1 = new com.resiliency.servicedriven.v1.ResiliencyServiceDrivenClientBuilder()
+            .serviceDeploymentVersion("v1")
+            .buildClient();
+
+    private final com.resiliency.servicedriven.v1.ResiliencyServiceDrivenClient oldClient2 = new com.resiliency.servicedriven.v1.ResiliencyServiceDrivenClientBuilder()
+            .serviceDeploymentVersion("v2")
+            .buildClient();
+
+    private final ResiliencyServiceDrivenClient client2v1 = new ResiliencyServiceDrivenClientBuilder()
             .serviceDeploymentVersion("v2")
             .serviceVersion(ServiceDrivenServiceVersion.V1)
             .buildClient();
 
-    private final ResiliencyServiceDrivenClient client2 = new ResiliencyServiceDrivenClientBuilder()
+    private final ResiliencyServiceDrivenClient client2v2 = new ResiliencyServiceDrivenClientBuilder()
             .serviceDeploymentVersion("v2")
             .serviceVersion(ServiceDrivenServiceVersion.V2)
             .buildClient();
 
     @Test
     public void testAddOptionalParamFromNone() {
-        client1.fromNone();
-        client2.fromNone("new");
+        oldClient1.fromNone();
+        oldClient2.fromNone();
+
+        client2v1.fromNone();
+        client2v2.fromNone("new");
     }
 
     @Test
     public void testAddOptionalParamFromOneRequired() {
-        client1.fromOneRequired("required");
-        client2.fromOneRequired("required", "new");
+        oldClient1.fromOneRequired("required");
+        oldClient2.fromOneRequired("required");
+        
+        client2v1.fromOneRequired("required");
+        client2v2.fromOneRequired("required", "new");
     }
 
     // this case does not work without resiliency on "added"
@@ -39,6 +53,6 @@ public class ServiceDrivenTests {
 
     @Test
     public void testAddOperation() {
-        client2.addOperation();
+        client2v2.addOperation();
     }
 }
