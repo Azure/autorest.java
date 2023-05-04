@@ -4,6 +4,7 @@
 
 package com.cadl.visibility.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,12 +15,14 @@ public final class RoundTripModel {
     /*
      * The name property.
      */
+    @Generated
     @JsonProperty(value = "name", required = true)
     private String name;
 
     /*
      * The secretName property.
      */
+    @Generated
     @JsonProperty(value = "secretName")
     private String secretName;
 
@@ -29,6 +32,7 @@ public final class RoundTripModel {
      * @param name the name value to set.
      * @param secretName the secretName value to set.
      */
+    @Generated
     @JsonCreator
     public RoundTripModel(
             @JsonProperty(value = "name", required = true) String name,
@@ -42,6 +46,7 @@ public final class RoundTripModel {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -51,6 +56,7 @@ public final class RoundTripModel {
      *
      * @return the secretName value.
      */
+    @Generated
     public String getSecretName() {
         return this.secretName;
     }
