@@ -22,12 +22,8 @@ public final class Dog {
     /*
      * The secretName property.
      */
-<<<<<<< HEAD
     @Generated
-    @JsonProperty(value = "secretName", required = true)
-=======
     @JsonProperty(value = "secretName")
->>>>>>> remote/main
     private String secretName;
 
     /*
