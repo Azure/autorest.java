@@ -46,6 +46,7 @@
   ],
   "peerDependencies": {
     "@typespec/compiler": "~0.43.0",
+    "@typespec/http": "~0.43.0",
     "@typespec/rest": "~0.43.0",
     "@typespec/versioning": "~0.43.0",
     "@azure-tools/typespec-azure-core": "~0.29.0",
@@ -57,6 +58,12 @@
     "js-yaml": "~4.1.0"
   },
   "devDependencies": {
+    "@typespec/compiler": "~0.43.0",
+    "@typespec/http": "~0.43.0",
+    "@typespec/rest": "~0.43.0",
+    "@typespec/versioning": "~0.43.0",
+    "@azure-tools/typespec-azure-core": "~0.29.0",
+    "@azure-tools/typespec-client-generator-core": "~0.29.0",
     "@types/lodash": "~4.14.168",
     "@types/js-yaml": "~4.0.1",
     "@types/mocha": "~9.1.0",
