@@ -19,7 +19,6 @@ public final class Model {
     /*
      * Manually added Required field.
      */
-    @JsonProperty(value = "addedRequiredField", required = true)
     private String addedRequiredField;
 
     /*
@@ -30,31 +29,26 @@ public final class Model {
     private String optionalField;
 
     /**
-     * Creates an instance of GeneratedModel class.
+     * Creates an instance of Model class.
      *
      * @param requiredField
-     * @param optionalField
      */
     Model(
-            @JsonProperty(value = "requiredField", required = true) String requiredField,
-            @JsonProperty(value = "optionalField") String optionalField) {
+            @JsonProperty(value = "requiredField", required = true) String requiredField) {
         this.requiredField = requiredField;
-        this.optionalField = optionalField;
     }
 
     /**
      * Creates an instance of GeneratedModel class.
      *
-     * @param requiredField
      * @param addedRequiredField
-     * @param optionalField
+     * @param requiredField
      */
     public Model(
-            @JsonProperty(value = "requiredField", required = true) String requiredField,
-            @JsonProperty(value = "addedRequiredField", required = true) String addedRequiredField,
-            @JsonProperty(value = "optionalField") String optionalField) {
+            String addedRequiredField,
+            @JsonProperty(value = "requiredField", required = true) String requiredField) {
+        this.addedRequiredField = addedRequiredField;
         this.requiredField = requiredField;
-        this.optionalField = optionalField;
     }
 
     /**
@@ -78,6 +72,18 @@ public final class Model {
     }
 
     /**
+     * Set the optionalField property: Optional field.
+     *
+     * @param optionalField the optionalField value to set.
+     * @return the Model object itself.
+     */
+    @Generated
+    public Model setOptionalField(String optionalField) {
+        this.optionalField = optionalField;
+        return this;
+    }
+
+    /**
      * Get the addedRequiredField property: Manually added Required field.
      *
      * @return the addedRequiredField value.
@@ -85,4 +91,5 @@ public final class Model {
     public String getAddedRequiredField() {
         return this.addedRequiredField;
     }
+
 }

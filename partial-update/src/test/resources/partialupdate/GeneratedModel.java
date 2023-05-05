@@ -27,14 +27,11 @@ public final class Model {
      * Creates an instance of Model class.
      *
      * @param requiredField
-     * @param optionalField
      */
     @Generated
     public Model(
-            @JsonProperty(value = "requiredField", required = true) String requiredField,
-            @JsonProperty(value = "optionalField") String optionalField) {
+            @JsonProperty(value = "requiredField", required = true) String requiredField) {
         this.requiredField = requiredField;
-        this.optionalField = optionalField;
     }
 
     /**
@@ -55,5 +52,17 @@ public final class Model {
     @Generated
     public String getOptionalField() {
         return this.optionalField;
+    }
+
+    /**
+     * Set the optionalField property: Optional field.
+     *
+     * @param optionalField the optionalField value to set.
+     * @return the Model object itself.
+     */
+    @Generated
+    public Model setOptionalField(String optionalField) {
+        this.optionalField = optionalField;
+        return this;
     }
 }

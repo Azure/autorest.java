@@ -199,10 +199,10 @@ public class PartialUpdateHandlerTest {
 
         CompilationUnit compilationUnit = parse(output);
         assertEquals(1, compilationUnit.getTypes().size());
-        assertEquals(8, compilationUnit.getTypes().get(0).getMembers().size());
+        assertEquals(9, compilationUnit.getTypes().get(0).getMembers().size());
         assertEquals(3, compilationUnit.getTypes().get(0).getFields().size());
         assertEquals(2, compilationUnit.getTypes().get(0).getConstructors().size());
-        assertEquals(3, compilationUnit.getTypes().get(0).getMethods().size());
+        assertEquals(4, compilationUnit.getTypes().get(0).getMethods().size());
 
     }
 
