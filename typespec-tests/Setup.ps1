@@ -2,7 +2,7 @@
 Set-Location ../typespec-extension/
 # Remove-Item node_modules -Recurse -Force
 # Remove-Item package-lock.json
-npm install --legacy-peer-deps
+npm install
 npm run build
 npm run lint
 npm pack
@@ -17,7 +17,7 @@ if (Test-Path package-lock.json) {
     Remove-Item package-lock.json
 }
 
-npm install --legacy-peer-deps
+npm install
 
 # snapshot of versions of dependencies
 npm list --all

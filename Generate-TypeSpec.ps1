@@ -22,8 +22,8 @@ Write-Host "Changing directory to './typespec-extension'"
 try {
   Push-Location ./typespec-extension
 
-  Write-Host "Installing dependencies for TypeSpec Java ('npm install --legacy-peer-deps')"
-  invokeExpressionAndCaptureOutput("npm install --legacy-peer-deps")
+  Write-Host "Installing dependencies for TypeSpec Java ('npm install')"
+  invokeExpressionAndCaptureOutput("npm install")
 
   Write-Host "Building TypeSpec Java ('npm run build')"
   invokeExpressionAndCaptureOutput("npm run build")
