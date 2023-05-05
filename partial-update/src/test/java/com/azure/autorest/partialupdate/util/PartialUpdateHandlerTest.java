@@ -189,6 +189,23 @@ public class PartialUpdateHandlerTest {
         assertTrue(actualMessage.contains(expectedMessage));
 
     }
+
+    @Test
+    public void testClassOrInterfaceFile_ModelCustomization() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/Model.java").toURI())));
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/GeneratedModel.java").toURI())));
+
+        String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+
+        CompilationUnit compilationUnit = parse(output);
+        assertEquals(1, compilationUnit.getTypes().size());
+        assertEquals(8, compilationUnit.getTypes().get(0).getMembers().size());
+        assertEquals(3, compilationUnit.getTypes().get(0).getFields().size());
+        assertEquals(2, compilationUnit.getTypes().get(0).getConstructors().size());
+        assertEquals(3, compilationUnit.getTypes().get(0).getMethods().size());
+
+    }
+
     @Test
     public void testModuleInfoFile_WhenGeneratedFileEqualsExistingFile_ThenUseGeneratedFile() {
         String existingFileContent = "// Copyright (c) Microsoft Corporation. All rights reserved.\n" +
