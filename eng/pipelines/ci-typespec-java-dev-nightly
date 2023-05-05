@@ -5,6 +5,7 @@ schedules:
     include:
     - main
 
+trigger: none
 pr: none
 
 jobs:
