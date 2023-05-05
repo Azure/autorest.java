@@ -1,4 +1,4 @@
-# re-build java-client-emitter
+# re-build typespec-java
 Set-Location ../typespec-extension/
 # Remove-Item node_modules -Recurse -Force
 # Remove-Item package-lock.json

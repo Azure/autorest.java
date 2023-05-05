@@ -43,6 +43,7 @@ jobs:
       - script: |
           npm install -g @typespec/compiler@next
           npx @azure-tools/typespec-bump-deps typespec-extension/package.json typespec-tests/package.json
+        displayName: 'Bump TypeSpec Dependencies to @next'
 
       - task: PowerShell@2
         displayName: 'Generate Code'
