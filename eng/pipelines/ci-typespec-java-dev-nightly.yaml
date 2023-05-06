@@ -53,6 +53,16 @@ jobs:
           filePath: Generate-TypeSpec.ps1
 
       - script: |
+          echo "Dependencies of typespec-java"
+          cd typespec-extension
+          npm ls --all
+          echo "Dependencies of typespec-java-tests"
+          cd ../typespec-tests
+          npm ls --all
+        displayName: 'Print package dependencies'
+        condition: succeededOrFailed()
+
+      - script: |
           git status
           git diff
         displayName: 'Git Diff'

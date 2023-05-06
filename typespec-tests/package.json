@@ -1,5 +1,5 @@
 {
-  "name": "typespec-tests",
+  "name": "typespec-java-tests",
   "type": "module",
   "scripts": {
     "format": "npm run -s prettier -- --write",

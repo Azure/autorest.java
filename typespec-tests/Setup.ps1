@@ -19,9 +19,6 @@ if (Test-Path package-lock.json) {
 
 npm install
 
-# snapshot of versions of dependencies
-npm list --all
-
 # delete output
 if (Test-Path tsp-output) {
     Remove-Item tsp-output -Recurse -Force
