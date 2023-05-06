@@ -4,12 +4,10 @@
 
 package com._specs_.azure.clientgenerator.core.internal.implementation;
 
-import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
-import com.azure.core.annotation.Post;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -63,6 +61,18 @@ public final class InternalClientImpl {
         return this.serializerAdapter;
     }
 
+    /** The SharedsImpl object to access its operations. */
+    private final SharedsImpl shareds;
+
+    /**
+     * Gets the SharedsImpl object to access its operations.
+     *
+     * @return the SharedsImpl object.
+     */
+    public SharedsImpl getShareds() {
+        return this.shareds;
+    }
+
     /** Initializes an instance of InternalClient client. */
     public InternalClientImpl() {
         this(
@@ -90,6 +100,7 @@ public final class InternalClientImpl {
     public InternalClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.shareds = new SharedsImpl(this);
         this.service = RestProxy.create(InternalClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
@@ -99,7 +110,7 @@ public final class InternalClientImpl {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "InternalClient")
     public interface InternalClientService {
-        @Get("/azure/client-generator-core/internal/getInternal")
+        @Get("/azure/client-generator-core/internal/public")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -111,13 +122,13 @@ public final class InternalClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getInternal(
+        Mono<Response<BinaryData>> publicOnly(
                 @QueryParam("name") String name,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/azure/client-generator-core/internal/getInternal")
+        @Get("/azure/client-generator-core/internal/public")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -129,13 +140,13 @@ public final class InternalClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getInternalSync(
+        Response<BinaryData> publicOnlySync(
                 @QueryParam("name") String name,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/azure/client-generator-core/internal/postInternal")
+        @Get("/azure/client-generator-core/internal/internal")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -147,13 +158,13 @@ public final class InternalClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> postInternal(
+        Mono<Response<BinaryData>> internalOnly(
+                @QueryParam("name") String name,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/azure/client-generator-core/internal/postInternal")
+        @Get("/azure/client-generator-core/internal/internal")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -165,15 +176,15 @@ public final class InternalClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> postInternalSync(
+        Response<BinaryData> internalOnlySync(
+                @QueryParam("name") String name,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
     }
 
     /**
-     * The getInternal operation.
+     * The publicOnly operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -189,16 +200,17 @@ public final class InternalClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is an internal model along with {@link Response} on successful completion of {@link Mono}.
+     * @return this is a model only used by public operation along with {@link Response} on successful completion of
+     *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getInternalWithResponseAsync(String name, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> publicOnlyWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getInternal(name, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.publicOnly(name, accept, requestOptions, context));
     }
 
     /**
-     * The getInternal operation.
+     * The publicOnly operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -214,82 +226,62 @@ public final class InternalClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is an internal model along with {@link Response}.
+     * @return this is a model only used by public operation along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getInternalWithResponse(String name, RequestOptions requestOptions) {
+    public Response<BinaryData> publicOnlyWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getInternalSync(name, accept, requestOptions, Context.NONE);
+        return service.publicOnlySync(name, accept, requestOptions, Context.NONE);
     }
 
     /**
-     * The postInternal operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     * }
-     * }</pre>
+     * The internalOnly operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
      *
-     * @param body This is a non-internal model only used by internal operation.
+     * @param name The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is a non-internal model only used by internal operation along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * @return this is a model only used by internal operation along with {@link Response} on successful completion of
+     *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postInternalWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> internalOnlyWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.postInternal(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.internalOnly(name, accept, requestOptions, context));
     }
 
     /**
-     * The postInternal operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     * }
-     * }</pre>
+     * The internalOnly operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
      *
-     * @param body This is a non-internal model only used by internal operation.
+     * @param name The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is a non-internal model only used by internal operation along with {@link Response}.
+     * @return this is a model only used by internal operation along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
+    public Response<BinaryData> internalOnlyWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.postInternalSync(accept, body, requestOptions, Context.NONE);
+        return service.internalOnlySync(name, accept, requestOptions, Context.NONE);
     }
 }

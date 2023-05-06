@@ -10,7 +10,7 @@
   <parent>
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-autorest-parent</artifactId>
-    <version>1.0.0-beta.3</version>
+    <version>1.0.0-beta.4</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -61,7 +61,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
-      <version>5.8.2</version>
+      <version>5.9.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

@@ -1,5 +1,11 @@
 # Release History
 
+## 1.0.0-beta.7 (2023-04-26)
+
+### Other Changes
+
+- Upgraded dependency versions.
+
 ## 1.0.0-beta.6 (2022-10-26)
 
 ### Features Added

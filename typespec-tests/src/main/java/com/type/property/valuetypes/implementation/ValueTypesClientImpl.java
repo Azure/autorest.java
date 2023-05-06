@@ -218,6 +218,54 @@ public final class ValueTypesClientImpl {
         return this.nevers;
     }
 
+    /** The UnknownStringsImpl object to access its operations. */
+    private final UnknownStringsImpl unknownStrings;
+
+    /**
+     * Gets the UnknownStringsImpl object to access its operations.
+     *
+     * @return the UnknownStringsImpl object.
+     */
+    public UnknownStringsImpl getUnknownStrings() {
+        return this.unknownStrings;
+    }
+
+    /** The UnknownIntsImpl object to access its operations. */
+    private final UnknownIntsImpl unknownInts;
+
+    /**
+     * Gets the UnknownIntsImpl object to access its operations.
+     *
+     * @return the UnknownIntsImpl object.
+     */
+    public UnknownIntsImpl getUnknownInts() {
+        return this.unknownInts;
+    }
+
+    /** The UnknownDictsImpl object to access its operations. */
+    private final UnknownDictsImpl unknownDicts;
+
+    /**
+     * Gets the UnknownDictsImpl object to access its operations.
+     *
+     * @return the UnknownDictsImpl object.
+     */
+    public UnknownDictsImpl getUnknownDicts() {
+        return this.unknownDicts;
+    }
+
+    /** The UnknownArraysImpl object to access its operations. */
+    private final UnknownArraysImpl unknownArrays;
+
+    /**
+     * Gets the UnknownArraysImpl object to access its operations.
+     *
+     * @return the UnknownArraysImpl object.
+     */
+    public UnknownArraysImpl getUnknownArrays() {
+        return this.unknownArrays;
+    }
+
     /** Initializes an instance of ValueTypesClient client. */
     public ValueTypesClientImpl() {
         this(
@@ -260,5 +308,9 @@ public final class ValueTypesClientImpl {
         this.collectionsModels = new CollectionsModelsImpl(this);
         this.dictionaryStrings = new DictionaryStringsImpl(this);
         this.nevers = new NeversImpl(this);
+        this.unknownStrings = new UnknownStringsImpl(this);
+        this.unknownInts = new UnknownIntsImpl(this);
+        this.unknownDicts = new UnknownDictsImpl(this);
+        this.unknownArrays = new UnknownArraysImpl(this);
     }
 }

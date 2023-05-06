@@ -5,6 +5,7 @@
 package com._specs_.azure.clientgenerator.core.internal;
 
 import com._specs_.azure.clientgenerator.core.internal.implementation.InternalClientImpl;
+import com._specs_.azure.clientgenerator.core.internal.models.PublicModel;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -16,6 +17,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous InternalClient type. */
@@ -34,7 +36,7 @@ public final class InternalAsyncClient {
     }
 
     /**
-     * The getInternal operation.
+     * The publicOnly operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -50,47 +52,60 @@ public final class InternalAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is an internal model along with {@link Response} on successful completion of {@link Mono}.
+     * @return this is a model only used by public operation along with {@link Response} on successful completion of
+     *     {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<Response<BinaryData>> getInternalWithResponse(String name, RequestOptions requestOptions) {
-        return this.serviceClient.getInternalWithResponseAsync(name, requestOptions);
+    public Mono<Response<BinaryData>> publicOnlyWithResponse(String name, RequestOptions requestOptions) {
+        return this.serviceClient.publicOnlyWithResponseAsync(name, requestOptions);
     }
 
     /**
-     * The postInternal operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     * }
-     * }</pre>
+     * The internalOnly operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
      *
-     * @param body This is a non-internal model only used by internal operation.
+     * @param name The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is a non-internal model only used by internal operation along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * @return this is a model only used by internal operation along with {@link Response} on successful completion of
+     *     {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<Response<BinaryData>> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.postInternalWithResponseAsync(body, requestOptions);
+    Mono<Response<BinaryData>> internalOnlyWithResponse(String name, RequestOptions requestOptions) {
+        return this.serviceClient.internalOnlyWithResponseAsync(name, requestOptions);
+    }
+
+    /**
+     * The publicOnly operation.
+     *
+     * @param name The name parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is a model only used by public operation on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PublicModel> publicOnly(String name) {
+        // Generated convenience method for publicOnlyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return publicOnlyWithResponse(name, requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(PublicModel.class));
     }
 }

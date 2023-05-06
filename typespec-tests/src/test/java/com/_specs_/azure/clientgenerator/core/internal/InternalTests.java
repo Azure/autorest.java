@@ -3,47 +3,52 @@
 
 package com._specs_.azure.clientgenerator.core.internal;
 
+import com._specs_.azure.clientgenerator.core.internal.models.PublicModel;
+import com._specs_.azure.clientgenerator.core.internal.models.SharedModel;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class InternalTests {
 
-    InternalClient internalClient = new InternalClientBuilder().buildClient();
+    private InternalClient internalClient = new InternalClientBuilder()
+            .buildClient();
+
+    private SharedClient sharedClient = new InternalClientBuilder()
+            .buildSharedClient();
 
     @Test
-    public void getTest() {
-        String name = "mockName";
-        Response<BinaryData> response = internalClient.getInternalWithResponse(name, new RequestOptions());
+    public void testInternalOnlyModel() {
+        String name = "test";
 
-        int statusCode = response.getStatusCode();
-        BinaryData bodyBinary = response.getValue();
-        Map body = bodyBinary.toObject(Map.class);
-
-        Assertions.assertEquals(200, statusCode);
-        Assertions.assertEquals(name, body.get("name"));
+        Response<BinaryData> response = internalClient.internalOnlyWithResponse(name, new RequestOptions());
+        Assertions.assertEquals(200, response.getStatusCode());
+        Map responseBody = response.getValue().toObject(Map.class);
+        Assertions.assertEquals(name, responseBody.get("name"));
     }
 
     @Test
-    public void postTest() {
-        Map<String, Object> requestBody = new HashMap<>();
-        String name = "mockName";
+    public void testPublicOnlyModel() {
+        String name = "test";
 
-        requestBody.put("id", 1);
-        requestBody.put("name", name);
+        PublicModel responseBody = internalClient.publicOnly(name);
+        Assertions.assertEquals(name, responseBody.getName());
+    }
 
-        Response<BinaryData> response = internalClient.postInternalWithResponse(BinaryData.fromObject(requestBody), new RequestOptions());
+    @Test
+    public void testSharedModel() {
+        String name = "test";
 
-        int statusCode = response.getStatusCode();
+        SharedModel modelResponseBody = sharedClient.publicMethod(name);
+        Assertions.assertEquals(name, modelResponseBody.getName());
+
+        Response<BinaryData> response = sharedClient.internalWithResponse(name, new RequestOptions());
+        Assertions.assertEquals(200, response.getStatusCode());
         Map responseBody = response.getValue().toObject(Map.class);
-
-        Assertions.assertEquals(200, statusCode);
-        Assertions.assertEquals(1, responseBody.get("id"));
         Assertions.assertEquals(name, responseBody.get("name"));
     }
 }

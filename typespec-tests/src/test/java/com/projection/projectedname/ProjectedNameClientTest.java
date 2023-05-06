@@ -4,6 +4,7 @@
 package com.projection.projectedname;
 
 import com.projection.projectedname.models.ClientProjectedNameModel;
+import com.projection.projectedname.models.JsonAndClientProjectedNameModel;
 import com.projection.projectedname.models.JsonProjectedNameModel;
 import com.projection.projectedname.models.LanguageProjectedNameModel;
 import org.junit.jupiter.api.Test;
@@ -26,8 +27,24 @@ class ProjectedNameClientTest {
     }
 
     @Test
+    void jsonAndClientProjection() {
+        JsonAndClientProjectedNameModel project = new JsonAndClientProjectedNameModel(true);
+        propertyClient.jsonAndClient(project);
+    }
+
+    @Test
     void languageProjection() {
         LanguageProjectedNameModel project = new LanguageProjectedNameModel(true);
         propertyClient.language(project);
+    }
+
+    @Test
+    public void testClient() {
+
+        // method name be clientName
+        client.clientName();
+
+        // parameter name be clientName
+        client.parameter("true");
     }
 }
