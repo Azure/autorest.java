@@ -60,6 +60,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         if (result == null && !ObjectMapper.isPlainObject(compositeType)) {
             Set<ImplementationDetails.Usage> usages = SchemaUtil.mapSchemaContext(compositeType.getUsage());
             if (isPredefinedModel(modelType)) {
+                // TODO (weidxu): a more consistent handling of external model for all data-plane
                 if (settings.isDataPlaneClient()) {
                     usages = new HashSet<>(usages);
                     usages.add(ImplementationDetails.Usage.EXTERNAL);

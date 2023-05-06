@@ -136,6 +136,7 @@ public class ModuleInfo {
         return openModules;
     }
 
+    // TODO (weidxu): this method likely will get refactored when we support external model (hence external package)
     public void checkForAdditionalDependencies(List<ClientModel> models) {
         Set<String> externalPackageNames = models.stream()
                 .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null

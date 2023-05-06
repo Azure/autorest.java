@@ -44,16 +44,24 @@ public class ImplementationDetails {
 
         /**
          * Model used in paged response.
+         * <p>
+         * Codegen may choose to not generate class for it, or generate class in implementation package.
          */
         PAGED("paged"),
 
         /**
          * Anonymous model.
+         * <p>
+         * Codegen may choose to not generate class for it, or generate class in implementation package.
          */
         ANONYMOUS("anonymous"),
 
         /**
          * External model.
+         * <p>
+         * Codegen should not generate the class.
+         * Javadoc or test/sample generation will still need to process the model.
+         * Codegen likely need to have additional "require" clause in module-info.java, and additional dependency in pom.xml.
          */
         EXTERNAL("external");
 

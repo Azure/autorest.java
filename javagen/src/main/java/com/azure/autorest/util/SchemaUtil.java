@@ -228,15 +228,16 @@ public class SchemaUtil {
 
             if (!CoreUtils.isNullOrEmpty(namespace) && !CoreUtils.isNullOrEmpty(name)) {
                 if ("Azure.Core.Foundations".equals(namespace)) {
-                    // https://github.com/Azure/cadl-azure/blob/main/packages/cadl-azure-core/lib/operations.cadl
+                    // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/core/azure-core/src/main/java/com/azure/core/models/ResponseError.java
                     if ("Error".equals(name)) {
                         classType = ClassType.ResponseError;
                     } else if ("InnerError".equals(name)) {
                         // InnerError is not public, but usually it is only referenced from Error
                         classType = ClassType.ResponseInnerError;
                     }
-                    // ErrorResponse is not available
+                    // ErrorResponse is not available, but that should only be used in Exception
 
+                    // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/core/azure-core-experimental/src/main/java/com/azure/core/experimental/models/PollResult.java
                     if ("PollResult".equals(name)
                             && compositeType.getLanguage().getJava() != null
                             && compositeType.getLanguage().getJava().getNamespace() != null

@@ -1602,6 +1602,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     finalType,
                     pollingDetails.getPollIntervalInSeconds());
         }
+        // TODO (weidxu): we will eventually get rid of the logic on OperationLink, and only use LongRunningMetadata
         if (methodPollingDetails == null && operation.getOperationLinks() != null) {
             // Only Typespec  would have operationLinks
             // If operationLinks is provided, it will override JavaSettings.PollingDetails

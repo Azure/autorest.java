@@ -889,9 +889,13 @@ public class JavaSettings {
                 "    .setEndpoint({endpoint})",
                 "    .setContext({context}))");
 
+        private static final String DEFAULT_POLLING_CODE = String.format(DEFAULT_POLLING_STRATEGY_FORMAT, "DefaultPollingStrategy");
+
+        private static final String DEFAULT_SYNC_POLLING_CODE = String.format(DEFAULT_POLLING_STRATEGY_FORMAT, "SyncDefaultPollingStrategy");
+
         public String getStrategy() {
             if (strategy == null || "default".equalsIgnoreCase(strategy)) {
-                return String.format(DEFAULT_POLLING_STRATEGY_FORMAT, "DefaultPollingStrategy");
+                return DEFAULT_POLLING_CODE;
             } else {
                 return strategy;
             }
@@ -899,7 +903,7 @@ public class JavaSettings {
 
         public String getSyncStrategy() {
             if (syncStrategy == null || "default".equalsIgnoreCase(syncStrategy)) {
-                return String.format(DEFAULT_POLLING_STRATEGY_FORMAT, "SyncDefaultPollingStrategy");
+                return DEFAULT_SYNC_POLLING_CODE;
             } else {
                 return syncStrategy;
             }

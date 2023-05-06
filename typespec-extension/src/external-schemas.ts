@@ -1,5 +1,10 @@
 import { ArraySchema, ObjectSchema, Property, Schemas, StringSchema } from "@autorest/codemodel";
 
+/*
+ * These schema need to reflect
+ * 1. wire schema via "serializedName"
+ * 2. client schema in Java via "name"
+ */
 export function createResponseErrorSchema(schemas: Schemas, stringSchema: StringSchema): ObjectSchema {
   const responseErrorSchema = new ObjectSchema("Error", "Status details for long running operations", {
     language: {

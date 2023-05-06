@@ -633,6 +633,7 @@ export class CodeModelBuilder {
       return op.lroMetadata;
     }
 
+    // TODO (weidxu): we will eventually get rid of the logic on OperationLinkMetadata, and only use LroMetadata
     const operationLinks = getOperationLinks(this.program, operation);
     if (operationLinks) {
       op.operationLinks = {};
