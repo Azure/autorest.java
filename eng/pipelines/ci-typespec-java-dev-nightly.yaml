@@ -59,7 +59,7 @@ jobs:
           echo "Dependencies of typespec-java-tests"
           cd ../typespec-tests
           npm ls --all
-        displayName: 'Print package dependencies'
+        displayName: 'Print Package Dependencies'
         condition: succeededOrFailed()
 
       - script: |
