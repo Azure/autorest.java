@@ -1,5 +1,6 @@
 {
   "name": "typespec-java-tests",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "format": "npm run -s prettier -- --write",

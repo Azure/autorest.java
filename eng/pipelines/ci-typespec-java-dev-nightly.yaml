@@ -16,7 +16,6 @@ jobs:
     variables:
       JavaVersion: 1.8
       NodeVersion: '18.x'
-      isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
     pool:
       name: "azsdk-pool-mms-ubuntu-2004-general"
