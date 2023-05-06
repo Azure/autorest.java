@@ -3,6 +3,7 @@
 
 package com.azure.autorest.fluent.util;
 
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.policy.ExponentialBackoff;
 import com.azure.core.http.policy.ExponentialBackoffOptions;
 import com.azure.core.http.policy.FixedDelay;
@@ -95,12 +96,12 @@ public class RetryOptionsTests {
         retryAfterHeaderField.setAccessible(true);
         retryAfterTimeUnitField.setAccessible(true);
         retryStrategyField.setAccessible(true);
-        String retryAfterHeader = (String) retryAfterHeaderField.get(retryPolicy);
+        HttpHeaderName retryAfterHeader = (HttpHeaderName) retryAfterHeaderField.get(retryPolicy);
         ChronoUnit retryAfterTimeUnit = (ChronoUnit) retryAfterTimeUnitField.get(retryPolicy);
         if (retryAfterHeaderAsNull) {
             Assertions.assertNull(retryAfterHeader);
         } else {
-            Assertions.assertEquals("Retry-After", retryAfterHeader);
+            Assertions.assertEquals("retry-after", retryAfterHeader.getCaseInsensitiveName());
             Assertions.assertEquals(ChronoUnit.SECONDS, retryAfterTimeUnit);
         }
 
