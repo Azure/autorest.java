@@ -29,7 +29,7 @@ import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
 import { getVersion } from "@typespec/versioning";
 
-export const specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
+export const specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent", "x-ms-client-request-id"]);
 
 export const originApiVersion = "modelerfour:synthesized/api-version";
 

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.UUID;
 
 public class TraitsTests {
 
@@ -21,6 +20,6 @@ public class TraitsTests {
 
         client.smokeTest(1, "123",
                 "\"valid\"", "\"invalid\"",
-                unmodifiedSince, modifiedSince, UUID.randomUUID().toString());
+                unmodifiedSince, modifiedSince);
     }
 }
