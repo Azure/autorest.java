@@ -49,7 +49,6 @@ public final class TraitsAsyncClient {
      *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this string.</td></tr>
      *     <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was not modified after this time.</td></tr>
      *     <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was modified after this time.</td></tr>
-     *     <tr><td>x-ms-client-request-id</td><td>String</td><td>No</td><td>An opaque, globally-unique, client-generated string identifier for the request.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -88,7 +87,6 @@ public final class TraitsAsyncClient {
      * @param ifNoneMatch The request should only proceed if no entity matches this string.
      * @param ifUnmodifiedSince The request should only proceed if the entity was not modified after this time.
      * @param ifModifiedSince The request should only proceed if the entity was modified after this time.
-     * @param clientRequestId An opaque, globally-unique, client-generated string identifier for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -105,8 +103,7 @@ public final class TraitsAsyncClient {
             String ifMatch,
             String ifNoneMatch,
             OffsetDateTime ifUnmodifiedSince,
-            OffsetDateTime ifModifiedSince,
-            String clientRequestId) {
+            OffsetDateTime ifModifiedSince) {
         // Generated convenience method for smokeTestWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (ifMatch != null) {
@@ -120,9 +117,6 @@ public final class TraitsAsyncClient {
         }
         if (ifModifiedSince != null) {
             requestOptions.setHeader("If-Modified-Since", String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
-        }
-        if (clientRequestId != null) {
-            requestOptions.setHeader("x-ms-client-request-id", clientRequestId);
         }
         return smokeTestWithResponse(id, foo, requestOptions)
                 .flatMap(FluxUtil::toMono)

@@ -52,13 +52,13 @@ public class Project {
     public enum Dependency {
         // azure
         AZURE_CLIENT_SDK_PARENT("com.azure", "azure-client-sdk-parent", "1.7.0"),
-        AZURE_JSON("com.azure", "azure-json", "1.0.0"),
+        AZURE_JSON("com.azure", "azure-json", "1.0.1"),
         AZURE_XML("com.azure", "azure-xml", "1.0.0-beta.1"),
-        AZURE_CORE("com.azure", "azure-core", "1.38.0"),
-        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.0"),
-        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.2"),
-        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.16.2"),
-        AZURE_IDENTITY("com.azure", "azure-identity", "1.8.2"),
+        AZURE_CORE("com.azure", "azure-core", "1.39.0"),
+        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.1"),
+        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.3"),
+        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.17.0"),
+        AZURE_IDENTITY("com.azure", "azure-identity", "1.8.3"),
 
         // external
         JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.1"),

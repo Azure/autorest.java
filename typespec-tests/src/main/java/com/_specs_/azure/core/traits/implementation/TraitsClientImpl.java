@@ -173,7 +173,6 @@ public final class TraitsClientImpl {
      *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this string.</td></tr>
      *     <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was not modified after this time.</td></tr>
      *     <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was modified after this time.</td></tr>
-     *     <tr><td>x-ms-client-request-id</td><td>String</td><td>No</td><td>An opaque, globally-unique, client-generated string identifier for the request.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -218,7 +217,6 @@ public final class TraitsClientImpl {
      *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this string.</td></tr>
      *     <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was not modified after this time.</td></tr>
      *     <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was modified after this time.</td></tr>
-     *     <tr><td>x-ms-client-request-id</td><td>String</td><td>No</td><td>An opaque, globally-unique, client-generated string identifier for the request.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
