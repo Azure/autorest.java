@@ -20,7 +20,7 @@ public class TraitsTests {
         OffsetDateTime modifiedSince = OffsetDateTime.of(2021, 8, 26, 14, 38, 0, 0, ZoneOffset.UTC);
 
         client.smokeTest(1, "123",
-                "valid", "invalid",
+                "\"valid\"", "\"invalid\"",
                 unmodifiedSince, modifiedSince, UUID.randomUUID().toString());
     }
 }
