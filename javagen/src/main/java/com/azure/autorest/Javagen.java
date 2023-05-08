@@ -18,6 +18,7 @@ import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
+import com.azure.autorest.model.clientmodel.ConvenienceExample;
 import com.azure.autorest.model.clientmodel.EnumType;;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
@@ -32,6 +33,7 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
+import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
@@ -213,6 +215,9 @@ public class Javagen extends NewPlugin {
         if (settings.isDataPlaneClient() && settings.isGenerateSamples()) {
             for (ProtocolExample protocolExample : client.getProtocolExamples()) {
                 javaPackage.addProtocolExamples(protocolExample);
+            }
+            for (ConvenienceExample convenienceExample : client.getConvenienceExamples()) {
+                javaPackage.addConvenienceExamples(convenienceExample);
             }
         }
 

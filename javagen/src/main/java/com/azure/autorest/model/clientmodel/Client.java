@@ -188,6 +188,10 @@ public class Client {
         return unionModels;
     }
 
+    public List<ConvenienceExample> getConvenienceExamples() {
+        return convenienceExamples;
+    }
+
     public static class Builder {
         private String clientName;
         private String clientDescription;

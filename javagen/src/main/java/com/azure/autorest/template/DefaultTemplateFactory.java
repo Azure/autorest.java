@@ -128,4 +128,9 @@ public class DefaultTemplateFactory implements TemplateFactory {
     public UnionModelTemplate getUnionModelTemplate() {
         return UnionModelTemplate.getInstance();
     }
+
+    @Override
+    public ConvenienceSampleTemplate getConvenienceSampleTemplate() {
+        return ConvenienceSampleTemplate.getInstance();
+    }
 }

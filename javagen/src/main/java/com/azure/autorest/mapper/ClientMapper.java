@@ -39,6 +39,7 @@ import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
@@ -350,8 +351,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
                             if (!convenienceExampleNameSet.contains(filename)) {
                                 ConvenienceExample convenienceExample = new ConvenienceExample(clientMethod, convenienceMethod, c, clientBuilder, filename, example);
-                                convenienceExamples.add(convenienceExample);
-                                convenienceExampleNameSet.add(filename);
+                                if (Templates.getConvenienceSampleTemplate().isExampleIncluded(convenienceExample)) {
+                                    convenienceExamples.add(convenienceExample);
+                                    convenienceExampleNameSet.add(filename);
+                                }
                             }
                         });
                     });
