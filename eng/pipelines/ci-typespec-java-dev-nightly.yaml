@@ -43,7 +43,7 @@ jobs:
           npm install -g @typespec/compiler@next
           npm install pacote
           node typespec-tests/bump_deps.js typespec-extension/package.json typespec-tests/package.json
-        displayName: 'Bump TypeSpec Dependencies to @next'
+        displayName: 'Bump TypeSpec Dependencies to dev'
 
       - task: PowerShell@2
         displayName: 'Generate Code'
@@ -60,6 +60,10 @@ jobs:
           npm ls --all
         displayName: 'Print Package Dependencies'
         condition: succeededOrFailed()
+
+      - script: |
+          git checkout package.json typespec-extension/package.json typespec-tests/package.json
+        displayName: 'Revert package.json'
 
       - script: |
           git status

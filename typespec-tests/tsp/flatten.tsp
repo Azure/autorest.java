@@ -6,7 +6,6 @@ using TypeSpec.Versioning;
 
 @service({
   title: "Flatten",
-  version: "1.0.0",
 })
 @server(
   "{endpoint}/openai",

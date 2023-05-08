@@ -3,12 +3,14 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 @service({
   title: "Odata",
   version: "1.0.0",
 })
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Cadl.Odata;
 
 @resource("resources")

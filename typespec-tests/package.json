@@ -20,6 +20,7 @@
   },
   "overrides": {
     "@typespec/compiler": "~0.43.0",
+    "@typespec/http": "~0.43.0",
     "@typespec/rest": "~0.43.0",
     "@typespec/versioning": "~0.43.0",
     "@azure-tools/typespec-azure-core": "~0.29.0"
