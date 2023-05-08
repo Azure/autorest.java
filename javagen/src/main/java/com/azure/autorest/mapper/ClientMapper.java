@@ -29,6 +29,8 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
+import com.azure.autorest.model.clientmodel.ConvenienceExample;
+import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
@@ -327,13 +329,40 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             };
 
-            syncClients.stream().filter(c -> c.getServiceClient() != null)
+            // protocol examples
+            syncClients.stream().filter(c -> c.getServiceClient() != null && CoreUtils.isNullOrEmpty(c.getConvenienceMethods()))
                     .forEach(c -> c.getServiceClient().getClientMethods()
                             .forEach(m -> handleExample.accept(c, m)));
-            syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
+            syncClients.stream().filter(c -> c.getMethodGroupClient() != null && CoreUtils.isNullOrEmpty(c.getConvenienceMethods()))
                     .forEach(c -> c.getMethodGroupClient().getClientMethods()
                             .forEach(m -> handleExample.accept(c, m)));
             builder.protocolExamples(protocolExamples);
+
+            // convenience examples
+            List<ConvenienceExample> convenienceExamples = new ArrayList<>();
+            Set<String> convenienceExampleNameSet = new HashSet<>();
+
+            BiConsumer<AsyncSyncClient, ConvenienceMethod> handleConvenienceExample = (c, convenienceMethod) -> {
+                ClientBuilder clientBuilder = c.getClientBuilder();
+                if (clientBuilder != null && convenienceMethod.getProtocolMethod().getProxyMethod().getExamples() != null) {
+                    convenienceMethod.getConvenienceMethods().forEach((clientMethod) -> {
+                        clientMethod.getProxyMethod().getExamples().forEach((name, example) -> {
+                            String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
+                            if (!convenienceExampleNameSet.contains(filename)) {
+                                ConvenienceExample convenienceExample = new ConvenienceExample(clientMethod, convenienceMethod, c, clientBuilder, filename, example);
+                                convenienceExamples.add(convenienceExample);
+                                convenienceExampleNameSet.add(filename);
+                            }
+                        });
+                    });
+                }
+            };
+
+            // convenience examples
+            syncClients.stream().filter(c -> !CoreUtils.isNullOrEmpty(c.getConvenienceMethods()))
+                    .forEach(c -> c.getConvenienceMethods()
+                            .forEach(m -> handleConvenienceExample.accept(c, m)));
+            builder.convenienceExamples(convenienceExamples);
         }
 
         if (settings.isGenerateTests() && codeModel.getTestModel() != null) {
