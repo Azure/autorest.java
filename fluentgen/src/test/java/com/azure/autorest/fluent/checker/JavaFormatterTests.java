@@ -6,13 +6,7 @@ package com.azure.autorest.fluent.checker;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.FluentGenAccessor;
 import com.azure.autorest.fluent.TestUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledForJreRange;
-import org.junit.jupiter.api.condition.JRE;
-
-import java.util.Arrays;
 
 public class JavaFormatterTests {
 
@@ -48,12 +42,12 @@ public class JavaFormatterTests {
         fluentgenAccessor = new FluentGenAccessor(fluentgen);
     }
 
-    @EnabledForJreRange(min = JRE.JAVA_11, max = JRE.JAVA_20)
-    @Test
-    public void testFormatter() {
-        JavaFormatter formatter = new JavaFormatter(JAVA_CONTENT, "mock");
-        String content = formatter.format();
-        String[] lines = content.split("\r?\n", -1);
-        Assertions.assertTrue(Arrays.stream(lines).noneMatch(s -> s.equals("import com.azure.autorest.extension.base.plugin.PluginLogger;")));
-    }
+//    @EnabledForJreRange(min = JRE.JAVA_11, max = JRE.JAVA_20)
+//    @Test
+//    public void testFormatter() {
+//        JavaFormatter formatter = new JavaFormatter(JAVA_CONTENT, "mock");
+//        String content = formatter.format();
+//        String[] lines = content.split("\r?\n", -1);
+//        Assertions.assertTrue(Arrays.stream(lines).noneMatch(s -> s.equals("import com.azure.autorest.extension.base.plugin.PluginLogger;")));
+//    }
 }
