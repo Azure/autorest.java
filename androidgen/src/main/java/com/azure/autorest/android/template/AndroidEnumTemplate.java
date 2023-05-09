@@ -4,6 +4,7 @@
 package com.azure.autorest.android.template;
 
 import com.azure.autorest.model.javamodel.JavaContext;
+import com.azure.autorest.model.javamodel.JavaEnum;
 import com.azure.autorest.template.EnumTemplate;
 
 import java.util.Set;
@@ -29,7 +30,10 @@ public class AndroidEnumTemplate extends EnumTemplate {
     }
 
     @Override
-    protected void addGeneratedAnnotation(JavaContext classBlock) {
+    protected void addGeneratedAnnotationForExpandableStringEnum(JavaContext context) {
     }
 
+    @Override
+    protected void addGeneratedAnnotationForEnum(JavaEnum context) {
+    }
 }

@@ -965,7 +965,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            classBlock.annotation("Generated");
+            classBlock.annotation(Generated.class.getSimpleName());
         }
     }
 

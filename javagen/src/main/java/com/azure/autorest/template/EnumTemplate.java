@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaContext;
+import com.azure.autorest.model.javamodel.JavaEnum;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.util.CodeNamer;
@@ -64,7 +65,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 classBlock.javadocComment(CoreUtils.isNullOrEmpty(enumValue.getDescription())
                     ? "Static value " + value + " for " + enumName + "."
                     : enumValue.getDescription());
-                addGeneratedAnnotation(classBlock);
+                addGeneratedAnnotationForExpandableStringEnum(classBlock);
                 classBlock.publicStaticFinalVariable(String.format("%1$s %2$s = from%3$s(%4$s)", enumName,
                     enumValue.getName(), pascalTypeName, elementType.defaultValueExpression(value)));
             }
@@ -74,7 +75,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 comment.description("Creates a new instance of " + enumName + " value.");
                 comment.deprecated(String.format("Use the {@link #from%1$s(%2$s)} factory method.", pascalTypeName, typeName));
             });
-            addGeneratedAnnotation(classBlock);
+            addGeneratedAnnotationForExpandableStringEnum(classBlock);
             classBlock.annotation("Deprecated");
             classBlock.publicConstructor(enumName + "()", ctor -> {
             });
@@ -86,7 +87,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 comment.methodReturns("the corresponding " + enumName);
             });
 
-            addGeneratedAnnotation(classBlock);
+            addGeneratedAnnotationForExpandableStringEnum(classBlock);
             if (!settings.isStreamStyleSerialization()) {
                 classBlock.annotation("JsonCreator");
             }
@@ -102,7 +103,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 comment.description("Gets known " + enumName + " values.");
                 comment.methodReturns("known " + enumName + " values");
             });
-            addGeneratedAnnotation(classBlock);
+            addGeneratedAnnotationForExpandableStringEnum(classBlock);
             classBlock.publicStaticMethod("Collection<" + enumName + "> values()",
                 function -> function.methodReturn("values(" + enumName + ".class)"));
         });
@@ -114,6 +115,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             imports.add("com.fasterxml.jackson.annotation.JsonCreator");
             imports.add("com.fasterxml.jackson.annotation.JsonValue");
         }
+        addGeneratedImport(imports);
         IType elementType = enumType.getElementType();
         elementType.getClientType().addImportsTo(imports, false);
 
@@ -121,6 +123,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         javaFile.javadocComment(comment -> comment.description(enumType.getDescription()));
         javaFile.publicEnum(enumType.getName(), enumBlock -> {
             for (ClientEnumValue value : enumType.getValues()) {
+                addGeneratedAnnotationForEnum(enumBlock);
                 enumBlock.value(value.getName(), value.getValue(), value.getDescription(), elementType);
             }
 
@@ -131,8 +134,10 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             String converterName = enumType.getFromJsonMethodName();
 
             enumBlock.javadocComment("The actual serialized value for a " + enumName + " instance.");
+            addGeneratedAnnotationForEnum(enumBlock);
             enumBlock.privateFinalMemberVariable(typeName, "value");
 
+            addGeneratedAnnotationForEnum(enumBlock);
             enumBlock.constructor(enumName + "(" +typeName + " value)", constructor -> constructor.line("this.value = value;"));
 
             enumBlock.javadocComment((comment) -> {
@@ -145,6 +150,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 enumBlock.annotation("JsonCreator");
             }
 
+            addGeneratedAnnotationForEnum(enumBlock);
             enumBlock.publicStaticMethod(String.format("%1$s %2$s(%3$s value)", enumName, converterName, typeName), function -> {
                 if (elementType.isNullable()) {
                     function.ifBlock("value == null", ifAction -> ifAction.methodReturn("null"));
@@ -171,6 +177,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     enumBlock.annotation("JsonValue");
                 }
             }
+            addGeneratedAnnotationForEnum(enumBlock);
             enumBlock.publicMethod(typeName + " " + enumType.getToJsonMethodName() + "()",
                 function -> function.methodReturn("this.value"));
         });
@@ -209,9 +216,16 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         }
     }
 
-    protected void addGeneratedAnnotation(JavaContext classBlock) {
+    protected void addGeneratedAnnotationForExpandableStringEnum(JavaContext classBlock) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            classBlock.annotation("Generated");
+            classBlock.annotation(Generated.class.getSimpleName());
         }
     }
+
+    protected void addGeneratedAnnotationForEnum(JavaEnum enumBlock) {
+        if (JavaSettings.getInstance().isDataPlaneClient()) {
+            enumBlock.annotation(Generated.class.getSimpleName());
+        }
+    }
+
 }
