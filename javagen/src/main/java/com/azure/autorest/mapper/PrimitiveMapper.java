@@ -95,15 +95,16 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
             case URI: return isLowLevelClient || urlAsString ? ClassType.String : ClassType.URL;
             case DURATION:
                 DurationSchema durationSchema = (DurationSchema) primaryType;
-                switch (durationSchema.getFormat()) {
-                    case SECONDS_INTEGER:
-                        return PrimitiveType.DurationLong;
-                    case SECONDS_NUMBER:
-                        return PrimitiveType.DurationDouble;
-                    case DURATION:
-                    default:
-                        return ClassType.Duration;
+                IType durationType = ClassType.Duration;
+                if (durationSchema.getFormat() != null) {
+                    switch (durationSchema.getFormat()) {
+                        case SECONDS_INTEGER:
+                            return PrimitiveType.DurationLong;
+                        case SECONDS_NUMBER:
+                            return PrimitiveType.DurationDouble;
+                    }
                 }
+                return durationType;
             case UNIXTIME: return isLowLevelClient ? PrimitiveType.Long : PrimitiveType.UnixTimeLong;
             case UUID: return isLowLevelClient ? ClassType.String : ClassType.UUID;
             case OBJECT: return ClassType.Object;
