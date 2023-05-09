@@ -4,21 +4,25 @@
 
 package fixtures.lro;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of AutoRestLongRunningOperationTestServiceClient. */
 public enum AutoRestLongRunningOperationTestServiceVersion implements ServiceVersion {
+    @Generated
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     AutoRestLongRunningOperationTestServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -28,6 +32,7 @@ public enum AutoRestLongRunningOperationTestServiceVersion implements ServiceVer
      *
      * @return The latest {@link AutoRestLongRunningOperationTestServiceVersion}.
      */
+    @Generated
     public static AutoRestLongRunningOperationTestServiceVersion getLatest() {
         return V1_0_0;
     }

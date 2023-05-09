@@ -4,21 +4,25 @@
 
 package fixtures.headexceptions;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of AutoRestHeadExceptionTestServiceClient. */
 public enum AutoRestHeadExceptionTestServiceVersion implements ServiceVersion {
+    @Generated
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     AutoRestHeadExceptionTestServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -28,6 +32,7 @@ public enum AutoRestHeadExceptionTestServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link AutoRestHeadExceptionTestServiceVersion}.
      */
+    @Generated
     public static AutoRestHeadExceptionTestServiceVersion getLatest() {
         return V1_0_0;
     }

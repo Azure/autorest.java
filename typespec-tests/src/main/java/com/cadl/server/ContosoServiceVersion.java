@@ -4,21 +4,25 @@
 
 package com.cadl.server;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of ContosoClient. */
 public enum ContosoServiceVersion implements ServiceVersion {
+    @Generated
     /** Enum value v1. */
     V1("v1");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     ContosoServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -28,6 +32,7 @@ public enum ContosoServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link ContosoServiceVersion}.
      */
+    @Generated
     public static ContosoServiceVersion getLatest() {
         return V1;
     }

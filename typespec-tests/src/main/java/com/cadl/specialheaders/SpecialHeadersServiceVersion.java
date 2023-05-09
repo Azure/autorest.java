@@ -4,21 +4,25 @@
 
 package com.cadl.specialheaders;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of SpecialHeadersClient. */
 public enum SpecialHeadersServiceVersion implements ServiceVersion {
+    @Generated
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     SpecialHeadersServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -28,6 +32,7 @@ public enum SpecialHeadersServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link SpecialHeadersServiceVersion}.
      */
+    @Generated
     public static SpecialHeadersServiceVersion getLatest() {
         return V1_0_0;
     }
