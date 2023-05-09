@@ -55,5 +55,5 @@ public interface TemplateFactory {
 
     UnionModelTemplate getUnionModelTemplate();
 
-    ConvenienceSampleTemplate getConvenienceSampleTemplate();
+    ClientMethodSampleTemplate getClientMethodSampleTemplate();
 }

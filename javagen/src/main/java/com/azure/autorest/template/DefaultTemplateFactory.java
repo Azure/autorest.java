@@ -130,7 +130,7 @@ public class DefaultTemplateFactory implements TemplateFactory {
     }
 
     @Override
-    public ConvenienceSampleTemplate getConvenienceSampleTemplate() {
-        return ConvenienceSampleTemplate.getInstance();
+    public ClientMethodSampleTemplate getClientMethodSampleTemplate() {
+        return ClientMethodSampleTemplate.getInstance();
     }
 }

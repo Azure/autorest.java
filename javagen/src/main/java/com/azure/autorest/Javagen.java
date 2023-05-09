@@ -18,8 +18,8 @@ import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.ConvenienceExample;
-import com.azure.autorest.model.clientmodel.EnumType;;
+import com.azure.autorest.model.clientmodel.ClientMethodExample;
+import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.Pom;
@@ -33,7 +33,6 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
-import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
@@ -55,6 +54,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
+
+;
 
 public class Javagen extends NewPlugin {
     private final Logger logger = new PluginLogger(this, Javagen.class);
@@ -216,8 +217,8 @@ public class Javagen extends NewPlugin {
             for (ProtocolExample protocolExample : client.getProtocolExamples()) {
                 javaPackage.addProtocolExamples(protocolExample);
             }
-            for (ConvenienceExample convenienceExample : client.getConvenienceExamples()) {
-                javaPackage.addConvenienceExamples(convenienceExample);
+            for (ClientMethodExample clientMethodExample : client.getConvenienceExamples()) {
+                javaPackage.addConvenienceExamples(clientMethodExample);
             }
         }
 

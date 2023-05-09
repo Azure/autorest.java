@@ -62,7 +62,7 @@ public class Client {
     private final List<ProtocolExample> protocolExamples;
     private final List<LiveTests> liveTests;
     private final List<UnionModel> unionModels;
-    private final List<ConvenienceExample> convenienceExamples;
+    private final List<ClientMethodExample> clientMethodExamples;
 
     /**
      * Create a new Client with the provided values.
@@ -88,7 +88,7 @@ public class Client {
                    ServiceClient serviceClient, List<ServiceClient> serviceClients, ModuleInfo moduleInfo,
                    List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
                    List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
-                   List<LiveTests> liveTests, List<UnionModel> unionModels, List<ConvenienceExample> convenienceExamples
+                   List<LiveTests> liveTests, List<UnionModel> unionModels, List<ClientMethodExample> clientMethodExamples
     ) {
         this.clientName = clientName;
         this.clientDescription = clientDescription;
@@ -108,7 +108,7 @@ public class Client {
         this.protocolExamples = protocolExamples;
         this.liveTests = liveTests;
         this.unionModels = unionModels;
-        this.convenienceExamples = convenienceExamples;
+        this.clientMethodExamples = clientMethodExamples;
     }
 
     public final String getClientName() {
@@ -188,8 +188,8 @@ public class Client {
         return unionModels;
     }
 
-    public List<ConvenienceExample> getConvenienceExamples() {
-        return convenienceExamples;
+    public List<ClientMethodExample> getConvenienceExamples() {
+        return clientMethodExamples;
     }
 
     public static class Builder {
@@ -211,7 +211,7 @@ public class Client {
         private List<ProtocolExample> protocolExamples = Collections.emptyList();
         private List<LiveTests> liveTests = Collections.emptyList();
         private List<UnionModel> unionModels = Collections.emptyList();
-        private List<ConvenienceExample> convenienceExamples = Collections.emptyList();
+        private List<ClientMethodExample> clientMethodExamples = Collections.emptyList();
 
         /**
          * Sets the name of this service client.
@@ -375,11 +375,11 @@ public class Client {
 
         /**
          * Sets the convenience examples for this client.
-         * @param convenienceExamples the examples for DPG convenience layer
+         * @param clientMethodExamples the examples for DPG convenience layer
          * @return the Builder itself
          */
-        public Builder convenienceExamples(List<ConvenienceExample> convenienceExamples) {
-            this.convenienceExamples = convenienceExamples;
+        public Builder convenienceExamples(List<ClientMethodExample> clientMethodExamples) {
+            this.clientMethodExamples = clientMethodExamples;
             return this;
         }
 
@@ -415,7 +415,7 @@ public class Client {
                     protocolExamples,
                     liveTests,
                     unionModels,
-                    convenienceExamples
+                    clientMethodExamples
                 );
         }
     }

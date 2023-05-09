@@ -114,7 +114,7 @@ public class Templates {
         return factory.getUnionModelTemplate();
     }
 
-    public static ConvenienceSampleTemplate getConvenienceSampleTemplate() {
-        return factory.getConvenienceSampleTemplate();
+    public static ClientMethodSampleTemplate getClientMethodSampleTemplate() {
+        return factory.getClientMethodSampleTemplate();
     }
 }

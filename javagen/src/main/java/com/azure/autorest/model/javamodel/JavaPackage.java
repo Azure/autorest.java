@@ -11,7 +11,7 @@ import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.ConvenienceExample;
+import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
@@ -27,7 +27,6 @@ import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.ChangelogTemplate;
-import com.azure.autorest.template.ConvenienceSyncMethodTemplate;
 import com.azure.autorest.template.ModelTestTemplate;
 import com.azure.autorest.template.ProtocolSampleBlankTemplate;
 import com.azure.autorest.template.ProtocolTestBaseTemplate;
@@ -223,9 +222,9 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public void addConvenienceExamples(ConvenienceExample convenienceExample) {
-        JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage("generated"), convenienceExample.getFilename());
-        Templates.getConvenienceSampleTemplate().write(convenienceExample, javaFile);
+    public void addConvenienceExamples(ClientMethodExample clientMethodExample) {
+        JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage("generated"), clientMethodExample.getFilename());
+        Templates.getClientMethodSampleTemplate().write(clientMethodExample, javaFile);
         this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
     }

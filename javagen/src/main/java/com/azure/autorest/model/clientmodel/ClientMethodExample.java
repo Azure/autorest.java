@@ -3,10 +3,8 @@
 
 package com.azure.autorest.model.clientmodel;
 
-public class ConvenienceExample {
+public class ClientMethodExample {
     private final ClientMethod clientMethod;
-
-    private final ConvenienceMethod convenienceMethod;
 
     private final AsyncSyncClient syncClient;
 
@@ -16,15 +14,13 @@ public class ConvenienceExample {
 
     private final ProxyMethodExample proxyMethodExample;
 
-    public ConvenienceExample(
+    public ClientMethodExample(
             ClientMethod clientMethod,
-            ConvenienceMethod convenienceMethod,
             AsyncSyncClient syncClient,
             ClientBuilder clientBuilder,
             String filename,
             ProxyMethodExample proxyMethodExample) {
         this.clientMethod = clientMethod;
-        this.convenienceMethod = convenienceMethod;
         this.syncClient = syncClient;
         this.clientBuilder = clientBuilder;
         this.filename = filename;
@@ -49,9 +45,5 @@ public class ConvenienceExample {
 
     public ProxyMethodExample getProxyMethodExample() {
         return proxyMethodExample;
-    }
-
-    public ConvenienceMethod getConvenienceMethod() {
-        return convenienceMethod;
     }
 }
