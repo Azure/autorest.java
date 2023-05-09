@@ -5,6 +5,7 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ByteArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.DateTimeSchema;
+import com.azure.autorest.extension.base.model.codemodel.DurationSchema;
 import com.azure.autorest.extension.base.model.codemodel.NumberSchema;
 import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -92,7 +93,17 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
             case STRING: return ClassType.String;
             case ARM_ID: return ClassType.String;
             case URI: return isLowLevelClient || urlAsString ? ClassType.String : ClassType.URL;
-            case DURATION: return ClassType.Duration;
+            case DURATION:
+                DurationSchema durationSchema = (DurationSchema) primaryType;
+                switch (durationSchema.getFormat()) {
+                    case SECONDS_INTEGER:
+                        return PrimitiveType.DurationLong;
+                    case SECONDS_NUMBER:
+                        return PrimitiveType.DurationDouble;
+                    case DURATION:
+                    default:
+                        return ClassType.Duration;
+                }
             case UNIXTIME: return isLowLevelClient ? PrimitiveType.Long : PrimitiveType.UnixTimeLong;
             case UUID: return isLowLevelClient ? ClassType.String : ClassType.UUID;
             case OBJECT: return ClassType.Object;

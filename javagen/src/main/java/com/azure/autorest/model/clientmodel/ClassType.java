@@ -192,6 +192,24 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
         .build();
 
+    public static final ClassType DurationLong = new ClassType.Builder(false)
+        .knownClass(java.lang.Long.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.ofSeconds(%s)", defaultValueExpression + 'L'))
+        .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
+        .serializationMethodBase("writeNumber")
+        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
+        .build();
+
+    public static final ClassType DurationDouble = new ClassType.Builder(false)
+        .knownClass(java.lang.Double.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D'))
+        .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
+        .serializationMethodBase("writeNumber")
+        .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)")
+        .build();
+
     public static final ClassType HttpPipeline = new ClassType.Builder(false)
         .knownClass(com.azure.core.http.HttpPipeline.class)
         .build();
@@ -500,6 +518,10 @@ public class ClassType implements IType {
             clientType = ClassType.DateTime;
         } else if (this == ClassType.Base64Url) {
             clientType = ArrayType.ByteArray;
+        } else if (this == ClassType.DurationLong) {
+            clientType = ClassType.Duration;
+        } else if (this == ClassType.DurationDouble) {
+            clientType = ClassType.Duration;
         }
         return clientType;
     }
@@ -512,6 +534,10 @@ public class ClassType implements IType {
             expression = java.lang.String.format("%s.decodedBytes()", expression);
         } else if (this == ClassType.URL) {
             expression = java.lang.String.format("new URL(%s)", expression);
+        } else if (this == ClassType.DurationLong) {
+            expression = java.lang.String.format("Duration.ofSeconds(%s)", expression);
+        } else if (this == ClassType.DurationDouble) {
+            expression = java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", expression);
         }
 
         return expression;
@@ -525,6 +551,10 @@ public class ClassType implements IType {
             expression = java.lang.String.format("Base64Url.encode(%s)", expression);
         } else if (this == ClassType.URL) {
             expression = java.lang.String.format("%s.toString()", expression);
+        } else if (this == ClassType.DurationLong) {
+            expression = java.lang.String.format("%s.toSeconds()", expression);
+        } else if (this == ClassType.DurationDouble) {
+            expression = java.lang.String.format("(double) %s.toNanos() / 1000_000_000L", expression);
         }
 
         return expression;
