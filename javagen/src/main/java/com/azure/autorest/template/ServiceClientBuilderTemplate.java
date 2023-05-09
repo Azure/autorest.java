@@ -585,7 +585,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
-        classBlock.annotation("Generated");
+        classBlock.annotation(Generated.class.getSimpleName());
     }
 
     protected void addOverrideAnnotation(JavaContext classBlock) {

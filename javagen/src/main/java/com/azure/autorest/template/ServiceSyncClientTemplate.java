@@ -169,7 +169,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
   }
 
   protected void addGeneratedAnnotation(JavaContext classBlock) {
-    classBlock.annotation("Generated");
+    classBlock.annotation(Generated.class.getSimpleName());
   }
 
   private void writeConvenienceMethods(List<ConvenienceMethod> convenienceMethods, JavaClass classBlock) {

@@ -117,6 +117,6 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
-        typeBlock.annotation("Generated");
+        typeBlock.annotation(Generated.class.getSimpleName());
     }
 }

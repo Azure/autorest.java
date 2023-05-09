@@ -245,7 +245,7 @@ abstract class ConvenienceMethodTemplateBase {
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
-        typeBlock.annotation("Generated");
+        typeBlock.annotation(Generated.class.getSimpleName());
     }
 
     /**

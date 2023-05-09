@@ -91,7 +91,7 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceVersion, Jav
 
     private void addGeneratedAnnotation(JavaEnum classBlock) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            classBlock.annotation("Generated");
+            classBlock.annotation(Generated.class.getSimpleName());
         }
     }
 }
