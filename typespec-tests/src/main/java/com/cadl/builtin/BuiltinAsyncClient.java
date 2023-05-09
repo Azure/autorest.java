@@ -97,6 +97,11 @@ public final class BuiltinAsyncClient {
      *     nullableFloatDict (Required): {
      *         String: double (Required)
      *     }
+     *     encoded (Required): {
+     *         timeInSeconds: Duration (Required)
+     *         timeInSecondsFraction: Duration (Required)
+     *         timeInSecondsOptional: Duration (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -153,6 +158,11 @@ public final class BuiltinAsyncClient {
      *     url: String (Required)
      *     nullableFloatDict (Required): {
      *         String: double (Required)
+     *     }
+     *     encoded (Required): {
+     *         timeInSeconds: Duration (Required)
+     *         timeInSecondsFraction: Duration (Required)
+     *         timeInSecondsOptional: Duration (Optional)
      *     }
      * }
      * }</pre>

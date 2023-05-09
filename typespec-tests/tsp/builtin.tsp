@@ -27,6 +27,7 @@ model Builtin {
   bytesDict: Record<bytes>;
   url: url;
   nullableFloatDict: Record<float64 | null>;
+  encoded: Encoded;
 }
 
 model FormatString {
@@ -49,6 +50,19 @@ model FormatString {
   @knownValues(KnownValues)
   extensibleEnum: string;
   extensibleEnumScalar: KnownValuesScalar;
+}
+
+@encode(DurationKnownEncoding.seconds, float32)
+scalar myDuration extends duration;
+
+model Encoded {
+  @encode(DurationKnownEncoding.seconds, int32)
+  timeInSeconds: duration;
+
+  timeInSecondsFraction: myDuration;
+
+  @encode(DurationKnownEncoding.seconds, int32)
+  timeInSecondsOptional?: duration;
 }
 
 @summary("summary of RFC1123 date-time")

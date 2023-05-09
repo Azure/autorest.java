@@ -95,6 +95,11 @@ public final class BuiltinClient {
      *     nullableFloatDict (Required): {
      *         String: double (Required)
      *     }
+     *     encoded (Required): {
+     *         timeInSeconds: Duration (Required)
+     *         timeInSecondsFraction: Duration (Required)
+     *         timeInSecondsOptional: Duration (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -151,6 +156,11 @@ public final class BuiltinClient {
      *     url: String (Required)
      *     nullableFloatDict (Required): {
      *         String: double (Required)
+     *     }
+     *     encoded (Required): {
+     *         timeInSeconds: Duration (Required)
+     *         timeInSecondsFraction: Duration (Required)
+     *         timeInSecondsOptional: Duration (Optional)
      *     }
      * }
      * }</pre>
