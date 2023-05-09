@@ -355,7 +355,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         syncClients.stream().filter(c -> !CoreUtils.isNullOrEmpty(c.getConvenienceMethods()))
                 .forEach(c -> c.getConvenienceMethods()
                         .forEach(m -> handleConvenienceExample.accept(c, m)));
-        builder.convenienceExamples(convenienceExamples);
+        builder.clientMethodExamples(convenienceExamples);
     }
 
     private void addProtocolExamples(Client.Builder builder, List<AsyncSyncClient> syncClients) {

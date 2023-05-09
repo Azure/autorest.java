@@ -188,7 +188,8 @@ public class Client {
         return unionModels;
     }
 
-    public List<ClientMethodExample> getConvenienceExamples() {
+    /** @return the examples for vanilla client methods */
+    public List<ClientMethodExample> getClientMethodExamples() {
         return clientMethodExamples;
     }
 
@@ -374,11 +375,11 @@ public class Client {
         }
 
         /**
-         * Sets the convenience examples for this client.
-         * @param clientMethodExamples the examples for DPG convenience layer
+         * Sets the client method examples for this client.
+         * @param clientMethodExamples the examples for vanilla client methods
          * @return the Builder itself
          */
-        public Builder convenienceExamples(List<ClientMethodExample> clientMethodExamples) {
+        public Builder clientMethodExamples(List<ClientMethodExample> clientMethodExamples) {
             this.clientMethodExamples = clientMethodExamples;
             return this;
         }

@@ -222,7 +222,7 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public void addConvenienceExamples(ClientMethodExample clientMethodExample) {
+    public void addClientMethodExamples(ClientMethodExample clientMethodExample) {
         JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage("generated"), clientMethodExample.getFilename());
         Templates.getClientMethodSampleTemplate().write(clientMethodExample, javaFile);
         this.checkDuplicateFile(javaFile.getFilePath());

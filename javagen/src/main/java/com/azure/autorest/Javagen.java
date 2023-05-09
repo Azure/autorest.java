@@ -217,8 +217,8 @@ public class Javagen extends NewPlugin {
             for (ProtocolExample protocolExample : client.getProtocolExamples()) {
                 javaPackage.addProtocolExamples(protocolExample);
             }
-            for (ClientMethodExample clientMethodExample : client.getConvenienceExamples()) {
-                javaPackage.addConvenienceExamples(clientMethodExample);
+            for (ClientMethodExample clientMethodExample : client.getClientMethodExamples()) {
+                javaPackage.addClientMethodExamples(clientMethodExample);
             }
         }
 
