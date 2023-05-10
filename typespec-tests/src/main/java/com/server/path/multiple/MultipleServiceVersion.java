@@ -9,7 +9,6 @@ import com.azure.core.util.ServiceVersion;
 
 /** Service version of MultipleClient. */
 public enum MultipleServiceVersion implements ServiceVersion {
-    @Generated
     /** Enum value v1.0. */
     V1_0("v1.0");
 

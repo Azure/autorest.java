@@ -9,7 +9,6 @@ import com.azure.core.util.ServiceVersion;
 
 /** Service version of BasicClient. */
 public enum BasicServiceVersion implements ServiceVersion {
-    @Generated
     /** Enum value 2022-12-01-preview. */
     V2022_12_01_PREVIEW("2022-12-01-preview");
 

@@ -9,7 +9,6 @@ import com.azure.core.util.ServiceVersion;
 
 /** Service version of FormRecognizerClient. */
 public enum FormRecognizerServiceVersion implements ServiceVersion {
-    @Generated
     /** Enum value 2022-08-31. */
     V2022_08_31("2022-08-31");
 
