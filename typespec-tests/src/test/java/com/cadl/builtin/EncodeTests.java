@@ -35,4 +35,16 @@ public class EncodeTests {
         Assertions.assertEquals(5, timeInSecondsInJson);
         Assertions.assertEquals(1.5, timeInSecondsFractionInJson);
     }
+
+    @Test
+    public void testEncodedDurationInvalidPrecision() {
+        Duration timeInSeconds = Duration.ofMillis(5700);
+        Duration timeInSecondsFraction = Duration.ofDays(1);
+
+        Encoded encoded = new Encoded(timeInSeconds, timeInSecondsFraction);
+
+        // since the wire type is long (in seconds), 5.7 seconds will be 5 seconds
+        Assertions.assertEquals(5, encoded.getTimeInSeconds().getSeconds());
+        Assertions.assertEquals(86400, encoded.getTimeInSecondsFraction().getSeconds());
+    }
 }
