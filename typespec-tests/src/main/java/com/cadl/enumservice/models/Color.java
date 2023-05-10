@@ -8,33 +8,19 @@ import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * Defines values for Color.
- */
+/** Defines values for Color. */
 public enum Color {
-    @Generated
-    /**
-     * Enum value Red.
-     */
-    RED("Red");
+    /** Enum value Red. */
+    RED("Red"),
 
-    @Generated
-    /**
-     * Enum value Blue.
-     */
-    BLUE("Blue");
+    /** Enum value Blue. */
+    BLUE("Blue"),
 
-    @Generated
-    /**
-     * Enum value Green.
-     */
+    /** Enum value Green. */
     GREEN("Green");
 
-    /**
-     * The actual serialized value for a Color instance.
-     */
-    @Generated
-    private final String value;
+    /** The actual serialized value for a Color instance. */
+    @Generated private final String value;
 
     @Generated
     Color(String value) {
@@ -43,7 +29,7 @@ public enum Color {
 
     /**
      * Parses a serialized value to a Color instance.
-     * 
+     *
      * @param value the serialized value to parse.
      * @return the parsed Color object, or null if unable to parse.
      */
@@ -62,9 +48,7 @@ public enum Color {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     @Generated

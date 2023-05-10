@@ -8,57 +8,31 @@ import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * Defines values for DaysOfWeekEnum.
- */
+/** Defines values for DaysOfWeekEnum. */
 public enum DaysOfWeekEnum {
-    @Generated
-    /**
-     * Enum value Monday.
-     */
-    MONDAY("Monday");
+    /** Enum value Monday. */
+    MONDAY("Monday"),
 
-    @Generated
-    /**
-     * Enum value Tuesday.
-     */
-    TUESDAY("Tuesday");
+    /** Enum value Tuesday. */
+    TUESDAY("Tuesday"),
 
-    @Generated
-    /**
-     * Enum value Wednesday.
-     */
-    WEDNESDAY("Wednesday");
+    /** Enum value Wednesday. */
+    WEDNESDAY("Wednesday"),
 
-    @Generated
-    /**
-     * Enum value Thursday.
-     */
-    THURSDAY("Thursday");
+    /** Enum value Thursday. */
+    THURSDAY("Thursday"),
 
-    @Generated
-    /**
-     * Enum value Friday.
-     */
-    FRIDAY("Friday");
+    /** Enum value Friday. */
+    FRIDAY("Friday"),
 
-    @Generated
-    /**
-     * Enum value Saturday.
-     */
-    SATURDAY("Saturday");
+    /** Enum value Saturday. */
+    SATURDAY("Saturday"),
 
-    @Generated
-    /**
-     * Enum value Sunday.
-     */
+    /** Enum value Sunday. */
     SUNDAY("Sunday");
 
-    /**
-     * The actual serialized value for a DaysOfWeekEnum instance.
-     */
-    @Generated
-    private final String value;
+    /** The actual serialized value for a DaysOfWeekEnum instance. */
+    @Generated private final String value;
 
     @Generated
     DaysOfWeekEnum(String value) {
@@ -67,7 +41,7 @@ public enum DaysOfWeekEnum {
 
     /**
      * Parses a serialized value to a DaysOfWeekEnum instance.
-     * 
+     *
      * @param value the serialized value to parse.
      * @return the parsed DaysOfWeekEnum object, or null if unable to parse.
      */
@@ -86,9 +60,7 @@ public enum DaysOfWeekEnum {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     @Generated
