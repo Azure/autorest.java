@@ -26,9 +26,11 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientBuilderTrait;
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
+import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
@@ -37,6 +39,7 @@ import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
@@ -304,36 +307,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         // example/test
         if (settings.isDataPlaneClient() && (settings.isGenerateSamples() || settings.isGenerateTests())) {
-            List<ProtocolExample> protocolExamples = new ArrayList<>();
-            Set<String> protocolExampleNameSet = new HashSet<>();
-
-            BiConsumer<AsyncSyncClient, ClientMethod> handleExample = (c, m) -> {
-                if (m.getMethodVisibility() == JavaVisibility.Public
-                        && !m.isImplementationOnly() &&
-                        (m.getType() == ClientMethodType.SimpleSyncRestResponse
-                        || m.getType() == ClientMethodType.PagingSync
-                        || m.getType() == ClientMethodType.LongRunningBeginSync)) {
-                    ClientBuilder clientBuilder = c.getClientBuilder();
-                    if (clientBuilder != null && m.getProxyMethod().getExamples() != null) {
-                        m.getProxyMethod().getExamples().forEach((name, example) -> {
-                            String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
-                            if (!protocolExampleNameSet.contains(filename)) {
-                                ProtocolExample protocolExample = new ProtocolExample(m, c, clientBuilder, filename, example);
-                                protocolExamples.add(protocolExample);
-                                protocolExampleNameSet.add(filename);
-                            }
-                        });
-                    }
-                }
-            };
-
-            syncClients.stream().filter(c -> c.getServiceClient() != null)
-                    .forEach(c -> c.getServiceClient().getClientMethods()
-                            .forEach(m -> handleExample.accept(c, m)));
-            syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
-                    .forEach(c -> c.getMethodGroupClient().getClientMethods()
-                            .forEach(m -> handleExample.accept(c, m)));
-            builder.protocolExamples(protocolExamples);
+            addProtocolExamples(builder, syncClients);
+            addConvenienceExamples(builder, syncClients);
         }
 
         if (settings.isGenerateTests() && codeModel.getTestModel() != null) {
@@ -341,6 +316,102 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
 
         return builder.build();
+    }
+
+    private void addConvenienceExamples(Client.Builder builder, List<AsyncSyncClient> syncClients) {
+        // convenience examples
+        List<ClientMethodExample> convenienceExamples = new ArrayList<>();
+        Set<String> convenienceExampleNameSet = new HashSet<>();
+
+        BiConsumer<AsyncSyncClient, ConvenienceMethod> handleConvenienceExample = (c, convenienceMethod) -> {
+            ClientBuilder clientBuilder = c.getClientBuilder();
+            if (clientBuilder != null && convenienceMethod.getProtocolMethod().getProxyMethod().getExamples() != null) {
+                // only generate sample for convenience methods with max overload parameters
+                convenienceMethod.getConvenienceMethods().stream().max((o1, o2) -> {
+                    int o1ParameterCount = o1.getOnlyRequiredParameters()
+                            ? o1.getMethodRequiredParameters().size()
+                            : o1.getMethodParameters().size();
+                    int o2ParameterCount = o2.getOnlyRequiredParameters()
+                            ? o2.getMethodRequiredParameters().size()
+                            : o2.getMethodParameters().size();
+                    return o1ParameterCount - o2ParameterCount;
+                }).ifPresent(clientMethod ->
+                        clientMethod.getProxyMethod().getExamples().forEach((name, example) -> {
+                            String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
+                            if (!convenienceExampleNameSet.contains(filename)) {
+                                if (Templates.getClientMethodSampleTemplate()
+                                        .isExampleIncluded(clientMethod, convenienceMethod)) {
+                                    ClientMethodExample convenienceExample =
+                                            new ClientMethodExample(clientMethod, c, clientBuilder, filename, example);
+                                    convenienceExamples.add(convenienceExample);
+                                    convenienceExampleNameSet.add(filename);
+                                }
+                            }
+                        }));
+            }
+        };
+
+        // convenience examples
+        syncClients.stream().filter(c -> !CoreUtils.isNullOrEmpty(c.getConvenienceMethods()))
+                .forEach(c -> c.getConvenienceMethods()
+                        .forEach(m -> handleConvenienceExample.accept(c, m)));
+        builder.clientMethodExamples(convenienceExamples);
+    }
+
+    private void addProtocolExamples(Client.Builder builder, List<AsyncSyncClient> syncClients) {
+        List<ProtocolExample> protocolExamples = new ArrayList<>();
+        Set<String> protocolExampleNameSet = new HashSet<>();
+
+        BiConsumer<AsyncSyncClient, ClientMethod> handleExample = (c, m) -> {
+            if (m.getMethodVisibility() == JavaVisibility.Public
+                    && !m.isImplementationOnly() &&
+                    (m.getType() == ClientMethodType.SimpleSyncRestResponse
+                    || m.getType() == ClientMethodType.PagingSync
+                    || m.getType() == ClientMethodType.LongRunningBeginSync)) {
+                ClientBuilder clientBuilder = c.getClientBuilder();
+                if (clientBuilder != null && m.getProxyMethod().getExamples() != null) {
+                    m.getProxyMethod().getExamples().forEach((name, example) -> {
+                        String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
+                        if (!protocolExampleNameSet.contains(filename)) {
+                            ProtocolExample protocolExample = new ProtocolExample(m, c, clientBuilder, filename, example);
+                            protocolExamples.add(protocolExample);
+                            protocolExampleNameSet.add(filename);
+                        }
+                    });
+                }
+            }
+        };
+
+        // protocol examples, exclude those that have convenience methods
+        syncClients.stream().filter(c -> c.getServiceClient() != null)
+                .forEach(c -> {
+                    Set<String> convenienceProxyMethodNames = new HashSet<>();
+                    if (c.getConvenienceMethods() != null) {
+                        convenienceProxyMethodNames.addAll(c.getConvenienceMethods().stream()
+                                .map(convenienceMethod -> convenienceMethod
+                                        .getProtocolMethod().getProxyMethod().getBaseName())
+                                .collect(Collectors.toSet()));
+                    }
+                    c.getServiceClient().getClientMethods()
+                            .stream()
+                            .filter(m -> !convenienceProxyMethodNames.contains(m.getProxyMethod().getBaseName()))
+                            .forEach(m -> handleExample.accept(c, m));
+                });
+        syncClients.stream().filter(c -> c.getMethodGroupClient() != null)
+                .forEach(c -> {
+                    Set<String> convenienceProxyMethodNames = new HashSet<>();
+                    if (c.getConvenienceMethods() != null) {
+                        convenienceProxyMethodNames.addAll(c.getConvenienceMethods().stream()
+                                .map(convenienceMethod -> convenienceMethod
+                                        .getProtocolMethod().getProxyMethod().getBaseName())
+                                .collect(Collectors.toSet()));
+                    }
+                    c.getMethodGroupClient().getClientMethods()
+                            .stream()
+                            .filter(m -> !convenienceProxyMethodNames.contains(m.getProxyMethod().getBaseName()))
+                            .forEach(m -> handleExample.accept(c, m));
+                });
+        builder.protocolExamples(protocolExamples);
     }
 
     /**

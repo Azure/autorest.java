@@ -62,6 +62,7 @@ public class Client {
     private final List<ProtocolExample> protocolExamples;
     private final List<LiveTests> liveTests;
     private final List<UnionModel> unionModels;
+    private final List<ClientMethodExample> clientMethodExamples;
 
     /**
      * Create a new Client with the provided values.
@@ -87,7 +88,7 @@ public class Client {
                    ServiceClient serviceClient, List<ServiceClient> serviceClients, ModuleInfo moduleInfo,
                    List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
                    List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
-                   List<LiveTests> liveTests, List<UnionModel> unionModels
+                   List<LiveTests> liveTests, List<UnionModel> unionModels, List<ClientMethodExample> clientMethodExamples
     ) {
         this.clientName = clientName;
         this.clientDescription = clientDescription;
@@ -107,6 +108,7 @@ public class Client {
         this.protocolExamples = protocolExamples;
         this.liveTests = liveTests;
         this.unionModels = unionModels;
+        this.clientMethodExamples = clientMethodExamples;
     }
 
     public final String getClientName() {
@@ -186,6 +188,11 @@ public class Client {
         return unionModels;
     }
 
+    /** @return the examples for vanilla client methods */
+    public List<ClientMethodExample> getClientMethodExamples() {
+        return clientMethodExamples;
+    }
+
     public static class Builder {
         private String clientName;
         private String clientDescription;
@@ -205,6 +212,7 @@ public class Client {
         private List<ProtocolExample> protocolExamples = Collections.emptyList();
         private List<LiveTests> liveTests = Collections.emptyList();
         private List<UnionModel> unionModels = Collections.emptyList();
+        private List<ClientMethodExample> clientMethodExamples = Collections.emptyList();
 
         /**
          * Sets the name of this service client.
@@ -367,6 +375,16 @@ public class Client {
         }
 
         /**
+         * Sets the client method examples for this client.
+         * @param clientMethodExamples the examples for vanilla client methods
+         * @return the Builder itself
+         */
+        public Builder clientMethodExamples(List<ClientMethodExample> clientMethodExamples) {
+            this.clientMethodExamples = clientMethodExamples;
+            return this;
+        }
+
+        /**
          * Sets the live tests for this client.
          * @param liveTests live tests
          * @return the Builder itself
@@ -397,7 +415,8 @@ public class Client {
                     clientBuilders,
                     protocolExamples,
                     liveTests,
-                    unionModels
+                    unionModels,
+                    clientMethodExamples
                 );
         }
     }

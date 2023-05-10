@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
+import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
@@ -217,6 +218,13 @@ public class JavaPackage {
     public void addProtocolExamples(ProtocolExample protocolExample) {
         JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage("generated"), protocolExample.getFilename());
         Templates.getProtocolSampleTemplate().write(protocolExample, javaFile);
+        this.checkDuplicateFile(javaFile.getFilePath());
+        javaFiles.add(javaFile);
+    }
+
+    public void addClientMethodExamples(ClientMethodExample clientMethodExample) {
+        JavaFile javaFile = javaFileFactory.createSampleFile(settings.getPackage("generated"), clientMethodExample.getFilename());
+        Templates.getClientMethodSampleTemplate().write(clientMethodExample, javaFile);
         this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
     }
