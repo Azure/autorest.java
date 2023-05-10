@@ -7,33 +7,22 @@ package com.cadl.multipleapiversion;
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
-/**
- * Service version of SecondClient.
- */
+/** Service version of SecondClient. */
 public enum SecondServiceVersion implements ServiceVersion {
-    @Generated
-    /**
-     * Enum value 2022-10-01-preview.
-     */
-    V2022_10_01_PREVIEW("2022-10-01-preview");
+    /** Enum value 2022-10-01-preview. */
+    V2022_10_01_PREVIEW("2022-10-01-preview"),
 
-    @Generated
-    /**
-     * Enum value 2022-12-01-preview.
-     */
+    /** Enum value 2022-12-01-preview. */
     V2022_12_01_PREVIEW("2022-12-01-preview");
 
-    @Generated
-    private final String version;
+    @Generated private final String version;
 
     @Generated
     SecondServiceVersion(String version) {
         this.version = version;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     @Generated
     public String getVersion() {
@@ -42,7 +31,7 @@ public enum SecondServiceVersion implements ServiceVersion {
 
     /**
      * Gets the latest service version supported by this client library.
-     * 
+     *
      * @return The latest {@link SecondServiceVersion}.
      */
     @Generated

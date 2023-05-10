@@ -9,7 +9,6 @@ import com.azure.core.util.ServiceVersion;
 
 /** Service version of SpecialHeaderClient. */
 public enum SpecialHeaderServiceVersion implements ServiceVersion {
-    @Generated
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 

@@ -9,7 +9,6 @@ import com.azure.core.util.ServiceVersion;
 
 /** Service version of ServiceDrivenClient. */
 public enum ServiceDrivenServiceVersion implements ServiceVersion {
-    @Generated
     /** Enum value v1. */
     V1("v1");
 

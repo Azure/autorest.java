@@ -9,7 +9,6 @@ import com.azure.core.util.ServiceVersion;
 
 /** Service version of MediaTypesClient. */
 public enum MediaTypesServiceVersion implements ServiceVersion {
-    @Generated
     /** Enum value 2.0-preview. */
     V2_0_PREVIEW("2.0-preview");
 

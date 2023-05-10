@@ -7,33 +7,22 @@ package com.resiliency.servicedriven;
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
-/**
- * Service version of ServiceDrivenClient.
- */
+/** Service version of ServiceDrivenClient. */
 public enum ServiceDrivenServiceVersion implements ServiceVersion {
-    @Generated
-    /**
-     * Enum value v1.
-     */
-    V1("v1");
+    /** Enum value v1. */
+    V1("v1"),
 
-    @Generated
-    /**
-     * Enum value v2.
-     */
+    /** Enum value v2. */
     V2("v2");
 
-    @Generated
-    private final String version;
+    @Generated private final String version;
 
     @Generated
     ServiceDrivenServiceVersion(String version) {
         this.version = version;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     @Generated
     public String getVersion() {
@@ -42,7 +31,7 @@ public enum ServiceDrivenServiceVersion implements ServiceVersion {
 
     /**
      * Gets the latest service version supported by this client library.
-     * 
+     *
      * @return The latest {@link ServiceDrivenServiceVersion}.
      */
     @Generated

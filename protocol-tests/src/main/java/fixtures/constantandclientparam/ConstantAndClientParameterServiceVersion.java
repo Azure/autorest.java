@@ -9,7 +9,6 @@ import com.azure.core.util.ServiceVersion;
 
 /** Service version of ConstantAndClientParameterServiceClient. */
 public enum ConstantAndClientParameterServiceVersion implements ServiceVersion {
-    @Generated
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
