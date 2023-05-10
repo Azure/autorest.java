@@ -4,21 +4,25 @@
 
 package fixtures.url.multi;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of AutoRestUrlMutliCollectionFormatTestServiceClient. */
 public enum AutoRestUrlMutliCollectionFormatTestServiceVersion implements ServiceVersion {
+    @Generated
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     AutoRestUrlMutliCollectionFormatTestServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -28,6 +32,7 @@ public enum AutoRestUrlMutliCollectionFormatTestServiceVersion implements Servic
      *
      * @return The latest {@link AutoRestUrlMutliCollectionFormatTestServiceVersion}.
      */
+    @Generated
     public static AutoRestUrlMutliCollectionFormatTestServiceVersion getLatest() {
         return V1_0_0;
     }

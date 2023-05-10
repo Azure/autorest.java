@@ -4,21 +4,25 @@
 
 package com.cadl.longrunning;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of LongRunningClient. */
 public enum LongRunningServiceVersion implements ServiceVersion {
+    @Generated
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     LongRunningServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -28,6 +32,7 @@ public enum LongRunningServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link LongRunningServiceVersion}.
      */
+    @Generated
     public static LongRunningServiceVersion getLatest() {
         return V1_0_0;
     }

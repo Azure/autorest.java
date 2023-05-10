@@ -4,21 +4,25 @@
 
 package fixtures.specialheader;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of SpecialHeaderClient. */
 public enum SpecialHeaderServiceVersion implements ServiceVersion {
+    @Generated
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     SpecialHeaderServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -28,6 +32,7 @@ public enum SpecialHeaderServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link SpecialHeaderServiceVersion}.
      */
+    @Generated
     public static SpecialHeaderServiceVersion getLatest() {
         return V1_0_0;
     }

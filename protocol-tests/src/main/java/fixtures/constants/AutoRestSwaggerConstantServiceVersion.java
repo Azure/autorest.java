@@ -4,21 +4,25 @@
 
 package fixtures.constants;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of AutoRestSwaggerConstantServiceClient. */
 public enum AutoRestSwaggerConstantServiceVersion implements ServiceVersion {
+    @Generated
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     AutoRestSwaggerConstantServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -28,6 +32,7 @@ public enum AutoRestSwaggerConstantServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link AutoRestSwaggerConstantServiceVersion}.
      */
+    @Generated
     public static AutoRestSwaggerConstantServiceVersion getLatest() {
         return V1_0_0;
     }

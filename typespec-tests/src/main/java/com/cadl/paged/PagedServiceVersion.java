@@ -4,21 +4,25 @@
 
 package com.cadl.paged;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of PagedClient. */
 public enum PagedServiceVersion implements ServiceVersion {
+    @Generated
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     PagedServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -28,6 +32,7 @@ public enum PagedServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link PagedServiceVersion}.
      */
+    @Generated
     public static PagedServiceVersion getLatest() {
         return V1_0_0;
     }

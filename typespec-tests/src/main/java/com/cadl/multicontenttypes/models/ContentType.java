@@ -4,34 +4,51 @@
 
 package com.cadl.multicontenttypes.models;
 
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for ContentType. */
+/**
+ * Defines values for ContentType.
+ */
 public enum ContentType {
-    /** Enum value application/octet-stream. */
-    APPLICATION_OCTET_STREAM("application/octet-stream"),
+    @Generated
+    /**
+     * Enum value application/octet-stream.
+     */
+    APPLICATION_OCTET_STREAM("application/octet-stream");
 
-    /** Enum value image/jpeg. */
-    IMAGE_JPEG("image/jpeg"),
+    @Generated
+    /**
+     * Enum value image/jpeg.
+     */
+    IMAGE_JPEG("image/jpeg");
 
-    /** Enum value image/png. */
+    @Generated
+    /**
+     * Enum value image/png.
+     */
     IMAGE_PNG("image/png");
 
-    /** The actual serialized value for a ContentType instance. */
+    /**
+     * The actual serialized value for a ContentType instance.
+     */
+    @Generated
     private final String value;
 
+    @Generated
     ContentType(String value) {
         this.value = value;
     }
 
     /**
      * Parses a serialized value to a ContentType instance.
-     *
+     * 
      * @param value the serialized value to parse.
      * @return the parsed ContentType object, or null if unable to parse.
      */
     @JsonCreator
+    @Generated
     public static ContentType fromString(String value) {
         if (value == null) {
             return null;
@@ -45,9 +62,12 @@ public enum ContentType {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @JsonValue
     @Override
+    @Generated
     public String toString() {
         return this.value;
     }
