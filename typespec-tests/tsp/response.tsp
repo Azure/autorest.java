@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
@@ -12,6 +13,7 @@ using Azure.ClientGenerator.Core;
   title: "Response",
   version: "1.0.0",
 })
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Cadl.Response;
 
 @resource("resources")

@@ -1,5 +1,6 @@
 {
-  "name": "typespec-tests",
+  "name": "typespec-java-tests",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "format": "npm run -s prettier -- --write",
@@ -16,6 +17,13 @@
   "devDependencies": {
     "@typespec/prettier-plugin-typespec": "~0.43.0",
     "prettier": "~2.8.1"
+  },
+  "overrides": {
+    "@typespec/compiler": "~0.43.0",
+    "@typespec/http": "~0.43.0",
+    "@typespec/rest": "~0.43.0",
+    "@typespec/versioning": "~0.43.0",
+    "@azure-tools/typespec-azure-core": "~0.29.0"
   },
   "private": true
 }

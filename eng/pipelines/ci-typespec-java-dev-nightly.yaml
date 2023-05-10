@@ -1,20 +1,12 @@
-trigger:
+schedules:
+- cron: '0 0 * * *'
+  displayName: Nightly dev build
   branches:
     include:
-      - main
+    - main
 
-pr:
-  branches:
-    include:
-      - main
-  paths:
-    include:
-      - '*'
-    exclude:
-      - 'fluent*'
-      - 'postprocessor'
-      - 'vanilla-tests'
-      - 'protocol*'
+trigger: none
+pr: none
 
 jobs:
   - job: Build
@@ -24,7 +16,6 @@ jobs:
     variables:
       JavaVersion: 1.8
       NodeVersion: '18.x'
-      isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
     pool:
       name: "azsdk-pool-mms-ubuntu-2004-general"
@@ -48,11 +39,31 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
+      - script: |
+          npm install -g @typespec/compiler@next
+          npm install pacote
+          node typespec-tests/bump_deps.js typespec-extension/package.json typespec-tests/package.json
+        displayName: 'Bump TypeSpec Dependencies to dev'
+
       - task: PowerShell@2
         displayName: 'Generate Code'
         inputs:
           pwsh: true
           filePath: Generate-TypeSpec.ps1
+
+      - script: |
+          echo "Dependencies of typespec-java"
+          cd typespec-extension
+          npm ls --all
+          echo "Dependencies of typespec-java-tests"
+          cd ../typespec-tests
+          npm ls --all
+        displayName: 'Print Package Dependencies'
+        condition: succeededOrFailed()
+
+      - script: |
+          git checkout package.json typespec-extension/package.json typespec-tests/package.json
+        displayName: 'Revert package.json'
 
       - script: |
           git status
@@ -83,22 +94,3 @@ jobs:
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js server stop
         displayName: 'Stop Cadl Ranch Test Server'
         workingDirectory: ./typespec-tests
-
-      - script: |
-          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js check-coverage node_modules/@azure-tools/cadl-ranch-specs/http --coverageFiles ./cadl-ranch-coverage-java.json
-        displayName: 'Cadl Ranch Coverage Report'
-        workingDirectory: ./typespec-tests
-        continueOnError: true
-
-      - publish: $(Build.SourcesDirectory)/typespec-tests/cadl-ranch-coverage-java.json
-        artifact: CoverageReport
-        displayName: 'Publish Cadl Ranch Coverage Report'
-
-      - task: AzureCLI@2
-        displayName: 'Upload to Cadl Ranch Coverage Report Dashboard'
-        condition: eq(variables.isMain, 'true')
-        inputs:
-          azureSubscription: "Cadl Ranch Storage"
-          scriptType: "bash"
-          scriptLocation: "inlineScript"
-          inlineScript: node $(Build.SourcesDirectory)/typespec-tests/node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js upload-coverage --coverageFile $(Build.SourcesDirectory)/typespec-tests/cadl-ranch-coverage-java.json --generatorName java --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./typespec-extension/package.json').version")
