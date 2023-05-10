@@ -11,7 +11,7 @@ const knownPackages = [
   "@typespec/eslint-config-typespec",
 ];
 
-async function getKnownPackageVersion(packageName) {
+async function getKnownPackageVersion(packageName: string): Promise<string> {
   return (await pacote.manifest(`${packageName}@next`)).version;
 }
 

@@ -41,8 +41,8 @@ jobs:
 
       - script: |
           npm install -g @typespec/compiler@next
-          npm install pacote
-          node typespec-tests/bump_deps.js typespec-extension/package.json typespec-tests/package.json
+          npm install tsx @types/pacote pacote
+          npx tsx typespec-tests/bump_deps.ts typespec-extension/package.json typespec-tests/package.json
         displayName: 'Bump TypeSpec Dependencies to dev'
 
       - task: PowerShell@2
