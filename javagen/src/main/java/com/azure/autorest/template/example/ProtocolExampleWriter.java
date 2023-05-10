@@ -5,7 +5,6 @@ package com.azure.autorest.template.example;
 
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
-import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
@@ -21,7 +20,6 @@ import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ServiceClient;
-import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.ModelExampleUtil;
@@ -37,9 +35,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -52,7 +48,7 @@ public class ProtocolExampleWriter {
     private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProtocolExampleWriter.class);
 
     private final Set<String> imports;
-    private final Consumer<JavaBlock> clientInitializationWriter;
+    private final ClientInitializationExampleWriter clientInitializationExampleWriter;
     private final Consumer<JavaBlock> clientMethodInvocationWriter;
     private final Consumer<JavaBlock> assertionWriter;
 
@@ -62,24 +58,25 @@ public class ProtocolExampleWriter {
 
         final ClientMethod method = protocolExample.getClientMethod();
         final AsyncSyncClient syncClient = protocolExample.getSyncClient();
-        final ServiceClient serviceClient = protocolExample.getClientBuilder().getServiceClient();
-        final String builderName = protocolExample.getClientBuilder().getClassName();
         final ProxyMethodExample proxyMethodExample = protocolExample.getProxyMethodExample();
         final String clientVarName = CodeNamer.toCamelCase(syncClient.getClassName());
+        final ServiceClient serviceClient = protocolExample.getClientBuilder().getServiceClient();
+
+        this.clientInitializationExampleWriter =
+                new ClientInitializationExampleWriter(
+                        syncClient,
+                        method,
+                        proxyMethodExample,
+                        serviceClient);
 
         // import
         this.imports = new HashSet<>();
+
+        imports.addAll(this.clientInitializationExampleWriter.getImports());
+
         ClassType.BinaryData.addImportsTo(imports, false);
         imports.add(java.util.Arrays.class.getName());
-
-        syncClient.addImportsTo(imports, false);
-        syncClient.getClientBuilder().addImportsTo(imports, false);
         method.addImportsTo(imports, false, settings);
-
-        // credential
-        imports.add("com.azure.identity.DefaultAzureCredentialBuilder");
-        ClassType.AzureKeyCredential.addImportsTo(imports, false);
-        ClassType.Configuration.addImportsTo(imports, false);
 
         // assertion
         imports.add("org.junit.jupiter.api.Assertions");
@@ -95,9 +92,6 @@ public class ProtocolExampleWriter {
         StringBuilder binaryDataStmt = new StringBuilder();
 
         List<String> requestOptionsStmts = new ArrayList<>();
-
-        List<String> clientParameterLines = new ArrayList<>();
-        Set<ServiceClientProperty> processedServiceClientProperties = new HashSet<>();
 
         List<ProxyMethodParameter> proxyMethodParameters = getProxyMethodParameters(method.getProxyMethod(), method.getParameters());
         final int numParam = method.getParameters().size();
@@ -203,63 +197,8 @@ public class ProtocolExampleWriter {
                         // Path cannot be optional
                     }
                 });
-
-                method.getProxyMethod().getAllParameters().stream().filter(ProxyMethodParameter::isFromClient).filter(p -> p.getName().equalsIgnoreCase(parameterName)).findFirst().ifPresent(p -> {
-                    String clientValue = p.getClientType()
-                            .defaultValueExpression(parameterValue.getObjectValue().toString());
-
-                    serviceClient.getProperties().stream().filter(p1 -> Objects.equals(p.getName(), p1.getName())).findFirst().ifPresent(serviceClientProperty -> {
-                        processedServiceClientProperties.add(serviceClientProperty);
-
-                        clientParameterLines.add(
-                                String.format(".%1$s(%2$s)", serviceClientProperty.getAccessorMethodSuffix(), clientValue));
-                    });
-                });
             }
         });
-
-        // client initialization
-        // required service client properties
-        serviceClient.getProperties().stream().filter(ServiceClientProperty::isRequired).filter(p -> !processedServiceClientProperties.contains(p)).forEach(serviceClientProperty -> {
-            String defaultValueExpression = serviceClientProperty.getDefaultValueExpression();
-            if (defaultValueExpression == null) {
-                defaultValueExpression = String.format("Configuration.getGlobalConfiguration().get(\"%1$s\")",
-                        serviceClientProperty.getName().toUpperCase(Locale.ROOT));
-            }
-
-            clientParameterLines.add(
-                    String.format(".%1$s(%2$s)", serviceClientProperty.getAccessorMethodSuffix(), defaultValueExpression));
-        });
-        String clientParameterExpr = String.join("", clientParameterLines);
-
-        // credentials
-        String credentialExpr;
-        if (serviceClient.getSecurityInfo() != null && serviceClient.getSecurityInfo().getSecurityTypes() != null) {
-            if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
-                credentialExpr = ".credential(new DefaultAzureCredentialBuilder().build())";
-            } else if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-                credentialExpr = ".credential(new AzureKeyCredential(Configuration.getGlobalConfiguration().get(\"API_KEY\")))";
-            } else {
-                credentialExpr = "";
-            }
-        } else {
-            credentialExpr = "";
-        }
-
-        this.clientInitializationWriter = methodBlock -> {
-            // client
-            String clientInit = "%1$s %2$s = new %3$s()" +
-                    "%4$s" +  // credentials
-                    "%5$s" +  // client properties
-                    ".%6$s();";
-            methodBlock.line(
-                    String.format(clientInit,
-                            syncClient.getClassName(), clientVarName,
-                            builderName,
-                            credentialExpr,
-                            clientParameterExpr,
-                            protocolExample.getClientBuilder().getBuilderMethodNameForSyncClient(syncClient)));
-        };
 
         this.clientMethodInvocationWriter = methodBlock -> {
             // binaryData
@@ -369,7 +308,7 @@ public class ProtocolExampleWriter {
     }
 
     public void writeClientInitialization(JavaBlock methodBlock) {
-        clientInitializationWriter.accept(methodBlock);
+        clientInitializationExampleWriter.write(methodBlock);
     }
 
     public void writeClientMethodInvocation(JavaBlock methodBlock) {
