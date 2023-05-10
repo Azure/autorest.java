@@ -30,10 +30,10 @@ public class AndroidEnumTemplate extends EnumTemplate {
     }
 
     @Override
-    protected void addGeneratedAnnotationForExpandableStringEnum(JavaContext context) {
+    protected void addGeneratedAnnotation(JavaContext context) {
     }
 
     @Override
-    protected void addGeneratedAnnotationForEnum(JavaEnum context) {
+    protected void addGeneratedAnnotation(JavaEnum context) {
     }
 }
