@@ -8,27 +8,16 @@ import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * Enum that will be used as a property for model EnumProperty. Non-extensible.
- */
+/** Enum that will be used as a property for model EnumProperty. Non-extensible. */
 public enum FixedInnerEnum {
-    @Generated
-    /**
-     * First value.
-     */
-    VALUE_ONE("ValueOne");
+    /** First value. */
+    VALUE_ONE("ValueOne"),
 
-    @Generated
-    /**
-     * Second value.
-     */
+    /** Second value. */
     VALUE_TWO("ValueTwo");
 
-    /**
-     * The actual serialized value for a FixedInnerEnum instance.
-     */
-    @Generated
-    private final String value;
+    /** The actual serialized value for a FixedInnerEnum instance. */
+    @Generated private final String value;
 
     @Generated
     FixedInnerEnum(String value) {
@@ -37,7 +26,7 @@ public enum FixedInnerEnum {
 
     /**
      * Parses a serialized value to a FixedInnerEnum instance.
-     * 
+     *
      * @param value the serialized value to parse.
      * @return the parsed FixedInnerEnum object, or null if unable to parse.
      */
@@ -56,9 +45,7 @@ public enum FixedInnerEnum {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     @Generated

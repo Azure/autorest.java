@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /** Defines values for OptionalLiteral. */
 public enum OptionalLiteral {
-    @Generated
     /** Enum value optionalLiteral. */
     OPTIONAL_LITERAL("optionalLiteral");
 

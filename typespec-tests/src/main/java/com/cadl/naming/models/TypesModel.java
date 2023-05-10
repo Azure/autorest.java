@@ -10,27 +10,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * summary of Types
- * 
- * description of Types.
+ *
+ * <p>description of Types.
  */
 public enum TypesModel {
-    @Generated
-    /**
-     * Enum value Blob.
-     */
-    BLOB("Blob");
+    /** Enum value Blob. */
+    BLOB("Blob"),
 
-    @Generated
-    /**
-     * Enum value File.
-     */
+    /** Enum value File. */
     FILE("File");
 
-    /**
-     * The actual serialized value for a TypesModel instance.
-     */
-    @Generated
-    private final String value;
+    /** The actual serialized value for a TypesModel instance. */
+    @Generated private final String value;
 
     @Generated
     TypesModel(String value) {
@@ -39,7 +30,7 @@ public enum TypesModel {
 
     /**
      * Parses a serialized value to a TypesModel instance.
-     * 
+     *
      * @param value the serialized value to parse.
      * @return the parsed TypesModel object, or null if unable to parse.
      */
@@ -58,9 +49,7 @@ public enum TypesModel {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     @Generated

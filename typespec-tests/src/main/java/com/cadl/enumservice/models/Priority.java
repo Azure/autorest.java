@@ -8,27 +8,16 @@ import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * Defines values for Priority.
- */
+/** Defines values for Priority. */
 public enum Priority {
-    @Generated
-    /**
-     * Enum value 100.
-     */
-    HIGH(100L);
+    /** Enum value 100. */
+    HIGH(100L),
 
-    @Generated
-    /**
-     * Enum value 0.
-     */
+    /** Enum value 0. */
     LOW(0L);
 
-    /**
-     * The actual serialized value for a Priority instance.
-     */
-    @Generated
-    private final long value;
+    /** The actual serialized value for a Priority instance. */
+    @Generated private final long value;
 
     @Generated
     Priority(long value) {
@@ -37,7 +26,7 @@ public enum Priority {
 
     /**
      * Parses a serialized value to a Priority instance.
-     * 
+     *
      * @param value the serialized value to parse.
      * @return the parsed Priority object, or null if unable to parse.
      */
@@ -55,7 +44,7 @@ public enum Priority {
 
     /**
      * De-serializes the instance to long value.
-     * 
+     *
      * @return the long value.
      */
     @JsonValue

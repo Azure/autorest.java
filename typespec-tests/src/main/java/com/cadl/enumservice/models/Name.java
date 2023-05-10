@@ -8,27 +8,16 @@ import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * Defines values for Name.
- */
+/** Defines values for Name. */
 public enum Name {
-    @Generated
-    /**
-     * Enum value Read.
-     */
-    READ("Read");
+    /** Enum value Read. */
+    READ("Read"),
 
-    @Generated
-    /**
-     * Enum value Write.
-     */
+    /** Enum value Write. */
     WRITE("Write");
 
-    /**
-     * The actual serialized value for a Name instance.
-     */
-    @Generated
-    private final String value;
+    /** The actual serialized value for a Name instance. */
+    @Generated private final String value;
 
     @Generated
     Name(String value) {
@@ -37,7 +26,7 @@ public enum Name {
 
     /**
      * Parses a serialized value to a Name instance.
-     * 
+     *
      * @param value the serialized value to parse.
      * @return the parsed Name object, or null if unable to parse.
      */
@@ -56,9 +45,7 @@ public enum Name {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     @Generated

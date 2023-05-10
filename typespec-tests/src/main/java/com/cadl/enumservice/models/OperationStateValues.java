@@ -8,33 +8,19 @@ import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * Defines values for OperationStateValues.
- */
+/** Defines values for OperationStateValues. */
 public enum OperationStateValues {
-    @Generated
-    /**
-     * Enum value Running.
-     */
-    RUNNING("Running");
+    /** Enum value Running. */
+    RUNNING("Running"),
 
-    @Generated
-    /**
-     * Enum value Completed.
-     */
-    COMPLETED("Completed");
+    /** Enum value Completed. */
+    COMPLETED("Completed"),
 
-    @Generated
-    /**
-     * Enum value Failed.
-     */
+    /** Enum value Failed. */
     FAILED("Failed");
 
-    /**
-     * The actual serialized value for a OperationStateValues instance.
-     */
-    @Generated
-    private final String value;
+    /** The actual serialized value for a OperationStateValues instance. */
+    @Generated private final String value;
 
     @Generated
     OperationStateValues(String value) {
@@ -43,7 +29,7 @@ public enum OperationStateValues {
 
     /**
      * Parses a serialized value to a OperationStateValues instance.
-     * 
+     *
      * @param value the serialized value to parse.
      * @return the parsed OperationStateValues object, or null if unable to parse.
      */
@@ -62,9 +48,7 @@ public enum OperationStateValues {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @JsonValue
     @Override
     @Generated
