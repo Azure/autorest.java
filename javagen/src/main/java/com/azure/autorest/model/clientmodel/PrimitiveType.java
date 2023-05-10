@@ -201,7 +201,7 @@ public class PrimitiveType implements IType {
         if (this == PrimitiveType.UnixTimeLong) {
             expression = String.format("%1$s.toEpochSecond()", expression);
         } else if (this == PrimitiveType.DurationLong) {
-            expression = java.lang.String.format("%s.toSeconds()", expression);
+            expression = java.lang.String.format("%s.getSeconds()", expression);
         } else if (this == PrimitiveType.DurationDouble) {
             expression = java.lang.String.format("(double) %s.toNanos() / 1000_000_000L", expression);
         }

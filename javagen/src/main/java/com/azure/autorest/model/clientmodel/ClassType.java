@@ -552,7 +552,7 @@ public class ClassType implements IType {
         } else if (this == ClassType.URL) {
             expression = java.lang.String.format("%s.toString()", expression);
         } else if (this == ClassType.DurationLong) {
-            expression = java.lang.String.format("%s.toSeconds()", expression);
+            expression = java.lang.String.format("%s.getSeconds()", expression);
         } else if (this == ClassType.DurationDouble) {
             expression = java.lang.String.format("(double) %s.toNanos() / 1000_000_000L", expression);
         }

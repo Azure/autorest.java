@@ -96,9 +96,9 @@ public final class BuiltinClient {
      *         String: double (Required)
      *     }
      *     encoded (Required): {
-     *         timeInSeconds: Duration (Required)
-     *         timeInSecondsFraction: Duration (Required)
-     *         timeInSecondsOptional: Duration (Optional)
+     *         timeInSeconds: long (Required)
+     *         timeInSecondsFraction: double (Required)
+     *         timeInSecondsOptional: Long (Optional)
      *     }
      * }
      * }</pre>
@@ -158,9 +158,9 @@ public final class BuiltinClient {
      *         String: double (Required)
      *     }
      *     encoded (Required): {
-     *         timeInSeconds: Duration (Required)
-     *         timeInSecondsFraction: Duration (Required)
-     *         timeInSecondsOptional: Duration (Optional)
+     *         timeInSeconds: long (Required)
+     *         timeInSecondsFraction: double (Required)
+     *         timeInSecondsOptional: Long (Optional)
      *     }
      * }
      * }</pre>

@@ -16,19 +16,19 @@ public final class Encoded {
      * The timeInSeconds property.
      */
     @JsonProperty(value = "timeInSeconds", required = true)
-    private Duration timeInSeconds;
+    private long timeInSeconds;
 
     /*
      * The timeInSecondsFraction property.
      */
     @JsonProperty(value = "timeInSecondsFraction", required = true)
-    private Duration timeInSecondsFraction;
+    private double timeInSecondsFraction;
 
     /*
      * The timeInSecondsOptional property.
      */
     @JsonProperty(value = "timeInSecondsOptional")
-    private Duration timeInSecondsOptional;
+    private Long timeInSecondsOptional;
 
     /**
      * Creates an instance of Encoded class.
@@ -40,8 +40,8 @@ public final class Encoded {
     public Encoded(
             @JsonProperty(value = "timeInSeconds", required = true) Duration timeInSeconds,
             @JsonProperty(value = "timeInSecondsFraction", required = true) Duration timeInSecondsFraction) {
-        this.timeInSeconds = timeInSeconds;
-        this.timeInSecondsFraction = timeInSecondsFraction;
+        this.timeInSeconds = timeInSeconds.getSeconds();
+        this.timeInSecondsFraction = (double) timeInSecondsFraction.toNanos() / 1000_000_000L;
     }
 
     /**
@@ -50,7 +50,7 @@ public final class Encoded {
      * @return the timeInSeconds value.
      */
     public Duration getTimeInSeconds() {
-        return this.timeInSeconds;
+        return Duration.ofSeconds(this.timeInSeconds);
     }
 
     /**
@@ -59,7 +59,7 @@ public final class Encoded {
      * @return the timeInSecondsFraction value.
      */
     public Duration getTimeInSecondsFraction() {
-        return this.timeInSecondsFraction;
+        return Duration.ofNanos((long) (this.timeInSecondsFraction * 1000_000_000L));
     }
 
     /**
@@ -68,7 +68,10 @@ public final class Encoded {
      * @return the timeInSecondsOptional value.
      */
     public Duration getTimeInSecondsOptional() {
-        return this.timeInSecondsOptional;
+        if (this.timeInSecondsOptional == null) {
+            return null;
+        }
+        return Duration.ofSeconds(this.timeInSecondsOptional);
     }
 
     /**
@@ -78,7 +81,11 @@ public final class Encoded {
      * @return the Encoded object itself.
      */
     public Encoded setTimeInSecondsOptional(Duration timeInSecondsOptional) {
-        this.timeInSecondsOptional = timeInSecondsOptional;
+        if (timeInSecondsOptional == null) {
+            this.timeInSecondsOptional = null;
+        } else {
+            this.timeInSecondsOptional = timeInSecondsOptional.getSeconds();
+        }
         return this;
     }
 }
