@@ -40,7 +40,6 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceVersion, Jav
 
         javaFile.publicEnum(className + " implements ServiceVersion", classBlock -> {
             serviceVersions.forEach(v -> {
-                addGeneratedAnnotation(classBlock);
                 classBlock.value(getVersionIdentifier(v), v);
             });
 
