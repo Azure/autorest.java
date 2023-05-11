@@ -42,7 +42,11 @@ jobs:
       - script: |
           npm install -g @typespec/compiler@next
           npm install tsx @types/pacote pacote
-          npx tsx typespec-tests/bump_deps.ts typespec-extension/package.json typespec-tests/package.json
+          npx tsx typespec-tests/bump_deps.ts typespec-extension/package.json typespec-tests/package.json --add-npm-overrides
+          echo "typespec-extension/package.json"
+          cat typespec-extension/package.json
+          echo "typespec-tests/package.json"
+          cat typespec-tests/package.json
         displayName: 'Bump TypeSpec Dependencies to dev'
 
       - task: PowerShell@2
