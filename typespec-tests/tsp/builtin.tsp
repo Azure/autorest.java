@@ -58,7 +58,6 @@ scalar myDuration extends duration;
 model Encoded {
   @encode(DurationKnownEncoding.seconds, int32)
   timeInSeconds: duration;
-
   timeInSecondsFraction: myDuration;
 
   @encode(DurationKnownEncoding.seconds, int32)
