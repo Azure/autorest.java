@@ -1,11 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.autorest.fluent.model.clientmodel;
+package com.azure.autorest.model.clientmodel.examplemodel;
 
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 
+/** 1-1 pair of proxy method parameter and client method parameter */
 public class MethodParameter {
 
     private final ProxyMethodParameter proxyMethodParameter;

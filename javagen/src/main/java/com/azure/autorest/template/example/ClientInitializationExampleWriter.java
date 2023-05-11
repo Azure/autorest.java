@@ -27,6 +27,7 @@ import java.util.function.Consumer;
 public class ClientInitializationExampleWriter {
     private final Set<String> imports = new HashSet<>();
     private final Consumer<JavaBlock> clientInitializationWriter;
+    private final String clientVarName;
 
     public ClientInitializationExampleWriter(
             AsyncSyncClient syncClient,
@@ -35,7 +36,7 @@ public class ClientInitializationExampleWriter {
             ServiceClient serviceClient){
         syncClient.addImportsTo(imports, false);
         syncClient.getClientBuilder().addImportsTo(imports, false);
-        final String clientVarName = CodeNamer.toCamelCase(syncClient.getClassName());
+        clientVarName = CodeNamer.toCamelCase(syncClient.getClassName());
         final String builderName = syncClient.getClientBuilder().getClassName();
 
         // credential
@@ -117,5 +118,9 @@ public class ClientInitializationExampleWriter {
 
     public void write(JavaBlock methodBlock) {
         this.clientInitializationWriter.accept(methodBlock);
+    }
+
+    public String getClientVarName() {
+        return clientVarName;
     }
 }
