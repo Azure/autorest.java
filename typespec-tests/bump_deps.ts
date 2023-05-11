@@ -23,11 +23,16 @@ async function main() {
   console.log("The following is a mapping between packages and the versions we will update them to");
   // eslint-disable-next-line no-console
   console.log(packageToVersionRecord);
-  const packageJsonPaths = process.argv.slice(2);
+  const args = process.argv.slice(2);
+  const addRushOverridesArg = "--add-rush-overrides";
+  const addNpmOverridesArg = "--add-npm-overrides";
+  const addRushOverrides = args.includes(addRushOverridesArg);
+  const addNpmOverrides = args.includes(addNpmOverridesArg);
+  const packageJsonPaths = args.filter(arg => arg !== addRushOverridesArg && arg !== addNpmOverridesArg);
   for (const packageJsonPath of packageJsonPaths) {
     const content = await readFile(packageJsonPath);
     const packageJson = JSON.parse(content.toString());
-    const depTypes = ["dependencies", "devDependencies", "peerDependencies", "overrides"];
+    const depTypes = ["dependencies", "devDependencies", "peerDependencies"];
     for (const depType of depTypes) {
       const deps = packageJson[depType];
       if (deps === undefined) continue;
@@ -37,6 +42,25 @@ async function main() {
         }
       }
     }
+
+    let overridesType: string | undefined = undefined;
+    if (addNpmOverrides) {
+      overridesType = "overrides";
+    }
+    if (addRushOverrides) {
+      overridesType = "globalOverrides";
+    }
+    if (overridesType) {
+      let deps = packageJson[overridesType];
+      if (deps === undefined) {
+        deps = {};
+        packageJson[overridesType] = deps;
+      }
+      for (const packageName in packageToVersionRecord) {
+        deps[packageName] = packageToVersionRecord[packageName];
+      }
+    }
+
     // eslint-disable-next-line no-console
     console.log(`Updated ${packageJsonPath}`);
     await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
