@@ -259,6 +259,11 @@ public final class BuiltinClientImpl {
      *     nullableFloatDict (Required): {
      *         String: double (Required)
      *     }
+     *     encoded (Required): {
+     *         timeInSeconds: long (Required)
+     *         timeInSecondsFraction: double (Required)
+     *         timeInSecondsOptional: Long (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -341,6 +346,11 @@ public final class BuiltinClientImpl {
      *     nullableFloatDict (Required): {
      *         String: double (Required)
      *     }
+     *     encoded (Required): {
+     *         timeInSeconds: long (Required)
+     *         timeInSecondsFraction: double (Required)
+     *         timeInSecondsOptional: Long (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -399,6 +409,11 @@ public final class BuiltinClientImpl {
      *     nullableFloatDict (Required): {
      *         String: double (Required)
      *     }
+     *     encoded (Required): {
+     *         timeInSeconds: long (Required)
+     *         timeInSecondsFraction: double (Required)
+     *         timeInSecondsOptional: Long (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -454,6 +469,11 @@ public final class BuiltinClientImpl {
      *     url: String (Required)
      *     nullableFloatDict (Required): {
      *         String: double (Required)
+     *     }
+     *     encoded (Required): {
+     *         timeInSeconds: long (Required)
+     *         timeInSecondsFraction: double (Required)
+     *         timeInSecondsOptional: Long (Optional)
      *     }
      * }
      * }</pre>
