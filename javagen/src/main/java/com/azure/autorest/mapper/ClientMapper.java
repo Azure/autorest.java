@@ -327,27 +327,28 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             ClientBuilder clientBuilder = c.getClientBuilder();
             if (clientBuilder != null && convenienceMethod.getProtocolMethod().getProxyMethod().getExamples() != null) {
                 // only generate sample for convenience methods with max overload parameters
-                convenienceMethod.getConvenienceMethods().stream().max((o1, o2) -> {
-                    int o1ParameterCount = o1.getOnlyRequiredParameters()
-                            ? o1.getMethodRequiredParameters().size()
-                            : o1.getMethodParameters().size();
-                    int o2ParameterCount = o2.getOnlyRequiredParameters()
-                            ? o2.getMethodRequiredParameters().size()
-                            : o2.getMethodParameters().size();
-                    return o1ParameterCount - o2ParameterCount;
-                }).ifPresent(clientMethod ->
-                        clientMethod.getProxyMethod().getExamples().forEach((name, example) -> {
-                            String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
-                            if (!convenienceExampleNameSet.contains(filename)) {
-                                if (Templates.getClientMethodSampleTemplate()
-                                        .isExampleIncluded(clientMethod, convenienceMethod)) {
-                                    ClientMethodExample convenienceExample =
-                                            new ClientMethodExample(clientMethod, c, clientBuilder, filename, example);
-                                    convenienceExamples.add(convenienceExample);
-                                    convenienceExampleNameSet.add(filename);
-                                }
-                            }
-                        }));
+                convenienceMethod.getConvenienceMethods().stream()
+                        .filter(clientMethod -> Templates.getClientMethodSampleTemplate()
+                                .isExampleIncluded(clientMethod, convenienceMethod))
+                        .max((clientMethod1, clientMethod2) -> {
+                            int m1ParameterCount = clientMethod1.getOnlyRequiredParameters()
+                                    ? clientMethod1.getMethodRequiredParameters().size()
+                                    : clientMethod1.getMethodParameters().size();
+                            int m2ParameterCount = clientMethod2.getOnlyRequiredParameters()
+                                    ? clientMethod2.getMethodRequiredParameters().size()
+                                    : clientMethod2.getMethodParameters().size();
+                            return m1ParameterCount - m2ParameterCount;
+                        })
+                        .ifPresent(clientMethod ->
+                                clientMethod.getProxyMethod().getExamples().forEach((name, example) -> {
+                                    String filename = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(name));
+                                    if (!convenienceExampleNameSet.contains(filename)) {
+                                        ClientMethodExample convenienceExample =
+                                                new ClientMethodExample(clientMethod, c, clientBuilder, filename, example);
+                                        convenienceExamples.add(convenienceExample);
+                                        convenienceExampleNameSet.add(filename);
+                                    }
+                                }));
             }
         };
 
