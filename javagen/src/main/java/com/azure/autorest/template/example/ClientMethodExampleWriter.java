@@ -41,20 +41,20 @@ public class ClientMethodExampleWriter {
         this.imports.addAll(nodeVisitor.getImports());
         this.helperFeatures.addAll(nodeVisitor.getHelperFeatures());
 
-        String methodBody =
-                method.getReturnValue().getType().asNullable() != ClassType.Void
-                        ? String.format("%s %s = %s.%s(%s);",
-                        method.getReturnValue().getType(),
-                        "response",
-                        clientVarName,
-                        method.getName(),
-                        parameterInvocations)
-                        : String.format("%s.%s(%s);",
-                        clientVarName,
-                        method.getName(),
-                        parameterInvocations);
+        StringBuilder methodInvocation = new StringBuilder();
 
-        methodBodyWriter = javaBlock -> javaBlock.line(methodBody);
+        if (method.getReturnValue().getType().asNullable() != ClassType.Void) {
+            String assignment = String.format("%s %s = ", method.getReturnValue().getType(), "response");
+            methodInvocation.append(assignment);
+        }
+
+        methodInvocation.append(
+                String.format("%s.%s(%s);",
+                        clientVarName,
+                        method.getName(),
+                        parameterInvocations));
+
+        methodBodyWriter = javaBlock -> javaBlock.line(methodInvocation.toString());
     }
 
     public Set<String> getImports() {
