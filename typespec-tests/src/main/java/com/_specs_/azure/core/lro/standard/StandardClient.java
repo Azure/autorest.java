@@ -5,8 +5,7 @@
 package com._specs_.azure.core.lro.standard;
 
 import com._specs_.azure.core.lro.standard.implementation.StandardClientImpl;
-import com._specs_.azure.core.lro.standard.models.ResourceOperationStatusUserError;
-import com._specs_.azure.core.lro.standard.models.ResourceOperationStatusUserExportedUserError;
+import com._specs_.azure.core.lro.standard.models.ExportedUser;
 import com._specs_.azure.core.lro.standard.models.User;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
@@ -16,6 +15,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
@@ -85,7 +85,14 @@ public final class StandardClient {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      *
@@ -113,11 +120,14 @@ public final class StandardClient {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         name: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      *     }
      * }
      * }</pre>
@@ -129,7 +139,7 @@ public final class StandardClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -154,7 +164,7 @@ public final class StandardClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceOperationStatusUserError, User> beginCreateOrReplace(String name, User resource) {
+    public SyncPoller<PollResult, User> beginCreateOrReplace(String name, User resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateOrReplaceWithModel(name, BinaryData.fromObject(resource), requestOptions);
@@ -176,7 +186,7 @@ public final class StandardClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceOperationStatusUserError, Void> beginDelete(String name) {
+    public SyncPoller<PollResult, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginDeleteWithModel(name, requestOptions);
@@ -195,12 +205,11 @@ public final class StandardClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceOperationStatusUserExportedUserError, ResourceOperationStatusUserExportedUserError>
-            beginExport(String name, String format) {
+    public SyncPoller<PollResult, ExportedUser> beginExport(String name, String format) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginExportWithModel(name, format, requestOptions);

@@ -9,6 +9,7 @@ import {
   SchemaType,
   Schema,
 } from "@autorest/codemodel";
+import { LongRunningMetadata } from "./long-running-metadata.js";
 
 /** represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)  */
 export interface Operation extends Aspect {
@@ -56,6 +57,9 @@ export interface Operation extends Aspect {
 
   /** the operation links, referring to related operations, e.g. "polling" for long-running operation to the status monitor operation */
   operationLinks?: Record<string, OperationLink>;
+
+  /** the long-running operation metadata */
+  lroMetadata?: LongRunningMetadata;
 }
 
 export class ConvenienceApi extends Metadata {

@@ -20,6 +20,7 @@ import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -391,6 +392,23 @@ public class ClientModelUtil {
             ClassType classType = (ClassType) type;
             return classType.getPackage().startsWith(JavaSettings.getInstance().getPackage())
                     && getClientModel(classType.getName()) != null;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check if the type is an external model.
+     *
+     * @param type the type
+     * @return whether the type is an external model.
+     */
+    public static boolean isExternalModel(IType type) {
+        if (type instanceof ClassType) {
+            ClassType classType = (ClassType) type;
+            ClientModel model = getClientModel(classType.getName());
+            return model != null && model.getImplementationDetails() != null && model.getImplementationDetails().getUsages() != null
+                    && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL);
         } else {
             return false;
         }

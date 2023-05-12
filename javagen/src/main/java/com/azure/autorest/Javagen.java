@@ -297,6 +297,9 @@ public class Javagen extends NewPlugin {
                 project.integrateWithSdk();
             }
 
+            client.getModuleInfo().checkForAdditionalDependencies(client.getModels());
+            project.checkForAdditionalDependencies(client.getModels());
+
             // Module-info
             javaPackage.addModuleInfo(client.getModuleInfo());
 
