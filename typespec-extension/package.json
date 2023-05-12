@@ -45,11 +45,11 @@
     "target/azure-typespec-extension-jar-with-dependencies.jar"
   ],
   "peerDependencies": {
-    "@typespec/compiler": "~0.44.0",
-    "@typespec/rest": "~0.44.0",
-    "@typespec/versioning": "~0.44.0",
-    "@azure-tools/typespec-azure-core": "~0.30.0",
-    "@azure-tools/typespec-client-generator-core": "~0.30.0"
+    "@typespec/compiler": ">=0.44.0 <1.0.0",
+    "@typespec/rest": ">=0.44.0 <1.0.0",
+    "@typespec/versioning": ">=0.44.0 <1.0.0",
+    "@azure-tools/typespec-azure-core": ">=0.30.0 <1.0.0",
+    "@azure-tools/typespec-client-generator-core": ">=0.30.0 <1.0.0"
   },
   "dependencies": {
     "@autorest/codemodel": "~4.19.3",
