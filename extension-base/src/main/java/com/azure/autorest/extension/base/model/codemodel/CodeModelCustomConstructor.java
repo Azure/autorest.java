@@ -55,6 +55,8 @@ public class CodeModelCustomConstructor extends Constructor {
                 return ScenarioTestScope.fromValue(((ScalarNode) node).getValue());
             } else if (type.equals(SchemaContext.class)) {
                 return SchemaContext.fromValue(((ScalarNode) node).getValue());
+            } else if (type.equals(DurationSchema.Format.class)) {
+                return DurationSchema.Format.fromValue(((ScalarNode) node).getValue());
             } else {
                 // create JavaBean
                 return super.construct(node);

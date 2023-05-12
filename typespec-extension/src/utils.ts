@@ -1,10 +1,13 @@
 import {
+  EncodeData,
   Enum,
+  IntrinsicScalarName,
   Model,
   ModelProperty,
   NoTarget,
   Operation,
   Program,
+  Scalar,
   SyntaxKind,
   TemplatedTypeBase,
   Type,
@@ -30,6 +33,7 @@ import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
 import { getVersion } from "@typespec/versioning";
+import { DurationSchema } from "./common/schemas/time.js";
 
 export const specialHeaderNames = new Set([
   "repeatability-request-id",
@@ -302,4 +306,31 @@ export function isLroNewPollingStrategy(operation: Operation, lroMetadata: LroMe
   //   // POST with final result in "result" property
   //   useNewPollStrategy = true;
   // }
+}
+
+export function getDurationFormat(encode: EncodeData): DurationSchema["format"] {
+  let format: DurationSchema["format"] = "duration-rfc3339";
+  // duration encoded as seconds
+  if (encode.encoding === "seconds") {
+    const scalarName = encode.type.name;
+    if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
+      format = "seconds-integer";
+    } else if (scalarName.startsWith("float")) {
+      format = "seconds-number";
+    } else {
+      throw new Error(`Unrecognized scalar type used by duration encoded as seconds: '${scalarName}'.`);
+    }
+  }
+  return format;
+}
+
+export function hasScalarAsBase(type: Scalar, scalarName: IntrinsicScalarName): boolean {
+  let scalarType: Scalar | undefined = type;
+  while (scalarType) {
+    if (scalarType.name === scalarName) {
+      return true;
+    }
+    scalarType = scalarType.baseScalar;
+  }
+  return false;
 }

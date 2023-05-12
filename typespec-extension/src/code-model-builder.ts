@@ -36,6 +36,7 @@ import {
   EmitContext,
   getProjectedName,
   getService,
+  getEncode,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -84,7 +85,6 @@ import {
   DateSchema,
   DictionarySchema,
   Discriminator,
-  DurationSchema,
   HttpHeader,
   HttpParameter,
   ImplementationLocation,
@@ -121,6 +121,7 @@ import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { ConstantSchema, ConstantValue } from "./common/schemas/constant.js";
 import { OrSchema } from "./common/schemas/relationship.js";
 import { LongRunningMetadata } from "./common/long-running-metadata.js";
+import { DurationSchema } from "./common/schemas/time.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
 import { createPollResultSchema } from "./external-schemas.js";
@@ -144,6 +145,8 @@ import {
   loadExamples,
   isLroMetadataSupported,
   isLroNewPollingStrategy,
+  getDurationFormat,
+  hasScalarAsBase,
 } from "./utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -1286,6 +1289,14 @@ export class CodeModelBuilder {
         // use it for extensible enum
         return this.processChoiceSchema(knownValues, this.getName(type), false);
       } else {
+        const encode = getEncode(this.program, type);
+        if (encode) {
+          // process as encode
+          if (encode.encoding === "seconds" && hasScalarAsBase(type, "duration")) {
+            return this.processDurationSchema(type, nameHint, getDurationFormat(encode));
+          }
+        }
+
         if (type.baseScalar) {
           // fallback to baseScalar
           const schema = this.processScalar(type.baseScalar, getFormat(this.program, type), nameHint);
@@ -1502,10 +1513,15 @@ export class CodeModelBuilder {
     );
   }
 
-  private processDurationSchema(type: Scalar, name: string): DurationSchema {
+  private processDurationSchema(
+    type: Scalar,
+    name: string,
+    format: DurationSchema["format"] = "duration-rfc3339",
+  ): DurationSchema {
     return this.codeModel.schemas.add(
       new DurationSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
+        format: format,
       }),
     );
   }
@@ -1670,6 +1686,13 @@ export class CodeModelBuilder {
     if (format) {
       if (prop.type.kind === "Scalar" && schema instanceof StringSchema) {
         schema = this.processFormatString(prop.type, format, nameHint);
+      }
+    } else {
+      const encode = getEncode(this.program, prop);
+      if (encode) {
+        if (encode.encoding === "seconds" && prop.type.kind === "Scalar" && hasScalarAsBase(prop.type, "duration")) {
+          schema = this.processDurationSchema(prop.type, nameHint, getDurationFormat(encode));
+        }
       }
     }
     return schema;
