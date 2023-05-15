@@ -615,7 +615,7 @@ public class ClassType implements IType {
         private List<String> implementationImports;
         private XmsExtensions extensions;
         private java.util.function.Function<String, String> defaultValueExpressionConverter;
-        private boolean wrapSerializationWithObjectsToString;
+        private boolean wrapSerializationWithObjectsToString = false;
         private String jsonDeserializationMethod;
         private String serializationMethodBase;
         private String xmlAttributeDeserializationTemplate;
@@ -642,8 +642,9 @@ public class ClassType implements IType {
         public Builder prototypeAsLong() {
             return this.knownClass(Long.class)
                 .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
-                .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
                 .serializationMethodBase("writeNumber")
+                .wrapSerializationWithObjectsToString(false)
+                .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
                 .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
                 .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)");
         }
@@ -651,8 +652,9 @@ public class ClassType implements IType {
         public Builder prototypeAsDouble() {
             return this.knownClass(Double.class)
                 .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D')
-                .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
                 .serializationMethodBase("writeNumber")
+                .wrapSerializationWithObjectsToString(false)
+                .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
                 .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
                 .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)");
         }
