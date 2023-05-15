@@ -57,14 +57,27 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ClassType modelType = objectMapper.map(compositeType);
         String modelName = modelType.getName();
         ClientModel result = serviceModels.getModel(modelType.getName());
-        if (result == null && !ObjectMapper.isPlainObject(compositeType) && !isPredefinedModel(modelType)) {
+        if (result == null && !ObjectMapper.isPlainObject(compositeType)) {
+            Set<ImplementationDetails.Usage> usages = SchemaUtil.mapSchemaContext(compositeType.getUsage());
+            if (isPredefinedModel(modelType)) {
+                // TODO (weidxu): a more consistent handling of external model for all data-plane
+                if (settings.isDataPlaneClient()) {
+                    usages = new HashSet<>(usages);
+                    usages.add(ImplementationDetails.Usage.EXTERNAL);
+                } else {
+                    // abort handling external model, if not DPG
+                    // vanilla and fluent currently does not have mechanism to handle model that not to be outputted.
+                    return result;
+                }
+            }
+
             ClientModel.Builder builder = createModelBuilder()
                 .name(modelName)
                 .packageName(modelType.getPackage())
                 .type(modelType)
                 .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
                 .implementationDetails(new ImplementationDetails.Builder()
-                    .usages(SchemaUtil.mapSchemaContext(compositeType.getUsage()))
+                    .usages(usages)
                     .build());
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;

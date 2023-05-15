@@ -19,6 +19,7 @@ public class ModelUtil {
                 && model.getImplementationDetails().isConvenienceMethod()
                 && !(isModelUsedOnlyInException(model.getImplementationDetails()))
                 && !(isAnonymousModel(model.getImplementationDetails()))
+                && !(isExternalModel(model.getImplementationDetails()))
                 && !(isPagedModel(model.getImplementationDetails()));
     }
 
@@ -45,7 +46,8 @@ public class ModelUtil {
         return model.getImplementationDetails() != null
                 && model.getImplementationDetails().isConvenienceMethod()
                 && !(isModelUsedOnlyInException(model.getImplementationDetails()))
-                && !(isAnonymousModel(model.getImplementationDetails()));
+                && !(isAnonymousModel(model.getImplementationDetails())
+                && !(isExternalModel(model.getImplementationDetails())));
     }
 
     private static boolean isModelUsedOnlyInException(ImplementationDetails implementationDetails) {
@@ -58,5 +60,9 @@ public class ModelUtil {
 
     private static boolean isAnonymousModel(ImplementationDetails implementationDetails) {
         return (implementationDetails.getUsages() != null && implementationDetails.getUsages().contains(ImplementationDetails.Usage.ANONYMOUS));
+    }
+
+    private static boolean isExternalModel(ImplementationDetails implementationDetails) {
+        return (implementationDetails.getUsages() != null && implementationDetails.getUsages().contains(ImplementationDetails.Usage.EXTERNAL));
     }
 }

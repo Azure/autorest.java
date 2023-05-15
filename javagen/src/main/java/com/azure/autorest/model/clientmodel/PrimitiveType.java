@@ -42,6 +42,16 @@ public class PrimitiveType implements IType {
         "writeString", true, "getNullable(nonNullReader -> new UnixTime(nonNullReader.getLong()))",
         "getNullableAttribute(%s, %s, UnixTime::new)", "getNullableElement(UnixTime::new)");
 
+    public static final PrimitiveType DurationLong = new PrimitiveType("long", ClassType.DurationLong,
+            defaultValueExpression -> java.lang.String.format("Duration.ofSeconds(%s)", defaultValueExpression + 'L'), "0",
+            "writeNumber", false, "getLong()",
+            "getLongAttribute(%s, %s)", "getLongElement()");
+
+    public static final PrimitiveType DurationDouble = new PrimitiveType("double", ClassType.DurationDouble,
+            defaultValueExpression -> java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D'), "0.0",
+            "writeNumber", false, "getDouble()",
+            "getDoubleAttribute(%s, %s)", "getDoubleElement()");
+
     /**
      * The name of this type.
      */
@@ -158,6 +168,10 @@ public class PrimitiveType implements IType {
         IType clientType = this;
         if (this == PrimitiveType.UnixTimeLong) {
             clientType = ClassType.UnixTimeDateTime;
+        } else if (this == PrimitiveType.DurationLong) {
+            clientType = ClassType.Duration;
+        } else if (this == PrimitiveType.DurationDouble) {
+            clientType = ClassType.Duration;
         }
         return clientType;
     }
@@ -170,6 +184,10 @@ public class PrimitiveType implements IType {
 
         if (this == PrimitiveType.UnixTimeLong) {
             expression = String.format("OffsetDateTime.from(Instant.ofEpochSecond(%1$s))", expression);
+        } else if (this == PrimitiveType.DurationLong) {
+            expression = java.lang.String.format("Duration.ofSeconds(%s)", expression);
+        } else if (this == PrimitiveType.DurationDouble) {
+            expression = java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", expression);
         }
         return expression;
     }
@@ -182,6 +200,10 @@ public class PrimitiveType implements IType {
 
         if (this == PrimitiveType.UnixTimeLong) {
             expression = String.format("%1$s.toEpochSecond()", expression);
+        } else if (this == PrimitiveType.DurationLong) {
+            expression = java.lang.String.format("%s.getSeconds()", expression);
+        } else if (this == PrimitiveType.DurationDouble) {
+            expression = java.lang.String.format("(double) %s.toNanos() / 1000_000_000L", expression);
         }
         return expression;
     }

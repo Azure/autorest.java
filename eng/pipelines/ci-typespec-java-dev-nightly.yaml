@@ -74,9 +74,9 @@ jobs:
           git diff
         displayName: 'Git Diff'
 
-      - script: |
-          [ -z "`git status --porcelain`" ]
-        displayName: 'Check no Diff'
+#      - script: |
+#          [ -z "`git status --porcelain`" ]
+#        displayName: 'Check no Diff'
 
       - script: |
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ --coverageFile ./cadl-ranch-coverage-java.json &

@@ -5,8 +5,7 @@
 package com._specs_.azure.core.lro.standard.implementation;
 
 import com._specs_.azure.core.lro.standard.StandardServiceVersion;
-import com._specs_.azure.core.lro.standard.models.ResourceOperationStatusUserError;
-import com._specs_.azure.core.lro.standard.models.ResourceOperationStatusUserExportedUserError;
+import com._specs_.azure.core.lro.standard.models.ExportedUser;
 import com._specs_.azure.core.lro.standard.models.User;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
@@ -25,6 +24,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
@@ -36,10 +36,8 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
-import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
@@ -377,7 +375,7 @@ public final class StandardClientImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
@@ -426,7 +424,7 @@ public final class StandardClientImpl {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
@@ -470,19 +468,19 @@ public final class StandardClientImpl {
      * @return the {@link PollerFlux} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusUserError, User> beginCreateOrReplaceWithModelAsync(
+    public PollerFlux<PollResult, User> beginCreateOrReplaceWithModelAsync(
             String name, BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusUserError.class),
+                TypeReference.createInstance(PollResult.class),
                 TypeReference.createInstance(User.class));
     }
 
@@ -519,19 +517,19 @@ public final class StandardClientImpl {
      * @return the {@link SyncPoller} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceOperationStatusUserError, User> beginCreateOrReplaceWithModel(
+    public SyncPoller<PollResult, User> beginCreateOrReplaceWithModel(
             String name, BinaryData resource, RequestOptions requestOptions) {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusUserError.class),
+                TypeReference.createInstance(PollResult.class),
                 TypeReference.createInstance(User.class));
     }
 
@@ -546,7 +544,14 @@ public final class StandardClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      *
@@ -578,7 +583,14 @@ public final class StandardClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      *
@@ -607,7 +619,14 @@ public final class StandardClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      *
@@ -624,7 +643,7 @@ public final class StandardClientImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponseAsync(name, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
@@ -646,7 +665,14 @@ public final class StandardClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      *
@@ -663,7 +689,7 @@ public final class StandardClientImpl {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponse(name, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
@@ -685,7 +711,14 @@ public final class StandardClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      *
@@ -698,19 +731,18 @@ public final class StandardClientImpl {
      * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusUserError, Void> beginDeleteWithModelAsync(
-            String name, RequestOptions requestOptions) {
+    public PollerFlux<PollResult, Void> beginDeleteWithModelAsync(String name, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponseAsync(name, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusUserError.class),
+                TypeReference.createInstance(PollResult.class),
                 TypeReference.createInstance(Void.class));
     }
 
@@ -725,7 +757,14 @@ public final class StandardClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      *
@@ -738,19 +777,18 @@ public final class StandardClientImpl {
      * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceOperationStatusUserError, Void> beginDeleteWithModel(
-            String name, RequestOptions requestOptions) {
+    public SyncPoller<PollResult, Void> beginDeleteWithModel(String name, RequestOptions requestOptions) {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponse(name, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusUserError.class),
+                TypeReference.createInstance(PollResult.class),
                 TypeReference.createInstance(Void.class));
     }
 
@@ -764,11 +802,14 @@ public final class StandardClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         name: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      *     }
      * }
      * }</pre>
@@ -780,8 +821,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * @return status details for long running operations along with {@link Response} on successful completion of {@link
+     *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> exportWithResponseAsync(
@@ -803,11 +844,14 @@ public final class StandardClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         name: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      *     }
      * }
      * }</pre>
@@ -819,7 +863,7 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response}.
+     * @return status details for long running operations along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> exportWithResponse(String name, String format, RequestOptions requestOptions) {
@@ -838,11 +882,14 @@ public final class StandardClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         name: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      *     }
      * }
      * }</pre>
@@ -854,7 +901,7 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginExportAsync(
@@ -862,7 +909,7 @@ public final class StandardClientImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponseAsync(name, format, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
@@ -883,11 +930,14 @@ public final class StandardClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         name: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      *     }
      * }
      * }</pre>
@@ -899,14 +949,14 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginExport(String name, String format, RequestOptions requestOptions) {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponse(name, format, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
@@ -927,11 +977,14 @@ public final class StandardClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         name: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      *     }
      * }
      * }</pre>
@@ -943,23 +996,23 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusUserExportedUserError, ResourceOperationStatusUserExportedUserError>
-            beginExportWithModelAsync(String name, String format, RequestOptions requestOptions) {
+    public PollerFlux<PollResult, ExportedUser> beginExportWithModelAsync(
+            String name, String format, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponseAsync(name, format, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusUserExportedUserError.class),
-                TypeReference.createInstance(ResourceOperationStatusUserExportedUserError.class));
+                TypeReference.createInstance(PollResult.class),
+                TypeReference.createInstance(ExportedUser.class));
     }
 
     /**
@@ -972,11 +1025,14 @@ public final class StandardClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         name: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      *     }
      * }
      * }</pre>
@@ -988,22 +1044,22 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceOperationStatusUserExportedUserError, ResourceOperationStatusUserExportedUserError>
-            beginExportWithModel(String name, String format, RequestOptions requestOptions) {
+    public SyncPoller<PollResult, ExportedUser> beginExportWithModel(
+            String name, String format, RequestOptions requestOptions) {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponse(name, format, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusUserExportedUserError.class),
-                TypeReference.createInstance(ResourceOperationStatusUserExportedUserError.class));
+                TypeReference.createInstance(PollResult.class),
+                TypeReference.createInstance(ExportedUser.class));
     }
 }

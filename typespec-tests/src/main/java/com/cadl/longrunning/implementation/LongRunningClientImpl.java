@@ -24,6 +24,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
@@ -35,18 +36,15 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
-import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import com.cadl.longrunning.LongRunningServiceVersion;
+import com.cadl.longrunning.models.ExportedResource;
 import com.cadl.longrunning.models.Resource;
-import com.cadl.longrunning.models.ResourceOperationStatusResourceError;
-import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResourceError;
 import java.time.Duration;
 import reactor.core.publisher.Mono;
 
@@ -596,7 +594,7 @@ public final class LongRunningClientImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
@@ -645,7 +643,7 @@ public final class LongRunningClientImpl {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
@@ -689,19 +687,19 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusResourceError, Resource> beginCreateOrReplaceWithModelAsync(
+    public PollerFlux<PollResult, Resource> beginCreateOrReplaceWithModelAsync(
             String name, BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusResourceError.class),
+                TypeReference.createInstance(PollResult.class),
                 TypeReference.createInstance(Resource.class));
     }
 
@@ -738,19 +736,19 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceOperationStatusResourceError, Resource> beginCreateOrReplaceWithModel(
+    public SyncPoller<PollResult, Resource> beginCreateOrReplaceWithModel(
             String name, BinaryData resource, RequestOptions requestOptions) {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusResourceError.class),
+                TypeReference.createInstance(PollResult.class),
                 TypeReference.createInstance(Resource.class));
     }
 
@@ -826,7 +824,18 @@ public final class LongRunningClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
      * }</pre>
      *
@@ -862,7 +871,18 @@ public final class LongRunningClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
      * }</pre>
      *
@@ -890,7 +910,18 @@ public final class LongRunningClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
      * }</pre>
      *
@@ -907,7 +938,7 @@ public final class LongRunningClientImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponseAsync(name, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
@@ -927,7 +958,18 @@ public final class LongRunningClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
      * }</pre>
      *
@@ -944,7 +986,7 @@ public final class LongRunningClientImpl {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponse(name, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
@@ -964,7 +1006,18 @@ public final class LongRunningClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
      * }</pre>
      *
@@ -977,19 +1030,18 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusResourceError, Void> beginDeleteWithModelAsync(
-            String name, RequestOptions requestOptions) {
+    public PollerFlux<PollResult, Void> beginDeleteWithModelAsync(String name, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponseAsync(name, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusResourceError.class),
+                TypeReference.createInstance(PollResult.class),
                 TypeReference.createInstance(Void.class));
     }
 
@@ -1002,7 +1054,18 @@ public final class LongRunningClientImpl {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
      * }</pre>
      *
@@ -1015,19 +1078,18 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceOperationStatusResourceError, Void> beginDeleteWithModel(
-            String name, RequestOptions requestOptions) {
+    public SyncPoller<PollResult, Void> beginDeleteWithModel(String name, RequestOptions requestOptions) {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.deleteWithResponse(name, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusResourceError.class),
+                TypeReference.createInstance(PollResult.class),
                 TypeReference.createInstance(Void.class));
     }
 
@@ -1039,11 +1101,18 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         id: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -1055,8 +1124,8 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * @return status details for long running operations along with {@link Response} on successful completion of {@link
+     *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> exportWithResponseAsync(
@@ -1082,11 +1151,18 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         id: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -1098,7 +1174,7 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response}.
+     * @return status details for long running operations along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> exportWithResponse(
@@ -1122,11 +1198,18 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         id: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -1138,7 +1221,7 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginExportAsync(
@@ -1146,7 +1229,7 @@ public final class LongRunningClientImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponseAsync(name, projectFileVersion, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
@@ -1165,11 +1248,18 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         id: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -1181,7 +1271,7 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginExport(
@@ -1189,7 +1279,7 @@ public final class LongRunningClientImpl {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponse(name, projectFileVersion, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
@@ -1208,11 +1298,18 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         id: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -1224,25 +1321,23 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<
-                    ResourceOperationStatusResourceExportedResourceError,
-                    ResourceOperationStatusResourceExportedResourceError>
-            beginExportWithModelAsync(String name, String projectFileVersion, RequestOptions requestOptions) {
+    public PollerFlux<PollResult, ExportedResource> beginExportWithModelAsync(
+            String name, String projectFileVersion, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponseAsync(name, projectFileVersion, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class),
-                TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class));
+                TypeReference.createInstance(PollResult.class),
+                TypeReference.createInstance(ExportedResource.class));
     }
 
     /**
@@ -1253,11 +1348,18 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         id: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -1269,24 +1371,22 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<
-                    ResourceOperationStatusResourceExportedResourceError,
-                    ResourceOperationStatusResourceExportedResourceError>
-            beginExportWithModel(String name, String projectFileVersion, RequestOptions requestOptions) {
+    public SyncPoller<PollResult, ExportedResource> beginExportWithModel(
+            String name, String projectFileVersion, RequestOptions requestOptions) {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.exportWithResponse(name, projectFileVersion, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class),
-                TypeReference.createInstance(ResourceOperationStatusResourceExportedResourceError.class));
+                TypeReference.createInstance(PollResult.class),
+                TypeReference.createInstance(ExportedResource.class));
     }
 }

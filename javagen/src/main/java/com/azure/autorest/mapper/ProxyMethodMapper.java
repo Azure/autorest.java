@@ -55,9 +55,19 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
 
     private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodMapper.class);
 
-    private static final List<IType> UNIX_TIME_TYPES = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong
-        , ClassType.UnixTimeDateTime);
-    private static final List<IType> RETURN_VALUE_WIRE_TYPE_OPTIONS = Stream.concat(Stream.of(ClassType.Base64Url, ClassType.DateTimeRfc1123), UNIX_TIME_TYPES.stream()).collect(Collectors.toList());
+    private static final List<IType> UNIX_TIME_TYPES = Arrays.asList(
+            PrimitiveType.UnixTimeLong,
+            ClassType.UnixTimeLong,
+            ClassType.UnixTimeDateTime);
+    private static final List<IType> RETURN_VALUE_WIRE_TYPE_OPTIONS =
+            Stream.concat(Stream.of(
+                    ClassType.Base64Url,
+                    ClassType.DateTimeRfc1123,
+                    PrimitiveType.DurationLong,
+                    PrimitiveType.DurationDouble,
+                    ClassType.DurationLong,
+                    ClassType.DurationDouble),
+                    UNIX_TIME_TYPES.stream()).collect(Collectors.toList());
     private static final ProxyMethodMapper INSTANCE = new ProxyMethodMapper();
 
     private static final Pattern APOSTROPHE = Pattern.compile("'");

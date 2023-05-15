@@ -115,6 +115,12 @@ public final class Builtin {
     @JsonProperty(value = "nullableFloatDict", required = true)
     private Map<String, Double> nullableFloatDict;
 
+    /*
+     * The encoded property.
+     */
+    @JsonProperty(value = "encoded", required = true)
+    private Encoded encoded;
+
     /**
      * Creates an instance of Builtin class.
      *
@@ -134,6 +140,7 @@ public final class Builtin {
      * @param bytesDict the bytesDict value to set.
      * @param url the url value to set.
      * @param nullableFloatDict the nullableFloatDict value to set.
+     * @param encoded the encoded value to set.
      */
     @JsonCreator
     public Builtin(
@@ -152,7 +159,8 @@ public final class Builtin {
             @JsonProperty(value = "stringList", required = true) List<String> stringList,
             @JsonProperty(value = "bytesDict", required = true) Map<String, byte[]> bytesDict,
             @JsonProperty(value = "url", required = true) String url,
-            @JsonProperty(value = "nullableFloatDict", required = true) Map<String, Double> nullableFloatDict) {
+            @JsonProperty(value = "nullableFloatDict", required = true) Map<String, Double> nullableFloatDict,
+            @JsonProperty(value = "encoded", required = true) Encoded encoded) {
         this.formatString = formatString;
         this.booleanProperty = booleanProperty;
         this.string = string;
@@ -169,6 +177,7 @@ public final class Builtin {
         this.bytesDict = bytesDict;
         this.url = url;
         this.nullableFloatDict = nullableFloatDict;
+        this.encoded = encoded;
     }
 
     /**
@@ -313,5 +322,14 @@ public final class Builtin {
      */
     public Map<String, Double> getNullableFloatDict() {
         return this.nullableFloatDict;
+    }
+
+    /**
+     * Get the encoded property: The encoded property.
+     *
+     * @return the encoded value.
+     */
+    public Encoded getEncoded() {
+        return this.encoded;
     }
 }

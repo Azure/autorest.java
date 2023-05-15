@@ -4,6 +4,8 @@
 
 Compatible with compiler 0.44.
 
+- Supported `@encode(DurationKnownEncoding.seconds, ..)` from compiler.
+
 ## 0.6.2 (2023-04-25)
 
 Compatible with compiler 0.43.
