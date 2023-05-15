@@ -176,7 +176,7 @@ public class PrimitiveType implements IType {
         return this == type;
     }
 
-    private java.util.function.Function<String, String> getDefaultValueExpressionConverter() {
+    private Function<String, String> getDefaultValueExpressionConverter() {
         return defaultValueExpressionConverter;
     }
 
@@ -191,11 +191,7 @@ public class PrimitiveType implements IType {
 
     @Override
     public final String defaultValueExpression() {
-        String result = defaultValue;
-        if (result != null && getDefaultValueExpressionConverter() != null) {
-            result = defaultValueExpressionConverter.apply(defaultValue);
-        }
-        return result;
+        return defaultValueExpression(defaultValue);
     }
 
     @Override
