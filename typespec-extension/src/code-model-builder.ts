@@ -509,7 +509,14 @@ export class CodeModelBuilder {
             }
           }
 
-          this.processParameterBody(codeModelOperation, bodyType, operation.parameters);
+          let groupModelName: string | undefined = undefined;
+          if (op.operation.parameters.kind === "Model" && op.operation.parameters.properties.size > 0) {
+            const operationProperty = op.operation.parameters.properties.values().next().value;
+            if (operationProperty.sourceProperty.model.name.endsWith("Options")) {
+              groupModelName = operationProperty.sourceProperty.model.name;
+            }
+          }
+          this.processParameterBody(codeModelOperation, bodyType, operation.parameters, groupModelName);
         }
       }
     }
@@ -863,12 +870,20 @@ export class CodeModelBuilder {
     );
   }
 
-  private processParameterBody(op: CodeModelOperation, body: ModelProperty | Model, parameters: Model) {
+  private processParameterBody(
+    op: CodeModelOperation,
+    body: ModelProperty | Model,
+    parameters: Model,
+    groupModelName: string | undefined = undefined,
+  ) {
     let schema: Schema;
     if (body.kind === "ModelProperty" && body.type.kind === "Scalar" && body.type.name === "bytes") {
       // handle binary request body
       schema = this.processBinarySchema(body.type);
     } else {
+      if (groupModelName !== undefined) {
+        body.name = ""; // spread the body to group with other parameter later
+      }
       schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
     }
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
@@ -961,9 +976,9 @@ export class CodeModelBuilder {
         }
         request.signatureParameters = request.parameters;
 
-        if (request.signatureParameters.length > 6) {
+        if (request.signatureParameters.length > 6 || groupModelName !== undefined) {
           // create an option bag
-          const name = op.language.default.name + "Options";
+          const name = groupModelName ?? op.language.default.name + "Options";
           const namespace = body.kind === "Model" ? getNamespace(body) : this.namespace;
           // option bag schema
           const optionBagSchema = this.codeModel.schemas.add(
