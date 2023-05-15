@@ -177,17 +177,14 @@ public class ClassType implements IType {
 
     public static final ClassType UnixTimeLong = new ClassType.Builder(false)
         .prototypeAsLong()
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("OffsetDateTime.from(Instant.ofEpochSecond(%1$s))", defaultValueExpression + 'L'))
         .build();
 
     public static final ClassType DurationLong = new ClassType.Builder(false)
         .prototypeAsLong()
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.ofSeconds(%s)", defaultValueExpression + 'L'))
         .build();
 
     public static final ClassType DurationDouble = new ClassType.Builder(false)
         .prototypeAsDouble()
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D'))
         .build();
 
     public static final ClassType HttpPipeline = new ClassType.Builder(false)
