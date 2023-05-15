@@ -18,7 +18,7 @@ public class PrimitiveType implements IType {
 
     public static final PrimitiveType Boolean = new Builder()
             .name("boolean")
-            .nullableType(ClassType.Void)
+            .nullableType(ClassType.Boolean)
             .defaultValueExpressionConverter(String::toLowerCase)
             .defaultValue("false")
             .serializationMethodBase("writeBoolean")
@@ -322,9 +322,9 @@ public class PrimitiveType implements IType {
         public Builder prototypeAsLong() {
             return this.name("long")
                 .nullableType(ClassType.Long)
-                .defaultValueExpressionConverter(defaultValueExpression -> String.format("Duration.ofSeconds(%s)", defaultValueExpression + 'L'))
+                .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
                 .defaultValue("0")
-                .serializationMethodBase("writeNumber")
+                .serializationMethodBase("writeLong")
                 .wrapSerializationWithObjectsToString(false)
                 .jsonDeserializationMethod("getLong()")
                 .xmlAttributeDeserializationTemplate("getLongAttribute(%s, %s)")
@@ -333,14 +333,14 @@ public class PrimitiveType implements IType {
 
         public Builder prototypeAsDouble() {
             return this.name("double")
-                    .nullableType(ClassType.Double)
-                    .defaultValueExpressionConverter(defaultValueExpression -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)))
-                    .defaultValue("0.0")
-                    .serializationMethodBase("writeDouble")
-                    .wrapSerializationWithObjectsToString(false)
-                    .jsonDeserializationMethod("getDouble()")
-                    .xmlAttributeDeserializationTemplate("getDoubleAttribute(%s, %s)")
-                    .xmlElementDeserializationMethod("getDoubleElement()");
+                .nullableType(ClassType.Double)
+                .defaultValueExpressionConverter(defaultValueExpression -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)))
+                .defaultValue("0.0")
+                .serializationMethodBase("writeDouble")
+                .wrapSerializationWithObjectsToString(false)
+                .jsonDeserializationMethod("getDouble()")
+                .xmlAttributeDeserializationTemplate("getDoubleAttribute(%s, %s)")
+                .xmlElementDeserializationMethod("getDoubleElement()");
         }
 
         public Builder nullableType(ClassType nullableType) {
