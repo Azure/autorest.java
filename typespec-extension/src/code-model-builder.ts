@@ -37,6 +37,8 @@ import {
   getProjectedName,
   getService,
   getEncode,
+  getOverloadedOperation,
+  getOverloads,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -528,9 +530,44 @@ export class CodeModelBuilder {
     // check for long-running operation
     this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata);
 
+    // process for multiple content types with overload
+    this.processForMultipleContentTypesWithOverload(operation, op, codeModelOperation);
+
     operationGroup.addOperation(codeModelOperation);
 
     return codeModelOperation;
+  }
+
+  private processForMultipleContentTypesWithOverload(operation: Operation, httpOperation: HttpOperation, codeModelOperation: CodeModelOperation) {
+  // generate protocol method only when it's overload base operation and multiple content types, generate protocol method only
+    if (this.isOverloadBaseOperation(operation) && this.isMultipleContentTypes(httpOperation)) {
+      codeModelOperation.generateProtocolApi = true;
+      codeModelOperation.convenienceApi = undefined;
+    }
+
+    // don't generate protocol and convenience method for overloaded operations
+    if (getOverloadedOperation(this.program, operation)) {
+      codeModelOperation.generateProtocolApi = false;
+      codeModelOperation.convenienceApi = undefined;
+    }
+
+  }
+
+  private isOverloadBaseOperation(operation: Operation): boolean {
+    const overloadedOperations = getOverloads(this.program, operation);
+    if (overloadedOperations && overloadedOperations.length > 1) {
+      return true;
+    }
+    return false;
+  }
+
+  private isMultipleContentTypes(httpOperation: HttpOperation): boolean {
+    if (httpOperation.parameters.parameters && httpOperation.parameters.parameters.length > 0) {
+      if (httpOperation.parameters.parameters.some(parameter => parameter?.type === "header" && parameter?.name === "content-type" && parameter?.param?.type?.kind === "Union")) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private processRouteForPaged(op: CodeModelOperation, responses: HttpOperationResponse[]) {
