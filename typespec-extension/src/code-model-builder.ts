@@ -53,7 +53,7 @@ import {
   getQueryParamOptions,
   getHeaderFieldOptions,
 } from "@typespec/http";
-import { getVersion } from "@typespec/versioning";
+import { getAddedOnVersions, getVersion } from "@typespec/versioning";
 import {
   isPollingLocation,
   getPagedResult,
@@ -736,13 +736,20 @@ export class CodeModelBuilder {
       }
 
       // skip-url-encoding
-      let extensions = undefined;
+      let extensions: { [id: string]: any } | undefined = undefined;
       if (
         (param.type === "query" || param.type === "path") &&
         param.param.type.kind === "Scalar" &&
         schema instanceof UriSchema
       ) {
         extensions = { "x-ms-skip-url-encoding": true };
+      }
+
+      // versioning
+      const addedOn = getAddedOnVersions(this.program, param.param);
+      if (addedOn) {
+        extensions = extensions ?? {};
+        extensions["x-ms-versioning-added"] = addedOn.map((it) => it.value).shift();
       }
 
       // format if array
