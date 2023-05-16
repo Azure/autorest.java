@@ -41,8 +41,7 @@ jobs:
 
       - script: |
           npm install -g @typespec/compiler@next
-          npm install tsx @types/pacote pacote
-          npx tsx typespec-tests/bump_deps.ts typespec-extension/package.json typespec-tests/package.json --add-npm-overrides
+          npx @azure-tools/typespec-bump-deps typespec-extension/package.json typespec-tests/package.json --add-npm-overrides
           echo "typespec-extension/package.json"
           cat typespec-extension/package.json
           echo "typespec-tests/package.json"
