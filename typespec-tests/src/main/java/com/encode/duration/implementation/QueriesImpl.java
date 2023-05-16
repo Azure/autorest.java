@@ -135,7 +135,7 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> int32Seconds(
-                @QueryParam("input") Duration input,
+                @QueryParam("input") long input,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -153,7 +153,7 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> int32SecondsSync(
-                @QueryParam("input") Duration input,
+                @QueryParam("input") long input,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -171,7 +171,7 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> floatSeconds(
-                @QueryParam("input") Duration input,
+                @QueryParam("input") double input,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -189,7 +189,7 @@ public final class QueriesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> floatSecondsSync(
-                @QueryParam("input") Duration input,
+                @QueryParam("input") double input,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -277,7 +277,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> int32SecondsWithResponseAsync(Duration input, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.int32Seconds(input, accept, requestOptions, context));
+        long inputConverted = input.getSeconds();
+        return FluxUtil.withContext(context -> service.int32Seconds(inputConverted, accept, requestOptions, context));
     }
 
     /**
@@ -294,7 +295,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> int32SecondsWithResponse(Duration input, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.int32SecondsSync(input, accept, requestOptions, Context.NONE);
+        long inputConverted = input.getSeconds();
+        return service.int32SecondsSync(inputConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -311,7 +313,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatSecondsWithResponseAsync(Duration input, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.floatSeconds(input, accept, requestOptions, context));
+        double inputConverted = (double) input.toNanos() / 1000_000_000L;
+        return FluxUtil.withContext(context -> service.floatSeconds(inputConverted, accept, requestOptions, context));
     }
 
     /**
@@ -328,6 +331,7 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatSecondsWithResponse(Duration input, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.floatSecondsSync(input, accept, requestOptions, Context.NONE);
+        double inputConverted = (double) input.toNanos() / 1000_000_000L;
+        return service.floatSecondsSync(inputConverted, accept, requestOptions, Context.NONE);
     }
 }
