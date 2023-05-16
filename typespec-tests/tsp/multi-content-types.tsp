@@ -39,7 +39,7 @@ interface SingleContentType {
 @route("multiple/sharedroute/request")
 interface MultipleContentTypesOnRequest {
   @doc("one data type maps to multiple content types")
-  @route("upload/single-response-type")
+  @route("upload/single-body-type")
   @post
   uploadBytesWithSingleBodyTypeForMultiContentTypes(@body data: bytes, @header contentType: "application/octet-stream" | "image/jpeg" | "image/png"): void;
 
