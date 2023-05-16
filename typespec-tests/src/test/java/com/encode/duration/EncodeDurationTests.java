@@ -8,7 +8,6 @@ import com.encode.duration.models.FloatSecondsDurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
 import com.encode.duration.models.Iso8601DurationProperty;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -22,7 +21,6 @@ public class EncodeDurationTests {
     private static final Duration SECOND35 = Duration.ofSeconds(35, 621_000_000);
     private static final Duration SECOND36 = Duration.ofSeconds(36);
 
-    @Disabled
     @Test
     public void testQuery() {
         queryClient.defaultMethod(DAY40);
