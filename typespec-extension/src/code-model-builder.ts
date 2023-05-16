@@ -539,7 +539,7 @@ export class CodeModelBuilder {
   }
 
   private processForMultipleContentTypesWithOverload(operation: Operation, httpOperation: HttpOperation, codeModelOperation: CodeModelOperation) {
-  // generate protocol method only when it's overload base operation and multiple content types, generate protocol method only
+    // generate protocol method only when it's overload base operation and multiple content types, generate protocol method only
     if (this.isOverloadBaseOperation(operation) && this.isMultipleContentTypes(httpOperation)) {
       codeModelOperation.generateProtocolApi = true;
       codeModelOperation.convenienceApi = undefined;
@@ -550,7 +550,6 @@ export class CodeModelBuilder {
       codeModelOperation.generateProtocolApi = false;
       codeModelOperation.convenienceApi = undefined;
     }
-
   }
 
   private isOverloadBaseOperation(operation: Operation): boolean {
