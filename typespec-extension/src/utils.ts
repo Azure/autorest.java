@@ -13,8 +13,6 @@ import {
   Type,
   Union,
   ignoreDiagnostics,
-  isGlobalNamespace,
-  isService,
   isTemplateDeclaration,
   isTemplateInstance,
   resolvePath,
@@ -27,6 +25,7 @@ import {
   isStatusCode,
   getAllHttpServices,
 } from "@typespec/http";
+import { resolveOperationId } from "@typespec/openapi";
 import { ApiVersions } from "@autorest/codemodel";
 import { LroMetadata } from "@azure-tools/typespec-azure-core";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
@@ -137,7 +136,7 @@ export async function loadExamples(program: Program, options: EmitterOptions): P
     if (operationIdExamplesMap.size > 0) {
       const routes = service.operations;
       routes.forEach((it) => {
-        const operationId = pascalCase(resolveOperationId(program, it.operation));
+        const operationId = pascalCaseForOperationId(resolveOperationId(program, it.operation));
         if (operationIdExamplesMap.has(operationId)) {
           operationExamplesMap.set(it.operation, operationIdExamplesMap.get(operationId));
         }
@@ -147,21 +146,11 @@ export async function loadExamples(program: Program, options: EmitterOptions): P
   return operationExamplesMap;
 }
 
-export function resolveOperationId(program: Program, operation: Operation) {
-  // const explicitOperationId = getOperationId(program, operation);
-  // if (explicitOperationId) {
-  //   return explicitOperationId;
-  // }
-
-  if (operation.interface) {
-    return `${operation.interface.name}_${operation.name}`;
-  }
-  const namespace = operation.namespace;
-  if (namespace === undefined || isGlobalNamespace(program, namespace) || isService(program, namespace)) {
-    return operation.name;
-  }
-
-  return `${namespace.name}_${operation.name}`;
+function pascalCaseForOperationId(name: string) {
+  return name
+    .split("_")
+    .map((s) => pascalCase(s))
+    .join("_");
 }
 
 export function getNamespace(type: Model | Enum | Union | Operation): string | undefined {
