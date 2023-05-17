@@ -46,12 +46,8 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Integer::parseInt)")
         .build();
 
-    public static final ClassType Long = new Builder(false).knownClass(Long.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
-        .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
+    public static final ClassType Long = new Builder(false)
+        .prototypeAsLong()
         .build();
 
     public static final ClassType Float = new Builder(false).knownClass(Float.class)
@@ -63,11 +59,7 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType Double = new Builder(false).knownClass(Double.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D')
-        .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)")
+        .prototypeAsDouble()
         .build();
 
     public static final ClassType Character = new Builder(false).knownClass(Character.class)
@@ -184,30 +176,15 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType UnixTimeLong = new ClassType.Builder(false)
-        .knownClass(java.lang.Long.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
-        .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
+        .prototypeAsLong()
         .build();
 
     public static final ClassType DurationLong = new ClassType.Builder(false)
-        .knownClass(java.lang.Long.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.ofSeconds(%s)", defaultValueExpression + 'L'))
-        .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
+        .prototypeAsLong()
         .build();
 
     public static final ClassType DurationDouble = new ClassType.Builder(false)
-        .knownClass(java.lang.Double.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D'))
-        .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)")
+        .prototypeAsDouble()
         .build();
 
     public static final ClassType HttpPipeline = new ClassType.Builder(false)
@@ -638,7 +615,7 @@ public class ClassType implements IType {
         private List<String> implementationImports;
         private XmsExtensions extensions;
         private java.util.function.Function<String, String> defaultValueExpressionConverter;
-        private boolean wrapSerializationWithObjectsToString;
+        private boolean wrapSerializationWithObjectsToString = false;
         private String jsonDeserializationMethod;
         private String serializationMethodBase;
         private String xmlAttributeDeserializationTemplate;
@@ -660,6 +637,26 @@ public class ClassType implements IType {
         public Builder name(String name) {
             this.name = name;
             return this;
+        }
+
+        public Builder prototypeAsLong() {
+            return this.knownClass(Long.class)
+                .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
+                .serializationMethodBase("writeNumber")
+                .wrapSerializationWithObjectsToString(false)
+                .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
+                .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
+                .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)");
+        }
+
+        public Builder prototypeAsDouble() {
+            return this.knownClass(Double.class)
+                .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D')
+                .serializationMethodBase("writeNumber")
+                .wrapSerializationWithObjectsToString(false)
+                .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
+                .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
+                .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)");
         }
 
         public Builder knownClass(Class<?> clazz) {
