@@ -732,7 +732,7 @@ export class CodeModelBuilder {
         // utcDateTime in header maps to RFC 5322
         schema = this.processDateTimeSchema(param.param.type, param.param.name, true);
       } else {
-        schema = this.processSchema(param.param.type, param.param.name);
+        schema = this.processSchema(param.param, param.param.name);
       }
 
       // skip-url-encoding
