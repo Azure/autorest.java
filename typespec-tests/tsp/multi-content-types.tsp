@@ -43,23 +43,23 @@ interface MultipleContentTypesOnRequest {
   @post
   uploadBytesWithSingleBodyTypeForMultiContentTypes(@body data: bytes, @header contentType: "application/octet-stream" | "image/jpeg" | "image/png"): void;
 
-//   @doc("multiple data types map to multiple content types using shared route")
-//   @route("upload/multi-body-types")
-//   @sharedRoute
-//   @post
-//   uploadBytesWithMultiBodyTypesForMultiContentTypes(@body data: bytes, @header contentType:  "application/octet-stream" | "image/jpeg" | "image/png"): void;
+  @doc("multiple data types map to multiple content types using shared route")
+  @route("upload/multi-body-types")
+  @sharedRoute
+  @post
+  uploadBytesWithMultiBodyTypesForMultiContentTypes(@body data: bytes, @header contentType:  "application/octet-stream" | "image/jpeg" | "image/png"): void;
 
-//   @doc("multiple data types map to multiple content types using shared route")
-//   @route("upload/multi-body-types")
-//   @sharedRoute
-//   @post
-//   uploadJsonWithMultiBodyTypesForMultiContentTypes(@body data: Resource, @header contentType:  "application/json"): void;
+  @doc("multiple data types map to multiple content types using shared route")
+  @route("upload/multi-body-types")
+  @sharedRoute
+  @post
+  uploadJsonWithMultiBodyTypesForMultiContentTypes(@body data: Resource, @header contentType:  "application/json"): void;
 
-//   @doc("multiple data types map to multiple content types using shared route")
-//   @route("upload/multi-body-types")
-//   @sharedRoute
-//   @post
-//   uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes(@body data: bytes | Resource, @header contentType:  "application/json" | "application/octet-stream" | "image/jpeg" | "image/png"): void;
+  @doc("multiple data types map to multiple content types using shared route")
+  @route("upload/multi-body-types")
+  @sharedRoute
+  @post
+  uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes(@body data: bytes | Resource, @header contentType:  "application/json" | "application/octet-stream" | "image/jpeg" | "image/png"): void;
 
 }
 
