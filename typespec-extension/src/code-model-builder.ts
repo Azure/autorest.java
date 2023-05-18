@@ -37,8 +37,6 @@ import {
   getProjectedName,
   getService,
   getEncode,
-  getOverloadedOperation,
-  getOverloads,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
