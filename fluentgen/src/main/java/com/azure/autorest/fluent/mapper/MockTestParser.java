@@ -8,7 +8,7 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
-import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
@@ -21,6 +21,7 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.autorest.util.ModelTestCaseUtil;
 import com.azure.autorest.util.PossibleCredentialException;
@@ -63,7 +64,7 @@ public class MockTestParser extends ExampleParser {
             for (FluentCollectionMethod collectionMethod : collectionMethods) {
                 ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
                 if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod) && FluentUtils.validResponseContentTypeToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
-                    List<MethodParameter> methodParameters = getParameters(clientMethod);
+                    List<MethodParameter> methodParameters = MethodUtil.getParameters(clientMethod);
                     MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
                     ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
                     FluentResourceCreateExample resourceCreateExample =
@@ -89,7 +90,7 @@ public class MockTestParser extends ExampleParser {
         try {
             ClientMethod clientMethod = collectionMethod.getInnerClientMethod();
             if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod) && FluentUtils.validResponseContentTypeToGenerateExample(clientMethod) && requiresExample(clientMethod)) {
-                List<MethodParameter> methodParameters = getParameters(clientMethod);
+                List<MethodParameter> methodParameters = MethodUtil.getParameters(clientMethod);
                 ProxyMethodExample proxyMethodExample = createProxyMethodExample(clientMethod, methodParameters);
                 FluentCollectionMethodExample collectionMethodExample =
                         parseMethodForExample(collection, collectionMethod, methodParameters, proxyMethodExample.getName(), proxyMethodExample);
