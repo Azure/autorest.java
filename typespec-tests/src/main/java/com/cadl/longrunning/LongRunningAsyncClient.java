@@ -12,15 +12,15 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollerFlux;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
+import com.cadl.longrunning.models.ExportedResource;
 import com.cadl.longrunning.models.Resource;
-import com.cadl.longrunning.models.ResourceOperationStatusResourceError;
-import com.cadl.longrunning.models.ResourceOperationStatusResourceExportedResourceError;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous LongRunningClient type. */
@@ -152,7 +152,18 @@ public final class LongRunningAsyncClient {
      * {
      *     id: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
      * }</pre>
      *
@@ -178,11 +189,18 @@ public final class LongRunningAsyncClient {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     error: ResponseError (Optional)
-     *     result (Optional): {
-     *         id: String (Required)
-     *         resourceUri: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -194,7 +212,7 @@ public final class LongRunningAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -218,8 +236,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusResourceError, Resource> beginCreateOrReplace(
-            String name, Resource resource) {
+    public PollerFlux<PollResult, Resource> beginCreateOrReplace(String name, Resource resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateOrReplaceWithModelAsync(name, BinaryData.fromObject(resource), requestOptions);
@@ -261,7 +278,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusResourceError, Void> beginDelete(String name) {
+    public PollerFlux<PollResult, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginDeleteWithModelAsync(name, requestOptions);
@@ -278,14 +295,11 @@ public final class LongRunningAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<
-                    ResourceOperationStatusResourceExportedResourceError,
-                    ResourceOperationStatusResourceExportedResourceError>
-            beginExport(String name, String projectFileVersion) {
+    public PollerFlux<PollResult, ExportedResource> beginExport(String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginExportWithModelAsync(name, projectFileVersion, requestOptions);

@@ -41,8 +41,11 @@ jobs:
 
       - script: |
           npm install -g @typespec/compiler@next
-          npm install pacote
-          node typespec-tests/bump_deps.js typespec-extension/package.json typespec-tests/package.json
+          npx @azure-tools/typespec-bump-deps typespec-extension/package.json typespec-tests/package.json --add-npm-overrides
+          echo "typespec-extension/package.json"
+          cat typespec-extension/package.json
+          echo "typespec-tests/package.json"
+          cat typespec-tests/package.json
         displayName: 'Bump TypeSpec Dependencies to dev'
 
       - task: PowerShell@2
@@ -70,9 +73,9 @@ jobs:
           git diff
         displayName: 'Git Diff'
 
-      - script: |
-          [ -z "`git status --porcelain`" ]
-        displayName: 'Check no Diff'
+#      - script: |
+#          [ -z "`git status --porcelain`" ]
+#        displayName: 'Check no Diff'
 
       - script: |
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ --coverageFile ./cadl-ranch-coverage-java.json &

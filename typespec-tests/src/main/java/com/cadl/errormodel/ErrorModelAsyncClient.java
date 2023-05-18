@@ -43,7 +43,18 @@ public final class ErrorModelAsyncClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     error: ResponseError (Required)
+     *     error (Required): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
      * }</pre>
      *

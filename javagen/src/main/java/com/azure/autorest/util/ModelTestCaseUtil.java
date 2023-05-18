@@ -117,9 +117,13 @@ public class ModelTestCaseUtil {
         } else if (type == ClassType.DateTimeRfc1123) {
             return DateTimeRfc1123.toRfc1123String(randomDateTime());
         } else if (type == ClassType.Duration) {
-            Duration duration = Duration.parse("PT0S");
+            Duration duration = Duration.ZERO;
             duration = duration.plusSeconds(RANDOM.nextInt(10 * 24 * 60 * 60));
             return duration.toString();
+        } else if (type.asNullable() == ClassType.DurationLong) {
+            return RANDOM.nextLong() & Long.MAX_VALUE;
+        } else if (type.asNullable() == ClassType.DurationDouble) {
+            return Math.abs(RANDOM.nextDouble() * 10);
         } else if (type == ClassType.UUID) {
             return UUID.randomUUID().toString();
         } else if (type == ClassType.URL) {

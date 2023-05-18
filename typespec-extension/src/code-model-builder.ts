@@ -36,12 +36,14 @@ import {
   EmitContext,
   getProjectedName,
   getService,
+  getEncode,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
   getAuthentication,
   getServers,
   getStatusCodeDescription,
+  HttpOperation,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
@@ -52,7 +54,13 @@ import {
   getHeaderFieldOptions,
 } from "@typespec/http";
 import { getVersion } from "@typespec/versioning";
-import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/typespec-azure-core";
+import {
+  isPollingLocation,
+  getPagedResult,
+  getOperationLinks,
+  isFixed,
+  getLroMetadata,
+} from "@azure-tools/typespec-azure-core";
 import {
   SdkContext,
   listClients,
@@ -77,7 +85,6 @@ import {
   DateSchema,
   DictionarySchema,
   Discriminator,
-  DurationSchema,
   HttpHeader,
   HttpParameter,
   ImplementationLocation,
@@ -104,6 +111,7 @@ import {
   GroupProperty,
   ApiVersion,
   SerializationStyle,
+  Metadata,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient } from "./common/client.js";
@@ -112,9 +120,12 @@ import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { ConstantSchema, ConstantValue } from "./common/schemas/constant.js";
 import { OrSchema } from "./common/schemas/relationship.js";
+import { LongRunningMetadata } from "./common/long-running-metadata.js";
+import { DurationSchema } from "./common/schemas/time.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
-import { ClientContext, LongRunningMetadata } from "./models.js";
+import { createPollResultSchema } from "./external-schemas.js";
+import { ClientContext } from "./models.js";
 import {
   ProcessingCache,
   stringArrayContainsIgnoreCase,
@@ -132,6 +143,10 @@ import {
   originApiVersion,
   specialHeaderNames,
   loadExamples,
+  isLroMetadataSupported,
+  isLroNewPollingStrategy,
+  getDurationFormat,
+  hasScalarAsBase,
 } from "./utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -502,7 +517,7 @@ export class CodeModelBuilder {
     // linked operations
     const lroMetadata = fromLinkedOperation
       ? new LongRunningMetadata(false)
-      : this.processLinkedOperation(codeModelOperation, groupName, operation, clientContext);
+      : this.processLroMetadata(codeModelOperation, groupName, op, clientContext);
 
     // responses
     const candidateResponseSchema = lroMetadata.pollResultType; // candidate: response body type of pollingOperation
@@ -511,7 +526,7 @@ export class CodeModelBuilder {
     // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
-    this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata.longRunning);
+    this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -545,15 +560,83 @@ export class CodeModelBuilder {
     }
   }
 
-  private processLinkedOperation(
+  private processLroMetadata(
     op: CodeModelOperation,
     groupName: string,
-    operation: Operation,
+    httpOperation: HttpOperation,
     clientContext: ClientContext,
   ): LongRunningMetadata {
+    const operation = httpOperation.operation;
+
     let pollingSchema = undefined;
     let finalSchema = undefined;
     let pollingFoundInOperationLinks = false;
+
+    const lroMetadata = getLroMetadata(this.program, operation);
+    if (
+      lroMetadata &&
+      // we know those operation with OperationStatus is from Azure.Core,
+      // which is validated that "getLroMetadata" gives correct metadata.
+      // there are known cases that on legacy LRO, "getLroMetadata" gives wrong metadata.
+      lroMetadata.statusMonitorStep &&
+      isLroMetadataSupported(operation, lroMetadata)
+    ) {
+      const verb = httpOperation.verb;
+      const useNewPollStrategy = isLroNewPollingStrategy(operation, lroMetadata);
+
+      let pollingStrategy: Metadata | undefined = undefined;
+      if (useNewPollStrategy) {
+        pollingStrategy = new Metadata({
+          language: {
+            java: {
+              name: "OperationLocationPollingStrategy",
+              namespace: "com.azure.core.experimental.util.polling",
+            },
+          },
+        });
+      }
+
+      // pollingSchema
+      if (useNewPollStrategy) {
+        // com.azure.core.experimental.models.PollResult
+        pollingSchema = this.pollResultSchema;
+      } else {
+        if (
+          lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
+          getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
+        ) {
+          pollingSchema = this.pollResultSchema;
+        } else {
+          pollingSchema = this.processSchema(lroMetadata.statusMonitorStep.responseModel, "pollResult");
+        }
+      }
+
+      // finalSchema
+      if (lroMetadata.finalStep?.responseModel) {
+        finalSchema = this.processSchema(lroMetadata.finalStep.responseModel, "finalResult");
+      } else if (verb !== "delete" && lroMetadata.logicalResult) {
+        finalSchema = this.processSchema(lroMetadata.logicalResult, "finalResult");
+      }
+
+      // track usage
+      if (pollingSchema) {
+        this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
+        if (op.convenienceApi) {
+          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.ConvenienceApi] });
+        }
+      }
+      if (finalSchema) {
+        this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
+        if (op.convenienceApi) {
+          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.ConvenienceApi] });
+        }
+      }
+
+      op.lroMetadata = new LongRunningMetadata(true, pollingSchema, finalSchema, pollingStrategy);
+      return op.lroMetadata;
+    }
+
+    // TODO (weidxu): we will eventually get rid of the logic on OperationLinkMetadata, and only use LroMetadata
     const operationLinks = getOperationLinks(this.program, operation);
     if (operationLinks) {
       op.operationLinks = {};
@@ -605,9 +688,9 @@ export class CodeModelBuilder {
   private processRouteForLongRunning(
     op: CodeModelOperation,
     responses: HttpOperationResponse[],
-    pollingFoundInOperationLinks: boolean,
+    lroMetadata: LongRunningMetadata,
   ) {
-    if (pollingFoundInOperationLinks) {
+    if (lroMetadata.longRunning) {
       op.extensions = op.extensions ?? {};
       op.extensions["x-ms-long-running-operation"] = true;
       return;
@@ -649,7 +732,7 @@ export class CodeModelBuilder {
         // utcDateTime in header maps to RFC 5322
         schema = this.processDateTimeSchema(param.param.type, param.param.name, true);
       } else {
-        schema = this.processSchema(param.param.type, param.param.name);
+        schema = this.processSchema(param.param, param.param.name);
       }
 
       // skip-url-encoding
@@ -1027,7 +1110,12 @@ export class CodeModelBuilder {
           }
         }
         if (!schema) {
-          schema = this.processSchema(bodyType, "response");
+          if (verb === "post" && op.lroMetadata && op.lroMetadata.pollResultType) {
+            // for standard LRO action, return type is the pollResultType
+            schema = op.lroMetadata.pollResultType;
+          } else {
+            schema = this.processSchema(bodyType, "response");
+          }
         }
         response = new SchemaResponse(schema, {
           protocol: {
@@ -1201,6 +1289,14 @@ export class CodeModelBuilder {
         // use it for extensible enum
         return this.processChoiceSchema(knownValues, this.getName(type), false);
       } else {
+        const encode = getEncode(this.program, type);
+        if (encode) {
+          // process as encode
+          if (encode.encoding === "seconds" && hasScalarAsBase(type, "duration")) {
+            return this.processDurationSchema(type, nameHint, getDurationFormat(encode));
+          }
+        }
+
         if (type.baseScalar) {
           // fallback to baseScalar
           const schema = this.processScalar(type.baseScalar, getFormat(this.program, type), nameHint);
@@ -1417,10 +1513,15 @@ export class CodeModelBuilder {
     );
   }
 
-  private processDurationSchema(type: Scalar, name: string): DurationSchema {
+  private processDurationSchema(
+    type: Scalar,
+    name: string,
+    format: DurationSchema["format"] = "duration-rfc3339",
+  ): DurationSchema {
     return this.codeModel.schemas.add(
       new DurationSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
+        format: format,
       }),
     );
   }
@@ -1585,6 +1686,13 @@ export class CodeModelBuilder {
     if (format) {
       if (prop.type.kind === "Scalar" && schema instanceof StringSchema) {
         schema = this.processFormatString(prop.type, format, nameHint);
+      }
+    } else {
+      const encode = getEncode(this.program, prop);
+      if (encode) {
+        if (encode.encoding === "seconds" && prop.type.kind === "Scalar" && hasScalarAsBase(prop.type, "duration")) {
+          schema = this.processDurationSchema(prop.type, nameHint, getDurationFormat(encode));
+        }
       }
     }
     return schema;
@@ -1893,6 +2001,14 @@ export class CodeModelBuilder {
   private _anySchema?: AnySchema;
   get anySchema(): AnySchema {
     return this._anySchema ?? (this._anySchema = this.codeModel.schemas.add(new AnySchema("Anything")));
+  }
+
+  private _pollResultSchema?: ObjectSchema;
+  get pollResultSchema(): ObjectSchema {
+    return (
+      this._pollResultSchema ??
+      (this._pollResultSchema = createPollResultSchema(this.codeModel.schemas, this.stringSchema))
+    );
   }
 
   private createApiVersionParameter(serializedName: string, parameterLocation: ParameterLocation): Parameter {

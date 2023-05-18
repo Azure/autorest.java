@@ -1,10 +1,14 @@
 import {
+  EncodeData,
   Enum,
+  IntrinsicScalarName,
   Model,
   ModelProperty,
   NoTarget,
   Operation,
   Program,
+  Scalar,
+  SyntaxKind,
   TemplatedTypeBase,
   Type,
   Union,
@@ -24,10 +28,12 @@ import {
   getAllHttpServices,
 } from "@typespec/http";
 import { ApiVersions } from "@autorest/codemodel";
+import { LroMetadata } from "@azure-tools/typespec-azure-core";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
 import { getVersion } from "@typespec/versioning";
+import { DurationSchema } from "./common/schemas/time.js";
 
 export const specialHeaderNames = new Set([
   "repeatability-request-id",
@@ -257,4 +263,74 @@ export function getServiceVersion(client: CodeModelClient | CodeModel): ServiceV
     name = name + "ServiceVersion";
   }
   return new ServiceVersion(name, description);
+}
+
+export function isLroMetadataSupported(operation: Operation, lroMetadata: LroMetadata): boolean {
+  const azureCoreLroSvs = [
+    "LongRunningResourceCreateOrReplace",
+    "LongRunningResourceCreateOrUpdate",
+    "LongRunningResourceDelete",
+    "LongRunningResourceAction",
+  ];
+
+  let ret = false;
+  if (
+    lroMetadata.statusMonitorStep &&
+    lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
+    getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
+  ) {
+    if (operation.node.signature.kind === SyntaxKind.OperationSignatureReference) {
+      if (operation.node.signature.baseOperation.target.kind === SyntaxKind.MemberExpression) {
+        const sv = operation.node.signature.baseOperation.target.id.sv;
+        ret = azureCoreLroSvs.includes(sv);
+      }
+    }
+  }
+  return ret;
+}
+
+export function isLroNewPollingStrategy(operation: Operation, lroMetadata: LroMetadata): boolean {
+  // at present, it is same as isLroMetadataSupported, which checks if operation uses template from Azure.Core
+  // will change later when isLroMetadataSupported extends to other types of operations
+  return true;
+
+  // if (verb === "put" && !lroMetadata.finalStep) {
+  //   // PUT without last GET on resource
+  //   useNewPollStrategy = true;
+  // } else if (
+  //   verb === "post" &&
+  //   lroMetadata.finalStep &&
+  //   lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
+  //   lroMetadata.finalStep.target.name === "result"
+  // ) {
+  //   // POST with final result in "result" property
+  //   useNewPollStrategy = true;
+  // }
+}
+
+export function getDurationFormat(encode: EncodeData): DurationSchema["format"] {
+  let format: DurationSchema["format"] = "duration-rfc3339";
+  // duration encoded as seconds
+  if (encode.encoding === "seconds") {
+    const scalarName = encode.type.name;
+    if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
+      format = "seconds-integer";
+    } else if (scalarName.startsWith("float")) {
+      format = "seconds-number";
+    } else {
+      throw new Error(`Unrecognized scalar type used by duration encoded as seconds: '${scalarName}'.`);
+    }
+  }
+  return format;
+}
+
+export function hasScalarAsBase(type: Scalar, scalarName: IntrinsicScalarName): boolean {
+  let scalarType: Scalar | undefined = type;
+  while (scalarType) {
+    if (scalarType.name === scalarName) {
+      return true;
+    }
+    scalarType = scalarType.baseScalar;
+  }
+  return false;
 }
