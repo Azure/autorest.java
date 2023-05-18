@@ -727,9 +727,11 @@ export class CodeModelBuilder {
       if (
         param.type === "header" &&
         param.param.type.kind === "Scalar" &&
-        (param.param.type.name === "utcDateTime" || param.param.type.name === "offsetDateTime")
+        getEncode(this.program, param.param) === undefined &&
+        getEncode(this.program, param.param.type) === undefined &&
+        (hasScalarAsBase(param.param.type, "utcDateTime") || hasScalarAsBase(param.param.type, "offsetDateTime"))
       ) {
-        // utcDateTime in header maps to RFC 5322
+        // utcDateTime in header maps to rfc7231
         schema = this.processDateTimeSchema(param.param.type, param.param.name, true);
       } else {
         schema = this.processSchema(param.param, param.param.name);
@@ -1294,6 +1296,14 @@ export class CodeModelBuilder {
           // process as encode
           if (encode.encoding === "seconds" && hasScalarAsBase(type, "duration")) {
             return this.processDurationSchema(type, nameHint, getDurationFormat(encode));
+          } else if (
+            (encode.encoding === "rfc3339" || encode.encoding === "rfc7231") &&
+            (hasScalarAsBase(type, "utcDateTime") || hasScalarAsBase(type, "offsetDateTime"))
+          ) {
+            // TODO "unixTimeStamp"
+            return this.processDateTimeSchema(type, nameHint, encode.encoding === "rfc7231");
+          } else if (encode.encoding === "base64url" && hasScalarAsBase(type, "bytes")) {
+            return this.processByteArraySchema(type, nameHint, true);
           }
         }
 
@@ -1687,11 +1697,19 @@ export class CodeModelBuilder {
       if (prop.type.kind === "Scalar" && schema instanceof StringSchema) {
         schema = this.processFormatString(prop.type, format, nameHint);
       }
-    } else {
+    } else if (prop.type.kind === "Scalar") {
       const encode = getEncode(this.program, prop);
       if (encode) {
-        if (encode.encoding === "seconds" && prop.type.kind === "Scalar" && hasScalarAsBase(prop.type, "duration")) {
+        if (encode.encoding === "seconds" && hasScalarAsBase(prop.type, "duration")) {
           schema = this.processDurationSchema(prop.type, nameHint, getDurationFormat(encode));
+        } else if (
+          (encode.encoding === "rfc3339" || encode.encoding === "rfc7231") &&
+          (hasScalarAsBase(prop.type, "utcDateTime") || hasScalarAsBase(prop.type, "offsetDateTime"))
+        ) {
+          // TODO "unixTimeStamp"
+          return this.processDateTimeSchema(prop.type, nameHint, encode.encoding === "rfc7231");
+        } else if (encode.encoding === "base64url" && hasScalarAsBase(prop.type, "bytes")) {
+          return this.processByteArraySchema(prop.type, nameHint, true);
         }
       }
     }

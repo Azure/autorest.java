@@ -10,18 +10,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.time.OffsetDateTime;
 
 public class EncodeTests {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
+    private static final OffsetDateTime DATE = OffsetDateTime.parse("2019-10-12T07:20:50.52Z");
+    private static final byte[] DATA = "data".getBytes(StandardCharsets.UTF_8);
+
     @Test
-    public void testEncodedDuration() throws Exception {
+    public void testEncoded() throws Exception {
         Duration timeInSeconds = Duration.ofSeconds(5);
         Duration timeInSecondsFraction = Duration.ofMillis(1500);
 
-        Encoded encoded = new Encoded(timeInSeconds, timeInSecondsFraction);
+        Encoded encoded = new Encoded(timeInSeconds, timeInSecondsFraction, DATE, DATE, DATA, DATA);
 
         Assertions.assertEquals(timeInSeconds, encoded.getTimeInSeconds());
         Assertions.assertEquals(timeInSecondsFraction, encoded.getTimeInSecondsFraction());
@@ -34,6 +39,10 @@ public class EncodeTests {
         double timeInSecondsFractionInJson = jsonNode.get("timeInSecondsFraction").asDouble();
         Assertions.assertEquals(5, timeInSecondsInJson);
         Assertions.assertEquals(1.5, timeInSecondsFractionInJson);
+        Assertions.assertEquals("2019-10-12T07:20:50.520Z", jsonNode.get("dateTime").asText());
+        Assertions.assertEquals("Sat, 12 Oct 2019 07:20:50 GMT", jsonNode.get("dateTimeRfc7231").asText());
+        Assertions.assertEquals("ZGF0YQ==", jsonNode.get("base64").asText());
+        Assertions.assertEquals("ZGF0YQ", jsonNode.get("base64url").asText());
     }
 
     @Test
@@ -41,7 +50,7 @@ public class EncodeTests {
         Duration timeInSeconds = Duration.ofMillis(5700);
         Duration timeInSecondsFraction = Duration.ofDays(1);
 
-        Encoded encoded = new Encoded(timeInSeconds, timeInSecondsFraction);
+        Encoded encoded = new Encoded(timeInSeconds, timeInSecondsFraction, DATE, DATE, DATA, DATA);
 
         // since the wire type is long (in seconds), 5.7 seconds will be 5 seconds
         Assertions.assertEquals(5, encoded.getTimeInSeconds().getSeconds());

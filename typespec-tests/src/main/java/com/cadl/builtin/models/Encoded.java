@@ -5,9 +5,13 @@
 package com.cadl.builtin.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.Base64Url;
+import com.azure.core.util.CoreUtils;
+import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
+import java.time.OffsetDateTime;
 
 /** The Encoded model. */
 @Fluent
@@ -30,18 +34,54 @@ public final class Encoded {
     @JsonProperty(value = "timeInSecondsOptional")
     private Long timeInSecondsOptional;
 
+    /*
+     * The dateTime property.
+     */
+    @JsonProperty(value = "dateTime", required = true)
+    private OffsetDateTime dateTime;
+
+    /*
+     * The dateTimeRfc7231 property.
+     */
+    @JsonProperty(value = "dateTimeRfc7231", required = true)
+    private DateTimeRfc1123 dateTimeRfc7231;
+
+    /*
+     * The base64 property.
+     */
+    @JsonProperty(value = "base64", required = true)
+    private byte[] base64;
+
+    /*
+     * The base64url property.
+     */
+    @JsonProperty(value = "base64url", required = true)
+    private Base64Url base64Url;
+
     /**
      * Creates an instance of Encoded class.
      *
      * @param timeInSeconds the timeInSeconds value to set.
      * @param timeInSecondsFraction the timeInSecondsFraction value to set.
+     * @param dateTime the dateTime value to set.
+     * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
+     * @param base64 the base64 value to set.
+     * @param base64Url the base64Url value to set.
      */
     @JsonCreator
     public Encoded(
             @JsonProperty(value = "timeInSeconds", required = true) Duration timeInSeconds,
-            @JsonProperty(value = "timeInSecondsFraction", required = true) Duration timeInSecondsFraction) {
+            @JsonProperty(value = "timeInSecondsFraction", required = true) Duration timeInSecondsFraction,
+            @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
+            @JsonProperty(value = "dateTimeRfc7231", required = true) OffsetDateTime dateTimeRfc7231,
+            @JsonProperty(value = "base64", required = true) byte[] base64,
+            @JsonProperty(value = "base64url", required = true) byte[] base64Url) {
         this.timeInSeconds = timeInSeconds.getSeconds();
         this.timeInSecondsFraction = (double) timeInSecondsFraction.toNanos() / 1000_000_000L;
+        this.dateTime = dateTime;
+        this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
+        this.base64 = base64;
+        this.base64Url = Base64Url.encode(base64Url);
     }
 
     /**
@@ -87,5 +127,47 @@ public final class Encoded {
             this.timeInSecondsOptional = timeInSecondsOptional.getSeconds();
         }
         return this;
+    }
+
+    /**
+     * Get the dateTime property: The dateTime property.
+     *
+     * @return the dateTime value.
+     */
+    public OffsetDateTime getDateTime() {
+        return this.dateTime;
+    }
+
+    /**
+     * Get the dateTimeRfc7231 property: The dateTimeRfc7231 property.
+     *
+     * @return the dateTimeRfc7231 value.
+     */
+    public OffsetDateTime getDateTimeRfc7231() {
+        if (this.dateTimeRfc7231 == null) {
+            return null;
+        }
+        return this.dateTimeRfc7231.getDateTime();
+    }
+
+    /**
+     * Get the base64 property: The base64 property.
+     *
+     * @return the base64 value.
+     */
+    public byte[] getBase64() {
+        return CoreUtils.clone(this.base64);
+    }
+
+    /**
+     * Get the base64Url property: The base64url property.
+     *
+     * @return the base64Url value.
+     */
+    public byte[] getBase64Url() {
+        if (this.base64Url == null) {
+            return new byte[0];
+        }
+        return this.base64Url.decodedBytes();
     }
 }
