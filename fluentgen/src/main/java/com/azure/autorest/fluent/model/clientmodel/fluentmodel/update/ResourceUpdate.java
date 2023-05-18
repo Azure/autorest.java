@@ -10,7 +10,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
-import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.method.FluentApplyMethod;

@@ -4,7 +4,7 @@
 package com.azure.autorest.fluent.model.clientmodel.fluentmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
-import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
