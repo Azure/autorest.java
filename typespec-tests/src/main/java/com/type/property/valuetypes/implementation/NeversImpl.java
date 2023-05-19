@@ -124,7 +124,8 @@ public final class NeversImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * Object
+     * {
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -146,7 +147,8 @@ public final class NeversImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * Object
+     * {
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -168,7 +170,8 @@ public final class NeversImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * Object
+     * {
+     * }
      * }</pre>
      *
      * @param body body.
@@ -191,7 +194,8 @@ public final class NeversImpl {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * Object
+     * {
+     * }
      * }</pre>
      *
      * @param body body.

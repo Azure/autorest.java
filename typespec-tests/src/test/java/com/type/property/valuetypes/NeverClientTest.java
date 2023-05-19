@@ -3,6 +3,7 @@
 
 package com.type.property.valuetypes;
 
+import com.type.property.valuetypes.models.NeverProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,12 +13,12 @@ class NeverClientTest {
 
     @Test
     void get() {
-        Object response = client.get();
-        Assertions.assertEquals("{}", response.toString());
+        NeverProperty response = client.get();
+        Assertions.assertNotNull(response);
     }
 
     @Test
     void put() {
-        client.put(new Object());
+        client.put(new NeverProperty());
     }
 }
