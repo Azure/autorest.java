@@ -76,7 +76,8 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
      * @param compositeType The type to check.
      */
     public static boolean isPlainObject(ObjectSchema compositeType) {
-        return compositeType.getProperties().isEmpty() && compositeType.getDiscriminator() == null
+        return !JavaSettings.getInstance().isDataPlaneClient()
+            && compositeType.getProperties().isEmpty() && compositeType.getDiscriminator() == null
             && compositeType.getParents() == null && compositeType.getChildren() == null
             && (compositeType.getExtensions() == null || compositeType.getExtensions().getXmsEnum() == null);
     }
