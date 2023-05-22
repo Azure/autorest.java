@@ -38,7 +38,14 @@ import java.util.Objects;
 
 /** A builder for creating a new instance of the DurationClient type. */
 @ServiceClientBuilder(
-        serviceClients = {QueryClient.class, PropertyClient.class, QueryAsyncClient.class, PropertyAsyncClient.class})
+        serviceClients = {
+            QueryClient.class,
+            PropertyClient.class,
+            HeaderClient.class,
+            QueryAsyncClient.class,
+            PropertyAsyncClient.class,
+            HeaderAsyncClient.class
+        })
 public final class DurationClientBuilder
         implements HttpTrait<DurationClientBuilder>, ConfigurationTrait<DurationClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
@@ -233,6 +240,16 @@ public final class DurationClientBuilder
     }
 
     /**
+     * Builds an instance of HeaderAsyncClient class.
+     *
+     * @return an instance of HeaderAsyncClient.
+     */
+    @Generated
+    public HeaderAsyncClient buildHeaderAsyncClient() {
+        return new HeaderAsyncClient(buildInnerClient().getHeaders());
+    }
+
+    /**
      * Builds an instance of QueryClient class.
      *
      * @return an instance of QueryClient.
@@ -250,5 +267,15 @@ public final class DurationClientBuilder
     @Generated
     public PropertyClient buildPropertyClient() {
         return new PropertyClient(buildInnerClient().getProperties());
+    }
+
+    /**
+     * Builds an instance of HeaderClient class.
+     *
+     * @return an instance of HeaderClient.
+     */
+    @Generated
+    public HeaderClient buildHeaderClient() {
+        return new HeaderClient(buildInnerClient().getHeaders());
     }
 }

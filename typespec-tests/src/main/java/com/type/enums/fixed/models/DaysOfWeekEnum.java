@@ -7,27 +7,27 @@ package com.type.enums.fixed.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for DaysOfWeekEnum. */
+/** Days of the week. */
 public enum DaysOfWeekEnum {
-    /** Enum value Monday. */
+    /** Monday. */
     MONDAY("Monday"),
 
-    /** Enum value Tuesday. */
+    /** Tuesday. */
     TUESDAY("Tuesday"),
 
-    /** Enum value Wednesday. */
+    /** Wednesday. */
     WEDNESDAY("Wednesday"),
 
-    /** Enum value Thursday. */
+    /** Thursday. */
     THURSDAY("Thursday"),
 
-    /** Enum value Friday. */
+    /** Friday. */
     FRIDAY("Friday"),
 
-    /** Enum value Saturday. */
+    /** Saturday. */
     SATURDAY("Saturday"),
 
-    /** Enum value Sunday. */
+    /** Sunday. */
     SUNDAY("Sunday");
 
     /** The actual serialized value for a DaysOfWeekEnum instance. */
