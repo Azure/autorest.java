@@ -857,7 +857,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             List<ClientMethodParameter> parameters) {
 
         if (!isProtocolMethod && JavaSettings.getInstance().isDataPlaneClient()) {
-            if (parameters.stream().anyMatch(p -> !p.isFromClient() && !p.isConstant() && p.getVersioning() != null && p.getVersioning().getAdded() != null)) {
+            if (parameters.stream().anyMatch(p -> p.getVersioning() != null && p.getVersioning().getAdded() != null)) {
                 List<List<ClientMethodParameter>> signatures = findOverloadedSignatures(parameters);
                 for (List<ClientMethodParameter> overloadedParameters : signatures) {
                     builder.parameters(overloadedParameters);
