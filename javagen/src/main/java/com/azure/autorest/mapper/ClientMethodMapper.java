@@ -64,6 +64,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A mapper that maps an {@link Operation} to a lit of {@link ClientMethod ClientMethods}.
@@ -327,7 +328,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         methodVisibility(ClientMethodType.SimpleAsyncRestResponse, defaultOverloadType, false, isProtocolMethod);
                     JavaVisibility simpleAsyncMethodVisibilityWithContext =
                         methodVisibility(ClientMethodType.SimpleAsyncRestResponse, defaultOverloadType, true, isProtocolMethod);
-
 
                     JavaVisibility simpleSyncMethodVisibility =
                             methodVisibility(ClientMethodType.SimpleSyncRestResponse, defaultOverloadType, false,
@@ -858,14 +858,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         if (!isProtocolMethod && JavaSettings.getInstance().isDataPlaneClient()) {
             if (parameters.stream().anyMatch(p -> !p.isFromClient() && !p.isConstant() && p.getVersioning() != null && p.getVersioning().getAdded() != null)) {
-                List<ClientMethodParameter> nonVersionedParameters = parameters.stream()
-                        .filter(p -> !p.isFromClient() && !p.isConstant()
-                                && (p.getVersioning() == null || p.getVersioning().getAdded() == null))
-                        .collect(Collectors.toList());
-                if (nonVersionedParameters.stream().anyMatch(p -> !p.isRequired())) {
-                    // TODO (weidxu): improve logic
-                    List<ClientMethodParameter> overloadedParameters = nonVersionedParameters;
-
+                List<List<ClientMethodParameter>> signatures = findOverloadedSignatures(parameters);
+                for (List<ClientMethodParameter> overloadedParameters : signatures) {
                     builder.parameters(overloadedParameters);
                     methods.add(builder.build());
                 }
@@ -873,6 +867,41 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             builder.parameters(parameters);
         }
+    }
+
+    static List<List<ClientMethodParameter>> findOverloadedSignatures(List<ClientMethodParameter> parameters) {
+        List<List<ClientMethodParameter>> signatures = new ArrayList<>();
+
+        List<ClientMethodParameter> allParameters = parameters;
+        List<ClientMethodParameter> requiredParameters = parameters.stream()
+                .filter(MethodParameter::isRequired)
+                .collect(Collectors.toList());
+
+        List<String> versions = allParameters.stream()
+                .flatMap(p -> {
+                    if (p.getVersioning() != null && p.getVersioning().getAdded() != null) {
+                        return p.getVersioning().getAdded().stream();
+                    } else {
+                        return Stream.empty();
+                    }
+                }).distinct().collect(Collectors.toList());
+        versions.add(0, null);  // for signature of no version
+
+        for (String version : versions) {
+            List<ClientMethodParameter> overloadedParameters = allParameters.stream()
+                    .filter(p -> (p.getVersioning() == null || p.getVersioning().getAdded() == null)
+                            || (p.getVersioning() != null && p.getVersioning().getAdded() != null && p.getVersioning().getAdded().contains(version)))
+                    .collect(Collectors.toList());
+
+            if (!overloadedParameters.equals(allParameters)
+                    && !overloadedParameters.equals(requiredParameters)
+                    && !signatures.contains(overloadedParameters)) {
+                // take the signature not same as required-only, not same as full, not same as anything already there
+                signatures.add(overloadedParameters);
+            }
+        }
+
+        return signatures;
     }
 
     private static ClientMethodParameter updateClientMethodParameter(ClientMethodParameter clientMethodParameter) {
