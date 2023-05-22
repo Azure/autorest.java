@@ -105,6 +105,11 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         }
     }
 
+    @Override
+    protected void writeThrowException(String exceptionExpression, JavaBlock methodBlock) {
+        methodBlock.methodReturn(String.format("Mono.error(%s)", exceptionExpression));
+    }
+
     private IType getResponseBodyType(ClientMethod method) {
         // Mono<T>
         return ((GenericType) method.getReturnValue().getType()).getTypeArguments()[0];

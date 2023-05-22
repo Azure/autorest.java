@@ -39,6 +39,10 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         if (!CoreUtils.isNullOrEmpty(convenienceMethods)) {
             super.addImports(imports, convenienceMethods);
         }
+
+        if (JavaSettings.getInstance().isUseClientLogger()) {
+            ClassType.ClientLogger.addImportsTo(imports, false);
+        }
     }
 
     @Override
@@ -126,6 +130,24 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             } else {
                 methodBlock.methodReturn(statement);
             }
+        }
+    }
+
+    @Override
+    protected void writeValidationForVersioning(Set<MethodParameter> parameters, JavaBlock methodBlock) {
+        if (JavaSettings.getInstance().isSyncStackEnabled()) {
+            super.writeValidationForVersioning(parameters, methodBlock);
+        } else {
+            // async client will do the validation
+        }
+    }
+
+    @Override
+    protected void writeThrowException(String exceptionExpression, JavaBlock methodBlock) {
+        if (JavaSettings.getInstance().isUseClientLogger()) {
+            methodBlock.line(String.format("throw LOGGER.logExceptionAsError(%s);", exceptionExpression));
+        } else {
+            methodBlock.line(String.format("throw %s;", exceptionExpression));
         }
     }
 

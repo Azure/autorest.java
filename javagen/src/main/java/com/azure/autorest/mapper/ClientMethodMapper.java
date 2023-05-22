@@ -857,14 +857,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             List<ClientMethodParameter> parameters) {
 
         if (!isProtocolMethod && JavaSettings.getInstance().isDataPlaneClient()) {
-            if (parameters.stream().anyMatch(p -> p.getVersioning() != null && p.getVersioning().getAdded() != null)) {
-                // TODO (weidxu): improve logic
-                List<ClientMethodParameter> overloadedParameters = parameters.stream()
-                        .filter(p -> p.getVersioning() == null || p.getVersioning().getAdded() == null)
+            if (parameters.stream().anyMatch(p -> !p.isFromClient() && !p.isConstant() && p.getVersioning() != null && p.getVersioning().getAdded() != null)) {
+                List<ClientMethodParameter> nonVersionedParameters = parameters.stream()
+                        .filter(p -> !p.isFromClient() && !p.isConstant()
+                                && (p.getVersioning() == null || p.getVersioning().getAdded() == null))
                         .collect(Collectors.toList());
+                if (nonVersionedParameters.stream().anyMatch(p -> !p.isRequired())) {
+                    // TODO (weidxu): improve logic
+                    List<ClientMethodParameter> overloadedParameters = nonVersionedParameters;
 
-                builder.parameters(overloadedParameters);
-                methods.add(builder.build());
+                    builder.parameters(overloadedParameters);
+                    methods.add(builder.build());
+                }
             }
 
             builder.parameters(parameters);

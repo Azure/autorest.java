@@ -158,6 +158,9 @@ public class XmsExtensions {
         this.xmsSecret = xmsSecret;
     }
 
+    /**
+     * @return the versions of which this (optional) parameter/property exists
+     */
     public List<String> getXmsVersioningAdded() {
         return xmsVersioningAdded;
     }
