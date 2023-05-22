@@ -8,27 +8,27 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for DaysOfWeekExtensibleEnum. */
+/** Days of the week. */
 public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfWeekExtensibleEnum> {
-    /** Static value Monday for DaysOfWeekExtensibleEnum. */
+    /** Monday. */
     public static final DaysOfWeekExtensibleEnum MONDAY = fromString("Monday");
 
-    /** Static value Tuesday for DaysOfWeekExtensibleEnum. */
+    /** Tuesday. */
     public static final DaysOfWeekExtensibleEnum TUESDAY = fromString("Tuesday");
 
-    /** Static value Wednesday for DaysOfWeekExtensibleEnum. */
+    /** Wednesday. */
     public static final DaysOfWeekExtensibleEnum WEDNESDAY = fromString("Wednesday");
 
-    /** Static value Thursday for DaysOfWeekExtensibleEnum. */
+    /** Thursday. */
     public static final DaysOfWeekExtensibleEnum THURSDAY = fromString("Thursday");
 
-    /** Static value Friday for DaysOfWeekExtensibleEnum. */
+    /** Friday. */
     public static final DaysOfWeekExtensibleEnum FRIDAY = fromString("Friday");
 
-    /** Static value Saturday for DaysOfWeekExtensibleEnum. */
+    /** Saturday. */
     public static final DaysOfWeekExtensibleEnum SATURDAY = fromString("Saturday");
 
-    /** Static value Sunday for DaysOfWeekExtensibleEnum. */
+    /** Sunday. */
     public static final DaysOfWeekExtensibleEnum SUNDAY = fromString("Sunday");
 
     /**
