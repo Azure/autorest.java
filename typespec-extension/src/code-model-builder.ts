@@ -751,7 +751,7 @@ export class CodeModelBuilder {
       const addedOn = getAddedOnVersions(this.program, param.param);
       if (addedOn) {
         extensions = extensions ?? {};
-        extensions["x-ms-versioning-added"] = addedOn.map((it) => it.value).shift();
+        extensions["x-ms-versioning-added"] = addedOn.map((it) => it.value);
       }
 
       // format if array
