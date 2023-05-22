@@ -1,5 +1,11 @@
 # Release History
 
+## 0.7.1 (2023-05-19)
+
+Compatible with compiler 0.44.
+
+- Supported generating samples with convenience API.
+
 ## 0.7.0 (2023-05-11)
 
 Compatible with compiler 0.44.
