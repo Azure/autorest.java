@@ -164,7 +164,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
 
                 classBlock.method(methodVisibility, null, propertyClientType + " " + getGetterName(model, property) + "()",
-                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml, methodBlock));
+                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
+                        methodBlock));
+
+                // If the model has derived types and the properties is an XML wrapper and stream-style serialization
+                // is being generated, generate an internal method that can access the direct value of the XML wrapper
+                // static class.
+                if (hasDerivedModels && property.isXmlWrapper() && settings.isStreamStyleSerialization()) {
+                    classBlock.method(JavaVisibility.PackagePrivate, null,
+                        getPropertyXmlWrapperClassName(property) + " " + getGetterName(model, property) + "Internal()",
+                        methodBlock -> methodBlock.methodReturn("this." + property.getName()));
+                }
 
                 if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputModel) {
                     generateSetterJavadoc(classBlock, model, property);
@@ -172,6 +182,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     classBlock.method(methodVisibility, null,
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml, methodBlock));
+
+                    // If the model has derived types and the properties is an XML wrapper and stream-style serialization
+                    // is being generated, generate an internal method that can access the direct value of the XML wrapper
+                    // static class.
+                    if (hasDerivedModels && property.isXmlWrapper() && settings.isStreamStyleSerialization()) {
+                        classBlock.method(JavaVisibility.PackagePrivate, null,
+                            model.getName() + " " + property.getSetterName()
+                                + "Internal(" + getPropertyXmlWrapperClassName(property) + " " + property.getName() + ")",
+                            methodBlock -> {
+                                methodBlock.line("this." + property.getName() + " = " + property.getName() + ";");
+                                methodBlock.methodReturn("this");
+                            });
+                    }
                 }
 
                 // If the property is additional properties, and stream-style serialization isn't being used, add a
@@ -487,14 +510,23 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         wrapperClassDefinition = wrapperClassDefinition + " implements XmlSerializable<" + wrapperClassDefinition + ">";
                     }
 
-                    classBlock.privateStaticFinalClass(wrapperClassDefinition, innerClass ->
+                    classBlock.staticFinalClass(JavaVisibility.PackagePrivate, wrapperClassDefinition, innerClass ->
                         addXmlWrapperClass(innerClass, property, xmlWrapperClassName, settings));
 
                     fieldSignature = xmlWrapperClassName + " " + propertyName;
                 } else if (propertyType instanceof ListType) {
                     fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
                 } else {
-                    fieldSignature = propertyType + " " + propertyName;
+                    // handle x-ms-client-default
+                    if (property.getDefaultValue() != null) {
+                        if (property.isPolymorphicDiscriminator()) {
+                            fieldSignature = propertyType + " " + CodeNamer.getEnumMemberName(propertyName) + " = " + property.getDefaultValue();
+                        } else {
+                            fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
+                        }
+                    } else {
+                        fieldSignature = propertyType + " " + propertyName;
+                    }
                 }
             } else {
                 if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType) {

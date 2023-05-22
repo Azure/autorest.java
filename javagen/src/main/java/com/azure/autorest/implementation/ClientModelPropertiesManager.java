@@ -56,8 +56,11 @@ public final class ClientModelPropertiesManager {
 
     private final boolean hasXmlElements;
     private final String xmlReaderNameVariableName;
+    private final List<ClientModelProperty> superXmlAttributes;
     private final List<ClientModelProperty> xmlAttributes;
+    private final List<ClientModelProperty> superXmlTexts;
     private final List<ClientModelProperty> xmlTexts;
+    private final List<ClientModelProperty> superXmlElements;
     private final List<ClientModelProperty> xmlElements;
 
     /**
@@ -82,8 +85,11 @@ public final class ClientModelPropertiesManager {
         superSetterProperties = new ArrayList<>();
         superReadOnlyProperties = new ArrayList<>();
         boolean hasXmlElements = false;
+        superXmlAttributes = new ArrayList<>();
         xmlAttributes = new ArrayList<>();
+        superXmlTexts = new ArrayList<>();
         xmlTexts = new ArrayList<>();
+        superXmlElements = new ArrayList<>();
         xmlElements = new ArrayList<>();
         for (ClientModelProperty property : ClientModelUtil.getParentProperties(model)) {
             // Ignore additional and discriminator properties.
@@ -112,12 +118,12 @@ public final class ClientModelPropertiesManager {
             possibleXmlNameVariableNames.remove(property.getName());
 
             if (property.isXmlAttribute()) {
-                xmlAttributes.add(property);
+                superXmlAttributes.add(property);
             } else if (property.isXmlText()) {
-                xmlTexts.add(property);
+                superXmlTexts.add(property);
             } else {
                 hasXmlElements = true;
-                xmlElements.add(property);
+                superXmlElements.add(property);
             }
         }
 
@@ -395,6 +401,16 @@ public final class ClientModelPropertiesManager {
     }
 
     /**
+     * Consumes each XML attribute {@link ClientModelProperty property} defined by super classes of the
+     * {@link #getModel() model}.
+     *
+     * @param consumer The {@link ClientModelProperty} consumer.
+     */
+    public void forEachSuperXmlAttribute(Consumer<ClientModelProperty> consumer) {
+        superXmlAttributes.forEach(consumer);
+    }
+
+    /**
      * Consumes each XML attribute {@link ClientModelProperty property} defined by the {@link #getModel() model}.
      *
      * @param consumer The {@link ClientModelProperty} consumer.
@@ -404,12 +420,32 @@ public final class ClientModelPropertiesManager {
     }
 
     /**
+     * Consumes each XML text {@link ClientModelProperty property} defined by super classes of the
+     * {@link #getModel() model}.
+     *
+     * @param consumer The {@link ClientModelProperty} consumer.
+     */
+    public void forEachSuperXmlText(Consumer<ClientModelProperty> consumer) {
+        superXmlTexts.forEach(consumer);
+    }
+
+    /**
      * Consumes each XML text {@link ClientModelProperty property} defined by the {@link #getModel() model}.
      *
      * @param consumer The {@link ClientModelProperty} consumer.
      */
     public void forEachXmlText(Consumer<ClientModelProperty> consumer) {
         xmlTexts.forEach(consumer);
+    }
+
+    /**
+     * Consumes each XML element {@link ClientModelProperty property} defined by super classes of the
+     * {@link #getModel() model}.
+     *
+     * @param consumer The {@link ClientModelProperty} consumer.
+     */
+    public void forEachSuperXmlElement(Consumer<ClientModelProperty> consumer) {
+        superXmlElements.forEach(consumer);
     }
 
     /**

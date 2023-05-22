@@ -160,7 +160,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         classBlock.annotation("Override");
         classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException", writerMethod -> {
             String writeStartElement = (xmlNamespace != null)
-                ? "xmlWriter.writeStartElement(null, \"" + xmlNamespace + "\", \"" + xmlRootElementName + "\");"
+                ? "xmlWriter.writeStartElement(\"" + xmlNamespace + "\", \"" + xmlRootElementName + "\");"
                 : "xmlWriter.writeStartElement(\"" + xmlRootElementName + "\");";
             writerMethod.line(writeStartElement);
 
@@ -745,6 +745,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         if (isXml) {
             // XML only needs to initialize the XML element properties. XML attribute properties are initialized with
             // their XML value.
+            propertiesManager.forEachSuperXmlElement(element -> initializeLocalVariable(methodBlock, element, settings));
             propertiesManager.forEachXmlElement(element -> initializeLocalVariable(methodBlock, element, settings));
         } else {
             if (propertiesManager.hasConstructorArguments()) {
@@ -1142,7 +1143,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // If the property is defined in a super class or doesn't match the wire type use the setter as this will
         // be able to set the value in the super class definition or handle converting the wire type.
         if (fromSuper || property.getWireType() != property.getClientType()) {
-            methodBlock.line(modelVariableName + "." + property.getSetterName() + "(" + value + ");");
+            if (property.isXmlWrapper()) {
+                methodBlock.line(modelVariableName + "." + property.getSetterName() + "Internal(" + value + ");");
+            } else {
+                methodBlock.line(modelVariableName + "." + property.getSetterName() + "(" + value + ");");
+            }
         } else {
             methodBlock.line(modelVariableName + "." + property.getName() + " = " + value + ";");
         }
@@ -1178,13 +1183,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line("xmlWriter.writeNamespace(\"" + modelXmlNamespace + "\");");
             }
 
-            propertiesManager.forEachXmlAttribute(property -> serializeXml(methodBlock, property));
+            String modelName = propertiesManager.getModel().getName();
+            propertiesManager.forEachSuperXmlAttribute(property -> serializeXml(methodBlock, property, true, modelName));
+            propertiesManager.forEachXmlAttribute(property -> serializeXml(methodBlock, property, false, modelName));
 
             // Valid XML should only either have elements or text.
             if (propertiesManager.hasXmlElements()) {
-                propertiesManager.forEachXmlElement(property -> serializeXml(methodBlock, property));
+                propertiesManager.forEachSuperXmlElement(property -> serializeXml(methodBlock, property, true, modelName));
+                propertiesManager.forEachXmlElement(property -> serializeXml(methodBlock, property, false, modelName));
             } else {
-                propertiesManager.forEachXmlText(property -> serializeXml(methodBlock, property));
+                propertiesManager.forEachSuperXmlText(property -> serializeXml(methodBlock, property, true, modelName));
+                propertiesManager.forEachXmlText(property -> serializeXml(methodBlock, property, false, modelName));
             }
 
             methodBlock.methodReturn("xmlWriter.writeEndElement()");
@@ -1196,10 +1205,28 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      *
      * @param methodBlock The method handling serialization.
      * @param element The XML element being serialized.
+     * @param fromSuperType Whether the property is defined in the super type.
      */
-    private static void serializeXml(JavaBlock methodBlock, ClientModelProperty element) {
+    private static void serializeXml(JavaBlock methodBlock, ClientModelProperty element, boolean fromSuperType,
+        String modelName) {
         IType wireType = element.getWireType();
-        String propertyValueGetter = "this." + element.getName();
+        String propertyValueGetter;
+        if (element.isPolymorphicDiscriminator()) {
+            // The most super type won't have a value for the polymorphic discriminator, use the model name.
+            if (CoreUtils.isNullOrEmpty(element.getDefaultValue())) {
+                propertyValueGetter = "\"" + modelName + "\"";
+            } else {
+                propertyValueGetter = CodeNamer.getEnumMemberName(element.getName());
+            }
+        } else if (fromSuperType) {
+            if (element.isXmlWrapper()) {
+                propertyValueGetter = element.getGetterName() + "Internal()";
+            } else {
+                propertyValueGetter = element.getGetterName() + "()";
+            }
+        } else {
+            propertyValueGetter = "this." + element.getName();
+        }
 
         // XML wrappers implement XmlSerializable and always use writeXml, check for this first as it's an early out.
         if (element.isXmlWrapper()) {
@@ -1240,7 +1267,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
                 if (valueType instanceof ClassType && ((ClassType) valueType).isSwaggerType()) {
                     String writeStartElement = (element.getXmlNamespace() != null)
-                        ? "xmlWriter.writeStartElement(null, \"" + element.getXmlNamespace() + "\", key);"
+                        ? "xmlWriter.writeStartElement(\"" + element.getXmlNamespace() + "\", key);"
                         : "xmlWriter.writeStartElement(key);";
 
                     ifAction.line("for (Map.Entry<String, %s> entry : %s.entrySet()) {", valueType, propertyValueGetter);
@@ -1291,39 +1318,20 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // discriminator type always as a String. This is permissible as the found discriminator is never being used in
         // a setter or for setting a field, unlike in the actual deserialization method where it needs to be the same
         // type as the field.
-        String nameVariableName = propertiesManager.getXmlReaderNameVariableName();
         ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
         readXmlObject(classBlock, propertiesManager, false, methodBlock -> {
-            methodBlock.line(String.join("\n",
-                "String discriminatorValue = null;",
-                "XmlReader readerToUse = null;",
-                "",
-                "// Read the first field name and determine if it's the discriminator field.",
-                "reader.nextElement();",
-                // TODO (alzimmer): Need to validate namespace matches
-                "QName elementName = reader.getElementName();",
-                "if (\"" + discriminatorProperty.getSerializedName() + "\".equals(elementName.getLocalPart())) {",
-                "    discriminatorValue = reader.getStringElement();",
-                "    readerToUse = reader;",
-                "} else {",
-                "    // If it isn't the discriminator field buffer the XML to make it replayable and find the discriminator field value.",
-                "    XmlReader replayReader = reader.bufferElement();",
-                "    replayReader.nextElement(); // Prepare for reading",
-                "    while (replayReader.nextElement() != XmlElement.END_ELEMENT) {",
-                "        String " + nameVariableName + " = replayReader.getElementName().getLocalPart();",
-                "        if (\"" + discriminatorProperty.getSerializedName() + "\".equals(" + nameVariableName + ")) {",
-                "            discriminatorValue = replayReader.getStringElement();",
-                "            break;",
-                "        } else {",
-                "            replayReader.skipElement();",
-                "        }",
-                "    }",
-                "",
-                "    if (discriminatorValue != null) {",
-                "        readerToUse = replayReader.reset();",
-                "    }",
-                "}"
-            ));
+            // Assumption for now for XML, only XML properties are used for handling inheritance.
+            // If this found to be wrong in the future copy the concept of bufferObject and resettable from azure-json
+            // into azure-xml as bufferElement and resettable.
+            methodBlock.line("// Get the XML discriminator attribute.");
+            if (discriminatorProperty.getXmlNamespace() != null) {
+                methodBlock.line("String discriminatorValue = reader.getStringAttribute("
+                    + "\"" + discriminatorProperty.getXmlNamespace() + "\", "
+                    + "\"" + discriminatorProperty.getSerializedName() + "\");");
+            } else {
+                methodBlock.line("String discriminatorValue = reader.getStringAttribute("
+                    + "\"" + discriminatorProperty.getSerializedName() + "\");");
+            }
 
             methodBlock.line("// Use the discriminator value to determine which subtype should be deserialized.");
 
@@ -1341,7 +1349,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 + "\"" + propertiesManager.getExpectedDiscriminator() + "\".equals(discriminatorValue)";
             JavaIfBlock ifBlock = (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) ? null
                 : methodBlock.ifBlock(conditionalStatement,
-                ifStatement -> ifStatement.methodReturn("fromXmlKnownDiscriminator(readerToUse)"));
+                ifStatement -> ifStatement.methodReturn("fromXmlKnownDiscriminator(reader)"));
 
             // Add deserialization for all child types.
             List<ClientModel> childTypes = getAllChildTypes(model, new ArrayList<>());
@@ -1350,8 +1358,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
                 ifBlock = ifOrElseIf(methodBlock, ifBlock, "\"" + childType.getSerializedName() + "\".equals(discriminatorValue)",
                     ifStatement -> ifStatement.methodReturn(childType.getName() + (isSuperTypeWithDiscriminator(childType)
-                        ? ".fromXmlKnownDiscriminator(readerToUse)"
-                        : ".fromXml(readerToUse)")));
+                        ? ".fromXmlKnownDiscriminator(reader)"
+                        : ".fromXml(reader)")));
 
                 if (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue()) && i == 0) {
                     exceptionMessage.append("'").append(childType.getSerializedName()).append("'");
@@ -1469,9 +1477,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Add the deserialization logic.
         methodBlock.indent(() -> {
             // Read the XML attribute properties first.
-            propertiesManager.forEachXmlAttribute(attribute -> deserializeXmlAttribute(methodBlock, attribute));
+            propertiesManager.forEachSuperXmlAttribute(attribute -> deserializeXmlAttribute(methodBlock, attribute,
+                propertiesManager));
+            propertiesManager.forEachXmlAttribute(attribute -> deserializeXmlAttribute(methodBlock, attribute,
+                propertiesManager));
 
             // Read the XML text next.
+            propertiesManager.forEachSuperXmlText(text -> methodBlock.line("%s %s = %s;", text.getClientType(), text.getName(),
+                getSimpleXmlDeserialization(text.getWireType(), text.getClientType(), "reader", null, null)));
             propertiesManager.forEachXmlText(text -> methodBlock.line("%s %s = %s;", text.getClientType(), text.getName(),
                 getSimpleXmlDeserialization(text.getWireType(), text.getClientType(), "reader", null, null)));
 
@@ -1484,11 +1497,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             initializeLocalVariables(methodBlock, propertiesManager, true, settings);
 
             // Add the outermost while loop to read the JSON object.
-            String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
+            String fieldNameVariableName = propertiesManager.getXmlReaderNameVariableName();
             addReaderWhileLoop(methodBlock, true, fieldNameVariableName, true, whileBlock -> {
                 JavaIfBlock ifBlock = null;
 
-                if (propertiesManager.getDiscriminatorProperty() != null) {
+                if (propertiesManager.getDiscriminatorProperty() != null
+                    && !propertiesManager.getDiscriminatorProperty().isXmlAttribute()) {
                     ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
                     String ifStatement = String.format("\"%s\".equals(%s)", discriminatorProperty.getSerializedName(),
                         fieldNameVariableName);
@@ -1507,6 +1521,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
                 // Loop over all properties and generate their deserialization handling.
                 AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>(ifBlock);
+                propertiesManager.forEachSuperXmlElement(element -> handleXmlPropertyDeserialization(element,
+                    whileBlock, ifBlockReference, fieldNameVariableName, settings));
                 propertiesManager.forEachXmlElement(element -> handleXmlPropertyDeserialization(element, whileBlock,
                     ifBlockReference, fieldNameVariableName, settings));
 
@@ -1523,11 +1539,20 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, true, settings);
     }
 
-    private static void deserializeXmlAttribute(JavaBlock methodBlock, ClientModelProperty attribute) {
+    private static void deserializeXmlAttribute(JavaBlock methodBlock, ClientModelProperty attribute,
+        ClientModelPropertiesManager propertiesManager) {
         String simpleXmlDeserialization = getSimpleXmlDeserialization(attribute.getWireType(),
             attribute.getClientType(), "reader", attribute.getXmlName(), attribute.getXmlNamespace());
 
         methodBlock.line("%s %s = %s;", attribute.getClientType(), attribute.getName(), simpleXmlDeserialization);
+        if (attribute.isPolymorphicDiscriminator()) {
+            String ifStatement = String.format("!%s.equals(%s)", attribute.getDefaultValue(), attribute.getName());
+            methodBlock.ifBlock(ifStatement, ifAction2 -> ifAction2.line(
+                "throw new IllegalStateException(\"'%s' was expected to be non-null and equal to '%s'. "
+                    + "The found '%s' was '\" + %s + \"'.\");",
+                attribute.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
+                attribute.getSerializedName(), attribute.getName()));
+        }
     }
 
     private static void handleXmlPropertyDeserialization(ClientModelProperty property, JavaBlock methodBlock,
