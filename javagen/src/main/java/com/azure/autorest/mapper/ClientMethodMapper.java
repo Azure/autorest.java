@@ -838,6 +838,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .methodVisibility(visibilityFunction.methodVisibility(false, defaultOverloadType, false));
         methods.add(builder.build());
 
+        createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
+
         if (generateClientMethodWithOnlyRequiredParameters) {
             methods.add(builder
                 .methodVisibility(visibilityFunction.methodVisibility(false, MethodOverloadType.OVERLOAD_MINIMUM, false))
@@ -847,6 +849,26 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         builder.methodVisibility(visibilityFunction.methodVisibility(false, defaultOverloadType, true));
         addClientMethodWithContext(methods, builder, parameters, contextParameter);
+    }
+
+    private static void createOverloadForVersioning(
+            boolean isProtocolMethod,
+            List<ClientMethod> methods, Builder builder,
+            List<ClientMethodParameter> parameters) {
+
+        if (!isProtocolMethod && JavaSettings.getInstance().isDataPlaneClient()) {
+            if (parameters.stream().anyMatch(p -> p.getVersioning() != null && p.getVersioning().getAdded() != null)) {
+                // TODO (weidxu): improve logic
+                List<ClientMethodParameter> overloadedParameters = parameters.stream()
+                        .filter(p -> p.getVersioning() == null || p.getVersioning().getAdded() == null)
+                        .collect(Collectors.toList());
+
+                builder.parameters(overloadedParameters);
+                methods.add(builder.build());
+            }
+
+            builder.parameters(parameters);
+        }
     }
 
     private static ClientMethodParameter updateClientMethodParameter(ClientMethodParameter clientMethodParameter) {
