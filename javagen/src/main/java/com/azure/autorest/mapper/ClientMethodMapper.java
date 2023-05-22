@@ -214,7 +214,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 boolean proxyMethodUsesBinaryData = proxyMethod.getParameters().stream()
                     .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == ClassType.BinaryData);
                 boolean proxyMethodUsesFluxByteBuffer = proxyMethod.getParameters().stream()
-                        .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FluxByteBuffer);
+                    .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FluxByteBuffer);
 
                 Set<Parameter> originalParameters = new HashSet<>();
                 for (Parameter parameter : codeModelParameters) {

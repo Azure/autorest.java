@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -100,7 +101,7 @@ abstract class ConvenienceMethodTemplateBase {
             convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, protocolMethod, methodBlock, parametersMap));
         }
 
-        writeValidationForVersioning(parametersMap.keySet(), methodBlock);
+        writeValidationForVersioning(convenienceMethod, parametersMap.keySet(), methodBlock);
 
         Map<String, String> parameterExpressionsMap = new HashMap<>();
         for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
@@ -164,7 +165,7 @@ abstract class ConvenienceMethodTemplateBase {
      * @param parameters the parameters
      * @param methodBlock the method block
      */
-    protected void writeValidationForVersioning(Set<MethodParameter> parameters, JavaBlock methodBlock) {
+    protected void writeValidationForVersioning(ClientMethod convenienceMethod, Set<MethodParameter> parameters, JavaBlock methodBlock) {
         // validate parameter for versioning
         for (MethodParameter parameter : parameters) {
             if (parameter.getClientMethodParameter().getVersioning() != null && parameter.getClientMethodParameter().getVersioning().getAdded() != null) {
@@ -176,14 +177,14 @@ abstract class ConvenienceMethodTemplateBase {
                             "new IllegalArgumentException(\"Parameter %1$s is only available in api-version %2$s.\")",
                             parameter.getName(),
                             String.join(", ", parameter.getClientMethodParameter().getVersioning().getAdded()));
-                    writeThrowException(exceptionExpression, ifBlock);
+                    writeThrowException(convenienceMethod.getType(), exceptionExpression, ifBlock);
                 });
             }
         }
 
     }
 
-    abstract void writeThrowException(String exceptionExpression, JavaBlock methodBlock);
+    abstract void writeThrowException(ClientMethodType methodType, String exceptionExpression, JavaBlock methodBlock);
 
     private static boolean isGroupByTransformation(MethodTransformationDetail detail) {
         return !CoreUtils.isNullOrEmpty(detail.getParameterMappings())

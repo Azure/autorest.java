@@ -134,16 +134,16 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     }
 
     @Override
-    protected void writeValidationForVersioning(Set<MethodParameter> parameters, JavaBlock methodBlock) {
+    protected void writeValidationForVersioning(ClientMethod convenienceMethod, Set<MethodParameter> parameters, JavaBlock methodBlock) {
         if (JavaSettings.getInstance().isSyncStackEnabled()) {
-            super.writeValidationForVersioning(parameters, methodBlock);
+            super.writeValidationForVersioning(convenienceMethod, parameters, methodBlock);
         } else {
             // async client will do the validation
         }
     }
 
     @Override
-    protected void writeThrowException(String exceptionExpression, JavaBlock methodBlock) {
+    protected void writeThrowException(ClientMethodType methodType, String exceptionExpression, JavaBlock methodBlock) {
         if (JavaSettings.getInstance().isUseClientLogger()) {
             methodBlock.line(String.format("throw LOGGER.logExceptionAsError(%s);", exceptionExpression));
         } else {
