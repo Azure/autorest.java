@@ -370,7 +370,12 @@ export class CodeModelBuilder {
       }
       const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
       codeModelClient.addGlobalParameters(hostParameters);
-      const clientContext = new ClientContext(baseUri, hostParameters, codeModelClient.globalParameters!);
+      const clientContext = new ClientContext(
+        baseUri,
+        hostParameters,
+        codeModelClient.globalParameters!,
+        codeModelClient.apiVersions,
+      );
 
       const operationGroups = listOperationGroups(this.sdkContext, client);
 
@@ -751,7 +756,7 @@ export class CodeModelBuilder {
       const addedOn = getAddedOnVersions(this.program, param.param);
       if (addedOn) {
         extensions = extensions ?? {};
-        extensions["x-ms-versioning-added"] = addedOn.map((it) => it.value);
+        extensions["x-ms-versioning-added"] = clientContext.getAddedVersions(addedOn);
       }
 
       // format if array
