@@ -108,7 +108,13 @@ public class ClientBuilderTrait {
                         ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build()"
                         : "createHttpPipeline()");
         Consumer<JavaBlock> pipelineMethodImpl = function -> {
-            function.line(String.format("this.%1$s = %2$s;", "pipeline", "pipeline"));
+            final String pipelineVarName = "pipeline";
+            function.ifBlock(String.format("this.%1$s != null && %1$s == null", pipelineVarName), ifBlock -> {
+                if (JavaSettings.getInstance().isUseClientLogger()) {
+                    function.line("LOGGER.info(\"HttpPipeline is being set to 'null' when it was previously configured.\");");
+                }
+            });
+            function.line(String.format("this.%1$s = %2$s;", pipelineVarName, pipelineVarName));
             function.methodReturn("this");
         };
         ClientBuilderTraitMethod pipelineMethod = createTraitMethod("pipeline", "pipeline", ClassType.HttpPipeline ,
@@ -116,7 +122,6 @@ public class ClientBuilderTrait {
         importPackages.add(HttpPipeline.class.getName());
 
         httpClientBuilderTraitMethods.add(pipelineMethod);
-
 
         // httpClient
         ServiceClientProperty httpClientProperty = new ServiceClientProperty("The HTTP client used to send the request.",
