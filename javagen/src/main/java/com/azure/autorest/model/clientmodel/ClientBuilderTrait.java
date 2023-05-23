@@ -109,11 +109,11 @@ public class ClientBuilderTrait {
                         : "createHttpPipeline()");
         Consumer<JavaBlock> pipelineMethodImpl = function -> {
             final String pipelineVarName = "pipeline";
-            function.ifBlock(String.format("this.%1$s != null && %1$s == null", pipelineVarName), ifBlock -> {
-                if (JavaSettings.getInstance().isUseClientLogger()) {
+            if (JavaSettings.getInstance().isUseClientLogger()) {
+                function.ifBlock(String.format("this.%1$s != null && %1$s == null", pipelineVarName), ifBlock -> {
                     function.line("LOGGER.info(\"HttpPipeline is being set to 'null' when it was previously configured.\");");
-                }
-            });
+                });
+            }
             function.line(String.format("this.%1$s = %2$s;", pipelineVarName, pipelineVarName));
             function.methodReturn("this");
         };
