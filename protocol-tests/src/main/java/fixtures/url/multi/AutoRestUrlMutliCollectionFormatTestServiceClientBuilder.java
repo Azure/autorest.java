@@ -29,6 +29,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.url.multi.implementation.AutoRestUrlMutliCollectionFormatTestServiceClientImpl;
 import java.util.ArrayList;
@@ -69,6 +70,9 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
     @Generated
     @Override
     public AutoRestUrlMutliCollectionFormatTestServiceClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -254,4 +258,7 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
     public AutoRestUrlMutliCollectionFormatTestServiceClient buildClient() {
         return new AutoRestUrlMutliCollectionFormatTestServiceClient(buildInnerClient().getQueries());
     }
+
+    private static final ClientLogger LOGGER =
+            new ClientLogger(AutoRestUrlMutliCollectionFormatTestServiceClientBuilder.class);
 }

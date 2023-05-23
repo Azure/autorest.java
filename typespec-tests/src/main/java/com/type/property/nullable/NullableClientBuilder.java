@@ -29,6 +29,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.type.property.nullable.implementation.NullableClientImpl;
 import java.util.ArrayList;
@@ -78,6 +79,9 @@ public final class NullableClientBuilder
     @Generated
     @Override
     public NullableClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -344,4 +348,6 @@ public final class NullableClientBuilder
     public CollectionsModelClient buildCollectionsModelClient() {
         return new CollectionsModelClient(buildInnerClient().getCollectionsModels());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(NullableClientBuilder.class);
 }

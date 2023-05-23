@@ -30,6 +30,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.paged.implementation.PagedClientImpl;
 import java.util.ArrayList;
@@ -66,6 +67,9 @@ public final class PagedClientBuilder
     @Generated
     @Override
     public PagedClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -265,4 +269,6 @@ public final class PagedClientBuilder
     public PagedClient buildClient() {
         return new PagedClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(PagedClientBuilder.class);
 }

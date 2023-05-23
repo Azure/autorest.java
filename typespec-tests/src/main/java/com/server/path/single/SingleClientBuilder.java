@@ -30,6 +30,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.server.path.single.implementation.SingleClientImpl;
 import java.util.ArrayList;
@@ -67,6 +68,9 @@ public final class SingleClientBuilder
     @Generated
     @Override
     public SingleClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -246,4 +250,6 @@ public final class SingleClientBuilder
     public SingleClient buildClient() {
         return new SingleClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(SingleClientBuilder.class);
 }

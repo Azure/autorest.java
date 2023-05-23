@@ -29,6 +29,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.partialupdate.implementation.PartialUpdateClientImpl;
 import java.util.ArrayList;
@@ -67,6 +68,9 @@ public final class PartialUpdateClientBuilder
     @Generated
     @Override
     public PartialUpdateClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -246,4 +250,6 @@ public final class PartialUpdateClientBuilder
     public PartialUpdateClient buildClient() {
         return new PartialUpdateClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(PartialUpdateClientBuilder.class);
 }

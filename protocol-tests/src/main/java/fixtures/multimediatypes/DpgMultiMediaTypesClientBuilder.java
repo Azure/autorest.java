@@ -29,6 +29,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.multimediatypes.implementation.DpgMultiMediaTypesClientImpl;
 import java.util.ArrayList;
@@ -65,6 +66,9 @@ public final class DpgMultiMediaTypesClientBuilder
     @Generated
     @Override
     public DpgMultiMediaTypesClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -250,4 +254,6 @@ public final class DpgMultiMediaTypesClientBuilder
     public DpgMultiMediaTypesClient buildClient() {
         return new DpgMultiMediaTypesClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(DpgMultiMediaTypesClientBuilder.class);
 }
