@@ -1231,7 +1231,7 @@ export class CodeModelBuilder {
       case "Model":
         if (isArrayModelType(this.program, type)) {
           return this.processArraySchema(type, nameHint);
-        } else if (isRecordModelType(this.program, type)) {
+        } else if (isRecordModelType(this.program, type) && type.properties.size == 0) {
           return this.processDictionarySchema(type, nameHint);
         } else {
           return this.processObjectSchema(type, this.getName(type));
@@ -1598,7 +1598,14 @@ export class CodeModelBuilder {
             }
           });
         }
+      } else {
+        pushDistinct(objectSchema.parents.all, parentSchema);
       }
+    } else if (isRecordModelType(this.program, type)) {
+      const parentSchema = this.processDictionarySchema(type, this.getName(type));
+      objectSchema.parents = new Relations();
+      objectSchema.parents.immediate.push(parentSchema);
+      pushDistinct(objectSchema.parents.all, parentSchema);
     }
 
     // value of the discriminator property
