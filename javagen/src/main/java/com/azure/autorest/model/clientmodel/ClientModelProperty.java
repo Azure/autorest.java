@@ -91,6 +91,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
     private final boolean clientFlatten;
     private final boolean polymorphicDiscriminator;
     private final boolean isXmlText;
+    private final String xmlPrefix;
 
     /**
      * Create a new ClientModelProperty with the provided properties.
@@ -99,6 +100,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
      * @param annotationArguments The arguments that go into this property's JsonProperty annotation.
      * @param isXmlAttribute Whether this property is an attribute when serialized to XML.
      * @param xmlName This property's name when serialized to XML.
+     * @param xmlNamespace Namespace of the XML attribute or element this property represents.
      * @param serializedName This property's name when it is serialized.
      * @param isXmlWrapper Whether this property is a container.
      * @param xmlListElementName The name of each list element tag within an XML list property.
@@ -112,12 +114,14 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
      * @param isAdditionalProperties Whether this property contain the additional properties.
      * @param polymorphicDiscriminator Whether this property is a polymorphic discriminator.
      * @param isXmlText Whether this property uses the value of an XML tag.
+     * @param xmlPrefix The prefix of the XML attribute or element this property represents.
      */
     private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute,
-            String xmlName, String xmlNamespace, String serializedName, boolean isXmlWrapper, String xmlListElementName,
-            IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, List<Mutability> mutabilities,
-            boolean isRequired, String headerCollectionPrefix, boolean isAdditionalProperties,
-            boolean needsFlatten, boolean clientFlatten, boolean polymorphicDiscriminator, boolean isXmlText) {
+        String xmlName, String xmlNamespace, String serializedName, boolean isXmlWrapper, String xmlListElementName,
+        IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly,
+        List<Mutability> mutabilities, boolean isRequired, String headerCollectionPrefix,
+        boolean isAdditionalProperties, boolean needsFlatten, boolean clientFlatten, boolean polymorphicDiscriminator,
+        boolean isXmlText, String xmlPrefix) {
         this.name = name;
         this.description = description;
         this.annotationArguments = annotationArguments;
@@ -140,6 +144,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         this.clientFlatten = clientFlatten;
         this.polymorphicDiscriminator = polymorphicDiscriminator;
         this.isXmlText = isXmlText;
+        this.xmlPrefix = xmlPrefix;
     }
 
     public final String getName() {
@@ -254,6 +259,15 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
     }
 
     /**
+     * Gets the XML prefix for the attribute or element.
+     *
+     * @return The XML prefix for this property.
+     */
+    public final String getXmlPrefix() {
+        return xmlPrefix;
+    }
+
+    /**
      * Add this ServiceModelProperty's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
      */
@@ -344,6 +358,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         private boolean clientFlatten = false;
         private boolean polymorphicDiscriminator = false;
         private boolean isXmlText = false;
+        private String xmlPrefix;
 
         /**
          * Sets the name of this property.
@@ -573,29 +588,22 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
             return this;
         }
 
+        /**
+         * Sets the XML prefix for the property being constructed.
+         *
+         * @param xmlPrefix The XML prefix for the attribute or element the property represents.
+         * @return the Builder itself
+         */
+        public Builder xmlPrefix(String xmlPrefix) {
+            this.xmlPrefix = xmlPrefix;
+            return this;
+        }
+
         public ClientModelProperty build() {
-            return new ClientModelProperty(name,
-                    description,
-                    annotationArguments,
-                    isXmlAttribute,
-                    xmlName,
-                    xmlNamespace,
-                    serializedName,
-                    isXmlWrapper,
-                    xmlListElementName,
-                    wireType,
-                    clientType,
-                    isConstant,
-                    defaultValue,
-                    isReadOnly,
-                    mutabilities,
-                    isRequired,
-                    headerCollectionPrefix,
-                    isAdditionalProperties,
-                    needsFlatten,
-                    clientFlatten,
-                    polymorphicDiscriminator,
-                    isXmlText);
+            return new ClientModelProperty(name, description, annotationArguments, isXmlAttribute, xmlName,
+                xmlNamespace, serializedName, isXmlWrapper, xmlListElementName, wireType, clientType, isConstant,
+                defaultValue, isReadOnly, mutabilities, isRequired, headerCollectionPrefix, isAdditionalProperties,
+                needsFlatten, clientFlatten, polymorphicDiscriminator, isXmlText, xmlPrefix);
         }
     }
 }

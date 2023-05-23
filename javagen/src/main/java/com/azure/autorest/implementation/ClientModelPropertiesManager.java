@@ -21,8 +21,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
+
+import static com.azure.autorest.util.ClientModelUtil.getClientModel;
 
 /**
  * Manages metadata about properties in a {@link ClientModel} and how they correlate with model class generation.
@@ -54,7 +57,9 @@ public final class ClientModelPropertiesManager {
     private final JsonFlattenedPropertiesTree jsonFlattenedPropertiesTree;
     private final String jsonReaderFieldNameVariableName;
 
+    private final String xmlRootElementName;
     private final boolean hasXmlElements;
+    private final boolean hasXmlTexts;
     private final String xmlReaderNameVariableName;
     private final List<ClientModelProperty> superXmlAttributes;
     private final List<ClientModelProperty> xmlAttributes;
@@ -62,6 +67,7 @@ public final class ClientModelPropertiesManager {
     private final List<ClientModelProperty> xmlTexts;
     private final List<ClientModelProperty> superXmlElements;
     private final List<ClientModelProperty> xmlElements;
+    private final Map<String, String> xmlNameSpaceWithPrefix;
 
     /**
      * Creates a new instance of {@link ClientModelPropertiesManager}.
@@ -85,12 +91,28 @@ public final class ClientModelPropertiesManager {
         superSetterProperties = new ArrayList<>();
         superReadOnlyProperties = new ArrayList<>();
         boolean hasXmlElements = false;
+        boolean hasXmlTexts = false;
+        xmlNameSpaceWithPrefix = new LinkedHashMap<>();
         superXmlAttributes = new ArrayList<>();
         xmlAttributes = new ArrayList<>();
         superXmlTexts = new ArrayList<>();
         xmlTexts = new ArrayList<>();
         superXmlElements = new ArrayList<>();
         xmlElements = new ArrayList<>();
+
+        if (model.isPolymorphic()) {
+            ClientModel superTypeModel = model;
+            ClientModel parentModel = getClientModel(model.getParentModelName());
+            while (parentModel != null) {
+                superTypeModel = parentModel;
+                parentModel = getClientModel(superTypeModel.getParentModelName());
+            }
+
+            xmlRootElementName = superTypeModel.getXmlName();
+        } else {
+            xmlRootElementName = model.getXmlName();
+        }
+
         for (ClientModelProperty property : ClientModelUtil.getParentProperties(model)) {
             // Ignore additional and discriminator properties.
             if (property.isAdditionalProperties() || property.isPolymorphicDiscriminator()) {
@@ -120,10 +142,15 @@ public final class ClientModelPropertiesManager {
             if (property.isXmlAttribute()) {
                 superXmlAttributes.add(property);
             } else if (property.isXmlText()) {
+                hasXmlTexts = true;
                 superXmlTexts.add(property);
             } else {
                 hasXmlElements = true;
                 superXmlElements.add(property);
+            }
+
+            if (!CoreUtils.isNullOrEmpty(property.getXmlPrefix())) {
+                xmlNameSpaceWithPrefix.put(property.getXmlPrefix(), property.getXmlNamespace());
             }
         }
 
@@ -163,10 +190,15 @@ public final class ClientModelPropertiesManager {
             if (property.isXmlAttribute()) {
                 xmlAttributes.add(property);
             } else if (property.isXmlText()) {
+                hasXmlTexts = true;
                 xmlTexts.add(property);
             } else {
                 hasXmlElements = true;
                 xmlElements.add(property);
+            }
+
+            if (!CoreUtils.isNullOrEmpty(property.getXmlPrefix())) {
+                xmlNameSpaceWithPrefix.put(property.getXmlPrefix(), property.getXmlNamespace());
             }
         }
 
@@ -178,6 +210,7 @@ public final class ClientModelPropertiesManager {
         this.hasRequiredProperties = hasRequiredProperties;
         this.hasConstructorArguments = requiredConstructorProperties || readOnlyConstructorProperties;
         this.hasXmlElements = hasXmlElements;
+        this.hasXmlTexts = hasXmlTexts;
         this.discriminatorProperty = discriminatorProperty;
         this.additionalProperties = additionalProperties;
         this.jsonFlattenedPropertiesTree = getFlattenedPropertiesHierarchy(model.getPolymorphicDiscriminator(),
@@ -391,6 +424,19 @@ public final class ClientModelPropertiesManager {
     }
 
     /**
+     * Gets the default XML root element name for the model.
+     * <p>
+     * Polymorphism for XML works differently from JSON where the discriminator to determine which type to deserialize
+     * is determined by an attribute rather than a special property. This results in the super type and all subtypes
+     * using the same root element name determined by the super type.
+     *
+     * @return The default XML root element name.
+     */
+    public String getXmlRootElementName() {
+        return xmlRootElementName;
+    }
+
+    /**
      * Whether the {@link #getModel() model} defines XML elements, XML properties that aren't
      * {@link ClientModelProperty#isXmlAttribute() attributes} or {@link ClientModelProperty#isXmlText() text}.
      *
@@ -398,6 +444,25 @@ public final class ClientModelPropertiesManager {
      */
     public boolean hasXmlElements() {
         return hasXmlElements;
+    }
+
+    /**
+     * Whether the {@link #getModel() model} defines XML texts, XML properties that are
+     * {@link ClientModelProperty#isXmlText() text}.
+     *
+     * @return Whether the {@link #getModel() model} defines XML texts
+     */
+    public boolean hasXmlTexts() {
+        return hasXmlTexts;
+    }
+
+    /**
+     * Consumes each XML namespace that has a prefix.
+     *
+     * @param consumer XML namespace with prefix consumer.
+     */
+    public void forEachXmlNamespaceWithPrefix(BiConsumer<String, String> consumer) {
+        xmlNameSpaceWithPrefix.forEach(consumer);
     }
 
     /**

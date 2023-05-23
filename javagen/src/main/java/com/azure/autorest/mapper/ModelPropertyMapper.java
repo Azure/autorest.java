@@ -118,20 +118,23 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         boolean isXmlWrapper = false;
         boolean isXmlAttribute = false;
         boolean isXmlText = false;
+        String xmlPrefix = null;
         if (xmlSerlializationFormat != null) {
             isXmlWrapper = xmlSerlializationFormat.isWrapped();
             isXmlAttribute = xmlSerlializationFormat.isAttribute();
             xmlName = xmlSerlializationFormat.getName();
             xmlNamespace = xmlSerlializationFormat.getNamespace();
             isXmlText = xmlSerlializationFormat.isText();
+            xmlPrefix = xmlSerlializationFormat.getPrefix();
         }
 
         final String xmlParamName = xmlName == null ? serializedName.toString() : xmlName;
         builder.xmlName(xmlParamName)
-                .xmlWrapper(isXmlWrapper)
-                .xmlAttribute(isXmlAttribute)
-                .xmlNamespace(xmlNamespace)
-                .xmlText(isXmlText);
+            .xmlWrapper(isXmlWrapper)
+            .xmlAttribute(isXmlAttribute)
+            .xmlNamespace(xmlNamespace)
+            .xmlText(isXmlText)
+            .xmlPrefix(xmlPrefix);
 
         List<String> annotationArgumentList = new ArrayList<String>() {{
             add(String.format("value = \"%s\"", xmlParamName));
