@@ -18,6 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.encode.duration.implementation.PropertiesImpl;
 import com.encode.duration.models.DefaultDurationProperty;
+import com.encode.duration.models.FloatSecondsDurationArrayProperty;
 import com.encode.duration.models.FloatSecondsDurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
 import com.encode.duration.models.Iso8601DurationProperty;
@@ -171,6 +172,43 @@ public final class PropertyAsyncClient {
     }
 
     /**
+     * The floatSecondsArray operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     value (Required): [
+     *         double (Required)
+     *     ]
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     value (Required): [
+     *         double (Required)
+     *     ]
+     * }
+     * }</pre>
+     *
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> floatSecondsArrayWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.floatSecondsArrayWithResponseAsync(body, requestOptions);
+    }
+
+    /**
      * The defaultMethod operation.
      *
      * @param body The body parameter.
@@ -256,5 +294,27 @@ public final class PropertyAsyncClient {
         return floatSecondsWithResponse(BinaryData.fromObject(body), requestOptions)
                 .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(FloatSecondsDurationProperty.class));
+    }
+
+    /**
+     * The floatSecondsArray operation.
+     *
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<FloatSecondsDurationArrayProperty> floatSecondsArray(FloatSecondsDurationArrayProperty body) {
+        // Generated convenience method for floatSecondsArrayWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return floatSecondsArrayWithResponse(BinaryData.fromObject(body), requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(FloatSecondsDurationArrayProperty.class));
     }
 }

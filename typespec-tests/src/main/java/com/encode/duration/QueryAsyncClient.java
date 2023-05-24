@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.FluxUtil;
 import com.encode.duration.implementation.QueriesImpl;
 import java.time.Duration;
+import java.util.List;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous DurationClient type. */
@@ -103,6 +104,23 @@ public final class QueryAsyncClient {
     }
 
     /**
+     * The int32SecondsArray operation.
+     *
+     * @param input Array of Input.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> int32SecondsArrayWithResponse(List<Duration> input, RequestOptions requestOptions) {
+        return this.serviceClient.int32SecondsArrayWithResponseAsync(input, requestOptions);
+    }
+
+    /**
      * The defaultMethod operation.
      *
      * @param input The input parameter.
@@ -180,5 +198,25 @@ public final class QueryAsyncClient {
         // Generated convenience method for floatSecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return floatSecondsWithResponse(input, requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The int32SecondsArray operation.
+     *
+     * @param input Array of Input.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> int32SecondsArray(List<Duration> input) {
+        // Generated convenience method for int32SecondsArrayWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return int32SecondsArrayWithResponse(input, requestOptions).flatMap(FluxUtil::toMono);
     }
 }
