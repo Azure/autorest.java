@@ -411,9 +411,25 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                                 }
                             } else {
                                 // Always use serializeIterable as Iterable supports both Iterable and List.
+
+                                // this logic depends on rawType of proxy method parameter be List<WireType>
+                                // alternative would be check wireType of client method parameter
+                                IType elementWireType = parameter.getRawType() instanceof IterableType
+                                        ? ((IterableType) parameter.getRawType()).getElementType()
+                                        : elementType;
+
+                                String serializeIterableInput = parameterName;
+                                if (elementWireType != elementType) {
+                                    // convert List<ClientType> to List<WireType>, if necessary
+                                    serializeIterableInput = String.format(
+                                            "%1$s.stream().map(value -> %2$s).collect(Collectors.toList())",
+                                            parameterName,
+                                            elementWireType.convertFromClientType("value"));
+                                }
+                                // convert List<WireType> to String
                                 expression = String.format(
-                                    "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%s, CollectionFormat.%s)",
-                                    parameterName, collectionFormat.toString().toUpperCase(Locale.ROOT));
+                                        "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%s, CollectionFormat.%s)",
+                                        serializeIterableInput, collectionFormat.toString().toUpperCase(Locale.ROOT));
                             }
                         }
                     } else {

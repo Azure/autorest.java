@@ -34,7 +34,7 @@ public class EncodeDurationTests {
 
         queryClient.iso8601(DAY40);
 
-//        queryClient.int32SecondsArray(Arrays.asList(SECOND36, Duration.ofSeconds(47)));
+        queryClient.int32SecondsArray(Arrays.asList(SECOND36, Duration.ofSeconds(47)));
     }
 
     @Test
