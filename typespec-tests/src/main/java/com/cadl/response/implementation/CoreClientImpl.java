@@ -39,7 +39,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.cadl.response.CoreServiceVersion;
+import com.cadl.response.ResponseServiceVersion;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -63,14 +63,14 @@ public final class CoreClientImpl {
     }
 
     /** Service version. */
-    private final CoreServiceVersion serviceVersion;
+    private final ResponseServiceVersion serviceVersion;
 
     /**
      * Gets Service version.
      *
      * @return the serviceVersion value.
      */
-    public CoreServiceVersion getServiceVersion() {
+    public ResponseServiceVersion getServiceVersion() {
         return this.serviceVersion;
     }
 
@@ -104,7 +104,7 @@ public final class CoreClientImpl {
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public CoreClientImpl(String endpoint, CoreServiceVersion serviceVersion) {
+    public CoreClientImpl(String endpoint, ResponseServiceVersion serviceVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -121,7 +121,7 @@ public final class CoreClientImpl {
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public CoreClientImpl(HttpPipeline httpPipeline, String endpoint, CoreServiceVersion serviceVersion) {
+    public CoreClientImpl(HttpPipeline httpPipeline, String endpoint, ResponseServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
@@ -137,7 +137,7 @@ public final class CoreClientImpl {
             HttpPipeline httpPipeline,
             SerializerAdapter serializerAdapter,
             String endpoint,
-            CoreServiceVersion serviceVersion) {
+            ResponseServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;

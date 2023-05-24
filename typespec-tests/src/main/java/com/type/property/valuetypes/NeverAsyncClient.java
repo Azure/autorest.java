@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.property.valuetypes.implementation.NeversImpl;
+import com.type.property.valuetypes.models.NeverProperty;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ValueTypesClient type. */
@@ -40,7 +41,8 @@ public final class NeverAsyncClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * Object
+     * {
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -62,7 +64,8 @@ public final class NeverAsyncClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * Object
+     * {
+     * }
      * }</pre>
      *
      * @param body body.
@@ -91,10 +94,12 @@ public final class NeverAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Object> get() {
+    public Mono<NeverProperty> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+        return getWithResponse(requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(NeverProperty.class));
     }
 
     /**
@@ -111,7 +116,7 @@ public final class NeverAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put(Object body) {
+    public Mono<Void> put(NeverProperty body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);

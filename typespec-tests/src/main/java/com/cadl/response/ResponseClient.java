@@ -159,6 +159,27 @@ public final class ResponseClient {
     }
 
     /**
+     * The exists operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * boolean
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return whether resource exists along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> existsWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.existsWithResponse(requestOptions);
+    }
+
+    /**
      * The getBinary operation.
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -245,6 +266,23 @@ public final class ResponseClient {
         // Generated convenience method for deleteWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         deleteWithHeadersWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * The exists operation.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean exists() {
+        // Generated convenience method for existsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return existsWithResponse(requestOptions).getValue();
     }
 
     @Generated

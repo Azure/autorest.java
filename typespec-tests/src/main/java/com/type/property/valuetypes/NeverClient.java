@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.property.valuetypes.implementation.NeversImpl;
+import com.type.property.valuetypes.models.NeverProperty;
 
 /** Initializes a new instance of the synchronous ValueTypesClient type. */
 @ServiceClient(builder = ValueTypesClientBuilder.class)
@@ -38,7 +39,8 @@ public final class NeverClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * Object
+     * {
+     * }
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -60,7 +62,8 @@ public final class NeverClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * Object
+     * {
+     * }
      * }</pre>
      *
      * @param body body.
@@ -89,10 +92,10 @@ public final class NeverClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Object get() {
+    public NeverProperty get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue();
+        return getWithResponse(requestOptions).getValue().toObject(NeverProperty.class);
     }
 
     /**
@@ -108,7 +111,7 @@ public final class NeverClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put(Object body) {
+    public void put(NeverProperty body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
