@@ -1155,7 +1155,7 @@ export class CodeModelBuilder {
       });
     }
     if (resp.statusCode === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
-      // TODO: x-ms-error-response
+      // "*", or the model is @error
       op.addException(response);
 
       if (response instanceof SchemaResponse) {
