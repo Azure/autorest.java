@@ -1232,6 +1232,7 @@ export class CodeModelBuilder {
         if (isArrayModelType(this.program, type)) {
           return this.processArraySchema(type, nameHint);
         } else if (isRecordModelType(this.program, type) && type.properties.size == 0) {
+          // "pure" Record that does not have properties in it
           return this.processDictionarySchema(type, nameHint);
         } else {
           return this.processObjectSchema(type, this.getName(type));
@@ -1599,9 +1600,12 @@ export class CodeModelBuilder {
           });
         }
       } else {
+        // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
         pushDistinct(objectSchema.parents.all, parentSchema);
       }
     } else if (isRecordModelType(this.program, type)) {
+      // "pure" Record processed elsewhere
+      // "mixed" Record that have properties, treat the model as "additionalProperties"
       const parentSchema = this.processDictionarySchema(type, this.getName(type));
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate.push(parentSchema);
