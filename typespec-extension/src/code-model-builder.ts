@@ -378,9 +378,8 @@ export class CodeModelBuilder {
       const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
-        const codeModelOperation = this.processOperation("", operation, clientContext);
-        if (codeModelOperation) {
-          codeModelGroup.addOperation(codeModelOperation);
+        if (!this.needToSkipProcessingOperation(operation)) {
+          codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
         }
       }
       if (codeModelGroup.operations?.length > 0) {
@@ -391,9 +390,8 @@ export class CodeModelBuilder {
         const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
         codeModelGroup = new OperationGroup(operationGroup.type.name);
         for (const operation of operations) {
-          const codeModelOperation = this.processOperation(operationGroup.type.name, operation, clientContext);
-          if (codeModelOperation) {
-            codeModelGroup.addOperation(codeModelOperation);
+          if (!this.needToSkipProcessingOperation(operation)) {
+            codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
           }
         }
         codeModelClient.operationGroups.push(codeModelGroup);
@@ -435,12 +433,20 @@ export class CodeModelBuilder {
     }
   }
 
+  private needToSkipProcessingOperation(operation: Operation): boolean {
+    // don't generate protocol and convenience method for overloaded operations
+    if (getOverloadedOperation(this.program, operation)) {
+      return true;
+    }
+    return false;
+  }
+
   private processOperation(
     groupName: string,
     operation: Operation,
     clientContext: ClientContext,
     fromLinkedOperation: boolean = false,
-  ): CodeModelOperation | undefined {
+  ): CodeModelOperation {
     const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
 
     const operationGroup = this.codeModel.getOperationGroup(groupName);
@@ -534,11 +540,6 @@ export class CodeModelBuilder {
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
     this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata);
-
-    // don't generate protocol and convenience method for overloaded operations
-    if (getOverloadedOperation(this.program, operation)) {
-      return;
-    }
 
     operationGroup.addOperation(codeModelOperation);
     
@@ -675,9 +676,6 @@ export class CodeModelBuilder {
             linkedOperation = this.processOperation(groupName, linkOperation.linkedOperation, clientContext, true);
           }
 
-          if (!linkedOperation) {
-            continue;
-          }
           const opLink = new OperationLink(linkedOperation);
           // parameters of operation link
           if (linkOperation.parameters) {
