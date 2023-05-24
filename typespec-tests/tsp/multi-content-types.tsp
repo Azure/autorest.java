@@ -41,26 +41,34 @@ interface MultipleContentTypesOnRequest {
   @doc("one data type maps to multiple content types")
   @route("upload/single-body-type")
   @post
-  uploadBytesWithSingleBodyTypeForMultiContentTypes(@body data: bytes, @header contentType: "application/octet-stream" | "image/jpeg" | "image/png"): void;
+  uploadBytesWithSingleBodyTypeForMultiContentTypes(
+    @body data: bytes,
+    @header contentType: "application/octet-stream" | "image/jpeg" | "image/png"
+  ): void;
 
   @doc("multiple data types map to multiple content types using shared route")
   @route("upload/multi-body-types")
   @sharedRoute
   @post
-  uploadBytesWithMultiBodyTypesForMultiContentTypes(@body data: bytes, @header contentType:  "application/octet-stream" | "image/jpeg" | "image/png"): void;
+  uploadBytesWithMultiBodyTypesForMultiContentTypes(
+    @body data: bytes,
+    @header contentType: "application/octet-stream" | "image/jpeg" | "image/png"
+  ): void;
 
   @doc("multiple data types map to multiple content types using shared route")
   @route("upload/multi-body-types")
   @sharedRoute
   @post
-  uploadJsonWithMultiBodyTypesForMultiContentTypes(@body data: Resource, @header contentType:  "application/json"): void;
+  uploadJsonWithMultiBodyTypesForMultiContentTypes(@body data: Resource, @header contentType: "application/json"): void;
 
   @doc("multiple data types map to multiple content types using shared route")
   @route("upload/multi-body-types")
   @sharedRoute
   @post
-  uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes(@body data: bytes | Resource, @header contentType:  "application/json" | "application/octet-stream" | "image/jpeg" | "image/png"): void;
-
+  uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes(
+    @body data: bytes | Resource,
+    @header contentType: "application/json" | "application/octet-stream" | "image/jpeg" | "image/png"
+  ): void;
 }
 
 // @route("multiple/sharedroute/response")
@@ -83,7 +91,6 @@ interface MultipleContentTypesOnRequest {
 //   uploadResourceWithSingleBodyTypesForMultiContentTypes(@body data: Resource, @header contentType: "application/json"): Resource;
 
 // }
-
 
 // overload
 @doc("multiple data types map to multiple content types")
@@ -110,6 +117,7 @@ op uploadImagesWithOverload(@body data: bytes, @header contentType: "image/jpeg"
 @route("upload/overload/multi-body-types")
 @post
 @overload(uploadWithOverload)
-op uploadBytesOrJsonWithOverload(@body data: bytes | Resource, @header contentType: "application/octet-stream" | "image/jpeg" | "image/png" | "application/json"): void;
-
-
+op uploadBytesOrJsonWithOverload(
+  @body data: bytes | Resource,
+  @header contentType: "application/octet-stream" | "image/jpeg" | "image/png" | "application/json"
+): void;
