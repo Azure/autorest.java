@@ -6,14 +6,14 @@ package com.cadl.response;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of CoreClient. */
-public enum CoreServiceVersion implements ServiceVersion {
+/** Service version of ResponseClient. */
+public enum ResponseServiceVersion implements ServiceVersion {
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
     private final String version;
 
-    CoreServiceVersion(String version) {
+    ResponseServiceVersion(String version) {
         this.version = version;
     }
 
@@ -26,9 +26,9 @@ public enum CoreServiceVersion implements ServiceVersion {
     /**
      * Gets the latest service version supported by this client library.
      *
-     * @return The latest {@link CoreServiceVersion}.
+     * @return The latest {@link ResponseServiceVersion}.
      */
-    public static CoreServiceVersion getLatest() {
+    public static ResponseServiceVersion getLatest() {
         return V1_0_0;
     }
 }
