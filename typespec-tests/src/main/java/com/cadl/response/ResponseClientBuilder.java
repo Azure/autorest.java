@@ -159,6 +159,23 @@ public final class ResponseClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated private ResponseServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     *
+     * @param serviceVersion the serviceVersion value.
+     * @return the ResponseClientBuilder.
+     */
+    @Generated
+    public ResponseClientBuilder serviceVersion(ResponseServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
@@ -183,8 +200,11 @@ public final class ResponseClientBuilder
     @Generated
     private ResponseClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        ResponseServiceVersion localServiceVersion =
+                (serviceVersion != null) ? serviceVersion : ResponseServiceVersion.getLatest();
         ResponseClientImpl client =
-                new ResponseClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                new ResponseClientImpl(
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
         return client;
     }
 
