@@ -543,13 +543,20 @@ export class CodeModelBuilder {
     this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata);
 
     operationGroup.addOperation(codeModelOperation);
-    
+
     return codeModelOperation;
   }
 
   private isMultipleContentTypes(httpOperation: HttpOperation): boolean {
     if (httpOperation.parameters.parameters && httpOperation.parameters.parameters.length > 0) {
-      if (httpOperation.parameters.parameters.some(parameter => parameter?.type === "header" && parameter?.name === "content-type" && parameter?.param?.type?.kind === "Union")) {
+      if (
+        httpOperation.parameters.parameters.some(
+          (parameter) =>
+            parameter?.type === "header" &&
+            parameter?.name === "content-type" &&
+            parameter?.param?.type?.kind === "Union",
+        )
+      ) {
         return true;
       }
     }
