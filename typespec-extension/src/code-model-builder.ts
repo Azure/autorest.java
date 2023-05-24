@@ -553,7 +553,7 @@ export class CodeModelBuilder {
         httpOperation.parameters.parameters.some(
           (parameter) =>
             parameter?.type === "header" &&
-            parameter?.name === "content-type" &&
+            parameter?.name?.toLowerCase() === "content-type" &&
             parameter?.param?.type?.kind === "Union",
         )
       ) {
