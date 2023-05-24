@@ -26,6 +26,7 @@ import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Queries. */
@@ -390,7 +391,10 @@ public final class QueriesImpl {
             List<Duration> input, RequestOptions requestOptions) {
         final String accept = "application/json";
         String inputConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(input, CollectionFormat.CSV);
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeIterable(
+                                input.stream().map(value -> value.getSeconds()).collect(Collectors.toList()),
+                                CollectionFormat.CSV);
         return FluxUtil.withContext(
                 context -> service.int32SecondsArray(inputConverted, accept, requestOptions, context));
     }
@@ -410,7 +414,10 @@ public final class QueriesImpl {
     public Response<Void> int32SecondsArrayWithResponse(List<Duration> input, RequestOptions requestOptions) {
         final String accept = "application/json";
         String inputConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(input, CollectionFormat.CSV);
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeIterable(
+                                input.stream().map(value -> value.getSeconds()).collect(Collectors.toList()),
+                                CollectionFormat.CSV);
         return service.int32SecondsArraySync(inputConverted, accept, requestOptions, Context.NONE);
     }
 }
