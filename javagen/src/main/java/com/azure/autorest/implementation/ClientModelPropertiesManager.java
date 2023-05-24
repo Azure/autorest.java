@@ -58,6 +58,7 @@ public final class ClientModelPropertiesManager {
     private final String jsonReaderFieldNameVariableName;
 
     private final String xmlRootElementName;
+    private final String xmlRootElementNamespace;
     private final boolean hasXmlElements;
     private final boolean hasXmlTexts;
     private final String xmlReaderNameVariableName;
@@ -109,8 +110,10 @@ public final class ClientModelPropertiesManager {
             }
 
             xmlRootElementName = superTypeModel.getXmlName();
+            xmlRootElementNamespace = superTypeModel.getXmlNamespace();
         } else {
             xmlRootElementName = model.getXmlName();
+            xmlRootElementNamespace = model.getXmlNamespace();
         }
 
         for (ClientModelProperty property : ClientModelUtil.getParentProperties(model)) {
@@ -434,6 +437,17 @@ public final class ClientModelPropertiesManager {
      */
     public String getXmlRootElementName() {
         return xmlRootElementName;
+    }
+
+    /**
+     * Gets the XML root element namespace for the model.
+     * <p>
+     * Polymorphism for XML has the super type define the XML namespace.
+     *
+     * @return The XML root element namespace.
+     */
+    public String getXmlRootElementNamespace() {
+        return xmlRootElementNamespace;
     }
 
     /**
