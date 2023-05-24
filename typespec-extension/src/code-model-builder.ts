@@ -37,6 +37,7 @@ import {
   getProjectedName,
   getService,
   getEncode,
+  isErrorModel,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -1046,10 +1047,11 @@ export class CodeModelBuilder {
       }
     }
 
+    let bodyType: Type | undefined = undefined;
     let trackConvenienceApi = op.convenienceApi ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
-      const bodyType = this.findResponseBody(responseBody.type);
+      bodyType = this.findResponseBody(responseBody.type);
       if (bodyType.kind === "Scalar" && bodyType.name === "bytes") {
         // binary
         response = new BinaryResponse({
@@ -1152,8 +1154,8 @@ export class CodeModelBuilder {
         },
       });
     }
-    if (resp.statusCode === "*" || Number(resp.statusCode) / 100 > 3) {
-      // TODO: x-ms-error-response
+    if (resp.statusCode === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
+      // "*", or the model is @error
       op.addException(response);
 
       if (response instanceof SchemaResponse) {
