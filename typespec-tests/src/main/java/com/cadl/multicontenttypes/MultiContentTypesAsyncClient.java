@@ -62,80 +62,6 @@ public final class MultiContentTypesAsyncClient {
     }
 
     /**
-     * multiple data types map to multiple content types.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param data The data parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadStringWithOverloadWithResponse(BinaryData data, RequestOptions requestOptions) {
-        return this.serviceClient.uploadStringWithOverloadWithResponseAsync(data, requestOptions);
-    }
-
-    /**
-     * multiple data types map to multiple content types using `@overload`.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @param contentType The contentType parameter. Allowed values: "image/jpeg", "image/png".
-     * @param data The data parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadImagesWithOverloadWithResponse(
-            String contentType, BinaryData data, RequestOptions requestOptions) {
-        return this.serviceClient.uploadImagesWithOverloadWithResponseAsync(contentType, data, requestOptions);
-    }
-
-    /**
-     * multiple data types map to multiple content types using `@overload`.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * DataModelBase
-     * }</pre>
-     *
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
-     *     "image/png", "application/json".
-     * @param data The data parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadBytesOrJsonWithOverloadWithResponse(
-            String contentType, BinaryData data, RequestOptions requestOptions) {
-        return this.serviceClient.uploadBytesOrJsonWithOverloadWithResponseAsync(contentType, data, requestOptions);
-    }
-
-    /**
      * response is binary.
      *
      * <p><strong>Response Body Schema</strong>
@@ -288,27 +214,6 @@ public final class MultiContentTypesAsyncClient {
             String contentType, BinaryData data, RequestOptions requestOptions) {
         return this.serviceClient.uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponseAsync(
                 contentType, data, requestOptions);
-    }
-
-    /**
-     * multiple data types map to multiple content types.
-     *
-     * @param data The data parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> uploadStringWithOverload(String data) {
-        // Generated convenience method for uploadStringWithOverloadWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return uploadStringWithOverloadWithResponse(BinaryData.fromObject(data), requestOptions)
-                .flatMap(FluxUtil::toMono);
     }
 
     /**

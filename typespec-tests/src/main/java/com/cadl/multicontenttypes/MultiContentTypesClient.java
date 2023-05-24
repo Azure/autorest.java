@@ -60,80 +60,6 @@ public final class MultiContentTypesClient {
     }
 
     /**
-     * multiple data types map to multiple content types.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * String
-     * }</pre>
-     *
-     * @param data The data parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadStringWithOverloadWithResponse(BinaryData data, RequestOptions requestOptions) {
-        return this.serviceClient.uploadStringWithOverloadWithResponse(data, requestOptions);
-    }
-
-    /**
-     * multiple data types map to multiple content types using `@overload`.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * BinaryData
-     * }</pre>
-     *
-     * @param contentType The contentType parameter. Allowed values: "image/jpeg", "image/png".
-     * @param data The data parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadImagesWithOverloadWithResponse(
-            String contentType, BinaryData data, RequestOptions requestOptions) {
-        return this.serviceClient.uploadImagesWithOverloadWithResponse(contentType, data, requestOptions);
-    }
-
-    /**
-     * multiple data types map to multiple content types using `@overload`.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * DataModelBase
-     * }</pre>
-     *
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
-     *     "image/png", "application/json".
-     * @param data The data parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadBytesOrJsonWithOverloadWithResponse(
-            String contentType, BinaryData data, RequestOptions requestOptions) {
-        return this.serviceClient.uploadBytesOrJsonWithOverloadWithResponse(contentType, data, requestOptions);
-    }
-
-    /**
      * response is binary.
      *
      * <p><strong>Response Body Schema</strong>
@@ -284,25 +210,6 @@ public final class MultiContentTypesClient {
             String contentType, BinaryData data, RequestOptions requestOptions) {
         return this.serviceClient.uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponse(
                 contentType, data, requestOptions);
-    }
-
-    /**
-     * multiple data types map to multiple content types.
-     *
-     * @param data The data parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void uploadStringWithOverload(String data) {
-        // Generated convenience method for uploadStringWithOverloadWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        uploadStringWithOverloadWithResponse(BinaryData.fromObject(data), requestOptions).getValue();
     }
 
     /**

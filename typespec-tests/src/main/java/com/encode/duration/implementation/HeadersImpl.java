@@ -4,11 +4,10 @@
 
 package com.encode.duration.implementation;
 
-import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
-import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -20,39 +19,41 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import java.time.Duration;
+import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Properties. */
-public final class PropertiesImpl {
+/** An instance of this class provides access to all the operations defined in Headers. */
+public final class HeadersImpl {
     /** The proxy service used to perform REST calls. */
-    private final PropertiesService service;
+    private final HeadersService service;
 
     /** The service client containing this operation class. */
     private final DurationClientImpl client;
 
     /**
-     * Initializes an instance of PropertiesImpl.
+     * Initializes an instance of HeadersImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    PropertiesImpl(DurationClientImpl client) {
-        this.service =
-                RestProxy.create(PropertiesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+    HeadersImpl(DurationClientImpl client) {
+        this.service = RestProxy.create(HeadersService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for DurationClientProperties to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for DurationClientHeaders to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "DurationClientProper")
-    public interface PropertiesService {
-        @Post("/encode/duration/property/default")
-        @ExpectedResponses({200})
+    @ServiceInterface(name = "DurationClientHeader")
+    public interface HeadersService {
+        @Get("/encode/duration/header/default")
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -63,14 +64,14 @@ public final class PropertiesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> defaultMethod(
+        Mono<Response<Void>> defaultMethod(
+                @HeaderParam("duration") Duration duration,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/encode/duration/property/default")
-        @ExpectedResponses({200})
+        @Get("/encode/duration/header/default")
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -81,14 +82,14 @@ public final class PropertiesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> defaultMethodSync(
+        Response<Void> defaultMethodSync(
+                @HeaderParam("duration") Duration duration,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/encode/duration/property/iso8601")
-        @ExpectedResponses({200})
+        @Get("/encode/duration/header/iso8601")
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -99,14 +100,14 @@ public final class PropertiesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> iso8601(
+        Mono<Response<Void>> iso8601(
+                @HeaderParam("duration") Duration duration,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/encode/duration/property/iso8601")
-        @ExpectedResponses({200})
+        @Get("/encode/duration/header/iso8601")
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -117,14 +118,14 @@ public final class PropertiesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> iso8601Sync(
+        Response<Void> iso8601Sync(
+                @HeaderParam("duration") Duration duration,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/encode/duration/property/int32-seconds")
-        @ExpectedResponses({200})
+        @Get("/encode/duration/header/iso8601-array")
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -135,14 +136,14 @@ public final class PropertiesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> int32Seconds(
+        Mono<Response<Void>> iso8601Array(
+                @HeaderParam("duration") String duration,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/encode/duration/property/int32-seconds")
-        @ExpectedResponses({200})
+        @Get("/encode/duration/header/iso8601-array")
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -153,14 +154,14 @@ public final class PropertiesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> int32SecondsSync(
+        Response<Void> iso8601ArraySync(
+                @HeaderParam("duration") String duration,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/encode/duration/property/float-seconds")
-        @ExpectedResponses({200})
+        @Get("/encode/duration/header/int32-seconds")
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -171,14 +172,14 @@ public final class PropertiesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> floatSeconds(
+        Mono<Response<Void>> int32Seconds(
+                @HeaderParam("duration") long duration,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/encode/duration/property/float-seconds")
-        @ExpectedResponses({200})
+        @Get("/encode/duration/header/int32-seconds")
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -189,14 +190,14 @@ public final class PropertiesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> floatSecondsSync(
+        Response<Void> int32SecondsSync(
+                @HeaderParam("duration") long duration,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/encode/duration/property/float-seconds-array")
-        @ExpectedResponses({200})
+        @Get("/encode/duration/header/float-seconds")
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -207,14 +208,14 @@ public final class PropertiesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> floatSecondsArray(
+        Mono<Response<Void>> floatSeconds(
+                @HeaderParam("duration") double duration,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/encode/duration/property/float-seconds-array")
-        @ExpectedResponses({200})
+        @Get("/encode/duration/header/float-seconds")
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
                 code = {401})
@@ -225,9 +226,9 @@ public final class PropertiesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> floatSecondsArraySync(
+        Response<Void> floatSecondsSync(
+                @HeaderParam("duration") double duration,
                 @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -235,339 +236,181 @@ public final class PropertiesImpl {
     /**
      * The defaultMethod operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: Duration (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: Duration (Required)
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
+     * @param duration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> defaultMethodWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<Void>> defaultMethodWithResponseAsync(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.defaultMethod(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.defaultMethod(duration, accept, requestOptions, context));
     }
 
     /**
      * The defaultMethod operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: Duration (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: Duration (Required)
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
+     * @param duration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> defaultMethodWithResponse(BinaryData body, RequestOptions requestOptions) {
+    public Response<Void> defaultMethodWithResponse(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.defaultMethodSync(accept, body, requestOptions, Context.NONE);
+        return service.defaultMethodSync(duration, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The iso8601 operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: Duration (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: Duration (Required)
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
+     * @param duration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> iso8601WithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<Void>> iso8601WithResponseAsync(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.iso8601(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.iso8601(duration, accept, requestOptions, context));
     }
 
     /**
      * The iso8601 operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: Duration (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: Duration (Required)
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
+     * @param duration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> iso8601WithResponse(BinaryData body, RequestOptions requestOptions) {
+    public Response<Void> iso8601WithResponse(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.iso8601Sync(accept, body, requestOptions, Context.NONE);
+        return service.iso8601Sync(duration, accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * The iso8601Array operation.
+     *
+     * @param duration Array of Duration.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> iso8601ArrayWithResponseAsync(List<Duration> duration, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String durationConverted =
+                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
+        return FluxUtil.withContext(
+                context -> service.iso8601Array(durationConverted, accept, requestOptions, context));
+    }
+
+    /**
+     * The iso8601Array operation.
+     *
+     * @param duration Array of Duration.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> iso8601ArrayWithResponse(List<Duration> duration, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String durationConverted =
+                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
+        return service.iso8601ArraySync(durationConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The int32Seconds operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: long (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: long (Required)
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
+     * @param duration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> int32SecondsWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<Void>> int32SecondsWithResponseAsync(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.int32Seconds(accept, body, requestOptions, context));
+        long durationConverted = duration.getSeconds();
+        return FluxUtil.withContext(
+                context -> service.int32Seconds(durationConverted, accept, requestOptions, context));
     }
 
     /**
      * The int32Seconds operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: long (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: long (Required)
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
+     * @param duration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> int32SecondsWithResponse(BinaryData body, RequestOptions requestOptions) {
+    public Response<Void> int32SecondsWithResponse(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.int32SecondsSync(accept, body, requestOptions, Context.NONE);
+        long durationConverted = duration.getSeconds();
+        return service.int32SecondsSync(durationConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The floatSeconds operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: double (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: double (Required)
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
+     * @param duration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> floatSecondsWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<Void>> floatSecondsWithResponseAsync(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.floatSeconds(accept, body, requestOptions, context));
+        double durationConverted = (double) duration.toNanos() / 1000_000_000L;
+        return FluxUtil.withContext(
+                context -> service.floatSeconds(durationConverted, accept, requestOptions, context));
     }
 
     /**
      * The floatSeconds operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: double (Required)
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: double (Required)
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
+     * @param duration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> floatSecondsWithResponse(BinaryData body, RequestOptions requestOptions) {
+    public Response<Void> floatSecondsWithResponse(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.floatSecondsSync(accept, body, requestOptions, Context.NONE);
-    }
-
-    /**
-     * The floatSecondsArray operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value (Required): [
-     *         double (Required)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value (Required): [
-     *         double (Required)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> floatSecondsArrayWithResponseAsync(
-            BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.floatSecondsArray(accept, body, requestOptions, context));
-    }
-
-    /**
-     * The floatSecondsArray operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value (Required): [
-     *         double (Required)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value (Required): [
-     *         double (Required)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param body The body parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> floatSecondsArrayWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.floatSecondsArraySync(accept, body, requestOptions, Context.NONE);
+        double durationConverted = (double) duration.toNanos() / 1000_000_000L;
+        return service.floatSecondsSync(durationConverted, accept, requestOptions, Context.NONE);
     }
 }
