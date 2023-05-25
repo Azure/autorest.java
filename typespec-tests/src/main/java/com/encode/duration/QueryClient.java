@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.encode.duration.implementation.QueriesImpl;
 import java.time.Duration;
+import java.util.List;
 
 /** Initializes a new instance of the synchronous DurationClient type. */
 @ServiceClient(builder = DurationClientBuilder.class)
@@ -101,6 +102,23 @@ public final class QueryClient {
     }
 
     /**
+     * The int32SecondsArray operation.
+     *
+     * @param input Array of Input.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> int32SecondsArrayWithResponse(List<Duration> input, RequestOptions requestOptions) {
+        return this.serviceClient.int32SecondsArrayWithResponse(input, requestOptions);
+    }
+
+    /**
      * The defaultMethod operation.
      *
      * @param input The input parameter.
@@ -174,5 +192,24 @@ public final class QueryClient {
         // Generated convenience method for floatSecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         floatSecondsWithResponse(input, requestOptions).getValue();
+    }
+
+    /**
+     * The int32SecondsArray operation.
+     *
+     * @param input Array of Input.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void int32SecondsArray(List<Duration> input) {
+        // Generated convenience method for int32SecondsArrayWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        int32SecondsArrayWithResponse(input, requestOptions).getValue();
     }
 }

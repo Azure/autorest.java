@@ -1,5 +1,9 @@
 # Release History
 
+## 0.7.2 (2023-05-24)
+
+Compatible with compiler 0.44.
+
 ## 0.7.1 (2023-05-19)
 
 Compatible with compiler 0.44.

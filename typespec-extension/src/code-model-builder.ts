@@ -37,6 +37,7 @@ import {
   getProjectedName,
   getService,
   getEncode,
+  isErrorModel,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -1058,10 +1059,11 @@ export class CodeModelBuilder {
       }
     }
 
+    let bodyType: Type | undefined = undefined;
     let trackConvenienceApi = op.convenienceApi ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
-      const bodyType = this.findResponseBody(responseBody.type);
+      bodyType = this.findResponseBody(responseBody.type);
       if (bodyType.kind === "Scalar" && bodyType.name === "bytes") {
         // binary
         response = new BinaryResponse({
@@ -1164,8 +1166,8 @@ export class CodeModelBuilder {
         },
       });
     }
-    if (resp.statusCode === "*" || Number(resp.statusCode) / 100 > 3) {
-      // TODO: x-ms-error-response
+    if (resp.statusCode === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
+      // "*", or the model is @error
       op.addException(response);
 
       if (response instanceof SchemaResponse) {
@@ -1243,7 +1245,8 @@ export class CodeModelBuilder {
       case "Model":
         if (isArrayModelType(this.program, type)) {
           return this.processArraySchema(type, nameHint);
-        } else if (isRecordModelType(this.program, type)) {
+        } else if (isRecordModelType(this.program, type) && type.properties.size == 0) {
+          // "pure" Record that does not have properties in it
           return this.processDictionarySchema(type, nameHint);
         } else {
           return this.processObjectSchema(type, this.getName(type));
@@ -1610,7 +1613,17 @@ export class CodeModelBuilder {
             }
           });
         }
+      } else {
+        // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
+        pushDistinct(objectSchema.parents.all, parentSchema);
       }
+    } else if (isRecordModelType(this.program, type)) {
+      // "pure" Record processed elsewhere
+      // "mixed" Record that have properties, treat the model as "additionalProperties"
+      const parentSchema = this.processDictionarySchema(type, this.getName(type));
+      objectSchema.parents = new Relations();
+      objectSchema.parents.immediate.push(parentSchema);
+      pushDistinct(objectSchema.parents.all, parentSchema);
     }
 
     // value of the discriminator property

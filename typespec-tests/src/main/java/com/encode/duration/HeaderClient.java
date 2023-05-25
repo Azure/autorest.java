@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.encode.duration.implementation.HeadersImpl;
 import java.time.Duration;
+import java.util.List;
 
 /** Initializes a new instance of the synchronous DurationClient type. */
 @ServiceClient(builder = DurationClientBuilder.class)
@@ -64,6 +65,23 @@ public final class HeaderClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> iso8601WithResponse(Duration duration, RequestOptions requestOptions) {
         return this.serviceClient.iso8601WithResponse(duration, requestOptions);
+    }
+
+    /**
+     * The iso8601Array operation.
+     *
+     * @param duration Array of Duration.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> iso8601ArrayWithResponse(List<Duration> duration, RequestOptions requestOptions) {
+        return this.serviceClient.iso8601ArrayWithResponse(duration, requestOptions);
     }
 
     /**
@@ -136,6 +154,25 @@ public final class HeaderClient {
         // Generated convenience method for iso8601WithResponse
         RequestOptions requestOptions = new RequestOptions();
         iso8601WithResponse(duration, requestOptions).getValue();
+    }
+
+    /**
+     * The iso8601Array operation.
+     *
+     * @param duration Array of Duration.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void iso8601Array(List<Duration> duration) {
+        // Generated convenience method for iso8601ArrayWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        iso8601ArrayWithResponse(duration, requestOptions).getValue();
     }
 
     /**
