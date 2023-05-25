@@ -753,11 +753,14 @@ export class CodeModelBuilder {
         extensions = { "x-ms-skip-url-encoding": true };
       }
 
-      // versioning
-      const addedOn = getAddedOnVersions(this.program, param.param);
-      if (addedOn) {
-        extensions = extensions ?? {};
-        extensions["x-ms-versioning-added"] = clientContext.getAddedVersions(addedOn);
+      // currently under dev-options.support-versioning
+      if (this.options["dev-options"] && this.options["dev-options"]["support-versioning"]) {
+        // versioning
+        const addedOn = getAddedOnVersions(this.program, param.param);
+        if (addedOn) {
+          extensions = extensions ?? {};
+          extensions["x-ms-versioning-added"] = clientContext.getAddedVersions(addedOn);
+        }
       }
 
       // format if array

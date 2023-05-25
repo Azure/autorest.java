@@ -33,7 +33,7 @@ export interface EmitterOptions {
 
 export interface DevOptions {
   "generate-code-model"?: boolean;
-  "generate-convenience-apis"?: boolean;
+  "support-versioning"?: boolean;
 }
 
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
