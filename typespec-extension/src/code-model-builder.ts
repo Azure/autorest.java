@@ -548,17 +548,15 @@ export class CodeModelBuilder {
   }
 
   private isMultipleContentTypes(httpOperation: HttpOperation): boolean {
-    if (httpOperation.parameters.parameters && httpOperation.parameters.parameters.length > 0) {
-      if (
-        httpOperation.parameters.parameters.some(
-          (parameter) =>
-            parameter?.type === "header" &&
-            parameter?.name?.toLowerCase() === "content-type" &&
-            parameter?.param?.type?.kind === "Union",
-        )
-      ) {
+    if (httpOperation.parameters.parameters
+        && httpOperation.parameters.parameters.length > 0
+        && httpOperation.parameters.parameters.some(
+            (parameter) =>
+                parameter?.type === "header" &&
+                parameter?.name?.toLowerCase() === "content-type" &&
+                parameter?.param?.type?.kind === "Union",
+            )) {
         return true;
-      }
     }
     return false;
   }
