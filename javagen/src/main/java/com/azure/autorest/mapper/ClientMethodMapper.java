@@ -443,7 +443,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                         builder = builder.implementationDetails(implDetailsBuilder.build());
 
-                        String modelSuffix = "WithModel";
                         createLroMethods(operation, builder, methods,
                             methodNamer.getLroModelBeginAsyncMethodName(),
                             methodNamer.getLroModelBeginMethodName(),
@@ -736,6 +735,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         if (settings.getSyncMethods() != SyncMethodsGeneration.NONE) {
             methods.add(builder.build());
+
+            // overload for versioning
+            createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
         }
 
         if (generateClientMethodWithOnlyRequiredParameters) {
@@ -838,6 +840,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .methodVisibility(visibilityFunction.methodVisibility(false, defaultOverloadType, false));
         methods.add(builder.build());
 
+        // overload for versioning
         createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
 
         if (generateClientMethodWithOnlyRequiredParameters) {
@@ -944,6 +947,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, defaultOverloadType, false, isProtocolMethod))
                 .build());
 
+            // overload for versioning
+            createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
+
             if (generateClientMethodWithOnlyRequiredParameters) {
                 methods.add(builder
                     .onlyRequiredParameters(true)
@@ -967,6 +973,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .groupedParameterRequired(false)
                 .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, defaultOverloadType, false, isProtocolMethod))
                 .build());
+
+            // overload for versioning
+            createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
 
             if (generateClientMethodWithOnlyRequiredParameters) {
                 methods.add(builder
