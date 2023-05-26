@@ -782,7 +782,7 @@ export class CodeModelBuilder {
       if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
         if (param.type === "query") {
           const queryParamOptions = getQueryParamOptions(this.program, param.param);
-          // TODO (weidxu): remove "as string" after compiler fix the type of queryParamOptions.format
+          // TODO (weidxu): remove "as string" after http lib fix the type of queryParamOptions.format
           switch (queryParamOptions?.format as string) {
             case "csv":
               style = SerializationStyle.Simple;
