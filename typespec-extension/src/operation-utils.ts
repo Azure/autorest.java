@@ -95,6 +95,21 @@ export function operationContainsJsonMergePatch(op: HttpOperation): boolean {
   return false;
 }
 
+export function operationIsMultipleContentTypes(httpOperation: HttpOperation): boolean {
+  if (
+    httpOperation.parameters.parameters &&
+    httpOperation.parameters.parameters.some(
+      (parameter) =>
+        parameter?.type === "header" &&
+        parameter?.name?.toLowerCase() === "content-type" &&
+        parameter?.param?.type?.kind === "Union",
+    )
+  ) {
+    return true;
+  }
+  return false;
+}
+
 export function isPayloadProperty(program: Program, property: ModelProperty) {
   const headerInfo = getHeaderFieldName(program, property);
   const queryInfo = getQueryParamName(program, property);

@@ -5,6 +5,8 @@ import {
   Scalar,
   TemplatedTypeBase,
   Type,
+  UnionVariant,
+  isNullType,
   isTemplateDeclaration,
   isTemplateInstance,
 } from "@typespec/compiler";
@@ -80,6 +82,25 @@ export function getNameForTemplate(target: Type): string {
 
     default:
       return "";
+  }
+}
+
+export function isNullableType(type: Type): boolean {
+  if (type.kind === "Union") {
+    const nullVariants = Array.from(type.variants.values()).filter((it) => isNullType(it.type));
+    return nullVariants.length >= 1;
+  } else {
+    return false;
+  }
+}
+
+export function isSameLiteralTypes(variants: UnionVariant[]): boolean {
+  const kindSet = new Set(variants.map((it) => it.type.kind));
+  if (kindSet.size === 1) {
+    const kind = kindSet.values().next().value;
+    return kind === "String" || kind === "Number" || kind === "Boolean";
+  } else {
+    return false;
   }
 }
 

@@ -1,13 +1,17 @@
 import { Enum, Model, NoTarget, Operation, Program, Union } from "@typespec/compiler";
 
 export function logWarning(program: Program, msg: string) {
-  program.trace("typespec-java", msg);
+  trace(program, msg);
   program.reportDiagnostic({
     code: "typespec-java",
     severity: "warning",
     message: msg,
     target: NoTarget,
   });
+}
+
+export function trace(program: Program, msg: string) {
+  program.trace("typespec-java", msg);
 }
 
 export function pascalCase(name: string): string {
