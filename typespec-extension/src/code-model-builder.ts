@@ -550,14 +550,16 @@ export class CodeModelBuilder {
   }
 
   private isMultipleContentTypes(httpOperation: HttpOperation): boolean {
-    if (httpOperation.parameters.parameters
-        && httpOperation.parameters.parameters.some(
-            (parameter) =>
-                parameter?.type === "header" &&
-                parameter?.name?.toLowerCase() === "content-type" &&
-                parameter?.param?.type?.kind === "Union",
-            )) {
-        return true;
+    if (
+      httpOperation.parameters.parameters &&
+      httpOperation.parameters.parameters.some(
+        (parameter) =>
+          parameter?.type === "header" &&
+          parameter?.name?.toLowerCase() === "content-type" &&
+          parameter?.param?.type?.kind === "Union",
+      )
+    ) {
+      return true;
     }
     return false;
   }
