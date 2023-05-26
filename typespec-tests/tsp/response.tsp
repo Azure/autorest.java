@@ -44,30 +44,6 @@ model Resource {
 
 model ResourceArray is Resource[];
 
-interface ResourceOperations
-  extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
-
-// operation using Azure.Core
-@Azure.ClientGenerator.Core.client({
-  name: "CoreClient",
-  service: Cadl.Response,
-})
-@route("/cadl-core")
-@doc("Cadl Core")
-interface CadlCoreOp {
-  @doc("Creates a new resource or updates an existing one.")
-  createOrUpdate is ResourceOperations.ResourceCreateOrReplace<Resource>;
-
-  @doc("Gets the details of a resource.")
-  get is ResourceOperations.ResourceRead<Resource>;
-
-  @doc("Deletes a resource.")
-  delete is ResourceOperations.ResourceDelete<Resource>;
-
-  @doc("Lists the existing resources.")
-  list is ResourceOperations.ResourceList<Resource>;
-}
-
 @Azure.ClientGenerator.Core.client({
   name: "ResponseClient",
   service: Cadl.Response,

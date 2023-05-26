@@ -31,7 +31,6 @@ import {
   listServices,
   getNamespaceFullName,
   isNullType,
-  NoTarget,
   getTypeName,
   EmitContext,
   getProjectedName,
@@ -129,27 +128,36 @@ import { EmitterOptions } from "./emitter.js";
 import { createPollResultSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
-  ProcessingCache,
   stringArrayContainsIgnoreCase,
-  getClientApiVersions,
   getJavaNamespace,
-  getServiceVersion,
-  isModelReferredInTemplate,
-  operationContainsJsonMergePatch,
   getNamespace,
-  pushDistinct,
-  isPayloadProperty,
-  modelContainsDerivedModel,
   pascalCase,
+  logWarning,
+  trace,
+} from "./utils.js";
+import {
+  ProcessingCache,
+  isModelReferredInTemplate,
+  pushDistinct,
+  modelContainsDerivedModel,
   getNameForTemplate,
+  getDurationFormat,
+  hasScalarAsBase,
+  isNullableType,
+  isSameLiteralTypes,
+} from "./type-utils.js";
+import {
+  getClientApiVersions,
+  getServiceVersion,
+  operationContainsJsonMergePatch,
+  isPayloadProperty,
   originApiVersion,
   specialHeaderNames,
   loadExamples,
   isLroMetadataSupported,
   isLroNewPollingStrategy,
-  getDurationFormat,
-  hasScalarAsBase,
-} from "./utils.js";
+  operationIsMultipleContentTypes,
+} from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
 
@@ -467,9 +475,14 @@ export class CodeModelBuilder {
       },
     });
 
-    if (!operationContainsJsonMergePatch(op) && !this.isMultipleContentTypes(op)) {
-      // do not generate convenience method for JSON Merge Patch and multiple content types
+    if (operationContainsJsonMergePatch(op)) {
+      // do not generate convenience method for JSON Merge Patch
+      this.trace(`Operation '${op.operation.name}' contains 'application/merge-patch+json'`);
+    } else if (operationIsMultipleContentTypes(op)) {
+      // and multiple content types
       // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
+      this.trace(`Operation '${op.operation.name}' is multiple content-type`);
+    } else {
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName && !isInternal(this.sdkContext, operation)) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
@@ -547,21 +560,6 @@ export class CodeModelBuilder {
     operationGroup.addOperation(codeModelOperation);
 
     return codeModelOperation;
-  }
-
-  private isMultipleContentTypes(httpOperation: HttpOperation): boolean {
-    if (
-      httpOperation.parameters.parameters &&
-      httpOperation.parameters.parameters.some(
-        (parameter) =>
-          parameter?.type === "header" &&
-          parameter?.name?.toLowerCase() === "content-type" &&
-          parameter?.param?.type?.kind === "Union",
-      )
-    ) {
-      return true;
-    }
-    return false;
   }
 
   private processRouteForPaged(op: CodeModelOperation, responses: HttpOperationResponse[]) {
@@ -818,7 +816,7 @@ export class CodeModelBuilder {
         }
       }
 
-      const nullable = this.isNullableType(param.param.type);
+      const nullable = isNullableType(param.param.type);
       const parameter = new Parameter(this.getName(param.param), this.getDoc(param.param), schema, {
         summary: this.getSummary(param.param),
         implementation: ImplementationLocation.Method,
@@ -1130,11 +1128,10 @@ export class CodeModelBuilder {
               }
               if (match) {
                 schema = candidateResponseSchema;
-                this.program.trace(
-                  "typespec-java",
-                  `Replace TypeSpec model ${this.getName(bodyType)} with ${
+                this.trace(
+                  `Replace TypeSpec model '${this.getName(bodyType)}' with '${
                     candidateResponseSchema.language.default.name
-                  }`,
+                  }'`,
                 );
               }
             }
@@ -1761,7 +1758,7 @@ export class CodeModelBuilder {
 
   private processModelProperty(prop: ModelProperty): Property {
     const schema = this.processSchema(prop, prop.name);
-    let nullable = this.isNullableType(prop.type);
+    let nullable = isNullableType(prop.type);
 
     let extensions = undefined;
     if (this.isSecret(prop)) {
@@ -1808,7 +1805,7 @@ export class CodeModelBuilder {
       return this.processSchema(nonNullVariants[0].type, name);
     }
 
-    if (this.isSameLiteralTypes(nonNullVariants)) {
+    if (isSameLiteralTypes(nonNullVariants)) {
       // enum
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
@@ -1897,25 +1894,6 @@ export class CodeModelBuilder {
         }
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
-    }
-  }
-
-  private isNullableType(type: Type): boolean {
-    if (type.kind === "Union") {
-      const nullVariants = Array.from(type.variants.values()).filter((it) => isNullType(it.type));
-      return nullVariants.length >= 1;
-    } else {
-      return false;
-    }
-  }
-
-  private isSameLiteralTypes(variants: UnionVariant[]): boolean {
-    const kindSet = new Set(variants.map((it) => it.type.kind));
-    if (kindSet.size === 1) {
-      const kind = kindSet.values().next().value;
-      return kind === "String" || kind === "Number" || kind === "Boolean";
-    } else {
-      return false;
     }
   }
 
@@ -2024,13 +2002,11 @@ export class CodeModelBuilder {
   }
 
   private logWarning(msg: string) {
-    this.program.trace("typespec-java", msg);
-    this.program.reportDiagnostic({
-      code: "typespec-java",
-      severity: "warning",
-      message: msg,
-      target: NoTarget,
-    });
+    logWarning(this.program, msg);
+  }
+
+  private trace(msg: string) {
+    trace(this.program, msg);
   }
 
   private _stringSchema?: StringSchema;
