@@ -37,6 +37,7 @@ import {
   getProjectedName,
   getService,
   getEncode,
+  getOverloadedOperation,
   isErrorModel,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
@@ -378,7 +379,9 @@ export class CodeModelBuilder {
       const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
-        codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
+        if (!this.needToSkipProcessingOperation(operation)) {
+          codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
+        }
       }
       if (codeModelGroup.operations?.length > 0) {
         codeModelClient.operationGroups.push(codeModelGroup);
@@ -388,7 +391,9 @@ export class CodeModelBuilder {
         const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
         codeModelGroup = new OperationGroup(operationGroup.type.name);
         for (const operation of operations) {
-          codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
+          if (!this.needToSkipProcessingOperation(operation)) {
+            codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
+          }
         }
         codeModelClient.operationGroups.push(codeModelGroup);
       }
@@ -429,6 +434,15 @@ export class CodeModelBuilder {
     }
   }
 
+  private needToSkipProcessingOperation(operation: Operation): boolean {
+    // don't generate protocol and convenience method for overloaded operations
+    // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
+    if (getOverloadedOperation(this.program, operation)) {
+      return true;
+    }
+    return false;
+  }
+
   private processOperation(
     groupName: string,
     operation: Operation,
@@ -453,8 +467,9 @@ export class CodeModelBuilder {
       },
     });
 
-    if (!operationContainsJsonMergePatch(op)) {
-      // do not generate convenience method for JSON Merge Patch
+    if (!operationContainsJsonMergePatch(op) && !this.isMultipleContentTypes(op)) {
+      // do not generate convenience method for JSON Merge Patch and multiple content types
+      // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName && !isInternal(this.sdkContext, operation)) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
@@ -532,6 +547,21 @@ export class CodeModelBuilder {
     operationGroup.addOperation(codeModelOperation);
 
     return codeModelOperation;
+  }
+
+  private isMultipleContentTypes(httpOperation: HttpOperation): boolean {
+    if (
+      httpOperation.parameters.parameters &&
+      httpOperation.parameters.parameters.some(
+        (parameter) =>
+          parameter?.type === "header" &&
+          parameter?.name?.toLowerCase() === "content-type" &&
+          parameter?.param?.type?.kind === "Union",
+      )
+    ) {
+      return true;
+    }
+    return false;
   }
 
   private processRouteForPaged(op: CodeModelOperation, responses: HttpOperationResponse[]) {
