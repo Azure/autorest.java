@@ -436,6 +436,7 @@ export class CodeModelBuilder {
 
   private needToSkipProcessingOperation(operation: Operation): boolean {
     // don't generate protocol and convenience method for overloaded operations
+    // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
     if (getOverloadedOperation(this.program, operation)) {
       return true;
     }
@@ -468,6 +469,7 @@ export class CodeModelBuilder {
 
     if (!operationContainsJsonMergePatch(op) && !this.isMultipleContentTypes(op)) {
       // do not generate convenience method for JSON Merge Patch and multiple content types
+      // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName && !isInternal(this.sdkContext, operation)) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
@@ -549,7 +551,6 @@ export class CodeModelBuilder {
 
   private isMultipleContentTypes(httpOperation: HttpOperation): boolean {
     if (httpOperation.parameters.parameters
-        && httpOperation.parameters.parameters.length > 0
         && httpOperation.parameters.parameters.some(
             (parameter) =>
                 parameter?.type === "header" &&
