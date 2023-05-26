@@ -782,17 +782,28 @@ export class CodeModelBuilder {
       if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
         if (param.type === "query") {
           const queryParamOptions = getQueryParamOptions(this.program, param.param);
-          switch (queryParamOptions?.format) {
+          // TODO (weidxu): remove "as string" after compiler fix the type of queryParamOptions.format
+          switch (queryParamOptions?.format as string) {
             case "csv":
               style = SerializationStyle.Simple;
+              break;
+
+            case "ssv":
+              style = SerializationStyle.SpaceDelimited;
+              break;
+
+            case "tsv":
+              style = SerializationStyle.TabDelimited;
+              break;
+
+            case "pipes":
+              style = SerializationStyle.PipeDelimited;
               break;
 
             case "multi":
               style = SerializationStyle.Form;
               explode = true;
               break;
-
-            // TODO there is bug in @typespec/http that ssv etc. is not in queryParamOptions.format
 
             default:
               if (queryParamOptions?.format) {
@@ -1330,7 +1341,7 @@ export class CodeModelBuilder {
             (encode.encoding === "rfc3339" || encode.encoding === "rfc7231") &&
             (hasScalarAsBase(type, "utcDateTime") || hasScalarAsBase(type, "offsetDateTime"))
           ) {
-            // TODO "unixTimeStamp"
+            // TODO: "unixTimeStamp"
             return this.processDateTimeSchema(type, nameHint, encode.encoding === "rfc7231");
           } else if (encode.encoding === "base64url" && hasScalarAsBase(type, "bytes")) {
             return this.processByteArraySchema(type, nameHint, true);
@@ -1746,7 +1757,7 @@ export class CodeModelBuilder {
           (encode.encoding === "rfc3339" || encode.encoding === "rfc7231") &&
           (hasScalarAsBase(prop.type, "utcDateTime") || hasScalarAsBase(prop.type, "offsetDateTime"))
         ) {
-          // TODO "unixTimeStamp"
+          // TODO: "unixTimeStamp"
           return this.processDateTimeSchema(prop.type, nameHint, encode.encoding === "rfc7231");
         } else if (encode.encoding === "base64url" && hasScalarAsBase(prop.type, "bytes")) {
           return this.processByteArraySchema(prop.type, nameHint, true);
