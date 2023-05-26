@@ -127,28 +127,27 @@ import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
 import { createPollResultSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
+import { stringArrayContainsIgnoreCase, getJavaNamespace, getNamespace, pascalCase } from "./utils.js";
 import {
   ProcessingCache,
-  stringArrayContainsIgnoreCase,
-  getClientApiVersions,
-  getJavaNamespace,
-  getServiceVersion,
   isModelReferredInTemplate,
-  operationContainsJsonMergePatch,
-  getNamespace,
   pushDistinct,
-  isPayloadProperty,
   modelContainsDerivedModel,
-  pascalCase,
   getNameForTemplate,
+  getDurationFormat,
+  hasScalarAsBase,
+} from "./type-utils.js";
+import {
+  getClientApiVersions,
+  getServiceVersion,
+  operationContainsJsonMergePatch,
+  isPayloadProperty,
   originApiVersion,
   specialHeaderNames,
   loadExamples,
   isLroMetadataSupported,
   isLroNewPollingStrategy,
-  getDurationFormat,
-  hasScalarAsBase,
-} from "./utils.js";
+} from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
 
