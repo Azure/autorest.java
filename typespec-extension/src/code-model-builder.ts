@@ -31,12 +31,13 @@ import {
   listServices,
   getNamespaceFullName,
   isNullType,
-  NoTarget,
   getTypeName,
   EmitContext,
   getProjectedName,
   getService,
   getEncode,
+  getOverloadedOperation,
+  isErrorModel,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -127,27 +128,36 @@ import { EmitterOptions } from "./emitter.js";
 import { createPollResultSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
-  ProcessingCache,
   stringArrayContainsIgnoreCase,
-  getClientApiVersions,
   getJavaNamespace,
-  getServiceVersion,
-  isModelReferredInTemplate,
-  operationContainsJsonMergePatch,
   getNamespace,
-  pushDistinct,
-  isPayloadProperty,
-  modelContainsDerivedModel,
   pascalCase,
+  logWarning,
+  trace,
+} from "./utils.js";
+import {
+  ProcessingCache,
+  isModelReferredInTemplate,
+  pushDistinct,
+  modelContainsDerivedModel,
   getNameForTemplate,
+  getDurationFormat,
+  hasScalarAsBase,
+  isNullableType,
+  isSameLiteralTypes,
+} from "./type-utils.js";
+import {
+  getClientApiVersions,
+  getServiceVersion,
+  operationContainsJsonMergePatch,
+  isPayloadProperty,
   originApiVersion,
   specialHeaderNames,
   loadExamples,
   isLroMetadataSupported,
   isLroNewPollingStrategy,
-  getDurationFormat,
-  hasScalarAsBase,
-} from "./utils.js";
+  operationIsMultipleContentTypes,
+} from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
 
@@ -377,7 +387,9 @@ export class CodeModelBuilder {
       const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
-        codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
+        if (!this.needToSkipProcessingOperation(operation)) {
+          codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
+        }
       }
       if (codeModelGroup.operations?.length > 0) {
         codeModelClient.operationGroups.push(codeModelGroup);
@@ -387,7 +399,9 @@ export class CodeModelBuilder {
         const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
         codeModelGroup = new OperationGroup(operationGroup.type.name);
         for (const operation of operations) {
-          codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
+          if (!this.needToSkipProcessingOperation(operation)) {
+            codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
+          }
         }
         codeModelClient.operationGroups.push(codeModelGroup);
       }
@@ -428,6 +442,15 @@ export class CodeModelBuilder {
     }
   }
 
+  private needToSkipProcessingOperation(operation: Operation): boolean {
+    // don't generate protocol and convenience method for overloaded operations
+    // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
+    if (getOverloadedOperation(this.program, operation)) {
+      return true;
+    }
+    return false;
+  }
+
   private processOperation(
     groupName: string,
     operation: Operation,
@@ -452,8 +475,14 @@ export class CodeModelBuilder {
       },
     });
 
-    if (!operationContainsJsonMergePatch(op)) {
+    if (operationContainsJsonMergePatch(op)) {
       // do not generate convenience method for JSON Merge Patch
+      this.trace(`Operation '${op.operation.name}' contains 'application/merge-patch+json'`);
+    } else if (operationIsMultipleContentTypes(op)) {
+      // and multiple content types
+      // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
+      this.trace(`Operation '${op.operation.name}' is multiple content-type`);
+    } else {
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName && !isInternal(this.sdkContext, operation)) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
@@ -787,7 +816,7 @@ export class CodeModelBuilder {
         }
       }
 
-      const nullable = this.isNullableType(param.param.type);
+      const nullable = isNullableType(param.param.type);
       const parameter = new Parameter(this.getName(param.param), this.getDoc(param.param), schema, {
         summary: this.getSummary(param.param),
         implementation: ImplementationLocation.Method,
@@ -1046,10 +1075,11 @@ export class CodeModelBuilder {
       }
     }
 
+    let bodyType: Type | undefined = undefined;
     let trackConvenienceApi = op.convenienceApi ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
-      const bodyType = this.findResponseBody(responseBody.type);
+      bodyType = this.findResponseBody(responseBody.type);
       if (bodyType.kind === "Scalar" && bodyType.name === "bytes") {
         // binary
         response = new BinaryResponse({
@@ -1098,11 +1128,10 @@ export class CodeModelBuilder {
               }
               if (match) {
                 schema = candidateResponseSchema;
-                this.program.trace(
-                  "typespec-java",
-                  `Replace TypeSpec model ${this.getName(bodyType)} with ${
+                this.trace(
+                  `Replace TypeSpec model '${this.getName(bodyType)}' with '${
                     candidateResponseSchema.language.default.name
-                  }`,
+                  }'`,
                 );
               }
             }
@@ -1152,8 +1181,8 @@ export class CodeModelBuilder {
         },
       });
     }
-    if (resp.statusCode === "*" || Number(resp.statusCode) / 100 > 3) {
-      // TODO: x-ms-error-response
+    if (resp.statusCode === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
+      // "*", or the model is @error
       op.addException(response);
 
       if (response instanceof SchemaResponse) {
@@ -1231,7 +1260,8 @@ export class CodeModelBuilder {
       case "Model":
         if (isArrayModelType(this.program, type)) {
           return this.processArraySchema(type, nameHint);
-        } else if (isRecordModelType(this.program, type)) {
+        } else if (isRecordModelType(this.program, type) && type.properties.size == 0) {
+          // "pure" Record that does not have properties in it
           return this.processDictionarySchema(type, nameHint);
         } else {
           return this.processObjectSchema(type, this.getName(type));
@@ -1598,7 +1628,17 @@ export class CodeModelBuilder {
             }
           });
         }
+      } else {
+        // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
+        pushDistinct(objectSchema.parents.all, parentSchema);
       }
+    } else if (isRecordModelType(this.program, type)) {
+      // "pure" Record processed elsewhere
+      // "mixed" Record that have properties, treat the model as "additionalProperties"
+      const parentSchema = this.processDictionarySchema(type, this.getName(type));
+      objectSchema.parents = new Relations();
+      objectSchema.parents.immediate.push(parentSchema);
+      pushDistinct(objectSchema.parents.all, parentSchema);
     }
 
     // value of the discriminator property
@@ -1718,7 +1758,7 @@ export class CodeModelBuilder {
 
   private processModelProperty(prop: ModelProperty): Property {
     const schema = this.processSchema(prop, prop.name);
-    let nullable = this.isNullableType(prop.type);
+    let nullable = isNullableType(prop.type);
 
     let extensions = undefined;
     if (this.isSecret(prop)) {
@@ -1765,7 +1805,7 @@ export class CodeModelBuilder {
       return this.processSchema(nonNullVariants[0].type, name);
     }
 
-    if (this.isSameLiteralTypes(nonNullVariants)) {
+    if (isSameLiteralTypes(nonNullVariants)) {
       // enum
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
@@ -1854,25 +1894,6 @@ export class CodeModelBuilder {
         }
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
-    }
-  }
-
-  private isNullableType(type: Type): boolean {
-    if (type.kind === "Union") {
-      const nullVariants = Array.from(type.variants.values()).filter((it) => isNullType(it.type));
-      return nullVariants.length >= 1;
-    } else {
-      return false;
-    }
-  }
-
-  private isSameLiteralTypes(variants: UnionVariant[]): boolean {
-    const kindSet = new Set(variants.map((it) => it.type.kind));
-    if (kindSet.size === 1) {
-      const kind = kindSet.values().next().value;
-      return kind === "String" || kind === "Number" || kind === "Boolean";
-    } else {
-      return false;
     }
   }
 
@@ -1981,13 +2002,11 @@ export class CodeModelBuilder {
   }
 
   private logWarning(msg: string) {
-    this.program.trace("typespec-java", msg);
-    this.program.reportDiagnostic({
-      code: "typespec-java",
-      severity: "warning",
-      message: msg,
-      target: NoTarget,
-    });
+    logWarning(this.program, msg);
+  }
+
+  private trace(msg: string) {
+    trace(this.program, msg);
   }
 
   private _stringSchema?: StringSchema;

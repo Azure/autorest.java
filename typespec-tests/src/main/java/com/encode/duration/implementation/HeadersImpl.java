@@ -21,7 +21,10 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
 import java.time.Duration;
+import java.util.List;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Headers. */
@@ -117,6 +120,42 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> iso8601Sync(
                 @HeaderParam("duration") Duration duration,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/encode/duration/header/iso8601-array")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> iso8601Array(
+                @HeaderParam("duration") String duration,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/encode/duration/header/iso8601-array")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> iso8601ArraySync(
+                @HeaderParam("duration") String duration,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -260,6 +299,45 @@ public final class HeadersImpl {
     public Response<Void> iso8601WithResponse(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.iso8601Sync(duration, accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * The iso8601Array operation.
+     *
+     * @param duration Array of Duration.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> iso8601ArrayWithResponseAsync(List<Duration> duration, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String durationConverted =
+                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
+        return FluxUtil.withContext(
+                context -> service.iso8601Array(durationConverted, accept, requestOptions, context));
+    }
+
+    /**
+     * The iso8601Array operation.
+     *
+     * @param duration Array of Duration.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> iso8601ArrayWithResponse(List<Duration> duration, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String durationConverted =
+                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
+        return service.iso8601ArraySync(durationConverted, accept, requestOptions, Context.NONE);
     }
 
     /**

@@ -22,7 +22,11 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
 import java.time.Duration;
+import java.util.List;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in Queries. */
@@ -193,6 +197,42 @@ public final class QueriesImpl {
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Get("/encode/duration/query/int32-seconds-array")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> int32SecondsArray(
+                @QueryParam("input") String input,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/encode/duration/query/int32-seconds-array")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> int32SecondsArraySync(
+                @QueryParam("input") String input,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -333,5 +373,51 @@ public final class QueriesImpl {
         final String accept = "application/json";
         double inputConverted = (double) input.toNanos() / 1000_000_000L;
         return service.floatSecondsSync(inputConverted, accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * The int32SecondsArray operation.
+     *
+     * @param input Array of Input.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> int32SecondsArrayWithResponseAsync(
+            List<Duration> input, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String inputConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeIterable(
+                                input.stream().map(value -> value.getSeconds()).collect(Collectors.toList()),
+                                CollectionFormat.CSV);
+        return FluxUtil.withContext(
+                context -> service.int32SecondsArray(inputConverted, accept, requestOptions, context));
+    }
+
+    /**
+     * The int32SecondsArray operation.
+     *
+     * @param input Array of Input.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> int32SecondsArrayWithResponse(List<Duration> input, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String inputConverted =
+                JacksonAdapter.createDefaultSerializerAdapter()
+                        .serializeIterable(
+                                input.stream().map(value -> value.getSeconds()).collect(Collectors.toList()),
+                                CollectionFormat.CSV);
+        return service.int32SecondsArraySync(inputConverted, accept, requestOptions, Context.NONE);
     }
 }

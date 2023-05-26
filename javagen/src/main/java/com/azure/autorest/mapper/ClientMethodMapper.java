@@ -532,7 +532,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             if (!(responseBodySchema instanceof ObjectSchema)) {
                 throw new IllegalArgumentException(String.format("[JavaCheck/SchemaError] no common parent found for client models %s",
                     operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull)
-                        .map(s -> s.getLanguage().getJava().getName()).collect(Collectors.toList())));
+                        .map(SchemaUtil::getJavaName).collect(Collectors.toList())));
             }
             ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
             Optional<ClientModelProperty> itemPropertyOpt = responseBodyModel.getProperties().stream()
