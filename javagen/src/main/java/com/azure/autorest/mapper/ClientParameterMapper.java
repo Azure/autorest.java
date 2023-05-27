@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.Versioning;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.SchemaUtil;
@@ -85,6 +86,15 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         builder.constant(isConstant).defaultValue(defaultValue);
 
         builder.description(MethodUtil.getMethodParameterDescription(parameter, name, isProtocolMethod));
+
+        if (parameter.getExtensions() != null) {
+            if (parameter.getExtensions().getXmsVersioningAdded() != null) {
+                builder.versioning(new Versioning.Builder()
+                        .added(parameter.getExtensions().getXmsVersioningAdded())
+                        .build());
+            }
+        }
+
         return builder.build();
     }
 }

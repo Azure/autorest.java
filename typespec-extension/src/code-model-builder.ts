@@ -54,7 +54,7 @@ import {
   getQueryParamOptions,
   getHeaderFieldOptions,
 } from "@typespec/http";
-import { getVersion } from "@typespec/versioning";
+import { getAddedOnVersions, getVersion } from "@typespec/versioning";
 import {
   isPollingLocation,
   getPagedResult,
@@ -380,7 +380,12 @@ export class CodeModelBuilder {
       }
       const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
       codeModelClient.addGlobalParameters(hostParameters);
-      const clientContext = new ClientContext(baseUri, hostParameters, codeModelClient.globalParameters!);
+      const clientContext = new ClientContext(
+        baseUri,
+        hostParameters,
+        codeModelClient.globalParameters!,
+        codeModelClient.apiVersions,
+      );
 
       const operationGroups = listOperationGroups(this.sdkContext, client);
 
@@ -767,7 +772,7 @@ export class CodeModelBuilder {
       }
 
       // skip-url-encoding
-      let extensions = undefined;
+      let extensions: { [id: string]: any } | undefined = undefined;
       if (
         (param.type === "query" || param.type === "path") &&
         param.param.type.kind === "Scalar" &&
@@ -776,23 +781,44 @@ export class CodeModelBuilder {
         extensions = { "x-ms-skip-url-encoding": true };
       }
 
+      // currently under dev-options.support-versioning
+      if (this.options["dev-options"] && this.options["dev-options"]["support-versioning"]) {
+        // versioning
+        const addedOn = getAddedOnVersions(this.program, param.param);
+        if (addedOn) {
+          extensions = extensions ?? {};
+          extensions["x-ms-versioning-added"] = clientContext.getAddedVersions(addedOn);
+        }
+      }
+
       // format if array
       let style = undefined;
       let explode = undefined;
       if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
         if (param.type === "query") {
           const queryParamOptions = getQueryParamOptions(this.program, param.param);
-          switch (queryParamOptions?.format) {
+          // TODO (weidxu): remove "as string" after http lib fix the type of queryParamOptions.format
+          switch (queryParamOptions?.format as string) {
             case "csv":
               style = SerializationStyle.Simple;
+              break;
+
+            case "ssv":
+              style = SerializationStyle.SpaceDelimited;
+              break;
+
+            case "tsv":
+              style = SerializationStyle.TabDelimited;
+              break;
+
+            case "pipes":
+              style = SerializationStyle.PipeDelimited;
               break;
 
             case "multi":
               style = SerializationStyle.Form;
               explode = true;
               break;
-
-            // TODO there is bug in @typespec/http that ssv etc. is not in queryParamOptions.format
 
             default:
               if (queryParamOptions?.format) {
@@ -1330,7 +1356,7 @@ export class CodeModelBuilder {
             (encode.encoding === "rfc3339" || encode.encoding === "rfc7231") &&
             (hasScalarAsBase(type, "utcDateTime") || hasScalarAsBase(type, "offsetDateTime"))
           ) {
-            // TODO "unixTimeStamp"
+            // TODO: "unixTimeStamp"
             return this.processDateTimeSchema(type, nameHint, encode.encoding === "rfc7231");
           } else if (encode.encoding === "base64url" && hasScalarAsBase(type, "bytes")) {
             return this.processByteArraySchema(type, nameHint, true);
@@ -1746,7 +1772,7 @@ export class CodeModelBuilder {
           (encode.encoding === "rfc3339" || encode.encoding === "rfc7231") &&
           (hasScalarAsBase(prop.type, "utcDateTime") || hasScalarAsBase(prop.type, "offsetDateTime"))
         ) {
-          // TODO "unixTimeStamp"
+          // TODO: "unixTimeStamp"
           return this.processDateTimeSchema(prop.type, nameHint, encode.encoding === "rfc7231");
         } else if (encode.encoding === "base64url" && hasScalarAsBase(prop.type, "bytes")) {
           return this.processByteArraySchema(prop.type, nameHint, true);

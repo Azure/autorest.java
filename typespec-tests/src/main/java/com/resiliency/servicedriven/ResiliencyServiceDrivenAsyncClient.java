@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.FluxUtil;
 import com.resiliency.servicedriven.implementation.ResiliencyServiceDrivenClientImpl;
+import java.util.Arrays;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous ResiliencyServiceDrivenClient type. */
@@ -166,6 +167,10 @@ public final class ResiliencyServiceDrivenAsyncClient {
     public Mono<Void> fromNone(String newParameter) {
         // Generated convenience method for fromNoneWithResponse
         RequestOptions requestOptions = new RequestOptions();
+        if (!Arrays.asList("v2").contains(serviceClient.getServiceVersion().getVersion())) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
+        }
         if (newParameter != null) {
             requestOptions.addQueryParam("new-parameter", newParameter, false);
         }
@@ -209,6 +214,10 @@ public final class ResiliencyServiceDrivenAsyncClient {
     public Mono<Void> fromOneRequired(String parameter, String newParameter) {
         // Generated convenience method for fromOneRequiredWithResponse
         RequestOptions requestOptions = new RequestOptions();
+        if (!Arrays.asList("v2").contains(serviceClient.getServiceVersion().getVersion())) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
+        }
         if (newParameter != null) {
             requestOptions.addQueryParam("new-parameter", newParameter, false);
         }
@@ -255,11 +264,39 @@ public final class ResiliencyServiceDrivenAsyncClient {
     public Mono<Void> fromOneOptional(String parameter, String newParameter) {
         // Generated convenience method for fromOneOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
+        if (!Arrays.asList("v2").contains(serviceClient.getServiceVersion().getVersion())) {
+            return Mono.error(
+                    new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
+        }
         if (parameter != null) {
             requestOptions.addQueryParam("parameter", parameter, false);
         }
         if (newParameter != null) {
             requestOptions.addQueryParam("new-parameter", newParameter, false);
+        }
+        return fromOneOptionalWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional
+     * parameters.
+     *
+     * @param parameter I am an optional parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> fromOneOptional(String parameter) {
+        // Generated convenience method for fromOneOptionalWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (parameter != null) {
+            requestOptions.addQueryParam("parameter", parameter, false);
         }
         return fromOneOptionalWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
