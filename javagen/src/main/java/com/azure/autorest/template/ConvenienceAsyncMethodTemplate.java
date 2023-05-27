@@ -105,6 +105,17 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         }
     }
 
+    @Override
+    protected void writeThrowException(ClientMethodType methodType, String exceptionExpression, JavaBlock methodBlock) {
+        if (methodType == ClientMethodType.PagingAsync) {
+            methodBlock.methodReturn(String.format("PagedFlux.create(() -> (continuationToken, pageSize) -> Flux.error(%s))", exceptionExpression));
+        } else if (methodType == ClientMethodType.LongRunningBeginAsync) {
+            methodBlock.methodReturn(String.format("PollerFlux.error(%s)", exceptionExpression));
+        } else {
+            methodBlock.methodReturn(String.format("Mono.error(%s)", exceptionExpression));
+        }
+    }
+
     private IType getResponseBodyType(ClientMethod method) {
         // Mono<T>
         return ((GenericType) method.getReturnValue().getType()).getTypeArguments()[0];

@@ -54,7 +54,7 @@ import {
   getQueryParamOptions,
   getHeaderFieldOptions,
 } from "@typespec/http";
-import { getVersion } from "@typespec/versioning";
+import { getAddedOnVersions, getVersion } from "@typespec/versioning";
 import {
   isPollingLocation,
   getPagedResult,
@@ -380,7 +380,12 @@ export class CodeModelBuilder {
       }
       const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
       codeModelClient.addGlobalParameters(hostParameters);
-      const clientContext = new ClientContext(baseUri, hostParameters, codeModelClient.globalParameters!);
+      const clientContext = new ClientContext(
+        baseUri,
+        hostParameters,
+        codeModelClient.globalParameters!,
+        codeModelClient.apiVersions,
+      );
 
       const operationGroups = listOperationGroups(this.sdkContext, client);
 
@@ -767,13 +772,23 @@ export class CodeModelBuilder {
       }
 
       // skip-url-encoding
-      let extensions = undefined;
+      let extensions: { [id: string]: any } | undefined = undefined;
       if (
         (param.type === "query" || param.type === "path") &&
         param.param.type.kind === "Scalar" &&
         schema instanceof UriSchema
       ) {
         extensions = { "x-ms-skip-url-encoding": true };
+      }
+
+      // currently under dev-options.support-versioning
+      if (this.options["dev-options"] && this.options["dev-options"]["support-versioning"]) {
+        // versioning
+        const addedOn = getAddedOnVersions(this.program, param.param);
+        if (addedOn) {
+          extensions = extensions ?? {};
+          extensions["x-ms-versioning-added"] = clientContext.getAddedVersions(addedOn);
+        }
       }
 
       // format if array

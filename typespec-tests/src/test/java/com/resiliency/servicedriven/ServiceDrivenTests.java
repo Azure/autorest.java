@@ -3,6 +3,7 @@
 
 package com.resiliency.servicedriven;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ServiceDrivenTests {
@@ -43,16 +44,29 @@ public class ServiceDrivenTests {
         client2v2.fromOneRequired("required", "new");
     }
 
-    // this case does not work without resiliency on "added"
-    // at present, v2 client does not have overload "fromOneOptional(String)"
-//    @Test
-//    public void testAddOptionalParamFromOneOptional() {
-//        client1.fromOneOptional("optional");
-//        client2.fromOneOptional("optional", "new");
-//    }
+    @Test
+    public void testAddOptionalParamFromOneOptional() {
+        oldClient1.fromOneOptional("optional");
+        oldClient2.fromOneOptional("optional");
+
+        client2v1.fromOneOptional("optional");
+        client2v2.fromOneOptional("optional", "new");
+    }
 
     @Test
     public void testAddOperation() {
         client2v2.addOperation();
+    }
+
+    @Test
+    public void testInvalidVersion() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> client2v1.fromNone("new"));
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> client2v1.fromOneRequired("required", "new"));
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> client2v1.fromOneOptional("optional", "new"));
     }
 }

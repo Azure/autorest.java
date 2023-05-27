@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -31,6 +32,7 @@ import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.TypeReference;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -99,6 +101,8 @@ abstract class ConvenienceMethodTemplateBase {
             convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, protocolMethod, methodBlock, parametersMap));
         }
 
+        writeValidationForVersioning(convenienceMethod, parametersMap.keySet(), methodBlock);
+
         Map<String, String> parameterExpressionsMap = new HashMap<>();
         for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
             MethodParameter parameter = entry.getKey();
@@ -153,6 +157,34 @@ abstract class ConvenienceMethodTemplateBase {
         // write the invocation of protocol method, and related type conversion
         writeInvocationAndConversion(convenienceMethod, protocolMethod, invocationExpression, methodBlock, typeReferenceStaticClasses);
     }
+
+
+    /**
+     * Write the validation for parameters against current api-version.
+     *
+     * @param parameters the parameters
+     * @param methodBlock the method block
+     */
+    protected void writeValidationForVersioning(ClientMethod convenienceMethod, Set<MethodParameter> parameters, JavaBlock methodBlock) {
+        // validate parameter for versioning
+        for (MethodParameter parameter : parameters) {
+            if (parameter.getClientMethodParameter().getVersioning() != null && parameter.getClientMethodParameter().getVersioning().getAdded() != null) {
+                String condition = String.format(
+                        "!Arrays.asList(%1$s).contains(serviceClient.getServiceVersion().getVersion())",
+                        parameter.getClientMethodParameter().getVersioning().getAdded().stream().map(ClassType.String::defaultValueExpression).collect(Collectors.joining(", ")));
+                methodBlock.ifBlock(condition, ifBlock -> {
+                    String exceptionExpression = String.format(
+                            "new IllegalArgumentException(\"Parameter %1$s is only available in api-version %2$s.\")",
+                            parameter.getName(),
+                            String.join(", ", parameter.getClientMethodParameter().getVersioning().getAdded()));
+                    writeThrowException(convenienceMethod.getType(), exceptionExpression, ifBlock);
+                });
+            }
+        }
+
+    }
+
+    abstract void writeThrowException(ClientMethodType methodType, String exceptionExpression, JavaBlock methodBlock);
 
     private static boolean isGroupByTransformation(MethodTransformationDetail detail) {
         return !CoreUtils.isNullOrEmpty(detail.getParameterMappings())
@@ -242,6 +274,9 @@ abstract class ConvenienceMethodTemplateBase {
         // flatten payload
         imports.add(Map.class.getName());
         imports.add(HashMap.class.getName());
+
+        // versioning
+        imports.add(Arrays.class.getName());
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {

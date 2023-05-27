@@ -71,6 +71,10 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     }
     javaFile.publicFinalClass(syncClassName, classBlock -> {
       writeClass(syncClient, classBlock, constructorVisibility);
+
+      if (JavaSettings.getInstance().isUseClientLogger()) {
+        TemplateUtil.addClientLogger(classBlock, syncClassName, javaFile.getContents());
+      }
     });
   }
 
