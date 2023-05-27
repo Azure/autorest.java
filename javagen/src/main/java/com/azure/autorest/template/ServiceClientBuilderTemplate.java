@@ -22,6 +22,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
@@ -86,6 +87,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add("java.util.ArrayList");
         imports.add("com.azure.core.http.HttpHeaders");
         imports.add("java.util.Objects");
+        if (settings.isUseClientLogger()) {
+            ClassType.ClientLogger.addImportsTo(imports, false);
+        }
         addServiceClientBuilderAnnotationImport(imports);
         addHttpPolicyImports(imports);
         addImportForCoreUtils(imports);
@@ -349,6 +353,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     ++syncClientIndex;
                 }
             }
+
+            TemplateUtil.addClientLogger(classBlock, serviceClientBuilderName, javaFile.getContents());
         });
     }
 

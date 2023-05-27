@@ -30,6 +30,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.enumservice.implementation.EnumServiceClientImpl;
 import java.util.ArrayList;
@@ -67,6 +68,9 @@ public final class EnumServiceClientBuilder
     @Generated
     @Override
     public EnumServiceClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -246,4 +250,6 @@ public final class EnumServiceClientBuilder
     public EnumServiceClient buildClient() {
         return new EnumServiceClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(EnumServiceClientBuilder.class);
 }

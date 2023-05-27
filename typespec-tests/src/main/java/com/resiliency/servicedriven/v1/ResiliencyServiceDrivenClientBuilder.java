@@ -29,6 +29,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.resiliency.servicedriven.v1.implementation.ResiliencyServiceDrivenClientImpl;
 import java.util.ArrayList;
@@ -66,6 +67,9 @@ public final class ResiliencyServiceDrivenClientBuilder
     @Generated
     @Override
     public ResiliencyServiceDrivenClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -276,4 +280,6 @@ public final class ResiliencyServiceDrivenClientBuilder
     public ResiliencyServiceDrivenClient buildClient() {
         return new ResiliencyServiceDrivenClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ResiliencyServiceDrivenClientBuilder.class);
 }
