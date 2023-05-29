@@ -16,7 +16,7 @@ function Generate($tspFile) {
     }
   }
 
-  $tspClientFile = $tspFile.replace('main.tsp', 'client.tsp')
+  $tspClientFile = $tspFile -replace 'main.tsp', 'client.tsp'
   if (($tspClientFile -match 'client.tsp$') -and (Test-Path $tspClientFile)) {
     $tspFile = $tspClientFile
   }
