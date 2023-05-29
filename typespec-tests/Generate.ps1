@@ -15,6 +15,12 @@ function Generate($tspFile) {
       break
     }
   }
+
+  $tspClientFile = $tspFile.replace('main.tsp', 'client.tsp')
+  if (($tspClientFile -match 'client.tsp$') -and (Test-Path $tspClientFile)) {
+    $tspFile = $tspClientFile
+  }
+
   $tspOptions = ""
   if ($overridedNamespace) {
     $tspOptions = "--options=""@azure-tools/typespec-java.namespace=$overridedNamespace"""
