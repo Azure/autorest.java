@@ -58,6 +58,33 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     }
 
     @Override
+    protected void writeMethodImplementation(
+            ClientMethod protocolMethod,
+            ClientMethod convenienceMethod,
+            JavaBlock methodBlock,
+            Set<GenericType> typeReferenceStaticClasses) {
+        if (!JavaSettings.getInstance().isSyncStackEnabled()) {
+            if (protocolMethod.getType() == ClientMethodType.PagingSync) {
+                // Call the convenience method from async client
+                // It would need rework, when underlying sync method in Impl is switched to sync protocol method
+
+                String methodInvoke = "new PagedIterable<>(" + getMethodInvokeViaAsyncClient(convenienceMethod) + ")";
+
+                methodBlock.methodReturn(methodInvoke);
+            } else if (protocolMethod.getType() == ClientMethodType.LongRunningBeginSync) {
+                // Call the convenience method from async client
+                String methodInvoke = getMethodInvokeViaAsyncClient(convenienceMethod) + ".getSyncPoller()";
+
+                methodBlock.methodReturn(methodInvoke);
+            } else {
+                super.writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock, typeReferenceStaticClasses);
+            }
+        } else {
+            super.writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock, typeReferenceStaticClasses);
+        }
+    }
+
+    @Override
     protected void writeInvocationAndConversion(
             ClientMethod convenienceMethod,
             ClientMethod protocolMethod,
@@ -71,26 +98,14 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                 ? "" : ".getValue()";
 
         if (convenienceMethod.getType() == ClientMethodType.PagingSync) {
-            if (JavaSettings.getInstance().isSyncStackEnabled()) {
-                methodBlock.methodReturn(String.format(
-                        "serviceClient.%1$s(%2$s).mapPage(value -> %3$s)",
-                        protocolMethod.getName(),
-                        invocationExpression,
-                        expressionConvertFromBinaryData(responseBodyType, "value", typeReferenceStaticClasses)));
-            } else {
-                // Call the convenience method from async client
-                String methodInvoke = "new PagedIterable<>(" + getMethodInvokeViaAsyncClient(convenienceMethod) + ")";
-                methodBlock.methodReturn(methodInvoke);
-            }
+            methodBlock.methodReturn(String.format(
+                    "serviceClient.%1$s(%2$s).mapPage(value -> %3$s)",
+                    protocolMethod.getName(),
+                    invocationExpression,
+                    expressionConvertFromBinaryData(responseBodyType, "value", typeReferenceStaticClasses)));
         } else if (convenienceMethod.getType() == ClientMethodType.LongRunningBeginSync){
-            if (JavaSettings.getInstance().isSyncStackEnabled()) {
-                String methodName = protocolMethod.getName();
-                methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));
-            } else {
-                // Call the convenience method from async client
-                String methodInvoke = getMethodInvokeViaAsyncClient(convenienceMethod) + ".getSyncPoller()";
-                methodBlock.methodReturn(methodInvoke);
-            }
+            String methodName = protocolMethod.getName();
+            methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));
         } else if (convenienceMethod.getType() == ClientMethodType.SimpleSyncRestResponse
                 && !(responseBodyType.asNullable() == ClassType.Void || responseBodyType == ClassType.BinaryData)) {
 
@@ -130,15 +145,6 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             } else {
                 methodBlock.methodReturn(statement);
             }
-        }
-    }
-
-    @Override
-    protected void writeValidationForVersioning(ClientMethod convenienceMethod, Set<MethodParameter> parameters, JavaBlock methodBlock) {
-        if (JavaSettings.getInstance().isSyncStackEnabled()) {
-            super.writeValidationForVersioning(convenienceMethod, parameters, methodBlock);
-        } else {
-            // async client will do the validation
         }
     }
 

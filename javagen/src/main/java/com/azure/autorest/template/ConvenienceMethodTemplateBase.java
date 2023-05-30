@@ -181,7 +181,6 @@ abstract class ConvenienceMethodTemplateBase {
                 });
             }
         }
-
     }
 
     abstract void writeThrowException(ClientMethodType methodType, String exceptionExpression, JavaBlock methodBlock);
