@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -17,7 +18,7 @@ import javax.xml.stream.XMLStreamException;
 /** A barrel of apples. */
 @Fluent
 public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
-    private static final class GoodApplesWrapper implements XmlSerializable<GoodApplesWrapper> {
+    static final class GoodApplesWrapper implements XmlSerializable<GoodApplesWrapper> {
         private final List<String> items;
 
         private GoodApplesWrapper(List<String> items) {
@@ -26,7 +27,13 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
 
         @Override
         public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-            xmlWriter.writeStartElement("GoodApples");
+            return toXml(xmlWriter, null);
+        }
+
+        @Override
+        public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+            rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "GoodApples" : rootElementName;
+            xmlWriter.writeStartElement(rootElementName);
             if (items != null) {
                 for (String element : items) {
                     xmlWriter.writeStringElement("Apple", element);
@@ -36,8 +43,13 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
         }
 
         public static GoodApplesWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
+            return fromXml(xmlReader, null);
+        }
+
+        public static GoodApplesWrapper fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+            rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "GoodApples" : rootElementName;
             return xmlReader.readObject(
-                    "GoodApples",
+                    rootElementName,
                     reader -> {
                         List<String> items = null;
 
@@ -64,7 +76,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      */
     private GoodApplesWrapper goodApples;
 
-    private static final class BadApplesWrapper implements XmlSerializable<BadApplesWrapper> {
+    static final class BadApplesWrapper implements XmlSerializable<BadApplesWrapper> {
         private final List<String> items;
 
         private BadApplesWrapper(List<String> items) {
@@ -73,7 +85,13 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
 
         @Override
         public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-            xmlWriter.writeStartElement("BadApples");
+            return toXml(xmlWriter, null);
+        }
+
+        @Override
+        public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+            rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "BadApples" : rootElementName;
+            xmlWriter.writeStartElement(rootElementName);
             if (items != null) {
                 for (String element : items) {
                     xmlWriter.writeStringElement("Apple", element);
@@ -83,8 +101,13 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
         }
 
         public static BadApplesWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
+            return fromXml(xmlReader, null);
+        }
+
+        public static BadApplesWrapper fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+            rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "BadApples" : rootElementName;
             return xmlReader.readObject(
-                    "BadApples",
+                    rootElementName,
                     reader -> {
                         List<String> items = null;
 
@@ -169,7 +192,13 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("AppleBarrel");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "AppleBarrel" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeXml(this.goodApples);
         xmlWriter.writeXml(this.badApples);
         return xmlWriter.writeEndElement();
@@ -181,19 +210,35 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of AppleBarrel if the XmlReader was pointing to an instance of it, or null if it was pointing
      *     to XML null.
+     * @throws XMLStreamException If an error occurs while reading the AppleBarrel.
      */
     public static AppleBarrel fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of AppleBarrel from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default definedby the model. Used to support
+     *     cases where the model can deserialize from different root elementnames.
+     * @return An instance of AppleBarrel if the XmlReader was pointing to an instance of it, or null if it was pointing
+     *     to XML null.
+     * @throws XMLStreamException If an error occurs while reading the AppleBarrel.
+     */
+    public static AppleBarrel fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "AppleBarrel" : rootElementName;
         return xmlReader.readObject(
-                "AppleBarrel",
+                finalRootElementName,
                 reader -> {
                     GoodApplesWrapper goodApples = null;
                     BadApplesWrapper badApples = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("GoodApples".equals(fieldName.getLocalPart())) {
+                        if ("GoodApples".equals(elementName.getLocalPart())) {
                             goodApples = GoodApplesWrapper.fromXml(reader);
-                        } else if ("BadApples".equals(fieldName.getLocalPart())) {
+                        } else if ("BadApples".equals(elementName.getLocalPart())) {
                             badApples = BadApplesWrapper.fromXml(reader);
                         } else {
                             reader.skipElement();

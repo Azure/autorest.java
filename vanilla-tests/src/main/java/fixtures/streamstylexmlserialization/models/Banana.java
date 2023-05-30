@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -104,7 +105,13 @@ public final class Banana implements XmlSerializable<Banana> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("banana");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "banana" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("name", this.name);
         xmlWriter.writeStringElement("flavor", this.flavor);
         xmlWriter.writeStringElement("expiration", Objects.toString(this.expiration, null));
@@ -117,22 +124,38 @@ public final class Banana implements XmlSerializable<Banana> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of Banana if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
+     * @throws XMLStreamException If an error occurs while reading the Banana.
      */
     public static Banana fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of Banana from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default definedby the model. Used to support
+     *     cases where the model can deserialize from different root elementnames.
+     * @return An instance of Banana if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     * @throws XMLStreamException If an error occurs while reading the Banana.
+     */
+    public static Banana fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "banana" : rootElementName;
         return xmlReader.readObject(
-                "banana",
+                finalRootElementName,
                 reader -> {
                     String name = null;
                     String flavor = null;
                     OffsetDateTime expiration = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("name".equals(fieldName.getLocalPart())) {
+                        if ("name".equals(elementName.getLocalPart())) {
                             name = reader.getStringElement();
-                        } else if ("flavor".equals(fieldName.getLocalPart())) {
+                        } else if ("flavor".equals(elementName.getLocalPart())) {
                             flavor = reader.getStringElement();
-                        } else if ("expiration".equals(fieldName.getLocalPart())) {
+                        } else if ("expiration".equals(elementName.getLocalPart())) {
                             expiration = reader.getNullableElement(OffsetDateTime::parse);
                         } else {
                             reader.skipElement();

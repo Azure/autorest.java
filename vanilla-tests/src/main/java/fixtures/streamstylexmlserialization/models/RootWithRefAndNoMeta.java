@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -81,8 +82,14 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("RootWithRefAndNoMeta");
-        xmlWriter.writeXml(this.refToModel);
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "RootWithRefAndNoMeta" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
+        xmlWriter.writeXml(this.refToModel, "RefToModel");
         xmlWriter.writeStringElement("Something", this.something);
         return xmlWriter.writeEndElement();
     }
@@ -93,19 +100,36 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
      * @param xmlReader The XmlReader being read.
      * @return An instance of RootWithRefAndNoMeta if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the RootWithRefAndNoMeta.
      */
     public static RootWithRefAndNoMeta fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of RootWithRefAndNoMeta from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default definedby the model. Used to support
+     *     cases where the model can deserialize from different root elementnames.
+     * @return An instance of RootWithRefAndNoMeta if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the RootWithRefAndNoMeta.
+     */
+    public static RootWithRefAndNoMeta fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName =
+                CoreUtils.isNullOrEmpty(rootElementName) ? "RootWithRefAndNoMeta" : rootElementName;
         return xmlReader.readObject(
-                "RootWithRefAndNoMeta",
+                finalRootElementName,
                 reader -> {
                     ComplexTypeNoMeta refToModel = null;
                     String something = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("RefToModel".equals(fieldName.getLocalPart())) {
-                            refToModel = ComplexTypeNoMeta.fromXml(reader);
-                        } else if ("Something".equals(fieldName.getLocalPart())) {
+                        if ("RefToModel".equals(elementName.getLocalPart())) {
+                            refToModel = ComplexTypeNoMeta.fromXml(reader, "RefToModel");
+                        } else if ("Something".equals(elementName.getLocalPart())) {
                             something = reader.getStringElement();
                         } else {
                             reader.skipElement();

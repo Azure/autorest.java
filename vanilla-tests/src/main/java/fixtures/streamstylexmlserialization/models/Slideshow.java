@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -134,13 +135,19 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("slideshow");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slideshow" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringAttribute("title", this.title);
         xmlWriter.writeStringAttribute("date", this.date);
         xmlWriter.writeStringAttribute("author", this.author);
         if (this.slides != null) {
             for (Slide element : this.slides) {
-                xmlWriter.writeXml(element);
+                xmlWriter.writeXml(element, "slides");
             }
         }
         return xmlWriter.writeEndElement();
@@ -152,23 +159,39 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of Slideshow if the XmlReader was pointing to an instance of it, or null if it was pointing
      *     to XML null.
+     * @throws XMLStreamException If an error occurs while reading the Slideshow.
      */
     public static Slideshow fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of Slideshow from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default definedby the model. Used to support
+     *     cases where the model can deserialize from different root elementnames.
+     * @return An instance of Slideshow if the XmlReader was pointing to an instance of it, or null if it was pointing
+     *     to XML null.
+     * @throws XMLStreamException If an error occurs while reading the Slideshow.
+     */
+    public static Slideshow fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slideshow" : rootElementName;
         return xmlReader.readObject(
-                "slideshow",
+                finalRootElementName,
                 reader -> {
                     String title = reader.getStringAttribute(null, "title");
                     String date = reader.getStringAttribute(null, "date");
                     String author = reader.getStringAttribute(null, "author");
                     List<Slide> slides = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("slides".equals(fieldName.getLocalPart())) {
+                        if ("slides".equals(elementName.getLocalPart())) {
                             if (slides == null) {
                                 slides = new LinkedList<>();
                             }
-                            slides.add(Slide.fromXml(reader));
+                            slides.add(Slide.fromXml(reader, "slides"));
                         } else {
                             reader.skipElement();
                         }

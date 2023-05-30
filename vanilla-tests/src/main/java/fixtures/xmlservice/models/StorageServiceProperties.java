@@ -34,7 +34,7 @@ public final class StorageServiceProperties {
     @JsonProperty(value = "MinuteMetrics")
     private Metrics minuteMetrics;
 
-    private static final class CorsWrapper {
+    static final class CorsWrapper {
         @JacksonXmlProperty(localName = "CorsRule")
         private final List<CorsRule> items;
 

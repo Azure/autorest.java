@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -77,7 +78,13 @@ public final class Error implements XmlSerializable<Error> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("Error");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Error" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeNumberElement("status", this.status);
         xmlWriter.writeStringElement("message", this.message);
         return xmlWriter.writeEndElement();
@@ -89,19 +96,35 @@ public final class Error implements XmlSerializable<Error> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of Error if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
+     * @throws XMLStreamException If an error occurs while reading the Error.
      */
     public static Error fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of Error from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default definedby the model. Used to support
+     *     cases where the model can deserialize from different root elementnames.
+     * @return An instance of Error if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     * @throws XMLStreamException If an error occurs while reading the Error.
+     */
+    public static Error fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Error" : rootElementName;
         return xmlReader.readObject(
-                "Error",
+                finalRootElementName,
                 reader -> {
                     Integer status = null;
                     String message = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("status".equals(fieldName.getLocalPart())) {
+                        if ("status".equals(elementName.getLocalPart())) {
                             status = reader.getNullableElement(Integer::parseInt);
-                        } else if ("message".equals(fieldName.getLocalPart())) {
+                        } else if ("message".equals(elementName.getLocalPart())) {
                             message = reader.getStringElement();
                         } else {
                             reader.skipElement();

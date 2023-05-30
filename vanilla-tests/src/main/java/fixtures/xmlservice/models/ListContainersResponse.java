@@ -40,7 +40,7 @@ public final class ListContainersResponse {
     @JsonProperty(value = "MaxResults", required = true)
     private int maxResults;
 
-    private static final class ContainersWrapper {
+    static final class ContainersWrapper {
         @JacksonXmlProperty(localName = "Container")
         private final List<Container> items;
 

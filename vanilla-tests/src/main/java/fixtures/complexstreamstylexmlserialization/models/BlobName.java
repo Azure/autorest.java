@@ -5,6 +5,7 @@
 package fixtures.complexstreamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlWriter;
@@ -75,7 +76,13 @@ public final class BlobName implements XmlSerializable<BlobName> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("BlobName");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "BlobName" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeBooleanAttribute("Encoded", this.encoded);
         xmlWriter.writeString(this.content);
         return xmlWriter.writeEndElement();
@@ -87,10 +94,26 @@ public final class BlobName implements XmlSerializable<BlobName> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of BlobName if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
+     * @throws XMLStreamException If an error occurs while reading the BlobName.
      */
     public static BlobName fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of BlobName from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default definedby the model. Used to support
+     *     cases where the model can deserialize from different root elementnames.
+     * @return An instance of BlobName if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     * @throws XMLStreamException If an error occurs while reading the BlobName.
+     */
+    public static BlobName fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "BlobName" : rootElementName;
         return xmlReader.readObject(
-                "BlobName",
+                finalRootElementName,
                 reader -> {
                     Boolean encoded = reader.getNullableAttribute(null, "Encoded", Boolean::parseBoolean);
                     String content = reader.getStringElement();

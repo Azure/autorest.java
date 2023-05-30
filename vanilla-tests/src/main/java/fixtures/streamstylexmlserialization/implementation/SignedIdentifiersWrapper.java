@@ -37,18 +37,30 @@ public final class SignedIdentifiersWrapper implements XmlSerializable<SignedIde
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("SignedIdentifiers");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "SignedIdentifiers" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         if (signedIdentifiers != null) {
             for (SignedIdentifier element : signedIdentifiers) {
-                xmlWriter.writeXml(element);
+                xmlWriter.writeXml(element, "SignedIdentifier");
             }
         }
         return xmlWriter.writeEndElement();
     }
 
     public static SignedIdentifiersWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    public static SignedIdentifiersWrapper fromXml(XmlReader xmlReader, String rootElementName)
+            throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "SignedIdentifiers" : rootElementName;
         return xmlReader.readObject(
-                "SignedIdentifiers",
+                rootElementName,
                 reader -> {
                     List<SignedIdentifier> items = null;
 

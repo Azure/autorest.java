@@ -37,18 +37,29 @@ public final class BananasWrapper implements XmlSerializable<BananasWrapper> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("bananas");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "bananas" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         if (bananas != null) {
             for (Banana element : bananas) {
-                xmlWriter.writeXml(element);
+                xmlWriter.writeXml(element, "banana");
             }
         }
         return xmlWriter.writeEndElement();
     }
 
     public static BananasWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    public static BananasWrapper fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "bananas" : rootElementName;
         return xmlReader.readObject(
-                "bananas",
+                rootElementName,
                 reader -> {
                     List<Banana> items = null;
 
