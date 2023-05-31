@@ -69,6 +69,9 @@ model Encoded {
   @encode(DateTimeKnownEncoding.rfc7231, string)
   dateTimeRfc7231: utcDateTime;
 
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  unixTimestamp: utcDateTime;
+
   @encode(BytesKnownEncoding.base64, string)
   base64: bytes;
 

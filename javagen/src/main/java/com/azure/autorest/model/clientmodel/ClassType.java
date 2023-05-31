@@ -493,6 +493,8 @@ public class ClassType implements IType {
         IType clientType = this;
         if (this == ClassType.DateTimeRfc1123) {
             clientType = ClassType.DateTime;
+        } else if (this == ClassType.UnixTimeLong) {
+            clientType = ClassType.DateTime;
         } else if (this == ClassType.Base64Url) {
             clientType = ArrayType.ByteArray;
         } else if (this == ClassType.DurationLong) {
@@ -507,6 +509,8 @@ public class ClassType implements IType {
         if (this == ClassType.DateTimeRfc1123
             || this == ClassType.AndroidDateTimeRfc1123) {
             expression = java.lang.String.format("%s.getDateTime()", expression);
+        } else if (this == ClassType.UnixTimeLong) {
+            expression = java.lang.String.format("OffsetDateTime.from(Instant.ofEpochSecond(%1$s))", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("%s.decodedBytes()", expression);
         } else if (this == ClassType.URL) {
@@ -524,6 +528,8 @@ public class ClassType implements IType {
         if (this == ClassType.DateTimeRfc1123
             || this == ClassType.AndroidDateTimeRfc1123) {
             expression = java.lang.String.format("new DateTimeRfc1123(%s)", expression);
+        } else if (this == ClassType.UnixTimeLong) {
+            expression = java.lang.String.format("%1$s.toEpochSecond()", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("Base64Url.encode(%s)", expression);
         } else if (this == ClassType.URL) {
