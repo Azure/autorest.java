@@ -101,6 +101,7 @@ public final class BuiltinClient {
      *         timeInSecondsOptional: Long (Optional)
      *         dateTime: OffsetDateTime (Required)
      *         dateTimeRfc7231: DateTimeRfc1123 (Required)
+     *         unixTimestamp: long (Required)
      *         base64: byte[] (Required)
      *         base64url: Base64Url (Required)
      *     }
@@ -167,6 +168,7 @@ public final class BuiltinClient {
      *         timeInSecondsOptional: Long (Optional)
      *         dateTime: OffsetDateTime (Required)
      *         dateTimeRfc7231: DateTimeRfc1123 (Required)
+     *         unixTimestamp: long (Required)
      *         base64: byte[] (Required)
      *         base64url: Base64Url (Required)
      *     }

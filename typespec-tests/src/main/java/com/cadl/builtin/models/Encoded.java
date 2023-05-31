@@ -11,6 +11,7 @@ import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.OffsetDateTime;
 
 /** The Encoded model. */
@@ -47,6 +48,12 @@ public final class Encoded {
     private DateTimeRfc1123 dateTimeRfc7231;
 
     /*
+     * The unixTimestamp property.
+     */
+    @JsonProperty(value = "unixTimestamp", required = true)
+    private long unixTimestamp;
+
+    /*
      * The base64 property.
      */
     @JsonProperty(value = "base64", required = true)
@@ -65,6 +72,7 @@ public final class Encoded {
      * @param timeInSecondsFraction the timeInSecondsFraction value to set.
      * @param dateTime the dateTime value to set.
      * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
+     * @param unixTimestamp the unixTimestamp value to set.
      * @param base64 the base64 value to set.
      * @param base64Url the base64Url value to set.
      */
@@ -74,12 +82,14 @@ public final class Encoded {
             @JsonProperty(value = "timeInSecondsFraction", required = true) Duration timeInSecondsFraction,
             @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
             @JsonProperty(value = "dateTimeRfc7231", required = true) OffsetDateTime dateTimeRfc7231,
+            @JsonProperty(value = "unixTimestamp", required = true) OffsetDateTime unixTimestamp,
             @JsonProperty(value = "base64", required = true) byte[] base64,
             @JsonProperty(value = "base64url", required = true) byte[] base64Url) {
         this.timeInSeconds = timeInSeconds.getSeconds();
         this.timeInSecondsFraction = (double) timeInSecondsFraction.toNanos() / 1000_000_000L;
         this.dateTime = dateTime;
         this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
+        this.unixTimestamp = unixTimestamp.toEpochSecond();
         this.base64 = base64;
         this.base64Url = Base64Url.encode(base64Url);
     }
@@ -148,6 +158,15 @@ public final class Encoded {
             return null;
         }
         return this.dateTimeRfc7231.getDateTime();
+    }
+
+    /**
+     * Get the unixTimestamp property: The unixTimestamp property.
+     *
+     * @return the unixTimestamp value.
+     */
+    public OffsetDateTime getUnixTimestamp() {
+        return OffsetDateTime.from(Instant.ofEpochSecond(this.unixTimestamp));
     }
 
     /**
