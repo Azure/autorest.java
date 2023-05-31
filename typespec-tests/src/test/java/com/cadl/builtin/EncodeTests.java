@@ -26,7 +26,7 @@ public class EncodeTests {
         Duration timeInSeconds = Duration.ofSeconds(5);
         Duration timeInSecondsFraction = Duration.ofMillis(1500);
 
-        Encoded encoded = new Encoded(timeInSeconds, timeInSecondsFraction, DATE, DATE, DATA, DATA);
+        Encoded encoded = new Encoded(timeInSeconds, timeInSecondsFraction, DATE, DATE, DATE, DATA, DATA);
 
         Assertions.assertEquals(timeInSeconds, encoded.getTimeInSeconds());
         Assertions.assertEquals(timeInSecondsFraction, encoded.getTimeInSecondsFraction());
@@ -41,6 +41,7 @@ public class EncodeTests {
         Assertions.assertEquals(1.5, timeInSecondsFractionInJson);
         Assertions.assertEquals("2019-10-12T07:20:50.520Z", jsonNode.get("dateTime").asText());
         Assertions.assertEquals("Sat, 12 Oct 2019 07:20:50 GMT", jsonNode.get("dateTimeRfc7231").asText());
+        Assertions.assertEquals(1570864850L, jsonNode.get("unixTimestamp").asLong());
         Assertions.assertEquals("ZGF0YQ==", jsonNode.get("base64").asText());
         Assertions.assertEquals("ZGF0YQ", jsonNode.get("base64url").asText());
     }
@@ -50,7 +51,7 @@ public class EncodeTests {
         Duration timeInSeconds = Duration.ofMillis(5700);
         Duration timeInSecondsFraction = Duration.ofDays(1);
 
-        Encoded encoded = new Encoded(timeInSeconds, timeInSecondsFraction, DATE, DATE, DATA, DATA);
+        Encoded encoded = new Encoded(timeInSeconds, timeInSecondsFraction, DATE, DATE, DATE, DATA, DATA);
 
         // since the wire type is long (in seconds), 5.7 seconds will be 5 seconds
         Assertions.assertEquals(5, encoded.getTimeInSeconds().getSeconds());
