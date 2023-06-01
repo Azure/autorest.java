@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -158,6 +159,7 @@ public class PrimitiveType implements IType {
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         if (this == PrimitiveType.UnixTimeLong) {
             imports.add(Instant.class.getName());
+            imports.add(ZoneOffset.class.getName());
         }
     }
 
@@ -214,7 +216,7 @@ public class PrimitiveType implements IType {
         }
 
         if (this == PrimitiveType.UnixTimeLong) {
-            expression = String.format("OffsetDateTime.from(Instant.ofEpochSecond(%1$s))", expression);
+            expression = String.format("OffsetDateTime.ofInstant(Instant.ofEpochSecond(%1$s), ZoneOffset.UTC)", expression);
         } else if (this == PrimitiveType.DurationLong) {
             expression = java.lang.String.format("Duration.ofSeconds(%s)", expression);
         } else if (this == PrimitiveType.DurationDouble) {

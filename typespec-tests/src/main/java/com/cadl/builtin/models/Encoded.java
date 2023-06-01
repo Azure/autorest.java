@@ -8,10 +8,11 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 /** The Encoded model. */
 @Fluent
@@ -19,70 +20,47 @@ public final class Encoded {
     /*
      * The timeInSeconds property.
      */
-    @JsonProperty(value = "timeInSeconds", required = true)
-    private long timeInSeconds;
+    @JsonProperty(value = "timeInSeconds")
+    private Long timeInSeconds;
 
     /*
      * The timeInSecondsFraction property.
      */
-    @JsonProperty(value = "timeInSecondsFraction", required = true)
-    private double timeInSecondsFraction;
-
-    /*
-     * The timeInSecondsOptional property.
-     */
-    @JsonProperty(value = "timeInSecondsOptional")
-    private Long timeInSecondsOptional;
+    @JsonProperty(value = "timeInSecondsFraction")
+    private Double timeInSecondsFraction;
 
     /*
      * The dateTime property.
      */
-    @JsonProperty(value = "dateTime", required = true)
+    @JsonProperty(value = "dateTime")
     private OffsetDateTime dateTime;
 
     /*
      * The dateTimeRfc7231 property.
      */
-    @JsonProperty(value = "dateTimeRfc7231", required = true)
+    @JsonProperty(value = "dateTimeRfc7231")
     private DateTimeRfc1123 dateTimeRfc7231;
+
+    /*
+     * The unixTimestamp property.
+     */
+    @JsonProperty(value = "unixTimestamp")
+    private Long unixTimestamp;
 
     /*
      * The base64 property.
      */
-    @JsonProperty(value = "base64", required = true)
+    @JsonProperty(value = "base64")
     private byte[] base64;
 
     /*
      * The base64url property.
      */
-    @JsonProperty(value = "base64url", required = true)
+    @JsonProperty(value = "base64url")
     private Base64Url base64Url;
 
-    /**
-     * Creates an instance of Encoded class.
-     *
-     * @param timeInSeconds the timeInSeconds value to set.
-     * @param timeInSecondsFraction the timeInSecondsFraction value to set.
-     * @param dateTime the dateTime value to set.
-     * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
-     * @param base64 the base64 value to set.
-     * @param base64Url the base64Url value to set.
-     */
-    @JsonCreator
-    public Encoded(
-            @JsonProperty(value = "timeInSeconds", required = true) Duration timeInSeconds,
-            @JsonProperty(value = "timeInSecondsFraction", required = true) Duration timeInSecondsFraction,
-            @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
-            @JsonProperty(value = "dateTimeRfc7231", required = true) OffsetDateTime dateTimeRfc7231,
-            @JsonProperty(value = "base64", required = true) byte[] base64,
-            @JsonProperty(value = "base64url", required = true) byte[] base64Url) {
-        this.timeInSeconds = timeInSeconds.getSeconds();
-        this.timeInSecondsFraction = (double) timeInSecondsFraction.toNanos() / 1000_000_000L;
-        this.dateTime = dateTime;
-        this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
-        this.base64 = base64;
-        this.base64Url = Base64Url.encode(base64Url);
-    }
+    /** Creates an instance of Encoded class. */
+    public Encoded() {}
 
     /**
      * Get the timeInSeconds property: The timeInSeconds property.
@@ -90,7 +68,25 @@ public final class Encoded {
      * @return the timeInSeconds value.
      */
     public Duration getTimeInSeconds() {
+        if (this.timeInSeconds == null) {
+            return null;
+        }
         return Duration.ofSeconds(this.timeInSeconds);
+    }
+
+    /**
+     * Set the timeInSeconds property: The timeInSeconds property.
+     *
+     * @param timeInSeconds the timeInSeconds value to set.
+     * @return the Encoded object itself.
+     */
+    public Encoded setTimeInSeconds(Duration timeInSeconds) {
+        if (timeInSeconds == null) {
+            this.timeInSeconds = null;
+        } else {
+            this.timeInSeconds = timeInSeconds.getSeconds();
+        }
+        return this;
     }
 
     /**
@@ -99,32 +95,23 @@ public final class Encoded {
      * @return the timeInSecondsFraction value.
      */
     public Duration getTimeInSecondsFraction() {
+        if (this.timeInSecondsFraction == null) {
+            return null;
+        }
         return Duration.ofNanos((long) (this.timeInSecondsFraction * 1000_000_000L));
     }
 
     /**
-     * Get the timeInSecondsOptional property: The timeInSecondsOptional property.
+     * Set the timeInSecondsFraction property: The timeInSecondsFraction property.
      *
-     * @return the timeInSecondsOptional value.
-     */
-    public Duration getTimeInSecondsOptional() {
-        if (this.timeInSecondsOptional == null) {
-            return null;
-        }
-        return Duration.ofSeconds(this.timeInSecondsOptional);
-    }
-
-    /**
-     * Set the timeInSecondsOptional property: The timeInSecondsOptional property.
-     *
-     * @param timeInSecondsOptional the timeInSecondsOptional value to set.
+     * @param timeInSecondsFraction the timeInSecondsFraction value to set.
      * @return the Encoded object itself.
      */
-    public Encoded setTimeInSecondsOptional(Duration timeInSecondsOptional) {
-        if (timeInSecondsOptional == null) {
-            this.timeInSecondsOptional = null;
+    public Encoded setTimeInSecondsFraction(Duration timeInSecondsFraction) {
+        if (timeInSecondsFraction == null) {
+            this.timeInSecondsFraction = null;
         } else {
-            this.timeInSecondsOptional = timeInSecondsOptional.getSeconds();
+            this.timeInSecondsFraction = (double) timeInSecondsFraction.toNanos() / 1000_000_000L;
         }
         return this;
     }
@@ -136,6 +123,17 @@ public final class Encoded {
      */
     public OffsetDateTime getDateTime() {
         return this.dateTime;
+    }
+
+    /**
+     * Set the dateTime property: The dateTime property.
+     *
+     * @param dateTime the dateTime value to set.
+     * @return the Encoded object itself.
+     */
+    public Encoded setDateTime(OffsetDateTime dateTime) {
+        this.dateTime = dateTime;
+        return this;
     }
 
     /**
@@ -151,12 +149,65 @@ public final class Encoded {
     }
 
     /**
+     * Set the dateTimeRfc7231 property: The dateTimeRfc7231 property.
+     *
+     * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
+     * @return the Encoded object itself.
+     */
+    public Encoded setDateTimeRfc7231(OffsetDateTime dateTimeRfc7231) {
+        if (dateTimeRfc7231 == null) {
+            this.dateTimeRfc7231 = null;
+        } else {
+            this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
+        }
+        return this;
+    }
+
+    /**
+     * Get the unixTimestamp property: The unixTimestamp property.
+     *
+     * @return the unixTimestamp value.
+     */
+    public OffsetDateTime getUnixTimestamp() {
+        if (this.unixTimestamp == null) {
+            return null;
+        }
+        return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.unixTimestamp), ZoneOffset.UTC);
+    }
+
+    /**
+     * Set the unixTimestamp property: The unixTimestamp property.
+     *
+     * @param unixTimestamp the unixTimestamp value to set.
+     * @return the Encoded object itself.
+     */
+    public Encoded setUnixTimestamp(OffsetDateTime unixTimestamp) {
+        if (unixTimestamp == null) {
+            this.unixTimestamp = null;
+        } else {
+            this.unixTimestamp = unixTimestamp.toEpochSecond();
+        }
+        return this;
+    }
+
+    /**
      * Get the base64 property: The base64 property.
      *
      * @return the base64 value.
      */
     public byte[] getBase64() {
         return CoreUtils.clone(this.base64);
+    }
+
+    /**
+     * Set the base64 property: The base64 property.
+     *
+     * @param base64 the base64 value to set.
+     * @return the Encoded object itself.
+     */
+    public Encoded setBase64(byte[] base64) {
+        this.base64 = CoreUtils.clone(base64);
+        return this;
     }
 
     /**
@@ -169,5 +220,20 @@ public final class Encoded {
             return new byte[0];
         }
         return this.base64Url.decodedBytes();
+    }
+
+    /**
+     * Set the base64Url property: The base64url property.
+     *
+     * @param base64Url the base64Url value to set.
+     * @return the Encoded object itself.
+     */
+    public Encoded setBase64Url(byte[] base64Url) {
+        if (base64Url == null) {
+            this.base64Url = null;
+        } else {
+            this.base64Url = Base64Url.encode(CoreUtils.clone(base64Url));
+        }
+        return this;
     }
 }
