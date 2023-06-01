@@ -133,10 +133,8 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             String converterName = enumType.getFromJsonMethodName();
 
             enumBlock.javadocComment("The actual serialized value for a " + enumName + " instance.");
-            addGeneratedAnnotation(enumBlock);
             enumBlock.privateFinalMemberVariable(typeName, "value");
 
-            addGeneratedAnnotation(enumBlock);
             enumBlock.constructor(enumName + "(" +typeName + " value)", constructor -> constructor.line("this.value = value;"));
 
             enumBlock.javadocComment((comment) -> {
@@ -149,7 +147,6 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 enumBlock.annotation("JsonCreator");
             }
 
-            addGeneratedAnnotation(enumBlock);
             enumBlock.publicStaticMethod(String.format("%1$s %2$s(%3$s value)", enumName, converterName, typeName), function -> {
                 if (elementType.isNullable()) {
                     function.ifBlock("value == null", ifAction -> ifAction.methodReturn("null"));
@@ -176,7 +173,6 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     enumBlock.annotation("JsonValue");
                 }
             }
-            addGeneratedAnnotation(enumBlock);
             enumBlock.publicMethod(typeName + " " + enumType.getToJsonMethodName() + "()",
                 function -> function.methodReturn("this.value"));
         });
