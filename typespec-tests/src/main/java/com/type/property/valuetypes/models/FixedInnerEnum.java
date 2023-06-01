@@ -4,7 +4,6 @@
 
 package com.type.property.valuetypes.models;
 
-import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -17,9 +16,8 @@ public enum FixedInnerEnum {
     VALUE_TWO("ValueTwo");
 
     /** The actual serialized value for a FixedInnerEnum instance. */
-    @Generated private final String value;
+    private final String value;
 
-    @Generated
     FixedInnerEnum(String value) {
         this.value = value;
     }
@@ -31,7 +29,6 @@ public enum FixedInnerEnum {
      * @return the parsed FixedInnerEnum object, or null if unable to parse.
      */
     @JsonCreator
-    @Generated
     public static FixedInnerEnum fromString(String value) {
         if (value == null) {
             return null;
@@ -48,7 +45,6 @@ public enum FixedInnerEnum {
     /** {@inheritDoc} */
     @JsonValue
     @Override
-    @Generated
     public String toString() {
         return this.value;
     }

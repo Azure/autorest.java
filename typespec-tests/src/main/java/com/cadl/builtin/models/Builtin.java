@@ -135,6 +135,7 @@ public final class Builtin {
     /*
      * The encoded property.
      */
+    @Generated
     @JsonProperty(value = "encoded", required = true)
     private Encoded encoded;
 
@@ -363,6 +364,7 @@ public final class Builtin {
      *
      * @return the encoded value.
      */
+    @Generated
     public Encoded getEncoded() {
         return this.encoded;
     }

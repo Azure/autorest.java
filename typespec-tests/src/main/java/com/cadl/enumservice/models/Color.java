@@ -4,7 +4,6 @@
 
 package com.cadl.enumservice.models;
 
-import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -20,9 +19,8 @@ public enum Color {
     GREEN("Green");
 
     /** The actual serialized value for a Color instance. */
-    @Generated private final String value;
+    private final String value;
 
-    @Generated
     Color(String value) {
         this.value = value;
     }
@@ -34,7 +32,6 @@ public enum Color {
      * @return the parsed Color object, or null if unable to parse.
      */
     @JsonCreator
-    @Generated
     public static Color fromString(String value) {
         if (value == null) {
             return null;
@@ -51,7 +48,6 @@ public enum Color {
     /** {@inheritDoc} */
     @JsonValue
     @Override
-    @Generated
     public String toString() {
         return this.value;
     }

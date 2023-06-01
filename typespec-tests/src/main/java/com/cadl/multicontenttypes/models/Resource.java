@@ -4,6 +4,7 @@
 
 package com.cadl.multicontenttypes.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,16 +14,19 @@ public final class Resource {
     /*
      * The id property.
      */
+    @Generated
     @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
      * The name property.
      */
+    @Generated
     @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /** Creates an instance of Resource class. */
+    @Generated
     public Resource() {}
 
     /**
@@ -30,6 +34,7 @@ public final class Resource {
      *
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -39,6 +44,7 @@ public final class Resource {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
