@@ -4,6 +4,7 @@
 
 package com.encode.duration.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,6 +17,7 @@ public final class FloatSecondsDurationArrayProperty {
     /*
      * The value property.
      */
+    @Generated
     @JsonProperty(value = "value", required = true)
     private List<Double> value;
 
@@ -24,6 +26,7 @@ public final class FloatSecondsDurationArrayProperty {
      *
      * @param value the value value to set.
      */
+    @Generated
     @JsonCreator
     public FloatSecondsDurationArrayProperty(@JsonProperty(value = "value", required = true) List<Duration> value) {
         this.value =
@@ -37,6 +40,7 @@ public final class FloatSecondsDurationArrayProperty {
      *
      * @return the value value.
      */
+    @Generated
     public List<Duration> getValue() {
         if (this.value == null) {
             return null;

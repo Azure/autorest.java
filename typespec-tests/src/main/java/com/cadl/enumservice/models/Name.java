@@ -4,7 +4,6 @@
 
 package com.cadl.enumservice.models;
 
-import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -17,9 +16,8 @@ public enum Name {
     WRITE("Write");
 
     /** The actual serialized value for a Name instance. */
-    @Generated private final String value;
+    private final String value;
 
-    @Generated
     Name(String value) {
         this.value = value;
     }
@@ -31,7 +29,6 @@ public enum Name {
      * @return the parsed Name object, or null if unable to parse.
      */
     @JsonCreator
-    @Generated
     public static Name fromString(String value) {
         if (value == null) {
             return null;
@@ -48,7 +45,6 @@ public enum Name {
     /** {@inheritDoc} */
     @JsonValue
     @Override
-    @Generated
     public String toString() {
         return this.value;
     }
