@@ -9,11 +9,11 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.util.CoreUtils;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -467,6 +467,11 @@ public class ClassType implements IType {
             imports.add(fullName);
         }
 
+        if (this == ClassType.UnixTimeLong) {
+            imports.add(Instant.class.getName());
+            imports.add(ZoneOffset.class.getName());
+        }
+
         if (includeImplementationImports && getImplementationImports() != null) {
             imports.addAll(getImplementationImports());
         }
@@ -510,7 +515,7 @@ public class ClassType implements IType {
             || this == ClassType.AndroidDateTimeRfc1123) {
             expression = java.lang.String.format("%s.getDateTime()", expression);
         } else if (this == ClassType.UnixTimeLong) {
-            expression = java.lang.String.format("OffsetDateTime.from(Instant.ofEpochSecond(%1$s))", expression);
+            expression = java.lang.String.format("OffsetDateTime.ofInstant(Instant.ofEpochSecond(%1$s), ZoneOffset.UTC)", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("%s.decodedBytes()", expression);
         } else if (this == ClassType.URL) {
