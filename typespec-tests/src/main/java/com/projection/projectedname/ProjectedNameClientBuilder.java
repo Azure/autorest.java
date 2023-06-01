@@ -29,6 +29,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.projection.projectedname.implementation.ProjectedNameClientImpl;
 import java.util.ArrayList;
@@ -71,6 +72,9 @@ public final class ProjectedNameClientBuilder
     @Generated
     @Override
     public ProjectedNameClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -257,4 +261,6 @@ public final class ProjectedNameClientBuilder
     public PropertyClient buildPropertyClient() {
         return new PropertyClient(buildInnerClient().getProperties());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ProjectedNameClientBuilder.class);
 }

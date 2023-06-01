@@ -62,6 +62,18 @@ public final class DurationClientImpl {
         return this.properties;
     }
 
+    /** The HeadersImpl object to access its operations. */
+    private final HeadersImpl headers;
+
+    /**
+     * Gets the HeadersImpl object to access its operations.
+     *
+     * @return the HeadersImpl object.
+     */
+    public HeadersImpl getHeaders() {
+        return this.headers;
+    }
+
     /** Initializes an instance of DurationClient client. */
     public DurationClientImpl() {
         this(
@@ -91,5 +103,6 @@ public final class DurationClientImpl {
         this.serializerAdapter = serializerAdapter;
         this.queries = new QueriesImpl(this);
         this.properties = new PropertiesImpl(this);
+        this.headers = new HeadersImpl(this);
     }
 }

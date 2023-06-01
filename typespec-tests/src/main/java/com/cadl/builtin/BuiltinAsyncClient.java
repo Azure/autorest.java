@@ -98,9 +98,13 @@ public final class BuiltinAsyncClient {
      *         String: double (Required)
      *     }
      *     encoded (Required): {
-     *         timeInSeconds: long (Required)
-     *         timeInSecondsFraction: double (Required)
-     *         timeInSecondsOptional: Long (Optional)
+     *         timeInSeconds: Long (Optional)
+     *         timeInSecondsFraction: Double (Optional)
+     *         dateTime: OffsetDateTime (Optional)
+     *         dateTimeRfc7231: DateTimeRfc1123 (Optional)
+     *         unixTimestamp: Long (Optional)
+     *         base64: byte[] (Optional)
+     *         base64url: Base64Url (Optional)
      *     }
      * }
      * }</pre>
@@ -160,9 +164,13 @@ public final class BuiltinAsyncClient {
      *         String: double (Required)
      *     }
      *     encoded (Required): {
-     *         timeInSeconds: long (Required)
-     *         timeInSecondsFraction: double (Required)
-     *         timeInSecondsOptional: Long (Optional)
+     *         timeInSeconds: Long (Optional)
+     *         timeInSecondsFraction: Double (Optional)
+     *         dateTime: OffsetDateTime (Optional)
+     *         dateTimeRfc7231: DateTimeRfc1123 (Optional)
+     *         unixTimestamp: Long (Optional)
+     *         base64: byte[] (Optional)
+     *         base64url: Base64Url (Optional)
      *     }
      * }
      * }</pre>

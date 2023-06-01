@@ -9,11 +9,11 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.util.CoreUtils;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -46,12 +46,8 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Integer::parseInt)")
         .build();
 
-    public static final ClassType Long = new Builder(false).knownClass(Long.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
-        .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
+    public static final ClassType Long = new Builder(false)
+        .prototypeAsLong()
         .build();
 
     public static final ClassType Float = new Builder(false).knownClass(Float.class)
@@ -63,11 +59,7 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType Double = new Builder(false).knownClass(Double.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D')
-        .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)")
+        .prototypeAsDouble()
         .build();
 
     public static final ClassType Character = new Builder(false).knownClass(Character.class)
@@ -184,30 +176,15 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType UnixTimeLong = new ClassType.Builder(false)
-        .knownClass(java.lang.Long.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
-        .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
+        .prototypeAsLong()
         .build();
 
     public static final ClassType DurationLong = new ClassType.Builder(false)
-        .knownClass(java.lang.Long.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.ofSeconds(%s)", defaultValueExpression + 'L'))
-        .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
+        .prototypeAsLong()
         .build();
 
     public static final ClassType DurationDouble = new ClassType.Builder(false)
-        .knownClass(java.lang.Double.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D'))
-        .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)")
+        .prototypeAsDouble()
         .build();
 
     public static final ClassType HttpPipeline = new ClassType.Builder(false)
@@ -490,6 +467,11 @@ public class ClassType implements IType {
             imports.add(fullName);
         }
 
+        if (this == ClassType.UnixTimeLong) {
+            imports.add(Instant.class.getName());
+            imports.add(ZoneOffset.class.getName());
+        }
+
         if (includeImplementationImports && getImplementationImports() != null) {
             imports.addAll(getImplementationImports());
         }
@@ -516,6 +498,8 @@ public class ClassType implements IType {
         IType clientType = this;
         if (this == ClassType.DateTimeRfc1123) {
             clientType = ClassType.DateTime;
+        } else if (this == ClassType.UnixTimeLong) {
+            clientType = ClassType.DateTime;
         } else if (this == ClassType.Base64Url) {
             clientType = ArrayType.ByteArray;
         } else if (this == ClassType.DurationLong) {
@@ -530,6 +514,8 @@ public class ClassType implements IType {
         if (this == ClassType.DateTimeRfc1123
             || this == ClassType.AndroidDateTimeRfc1123) {
             expression = java.lang.String.format("%s.getDateTime()", expression);
+        } else if (this == ClassType.UnixTimeLong) {
+            expression = java.lang.String.format("OffsetDateTime.ofInstant(Instant.ofEpochSecond(%1$s), ZoneOffset.UTC)", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("%s.decodedBytes()", expression);
         } else if (this == ClassType.URL) {
@@ -547,6 +533,8 @@ public class ClassType implements IType {
         if (this == ClassType.DateTimeRfc1123
             || this == ClassType.AndroidDateTimeRfc1123) {
             expression = java.lang.String.format("new DateTimeRfc1123(%s)", expression);
+        } else if (this == ClassType.UnixTimeLong) {
+            expression = java.lang.String.format("%1$s.toEpochSecond()", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("Base64Url.encode(%s)", expression);
         } else if (this == ClassType.URL) {
@@ -638,7 +626,7 @@ public class ClassType implements IType {
         private List<String> implementationImports;
         private XmsExtensions extensions;
         private java.util.function.Function<String, String> defaultValueExpressionConverter;
-        private boolean wrapSerializationWithObjectsToString;
+        private boolean wrapSerializationWithObjectsToString = false;
         private String jsonDeserializationMethod;
         private String serializationMethodBase;
         private String xmlAttributeDeserializationTemplate;
@@ -660,6 +648,26 @@ public class ClassType implements IType {
         public Builder name(String name) {
             this.name = name;
             return this;
+        }
+
+        public Builder prototypeAsLong() {
+            return this.knownClass(Long.class)
+                .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
+                .serializationMethodBase("writeNumber")
+                .wrapSerializationWithObjectsToString(false)
+                .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
+                .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
+                .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)");
+        }
+
+        public Builder prototypeAsDouble() {
+            return this.knownClass(Double.class)
+                .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D')
+                .serializationMethodBase("writeNumber")
+                .wrapSerializationWithObjectsToString(false)
+                .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
+                .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
+                .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)");
         }
 
         public Builder knownClass(Class<?> clazz) {

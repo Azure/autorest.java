@@ -30,6 +30,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,9 @@ public final class RpcClientBuilder implements HttpTrait<RpcClientBuilder>, Conf
     @Generated
     @Override
     public RpcClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -249,4 +253,6 @@ public final class RpcClientBuilder implements HttpTrait<RpcClientBuilder>, Conf
     public RpcClient buildClient() {
         return new RpcClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(RpcClientBuilder.class);
 }

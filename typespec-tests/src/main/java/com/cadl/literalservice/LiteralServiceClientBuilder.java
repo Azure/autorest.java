@@ -30,6 +30,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.literalservice.implementation.LiteralServiceClientImpl;
 import java.util.ArrayList;
@@ -67,6 +68,9 @@ public final class LiteralServiceClientBuilder
     @Generated
     @Override
     public LiteralServiceClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -246,4 +250,6 @@ public final class LiteralServiceClientBuilder
     public LiteralServiceClient buildClient() {
         return new LiteralServiceClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(LiteralServiceClientBuilder.class);
 }

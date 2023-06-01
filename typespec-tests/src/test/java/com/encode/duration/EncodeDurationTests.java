@@ -4,6 +4,7 @@
 package com.encode.duration;
 
 import com.encode.duration.models.DefaultDurationProperty;
+import com.encode.duration.models.FloatSecondsDurationArrayProperty;
 import com.encode.duration.models.FloatSecondsDurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
 import com.encode.duration.models.Iso8601DurationProperty;
@@ -11,12 +12,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
+import java.util.Arrays;
 
 public class EncodeDurationTests {
 
     private final QueryClient queryClient = new DurationClientBuilder().buildQueryClient();
+    private final HeaderClient headerClient = new DurationClientBuilder().buildHeaderClient();
     private final PropertyClient propertyClient = new DurationClientBuilder().buildPropertyClient();
-    
+
     private static final Duration DAY40 = Duration.ofDays(40);
     private static final Duration SECOND35 = Duration.ofSeconds(35, 621_000_000);
     private static final Duration SECOND36 = Duration.ofSeconds(36);
@@ -30,6 +33,21 @@ public class EncodeDurationTests {
         queryClient.int32Seconds(SECOND36);
 
         queryClient.iso8601(DAY40);
+
+        queryClient.int32SecondsArray(Arrays.asList(SECOND36, Duration.ofSeconds(47)));
+    }
+
+    @Test
+    public void testHeader() {
+        headerClient.defaultMethod(DAY40);
+
+        headerClient.floatSeconds(SECOND35);
+
+        headerClient.int32Seconds(SECOND36);
+
+        headerClient.iso8601(DAY40);
+
+        headerClient.iso8601Array(Arrays.asList(DAY40, Duration.ofDays(50)));
     }
 
     @Test
@@ -44,5 +62,8 @@ public class EncodeDurationTests {
                 propertyClient.int32Seconds(new Int32SecondsDurationProperty(SECOND36)).getValue());
 
         propertyClient.iso8601(new Iso8601DurationProperty(DAY40));
+
+        propertyClient.floatSecondsArray(new FloatSecondsDurationArrayProperty(
+                Arrays.asList(SECOND35, Duration.ofSeconds(46, 781_000_000))));
     }
 }

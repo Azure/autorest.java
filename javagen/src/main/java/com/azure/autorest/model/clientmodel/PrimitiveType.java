@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -11,46 +12,89 @@ import java.util.function.Function;
  * A basic type used by a client.
  */
 public class PrimitiveType implements IType {
-    public static final PrimitiveType Void = new PrimitiveType("void", ClassType.Void);
+    public static final PrimitiveType Void = new Builder()
+            .name("void")
+            .nullableType(ClassType.Void)
+            .build();
 
-    public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase,
-        "false", "writeBoolean", false, "getBoolean()", "getBooleanAttribute(%s, %s)", "getBooleanElement()");
+    public static final PrimitiveType Boolean = new Builder()
+            .name("boolean")
+            .nullableType(ClassType.Boolean)
+            .defaultValueExpressionConverter(String::toLowerCase)
+            .defaultValue("false")
+            .serializationMethodBase("writeBoolean")
+            .jsonDeserializationMethod("getBoolean()")
+            .xmlAttributeDeserializationTemplate("getBooleanAttribute(%s, %s)")
+            .xmlElementDeserializationMethod("getBooleanElement()")
+            .build();
 
-    public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte, Function.identity(), "0",
-        "writeInt", false, "getInt()", "getIntAttribute(%s, %s)", "getIntElement()");
+    public static final PrimitiveType Byte = new Builder()
+            .name("byte")
+            .nullableType(ClassType.Byte)
+            .defaultValueExpressionConverter(Function.identity())
+            .defaultValue("0")
+            .serializationMethodBase("writeInt")
+            .jsonDeserializationMethod("getInt()")
+            .xmlAttributeDeserializationTemplate("getIntAttribute(%s, %s)")
+            .xmlElementDeserializationMethod("getIntElement()")
+            .build();
 
-    public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer, Function.identity(), "0",
-        "writeInt", false, "getInt()", "getIntAttribute(%s, %s)", "getIntElement()");
+    public static final PrimitiveType Int = new Builder()
+            .name("int")
+            .nullableType(ClassType.Integer)
+            .defaultValueExpressionConverter(Function.identity())
+            .defaultValue("0")
+            .serializationMethodBase("writeInt")
+            .jsonDeserializationMethod("getInt()")
+            .xmlAttributeDeserializationTemplate("getIntAttribute(%s, %s)")
+            .xmlElementDeserializationMethod("getIntElement()")
+            .build();
 
-    public static final PrimitiveType Long = new PrimitiveType("long", ClassType.Long,
-        defaultValueExpression -> defaultValueExpression + 'L', "0", "writeLong", false, "getLong()",
-        "getLongAttribute(%s, %s)", "getLongElement()");
+    public static final PrimitiveType Long = new Builder()
+            .prototypeAsLong()
+            .build();
 
-    public static final PrimitiveType Float = new PrimitiveType("float", ClassType.Float,
-        defaultValueExpression -> defaultValueExpression + "f", "0.0", "writeFloat", false, "getFloat()",
-        "getFloatAttribute(%s, %s)", "getFloatElement()");
+    public static final PrimitiveType Float = new Builder()
+            .name("float")
+            .nullableType(ClassType.Float)
+            .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + "f")
+            .defaultValue("0.0")
+            .serializationMethodBase("writeFloat")
+            .jsonDeserializationMethod("getFloat()")
+            .xmlAttributeDeserializationTemplate("getFloatAttribute(%s, %s)")
+            .xmlElementDeserializationMethod("getFloatElement()")
+            .build();
 
-    public static final PrimitiveType Double = new PrimitiveType("double", ClassType.Double,
-        defaultValueExpression -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)),
-        "0.0", "writeDouble", false, "getDouble()", "getDoubleAttribute(%s, %s)", "getDoubleElement()");
+    public static final PrimitiveType Double = new Builder()
+            .prototypeAsDouble()
+            .build();
 
-    public static final PrimitiveType Char = new PrimitiveType("char", ClassType.Character,
-        defaultValueExpression -> Integer.toString(defaultValueExpression.charAt(0)), "\u0000", "writeString",
-        true, "getString().charAt(0)", "getStringAttribute(%s, %s).charAt(0)", "getStringElement().charAt(0)");
+    public static final PrimitiveType Char = new Builder()
+            .name("char")
+            .nullableType(ClassType.Character)
+            .defaultValueExpressionConverter(defaultValueExpression -> Integer.toString(defaultValueExpression.charAt(0)))
+            .defaultValue("\u0000")
+            .serializationMethodBase("writeString")
+            .wrapSerializationWithObjectsToString(true)
+            .jsonDeserializationMethod("getString().charAt(0)")
+            .xmlAttributeDeserializationTemplate("getStringAttribute(%s, %s).charAt(0)")
+            .xmlElementDeserializationMethod("getStringElement().charAt(0)")
+            .build();
 
-    public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong, defaultValueExpression -> defaultValueExpression + 'L', null,
-        "writeString", true, "getNullable(nonNullReader -> new UnixTime(nonNullReader.getLong()))",
-        "getNullableAttribute(%s, %s, UnixTime::new)", "getNullableElement(UnixTime::new)");
+    public static final PrimitiveType UnixTimeLong = new Builder()
+            .prototypeAsLong()
+            .nullableType(ClassType.UnixTimeLong)
+            .build();
 
-    public static final PrimitiveType DurationLong = new PrimitiveType("long", ClassType.DurationLong,
-            defaultValueExpression -> java.lang.String.format("Duration.ofSeconds(%s)", defaultValueExpression + 'L'), "0",
-            "writeNumber", false, "getLong()",
-            "getLongAttribute(%s, %s)", "getLongElement()");
+    public static final PrimitiveType DurationLong = new Builder()
+            .prototypeAsLong()
+            .nullableType(ClassType.DurationLong)
+            .build();
 
-    public static final PrimitiveType DurationDouble = new PrimitiveType("double", ClassType.DurationDouble,
-            defaultValueExpression -> java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D'), "0.0",
-            "writeNumber", false, "getDouble()",
-            "getDoubleAttribute(%s, %s)", "getDoubleElement()");
+    public static final PrimitiveType DurationDouble = new Builder()
+            .prototypeAsDouble()
+            .nullableType(ClassType.DurationDouble)
+            .build();
 
     /**
      * The name of this type.
@@ -68,14 +112,6 @@ public class PrimitiveType implements IType {
     private final String xmlAttributeDeserializationTemplate;
     private final String xmlElementDeserializationMethod;
 
-    /**
-     * Create a new PrimitiveType from the provided properties.
-     * @param name The name of this type.
-     */
-    private PrimitiveType(String name, ClassType nullableType) {
-        this(name, nullableType, null, null, null, false, null, null, null);
-    }
-
     private PrimitiveType(String name, ClassType nullableType, Function<String, String> defaultValueExpressionConverter,
         String defaultValue, String serializationMethodBase, boolean wrapSerializationWithObjectsToString,
         String jsonDeserializationMethod, String xmlAttributeDeserializationTemplate,
@@ -91,25 +127,25 @@ public class PrimitiveType implements IType {
         this.xmlElementDeserializationMethod = xmlElementDeserializationMethod;
     }
 
-    public static PrimitiveType fromNullableType(ClassType nullableType) {
-        if (nullableType == ClassType.Void) {
-            return PrimitiveType.Void;
-        } else if (nullableType == ClassType.Boolean) {
-            return PrimitiveType.Boolean;
-        } else if (nullableType == ClassType.Byte) {
-            return PrimitiveType.Byte;
-        } else if (nullableType == ClassType.Integer) {
-            return PrimitiveType.Int;
-        } else if (nullableType == ClassType.Long) {
-            return PrimitiveType.Long;
-        } else if (nullableType == ClassType.Double) {
-            return PrimitiveType.Double;
-        } else if (nullableType == ClassType.Float) {
-            return PrimitiveType.Float;
-        } else {
-            throw new IllegalArgumentException("Class type " + nullableType + " is not a boxed type");
-        }
-    }
+//    public static PrimitiveType fromNullableType(ClassType nullableType) {
+//        if (nullableType == ClassType.Void) {
+//            return PrimitiveType.Void;
+//        } else if (nullableType == ClassType.Boolean) {
+//            return PrimitiveType.Boolean;
+//        } else if (nullableType == ClassType.Byte) {
+//            return PrimitiveType.Byte;
+//        } else if (nullableType == ClassType.Integer) {
+//            return PrimitiveType.Int;
+//        } else if (nullableType == ClassType.Long) {
+//            return PrimitiveType.Long;
+//        } else if (nullableType == ClassType.Double) {
+//            return PrimitiveType.Double;
+//        } else if (nullableType == ClassType.Float) {
+//            return PrimitiveType.Float;
+//        } else {
+//            throw new IllegalArgumentException("Class type " + nullableType + " is not a boxed type");
+//        }
+//    }
 
     public final String getName() {
         return name;
@@ -123,6 +159,7 @@ public class PrimitiveType implements IType {
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         if (this == PrimitiveType.UnixTimeLong) {
             imports.add(Instant.class.getName());
+            imports.add(ZoneOffset.class.getName());
         }
     }
 
@@ -141,7 +178,7 @@ public class PrimitiveType implements IType {
         return this == type;
     }
 
-    private java.util.function.Function<String, String> getDefaultValueExpressionConverter() {
+    private Function<String, String> getDefaultValueExpressionConverter() {
         return defaultValueExpressionConverter;
     }
 
@@ -156,11 +193,7 @@ public class PrimitiveType implements IType {
 
     @Override
     public final String defaultValueExpression() {
-        String result = defaultValue;
-        if (result != null && getDefaultValueExpressionConverter() != null) {
-            result = defaultValueExpressionConverter.apply(defaultValue);
-        }
-        return result;
+        return defaultValueExpression(defaultValue);
     }
 
     @Override
@@ -183,7 +216,7 @@ public class PrimitiveType implements IType {
         }
 
         if (this == PrimitiveType.UnixTimeLong) {
-            expression = String.format("OffsetDateTime.from(Instant.ofEpochSecond(%1$s))", expression);
+            expression = String.format("OffsetDateTime.ofInstant(Instant.ofEpochSecond(%1$s), ZoneOffset.UTC)", expression);
         } else if (this == PrimitiveType.DurationLong) {
             expression = java.lang.String.format("Duration.ofSeconds(%s)", expression);
         } else if (this == PrimitiveType.DurationDouble) {
@@ -265,5 +298,93 @@ public class PrimitiveType implements IType {
     @Override
     public String toString() {
         return getName();
+    }
+
+    private static class Builder {
+
+        private String name;
+        private ClassType nullableType;
+        private Function<String, String> defaultValueExpressionConverter;
+        private String defaultValue;
+        private String serializationMethodBase;
+        private boolean wrapSerializationWithObjectsToString = false;
+        private String jsonDeserializationMethod;
+        private String xmlAttributeDeserializationTemplate;
+        private String xmlElementDeserializationMethod;
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder prototypeAsLong() {
+            return this.name("long")
+                .nullableType(ClassType.Long)
+                .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
+                .defaultValue("0")
+                .serializationMethodBase("writeLong")
+                .wrapSerializationWithObjectsToString(false)
+                .jsonDeserializationMethod("getLong()")
+                .xmlAttributeDeserializationTemplate("getLongAttribute(%s, %s)")
+                .xmlElementDeserializationMethod("getLongElement()");
+        }
+
+        public Builder prototypeAsDouble() {
+            return this.name("double")
+                .nullableType(ClassType.Double)
+                .defaultValueExpressionConverter(defaultValueExpression -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)))
+                .defaultValue("0.0")
+                .serializationMethodBase("writeDouble")
+                .wrapSerializationWithObjectsToString(false)
+                .jsonDeserializationMethod("getDouble()")
+                .xmlAttributeDeserializationTemplate("getDoubleAttribute(%s, %s)")
+                .xmlElementDeserializationMethod("getDoubleElement()");
+        }
+
+        public Builder nullableType(ClassType nullableType) {
+            this.nullableType = nullableType;
+            return this;
+        }
+
+        public Builder defaultValue(String defaultValue) {
+            this.defaultValue = defaultValue;
+            return this;
+        }
+
+        public Builder defaultValueExpressionConverter(java.util.function.Function<String, String> defaultValueExpressionConverter) {
+            this.defaultValueExpressionConverter = defaultValueExpressionConverter;
+            return this;
+        }
+
+        public Builder wrapSerializationWithObjectsToString(boolean wrapSerializationWithObjectsToString) {
+            this.wrapSerializationWithObjectsToString = wrapSerializationWithObjectsToString;
+            return this;
+        }
+
+        public Builder jsonDeserializationMethod(String jsonDeserializationMethod) {
+            this.jsonDeserializationMethod = jsonDeserializationMethod;
+            return this;
+        }
+
+        public Builder serializationMethodBase(String serializationMethodBase) {
+            this.serializationMethodBase = serializationMethodBase;
+            return this;
+        }
+
+        public Builder xmlAttributeDeserializationTemplate(String xmlAttributeDeserializationTemplate) {
+            this.xmlAttributeDeserializationTemplate = xmlAttributeDeserializationTemplate;
+            return this;
+        }
+
+        public Builder xmlElementDeserializationMethod(String xmlElementDeserializationMethod) {
+            this.xmlElementDeserializationMethod = xmlElementDeserializationMethod;
+            return this;
+        }
+
+        public PrimitiveType build() {
+            return new PrimitiveType(name, nullableType, defaultValueExpressionConverter, defaultValue,
+                    serializationMethodBase, wrapSerializationWithObjectsToString,
+                    jsonDeserializationMethod, xmlAttributeDeserializationTemplate, xmlElementDeserializationMethod);
+        }
     }
 }

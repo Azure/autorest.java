@@ -10,3 +10,4 @@ options:
     enable-sync-stack: true
     dev-options:
       generate-code-model: true
+      support-versioning: true

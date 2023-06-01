@@ -47,7 +47,7 @@ public final class ExtensibleClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return days of the week along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -69,7 +69,7 @@ public final class ExtensibleClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return days of the week along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -86,7 +86,7 @@ public final class ExtensibleClient {
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
      *
-     * @param body The body parameter.
+     * @param body Days of the week.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -109,7 +109,7 @@ public final class ExtensibleClient {
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
      *
-     * @param body The body parameter.
+     * @param body Days of the week.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -131,7 +131,7 @@ public final class ExtensibleClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return days of the week.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -149,7 +149,7 @@ public final class ExtensibleClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return days of the week.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -162,7 +162,7 @@ public final class ExtensibleClient {
     /**
      * The putKnownValue operation.
      *
-     * @param body The body parameter.
+     * @param body Days of the week.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -181,7 +181,7 @@ public final class ExtensibleClient {
     /**
      * The putUnknownValue operation.
      *
-     * @param body The body parameter.
+     * @param body Days of the week.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

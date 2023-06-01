@@ -16,6 +16,20 @@ using Azure.ClientGenerator.Core;
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Cadl.Response;
 
+@Foundations.Private.needsRoute
+op RpcOperationWithAdditionalResponse<
+  TParams,
+  TResponse extends TypeSpec.Reflection.Model,
+  TAdditionalResponse extends object,
+  Traits extends object = {},
+  TErrorResponse = Azure.Core.Foundations.ErrorResponse
+> is Foundations.Operation<
+  TParams & Azure.Core.Traits.Private.TraitProperties<Traits, TraitLocation.Parameters>,
+  (TResponse & Azure.Core.Traits.Private.TraitProperties<Traits, TraitLocation.Response>) | TAdditionalResponse,
+  Traits,
+  TErrorResponse
+>;
+
 @resource("resources")
 model Resource {
   @visibility("read")
@@ -29,30 +43,6 @@ model Resource {
 }
 
 model ResourceArray is Resource[];
-
-interface ResourceOperations
-  extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
-
-// operation using Azure.Core
-@Azure.ClientGenerator.Core.client({
-  name: "CoreClient",
-  service: Cadl.Response,
-})
-@route("/cadl-core")
-@doc("Cadl Core")
-interface CadlCoreOp {
-  @doc("Creates a new resource or updates an existing one.")
-  createOrUpdate is ResourceOperations.ResourceCreateOrReplace<Resource>;
-
-  @doc("Gets the details of a resource.")
-  get is ResourceOperations.ResourceRead<Resource>;
-
-  @doc("Deletes a resource.")
-  delete is ResourceOperations.ResourceDelete<Resource>;
-
-  @doc("Lists the existing resources.")
-  list is ResourceOperations.ResourceList<Resource>;
-}
 
 @Azure.ClientGenerator.Core.client({
   name: "ResponseClient",
@@ -92,4 +82,22 @@ interface ResponseOp {
     @header("operation-location")
     operationLocation: ResourceLocation<Resource>;
   };
+
+  @route("/exists")
+  @head
+  exists is RpcOperationWithAdditionalResponse<
+    {},
+    {
+      @doc("A response containing headers related to the Job Schedule, if it exists.")
+      @statusCode
+      code: "200";
+    },
+    {
+      @doc("A response containing headers related to the Job Schedule, if it exists.")
+      @statusCode
+      code: "404";
+    },
+    {},
+    Foundations.ErrorResponse
+  >;
 }

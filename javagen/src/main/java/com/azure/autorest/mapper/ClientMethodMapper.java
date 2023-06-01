@@ -64,6 +64,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A mapper that maps an {@link Operation} to a lit of {@link ClientMethod ClientMethods}.
@@ -214,7 +215,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 boolean proxyMethodUsesBinaryData = proxyMethod.getParameters().stream()
                     .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == ClassType.BinaryData);
                 boolean proxyMethodUsesFluxByteBuffer = proxyMethod.getParameters().stream()
-                        .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FluxByteBuffer);
+                    .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FluxByteBuffer);
 
                 Set<Parameter> originalParameters = new HashSet<>();
                 for (Parameter parameter : codeModelParameters) {
@@ -327,7 +328,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         methodVisibility(ClientMethodType.SimpleAsyncRestResponse, defaultOverloadType, false, isProtocolMethod);
                     JavaVisibility simpleAsyncMethodVisibilityWithContext =
                         methodVisibility(ClientMethodType.SimpleAsyncRestResponse, defaultOverloadType, true, isProtocolMethod);
-
 
                     JavaVisibility simpleSyncMethodVisibility =
                             methodVisibility(ClientMethodType.SimpleSyncRestResponse, defaultOverloadType, false,
@@ -443,7 +443,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                         builder = builder.implementationDetails(implDetailsBuilder.build());
 
-                        String modelSuffix = "WithModel";
                         createLroMethods(operation, builder, methods,
                             methodNamer.getLroModelBeginAsyncMethodName(),
                             methodNamer.getLroModelBeginMethodName(),
@@ -532,7 +531,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             if (!(responseBodySchema instanceof ObjectSchema)) {
                 throw new IllegalArgumentException(String.format("[JavaCheck/SchemaError] no common parent found for client models %s",
                     operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull)
-                        .map(s -> s.getLanguage().getJava().getName()).collect(Collectors.toList())));
+                        .map(SchemaUtil::getJavaName).collect(Collectors.toList())));
             }
             ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
             Optional<ClientModelProperty> itemPropertyOpt = responseBodyModel.getProperties().stream()
@@ -736,6 +735,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         if (settings.getSyncMethods() != SyncMethodsGeneration.NONE) {
             methods.add(builder.build());
+
+            // overload for versioning
+            createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
         }
 
         if (generateClientMethodWithOnlyRequiredParameters) {
@@ -838,6 +840,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .methodVisibility(visibilityFunction.methodVisibility(false, defaultOverloadType, false));
         methods.add(builder.build());
 
+        // overload for versioning
+        createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
+
         if (generateClientMethodWithOnlyRequiredParameters) {
             methods.add(builder
                 .methodVisibility(visibilityFunction.methodVisibility(false, MethodOverloadType.OVERLOAD_MINIMUM, false))
@@ -847,6 +852,59 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         builder.methodVisibility(visibilityFunction.methodVisibility(false, defaultOverloadType, true));
         addClientMethodWithContext(methods, builder, parameters, contextParameter);
+    }
+
+    private static void createOverloadForVersioning(
+            boolean isProtocolMethod,
+            List<ClientMethod> methods, Builder builder,
+            List<ClientMethodParameter> parameters) {
+
+        if (!isProtocolMethod && JavaSettings.getInstance().isDataPlaneClient()) {
+            if (parameters.stream().anyMatch(p -> p.getVersioning() != null && p.getVersioning().getAdded() != null)) {
+                List<List<ClientMethodParameter>> signatures = findOverloadedSignatures(parameters);
+                for (List<ClientMethodParameter> overloadedParameters : signatures) {
+                    builder.parameters(overloadedParameters);
+                    methods.add(builder.build());
+                }
+            }
+
+            builder.parameters(parameters);
+        }
+    }
+
+    static List<List<ClientMethodParameter>> findOverloadedSignatures(List<ClientMethodParameter> parameters) {
+        List<List<ClientMethodParameter>> signatures = new ArrayList<>();
+
+        List<ClientMethodParameter> allParameters = parameters;
+        List<ClientMethodParameter> requiredParameters = parameters.stream()
+                .filter(MethodParameter::isRequired)
+                .collect(Collectors.toList());
+
+        List<String> versions = allParameters.stream()
+                .flatMap(p -> {
+                    if (p.getVersioning() != null && p.getVersioning().getAdded() != null) {
+                        return p.getVersioning().getAdded().stream();
+                    } else {
+                        return Stream.empty();
+                    }
+                }).distinct().collect(Collectors.toList());
+        versions.add(0, null);  // for signature of no version
+
+        for (String version : versions) {
+            List<ClientMethodParameter> overloadedParameters = allParameters.stream()
+                    .filter(p -> (p.getVersioning() == null || p.getVersioning().getAdded() == null)
+                            || (p.getVersioning() != null && p.getVersioning().getAdded() != null && p.getVersioning().getAdded().contains(version)))
+                    .collect(Collectors.toList());
+
+            if (!overloadedParameters.equals(allParameters)
+                    && !overloadedParameters.equals(requiredParameters)
+                    && !signatures.contains(overloadedParameters)) {
+                // take the signature not same as required-only, not same as full, not same as anything already there
+                signatures.add(overloadedParameters);
+            }
+        }
+
+        return signatures;
     }
 
     private static ClientMethodParameter updateClientMethodParameter(ClientMethodParameter clientMethodParameter) {
@@ -889,6 +947,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, defaultOverloadType, false, isProtocolMethod))
                 .build());
 
+            // overload for versioning
+            createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
+
             if (generateClientMethodWithOnlyRequiredParameters) {
                 methods.add(builder
                     .onlyRequiredParameters(true)
@@ -912,6 +973,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .groupedParameterRequired(false)
                 .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, defaultOverloadType, false, isProtocolMethod))
                 .build());
+
+            // overload for versioning
+            createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
 
             if (generateClientMethodWithOnlyRequiredParameters) {
                 methods.add(builder
