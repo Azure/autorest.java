@@ -1,5 +1,11 @@
 # Release History
 
+## 0.7.4 (Unreleased)
+
+Compatible with compiler 0.44.
+
+- Supported partial update for models and extensible enums.
+
 ## 0.7.3 (2023-05-30)
 
 Compatible with compiler 0.44.

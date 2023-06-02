@@ -9,9 +9,12 @@ import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.javamodel.JavaContext;
+import com.azure.autorest.model.javamodel.JavaEnum;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 
 import java.util.HashSet;
@@ -47,6 +50,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         if (!settings.isStreamStyleSerialization()) {
             imports.add("com.fasterxml.jackson.annotation.JsonCreator");
         }
+        addGeneratedImport(imports);
 
         javaFile.declareImport(imports);
         javaFile.javadocComment(comment -> comment.description(enumType.getDescription()));
@@ -61,6 +65,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 classBlock.javadocComment(CoreUtils.isNullOrEmpty(enumValue.getDescription())
                     ? "Static value " + value + " for " + enumName + "."
                     : enumValue.getDescription());
+                addGeneratedAnnotation(classBlock);
                 classBlock.publicStaticFinalVariable(String.format("%1$s %2$s = from%3$s(%4$s)", enumName,
                     enumValue.getName(), pascalTypeName, elementType.defaultValueExpression(value)));
             }
@@ -70,6 +75,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 comment.description("Creates a new instance of " + enumName + " value.");
                 comment.deprecated(String.format("Use the {@link #from%1$s(%2$s)} factory method.", pascalTypeName, typeName));
             });
+            addGeneratedAnnotation(classBlock);
             classBlock.annotation("Deprecated");
             classBlock.publicConstructor(enumName + "()", ctor -> {
             });
@@ -81,6 +87,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 comment.methodReturns("the corresponding " + enumName);
             });
 
+            addGeneratedAnnotation(classBlock);
             if (!settings.isStreamStyleSerialization()) {
                 classBlock.annotation("JsonCreator");
             }
@@ -96,6 +103,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 comment.description("Gets known " + enumName + " values.");
                 comment.methodReturns("known " + enumName + " values");
             });
+            addGeneratedAnnotation(classBlock);
             classBlock.publicStaticMethod("Collection<" + enumName + "> values()",
                 function -> function.methodReturn("values(" + enumName + ".class)"));
         });
@@ -107,6 +115,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             imports.add("com.fasterxml.jackson.annotation.JsonCreator");
             imports.add("com.fasterxml.jackson.annotation.JsonValue");
         }
+        addGeneratedImport(imports);
         IType elementType = enumType.getElementType();
         elementType.getClientType().addImportsTo(imports, false);
 
@@ -195,4 +204,23 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             return String.format("item.%s().equals(value)", toJsonMethodName);
         }
     }
+
+    protected void addGeneratedImport(Set<String> imports) {
+        if (JavaSettings.getInstance().isDataPlaneClient()) {
+            imports.add(Generated.class.getName());
+        }
+    }
+
+    protected void addGeneratedAnnotation(JavaContext classBlock) {
+        if (JavaSettings.getInstance().isDataPlaneClient()) {
+            classBlock.annotation(Generated.class.getSimpleName());
+        }
+    }
+
+    protected void addGeneratedAnnotation(JavaEnum enumBlock) {
+        if (JavaSettings.getInstance().isDataPlaneClient()) {
+            enumBlock.annotation(Generated.class.getSimpleName());
+        }
+    }
+
 }

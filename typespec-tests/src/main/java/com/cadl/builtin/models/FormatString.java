@@ -4,6 +4,7 @@
 
 package com.cadl.builtin.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.CoreUtils;
@@ -18,48 +19,56 @@ public final class FormatString {
     /*
      * The base64Encoded property.
      */
+    @Generated
     @JsonProperty(value = "base64Encoded", required = true)
     private Base64Url base64Encoded;
 
     /*
      * The binary property.
      */
+    @Generated
     @JsonProperty(value = "binary", required = true)
     private byte[] binary;
 
     /*
      * The dateTime property.
      */
+    @Generated
     @JsonProperty(value = "dateTime", required = true)
     private OffsetDateTime dateTime;
 
     /*
      * summary of RFC1123 date-time
      */
+    @Generated
     @JsonProperty(value = "dateTimeRfc1123", required = true)
     private DateTimeRfc1123 dateTimeRfc1123;
 
     /*
      * The password property.
      */
+    @Generated
     @JsonProperty(value = "password", required = true)
     private String password;
 
     /*
      * The uri property.
      */
+    @Generated
     @JsonProperty(value = "uri", required = true)
     private String uri;
 
     /*
      * The extensibleEnum property.
      */
+    @Generated
     @JsonProperty(value = "extensibleEnum", required = true)
     private KnownValues extensibleEnum;
 
     /*
      * The extensibleEnumScalar property.
      */
+    @Generated
     @JsonProperty(value = "extensibleEnumScalar", required = true)
     private KnownValuesScalar extensibleEnumScalar;
 
@@ -75,6 +84,7 @@ public final class FormatString {
      * @param extensibleEnum the extensibleEnum value to set.
      * @param extensibleEnumScalar the extensibleEnumScalar value to set.
      */
+    @Generated
     @JsonCreator
     public FormatString(
             @JsonProperty(value = "base64Encoded", required = true) byte[] base64Encoded,
@@ -100,6 +110,7 @@ public final class FormatString {
      *
      * @return the base64Encoded value.
      */
+    @Generated
     public byte[] getBase64Encoded() {
         if (this.base64Encoded == null) {
             return new byte[0];
@@ -112,6 +123,7 @@ public final class FormatString {
      *
      * @return the binary value.
      */
+    @Generated
     public byte[] getBinary() {
         return CoreUtils.clone(this.binary);
     }
@@ -121,6 +133,7 @@ public final class FormatString {
      *
      * @return the dateTime value.
      */
+    @Generated
     public OffsetDateTime getDateTime() {
         return this.dateTime;
     }
@@ -130,6 +143,7 @@ public final class FormatString {
      *
      * @return the dateTimeRfc1123 value.
      */
+    @Generated
     public OffsetDateTime getDateTimeRfc1123() {
         if (this.dateTimeRfc1123 == null) {
             return null;
@@ -142,6 +156,7 @@ public final class FormatString {
      *
      * @return the password value.
      */
+    @Generated
     public String getPassword() {
         return this.password;
     }
@@ -151,6 +166,7 @@ public final class FormatString {
      *
      * @return the uri value.
      */
+    @Generated
     public String getUri() {
         return this.uri;
     }
@@ -160,6 +176,7 @@ public final class FormatString {
      *
      * @return the extensibleEnum value.
      */
+    @Generated
     public KnownValues getExtensibleEnum() {
         return this.extensibleEnum;
     }
@@ -169,6 +186,7 @@ public final class FormatString {
      *
      * @return the extensibleEnumScalar value.
      */
+    @Generated
     public KnownValuesScalar getExtensibleEnumScalar() {
         return this.extensibleEnumScalar;
     }

@@ -4,6 +4,7 @@
 
 package com.cadl.naming.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,6 +21,7 @@ public final class DataResponse {
      *
      * description of name property
      */
+    @Generated
     @JsonProperty(value = "name", required = true)
     private String name;
 
@@ -28,6 +30,7 @@ public final class DataResponse {
      *
      * description of data property
      */
+    @Generated
     @JsonProperty(value = "data", required = true)
     private BinaryData data;
 
@@ -36,6 +39,7 @@ public final class DataResponse {
      *
      * description of type property
      */
+    @Generated
     @JsonProperty(value = "type", required = true)
     private TypesModel dataType;
 
@@ -44,6 +48,7 @@ public final class DataResponse {
      *
      * description of status property
      */
+    @Generated
     @JsonProperty(value = "status", required = true)
     private DataStatus status;
 
@@ -55,6 +60,7 @@ public final class DataResponse {
      * @param dataType the dataType value to set.
      * @param status the status value to set.
      */
+    @Generated
     @JsonCreator
     private DataResponse(
             @JsonProperty(value = "name", required = true) String name,
@@ -74,6 +80,7 @@ public final class DataResponse {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -85,6 +92,7 @@ public final class DataResponse {
      *
      * @return the data value.
      */
+    @Generated
     public BinaryData getData() {
         return this.data;
     }
@@ -96,6 +104,7 @@ public final class DataResponse {
      *
      * @return the dataType value.
      */
+    @Generated
     public TypesModel getDataType() {
         return this.dataType;
     }
@@ -107,6 +116,7 @@ public final class DataResponse {
      *
      * @return the status value.
      */
+    @Generated
     public DataStatus getStatus() {
         return this.status;
     }

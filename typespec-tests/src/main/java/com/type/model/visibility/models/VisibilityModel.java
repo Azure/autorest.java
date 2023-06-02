@@ -4,6 +4,7 @@
 
 package com.type.model.visibility.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,30 +16,35 @@ public final class VisibilityModel {
     /*
      * Required string, illustrating a readonly property.
      */
+    @Generated
     @JsonProperty(value = "readProp", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String readProp;
 
     /*
      * Required int32, illustrating a query property.
      */
+    @Generated
     @JsonProperty(value = "queryProp")
     private Integer queryProp;
 
     /*
      * Required string[], illustrating a create property.
      */
+    @Generated
     @JsonProperty(value = "createProp")
     private List<String> createProp;
 
     /*
      * Required int32[], illustrating a update property.
      */
+    @Generated
     @JsonProperty(value = "updateProp")
     private List<Integer> updateProp;
 
     /*
      * Required bool, illustrating a delete property.
      */
+    @Generated
     @JsonProperty(value = "deleteProp")
     private Boolean deleteProp;
 
@@ -50,6 +56,7 @@ public final class VisibilityModel {
      * @param updateProp the updateProp value to set.
      * @param deleteProp the deleteProp value to set.
      */
+    @Generated
     @JsonCreator
     public VisibilityModel(
             @JsonProperty(value = "queryProp") Integer queryProp,
@@ -67,6 +74,7 @@ public final class VisibilityModel {
      *
      * @return the readProp value.
      */
+    @Generated
     public String getReadProp() {
         return this.readProp;
     }
@@ -76,6 +84,7 @@ public final class VisibilityModel {
      *
      * @return the queryProp value.
      */
+    @Generated
     public Integer getQueryProp() {
         return this.queryProp;
     }
@@ -85,6 +94,7 @@ public final class VisibilityModel {
      *
      * @return the createProp value.
      */
+    @Generated
     public List<String> getCreateProp() {
         return this.createProp;
     }
@@ -94,6 +104,7 @@ public final class VisibilityModel {
      *
      * @return the updateProp value.
      */
+    @Generated
     public List<Integer> getUpdateProp() {
         return this.updateProp;
     }
@@ -103,6 +114,7 @@ public final class VisibilityModel {
      *
      * @return the deleteProp value.
      */
+    @Generated
     public Boolean isDeleteProp() {
         return this.deleteProp;
     }

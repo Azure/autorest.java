@@ -4,6 +4,7 @@
 
 package com.specialwords.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,12 +19,14 @@ public final class DerivedModel extends BaseModel {
     /*
      * The derived.name property.
      */
+    @Generated
     @JsonProperty(value = "derived.name", required = true)
     private String derivedName;
 
     /*
      * The for property.
      */
+    @Generated
     @JsonProperty(value = "for", required = true)
     private String forProperty;
 
@@ -33,6 +36,7 @@ public final class DerivedModel extends BaseModel {
      * @param derivedName the derivedName value to set.
      * @param forProperty the forProperty value to set.
      */
+    @Generated
     @JsonCreator
     public DerivedModel(
             @JsonProperty(value = "derived.name", required = true) String derivedName,
@@ -46,6 +50,7 @@ public final class DerivedModel extends BaseModel {
      *
      * @return the derivedName value.
      */
+    @Generated
     public String getDerivedName() {
         return this.derivedName;
     }
@@ -55,6 +60,7 @@ public final class DerivedModel extends BaseModel {
      *
      * @return the forProperty value.
      */
+    @Generated
     public String getForProperty() {
         return this.forProperty;
     }

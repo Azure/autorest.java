@@ -4,6 +4,7 @@
 
 package com.parameters.spread.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,48 +15,56 @@ public final class SpreadWithMultipleParametersOptions {
     /*
      * The id property.
      */
+    @Generated
     @JsonProperty(value = "id", required = true)
     private String id;
 
     /*
      * The x-ms-test-header property.
      */
+    @Generated
     @JsonProperty(value = "x-ms-test-header", required = true)
     private String xMsTestHeader;
 
     /*
      * The prop1 property.
      */
+    @Generated
     @JsonProperty(value = "prop1", required = true)
     private String prop1;
 
     /*
      * The prop2 property.
      */
+    @Generated
     @JsonProperty(value = "prop2", required = true)
     private String prop2;
 
     /*
      * The prop3 property.
      */
+    @Generated
     @JsonProperty(value = "prop3", required = true)
     private String prop3;
 
     /*
      * The prop4 property.
      */
+    @Generated
     @JsonProperty(value = "prop4", required = true)
     private String prop4;
 
     /*
      * The prop5 property.
      */
+    @Generated
     @JsonProperty(value = "prop5", required = true)
     private String prop5;
 
     /*
      * The prop6 property.
      */
+    @Generated
     @JsonProperty(value = "prop6", required = true)
     private String prop6;
 
@@ -71,6 +80,7 @@ public final class SpreadWithMultipleParametersOptions {
      * @param prop5 the prop5 value to set.
      * @param prop6 the prop6 value to set.
      */
+    @Generated
     @JsonCreator
     public SpreadWithMultipleParametersOptions(
             @JsonProperty(value = "id", required = true) String id,
@@ -96,6 +106,7 @@ public final class SpreadWithMultipleParametersOptions {
      *
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -105,6 +116,7 @@ public final class SpreadWithMultipleParametersOptions {
      *
      * @return the xMsTestHeader value.
      */
+    @Generated
     public String getXMsTestHeader() {
         return this.xMsTestHeader;
     }
@@ -114,6 +126,7 @@ public final class SpreadWithMultipleParametersOptions {
      *
      * @return the prop1 value.
      */
+    @Generated
     public String getProp1() {
         return this.prop1;
     }
@@ -123,6 +136,7 @@ public final class SpreadWithMultipleParametersOptions {
      *
      * @return the prop2 value.
      */
+    @Generated
     public String getProp2() {
         return this.prop2;
     }
@@ -132,6 +146,7 @@ public final class SpreadWithMultipleParametersOptions {
      *
      * @return the prop3 value.
      */
+    @Generated
     public String getProp3() {
         return this.prop3;
     }
@@ -141,6 +156,7 @@ public final class SpreadWithMultipleParametersOptions {
      *
      * @return the prop4 value.
      */
+    @Generated
     public String getProp4() {
         return this.prop4;
     }
@@ -150,6 +166,7 @@ public final class SpreadWithMultipleParametersOptions {
      *
      * @return the prop5 value.
      */
+    @Generated
     public String getProp5() {
         return this.prop5;
     }
@@ -159,6 +176,7 @@ public final class SpreadWithMultipleParametersOptions {
      *
      * @return the prop6 value.
      */
+    @Generated
     public String getProp6() {
         return this.prop6;
     }

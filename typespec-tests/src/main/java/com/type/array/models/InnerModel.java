@@ -5,6 +5,7 @@
 package com.type.array.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -15,12 +16,14 @@ public final class InnerModel {
     /*
      * Required string property
      */
+    @Generated
     @JsonProperty(value = "property", required = true)
     private String property;
 
     /*
      * The children property.
      */
+    @Generated
     @JsonProperty(value = "children")
     private List<InnerModel> children;
 
@@ -29,6 +32,7 @@ public final class InnerModel {
      *
      * @param property the property value to set.
      */
+    @Generated
     @JsonCreator
     public InnerModel(@JsonProperty(value = "property", required = true) String property) {
         this.property = property;
@@ -39,6 +43,7 @@ public final class InnerModel {
      *
      * @return the property value.
      */
+    @Generated
     public String getProperty() {
         return this.property;
     }
@@ -48,6 +53,7 @@ public final class InnerModel {
      *
      * @return the children value.
      */
+    @Generated
     public List<InnerModel> getChildren() {
         return this.children;
     }
@@ -58,6 +64,7 @@ public final class InnerModel {
      * @param children the children value to set.
      * @return the InnerModel object itself.
      */
+    @Generated
     public InnerModel setChildren(List<InnerModel> children) {
         this.children = children;
         return this;

@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.lro.standard.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,12 +15,14 @@ public final class ExportedUser {
     /*
      * The name of user.
      */
+    @Generated
     @JsonProperty(value = "name", required = true)
     private String name;
 
     /*
      * The exported URI.
      */
+    @Generated
     @JsonProperty(value = "resourceUri", required = true)
     private String resourceUri;
 
@@ -29,6 +32,7 @@ public final class ExportedUser {
      * @param name the name value to set.
      * @param resourceUri the resourceUri value to set.
      */
+    @Generated
     @JsonCreator
     private ExportedUser(
             @JsonProperty(value = "name", required = true) String name,
@@ -42,6 +46,7 @@ public final class ExportedUser {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -51,6 +56,7 @@ public final class ExportedUser {
      *
      * @return the resourceUri value.
      */
+    @Generated
     public String getResourceUri() {
         return this.resourceUri;
     }

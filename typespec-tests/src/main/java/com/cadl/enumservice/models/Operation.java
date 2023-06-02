@@ -4,6 +4,7 @@
 
 package com.cadl.enumservice.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,30 +15,35 @@ public final class Operation {
     /*
      * The name property.
      */
+    @Generated
     @JsonProperty(value = "name", required = true)
     private Name name;
 
     /*
      * The best property.
      */
+    @Generated
     @JsonProperty(value = "best", required = true)
     private boolean best = true;
 
     /*
      * The age property.
      */
+    @Generated
     @JsonProperty(value = "age", required = true)
     private long age = 50L;
 
     /*
      * The priority property.
      */
+    @Generated
     @JsonProperty(value = "priority", required = true)
     private Priority priority;
 
     /*
      * The color property.
      */
+    @Generated
     @JsonProperty(value = "color", required = true)
     private ColorModel color;
 
@@ -48,6 +54,7 @@ public final class Operation {
      * @param priority the priority value to set.
      * @param color the color value to set.
      */
+    @Generated
     @JsonCreator
     private Operation(
             @JsonProperty(value = "name", required = true) Name name,
@@ -65,6 +72,7 @@ public final class Operation {
      *
      * @return the name value.
      */
+    @Generated
     public Name getName() {
         return this.name;
     }
@@ -74,6 +82,7 @@ public final class Operation {
      *
      * @return the best value.
      */
+    @Generated
     public boolean isBest() {
         return this.best;
     }
@@ -83,6 +92,7 @@ public final class Operation {
      *
      * @return the age value.
      */
+    @Generated
     public long getAge() {
         return this.age;
     }
@@ -92,6 +102,7 @@ public final class Operation {
      *
      * @return the priority value.
      */
+    @Generated
     public Priority getPriority() {
         return this.priority;
     }
@@ -101,6 +112,7 @@ public final class Operation {
      *
      * @return the color value.
      */
+    @Generated
     public ColorModel getColor() {
         return this.color;
     }

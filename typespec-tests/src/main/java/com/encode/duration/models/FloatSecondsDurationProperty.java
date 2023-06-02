@@ -4,6 +4,7 @@
 
 package com.encode.duration.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,6 +16,7 @@ public final class FloatSecondsDurationProperty {
     /*
      * The value property.
      */
+    @Generated
     @JsonProperty(value = "value", required = true)
     private double value;
 
@@ -23,6 +25,7 @@ public final class FloatSecondsDurationProperty {
      *
      * @param value the value value to set.
      */
+    @Generated
     @JsonCreator
     public FloatSecondsDurationProperty(@JsonProperty(value = "value", required = true) Duration value) {
         this.value = (double) value.toNanos() / 1000_000_000L;
@@ -33,6 +36,7 @@ public final class FloatSecondsDurationProperty {
      *
      * @return the value value.
      */
+    @Generated
     public Duration getValue() {
         return Duration.ofNanos((long) (this.value * 1000_000_000L));
     }

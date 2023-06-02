@@ -4,6 +4,7 @@
 
 package fixtures.dpgcustomization.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,7 @@ public final class Input {
     /*
      * The hello property.
      */
+    @Generated
     @JsonProperty(value = "hello", required = true)
     private String hello;
 
@@ -22,6 +24,7 @@ public final class Input {
      *
      * @param hello the hello value to set.
      */
+    @Generated
     @JsonCreator
     public Input(@JsonProperty(value = "hello", required = true) String hello) {
         this.hello = hello;
@@ -32,6 +35,7 @@ public final class Input {
      *
      * @return the hello value.
      */
+    @Generated
     public String getHello() {
         return this.hello;
     }

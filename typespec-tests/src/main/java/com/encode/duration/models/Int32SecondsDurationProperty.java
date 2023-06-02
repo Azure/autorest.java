@@ -4,6 +4,7 @@
 
 package com.encode.duration.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,6 +16,7 @@ public final class Int32SecondsDurationProperty {
     /*
      * The value property.
      */
+    @Generated
     @JsonProperty(value = "value", required = true)
     private long value;
 
@@ -23,6 +25,7 @@ public final class Int32SecondsDurationProperty {
      *
      * @param value the value value to set.
      */
+    @Generated
     @JsonCreator
     public Int32SecondsDurationProperty(@JsonProperty(value = "value", required = true) Duration value) {
         this.value = value.getSeconds();
@@ -33,6 +36,7 @@ public final class Int32SecondsDurationProperty {
      *
      * @return the value value.
      */
+    @Generated
     public Duration getValue() {
         return Duration.ofSeconds(this.value);
     }
