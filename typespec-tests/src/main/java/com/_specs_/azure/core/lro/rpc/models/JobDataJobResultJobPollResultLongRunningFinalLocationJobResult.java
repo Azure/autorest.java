@@ -4,11 +4,13 @@
 
 package com._specs_.azure.core.lro.rpc.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 
 /** The JobDataJobResultJobPollResultLongRunningFinalLocationJobResult model. */
 @Immutable
 public final class JobDataJobResultJobPollResultLongRunningFinalLocationJobResult {
     /** Creates an instance of JobDataJobResultJobPollResultLongRunningFinalLocationJobResult class. */
+    @Generated
     private JobDataJobResultJobPollResultLongRunningFinalLocationJobResult() {}
 }
