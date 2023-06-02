@@ -3,12 +3,9 @@
 
 package com.azure.autorest.template;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ServiceVersion;
-import com.azure.autorest.model.javamodel.JavaEnum;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
-import com.azure.core.annotation.Generated;
 
 import java.util.HashSet;
 import java.util.List;
