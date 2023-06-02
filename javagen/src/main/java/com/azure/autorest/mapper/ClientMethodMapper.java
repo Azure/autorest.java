@@ -9,7 +9,6 @@ import com.azure.autorest.extension.base.model.codemodel.ConvenienceApi;
 import com.azure.autorest.extension.base.model.codemodel.LongRunningMetadata;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
-import com.azure.autorest.extension.base.model.codemodel.OperationLink;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
@@ -395,7 +394,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     MethodPollingDetails dpgMethodPollingDetailsWithModel = null;   // for additional LRO methods
 
                     if (pollingDetails != null) {
-                        // try operationLinks from Cadl
+                        // try lroMetadata
                         methodPollingDetails = methodPollingDetailsFromMetadata(operation, pollingDetails, settings);
 
                         // fallback to JavaSettings.PollingDetails
@@ -1665,59 +1664,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     intermediateType,
                     finalType,
                     pollingDetails.getPollIntervalInSeconds());
-        }
-        // TODO (weidxu): we will eventually get rid of the logic on OperationLink, and only use LongRunningMetadata
-        if (methodPollingDetails == null && operation.getOperationLinks() != null) {
-            // Only Typespec  would have operationLinks
-            // If operationLinks is provided, it will override JavaSettings.PollingDetails
-
-            IType intermediateType = null;
-            IType finalType = null;
-
-            OperationLink pollingOperationLink = operation.getOperationLinks().get("polling");
-            OperationLink finalOperationLink = operation.getOperationLinks().get("final");
-
-            if (pollingOperationLink != null && pollingOperationLink.getOperation() != null) {
-                // type from polling operation
-                intermediateType = SchemaUtil.getOperationResponseType(pollingOperationLink.getOperation(), settings);
-            }
-            if (finalOperationLink != null && finalOperationLink.getOperation() != null) {
-                // type from final operation
-                finalType = SchemaUtil.getOperationResponseType(finalOperationLink.getOperation(), settings);
-            }
-            if (intermediateType != null && finalType == null) {
-                if (HttpMethod.DELETE == MethodUtil.getHttpMethod(operation)) {
-                    // DELETE would not have final response as resource is deleted
-                    finalType = PrimitiveType.Void;
-                } else {
-                    // fallback to use response of this LRO as final type
-                    finalType = SchemaUtil.getOperationResponseType(operation, settings);
-
-                    if (finalType == ClassType.Object) {
-                        // possible of multiple response types
-                        // fallback to use response of 200 as final type
-                        Schema schemaOf200StatusCode = operation.getResponses().stream()
-                                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null
-                                        && !CoreUtils.isNullOrEmpty(r.getProtocol().getHttp().getStatusCodes())
-                                        && r.getProtocol().getHttp().getStatusCodes().contains("200"))
-                                .findFirst()
-                                .map(Response::getSchema)
-                                .orElse(null);
-                        if (schemaOf200StatusCode != null) {
-                            finalType = Mappers.getSchemaMapper().map(schemaOf200StatusCode);
-                        }
-                    }
-                }
-            }
-
-            if (intermediateType != null && finalType != null) {
-                methodPollingDetails = new MethodPollingDetails(
-                    pollingDetails.getStrategy(),
-                    pollingDetails.getSyncStrategy(),
-                    intermediateType,
-                    finalType,
-                    pollingDetails.getPollIntervalInSeconds());
-            }
         }
         return methodPollingDetails;
     }

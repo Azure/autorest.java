@@ -63,7 +63,6 @@ public class Operation extends Metadata {
 
     private List<String> specialHeaders;
 
-    private Map<String, OperationLink> operationLinks;
     private LongRunningMetadata lroMetadata;
 
     private ConvenienceApi convenienceApi;
@@ -265,17 +264,6 @@ public class Operation extends Metadata {
 
     public void setSpecialHeaders(List<String> specialHeaders) {
         this.specialHeaders = specialHeaders;
-    }
-
-    /**
-     * @return the operation links, e.g. "polling" for the status monitor operation.
-     */
-    public Map<String, OperationLink> getOperationLinks() {
-        return operationLinks;
-    }
-
-    public void setOperationLinks(Map<String, OperationLink> operationLinks) {
-        this.operationLinks = operationLinks;
     }
 
     public LongRunningMetadata getLroMetadata() {

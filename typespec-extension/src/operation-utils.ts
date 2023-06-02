@@ -142,19 +142,22 @@ export function getServiceVersion(client: CodeModelClient | CodeModel): ServiceV
   return new ServiceVersion(name, description);
 }
 
-export function isLroMetadataSupported(operation: Operation, lroMetadata: LroMetadata): boolean {
+export function isLroNewPollingStrategy(operation: Operation, lroMetadata: LroMetadata): boolean {
+  // at present, checks if operation uses template from Azure.Core
   const azureCoreLroSvs = [
     "LongRunningResourceCreateOrReplace",
     "LongRunningResourceCreateOrUpdate",
     "LongRunningResourceDelete",
     "LongRunningResourceAction",
+    "LongRunningRpcOperation",
   ];
 
   let ret = false;
   if (
+    lroMetadata.pollingInfo &&
     lroMetadata.statusMonitorStep &&
-    lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
-    getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
+    lroMetadata.pollingInfo.responseModel.name === "OperationStatus" &&
+    getNamespace(lroMetadata.pollingInfo.responseModel) === "Azure.Core.Foundations"
   ) {
     if (operation.node.signature.kind === SyntaxKind.OperationSignatureReference) {
       if (operation.node.signature.baseOperation.target.kind === SyntaxKind.MemberExpression) {
@@ -164,12 +167,6 @@ export function isLroMetadataSupported(operation: Operation, lroMetadata: LroMet
     }
   }
   return ret;
-}
-
-export function isLroNewPollingStrategy(operation: Operation, lroMetadata: LroMetadata): boolean {
-  // at present, it is same as isLroMetadataSupported, which checks if operation uses template from Azure.Core
-  // will change later when isLroMetadataSupported extends to other types of operations
-  return true;
 
   // if (verb === "put" && !lroMetadata.finalStep) {
   //   // PUT without last GET on resource
