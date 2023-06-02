@@ -155,6 +155,7 @@ export function isLroNewPollingStrategy(operation: Operation, lroMetadata: LroMe
   let ret = false;
   if (
     lroMetadata.pollingInfo &&
+    lroMetadata.statusMonitorStep &&
     lroMetadata.pollingInfo.responseModel.name === "OperationStatus" &&
     getNamespace(lroMetadata.pollingInfo.responseModel) === "Azure.Core.Foundations"
   ) {

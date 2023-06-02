@@ -533,7 +533,7 @@ export class CodeModelBuilder {
     }
 
     // lro metadata
-    const lroMetadata = this.processLroMetadata(codeModelOperation, groupName, op, clientContext);
+    const lroMetadata = this.processLroMetadata(codeModelOperation, op);
 
     // responses
     const candidateResponseSchema = lroMetadata.pollResultType; // candidate: response body type of pollingOperation
@@ -576,16 +576,12 @@ export class CodeModelBuilder {
     }
   }
 
-  private processLroMetadata(
-    op: CodeModelOperation,
-    groupName: string,
-    httpOperation: HttpOperation,
-    clientContext: ClientContext,
-  ): LongRunningMetadata {
+  private processLroMetadata(op: CodeModelOperation, httpOperation: HttpOperation): LongRunningMetadata {
     const operation = httpOperation.operation;
 
     const lroMetadata = getLroMetadata(this.program, operation);
-    if (lroMetadata && lroMetadata.pollingInfo) {
+    // needs lroMetadata.statusMonitorStep, as getLroMetadata would return for @pollingOperation operation
+    if (lroMetadata && lroMetadata.pollingInfo && lroMetadata.statusMonitorStep) {
       let pollingSchema = undefined;
       let finalSchema = undefined;
 
