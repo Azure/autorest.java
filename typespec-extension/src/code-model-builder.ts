@@ -55,13 +55,7 @@ import {
   getHeaderFieldOptions,
 } from "@typespec/http";
 import { getAddedOnVersions, getVersion } from "@typespec/versioning";
-import {
-  isPollingLocation,
-  getPagedResult,
-  getOperationLinks,
-  isFixed,
-  getLroMetadata,
-} from "@azure-tools/typespec-azure-core";
+import { isPollingLocation, getPagedResult, isFixed, getLroMetadata } from "@azure-tools/typespec-azure-core";
 import {
   SdkContext,
   listClients,
@@ -117,7 +111,7 @@ import {
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient } from "./common/client.js";
-import { ConvenienceApi, Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
+import { ConvenienceApi, Operation as CodeModelOperation, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { ConstantSchema, ConstantValue } from "./common/schemas/constant.js";
@@ -155,7 +149,6 @@ import {
   originApiVersion,
   specialHeaderNames,
   loadExamples,
-  isLroMetadataSupported,
   isLroNewPollingStrategy,
   operationIsMultipleContentTypes,
 } from "./operation-utils.js";
@@ -457,12 +450,7 @@ export class CodeModelBuilder {
     return false;
   }
 
-  private processOperation(
-    groupName: string,
-    operation: Operation,
-    clientContext: ClientContext,
-    fromLinkedOperation: boolean = false,
-  ): CodeModelOperation {
+  private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
     const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
 
     const operationGroup = this.codeModel.getOperationGroup(groupName);
@@ -498,11 +486,6 @@ export class CodeModelBuilder {
     // check for generating protocol api or not
     codeModelOperation.generateProtocolApi =
       shouldGenerateProtocol(this.sdkContext, operation) && !isInternal(this.sdkContext, operation);
-
-    if (!fromLinkedOperation) {
-      // cache for later reference from operationLinks
-      this.operationCache.set(operation, codeModelOperation);
-    }
 
     codeModelOperation.addRequest(
       new Request({
@@ -549,10 +532,8 @@ export class CodeModelBuilder {
       }
     }
 
-    // linked operations
-    const lroMetadata = fromLinkedOperation
-      ? new LongRunningMetadata(false)
-      : this.processLroMetadata(codeModelOperation, groupName, op, clientContext);
+    // lro metadata
+    const lroMetadata = this.processLroMetadata(codeModelOperation, groupName, op, clientContext);
 
     // responses
     const candidateResponseSchema = lroMetadata.pollResultType; // candidate: response body type of pollingOperation
@@ -603,24 +584,17 @@ export class CodeModelBuilder {
   ): LongRunningMetadata {
     const operation = httpOperation.operation;
 
-    let pollingSchema = undefined;
-    let finalSchema = undefined;
-    let pollingFoundInOperationLinks = false;
-
     const lroMetadata = getLroMetadata(this.program, operation);
-    if (
-      lroMetadata &&
-      // we know those operation with OperationStatus is from Azure.Core,
-      // which is validated that "getLroMetadata" gives correct metadata.
-      // there are known cases that on legacy LRO, "getLroMetadata" gives wrong metadata.
-      lroMetadata.statusMonitorStep &&
-      isLroMetadataSupported(operation, lroMetadata)
-    ) {
+    if (lroMetadata && lroMetadata.pollingInfo) {
+      let pollingSchema = undefined;
+      let finalSchema = undefined;
+
       const verb = httpOperation.verb;
       const useNewPollStrategy = isLroNewPollingStrategy(operation, lroMetadata);
 
       let pollingStrategy: Metadata | undefined = undefined;
       if (useNewPollStrategy) {
+        // use new experimental OperationLocationPollingStrategy
         pollingStrategy = new Metadata({
           language: {
             java: {
@@ -637,19 +611,17 @@ export class CodeModelBuilder {
         pollingSchema = this.pollResultSchema;
       } else {
         if (
-          lroMetadata.statusMonitorStep.responseModel.name === "OperationStatus" &&
-          getNamespace(lroMetadata.statusMonitorStep.responseModel) === "Azure.Core.Foundations"
+          lroMetadata.pollingInfo.responseModel.name === "OperationStatus" &&
+          getNamespace(lroMetadata.pollingInfo.responseModel) === "Azure.Core.Foundations"
         ) {
           pollingSchema = this.pollResultSchema;
         } else {
-          pollingSchema = this.processSchema(lroMetadata.statusMonitorStep.responseModel, "pollResult");
+          pollingSchema = this.processSchema(lroMetadata.pollingInfo.responseModel, "pollResult");
         }
       }
 
       // finalSchema
-      if (lroMetadata.finalStep?.responseModel) {
-        finalSchema = this.processSchema(lroMetadata.finalStep.responseModel, "finalResult");
-      } else if (verb !== "delete" && lroMetadata.logicalResult) {
+      if (verb !== "delete" && lroMetadata.logicalResult) {
         finalSchema = this.processSchema(lroMetadata.logicalResult, "finalResult");
       }
 
@@ -671,53 +643,7 @@ export class CodeModelBuilder {
       return op.lroMetadata;
     }
 
-    // TODO (weidxu): we will eventually get rid of the logic on OperationLinkMetadata, and only use LroMetadata
-    const operationLinks = getOperationLinks(this.program, operation);
-    if (operationLinks) {
-      op.operationLinks = {};
-
-      for (const [linkType, linkOperation] of operationLinks) {
-        if (linkType === "polling" || linkType === "final") {
-          // some TypeSpec writes pollingOperation without the operation
-          pollingFoundInOperationLinks = true;
-        }
-
-        if (linkOperation.linkedOperation) {
-          // process linked operation, if not processed
-          let linkedOperation = this.operationCache.get(linkOperation.linkedOperation);
-          if (!linkedOperation) {
-            linkedOperation = this.processOperation(groupName, linkOperation.linkedOperation, clientContext, true);
-          }
-
-          const opLink = new OperationLink(linkedOperation);
-          // parameters of operation link
-          if (linkOperation.parameters) {
-            opLink.parameters = this.processSchema(linkOperation.parameters, "parameters");
-          }
-          op.operationLinks[linkType] = opLink;
-
-          const getResponse = (linkedOp: CodeModelOperation): Schema | undefined => {
-            if (linkedOp.responses) {
-              const response = linkedOp.responses.find((it) => it.protocol?.http?.statusCodes?.includes("200"));
-              if (response && response instanceof SchemaResponse) {
-                const schema = response.schema;
-                if (op.convenienceApi) {
-                  this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
-                }
-                return schema;
-              }
-            }
-            return undefined;
-          };
-          if (linkType === "polling") {
-            pollingSchema = getResponse(linkedOperation);
-          } else if (linkType === "final") {
-            finalSchema = getResponse(linkedOperation);
-          }
-        }
-      }
-    }
-    return new LongRunningMetadata(pollingFoundInOperationLinks, pollingSchema, finalSchema);
+    return new LongRunningMetadata(false);
   }
 
   private processRouteForLongRunning(
