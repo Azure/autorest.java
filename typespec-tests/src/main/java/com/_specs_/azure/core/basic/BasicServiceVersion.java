@@ -4,7 +4,6 @@
 
 package com._specs_.azure.core.basic;
 
-import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of BasicClient. */
@@ -12,16 +11,14 @@ public enum BasicServiceVersion implements ServiceVersion {
     /** Enum value 2022-12-01-preview. */
     V2022_12_01_PREVIEW("2022-12-01-preview");
 
-    @Generated private final String version;
+    private final String version;
 
-    @Generated
     BasicServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
-    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -31,7 +28,6 @@ public enum BasicServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link BasicServiceVersion}.
      */
-    @Generated
     public static BasicServiceVersion getLatest() {
         return V2022_12_01_PREVIEW;
     }
