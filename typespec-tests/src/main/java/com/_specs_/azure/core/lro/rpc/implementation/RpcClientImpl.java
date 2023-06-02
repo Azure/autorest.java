@@ -5,6 +5,7 @@
 package com._specs_.azure.core.lro.rpc.implementation;
 
 import com._specs_.azure.core.lro.rpc.RpcServiceVersion;
+import com._specs_.azure.core.lro.rpc.models.JobDataJobResultJobPollResultLongRunningFinalLocationJobResult;
 import com._specs_.azure.core.lro.rpc.models.JobPollResult;
 import com._specs_.azure.core.lro.rpc.models.JobResult;
 import com.azure.core.annotation.BodyParam;
@@ -760,28 +761,8 @@ public final class RpcClientImpl {
      *
      * <pre>{@code
      * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
+     *     operationId: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Required): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Required)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Required): [
-     *         String (Required)
-     *     ]
      * }
      * }</pre>
      *
@@ -791,7 +772,7 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return result of the job along with {@link Response} on successful completion of {@link Mono}.
+     * @return result of the poll along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createJobFinalOnLocationWithResponseAsync(
@@ -818,28 +799,8 @@ public final class RpcClientImpl {
      *
      * <pre>{@code
      * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
+     *     operationId: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Required): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Required)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Required): [
-     *         String (Required)
-     *     ]
      * }
      * }</pre>
      *
@@ -849,7 +810,7 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return result of the job along with {@link Response}.
+     * @return result of the poll along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> createJobFinalOnLocationWithResponse(
@@ -874,28 +835,8 @@ public final class RpcClientImpl {
      *
      * <pre>{@code
      * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
+     *     operationId: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Required): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Required)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Required): [
-     *         String (Required)
-     *     ]
      * }
      * }</pre>
      *
@@ -905,7 +846,7 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of result of the job.
+     * @return the {@link PollerFlux} for polling of result of the poll.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCreateJobFinalOnLocationAsync(
@@ -939,28 +880,8 @@ public final class RpcClientImpl {
      *
      * <pre>{@code
      * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
+     *     operationId: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Required): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Required)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Required): [
-     *         String (Required)
-     *     ]
      * }
      * }</pre>
      *
@@ -970,7 +891,7 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of result of the job.
+     * @return the {@link SyncPoller} for polling of result of the poll.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateJobFinalOnLocation(
@@ -1004,28 +925,8 @@ public final class RpcClientImpl {
      *
      * <pre>{@code
      * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
+     *     operationId: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Required): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Required)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Required): [
-     *         String (Required)
-     *     ]
      * }
      * }</pre>
      *
@@ -1035,11 +936,11 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of result of the job.
+     * @return the {@link PollerFlux} for polling of result of the poll.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<JobPollResult, JobResult> beginCreateJobFinalOnLocationWithModelAsync(
-            BinaryData jobData, RequestOptions requestOptions) {
+    public PollerFlux<JobPollResult, JobDataJobResultJobPollResultLongRunningFinalLocationJobResult>
+            beginCreateJobFinalOnLocationWithModelAsync(BinaryData jobData, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.createJobFinalOnLocationWithResponseAsync(jobData, requestOptions),
@@ -1051,7 +952,7 @@ public final class RpcClientImpl {
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
                 TypeReference.createInstance(JobPollResult.class),
-                TypeReference.createInstance(JobResult.class));
+                TypeReference.createInstance(JobDataJobResultJobPollResultLongRunningFinalLocationJobResult.class));
     }
 
     /**
@@ -1069,28 +970,8 @@ public final class RpcClientImpl {
      *
      * <pre>{@code
      * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
+     *     operationId: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Required): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Required)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Required): [
-     *         String (Required)
-     *     ]
      * }
      * }</pre>
      *
@@ -1100,11 +981,11 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of result of the job.
+     * @return the {@link SyncPoller} for polling of result of the poll.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<JobPollResult, JobResult> beginCreateJobFinalOnLocationWithModel(
-            BinaryData jobData, RequestOptions requestOptions) {
+    public SyncPoller<JobPollResult, JobDataJobResultJobPollResultLongRunningFinalLocationJobResult>
+            beginCreateJobFinalOnLocationWithModel(BinaryData jobData, RequestOptions requestOptions) {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.createJobFinalOnLocationWithResponse(jobData, requestOptions),
@@ -1116,7 +997,7 @@ public final class RpcClientImpl {
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
                 TypeReference.createInstance(JobPollResult.class),
-                TypeReference.createInstance(JobResult.class));
+                TypeReference.createInstance(JobDataJobResultJobPollResultLongRunningFinalLocationJobResult.class));
     }
 
     /**
