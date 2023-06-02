@@ -5,6 +5,7 @@
 package com.type.property.optional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
@@ -14,10 +15,12 @@ public final class DatetimeProperty {
     /*
      * Property
      */
+    @Generated
     @JsonProperty(value = "property")
     private OffsetDateTime property;
 
     /** Creates an instance of DatetimeProperty class. */
+    @Generated
     public DatetimeProperty() {}
 
     /**
@@ -25,6 +28,7 @@ public final class DatetimeProperty {
      *
      * @return the property value.
      */
+    @Generated
     public OffsetDateTime getProperty() {
         return this.property;
     }
@@ -35,6 +39,7 @@ public final class DatetimeProperty {
      * @param property the property value to set.
      * @return the DatetimeProperty object itself.
      */
+    @Generated
     public DatetimeProperty setProperty(OffsetDateTime property) {
         this.property = property;
         return this;

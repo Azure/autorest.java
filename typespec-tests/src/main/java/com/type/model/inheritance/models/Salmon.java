@@ -5,6 +5,7 @@
 package com.type.model.inheritance.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -23,18 +24,21 @@ public final class Salmon extends Fish {
     /*
      * The friends property.
      */
+    @Generated
     @JsonProperty(value = "friends")
     private List<Fish> friends;
 
     /*
      * The hate property.
      */
+    @Generated
     @JsonProperty(value = "hate")
     private Map<String, Fish> hate;
 
     /*
      * The partner property.
      */
+    @Generated
     @JsonProperty(value = "partner")
     private Fish partner;
 
@@ -43,6 +47,7 @@ public final class Salmon extends Fish {
      *
      * @param age the age value to set.
      */
+    @Generated
     @JsonCreator
     public Salmon(@JsonProperty(value = "age", required = true) int age) {
         super(age);
@@ -53,6 +58,7 @@ public final class Salmon extends Fish {
      *
      * @return the friends value.
      */
+    @Generated
     public List<Fish> getFriends() {
         return this.friends;
     }
@@ -63,6 +69,7 @@ public final class Salmon extends Fish {
      * @param friends the friends value to set.
      * @return the Salmon object itself.
      */
+    @Generated
     public Salmon setFriends(List<Fish> friends) {
         this.friends = friends;
         return this;
@@ -73,6 +80,7 @@ public final class Salmon extends Fish {
      *
      * @return the hate value.
      */
+    @Generated
     public Map<String, Fish> getHate() {
         return this.hate;
     }
@@ -83,6 +91,7 @@ public final class Salmon extends Fish {
      * @param hate the hate value to set.
      * @return the Salmon object itself.
      */
+    @Generated
     public Salmon setHate(Map<String, Fish> hate) {
         this.hate = hate;
         return this;
@@ -93,6 +102,7 @@ public final class Salmon extends Fish {
      *
      * @return the partner value.
      */
+    @Generated
     public Fish getPartner() {
         return this.partner;
     }
@@ -103,6 +113,7 @@ public final class Salmon extends Fish {
      * @param partner the partner value to set.
      * @return the Salmon object itself.
      */
+    @Generated
     public Salmon setPartner(Fish partner) {
         this.partner = partner;
         return this;

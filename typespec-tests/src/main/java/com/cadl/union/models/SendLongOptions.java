@@ -5,6 +5,7 @@
 package com.cadl.union.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,48 +15,56 @@ public final class SendLongOptions {
     /*
      * The id property.
      */
+    @Generated
     @JsonProperty(value = "id", required = true)
     private String id;
 
     /*
      * The filter property.
      */
+    @Generated
     @JsonProperty(value = "filter")
     private String filter;
 
     /*
      * The user property.
      */
+    @Generated
     @JsonProperty(value = "user")
     private User user;
 
     /*
      * The input property.
      */
+    @Generated
     @JsonProperty(value = "input", required = true)
     private String input;
 
     /*
      * The dataInt property.
      */
+    @Generated
     @JsonProperty(value = "dataInt", required = true)
     private int dataInt;
 
     /*
      * The dataUnion property.
      */
+    @Generated
     @JsonProperty(value = "dataUnion")
     private DataUnionModelBase dataUnion;
 
     /*
      * The dataLong property.
      */
+    @Generated
     @JsonProperty(value = "dataLong")
     private Long dataLong;
 
     /*
      * The data_float property.
      */
+    @Generated
     @JsonProperty(value = "data_float")
     private Double dataFloat;
 
@@ -66,6 +75,7 @@ public final class SendLongOptions {
      * @param input the input value to set.
      * @param dataInt the dataInt value to set.
      */
+    @Generated
     @JsonCreator
     public SendLongOptions(
             @JsonProperty(value = "id", required = true) String id,
@@ -81,6 +91,7 @@ public final class SendLongOptions {
      *
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -90,6 +101,7 @@ public final class SendLongOptions {
      *
      * @return the filter value.
      */
+    @Generated
     public String getFilter() {
         return this.filter;
     }
@@ -100,6 +112,7 @@ public final class SendLongOptions {
      * @param filter the filter value to set.
      * @return the SendLongOptions object itself.
      */
+    @Generated
     public SendLongOptions setFilter(String filter) {
         this.filter = filter;
         return this;
@@ -110,6 +123,7 @@ public final class SendLongOptions {
      *
      * @return the user value.
      */
+    @Generated
     public User getUser() {
         return this.user;
     }
@@ -120,6 +134,7 @@ public final class SendLongOptions {
      * @param user the user value to set.
      * @return the SendLongOptions object itself.
      */
+    @Generated
     public SendLongOptions setUser(User user) {
         this.user = user;
         return this;
@@ -130,6 +145,7 @@ public final class SendLongOptions {
      *
      * @return the input value.
      */
+    @Generated
     public String getInput() {
         return this.input;
     }
@@ -139,6 +155,7 @@ public final class SendLongOptions {
      *
      * @return the dataInt value.
      */
+    @Generated
     public int getDataInt() {
         return this.dataInt;
     }
@@ -148,6 +165,7 @@ public final class SendLongOptions {
      *
      * @return the dataUnion value.
      */
+    @Generated
     public DataUnionModelBase getDataUnion() {
         return this.dataUnion;
     }
@@ -158,6 +176,7 @@ public final class SendLongOptions {
      * @param dataUnion the dataUnion value to set.
      * @return the SendLongOptions object itself.
      */
+    @Generated
     public SendLongOptions setDataUnion(DataUnionModelBase dataUnion) {
         this.dataUnion = dataUnion;
         return this;
@@ -168,6 +187,7 @@ public final class SendLongOptions {
      *
      * @return the dataLong value.
      */
+    @Generated
     public Long getDataLong() {
         return this.dataLong;
     }
@@ -178,6 +198,7 @@ public final class SendLongOptions {
      * @param dataLong the dataLong value to set.
      * @return the SendLongOptions object itself.
      */
+    @Generated
     public SendLongOptions setDataLong(Long dataLong) {
         this.dataLong = dataLong;
         return this;
@@ -188,6 +209,7 @@ public final class SendLongOptions {
      *
      * @return the dataFloat value.
      */
+    @Generated
     public Double getDataFloat() {
         return this.dataFloat;
     }
@@ -198,6 +220,7 @@ public final class SendLongOptions {
      * @param dataFloat the dataFloat value to set.
      * @return the SendLongOptions object itself.
      */
+    @Generated
     public SendLongOptions setDataFloat(Double dataFloat) {
         this.dataFloat = dataFloat;
         return this;

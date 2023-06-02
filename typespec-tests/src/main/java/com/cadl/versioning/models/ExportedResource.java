@@ -4,6 +4,7 @@
 
 package com.cadl.versioning.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,12 +15,14 @@ public final class ExportedResource {
     /*
      * The id property.
      */
+    @Generated
     @JsonProperty(value = "id", required = true)
     private String id;
 
     /*
      * The resourceUri property.
      */
+    @Generated
     @JsonProperty(value = "resourceUri", required = true)
     private String resourceUri;
 
@@ -29,6 +32,7 @@ public final class ExportedResource {
      * @param id the id value to set.
      * @param resourceUri the resourceUri value to set.
      */
+    @Generated
     @JsonCreator
     private ExportedResource(
             @JsonProperty(value = "id", required = true) String id,
@@ -42,6 +46,7 @@ public final class ExportedResource {
      *
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -51,6 +56,7 @@ public final class ExportedResource {
      *
      * @return the resourceUri value.
      */
+    @Generated
     public String getResourceUri() {
         return this.resourceUri;
     }

@@ -4,6 +4,7 @@
 
 package com.cadl.optional.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,12 +15,14 @@ public final class ImmutableModel {
     /*
      * The stringReadWriteRequired property.
      */
+    @Generated
     @JsonProperty(value = "stringReadWriteRequired", required = true)
     private String stringReadWriteRequired;
 
     /*
      * The stringReadOnlyOptional property.
      */
+    @Generated
     @JsonProperty(value = "stringReadOnlyOptional", access = JsonProperty.Access.WRITE_ONLY)
     private String stringReadOnlyOptional;
 
@@ -28,6 +31,7 @@ public final class ImmutableModel {
      *
      * @param stringReadWriteRequired the stringReadWriteRequired value to set.
      */
+    @Generated
     @JsonCreator
     private ImmutableModel(
             @JsonProperty(value = "stringReadWriteRequired", required = true) String stringReadWriteRequired) {
@@ -39,6 +43,7 @@ public final class ImmutableModel {
      *
      * @return the stringReadWriteRequired value.
      */
+    @Generated
     public String getStringReadWriteRequired() {
         return this.stringReadWriteRequired;
     }
@@ -48,6 +53,7 @@ public final class ImmutableModel {
      *
      * @return the stringReadOnlyOptional value.
      */
+    @Generated
     public String getStringReadOnlyOptional() {
         return this.stringReadOnlyOptional;
     }

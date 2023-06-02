@@ -5,6 +5,7 @@
 package com.cadl.builtin.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
@@ -20,46 +21,54 @@ public final class Encoded {
     /*
      * The timeInSeconds property.
      */
+    @Generated
     @JsonProperty(value = "timeInSeconds")
     private Long timeInSeconds;
 
     /*
      * The timeInSecondsFraction property.
      */
+    @Generated
     @JsonProperty(value = "timeInSecondsFraction")
     private Double timeInSecondsFraction;
 
     /*
      * The dateTime property.
      */
+    @Generated
     @JsonProperty(value = "dateTime")
     private OffsetDateTime dateTime;
 
     /*
      * The dateTimeRfc7231 property.
      */
+    @Generated
     @JsonProperty(value = "dateTimeRfc7231")
     private DateTimeRfc1123 dateTimeRfc7231;
 
     /*
      * The unixTimestamp property.
      */
+    @Generated
     @JsonProperty(value = "unixTimestamp")
     private Long unixTimestamp;
 
     /*
      * The base64 property.
      */
+    @Generated
     @JsonProperty(value = "base64")
     private byte[] base64;
 
     /*
      * The base64url property.
      */
+    @Generated
     @JsonProperty(value = "base64url")
     private Base64Url base64Url;
 
     /** Creates an instance of Encoded class. */
+    @Generated
     public Encoded() {}
 
     /**
@@ -67,6 +76,7 @@ public final class Encoded {
      *
      * @return the timeInSeconds value.
      */
+    @Generated
     public Duration getTimeInSeconds() {
         if (this.timeInSeconds == null) {
             return null;
@@ -80,6 +90,7 @@ public final class Encoded {
      * @param timeInSeconds the timeInSeconds value to set.
      * @return the Encoded object itself.
      */
+    @Generated
     public Encoded setTimeInSeconds(Duration timeInSeconds) {
         if (timeInSeconds == null) {
             this.timeInSeconds = null;
@@ -94,6 +105,7 @@ public final class Encoded {
      *
      * @return the timeInSecondsFraction value.
      */
+    @Generated
     public Duration getTimeInSecondsFraction() {
         if (this.timeInSecondsFraction == null) {
             return null;
@@ -107,6 +119,7 @@ public final class Encoded {
      * @param timeInSecondsFraction the timeInSecondsFraction value to set.
      * @return the Encoded object itself.
      */
+    @Generated
     public Encoded setTimeInSecondsFraction(Duration timeInSecondsFraction) {
         if (timeInSecondsFraction == null) {
             this.timeInSecondsFraction = null;
@@ -121,6 +134,7 @@ public final class Encoded {
      *
      * @return the dateTime value.
      */
+    @Generated
     public OffsetDateTime getDateTime() {
         return this.dateTime;
     }
@@ -131,6 +145,7 @@ public final class Encoded {
      * @param dateTime the dateTime value to set.
      * @return the Encoded object itself.
      */
+    @Generated
     public Encoded setDateTime(OffsetDateTime dateTime) {
         this.dateTime = dateTime;
         return this;
@@ -141,6 +156,7 @@ public final class Encoded {
      *
      * @return the dateTimeRfc7231 value.
      */
+    @Generated
     public OffsetDateTime getDateTimeRfc7231() {
         if (this.dateTimeRfc7231 == null) {
             return null;
@@ -154,6 +170,7 @@ public final class Encoded {
      * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
      * @return the Encoded object itself.
      */
+    @Generated
     public Encoded setDateTimeRfc7231(OffsetDateTime dateTimeRfc7231) {
         if (dateTimeRfc7231 == null) {
             this.dateTimeRfc7231 = null;
@@ -168,6 +185,7 @@ public final class Encoded {
      *
      * @return the unixTimestamp value.
      */
+    @Generated
     public OffsetDateTime getUnixTimestamp() {
         if (this.unixTimestamp == null) {
             return null;
@@ -181,6 +199,7 @@ public final class Encoded {
      * @param unixTimestamp the unixTimestamp value to set.
      * @return the Encoded object itself.
      */
+    @Generated
     public Encoded setUnixTimestamp(OffsetDateTime unixTimestamp) {
         if (unixTimestamp == null) {
             this.unixTimestamp = null;
@@ -195,6 +214,7 @@ public final class Encoded {
      *
      * @return the base64 value.
      */
+    @Generated
     public byte[] getBase64() {
         return CoreUtils.clone(this.base64);
     }
@@ -205,6 +225,7 @@ public final class Encoded {
      * @param base64 the base64 value to set.
      * @return the Encoded object itself.
      */
+    @Generated
     public Encoded setBase64(byte[] base64) {
         this.base64 = CoreUtils.clone(base64);
         return this;
@@ -215,6 +236,7 @@ public final class Encoded {
      *
      * @return the base64Url value.
      */
+    @Generated
     public byte[] getBase64Url() {
         if (this.base64Url == null) {
             return new byte[0];
@@ -228,6 +250,7 @@ public final class Encoded {
      * @param base64Url the base64Url value to set.
      * @return the Encoded object itself.
      */
+    @Generated
     public Encoded setBase64Url(byte[] base64Url) {
         if (base64Url == null) {
             this.base64Url = null;

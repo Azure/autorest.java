@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.lro.rpc.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,16 +14,19 @@ public final class JobPollResult {
     /*
      * Operation identifier.
      */
+    @Generated
     @JsonProperty(value = "operationId", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String operationId;
 
     /*
      * The status of the processing job.
      */
+    @Generated
     @JsonProperty(value = "status", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private OperationState status;
 
     /** Creates an instance of JobPollResult class. */
+    @Generated
     private JobPollResult() {}
 
     /**
@@ -30,6 +34,7 @@ public final class JobPollResult {
      *
      * @return the operationId value.
      */
+    @Generated
     public String getOperationId() {
         return this.operationId;
     }
@@ -39,6 +44,7 @@ public final class JobPollResult {
      *
      * @return the status value.
      */
+    @Generated
     public OperationState getStatus() {
         return this.status;
     }

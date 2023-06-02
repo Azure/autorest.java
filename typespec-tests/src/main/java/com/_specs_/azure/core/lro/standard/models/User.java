@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.lro.standard.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,12 +15,14 @@ public final class User {
     /*
      * The name of user.
      */
+    @Generated
     @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /*
      * The role of user
      */
+    @Generated
     @JsonProperty(value = "role", required = true)
     private String role;
 
@@ -28,6 +31,7 @@ public final class User {
      *
      * @param role the role value to set.
      */
+    @Generated
     @JsonCreator
     public User(@JsonProperty(value = "role", required = true) String role) {
         this.role = role;
@@ -38,6 +42,7 @@ public final class User {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -47,6 +52,7 @@ public final class User {
      *
      * @return the role value.
      */
+    @Generated
     public String getRole() {
         return this.role;
     }

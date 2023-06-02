@@ -4,6 +4,7 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,6 +16,7 @@ public final class BytesProperty {
     /*
      * Property
      */
+    @Generated
     @JsonProperty(value = "property", required = true)
     private byte[] property;
 
@@ -23,6 +25,7 @@ public final class BytesProperty {
      *
      * @param property the property value to set.
      */
+    @Generated
     @JsonCreator
     public BytesProperty(@JsonProperty(value = "property", required = true) byte[] property) {
         this.property = property;
@@ -33,6 +36,7 @@ public final class BytesProperty {
      *
      * @return the property value.
      */
+    @Generated
     public byte[] getProperty() {
         return CoreUtils.clone(this.property);
     }

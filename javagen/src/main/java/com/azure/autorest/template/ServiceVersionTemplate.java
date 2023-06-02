@@ -35,7 +35,9 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceVersion, Jav
         List<String> serviceVersions = serviceVersion.getServiceVersions();
 
         javaFile.publicEnum(className + " implements ServiceVersion", classBlock -> {
-            serviceVersions.forEach(v -> classBlock.value(getVersionIdentifier(v), v));
+            serviceVersions.forEach(v -> {
+                classBlock.value(getVersionIdentifier(v), v);
+            });
 
             classBlock.privateFinalMemberVariable("String", "version");
 
@@ -70,4 +72,5 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceVersion, Jav
         }
         return versionInEnum;
     }
+
 }

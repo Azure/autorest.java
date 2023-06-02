@@ -4,6 +4,7 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,6 +16,7 @@ public final class CollectionsStringProperty {
     /*
      * Property
      */
+    @Generated
     @JsonProperty(value = "property", required = true)
     private List<String> property;
 
@@ -23,6 +25,7 @@ public final class CollectionsStringProperty {
      *
      * @param property the property value to set.
      */
+    @Generated
     @JsonCreator
     public CollectionsStringProperty(@JsonProperty(value = "property", required = true) List<String> property) {
         this.property = property;
@@ -33,6 +36,7 @@ public final class CollectionsStringProperty {
      *
      * @return the property value.
      */
+    @Generated
     public List<String> getProperty() {
         return this.property;
     }

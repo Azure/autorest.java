@@ -4,6 +4,7 @@
 
 package com.type.union.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,7 @@ public final class ModelWithSimpleUnionProperty {
     /*
      * The simpleUnion property.
      */
+    @Generated
     @JsonProperty(value = "simpleUnion", required = true)
     private SimpleUnionModelBase simpleUnion;
 
@@ -22,6 +24,7 @@ public final class ModelWithSimpleUnionProperty {
      *
      * @param simpleUnion the simpleUnion value to set.
      */
+    @Generated
     @JsonCreator
     public ModelWithSimpleUnionProperty(
             @JsonProperty(value = "simpleUnion", required = true) SimpleUnionModelBase simpleUnion) {
@@ -33,6 +36,7 @@ public final class ModelWithSimpleUnionProperty {
      *
      * @return the simpleUnion value.
      */
+    @Generated
     public SimpleUnionModelBase getSimpleUnion() {
         return this.simpleUnion;
     }
