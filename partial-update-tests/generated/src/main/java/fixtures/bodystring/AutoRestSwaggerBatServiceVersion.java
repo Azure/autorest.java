@@ -4,7 +4,6 @@
 
 package fixtures.bodystring;
 
-import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of AutoRestSwaggerBatServiceClient. */
@@ -12,16 +11,14 @@ public enum AutoRestSwaggerBatServiceVersion implements ServiceVersion {
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    @Generated private final String version;
+    private final String version;
 
-    @Generated
     AutoRestSwaggerBatServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
-    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -31,7 +28,6 @@ public enum AutoRestSwaggerBatServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link AutoRestSwaggerBatServiceVersion}.
      */
-    @Generated
     public static AutoRestSwaggerBatServiceVersion getLatest() {
         return V1_0_0;
     }

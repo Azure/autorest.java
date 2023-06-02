@@ -4,7 +4,6 @@
 
 package fixtures.httpinfrastructure;
 
-import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of AutoRestHttpInfrastructureTestServiceClient. */
@@ -12,16 +11,14 @@ public enum AutoRestHttpInfrastructureTestServiceVersion implements ServiceVersi
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    @Generated private final String version;
+    private final String version;
 
-    @Generated
     AutoRestHttpInfrastructureTestServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
-    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -31,7 +28,6 @@ public enum AutoRestHttpInfrastructureTestServiceVersion implements ServiceVersi
      *
      * @return The latest {@link AutoRestHttpInfrastructureTestServiceVersion}.
      */
-    @Generated
     public static AutoRestHttpInfrastructureTestServiceVersion getLatest() {
         return V1_0_0;
     }

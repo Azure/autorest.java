@@ -4,7 +4,6 @@
 
 package fixtures.dpgcustomization;
 
-import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of DpgClient. */
@@ -12,16 +11,14 @@ public enum DpgServiceVersion implements ServiceVersion {
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    @Generated private final String version;
+    private final String version;
 
-    @Generated
     DpgServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
-    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -31,7 +28,6 @@ public enum DpgServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link DpgServiceVersion}.
      */
-    @Generated
     public static DpgServiceVersion getLatest() {
         return V1_0_0;
     }

@@ -4,7 +4,6 @@
 
 package fixtures.multimediatypes;
 
-import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of DpgMultiMediaTypesClient. */
@@ -12,16 +11,14 @@ public enum DpgMultiMediaTypesServiceVersion implements ServiceVersion {
     /** Enum value 1.0.0. */
     V1_0_0("1.0.0");
 
-    @Generated private final String version;
+    private final String version;
 
-    @Generated
     DpgMultiMediaTypesServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
-    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -31,7 +28,6 @@ public enum DpgMultiMediaTypesServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link DpgMultiMediaTypesServiceVersion}.
      */
-    @Generated
     public static DpgMultiMediaTypesServiceVersion getLatest() {
         return V1_0_0;
     }
