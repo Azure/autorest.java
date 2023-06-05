@@ -16,6 +16,8 @@ public class SecurityInfo {
 
     private String headerName;
 
+    private String headerValuePrefix;
+
     public Set<Scheme.SecuritySchemeType> getSecurityTypes() {
         return securityTypes;
     }
@@ -38,5 +40,13 @@ public class SecurityInfo {
 
     public void setHeaderName(String headerName) {
         this.headerName = headerName;
+    }
+
+    public String getHeaderValuePrefix() {
+        return headerValuePrefix;
+    }
+
+    public void setHeaderValuePrefix(String headerValuePrefix) {
+        this.headerValuePrefix = headerValuePrefix;
     }
 }

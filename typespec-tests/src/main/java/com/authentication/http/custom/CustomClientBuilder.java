@@ -7,8 +7,10 @@ package com.authentication.http.custom;
 import com.authentication.http.custom.implementation.CustomClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
+import com.azure.core.client.traits.AzureKeyCredentialTrait;
 import com.azure.core.client.traits.ConfigurationTrait;
 import com.azure.core.client.traits.HttpTrait;
+import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
@@ -17,6 +19,7 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
+import com.azure.core.http.policy.AzureKeyCredentialPolicy;
 import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
@@ -40,7 +43,9 @@ import java.util.Objects;
 /** A builder for creating a new instance of the CustomClient type. */
 @ServiceClientBuilder(serviceClients = {CustomClient.class, CustomAsyncClient.class})
 public final class CustomClientBuilder
-        implements HttpTrait<CustomClientBuilder>, ConfigurationTrait<CustomClientBuilder> {
+        implements HttpTrait<CustomClientBuilder>,
+                ConfigurationTrait<CustomClientBuilder>,
+                AzureKeyCredentialTrait<CustomClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -148,6 +153,19 @@ public final class CustomClientBuilder
     }
 
     /*
+     * The AzureKeyCredential used for authentication.
+     */
+    @Generated private AzureKeyCredential azureKeyCredential;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public CustomClientBuilder credential(AzureKeyCredential azureKeyCredential) {
+        this.azureKeyCredential = azureKeyCredential;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
@@ -201,6 +219,9 @@ public final class CustomClientBuilder
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
         policies.add(new CookiePolicy());
+        if (azureKeyCredential != null) {
+            policies.add(new AzureKeyCredentialPolicy("authorization", azureKeyCredential, "SharedAccessKey"));
+        }
         this.pipelinePolicies.stream()
                 .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
                 .forEach(p -> policies.add(p));
