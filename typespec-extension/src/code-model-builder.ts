@@ -1765,6 +1765,7 @@ export class CodeModelBuilder {
       case "password":
       case "url":
       case "uuid":
+      case "eTag":
         return this.processStringSchema(type, nameHint);
     }
     throw new Error(`Unrecognized string format: '${format}'.`);
