@@ -284,8 +284,8 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
      * Reads an instance of ListBlobsResponse from the XmlReader.
      *
      * @param xmlReader The XmlReader being read.
-     * @param rootElementName Optional root element name to override the default definedby the model. Used to support
-     *     cases where the model can deserialize from different root elementnames.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
      * @return An instance of ListBlobsResponse if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.

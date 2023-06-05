@@ -1467,8 +1467,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             javadocComment.description("Reads an instance of " + modelName + " from the XmlReader.");
             javadocComment.param("xmlReader", "The XmlReader being read.");
             if (hasRootElementName) {
-                javadocComment.param("rootElementName", "Optional root element name to override the default defined"
-                    + "by the model. Used to support cases where the model can deserialize from different root element"
+                javadocComment.param("rootElementName", "Optional root element name to override the default defined "
+                    + "by the model. Used to support cases where the model can deserialize from different root element "
                     + "names.");
             }
             javadocComment.methodReturns("An instance of " + modelName + " if the XmlReader was pointing to an "
