@@ -4,6 +4,7 @@
 
 package com.type.union.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,7 @@ public final class ModelWithNamedUnionProperty {
     /*
      * The namedUnion property.
      */
+    @Generated
     @JsonProperty(value = "namedUnion", required = true)
     private NamedUnionModelBase namedUnion;
 
@@ -22,6 +24,7 @@ public final class ModelWithNamedUnionProperty {
      *
      * @param namedUnion the namedUnion value to set.
      */
+    @Generated
     @JsonCreator
     public ModelWithNamedUnionProperty(
             @JsonProperty(value = "namedUnion", required = true) NamedUnionModelBase namedUnion) {
@@ -33,6 +36,7 @@ public final class ModelWithNamedUnionProperty {
      *
      * @return the namedUnion value.
      */
+    @Generated
     public NamedUnionModelBase getNamedUnion() {
         return this.namedUnion;
     }

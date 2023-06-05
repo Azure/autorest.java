@@ -4,6 +4,7 @@
 
 package com.type.property.nullable.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,12 +15,14 @@ public final class StringProperty {
     /*
      * Required property
      */
+    @Generated
     @JsonProperty(value = "requiredProperty", required = true)
     private String requiredProperty;
 
     /*
      * Property
      */
+    @Generated
     @JsonProperty(value = "nullableProperty", required = true)
     private String nullableProperty;
 
@@ -29,6 +32,7 @@ public final class StringProperty {
      * @param requiredProperty the requiredProperty value to set.
      * @param nullableProperty the nullableProperty value to set.
      */
+    @Generated
     @JsonCreator
     public StringProperty(
             @JsonProperty(value = "requiredProperty", required = true) String requiredProperty,
@@ -42,6 +46,7 @@ public final class StringProperty {
      *
      * @return the requiredProperty value.
      */
+    @Generated
     public String getRequiredProperty() {
         return this.requiredProperty;
     }
@@ -51,6 +56,7 @@ public final class StringProperty {
      *
      * @return the nullableProperty value.
      */
+    @Generated
     public String getNullableProperty() {
         return this.nullableProperty;
     }

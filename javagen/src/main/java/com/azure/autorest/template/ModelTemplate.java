@@ -18,6 +18,7 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
@@ -27,6 +28,7 @@ import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
@@ -128,11 +130,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (model.getProperties().stream().anyMatch(ClientModelProperty::isAdditionalProperties)
                 && model.getNeedsFlatten()
                 && !settings.isStreamStyleSerialization()) {
+                addGeneratedAnnotation(classBlock);
                 classBlock.privateStaticFinalVariable("Pattern KEY_ESCAPER = Pattern.compile(\"\\\\.\");");
             }
 
+            // properties
             addProperties(model, classBlock, settings);
 
+            // constructor
             JavaVisibility modelConstructorVisibility =
                 immutableOutputModel
                     ? (hasDerivedModels ? JavaVisibility.Protected : JavaVisibility.Private)
@@ -156,6 +161,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     : JavaVisibility.Public;
 
                 generateGetterJavadoc(classBlock, model, property);
+                addGeneratedAnnotation(classBlock);
                 if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
                     classBlock.annotation("JsonAnyGetter");
                 }
@@ -178,6 +184,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                 if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputModel) {
                     generateSetterJavadoc(classBlock, model, property);
+                    addGeneratedAnnotation(classBlock);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
                     classBlock.method(methodVisibility, null,
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
@@ -200,6 +207,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 // If the property is additional properties, and stream-style serialization isn't being used, add a
                 // package-private setter that Jackson can use to set values as it deserializes the key-value pairs.
                 if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
+                    addGeneratedAnnotation(classBlock);
                     classBlock.annotation("JsonAnySetter");
                     MapType mapType = (MapType) property.getClientType();
                     classBlock.packagePrivateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
@@ -220,6 +228,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     propertyReferences);
                 for (ClientModelPropertyAccess parentProperty : settersToOverride) {
                     classBlock.javadocComment(JavaJavadocComment::inheritDoc);
+                    addGeneratedAnnotation(classBlock);
                     classBlock.annotation("Override");
                     classBlock.publicMethod(String.format("%s %s(%s %s)",
                             model.getName(),
@@ -251,6 +260,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                     // getter
                     generateGetterJavadoc(classBlock, model, property);
+                    addGeneratedAnnotation(classBlock);
                     classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, propertyReference.getGetterName()), methodBlock -> {
                         // use ternary operator to avoid directly return null
                         String ifClause = String.format("this.%1$s() == null", targetProperty.getGetterName());
@@ -263,6 +273,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // setter
                     if (!propertyIsReadOnly) {
                         generateSetterJavadoc(classBlock, model, property);
+                        addGeneratedAnnotation(classBlock);
                         classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", model.getName(), propertyReference.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
                             methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock ->
                                 methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), propertyReference.getTargetModelType())));
@@ -326,6 +337,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             lastParentName = parentModel.getName();
             parentModel = ClientModelUtil.getClientModel(parentModel.getParentModelName());
         }
+
+        addGeneratedImport(imports);
 
         model.addImportsTo(imports, settings);
     }
@@ -549,6 +562,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
                 comment -> comment.line(property.getDescription()));
 
+            addGeneratedAnnotation(classBlock);
             addFieldAnnotations(model, property, classBlock, settings);
 
             if (property.isPolymorphicDiscriminator()) {
@@ -725,6 +739,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // Add the Javadocs for the constructor.
         classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), javadocCommentConsumer);
 
+
+        addGeneratedAnnotation(classBlock);
         // If there are any constructor arguments indicate that this is the JsonCreator. No args constructors are
         // implicitly used as the JsonCreator if the class doesn't indicate one.
         if (constructorProperties.length() > 0 && !settings.isStreamStyleSerialization()) {
@@ -971,6 +987,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model, JavaSettings settings) {
         // No-op, meant for StreamSerializationModelTemplate.
+    }
+
+    protected void addGeneratedImport(Set<String> imports) {
+        if (JavaSettings.getInstance().isDataPlaneClient()) {
+            imports.add(Generated.class.getName());
+        }
+    }
+
+    protected void addGeneratedAnnotation(JavaContext classBlock) {
+        if (JavaSettings.getInstance().isDataPlaneClient()) {
+            classBlock.annotation(Generated.class.getSimpleName());
+        }
     }
 
     // Javadoc for getter method

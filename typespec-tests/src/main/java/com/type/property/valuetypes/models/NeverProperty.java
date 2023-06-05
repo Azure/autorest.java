@@ -4,11 +4,13 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 
 /** Model with a property never. (This property should not be included). */
 @Immutable
 public final class NeverProperty {
     /** Creates an instance of NeverProperty class. */
+    @Generated
     public NeverProperty() {}
 }

@@ -4,6 +4,7 @@
 
 package com._specs_.azure.clientgenerator.core.internal.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,7 @@ public final class SharedModel {
     /*
      * The name property.
      */
+    @Generated
     @JsonProperty(value = "name", required = true)
     private String name;
 
@@ -22,6 +24,7 @@ public final class SharedModel {
      *
      * @param name the name value to set.
      */
+    @Generated
     @JsonCreator
     private SharedModel(@JsonProperty(value = "name", required = true) String name) {
         this.name = name;
@@ -32,6 +35,7 @@ public final class SharedModel {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }

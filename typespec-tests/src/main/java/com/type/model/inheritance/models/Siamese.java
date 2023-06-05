@@ -4,6 +4,7 @@
 
 package com.type.model.inheritance.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,7 @@ public final class Siamese extends Cat {
     /*
      * The smart property.
      */
+    @Generated
     @JsonProperty(value = "smart", required = true)
     private boolean smart;
 
@@ -24,6 +26,7 @@ public final class Siamese extends Cat {
      * @param age the age value to set.
      * @param smart the smart value to set.
      */
+    @Generated
     @JsonCreator
     public Siamese(
             @JsonProperty(value = "name", required = true) String name,
@@ -38,6 +41,7 @@ public final class Siamese extends Cat {
      *
      * @return the smart value.
      */
+    @Generated
     public boolean isSmart() {
         return this.smart;
     }

@@ -4,6 +4,7 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,7 @@ public final class UnknownStringProperty {
     /*
      * Property
      */
+    @Generated
     @JsonProperty(value = "property", required = true)
     private Object property;
 
@@ -22,6 +24,7 @@ public final class UnknownStringProperty {
      *
      * @param property the property value to set.
      */
+    @Generated
     @JsonCreator
     public UnknownStringProperty(@JsonProperty(value = "property", required = true) Object property) {
         this.property = property;
@@ -32,6 +35,7 @@ public final class UnknownStringProperty {
      *
      * @return the property value.
      */
+    @Generated
     public Object getProperty() {
         return this.property;
     }

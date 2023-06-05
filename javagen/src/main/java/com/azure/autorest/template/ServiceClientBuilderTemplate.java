@@ -22,6 +22,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
@@ -86,6 +87,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add("java.util.ArrayList");
         imports.add("com.azure.core.http.HttpHeaders");
         imports.add("java.util.Objects");
+        if (settings.isUseClientLogger()) {
+            ClassType.ClientLogger.addImportsTo(imports, false);
+        }
         addServiceClientBuilderAnnotationImport(imports);
         addHttpPolicyImports(imports);
         addImportForCoreUtils(imports);
@@ -349,6 +353,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     ++syncClientIndex;
                 }
             }
+
+            TemplateUtil.addClientLogger(classBlock, serviceClientBuilderName, javaFile.getContents());
         });
     }
 
@@ -510,17 +516,24 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("policies.add(new CookiePolicy());");
 
             if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-                if (securityInfo.getHeaderName() == null
-                    || securityInfo.getHeaderName().isEmpty()) {
+                if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderName())) {
                     logger.error("key-credential-header-name is required for " +
                             "azurekeycredential credential type");
                     throw new IllegalStateException("key-credential-header-name is required for " +
                             "azurekeycredential credential type");
                 }
                 function.ifBlock("azureKeyCredential != null", action -> {
-                    function.line("policies.add(new AzureKeyCredentialPolicy(\""
-                            + securityInfo.getHeaderName()
-                            + "\", azureKeyCredential));");
+                    if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
+                        function.line("policies.add(new AzureKeyCredentialPolicy(\""
+                                + securityInfo.getHeaderName()
+                                + "\", azureKeyCredential));");
+                    } else {
+                        function.line("policies.add(new AzureKeyCredentialPolicy(\""
+                                + securityInfo.getHeaderName()
+                                + "\", azureKeyCredential, \""
+                                + securityInfo.getHeaderValuePrefix()
+                                + "\"));");
+                    }
                 });
             }
             if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
@@ -585,7 +598,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
-        classBlock.annotation("Generated");
+        classBlock.annotation(Generated.class.getSimpleName());
     }
 
     protected void addOverrideAnnotation(JavaContext classBlock) {

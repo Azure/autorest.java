@@ -4,6 +4,7 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,6 +16,7 @@ public final class DurationProperty {
     /*
      * Property
      */
+    @Generated
     @JsonProperty(value = "property", required = true)
     private Duration property;
 
@@ -23,6 +25,7 @@ public final class DurationProperty {
      *
      * @param property the property value to set.
      */
+    @Generated
     @JsonCreator
     public DurationProperty(@JsonProperty(value = "property", required = true) Duration property) {
         this.property = property;
@@ -33,6 +36,7 @@ public final class DurationProperty {
      *
      * @return the property value.
      */
+    @Generated
     public Duration getProperty() {
         return this.property;
     }

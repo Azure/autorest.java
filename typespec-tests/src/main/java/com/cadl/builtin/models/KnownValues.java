@@ -4,6 +4,7 @@
 
 package com.cadl.builtin.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
@@ -11,16 +12,17 @@ import java.util.Collection;
 /** Defines values for KnownValues. */
 public final class KnownValues extends ExpandableStringEnum<KnownValues> {
     /** Static value Value1 for KnownValues. */
-    public static final KnownValues VALUE1 = fromString("Value1");
+    @Generated public static final KnownValues VALUE1 = fromString("Value1");
 
     /** Static value Value2 for KnownValues. */
-    public static final KnownValues VALUE2 = fromString("Value2");
+    @Generated public static final KnownValues VALUE2 = fromString("Value2");
 
     /**
      * Creates a new instance of KnownValues value.
      *
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public KnownValues() {}
 
@@ -30,6 +32,7 @@ public final class KnownValues extends ExpandableStringEnum<KnownValues> {
      * @param name a name to look for.
      * @return the corresponding KnownValues.
      */
+    @Generated
     @JsonCreator
     public static KnownValues fromString(String name) {
         return fromString(name, KnownValues.class);
@@ -40,6 +43,7 @@ public final class KnownValues extends ExpandableStringEnum<KnownValues> {
      *
      * @return known KnownValues values.
      */
+    @Generated
     public static Collection<KnownValues> values() {
         return values(KnownValues.class);
     }

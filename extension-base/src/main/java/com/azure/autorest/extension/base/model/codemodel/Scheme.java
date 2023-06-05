@@ -18,6 +18,7 @@ public class Scheme {
     // Key
     private String name;
     private String in;
+    private String prefix;
 
     public Scheme.SecuritySchemeType getType() {
         return type;
@@ -49,6 +50,14 @@ public class Scheme {
 
     public void setIn(String in) {
         this.in = in;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
     public enum SecuritySchemeType {

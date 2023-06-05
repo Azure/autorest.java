@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.lro.rpc.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -14,34 +15,40 @@ public final class JobResult {
     /*
      * A processing job identifier.
      */
+    @Generated
     @JsonProperty(value = "jobId", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String jobId;
 
     /*
      * Comment.
      */
+    @Generated
     @JsonProperty(value = "comment", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private String comment;
 
     /*
      * The status of the processing job.
      */
+    @Generated
     @JsonProperty(value = "status", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private OperationState status;
 
     /*
      * Error objects that describes the error when status is "Failed".
      */
+    @Generated
     @JsonProperty(value = "errors", access = JsonProperty.Access.WRITE_ONLY)
     private List<ErrorResponse> errors;
 
     /*
      * The results.
      */
+    @Generated
     @JsonProperty(value = "results", required = true, access = JsonProperty.Access.WRITE_ONLY)
     private List<String> results;
 
     /** Creates an instance of JobResult class. */
+    @Generated
     private JobResult() {}
 
     /**
@@ -49,6 +56,7 @@ public final class JobResult {
      *
      * @return the jobId value.
      */
+    @Generated
     public String getJobId() {
         return this.jobId;
     }
@@ -58,6 +66,7 @@ public final class JobResult {
      *
      * @return the comment value.
      */
+    @Generated
     public String getComment() {
         return this.comment;
     }
@@ -67,6 +76,7 @@ public final class JobResult {
      *
      * @return the status value.
      */
+    @Generated
     public OperationState getStatus() {
         return this.status;
     }
@@ -76,6 +86,7 @@ public final class JobResult {
      *
      * @return the errors value.
      */
+    @Generated
     public List<ErrorResponse> getErrors() {
         return this.errors;
     }
@@ -85,6 +96,7 @@ public final class JobResult {
      *
      * @return the results value.
      */
+    @Generated
     public List<String> getResults() {
         return this.results;
     }

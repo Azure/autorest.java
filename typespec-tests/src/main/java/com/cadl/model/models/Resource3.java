@@ -4,6 +4,7 @@
 
 package com.cadl.model.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,12 +15,14 @@ public final class Resource3 {
     /*
      * The name property.
      */
+    @Generated
     @JsonProperty(value = "name", required = true)
     private String name;
 
     /*
      * The outputData3 property.
      */
+    @Generated
     @JsonProperty(value = "outputData3", required = true)
     private OutputData3 outputData3;
 
@@ -29,6 +32,7 @@ public final class Resource3 {
      * @param name the name value to set.
      * @param outputData3 the outputData3 value to set.
      */
+    @Generated
     @JsonCreator
     private Resource3(
             @JsonProperty(value = "name", required = true) String name,
@@ -42,6 +46,7 @@ public final class Resource3 {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -51,6 +56,7 @@ public final class Resource3 {
      *
      * @return the outputData3 value.
      */
+    @Generated
     public OutputData3 getOutputData3() {
         return this.outputData3;
     }

@@ -30,6 +30,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.endpointlro.implementation.LroEndpointClientImpl;
 import java.util.ArrayList;
@@ -67,6 +68,9 @@ public final class LroEndpointClientBuilder
     @Generated
     @Override
     public LroEndpointClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -264,4 +268,6 @@ public final class LroEndpointClientBuilder
     public LroEndpointClient buildClient() {
         return new LroEndpointClient(buildInnerClient().getLROs());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(LroEndpointClientBuilder.class);
 }
