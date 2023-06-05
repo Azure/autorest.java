@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -186,7 +187,13 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("CorsRule");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "CorsRule" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("AllowedOrigins", this.allowedOrigins);
         xmlWriter.writeStringElement("AllowedMethods", this.allowedMethods);
         xmlWriter.writeStringElement("AllowedHeaders", this.allowedHeaders);
@@ -202,10 +209,27 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
      * @return An instance of CorsRule if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the CorsRule.
      */
     public static CorsRule fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of CorsRule from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of CorsRule if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the CorsRule.
+     */
+    public static CorsRule fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "CorsRule" : rootElementName;
         return xmlReader.readObject(
-                "CorsRule",
+                finalRootElementName,
                 reader -> {
                     String allowedOrigins = null;
                     String allowedMethods = null;
@@ -213,17 +237,17 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
                     String exposedHeaders = null;
                     int maxAgeInSeconds = 0;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("AllowedOrigins".equals(fieldName.getLocalPart())) {
+                        if ("AllowedOrigins".equals(elementName.getLocalPart())) {
                             allowedOrigins = reader.getStringElement();
-                        } else if ("AllowedMethods".equals(fieldName.getLocalPart())) {
+                        } else if ("AllowedMethods".equals(elementName.getLocalPart())) {
                             allowedMethods = reader.getStringElement();
-                        } else if ("AllowedHeaders".equals(fieldName.getLocalPart())) {
+                        } else if ("AllowedHeaders".equals(elementName.getLocalPart())) {
                             allowedHeaders = reader.getStringElement();
-                        } else if ("ExposedHeaders".equals(fieldName.getLocalPart())) {
+                        } else if ("ExposedHeaders".equals(elementName.getLocalPart())) {
                             exposedHeaders = reader.getStringElement();
-                        } else if ("MaxAgeInSeconds".equals(fieldName.getLocalPart())) {
+                        } else if ("MaxAgeInSeconds".equals(elementName.getLocalPart())) {
                             maxAgeInSeconds = reader.getIntElement();
                         } else {
                             reader.skipElement();

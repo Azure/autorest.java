@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
@@ -758,7 +759,13 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("BlobProperties");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "BlobProperties" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Last-Modified", Objects.toString(this.lastModified, null));
         xmlWriter.writeStringElement("Etag", this.etag);
         xmlWriter.writeNumberElement("Content-Length", this.contentLength);
@@ -797,10 +804,27 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
      * @return An instance of BlobProperties if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the BlobProperties.
      */
     public static BlobProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of BlobProperties from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of BlobProperties if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the BlobProperties.
+     */
+    public static BlobProperties fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "BlobProperties" : rootElementName;
         return xmlReader.readObject(
-                "BlobProperties",
+                finalRootElementName,
                 reader -> {
                     OffsetDateTime lastModified = null;
                     String etag = null;
@@ -831,63 +855,63 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
                     Boolean accessTierInferred = null;
                     ArchiveStatus archiveStatus = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("Last-Modified".equals(fieldName.getLocalPart())) {
+                        if ("Last-Modified".equals(elementName.getLocalPart())) {
                             lastModified = reader.getNullableElement(DateTimeRfc1123::new).getDateTime();
-                        } else if ("Etag".equals(fieldName.getLocalPart())) {
+                        } else if ("Etag".equals(elementName.getLocalPart())) {
                             etag = reader.getStringElement();
-                        } else if ("Content-Length".equals(fieldName.getLocalPart())) {
+                        } else if ("Content-Length".equals(elementName.getLocalPart())) {
                             contentLength = reader.getNullableElement(Long::parseLong);
-                        } else if ("Content-Type".equals(fieldName.getLocalPart())) {
+                        } else if ("Content-Type".equals(elementName.getLocalPart())) {
                             contentType = reader.getStringElement();
-                        } else if ("Content-Encoding".equals(fieldName.getLocalPart())) {
+                        } else if ("Content-Encoding".equals(elementName.getLocalPart())) {
                             contentEncoding = reader.getStringElement();
-                        } else if ("Content-Language".equals(fieldName.getLocalPart())) {
+                        } else if ("Content-Language".equals(elementName.getLocalPart())) {
                             contentLanguage = reader.getStringElement();
-                        } else if ("Content-MD5".equals(fieldName.getLocalPart())) {
+                        } else if ("Content-MD5".equals(elementName.getLocalPart())) {
                             contentMD5 = reader.getStringElement();
-                        } else if ("Content-Disposition".equals(fieldName.getLocalPart())) {
+                        } else if ("Content-Disposition".equals(elementName.getLocalPart())) {
                             contentDisposition = reader.getStringElement();
-                        } else if ("Cache-Control".equals(fieldName.getLocalPart())) {
+                        } else if ("Cache-Control".equals(elementName.getLocalPart())) {
                             cacheControl = reader.getStringElement();
-                        } else if ("x-ms-blob-sequence-number".equals(fieldName.getLocalPart())) {
+                        } else if ("x-ms-blob-sequence-number".equals(elementName.getLocalPart())) {
                             blobSequenceNumber = reader.getNullableElement(Integer::parseInt);
-                        } else if ("BlobType".equals(fieldName.getLocalPart())) {
+                        } else if ("BlobType".equals(elementName.getLocalPart())) {
                             blobType = reader.getNullableElement(BlobType::fromString);
-                        } else if ("LeaseStatus".equals(fieldName.getLocalPart())) {
+                        } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
                             leaseStatus = reader.getNullableElement(LeaseStatusType::fromString);
-                        } else if ("LeaseState".equals(fieldName.getLocalPart())) {
+                        } else if ("LeaseState".equals(elementName.getLocalPart())) {
                             leaseState = reader.getNullableElement(LeaseStateType::fromString);
-                        } else if ("LeaseDuration".equals(fieldName.getLocalPart())) {
+                        } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
                             leaseDuration = reader.getNullableElement(LeaseDurationType::fromString);
-                        } else if ("CopyId".equals(fieldName.getLocalPart())) {
+                        } else if ("CopyId".equals(elementName.getLocalPart())) {
                             copyId = reader.getStringElement();
-                        } else if ("CopyStatus".equals(fieldName.getLocalPart())) {
+                        } else if ("CopyStatus".equals(elementName.getLocalPart())) {
                             copyStatus = reader.getNullableElement(CopyStatusType::fromString);
-                        } else if ("CopySource".equals(fieldName.getLocalPart())) {
+                        } else if ("CopySource".equals(elementName.getLocalPart())) {
                             copySource = reader.getStringElement();
-                        } else if ("CopyProgress".equals(fieldName.getLocalPart())) {
+                        } else if ("CopyProgress".equals(elementName.getLocalPart())) {
                             copyProgress = reader.getStringElement();
-                        } else if ("CopyCompletionTime".equals(fieldName.getLocalPart())) {
+                        } else if ("CopyCompletionTime".equals(elementName.getLocalPart())) {
                             copyCompletionTime = reader.getNullableElement(DateTimeRfc1123::new).getDateTime();
-                        } else if ("CopyStatusDescription".equals(fieldName.getLocalPart())) {
+                        } else if ("CopyStatusDescription".equals(elementName.getLocalPart())) {
                             copyStatusDescription = reader.getStringElement();
-                        } else if ("ServerEncrypted".equals(fieldName.getLocalPart())) {
+                        } else if ("ServerEncrypted".equals(elementName.getLocalPart())) {
                             serverEncrypted = reader.getNullableElement(Boolean::parseBoolean);
-                        } else if ("IncrementalCopy".equals(fieldName.getLocalPart())) {
+                        } else if ("IncrementalCopy".equals(elementName.getLocalPart())) {
                             incrementalCopy = reader.getNullableElement(Boolean::parseBoolean);
-                        } else if ("DestinationSnapshot".equals(fieldName.getLocalPart())) {
+                        } else if ("DestinationSnapshot".equals(elementName.getLocalPart())) {
                             destinationSnapshot = reader.getStringElement();
-                        } else if ("DeletedTime".equals(fieldName.getLocalPart())) {
+                        } else if ("DeletedTime".equals(elementName.getLocalPart())) {
                             deletedTime = reader.getNullableElement(DateTimeRfc1123::new).getDateTime();
-                        } else if ("RemainingRetentionDays".equals(fieldName.getLocalPart())) {
+                        } else if ("RemainingRetentionDays".equals(elementName.getLocalPart())) {
                             remainingRetentionDays = reader.getNullableElement(Integer::parseInt);
-                        } else if ("AccessTier".equals(fieldName.getLocalPart())) {
+                        } else if ("AccessTier".equals(elementName.getLocalPart())) {
                             accessTier = reader.getNullableElement(AccessTier::fromString);
-                        } else if ("AccessTierInferred".equals(fieldName.getLocalPart())) {
+                        } else if ("AccessTierInferred".equals(elementName.getLocalPart())) {
                             accessTierInferred = reader.getNullableElement(Boolean::parseBoolean);
-                        } else if ("ArchiveStatus".equals(fieldName.getLocalPart())) {
+                        } else if ("ArchiveStatus".equals(elementName.getLocalPart())) {
                             archiveStatus = reader.getNullableElement(ArchiveStatus::fromString);
                         } else {
                             reader.skipElement();

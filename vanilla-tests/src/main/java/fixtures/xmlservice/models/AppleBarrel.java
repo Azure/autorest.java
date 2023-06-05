@@ -16,7 +16,7 @@ import java.util.List;
 @JacksonXmlRootElement(localName = "AppleBarrel")
 @Fluent
 public final class AppleBarrel {
-    private static final class GoodApplesWrapper {
+    static final class GoodApplesWrapper {
         @JacksonXmlProperty(localName = "Apple")
         private final List<String> items;
 
@@ -32,7 +32,7 @@ public final class AppleBarrel {
     @JsonProperty(value = "GoodApples")
     private GoodApplesWrapper goodApples;
 
-    private static final class BadApplesWrapper {
+    static final class BadApplesWrapper {
         @JacksonXmlProperty(localName = "Apple")
         private final List<String> items;
 

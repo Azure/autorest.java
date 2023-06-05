@@ -410,6 +410,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             .serializedName(serializedName)
             .xmlWrapper(discriminatorProperty.isXmlWrapper())
             .xmlListElementName(discriminatorProperty.getXmlListElementName())
+            .xmlPrefix(discriminatorProperty.getXmlPrefix())
             .wireType(discriminatorProperty.getWireType())
             .clientType(discriminatorProperty.getClientType())
             .constant(discriminatorProperty.isConstant())
