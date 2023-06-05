@@ -320,7 +320,16 @@ export class CodeModelBuilder {
 
           case "http":
             {
-              this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
+              const schemeOrApiKeyPrefix = scheme.scheme;
+              if (schemeOrApiKeyPrefix === "basic" || schemeOrApiKeyPrefix === "bearer") {
+                this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
+              } else {
+                const keyScheme = new KeySecurityScheme({
+                  name: "authorization",
+                });
+                (keyScheme as any).prefix = schemeOrApiKeyPrefix; // TODO (weidxu): modify KeySecurityScheme, after design stable
+                securitySchemes.push(keyScheme);
+              }
             }
             break;
         }

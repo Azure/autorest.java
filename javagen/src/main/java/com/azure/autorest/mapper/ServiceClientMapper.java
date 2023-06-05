@@ -317,6 +317,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 }
                 if (securityScheme.getType().equals(Scheme.SecuritySchemeType.KEY)) {
                     securityInfoInCodeModel.setHeaderName(securityScheme.getName());
+                    securityInfoInCodeModel.setHeaderValuePrefix(securityScheme.getPrefix());
                 }
             });
             securityInfo = securityInfoInCodeModel;
