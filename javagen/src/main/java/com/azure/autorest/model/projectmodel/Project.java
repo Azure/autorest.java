@@ -57,7 +57,7 @@ public class Project {
         // azure
         AZURE_CLIENT_SDK_PARENT("com.azure", "azure-client-sdk-parent", "1.7.0"),
         AZURE_JSON("com.azure", "azure-json", "1.0.1"),
-        AZURE_XML("com.azure", "azure-xml", "1.0.0-beta.1"),
+        AZURE_XML("com.azure", "azure-xml", "1.0.0-beta.2"),
         AZURE_CORE("com.azure", "azure-core", "1.40.0"),
         AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.2"),
         AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.4"),
