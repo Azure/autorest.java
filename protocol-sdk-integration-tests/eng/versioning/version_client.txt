@@ -4,5 +4,5 @@ com.azure:azure-core-http-netty;1.13.4;1.13.4
 com.azure:azure-core-management;1.11.2;1.11.2
 com.azure:azure-core-test;1.18.0;1.18.0
 
-com.azure:azure-identity;1.9.0;1.9.0
+com.azure:azure-identity;1.9.1;1.9.1
 com.azure:azure-json;1.0.1;1.0.1
