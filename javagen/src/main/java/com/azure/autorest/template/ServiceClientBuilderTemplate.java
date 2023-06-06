@@ -516,17 +516,24 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("policies.add(new CookiePolicy());");
 
             if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-                if (securityInfo.getHeaderName() == null
-                    || securityInfo.getHeaderName().isEmpty()) {
+                if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderName())) {
                     logger.error("key-credential-header-name is required for " +
                             "azurekeycredential credential type");
                     throw new IllegalStateException("key-credential-header-name is required for " +
                             "azurekeycredential credential type");
                 }
                 function.ifBlock("azureKeyCredential != null", action -> {
-                    function.line("policies.add(new AzureKeyCredentialPolicy(\""
-                            + securityInfo.getHeaderName()
-                            + "\", azureKeyCredential));");
+                    if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
+                        function.line("policies.add(new AzureKeyCredentialPolicy(\""
+                                + securityInfo.getHeaderName()
+                                + "\", azureKeyCredential));");
+                    } else {
+                        function.line("policies.add(new AzureKeyCredentialPolicy(\""
+                                + securityInfo.getHeaderName()
+                                + "\", azureKeyCredential, \""
+                                + securityInfo.getHeaderValuePrefix()
+                                + "\"));");
+                    }
                 });
             }
             if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {

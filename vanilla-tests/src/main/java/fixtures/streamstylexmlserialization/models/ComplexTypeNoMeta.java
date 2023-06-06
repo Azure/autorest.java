@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -52,7 +53,13 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("ComplexTypeNoMeta");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ComplexTypeNoMeta" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("ID", this.id);
         return xmlWriter.writeEndElement();
     }
@@ -63,16 +70,32 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
      * @param xmlReader The XmlReader being read.
      * @return An instance of ComplexTypeNoMeta if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the ComplexTypeNoMeta.
      */
     public static ComplexTypeNoMeta fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of ComplexTypeNoMeta from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of ComplexTypeNoMeta if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the ComplexTypeNoMeta.
+     */
+    public static ComplexTypeNoMeta fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ComplexTypeNoMeta" : rootElementName;
         return xmlReader.readObject(
-                "ComplexTypeNoMeta",
+                finalRootElementName,
                 reader -> {
                     String id = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("ID".equals(fieldName.getLocalPart())) {
+                        if ("ID".equals(elementName.getLocalPart())) {
                             id = reader.getStringElement();
                         } else {
                             reader.skipElement();

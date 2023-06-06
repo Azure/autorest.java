@@ -4,16 +4,16 @@
 package com.authentication.util;
 
 import com.azure.core.credential.AzureKeyCredential;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipelineCallContext;
 import com.azure.core.http.HttpPipelineNextPolicy;
 import com.azure.core.http.HttpPipelineNextSyncPolicy;
 import com.azure.core.http.HttpResponse;
 import com.azure.core.http.policy.HttpPipelinePolicy;
-import com.azure.core.http.policy.HttpPipelineSyncPolicy;
 import com.azure.core.util.logging.ClientLogger;
 import reactor.core.publisher.Mono;
 
-import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -25,23 +25,9 @@ import java.util.Objects;
 public final class AzureKeyCredentialPolicy implements HttpPipelinePolicy {
     // AzureKeyCredentialPolicy can be a commonly used policy, use a static logger.
     private static final ClientLogger LOGGER = new ClientLogger(com.azure.core.http.policy.AzureKeyCredentialPolicy.class);
-    private final String name;
-    private final String nameLowerCase;
+    private final HttpHeaderName name;
     private final AzureKeyCredential credential;
-
-    private final HttpPipelineSyncPolicy inner = new HttpPipelineSyncPolicy() {
-        @Override
-        protected void beforeSendingRequest(HttpPipelineCallContext context) {
-//            if ("http".equals(context.getHttpRequest().getUrl().getProtocol())) {
-//                throw LOGGER.logExceptionAsError(
-//                        new IllegalStateException("Key credentials require HTTPS to prevent leaking the key."));
-//            }
-//
-//            HttpHeadersHelper.setNoKeyFormatting(context.getHttpRequest().getHeaders(), nameLowerCase, name,
-//                    credential.getKey());
-            context.getHttpRequest().getHeaders().add(nameLowerCase, credential.getKey());
-        }
-    };
+    private final String prefix;
 
     /**
      * Creates a policy that uses the passed {@link AzureKeyCredential} to set the specified header name.
@@ -52,24 +38,45 @@ public final class AzureKeyCredentialPolicy implements HttpPipelinePolicy {
      * @throws IllegalArgumentException If {@code name} is empty.
      */
     public AzureKeyCredentialPolicy(String name, AzureKeyCredential credential) {
-        Objects.requireNonNull(credential, "'credential' cannot be null.");
-        Objects.requireNonNull(name, "'name' cannot be null.");
-        if (name.isEmpty()) {
-            throw LOGGER.logExceptionAsError(new IllegalArgumentException("'name' cannot be empty."));
-        }
+        this(HttpHeaderName.fromString(name), credential, null);
+    }
 
+    /**
+     * Creates a policy that uses the passed {@link AzureKeyCredential} to set the specified header name.
+     * <p>
+     * The {@code prefix} will be applied before the {@link AzureKeyCredential#getKey()} when setting the header. A
+     * space will be inserted between {@code prefix} and credential.
+     *
+     * @param name The name of the key header that will be set to {@link AzureKeyCredential#getKey()}.
+     * @param credential The {@link AzureKeyCredential} containing the authorization key to use.
+     * @param prefix The prefix to apply before the credential, for example "SharedAccessKey credential".
+     * @throws NullPointerException If {@code name} or {@code credential} is {@code null}.
+     * @throws IllegalArgumentException If {@code name} is empty.
+     */
+    public AzureKeyCredentialPolicy(String name, AzureKeyCredential credential, String prefix) {
+        this(HttpHeaderName.fromString(name), Objects.requireNonNull(credential, "'credential' cannot be null."), prefix);
+    }
+
+    AzureKeyCredentialPolicy(HttpHeaderName name, AzureKeyCredential credential, String prefix) {
         this.name = name;
-        this.nameLowerCase = name.toLowerCase(Locale.ROOT);
         this.credential = credential;
+        this.prefix = prefix != null ? prefix.trim() : null;
     }
 
     @Override
     public Mono<HttpResponse> process(HttpPipelineCallContext context, HttpPipelineNextPolicy next) {
-        return inner.process(context, next);
+        setCredential(context.getHttpRequest().getHeaders());
+        return next.process();
     }
 
     @Override
     public HttpResponse processSync(HttpPipelineCallContext context, HttpPipelineNextSyncPolicy next) {
-        return inner.processSync(context, next);
+        setCredential(context.getHttpRequest().getHeaders());
+        return next.processSync();
+    }
+
+    void setCredential(HttpHeaders headers) {
+        String credential = this.credential.getKey();
+        headers.set(name, (prefix == null) ? credential : prefix + " " + credential);
     }
 }

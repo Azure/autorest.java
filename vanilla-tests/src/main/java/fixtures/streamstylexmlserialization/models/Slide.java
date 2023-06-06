@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -105,7 +106,13 @@ public final class Slide implements XmlSerializable<Slide> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("slide");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slide" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringAttribute("type", this.type);
         xmlWriter.writeStringElement("title", this.title);
         if (this.items != null) {
@@ -122,20 +129,36 @@ public final class Slide implements XmlSerializable<Slide> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of Slide if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
+     * @throws XMLStreamException If an error occurs while reading the Slide.
      */
     public static Slide fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of Slide from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of Slide if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     * @throws XMLStreamException If an error occurs while reading the Slide.
+     */
+    public static Slide fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slide" : rootElementName;
         return xmlReader.readObject(
-                "slide",
+                finalRootElementName,
                 reader -> {
                     String type = reader.getStringAttribute(null, "type");
                     String title = null;
                     List<String> items = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("title".equals(fieldName.getLocalPart())) {
+                        if ("title".equals(elementName.getLocalPart())) {
                             title = reader.getStringElement();
-                        } else if ("items".equals(fieldName.getLocalPart())) {
+                        } else if ("items".equals(elementName.getLocalPart())) {
                             if (items == null) {
                                 items = new LinkedList<>();
                             }

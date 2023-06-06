@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -37,7 +38,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      */
     private int maxResults;
 
-    private static final class ContainersWrapper implements XmlSerializable<ContainersWrapper> {
+    static final class ContainersWrapper implements XmlSerializable<ContainersWrapper> {
         private final List<Container> items;
 
         private ContainersWrapper(List<Container> items) {
@@ -46,18 +47,29 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
 
         @Override
         public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-            xmlWriter.writeStartElement("Containers");
+            return toXml(xmlWriter, null);
+        }
+
+        @Override
+        public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+            rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Containers" : rootElementName;
+            xmlWriter.writeStartElement(rootElementName);
             if (items != null) {
                 for (Container element : items) {
-                    xmlWriter.writeXml(element);
+                    xmlWriter.writeXml(element, "Container");
                 }
             }
             return xmlWriter.writeEndElement();
         }
 
         public static ContainersWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
+            return fromXml(xmlReader, null);
+        }
+
+        public static ContainersWrapper fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+            rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Containers" : rootElementName;
             return xmlReader.readObject(
-                    "Containers",
+                    rootElementName,
                     reader -> {
                         List<Container> items = null;
 
@@ -238,7 +250,13 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("EnumerationResults");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "EnumerationResults" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringAttribute("ServiceEndpoint", this.serviceEndpoint);
         xmlWriter.writeStringElement("Prefix", this.prefix);
         xmlWriter.writeStringElement("Marker", this.marker);
@@ -255,10 +273,28 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * @return An instance of ListContainersResponse if the XmlReader was pointing to an instance of it, or null if it
      *     was pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the ListContainersResponse.
      */
     public static ListContainersResponse fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of ListContainersResponse from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of ListContainersResponse if the XmlReader was pointing to an instance of it, or null if it
+     *     was pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the ListContainersResponse.
+     */
+    public static ListContainersResponse fromXml(XmlReader xmlReader, String rootElementName)
+            throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "EnumerationResults" : rootElementName;
         return xmlReader.readObject(
-                "EnumerationResults",
+                finalRootElementName,
                 reader -> {
                     String serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
                     String prefix = null;
@@ -267,17 +303,17 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                     ContainersWrapper containers = null;
                     String nextMarker = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("Prefix".equals(fieldName.getLocalPart())) {
+                        if ("Prefix".equals(elementName.getLocalPart())) {
                             prefix = reader.getStringElement();
-                        } else if ("Marker".equals(fieldName.getLocalPart())) {
+                        } else if ("Marker".equals(elementName.getLocalPart())) {
                             marker = reader.getStringElement();
-                        } else if ("MaxResults".equals(fieldName.getLocalPart())) {
+                        } else if ("MaxResults".equals(elementName.getLocalPart())) {
                             maxResults = reader.getIntElement();
-                        } else if ("Containers".equals(fieldName.getLocalPart())) {
+                        } else if ("Containers".equals(elementName.getLocalPart())) {
                             containers = ContainersWrapper.fromXml(reader);
-                        } else if ("NextMarker".equals(fieldName.getLocalPart())) {
+                        } else if ("NextMarker".equals(elementName.getLocalPart())) {
                             nextMarker = reader.getStringElement();
                         } else {
                             reader.skipElement();

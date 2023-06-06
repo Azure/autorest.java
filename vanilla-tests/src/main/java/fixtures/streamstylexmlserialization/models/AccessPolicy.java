@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -114,7 +115,13 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("AccessPolicy");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "AccessPolicy" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Start", Objects.toString(this.start, null));
         xmlWriter.writeStringElement("Expiry", Objects.toString(this.expiry, null));
         xmlWriter.writeStringElement("Permission", this.permission);
@@ -128,22 +135,39 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
      * @return An instance of AccessPolicy if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the AccessPolicy.
      */
     public static AccessPolicy fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of AccessPolicy from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of AccessPolicy if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the AccessPolicy.
+     */
+    public static AccessPolicy fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "AccessPolicy" : rootElementName;
         return xmlReader.readObject(
-                "AccessPolicy",
+                finalRootElementName,
                 reader -> {
                     OffsetDateTime start = null;
                     OffsetDateTime expiry = null;
                     String permission = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("Start".equals(fieldName.getLocalPart())) {
+                        if ("Start".equals(elementName.getLocalPart())) {
                             start = reader.getNullableElement(OffsetDateTime::parse);
-                        } else if ("Expiry".equals(fieldName.getLocalPart())) {
+                        } else if ("Expiry".equals(elementName.getLocalPart())) {
                             expiry = reader.getNullableElement(OffsetDateTime::parse);
-                        } else if ("Permission".equals(fieldName.getLocalPart())) {
+                        } else if ("Permission".equals(elementName.getLocalPart())) {
                             permission = reader.getStringElement();
                         } else {
                             reader.skipElement();

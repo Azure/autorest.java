@@ -606,7 +606,7 @@ public class ClassType implements IType {
                 throw new RuntimeException("Swagger types cannot be written as attributes.");
             }
 
-            return java.lang.String.format("%s.writeXml(%s)", xmlWriterName, valueGetter);
+            return xmlWriterName + ".writeXml(" + valueGetter + ", \"" + attributeOrElementName + "\")";
         }
 
         String value = wrapSerializationWithObjectsToString ? "Objects.toString(" + valueGetter + ", null)" : valueGetter;

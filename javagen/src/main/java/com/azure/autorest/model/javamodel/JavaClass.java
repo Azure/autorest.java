@@ -154,8 +154,13 @@ public class JavaClass implements JavaType {
     }
 
     public final void privateStaticFinalClass(String classSignature, Consumer<JavaClass> classBlock) {
+        staticFinalClass(JavaVisibility.Private, classSignature, classBlock);
+    }
+
+    public final void staticFinalClass(JavaVisibility visibility, String classSignature, Consumer<JavaClass> classBlock) {
         addExpectedNewLine();
-        contents.classBlock(JavaVisibility.Private, Arrays.asList(JavaModifier.Static, JavaModifier.Final), classSignature, classBlock);
+        contents.classBlock(visibility, Arrays.asList(JavaModifier.Static, JavaModifier.Final), classSignature,
+            classBlock);
         addNewLine = true;
     }
 

@@ -5,6 +5,7 @@
 Compatible with compiler 0.44.
 
 - Supported partial update for models and extensible enums.
+- Supported custom scheme for AuthType.http.
 
 ## 0.7.3 (2023-05-30)
 

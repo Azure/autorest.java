@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -32,7 +33,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      */
     private Metrics minuteMetrics;
 
-    private static final class CorsWrapper implements XmlSerializable<CorsWrapper> {
+    static final class CorsWrapper implements XmlSerializable<CorsWrapper> {
         private final List<CorsRule> items;
 
         private CorsWrapper(List<CorsRule> items) {
@@ -41,18 +42,29 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
 
         @Override
         public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-            xmlWriter.writeStartElement("Cors");
+            return toXml(xmlWriter, null);
+        }
+
+        @Override
+        public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+            rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Cors" : rootElementName;
+            xmlWriter.writeStartElement(rootElementName);
             if (items != null) {
                 for (CorsRule element : items) {
-                    xmlWriter.writeXml(element);
+                    xmlWriter.writeXml(element, "CorsRule");
                 }
             }
             return xmlWriter.writeEndElement();
         }
 
         public static CorsWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
+            return fromXml(xmlReader, null);
+        }
+
+        public static CorsWrapper fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+            rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Cors" : rootElementName;
             return xmlReader.readObject(
-                    "Cors",
+                    rootElementName,
                     reader -> {
                         List<CorsRule> items = null;
 
@@ -245,13 +257,19 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("StorageServiceProperties");
-        xmlWriter.writeXml(this.logging);
-        xmlWriter.writeXml(this.hourMetrics);
-        xmlWriter.writeXml(this.minuteMetrics);
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "StorageServiceProperties" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
+        xmlWriter.writeXml(this.logging, "Logging");
+        xmlWriter.writeXml(this.hourMetrics, "HourMetrics");
+        xmlWriter.writeXml(this.minuteMetrics, "MinuteMetrics");
         xmlWriter.writeXml(this.cors);
         xmlWriter.writeStringElement("DefaultServiceVersion", this.defaultServiceVersion);
-        xmlWriter.writeXml(this.deleteRetentionPolicy);
+        xmlWriter.writeXml(this.deleteRetentionPolicy, "DeleteRetentionPolicy");
         return xmlWriter.writeEndElement();
     }
 
@@ -261,10 +279,28 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * @param xmlReader The XmlReader being read.
      * @return An instance of StorageServiceProperties if the XmlReader was pointing to an instance of it, or null if it
      *     was pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the StorageServiceProperties.
      */
     public static StorageServiceProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of StorageServiceProperties from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of StorageServiceProperties if the XmlReader was pointing to an instance of it, or null if it
+     *     was pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the StorageServiceProperties.
+     */
+    public static StorageServiceProperties fromXml(XmlReader xmlReader, String rootElementName)
+            throws XMLStreamException {
+        String finalRootElementName =
+                CoreUtils.isNullOrEmpty(rootElementName) ? "StorageServiceProperties" : rootElementName;
         return xmlReader.readObject(
-                "StorageServiceProperties",
+                finalRootElementName,
                 reader -> {
                     Logging logging = null;
                     Metrics hourMetrics = null;
@@ -273,20 +309,20 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
                     String defaultServiceVersion = null;
                     RetentionPolicy deleteRetentionPolicy = null;
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                        QName elementName = reader.getElementName();
 
-                        if ("Logging".equals(fieldName.getLocalPart())) {
-                            logging = Logging.fromXml(reader);
-                        } else if ("HourMetrics".equals(fieldName.getLocalPart())) {
-                            hourMetrics = Metrics.fromXml(reader);
-                        } else if ("MinuteMetrics".equals(fieldName.getLocalPart())) {
-                            minuteMetrics = Metrics.fromXml(reader);
-                        } else if ("Cors".equals(fieldName.getLocalPart())) {
+                        if ("Logging".equals(elementName.getLocalPart())) {
+                            logging = Logging.fromXml(reader, "Logging");
+                        } else if ("HourMetrics".equals(elementName.getLocalPart())) {
+                            hourMetrics = Metrics.fromXml(reader, "HourMetrics");
+                        } else if ("MinuteMetrics".equals(elementName.getLocalPart())) {
+                            minuteMetrics = Metrics.fromXml(reader, "MinuteMetrics");
+                        } else if ("Cors".equals(elementName.getLocalPart())) {
                             cors = CorsWrapper.fromXml(reader);
-                        } else if ("DefaultServiceVersion".equals(fieldName.getLocalPart())) {
+                        } else if ("DefaultServiceVersion".equals(elementName.getLocalPart())) {
                             defaultServiceVersion = reader.getStringElement();
-                        } else if ("DeleteRetentionPolicy".equals(fieldName.getLocalPart())) {
-                            deleteRetentionPolicy = RetentionPolicy.fromXml(reader);
+                        } else if ("DeleteRetentionPolicy".equals(elementName.getLocalPart())) {
+                            deleteRetentionPolicy = RetentionPolicy.fromXml(reader, "DeleteRetentionPolicy");
                         } else {
                             reader.skipElement();
                         }
