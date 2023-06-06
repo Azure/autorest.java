@@ -16,14 +16,14 @@ public final class ResourceB {
      * The id property.
      */
     @Generated
-    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -33,7 +33,7 @@ public final class ResourceB {
      */
     @Generated
     @JsonCreator
-    private ResourceB(@JsonProperty(value = "name", required = true) String name) {
+    private ResourceB(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 

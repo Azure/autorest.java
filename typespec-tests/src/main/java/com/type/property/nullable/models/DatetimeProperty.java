@@ -17,14 +17,14 @@ public final class DatetimeProperty {
      * Required property
      */
     @Generated
-    @JsonProperty(value = "requiredProperty", required = true)
+    @JsonProperty(value = "requiredProperty")
     private String requiredProperty;
 
     /*
      * Property
      */
     @Generated
-    @JsonProperty(value = "nullableProperty", required = true)
+    @JsonProperty(value = "nullableProperty")
     private OffsetDateTime nullableProperty;
 
     /**
@@ -36,8 +36,8 @@ public final class DatetimeProperty {
     @Generated
     @JsonCreator
     public DatetimeProperty(
-            @JsonProperty(value = "requiredProperty", required = true) String requiredProperty,
-            @JsonProperty(value = "nullableProperty", required = true) OffsetDateTime nullableProperty) {
+            @JsonProperty(value = "requiredProperty") String requiredProperty,
+            @JsonProperty(value = "nullableProperty") OffsetDateTime nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }

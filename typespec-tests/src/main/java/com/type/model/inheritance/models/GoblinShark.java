@@ -23,7 +23,7 @@ public final class GoblinShark extends Shark {
      */
     @Generated
     @JsonCreator
-    public GoblinShark(@JsonProperty(value = "age", required = true) int age) {
+    public GoblinShark(@JsonProperty(value = "age") int age) {
         super(age);
     }
 }

@@ -16,7 +16,7 @@ public final class JsonProjectedNameModel {
      * Pass in true
      */
     @Generated
-    @JsonProperty(value = "wireName", required = true)
+    @JsonProperty(value = "wireName")
     private boolean defaultName;
 
     /**
@@ -26,7 +26,7 @@ public final class JsonProjectedNameModel {
      */
     @Generated
     @JsonCreator
-    public JsonProjectedNameModel(@JsonProperty(value = "wireName", required = true) boolean defaultName) {
+    public JsonProjectedNameModel(@JsonProperty(value = "wireName") boolean defaultName) {
         this.defaultName = defaultName;
     }
 

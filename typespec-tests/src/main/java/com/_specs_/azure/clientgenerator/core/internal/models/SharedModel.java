@@ -16,7 +16,7 @@ public final class SharedModel {
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -26,7 +26,7 @@ public final class SharedModel {
      */
     @Generated
     @JsonCreator
-    private SharedModel(@JsonProperty(value = "name", required = true) String name) {
+    private SharedModel(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 

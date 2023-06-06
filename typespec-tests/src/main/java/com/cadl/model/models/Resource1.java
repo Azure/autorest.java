@@ -16,21 +16,21 @@ public final class Resource1 {
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /*
      * The outputData property.
      */
     @Generated
-    @JsonProperty(value = "outputData", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "outputData", access = JsonProperty.Access.WRITE_ONLY)
     private OutputData outputData;
 
     /*
      * The outputData2 property.
      */
     @Generated
-    @JsonProperty(value = "outputData2", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "outputData2", access = JsonProperty.Access.WRITE_ONLY)
     private InputOutputData2 outputData2;
 
     /**
@@ -40,7 +40,7 @@ public final class Resource1 {
      */
     @Generated
     @JsonCreator
-    public Resource1(@JsonProperty(value = "name", required = true) String name) {
+    public Resource1(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 

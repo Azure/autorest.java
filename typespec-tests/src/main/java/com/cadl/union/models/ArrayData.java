@@ -17,7 +17,7 @@ public final class ArrayData {
      * The data property.
      */
     @Generated
-    @JsonProperty(value = "data", required = true)
+    @JsonProperty(value = "data")
     private List<String> data;
 
     /**
@@ -27,7 +27,7 @@ public final class ArrayData {
      */
     @Generated
     @JsonCreator
-    public ArrayData(@JsonProperty(value = "data", required = true) List<String> data) {
+    public ArrayData(@JsonProperty(value = "data") List<String> data) {
         this.data = data;
     }
 

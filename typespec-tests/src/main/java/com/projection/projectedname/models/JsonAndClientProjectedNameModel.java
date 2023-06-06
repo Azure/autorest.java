@@ -16,7 +16,7 @@ public final class JsonAndClientProjectedNameModel {
      * Pass in true
      */
     @Generated
-    @JsonProperty(value = "wireName", required = true)
+    @JsonProperty(value = "wireName")
     private boolean clientName;
 
     /**
@@ -26,7 +26,7 @@ public final class JsonAndClientProjectedNameModel {
      */
     @Generated
     @JsonCreator
-    public JsonAndClientProjectedNameModel(@JsonProperty(value = "wireName", required = true) boolean clientName) {
+    public JsonAndClientProjectedNameModel(@JsonProperty(value = "wireName") boolean clientName) {
         this.clientName = clientName;
     }
 

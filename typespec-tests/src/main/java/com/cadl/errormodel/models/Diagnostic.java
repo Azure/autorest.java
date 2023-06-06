@@ -17,14 +17,14 @@ public final class Diagnostic {
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /*
      * The error property.
      */
     @Generated
-    @JsonProperty(value = "error", required = true)
+    @JsonProperty(value = "error")
     private ResponseError error;
 
     /**
@@ -35,9 +35,7 @@ public final class Diagnostic {
      */
     @Generated
     @JsonCreator
-    private Diagnostic(
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "error", required = true) ResponseError error) {
+    private Diagnostic(@JsonProperty(value = "name") String name, @JsonProperty(value = "error") ResponseError error) {
         this.name = name;
         this.error = error;
     }

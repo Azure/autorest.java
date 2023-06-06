@@ -17,7 +17,7 @@ public final class Iso8601DurationProperty {
      * The value property.
      */
     @Generated
-    @JsonProperty(value = "value", required = true)
+    @JsonProperty(value = "value")
     private Duration value;
 
     /**
@@ -27,7 +27,7 @@ public final class Iso8601DurationProperty {
      */
     @Generated
     @JsonCreator
-    public Iso8601DurationProperty(@JsonProperty(value = "value", required = true) Duration value) {
+    public Iso8601DurationProperty(@JsonProperty(value = "value") Duration value) {
         this.value = value;
     }
 

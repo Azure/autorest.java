@@ -23,105 +23,105 @@ public final class Builtin {
      * The formatString property.
      */
     @Generated
-    @JsonProperty(value = "formatString", required = true)
+    @JsonProperty(value = "formatString")
     private FormatString formatString;
 
     /*
      * The boolean property.
      */
     @Generated
-    @JsonProperty(value = "boolean", required = true)
+    @JsonProperty(value = "boolean")
     private boolean booleanProperty;
 
     /*
      * The string property.
      */
     @Generated
-    @JsonProperty(value = "string", required = true)
+    @JsonProperty(value = "string")
     private String string;
 
     /*
      * The bytes property.
      */
     @Generated
-    @JsonProperty(value = "bytes", required = true)
+    @JsonProperty(value = "bytes")
     private byte[] bytes;
 
     /*
      * The int property.
      */
     @Generated
-    @JsonProperty(value = "int", required = true)
+    @JsonProperty(value = "int")
     private int intProperty;
 
     /*
      * The safeint property.
      */
     @Generated
-    @JsonProperty(value = "safeint", required = true)
+    @JsonProperty(value = "safeint")
     private long safeint;
 
     /*
      * The long property.
      */
     @Generated
-    @JsonProperty(value = "long", required = true)
+    @JsonProperty(value = "long")
     private long longProperty;
 
     /*
      * The float property.
      */
     @Generated
-    @JsonProperty(value = "float", required = true)
+    @JsonProperty(value = "float")
     private double floatProperty;
 
     /*
      * The double property.
      */
     @Generated
-    @JsonProperty(value = "double", required = true)
+    @JsonProperty(value = "double")
     private double doubleProperty;
 
     /*
      * The duration property.
      */
     @Generated
-    @JsonProperty(value = "duration", required = true)
+    @JsonProperty(value = "duration")
     private Duration duration;
 
     /*
      * The date property.
      */
     @Generated
-    @JsonProperty(value = "date", required = true)
+    @JsonProperty(value = "date")
     private LocalDate date;
 
     /*
      * The dateTime property.
      */
     @Generated
-    @JsonProperty(value = "dateTime", required = true)
+    @JsonProperty(value = "dateTime")
     private OffsetDateTime dateTime;
 
     /*
      * The stringList property.
      */
     @Generated
-    @JsonProperty(value = "stringList", required = true)
+    @JsonProperty(value = "stringList")
     private List<String> stringList;
 
     /*
      * The bytesDict property.
      */
     @Generated
-    @JsonProperty(value = "bytesDict", required = true)
+    @JsonProperty(value = "bytesDict")
     private Map<String, byte[]> bytesDict;
 
     /*
      * The url property.
      */
     @Generated
-    @JsonProperty(value = "url", required = true)
+    @JsonProperty(value = "url")
     private String url;
 
     /*
@@ -129,14 +129,14 @@ public final class Builtin {
      */
     @Generated
     @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
-    @JsonProperty(value = "nullableFloatDict", required = true)
+    @JsonProperty(value = "nullableFloatDict")
     private Map<String, Double> nullableFloatDict;
 
     /*
      * The encoded property.
      */
     @Generated
-    @JsonProperty(value = "encoded", required = true)
+    @JsonProperty(value = "encoded")
     private Encoded encoded;
 
     /**
@@ -163,23 +163,23 @@ public final class Builtin {
     @Generated
     @JsonCreator
     public Builtin(
-            @JsonProperty(value = "formatString", required = true) FormatString formatString,
-            @JsonProperty(value = "boolean", required = true) boolean booleanProperty,
-            @JsonProperty(value = "string", required = true) String string,
-            @JsonProperty(value = "bytes", required = true) byte[] bytes,
-            @JsonProperty(value = "int", required = true) int intProperty,
-            @JsonProperty(value = "safeint", required = true) long safeint,
-            @JsonProperty(value = "long", required = true) long longProperty,
-            @JsonProperty(value = "float", required = true) double floatProperty,
-            @JsonProperty(value = "double", required = true) double doubleProperty,
-            @JsonProperty(value = "duration", required = true) Duration duration,
-            @JsonProperty(value = "date", required = true) LocalDate date,
-            @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
-            @JsonProperty(value = "stringList", required = true) List<String> stringList,
-            @JsonProperty(value = "bytesDict", required = true) Map<String, byte[]> bytesDict,
-            @JsonProperty(value = "url", required = true) String url,
-            @JsonProperty(value = "nullableFloatDict", required = true) Map<String, Double> nullableFloatDict,
-            @JsonProperty(value = "encoded", required = true) Encoded encoded) {
+            @JsonProperty(value = "formatString") FormatString formatString,
+            @JsonProperty(value = "boolean") boolean booleanProperty,
+            @JsonProperty(value = "string") String string,
+            @JsonProperty(value = "bytes") byte[] bytes,
+            @JsonProperty(value = "int") int intProperty,
+            @JsonProperty(value = "safeint") long safeint,
+            @JsonProperty(value = "long") long longProperty,
+            @JsonProperty(value = "float") double floatProperty,
+            @JsonProperty(value = "double") double doubleProperty,
+            @JsonProperty(value = "duration") Duration duration,
+            @JsonProperty(value = "date") LocalDate date,
+            @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
+            @JsonProperty(value = "stringList") List<String> stringList,
+            @JsonProperty(value = "bytesDict") Map<String, byte[]> bytesDict,
+            @JsonProperty(value = "url") String url,
+            @JsonProperty(value = "nullableFloatDict") Map<String, Double> nullableFloatDict,
+            @JsonProperty(value = "encoded") Encoded encoded) {
         this.formatString = formatString;
         this.booleanProperty = booleanProperty;
         this.string = string;

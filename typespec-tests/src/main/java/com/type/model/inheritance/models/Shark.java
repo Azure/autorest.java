@@ -32,7 +32,7 @@ public class Shark extends Fish {
      */
     @Generated
     @JsonCreator
-    public Shark(@JsonProperty(value = "age", required = true) int age) {
+    public Shark(@JsonProperty(value = "age") int age) {
         super(age);
     }
 }

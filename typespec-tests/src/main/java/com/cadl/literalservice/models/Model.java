@@ -15,7 +15,7 @@ public final class Model {
      * The literal property.
      */
     @Generated
-    @JsonProperty(value = "literal", required = true)
+    @JsonProperty(value = "literal")
     private String literal = "literal";
 
     /*

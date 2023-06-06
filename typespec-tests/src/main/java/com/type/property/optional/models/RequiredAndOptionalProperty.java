@@ -23,7 +23,7 @@ public final class RequiredAndOptionalProperty {
      * required int property
      */
     @Generated
-    @JsonProperty(value = "requiredProperty", required = true)
+    @JsonProperty(value = "requiredProperty")
     private int requiredProperty;
 
     /**
@@ -33,8 +33,7 @@ public final class RequiredAndOptionalProperty {
      */
     @Generated
     @JsonCreator
-    public RequiredAndOptionalProperty(
-            @JsonProperty(value = "requiredProperty", required = true) int requiredProperty) {
+    public RequiredAndOptionalProperty(@JsonProperty(value = "requiredProperty") int requiredProperty) {
         this.requiredProperty = requiredProperty;
     }
 

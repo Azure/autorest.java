@@ -17,14 +17,14 @@ public final class User {
      * The user's id.
      */
     @Generated
-    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private int id;
 
     /*
      * The user's name.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /*
@@ -38,7 +38,7 @@ public final class User {
      * The entity tag for this resource.
      */
     @Generated
-    @JsonProperty(value = "etag", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "etag", access = JsonProperty.Access.WRITE_ONLY)
     private String etag;
 
     /**
@@ -48,7 +48,7 @@ public final class User {
      */
     @Generated
     @JsonCreator
-    public User(@JsonProperty(value = "name", required = true) String name) {
+    public User(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 

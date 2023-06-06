@@ -17,7 +17,7 @@ public final class DefaultDurationProperty {
      * The value property.
      */
     @Generated
-    @JsonProperty(value = "value", required = true)
+    @JsonProperty(value = "value")
     private Duration value;
 
     /**
@@ -27,7 +27,7 @@ public final class DefaultDurationProperty {
      */
     @Generated
     @JsonCreator
-    public DefaultDurationProperty(@JsonProperty(value = "value", required = true) Duration value) {
+    public DefaultDurationProperty(@JsonProperty(value = "value") Duration value) {
         this.value = value;
     }
 

@@ -20,56 +20,56 @@ public final class FormatString {
      * The base64Encoded property.
      */
     @Generated
-    @JsonProperty(value = "base64Encoded", required = true)
+    @JsonProperty(value = "base64Encoded")
     private Base64Url base64Encoded;
 
     /*
      * The binary property.
      */
     @Generated
-    @JsonProperty(value = "binary", required = true)
+    @JsonProperty(value = "binary")
     private byte[] binary;
 
     /*
      * The dateTime property.
      */
     @Generated
-    @JsonProperty(value = "dateTime", required = true)
+    @JsonProperty(value = "dateTime")
     private OffsetDateTime dateTime;
 
     /*
      * summary of RFC1123 date-time
      */
     @Generated
-    @JsonProperty(value = "dateTimeRfc1123", required = true)
+    @JsonProperty(value = "dateTimeRfc1123")
     private DateTimeRfc1123 dateTimeRfc1123;
 
     /*
      * The password property.
      */
     @Generated
-    @JsonProperty(value = "password", required = true)
+    @JsonProperty(value = "password")
     private String password;
 
     /*
      * The uri property.
      */
     @Generated
-    @JsonProperty(value = "uri", required = true)
+    @JsonProperty(value = "uri")
     private String uri;
 
     /*
      * The extensibleEnum property.
      */
     @Generated
-    @JsonProperty(value = "extensibleEnum", required = true)
+    @JsonProperty(value = "extensibleEnum")
     private KnownValues extensibleEnum;
 
     /*
      * The extensibleEnumScalar property.
      */
     @Generated
-    @JsonProperty(value = "extensibleEnumScalar", required = true)
+    @JsonProperty(value = "extensibleEnumScalar")
     private KnownValuesScalar extensibleEnumScalar;
 
     /**
@@ -87,14 +87,14 @@ public final class FormatString {
     @Generated
     @JsonCreator
     public FormatString(
-            @JsonProperty(value = "base64Encoded", required = true) byte[] base64Encoded,
-            @JsonProperty(value = "binary", required = true) byte[] binary,
-            @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
-            @JsonProperty(value = "dateTimeRfc1123", required = true) OffsetDateTime dateTimeRfc1123,
-            @JsonProperty(value = "password", required = true) String password,
-            @JsonProperty(value = "uri", required = true) String uri,
-            @JsonProperty(value = "extensibleEnum", required = true) KnownValues extensibleEnum,
-            @JsonProperty(value = "extensibleEnumScalar", required = true) KnownValuesScalar extensibleEnumScalar) {
+            @JsonProperty(value = "base64Encoded") byte[] base64Encoded,
+            @JsonProperty(value = "binary") byte[] binary,
+            @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
+            @JsonProperty(value = "dateTimeRfc1123") OffsetDateTime dateTimeRfc1123,
+            @JsonProperty(value = "password") String password,
+            @JsonProperty(value = "uri") String uri,
+            @JsonProperty(value = "extensibleEnum") KnownValues extensibleEnum,
+            @JsonProperty(value = "extensibleEnumScalar") KnownValuesScalar extensibleEnumScalar) {
         this.base64Encoded = Base64Url.encode(base64Encoded);
         this.binary = binary;
         this.dateTime = dateTime;

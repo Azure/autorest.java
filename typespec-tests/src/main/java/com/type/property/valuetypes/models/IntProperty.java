@@ -16,7 +16,7 @@ public final class IntProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private int property;
 
     /**
@@ -26,7 +26,7 @@ public final class IntProperty {
      */
     @Generated
     @JsonCreator
-    public IntProperty(@JsonProperty(value = "property", required = true) int property) {
+    public IntProperty(@JsonProperty(value = "property") int property) {
         this.property = property;
     }
 
