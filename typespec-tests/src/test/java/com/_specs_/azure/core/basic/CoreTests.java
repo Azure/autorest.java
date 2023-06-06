@@ -4,9 +4,11 @@
 package com._specs_.azure.core.basic;
 
 import com._specs_.azure.core.basic.models.User;
+import com.azure.core.http.HttpClient;
 import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
+import com.azure.core.test.http.AssertingHttpClientBuilder;
 import com.azure.core.util.BinaryData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -24,9 +26,11 @@ import java.util.stream.Collectors;
 public class CoreTests {
 
     private BasicAsyncClient client = new BasicClientBuilder()
+            .httpClient(new AssertingHttpClientBuilder(HttpClient.createDefault()).assertAsync().build())
             .buildAsyncClient();
 
     private BasicClient syncClient = new BasicClientBuilder()
+            .httpClient(new AssertingHttpClientBuilder(HttpClient.createDefault()).assertSync().build())
             .buildClient();
 
     @Test
