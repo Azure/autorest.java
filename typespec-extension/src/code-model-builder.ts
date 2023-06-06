@@ -1767,8 +1767,10 @@ export class CodeModelBuilder {
       case "uuid":
       case "eTag":
         return this.processStringSchema(type, nameHint);
+      default:
+        this.logWarning(`Unrecognized string format: '${format}'.`);
+        return this.processStringSchema(type, nameHint);
     }
-    throw new Error(`Unrecognized string format: '${format}'.`);
   }
 
   private processUnionSchema(type: Union, name: string): Schema {
