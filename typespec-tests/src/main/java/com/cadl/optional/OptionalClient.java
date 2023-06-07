@@ -42,9 +42,9 @@ public final class OptionalClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>booleanNullable</td><td>Boolean</td><td>No</td><td>The booleanNullable parameter</td></tr>
-     *     <tr><td>string</td><td>String</td><td>No</td><td>The string parameter</td></tr>
-     *     <tr><td>stringNullable</td><td>String</td><td>No</td><td>The stringNullable parameter</td></tr>
+     *     <tr><td>booleanNullable</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
+     *     <tr><td>string</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     *     <tr><td>stringNullable</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -54,7 +54,7 @@ public final class OptionalClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>request-header-optional</td><td>String</td><td>No</td><td>The requestHeaderOptional parameter</td></tr>
+     *     <tr><td>request-header-optional</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -119,11 +119,11 @@ public final class OptionalClient {
      * }
      * }</pre>
      *
-     * @param requestHeaderRequired The requestHeaderRequired parameter.
-     * @param booleanRequired The booleanRequired parameter.
-     * @param booleanRequiredNullable The booleanRequiredNullable parameter.
-     * @param stringRequired The stringRequired parameter.
-     * @param stringRequiredNullable The stringRequiredNullable parameter.
+     * @param requestHeaderRequired A sequence of textual characters.
+     * @param booleanRequired Boolean with `true` and `false` values.
+     * @param booleanRequiredNullable Boolean with `true` and `false` values.
+     * @param stringRequired A sequence of textual characters.
+     * @param stringRequiredNullable A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -152,15 +152,15 @@ public final class OptionalClient {
     /**
      * The put operation.
      *
-     * @param requestHeaderRequired The requestHeaderRequired parameter.
-     * @param booleanRequired The booleanRequired parameter.
-     * @param booleanRequiredNullable The booleanRequiredNullable parameter.
-     * @param stringRequired The stringRequired parameter.
-     * @param stringRequiredNullable The stringRequiredNullable parameter.
-     * @param requestHeaderOptional The requestHeaderOptional parameter.
-     * @param booleanNullable The booleanNullable parameter.
-     * @param string The string parameter.
-     * @param stringNullable The stringNullable parameter.
+     * @param requestHeaderRequired A sequence of textual characters.
+     * @param booleanRequired Boolean with `true` and `false` values.
+     * @param booleanRequiredNullable Boolean with `true` and `false` values.
+     * @param stringRequired A sequence of textual characters.
+     * @param stringRequiredNullable A sequence of textual characters.
+     * @param requestHeaderOptional A sequence of textual characters.
+     * @param booleanNullable Boolean with `true` and `false` values.
+     * @param string A sequence of textual characters.
+     * @param stringNullable A sequence of textual characters.
      * @param optional The optional parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -214,11 +214,11 @@ public final class OptionalClient {
     /**
      * The put operation.
      *
-     * @param requestHeaderRequired The requestHeaderRequired parameter.
-     * @param booleanRequired The booleanRequired parameter.
-     * @param booleanRequiredNullable The booleanRequiredNullable parameter.
-     * @param stringRequired The stringRequired parameter.
-     * @param stringRequiredNullable The stringRequiredNullable parameter.
+     * @param requestHeaderRequired A sequence of textual characters.
+     * @param booleanRequired Boolean with `true` and `false` values.
+     * @param booleanRequiredNullable Boolean with `true` and `false` values.
+     * @param stringRequired A sequence of textual characters.
+     * @param stringRequiredNullable A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

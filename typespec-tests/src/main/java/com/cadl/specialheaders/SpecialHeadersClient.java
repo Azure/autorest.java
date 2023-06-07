@@ -35,7 +35,7 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * The get operation.
+     * The most basic operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -48,7 +48,7 @@ public final class SpecialHeadersClient {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -98,7 +98,7 @@ public final class SpecialHeadersClient {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -138,7 +138,7 @@ public final class SpecialHeadersClient {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -188,7 +188,7 @@ public final class SpecialHeadersClient {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -205,9 +205,9 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * The get operation.
+     * The most basic operation.
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -227,7 +227,7 @@ public final class SpecialHeadersClient {
     /**
      * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -250,7 +250,7 @@ public final class SpecialHeadersClient {
     /**
      * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

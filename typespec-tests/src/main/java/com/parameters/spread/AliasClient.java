@@ -71,8 +71,8 @@ public final class AliasClient {
      * }
      * }</pre>
      *
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -99,8 +99,8 @@ public final class AliasClient {
      * }
      * }</pre>
      *
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -119,7 +119,7 @@ public final class AliasClient {
     /**
      * The spreadAsRequestBody operation.
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -141,9 +141,9 @@ public final class AliasClient {
     /**
      * The spreadAsRequestParameter operation.
      *
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
-     * @param name The name parameter.
+     * @param id A sequence of textual characters.
+     * @param xMsTestHeader A sequence of textual characters.
+     * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
