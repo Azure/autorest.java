@@ -101,8 +101,9 @@ final class MapperUtils {
         // ObjectSchema.
         ArraySchema arraySchema = (ArraySchema) responseBodySchema;
         String className = arraySchema.getElementType().getLanguage().getJava().getName() + "Wrapper";
-        String classPackage = settings.isCustomType(className) ? settings.getPackage(className)
-            : settings.getPackage(settings.getModelsSubpackage());
+        String classPackage = settings.isCustomType(className)
+            ? settings.getPackage(className)
+            : settings.getPackage(settings.getImplementationSubpackage() + ".models");
 
         return new ClassType.Builder()
             .packageName(classPackage)

@@ -21,8 +21,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import fixtures.xmlservice.implementation.BananasWrapper;
-import fixtures.xmlservice.implementation.SignedIdentifiersWrapper;
+import fixtures.xmlservice.implementation.models.BananaWrapper;
+import fixtures.xmlservice.implementation.models.SignedIdentifierWrapper;
 import fixtures.xmlservice.models.AppleBarrel;
 import fixtures.xmlservice.models.Banana;
 import fixtures.xmlservice.models.ErrorException;
@@ -36,7 +36,6 @@ import fixtures.xmlservice.models.ObjectWithXMsTextProperty;
 import fixtures.xmlservice.models.RootWithRefAndMeta;
 import fixtures.xmlservice.models.RootWithRefAndNoMeta;
 import fixtures.xmlservice.models.SignedIdentifier;
-import fixtures.xmlservice.models.SignedIdentifiers;
 import fixtures.xmlservice.models.Slideshow;
 import fixtures.xmlservice.models.StorageServiceProperties;
 import fixtures.xmlservice.models.XmlsGetHeadersResponse;
@@ -167,7 +166,7 @@ public final class Xmls {
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putRootList(
-                @HostParam("$host") String host, @BodyParam("application/xml") BananasWrapper bananas, Context context);
+                @HostParam("$host") String host, @BodyParam("application/xml") BananaWrapper bananas, Context context);
 
         @Get("/xml/root-list-single-item")
         @ExpectedResponses({200})
@@ -179,7 +178,7 @@ public final class Xmls {
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putRootListSingleItem(
-                @HostParam("$host") String host, @BodyParam("application/xml") BananasWrapper bananas, Context context);
+                @HostParam("$host") String host, @BodyParam("application/xml") BananaWrapper bananas, Context context);
 
         @Get("/xml/empty-root-list")
         @ExpectedResponses({200})
@@ -191,7 +190,7 @@ public final class Xmls {
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putEmptyRootList(
-                @HostParam("$host") String host, @BodyParam("application/xml") BananasWrapper bananas, Context context);
+                @HostParam("$host") String host, @BodyParam("application/xml") BananaWrapper bananas, Context context);
 
         @Get("/xml/empty-child-element")
         @ExpectedResponses({200})
@@ -237,7 +236,7 @@ public final class Xmls {
         @Get("/xml/mycontainer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<SignedIdentifiers>> getAcls(
+        Mono<Response<SignedIdentifierWrapper>> getAcls(
                 @HostParam("$host") String host,
                 @QueryParam("comp") String comp,
                 @QueryParam("restype") String restype,
@@ -251,7 +250,7 @@ public final class Xmls {
                 @HostParam("$host") String host,
                 @QueryParam("comp") String comp,
                 @QueryParam("restype") String restype,
-                @BodyParam("application/xml") SignedIdentifiersWrapper properties,
+                @BodyParam("application/xml") SignedIdentifierWrapper properties,
                 Context context);
 
         @Get("/xml/mycontainer")
@@ -1674,7 +1673,7 @@ public final class Xmls {
         } else {
             bananas.forEach(e -> e.validate());
         }
-        BananasWrapper bananasConverted = new BananasWrapper(bananas);
+        BananaWrapper bananasConverted = new BananaWrapper(bananas);
         return FluxUtil.withContext(context -> service.putRootList(this.client.getHost(), bananasConverted, context));
     }
 
@@ -1699,7 +1698,7 @@ public final class Xmls {
         } else {
             bananas.forEach(e -> e.validate());
         }
-        BananasWrapper bananasConverted = new BananasWrapper(bananas);
+        BananaWrapper bananasConverted = new BananaWrapper(bananas);
         return service.putRootList(this.client.getHost(), bananasConverted, context);
     }
 
@@ -1868,7 +1867,7 @@ public final class Xmls {
         } else {
             bananas.forEach(e -> e.validate());
         }
-        BananasWrapper bananasConverted = new BananasWrapper(bananas);
+        BananaWrapper bananasConverted = new BananaWrapper(bananas);
         return FluxUtil.withContext(
                 context -> service.putRootListSingleItem(this.client.getHost(), bananasConverted, context));
     }
@@ -1894,7 +1893,7 @@ public final class Xmls {
         } else {
             bananas.forEach(e -> e.validate());
         }
-        BananasWrapper bananasConverted = new BananasWrapper(bananas);
+        BananaWrapper bananasConverted = new BananaWrapper(bananas);
         return service.putRootListSingleItem(this.client.getHost(), bananasConverted, context);
     }
 
@@ -2063,7 +2062,7 @@ public final class Xmls {
         } else {
             bananas.forEach(e -> e.validate());
         }
-        BananasWrapper bananasConverted = new BananasWrapper(bananas);
+        BananaWrapper bananasConverted = new BananaWrapper(bananas);
         return FluxUtil.withContext(
                 context -> service.putEmptyRootList(this.client.getHost(), bananasConverted, context));
     }
@@ -2089,7 +2088,7 @@ public final class Xmls {
         } else {
             bananas.forEach(e -> e.validate());
         }
-        BananasWrapper bananasConverted = new BananasWrapper(bananas);
+        BananaWrapper bananasConverted = new BananaWrapper(bananas);
         return service.putEmptyRootList(this.client.getHost(), bananasConverted, context);
     }
 
@@ -2645,7 +2644,7 @@ public final class Xmls {
      * @return storage ACLs for a container along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<SignedIdentifiers>> getAclsWithResponseAsync() {
+    public Mono<Response<SignedIdentifierWrapper>> getAclsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2666,7 +2665,7 @@ public final class Xmls {
      * @return storage ACLs for a container along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<SignedIdentifiers>> getAclsWithResponseAsync(Context context) {
+    public Mono<Response<SignedIdentifierWrapper>> getAclsWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2685,7 +2684,7 @@ public final class Xmls {
      * @return storage ACLs for a container on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SignedIdentifiers> getAclsAsync() {
+    public Mono<SignedIdentifierWrapper> getAclsAsync() {
         return getAclsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -2699,7 +2698,7 @@ public final class Xmls {
      * @return storage ACLs for a container on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SignedIdentifiers> getAclsAsync(Context context) {
+    public Mono<SignedIdentifierWrapper> getAclsAsync(Context context) {
         return getAclsWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -2713,7 +2712,7 @@ public final class Xmls {
      * @return storage ACLs for a container along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<SignedIdentifiers> getAclsWithResponse(Context context) {
+    public Response<SignedIdentifierWrapper> getAclsWithResponse(Context context) {
         return getAclsWithResponseAsync(context).block();
     }
 
@@ -2725,7 +2724,7 @@ public final class Xmls {
      * @return storage ACLs for a container.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SignedIdentifiers getAcls() {
+    public SignedIdentifierWrapper getAcls() {
         return getAclsWithResponse(Context.NONE).getValue();
     }
 
@@ -2751,7 +2750,7 @@ public final class Xmls {
         }
         final String comp = "acl";
         final String restype = "container";
-        SignedIdentifiersWrapper propertiesConverted = new SignedIdentifiersWrapper(properties);
+        SignedIdentifierWrapper propertiesConverted = new SignedIdentifierWrapper(properties);
         return FluxUtil.withContext(
                 context -> service.putAcls(this.client.getHost(), comp, restype, propertiesConverted, context));
     }
@@ -2779,7 +2778,7 @@ public final class Xmls {
         }
         final String comp = "acl";
         final String restype = "container";
-        SignedIdentifiersWrapper propertiesConverted = new SignedIdentifiersWrapper(properties);
+        SignedIdentifierWrapper propertiesConverted = new SignedIdentifierWrapper(properties);
         return service.putAcls(this.client.getHost(), comp, restype, propertiesConverted, context);
     }
 
