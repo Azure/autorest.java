@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -40,6 +41,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
@@ -110,7 +112,31 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 .sorted().collect(Collectors.toList());
         builder.responseExpectedStatusCodes(expectedStatusCodes);
 
-        IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
+        Schema responseBodySchema = SchemaUtil.getLowestCommonParent(operation.getResponses().stream()
+            .map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+        IType responseBodyType;
+
+        // XML wrapped response types are tricky as they're defined as ArraySchema but in reality it's a specialized
+        // ObjectSchema.
+        if (responseBodySchema != null && responseBodySchema.getSerialization() != null
+            && responseBodySchema.getSerialization().getXml() != null
+            && responseBodySchema.getSerialization().getXml().isWrapped()) {
+            String className = responseBodySchema.getLanguage().getJava() != null
+                ? responseBodySchema.getLanguage().getJava().getName()
+                : responseBodySchema.getLanguage().getDefault().getName();
+            String classPackage = settings.isCustomType(className)
+                ? settings.getPackage(className)
+                : settings.getPackage(settings.getModelsSubpackage());
+
+            responseBodyType = new ClassType.Builder()
+                .packageName(classPackage)
+                .name(className)
+                .extensions(responseBodySchema.getExtensions())
+                .build();
+        } else {
+            responseBodyType = SchemaUtil.getOperationResponseType(responseBodySchema, operation, settings);
+        }
+
         if (settings.isDataPlaneClient()) {
             builder.rawResponseBodyType(responseBodyType);
             if (responseBodyType instanceof ClassType

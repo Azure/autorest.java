@@ -12,6 +12,7 @@ import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
+import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
@@ -135,6 +136,69 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .filter(Objects::nonNull)
                 .distinct()
                 .collect(Collectors.toList());
+
+        for (OperationGroup operationGroup : codeModel.getOperationGroups()) {
+            for (Operation operation : operationGroup.getOperations()) {
+                Schema responseBodySchema = SchemaUtil.getLowestCommonParent(operation.getResponses().stream()
+                    .map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+
+                // XML wrapped response types are tricky as they're defined as ArraySchema but in reality it's a specialized
+                // ObjectSchema.
+                if (responseBodySchema != null && responseBodySchema.getSerialization() != null
+                    && responseBodySchema.getSerialization().getXml() != null
+                    && responseBodySchema.getSerialization().getXml().isWrapped()) {
+                    String className = responseBodySchema.getLanguage().getJava() != null
+                        ? responseBodySchema.getLanguage().getJava().getName()
+                        : responseBodySchema.getLanguage().getDefault().getName();
+                    String packageName = settings.isCustomType(className)
+                        ? settings.getPackage(className)
+                        : settings.getPackage(settings.getModelsSubpackage());
+
+                    Schema typePropertySchema = ((ArraySchema) responseBodySchema).getElementType();
+                    Language javaLanguage = typePropertySchema.getLanguage().getJava();
+                    if (javaLanguage != null) {
+                        javaLanguage.setName(CodeNamer.getPropertyName(javaLanguage.getName()));
+                    }
+
+                    ArraySchema arraySchema = new ArraySchema();
+                    arraySchema.setLanguage(arraySchema.getLanguage());
+                    if (arraySchema.getLanguage() != null) {
+                        arraySchema.getLanguage().setJava(javaLanguage);
+                    }
+                    arraySchema.setProtocol(arraySchema.getProtocol());
+                    arraySchema.setElementType(typePropertySchema);
+                    arraySchema.setSummary(typePropertySchema.getSummary());
+                    arraySchema.setExample(typePropertySchema.getExample());
+                    arraySchema.setDefaultValue(typePropertySchema.getDefaultValue());
+                    arraySchema.setSerialization(typePropertySchema.getSerialization());
+                    arraySchema.setUid(typePropertySchema.getUid());
+                    arraySchema.set$key(typePropertySchema.get$key());
+                    arraySchema.setDescription(typePropertySchema.getDescription());
+                    arraySchema.setApiVersions(typePropertySchema.getApiVersions());
+                    arraySchema.setDescription(typePropertySchema.getDescription());
+                    arraySchema.setExternalDocs(typePropertySchema.getExternalDocs());
+
+                    Property property = new Property();
+                    property.setSerializedName(typePropertySchema.getLanguage().getDefault().getSerializedName());
+                    property.setLanguage(new Languages());
+                    property.getLanguage().setJava(javaLanguage);
+                    property.getLanguage().setDefault(typePropertySchema.getLanguage().getDefault());
+                    property.setSchema(arraySchema);
+                    property.setDescription(typePropertySchema.getDescription());
+                    property.setExtensions(typePropertySchema.getExtensions());
+
+                    clientModels.add(new ClientModel.Builder()
+                        .name(className)
+                        .packageName(packageName)
+                        .type(SchemaUtil.getOperationResponseType(operation, settings))
+                        .xmlName(responseBodySchema.getSerialization().getXml().getName())
+                        .xmlNamespace(responseBodySchema.getSerialization().getXml().getNamespace())
+                        .properties(Collections.singletonList(Mappers.getModelPropertyMapper().map(property)))
+                        .build());
+                }
+            }
+        }
+
         builder.models(clientModels);
 
         // union model (class)

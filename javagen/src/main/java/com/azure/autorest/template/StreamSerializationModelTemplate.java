@@ -125,33 +125,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         constructorSignatureBuilder.append(property.getClientType()).append(" ").append(property.getName());
     }
 
-    @Override
-    protected void addXmlWrapperClass(JavaClass classBlock, ClientModelProperty property, String wrapperClassName,
-        JavaSettings settings) {
-        // While using a wrapping class for XML elements that are wrapped may seem inconvenient it is required.
-        // There has been previous attempts to remove this by using JacksonXmlElementWrapper, which based on its
-        // documentation should cover this exact scenario, but it doesn't. Jackson unfortunately doesn't always
-        // respect the JacksonXmlRootName, or JsonRootName, value when handling types wrapped by an enumeration,
-        // such as List<CorsRule> or Iterable<CorsRule>. Instead, it uses the JacksonXmlProperty local name as the
-        // root XML node name for each element in the enumeration. There are configurations for ObjectMapper, and
-        // XmlMapper, that always forces Jackson to use the root name but those also add the class name as a root
-        // XML node name if the class doesn't have a root name annotation which results in an addition XML level
-        // resulting in invalid service XML. There is also one last work around to use JacksonXmlElementWrapper
-        // and JacksonXmlProperty together as the wrapper will configure the wrapper name and property will configure
-        // the element name but this breaks down in cases where the same element name is used in two different
-        // wrappers, a case being Storage BlockList which uses two block elements for its committed and uncommitted
-        // block lists.
-        IType propertyClientType = property.getWireType().getClientType();
-
-        classBlock.privateFinalMemberVariable(propertyClientType.toString(), "items");
-
-        classBlock.privateConstructor(wrapperClassName + "(" + propertyClientType + " items)",
-            constructor -> constructor.line("this.items = items;"));
-
-        xmlWrapperClassXmlSerializableImplementation(classBlock, wrapperClassName, propertyClientType,
-            property.getXmlName(), property.getXmlListElementName(), "items", property.getXmlNamespace());
-    }
-
     static void xmlWrapperClassXmlSerializableImplementation(JavaClass classBlock, String wrapperClassName,
         IType iterableType, String xmlRootElementName, String xmlListElementName, String xmlElementNameCamelCase,
         String xmlNamespace) {
@@ -199,7 +172,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     readerMethod.line("String elementName = reader.getElementName().getLocalPart();");
                     readerMethod.line();
                     readerMethod.ifBlock("\"" + xmlListElementName + "\".equals(elementName)", ifBlock -> {
-                        ifBlock.ifBlock("items == null", ifBlock2 -> ifBlock2.line("items = new ArrayList<>();"));
+                        ifBlock.ifBlock("items == null", ifBlock2 -> ifBlock2.line("items = new LinkedList<>();"));
                         ifBlock.line();
 
                         // TODO (alzimmer): Insert XML object reading logic.
@@ -786,12 +759,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // Always instantiate the local variable.
         IType clientType = property.getClientType();
-        if (property.isXmlWrapper()) {
-            methodBlock.line(getPropertyXmlWrapperClassName(property) + " " + property.getName() + " = "
-                + clientType.defaultValueExpression() + ";");
-        } else {
-            methodBlock.line(clientType + " " + property.getName() + " = " + clientType.defaultValueExpression() + ";");
-        }
+        methodBlock.line(clientType + " " + property.getName() + " = " + clientType.defaultValueExpression() + ";");
     }
 
     /**
@@ -1153,11 +1121,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // If the property is defined in a super class or doesn't match the wire type use the setter as this will
         // be able to set the value in the super class definition or handle converting the wire type.
         if (fromSuper || property.getWireType() != property.getClientType()) {
-            if (property.isXmlWrapper()) {
-                methodBlock.line(modelVariableName + "." + property.getSetterName() + "Internal(" + value + ");");
-            } else {
-                methodBlock.line(modelVariableName + "." + property.getSetterName() + "(" + value + ");");
-            }
+            methodBlock.line(modelVariableName + "." + property.getSetterName() + "(" + value + ");");
         } else {
             methodBlock.line(modelVariableName + "." + property.getName() + " = " + value + ";");
         }
@@ -1237,19 +1201,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 propertyValueGetter = CodeNamer.getEnumMemberName(element.getName());
             }
         } else if (fromSuperType) {
-            if (element.isXmlWrapper()) {
-                propertyValueGetter = element.getGetterName() + "Internal()";
-            } else {
-                propertyValueGetter = element.getGetterName() + "()";
-            }
+            propertyValueGetter = element.getGetterName() + "()";
         } else {
             propertyValueGetter = "this." + element.getName();
-        }
-
-        // XML wrappers implement XmlSerializable and always use writeXml, check for this first as it's an early out.
-        if (element.isXmlWrapper()) {
-            methodBlock.line("xmlWriter.writeXml(" + propertyValueGetter + ");");
-            return;
         }
 
         // Attempt to determine whether the wire type is simple serialization.
@@ -1267,13 +1221,22 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             methodBlock.line("xmlWriter.writeXml(" + propertyValueGetter + ");");
         } else if (wireType instanceof IterableType) {
             IType elementType = ((IterableType) wireType).getElementType();
+            boolean sameNames = Objects.equals(element.getXmlName(), element.getXmlListElementName());
 
             methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
-                String xmlWrite = elementType.xmlSerializationMethodCall("xmlWriter", element.getXmlName(),
-                    element.getXmlNamespace(), "element", element.isXmlAttribute(), false);
+                if (!sameNames) {
+                    ifAction.line("xmlWriter.writeStartElement(\"" + element.getXmlName() + "\");");
+                }
+
+                String xmlWrite = elementType.xmlSerializationMethodCall("xmlWriter", element.getXmlListElementName(),
+                    element.getXmlNamespace(), "element", false, false);
                 ifAction.line("for (%s element : %s) {", elementType, propertyValueGetter);
                 ifAction.indent(() -> ifAction.line(xmlWrite + ";"));
                 ifAction.line("}");
+
+                if (!sameNames) {
+                    ifAction.line("xmlWriter.writeEndElement();");
+                }
             });
         } else if (wireType instanceof MapType) {
             // Assumption is that the key type for the Map is a String. This may not always hold true and when that
@@ -1636,13 +1599,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         IType wireType = property.getWireType();
         IType clientType = property.getClientType();
 
-        // XML wrappers implement XmlSerializable and always use fromXml, check for this first as it's an early out.
-        if (property.isXmlWrapper()) {
-            String className = getPropertyXmlWrapperClassName(property);
-            deserializationBlock.line(property.getName() + " = " + className + ".fromXml(reader);");
-            return;
-        }
-
         // Attempt to determine whether the wire type is simple deserialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String simpleDeserialization = getSimpleXmlDeserialization(wireType, clientType, "reader",
@@ -1651,13 +1607,26 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             deserializationBlock.line(property.getName() + " = " + simpleDeserialization + ";");
         } else if (wireType instanceof IterableType) {
             IType elementType = ((IterableType) wireType).getElementType();
+            boolean sameNames = Objects.equals(property.getXmlName(), property.getXmlListElementName());
 
             // TODO (alzimmer): Handle nested container types when needed.
             deserializationBlock.ifBlock(property.getName() + " == null",
                 ifStatement -> ifStatement.line(property.getName() + " = new LinkedList<>();"));
             String elementDeserialization = getSimpleXmlDeserialization(elementType, elementType, "reader",
-                property.getXmlName(), null, null);
-            deserializationBlock.line(property.getName() + ".add(" + elementDeserialization + ");");
+                sameNames ? property.getXmlName() : property.getXmlListElementName(), null, null);
+
+            if (sameNames) {
+                deserializationBlock.line(property.getName() + ".add(" + elementDeserialization + ");");
+            } else {
+                deserializationBlock.line("while (reader.nextElement() != XmlToken.END_ELEMENT) {");
+                deserializationBlock.indent(() -> {
+                    deserializationBlock.line("elementName = reader.getElementName();");
+                    deserializationBlock.ifBlock("\"" + property.getXmlListElementName() + "\".equals(elementName.getLocalPart())",
+                            ifBlock -> ifBlock.line(property.getName() + ".add(" + elementDeserialization + ");"))
+                        .elseBlock(elseBlock -> elseBlock.line("reader.skipElement();"));
+                });
+                deserializationBlock.line("}");
+            }
         } else if (wireType instanceof MapType) {
             IType valueType = ((MapType) wireType).getValueType();
 

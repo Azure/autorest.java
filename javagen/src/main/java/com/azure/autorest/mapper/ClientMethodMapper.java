@@ -557,7 +557,31 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return returnTypeHolder;
         }
 
-        IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
+        Schema responseBodySchema = SchemaUtil.getLowestCommonParent(operation.getResponses().stream()
+            .map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+        IType responseBodyType;
+
+        // XML wrapped response types are tricky as they're defined as ArraySchema but in reality it's a specialized
+        // ObjectSchema.
+        if (responseBodySchema != null && responseBodySchema.getSerialization() != null
+            && responseBodySchema.getSerialization().getXml() != null
+            && responseBodySchema.getSerialization().getXml().isWrapped()) {
+            String className = responseBodySchema.getLanguage().getJava() != null
+                ? responseBodySchema.getLanguage().getJava().getName()
+                : responseBodySchema.getLanguage().getDefault().getName();
+            String classPackage = settings.isCustomType(className)
+                ? settings.getPackage(className)
+                : settings.getPackage(settings.getModelsSubpackage());
+
+            responseBodyType = new ClassType.Builder()
+                .packageName(classPackage)
+                .name(className)
+                .extensions(responseBodySchema.getExtensions())
+                .build();
+        } else {
+            responseBodyType = SchemaUtil.getOperationResponseType(responseBodySchema, operation, settings);
+        }
+
         if (isProtocolMethod) {
             if (responseBodyType instanceof ClassType
                     || responseBodyType instanceof ListType

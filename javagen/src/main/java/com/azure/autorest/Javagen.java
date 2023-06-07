@@ -169,9 +169,8 @@ public class Javagen extends NewPlugin {
         JavaPackage javaPackage = new JavaPackage(this);
         // Service client
         if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
-            javaPackage
-                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
-                    client.getServiceClient());
+            javaPackage.addServiceClient(client.getServiceClient().getPackage(),
+                client.getServiceClient().getClassName(), client.getServiceClient());
         } else {
             // multi-client from TypeSpec
             for (ServiceClient serviceClient : client.getServiceClients()) {
@@ -180,8 +179,8 @@ public class Javagen extends NewPlugin {
         }
 
         if (settings.isGenerateClientInterfaces()) {
-            javaPackage
-                .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
+            javaPackage.addServiceClientInterface(client.getServiceClient().getInterfaceName(),
+                client.getServiceClient());
         }
 
         // Async/sync service clients
