@@ -16,7 +16,7 @@ public final class Dog {
      * The id property.
      */
     @Generated
-    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private int id;
 
     /*
@@ -30,7 +30,7 @@ public final class Dog {
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -41,9 +41,7 @@ public final class Dog {
      */
     @Generated
     @JsonCreator
-    private Dog(
-            @JsonProperty(value = "secretName") String secretName,
-            @JsonProperty(value = "name", required = true) String name) {
+    private Dog(@JsonProperty(value = "secretName") String secretName, @JsonProperty(value = "name") String name) {
         this.secretName = secretName;
         this.name = name;
     }

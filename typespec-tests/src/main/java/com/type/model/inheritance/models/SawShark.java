@@ -23,7 +23,7 @@ public final class SawShark extends Shark {
      */
     @Generated
     @JsonCreator
-    public SawShark(@JsonProperty(value = "age", required = true) int age) {
+    public SawShark(@JsonProperty(value = "age") int age) {
         super(age);
     }
 }

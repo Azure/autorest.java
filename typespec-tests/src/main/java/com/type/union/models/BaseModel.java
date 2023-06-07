@@ -16,7 +16,7 @@ public class BaseModel {
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -26,7 +26,7 @@ public class BaseModel {
      */
     @Generated
     @JsonCreator
-    public BaseModel(@JsonProperty(value = "name", required = true) String name) {
+    public BaseModel(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 

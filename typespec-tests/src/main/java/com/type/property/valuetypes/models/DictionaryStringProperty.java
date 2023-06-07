@@ -17,7 +17,7 @@ public final class DictionaryStringProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private Map<String, String> property;
 
     /**
@@ -27,7 +27,7 @@ public final class DictionaryStringProperty {
      */
     @Generated
     @JsonCreator
-    public DictionaryStringProperty(@JsonProperty(value = "property", required = true) Map<String, String> property) {
+    public DictionaryStringProperty(@JsonProperty(value = "property") Map<String, String> property) {
         this.property = property;
     }
 

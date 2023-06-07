@@ -16,14 +16,14 @@ public final class ExportedUser {
      * The name of user.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /*
      * The exported URI.
      */
     @Generated
-    @JsonProperty(value = "resourceUri", required = true)
+    @JsonProperty(value = "resourceUri")
     private String resourceUri;
 
     /**
@@ -35,8 +35,7 @@ public final class ExportedUser {
     @Generated
     @JsonCreator
     private ExportedUser(
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "resourceUri", required = true) String resourceUri) {
+            @JsonProperty(value = "name") String name, @JsonProperty(value = "resourceUri") String resourceUri) {
         this.name = name;
         this.resourceUri = resourceUri;
     }

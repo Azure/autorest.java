@@ -15,14 +15,14 @@ public final class JobPollResult {
      * Operation identifier.
      */
     @Generated
-    @JsonProperty(value = "operationId", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "operationId", access = JsonProperty.Access.WRITE_ONLY)
     private String operationId;
 
     /*
      * The status of the processing job.
      */
     @Generated
-    @JsonProperty(value = "status", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "status", access = JsonProperty.Access.WRITE_ONLY)
     private OperationState status;
 
     /** Creates an instance of JobPollResult class. */

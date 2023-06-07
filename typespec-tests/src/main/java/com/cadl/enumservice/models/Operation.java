@@ -16,35 +16,35 @@ public final class Operation {
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private Name name;
 
     /*
      * The best property.
      */
     @Generated
-    @JsonProperty(value = "best", required = true)
+    @JsonProperty(value = "best")
     private boolean best = true;
 
     /*
      * The age property.
      */
     @Generated
-    @JsonProperty(value = "age", required = true)
+    @JsonProperty(value = "age")
     private long age = 50L;
 
     /*
      * The priority property.
      */
     @Generated
-    @JsonProperty(value = "priority", required = true)
+    @JsonProperty(value = "priority")
     private Priority priority;
 
     /*
      * The color property.
      */
     @Generated
-    @JsonProperty(value = "color", required = true)
+    @JsonProperty(value = "color")
     private ColorModel color;
 
     /**
@@ -57,9 +57,9 @@ public final class Operation {
     @Generated
     @JsonCreator
     private Operation(
-            @JsonProperty(value = "name", required = true) Name name,
-            @JsonProperty(value = "priority", required = true) Priority priority,
-            @JsonProperty(value = "color", required = true) ColorModel color) {
+            @JsonProperty(value = "name") Name name,
+            @JsonProperty(value = "priority") Priority priority,
+            @JsonProperty(value = "color") ColorModel color) {
         best = true;
         age = 50L;
         this.name = name;

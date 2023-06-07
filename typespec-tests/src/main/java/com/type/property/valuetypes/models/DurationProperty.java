@@ -17,7 +17,7 @@ public final class DurationProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private Duration property;
 
     /**
@@ -27,7 +27,7 @@ public final class DurationProperty {
      */
     @Generated
     @JsonCreator
-    public DurationProperty(@JsonProperty(value = "property", required = true) Duration property) {
+    public DurationProperty(@JsonProperty(value = "property") Duration property) {
         this.property = property;
     }
 

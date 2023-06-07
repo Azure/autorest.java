@@ -17,14 +17,14 @@ public final class BytesProperty {
      * Required property
      */
     @Generated
-    @JsonProperty(value = "requiredProperty", required = true)
+    @JsonProperty(value = "requiredProperty")
     private String requiredProperty;
 
     /*
      * Property
      */
     @Generated
-    @JsonProperty(value = "nullableProperty", required = true)
+    @JsonProperty(value = "nullableProperty")
     private byte[] nullableProperty;
 
     /**
@@ -36,8 +36,8 @@ public final class BytesProperty {
     @Generated
     @JsonCreator
     public BytesProperty(
-            @JsonProperty(value = "requiredProperty", required = true) String requiredProperty,
-            @JsonProperty(value = "nullableProperty", required = true) byte[] nullableProperty) {
+            @JsonProperty(value = "requiredProperty") String requiredProperty,
+            @JsonProperty(value = "nullableProperty") byte[] nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }

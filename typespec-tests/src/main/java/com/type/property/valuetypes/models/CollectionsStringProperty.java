@@ -17,7 +17,7 @@ public final class CollectionsStringProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private List<String> property;
 
     /**
@@ -27,7 +27,7 @@ public final class CollectionsStringProperty {
      */
     @Generated
     @JsonCreator
-    public CollectionsStringProperty(@JsonProperty(value = "property", required = true) List<String> property) {
+    public CollectionsStringProperty(@JsonProperty(value = "property") List<String> property) {
         this.property = property;
     }
 

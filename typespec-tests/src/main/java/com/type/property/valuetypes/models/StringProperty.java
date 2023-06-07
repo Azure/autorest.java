@@ -16,7 +16,7 @@ public final class StringProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private String property;
 
     /**
@@ -26,7 +26,7 @@ public final class StringProperty {
      */
     @Generated
     @JsonCreator
-    public StringProperty(@JsonProperty(value = "property", required = true) String property) {
+    public StringProperty(@JsonProperty(value = "property") String property) {
         this.property = property;
     }
 

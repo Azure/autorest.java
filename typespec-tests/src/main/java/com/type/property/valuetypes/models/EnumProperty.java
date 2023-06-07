@@ -16,7 +16,7 @@ public final class EnumProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private FixedInnerEnum property;
 
     /**
@@ -26,7 +26,7 @@ public final class EnumProperty {
      */
     @Generated
     @JsonCreator
-    public EnumProperty(@JsonProperty(value = "property", required = true) FixedInnerEnum property) {
+    public EnumProperty(@JsonProperty(value = "property") FixedInnerEnum property) {
         this.property = property;
     }
 

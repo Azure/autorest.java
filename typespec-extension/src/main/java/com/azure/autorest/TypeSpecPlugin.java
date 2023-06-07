@@ -133,6 +133,7 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("required-parameter-client-methods", true);
         SETTINGS_MAP.put("generic-response-type", true);
         SETTINGS_MAP.put("output-model-immutable", true);
+        SETTINGS_MAP.put("disable-required-property-annotation", true);
     }
 
     public static class MockConnection extends Connection {

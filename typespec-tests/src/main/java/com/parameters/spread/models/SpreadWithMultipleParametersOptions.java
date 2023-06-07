@@ -16,56 +16,56 @@ public final class SpreadWithMultipleParametersOptions {
      * The id property.
      */
     @Generated
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id")
     private String id;
 
     /*
      * The x-ms-test-header property.
      */
     @Generated
-    @JsonProperty(value = "x-ms-test-header", required = true)
+    @JsonProperty(value = "x-ms-test-header")
     private String xMsTestHeader;
 
     /*
      * The prop1 property.
      */
     @Generated
-    @JsonProperty(value = "prop1", required = true)
+    @JsonProperty(value = "prop1")
     private String prop1;
 
     /*
      * The prop2 property.
      */
     @Generated
-    @JsonProperty(value = "prop2", required = true)
+    @JsonProperty(value = "prop2")
     private String prop2;
 
     /*
      * The prop3 property.
      */
     @Generated
-    @JsonProperty(value = "prop3", required = true)
+    @JsonProperty(value = "prop3")
     private String prop3;
 
     /*
      * The prop4 property.
      */
     @Generated
-    @JsonProperty(value = "prop4", required = true)
+    @JsonProperty(value = "prop4")
     private String prop4;
 
     /*
      * The prop5 property.
      */
     @Generated
-    @JsonProperty(value = "prop5", required = true)
+    @JsonProperty(value = "prop5")
     private String prop5;
 
     /*
      * The prop6 property.
      */
     @Generated
-    @JsonProperty(value = "prop6", required = true)
+    @JsonProperty(value = "prop6")
     private String prop6;
 
     /**
@@ -83,14 +83,14 @@ public final class SpreadWithMultipleParametersOptions {
     @Generated
     @JsonCreator
     public SpreadWithMultipleParametersOptions(
-            @JsonProperty(value = "id", required = true) String id,
-            @JsonProperty(value = "x-ms-test-header", required = true) String xMsTestHeader,
-            @JsonProperty(value = "prop1", required = true) String prop1,
-            @JsonProperty(value = "prop2", required = true) String prop2,
-            @JsonProperty(value = "prop3", required = true) String prop3,
-            @JsonProperty(value = "prop4", required = true) String prop4,
-            @JsonProperty(value = "prop5", required = true) String prop5,
-            @JsonProperty(value = "prop6", required = true) String prop6) {
+            @JsonProperty(value = "id") String id,
+            @JsonProperty(value = "x-ms-test-header") String xMsTestHeader,
+            @JsonProperty(value = "prop1") String prop1,
+            @JsonProperty(value = "prop2") String prop2,
+            @JsonProperty(value = "prop3") String prop3,
+            @JsonProperty(value = "prop4") String prop4,
+            @JsonProperty(value = "prop5") String prop5,
+            @JsonProperty(value = "prop6") String prop6) {
         this.id = id;
         this.xMsTestHeader = xMsTestHeader;
         this.prop1 = prop1;

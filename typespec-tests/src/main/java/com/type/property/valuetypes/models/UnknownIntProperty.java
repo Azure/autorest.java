@@ -16,7 +16,7 @@ public final class UnknownIntProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private Object property;
 
     /**
@@ -26,7 +26,7 @@ public final class UnknownIntProperty {
      */
     @Generated
     @JsonCreator
-    public UnknownIntProperty(@JsonProperty(value = "property", required = true) Object property) {
+    public UnknownIntProperty(@JsonProperty(value = "property") Object property) {
         this.property = property;
     }
 

@@ -17,7 +17,7 @@ public final class CollectionsModelProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private List<InnerModel> property;
 
     /**
@@ -27,7 +27,7 @@ public final class CollectionsModelProperty {
      */
     @Generated
     @JsonCreator
-    public CollectionsModelProperty(@JsonProperty(value = "property", required = true) List<InnerModel> property) {
+    public CollectionsModelProperty(@JsonProperty(value = "property") List<InnerModel> property) {
         this.property = property;
     }
 

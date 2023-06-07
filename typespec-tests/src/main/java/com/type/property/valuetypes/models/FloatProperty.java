@@ -16,7 +16,7 @@ public final class FloatProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private double property;
 
     /**
@@ -26,7 +26,7 @@ public final class FloatProperty {
      */
     @Generated
     @JsonCreator
-    public FloatProperty(@JsonProperty(value = "property", required = true) double property) {
+    public FloatProperty(@JsonProperty(value = "property") double property) {
         this.property = property;
     }
 

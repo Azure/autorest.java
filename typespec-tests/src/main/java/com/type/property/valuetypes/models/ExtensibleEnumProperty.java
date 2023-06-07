@@ -16,7 +16,7 @@ public final class ExtensibleEnumProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private InnerEnum property;
 
     /**
@@ -26,7 +26,7 @@ public final class ExtensibleEnumProperty {
      */
     @Generated
     @JsonCreator
-    public ExtensibleEnumProperty(@JsonProperty(value = "property", required = true) InnerEnum property) {
+    public ExtensibleEnumProperty(@JsonProperty(value = "property") InnerEnum property) {
         this.property = property;
     }
 

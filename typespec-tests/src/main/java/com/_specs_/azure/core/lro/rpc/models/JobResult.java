@@ -16,21 +16,21 @@ public final class JobResult {
      * A processing job identifier.
      */
     @Generated
-    @JsonProperty(value = "jobId", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "jobId", access = JsonProperty.Access.WRITE_ONLY)
     private String jobId;
 
     /*
      * Comment.
      */
     @Generated
-    @JsonProperty(value = "comment", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "comment", access = JsonProperty.Access.WRITE_ONLY)
     private String comment;
 
     /*
      * The status of the processing job.
      */
     @Generated
-    @JsonProperty(value = "status", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "status", access = JsonProperty.Access.WRITE_ONLY)
     private OperationState status;
 
     /*
@@ -44,7 +44,7 @@ public final class JobResult {
      * The results.
      */
     @Generated
-    @JsonProperty(value = "results", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "results", access = JsonProperty.Access.WRITE_ONLY)
     private List<String> results;
 
     /** Creates an instance of JobResult class. */

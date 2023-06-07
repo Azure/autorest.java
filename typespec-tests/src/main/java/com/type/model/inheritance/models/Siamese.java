@@ -16,7 +16,7 @@ public final class Siamese extends Cat {
      * The smart property.
      */
     @Generated
-    @JsonProperty(value = "smart", required = true)
+    @JsonProperty(value = "smart")
     private boolean smart;
 
     /**
@@ -29,9 +29,9 @@ public final class Siamese extends Cat {
     @Generated
     @JsonCreator
     public Siamese(
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "age", required = true) int age,
-            @JsonProperty(value = "smart", required = true) boolean smart) {
+            @JsonProperty(value = "name") String name,
+            @JsonProperty(value = "age") int age,
+            @JsonProperty(value = "smart") boolean smart) {
         super(name, age);
         this.smart = smart;
     }

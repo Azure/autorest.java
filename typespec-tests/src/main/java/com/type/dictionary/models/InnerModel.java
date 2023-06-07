@@ -17,7 +17,7 @@ public final class InnerModel {
      * Required string property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private String property;
 
     /*
@@ -34,7 +34,7 @@ public final class InnerModel {
      */
     @Generated
     @JsonCreator
-    public InnerModel(@JsonProperty(value = "property", required = true) String property) {
+    public InnerModel(@JsonProperty(value = "property") String property) {
         this.property = property;
     }
 

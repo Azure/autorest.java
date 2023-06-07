@@ -16,7 +16,7 @@ public final class SendLongOptions {
      * The id property.
      */
     @Generated
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id")
     private String id;
 
     /*
@@ -37,14 +37,14 @@ public final class SendLongOptions {
      * The input property.
      */
     @Generated
-    @JsonProperty(value = "input", required = true)
+    @JsonProperty(value = "input")
     private String input;
 
     /*
      * The dataInt property.
      */
     @Generated
-    @JsonProperty(value = "dataInt", required = true)
+    @JsonProperty(value = "dataInt")
     private int dataInt;
 
     /*
@@ -78,9 +78,9 @@ public final class SendLongOptions {
     @Generated
     @JsonCreator
     public SendLongOptions(
-            @JsonProperty(value = "id", required = true) String id,
-            @JsonProperty(value = "input", required = true) String input,
-            @JsonProperty(value = "dataInt", required = true) int dataInt) {
+            @JsonProperty(value = "id") String id,
+            @JsonProperty(value = "input") String input,
+            @JsonProperty(value = "dataInt") int dataInt) {
         this.id = id;
         this.input = input;
         this.dataInt = dataInt;

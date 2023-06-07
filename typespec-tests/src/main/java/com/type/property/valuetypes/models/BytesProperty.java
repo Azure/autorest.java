@@ -17,7 +17,7 @@ public final class BytesProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private byte[] property;
 
     /**
@@ -27,7 +27,7 @@ public final class BytesProperty {
      */
     @Generated
     @JsonCreator
-    public BytesProperty(@JsonProperty(value = "property", required = true) byte[] property) {
+    public BytesProperty(@JsonProperty(value = "property") byte[] property) {
         this.property = property;
     }
 

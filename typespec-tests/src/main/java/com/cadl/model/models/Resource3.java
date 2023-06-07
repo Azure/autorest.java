@@ -16,14 +16,14 @@ public final class Resource3 {
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /*
      * The outputData3 property.
      */
     @Generated
-    @JsonProperty(value = "outputData3", required = true)
+    @JsonProperty(value = "outputData3")
     private OutputData3 outputData3;
 
     /**
@@ -35,8 +35,7 @@ public final class Resource3 {
     @Generated
     @JsonCreator
     private Resource3(
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "outputData3", required = true) OutputData3 outputData3) {
+            @JsonProperty(value = "name") String name, @JsonProperty(value = "outputData3") OutputData3 outputData3) {
         this.name = name;
         this.outputData3 = outputData3;
     }

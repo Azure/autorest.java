@@ -29,7 +29,7 @@ public class Fish {
      * The age property.
      */
     @Generated
-    @JsonProperty(value = "age", required = true)
+    @JsonProperty(value = "age")
     private int age;
 
     /**
@@ -39,7 +39,7 @@ public class Fish {
      */
     @Generated
     @JsonCreator
-    public Fish(@JsonProperty(value = "age", required = true) int age) {
+    public Fish(@JsonProperty(value = "age") int age) {
         this.age = age;
     }
 

@@ -16,7 +16,7 @@ public final class OutputData {
      * The data property.
      */
     @Generated
-    @JsonProperty(value = "data", required = true)
+    @JsonProperty(value = "data")
     private String data;
 
     /**
@@ -26,7 +26,7 @@ public final class OutputData {
      */
     @Generated
     @JsonCreator
-    private OutputData(@JsonProperty(value = "data", required = true) String data) {
+    private OutputData(@JsonProperty(value = "data") String data) {
         this.data = data;
     }
 

@@ -16,7 +16,7 @@ public final class ModelWithNamedUnionProperty {
      * The namedUnion property.
      */
     @Generated
-    @JsonProperty(value = "namedUnion", required = true)
+    @JsonProperty(value = "namedUnion")
     private NamedUnionModelBase namedUnion;
 
     /**
@@ -26,8 +26,7 @@ public final class ModelWithNamedUnionProperty {
      */
     @Generated
     @JsonCreator
-    public ModelWithNamedUnionProperty(
-            @JsonProperty(value = "namedUnion", required = true) NamedUnionModelBase namedUnion) {
+    public ModelWithNamedUnionProperty(@JsonProperty(value = "namedUnion") NamedUnionModelBase namedUnion) {
         this.namedUnion = namedUnion;
     }
 

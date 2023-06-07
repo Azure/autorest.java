@@ -23,7 +23,7 @@ public final class BinaryData {
      * description of data property
      */
     @Generated
-    @JsonProperty(value = "data", required = true)
+    @JsonProperty(value = "data")
     private byte[] data;
 
     /**
@@ -33,7 +33,7 @@ public final class BinaryData {
      */
     @Generated
     @JsonCreator
-    private BinaryData(@JsonProperty(value = "data", required = true) byte[] data) {
+    private BinaryData(@JsonProperty(value = "data") byte[] data) {
         this.data = data;
     }
 

@@ -16,7 +16,7 @@ public final class Model2 extends BaseModel {
      * The prop2 property.
      */
     @Generated
-    @JsonProperty(value = "prop2", required = true)
+    @JsonProperty(value = "prop2")
     private int prop2;
 
     /**
@@ -27,9 +27,7 @@ public final class Model2 extends BaseModel {
      */
     @Generated
     @JsonCreator
-    public Model2(
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "prop2", required = true) int prop2) {
+    public Model2(@JsonProperty(value = "name") String name, @JsonProperty(value = "prop2") int prop2) {
         super(name);
         this.prop2 = prop2;
     }

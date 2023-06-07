@@ -16,7 +16,7 @@ public final class PublicModel {
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -26,7 +26,7 @@ public final class PublicModel {
      */
     @Generated
     @JsonCreator
-    private PublicModel(@JsonProperty(value = "name", required = true) String name) {
+    private PublicModel(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 

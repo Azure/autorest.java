@@ -16,7 +16,7 @@ public final class ModelWithSimpleUnionProperty {
      * The simpleUnion property.
      */
     @Generated
-    @JsonProperty(value = "simpleUnion", required = true)
+    @JsonProperty(value = "simpleUnion")
     private SimpleUnionModelBase simpleUnion;
 
     /**
@@ -26,8 +26,7 @@ public final class ModelWithSimpleUnionProperty {
      */
     @Generated
     @JsonCreator
-    public ModelWithSimpleUnionProperty(
-            @JsonProperty(value = "simpleUnion", required = true) SimpleUnionModelBase simpleUnion) {
+    public ModelWithSimpleUnionProperty(@JsonProperty(value = "simpleUnion") SimpleUnionModelBase simpleUnion) {
         this.simpleUnion = simpleUnion;
     }
 

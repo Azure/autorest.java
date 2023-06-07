@@ -17,7 +17,7 @@ public final class DatetimeProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private OffsetDateTime property;
 
     /**
@@ -27,7 +27,7 @@ public final class DatetimeProperty {
      */
     @Generated
     @JsonCreator
-    public DatetimeProperty(@JsonProperty(value = "property", required = true) OffsetDateTime property) {
+    public DatetimeProperty(@JsonProperty(value = "property") OffsetDateTime property) {
         this.property = property;
     }
 

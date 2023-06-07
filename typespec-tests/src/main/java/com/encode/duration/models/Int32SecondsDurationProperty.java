@@ -17,7 +17,7 @@ public final class Int32SecondsDurationProperty {
      * The value property.
      */
     @Generated
-    @JsonProperty(value = "value", required = true)
+    @JsonProperty(value = "value")
     private long value;
 
     /**
@@ -27,7 +27,7 @@ public final class Int32SecondsDurationProperty {
      */
     @Generated
     @JsonCreator
-    public Int32SecondsDurationProperty(@JsonProperty(value = "value", required = true) Duration value) {
+    public Int32SecondsDurationProperty(@JsonProperty(value = "value") Duration value) {
         this.value = value.getSeconds();
     }
 

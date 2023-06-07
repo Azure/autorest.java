@@ -16,7 +16,7 @@ public final class UnknownArrayProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private Object property;
 
     /**
@@ -26,7 +26,7 @@ public final class UnknownArrayProperty {
      */
     @Generated
     @JsonCreator
-    public UnknownArrayProperty(@JsonProperty(value = "property", required = true) Object property) {
+    public UnknownArrayProperty(@JsonProperty(value = "property") Object property) {
         this.property = property;
     }
 

@@ -16,14 +16,14 @@ public final class User {
      * The name of user.
      */
     @Generated
-    @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /*
      * The role of user
      */
     @Generated
-    @JsonProperty(value = "role", required = true)
+    @JsonProperty(value = "role")
     private String role;
 
     /**
@@ -33,7 +33,7 @@ public final class User {
      */
     @Generated
     @JsonCreator
-    public User(@JsonProperty(value = "role", required = true) String role) {
+    public User(@JsonProperty(value = "role") String role) {
         this.role = role;
     }
 

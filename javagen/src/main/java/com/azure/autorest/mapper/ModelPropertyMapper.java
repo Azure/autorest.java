@@ -139,7 +139,8 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         List<String> annotationArgumentList = new ArrayList<String>() {{
             add(String.format("value = \"%s\"", xmlParamName));
         }};
-        if (property.isRequired() && !propertyIsSecret) {
+
+        if (property.isRequired() && !propertyIsSecret && !settings.isDisableRequiredJsonAnnotation()) {
             annotationArgumentList.add("required = true");
         }
 

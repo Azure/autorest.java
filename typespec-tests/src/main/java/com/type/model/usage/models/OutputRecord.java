@@ -16,7 +16,7 @@ public final class OutputRecord {
      * The requiredProp property.
      */
     @Generated
-    @JsonProperty(value = "requiredProp", required = true)
+    @JsonProperty(value = "requiredProp")
     private String requiredProp;
 
     /**
@@ -26,7 +26,7 @@ public final class OutputRecord {
      */
     @Generated
     @JsonCreator
-    private OutputRecord(@JsonProperty(value = "requiredProp", required = true) String requiredProp) {
+    private OutputRecord(@JsonProperty(value = "requiredProp") String requiredProp) {
         this.requiredProp = requiredProp;
     }
 
