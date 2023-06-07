@@ -16,7 +16,7 @@ public final class User {
      * The user property.
      */
     @Generated
-    @JsonProperty(value = "user", required = true)
+    @JsonProperty(value = "user")
     private String user;
 
     /**
@@ -26,7 +26,7 @@ public final class User {
      */
     @Generated
     @JsonCreator
-    public User(@JsonProperty(value = "user", required = true) String user) {
+    public User(@JsonProperty(value = "user") String user) {
         this.user = user;
     }
 

@@ -16,7 +16,7 @@ public class Pet {
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -26,7 +26,7 @@ public class Pet {
      */
     @Generated
     @JsonCreator
-    public Pet(@JsonProperty(value = "name", required = true) String name) {
+    public Pet(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 

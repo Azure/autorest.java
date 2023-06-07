@@ -16,21 +16,21 @@ public final class UserOrder {
      * The user's id.
      */
     @Generated
-    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private int id;
 
     /*
      * The user's id.
      */
     @Generated
-    @JsonProperty(value = "userId", required = true)
+    @JsonProperty(value = "userId")
     private int userId;
 
     /*
      * The user's order detail
      */
     @Generated
-    @JsonProperty(value = "detail", required = true)
+    @JsonProperty(value = "detail")
     private String detail;
 
     /**
@@ -41,9 +41,7 @@ public final class UserOrder {
      */
     @Generated
     @JsonCreator
-    public UserOrder(
-            @JsonProperty(value = "userId", required = true) int userId,
-            @JsonProperty(value = "detail", required = true) String detail) {
+    public UserOrder(@JsonProperty(value = "userId") int userId, @JsonProperty(value = "detail") String detail) {
         this.userId = userId;
         this.detail = detail;
     }

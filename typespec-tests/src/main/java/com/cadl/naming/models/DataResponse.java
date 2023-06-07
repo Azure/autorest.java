@@ -22,7 +22,7 @@ public final class DataResponse {
      * description of name property
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /*
@@ -31,7 +31,7 @@ public final class DataResponse {
      * description of data property
      */
     @Generated
-    @JsonProperty(value = "data", required = true)
+    @JsonProperty(value = "data")
     private BinaryData data;
 
     /*
@@ -40,7 +40,7 @@ public final class DataResponse {
      * description of type property
      */
     @Generated
-    @JsonProperty(value = "type", required = true)
+    @JsonProperty(value = "type")
     private TypesModel dataType;
 
     /*
@@ -49,7 +49,7 @@ public final class DataResponse {
      * description of status property
      */
     @Generated
-    @JsonProperty(value = "status", required = true)
+    @JsonProperty(value = "status")
     private DataStatus status;
 
     /**
@@ -63,10 +63,10 @@ public final class DataResponse {
     @Generated
     @JsonCreator
     private DataResponse(
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "data", required = true) BinaryData data,
-            @JsonProperty(value = "type", required = true) TypesModel dataType,
-            @JsonProperty(value = "status", required = true) DataStatus status) {
+            @JsonProperty(value = "name") String name,
+            @JsonProperty(value = "data") BinaryData data,
+            @JsonProperty(value = "type") TypesModel dataType,
+            @JsonProperty(value = "status") DataStatus status) {
         this.name = name;
         this.data = data;
         this.dataType = dataType;

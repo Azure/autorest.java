@@ -17,14 +17,14 @@ public final class DurationProperty {
      * Required property
      */
     @Generated
-    @JsonProperty(value = "requiredProperty", required = true)
+    @JsonProperty(value = "requiredProperty")
     private String requiredProperty;
 
     /*
      * Property
      */
     @Generated
-    @JsonProperty(value = "nullableProperty", required = true)
+    @JsonProperty(value = "nullableProperty")
     private Duration nullableProperty;
 
     /**
@@ -36,8 +36,8 @@ public final class DurationProperty {
     @Generated
     @JsonCreator
     public DurationProperty(
-            @JsonProperty(value = "requiredProperty", required = true) String requiredProperty,
-            @JsonProperty(value = "nullableProperty", required = true) Duration nullableProperty) {
+            @JsonProperty(value = "requiredProperty") String requiredProperty,
+            @JsonProperty(value = "nullableProperty") Duration nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }

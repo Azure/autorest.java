@@ -49,7 +49,7 @@ public final class Salmon extends Fish {
      */
     @Generated
     @JsonCreator
-    public Salmon(@JsonProperty(value = "age", required = true) int age) {
+    public Salmon(@JsonProperty(value = "age") int age) {
         super(age);
     }
 

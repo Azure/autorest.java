@@ -16,7 +16,7 @@ public final class BooleanProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private boolean property;
 
     /**
@@ -26,7 +26,7 @@ public final class BooleanProperty {
      */
     @Generated
     @JsonCreator
-    public BooleanProperty(@JsonProperty(value = "property", required = true) boolean property) {
+    public BooleanProperty(@JsonProperty(value = "property") boolean property) {
         this.property = property;
     }
 

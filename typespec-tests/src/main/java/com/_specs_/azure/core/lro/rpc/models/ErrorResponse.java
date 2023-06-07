@@ -17,7 +17,7 @@ public final class ErrorResponse {
      * The error object.
      */
     @Generated
-    @JsonProperty(value = "error", required = true)
+    @JsonProperty(value = "error")
     private ResponseError error;
 
     /**
@@ -27,7 +27,7 @@ public final class ErrorResponse {
      */
     @Generated
     @JsonCreator
-    private ErrorResponse(@JsonProperty(value = "error", required = true) ResponseError error) {
+    private ErrorResponse(@JsonProperty(value = "error") ResponseError error) {
         this.error = error;
     }
 

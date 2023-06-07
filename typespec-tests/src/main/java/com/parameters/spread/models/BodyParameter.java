@@ -16,7 +16,7 @@ public final class BodyParameter {
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -26,7 +26,7 @@ public final class BodyParameter {
      */
     @Generated
     @JsonCreator
-    public BodyParameter(@JsonProperty(value = "name", required = true) String name) {
+    public BodyParameter(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 

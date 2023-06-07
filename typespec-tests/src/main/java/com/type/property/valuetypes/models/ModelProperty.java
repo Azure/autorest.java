@@ -16,7 +16,7 @@ public final class ModelProperty {
      * Property
      */
     @Generated
-    @JsonProperty(value = "property", required = true)
+    @JsonProperty(value = "property")
     private InnerModel property;
 
     /**
@@ -26,7 +26,7 @@ public final class ModelProperty {
      */
     @Generated
     @JsonCreator
-    public ModelProperty(@JsonProperty(value = "property", required = true) InnerModel property) {
+    public ModelProperty(@JsonProperty(value = "property") InnerModel property) {
         this.property = property;
     }
 

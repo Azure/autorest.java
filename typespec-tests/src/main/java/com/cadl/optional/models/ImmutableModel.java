@@ -16,7 +16,7 @@ public final class ImmutableModel {
      * The stringReadWriteRequired property.
      */
     @Generated
-    @JsonProperty(value = "stringReadWriteRequired", required = true)
+    @JsonProperty(value = "stringReadWriteRequired")
     private String stringReadWriteRequired;
 
     /*
@@ -33,8 +33,7 @@ public final class ImmutableModel {
      */
     @Generated
     @JsonCreator
-    private ImmutableModel(
-            @JsonProperty(value = "stringReadWriteRequired", required = true) String stringReadWriteRequired) {
+    private ImmutableModel(@JsonProperty(value = "stringReadWriteRequired") String stringReadWriteRequired) {
         this.stringReadWriteRequired = stringReadWriteRequired;
     }
 

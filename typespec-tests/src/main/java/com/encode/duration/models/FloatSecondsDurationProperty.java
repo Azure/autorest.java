@@ -17,7 +17,7 @@ public final class FloatSecondsDurationProperty {
      * The value property.
      */
     @Generated
-    @JsonProperty(value = "value", required = true)
+    @JsonProperty(value = "value")
     private double value;
 
     /**
@@ -27,7 +27,7 @@ public final class FloatSecondsDurationProperty {
      */
     @Generated
     @JsonCreator
-    public FloatSecondsDurationProperty(@JsonProperty(value = "value", required = true) Duration value) {
+    public FloatSecondsDurationProperty(@JsonProperty(value = "value") Duration value) {
         this.value = (double) value.toNanos() / 1000_000_000L;
     }
 

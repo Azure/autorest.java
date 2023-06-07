@@ -16,7 +16,7 @@ public final class JobData {
      * Comment.
      */
     @Generated
-    @JsonProperty(value = "comment", required = true)
+    @JsonProperty(value = "comment")
     private String comment;
 
     /**
@@ -26,7 +26,7 @@ public final class JobData {
      */
     @Generated
     @JsonCreator
-    public JobData(@JsonProperty(value = "comment", required = true) String comment) {
+    public JobData(@JsonProperty(value = "comment") String comment) {
         this.comment = comment;
     }
 

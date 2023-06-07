@@ -18,7 +18,7 @@ public final class FloatSecondsDurationArrayProperty {
      * The value property.
      */
     @Generated
-    @JsonProperty(value = "value", required = true)
+    @JsonProperty(value = "value")
     private List<Double> value;
 
     /**
@@ -28,7 +28,7 @@ public final class FloatSecondsDurationArrayProperty {
      */
     @Generated
     @JsonCreator
-    public FloatSecondsDurationArrayProperty(@JsonProperty(value = "value", required = true) List<Duration> value) {
+    public FloatSecondsDurationArrayProperty(@JsonProperty(value = "value") List<Duration> value) {
         this.value =
                 value.stream()
                         .map(el -> (double) el.toNanos() / 1000_000_000L)

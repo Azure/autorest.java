@@ -16,7 +16,7 @@ public class Cat extends Pet {
      * The age property.
      */
     @Generated
-    @JsonProperty(value = "age", required = true)
+    @JsonProperty(value = "age")
     private int age;
 
     /**
@@ -27,9 +27,7 @@ public class Cat extends Pet {
      */
     @Generated
     @JsonCreator
-    public Cat(
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "age", required = true) int age) {
+    public Cat(@JsonProperty(value = "name") String name, @JsonProperty(value = "age") int age) {
         super(name);
         this.age = age;
     }

@@ -20,14 +20,14 @@ public final class DerivedModel extends BaseModel {
      * The derived.name property.
      */
     @Generated
-    @JsonProperty(value = "derived.name", required = true)
+    @JsonProperty(value = "derived.name")
     private String derivedName;
 
     /*
      * The for property.
      */
     @Generated
-    @JsonProperty(value = "for", required = true)
+    @JsonProperty(value = "for")
     private String forProperty;
 
     /**
@@ -39,8 +39,7 @@ public final class DerivedModel extends BaseModel {
     @Generated
     @JsonCreator
     public DerivedModel(
-            @JsonProperty(value = "derived.name", required = true) String derivedName,
-            @JsonProperty(value = "for", required = true) String forProperty) {
+            @JsonProperty(value = "derived.name") String derivedName, @JsonProperty(value = "for") String forProperty) {
         this.derivedName = derivedName;
         this.forProperty = forProperty;
     }

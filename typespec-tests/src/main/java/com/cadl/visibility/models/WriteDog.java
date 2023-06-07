@@ -16,7 +16,7 @@ public final class WriteDog {
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", required = true)
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -26,7 +26,7 @@ public final class WriteDog {
      */
     @Generated
     @JsonCreator
-    public WriteDog(@JsonProperty(value = "name", required = true) String name) {
+    public WriteDog(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 

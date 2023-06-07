@@ -16,7 +16,7 @@ public final class LanguageProjectedNameModel {
      * Pass in true
      */
     @Generated
-    @JsonProperty(value = "defaultName", required = true)
+    @JsonProperty(value = "defaultName")
     private boolean javaName;
 
     /**
@@ -26,7 +26,7 @@ public final class LanguageProjectedNameModel {
      */
     @Generated
     @JsonCreator
-    public LanguageProjectedNameModel(@JsonProperty(value = "defaultName", required = true) boolean javaName) {
+    public LanguageProjectedNameModel(@JsonProperty(value = "defaultName") boolean javaName) {
         this.javaName = javaName;
     }
 

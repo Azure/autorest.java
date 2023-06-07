@@ -35,14 +35,14 @@ public final class Optional {
      * The booleanRequired property.
      */
     @Generated
-    @JsonProperty(value = "booleanRequired", required = true)
+    @JsonProperty(value = "booleanRequired")
     private boolean booleanRequired;
 
     /*
      * The booleanRequiredNullable property.
      */
     @Generated
-    @JsonProperty(value = "booleanRequiredNullable", required = true)
+    @JsonProperty(value = "booleanRequiredNullable")
     private Boolean booleanRequiredNullable;
 
     /*
@@ -63,14 +63,14 @@ public final class Optional {
      * The stringRequired property.
      */
     @Generated
-    @JsonProperty(value = "stringRequired", required = true)
+    @JsonProperty(value = "stringRequired")
     private String stringRequired;
 
     /*
      * The stringRequiredNullable property.
      */
     @Generated
-    @JsonProperty(value = "stringRequiredNullable", required = true)
+    @JsonProperty(value = "stringRequiredNullable")
     private String stringRequiredNullable;
 
     /*
@@ -147,10 +147,10 @@ public final class Optional {
     @Generated
     @JsonCreator
     public Optional(
-            @JsonProperty(value = "booleanRequired", required = true) boolean booleanRequired,
-            @JsonProperty(value = "booleanRequiredNullable", required = true) Boolean booleanRequiredNullable,
-            @JsonProperty(value = "stringRequired", required = true) String stringRequired,
-            @JsonProperty(value = "stringRequiredNullable", required = true) String stringRequiredNullable) {
+            @JsonProperty(value = "booleanRequired") boolean booleanRequired,
+            @JsonProperty(value = "booleanRequiredNullable") Boolean booleanRequiredNullable,
+            @JsonProperty(value = "stringRequired") String stringRequired,
+            @JsonProperty(value = "stringRequiredNullable") String stringRequiredNullable) {
         this.booleanRequired = booleanRequired;
         this.booleanRequiredNullable = booleanRequiredNullable;
         this.stringRequired = stringRequired;

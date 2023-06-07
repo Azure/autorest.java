@@ -17,7 +17,7 @@ public final class VisibilityModel {
      * Required string, illustrating a readonly property.
      */
     @Generated
-    @JsonProperty(value = "readProp", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "readProp", access = JsonProperty.Access.WRITE_ONLY)
     private String readProp;
 
     /*
