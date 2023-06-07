@@ -91,18 +91,16 @@ public final class JsonInput implements XmlSerializable<JsonInput> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    Integer id = null;
+                    JsonInput deserializedJsonInput = new JsonInput();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("id".equals(elementName.getLocalPart())) {
-                            id = reader.getNullableElement(Integer::parseInt);
+                            deserializedJsonInput.id = reader.getNullableElement(Integer::parseInt);
                         } else {
                             reader.skipElement();
                         }
                     }
-                    JsonInput deserializedJsonInput = new JsonInput();
-                    deserializedJsonInput.id = id;
 
                     return deserializedJsonInput;
                 });

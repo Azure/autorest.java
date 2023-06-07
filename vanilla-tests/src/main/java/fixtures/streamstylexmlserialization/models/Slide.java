@@ -10,7 +10,6 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.xml.namespace.QName;
@@ -32,7 +31,7 @@ public final class Slide implements XmlSerializable<Slide> {
     /*
      * The items property.
      */
-    private List<String> items = new ArrayList<>();
+    private List<String> items = new LinkedList<>();
 
     /** Creates an instance of Slide class. */
     public Slide() {}
@@ -116,9 +115,11 @@ public final class Slide implements XmlSerializable<Slide> {
         xmlWriter.writeStringAttribute("type", this.type);
         xmlWriter.writeStringElement("title", this.title);
         if (this.items != null) {
+            xmlWriter.writeStartElement("items");
             for (String element : this.items) {
-                xmlWriter.writeStringElement("items", element);
+                xmlWriter.writeStringElement("item", element);
             }
+            xmlWriter.writeEndElement();
         }
         return xmlWriter.writeEndElement();
     }
@@ -150,27 +151,29 @@ public final class Slide implements XmlSerializable<Slide> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String type = reader.getStringAttribute(null, "type");
-                    String title = null;
-                    List<String> items = null;
+                    Slide deserializedSlide = new Slide();
+                    deserializedSlide.type = reader.getStringAttribute(null, "type");
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("title".equals(elementName.getLocalPart())) {
-                            title = reader.getStringElement();
+                            deserializedSlide.title = reader.getStringElement();
                         } else if ("items".equals(elementName.getLocalPart())) {
-                            if (items == null) {
-                                items = new LinkedList<>();
+                            if (deserializedSlide.items == null) {
+                                deserializedSlide.items = new LinkedList<>();
                             }
-                            items.add(reader.getStringElement());
+                            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                                elementName = reader.getElementName();
+                                if ("item".equals(elementName.getLocalPart())) {
+                                    deserializedSlide.items.add(reader.getStringElement());
+                                } else {
+                                    reader.skipElement();
+                                }
+                            }
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Slide deserializedSlide = new Slide();
-                    deserializedSlide.type = type;
-                    deserializedSlide.title = title;
-                    deserializedSlide.items = items;
 
                     return deserializedSlide;
                 });

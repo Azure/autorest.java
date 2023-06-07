@@ -91,18 +91,16 @@ public final class JsonOutput implements XmlSerializable<JsonOutput> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    Integer id = null;
+                    JsonOutput deserializedJsonOutput = new JsonOutput();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("id".equals(elementName.getLocalPart())) {
-                            id = reader.getNullableElement(Integer::parseInt);
+                            deserializedJsonOutput.id = reader.getNullableElement(Integer::parseInt);
                         } else {
                             reader.skipElement();
                         }
                     }
-                    JsonOutput deserializedJsonOutput = new JsonOutput();
-                    deserializedJsonOutput.id = id;
 
                     return deserializedJsonOutput;
                 });

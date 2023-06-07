@@ -92,18 +92,16 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    byte[] bytes = new byte[0];
+                    ModelWithByteProperty deserializedModelWithByteProperty = new ModelWithByteProperty();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Bytes".equals(elementName.getLocalPart())) {
-                            bytes = reader.getBinaryElement();
+                            deserializedModelWithByteProperty.bytes = reader.getBinaryElement();
                         } else {
                             reader.skipElement();
                         }
                     }
-                    ModelWithByteProperty deserializedModelWithByteProperty = new ModelWithByteProperty();
-                    deserializedModelWithByteProperty.bytes = bytes;
 
                     return deserializedModelWithByteProperty;
                 });

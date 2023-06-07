@@ -10,7 +10,6 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.xml.namespace.QName;
@@ -37,7 +36,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
     /*
      * The slides property.
      */
-    private List<Slide> slides = new ArrayList<>();
+    private List<Slide> slides = new LinkedList<>();
 
     /** Creates an instance of Slideshow class. */
     public Slideshow() {}
@@ -146,9 +145,11 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
         xmlWriter.writeStringAttribute("date", this.date);
         xmlWriter.writeStringAttribute("author", this.author);
         if (this.slides != null) {
+            xmlWriter.writeStartElement("slides");
             for (Slide element : this.slides) {
-                xmlWriter.writeXml(element, "slides");
+                xmlWriter.writeXml(element, "slide");
             }
+            xmlWriter.writeEndElement();
         }
         return xmlWriter.writeEndElement();
     }
@@ -180,27 +181,29 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String title = reader.getStringAttribute(null, "title");
-                    String date = reader.getStringAttribute(null, "date");
-                    String author = reader.getStringAttribute(null, "author");
-                    List<Slide> slides = null;
+                    Slideshow deserializedSlideshow = new Slideshow();
+                    deserializedSlideshow.title = reader.getStringAttribute(null, "title");
+                    deserializedSlideshow.date = reader.getStringAttribute(null, "date");
+                    deserializedSlideshow.author = reader.getStringAttribute(null, "author");
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("slides".equals(elementName.getLocalPart())) {
-                            if (slides == null) {
-                                slides = new LinkedList<>();
+                            if (deserializedSlideshow.slides == null) {
+                                deserializedSlideshow.slides = new LinkedList<>();
                             }
-                            slides.add(Slide.fromXml(reader, "slides"));
+                            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                                elementName = reader.getElementName();
+                                if ("slide".equals(elementName.getLocalPart())) {
+                                    deserializedSlideshow.slides.add(Slide.fromXml(reader, "slide"));
+                                } else {
+                                    reader.skipElement();
+                                }
+                            }
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Slideshow deserializedSlideshow = new Slideshow();
-                    deserializedSlideshow.title = title;
-                    deserializedSlideshow.date = date;
-                    deserializedSlideshow.author = author;
-                    deserializedSlideshow.slides = slides;
 
                     return deserializedSlideshow;
                 });

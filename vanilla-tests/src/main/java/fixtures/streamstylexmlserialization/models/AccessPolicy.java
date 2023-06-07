@@ -157,26 +157,20 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    OffsetDateTime start = null;
-                    OffsetDateTime expiry = null;
-                    String permission = null;
+                    AccessPolicy deserializedAccessPolicy = new AccessPolicy();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Start".equals(elementName.getLocalPart())) {
-                            start = reader.getNullableElement(OffsetDateTime::parse);
+                            deserializedAccessPolicy.start = reader.getNullableElement(OffsetDateTime::parse);
                         } else if ("Expiry".equals(elementName.getLocalPart())) {
-                            expiry = reader.getNullableElement(OffsetDateTime::parse);
+                            deserializedAccessPolicy.expiry = reader.getNullableElement(OffsetDateTime::parse);
                         } else if ("Permission".equals(elementName.getLocalPart())) {
-                            permission = reader.getStringElement();
+                            deserializedAccessPolicy.permission = reader.getStringElement();
                         } else {
                             reader.skipElement();
                         }
                     }
-                    AccessPolicy deserializedAccessPolicy = new AccessPolicy();
-                    deserializedAccessPolicy.start = start;
-                    deserializedAccessPolicy.expiry = expiry;
-                    deserializedAccessPolicy.permission = permission;
 
                     return deserializedAccessPolicy;
                 });

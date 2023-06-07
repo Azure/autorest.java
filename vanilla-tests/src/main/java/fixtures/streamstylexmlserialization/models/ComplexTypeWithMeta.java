@@ -92,18 +92,16 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String id = null;
+                    ComplexTypeWithMeta deserializedComplexTypeWithMeta = new ComplexTypeWithMeta();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("ID".equals(elementName.getLocalPart())) {
-                            id = reader.getStringElement();
+                            deserializedComplexTypeWithMeta.id = reader.getStringElement();
                         } else {
                             reader.skipElement();
                         }
                     }
-                    ComplexTypeWithMeta deserializedComplexTypeWithMeta = new ComplexTypeWithMeta();
-                    deserializedComplexTypeWithMeta.id = id;
 
                     return deserializedComplexTypeWithMeta;
                 });

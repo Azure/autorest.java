@@ -91,18 +91,16 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String id = null;
+                    ComplexTypeNoMeta deserializedComplexTypeNoMeta = new ComplexTypeNoMeta();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("ID".equals(elementName.getLocalPart())) {
-                            id = reader.getStringElement();
+                            deserializedComplexTypeNoMeta.id = reader.getStringElement();
                         } else {
                             reader.skipElement();
                         }
                     }
-                    ComplexTypeNoMeta deserializedComplexTypeNoMeta = new ComplexTypeNoMeta();
-                    deserializedComplexTypeNoMeta.id = id;
 
                     return deserializedComplexTypeNoMeta;
                 });

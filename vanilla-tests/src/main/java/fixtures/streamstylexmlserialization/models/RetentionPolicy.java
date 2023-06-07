@@ -122,22 +122,18 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    boolean enabled = false;
-                    Integer days = null;
+                    RetentionPolicy deserializedRetentionPolicy = new RetentionPolicy();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Enabled".equals(elementName.getLocalPart())) {
-                            enabled = reader.getBooleanElement();
+                            deserializedRetentionPolicy.enabled = reader.getBooleanElement();
                         } else if ("Days".equals(elementName.getLocalPart())) {
-                            days = reader.getNullableElement(Integer::parseInt);
+                            deserializedRetentionPolicy.days = reader.getNullableElement(Integer::parseInt);
                         } else {
                             reader.skipElement();
                         }
                     }
-                    RetentionPolicy deserializedRetentionPolicy = new RetentionPolicy();
-                    deserializedRetentionPolicy.enabled = enabled;
-                    deserializedRetentionPolicy.days = days;
 
                     return deserializedRetentionPolicy;
                 });

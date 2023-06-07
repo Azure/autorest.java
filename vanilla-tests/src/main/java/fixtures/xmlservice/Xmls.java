@@ -36,6 +36,7 @@ import fixtures.xmlservice.models.ObjectWithXMsTextProperty;
 import fixtures.xmlservice.models.RootWithRefAndMeta;
 import fixtures.xmlservice.models.RootWithRefAndNoMeta;
 import fixtures.xmlservice.models.SignedIdentifier;
+import fixtures.xmlservice.models.SignedIdentifiers;
 import fixtures.xmlservice.models.Slideshow;
 import fixtures.xmlservice.models.StorageServiceProperties;
 import fixtures.xmlservice.models.XmlsGetHeadersResponse;
@@ -236,7 +237,7 @@ public final class Xmls {
         @Get("/xml/mycontainer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<List<SignedIdentifier>>> getAcls(
+        Mono<Response<SignedIdentifiers>> getAcls(
                 @HostParam("$host") String host,
                 @QueryParam("comp") String comp,
                 @QueryParam("restype") String restype,
@@ -2644,7 +2645,7 @@ public final class Xmls {
      * @return storage ACLs for a container along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<List<SignedIdentifier>>> getAclsWithResponseAsync() {
+    public Mono<Response<SignedIdentifiers>> getAclsWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2665,7 +2666,7 @@ public final class Xmls {
      * @return storage ACLs for a container along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<List<SignedIdentifier>>> getAclsWithResponseAsync(Context context) {
+    public Mono<Response<SignedIdentifiers>> getAclsWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono.error(
                     new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2684,7 +2685,7 @@ public final class Xmls {
      * @return storage ACLs for a container on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<List<SignedIdentifier>> getAclsAsync() {
+    public Mono<SignedIdentifiers> getAclsAsync() {
         return getAclsWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -2698,7 +2699,7 @@ public final class Xmls {
      * @return storage ACLs for a container on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<List<SignedIdentifier>> getAclsAsync(Context context) {
+    public Mono<SignedIdentifiers> getAclsAsync(Context context) {
         return getAclsWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -2712,7 +2713,7 @@ public final class Xmls {
      * @return storage ACLs for a container along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<List<SignedIdentifier>> getAclsWithResponse(Context context) {
+    public Response<SignedIdentifiers> getAclsWithResponse(Context context) {
         return getAclsWithResponseAsync(context).block();
     }
 
@@ -2724,7 +2725,7 @@ public final class Xmls {
      * @return storage ACLs for a container.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public List<SignedIdentifier> getAcls() {
+    public SignedIdentifiers getAcls() {
         return getAclsWithResponse(Context.NONE).getValue();
     }
 

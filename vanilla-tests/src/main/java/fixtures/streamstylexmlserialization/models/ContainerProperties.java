@@ -241,38 +241,31 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    OffsetDateTime lastModified = null;
-                    String etag = null;
-                    LeaseStatusType leaseStatus = null;
-                    LeaseStateType leaseState = null;
-                    LeaseDurationType leaseDuration = null;
-                    PublicAccessType publicAccess = null;
+                    ContainerProperties deserializedContainerProperties = new ContainerProperties();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Last-Modified".equals(elementName.getLocalPart())) {
-                            lastModified = reader.getNullableElement(DateTimeRfc1123::new).getDateTime();
+                            deserializedContainerProperties.setLastModified(
+                                    reader.getNullableElement(DateTimeRfc1123::new).getDateTime());
                         } else if ("Etag".equals(elementName.getLocalPart())) {
-                            etag = reader.getStringElement();
+                            deserializedContainerProperties.etag = reader.getStringElement();
                         } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
-                            leaseStatus = reader.getNullableElement(LeaseStatusType::fromString);
+                            deserializedContainerProperties.leaseStatus =
+                                    reader.getNullableElement(LeaseStatusType::fromString);
                         } else if ("LeaseState".equals(elementName.getLocalPart())) {
-                            leaseState = reader.getNullableElement(LeaseStateType::fromString);
+                            deserializedContainerProperties.leaseState =
+                                    reader.getNullableElement(LeaseStateType::fromString);
                         } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
-                            leaseDuration = reader.getNullableElement(LeaseDurationType::fromString);
+                            deserializedContainerProperties.leaseDuration =
+                                    reader.getNullableElement(LeaseDurationType::fromString);
                         } else if ("PublicAccess".equals(elementName.getLocalPart())) {
-                            publicAccess = reader.getNullableElement(PublicAccessType::fromString);
+                            deserializedContainerProperties.publicAccess =
+                                    reader.getNullableElement(PublicAccessType::fromString);
                         } else {
                             reader.skipElement();
                         }
                     }
-                    ContainerProperties deserializedContainerProperties = new ContainerProperties();
-                    deserializedContainerProperties.setLastModified(lastModified);
-                    deserializedContainerProperties.etag = etag;
-                    deserializedContainerProperties.leaseStatus = leaseStatus;
-                    deserializedContainerProperties.leaseState = leaseState;
-                    deserializedContainerProperties.leaseDuration = leaseDuration;
-                    deserializedContainerProperties.publicAccess = publicAccess;
 
                     return deserializedContainerProperties;
                 });

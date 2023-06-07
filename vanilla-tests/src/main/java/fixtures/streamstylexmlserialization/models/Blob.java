@@ -217,39 +217,30 @@ public final class Blob implements XmlSerializable<Blob> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String name = null;
-                    boolean deleted = false;
-                    String snapshot = null;
-                    BlobProperties properties = null;
-                    Map<String, String> metadata = null;
+                    Blob deserializedBlob = new Blob();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Name".equals(elementName.getLocalPart())) {
-                            name = reader.getStringElement();
+                            deserializedBlob.name = reader.getStringElement();
                         } else if ("Deleted".equals(elementName.getLocalPart())) {
-                            deleted = reader.getBooleanElement();
+                            deserializedBlob.deleted = reader.getBooleanElement();
                         } else if ("Snapshot".equals(elementName.getLocalPart())) {
-                            snapshot = reader.getStringElement();
+                            deserializedBlob.snapshot = reader.getStringElement();
                         } else if ("Properties".equals(elementName.getLocalPart())) {
-                            properties = BlobProperties.fromXml(reader, "Properties");
+                            deserializedBlob.properties = BlobProperties.fromXml(reader, "Properties");
                         } else if ("Metadata".equals(elementName.getLocalPart())) {
-                            if (metadata == null) {
-                                metadata = new LinkedHashMap<>();
+                            if (deserializedBlob.metadata == null) {
+                                deserializedBlob.metadata = new LinkedHashMap<>();
                             }
                             while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                                metadata.put(reader.getElementName().getLocalPart(), reader.getStringElement());
+                                deserializedBlob.metadata.put(
+                                        reader.getElementName().getLocalPart(), reader.getStringElement());
                             }
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Blob deserializedBlob = new Blob();
-                    deserializedBlob.name = name;
-                    deserializedBlob.deleted = deleted;
-                    deserializedBlob.snapshot = snapshot;
-                    deserializedBlob.properties = properties;
-                    deserializedBlob.metadata = metadata;
 
                     return deserializedBlob;
                 });
