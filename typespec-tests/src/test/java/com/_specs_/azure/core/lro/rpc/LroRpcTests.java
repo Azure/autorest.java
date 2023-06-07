@@ -5,7 +5,7 @@ package com._specs_.azure.core.lro.rpc;
 
 import com._specs_.azure.core.lro.rpc.models.JobData;
 import com._specs_.azure.core.lro.rpc.models.JobResult;
-import com._specs_.azure.core.lro.rpc.models.Status;
+import com._specs_.azure.core.lro.rpc.models.JobStatus;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.polling.LongRunningOperationStatus;
@@ -27,11 +27,11 @@ public class LroRpcTests {
         PollResponse<JobResult> response = poller.waitForCompletion();
 
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
-        Assertions.assertEquals(Status.SUCCEEDED, response.getValue().getStatus());
+        Assertions.assertEquals(JobStatus.SUCCEEDED, response.getValue().getStatus());
         Assertions.assertNotNull(response.getValue().getResults());
 
         JobResult finalResult = poller.getFinalResult();
-        Assertions.assertEquals(Status.SUCCEEDED, finalResult.getStatus());
+        Assertions.assertEquals(JobStatus.SUCCEEDED, finalResult.getStatus());
         Assertions.assertNotNull(finalResult.getResults());
     }
 }

@@ -31,7 +31,7 @@ public final class JobResult {
      */
     @Generated
     @JsonProperty(value = "status", required = true, access = JsonProperty.Access.WRITE_ONLY)
-    private Status status;
+    private JobStatus status;
 
     /*
      * Error objects that describes the error when status is "Failed".
@@ -77,7 +77,7 @@ public final class JobResult {
      * @return the status value.
      */
     @Generated
-    public Status getStatus() {
+    public JobStatus getStatus() {
         return this.status;
     }
 

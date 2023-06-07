@@ -51,7 +51,7 @@ public final class RpcClient {
      * {
      *     jobId: String (Required)
      *     comment: String (Required)
-     *     status: String(Succeeded/Canceled/Failed/Running) (Required)
+     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
      *     errors (Optional): [
      *          (Optional){
      *             error (Required): {
