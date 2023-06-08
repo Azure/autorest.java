@@ -17,6 +17,7 @@ public class BodyTests {
 
         client.requiredImplicit(new BodyModel("foo"));
 
+        optionalClient.set(new BodyModel("foo"));
         optionalClient.omit();
     }
 }
