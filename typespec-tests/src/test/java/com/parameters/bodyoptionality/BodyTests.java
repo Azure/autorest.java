@@ -3,13 +3,17 @@
 
 package com.parameters.bodyoptionality;
 
+import com.azure.core.http.policy.HttpLogDetailLevel;
+import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.rest.RequestOptions;
+import com.azure.core.util.BinaryData;
 import com.parameters.bodyoptionality.models.BodyModel;
 import org.junit.jupiter.api.Test;
 
 public class BodyTests {
 
     private final BodyOptionalityClient client = new BodyOptionalityClientBuilder().buildClient();
-    private final OptionalExplicitClient optionalClient = new BodyOptionalityClientBuilder().buildOptionalExplicitClient();
+    private final OptionalExplicitClient optionalClient = new BodyOptionalityClientBuilder().httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)).buildOptionalExplicitClient();
 
     @Test
     public void testBodyOptionality() {
@@ -17,7 +21,10 @@ public class BodyTests {
 
         client.requiredImplicit(new BodyModel("foo"));
 
-        optionalClient.set(new BodyModel("foo"));
+        optionalClient.setWithResponse(new RequestOptions()
+                .setHeader("content-type", "application/json")
+                .setBody(BinaryData.fromObject(new BodyModel("foo"))));
+//        optionalClient.set(new BodyModel("foo"));
         optionalClient.omit();
     }
 }
