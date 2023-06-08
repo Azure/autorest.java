@@ -19,7 +19,6 @@ import com.azure.xml.XmlWriter;
 
 import javax.xml.stream.XMLStreamException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * Writes an XmlSequenceWrapper to a JavaFile.
@@ -47,9 +46,9 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
         javaFile.declareImport(xmlSequenceWrapper.getImports());
 
         if (settings.isStreamStyleSerialization()) {
-            javaFile.declareImport(ArrayList.class.getName(), CoreUtils.class.getName(), LinkedList.class.getName(),
-                XmlSerializable.class.getName(), XmlWriter.class.getName(), XmlReader.class.getName(),
-                XmlProviders.class.getName(), XmlToken.class.getName(), XMLStreamException.class.getName());
+            javaFile.declareImport(ArrayList.class.getName(), CoreUtils.class.getName(), XmlProviders.class.getName(),
+                XmlReader.class.getName(), XmlSerializable.class.getName(),  XMLStreamException.class.getName(),
+                XmlToken.class.getName(), XmlWriter.class.getName());
         }
 
         javaFile.javadocComment(comment -> comment.description(

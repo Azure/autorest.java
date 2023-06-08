@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -90,7 +89,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         imports.add(ArrayList.class.getName());
         imports.add(Base64.class.getName());
         imports.add(LinkedHashMap.class.getName());
-        imports.add(LinkedList.class.getName());
         imports.add(List.class.getName());
         imports.add(Objects.class.getName());
     }
@@ -172,7 +170,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     readerMethod.line("String elementName = reader.getElementName().getLocalPart();");
                     readerMethod.line();
                     readerMethod.ifBlock("\"" + xmlListElementName + "\".equals(elementName)", ifBlock -> {
-                        ifBlock.ifBlock("items == null", ifBlock2 -> ifBlock2.line("items = new LinkedList<>();"));
+                        ifBlock.ifBlock("items == null", ifBlock2 -> ifBlock2.line("items = new ArrayList<>();"));
                         ifBlock.line();
 
                         // TODO (alzimmer): Insert XML object reading logic.
@@ -1639,7 +1637,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             // TODO (alzimmer): Handle nested container types when needed.
             deserializationBlock.ifBlock(fieldAccess + " == null",
-                ifStatement -> ifStatement.line(fieldAccess + " = new LinkedList<>();"));
+                ifStatement -> ifStatement.line(fieldAccess + " = new ArrayList<>();"));
 
             if (sameNames) {
                 deserializationBlock.line(fieldAccess + ".add(" + elementDeserialization + ");");

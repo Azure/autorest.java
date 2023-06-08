@@ -10,7 +10,7 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -36,7 +36,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
     /*
      * The slides property.
      */
-    private List<Slide> slides = new LinkedList<>();
+    private List<Slide> slides = new ArrayList<>();
 
     /** Creates an instance of Slideshow class. */
     public Slideshow() {}
@@ -190,7 +190,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
                         if ("slides".equals(elementName.getLocalPart())) {
                             if (deserializedSlideshow.slides == null) {
-                                deserializedSlideshow.slides = new LinkedList<>();
+                                deserializedSlideshow.slides = new ArrayList<>();
                             }
                             while (reader.nextElement() != XmlToken.END_ELEMENT) {
                                 elementName = reader.getElementName();

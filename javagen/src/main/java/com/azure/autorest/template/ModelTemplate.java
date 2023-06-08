@@ -523,11 +523,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                     fieldSignature = xmlWrapperClassName + " " + propertyName;
                 } else if (propertyType instanceof ListType) {
-                    if (settings.isStreamStyleSerialization()) {
-                        fieldSignature = propertyType + " " + propertyName + " = new LinkedList<>()";
-                    } else {
-                        fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
-                    }
+                    fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
                 } else {
                     // handle x-ms-client-default
                     if (property.getDefaultValue() != null) {
@@ -810,11 +806,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (treatAsXml && property.isXmlWrapper() && (property.getWireType() instanceof IterableType)) {
                 if (settings.isStreamStyleSerialization()) {
                     methodBlock.ifBlock("this." + property.getName() + " == null", ifBlock ->
-                        ifBlock.line("this." + property.getName() + " = new LinkedList<>();"));
+                        ifBlock.line("this." + property.getName() + " = new ArrayList<>();"));
                     methodBlock.methodReturn("this." + property.getName());
                 } else {
                     methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
-                        ifBlock.line("this.%s = new %s(new LinkedList<%s>());", property.getName(),
+                        ifBlock.line("this.%s = new %s(new ArrayList<%s>());", property.getName(),
                             getPropertyXmlWrapperClassName(property),
                             ((GenericType) property.getWireType()).getTypeArguments()[0]));
                     methodBlock.methodReturn(String.format("this.%s.items", property.getName()));

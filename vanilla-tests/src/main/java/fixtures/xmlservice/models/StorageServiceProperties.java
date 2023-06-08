@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import java.util.ArrayList;
 import java.util.List;
 
 /** Storage Service Properties. */
@@ -132,7 +133,7 @@ public final class StorageServiceProperties {
      */
     public List<CorsRule> getCors() {
         if (this.cors == null) {
-            this.cors = new CorsWrapper(new LinkedList<CorsRule>());
+            this.cors = new CorsWrapper(new ArrayList<CorsRule>());
         }
         return this.cors.items;
     }

@@ -10,7 +10,7 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -21,12 +21,12 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
     /*
      * The GoodApples property.
      */
-    private List<String> goodApples = new LinkedList<>();
+    private List<String> goodApples = new ArrayList<>();
 
     /*
      * The BadApples property.
      */
-    private List<String> badApples = new LinkedList<>();
+    private List<String> badApples = new ArrayList<>();
 
     /** Creates an instance of AppleBarrel class. */
     public AppleBarrel() {}
@@ -38,7 +38,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      */
     public List<String> getGoodApples() {
         if (this.goodApples == null) {
-            this.goodApples = new LinkedList<>();
+            this.goodApples = new ArrayList<>();
         }
         return this.goodApples;
     }
@@ -61,7 +61,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      */
     public List<String> getBadApples() {
         if (this.badApples == null) {
-            this.badApples = new LinkedList<>();
+            this.badApples = new ArrayList<>();
         }
         return this.badApples;
     }
@@ -143,7 +143,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
 
                         if ("GoodApples".equals(elementName.getLocalPart())) {
                             if (deserializedAppleBarrel.goodApples == null) {
-                                deserializedAppleBarrel.goodApples = new LinkedList<>();
+                                deserializedAppleBarrel.goodApples = new ArrayList<>();
                             }
                             while (reader.nextElement() != XmlToken.END_ELEMENT) {
                                 elementName = reader.getElementName();
@@ -155,7 +155,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
                             }
                         } else if ("BadApples".equals(elementName.getLocalPart())) {
                             if (deserializedAppleBarrel.badApples == null) {
-                                deserializedAppleBarrel.badApples = new LinkedList<>();
+                                deserializedAppleBarrel.badApples = new ArrayList<>();
                             }
                             while (reader.nextElement() != XmlToken.END_ELEMENT) {
                                 elementName = reader.getElementName();

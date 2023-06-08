@@ -10,7 +10,7 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -41,7 +41,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
     /*
      * The Containers property.
      */
-    private List<Container> containers = new LinkedList<>();
+    private List<Container> containers = new ArrayList<>();
 
     /*
      * The NextMarker property.
@@ -138,7 +138,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      */
     public List<Container> getContainers() {
         if (this.containers == null) {
-            this.containers = new LinkedList<>();
+            this.containers = new ArrayList<>();
         }
         return this.containers;
     }
@@ -263,7 +263,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                             deserializedListContainersResponse.maxResults = reader.getIntElement();
                         } else if ("Containers".equals(elementName.getLocalPart())) {
                             if (deserializedListContainersResponse.containers == null) {
-                                deserializedListContainersResponse.containers = new LinkedList<>();
+                                deserializedListContainersResponse.containers = new ArrayList<>();
                             }
                             while (reader.nextElement() != XmlToken.END_ELEMENT) {
                                 elementName = reader.getElementName();

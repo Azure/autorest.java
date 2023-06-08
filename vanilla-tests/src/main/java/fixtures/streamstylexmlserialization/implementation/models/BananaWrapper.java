@@ -10,7 +10,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import fixtures.streamstylexmlserialization.models.Banana;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.stream.XMLStreamException;
 
@@ -69,7 +69,7 @@ public final class BananaWrapper implements XmlSerializable<BananaWrapper> {
 
                         if ("banana".equals(elementName)) {
                             if (items == null) {
-                                items = new LinkedList<>();
+                                items = new ArrayList<>();
                             }
 
                             items.add(Banana.fromXml(reader));

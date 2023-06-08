@@ -10,7 +10,7 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -21,12 +21,12 @@ public final class Blobs implements XmlSerializable<Blobs> {
     /*
      * The BlobPrefix property.
      */
-    private List<BlobPrefix> blobPrefix = new LinkedList<>();
+    private List<BlobPrefix> blobPrefix = new ArrayList<>();
 
     /*
      * The Blob property.
      */
-    private List<Blob> blob = new LinkedList<>();
+    private List<Blob> blob = new ArrayList<>();
 
     /** Creates an instance of Blobs class. */
     public Blobs() {}
@@ -140,12 +140,12 @@ public final class Blobs implements XmlSerializable<Blobs> {
 
                         if ("BlobPrefix".equals(elementName.getLocalPart())) {
                             if (deserializedBlobs.blobPrefix == null) {
-                                deserializedBlobs.blobPrefix = new LinkedList<>();
+                                deserializedBlobs.blobPrefix = new ArrayList<>();
                             }
                             deserializedBlobs.blobPrefix.add(BlobPrefix.fromXml(reader, "BlobPrefix"));
                         } else if ("Blob".equals(elementName.getLocalPart())) {
                             if (deserializedBlobs.blob == null) {
-                                deserializedBlobs.blob = new LinkedList<>();
+                                deserializedBlobs.blob = new ArrayList<>();
                             }
                             deserializedBlobs.blob.add(Blob.fromXml(reader, "Blob"));
                         } else {

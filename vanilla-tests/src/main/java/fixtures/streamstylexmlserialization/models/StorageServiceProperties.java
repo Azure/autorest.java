@@ -10,7 +10,7 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -36,7 +36,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
     /*
      * The set of CORS rules.
      */
-    private List<CorsRule> cors = new LinkedList<>();
+    private List<CorsRule> cors = new ArrayList<>();
 
     /*
      * The default version to use for requests to the Blob service if an incoming request's version is not specified.
@@ -119,7 +119,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      */
     public List<CorsRule> getCors() {
         if (this.cors == null) {
-            this.cors = new LinkedList<>();
+            this.cors = new ArrayList<>();
         }
         return this.cors;
     }
@@ -268,7 +268,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
                                     Metrics.fromXml(reader, "MinuteMetrics");
                         } else if ("Cors".equals(elementName.getLocalPart())) {
                             if (deserializedStorageServiceProperties.cors == null) {
-                                deserializedStorageServiceProperties.cors = new LinkedList<>();
+                                deserializedStorageServiceProperties.cors = new ArrayList<>();
                             }
                             while (reader.nextElement() != XmlToken.END_ELEMENT) {
                                 elementName = reader.getElementName();
