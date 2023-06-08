@@ -121,22 +121,19 @@ public final class RootWithRefAndMeta implements XmlSerializable<RootWithRefAndM
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    ComplexTypeWithMeta refToModel = null;
-                    String something = null;
+                    RootWithRefAndMeta deserializedRootWithRefAndMeta = new RootWithRefAndMeta();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("XMLComplexTypeWithMeta".equals(elementName.getLocalPart())) {
-                            refToModel = ComplexTypeWithMeta.fromXml(reader, "XMLComplexTypeWithMeta");
+                            deserializedRootWithRefAndMeta.refToModel =
+                                    ComplexTypeWithMeta.fromXml(reader, "XMLComplexTypeWithMeta");
                         } else if ("Something".equals(elementName.getLocalPart())) {
-                            something = reader.getStringElement();
+                            deserializedRootWithRefAndMeta.something = reader.getStringElement();
                         } else {
                             reader.skipElement();
                         }
                     }
-                    RootWithRefAndMeta deserializedRootWithRefAndMeta = new RootWithRefAndMeta();
-                    deserializedRootWithRefAndMeta.refToModel = refToModel;
-                    deserializedRootWithRefAndMeta.something = something;
 
                     return deserializedRootWithRefAndMeta;
                 });

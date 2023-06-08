@@ -171,7 +171,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                 classBlock.method(methodVisibility, null, propertyClientType + " " + getGetterName(model, property) + "()",
                     methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
-                        methodBlock));
+                        methodBlock, settings));
 
                 // If the model has derived types and the properties is an XML wrapper and stream-style serialization
                 // is being generated, generate an internal method that can access the direct value of the XML wrapper
@@ -188,7 +188,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
                     classBlock.method(methodVisibility, null,
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
-                        methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml, methodBlock));
+                        methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
+                            methodBlock, settings));
 
                     // If the model has derived types and the properties is an XML wrapper and stream-style serialization
                     // is being generated, generate an internal method that can access the direct value of the XML wrapper
@@ -515,16 +516,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             String fieldSignature;
             if (treatAsXml(settings, model)) {
-                if (property.isXmlWrapper()) {
+                if (property.isXmlWrapper() && !settings.isStreamStyleSerialization()) {
                     String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
-
-                    String wrapperClassDefinition = xmlWrapperClassName;
-                    if (settings.isStreamStyleSerialization()) {
-                        wrapperClassDefinition = wrapperClassDefinition + " implements XmlSerializable<" + wrapperClassDefinition + ">";
-                    }
-
-                    classBlock.staticFinalClass(JavaVisibility.PackagePrivate, wrapperClassDefinition, innerClass ->
-                        addXmlWrapperClass(innerClass, property, xmlWrapperClassName, settings));
+                    classBlock.staticFinalClass(JavaVisibility.PackagePrivate, xmlWrapperClassName,
+                        innerClass -> addXmlWrapperClass(innerClass, property, xmlWrapperClassName, settings));
 
                     fieldSignature = xmlWrapperClassName + " " + propertyName;
                 } else if (propertyType instanceof ListType) {
@@ -797,7 +792,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param methodBlock Where the getter method is being added.
      */
     private static void addGetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
-        boolean treatAsXml, JavaBlock methodBlock) {
+        boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings) {
         String sourceTypeName = propertyWireType.toString();
         String targetTypeName = propertyClientType.toString();
         String expression = property.isPolymorphicDiscriminator()
@@ -809,11 +804,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         if (sourceTypeName.equals(targetTypeName)) {
             if (treatAsXml && property.isXmlWrapper() && (property.getWireType() instanceof IterableType)) {
-                methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
-                    ifBlock.line("this.%s = new %s(new ArrayList<%s>());", property.getName(),
-                        getPropertyXmlWrapperClassName(property),
-                        ((GenericType) property.getWireType()).getTypeArguments()[0]));
-                methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
+                if (settings.isStreamStyleSerialization()) {
+                    methodBlock.ifBlock("this." + property.getName() + " == null", ifBlock ->
+                        ifBlock.line("this." + property.getName() + " = new ArrayList<>();"));
+                    methodBlock.methodReturn("this." + property.getName());
+                } else {
+                    methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
+                        ifBlock.line("this.%s = new %s(new ArrayList<%s>());", property.getName(),
+                            getPropertyXmlWrapperClassName(property),
+                            ((GenericType) property.getWireType()).getTypeArguments()[0]));
+                    methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
+                }
             } else {
                 methodBlock.methodReturn(expression);
             }
@@ -842,7 +843,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param methodBlock Where the setter method is being added.
      */
     private static void addSetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
-        boolean treatAsXml, JavaBlock methodBlock) {
+        boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings) {
         String expression = (propertyClientType.equals(ArrayType.ByteArray))
             ? "CoreUtils.clone(" + property.getName() + ")"
             : property.getName();
@@ -857,8 +858,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     elseBlock.line("this.%s = %s;", property.getName(), propertyWireType.convertFromClientType(expression)));
         } else {
             if (treatAsXml && property.isXmlWrapper()) {
-                methodBlock.line("this.%s = new %s(%s);", property.getName(),
-                    getPropertyXmlWrapperClassName(property), expression);
+                if (settings.isStreamStyleSerialization()) {
+                    methodBlock.line("this." + property.getName() + " = " + expression + ";");
+                } else {
+                    methodBlock.line("this.%s = new %s(%s);", property.getName(),
+                        getPropertyXmlWrapperClassName(property), expression);
+                }
             } else {
                 methodBlock.line("this.%s = %s;", property.getName(), expression);
             }

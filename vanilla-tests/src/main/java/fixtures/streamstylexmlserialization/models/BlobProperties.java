@@ -826,126 +826,83 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    OffsetDateTime lastModified = null;
-                    String etag = null;
-                    Long contentLength = null;
-                    String contentType = null;
-                    String contentEncoding = null;
-                    String contentLanguage = null;
-                    String contentMD5 = null;
-                    String contentDisposition = null;
-                    String cacheControl = null;
-                    Integer blobSequenceNumber = null;
-                    BlobType blobType = null;
-                    LeaseStatusType leaseStatus = null;
-                    LeaseStateType leaseState = null;
-                    LeaseDurationType leaseDuration = null;
-                    String copyId = null;
-                    CopyStatusType copyStatus = null;
-                    String copySource = null;
-                    String copyProgress = null;
-                    OffsetDateTime copyCompletionTime = null;
-                    String copyStatusDescription = null;
-                    Boolean serverEncrypted = null;
-                    Boolean incrementalCopy = null;
-                    String destinationSnapshot = null;
-                    OffsetDateTime deletedTime = null;
-                    Integer remainingRetentionDays = null;
-                    AccessTier accessTier = null;
-                    Boolean accessTierInferred = null;
-                    ArchiveStatus archiveStatus = null;
+                    BlobProperties deserializedBlobProperties = new BlobProperties();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Last-Modified".equals(elementName.getLocalPart())) {
-                            lastModified = reader.getNullableElement(DateTimeRfc1123::new).getDateTime();
+                            deserializedBlobProperties.setLastModified(
+                                    reader.getNullableElement(DateTimeRfc1123::new).getDateTime());
                         } else if ("Etag".equals(elementName.getLocalPart())) {
-                            etag = reader.getStringElement();
+                            deserializedBlobProperties.etag = reader.getStringElement();
                         } else if ("Content-Length".equals(elementName.getLocalPart())) {
-                            contentLength = reader.getNullableElement(Long::parseLong);
+                            deserializedBlobProperties.contentLength = reader.getNullableElement(Long::parseLong);
                         } else if ("Content-Type".equals(elementName.getLocalPart())) {
-                            contentType = reader.getStringElement();
+                            deserializedBlobProperties.contentType = reader.getStringElement();
                         } else if ("Content-Encoding".equals(elementName.getLocalPart())) {
-                            contentEncoding = reader.getStringElement();
+                            deserializedBlobProperties.contentEncoding = reader.getStringElement();
                         } else if ("Content-Language".equals(elementName.getLocalPart())) {
-                            contentLanguage = reader.getStringElement();
+                            deserializedBlobProperties.contentLanguage = reader.getStringElement();
                         } else if ("Content-MD5".equals(elementName.getLocalPart())) {
-                            contentMD5 = reader.getStringElement();
+                            deserializedBlobProperties.contentMD5 = reader.getStringElement();
                         } else if ("Content-Disposition".equals(elementName.getLocalPart())) {
-                            contentDisposition = reader.getStringElement();
+                            deserializedBlobProperties.contentDisposition = reader.getStringElement();
                         } else if ("Cache-Control".equals(elementName.getLocalPart())) {
-                            cacheControl = reader.getStringElement();
+                            deserializedBlobProperties.cacheControl = reader.getStringElement();
                         } else if ("x-ms-blob-sequence-number".equals(elementName.getLocalPart())) {
-                            blobSequenceNumber = reader.getNullableElement(Integer::parseInt);
+                            deserializedBlobProperties.blobSequenceNumber =
+                                    reader.getNullableElement(Integer::parseInt);
                         } else if ("BlobType".equals(elementName.getLocalPart())) {
-                            blobType = reader.getNullableElement(BlobType::fromString);
+                            deserializedBlobProperties.blobType = reader.getNullableElement(BlobType::fromString);
                         } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
-                            leaseStatus = reader.getNullableElement(LeaseStatusType::fromString);
+                            deserializedBlobProperties.leaseStatus =
+                                    reader.getNullableElement(LeaseStatusType::fromString);
                         } else if ("LeaseState".equals(elementName.getLocalPart())) {
-                            leaseState = reader.getNullableElement(LeaseStateType::fromString);
+                            deserializedBlobProperties.leaseState =
+                                    reader.getNullableElement(LeaseStateType::fromString);
                         } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
-                            leaseDuration = reader.getNullableElement(LeaseDurationType::fromString);
+                            deserializedBlobProperties.leaseDuration =
+                                    reader.getNullableElement(LeaseDurationType::fromString);
                         } else if ("CopyId".equals(elementName.getLocalPart())) {
-                            copyId = reader.getStringElement();
+                            deserializedBlobProperties.copyId = reader.getStringElement();
                         } else if ("CopyStatus".equals(elementName.getLocalPart())) {
-                            copyStatus = reader.getNullableElement(CopyStatusType::fromString);
+                            deserializedBlobProperties.copyStatus =
+                                    reader.getNullableElement(CopyStatusType::fromString);
                         } else if ("CopySource".equals(elementName.getLocalPart())) {
-                            copySource = reader.getStringElement();
+                            deserializedBlobProperties.copySource = reader.getStringElement();
                         } else if ("CopyProgress".equals(elementName.getLocalPart())) {
-                            copyProgress = reader.getStringElement();
+                            deserializedBlobProperties.copyProgress = reader.getStringElement();
                         } else if ("CopyCompletionTime".equals(elementName.getLocalPart())) {
-                            copyCompletionTime = reader.getNullableElement(DateTimeRfc1123::new).getDateTime();
+                            deserializedBlobProperties.setCopyCompletionTime(
+                                    reader.getNullableElement(DateTimeRfc1123::new).getDateTime());
                         } else if ("CopyStatusDescription".equals(elementName.getLocalPart())) {
-                            copyStatusDescription = reader.getStringElement();
+                            deserializedBlobProperties.copyStatusDescription = reader.getStringElement();
                         } else if ("ServerEncrypted".equals(elementName.getLocalPart())) {
-                            serverEncrypted = reader.getNullableElement(Boolean::parseBoolean);
+                            deserializedBlobProperties.serverEncrypted =
+                                    reader.getNullableElement(Boolean::parseBoolean);
                         } else if ("IncrementalCopy".equals(elementName.getLocalPart())) {
-                            incrementalCopy = reader.getNullableElement(Boolean::parseBoolean);
+                            deserializedBlobProperties.incrementalCopy =
+                                    reader.getNullableElement(Boolean::parseBoolean);
                         } else if ("DestinationSnapshot".equals(elementName.getLocalPart())) {
-                            destinationSnapshot = reader.getStringElement();
+                            deserializedBlobProperties.destinationSnapshot = reader.getStringElement();
                         } else if ("DeletedTime".equals(elementName.getLocalPart())) {
-                            deletedTime = reader.getNullableElement(DateTimeRfc1123::new).getDateTime();
+                            deserializedBlobProperties.setDeletedTime(
+                                    reader.getNullableElement(DateTimeRfc1123::new).getDateTime());
                         } else if ("RemainingRetentionDays".equals(elementName.getLocalPart())) {
-                            remainingRetentionDays = reader.getNullableElement(Integer::parseInt);
+                            deserializedBlobProperties.remainingRetentionDays =
+                                    reader.getNullableElement(Integer::parseInt);
                         } else if ("AccessTier".equals(elementName.getLocalPart())) {
-                            accessTier = reader.getNullableElement(AccessTier::fromString);
+                            deserializedBlobProperties.accessTier = reader.getNullableElement(AccessTier::fromString);
                         } else if ("AccessTierInferred".equals(elementName.getLocalPart())) {
-                            accessTierInferred = reader.getNullableElement(Boolean::parseBoolean);
+                            deserializedBlobProperties.accessTierInferred =
+                                    reader.getNullableElement(Boolean::parseBoolean);
                         } else if ("ArchiveStatus".equals(elementName.getLocalPart())) {
-                            archiveStatus = reader.getNullableElement(ArchiveStatus::fromString);
+                            deserializedBlobProperties.archiveStatus =
+                                    reader.getNullableElement(ArchiveStatus::fromString);
                         } else {
                             reader.skipElement();
                         }
                     }
-                    BlobProperties deserializedBlobProperties = new BlobProperties();
-                    deserializedBlobProperties.setLastModified(lastModified);
-                    deserializedBlobProperties.etag = etag;
-                    deserializedBlobProperties.contentLength = contentLength;
-                    deserializedBlobProperties.contentType = contentType;
-                    deserializedBlobProperties.contentEncoding = contentEncoding;
-                    deserializedBlobProperties.contentLanguage = contentLanguage;
-                    deserializedBlobProperties.contentMD5 = contentMD5;
-                    deserializedBlobProperties.contentDisposition = contentDisposition;
-                    deserializedBlobProperties.cacheControl = cacheControl;
-                    deserializedBlobProperties.blobSequenceNumber = blobSequenceNumber;
-                    deserializedBlobProperties.blobType = blobType;
-                    deserializedBlobProperties.leaseStatus = leaseStatus;
-                    deserializedBlobProperties.leaseState = leaseState;
-                    deserializedBlobProperties.leaseDuration = leaseDuration;
-                    deserializedBlobProperties.copyId = copyId;
-                    deserializedBlobProperties.copyStatus = copyStatus;
-                    deserializedBlobProperties.copySource = copySource;
-                    deserializedBlobProperties.copyProgress = copyProgress;
-                    deserializedBlobProperties.setCopyCompletionTime(copyCompletionTime);
-                    deserializedBlobProperties.copyStatusDescription = copyStatusDescription;
-                    deserializedBlobProperties.serverEncrypted = serverEncrypted;
-                    deserializedBlobProperties.incrementalCopy = incrementalCopy;
-                    deserializedBlobProperties.destinationSnapshot = destinationSnapshot;
-                    deserializedBlobProperties.setDeletedTime(deletedTime);
-                    deserializedBlobProperties.remainingRetentionDays = remainingRetentionDays;
-                    deserializedBlobProperties.accessTier = accessTier;
-                    deserializedBlobProperties.accessTierInferred = accessTierInferred;
-                    deserializedBlobProperties.archiveStatus = archiveStatus;
 
                     return deserializedBlobProperties;
                 });

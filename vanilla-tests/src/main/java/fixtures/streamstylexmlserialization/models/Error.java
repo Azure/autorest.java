@@ -117,22 +117,18 @@ public final class Error implements XmlSerializable<Error> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    Integer status = null;
-                    String message = null;
+                    Error deserializedError = new Error();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("status".equals(elementName.getLocalPart())) {
-                            status = reader.getNullableElement(Integer::parseInt);
+                            deserializedError.status = reader.getNullableElement(Integer::parseInt);
                         } else if ("message".equals(elementName.getLocalPart())) {
-                            message = reader.getStringElement();
+                            deserializedError.message = reader.getStringElement();
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Error deserializedError = new Error();
-                    deserializedError.status = status;
-                    deserializedError.message = message;
 
                     return deserializedError;
                 });

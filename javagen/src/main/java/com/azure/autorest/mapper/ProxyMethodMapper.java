@@ -110,7 +110,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 .sorted().collect(Collectors.toList());
         builder.responseExpectedStatusCodes(expectedStatusCodes);
 
-        IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
+        IType responseBodyType = MapperUtils.handleResponseSchema(operation, settings);
         if (settings.isDataPlaneClient()) {
             builder.rawResponseBodyType(responseBodyType);
             if (responseBodyType instanceof ClassType

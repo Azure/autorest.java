@@ -94,18 +94,16 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    URL url = null;
+                    ModelWithUrlProperty deserializedModelWithUrlProperty = new ModelWithUrlProperty();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Url".equals(elementName.getLocalPart())) {
-                            url = reader.getNullableElement(URL::new);
+                            deserializedModelWithUrlProperty.url = reader.getNullableElement(URL::new);
                         } else {
                             reader.skipElement();
                         }
                     }
-                    ModelWithUrlProperty deserializedModelWithUrlProperty = new ModelWithUrlProperty();
-                    deserializedModelWithUrlProperty.url = url;
 
                     return deserializedModelWithUrlProperty;
                 });

@@ -231,34 +231,24 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String allowedOrigins = null;
-                    String allowedMethods = null;
-                    String allowedHeaders = null;
-                    String exposedHeaders = null;
-                    int maxAgeInSeconds = 0;
+                    CorsRule deserializedCorsRule = new CorsRule();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("AllowedOrigins".equals(elementName.getLocalPart())) {
-                            allowedOrigins = reader.getStringElement();
+                            deserializedCorsRule.allowedOrigins = reader.getStringElement();
                         } else if ("AllowedMethods".equals(elementName.getLocalPart())) {
-                            allowedMethods = reader.getStringElement();
+                            deserializedCorsRule.allowedMethods = reader.getStringElement();
                         } else if ("AllowedHeaders".equals(elementName.getLocalPart())) {
-                            allowedHeaders = reader.getStringElement();
+                            deserializedCorsRule.allowedHeaders = reader.getStringElement();
                         } else if ("ExposedHeaders".equals(elementName.getLocalPart())) {
-                            exposedHeaders = reader.getStringElement();
+                            deserializedCorsRule.exposedHeaders = reader.getStringElement();
                         } else if ("MaxAgeInSeconds".equals(elementName.getLocalPart())) {
-                            maxAgeInSeconds = reader.getIntElement();
+                            deserializedCorsRule.maxAgeInSeconds = reader.getIntElement();
                         } else {
                             reader.skipElement();
                         }
                     }
-                    CorsRule deserializedCorsRule = new CorsRule();
-                    deserializedCorsRule.allowedOrigins = allowedOrigins;
-                    deserializedCorsRule.allowedMethods = allowedMethods;
-                    deserializedCorsRule.allowedHeaders = allowedHeaders;
-                    deserializedCorsRule.exposedHeaders = exposedHeaders;
-                    deserializedCorsRule.maxAgeInSeconds = maxAgeInSeconds;
 
                     return deserializedCorsRule;
                 });

@@ -177,30 +177,22 @@ public final class Metrics implements XmlSerializable<Metrics> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String version = null;
-                    boolean enabled = false;
-                    Boolean includeAPIs = null;
-                    RetentionPolicy retentionPolicy = null;
+                    Metrics deserializedMetrics = new Metrics();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Version".equals(elementName.getLocalPart())) {
-                            version = reader.getStringElement();
+                            deserializedMetrics.version = reader.getStringElement();
                         } else if ("Enabled".equals(elementName.getLocalPart())) {
-                            enabled = reader.getBooleanElement();
+                            deserializedMetrics.enabled = reader.getBooleanElement();
                         } else if ("IncludeAPIs".equals(elementName.getLocalPart())) {
-                            includeAPIs = reader.getNullableElement(Boolean::parseBoolean);
+                            deserializedMetrics.includeAPIs = reader.getNullableElement(Boolean::parseBoolean);
                         } else if ("RetentionPolicy".equals(elementName.getLocalPart())) {
-                            retentionPolicy = RetentionPolicy.fromXml(reader, "RetentionPolicy");
+                            deserializedMetrics.retentionPolicy = RetentionPolicy.fromXml(reader, "RetentionPolicy");
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Metrics deserializedMetrics = new Metrics();
-                    deserializedMetrics.enabled = enabled;
-                    deserializedMetrics.version = version;
-                    deserializedMetrics.includeAPIs = includeAPIs;
-                    deserializedMetrics.retentionPolicy = retentionPolicy;
 
                     return deserializedMetrics;
                 });

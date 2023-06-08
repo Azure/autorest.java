@@ -296,42 +296,28 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
-                    String containerName = reader.getStringAttribute(null, "ContainerName");
-                    String prefix = null;
-                    String marker = null;
-                    int maxResults = 0;
-                    String delimiter = null;
-                    Blobs blobs = null;
-                    String nextMarker = null;
+                    ListBlobsResponse deserializedListBlobsResponse = new ListBlobsResponse();
+                    deserializedListBlobsResponse.serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
+                    deserializedListBlobsResponse.containerName = reader.getStringAttribute(null, "ContainerName");
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Prefix".equals(elementName.getLocalPart())) {
-                            prefix = reader.getStringElement();
+                            deserializedListBlobsResponse.prefix = reader.getStringElement();
                         } else if ("Marker".equals(elementName.getLocalPart())) {
-                            marker = reader.getStringElement();
+                            deserializedListBlobsResponse.marker = reader.getStringElement();
                         } else if ("MaxResults".equals(elementName.getLocalPart())) {
-                            maxResults = reader.getIntElement();
+                            deserializedListBlobsResponse.maxResults = reader.getIntElement();
                         } else if ("Delimiter".equals(elementName.getLocalPart())) {
-                            delimiter = reader.getStringElement();
+                            deserializedListBlobsResponse.delimiter = reader.getStringElement();
                         } else if ("Blobs".equals(elementName.getLocalPart())) {
-                            blobs = Blobs.fromXml(reader, "Blobs");
+                            deserializedListBlobsResponse.blobs = Blobs.fromXml(reader, "Blobs");
                         } else if ("NextMarker".equals(elementName.getLocalPart())) {
-                            nextMarker = reader.getStringElement();
+                            deserializedListBlobsResponse.nextMarker = reader.getStringElement();
                         } else {
                             reader.skipElement();
                         }
                     }
-                    ListBlobsResponse deserializedListBlobsResponse = new ListBlobsResponse();
-                    deserializedListBlobsResponse.containerName = containerName;
-                    deserializedListBlobsResponse.prefix = prefix;
-                    deserializedListBlobsResponse.marker = marker;
-                    deserializedListBlobsResponse.maxResults = maxResults;
-                    deserializedListBlobsResponse.delimiter = delimiter;
-                    deserializedListBlobsResponse.blobs = blobs;
-                    deserializedListBlobsResponse.nextMarker = nextMarker;
-                    deserializedListBlobsResponse.serviceEndpoint = serviceEndpoint;
 
                     return deserializedListBlobsResponse;
                 });

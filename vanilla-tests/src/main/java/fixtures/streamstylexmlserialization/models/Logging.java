@@ -206,34 +206,24 @@ public final class Logging implements XmlSerializable<Logging> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String version = null;
-                    boolean delete = false;
-                    boolean read = false;
-                    boolean write = false;
-                    RetentionPolicy retentionPolicy = null;
+                    Logging deserializedLogging = new Logging();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Version".equals(elementName.getLocalPart())) {
-                            version = reader.getStringElement();
+                            deserializedLogging.version = reader.getStringElement();
                         } else if ("Delete".equals(elementName.getLocalPart())) {
-                            delete = reader.getBooleanElement();
+                            deserializedLogging.delete = reader.getBooleanElement();
                         } else if ("Read".equals(elementName.getLocalPart())) {
-                            read = reader.getBooleanElement();
+                            deserializedLogging.read = reader.getBooleanElement();
                         } else if ("Write".equals(elementName.getLocalPart())) {
-                            write = reader.getBooleanElement();
+                            deserializedLogging.write = reader.getBooleanElement();
                         } else if ("RetentionPolicy".equals(elementName.getLocalPart())) {
-                            retentionPolicy = RetentionPolicy.fromXml(reader, "RetentionPolicy");
+                            deserializedLogging.retentionPolicy = RetentionPolicy.fromXml(reader, "RetentionPolicy");
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Logging deserializedLogging = new Logging();
-                    deserializedLogging.version = version;
-                    deserializedLogging.delete = delete;
-                    deserializedLogging.read = read;
-                    deserializedLogging.write = write;
-                    deserializedLogging.retentionPolicy = retentionPolicy;
 
                     return deserializedLogging;
                 });

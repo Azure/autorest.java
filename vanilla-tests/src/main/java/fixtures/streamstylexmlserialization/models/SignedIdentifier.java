@@ -128,22 +128,18 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String id = null;
-                    AccessPolicy accessPolicy = null;
+                    SignedIdentifier deserializedSignedIdentifier = new SignedIdentifier();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Id".equals(elementName.getLocalPart())) {
-                            id = reader.getStringElement();
+                            deserializedSignedIdentifier.id = reader.getStringElement();
                         } else if ("AccessPolicy".equals(elementName.getLocalPart())) {
-                            accessPolicy = AccessPolicy.fromXml(reader, "AccessPolicy");
+                            deserializedSignedIdentifier.accessPolicy = AccessPolicy.fromXml(reader, "AccessPolicy");
                         } else {
                             reader.skipElement();
                         }
                     }
-                    SignedIdentifier deserializedSignedIdentifier = new SignedIdentifier();
-                    deserializedSignedIdentifier.id = id;
-                    deserializedSignedIdentifier.accessPolicy = accessPolicy;
 
                     return deserializedSignedIdentifier;
                 });

@@ -557,7 +557,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return returnTypeHolder;
         }
 
-        IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
+        IType responseBodyType = MapperUtils.handleResponseSchema(operation, settings);
         if (isProtocolMethod) {
             if (responseBodyType instanceof ClassType
                     || responseBodyType instanceof ListType
