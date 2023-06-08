@@ -5,11 +5,13 @@
 package com._specs_.azure.core.traits.implementation;
 
 import com._specs_.azure.core.traits.TraitsServiceVersion;
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.PathParam;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -29,9 +31,12 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
+import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import java.time.OffsetDateTime;
+import java.util.UUID;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the TraitsClient type. */
@@ -159,6 +164,46 @@ public final class TraitsClientImpl {
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Post("/azure/core/traits/user/{id}:repeatableAction")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> repeatableAction(
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("id") int id,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData userActionParam,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/azure/core/traits/user/{id}:repeatableAction")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> repeatableActionSync(
+                @QueryParam("api-version") String apiVersion,
+                @PathParam("id") int id,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData userActionParam,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -244,5 +289,136 @@ public final class TraitsClientImpl {
         final String accept = "application/json";
         return service.smokeTestSync(
                 this.getServiceVersion().getVersion(), id, foo, accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * Test for repeatable requests.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     userActionValue: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     userActionResult: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param id The user's id.
+     * @param userActionParam User action param.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return user action response along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> repeatableActionWithResponseAsync(
+            int id, BinaryData userActionParam, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
+                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    }
+                });
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
+                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    }
+                });
+        return FluxUtil.withContext(
+                context ->
+                        service.repeatableAction(
+                                this.getServiceVersion().getVersion(),
+                                id,
+                                accept,
+                                userActionParam,
+                                requestOptionsLocal,
+                                context));
+    }
+
+    /**
+     * Test for repeatable requests.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     userActionValue: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     userActionResult: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param id The user's id.
+     * @param userActionParam User action param.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return user action response along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> repeatableActionWithResponse(
+            int id, BinaryData userActionParam, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
+                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    }
+                });
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
+                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    }
+                });
+        return service.repeatableActionSync(
+                this.getServiceVersion().getVersion(), id, accept, userActionParam, requestOptionsLocal, Context.NONE);
     }
 }
