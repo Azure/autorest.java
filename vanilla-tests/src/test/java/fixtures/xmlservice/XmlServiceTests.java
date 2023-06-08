@@ -235,7 +235,7 @@ public class XmlServiceTests {
 
   @Test
   public void getAcls() {
-    List<SignedIdentifier> response = client.getXmls().getAcls();
+    List<SignedIdentifier> response = client.getXmls().getAcls().items();
     assertEquals(1, response.size());
     assertEquals("MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=", response.get(0).getId());
     assertNotNull(response.get(0).getAccessPolicy());
@@ -246,7 +246,7 @@ public class XmlServiceTests {
 
   @Test
   public void putAcls() {
-    List<SignedIdentifier> response = client.getXmls().getAcls();
+    List<SignedIdentifier> response = client.getXmls().getAcls().items();
     client.getXmls().putAcls(response);
   }
 
