@@ -478,8 +478,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     private static void requestOptionsSetHeaderIfAbsent(JavaBlock function, String variableName, String headerName) {
         function.line("requestOptionsLocal.addRequestCallback(requestLocal -> {");
         function.indent(() -> {
-            function.ifBlock(String.format("requestLocal.getHeaders().get(\"%1$s\") == null", headerName), ifBlock -> {
-                function.line(String.format("requestLocal.getHeaders().set(\"%1$s\", %2$s);", headerName, variableName));
+            function.ifBlock(String.format("requestLocal.getHeaders().get(HttpHeaderName.fromString(\"%1$s\")) == null", headerName), ifBlock -> {
+                function.line(String.format("requestLocal.getHeaders().set(HttpHeaderName.fromString(\"%1$s\"), %2$s);", headerName, variableName));
             });
         });
         function.line("});");

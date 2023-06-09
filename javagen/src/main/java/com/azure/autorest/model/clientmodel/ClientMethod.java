@@ -18,10 +18,8 @@ import com.azure.autorest.util.MethodUtil;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.CoreUtils;
-import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.polling.PollingStrategyOptions;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -437,9 +434,10 @@ public class ClientMethod {
 
             if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
                 // Repeatable Requests
-                imports.add(UUID.class.getName());
-                imports.add(OffsetDateTime.class.getName());
-                imports.add(DateTimeRfc1123.class.getName());
+                ClassType.UUID.addImportsTo(imports, false);
+                ClassType.DateTime.addImportsTo(imports, false);
+                ClassType.DateTimeRfc1123.addImportsTo(imports, false);
+                ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
             }
 
             if (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync) {
