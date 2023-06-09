@@ -100,6 +100,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     try {
       const output = await promisify(execFile)("java", [
         `-DemitterOptions=${emitterOptions}`,
+        `-Dfile.encoding=UTF-8`,
         "-jar",
         jarFileName,
         codeModelFileName,
