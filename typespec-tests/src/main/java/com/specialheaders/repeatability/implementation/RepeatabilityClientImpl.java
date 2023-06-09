@@ -16,6 +16,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
@@ -160,14 +161,18 @@ public final class RepeatabilityClientImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
-                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
                     }
                 });
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
-                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
                     }
                 });
         return FluxUtil.withContext(context -> service.immediateSuccess(accept, requestOptionsLocal, context));
@@ -202,14 +207,18 @@ public final class RepeatabilityClientImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
-                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
                     }
                 });
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
-                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
                     }
                 });
         return service.immediateSuccessSync(accept, requestOptionsLocal, Context.NONE);
