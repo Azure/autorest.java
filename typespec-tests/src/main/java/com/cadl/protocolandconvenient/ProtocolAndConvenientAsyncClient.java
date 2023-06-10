@@ -212,7 +212,7 @@ public final class ProtocolAndConvenientAsyncClient {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -301,7 +301,7 @@ public final class ProtocolAndConvenientAsyncClient {
     /**
      * Long running operation.
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

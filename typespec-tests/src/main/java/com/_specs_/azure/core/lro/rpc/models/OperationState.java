@@ -9,18 +9,18 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for OperationState. */
+/** Enum describing allowed operation states. */
 public final class OperationState extends ExpandableStringEnum<OperationState> {
-    /** Static value InProgress for OperationState. */
+    /** The operation is in progress. */
     @Generated public static final OperationState IN_PROGRESS = fromString("InProgress");
 
-    /** Static value Succeeded for OperationState. */
+    /** The operation has completed successfully. */
     @Generated public static final OperationState SUCCEEDED = fromString("Succeeded");
 
-    /** Static value Failed for OperationState. */
+    /** The operation has failed. */
     @Generated public static final OperationState FAILED = fromString("Failed");
 
-    /** Static value Canceled for OperationState. */
+    /** The operation has been canceled by the user. */
     @Generated public static final OperationState CANCELED = fromString("Canceled");
 
     /**

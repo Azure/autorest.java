@@ -61,11 +61,11 @@ public final class RpcClient {
      *                 code: String (Required)
      *                 message: String (Required)
      *                 target: String (Optional)
-     *                 details (Required): [
+     *                 details (Optional): [
      *                     (recursive schema, see above)
      *                 ]
      *                 innererror (Optional): {
-     *                     code: String (Required)
+     *                     code: String (Optional)
      *                     innererror (Optional): (recursive schema, see innererror above)
      *                 }
      *             }
@@ -107,11 +107,11 @@ public final class RpcClient {
      *                 code: String (Required)
      *                 message: String (Required)
      *                 target: String (Optional)
-     *                 details (Required): [
+     *                 details (Optional): [
      *                     (recursive schema, see above)
      *                 ]
      *                 innererror (Optional): {
-     *                     code: String (Required)
+     *                     code: String (Optional)
      *                     innererror (Optional): (recursive schema, see innererror above)
      *                 }
      *             }

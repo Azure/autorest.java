@@ -43,15 +43,15 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The export operation.
+     * The most basic operation.
      *
      * <p><strong>Query Parameters</strong>
      *
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>The projectFileVersion parameter</td></tr>
-     *     <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>The projectedFileFormat parameter</td></tr>
+     *     <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     *     <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -73,7 +73,7 @@ public final class VersioningAsyncClient {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -88,7 +88,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The list operation.
+     * The most basic operation.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -125,11 +125,11 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The export operation.
+     * The most basic operation.
      *
-     * @param name The name parameter.
-     * @param projectFileVersion The projectFileVersion parameter.
-     * @param projectedFileFormat The projectedFileFormat parameter.
+     * @param name A sequence of textual characters.
+     * @param projectFileVersion A sequence of textual characters.
+     * @param projectedFileFormat A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -159,10 +159,10 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The export operation.
+     * The most basic operation.
      *
-     * @param name The name parameter.
-     * @param projectFileVersion The projectFileVersion parameter.
+     * @param name A sequence of textual characters.
+     * @param projectFileVersion A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -183,9 +183,9 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The export operation.
+     * The most basic operation.
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -203,7 +203,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The list operation.
+     * The most basic operation.
      *
      * @param select Select the specified fields to be included in the response.
      * @param filter Filter the result list using the given expression.
@@ -263,7 +263,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The list operation.
+     * The most basic operation.
      *
      * @param select Select the specified fields to be included in the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -311,7 +311,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The list operation.
+     * The most basic operation.
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

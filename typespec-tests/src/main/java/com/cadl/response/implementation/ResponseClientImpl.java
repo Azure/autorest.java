@@ -606,7 +606,7 @@ public final class ResponseClientImpl {
     }
 
     /**
-     * The exists operation.
+     * The most basic operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -634,7 +634,7 @@ public final class ResponseClientImpl {
     }
 
     /**
-     * The exists operation.
+     * The most basic operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
