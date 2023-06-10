@@ -236,7 +236,7 @@ public final class HeadersImpl {
     /**
      * The defaultMethod operation.
      *
-     * @param duration The duration parameter.
+     * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -253,7 +253,7 @@ public final class HeadersImpl {
     /**
      * The defaultMethod operation.
      *
-     * @param duration The duration parameter.
+     * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -270,7 +270,7 @@ public final class HeadersImpl {
     /**
      * The iso8601 operation.
      *
-     * @param duration The duration parameter.
+     * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -287,7 +287,7 @@ public final class HeadersImpl {
     /**
      * The iso8601 operation.
      *
-     * @param duration The duration parameter.
+     * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -343,7 +343,7 @@ public final class HeadersImpl {
     /**
      * The int32Seconds operation.
      *
-     * @param duration The duration parameter.
+     * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -362,7 +362,7 @@ public final class HeadersImpl {
     /**
      * The int32Seconds operation.
      *
-     * @param duration The duration parameter.
+     * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -380,7 +380,7 @@ public final class HeadersImpl {
     /**
      * The floatSeconds operation.
      *
-     * @param duration The duration parameter.
+     * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -399,7 +399,7 @@ public final class HeadersImpl {
     /**
      * The floatSeconds operation.
      *
-     * @param duration The duration parameter.
+     * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

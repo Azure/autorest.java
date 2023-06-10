@@ -36,7 +36,7 @@ public final class QueryClient {
     /**
      * The defaultMethod operation.
      *
-     * @param input The input parameter.
+     * @param input A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -53,7 +53,7 @@ public final class QueryClient {
     /**
      * The iso8601 operation.
      *
-     * @param input The input parameter.
+     * @param input A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -70,7 +70,7 @@ public final class QueryClient {
     /**
      * The int32Seconds operation.
      *
-     * @param input The input parameter.
+     * @param input A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -87,7 +87,7 @@ public final class QueryClient {
     /**
      * The floatSeconds operation.
      *
-     * @param input The input parameter.
+     * @param input A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -121,7 +121,7 @@ public final class QueryClient {
     /**
      * The defaultMethod operation.
      *
-     * @param input The input parameter.
+     * @param input A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -140,7 +140,7 @@ public final class QueryClient {
     /**
      * The iso8601 operation.
      *
-     * @param input The input parameter.
+     * @param input A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -159,7 +159,7 @@ public final class QueryClient {
     /**
      * The int32Seconds operation.
      *
-     * @param input The input parameter.
+     * @param input A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -178,7 +178,7 @@ public final class QueryClient {
     /**
      * The floatSeconds operation.
      *
-     * @param input The input parameter.
+     * @param input A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

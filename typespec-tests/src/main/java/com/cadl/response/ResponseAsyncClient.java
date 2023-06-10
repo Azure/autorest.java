@@ -161,7 +161,7 @@ public final class ResponseAsyncClient {
     }
 
     /**
-     * The exists operation.
+     * The most basic operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -278,7 +278,7 @@ public final class ResponseAsyncClient {
     }
 
     /**
-     * The exists operation.
+     * The most basic operation.
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
