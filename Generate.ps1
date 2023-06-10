@@ -2,6 +2,10 @@
 #
 # If 'com.azure.autorest.customization' tests fails, re-install 'customization-base'.
 
+param (
+    [switch]$notimeout = $false
+)
+
 $AUTOREST_CORE_VERSION = "3.9.3"
 $VANILLA_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL"
 $AZURE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL"
@@ -117,7 +121,11 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/lro.md",
     "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md"
 ) | ForEach-Object -Parallel $generateScript -AsJob -ThrottleLimit $PARALLELIZATION
-$job | Wait-Job -Timeout 400
+if ($false -eq $notimeout) {
+    $job | Wait-Job -Timeout 400
+} else {
+    $job | Wait-Job
+}
 if ($job.State -notin @('Completed', 'Failed')) {
     throw "Vanilla code generation failed to complete within 400 seconds."
 } else {
@@ -144,7 +152,11 @@ $job = @(
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true --output-model-immutable"
 ) | ForEach-Object -Parallel $generateScript -AsJob -ThrottleLimit $PARALLELIZATION
-$job | Wait-Job -Timeout 180
+if ($false -eq $notimeout) {
+    $job | Wait-Job -Timeout 180
+} else {
+    $job | Wait-Job
+}
 if ($job.State -notin @('Completed', 'Failed')) {
     throw "Local swagger code generation failed to complete within 180 seconds."
 } else {
@@ -164,7 +176,11 @@ $job = @(
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_DATAPLANE_PATH/form-recognizer.md"
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_DATAPLANE_PATH/form-recognizer-dpg.md"
 ) | ForEach-Object -Parallel $generateScript -AsJob -ThrottleLimit $PARALLELIZATION
-$job | Wait-Job -Timeout 120
+if ($false -eq $notimeout) {
+    $job | Wait-Job -Timeout 120
+} else {
+    $job | Wait-Job
+}
 if ($job.State -notin @('Completed', 'Failed')) {
     throw "Azure Data Plane code generation failed to complete within 120 seconds."
 } else {
@@ -181,7 +197,11 @@ $job = @(
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/subscriptionId-apiVersion.json --namespace=fixtures.subscriptionidapiversion --payload-flattening-threshold=1",
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1"
 ) | ForEach-Object -Parallel $generateScript -AsJob -ThrottleLimit $PARALLELIZATION
-$job | Wait-Job -Timeout 180
+if ($false -eq $notimeout) {
+    $job | Wait-Job -Timeout 180
+} else {
+    $job | Wait-Job
+}
 if ($job.State -notin @('Completed', 'Failed')) {
     throw "Azure code generation failed to complete within 180 seconds."
 } else {
@@ -231,7 +251,11 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/dpg-customization.md",
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/custom-http-exception-mapping.md"
 ) | ForEach-Object -Parallel $generateScript -AsJob -ThrottleLimit $PARALLELIZATION
-$job | Wait-Job -Timeout 300
+if ($false -eq $notimeout) {
+    $job | Wait-Job -Timeout 300
+} else {
+    $job | Wait-Job
+}
 if ($job.State -notin @('Completed', 'Failed')) {
     throw "Protocol code generation failed to complete within 300 seconds."
 } else {
