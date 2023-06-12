@@ -1485,18 +1485,10 @@ public final class DpgMultiMediaTypesClientImpl {
     public Mono<Response<BinaryData>> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponseAsync(
             RequestOptions requestOptions) {
         final String accept = "application/json";
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "image/jpeg");
-                    }
-                });
         return FluxUtil.withContext(
                 context ->
                         service.jsonAndImageObjectTypeJsonFirstWithNonRequiredBody(
-                                this.getHost(), accept, requestOptionsLocal, context));
+                                this.getHost(), accept, requestOptions, context));
     }
 
     /**
@@ -1535,15 +1527,7 @@ public final class DpgMultiMediaTypesClientImpl {
     public Response<BinaryData> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(
             RequestOptions requestOptions) {
         final String accept = "application/json";
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "image/jpeg");
-                    }
-                });
         return service.jsonAndImageObjectTypeJsonFirstWithNonRequiredBodySync(
-                this.getHost(), accept, requestOptionsLocal, Context.NONE);
+                this.getHost(), accept, requestOptions, Context.NONE);
     }
 }

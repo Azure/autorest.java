@@ -475,6 +475,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         boolean bodyParameterOptional = clientMethod.getProxyMethod().getAllParameters().stream()
                 .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.BODY
                         && !p.isConstant() && !p.isFromClient() && !p.isRequired());
+        // this logic relies on: codegen requires either source defines "content-type" header parameter, or codegen generates a "content-type" header parameter (ref ProxyMethodMapper class)
         boolean singleContentType = clientMethod.getProxyMethod().getAllParameters().stream()
                 .noneMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.HEADER
                         && HttpHeaderName.CONTENT_TYPE.getCaseInsensitiveName().equalsIgnoreCase(p.getRequestParameterName())
