@@ -335,9 +335,9 @@ public final class TraitsClientImpl {
     public Mono<Response<BinaryData>> repeatableActionWithResponseAsync(
             int id, BinaryData userActionParam, RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
                     if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
@@ -408,9 +408,9 @@ public final class TraitsClientImpl {
     public Response<BinaryData> repeatableActionWithResponse(
             int id, BinaryData userActionParam, RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
                     if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {

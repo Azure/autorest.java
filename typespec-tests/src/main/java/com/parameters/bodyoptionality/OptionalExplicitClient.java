@@ -12,7 +12,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -55,14 +54,6 @@ public final class OptionalExplicitClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> setWithResponse(RequestOptions requestOptions) {
-        if (requestOptions == null) {
-            requestOptions = new RequestOptions();
-        }
-        requestOptions.addRequestCallback(requestLocal -> {
-            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.fromString("content-type")) == null) {
-                requestLocal.setHeader(HttpHeaderName.fromString("content-type"), "application/json");
-            }
-        });
         return this.serviceClient.setWithResponse(requestOptions);
     }
 
@@ -87,14 +78,6 @@ public final class OptionalExplicitClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> omitWithResponse(RequestOptions requestOptions) {
-        if (requestOptions == null) {
-            requestOptions = new RequestOptions();
-        }
-        requestOptions.addRequestCallback(requestLocal -> {
-            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.fromString("content-type")) == null) {
-                requestLocal.setHeader(HttpHeaderName.fromString("content-type"), "application/json");
-            }
-        });
         return this.serviceClient.omitWithResponse(requestOptions);
     }
 

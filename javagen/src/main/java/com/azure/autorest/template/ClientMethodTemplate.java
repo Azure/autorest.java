@@ -480,7 +480,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         && HttpHeaderName.CONTENT_TYPE.getCaseInsensitiveName().equalsIgnoreCase(p.getRequestParameterName()));
         final boolean contentTypeRequestHeaders = bodyParameterOptional && singleContentType;
 
-        // need a "final" variable
+        // need a "final" variable for RequestOptions
         if (repeatabilityRequestHeaders || contentTypeRequestHeaders) {
             requestOptionsLocal = true;
             function.line("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;");
