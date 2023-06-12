@@ -477,7 +477,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         && !p.isConstant() && !p.isFromClient() && !p.isRequired());
         boolean singleContentType = clientMethod.getProxyMethod().getAllParameters().stream()
                 .noneMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.HEADER
-                        && HttpHeaderName.CONTENT_TYPE.getCaseInsensitiveName().equalsIgnoreCase(p.getRequestParameterName()));
+                        && HttpHeaderName.CONTENT_TYPE.getCaseInsensitiveName().equalsIgnoreCase(p.getRequestParameterName())
+                        && p.getRawType() instanceof EnumType
+                        && ((EnumType) p.getRawType()).getValues().size() == 1);
         final boolean contentTypeRequestHeaders = bodyParameterOptional && singleContentType;
 
         // need a "final" variable for RequestOptions

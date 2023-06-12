@@ -33,6 +33,7 @@ public class MediaTypesTests {
 
     @Test
     public void contentTypeWithEncoding() throws Exception {
-        client.contentTypeWithEncodingWithResponse(new RequestOptions().setBody(BinaryData.fromString("does not matter")));
+        // case verifies request header "content-type: text/plain; charset=UTF-8"
+        client.contentTypeWithEncodingWithResponse(new RequestOptions().setBody(BinaryData.fromString("content does not matter")));
     }
 }

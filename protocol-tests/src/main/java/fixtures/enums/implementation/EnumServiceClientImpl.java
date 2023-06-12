@@ -19,6 +19,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
@@ -462,8 +463,16 @@ public final class EnumServiceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNonRequiredBodyEnumsWithResponseAsync(RequestOptions requestOptions) {
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.putNonRequiredBodyEnums(this.getHost(), requestOptions, context));
+                context -> service.putNonRequiredBodyEnums(this.getHost(), requestOptionsLocal, context));
     }
 
     /**
@@ -494,6 +503,14 @@ public final class EnumServiceClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNonRequiredBodyEnumsWithResponse(RequestOptions requestOptions) {
-        return service.putNonRequiredBodyEnumsSync(this.getHost(), requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.putNonRequiredBodyEnumsSync(this.getHost(), requestOptionsLocal, Context.NONE);
     }
 }

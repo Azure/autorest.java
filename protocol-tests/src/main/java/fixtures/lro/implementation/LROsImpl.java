@@ -20,6 +20,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
@@ -1705,8 +1706,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> put200SucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.put200Succeeded(this.client.getHost(), accept, requestOptions, context));
+                context -> service.put200Succeeded(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -1769,7 +1778,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> put200SucceededWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.put200SucceededSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.put200SucceededSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -1978,9 +1995,18 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> patch200SucceededIgnoreHeadersWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
                 context ->
-                        service.patch200SucceededIgnoreHeaders(this.client.getHost(), accept, requestOptions, context));
+                        service.patch200SucceededIgnoreHeaders(
+                                this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -2043,7 +2069,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> patch200SucceededIgnoreHeadersWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.patch200SucceededIgnoreHeadersSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.patch200SucceededIgnoreHeadersSync(
+                this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -2251,9 +2286,18 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> patch201RetryWithAsyncHeaderWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
                 context ->
-                        service.patch201RetryWithAsyncHeader(this.client.getHost(), accept, requestOptions, context));
+                        service.patch201RetryWithAsyncHeader(
+                                this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -2315,7 +2359,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> patch201RetryWithAsyncHeaderWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.patch201RetryWithAsyncHeaderSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.patch201RetryWithAsyncHeaderSync(
+                this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -2522,10 +2575,18 @@ public final class LROsImpl {
     private Mono<Response<BinaryData>> patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(
             RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
                 context ->
                         service.patch202RetryWithAsyncAndLocationHeader(
-                                this.client.getHost(), accept, requestOptions, context));
+                                this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -2587,8 +2648,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> patch202RetryWithAsyncAndLocationHeaderWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return service.patch202RetryWithAsyncAndLocationHeaderSync(
-                this.client.getHost(), accept, requestOptions, Context.NONE);
+                this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -2797,8 +2866,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> put201SucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.put201Succeeded(this.client.getHost(), accept, requestOptions, context));
+                context -> service.put201Succeeded(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -2861,7 +2938,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> put201SucceededWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.put201SucceededSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.put201SucceededSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -3239,8 +3324,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> put200SucceededNoStateWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.put200SucceededNoState(this.client.getHost(), accept, requestOptions, context));
+                context -> service.put200SucceededNoState(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -3303,7 +3396,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> put200SucceededNoStateWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.put200SucceededNoStateSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.put200SucceededNoStateSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -3512,8 +3613,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> put202Retry200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.put202Retry200(this.client.getHost(), accept, requestOptions, context));
+                context -> service.put202Retry200(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -3576,7 +3685,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> put202Retry200WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.put202Retry200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.put202Retry200Sync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -3786,8 +3903,18 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> put201CreatingSucceeded200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.put201CreatingSucceeded200(this.client.getHost(), accept, requestOptions, context));
+                context ->
+                        service.put201CreatingSucceeded200(
+                                this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -3851,7 +3978,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> put201CreatingSucceeded200WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.put201CreatingSucceeded200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.put201CreatingSucceeded200Sync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -4063,8 +4198,18 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> put200UpdatingSucceeded204WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.put200UpdatingSucceeded204(this.client.getHost(), accept, requestOptions, context));
+                context ->
+                        service.put200UpdatingSucceeded204(
+                                this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -4128,7 +4273,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> put200UpdatingSucceeded204WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.put200UpdatingSucceeded204Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.put200UpdatingSucceeded204Sync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -4340,8 +4493,17 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> put201CreatingFailed200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.put201CreatingFailed200(this.client.getHost(), accept, requestOptions, context));
+                context ->
+                        service.put201CreatingFailed200(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -4405,7 +4567,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> put201CreatingFailed200WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.put201CreatingFailed200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.put201CreatingFailed200Sync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -4617,8 +4787,17 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> put200Acceptedcanceled200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.put200Acceptedcanceled200(this.client.getHost(), accept, requestOptions, context));
+                context ->
+                        service.put200Acceptedcanceled200(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -4682,7 +4861,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> put200Acceptedcanceled200WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.put200Acceptedcanceled200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.put200Acceptedcanceled200Sync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -4893,8 +5080,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> putNoHeaderInRetryWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.putNoHeaderInRetry(this.client.getHost(), accept, requestOptions, context));
+                context -> service.putNoHeaderInRetry(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -4957,7 +5152,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> putNoHeaderInRetryWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putNoHeaderInRetrySync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.putNoHeaderInRetrySync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -5167,8 +5370,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> putAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.putAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
+                context -> service.putAsyncRetrySucceeded(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -5232,7 +5443,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> putAsyncRetrySucceededWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putAsyncRetrySucceededSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.putAsyncRetrySucceededSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -5444,8 +5663,17 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> putAsyncNoRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.putAsyncNoRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
+                context ->
+                        service.putAsyncNoRetrySucceeded(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -5509,7 +5737,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> putAsyncNoRetrySucceededWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putAsyncNoRetrySucceededSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.putAsyncNoRetrySucceededSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -5721,8 +5957,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> putAsyncRetryFailedWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.putAsyncRetryFailed(this.client.getHost(), accept, requestOptions, context));
+                context -> service.putAsyncRetryFailed(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -5786,7 +6030,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> putAsyncRetryFailedWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putAsyncRetryFailedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.putAsyncRetryFailedSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -5998,8 +6250,17 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> putAsyncNoRetrycanceledWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.putAsyncNoRetrycanceled(this.client.getHost(), accept, requestOptions, context));
+                context ->
+                        service.putAsyncNoRetrycanceled(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -6063,7 +6324,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> putAsyncNoRetrycanceledWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putAsyncNoRetrycanceledSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.putAsyncNoRetrycanceledSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -6274,8 +6543,17 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> putAsyncNoHeaderInRetryWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.putAsyncNoHeaderInRetry(this.client.getHost(), accept, requestOptions, context));
+                context ->
+                        service.putAsyncNoHeaderInRetry(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -6338,7 +6616,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> putAsyncNoHeaderInRetryWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putAsyncNoHeaderInRetrySync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.putAsyncNoHeaderInRetrySync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -6528,8 +6814,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> putNonResourceWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.putNonResource(this.client.getHost(), accept, requestOptions, context));
+                context -> service.putNonResource(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -6573,7 +6867,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> putNonResourceWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putNonResourceSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.putNonResourceSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -6725,8 +7027,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> putAsyncNonResourceWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.putAsyncNonResource(this.client.getHost(), accept, requestOptions, context));
+                context -> service.putAsyncNonResource(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -6770,7 +7080,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> putAsyncNonResourceWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putAsyncNonResourceSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.putAsyncNonResourceSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -6928,8 +7246,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> putSubResourceWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.putSubResource(this.client.getHost(), accept, requestOptions, context));
+                context -> service.putSubResource(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -6979,7 +7305,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> putSubResourceWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putSubResourceSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.putSubResourceSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -7149,8 +7483,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> putAsyncSubResourceWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.putAsyncSubResource(this.client.getHost(), accept, requestOptions, context));
+                context -> service.putAsyncSubResource(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -7200,7 +7542,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> putAsyncSubResourceWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putAsyncSubResourceSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.putAsyncSubResourceSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -8941,8 +9291,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Void>> post202Retry200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.post202Retry200(this.client.getHost(), accept, requestOptions, context));
+                context -> service.post202Retry200(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -8987,7 +9345,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<Void> post202Retry200WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.post202Retry200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.post202Retry200Sync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -9160,8 +9526,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> post202NoRetry204WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.post202NoRetry204(this.client.getHost(), accept, requestOptions, context));
+                context -> service.post202NoRetry204(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -9224,7 +9598,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> post202NoRetry204WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.post202NoRetry204Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.post202NoRetry204Sync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -9938,8 +10320,17 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> postAsyncRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.postAsyncRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
+                context ->
+                        service.postAsyncRetrySucceeded(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -10003,7 +10394,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> postAsyncRetrySucceededWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.postAsyncRetrySucceededSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.postAsyncRetrySucceededSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -10215,8 +10614,17 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> postAsyncNoRetrySucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.postAsyncNoRetrySucceeded(this.client.getHost(), accept, requestOptions, context));
+                context ->
+                        service.postAsyncNoRetrySucceeded(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -10280,7 +10688,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> postAsyncNoRetrySucceededWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.postAsyncNoRetrySucceededSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.postAsyncNoRetrySucceededSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -10474,8 +10890,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Void>> postAsyncRetryFailedWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.postAsyncRetryFailed(this.client.getHost(), accept, requestOptions, context));
+                context -> service.postAsyncRetryFailed(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -10521,7 +10945,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<Void> postAsyncRetryFailedWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.postAsyncRetryFailedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.postAsyncRetryFailedSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -10679,8 +11111,16 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Void>> postAsyncRetrycanceledWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.postAsyncRetrycanceled(this.client.getHost(), accept, requestOptions, context));
+                context -> service.postAsyncRetrycanceled(this.client.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -10726,7 +11166,15 @@ public final class LROsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<Void> postAsyncRetrycanceledWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.postAsyncRetrycanceledSync(this.client.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+                    }
+                });
+        return service.postAsyncRetrycanceledSync(this.client.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
