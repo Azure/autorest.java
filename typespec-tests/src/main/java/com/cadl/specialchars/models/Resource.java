@@ -16,7 +16,7 @@ public final class Resource {
      * id
      */
     @Generated
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id")
     private String id;
 
     /*
@@ -58,7 +58,7 @@ public final class Resource {
      */
     @Generated
     @JsonCreator
-    private Resource(@JsonProperty(value = "id", required = true) String id) {
+    private Resource(@JsonProperty(value = "id") String id) {
         this.id = id;
     }
 
