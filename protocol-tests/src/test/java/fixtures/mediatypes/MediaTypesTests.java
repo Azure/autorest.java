@@ -30,5 +30,9 @@ public class MediaTypesTests {
         requestOptions.setBody(BinaryData.fromString("PDF"));
         client.analyzeBodyWithResponse("application/pdf", requestOptions);
     }
-    
+
+    @Test
+    public void contentTypeWithEncoding() throws Exception {
+        client.contentTypeWithEncodingWithResponse(new RequestOptions().setBody(BinaryData.fromString("does not matter")));
+    }
 }
