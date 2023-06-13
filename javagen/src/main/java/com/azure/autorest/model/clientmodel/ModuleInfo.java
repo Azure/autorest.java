@@ -140,6 +140,7 @@ public class ModuleInfo {
     public void checkForAdditionalDependencies(List<ClientModel> models) {
         Set<String> externalPackageNames = models.stream()
                 .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null
+                        && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.CONVENIENCE_API)
                         && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL))
                 .map(ClientModel::getPackage)
                 .collect(Collectors.toSet());
