@@ -356,6 +356,11 @@ public class ClientMethod {
         imports.add(Response.class.getName());
         imports.add(SimpleResponse.class.getName());
 
+        if (settings.isDataPlaneClient()) {
+            // for some processing on RequestOptions (get/set header)
+            ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
+        }
+
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 
         for (ClientMethodParameter parameter : getParameters()) {
@@ -437,7 +442,6 @@ public class ClientMethod {
                 ClassType.UUID.addImportsTo(imports, false);
                 ClassType.DateTime.addImportsTo(imports, false);
                 ClassType.DateTimeRfc1123.addImportsTo(imports, false);
-                ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
             }
 
             if (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync) {

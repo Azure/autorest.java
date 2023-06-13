@@ -31,6 +31,7 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.CollectionFormat;
 
@@ -464,14 +465,49 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     private static boolean addSpecialHeadersToRequestOptions(JavaBlock function, ClientMethod clientMethod) {
+        // logic only works for DPG, protocol API, on RequestOptions
+
         boolean requestOptionsLocal = false;
-        addSpecialHeadersToLocalVariables(function, clientMethod);
-        if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod())) {
+
+        final boolean repeatabilityRequestHeaders = MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod());
+
+        // optional parameter is in getAllParameters
+        boolean bodyParameterOptional = clientMethod.getProxyMethod().getAllParameters().stream()
+                .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.BODY
+                        && !p.isConstant() && !p.isFromClient() && !p.isRequired());
+        // this logic relies on: codegen requires either source defines "content-type" header parameter, or codegen generates a "content-type" header parameter (ref ProxyMethodMapper class)
+        boolean singleContentType = clientMethod.getProxyMethod().getAllParameters().stream()
+                .noneMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.HEADER
+                        && HttpHeaderName.CONTENT_TYPE.getCaseInsensitiveName().equalsIgnoreCase(p.getRequestParameterName())
+                        && p.getRawType() instanceof EnumType
+                        && ((EnumType) p.getRawType()).getValues().size() > 1);
+        final boolean contentTypeRequestHeaders = bodyParameterOptional && singleContentType;
+
+        // need a "final" variable for RequestOptions
+        if (repeatabilityRequestHeaders || contentTypeRequestHeaders) {
             requestOptionsLocal = true;
             function.line("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;");
+        }
+
+        // repeatability headers
+        if (repeatabilityRequestHeaders) {
+            addSpecialHeadersToLocalVariables(function, clientMethod);
             requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME, MethodUtil.REPEATABILITY_REQUEST_ID_HEADER);
             requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME, MethodUtil.REPEATABILITY_FIRST_SENT_HEADER);
         }
+
+        // content-type headers for optional body parameter
+        if (contentTypeRequestHeaders) {
+            final String contentType = clientMethod.getProxyMethod().getRequestContentType();
+            function.line("requestOptionsLocal.addRequestCallback(requestLocal -> {");
+            function.indent(() -> {
+                function.ifBlock("requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null", ifBlock -> {
+                    function.line(String.format("requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, \"%1$s\");", contentType));
+                });
+            });
+            function.line("});");
+        }
+
         return requestOptionsLocal;
     }
 

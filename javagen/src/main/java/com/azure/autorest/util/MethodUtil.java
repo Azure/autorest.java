@@ -175,9 +175,9 @@ public class MethodUtil {
         Parameter contentType = new Parameter();
         contentType.setOperation(operation);
         contentType.setDescription("The content type");
-        for (int i = 0; i < request.getParameters().size(); ++i) {
-            if (request.getParameters().get(i).getSchema() instanceof BinarySchema) {
-                contentType.setRequired(request.getParameters().get(i).isRequired());
+        for (Parameter parameter : request.getParameters()) {
+            if (parameter.getSchema() instanceof BinarySchema) {
+                contentType.setRequired(parameter.isRequired());
                 break;
             }
         }
