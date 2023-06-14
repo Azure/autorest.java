@@ -865,8 +865,8 @@ export class CodeModelBuilder {
         "if-modified-since",
       ]);
 
+      // collect etag headers in parameters
       const etagHeaders: string[] = [];
-
       if (op.parameters) {
         for (const parameter of op.parameters) {
           if (
@@ -882,10 +882,12 @@ export class CodeModelBuilder {
       let groupToMatchConditions = false;
 
       if (etagHeaders.length === 4) {
+        // all 4 headers available, use RequestConditions
         groupToRequestConditions = true;
       } else if (etagHeaders.length === 2) {
         const etagHeadersLowerCase = etagHeaders.filter((it) => it.toLowerCase());
         if (etagHeadersLowerCase.includes("if-match") && etagHeadersLowerCase.includes("if-none-match")) {
+          // only 2 headers available, use MatchConditions
           groupToMatchConditions = true;
         }
       }
@@ -898,9 +900,11 @@ export class CodeModelBuilder {
         op.convenienceApi.requests.push(request);
 
         for (const parameter of op.parameters) {
+          // copy all parameters to request
           const clonedParameter = cloneOperationParameter(parameter);
           request.parameters.push(clonedParameter);
 
+          // copy signatureParameters, but exclude etag headers (as they won't be in method signature)
           if (
             op.signatureParameters.includes(parameter) &&
             !(
@@ -918,6 +922,7 @@ export class CodeModelBuilder {
           ? "Specifies HTTP options for conditional requests based on modification time."
           : "Specifies HTTP options for conditional requests.";
 
+        // group schema
         const requestConditionsSchema = this.codeModel.schemas.add(
           new GroupSchema(schemaName, schemaDescription, {
             language: {
@@ -931,6 +936,7 @@ export class CodeModelBuilder {
           }),
         );
 
+        // parameter (optional) of the group schema
         const requestConditionsParameter = new Parameter(
           schemaName,
           requestConditionsSchema.language.default.description,
@@ -944,28 +950,11 @@ export class CodeModelBuilder {
 
         this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Input, SchemaContext.ConvenienceApi] });
 
-        // // insert requestConditionsParameter before body parameter
-        // let bodyIndex = request.parameters.findIndex(
-        //   (it) => it.protocol.http && it.protocol.http.in === ParameterLocation.Body,
-        // );
-        // if (bodyIndex >= 0) {
-        //   request.parameters.splice(bodyIndex, 0, requestConditionsParameter);
-        // } else {
-        request.parameters.push(requestConditionsParameter);
-        // }
-        // bodyIndex = request.signatureParameters.findIndex(
-        //   (it) => it.protocol.http && it.protocol.http.in === ParameterLocation.Body,
-        // );
-        // if (bodyIndex >= 0) {
-        //   request.signatureParameters.splice(bodyIndex, 0, requestConditionsParameter);
-        // } else {
-        request.signatureParameters.push(requestConditionsParameter);
-        // }
-
+        // update group schema for properties
         for (const parameter of request.parameters) {
           if (
             parameter.language.default.serializedName &&
-            etagHeadersNames.has(parameter.language.default.serializedName.toLowerCase())
+            etagHeaders.includes(parameter.language.default.serializedName)
           ) {
             parameter.groupedBy = requestConditionsParameter;
 
@@ -988,7 +977,9 @@ export class CodeModelBuilder {
           }
         }
 
-        request.signatureParameters;
+        // put RequestConditions/MatchConditions as last parameter/signatureParameters
+        request.parameters.push(requestConditionsParameter);
+        request.signatureParameters.push(requestConditionsParameter);
       }
     }
   }
