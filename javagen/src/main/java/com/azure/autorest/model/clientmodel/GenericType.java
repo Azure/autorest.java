@@ -292,6 +292,11 @@ public class GenericType implements IType {
     }
 
     @Override
+    public boolean isUsedInXml() {
+        return false;
+    }
+
+    @Override
     public String validate(String expression) {
         return null;
     }

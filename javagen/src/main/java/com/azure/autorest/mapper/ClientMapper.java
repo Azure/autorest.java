@@ -445,15 +445,14 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     private List<XmlSequenceWrapper> parseXmlSequenceWrappers(CodeModel codeModel, JavaSettings settings) {
-        if (!settings.isGenerateXmlSerialization()) {
-            return new ArrayList<>();
-        }
-
         Map<String, XmlSequenceWrapper> xmlSequenceWrappers = new LinkedHashMap<>();
         for (OperationGroup operationGroup : codeModel.getOperationGroups()) {
             for (Operation operation : operationGroup.getOperations()) {
                 Schema responseBodySchema = SchemaUtil.getLowestCommonParent(operation.getResponses().stream()
-                    .map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+                    .map(Response::getSchema)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList()));
+
                 if (responseBodySchema instanceof ArraySchema) {
                     parseXmlSequenceWrappers((ArraySchema) responseBodySchema, xmlSequenceWrappers, settings);
                 }
@@ -488,14 +487,25 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
     private static void parseXmlSequenceWrappers(ArraySchema arraySchema,
         Map<String, XmlSequenceWrapper> xmlSequenceWrappers, JavaSettings settings) {
-        if (arraySchema.getSerialization() == null || arraySchema.getSerialization().getXml() == null) {
+        if (!SchemaUtil.treatAsXml(arraySchema)) {
             return;
         }
 
+        boolean wrapperHasXmlSerialization = arraySchema.getSerialization() != null
+            && arraySchema.getSerialization().getXml() != null;
+        boolean elementHasXmlSerialization = arraySchema.getElementType().getSerialization() != null
+            && arraySchema.getElementType().getSerialization().getXml() != null;
+
         IType type = Mappers.getSchemaMapper().map(arraySchema);
-        String modelTypeName = arraySchema.getElementType().getLanguage().getJava().getName();
-        String xmlRootElementName = arraySchema.getSerialization().getXml().getName();
-        String xmlListElementName = arraySchema.getElementType().getSerialization().getXml().getName();
+        String modelTypeName = arraySchema.getElementType().getLanguage().getJava() != null
+            ? arraySchema.getElementType().getLanguage().getJava().getName()
+            : arraySchema.getElementType().getLanguage().getDefault().getName();
+        String xmlRootElementName = wrapperHasXmlSerialization
+            ? arraySchema.getSerialization().getXml().getName()
+            : arraySchema.getLanguage().getDefault().getSerializedName();
+        String xmlListElementName = elementHasXmlSerialization
+            ? arraySchema.getElementType().getSerialization().getXml().getName()
+            : arraySchema.getElementType().getLanguage().getDefault().getSerializedName();
         xmlSequenceWrappers.computeIfAbsent(modelTypeName, ignored -> {
             Set<String> imports = getXmlSequenceWrapperImports();
             type.addImportsTo(imports, true);

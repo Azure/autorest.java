@@ -377,12 +377,13 @@ public class ClassType implements IType {
     private final String jsonDeserializationMethod;
     private final String xmlAttributeDeserializationTemplate;
     private final String xmlElementDeserializationMethod;
+    private final boolean usedInXml;
 
     private ClassType(String packageKeyword, String name, List<String> implementationImports, XmsExtensions extensions,
         java.util.function.Function<String, String> defaultValueExpressionConverter, boolean isSwaggerType,
         String serializationMethodBase, boolean wrapSerializationWithObjectsToString,
         String jsonDeserializationMethod, String xmlAttributeDeserializationTemplate,
-        String xmlElementDeserializationMethod) {
+        String xmlElementDeserializationMethod, boolean usedInXml) {
         this.fullName = packageKeyword + "." + name;
         this.packageName = packageKeyword;
         this.name = name;
@@ -395,6 +396,7 @@ public class ClassType implements IType {
         this.jsonDeserializationMethod = jsonDeserializationMethod;
         this.xmlAttributeDeserializationTemplate = xmlAttributeDeserializationTemplate;
         this.xmlElementDeserializationMethod = xmlElementDeserializationMethod;
+        this.usedInXml = usedInXml;
     }
 
     public final String getPackage() {
@@ -614,6 +616,11 @@ public class ClassType implements IType {
             value, isAttribute, nameIsVariable);
     }
 
+    @Override
+    public boolean isUsedInXml() {
+        return usedInXml;
+    }
+
     public static class Builder {
         /*
          * Used to indicate if the class type is generated based on a Swagger definition and isn't a pre-defined,
@@ -631,6 +638,7 @@ public class ClassType implements IType {
         private String serializationMethodBase;
         private String xmlAttributeDeserializationTemplate;
         private String xmlElementDeserializationMethod;
+        private boolean usedInXml;
 
         public Builder() {
             this(true);
@@ -715,6 +723,11 @@ public class ClassType implements IType {
             return this;
         }
 
+        public Builder usedInXml(boolean usedInXml) {
+            this.usedInXml = usedInXml;
+            return this;
+        }
+
         public ClassType build() {
             // Deserialization of Swagger types needs to be handled differently as the named reader needs
             // to be passed to the deserialization method and the reader name cannot be determined here.
@@ -725,7 +738,8 @@ public class ClassType implements IType {
 
             return new ClassType(packageName, name, implementationImports, extensions, defaultValueExpressionConverter,
                 isSwaggerType, serializationMethodBase, wrapSerializationWithObjectsToString,
-                jsonDeserializationMethod, xmlAttributeDeserializationTemplate, xmlElementDeserializationMethod);
+                jsonDeserializationMethod, xmlAttributeDeserializationTemplate, xmlElementDeserializationMethod,
+                usedInXml);
         }
     }
 

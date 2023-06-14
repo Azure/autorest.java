@@ -67,6 +67,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
             .packageName(classPackage)
             .name(className)
             .extensions(compositeType.getExtensions())
+            .usedInXml(SchemaUtil.treatAsXml(compositeType))
             .build();
     }
 

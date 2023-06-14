@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 
 public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMethodParameter> {
@@ -71,16 +72,18 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
         boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
         builder.fromClient(parameterIsServiceClientProperty);
 
-        if (wireType instanceof ListType && settings.isGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.BODY) {
+        if (wireType instanceof ListType && SchemaUtil.treatAsXml(parameterJvWireType)
+            && parameterRequestLocation == RequestParameterLocation.BODY) {
             String modelTypeName = ((ArraySchema) parameterJvWireType).getElementType().getLanguage().getJava().getName();
             boolean isCustomType = settings.isCustomType(CodeNamer.toPascalCase(modelTypeName + "Wrapper"));
             String packageName = isCustomType
                 ? settings.getPackage(settings.getCustomTypesSubpackage())
                 : settings.getPackage(settings.getImplementationSubpackage() + ".models");
             wireType = new ClassType.Builder()
-                    .packageName(packageName)
-                    .name(modelTypeName + "Wrapper")
-                    .build();
+                .packageName(packageName)
+                .name(modelTypeName + "Wrapper")
+                .usedInXml(true)
+                .build();
         } else if (wireType == ArrayType.ByteArray) {
             if (parameterRequestLocation != RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.String;
