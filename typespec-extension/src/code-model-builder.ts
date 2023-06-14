@@ -885,7 +885,7 @@ export class CodeModelBuilder {
         // all 4 headers available, use RequestConditions
         groupToRequestConditions = true;
       } else if (etagHeaders.length === 2) {
-        const etagHeadersLowerCase = etagHeaders.filter((it) => it.toLowerCase());
+        const etagHeadersLowerCase = etagHeaders.map((it) => it.toLowerCase());
         if (etagHeadersLowerCase.includes("if-match") && etagHeadersLowerCase.includes("if-none-match")) {
           // only 2 headers available, use MatchConditions
           groupToMatchConditions = true;
