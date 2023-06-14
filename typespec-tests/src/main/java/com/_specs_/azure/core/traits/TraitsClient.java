@@ -16,6 +16,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.RequestConditions;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -128,10 +129,7 @@ public final class TraitsClient {
      *
      * @param id The user's id.
      * @param foo header in request.
-     * @param ifMatch The request should only proceed if an entity matches this string.
-     * @param ifNoneMatch The request should only proceed if no entity matches this string.
-     * @param ifUnmodifiedSince The request should only proceed if the entity was not modified after this time.
-     * @param ifModifiedSince The request should only proceed if the entity was modified after this time.
+     * @param requestConditions Specifies HTTP options for conditional requests based on modification time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -142,15 +140,13 @@ public final class TraitsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public User smokeTest(
-            int id,
-            String foo,
-            String ifMatch,
-            String ifNoneMatch,
-            OffsetDateTime ifUnmodifiedSince,
-            OffsetDateTime ifModifiedSince) {
+    public User smokeTest(int id, String foo, RequestConditions requestConditions) {
         // Generated convenience method for smokeTestWithResponse
         RequestOptions requestOptions = new RequestOptions();
+        String ifMatch = requestConditions == null ? null : requestConditions.getIfMatch();
+        String ifNoneMatch = requestConditions == null ? null : requestConditions.getIfNoneMatch();
+        OffsetDateTime ifUnmodifiedSince = requestConditions == null ? null : requestConditions.getIfUnmodifiedSince();
+        OffsetDateTime ifModifiedSince = requestConditions == null ? null : requestConditions.getIfModifiedSince();
         if (ifMatch != null) {
             requestOptions.setHeader("If-Match", ifMatch);
         }
