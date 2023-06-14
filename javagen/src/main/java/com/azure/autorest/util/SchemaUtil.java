@@ -248,16 +248,21 @@ public class SchemaUtil {
                         classType = ClassType.ResponseInnerError;
                     }
                     // ErrorResponse is not available, but that should only be used in Exception
+                }
+
+                if (compositeType.getLanguage().getJava() != null
+                        && compositeType.getLanguage().getJava().getNamespace() != null) {
 
                     // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/core/azure-core-experimental/src/main/java/com/azure/core/experimental/models/PollResult.java
                     if ("PollResult".equals(name)
-                            && compositeType.getLanguage().getJava() != null
-                            && compositeType.getLanguage().getJava().getNamespace() != null
                             && compositeType.getLanguage().getJava().getNamespace().startsWith("com.azure.core")) {
                         classType = new ClassType.Builder()
                                 .name(name)
                                 .packageName(compositeType.getLanguage().getJava().getNamespace())
                                 .build();
+                    } else if ("RequestConditions".equals(name)
+                            && "com.azure.core.http".equals(compositeType.getLanguage().getJava().getNamespace())) {
+                        classType = ClassType.REQUEST_CONDITIONS;
                     }
                 }
             }
