@@ -7,6 +7,7 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.MatchConditions;
 import com.azure.core.http.RequestConditions;
 import com.azure.core.util.CoreUtils;
 
@@ -369,6 +370,10 @@ public class ClassType implements IType {
     public static final ClassType REQUEST_CONDITIONS = new Builder()
         .knownClass(RequestConditions.class)
         .build();
+
+    public static final ClassType MATCH_CONDITIONS = new Builder()
+            .knownClass(MatchConditions.class)
+            .build();
 
     private final String fullName;
     private final String packageName;
