@@ -166,6 +166,7 @@ public final class PartialUpdateClientImpl {
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
+     *     aggregate: String (Optional)
      * }
      * }</pre>
      *
@@ -192,6 +193,7 @@ public final class PartialUpdateClientImpl {
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
+     *     aggregate: String (Optional)
      * }
      * }</pre>
      *
