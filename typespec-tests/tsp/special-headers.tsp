@@ -45,3 +45,39 @@ interface SpecialHeadersOp {
   @doc("Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent")
   createLro is ResourceOperations.LongRunningResourceCreateOrUpdate<Resource>;
 }
+
+@route("/etag-headers")
+interface EtagHeaders {
+  @put
+  putWithRequestHeaders is ResourceOperations.ResourceCreateOrReplace<
+    Resource,
+    RequestHeadersTrait<ConditionalRequestHeaders>
+  >;
+
+  @patch
+  patchWithMatchHeaders is ResourceOperations.ResourceCreateOrReplace<
+    Resource,
+    RequestHeadersTrait<{
+      @header("If-Match")
+      @doc("The request should only proceed if an entity matches this string.")
+      ifMatch?: string;
+
+      @header("If-None-Match")
+      @doc("The request should only proceed if no entity matches this string.")
+      ifNoneMatch?: string;
+    }>
+  >;
+}
+
+@route("/etag-headers-optional-body")
+interface EtagHeadersOptionalBody {
+  @put
+  @doc("etag headers among other optional query/header/body parameters")
+  putWithOptionalBody(
+    @query format: string,
+    @query filter?: string,
+    ...ConditionalRequestHeaders,
+    @header @encode(DateTimeKnownEncoding.unixTimestamp, int64) timestamp?: utcDateTime,
+    @body body?: Resource
+  ): Resource;
+}
