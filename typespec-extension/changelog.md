@@ -1,5 +1,15 @@
 # Release History
 
+## 0.8.2 (2023-06-15)
+
+Compatible with compiler 0.45.
+
+- (Preview) Supported `RequestConditions` and `MatchConditions` for eTag headers.
+
+## 0.8.1 (2023-06-14)
+
+Compatible with compiler 0.45.
+
 ## 0.8.0 (2023-06-08)
 
 Compatible with compiler 0.45.

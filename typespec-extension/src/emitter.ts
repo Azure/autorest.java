@@ -16,10 +16,12 @@ import { fileURLToPath } from "url";
 
 export interface EmitterOptions {
   "namespace"?: string;
-  "service-name"?: string;
-  "partial-update"?: boolean;
   "output-dir"?: string;
-  "service-versions"?: Array<string>;
+  "partial-update"?: boolean;
+  "service-name"?: string;
+  "service-versions"?: string[];
+
+  "skip-special-headers"?: string[];
 
   "namer"?: boolean;
   "generate-samples"?: boolean;
@@ -41,10 +43,12 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   additionalProperties: true,
   properties: {
     "namespace": { type: "string", nullable: true },
-    "service-name": { type: "string", nullable: true },
-    "partial-update": { type: "boolean", nullable: true, default: false },
     "output-dir": { type: "string", nullable: true },
+    "partial-update": { type: "boolean", nullable: true, default: false },
+    "service-name": { type: "string", nullable: true },
     "service-versions": { type: "array", items: { type: "string" }, nullable: true },
+
+    "skip-special-headers": { type: "array", items: { type: "string" }, nullable: true },
 
     "namer": { type: "boolean", nullable: true, default: false },
     "generate-samples": { type: "boolean", nullable: true, default: true },

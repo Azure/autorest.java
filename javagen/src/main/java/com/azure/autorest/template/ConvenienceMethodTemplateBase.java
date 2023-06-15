@@ -23,6 +23,7 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
@@ -203,20 +204,37 @@ abstract class ConvenienceMethodTemplateBase {
             ParameterMapping mapping = detail.getParameterMappings().iterator().next();
             ClientMethodParameter sourceParameter = mapping.getInputParameter();
 
-            methodBlock.line(String.format("%1$s %2$s = %3$s.%4$s();",
-                    detail.getOutParameter().getWireType(),
-                    detail.getOutParameter().getName(),
-                    sourceParameter.getName(),
-                    CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty())));
+            boolean sourceParameterInMethod = false;
+            for (MethodParameter parameter: parametersMap.keySet()) {
+                if (parameter.clientMethodParameter != null && parameter.clientMethodParameter.getName() != null
+                        && Objects.equals(parameter.clientMethodParameter.getName(), sourceParameter.getName())) {
+                    sourceParameterInMethod = true;
+                    break;
+                }
+            }
 
-            if (detail.getOutParameter().getRequestParameterLocation() != null) {
-                ClientMethodParameter clientMethodParameter = detail.getOutParameter();
-                ProxyMethodParameter proxyMethodParameter = convenienceMethod.getProxyMethod().getAllParameters().stream()
-                        .filter(p -> clientMethodParameter.getName().equals(CodeNamer.getEscapedReservedClientMethodParameterName(p.getName())))
-                        .findFirst().orElse(null);
-                if (proxyMethodParameter != null) {
-                    MethodParameter methodParameter = new MethodParameter(proxyMethodParameter, clientMethodParameter);
-                    parametersMap.put(methodParameter, findParameterForConvenienceMethod(methodParameter, protocolMethod));
+            if (sourceParameterInMethod) {
+                // null check on input parameter
+                String assignmentExpression = "%1$s %2$s = %3$s.%4$s();";
+                if (!sourceParameter.isRequired()) {
+                    assignmentExpression = "%1$s %2$s = %3$s == null ? null : %3$s.%4$s();";
+                }
+
+                methodBlock.line(String.format(assignmentExpression,
+                        detail.getOutParameter().getClientType(),
+                        detail.getOutParameter().getName(),
+                        sourceParameter.getName(),
+                        CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty())));
+
+                if (detail.getOutParameter().getRequestParameterLocation() != null) {
+                    ClientMethodParameter clientMethodParameter = detail.getOutParameter();
+                    ProxyMethodParameter proxyMethodParameter = convenienceMethod.getProxyMethod().getAllParameters().stream()
+                            .filter(p -> clientMethodParameter.getName().equals(CodeNamer.getEscapedReservedClientMethodParameterName(p.getName())))
+                            .findFirst().orElse(null);
+                    if (proxyMethodParameter != null) {
+                        MethodParameter methodParameter = new MethodParameter(proxyMethodParameter, clientMethodParameter);
+                        parametersMap.put(methodParameter, findParameterForConvenienceMethod(methodParameter, protocolMethod));
+                    }
                 }
             }
         } else {
@@ -260,6 +278,7 @@ abstract class ConvenienceMethodTemplateBase {
                     }
                 });
 
+        ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
         ClassType.BinaryData.addImportsTo(imports, false);
         ClassType.RequestOptions.addImportsTo(imports, false);
         imports.add(Collectors.class.getName());
@@ -347,7 +366,7 @@ abstract class ConvenienceMethodTemplateBase {
     private static void writeHeader(MethodParameter parameter, JavaBlock methodBlock) {
         Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
                 String.format("requestOptions.setHeader(%1$s, %2$s);",
-                        ClassType.String.defaultValueExpression(parameter.getSerializedName()),
+                        ModelTemplateHeaderHelper.getHttpHeaderNameInstanceExpression(parameter.getSerializedName()),
                         expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter())));
         if (!parameter.getClientMethodParameter().isRequired()) {
             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {

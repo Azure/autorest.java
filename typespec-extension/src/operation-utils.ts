@@ -8,7 +8,7 @@ import {
   getAllHttpServices,
 } from "@typespec/http";
 import { resolveOperationId } from "@typespec/openapi";
-import { ApiVersions } from "@autorest/codemodel";
+import { ApiVersions, Parameter } from "@autorest/codemodel";
 import { LroMetadata } from "@azure-tools/typespec-azure-core";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
@@ -180,4 +180,20 @@ export function isLroNewPollingStrategy(operation: Operation, lroMetadata: LroMe
   //   // POST with final result in "result" property
   //   useNewPollStrategy = true;
   // }
+}
+
+export function cloneOperationParameter(parameter: Parameter): Parameter {
+  return new Parameter(parameter.language.default.name, parameter.language.default.description, parameter.schema, {
+    language: {
+      default: {
+        serializedName: parameter.language.default.serializedName,
+      },
+    },
+    protocol: parameter.protocol,
+    summary: parameter.summary,
+    implementation: parameter.implementation,
+    required: parameter.required,
+    nullable: parameter.nullable,
+    extensions: parameter.extensions,
+  });
 }

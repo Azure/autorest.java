@@ -5,6 +5,7 @@ package com._specs_.azure.core.traits;
 
 import com._specs_.azure.core.traits.models.UserActionParam;
 import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.RequestConditions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import org.junit.jupiter.api.Assertions;
@@ -23,9 +24,11 @@ public class TraitsTests {
         OffsetDateTime unmodifiedSince = OffsetDateTime.of(2022, 8, 26, 14, 38, 0, 0, ZoneOffset.UTC);
         OffsetDateTime modifiedSince = OffsetDateTime.of(2021, 8, 26, 14, 38, 0, 0, ZoneOffset.UTC);
 
-        client.smokeTest(1, "123",
-                "\"valid\"", "\"invalid\"",
-                unmodifiedSince, modifiedSince);
+        client.smokeTest(1, "123", new RequestConditions()
+                .setIfMatch("\"valid\"")
+                .setIfNoneMatch("\"invalid\"")
+                .setIfModifiedSince(modifiedSince)
+                .setIfUnmodifiedSince(unmodifiedSince));
     }
 
     @Test
