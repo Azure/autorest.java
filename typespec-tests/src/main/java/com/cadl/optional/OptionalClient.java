@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -186,7 +187,7 @@ public final class OptionalClient {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (requestHeaderOptional != null) {
-            requestOptions.setHeader("request-header-optional", requestHeaderOptional);
+            requestOptions.setHeader(HttpHeaderName.fromString("request-header-optional"), requestHeaderOptional);
         }
         if (booleanNullable != null) {
             requestOptions.addQueryParam("booleanNullable", String.valueOf(booleanNullable), false);

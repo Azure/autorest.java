@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -103,7 +104,7 @@ public final class NamingAsyncClient {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {
-            requestOptions.setHeader("etag", etag);
+            requestOptions.setHeader(HttpHeaderName.ETAG, etag);
         }
         return postWithResponse(name, requestOptions)
                 .flatMap(FluxUtil::toMono)
