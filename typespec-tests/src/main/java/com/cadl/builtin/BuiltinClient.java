@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -216,7 +217,8 @@ public final class BuiltinClient {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (dateTime != null) {
-            requestOptions.setHeader("x-ms-date", String.valueOf(new DateTimeRfc1123(dateTime)));
+            requestOptions.setHeader(
+                    HttpHeaderName.fromString("x-ms-date"), String.valueOf(new DateTimeRfc1123(dateTime)));
         }
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);

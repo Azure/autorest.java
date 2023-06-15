@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.MatchConditions;
 import com.azure.core.http.RequestConditions;
 import com.azure.core.http.rest.RequestOptions;
@@ -489,16 +490,18 @@ public final class SpecialHeadersAsyncClient {
         OffsetDateTime ifUnmodifiedSince = requestConditions == null ? null : requestConditions.getIfUnmodifiedSince();
         OffsetDateTime ifModifiedSince = requestConditions == null ? null : requestConditions.getIfModifiedSince();
         if (ifMatch != null) {
-            requestOptions.setHeader("If-Match", ifMatch);
+            requestOptions.setHeader(HttpHeaderName.IF_MATCH, ifMatch);
         }
         if (ifNoneMatch != null) {
-            requestOptions.setHeader("If-None-Match", ifNoneMatch);
+            requestOptions.setHeader(HttpHeaderName.IF_NONE_MATCH, ifNoneMatch);
         }
         if (ifUnmodifiedSince != null) {
-            requestOptions.setHeader("If-Unmodified-Since", String.valueOf(new DateTimeRfc1123(ifUnmodifiedSince)));
+            requestOptions.setHeader(
+                    HttpHeaderName.IF_UNMODIFIED_SINCE, String.valueOf(new DateTimeRfc1123(ifUnmodifiedSince)));
         }
         if (ifModifiedSince != null) {
-            requestOptions.setHeader("If-Modified-Since", String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
+            requestOptions.setHeader(
+                    HttpHeaderName.IF_MODIFIED_SINCE, String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
         }
         return putWithRequestHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions)
                 .flatMap(FluxUtil::toMono)
@@ -550,10 +553,10 @@ public final class SpecialHeadersAsyncClient {
         String ifMatch = matchConditions == null ? null : matchConditions.getIfMatch();
         String ifNoneMatch = matchConditions == null ? null : matchConditions.getIfNoneMatch();
         if (ifMatch != null) {
-            requestOptions.setHeader("If-Match", ifMatch);
+            requestOptions.setHeader(HttpHeaderName.IF_MATCH, ifMatch);
         }
         if (ifNoneMatch != null) {
-            requestOptions.setHeader("If-None-Match", ifNoneMatch);
+            requestOptions.setHeader(HttpHeaderName.IF_NONE_MATCH, ifNoneMatch);
         }
         return patchWithMatchHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions)
                 .flatMap(FluxUtil::toMono)
@@ -617,22 +620,24 @@ public final class SpecialHeadersAsyncClient {
             requestOptions.addQueryParam("filter", filter, false);
         }
         if (timestamp != null) {
-            requestOptions.setHeader("timestamp", String.valueOf(timestamp.toEpochSecond()));
+            requestOptions.setHeader(HttpHeaderName.fromString("timestamp"), String.valueOf(timestamp.toEpochSecond()));
         }
         if (body != null) {
             requestOptions.setBody(BinaryData.fromObject(body));
         }
         if (ifMatch != null) {
-            requestOptions.setHeader("If-Match", ifMatch);
+            requestOptions.setHeader(HttpHeaderName.IF_MATCH, ifMatch);
         }
         if (ifNoneMatch != null) {
-            requestOptions.setHeader("If-None-Match", ifNoneMatch);
+            requestOptions.setHeader(HttpHeaderName.IF_NONE_MATCH, ifNoneMatch);
         }
         if (ifUnmodifiedSince != null) {
-            requestOptions.setHeader("If-Unmodified-Since", String.valueOf(new DateTimeRfc1123(ifUnmodifiedSince)));
+            requestOptions.setHeader(
+                    HttpHeaderName.IF_UNMODIFIED_SINCE, String.valueOf(new DateTimeRfc1123(ifUnmodifiedSince)));
         }
         if (ifModifiedSince != null) {
-            requestOptions.setHeader("If-Modified-Since", String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
+            requestOptions.setHeader(
+                    HttpHeaderName.IF_MODIFIED_SINCE, String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
         }
         return putWithOptionalBodyWithResponse(format, requestOptions)
                 .flatMap(FluxUtil::toMono)

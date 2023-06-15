@@ -16,6 +16,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.RequestConditions;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
@@ -148,16 +149,18 @@ public final class TraitsClient {
         OffsetDateTime ifUnmodifiedSince = requestConditions == null ? null : requestConditions.getIfUnmodifiedSince();
         OffsetDateTime ifModifiedSince = requestConditions == null ? null : requestConditions.getIfModifiedSince();
         if (ifMatch != null) {
-            requestOptions.setHeader("If-Match", ifMatch);
+            requestOptions.setHeader(HttpHeaderName.IF_MATCH, ifMatch);
         }
         if (ifNoneMatch != null) {
-            requestOptions.setHeader("If-None-Match", ifNoneMatch);
+            requestOptions.setHeader(HttpHeaderName.IF_NONE_MATCH, ifNoneMatch);
         }
         if (ifUnmodifiedSince != null) {
-            requestOptions.setHeader("If-Unmodified-Since", String.valueOf(new DateTimeRfc1123(ifUnmodifiedSince)));
+            requestOptions.setHeader(
+                    HttpHeaderName.IF_UNMODIFIED_SINCE, String.valueOf(new DateTimeRfc1123(ifUnmodifiedSince)));
         }
         if (ifModifiedSince != null) {
-            requestOptions.setHeader("If-Modified-Since", String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
+            requestOptions.setHeader(
+                    HttpHeaderName.IF_MODIFIED_SINCE, String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
         }
         return smokeTestWithResponse(id, foo, requestOptions).getValue().toObject(User.class);
     }
