@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 public class EncodeTests {
 
@@ -71,5 +72,17 @@ public class EncodeTests {
 
         // since the wire type is long (in seconds), 5.7 seconds will be 5 seconds
         Assertions.assertEquals(5, encoded.getTimeInSeconds().getSeconds());
+    }
+
+    @Test
+    public void testLocalModel() {
+        OffsetDateTime now = OffsetDateTime.now().withNano(0).withOffsetSameInstant(ZoneOffset.UTC);
+
+        Model model = new Model(now);
+
+        BinaryData json = BinaryData.fromObject(model);
+
+        Model model1 = json.toObject(Model.class);
+        Assertions.assertEquals(now, model1.getDateTimeRfc7231());
     }
 }
