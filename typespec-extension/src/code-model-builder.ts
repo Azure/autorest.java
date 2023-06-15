@@ -175,6 +175,10 @@ export class CodeModelBuilder {
     this.options = context.options;
     this.program = program1;
 
+    if (this.options["skip-special-headers"]) {
+      this.options["skip-special-headers"].forEach((it) => specialHeaderNames.add(it));
+    }
+
     this.sdkContext = createSdkContext(context as EmitContext<any>);
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;

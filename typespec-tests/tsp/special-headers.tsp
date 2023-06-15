@@ -29,8 +29,11 @@ model Resource {
 interface ResourceOperations
   extends Azure.Core.ResourceOperations<SupportsRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
 
-@route("/special-headers")
-interface SpecialHeadersOp {
+interface StandardResourceOperations
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
+
+@route("/repeatability-headers")
+interface RepeatabilityHeaders {
   @get
   get is ResourceOperations.ResourceRead<Resource>;
 
@@ -49,13 +52,13 @@ interface SpecialHeadersOp {
 @route("/etag-headers")
 interface EtagHeaders {
   @put
-  putWithRequestHeaders is ResourceOperations.ResourceCreateOrReplace<
+  putWithRequestHeaders is StandardResourceOperations.ResourceCreateOrReplace<
     Resource,
     RequestHeadersTrait<ConditionalRequestHeaders>
   >;
 
   @patch
-  patchWithMatchHeaders is ResourceOperations.ResourceCreateOrReplace<
+  patchWithMatchHeaders is StandardResourceOperations.ResourceCreateOrReplace<
     Resource,
     RequestHeadersTrait<{
       @header("If-Match")
@@ -80,4 +83,17 @@ interface EtagHeadersOptionalBody {
     @header @encode(DateTimeKnownEncoding.unixTimestamp, int64) timestamp?: utcDateTime,
     @body body?: Resource
   ): Resource;
+}
+
+@route("/skip-special-headers")
+interface SkipSpecialHeaders {
+  @doc("skip special headers")
+  deleteWithSpecialHeaders is StandardResourceOperations.ResourceDelete<
+    Resource,
+    RequestHeadersTrait<{
+      @header("client-request-id") clientRequestId: string;
+      @header("return-client-request-id") returnClientRequestId: boolean;
+      @header foo: string;
+    }>
+  >;
 }

@@ -220,8 +220,6 @@ public final class SpecialHeadersClient {
      *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this string.</td></tr>
      *     <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was not modified after this time.</td></tr>
      *     <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was modified after this time.</td></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -274,8 +272,6 @@ public final class SpecialHeadersClient {
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this string.</td></tr>
      *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this string.</td></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -379,6 +375,24 @@ public final class SpecialHeadersClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putWithOptionalBodyWithResponse(String format, RequestOptions requestOptions) {
         return this.serviceClient.putWithOptionalBodyWithResponse(format, requestOptions);
+    }
+
+    /**
+     * skip special headers.
+     *
+     * @param name A sequence of textual characters.
+     * @param foo A sequence of textual characters.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> deleteWithSpecialHeadersWithResponse(String name, String foo, RequestOptions requestOptions) {
+        return this.serviceClient.deleteWithSpecialHeadersWithResponse(name, foo, requestOptions);
     }
 
     /**
@@ -634,5 +648,25 @@ public final class SpecialHeadersClient {
         // Generated convenience method for putWithOptionalBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putWithOptionalBodyWithResponse(format, requestOptions).getValue().toObject(Resource.class);
+    }
+
+    /**
+     * skip special headers.
+     *
+     * @param name A sequence of textual characters.
+     * @param foo A sequence of textual characters.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void deleteWithSpecialHeaders(String name, String foo) {
+        // Generated convenience method for deleteWithSpecialHeadersWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        deleteWithSpecialHeadersWithResponse(name, foo, requestOptions).getValue();
     }
 }
