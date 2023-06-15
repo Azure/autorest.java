@@ -92,7 +92,19 @@ public class SchemaUtil {
      */
     public static IType getOperationResponseType(Operation operation, JavaSettings settings) {
         Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
-                operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+            operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+
+        return getOperationResponseType(responseBodySchema, operation, settings);
+    }
+
+    /*
+     * Returns raw response type.
+     * In case of binary response:
+     *   For DPG, returns BinaryData
+     *   For vanilla/mgmt, returns InputStream
+     */
+    public static IType getOperationResponseType(Schema responseBodySchema, Operation operation,
+        JavaSettings settings) {
         IType responseBodyType = Mappers.getSchemaMapper().map(responseBodySchema);
 
         if (responseBodyType == null) {

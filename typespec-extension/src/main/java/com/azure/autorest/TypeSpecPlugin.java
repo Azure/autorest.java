@@ -13,17 +13,18 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
-import com.azure.typespec.model.EmitterOptions;
-import com.azure.typespec.mapper.TypeSpecMapperFactory;
-import com.azure.typespec.util.ModelUtil;
 import com.azure.core.util.CoreUtils;
+import com.azure.typespec.mapper.TypeSpecMapperFactory;
+import com.azure.typespec.model.EmitterOptions;
+import com.azure.typespec.util.ModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -82,7 +83,7 @@ public class TypeSpecPlugin extends Javagen {
         if (!parentFile.exists()) {
             parentFile.mkdirs();
         }
-        try (FileWriter writer = new FileWriter(outputFile)) {
+        try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(outputFile.toPath()), StandardCharsets.UTF_8)) {
             writer.write(content);
         } catch (IOException e) {
             throw new IllegalStateException(e);

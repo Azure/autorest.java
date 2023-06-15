@@ -97,18 +97,16 @@ public final class BlobPrefix implements XmlSerializable<BlobPrefix> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String name = null;
+                    BlobPrefix deserializedBlobPrefix = new BlobPrefix();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Name".equals(elementName.getLocalPart())) {
-                            name = reader.getStringElement();
+                            deserializedBlobPrefix.name = reader.getStringElement();
                         } else {
                             reader.skipElement();
                         }
                     }
-                    BlobPrefix deserializedBlobPrefix = new BlobPrefix();
-                    deserializedBlobPrefix.name = name;
 
                     return deserializedBlobPrefix;
                 });

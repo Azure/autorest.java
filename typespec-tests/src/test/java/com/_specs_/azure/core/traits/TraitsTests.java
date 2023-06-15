@@ -3,6 +3,11 @@
 
 package com._specs_.azure.core.traits;
 
+import com._specs_.azure.core.traits.models.UserActionParam;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
@@ -21,5 +26,11 @@ public class TraitsTests {
         client.smokeTest(1, "123",
                 "\"valid\"", "\"invalid\"",
                 unmodifiedSince, modifiedSince);
+    }
+
+    @Test
+    public void testPost() {
+        Response<BinaryData> response = client.repeatableActionWithResponse(1, BinaryData.fromObject(new UserActionParam("test")), null);
+        Assertions.assertEquals("accepted", response.getHeaders().getValue(HttpHeaderName.fromString("repeatability-result")));
     }
 }

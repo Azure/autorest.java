@@ -6,6 +6,8 @@ package com._specs_.azure.core.traits;
 
 import com._specs_.azure.core.traits.implementation.TraitsClientImpl;
 import com._specs_.azure.core.traits.models.User;
+import com._specs_.azure.core.traits.models.UserActionParam;
+import com._specs_.azure.core.traits.models.UserActionResponse;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -79,6 +81,52 @@ public final class TraitsAsyncClient {
     }
 
     /**
+     * Test for repeatable requests.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     userActionValue: String (Required)
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     userActionResult: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param id The user's id.
+     * @param userActionParam User action param.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return user action response along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> repeatableActionWithResponse(
+            int id, BinaryData userActionParam, RequestOptions requestOptions) {
+        return this.serviceClient.repeatableActionWithResponseAsync(id, userActionParam, requestOptions);
+    }
+
+    /**
      * Get a resource, sending and receiving headers.
      *
      * @param id The user's id.
@@ -144,5 +192,28 @@ public final class TraitsAsyncClient {
         return smokeTestWithResponse(id, foo, requestOptions)
                 .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(User.class));
+    }
+
+    /**
+     * Test for repeatable requests.
+     *
+     * @param id The user's id.
+     * @param userActionParam User action param.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return user action response on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<UserActionResponse> repeatableAction(int id, UserActionParam userActionParam) {
+        // Generated convenience method for repeatableActionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return repeatableActionWithResponse(id, BinaryData.fromObject(userActionParam), requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(UserActionResponse.class));
     }
 }

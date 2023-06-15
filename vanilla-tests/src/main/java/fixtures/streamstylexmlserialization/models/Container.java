@@ -162,31 +162,26 @@ public final class Container implements XmlSerializable<Container> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String name = null;
-                    ContainerProperties properties = null;
-                    Map<String, String> metadata = null;
+                    Container deserializedContainer = new Container();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("Name".equals(elementName.getLocalPart())) {
-                            name = reader.getStringElement();
+                            deserializedContainer.name = reader.getStringElement();
                         } else if ("Properties".equals(elementName.getLocalPart())) {
-                            properties = ContainerProperties.fromXml(reader, "Properties");
+                            deserializedContainer.properties = ContainerProperties.fromXml(reader, "Properties");
                         } else if ("Metadata".equals(elementName.getLocalPart())) {
-                            if (metadata == null) {
-                                metadata = new LinkedHashMap<>();
+                            if (deserializedContainer.metadata == null) {
+                                deserializedContainer.metadata = new LinkedHashMap<>();
                             }
                             while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                                metadata.put(reader.getElementName().getLocalPart(), reader.getStringElement());
+                                deserializedContainer.metadata.put(
+                                        reader.getElementName().getLocalPart(), reader.getStringElement());
                             }
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Container deserializedContainer = new Container();
-                    deserializedContainer.name = name;
-                    deserializedContainer.properties = properties;
-                    deserializedContainer.metadata = metadata;
 
                     return deserializedContainer;
                 });

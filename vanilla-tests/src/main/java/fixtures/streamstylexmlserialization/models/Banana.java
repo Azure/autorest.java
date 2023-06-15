@@ -145,26 +145,20 @@ public final class Banana implements XmlSerializable<Banana> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    String name = null;
-                    String flavor = null;
-                    OffsetDateTime expiration = null;
+                    Banana deserializedBanana = new Banana();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("name".equals(elementName.getLocalPart())) {
-                            name = reader.getStringElement();
+                            deserializedBanana.name = reader.getStringElement();
                         } else if ("flavor".equals(elementName.getLocalPart())) {
-                            flavor = reader.getStringElement();
+                            deserializedBanana.flavor = reader.getStringElement();
                         } else if ("expiration".equals(elementName.getLocalPart())) {
-                            expiration = reader.getNullableElement(OffsetDateTime::parse);
+                            deserializedBanana.expiration = reader.getNullableElement(OffsetDateTime::parse);
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Banana deserializedBanana = new Banana();
-                    deserializedBanana.name = name;
-                    deserializedBanana.flavor = flavor;
-                    deserializedBanana.expiration = expiration;
 
                     return deserializedBanana;
                 });

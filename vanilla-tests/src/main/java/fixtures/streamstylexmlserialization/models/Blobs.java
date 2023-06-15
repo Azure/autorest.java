@@ -11,7 +11,6 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -135,28 +134,24 @@ public final class Blobs implements XmlSerializable<Blobs> {
         return xmlReader.readObject(
                 finalRootElementName,
                 reader -> {
-                    List<BlobPrefix> blobPrefix = null;
-                    List<Blob> blob = null;
+                    Blobs deserializedBlobs = new Blobs();
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         QName elementName = reader.getElementName();
 
                         if ("BlobPrefix".equals(elementName.getLocalPart())) {
-                            if (blobPrefix == null) {
-                                blobPrefix = new LinkedList<>();
+                            if (deserializedBlobs.blobPrefix == null) {
+                                deserializedBlobs.blobPrefix = new ArrayList<>();
                             }
-                            blobPrefix.add(BlobPrefix.fromXml(reader, "BlobPrefix"));
+                            deserializedBlobs.blobPrefix.add(BlobPrefix.fromXml(reader, "BlobPrefix"));
                         } else if ("Blob".equals(elementName.getLocalPart())) {
-                            if (blob == null) {
-                                blob = new LinkedList<>();
+                            if (deserializedBlobs.blob == null) {
+                                deserializedBlobs.blob = new ArrayList<>();
                             }
-                            blob.add(Blob.fromXml(reader, "Blob"));
+                            deserializedBlobs.blob.add(Blob.fromXml(reader, "Blob"));
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Blobs deserializedBlobs = new Blobs();
-                    deserializedBlobs.blobPrefix = blobPrefix;
-                    deserializedBlobs.blob = blob;
 
                     return deserializedBlobs;
                 });

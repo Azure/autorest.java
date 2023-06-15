@@ -23,6 +23,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
@@ -326,7 +327,7 @@ public final class SpecialHeadersClientImpl {
     }
 
     /**
-     * The get operation.
+     * The most basic operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -339,7 +340,7 @@ public final class SpecialHeadersClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -362,7 +363,7 @@ public final class SpecialHeadersClientImpl {
     }
 
     /**
-     * The get operation.
+     * The most basic operation.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -375,7 +376,7 @@ public final class SpecialHeadersClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -426,7 +427,7 @@ public final class SpecialHeadersClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -439,19 +440,23 @@ public final class SpecialHeadersClientImpl {
     public Mono<Response<BinaryData>> putWithResponseAsync(
             String name, BinaryData resource, RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
-                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
                     }
                 });
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
-                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
                     }
                 });
         return FluxUtil.withContext(
@@ -502,7 +507,7 @@ public final class SpecialHeadersClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -514,19 +519,23 @@ public final class SpecialHeadersClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putWithResponse(String name, BinaryData resource, RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
-                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
                     }
                 });
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
-                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
                     }
                 });
         return service.putSync(
@@ -564,7 +573,7 @@ public final class SpecialHeadersClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -575,19 +584,23 @@ public final class SpecialHeadersClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
-                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
                     }
                 });
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
-                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
                     }
                 });
         return FluxUtil.withContext(
@@ -626,7 +639,7 @@ public final class SpecialHeadersClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -637,19 +650,23 @@ public final class SpecialHeadersClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
-                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
                     }
                 });
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
-                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
                     }
                 });
         return service.postSync(
@@ -697,7 +714,7 @@ public final class SpecialHeadersClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -711,19 +728,23 @@ public final class SpecialHeadersClientImpl {
             String name, BinaryData resource, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
-                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
                     }
                 });
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
-                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
                     }
                 });
         return FluxUtil.withContext(
@@ -775,7 +796,7 @@ public final class SpecialHeadersClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -789,19 +810,23 @@ public final class SpecialHeadersClientImpl {
             String name, BinaryData resource, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-request-id") == null) {
-                        requestLocal.getHeaders().set("repeatability-request-id", repeatabilityRequestId);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
                     }
                 });
         requestOptionsLocal.addRequestCallback(
                 requestLocal -> {
-                    if (requestLocal.getHeaders().get("repeatability-first-sent") == null) {
-                        requestLocal.getHeaders().set("repeatability-first-sent", repeatabilityFirstSent);
+                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                        requestLocal
+                                .getHeaders()
+                                .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
                     }
                 });
         return service.createLroSync(
@@ -851,7 +876,7 @@ public final class SpecialHeadersClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -913,7 +938,7 @@ public final class SpecialHeadersClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
