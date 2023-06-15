@@ -277,70 +277,6 @@ public class Languages {
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Languages.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("_default");
-        sb.append('=');
-        sb.append(((this._default == null)?"<null>":this._default));
-        sb.append(',');
-        sb.append("csharp");
-        sb.append('=');
-        sb.append(((this.csharp == null)?"<null>":this.csharp));
-        sb.append(',');
-        sb.append("python");
-        sb.append('=');
-        sb.append(((this.python == null)?"<null>":this.python));
-        sb.append(',');
-        sb.append("ruby");
-        sb.append('=');
-        sb.append(((this.ruby == null)?"<null>":this.ruby));
-        sb.append(',');
-        sb.append("go");
-        sb.append('=');
-        sb.append(((this.go == null)?"<null>":this.go));
-        sb.append(',');
-        sb.append("typescript");
-        sb.append('=');
-        sb.append(((this.typescript == null)?"<null>":this.typescript));
-        sb.append(',');
-        sb.append("javascript");
-        sb.append('=');
-        sb.append(((this.javascript == null)?"<null>":this.javascript));
-        sb.append(',');
-        sb.append("powershell");
-        sb.append('=');
-        sb.append(((this.powershell == null)?"<null>":this.powershell));
-        sb.append(',');
-        sb.append("java");
-        sb.append('=');
-        sb.append(((this.java == null)?"<null>":this.java));
-        sb.append(',');
-        sb.append("c");
-        sb.append('=');
-        sb.append(((this.c == null)?"<null>":this.c));
-        sb.append(',');
-        sb.append("cpp");
-        sb.append('=');
-        sb.append(((this.cpp == null)?"<null>":this.cpp));
-        sb.append(',');
-        sb.append("swift");
-        sb.append('=');
-        sb.append(((this.swift == null)?"<null>":this.swift));
-        sb.append(',');
-        sb.append("objectivec");
-        sb.append('=');
-        sb.append(((this.objectivec == null)?"<null>":this.objectivec));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
-    }
-
-    @Override
     public int hashCode() {
         int result = 1;
         result = ((result* 31)+((this._default == null)? 0 :this._default.hashCode()));
@@ -371,4 +307,11 @@ public class Languages {
         return ((((((((((((((this._default == rhs._default)||((this._default!= null)&&this._default.equals(rhs._default)))&&((this.python == rhs.python)||((this.python!= null)&&this.python.equals(rhs.python))))&&((this.cpp == rhs.cpp)||((this.cpp!= null)&&this.cpp.equals(rhs.cpp))))&&((this.c == rhs.c)||((this.c!= null)&&this.c.equals(rhs.c))))&&((this.go == rhs.go)||((this.go!= null)&&this.go.equals(rhs.go))))&&((this.objectivec == rhs.objectivec)||((this.objectivec!= null)&&this.objectivec.equals(rhs.objectivec))))&&((this.javascript == rhs.javascript)||((this.javascript!= null)&&this.javascript.equals(rhs.javascript))))&&((this.ruby == rhs.ruby)||((this.ruby!= null)&&this.ruby.equals(rhs.ruby))))&&((this.csharp == rhs.csharp)||((this.csharp!= null)&&this.csharp.equals(rhs.csharp))))&&((this.java == rhs.java)||((this.java!= null)&&this.java.equals(rhs.java))))&&((this.powershell == rhs.powershell)||((this.powershell!= null)&&this.powershell.equals(rhs.powershell))))&&((this.typescript == rhs.typescript)||((this.typescript!= null)&&this.typescript.equals(rhs.typescript))))&&((this.swift == rhs.swift)||((this.swift!= null)&&this.swift.equals(rhs.swift))));
     }
 
+    @Override
+    public String toString() {
+        return "Languages{" +
+                "default=" + _default +
+                ", java=" + java +
+                '}';
+    }
 }

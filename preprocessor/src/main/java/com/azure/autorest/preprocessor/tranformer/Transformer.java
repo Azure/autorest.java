@@ -140,6 +140,7 @@ public class Transformer {
           if (operation.getConvenienceApi().getRequests() != null) {
             for (Request request : operation.getConvenienceApi().getRequests()) {
               for (Parameter parameter : request.getParameters()) {
+                parameter.setOperation(operation);
                 renameVariable(parameter);
               }
             }
