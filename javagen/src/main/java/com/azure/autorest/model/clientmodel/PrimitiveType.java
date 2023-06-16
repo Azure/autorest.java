@@ -296,6 +296,11 @@ public class PrimitiveType implements IType {
     }
 
     @Override
+    public boolean isUsedInXml() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return getName();
     }

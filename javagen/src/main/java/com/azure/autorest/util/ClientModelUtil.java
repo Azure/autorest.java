@@ -505,18 +505,4 @@ public class ClientModelUtil {
         return property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()
             && (!property.isReadOnly() || settings.isIncludeReadOnlyInConstructorArgs());
     }
-
-    /**
-     * Determines whether the caller should treat the model as XML.
-     * <p>
-     * XML is used when either {@link JavaSettings#isGenerateXmlSerialization()} is true or the model or property was
-     * defined in Swagger with an {@code xml} property.
-     *
-     * @param settings The Autorest generation settings.
-     * @param model The model.
-     * @return Whether the model should be treated as XML.
-     */
-    public static boolean treatAsXml(JavaSettings settings, ClientModel model) {
-        return settings.isGenerateXmlSerialization() || model.getXmlName() != null;
-    }
 }

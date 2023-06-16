@@ -448,8 +448,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
             }
 
-            if (settings.isGenerateXmlSerialization()
-                && parameterClientType instanceof ListType
+            if (parameter.getWireType().isUsedInXml() && parameterClientType instanceof ListType
                 && (parameterLocation == RequestParameterLocation.BODY /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
                 function.line("%s %s = new %s(%s);", parameter.getWireType(), parameterWireName,
                     parameter.getWireType(), alwaysNull ? "null" : parameterName);
