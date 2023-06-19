@@ -7,6 +7,8 @@ import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
@@ -30,7 +32,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Project {
 
@@ -52,13 +56,14 @@ public class Project {
     public enum Dependency {
         // azure
         AZURE_CLIENT_SDK_PARENT("com.azure", "azure-client-sdk-parent", "1.7.0"),
-        AZURE_JSON("com.azure", "azure-json", "1.0.0"),
-        AZURE_XML("com.azure", "azure-xml", "1.0.0-beta.1"),
-        AZURE_CORE("com.azure", "azure-core", "1.38.0"),
-        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.0"),
-        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.2"),
-        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.16.2"),
-        AZURE_IDENTITY("com.azure", "azure-identity", "1.8.2"),
+        AZURE_JSON("com.azure", "azure-json", "1.0.1"),
+        AZURE_XML("com.azure", "azure-xml", "1.0.0-beta.2"),
+        AZURE_CORE("com.azure", "azure-core", "1.40.0"),
+        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.2"),
+        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.4"),
+        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.18.0"),
+        AZURE_IDENTITY("com.azure", "azure-identity", "1.9.1"),
+        AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.40"),
 
         // external
         JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.1"),
@@ -114,6 +119,24 @@ public class Project {
         this.serviceDescription = String.format("This package contains Microsoft Azure %1$s client library.", serviceName);
 
         this.apiVersions = apiVersions;
+    }
+
+    // TODO (weidxu): this method likely will get refactored when we support external model (hence external package)
+    public void checkForAdditionalDependencies(List<ClientModel> models) {
+        Set<String> externalPackageNames = models.stream()
+                .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null
+                        && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL))
+                .map(ClientModel::getPackage)
+                .collect(Collectors.toSet());
+
+        // currently, only check for azure-core-experimental
+        if (externalPackageNames.stream().anyMatch(p -> p.startsWith("com.azure.core.experimental"))) {
+            // add to pomDependencyIdentifiers is not already there
+            if (this.pomDependencyIdentifiers.stream()
+                    .noneMatch(identifier -> identifier.startsWith(Dependency.AZURE_CORE_EXPERIMENTAL.getGroupId() + ":" + Dependency.AZURE_CORE_EXPERIMENTAL.getArtifactId() + ":"))) {
+                this.pomDependencyIdentifiers.add(Dependency.AZURE_CORE_EXPERIMENTAL.getDependencyIdentifier());
+            }
+        }
     }
 
     public void integrateWithSdk() {

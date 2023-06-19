@@ -4,6 +4,7 @@
 
 package com.parameters.spread.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +15,8 @@ public final class BodyParameter {
     /*
      * The name property.
      */
-    @JsonProperty(value = "name", required = true)
+    @Generated
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -22,8 +24,9 @@ public final class BodyParameter {
      *
      * @param name the name value to set.
      */
+    @Generated
     @JsonCreator
-    public BodyParameter(@JsonProperty(value = "name", required = true) String name) {
+    public BodyParameter(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 
@@ -32,6 +35,7 @@ public final class BodyParameter {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }

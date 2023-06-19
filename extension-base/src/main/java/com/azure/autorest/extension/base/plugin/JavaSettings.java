@@ -34,7 +34,6 @@ public class JavaSettings {
 
     private static Logger logger;
     private boolean noCustomHeaders;
-
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
             header = MICROSOFT_MIT_LICENSE_HEADER + "\n" + String.format(DEFAULT_CODE_GENERATION_HEADER, VERSION);
@@ -161,7 +160,11 @@ public class JavaSettings {
                 getBooleanValue(host, "no-custom-headers", false),
                 getBooleanValue(host, "include-read-only-in-constructor-args", false),
                 // setting the default as true as the Java design guideline recommends using String for URLs.
-                getBooleanValue(host, "url-as-string", true)
+                getBooleanValue(host, "url-as-string", true),
+
+                // setting this to false by default as a lot of existing libraries still use swagger and
+                // were generated with required = true set in JsonProperty annotation
+                getBooleanValue(host, "disable-required-property-annotation", false)
             );
         }
         return instance;
@@ -311,7 +314,8 @@ public class JavaSettings {
         boolean streamResponseInputStream,
         boolean noCustomHeaders,
         boolean includeReadOnlyInConstructorArgs,
-        boolean urlAsString) {
+        boolean urlAsString,
+        boolean disableRequiredPropertyAnnotation) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -406,34 +410,35 @@ public class JavaSettings {
         this.noCustomHeaders = noCustomHeaders;
         this.includeReadOnlyInConstructorArgs = includeReadOnlyInConstructorArgs;
         this.urlAsString = urlAsString;
+        this.disableRequiredJsonAnnotation = disableRequiredPropertyAnnotation;
     }
 
-    private String keyCredentialHeaderName;
 
+    private String keyCredentialHeaderName;
     public String getKeyCredentialHeaderName() {
         return this.keyCredentialHeaderName;
     }
 
-    private Set<CredentialType> credentialTypes;
 
+    private Set<CredentialType> credentialTypes;
     public Set<CredentialType> getCredentialTypes() {
         return credentialTypes;
     }
 
-    private Set<String> credentialScopes;
 
+    private Set<String> credentialScopes;
     public Set<String> getCredentialScopes() {
         return credentialScopes;
     }
 
-    private boolean azure;
 
+    private boolean azure;
     public final boolean isAzure() {
         return azure;
     }
 
-    private String artifactId;
 
+    private String artifactId;
     public String getArtifactId() {
         return artifactId;
     }
@@ -442,9 +447,15 @@ public class JavaSettings {
         return noCustomHeaders;
     }
 
+
     private boolean urlAsString;
     public boolean urlAsString() {
         return urlAsString;
+    }
+
+    private final boolean disableRequiredJsonAnnotation;
+    public boolean isDisableRequiredJsonAnnotation() {
+        return disableRequiredJsonAnnotation;
     }
 
     public enum Fluent {
@@ -884,15 +895,14 @@ public class JavaSettings {
         @JsonProperty("sync-strategy")
         private String syncStrategy;
 
-        private static final String DEFAULT_POLLING_CODE = String.join("\n",
-                "new DefaultPollingStrategy<>(new PollingStrategyOptions({httpPipeline})",
+        public static final String DEFAULT_POLLING_STRATEGY_FORMAT = String.join("\n",
+                "new %s<>(new PollingStrategyOptions({httpPipeline})",
                 "    .setEndpoint({endpoint})",
                 "    .setContext({context}))");
 
-        private static final String DEFAULT_SYNC_POLLING_CODE = String.join("\n",
-                "new SyncDefaultPollingStrategy<>(new PollingStrategyOptions({httpPipeline})",
-                "    .setEndpoint({endpoint})",
-                "    .setContext({context}))");
+        private static final String DEFAULT_POLLING_CODE = String.format(DEFAULT_POLLING_STRATEGY_FORMAT, "DefaultPollingStrategy");
+
+        private static final String DEFAULT_SYNC_POLLING_CODE = String.format(DEFAULT_POLLING_STRATEGY_FORMAT, "SyncDefaultPollingStrategy");
 
         public String getStrategy() {
             if (strategy == null || "default".equalsIgnoreCase(strategy)) {

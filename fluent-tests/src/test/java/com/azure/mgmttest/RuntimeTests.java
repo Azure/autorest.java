@@ -6,7 +6,6 @@ package com.azure.mgmttest;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
@@ -103,7 +102,7 @@ public class RuntimeTests {
     @Test
     public void testManagementClient() {
         StorageManagementClient storageManagementClient = new StorageManagementClientBuilder()
-                .pipeline(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build())
+                .pipeline(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build())
                 .endpoint(AzureEnvironment.AZURE.getResourceManagerEndpoint())
                 .subscriptionId(MOCK_SUBSCRIPTION_ID)
                 .buildClient();

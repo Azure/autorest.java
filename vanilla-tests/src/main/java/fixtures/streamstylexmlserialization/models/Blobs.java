@@ -5,12 +5,12 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -87,15 +87,21 @@ public final class Blobs implements XmlSerializable<Blobs> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("Blobs");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Blobs" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         if (this.blobPrefix != null) {
             for (BlobPrefix element : this.blobPrefix) {
-                xmlWriter.writeXml(element);
+                xmlWriter.writeXml(element, "BlobPrefix");
             }
         }
         if (this.blob != null) {
             for (Blob element : this.blob) {
-                xmlWriter.writeXml(element);
+                xmlWriter.writeXml(element, "Blob");
             }
         }
         return xmlWriter.writeEndElement();
@@ -107,33 +113,45 @@ public final class Blobs implements XmlSerializable<Blobs> {
      * @param xmlReader The XmlReader being read.
      * @return An instance of Blobs if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
+     * @throws XMLStreamException If an error occurs while reading the Blobs.
      */
     public static Blobs fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return xmlReader.readObject(
-                "Blobs",
-                reader -> {
-                    List<BlobPrefix> blobPrefix = null;
-                    List<Blob> blob = null;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+        return fromXml(xmlReader, null);
+    }
 
-                        if ("BlobPrefix".equals(fieldName.getLocalPart())) {
-                            if (blobPrefix == null) {
-                                blobPrefix = new LinkedList<>();
+    /**
+     * Reads an instance of Blobs from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of Blobs if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     * @throws XMLStreamException If an error occurs while reading the Blobs.
+     */
+    public static Blobs fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Blobs" : rootElementName;
+        return xmlReader.readObject(
+                finalRootElementName,
+                reader -> {
+                    Blobs deserializedBlobs = new Blobs();
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName elementName = reader.getElementName();
+
+                        if ("BlobPrefix".equals(elementName.getLocalPart())) {
+                            if (deserializedBlobs.blobPrefix == null) {
+                                deserializedBlobs.blobPrefix = new ArrayList<>();
                             }
-                            blobPrefix.add(BlobPrefix.fromXml(reader));
-                        } else if ("Blob".equals(fieldName.getLocalPart())) {
-                            if (blob == null) {
-                                blob = new LinkedList<>();
+                            deserializedBlobs.blobPrefix.add(BlobPrefix.fromXml(reader, "BlobPrefix"));
+                        } else if ("Blob".equals(elementName.getLocalPart())) {
+                            if (deserializedBlobs.blob == null) {
+                                deserializedBlobs.blob = new ArrayList<>();
                             }
-                            blob.add(Blob.fromXml(reader));
+                            deserializedBlobs.blob.add(Blob.fromXml(reader, "Blob"));
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Blobs deserializedBlobs = new Blobs();
-                    deserializedBlobs.blobPrefix = blobPrefix;
-                    deserializedBlobs.blob = blob;
 
                     return deserializedBlobs;
                 });

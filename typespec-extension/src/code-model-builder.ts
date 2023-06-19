@@ -31,17 +31,20 @@ import {
   listServices,
   getNamespaceFullName,
   isNullType,
-  NoTarget,
   getTypeName,
   EmitContext,
   getProjectedName,
   getService,
+  getEncode,
+  getOverloadedOperation,
+  isErrorModel,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
   getAuthentication,
   getServers,
   getStatusCodeDescription,
+  HttpOperation,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
@@ -51,8 +54,8 @@ import {
   getQueryParamOptions,
   getHeaderFieldOptions,
 } from "@typespec/http";
-import { getVersion } from "@typespec/versioning";
-import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/typespec-azure-core";
+import { getAddedOnVersions, getVersion } from "@typespec/versioning";
+import { isPollingLocation, getPagedResult, isFixed, getLroMetadata } from "@azure-tools/typespec-azure-core";
 import {
   SdkContext,
   listClients,
@@ -77,7 +80,6 @@ import {
   DateSchema,
   DictionarySchema,
   Discriminator,
-  DurationSchema,
   HttpHeader,
   HttpParameter,
   ImplementationLocation,
@@ -104,35 +106,53 @@ import {
   GroupProperty,
   ApiVersion,
   SerializationStyle,
+  Metadata,
+  UnixTimeSchema,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient } from "./common/client.js";
-import { ConvenienceApi, Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
+import { ConvenienceApi, Operation as CodeModelOperation, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { ConstantSchema, ConstantValue } from "./common/schemas/constant.js";
 import { OrSchema } from "./common/schemas/relationship.js";
+import { LongRunningMetadata } from "./common/long-running-metadata.js";
+import { DurationSchema } from "./common/schemas/time.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
-import { ClientContext, LongRunningMetadata } from "./models.js";
+import { createPollResultSchema } from "./external-schemas.js";
+import { ClientContext } from "./models.js";
+import {
+  stringArrayContainsIgnoreCase,
+  getJavaNamespace,
+  getNamespace,
+  pascalCase,
+  logWarning,
+  trace,
+} from "./utils.js";
 import {
   ProcessingCache,
-  stringArrayContainsIgnoreCase,
-  getClientApiVersions,
-  getJavaNamespace,
-  getServiceVersion,
   isModelReferredInTemplate,
-  operationContainsJsonMergePatch,
-  getNamespace,
   pushDistinct,
-  isPayloadProperty,
   modelContainsDerivedModel,
-  pascalCase,
   getNameForTemplate,
+  getDurationFormat,
+  hasScalarAsBase,
+  isNullableType,
+  isSameLiteralTypes,
+} from "./type-utils.js";
+import {
+  getClientApiVersions,
+  getServiceVersion,
+  operationContainsJsonMergePatch,
+  isPayloadProperty,
   originApiVersion,
   specialHeaderNames,
   loadExamples,
-} from "./utils.js";
+  isLroNewPollingStrategy,
+  operationIsMultipleContentTypes,
+  cloneOperationParameter,
+} from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
 
@@ -154,6 +174,10 @@ export class CodeModelBuilder {
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
     this.program = program1;
+
+    if (this.options["skip-special-headers"]) {
+      this.options["skip-special-headers"].forEach((it) => specialHeaderNames.add(it.toLowerCase()));
+    }
 
     this.sdkContext = createSdkContext(context as EmitContext<any>);
     const service = listServices(this.program)[0];
@@ -298,9 +322,19 @@ export class CodeModelBuilder {
               securitySchemes.push(keyScheme);
             }
             break;
+
           case "http":
             {
-              this.logWarning(scheme.scheme + " auth method is currently not supported.");
+              const schemeOrApiKeyPrefix = scheme.scheme;
+              if (schemeOrApiKeyPrefix === "basic" || schemeOrApiKeyPrefix === "bearer") {
+                this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
+              } else {
+                const keyScheme = new KeySecurityScheme({
+                  name: "authorization",
+                });
+                (keyScheme as any).prefix = schemeOrApiKeyPrefix; // TODO (weidxu): modify KeySecurityScheme, after design stable
+                securitySchemes.push(keyScheme);
+              }
             }
             break;
         }
@@ -354,14 +388,21 @@ export class CodeModelBuilder {
       }
       const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
       codeModelClient.addGlobalParameters(hostParameters);
-      const clientContext = new ClientContext(baseUri, hostParameters, codeModelClient.globalParameters!);
+      const clientContext = new ClientContext(
+        baseUri,
+        hostParameters,
+        codeModelClient.globalParameters!,
+        codeModelClient.apiVersions,
+      );
 
       const operationGroups = listOperationGroups(this.sdkContext, client);
 
       const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
-        codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
+        if (!this.needToSkipProcessingOperation(operation)) {
+          codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
+        }
       }
       if (codeModelGroup.operations?.length > 0) {
         codeModelClient.operationGroups.push(codeModelGroup);
@@ -371,7 +412,9 @@ export class CodeModelBuilder {
         const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
         codeModelGroup = new OperationGroup(operationGroup.type.name);
         for (const operation of operations) {
-          codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
+          if (!this.needToSkipProcessingOperation(operation)) {
+            codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
+          }
         }
         codeModelClient.operationGroups.push(codeModelGroup);
       }
@@ -412,12 +455,16 @@ export class CodeModelBuilder {
     }
   }
 
-  private processOperation(
-    groupName: string,
-    operation: Operation,
-    clientContext: ClientContext,
-    fromLinkedOperation: boolean = false,
-  ): CodeModelOperation {
+  private needToSkipProcessingOperation(operation: Operation): boolean {
+    // don't generate protocol and convenience method for overloaded operations
+    // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
+    if (getOverloadedOperation(this.program, operation)) {
+      return true;
+    }
+    return false;
+  }
+
+  private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
     const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
 
     const operationGroup = this.codeModel.getOperationGroup(groupName);
@@ -436,8 +483,14 @@ export class CodeModelBuilder {
       },
     });
 
-    if (!operationContainsJsonMergePatch(op)) {
+    if (operationContainsJsonMergePatch(op)) {
       // do not generate convenience method for JSON Merge Patch
+      this.trace(`Operation '${op.operation.name}' contains 'application/merge-patch+json'`);
+    } else if (operationIsMultipleContentTypes(op)) {
+      // and multiple content types
+      // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
+      this.trace(`Operation '${op.operation.name}' is multiple content-type`);
+    } else {
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName && !isInternal(this.sdkContext, operation)) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
@@ -447,11 +500,6 @@ export class CodeModelBuilder {
     // check for generating protocol api or not
     codeModelOperation.generateProtocolApi =
       shouldGenerateProtocol(this.sdkContext, operation) && !isInternal(this.sdkContext, operation);
-
-    if (!fromLinkedOperation) {
-      // cache for later reference from operationLinks
-      this.operationCache.set(operation, codeModelOperation);
-    }
 
     codeModelOperation.addRequest(
       new Request({
@@ -474,7 +522,7 @@ export class CodeModelBuilder {
     // body
     if (op.parameters.body) {
       if (op.parameters.body.parameter) {
-        this.processParameterBody(codeModelOperation, op.parameters.body.parameter, operation.parameters);
+        this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
       } else if (op.parameters.body.type) {
         let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
 
@@ -493,15 +541,16 @@ export class CodeModelBuilder {
             }
           }
 
-          this.processParameterBody(codeModelOperation, bodyType, operation.parameters);
+          this.processParameterBody(codeModelOperation, op, bodyType);
         }
       }
     }
 
-    // linked operations
-    const lroMetadata = fromLinkedOperation
-      ? new LongRunningMetadata(false)
-      : this.processLinkedOperation(codeModelOperation, groupName, operation, clientContext);
+    // group ETag header parameters, if exists
+    this.processEtagHeaderParameters(codeModelOperation, op);
+
+    // lro metadata
+    const lroMetadata = this.processLroMetadata(codeModelOperation, op);
 
     // responses
     const candidateResponseSchema = lroMetadata.pollResultType; // candidate: response body type of pollingOperation
@@ -510,7 +559,7 @@ export class CodeModelBuilder {
     // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
-    this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata.longRunning);
+    this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -544,69 +593,78 @@ export class CodeModelBuilder {
     }
   }
 
-  private processLinkedOperation(
-    op: CodeModelOperation,
-    groupName: string,
-    operation: Operation,
-    clientContext: ClientContext,
-  ): LongRunningMetadata {
-    let pollingSchema = undefined;
-    let finalSchema = undefined;
-    let pollingFoundInOperationLinks = false;
-    const operationLinks = getOperationLinks(this.program, operation);
-    if (operationLinks) {
-      op.operationLinks = {};
+  private processLroMetadata(op: CodeModelOperation, httpOperation: HttpOperation): LongRunningMetadata {
+    const operation = httpOperation.operation;
 
-      for (const [linkType, linkOperation] of operationLinks) {
-        if (linkType === "polling" || linkType === "final") {
-          // some TypeSpec writes pollingOperation without the operation
-          pollingFoundInOperationLinks = true;
-        }
+    const lroMetadata = getLroMetadata(this.program, operation);
+    // needs lroMetadata.statusMonitorStep, as getLroMetadata would return for @pollingOperation operation
+    if (lroMetadata && lroMetadata.pollingInfo && lroMetadata.statusMonitorStep) {
+      let pollingSchema = undefined;
+      let finalSchema = undefined;
 
-        if (linkOperation.linkedOperation) {
-          // process linked operation, if not processed
-          let linkedOperation = this.operationCache.get(linkOperation.linkedOperation);
-          if (!linkedOperation) {
-            linkedOperation = this.processOperation(groupName, linkOperation.linkedOperation, clientContext, true);
-          }
+      const verb = httpOperation.verb;
+      const useNewPollStrategy = isLroNewPollingStrategy(operation, lroMetadata);
 
-          const opLink = new OperationLink(linkedOperation);
-          // parameters of operation link
-          if (linkOperation.parameters) {
-            opLink.parameters = this.processSchema(linkOperation.parameters, "parameters");
-          }
-          op.operationLinks[linkType] = opLink;
+      let pollingStrategy: Metadata | undefined = undefined;
+      if (useNewPollStrategy) {
+        // use new experimental OperationLocationPollingStrategy
+        pollingStrategy = new Metadata({
+          language: {
+            java: {
+              name: "OperationLocationPollingStrategy",
+              namespace: "com.azure.core.experimental.util.polling",
+            },
+          },
+        });
+      }
 
-          const getResponse = (linkedOp: CodeModelOperation): Schema | undefined => {
-            if (linkedOp.responses) {
-              const response = linkedOp.responses.find((it) => it.protocol?.http?.statusCodes?.includes("200"));
-              if (response && response instanceof SchemaResponse) {
-                const schema = response.schema;
-                if (op.convenienceApi) {
-                  this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
-                }
-                return schema;
-              }
-            }
-            return undefined;
-          };
-          if (linkType === "polling") {
-            pollingSchema = getResponse(linkedOperation);
-          } else if (linkType === "final") {
-            finalSchema = getResponse(linkedOperation);
-          }
+      // pollingSchema
+      if (useNewPollStrategy) {
+        // com.azure.core.experimental.models.PollResult
+        pollingSchema = this.pollResultSchema;
+      } else {
+        if (
+          lroMetadata.pollingInfo.responseModel.name === "OperationStatus" &&
+          getNamespace(lroMetadata.pollingInfo.responseModel) === "Azure.Core.Foundations"
+        ) {
+          pollingSchema = this.pollResultSchema;
+        } else {
+          pollingSchema = this.processSchema(lroMetadata.pollingInfo.responseModel, "pollResult");
         }
       }
+
+      // finalSchema
+      if (verb !== "delete" && lroMetadata.logicalResult) {
+        finalSchema = this.processSchema(lroMetadata.logicalResult, "finalResult");
+      }
+
+      // track usage
+      if (pollingSchema) {
+        this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
+        if (op.convenienceApi) {
+          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.ConvenienceApi] });
+        }
+      }
+      if (finalSchema) {
+        this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
+        if (op.convenienceApi) {
+          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.ConvenienceApi] });
+        }
+      }
+
+      op.lroMetadata = new LongRunningMetadata(true, pollingSchema, finalSchema, pollingStrategy);
+      return op.lroMetadata;
     }
-    return new LongRunningMetadata(pollingFoundInOperationLinks, pollingSchema, finalSchema);
+
+    return new LongRunningMetadata(false);
   }
 
   private processRouteForLongRunning(
     op: CodeModelOperation,
     responses: HttpOperationResponse[],
-    pollingFoundInOperationLinks: boolean,
+    lroMetadata: LongRunningMetadata,
   ) {
-    if (pollingFoundInOperationLinks) {
+    if (lroMetadata.longRunning) {
       op.extensions = op.extensions ?? {};
       op.extensions["x-ms-long-running-operation"] = true;
       return;
@@ -643,16 +701,18 @@ export class CodeModelBuilder {
       if (
         param.type === "header" &&
         param.param.type.kind === "Scalar" &&
-        (param.param.type.name === "utcDateTime" || param.param.type.name === "offsetDateTime")
+        getEncode(this.program, param.param) === undefined &&
+        getEncode(this.program, param.param.type) === undefined &&
+        (hasScalarAsBase(param.param.type, "utcDateTime") || hasScalarAsBase(param.param.type, "offsetDateTime"))
       ) {
-        // utcDateTime in header maps to RFC 5322
+        // utcDateTime in header maps to rfc7231
         schema = this.processDateTimeSchema(param.param.type, param.param.name, true);
       } else {
-        schema = this.processSchema(param.param.type, param.param.name);
+        schema = this.processSchema(param.param, param.param.name);
       }
 
       // skip-url-encoding
-      let extensions = undefined;
+      let extensions: { [id: string]: any } | undefined = undefined;
       if (
         (param.type === "query" || param.type === "path") &&
         param.param.type.kind === "Scalar" &&
@@ -661,20 +721,49 @@ export class CodeModelBuilder {
         extensions = { "x-ms-skip-url-encoding": true };
       }
 
+      // currently under dev-options.support-versioning
+      if (this.options["dev-options"] && this.options["dev-options"]["support-versioning"]) {
+        // versioning
+        const addedOn = getAddedOnVersions(this.program, param.param);
+        if (addedOn) {
+          extensions = extensions ?? {};
+          extensions["x-ms-versioning-added"] = clientContext.getAddedVersions(addedOn);
+        }
+      }
+
       // format if array
       let style = undefined;
       let explode = undefined;
       if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
         if (param.type === "query") {
           const queryParamOptions = getQueryParamOptions(this.program, param.param);
-          switch (queryParamOptions?.format) {
+          // TODO (weidxu): remove "as string" after http lib fix the type of queryParamOptions.format
+          switch (queryParamOptions?.format as string) {
             case "csv":
               style = SerializationStyle.Simple;
+              break;
+
+            case "ssv":
+              style = SerializationStyle.SpaceDelimited;
+              break;
+
+            case "tsv":
+              style = SerializationStyle.TabDelimited;
+              break;
+
+            case "pipes":
+              style = SerializationStyle.PipeDelimited;
               break;
 
             case "multi":
               style = SerializationStyle.Form;
               explode = true;
+              break;
+
+            default:
+              if (queryParamOptions?.format) {
+                this.logWarning(`Unrecognized query parameter format: '${queryParamOptions?.format}'.`);
+              }
               break;
           }
         } else if (param.type === "header") {
@@ -683,11 +772,17 @@ export class CodeModelBuilder {
             case "csv":
               style = SerializationStyle.Simple;
               break;
+
+            default:
+              if (headerFieldOptions?.format) {
+                this.logWarning(`Unrecognized header parameter format: '${headerFieldOptions?.format}'.`);
+              }
+              break;
           }
         }
       }
 
-      const nullable = this.isNullableType(param.param.type);
+      const nullable = isNullableType(param.param.type);
       const parameter = new Parameter(this.getName(param.param), this.getDoc(param.param), schema, {
         summary: this.getSummary(param.param),
         implementation: ImplementationLocation.Method,
@@ -765,7 +860,137 @@ export class CodeModelBuilder {
     );
   }
 
-  private processParameterBody(op: CodeModelOperation, body: ModelProperty | Model, parameters: Model) {
+  private processEtagHeaderParameters(op: CodeModelOperation, httpOperation: HttpOperation) {
+    if (op.convenienceApi && op.parameters && op.signatureParameters) {
+      const etagHeadersNames = new Set<string>([
+        "if-match",
+        "if-none-match",
+        "if-unmodified-since",
+        "if-modified-since",
+      ]);
+
+      // collect etag headers in parameters
+      const etagHeaders: string[] = [];
+      if (op.parameters) {
+        for (const parameter of op.parameters) {
+          if (
+            parameter.language.default.serializedName &&
+            etagHeadersNames.has(parameter.language.default.serializedName.toLowerCase())
+          ) {
+            etagHeaders.push(parameter.language.default.serializedName);
+          }
+        }
+      }
+
+      let groupToRequestConditions = false;
+      let groupToMatchConditions = false;
+
+      if (etagHeaders.length === 4) {
+        // all 4 headers available, use RequestConditions
+        groupToRequestConditions = true;
+      } else if (etagHeaders.length === 2) {
+        const etagHeadersLowerCase = etagHeaders.map((it) => it.toLowerCase());
+        if (etagHeadersLowerCase.includes("if-match") && etagHeadersLowerCase.includes("if-none-match")) {
+          // only 2 headers available, use MatchConditions
+          groupToMatchConditions = true;
+        }
+      }
+
+      if (groupToRequestConditions || groupToMatchConditions) {
+        op.convenienceApi.requests = [];
+        const request = new Request();
+        request.parameters = [];
+        request.signatureParameters = [];
+        op.convenienceApi.requests.push(request);
+
+        for (const parameter of op.parameters) {
+          // copy all parameters to request
+          const clonedParameter = cloneOperationParameter(parameter);
+          request.parameters.push(clonedParameter);
+
+          // copy signatureParameters, but exclude etag headers (as they won't be in method signature)
+          if (
+            op.signatureParameters.includes(parameter) &&
+            !(
+              parameter.language.default.serializedName &&
+              etagHeaders.includes(parameter.language.default.serializedName)
+            )
+          ) {
+            request.signatureParameters.push(clonedParameter);
+          }
+        }
+
+        const namespace = getNamespace(httpOperation.operation);
+        const schemaName = groupToRequestConditions ? "RequestConditions" : "MatchConditions";
+        const schemaDescription = groupToRequestConditions
+          ? "Specifies HTTP options for conditional requests based on modification time."
+          : "Specifies HTTP options for conditional requests.";
+
+        // group schema
+        const requestConditionsSchema = this.codeModel.schemas.add(
+          new GroupSchema(schemaName, schemaDescription, {
+            language: {
+              default: {
+                namespace: namespace,
+              },
+              java: {
+                namespace: "com.azure.core.http",
+              },
+            },
+          }),
+        );
+
+        // parameter (optional) of the group schema
+        const requestConditionsParameter = new Parameter(
+          schemaName,
+          requestConditionsSchema.language.default.description,
+          requestConditionsSchema,
+          {
+            implementation: ImplementationLocation.Method,
+            required: false,
+            nullable: true,
+          },
+        );
+
+        this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Input, SchemaContext.ConvenienceApi] });
+
+        // update group schema for properties
+        for (const parameter of request.parameters) {
+          if (
+            parameter.language.default.serializedName &&
+            etagHeaders.includes(parameter.language.default.serializedName)
+          ) {
+            parameter.groupedBy = requestConditionsParameter;
+
+            requestConditionsSchema.add(
+              // name is serializedName, as it must be same as that in RequestConditions class
+              new GroupProperty(
+                parameter.language.default.serializedName,
+                parameter.language.default.description,
+                parameter.schema,
+                {
+                  originalParameter: [parameter],
+                  summary: parameter.summary,
+                  required: false,
+                  nullable: true,
+                  readOnly: false,
+                  serializedName: parameter.language.default.serializedName,
+                },
+              ),
+            );
+          }
+        }
+
+        // put RequestConditions/MatchConditions as last parameter/signatureParameters
+        request.parameters.push(requestConditionsParameter);
+        request.signatureParameters.push(requestConditionsParameter);
+      }
+    }
+  }
+
+  private processParameterBody(op: CodeModelOperation, httpOperation: HttpOperation, body: ModelProperty | Model) {
+    const parameters = httpOperation.operation.parameters;
+
     let schema: Schema;
     if (body.kind === "ModelProperty" && body.type.kind === "Scalar" && body.type.name === "bytes") {
       // handle binary request body
@@ -813,26 +1038,7 @@ export class CodeModelBuilder {
               existParameter.implementation === ImplementationLocation.Method &&
               (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true)
             ) {
-              request.parameters.push(
-                new Parameter(
-                  existParameter.language.default.name,
-                  existParameter.language.default.description,
-                  existParameter.schema,
-                  {
-                    language: {
-                      default: {
-                        serializedName: existParameter.language.default.serializedName,
-                      },
-                    },
-                    protocol: existParameter.protocol,
-                    summary: existParameter.summary,
-                    implementation: ImplementationLocation.Method,
-                    required: existParameter.required,
-                    nullable: existParameter.nullable,
-                    extensions: existParameter.extensions,
-                  },
-                ),
-              );
+              request.parameters.push(cloneOperationParameter(existParameter));
             }
           } else {
             // property from anonymous model
@@ -866,7 +1072,7 @@ export class CodeModelBuilder {
         if (request.signatureParameters.length > 6) {
           // create an option bag
           const name = op.language.default.name + "Options";
-          const namespace = body.kind === "Model" ? getNamespace(body) : this.namespace;
+          const namespace = getNamespace(httpOperation.operation);
           // option bag schema
           const optionBagSchema = this.codeModel.schemas.add(
             new GroupSchema(name, `Options for ${op.language.default.name} API`, {
@@ -946,10 +1152,11 @@ export class CodeModelBuilder {
       }
     }
 
+    let bodyType: Type | undefined = undefined;
     let trackConvenienceApi = op.convenienceApi ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
-      const bodyType = this.findResponseBody(responseBody.type);
+      bodyType = this.findResponseBody(responseBody.type);
       if (bodyType.kind === "Scalar" && bodyType.name === "bytes") {
         // binary
         response = new BinaryResponse({
@@ -998,11 +1205,10 @@ export class CodeModelBuilder {
               }
               if (match) {
                 schema = candidateResponseSchema;
-                this.program.trace(
-                  "typespec-java",
-                  `Replace TypeSpec model ${this.getName(bodyType)} with ${
+                this.trace(
+                  `Replace TypeSpec model '${this.getName(bodyType)}' with '${
                     candidateResponseSchema.language.default.name
-                  }`,
+                  }'`,
                 );
               }
             }
@@ -1012,7 +1218,12 @@ export class CodeModelBuilder {
           }
         }
         if (!schema) {
-          schema = this.processSchema(bodyType, "response");
+          if (verb === "post" && op.lroMetadata && op.lroMetadata.pollResultType) {
+            // for standard LRO action, return type is the pollResultType
+            schema = op.lroMetadata.pollResultType;
+          } else {
+            schema = this.processSchema(bodyType, "response");
+          }
         }
         response = new SchemaResponse(schema, {
           protocol: {
@@ -1047,8 +1258,8 @@ export class CodeModelBuilder {
         },
       });
     }
-    if (resp.statusCode === "*" || Number(resp.statusCode) / 100 > 3) {
-      // TODO: x-ms-error-response
+    if (resp.statusCode === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
+      // "*", or the model is @error
       op.addException(response);
 
       if (response instanceof SchemaResponse) {
@@ -1126,7 +1337,8 @@ export class CodeModelBuilder {
       case "Model":
         if (isArrayModelType(this.program, type)) {
           return this.processArraySchema(type, nameHint);
-        } else if (isRecordModelType(this.program, type)) {
+        } else if (isRecordModelType(this.program, type) && type.properties.size == 0) {
+          // "pure" Record that does not have properties in it
           return this.processDictionarySchema(type, nameHint);
         } else {
           return this.processObjectSchema(type, this.getName(type));
@@ -1186,6 +1398,25 @@ export class CodeModelBuilder {
         // use it for extensible enum
         return this.processChoiceSchema(knownValues, this.getName(type), false);
       } else {
+        const encode = getEncode(this.program, type);
+        if (encode) {
+          // process as encode
+          if (encode.encoding === "seconds" && hasScalarAsBase(type, "duration")) {
+            return this.processDurationSchema(type, nameHint, getDurationFormat(encode));
+          } else if (
+            (encode.encoding === "rfc3339" || encode.encoding === "rfc7231" || encode.encoding === "unixTimestamp") &&
+            (hasScalarAsBase(type, "utcDateTime") || hasScalarAsBase(type, "offsetDateTime"))
+          ) {
+            if (encode.encoding === "unixTimestamp") {
+              return this.processUnixTimeSchema(type, nameHint);
+            } else {
+              return this.processDateTimeSchema(type, nameHint, encode.encoding === "rfc7231");
+            }
+          } else if (encode.encoding === "base64url" && hasScalarAsBase(type, "bytes")) {
+            return this.processByteArraySchema(type, nameHint, true);
+          }
+        }
+
         if (type.baseScalar) {
           // fallback to baseScalar
           const schema = this.processScalar(type.baseScalar, getFormat(this.program, type), nameHint);
@@ -1377,6 +1608,14 @@ export class CodeModelBuilder {
     );
   }
 
+  private processUnixTimeSchema(type: Scalar, name: string): UnixTimeSchema {
+    return this.codeModel.schemas.add(
+      new UnixTimeSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+      }),
+    );
+  }
+
   private processDateTimeSchema(type: Scalar, name: string, rfc1123: boolean): DateTimeSchema {
     return this.codeModel.schemas.add(
       new DateTimeSchema(name, this.getDoc(type), {
@@ -1402,10 +1641,15 @@ export class CodeModelBuilder {
     );
   }
 
-  private processDurationSchema(type: Scalar, name: string): DurationSchema {
+  private processDurationSchema(
+    type: Scalar,
+    name: string,
+    format: DurationSchema["format"] = "duration-rfc3339",
+  ): DurationSchema {
     return this.codeModel.schemas.add(
       new DurationSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
+        format: format,
       }),
     );
   }
@@ -1472,7 +1716,17 @@ export class CodeModelBuilder {
             }
           });
         }
+      } else {
+        // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
+        pushDistinct(objectSchema.parents.all, parentSchema);
       }
+    } else if (isRecordModelType(this.program, type)) {
+      // "pure" Record processed elsewhere
+      // "mixed" Record that have properties, treat the model as "additionalProperties"
+      const parentSchema = this.processDictionarySchema(type, this.getName(type));
+      objectSchema.parents = new Relations();
+      objectSchema.parents.immediate.push(parentSchema);
+      pushDistinct(objectSchema.parents.all, parentSchema);
     }
 
     // value of the discriminator property
@@ -1571,13 +1825,31 @@ export class CodeModelBuilder {
       if (prop.type.kind === "Scalar" && schema instanceof StringSchema) {
         schema = this.processFormatString(prop.type, format, nameHint);
       }
+    } else if (prop.type.kind === "Scalar") {
+      const encode = getEncode(this.program, prop);
+      if (encode) {
+        if (encode.encoding === "seconds" && hasScalarAsBase(prop.type, "duration")) {
+          schema = this.processDurationSchema(prop.type, nameHint, getDurationFormat(encode));
+        } else if (
+          (encode.encoding === "rfc3339" || encode.encoding === "rfc7231" || encode.encoding === "unixTimestamp") &&
+          (hasScalarAsBase(prop.type, "utcDateTime") || hasScalarAsBase(prop.type, "offsetDateTime"))
+        ) {
+          if (encode.encoding === "unixTimestamp") {
+            return this.processUnixTimeSchema(prop.type, nameHint);
+          } else {
+            return this.processDateTimeSchema(prop.type, nameHint, encode.encoding === "rfc7231");
+          }
+        } else if (encode.encoding === "base64url" && hasScalarAsBase(prop.type, "bytes")) {
+          return this.processByteArraySchema(prop.type, nameHint, true);
+        }
+      }
     }
     return schema;
   }
 
   private processModelProperty(prop: ModelProperty): Property {
     const schema = this.processSchema(prop, prop.name);
-    let nullable = this.isNullableType(prop.type);
+    let nullable = isNullableType(prop.type);
 
     let extensions = undefined;
     if (this.isSecret(prop)) {
@@ -1612,9 +1884,12 @@ export class CodeModelBuilder {
       case "password":
       case "url":
       case "uuid":
+      case "eTag":
+        return this.processStringSchema(type, nameHint);
+      default:
+        this.logWarning(`Unrecognized string format: '${format}'.`);
         return this.processStringSchema(type, nameHint);
     }
-    throw new Error(`Unrecognized string format: '${format}'.`);
   }
 
   private processUnionSchema(type: Union, name: string): Schema {
@@ -1624,7 +1899,7 @@ export class CodeModelBuilder {
       return this.processSchema(nonNullVariants[0].type, name);
     }
 
-    if (this.isSameLiteralTypes(nonNullVariants)) {
+    if (isSameLiteralTypes(nonNullVariants)) {
       // enum
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
@@ -1713,25 +1988,6 @@ export class CodeModelBuilder {
         }
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
-    }
-  }
-
-  private isNullableType(type: Type): boolean {
-    if (type.kind === "Union") {
-      const nullVariants = Array.from(type.variants.values()).filter((it) => isNullType(it.type));
-      return nullVariants.length >= 1;
-    } else {
-      return false;
-    }
-  }
-
-  private isSameLiteralTypes(variants: UnionVariant[]): boolean {
-    const kindSet = new Set(variants.map((it) => it.type.kind));
-    if (kindSet.size === 1) {
-      const kind = kindSet.values().next().value;
-      return kind === "String" || kind === "Number" || kind === "Boolean";
-    } else {
-      return false;
     }
   }
 
@@ -1840,13 +2096,11 @@ export class CodeModelBuilder {
   }
 
   private logWarning(msg: string) {
-    this.program.trace("typespec-java", msg);
-    this.program.reportDiagnostic({
-      code: "typespec-java",
-      severity: "warning",
-      message: msg,
-      target: NoTarget,
-    });
+    logWarning(this.program, msg);
+  }
+
+  private trace(msg: string) {
+    trace(this.program, msg);
   }
 
   private _stringSchema?: StringSchema;
@@ -1878,6 +2132,14 @@ export class CodeModelBuilder {
   private _anySchema?: AnySchema;
   get anySchema(): AnySchema {
     return this._anySchema ?? (this._anySchema = this.codeModel.schemas.add(new AnySchema("Anything")));
+  }
+
+  private _pollResultSchema?: ObjectSchema;
+  get pollResultSchema(): ObjectSchema {
+    return (
+      this._pollResultSchema ??
+      (this._pollResultSchema = createPollResultSchema(this.codeModel.schemas, this.stringSchema))
+    );
   }
 
   private createApiVersionParameter(serializedName: string, parameterLocation: ParameterLocation): Parameter {

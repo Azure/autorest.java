@@ -4,6 +4,7 @@
 
 package com.specialwords.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,13 +19,15 @@ public final class DerivedModel extends BaseModel {
     /*
      * The derived.name property.
      */
-    @JsonProperty(value = "derived.name", required = true)
+    @Generated
+    @JsonProperty(value = "derived.name")
     private String derivedName;
 
     /*
      * The for property.
      */
-    @JsonProperty(value = "for", required = true)
+    @Generated
+    @JsonProperty(value = "for")
     private String forProperty;
 
     /**
@@ -33,10 +36,10 @@ public final class DerivedModel extends BaseModel {
      * @param derivedName the derivedName value to set.
      * @param forProperty the forProperty value to set.
      */
+    @Generated
     @JsonCreator
     public DerivedModel(
-            @JsonProperty(value = "derived.name", required = true) String derivedName,
-            @JsonProperty(value = "for", required = true) String forProperty) {
+            @JsonProperty(value = "derived.name") String derivedName, @JsonProperty(value = "for") String forProperty) {
         this.derivedName = derivedName;
         this.forProperty = forProperty;
     }
@@ -46,6 +49,7 @@ public final class DerivedModel extends BaseModel {
      *
      * @return the derivedName value.
      */
+    @Generated
     public String getDerivedName() {
         return this.derivedName;
     }
@@ -55,6 +59,7 @@ public final class DerivedModel extends BaseModel {
      *
      * @return the forProperty value.
      */
+    @Generated
     public String getForProperty() {
         return this.forProperty;
     }

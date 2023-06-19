@@ -4,6 +4,7 @@
 
 package com.cadl.visibility.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,13 +15,15 @@ public final class ReadDog {
     /*
      * The id property.
      */
-    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @Generated
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private int id;
 
     /*
      * The name property.
      */
-    @JsonProperty(value = "name", required = true)
+    @Generated
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -28,8 +31,9 @@ public final class ReadDog {
      *
      * @param name the name value to set.
      */
+    @Generated
     @JsonCreator
-    public ReadDog(@JsonProperty(value = "name", required = true) String name) {
+    public ReadDog(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 
@@ -38,6 +42,7 @@ public final class ReadDog {
      *
      * @return the id value.
      */
+    @Generated
     public int getId() {
         return this.id;
     }
@@ -47,6 +52,7 @@ public final class ReadDog {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }

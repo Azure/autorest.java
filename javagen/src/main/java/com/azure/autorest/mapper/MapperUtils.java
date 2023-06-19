@@ -3,8 +3,12 @@
 
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceValue;
+import com.azure.autorest.extension.base.model.codemodel.Operation;
+import com.azure.autorest.extension.base.model.codemodel.Response;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
@@ -17,6 +21,8 @@ import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Contains utility methods to help map from modelerfour to Java Autorest.
@@ -78,6 +84,32 @@ final class MapperUtils {
                     .build())
                 .build();
         }
+    }
+
+    static IType handleResponseSchema(Operation operation, JavaSettings settings) {
+        Schema responseBodySchema = SchemaUtil.getLowestCommonParent(operation.getResponses().stream()
+            .map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+        boolean xmlWrapperResponse = responseBodySchema != null && responseBodySchema.getSerialization() != null
+            && responseBodySchema.getSerialization().getXml() != null
+            && responseBodySchema.getSerialization().getXml().isWrapped();
+
+        if (!xmlWrapperResponse) {
+            return SchemaUtil.getOperationResponseType(responseBodySchema, operation, settings);
+        }
+
+        // XML wrapped response types are tricky as they're defined as ArraySchema but in reality it's a specialized
+        // ObjectSchema.
+        ArraySchema arraySchema = (ArraySchema) responseBodySchema;
+        String className = arraySchema.getElementType().getLanguage().getJava().getName() + "Wrapper";
+        String classPackage = settings.isCustomType(className)
+            ? settings.getPackage(className)
+            : settings.getPackage(settings.getImplementationSubpackage() + ".models");
+
+        return new ClassType.Builder()
+            .packageName(classPackage)
+            .name(className)
+            .extensions(responseBodySchema.getExtensions())
+            .build();
     }
 
     private MapperUtils() {

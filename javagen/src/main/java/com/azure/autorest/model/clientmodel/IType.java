@@ -155,4 +155,11 @@ public interface IType {
      */
     String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
         String valueGetter, boolean isAttribute, boolean nameIsVariable);
+
+    /**
+     * Whether the type is used with XML serialization.
+     *
+     * @return Whether the type is used with XML serialization.
+     */
+    boolean isUsedInXml();
 }

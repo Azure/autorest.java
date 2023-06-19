@@ -3,6 +3,7 @@
 
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
@@ -70,14 +71,18 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         }
         builder.clientType(clientType);
 
-        if (wireType instanceof ListType && settings.isGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.BODY){
-            String parameterTypePackage = settings.getPackage(settings.getImplementationSubpackage());
-            String parameterTypeName = CodeNamer
-                .toPascalCase(parameterJvWireType.getSerialization().getXml().getName() +
-                    "Wrapper");
+        if (wireType instanceof ListType
+            && SchemaUtil.treatAsXml(parameterJvWireType)
+            && parameterRequestLocation == RequestParameterLocation.BODY) {
+            String modelTypeName = ((ArraySchema) parameterJvWireType).getElementType().getLanguage().getJava().getName();
+            boolean isCustomType = settings.isCustomType(CodeNamer.toPascalCase(modelTypeName + "Wrapper"));
+            String packageName = isCustomType
+                ? settings.getPackage(settings.getCustomTypesSubpackage())
+                : settings.getPackage(settings.getImplementationSubpackage() + ".models");
             wireType = new ClassType.Builder()
-                .packageName(parameterTypePackage)
-                .name(parameterTypeName)
+                .packageName(packageName)
+                .name(modelTypeName + "Wrapper")
+                .usedInXml(true)
                 .build();
         } else if (wireType == ArrayType.ByteArray) {
             if (parameterRequestLocation != RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {

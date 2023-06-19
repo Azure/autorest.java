@@ -1,4 +1,4 @@
-# re-build java-client-emitter
+# re-build typespec-java
 Set-Location ../typespec-extension/
 # Remove-Item node_modules -Recurse -Force
 # Remove-Item package-lock.json
@@ -18,9 +18,6 @@ if (Test-Path package-lock.json) {
 }
 
 npm install
-
-# snapshot of versions of dependencies
-npm list --all
 
 # delete output
 if (Test-Path tsp-output) {

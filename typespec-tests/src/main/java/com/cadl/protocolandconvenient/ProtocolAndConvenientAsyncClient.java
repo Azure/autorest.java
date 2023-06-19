@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
@@ -27,7 +28,6 @@ import com.cadl.protocolandconvenient.models.ResourceE;
 import com.cadl.protocolandconvenient.models.ResourceF;
 import com.cadl.protocolandconvenient.models.ResourceI;
 import com.cadl.protocolandconvenient.models.ResourceJ;
-import com.cadl.protocolandconvenient.models.ResourceOperationStatusResourceIError;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -212,7 +212,7 @@ public final class ProtocolAndConvenientAsyncClient {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -301,7 +301,7 @@ public final class ProtocolAndConvenientAsyncClient {
     /**
      * Long running operation.
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -313,8 +313,7 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusResourceIError, ResourceI> beginCreateOrReplace(
-            String name, ResourceI resource) {
+    public PollerFlux<PollResult, ResourceI> beginCreateOrReplace(String name, ResourceI resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateOrReplaceWithModelAsync(name, BinaryData.fromObject(resource), requestOptions);

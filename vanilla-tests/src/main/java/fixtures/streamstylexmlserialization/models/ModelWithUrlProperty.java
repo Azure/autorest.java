@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -54,7 +55,13 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("ModelWithUrlProperty");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ModelWithUrlProperty" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Url", Objects.toString(this.url, null));
         return xmlWriter.writeEndElement();
     }
@@ -65,23 +72,38 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
      * @param xmlReader The XmlReader being read.
      * @return An instance of ModelWithUrlProperty if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the ModelWithUrlProperty.
      */
     public static ModelWithUrlProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return xmlReader.readObject(
-                "ModelWithUrlProperty",
-                reader -> {
-                    URL url = null;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+        return fromXml(xmlReader, null);
+    }
 
-                        if ("Url".equals(fieldName.getLocalPart())) {
-                            url = reader.getNullableElement(URL::new);
+    /**
+     * Reads an instance of ModelWithUrlProperty from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of ModelWithUrlProperty if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the ModelWithUrlProperty.
+     */
+    public static ModelWithUrlProperty fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName =
+                CoreUtils.isNullOrEmpty(rootElementName) ? "ModelWithUrlProperty" : rootElementName;
+        return xmlReader.readObject(
+                finalRootElementName,
+                reader -> {
+                    ModelWithUrlProperty deserializedModelWithUrlProperty = new ModelWithUrlProperty();
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName elementName = reader.getElementName();
+
+                        if ("Url".equals(elementName.getLocalPart())) {
+                            deserializedModelWithUrlProperty.url = reader.getNullableElement(URL::new);
                         } else {
                             reader.skipElement();
                         }
                     }
-                    ModelWithUrlProperty deserializedModelWithUrlProperty = new ModelWithUrlProperty();
-                    deserializedModelWithUrlProperty.url = url;
 
                     return deserializedModelWithUrlProperty;
                 });

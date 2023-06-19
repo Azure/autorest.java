@@ -183,7 +183,7 @@ public final class ContosoClientImpl {
     /**
      * The get operation.
      *
-     * @param group The group parameter.
+     * @param group Represent a URL string as described by https://url.spec.whatwg.org/.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -208,7 +208,7 @@ public final class ContosoClientImpl {
     /**
      * The get operation.
      *
-     * @param group The group parameter.
+     * @param group Represent a URL string as described by https://url.spec.whatwg.org/.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

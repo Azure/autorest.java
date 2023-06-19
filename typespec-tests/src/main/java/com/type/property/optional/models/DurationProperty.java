@@ -5,6 +5,7 @@
 package com.type.property.optional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
@@ -14,10 +15,12 @@ public final class DurationProperty {
     /*
      * Property
      */
+    @Generated
     @JsonProperty(value = "property")
     private Duration property;
 
     /** Creates an instance of DurationProperty class. */
+    @Generated
     public DurationProperty() {}
 
     /**
@@ -25,6 +28,7 @@ public final class DurationProperty {
      *
      * @return the property value.
      */
+    @Generated
     public Duration getProperty() {
         return this.property;
     }
@@ -35,6 +39,7 @@ public final class DurationProperty {
      * @param property the property value to set.
      * @return the DurationProperty object itself.
      */
+    @Generated
     public DurationProperty setProperty(Duration property) {
         this.property = property;
         return this;

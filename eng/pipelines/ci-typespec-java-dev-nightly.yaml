@@ -1,0 +1,99 @@
+schedules:
+- cron: '0 0 * * *'
+  displayName: Nightly dev build
+  branches:
+    include:
+    - main
+
+trigger: none
+pr: none
+
+jobs:
+  - job: Build
+
+    timeoutInMinutes: 30
+
+    variables:
+      JavaVersion: 1.8
+      NodeVersion: '18.x'
+
+    pool:
+      name: "azsdk-pool-mms-ubuntu-2004-general"
+      vmImage: "MMSUbuntu20.04"
+
+    steps:
+      - task: NodeTool@0
+        displayName: 'Install Node.js $(NodeVersion)'
+        inputs:
+          versionSpec: '$(NodeVersion)'
+
+      - task: Maven@3
+        retryCountOnTaskFailure: 3
+        displayName: 'Build JAR'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'clean verify package install'
+          options: '-P local,tsp -T 1C --no-transfer-progress'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - script: |
+          npm install -g @typespec/compiler@next
+          npx @azure-tools/typespec-bump-deps typespec-extension/package.json typespec-tests/package.json --add-npm-overrides
+          echo "typespec-extension/package.json"
+          cat typespec-extension/package.json
+          echo "typespec-tests/package.json"
+          cat typespec-tests/package.json
+        displayName: 'Bump TypeSpec Dependencies to dev'
+
+      - task: PowerShell@2
+        displayName: 'Generate Code'
+        inputs:
+          pwsh: true
+          filePath: Generate-TypeSpec.ps1
+
+      - script: |
+          echo "Dependencies of typespec-java"
+          cd typespec-extension
+          npm ls --all
+          echo "Dependencies of typespec-java-tests"
+          cd ../typespec-tests
+          npm ls --all
+        displayName: 'Print Package Dependencies'
+        condition: succeededOrFailed()
+
+      - script: |
+          git checkout package.json typespec-extension/package.json typespec-tests/package.json
+        displayName: 'Revert package.json'
+
+      - script: |
+          git status
+          git diff
+        displayName: 'Git Diff'
+
+#      - script: |
+#          [ -z "`git status --porcelain`" ]
+#        displayName: 'Check no Diff'
+
+      - script: |
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ --coverageFile ./cadl-ranch-coverage-java.json &
+        displayName: 'Start Cadl Ranch Test Server'
+        workingDirectory: ./typespec-tests
+
+      - task: Maven@3
+        displayName: 'Run TypeSpec Tests'
+        inputs:
+          mavenPomFile: pom.xml
+          goals: 'clean test'
+          options: '-PtestTsp -pl typespec-tests -DtrimStackTrace=false --no-transfer-progress'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
+      - script: |
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js server stop
+        displayName: 'Stop Cadl Ranch Test Server'
+        workingDirectory: ./typespec-tests

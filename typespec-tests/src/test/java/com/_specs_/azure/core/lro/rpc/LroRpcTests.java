@@ -4,6 +4,7 @@
 package com._specs_.azure.core.lro.rpc;
 
 import com._specs_.azure.core.lro.rpc.models.JobData;
+import com._specs_.azure.core.lro.rpc.models.JobDataJobResultJobPollResultLongRunningFinalLocationJobResult;
 import com._specs_.azure.core.lro.rpc.models.JobPollResult;
 import com._specs_.azure.core.lro.rpc.models.JobResult;
 import com._specs_.azure.core.lro.rpc.models.OperationState;
@@ -42,15 +43,14 @@ public class LroRpcTests {
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
                 .buildClient();
 
-        SyncPoller<JobPollResult, JobResult> poller = client.beginCreateJobFinalOnLocation(new JobData("async job"));
+        SyncPoller<JobPollResult, JobDataJobResultJobPollResultLongRunningFinalLocationJobResult> poller = client.beginCreateJobFinalOnLocation(new JobData("async job"));
 
         PollResponse<JobPollResult> response = poller.waitForCompletion();
 
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
         Assertions.assertEquals(OperationState.SUCCEEDED, response.getValue().getStatus());
 
-        JobResult finalResult = poller.getFinalResult();
-        Assertions.assertEquals(OperationState.SUCCEEDED, finalResult.getStatus());
-        Assertions.assertNotNull(finalResult.getResults());
+        JobDataJobResultJobPollResultLongRunningFinalLocationJobResult finalResult = poller.getFinalResult();
+        Assertions.assertNotNull(finalResult);
     }
 }

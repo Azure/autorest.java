@@ -5,6 +5,7 @@
 package com.cadl.specialheaders.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,25 +15,29 @@ public final class Resource {
     /*
      * The id property.
      */
-    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @Generated
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
      * The name property.
      */
-    @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @Generated
+    @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /*
      * The description property.
      */
+    @Generated
     @JsonProperty(value = "description")
     private String description;
 
     /*
      * The type property.
      */
-    @JsonProperty(value = "type", required = true)
+    @Generated
+    @JsonProperty(value = "type")
     private String type;
 
     /**
@@ -40,8 +45,9 @@ public final class Resource {
      *
      * @param type the type value to set.
      */
+    @Generated
     @JsonCreator
-    public Resource(@JsonProperty(value = "type", required = true) String type) {
+    public Resource(@JsonProperty(value = "type") String type) {
         this.type = type;
     }
 
@@ -50,6 +56,7 @@ public final class Resource {
      *
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -59,6 +66,7 @@ public final class Resource {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -68,6 +76,7 @@ public final class Resource {
      *
      * @return the description value.
      */
+    @Generated
     public String getDescription() {
         return this.description;
     }
@@ -78,6 +87,7 @@ public final class Resource {
      * @param description the description value to set.
      * @return the Resource object itself.
      */
+    @Generated
     public Resource setDescription(String description) {
         this.description = description;
         return this;
@@ -88,6 +98,7 @@ public final class Resource {
      *
      * @return the type value.
      */
+    @Generated
     public String getType() {
         return this.type;
     }

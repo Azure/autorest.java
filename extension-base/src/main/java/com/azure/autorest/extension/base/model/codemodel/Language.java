@@ -95,4 +95,12 @@ public class Language {
     public void setNamespace(String namespace) {
         this.namespace = namespace;
     }
+
+    @Override
+    public String toString() {
+        return "Language{" +
+                "name='" + name + '\'' +
+                ", serializedName='" + serializedName + '\'' +
+                '}';
+    }
 }

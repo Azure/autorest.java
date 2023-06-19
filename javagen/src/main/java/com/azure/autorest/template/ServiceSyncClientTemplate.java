@@ -16,6 +16,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.annotation.Generated;
 
 import java.util.HashSet;
 import java.util.List;
@@ -71,6 +72,10 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     }
     javaFile.publicFinalClass(syncClassName, classBlock -> {
       writeClass(syncClient, classBlock, constructorVisibility);
+
+      if (JavaSettings.getInstance().isUseClientLogger()) {
+        TemplateUtil.addClientLogger(classBlock, syncClassName, javaFile.getContents());
+      }
     });
   }
 
@@ -169,7 +174,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
   }
 
   protected void addGeneratedAnnotation(JavaContext classBlock) {
-    classBlock.annotation("Generated");
+    classBlock.annotation(Generated.class.getSimpleName());
   }
 
   private void writeConvenienceMethods(List<ConvenienceMethod> convenienceMethods, JavaClass classBlock) {

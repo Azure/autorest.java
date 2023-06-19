@@ -6,6 +6,7 @@ package com._specs_.azure.core.lro.rpc;
 
 import com._specs_.azure.core.lro.rpc.implementation.RpcClientImpl;
 import com._specs_.azure.core.lro.rpc.models.JobData;
+import com._specs_.azure.core.lro.rpc.models.JobDataJobResultJobPollResultLongRunningFinalLocationJobResult;
 import com._specs_.azure.core.lro.rpc.models.JobPollResult;
 import com._specs_.azure.core.lro.rpc.models.JobResult;
 import com.azure.core.annotation.Generated;
@@ -56,7 +57,18 @@ public final class RpcClient {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Optional): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Optional)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -91,7 +103,18 @@ public final class RpcClient {
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
      *     errors (Optional): [
      *          (Optional){
-     *             error: ResponseError (Required)
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Optional): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Optional)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
      *         }
      *     ]
      *     results (Required): [
@@ -129,17 +152,8 @@ public final class RpcClient {
      *
      * <pre>{@code
      * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
+     *     operationId: String (Required)
      *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error: ResponseError (Required)
-     *         }
-     *     ]
-     *     results (Required): [
-     *         String (Required)
-     *     ]
      * }
      * }</pre>
      *
@@ -149,7 +163,7 @@ public final class RpcClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of result of the job.
+     * @return the {@link SyncPoller} for polling of result of the poll.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -234,11 +248,12 @@ public final class RpcClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of result of the job.
+     * @return the {@link SyncPoller} for polling of result of the poll.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<JobPollResult, JobResult> beginCreateJobFinalOnLocation(JobData jobData) {
+    public SyncPoller<JobPollResult, JobDataJobResultJobPollResultLongRunningFinalLocationJobResult>
+            beginCreateJobFinalOnLocation(JobData jobData) {
         // Generated convenience method for beginCreateJobFinalOnLocationWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateJobFinalOnLocationWithModel(BinaryData.fromObject(jobData), requestOptions);

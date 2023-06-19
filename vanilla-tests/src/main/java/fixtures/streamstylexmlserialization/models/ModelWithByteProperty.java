@@ -53,7 +53,13 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("ModelWithByteProperty");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ModelWithByteProperty" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeBinaryElement("Bytes", this.bytes);
         return xmlWriter.writeEndElement();
     }
@@ -64,23 +70,38 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
      * @param xmlReader The XmlReader being read.
      * @return An instance of ModelWithByteProperty if the XmlReader was pointing to an instance of it, or null if it
      *     was pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the ModelWithByteProperty.
      */
     public static ModelWithByteProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return xmlReader.readObject(
-                "ModelWithByteProperty",
-                reader -> {
-                    byte[] bytes = new byte[0];
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+        return fromXml(xmlReader, null);
+    }
 
-                        if ("Bytes".equals(fieldName.getLocalPart())) {
-                            bytes = reader.getBinaryElement();
+    /**
+     * Reads an instance of ModelWithByteProperty from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of ModelWithByteProperty if the XmlReader was pointing to an instance of it, or null if it
+     *     was pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the ModelWithByteProperty.
+     */
+    public static ModelWithByteProperty fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName =
+                CoreUtils.isNullOrEmpty(rootElementName) ? "ModelWithByteProperty" : rootElementName;
+        return xmlReader.readObject(
+                finalRootElementName,
+                reader -> {
+                    ModelWithByteProperty deserializedModelWithByteProperty = new ModelWithByteProperty();
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName elementName = reader.getElementName();
+
+                        if ("Bytes".equals(elementName.getLocalPart())) {
+                            deserializedModelWithByteProperty.bytes = reader.getBinaryElement();
                         } else {
                             reader.skipElement();
                         }
                     }
-                    ModelWithByteProperty deserializedModelWithByteProperty = new ModelWithByteProperty();
-                    deserializedModelWithByteProperty.bytes = bytes;
 
                     return deserializedModelWithByteProperty;
                 });

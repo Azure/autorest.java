@@ -1,5 +1,46 @@
 # Release History
 
+## 0.8.2 (2023-06-15)
+
+Compatible with compiler 0.45.
+
+- (Preview) Supported `RequestConditions` and `MatchConditions` for eTag headers.
+
+## 0.8.1 (2023-06-14)
+
+Compatible with compiler 0.45.
+
+## 0.8.0 (2023-06-08)
+
+Compatible with compiler 0.45.
+
+## 0.7.4 (2023-06-06)
+
+Compatible with compiler 0.44.
+
+- Supported partial update for models and extensible enums.
+- Supported custom scheme for AuthType.http.
+
+## 0.7.3 (2023-05-30)
+
+Compatible with compiler 0.44.
+
+## 0.7.2 (2023-05-24)
+
+Compatible with compiler 0.44.
+
+## 0.7.1 (2023-05-19)
+
+Compatible with compiler 0.44.
+
+- Supported generating samples with convenience API.
+
+## 0.7.0 (2023-05-11)
+
+Compatible with compiler 0.44.
+
+- Supported `@encode(DurationKnownEncoding.seconds, ..)` from compiler.
+
 ## 0.6.2 (2023-04-25)
 
 Compatible with compiler 0.43.

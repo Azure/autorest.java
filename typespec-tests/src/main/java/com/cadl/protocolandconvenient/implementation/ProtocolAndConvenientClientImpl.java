@@ -22,6 +22,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
@@ -37,17 +38,14 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
-import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import com.cadl.protocolandconvenient.ProtocolAndConvenientServiceVersion;
 import com.cadl.protocolandconvenient.models.ResourceI;
-import com.cadl.protocolandconvenient.models.ResourceOperationStatusResourceIError;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -746,7 +744,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -794,7 +792,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -840,7 +838,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -855,7 +853,7 @@ public final class ProtocolAndConvenientClientImpl {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
@@ -889,7 +887,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -904,7 +902,7 @@ public final class ProtocolAndConvenientClientImpl {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
@@ -938,7 +936,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -948,19 +946,19 @@ public final class ProtocolAndConvenientClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<ResourceOperationStatusResourceIError, ResourceI> beginCreateOrReplaceWithModelAsync(
+    public PollerFlux<PollResult, ResourceI> beginCreateOrReplaceWithModelAsync(
             String name, BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-                new DefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusResourceIError.class),
+                TypeReference.createInstance(PollResult.class),
                 TypeReference.createInstance(ResourceI.class));
     }
 
@@ -987,7 +985,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -997,19 +995,19 @@ public final class ProtocolAndConvenientClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<ResourceOperationStatusResourceIError, ResourceI> beginCreateOrReplaceWithModel(
+    public SyncPoller<PollResult, ResourceI> beginCreateOrReplaceWithModel(
             String name, BinaryData resource, RequestOptions requestOptions) {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-                new SyncDefaultPollingStrategy<>(
+                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
-                TypeReference.createInstance(ResourceOperationStatusResourceIError.class),
+                TypeReference.createInstance(PollResult.class),
                 TypeReference.createInstance(ResourceI.class));
     }
 

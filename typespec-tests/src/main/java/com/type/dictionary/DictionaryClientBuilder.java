@@ -29,6 +29,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.type.dictionary.implementation.DictionaryClientImpl;
 import java.util.ArrayList;
@@ -88,6 +89,9 @@ public final class DictionaryClientBuilder
     @Generated
     @Override
     public DictionaryClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -454,4 +458,6 @@ public final class DictionaryClientBuilder
     public NullableFloatValueClient buildNullableFloatValueClient() {
         return new NullableFloatValueClient(buildInnerClient().getNullableFloatValues());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(DictionaryClientBuilder.class);
 }

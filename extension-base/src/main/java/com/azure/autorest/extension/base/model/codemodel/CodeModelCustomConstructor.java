@@ -55,6 +55,8 @@ public class CodeModelCustomConstructor extends Constructor {
                 return ScenarioTestScope.fromValue(((ScalarNode) node).getValue());
             } else if (type.equals(SchemaContext.class)) {
                 return SchemaContext.fromValue(((ScalarNode) node).getValue());
+            } else if (type.equals(DurationSchema.Format.class)) {
+                return DurationSchema.Format.fromValue(((ScalarNode) node).getValue());
             } else {
                 // create JavaBean
                 return super.construct(node);
@@ -321,6 +323,14 @@ public class CodeModelCustomConstructor extends Constructor {
                                 actualValues.add(new NodeTuple(new ScalarNode(
                                         keyNode.getTag(),
                                         "xmsSecret",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            } else if ("x-ms-versioning-added".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsVersioningAdded",
                                         keyNode.getStartMark(),
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),

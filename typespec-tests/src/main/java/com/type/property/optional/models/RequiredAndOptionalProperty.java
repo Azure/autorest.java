@@ -5,6 +5,7 @@
 package com.type.property.optional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,13 +15,15 @@ public final class RequiredAndOptionalProperty {
     /*
      * optional string property
      */
+    @Generated
     @JsonProperty(value = "optionalProperty")
     private String optionalProperty;
 
     /*
      * required int property
      */
-    @JsonProperty(value = "requiredProperty", required = true)
+    @Generated
+    @JsonProperty(value = "requiredProperty")
     private int requiredProperty;
 
     /**
@@ -28,9 +31,9 @@ public final class RequiredAndOptionalProperty {
      *
      * @param requiredProperty the requiredProperty value to set.
      */
+    @Generated
     @JsonCreator
-    public RequiredAndOptionalProperty(
-            @JsonProperty(value = "requiredProperty", required = true) int requiredProperty) {
+    public RequiredAndOptionalProperty(@JsonProperty(value = "requiredProperty") int requiredProperty) {
         this.requiredProperty = requiredProperty;
     }
 
@@ -39,6 +42,7 @@ public final class RequiredAndOptionalProperty {
      *
      * @return the optionalProperty value.
      */
+    @Generated
     public String getOptionalProperty() {
         return this.optionalProperty;
     }
@@ -49,6 +53,7 @@ public final class RequiredAndOptionalProperty {
      * @param optionalProperty the optionalProperty value to set.
      * @return the RequiredAndOptionalProperty object itself.
      */
+    @Generated
     public RequiredAndOptionalProperty setOptionalProperty(String optionalProperty) {
         this.optionalProperty = optionalProperty;
         return this;
@@ -59,6 +64,7 @@ public final class RequiredAndOptionalProperty {
      *
      * @return the requiredProperty value.
      */
+    @Generated
     public int getRequiredProperty() {
         return this.requiredProperty;
     }

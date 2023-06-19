@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -133,11 +134,17 @@ public final class Metrics implements XmlSerializable<Metrics> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("Metrics");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Metrics" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Version", this.version);
         xmlWriter.writeBooleanElement("Enabled", this.enabled);
         xmlWriter.writeBooleanElement("IncludeAPIs", this.includeAPIs);
-        xmlWriter.writeXml(this.retentionPolicy);
+        xmlWriter.writeXml(this.retentionPolicy, "RetentionPolicy");
         return xmlWriter.writeEndElement();
     }
 
@@ -148,35 +155,44 @@ public final class Metrics implements XmlSerializable<Metrics> {
      * @return An instance of Metrics if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the Metrics.
      */
     public static Metrics fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return xmlReader.readObject(
-                "Metrics",
-                reader -> {
-                    String version = null;
-                    boolean enabled = false;
-                    Boolean includeAPIs = null;
-                    RetentionPolicy retentionPolicy = null;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+        return fromXml(xmlReader, null);
+    }
 
-                        if ("Version".equals(fieldName.getLocalPart())) {
-                            version = reader.getStringElement();
-                        } else if ("Enabled".equals(fieldName.getLocalPart())) {
-                            enabled = reader.getBooleanElement();
-                        } else if ("IncludeAPIs".equals(fieldName.getLocalPart())) {
-                            includeAPIs = reader.getNullableElement(Boolean::parseBoolean);
-                        } else if ("RetentionPolicy".equals(fieldName.getLocalPart())) {
-                            retentionPolicy = RetentionPolicy.fromXml(reader);
+    /**
+     * Reads an instance of Metrics from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of Metrics if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the Metrics.
+     */
+    public static Metrics fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Metrics" : rootElementName;
+        return xmlReader.readObject(
+                finalRootElementName,
+                reader -> {
+                    Metrics deserializedMetrics = new Metrics();
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName elementName = reader.getElementName();
+
+                        if ("Version".equals(elementName.getLocalPart())) {
+                            deserializedMetrics.version = reader.getStringElement();
+                        } else if ("Enabled".equals(elementName.getLocalPart())) {
+                            deserializedMetrics.enabled = reader.getBooleanElement();
+                        } else if ("IncludeAPIs".equals(elementName.getLocalPart())) {
+                            deserializedMetrics.includeAPIs = reader.getNullableElement(Boolean::parseBoolean);
+                        } else if ("RetentionPolicy".equals(elementName.getLocalPart())) {
+                            deserializedMetrics.retentionPolicy = RetentionPolicy.fromXml(reader, "RetentionPolicy");
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Metrics deserializedMetrics = new Metrics();
-                    deserializedMetrics.enabled = enabled;
-                    deserializedMetrics.version = version;
-                    deserializedMetrics.includeAPIs = includeAPIs;
-                    deserializedMetrics.retentionPolicy = retentionPolicy;
 
                     return deserializedMetrics;
                 });

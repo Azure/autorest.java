@@ -15,6 +15,7 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
+import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
@@ -53,8 +54,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
-
-;
 
 public class Javagen extends NewPlugin {
     private final Logger logger = new PluginLogger(this, Javagen.class);
@@ -172,9 +171,8 @@ public class Javagen extends NewPlugin {
         JavaPackage javaPackage = new JavaPackage(this);
         // Service client
         if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
-            javaPackage
-                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
-                    client.getServiceClient());
+            javaPackage.addServiceClient(client.getServiceClient().getPackage(),
+                client.getServiceClient().getClassName(), client.getServiceClient());
         } else {
             // multi-client from TypeSpec
             for (ServiceClient serviceClient : client.getServiceClients()) {
@@ -183,8 +181,8 @@ public class Javagen extends NewPlugin {
         }
 
         if (settings.isGenerateClientInterfaces()) {
-            javaPackage
-                .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
+            javaPackage.addServiceClientInterface(client.getServiceClient().getInterfaceName(),
+                client.getServiceClient());
         }
 
         // Async/sync service clients
@@ -217,6 +215,9 @@ public class Javagen extends NewPlugin {
         if (settings.isDataPlaneClient() && settings.isGenerateSamples()) {
             for (ProtocolExample protocolExample : client.getProtocolExamples()) {
                 javaPackage.addProtocolExamples(protocolExample);
+            }
+            for (ClientMethodExample clientMethodExample : client.getClientMethodExamples()) {
+                javaPackage.addClientMethodExamples(clientMethodExample);
             }
         }
 
@@ -296,6 +297,9 @@ public class Javagen extends NewPlugin {
             if (settings.isSdkIntegration()) {
                 project.integrateWithSdk();
             }
+
+            client.getModuleInfo().checkForAdditionalDependencies(client.getModels());
+            project.checkForAdditionalDependencies(client.getModels());
 
             // Module-info
             javaPackage.addModuleInfo(client.getModuleInfo());

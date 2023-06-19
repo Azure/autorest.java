@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 /** The TransformationAsRequiredFields model. */
 @Immutable
@@ -126,7 +127,7 @@ public class TransformationAsRequiredFields {
      * @return the unixTimeLongRequired value.
      */
     public OffsetDateTime getUnixTimeLongRequired() {
-        return OffsetDateTime.from(Instant.ofEpochSecond(this.unixTimeLongRequired));
+        return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.unixTimeLongRequired), ZoneOffset.UTC);
     }
 
     /**

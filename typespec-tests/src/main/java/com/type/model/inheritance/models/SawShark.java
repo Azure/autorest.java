@@ -4,6 +4,7 @@
 
 package com.type.model.inheritance.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,8 +21,9 @@ public final class SawShark extends Shark {
      *
      * @param age the age value to set.
      */
+    @Generated
     @JsonCreator
-    public SawShark(@JsonProperty(value = "age", required = true) int age) {
+    public SawShark(@JsonProperty(value = "age") int age) {
         super(age);
     }
 }

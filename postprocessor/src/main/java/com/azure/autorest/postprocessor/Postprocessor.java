@@ -235,6 +235,13 @@ public class Postprocessor extends NewPlugin {
             throw new RuntimeException(e);
         }
 
+        int javaVersion = getJavaVersion(logger);
+        if (javaVersion != -1 && javaVersion < 11) {
+            throw new IllegalStateException("Java version was '" + javaVersion + "', code customizations require "
+                + "Java 11+ to be used. Please update your environment to Java 11+, preferably Java 17, and run "
+                + "Autorest again.");
+        }
+
         // Start language client
         try (EclipseLanguageClient languageClient = new EclipseLanguageClient(tempDirWithPrefix.toString())) {
             languageClient.initialize();
@@ -274,7 +281,7 @@ public class Postprocessor extends NewPlugin {
                 // check if existingFile exists, if not, no need to handle partial update
                 if (Files.exists(existingFilePath)) {
                     try {
-                        String existingFileContent = new String(Files.readAllBytes(existingFilePath));
+                        String existingFileContent = new String(Files.readAllBytes(existingFilePath), StandardCharsets.UTF_8);
                         String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
                         return updatedContent;
                     } catch (Exception e) {
@@ -308,5 +315,52 @@ public class Postprocessor extends NewPlugin {
 
     private void clear() {
         JavaSettings.clear();
+    }
+
+    private static int getJavaVersion(Logger logger) {
+        // java.version format:
+        // 8 and lower: 1.7, 1.8.0
+        // 9 and above: 12, 14.1.1
+        String version = System.getProperty("java.version");
+        if (version == null || version.isEmpty()) {
+            logger.info("Unable to determine Java version to verify if Java 11+ is being used, which is the "
+                + "requirement to run Autorest code customizations.");
+            return -1;
+        }
+
+        if (version.startsWith("1.")) {
+            if (version.length() < 3) {
+                logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
+                    + "requirement to run Autorest code customizations. Version was: " + version);
+                return -1;
+            }
+
+            try {
+                return Integer.parseInt(version.substring(2, 3));
+            } catch (NumberFormatException t) {
+                logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
+                    + "requirement to run Autorest code customizations. Version was: " + version);
+                return -1;
+            }
+        } else {
+            int idx = version.indexOf(".");
+
+            if (idx == -1) {
+                try {
+                    return Integer.parseInt(version);
+                } catch (NumberFormatException ex) {
+                    logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
+                        + "requirement to run Autorest code customizations. Version was: " + version);
+                    return -1;
+                }
+            }
+            try {
+                return Integer.parseInt(version.substring(0, idx));
+            } catch (NumberFormatException t) {
+                logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
+                    + "requirement to run Autorest code customizations. Version was: " + version);
+                return -1;
+            }
+        }
     }
 }

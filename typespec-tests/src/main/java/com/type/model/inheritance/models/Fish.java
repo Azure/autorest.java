@@ -4,6 +4,7 @@
 
 package com.type.model.inheritance.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,7 +28,8 @@ public class Fish {
     /*
      * The age property.
      */
-    @JsonProperty(value = "age", required = true)
+    @Generated
+    @JsonProperty(value = "age")
     private int age;
 
     /**
@@ -35,8 +37,9 @@ public class Fish {
      *
      * @param age the age value to set.
      */
+    @Generated
     @JsonCreator
-    public Fish(@JsonProperty(value = "age", required = true) int age) {
+    public Fish(@JsonProperty(value = "age") int age) {
         this.age = age;
     }
 
@@ -45,6 +48,7 @@ public class Fish {
      *
      * @return the age value.
      */
+    @Generated
     public int getAge() {
         return this.age;
     }

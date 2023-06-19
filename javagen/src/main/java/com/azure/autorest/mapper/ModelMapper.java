@@ -57,14 +57,28 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ClassType modelType = objectMapper.map(compositeType);
         String modelName = modelType.getName();
         ClientModel result = serviceModels.getModel(modelType.getName());
-        if (result == null && !ObjectMapper.isPlainObject(compositeType) && !isPredefinedModel(modelType)) {
+        if (result == null && !ObjectMapper.isPlainObject(compositeType)) {
+            Set<ImplementationDetails.Usage> usages = SchemaUtil.mapSchemaContext(compositeType.getUsage());
+            if (isPredefinedModel(modelType)) {
+                // TODO (weidxu): a more consistent handling of external model for all data-plane
+                if (settings.isDataPlaneClient()) {
+                    usages = new HashSet<>(usages);
+                    usages.add(ImplementationDetails.Usage.EXTERNAL);
+                } else {
+                    // abort handling external model, if not DPG
+                    // vanilla and fluent currently does not have mechanism to handle model that not to be outputted.
+                    return result;
+                }
+            }
+
             ClientModel.Builder builder = createModelBuilder()
                 .name(modelName)
                 .packageName(modelType.getPackage())
                 .type(modelType)
                 .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
+                .usedInXml(SchemaUtil.treatAsXml(compositeType))
                 .implementationDetails(new ImplementationDetails.Builder()
-                    .usages(SchemaUtil.mapSchemaContext(compositeType.getUsage()))
+                    .usages(usages)
                     .build());
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
@@ -118,9 +132,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 propertyClientType.addImportsTo(modelImports, false);
             }
 
+            boolean compositeTypeUsedWithXml = SchemaUtil.treatAsXml(compositeType);
             if (!compositeTypeProperties.isEmpty()) {
-                if (settings.isGenerateXmlSerialization()
-                    || (compositeType.getSerialization() != null && compositeType.getSerialization().getXml() != null)) {
+                if (compositeTypeUsedWithXml) {
                     modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
 
                     if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema() instanceof ArraySchema)) {
@@ -199,16 +213,20 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
             builder.derivedModels(derivedTypes);
 
-            // Only configure XML information in the ClientModel if XML is defined in the object or 'enable-xml' is true
-            if (compositeType.getSerialization() != null && compositeType.getSerialization().getXml() != null) {
-                final XmlSerlializationFormat xml = compositeType.getSerialization().getXml();
-                String xmlName = CoreUtils.isNullOrEmpty(xml.getName())
-                    ? compositeType.getLanguage().getDefault().getName()
-                    : xml.getName();
-                builder.xmlName(xmlName);
-                builder.xmlNamespace(xml.getNamespace());
-            } else if (compositeType.getLanguage().getDefault() != null && settings.isGenerateXmlSerialization()) {
-                builder.xmlName(compositeType.getLanguage().getDefault().getName());
+            // Only configure XML information if XML is listed as one of the serialization formats in the ObjectSchema.
+            if (SchemaUtil.treatAsXml(compositeType)) {
+                boolean hasXmlFormat = compositeType.getSerialization() != null
+                    && compositeType.getSerialization().getXml() != null;
+                if (hasXmlFormat) {
+                    final XmlSerlializationFormat xml = compositeType.getSerialization().getXml();
+                    String xmlName = CoreUtils.isNullOrEmpty(xml.getName())
+                        ? compositeType.getLanguage().getDefault().getName()
+                        : xml.getName();
+                    builder.xmlName(xmlName);
+                    builder.xmlNamespace(xml.getNamespace());
+                } else {
+                    builder.xmlName(compositeType.getLanguage().getDefault().getName());
+                }
             }
 
             List<ClientModelProperty> properties = new ArrayList<>();
@@ -260,7 +278,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             if (hasAdditionalProperties) {
                 DictionarySchema schema = (DictionarySchema) compositeType.getParents().getImmediate().stream()
                     .filter(s -> s instanceof DictionarySchema)
-                    .findFirst().get();
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalStateException(
+                        "Unable to find DictionarySchema for additional properties property."));
                 Property additionalProperties = new Property();
                 additionalProperties.setReadOnly(false);
                 additionalProperties.setSchema(schema);
@@ -397,6 +417,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             .serializedName(serializedName)
             .xmlWrapper(discriminatorProperty.isXmlWrapper())
             .xmlListElementName(discriminatorProperty.getXmlListElementName())
+            .xmlPrefix(discriminatorProperty.getXmlPrefix())
             .wireType(discriminatorProperty.getWireType())
             .clientType(discriminatorProperty.getClientType())
             .constant(discriminatorProperty.isConstant())

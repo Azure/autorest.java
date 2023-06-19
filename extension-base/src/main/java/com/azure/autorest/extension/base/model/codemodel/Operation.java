@@ -20,64 +20,50 @@ public class Operation extends Metadata {
 
     private List<Parameter> signatureParameters = new ArrayList<>();
     /**
-     * 
      * (Required)
-     * 
      */
     private List<Request> requests;
     /**
      * responses that indicate a successful call
-     * 
      */
     private List<Response> responses = new ArrayList<Response>();
     /**
      * responses that indicate a failed call
-     * 
      */
     private List<Response> exceptions = new ArrayList<Response>();
     private DictionaryApiVersion profile;
     /**
-     * 
      * (Required)
-     * 
      */
     private String $key;
     /**
-     * 
      * (Required)
-     * 
      */
     private String description;
     /**
-     * 
      * (Required)
-     * 
      */
     private String uid;
     /**
      * a short description
-     * 
      */
     private String summary;
     /**
      * API versions that this applies to. Undefined means all versions
-     * 
      */
     private List<ApiVersion> apiVersions = new ArrayList<ApiVersion>();
     /**
      * represents  deprecation information for a given aspect
-     * 
      */
     private Deprecation deprecated;
     /**
      * a reference to external documentation
-     * 
      */
     private ExternalDocumentation externalDocs;
 
     private List<String> specialHeaders;
 
-    private Map<String, OperationLink> operationLinks;
+    private LongRunningMetadata lroMetadata;
 
     private ConvenienceApi convenienceApi;
 
@@ -98,18 +84,14 @@ public class Operation extends Metadata {
     }
 
     /**
-     * 
      * (Required)
-     * 
      */
     public List<Request> getRequests() {
         return requests;
     }
 
     /**
-     * 
      * (Required)
-     * 
      */
     public void setRequests(List<Request> requests) {
         this.requests = requests;
@@ -117,7 +99,6 @@ public class Operation extends Metadata {
 
     /**
      * responses that indicate a successful call
-     * 
      */
     public List<Response> getResponses() {
         return responses;
@@ -125,7 +106,6 @@ public class Operation extends Metadata {
 
     /**
      * responses that indicate a successful call
-     * 
      */
     public void setResponses(List<Response> responses) {
         this.responses = responses;
@@ -133,7 +113,6 @@ public class Operation extends Metadata {
 
     /**
      * responses that indicate a failed call
-     * 
      */
     public List<Response> getExceptions() {
         return exceptions;
@@ -141,7 +120,6 @@ public class Operation extends Metadata {
 
     /**
      * responses that indicate a failed call
-     * 
      */
     public void setExceptions(List<Response> exceptions) {
         this.exceptions = exceptions;
@@ -156,54 +134,42 @@ public class Operation extends Metadata {
     }
 
     /**
-     * 
      * (Required)
-     * 
      */
     public String get$key() {
         return $key;
     }
 
     /**
-     * 
      * (Required)
-     * 
      */
     public void set$key(String $key) {
         this.$key = $key;
     }
 
     /**
-     * 
      * (Required)
-     * 
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * 
      * (Required)
-     * 
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * 
      * (Required)
-     * 
      */
     public String getUid() {
         return uid;
     }
 
     /**
-     * 
      * (Required)
-     * 
      */
     public void setUid(String uid) {
         this.uid = uid;
@@ -211,7 +177,6 @@ public class Operation extends Metadata {
 
     /**
      * a short description
-     * 
      */
     public String getSummary() {
         return summary;
@@ -219,7 +184,6 @@ public class Operation extends Metadata {
 
     /**
      * a short description
-     * 
      */
     public void setSummary(String summary) {
         this.summary = summary;
@@ -227,7 +191,6 @@ public class Operation extends Metadata {
 
     /**
      * API versions that this applies to. Undefined means all versions
-     * 
      */
     public List<ApiVersion> getApiVersions() {
         return apiVersions;
@@ -235,7 +198,6 @@ public class Operation extends Metadata {
 
     /**
      * API versions that this applies to. Undefined means all versions
-     * 
      */
     public void setApiVersions(List<ApiVersion> apiVersions) {
         this.apiVersions = apiVersions;
@@ -243,7 +205,6 @@ public class Operation extends Metadata {
 
     /**
      * represents  deprecation information for a given aspect
-     * 
      */
     public Deprecation getDeprecated() {
         return deprecated;
@@ -251,7 +212,6 @@ public class Operation extends Metadata {
 
     /**
      * represents  deprecation information for a given aspect
-     * 
      */
     public void setDeprecated(Deprecation deprecated) {
         this.deprecated = deprecated;
@@ -259,7 +219,6 @@ public class Operation extends Metadata {
 
     /**
      * a reference to external documentation
-     * 
      */
     public ExternalDocumentation getExternalDocs() {
         return externalDocs;
@@ -267,7 +226,6 @@ public class Operation extends Metadata {
 
     /**
      * a reference to external documentation
-     * 
      */
     public void setExternalDocs(ExternalDocumentation externalDocs) {
         this.externalDocs = externalDocs;
@@ -308,15 +266,12 @@ public class Operation extends Metadata {
         this.specialHeaders = specialHeaders;
     }
 
-    /**
-     * @return the operation links, e.g. "polling" for the status monitor operation.
-     */
-    public Map<String, OperationLink> getOperationLinks() {
-        return operationLinks;
+    public LongRunningMetadata getLroMetadata() {
+        return lroMetadata;
     }
 
-    public void setOperationLinks(Map<String, OperationLink> operationLinks) {
-        this.operationLinks = operationLinks;
+    public void setLroMetadata(LongRunningMetadata lroMetadata) {
+        this.lroMetadata = lroMetadata;
     }
 
     /**
@@ -330,13 +285,11 @@ public class Operation extends Metadata {
         this.convenienceApi = convenienceApi;
     }
 
-    public Boolean isGenerateProtocolApi() {
+    public Boolean getGenerateProtocolApi() {
         return generateProtocolApi;
     }
 
     public void setGenerateProtocolApi(Boolean generateProtocolApi) {
         this.generateProtocolApi = generateProtocolApi;
     }
-
-
 }

@@ -40,17 +40,17 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.38.0</version>
+      <version>1.40.0</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-json</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-xml</artifactId>
-      <version>1.0.0-beta.1</version>
+      <version>1.0.0-beta.2</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -60,7 +60,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.13.2</version>
+      <version>1.13.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -90,7 +90,7 @@
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-test</artifactId>
-      <version>3.4.27</version>
+      <version>3.4.29</version>
       <scope>test</scope>
     </dependency>
     <dependency>

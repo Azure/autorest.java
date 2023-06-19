@@ -4,6 +4,7 @@
 
 package com.type.model.usage.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +15,8 @@ public final class InputOutputRecord {
     /*
      * The requiredProp property.
      */
-    @JsonProperty(value = "requiredProp", required = true)
+    @Generated
+    @JsonProperty(value = "requiredProp")
     private String requiredProp;
 
     /**
@@ -22,8 +24,9 @@ public final class InputOutputRecord {
      *
      * @param requiredProp the requiredProp value to set.
      */
+    @Generated
     @JsonCreator
-    public InputOutputRecord(@JsonProperty(value = "requiredProp", required = true) String requiredProp) {
+    public InputOutputRecord(@JsonProperty(value = "requiredProp") String requiredProp) {
         this.requiredProp = requiredProp;
     }
 
@@ -32,6 +35,7 @@ public final class InputOutputRecord {
      *
      * @return the requiredProp value.
      */
+    @Generated
     public String getRequiredProp() {
         return this.requiredProp;
     }

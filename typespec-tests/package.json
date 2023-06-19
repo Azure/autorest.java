@@ -1,5 +1,6 @@
 {
-  "name": "typespec-tests",
+  "name": "typespec-java-tests",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "format": "npm run -s prettier -- --write",
@@ -8,14 +9,21 @@
     "start-test-server": "npx cadl-ranch serve ./node_modules/@azure-tools/cadl-ranch-specs/http  --coverageFile ./cadl-ranch-coverage-java.json"
   },
   "dependencies": {
-    "@typespec/openapi": "~0.43.0",
-    "@azure-tools/typespec-autorest": "~0.29.0",
-    "@azure-tools/cadl-ranch-specs": "~0.14.2",
-    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.6.2.tgz"
+    "@typespec/openapi": ">=0.45.0 <1.0.0",
+    "@azure-tools/typespec-autorest": ">=0.31.0 <1.0.0",
+    "@azure-tools/cadl-ranch-specs": "~0.16.0",
+    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.8.2.tgz"
   },
   "devDependencies": {
-    "@typespec/prettier-plugin-typespec": "~0.43.0",
-    "prettier": "~2.8.1"
+    "@typespec/prettier-plugin-typespec": ">=0.45.0 <1.0.0",
+    "prettier": "~2.8.8"
+  },
+  "overrides": {
+    "@typespec/compiler": ">=0.45.0 <1.0.0",
+    "@typespec/http": ">=0.45.0 <1.0.0",
+    "@typespec/rest": ">=0.45.0 <1.0.0",
+    "@typespec/versioning": ">=0.45.0 <1.0.0",
+    "@azure-tools/typespec-azure-core": ">=0.31.0 <1.0.0"
   },
   "private": true
 }

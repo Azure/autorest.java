@@ -41,7 +41,18 @@ public final class ErrorModelClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *     error: ResponseError (Required)
+     *     error (Required): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
      * }</pre>
      *

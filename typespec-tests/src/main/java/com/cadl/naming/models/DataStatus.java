@@ -4,6 +4,7 @@
 
 package com.cadl.naming.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
@@ -15,19 +16,20 @@ import java.util.Collection;
  */
 public final class DataStatus extends ExpandableStringEnum<DataStatus> {
     /** Static value Running for DataStatus. */
-    public static final DataStatus RUNNING = fromString("Running");
+    @Generated public static final DataStatus RUNNING = fromString("Running");
 
     /** Static value Completed for DataStatus. */
-    public static final DataStatus COMPLETED = fromString("Completed");
+    @Generated public static final DataStatus COMPLETED = fromString("Completed");
 
     /** Static value Failed for DataStatus. */
-    public static final DataStatus FAILED = fromString("Failed");
+    @Generated public static final DataStatus FAILED = fromString("Failed");
 
     /**
      * Creates a new instance of DataStatus value.
      *
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public DataStatus() {}
 
@@ -37,6 +39,7 @@ public final class DataStatus extends ExpandableStringEnum<DataStatus> {
      * @param name a name to look for.
      * @return the corresponding DataStatus.
      */
+    @Generated
     @JsonCreator
     public static DataStatus fromString(String name) {
         return fromString(name, DataStatus.class);
@@ -47,6 +50,7 @@ public final class DataStatus extends ExpandableStringEnum<DataStatus> {
      *
      * @return known DataStatus values.
      */
+    @Generated
     public static Collection<DataStatus> values() {
         return values(DataStatus.class);
     }

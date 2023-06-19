@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.traits.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,16 +14,19 @@ public final class User {
     /*
      * The user's id.
      */
-    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @Generated
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private int id;
 
     /*
      * The user's name.
      */
+    @Generated
     @JsonProperty(value = "name")
     private String name;
 
     /** Creates an instance of User class. */
+    @Generated
     private User() {}
 
     /**
@@ -30,6 +34,7 @@ public final class User {
      *
      * @return the id value.
      */
+    @Generated
     public int getId() {
         return this.id;
     }
@@ -39,6 +44,7 @@ public final class User {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }

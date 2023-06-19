@@ -63,11 +63,6 @@ jobs:
           [ -z "`git status --porcelain`" ]
         displayName: 'Check no Diff'
 
-      - task: Npm@1
-        displayName: 'Install Testserver'
-        inputs:
-          command: install
-
       - script: |
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ --coverageFile ./cadl-ranch-coverage-java.json &
         displayName: 'Start Cadl Ranch Test Server'

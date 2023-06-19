@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.basic.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,19 +15,22 @@ public final class UserOrder {
     /*
      * The user's id.
      */
-    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @Generated
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private int id;
 
     /*
      * The user's id.
      */
-    @JsonProperty(value = "userId", required = true)
+    @Generated
+    @JsonProperty(value = "userId")
     private int userId;
 
     /*
      * The user's order detail
      */
-    @JsonProperty(value = "detail", required = true)
+    @Generated
+    @JsonProperty(value = "detail")
     private String detail;
 
     /**
@@ -35,10 +39,9 @@ public final class UserOrder {
      * @param userId the userId value to set.
      * @param detail the detail value to set.
      */
+    @Generated
     @JsonCreator
-    public UserOrder(
-            @JsonProperty(value = "userId", required = true) int userId,
-            @JsonProperty(value = "detail", required = true) String detail) {
+    public UserOrder(@JsonProperty(value = "userId") int userId, @JsonProperty(value = "detail") String detail) {
         this.userId = userId;
         this.detail = detail;
     }
@@ -48,6 +51,7 @@ public final class UserOrder {
      *
      * @return the id value.
      */
+    @Generated
     public int getId() {
         return this.id;
     }
@@ -57,6 +61,7 @@ public final class UserOrder {
      *
      * @return the userId value.
      */
+    @Generated
     public int getUserId() {
         return this.userId;
     }
@@ -66,6 +71,7 @@ public final class UserOrder {
      *
      * @return the detail value.
      */
+    @Generated
     public String getDetail() {
         return this.detail;
     }

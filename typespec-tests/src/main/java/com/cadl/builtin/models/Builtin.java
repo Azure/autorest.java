@@ -4,6 +4,7 @@
 
 package com.cadl.builtin.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -21,99 +22,122 @@ public final class Builtin {
     /*
      * The formatString property.
      */
-    @JsonProperty(value = "formatString", required = true)
+    @Generated
+    @JsonProperty(value = "formatString")
     private FormatString formatString;
 
     /*
      * The boolean property.
      */
-    @JsonProperty(value = "boolean", required = true)
+    @Generated
+    @JsonProperty(value = "boolean")
     private boolean booleanProperty;
 
     /*
      * The string property.
      */
-    @JsonProperty(value = "string", required = true)
+    @Generated
+    @JsonProperty(value = "string")
     private String string;
 
     /*
      * The bytes property.
      */
-    @JsonProperty(value = "bytes", required = true)
+    @Generated
+    @JsonProperty(value = "bytes")
     private byte[] bytes;
 
     /*
      * The int property.
      */
-    @JsonProperty(value = "int", required = true)
+    @Generated
+    @JsonProperty(value = "int")
     private int intProperty;
 
     /*
      * The safeint property.
      */
-    @JsonProperty(value = "safeint", required = true)
+    @Generated
+    @JsonProperty(value = "safeint")
     private long safeint;
 
     /*
      * The long property.
      */
-    @JsonProperty(value = "long", required = true)
+    @Generated
+    @JsonProperty(value = "long")
     private long longProperty;
 
     /*
      * The float property.
      */
-    @JsonProperty(value = "float", required = true)
+    @Generated
+    @JsonProperty(value = "float")
     private double floatProperty;
 
     /*
      * The double property.
      */
-    @JsonProperty(value = "double", required = true)
+    @Generated
+    @JsonProperty(value = "double")
     private double doubleProperty;
 
     /*
      * The duration property.
      */
-    @JsonProperty(value = "duration", required = true)
+    @Generated
+    @JsonProperty(value = "duration")
     private Duration duration;
 
     /*
      * The date property.
      */
-    @JsonProperty(value = "date", required = true)
+    @Generated
+    @JsonProperty(value = "date")
     private LocalDate date;
 
     /*
      * The dateTime property.
      */
-    @JsonProperty(value = "dateTime", required = true)
+    @Generated
+    @JsonProperty(value = "dateTime")
     private OffsetDateTime dateTime;
 
     /*
      * The stringList property.
      */
-    @JsonProperty(value = "stringList", required = true)
+    @Generated
+    @JsonProperty(value = "stringList")
     private List<String> stringList;
 
     /*
      * The bytesDict property.
      */
-    @JsonProperty(value = "bytesDict", required = true)
+    @Generated
+    @JsonProperty(value = "bytesDict")
     private Map<String, byte[]> bytesDict;
 
     /*
      * The url property.
      */
-    @JsonProperty(value = "url", required = true)
+    @Generated
+    @JsonProperty(value = "url")
     private String url;
 
     /*
      * The nullableFloatDict property.
      */
+    @Generated
     @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
-    @JsonProperty(value = "nullableFloatDict", required = true)
+    @JsonProperty(value = "nullableFloatDict")
     private Map<String, Double> nullableFloatDict;
+
+    /*
+     * The encoded property.
+     */
+    @Generated
+    @JsonProperty(value = "encoded")
+    private Encoded encoded;
 
     /**
      * Creates an instance of Builtin class.
@@ -134,25 +158,28 @@ public final class Builtin {
      * @param bytesDict the bytesDict value to set.
      * @param url the url value to set.
      * @param nullableFloatDict the nullableFloatDict value to set.
+     * @param encoded the encoded value to set.
      */
+    @Generated
     @JsonCreator
     public Builtin(
-            @JsonProperty(value = "formatString", required = true) FormatString formatString,
-            @JsonProperty(value = "boolean", required = true) boolean booleanProperty,
-            @JsonProperty(value = "string", required = true) String string,
-            @JsonProperty(value = "bytes", required = true) byte[] bytes,
-            @JsonProperty(value = "int", required = true) int intProperty,
-            @JsonProperty(value = "safeint", required = true) long safeint,
-            @JsonProperty(value = "long", required = true) long longProperty,
-            @JsonProperty(value = "float", required = true) double floatProperty,
-            @JsonProperty(value = "double", required = true) double doubleProperty,
-            @JsonProperty(value = "duration", required = true) Duration duration,
-            @JsonProperty(value = "date", required = true) LocalDate date,
-            @JsonProperty(value = "dateTime", required = true) OffsetDateTime dateTime,
-            @JsonProperty(value = "stringList", required = true) List<String> stringList,
-            @JsonProperty(value = "bytesDict", required = true) Map<String, byte[]> bytesDict,
-            @JsonProperty(value = "url", required = true) String url,
-            @JsonProperty(value = "nullableFloatDict", required = true) Map<String, Double> nullableFloatDict) {
+            @JsonProperty(value = "formatString") FormatString formatString,
+            @JsonProperty(value = "boolean") boolean booleanProperty,
+            @JsonProperty(value = "string") String string,
+            @JsonProperty(value = "bytes") byte[] bytes,
+            @JsonProperty(value = "int") int intProperty,
+            @JsonProperty(value = "safeint") long safeint,
+            @JsonProperty(value = "long") long longProperty,
+            @JsonProperty(value = "float") double floatProperty,
+            @JsonProperty(value = "double") double doubleProperty,
+            @JsonProperty(value = "duration") Duration duration,
+            @JsonProperty(value = "date") LocalDate date,
+            @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
+            @JsonProperty(value = "stringList") List<String> stringList,
+            @JsonProperty(value = "bytesDict") Map<String, byte[]> bytesDict,
+            @JsonProperty(value = "url") String url,
+            @JsonProperty(value = "nullableFloatDict") Map<String, Double> nullableFloatDict,
+            @JsonProperty(value = "encoded") Encoded encoded) {
         this.formatString = formatString;
         this.booleanProperty = booleanProperty;
         this.string = string;
@@ -169,6 +196,7 @@ public final class Builtin {
         this.bytesDict = bytesDict;
         this.url = url;
         this.nullableFloatDict = nullableFloatDict;
+        this.encoded = encoded;
     }
 
     /**
@@ -176,6 +204,7 @@ public final class Builtin {
      *
      * @return the formatString value.
      */
+    @Generated
     public FormatString getFormatString() {
         return this.formatString;
     }
@@ -185,6 +214,7 @@ public final class Builtin {
      *
      * @return the booleanProperty value.
      */
+    @Generated
     public boolean isBooleanProperty() {
         return this.booleanProperty;
     }
@@ -194,6 +224,7 @@ public final class Builtin {
      *
      * @return the string value.
      */
+    @Generated
     public String getString() {
         return this.string;
     }
@@ -203,6 +234,7 @@ public final class Builtin {
      *
      * @return the bytes value.
      */
+    @Generated
     public byte[] getBytes() {
         return CoreUtils.clone(this.bytes);
     }
@@ -212,6 +244,7 @@ public final class Builtin {
      *
      * @return the intProperty value.
      */
+    @Generated
     public int getIntProperty() {
         return this.intProperty;
     }
@@ -221,6 +254,7 @@ public final class Builtin {
      *
      * @return the safeint value.
      */
+    @Generated
     public long getSafeint() {
         return this.safeint;
     }
@@ -230,6 +264,7 @@ public final class Builtin {
      *
      * @return the longProperty value.
      */
+    @Generated
     public long getLongProperty() {
         return this.longProperty;
     }
@@ -239,6 +274,7 @@ public final class Builtin {
      *
      * @return the floatProperty value.
      */
+    @Generated
     public double getFloatProperty() {
         return this.floatProperty;
     }
@@ -248,6 +284,7 @@ public final class Builtin {
      *
      * @return the doubleProperty value.
      */
+    @Generated
     public double getDoubleProperty() {
         return this.doubleProperty;
     }
@@ -257,6 +294,7 @@ public final class Builtin {
      *
      * @return the duration value.
      */
+    @Generated
     public Duration getDuration() {
         return this.duration;
     }
@@ -266,6 +304,7 @@ public final class Builtin {
      *
      * @return the date value.
      */
+    @Generated
     public LocalDate getDate() {
         return this.date;
     }
@@ -275,6 +314,7 @@ public final class Builtin {
      *
      * @return the dateTime value.
      */
+    @Generated
     public OffsetDateTime getDateTime() {
         return this.dateTime;
     }
@@ -284,6 +324,7 @@ public final class Builtin {
      *
      * @return the stringList value.
      */
+    @Generated
     public List<String> getStringList() {
         return this.stringList;
     }
@@ -293,6 +334,7 @@ public final class Builtin {
      *
      * @return the bytesDict value.
      */
+    @Generated
     public Map<String, byte[]> getBytesDict() {
         return this.bytesDict;
     }
@@ -302,6 +344,7 @@ public final class Builtin {
      *
      * @return the url value.
      */
+    @Generated
     public String getUrl() {
         return this.url;
     }
@@ -311,7 +354,18 @@ public final class Builtin {
      *
      * @return the nullableFloatDict value.
      */
+    @Generated
     public Map<String, Double> getNullableFloatDict() {
         return this.nullableFloatDict;
+    }
+
+    /**
+     * Get the encoded property: The encoded property.
+     *
+     * @return the encoded value.
+     */
+    @Generated
+    public Encoded getEncoded() {
+        return this.encoded;
     }
 }

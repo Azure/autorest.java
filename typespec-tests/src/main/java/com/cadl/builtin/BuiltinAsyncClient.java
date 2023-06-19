@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -45,9 +46,9 @@ public final class BuiltinAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
-     *     <tr><td>query-opt</td><td>String</td><td>No</td><td>The queryParamOptional parameter</td></tr>
-     *     <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>The queryParamOptionalEncoded parameter</td></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     *     <tr><td>query-opt</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     *     <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>Represent a URL string as described by https://url.spec.whatwg.org/</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -57,7 +58,7 @@ public final class BuiltinAsyncClient {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>x-ms-date</td><td>OffsetDateTime</td><td>No</td><td>The dateTime parameter</td></tr>
+     *     <tr><td>x-ms-date</td><td>OffsetDateTime</td><td>No</td><td>An instant in coordinated universal time (UTC)"</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -97,11 +98,20 @@ public final class BuiltinAsyncClient {
      *     nullableFloatDict (Required): {
      *         String: double (Required)
      *     }
+     *     encoded (Required): {
+     *         timeInSeconds: Long (Optional)
+     *         timeInSecondsFraction: Double (Optional)
+     *         dateTime: OffsetDateTime (Optional)
+     *         dateTimeRfc7231: DateTimeRfc1123 (Optional)
+     *         unixTimestamp: Long (Optional)
+     *         base64: byte[] (Optional)
+     *         base64url: Base64Url (Optional)
+     *     }
      * }
      * }</pre>
      *
-     * @param queryParam The queryParam parameter.
-     * @param queryParamEncoded The queryParamEncoded parameter.
+     * @param queryParam A sequence of textual characters.
+     * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -154,6 +164,15 @@ public final class BuiltinAsyncClient {
      *     nullableFloatDict (Required): {
      *         String: double (Required)
      *     }
+     *     encoded (Required): {
+     *         timeInSeconds: Long (Optional)
+     *         timeInSecondsFraction: Double (Optional)
+     *         dateTime: OffsetDateTime (Optional)
+     *         dateTimeRfc7231: DateTimeRfc1123 (Optional)
+     *         unixTimestamp: Long (Optional)
+     *         base64: byte[] (Optional)
+     *         base64url: Base64Url (Optional)
+     *     }
      * }
      * }</pre>
      *
@@ -174,12 +193,12 @@ public final class BuiltinAsyncClient {
     /**
      * The read operation.
      *
-     * @param queryParam The queryParam parameter.
-     * @param queryParamEncoded The queryParamEncoded parameter.
-     * @param dateTime The dateTime parameter.
-     * @param filter The filter parameter.
-     * @param queryParamOptional The queryParamOptional parameter.
-     * @param queryParamOptionalEncoded The queryParamOptionalEncoded parameter.
+     * @param queryParam A sequence of textual characters.
+     * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
+     * @param dateTime An instant in coordinated universal time (UTC)".
+     * @param filter A sequence of textual characters.
+     * @param queryParamOptional A sequence of textual characters.
+     * @param queryParamOptionalEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -200,7 +219,8 @@ public final class BuiltinAsyncClient {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (dateTime != null) {
-            requestOptions.setHeader("x-ms-date", String.valueOf(new DateTimeRfc1123(dateTime)));
+            requestOptions.setHeader(
+                    HttpHeaderName.fromString("x-ms-date"), String.valueOf(new DateTimeRfc1123(dateTime)));
         }
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);
@@ -219,8 +239,8 @@ public final class BuiltinAsyncClient {
     /**
      * The read operation.
      *
-     * @param queryParam The queryParam parameter.
-     * @param queryParamEncoded The queryParamEncoded parameter.
+     * @param queryParam A sequence of textual characters.
+     * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

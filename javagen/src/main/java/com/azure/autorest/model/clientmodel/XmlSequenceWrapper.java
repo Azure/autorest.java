@@ -3,26 +3,26 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.util.CodeNamer;
 import java.util.Set;
 
 /**
  * The details needed to create an XML sequence wrapper class for the client.
  */
 public class XmlSequenceWrapper {
-    private IType sequenceType;
-    private String xmlRootElementName;
-    private String xmlListElementName;
-    private String wrapperClassName;
-    private Set<String> imports;
-    private String packageName;
+    private final String packageName;
+    private final IType sequenceType;
+    private final String xmlRootElementName;
+    private final String xmlListElementName;
+    private final String wrapperClassName;
+    private final Set<String> imports;
 
-    public XmlSequenceWrapper(String packageKeyword, IType sequenceType, String xmlRootElementName, String xmlListElementName, Set<String> imports) {
-        this.packageName = packageKeyword;
+    public XmlSequenceWrapper(String packageName, IType sequenceType, String modelTypeName, String xmlRootElementName,
+        String xmlListElementName, Set<String> imports) {
+        this.packageName = packageName;
         this.sequenceType = sequenceType;
         this.xmlRootElementName = xmlRootElementName;
         this.xmlListElementName = xmlListElementName;
-        this.wrapperClassName = CodeNamer.toPascalCase(xmlRootElementName) + "Wrapper";
+        this.wrapperClassName = modelTypeName + "Wrapper";
         this.imports = imports;
     }
 

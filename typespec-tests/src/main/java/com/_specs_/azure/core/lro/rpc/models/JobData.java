@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.lro.rpc.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +15,8 @@ public final class JobData {
     /*
      * Comment.
      */
-    @JsonProperty(value = "comment", required = true)
+    @Generated
+    @JsonProperty(value = "comment")
     private String comment;
 
     /**
@@ -22,8 +24,9 @@ public final class JobData {
      *
      * @param comment the comment value to set.
      */
+    @Generated
     @JsonCreator
-    public JobData(@JsonProperty(value = "comment", required = true) String comment) {
+    public JobData(@JsonProperty(value = "comment") String comment) {
         this.comment = comment;
     }
 
@@ -32,6 +35,7 @@ public final class JobData {
      *
      * @return the comment value.
      */
+    @Generated
     public String getComment() {
         return this.comment;
     }

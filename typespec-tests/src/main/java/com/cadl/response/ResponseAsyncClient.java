@@ -161,6 +161,27 @@ public final class ResponseAsyncClient {
     }
 
     /**
+     * The most basic operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * boolean
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Boolean>> existsWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.existsWithResponseAsync(requestOptions);
+    }
+
+    /**
      * The getBinary operation.
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -254,6 +275,23 @@ public final class ResponseAsyncClient {
         // Generated convenience method for deleteWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return deleteWithHeadersWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The most basic operation.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return whether resource exists on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> exists() {
+        // Generated convenience method for existsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return existsWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     @Generated

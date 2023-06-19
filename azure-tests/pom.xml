@@ -22,18 +22,18 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.38.0</version>
+      <version>1.40.0</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-management</artifactId>
-      <version>1.11.0</version>
+      <version>1.11.2</version>
     </dependency>
 
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.13.2</version>
+      <version>1.13.4</version>
       <scope>test</scope>
     </dependency>
 

@@ -4,6 +4,7 @@
 
 package com.type.model.inheritance.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +15,8 @@ public class Pet {
     /*
      * The name property.
      */
-    @JsonProperty(value = "name", required = true)
+    @Generated
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -22,8 +24,9 @@ public class Pet {
      *
      * @param name the name value to set.
      */
+    @Generated
     @JsonCreator
-    public Pet(@JsonProperty(value = "name", required = true) String name) {
+    public Pet(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 
@@ -32,6 +35,7 @@ public class Pet {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }

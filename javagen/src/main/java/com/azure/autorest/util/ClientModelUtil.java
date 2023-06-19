@@ -20,6 +20,7 @@ import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -397,6 +398,23 @@ public class ClientModelUtil {
     }
 
     /**
+     * Check if the type is an external model.
+     *
+     * @param type the type
+     * @return whether the type is an external model.
+     */
+    public static boolean isExternalModel(IType type) {
+        if (type instanceof ClassType) {
+            ClassType classType = (ClassType) type;
+            ClientModel model = getClientModel(classType.getName());
+            return model != null && model.getImplementationDetails() != null && model.getImplementationDetails().getUsages() != null
+                    && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL);
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Gets all parent properties.
      *
      * @param model The client model.
@@ -486,19 +504,5 @@ public class ClientModelUtil {
     public static boolean includePropertyInConstructor(ClientModelProperty property, JavaSettings settings) {
         return property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()
             && (!property.isReadOnly() || settings.isIncludeReadOnlyInConstructorArgs());
-    }
-
-    /**
-     * Determines whether the caller should treat the model as XML.
-     * <p>
-     * XML is used when either {@link JavaSettings#isGenerateXmlSerialization()} is true or the model or property was
-     * defined in Swagger with an {@code xml} property.
-     *
-     * @param settings The Autorest generation settings.
-     * @param model The model.
-     * @return Whether the model should be treated as XML.
-     */
-    public static boolean treatAsXml(JavaSettings settings, ClientModel model) {
-        return settings.isGenerateXmlSerialization() || model.getXmlName() != null;
     }
 }

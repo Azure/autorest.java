@@ -4,6 +4,7 @@
 
 package com.cadl.union.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +15,8 @@ public final class User {
     /*
      * The user property.
      */
-    @JsonProperty(value = "user", required = true)
+    @Generated
+    @JsonProperty(value = "user")
     private String user;
 
     /**
@@ -22,8 +24,9 @@ public final class User {
      *
      * @param user the user value to set.
      */
+    @Generated
     @JsonCreator
-    public User(@JsonProperty(value = "user", required = true) String user) {
+    public User(@JsonProperty(value = "user") String user) {
         this.user = user;
     }
 
@@ -32,6 +35,7 @@ public final class User {
      *
      * @return the user value.
      */
+    @Generated
     public String getUser() {
         return this.user;
     }

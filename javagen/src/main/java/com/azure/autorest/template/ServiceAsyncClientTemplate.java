@@ -20,6 +20,7 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.annotation.Generated;
 import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.util.CoreUtils;
 
@@ -140,7 +141,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
   }
 
   protected void addGeneratedAnnotation(JavaContext classBlock) {
-    classBlock.annotation("Generated");
+    classBlock.annotation(Generated.class.getSimpleName());
   }
 
   /**

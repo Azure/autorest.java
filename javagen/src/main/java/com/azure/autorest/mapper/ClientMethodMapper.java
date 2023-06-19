@@ -6,9 +6,9 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ConvenienceApi;
+import com.azure.autorest.extension.base.model.codemodel.LongRunningMetadata;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
-import com.azure.autorest.extension.base.model.codemodel.OperationLink;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
@@ -63,6 +63,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A mapper that maps an {@link Operation} to a lit of {@link ClientMethod ClientMethods}.
@@ -213,7 +214,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 boolean proxyMethodUsesBinaryData = proxyMethod.getParameters().stream()
                     .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == ClassType.BinaryData);
                 boolean proxyMethodUsesFluxByteBuffer = proxyMethod.getParameters().stream()
-                        .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FluxByteBuffer);
+                    .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FluxByteBuffer);
 
                 Set<Parameter> originalParameters = new HashSet<>();
                 for (Parameter parameter : codeModelParameters) {
@@ -283,7 +284,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     .requiredNullableParameterExpressions(requiredParameterExpressions)
                     .validateExpressions(validateExpressions)
                     .methodTransformationDetails(methodTransformationDetails)
-                    .methodVisibilityInWrapperClient(isProtocolMethod && operation.isGenerateProtocolApi() == Boolean.FALSE ? JavaVisibility.PackagePrivate : JavaVisibility.Public)
+                    .methodVisibilityInWrapperClient(isProtocolMethod && operation.getGenerateProtocolApi() == Boolean.FALSE ? JavaVisibility.PackagePrivate : JavaVisibility.Public)
                     .methodPageDetails(null);
 
                 if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null
@@ -326,7 +327,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         methodVisibility(ClientMethodType.SimpleAsyncRestResponse, defaultOverloadType, false, isProtocolMethod);
                     JavaVisibility simpleAsyncMethodVisibilityWithContext =
                         methodVisibility(ClientMethodType.SimpleAsyncRestResponse, defaultOverloadType, true, isProtocolMethod);
-
 
                     JavaVisibility simpleSyncMethodVisibility =
                             methodVisibility(ClientMethodType.SimpleSyncRestResponse, defaultOverloadType, false,
@@ -394,8 +394,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     MethodPollingDetails dpgMethodPollingDetailsWithModel = null;   // for additional LRO methods
 
                     if (pollingDetails != null) {
-                        // try operationLinks from Cadl
-                        methodPollingDetails = methodPollingDetailsFromOperationLinks(operation, pollingDetails, settings);
+                        // try lroMetadata
+                        methodPollingDetails = methodPollingDetailsFromMetadata(operation, pollingDetails, settings);
 
                         // fallback to JavaSettings.PollingDetails
                         if (methodPollingDetails == null) {
@@ -442,7 +442,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                         builder = builder.implementationDetails(implDetailsBuilder.build());
 
-                        String modelSuffix = "WithModel";
                         createLroMethods(operation, builder, methods,
                             methodNamer.getLroModelBeginAsyncMethodName(),
                             methodNamer.getLroModelBeginMethodName(),
@@ -531,7 +530,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             if (!(responseBodySchema instanceof ObjectSchema)) {
                 throw new IllegalArgumentException(String.format("[JavaCheck/SchemaError] no common parent found for client models %s",
                     operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull)
-                        .map(s -> s.getLanguage().getJava().getName()).collect(Collectors.toList())));
+                        .map(SchemaUtil::getJavaName).collect(Collectors.toList())));
             }
             ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
             Optional<ClientModelProperty> itemPropertyOpt = responseBodyModel.getProperties().stream()
@@ -558,7 +557,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return returnTypeHolder;
         }
 
-        IType responseBodyType = SchemaUtil.getOperationResponseType(operation, settings);
+        IType responseBodyType = MapperUtils.handleResponseSchema(operation, settings);
         if (isProtocolMethod) {
             if (responseBodyType instanceof ClassType
                     || responseBodyType instanceof ListType
@@ -735,6 +734,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         if (settings.getSyncMethods() != SyncMethodsGeneration.NONE) {
             methods.add(builder.build());
+
+            // overload for versioning
+            createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
         }
 
         if (generateClientMethodWithOnlyRequiredParameters) {
@@ -837,6 +839,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .methodVisibility(visibilityFunction.methodVisibility(false, defaultOverloadType, false));
         methods.add(builder.build());
 
+        // overload for versioning
+        createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
+
         if (generateClientMethodWithOnlyRequiredParameters) {
             methods.add(builder
                 .methodVisibility(visibilityFunction.methodVisibility(false, MethodOverloadType.OVERLOAD_MINIMUM, false))
@@ -846,6 +851,59 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         builder.methodVisibility(visibilityFunction.methodVisibility(false, defaultOverloadType, true));
         addClientMethodWithContext(methods, builder, parameters, contextParameter);
+    }
+
+    private static void createOverloadForVersioning(
+            boolean isProtocolMethod,
+            List<ClientMethod> methods, Builder builder,
+            List<ClientMethodParameter> parameters) {
+
+        if (!isProtocolMethod && JavaSettings.getInstance().isDataPlaneClient()) {
+            if (parameters.stream().anyMatch(p -> p.getVersioning() != null && p.getVersioning().getAdded() != null)) {
+                List<List<ClientMethodParameter>> signatures = findOverloadedSignatures(parameters);
+                for (List<ClientMethodParameter> overloadedParameters : signatures) {
+                    builder.parameters(overloadedParameters);
+                    methods.add(builder.build());
+                }
+            }
+
+            builder.parameters(parameters);
+        }
+    }
+
+    static List<List<ClientMethodParameter>> findOverloadedSignatures(List<ClientMethodParameter> parameters) {
+        List<List<ClientMethodParameter>> signatures = new ArrayList<>();
+
+        List<ClientMethodParameter> allParameters = parameters;
+        List<ClientMethodParameter> requiredParameters = parameters.stream()
+                .filter(MethodParameter::isRequired)
+                .collect(Collectors.toList());
+
+        List<String> versions = allParameters.stream()
+                .flatMap(p -> {
+                    if (p.getVersioning() != null && p.getVersioning().getAdded() != null) {
+                        return p.getVersioning().getAdded().stream();
+                    } else {
+                        return Stream.empty();
+                    }
+                }).distinct().collect(Collectors.toList());
+        versions.add(0, null);  // for signature of no version
+
+        for (String version : versions) {
+            List<ClientMethodParameter> overloadedParameters = allParameters.stream()
+                    .filter(p -> (p.getVersioning() == null || p.getVersioning().getAdded() == null)
+                            || (p.getVersioning() != null && p.getVersioning().getAdded() != null && p.getVersioning().getAdded().contains(version)))
+                    .collect(Collectors.toList());
+
+            if (!overloadedParameters.equals(allParameters)
+                    && !overloadedParameters.equals(requiredParameters)
+                    && !signatures.contains(overloadedParameters)) {
+                // take the signature not same as required-only, not same as full, not same as anything already there
+                signatures.add(overloadedParameters);
+            }
+        }
+
+        return signatures;
     }
 
     private static ClientMethodParameter updateClientMethodParameter(ClientMethodParameter clientMethodParameter) {
@@ -888,6 +946,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginAsync, defaultOverloadType, false, isProtocolMethod))
                 .build());
 
+            // overload for versioning
+            createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
+
             if (generateClientMethodWithOnlyRequiredParameters) {
                 methods.add(builder
                     .onlyRequiredParameters(true)
@@ -911,6 +972,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .groupedParameterRequired(false)
                 .methodVisibility(methodVisibility(ClientMethodType.LongRunningBeginSync, defaultOverloadType, false, isProtocolMethod))
                 .build());
+
+            // overload for versioning
+            createOverloadForVersioning(isProtocolMethod, methods, builder, parameters);
 
             if (generateClientMethodWithOnlyRequiredParameters) {
                 methods.add(builder
@@ -1567,67 +1631,39 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return description;
     }
 
-    private static MethodPollingDetails methodPollingDetailsFromOperationLinks(
+    private static MethodPollingDetails methodPollingDetailsFromMetadata(
         Operation operation,
         JavaSettings.PollingDetails pollingDetails,
         JavaSettings settings) {
 
-        if (operation.getOperationLinks() == null || pollingDetails == null || operation.getConvenienceApi() == null) {
+        if (pollingDetails == null || operation.getConvenienceApi() == null) {
             return null;
         }
 
         MethodPollingDetails methodPollingDetails = null;
-        if (operation.getOperationLinks() != null) {
-            // Only Cadl would have operationLinks
-            // If operationLinks is provided, it will override JavaSettings.PollingDetails
+        if (operation.getLroMetadata() != null) {
+            // Only Typespec would have longRunningMetadata
 
-            IType intermediateType = null;
-            IType finalType = null;
+            LongRunningMetadata metadata = operation.getLroMetadata();
+            ObjectMapper objectMapper = Mappers.getObjectMapper();
+            IType intermediateType = objectMapper.map(metadata.getPollResultType());
+            IType finalType = metadata.getFinalResultType() == null
+                    ? PrimitiveType.Void
+                    : objectMapper.map(metadata.getFinalResultType());
 
-            OperationLink pollingOperationLink = operation.getOperationLinks().get("polling");
-            OperationLink finalOperationLink = operation.getOperationLinks().get("final");
+            String pollingStrategy = metadata.getPollingStrategy() == null
+                    ? pollingDetails.getStrategy()
+                    : String.format(JavaSettings.PollingDetails.DEFAULT_POLLING_STRATEGY_FORMAT, metadata.getPollingStrategy().getLanguage().getJava().getNamespace() + "." + metadata.getPollingStrategy().getLanguage().getJava().getName());
+            String syncPollingStrategy = metadata.getPollingStrategy() == null
+                    ? pollingDetails.getSyncStrategy()
+                    : String.format(JavaSettings.PollingDetails.DEFAULT_POLLING_STRATEGY_FORMAT, metadata.getPollingStrategy().getLanguage().getJava().getNamespace() + ".Sync" + metadata.getPollingStrategy().getLanguage().getJava().getName());
 
-            if (pollingOperationLink != null && pollingOperationLink.getOperation() != null) {
-                // type from polling operation
-                intermediateType = SchemaUtil.getOperationResponseType(pollingOperationLink.getOperation(), settings);
-            }
-            if (finalOperationLink != null && finalOperationLink.getOperation() != null) {
-                // type from final operation
-                finalType = SchemaUtil.getOperationResponseType(finalOperationLink.getOperation(), settings);
-            }
-            if (intermediateType != null && finalType == null) {
-                if (HttpMethod.DELETE == MethodUtil.getHttpMethod(operation)) {
-                    // DELETE would not have final response as resource is deleted
-                    finalType = PrimitiveType.Void;
-                } else {
-                    // fallback to use response of this LRO as final type
-                    finalType = SchemaUtil.getOperationResponseType(operation, settings);
-
-                    if (finalType == ClassType.Object) {
-                        // possible of multiple response types
-                        // fallback to use response of 200 as final type
-                        Schema schemaOf200StatusCode = operation.getResponses().stream()
-                                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null
-                                        && !CoreUtils.isNullOrEmpty(r.getProtocol().getHttp().getStatusCodes())
-                                        && r.getProtocol().getHttp().getStatusCodes().contains("200"))
-                                .findFirst()
-                                .map(Response::getSchema).filter(Objects::nonNull)
-                                .orElse(null);
-                        if (schemaOf200StatusCode != null) {
-                            finalType = Mappers.getSchemaMapper().map(schemaOf200StatusCode);
-                        }
-                    }
-                }
-            }
-
-            if (intermediateType != null && finalType != null) {
-                methodPollingDetails = new MethodPollingDetails(
-                    pollingDetails.getStrategy(),
-                    pollingDetails.getSyncStrategy(),
+            methodPollingDetails = new MethodPollingDetails(
+                    pollingStrategy,
+                    syncPollingStrategy,
                     intermediateType,
                     finalType,
                     pollingDetails.getPollIntervalInSeconds());
-            }
         }
         return methodPollingDetails;
     }

@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -226,7 +227,7 @@ public final class EnumServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -259,7 +260,7 @@ public final class EnumServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -292,7 +293,7 @@ public final class EnumServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -325,7 +326,7 @@ public final class EnumServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -358,7 +359,7 @@ public final class EnumServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -391,7 +392,7 @@ public final class EnumServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -424,7 +425,7 @@ public final class EnumServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -457,7 +458,7 @@ public final class EnumServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -490,7 +491,7 @@ public final class EnumServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -626,7 +627,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -659,7 +660,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -686,7 +687,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -721,7 +722,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -750,7 +751,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -778,7 +779,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -799,7 +800,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -826,7 +827,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -847,7 +848,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -880,7 +881,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -907,7 +908,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -942,7 +943,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -971,7 +972,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -998,7 +999,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1019,7 +1020,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1044,7 +1045,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1065,7 +1066,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1074,7 +1075,7 @@ public final class EnumServiceClient {
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
             requestOptions.setHeader(
-                    "color-array-opt",
+                    HttpHeaderName.fromString("color-array-opt"),
                     JacksonAdapter.createDefaultSerializerAdapter()
                             .serializeIterable(colorArrayOpt, CollectionFormat.CSV));
         }
@@ -1097,7 +1098,7 @@ public final class EnumServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a sequence of textual characters.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

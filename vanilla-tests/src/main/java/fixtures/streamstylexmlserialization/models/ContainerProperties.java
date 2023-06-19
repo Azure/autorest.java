@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
@@ -194,7 +195,13 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("ContainerProperties");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ContainerProperties" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Last-Modified", Objects.toString(this.lastModified, null));
         xmlWriter.writeStringElement("Etag", this.etag);
         xmlWriter.writeStringElement("LeaseStatus", Objects.toString(this.leaseStatus, null));
@@ -211,43 +218,54 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * @return An instance of ContainerProperties if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the ContainerProperties.
      */
     public static ContainerProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return xmlReader.readObject(
-                "ContainerProperties",
-                reader -> {
-                    OffsetDateTime lastModified = null;
-                    String etag = null;
-                    LeaseStatusType leaseStatus = null;
-                    LeaseStateType leaseState = null;
-                    LeaseDurationType leaseDuration = null;
-                    PublicAccessType publicAccess = null;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+        return fromXml(xmlReader, null);
+    }
 
-                        if ("Last-Modified".equals(fieldName.getLocalPart())) {
-                            lastModified = reader.getNullableElement(DateTimeRfc1123::new).getDateTime();
-                        } else if ("Etag".equals(fieldName.getLocalPart())) {
-                            etag = reader.getStringElement();
-                        } else if ("LeaseStatus".equals(fieldName.getLocalPart())) {
-                            leaseStatus = reader.getNullableElement(LeaseStatusType::fromString);
-                        } else if ("LeaseState".equals(fieldName.getLocalPart())) {
-                            leaseState = reader.getNullableElement(LeaseStateType::fromString);
-                        } else if ("LeaseDuration".equals(fieldName.getLocalPart())) {
-                            leaseDuration = reader.getNullableElement(LeaseDurationType::fromString);
-                        } else if ("PublicAccess".equals(fieldName.getLocalPart())) {
-                            publicAccess = reader.getNullableElement(PublicAccessType::fromString);
+    /**
+     * Reads an instance of ContainerProperties from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of ContainerProperties if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the ContainerProperties.
+     */
+    public static ContainerProperties fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName =
+                CoreUtils.isNullOrEmpty(rootElementName) ? "ContainerProperties" : rootElementName;
+        return xmlReader.readObject(
+                finalRootElementName,
+                reader -> {
+                    ContainerProperties deserializedContainerProperties = new ContainerProperties();
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName elementName = reader.getElementName();
+
+                        if ("Last-Modified".equals(elementName.getLocalPart())) {
+                            deserializedContainerProperties.setLastModified(
+                                    reader.getNullableElement(DateTimeRfc1123::new).getDateTime());
+                        } else if ("Etag".equals(elementName.getLocalPart())) {
+                            deserializedContainerProperties.etag = reader.getStringElement();
+                        } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
+                            deserializedContainerProperties.leaseStatus =
+                                    reader.getNullableElement(LeaseStatusType::fromString);
+                        } else if ("LeaseState".equals(elementName.getLocalPart())) {
+                            deserializedContainerProperties.leaseState =
+                                    reader.getNullableElement(LeaseStateType::fromString);
+                        } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
+                            deserializedContainerProperties.leaseDuration =
+                                    reader.getNullableElement(LeaseDurationType::fromString);
+                        } else if ("PublicAccess".equals(elementName.getLocalPart())) {
+                            deserializedContainerProperties.publicAccess =
+                                    reader.getNullableElement(PublicAccessType::fromString);
                         } else {
                             reader.skipElement();
                         }
                     }
-                    ContainerProperties deserializedContainerProperties = new ContainerProperties();
-                    deserializedContainerProperties.setLastModified(lastModified);
-                    deserializedContainerProperties.etag = etag;
-                    deserializedContainerProperties.leaseStatus = leaseStatus;
-                    deserializedContainerProperties.leaseState = leaseState;
-                    deserializedContainerProperties.leaseDuration = leaseDuration;
-                    deserializedContainerProperties.publicAccess = publicAccess;
 
                     return deserializedContainerProperties;
                 });

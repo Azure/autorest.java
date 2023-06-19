@@ -4,6 +4,7 @@
 
 package com.cadl.errormodel.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,13 +16,15 @@ public final class Diagnostic {
     /*
      * The name property.
      */
-    @JsonProperty(value = "name", required = true)
+    @Generated
+    @JsonProperty(value = "name")
     private String name;
 
     /*
      * The error property.
      */
-    @JsonProperty(value = "error", required = true)
+    @Generated
+    @JsonProperty(value = "error")
     private ResponseError error;
 
     /**
@@ -30,10 +33,9 @@ public final class Diagnostic {
      * @param name the name value to set.
      * @param error the error value to set.
      */
+    @Generated
     @JsonCreator
-    private Diagnostic(
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "error", required = true) ResponseError error) {
+    private Diagnostic(@JsonProperty(value = "name") String name, @JsonProperty(value = "error") ResponseError error) {
         this.name = name;
         this.error = error;
     }
@@ -43,6 +45,7 @@ public final class Diagnostic {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -52,6 +55,7 @@ public final class Diagnostic {
      *
      * @return the error value.
      */
+    @Generated
     public ResponseError getError() {
         return this.error;
     }

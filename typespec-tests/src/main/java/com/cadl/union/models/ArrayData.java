@@ -4,6 +4,7 @@
 
 package com.cadl.union.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +16,8 @@ public final class ArrayData {
     /*
      * The data property.
      */
-    @JsonProperty(value = "data", required = true)
+    @Generated
+    @JsonProperty(value = "data")
     private List<String> data;
 
     /**
@@ -23,8 +25,9 @@ public final class ArrayData {
      *
      * @param data the data value to set.
      */
+    @Generated
     @JsonCreator
-    public ArrayData(@JsonProperty(value = "data", required = true) List<String> data) {
+    public ArrayData(@JsonProperty(value = "data") List<String> data) {
         this.data = data;
     }
 
@@ -33,6 +36,7 @@ public final class ArrayData {
      *
      * @return the data value.
      */
+    @Generated
     public List<String> getData() {
         return this.data;
     }

@@ -113,4 +113,8 @@ public class Templates {
     public static UnionModelTemplate getUnionModelTemplate() {
         return factory.getUnionModelTemplate();
     }
+
+    public static ClientMethodSampleTemplate getClientMethodSampleTemplate() {
+        return factory.getClientMethodSampleTemplate();
+    }
 }

@@ -30,6 +30,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,9 @@ public final class TraitsClientBuilder
     @Generated
     @Override
     public TraitsClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -251,4 +255,6 @@ public final class TraitsClientBuilder
     public TraitsClient buildClient() {
         return new TraitsClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(TraitsClientBuilder.class);
 }
