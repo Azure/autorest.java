@@ -176,7 +176,7 @@ export class CodeModelBuilder {
     this.program = program1;
 
     if (this.options["skip-special-headers"]) {
-      this.options["skip-special-headers"].forEach((it) => specialHeaderNames.add(it));
+      this.options["skip-special-headers"].forEach((it) => specialHeaderNames.add(it.toLowerCase()));
     }
 
     this.sdkContext = createSdkContext(context as EmitContext<any>);

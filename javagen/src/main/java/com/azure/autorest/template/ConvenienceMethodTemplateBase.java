@@ -23,6 +23,7 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
@@ -277,6 +278,7 @@ abstract class ConvenienceMethodTemplateBase {
                     }
                 });
 
+        ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
         ClassType.BinaryData.addImportsTo(imports, false);
         ClassType.RequestOptions.addImportsTo(imports, false);
         imports.add(Collectors.class.getName());
@@ -364,7 +366,7 @@ abstract class ConvenienceMethodTemplateBase {
     private static void writeHeader(MethodParameter parameter, JavaBlock methodBlock) {
         Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
                 String.format("requestOptions.setHeader(%1$s, %2$s);",
-                        ClassType.String.defaultValueExpression(parameter.getSerializedName()),
+                        ModelTemplateHeaderHelper.getHttpHeaderNameInstanceExpression(parameter.getSerializedName()),
                         expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter())));
         if (!parameter.getClientMethodParameter().isRequired()) {
             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {

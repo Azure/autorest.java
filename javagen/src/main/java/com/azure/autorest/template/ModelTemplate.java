@@ -54,8 +54,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.azure.autorest.util.ClientModelUtil.treatAsXml;
-
 /**
  * Writes a ClientModel to a JavaFile.
  */
@@ -99,7 +97,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
         final boolean immutableOutputModel = settings.isOutputModelImmutable()
             && model.getImplementationDetails() != null && !model.getImplementationDetails().isInput();
-        boolean treatAsXml = treatAsXml(settings, model);
+        boolean treatAsXml = model.isUsedInXml();
 
         // Handle adding annotations if the model is polymorphic.
         handlePolymorphism(model, hasDerivedModels, settings.isDiscriminatorPassedToChildDeserialization(), javaFile);
@@ -448,7 +446,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings Autorest generation settings.
      */
     protected void addClassLevelAnnotations(ClientModel model, JavaFile javaFile, JavaSettings settings) {
-        if (treatAsXml(settings, model)) {
+        if (model.isUsedInXml()) {
             if (!CoreUtils.isNullOrEmpty(model.getXmlNamespace())) {
                 javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\", namespace = \"%2$s\")",
                     model.getXmlName(), model.getXmlNamespace()));
@@ -515,7 +513,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             IType propertyType = property.getWireType();
 
             String fieldSignature;
-            if (treatAsXml(settings, model)) {
+            if (model.isUsedInXml()) {
                 if (property.isXmlWrapper() && !settings.isStreamStyleSerialization()) {
                     String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
                     classBlock.staticFinalClass(JavaVisibility.PackagePrivate, xmlWrapperClassName,
@@ -629,7 +627,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classBlock.annotation("JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)");
         }
 
-        boolean treatAsXml = treatAsXml(settings, model);
+        boolean treatAsXml = model.isUsedInXml();
         if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
             classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
         } else if (treatAsXml && property.isXmlAttribute()) {

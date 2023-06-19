@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -1074,7 +1075,7 @@ public final class EnumServiceClient {
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
             requestOptions.setHeader(
-                    "color-array-opt",
+                    HttpHeaderName.fromString("color-array-opt"),
                     JacksonAdapter.createDefaultSerializerAdapter()
                             .serializeIterable(colorArrayOpt, CollectionFormat.CSV));
         }

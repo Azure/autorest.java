@@ -11,83 +11,68 @@ import java.util.Set;
 
 public class Schema extends Metadata {
     /**
-     * all schema types
-     * (Required)
-     * 
+     * all schema types (Required)
      */
     private Schema.AllSchemaTypes type;
     /**
      * a short description
-     * 
      */
     private String summary;
     /**
      * example information
-     * 
      */
     private Object example;
     /**
      * If the value isn't sent on the wire, the service will assume this
-     * 
      */
     private Object defaultValue;
     // serialization and usage in SchemaUsage
     /**
      * custom extensible metadata for individual serialization formats
-     * 
      */
     private SerializationFormats serialization;
+    /**
+     * List of serialization formats the Schema is used with, ex JSON, XML, etc.
+     */
+    private Set<String> serializationFormats;
     /**
      * Usage of the schema.
      */
     private Set<SchemaContext> usage;
     /**
-     * 
      * (Required)
-     * 
      */
     private String uid;
     /**
-     * common name of the aspect -- in OAI3 this was typically the key in the parent dictionary
-     * (Required)
-     * 
+     * common name of the aspect -- in OAI3 this was typically the key in the parent dictionary (Required)
      */
     private String $key;
     /**
-     * description of the aspect.
-     * (Required)
-     * 
+     * description of the aspect. (Required)
      */
     private String description;
     /**
      * API versions that this applies to. Undefined means all versions
-     * 
      */
     private List<ApiVersion> apiVersions = new ArrayList<ApiVersion>();
     /**
      * represents  deprecation information for a given aspect
-     * 
      */
     private Deprecation deprecated;
     /**
      * a reference to external documentation
-     * 
      */
     private ExternalDocumentation externalDocs;
 
     /**
-     * all schema types
-     * (Required)
-     * 
+     * all schema types (Required)
      */
     public Schema.AllSchemaTypes getType() {
         return type;
     }
 
     /**
-     * all schema types
-     * (Required)
-     * 
+     * all schema types (Required)
      */
     public void setType(Schema.AllSchemaTypes type) {
         this.type = type;
@@ -95,7 +80,6 @@ public class Schema extends Metadata {
 
     /**
      * a short description
-     * 
      */
     public String getSummary() {
         return summary;
@@ -103,7 +87,6 @@ public class Schema extends Metadata {
 
     /**
      * a short description
-     * 
      */
     public void setSummary(String summary) {
         this.summary = summary;
@@ -111,7 +94,6 @@ public class Schema extends Metadata {
 
     /**
      * example information
-     * 
      */
     public Object getExample() {
         return example;
@@ -119,7 +101,6 @@ public class Schema extends Metadata {
 
     /**
      * example information
-     * 
      */
     public void setExample(Object example) {
         this.example = example;
@@ -127,7 +108,6 @@ public class Schema extends Metadata {
 
     /**
      * If the value isn't sent on the wire, the service will assume this
-     * 
      */
     public Object getDefaultValue() {
         return defaultValue;
@@ -135,7 +115,6 @@ public class Schema extends Metadata {
 
     /**
      * If the value isn't sent on the wire, the service will assume this
-     * 
      */
     public void setDefaultValue(Object defaultValue) {
         this.defaultValue = defaultValue;
@@ -143,7 +122,6 @@ public class Schema extends Metadata {
 
     /**
      * custom extensible metadata for individual serialization formats
-     * 
      */
     public SerializationFormats getSerialization() {
         return serialization;
@@ -151,61 +129,66 @@ public class Schema extends Metadata {
 
     /**
      * custom extensible metadata for individual serialization formats
-     * 
      */
     public void setSerialization(SerializationFormats serialization) {
         this.serialization = serialization;
     }
 
     /**
-     * 
+     * Gets the set of serialization formats this Schema is used with, ex. JSON, XML, etc.
+     *
+     * @return The serialization formats.
+     */
+    public Set<String> getSerializationFormats() {
+        return serializationFormats;
+    }
+
+    /**
+     * Sets the set of serialization formats this Schema is used with, ex. JSON, XML, etc.
+     *
+     * @param serializationFormats The serialization formats.
+     */
+    public void setSerializationFormats(Set<String> serializationFormats) {
+        this.serializationFormats = serializationFormats;
+    }
+
+    /**
      * (Required)
-     * 
      */
     public String getUid() {
         return uid;
     }
 
     /**
-     * 
      * (Required)
-     * 
      */
     public void setUid(String uid) {
         this.uid = uid;
     }
 
     /**
-     * common name of the aspect -- in OAI3 this was typically the key in the parent dictionary
-     * (Required)
-     * 
+     * common name of the aspect -- in OAI3 this was typically the key in the parent dictionary (Required)
      */
     public String get$key() {
         return $key;
     }
 
     /**
-     * common name of the aspect -- in OAI3 this was typically the key in the parent dictionary
-     * (Required)
-     * 
+     * common name of the aspect -- in OAI3 this was typically the key in the parent dictionary (Required)
      */
     public void set$key(String $key) {
         this.$key = $key;
     }
 
     /**
-     * description of the aspect.
-     * (Required)
-     * 
+     * description of the aspect. (Required)
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * description of the aspect.
-     * (Required)
-     * 
+     * description of the aspect. (Required)
      */
     public void setDescription(String description) {
         this.description = description;
@@ -213,7 +196,6 @@ public class Schema extends Metadata {
 
     /**
      * API versions that this applies to. Undefined means all versions
-     * 
      */
     public List<ApiVersion> getApiVersions() {
         return apiVersions;
@@ -221,7 +203,6 @@ public class Schema extends Metadata {
 
     /**
      * API versions that this applies to. Undefined means all versions
-     * 
      */
     public void setApiVersions(List<ApiVersion> apiVersions) {
         this.apiVersions = apiVersions;
@@ -229,7 +210,6 @@ public class Schema extends Metadata {
 
     /**
      * represents  deprecation information for a given aspect
-     * 
      */
     public Deprecation getDeprecated() {
         return deprecated;
@@ -237,7 +217,6 @@ public class Schema extends Metadata {
 
     /**
      * represents  deprecation information for a given aspect
-     * 
      */
     public void setDeprecated(Deprecation deprecated) {
         this.deprecated = deprecated;
@@ -245,7 +224,6 @@ public class Schema extends Metadata {
 
     /**
      * a reference to external documentation
-     * 
      */
     public ExternalDocumentation getExternalDocs() {
         return externalDocs;
@@ -253,7 +231,6 @@ public class Schema extends Metadata {
 
     /**
      * a reference to external documentation
-     * 
      */
     public void setExternalDocs(ExternalDocumentation externalDocs) {
         this.externalDocs = externalDocs;
@@ -304,7 +281,7 @@ public class Schema extends Metadata {
         private final static Map<String, Schema.AllSchemaTypes> CONSTANTS = new HashMap<String, Schema.AllSchemaTypes>();
 
         static {
-            for (Schema.AllSchemaTypes c: values()) {
+            for (Schema.AllSchemaTypes c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
