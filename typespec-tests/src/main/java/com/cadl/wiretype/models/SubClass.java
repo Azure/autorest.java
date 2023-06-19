@@ -23,15 +23,15 @@ public final class SubClass extends SuperClassMismatch {
     /**
      * Creates an instance of SubClass class.
      *
-     * @param unixTimestamp the unixTimestamp value to set.
+     * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
      * @param dateTime the dateTime value to set.
      */
     @Generated
     @JsonCreator
     public SubClass(
-            @JsonProperty(value = "unixTimestamp") OffsetDateTime unixTimestamp,
+            @JsonProperty(value = "dateTimeRfc7231") OffsetDateTime dateTimeRfc7231,
             @JsonProperty(value = "dateTime") OffsetDateTime dateTime) {
-        super(unixTimestamp);
+        super(dateTimeRfc7231);
         this.dateTime = dateTime;
     }
 

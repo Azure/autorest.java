@@ -12,8 +12,8 @@ using Azure.ClientGenerator.Core;
 namespace Cadl.WireType;
 
 model SuperClassMismatch {
-  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
-  unixTimestamp: utcDateTime;
+  @encode(DateTimeKnownEncoding.rfc7231, string)
+  dateTimeRfc7231: utcDateTime;
 }
 
 model SuperClass {
@@ -25,13 +25,13 @@ model SubClass extends SuperClassMismatch {
 }
 
 model SubClassMismatch extends SuperClass {
-  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
-  unixTimestamp: utcDateTime;
+  @encode(DateTimeKnownEncoding.rfc7231, string)
+  dateTimeRfc7231: utcDateTime;
 }
 
 model SubClassBothMismatch extends SuperClassMismatch {
-  @encode(DateTimeKnownEncoding.rfc7231, string)
-  dateTimeRfc7231: utcDateTime;
+  @encode(BytesKnownEncoding.base64url, string)
+  base64url: bytes;
 }
 
 @route("/wireType")

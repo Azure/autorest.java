@@ -6,7 +6,7 @@ package com.cadl.wiretype.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.azure.core.util.DateTimeRfc1123;
+import com.azure.core.util.Base64Url;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
@@ -15,37 +15,37 @@ import java.time.OffsetDateTime;
 @Immutable
 public final class SubClassBothMismatch extends SuperClassMismatch {
     /*
-     * The dateTimeRfc7231 property.
+     * The base64url property.
      */
     @Generated
-    @JsonProperty(value = "dateTimeRfc7231")
-    private DateTimeRfc1123 dateTimeRfc7231;
+    @JsonProperty(value = "base64url")
+    private Base64Url base64Url;
 
     /**
      * Creates an instance of SubClassBothMismatch class.
      *
-     * @param unixTimestamp the unixTimestamp value to set.
      * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
+     * @param base64Url the base64Url value to set.
      */
     @Generated
     @JsonCreator
     public SubClassBothMismatch(
-            @JsonProperty(value = "unixTimestamp") OffsetDateTime unixTimestamp,
-            @JsonProperty(value = "dateTimeRfc7231") OffsetDateTime dateTimeRfc7231) {
-        super(unixTimestamp);
-        this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
+            @JsonProperty(value = "dateTimeRfc7231") OffsetDateTime dateTimeRfc7231,
+            @JsonProperty(value = "base64url") byte[] base64Url) {
+        super(dateTimeRfc7231);
+        this.base64Url = Base64Url.encode(base64Url);
     }
 
     /**
-     * Get the dateTimeRfc7231 property: The dateTimeRfc7231 property.
+     * Get the base64Url property: The base64url property.
      *
-     * @return the dateTimeRfc7231 value.
+     * @return the base64Url value.
      */
     @Generated
-    public OffsetDateTime getDateTimeRfc7231() {
-        if (this.dateTimeRfc7231 == null) {
-            return null;
+    public byte[] getBase64Url() {
+        if (this.base64Url == null) {
+            return new byte[0];
         }
-        return this.dateTimeRfc7231.getDateTime();
+        return this.base64Url.decodedBytes();
     }
 }

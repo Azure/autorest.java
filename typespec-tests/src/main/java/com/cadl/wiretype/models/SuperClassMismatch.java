@@ -6,40 +6,42 @@ package com.cadl.wiretype.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
 /** The SuperClassMismatch model. */
 @Immutable
 public class SuperClassMismatch {
     /*
-     * The unixTimestamp property.
+     * The dateTimeRfc7231 property.
      */
     @Generated
-    @JsonProperty(value = "unixTimestamp")
-    private long unixTimestamp;
+    @JsonProperty(value = "dateTimeRfc7231")
+    private DateTimeRfc1123 dateTimeRfc7231;
 
     /**
      * Creates an instance of SuperClassMismatch class.
      *
-     * @param unixTimestamp the unixTimestamp value to set.
+     * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
      */
     @Generated
     @JsonCreator
-    public SuperClassMismatch(@JsonProperty(value = "unixTimestamp") OffsetDateTime unixTimestamp) {
-        this.unixTimestamp = unixTimestamp.toEpochSecond();
+    public SuperClassMismatch(@JsonProperty(value = "dateTimeRfc7231") OffsetDateTime dateTimeRfc7231) {
+        this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
     }
 
     /**
-     * Get the unixTimestamp property: The unixTimestamp property.
+     * Get the dateTimeRfc7231 property: The dateTimeRfc7231 property.
      *
-     * @return the unixTimestamp value.
+     * @return the dateTimeRfc7231 value.
      */
     @Generated
-    public OffsetDateTime getUnixTimestamp() {
-        return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.unixTimestamp), ZoneOffset.UTC);
+    public OffsetDateTime getDateTimeRfc7231() {
+        if (this.dateTimeRfc7231 == null) {
+            return null;
+        }
+        return this.dateTimeRfc7231.getDateTime();
     }
 }

@@ -17,7 +17,6 @@ public class LocalModelTests {
         OffsetDateTime now = OffsetDateTime.now().withNano(0).withOffsetSameInstant(ZoneOffset.UTC);
 
         Model model = new Model(now);
-
         BinaryData json = BinaryData.fromObject(model);
 
         Model model1 = json.toObject(Model.class);

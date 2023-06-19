@@ -6,44 +6,46 @@ package com.cadl.wiretype.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
 /** The SubClassMismatch model. */
 @Immutable
 public final class SubClassMismatch extends SuperClass {
     /*
-     * The unixTimestamp property.
+     * The dateTimeRfc7231 property.
      */
     @Generated
-    @JsonProperty(value = "unixTimestamp")
-    private long unixTimestamp;
+    @JsonProperty(value = "dateTimeRfc7231")
+    private DateTimeRfc1123 dateTimeRfc7231;
 
     /**
      * Creates an instance of SubClassMismatch class.
      *
      * @param dateTime the dateTime value to set.
-     * @param unixTimestamp the unixTimestamp value to set.
+     * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
      */
     @Generated
     @JsonCreator
     public SubClassMismatch(
             @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
-            @JsonProperty(value = "unixTimestamp") OffsetDateTime unixTimestamp) {
+            @JsonProperty(value = "dateTimeRfc7231") OffsetDateTime dateTimeRfc7231) {
         super(dateTime);
-        this.unixTimestamp = unixTimestamp.toEpochSecond();
+        this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
     }
 
     /**
-     * Get the unixTimestamp property: The unixTimestamp property.
+     * Get the dateTimeRfc7231 property: The dateTimeRfc7231 property.
      *
-     * @return the unixTimestamp value.
+     * @return the dateTimeRfc7231 value.
      */
     @Generated
-    public OffsetDateTime getUnixTimestamp() {
-        return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.unixTimestamp), ZoneOffset.UTC);
+    public OffsetDateTime getDateTimeRfc7231() {
+        if (this.dateTimeRfc7231 == null) {
+            return null;
+        }
+        return this.dateTimeRfc7231.getDateTime();
     }
 }

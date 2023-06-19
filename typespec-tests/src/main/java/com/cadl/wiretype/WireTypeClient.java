@@ -42,7 +42,7 @@ public final class WireTypeClient {
      *
      * <pre>{@code
      * {
-     *     unixTimestamp: long (Required)
+     *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     dateTime: OffsetDateTime (Required)
      * }
      * }</pre>
@@ -51,7 +51,7 @@ public final class WireTypeClient {
      *
      * <pre>{@code
      * {
-     *     unixTimestamp: long (Required)
+     *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     dateTime: OffsetDateTime (Required)
      * }
      * }</pre>
@@ -78,7 +78,7 @@ public final class WireTypeClient {
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
-     *     unixTimestamp: long (Required)
+     *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      * }
      * }</pre>
      *
@@ -87,7 +87,7 @@ public final class WireTypeClient {
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
-     *     unixTimestamp: long (Required)
+     *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      * }
      * }</pre>
      *
@@ -113,8 +113,8 @@ public final class WireTypeClient {
      *
      * <pre>{@code
      * {
-     *     unixTimestamp: long (Required)
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
+     *     base64url: Base64Url (Required)
      * }
      * }</pre>
      *
@@ -122,8 +122,8 @@ public final class WireTypeClient {
      *
      * <pre>{@code
      * {
-     *     unixTimestamp: long (Required)
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
+     *     base64url: Base64Url (Required)
      * }
      * }</pre>
      *
