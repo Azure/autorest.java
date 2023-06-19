@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.cadl.builtin;
+package com.cadl.wiretype;
 
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +18,7 @@ public final class Model {
     }
 
     // Jackson fails with below error, if this private constructor not provided
-    // java.io.UncheckedIOException: com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `com.cadl.builtin.Model` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+    // java.io.UncheckedIOException: com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `com.cadl.wiretype.Model` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
     private Model() {
     }
 
