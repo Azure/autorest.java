@@ -27,9 +27,14 @@ public class SuperClassMismatch {
      * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
      */
     @Generated
-    @JsonCreator
-    public SuperClassMismatch(@JsonProperty(value = "dateTimeRfc7231") OffsetDateTime dateTimeRfc7231) {
+    public SuperClassMismatch(OffsetDateTime dateTimeRfc7231) {
         this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
+    }
+
+    @Generated
+    @JsonCreator
+    private SuperClassMismatch(@JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231) {
+        this(dateTimeRfc7231.getDateTime());
     }
 
     /**

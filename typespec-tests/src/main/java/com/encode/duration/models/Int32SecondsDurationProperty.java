@@ -26,9 +26,14 @@ public final class Int32SecondsDurationProperty {
      * @param value the value value to set.
      */
     @Generated
-    @JsonCreator
-    public Int32SecondsDurationProperty(@JsonProperty(value = "value") Duration value) {
+    public Int32SecondsDurationProperty(Duration value) {
         this.value = value.getSeconds();
+    }
+
+    @Generated
+    @JsonCreator
+    private Int32SecondsDurationProperty(@JsonProperty(value = "value") long value) {
+        this(Duration.ofSeconds(value));
     }
 
     /**

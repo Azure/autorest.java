@@ -28,12 +28,17 @@ public final class SubClassMismatch extends SuperClass {
      * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
      */
     @Generated
-    @JsonCreator
-    public SubClassMismatch(
-            @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
-            @JsonProperty(value = "dateTimeRfc7231") OffsetDateTime dateTimeRfc7231) {
+    public SubClassMismatch(OffsetDateTime dateTime, OffsetDateTime dateTimeRfc7231) {
         super(dateTime);
         this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
+    }
+
+    @Generated
+    @JsonCreator
+    private SubClassMismatch(
+            @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
+            @JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231) {
+        this(dateTime, dateTimeRfc7231.getDateTime());
     }
 
     /**

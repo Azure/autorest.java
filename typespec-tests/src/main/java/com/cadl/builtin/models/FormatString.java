@@ -85,16 +85,15 @@ public final class FormatString {
      * @param extensibleEnumScalar the extensibleEnumScalar value to set.
      */
     @Generated
-    @JsonCreator
     public FormatString(
-            @JsonProperty(value = "base64Encoded") byte[] base64Encoded,
-            @JsonProperty(value = "binary") byte[] binary,
-            @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
-            @JsonProperty(value = "dateTimeRfc1123") OffsetDateTime dateTimeRfc1123,
-            @JsonProperty(value = "password") String password,
-            @JsonProperty(value = "uri") String uri,
-            @JsonProperty(value = "extensibleEnum") KnownValues extensibleEnum,
-            @JsonProperty(value = "extensibleEnumScalar") KnownValuesScalar extensibleEnumScalar) {
+            byte[] base64Encoded,
+            byte[] binary,
+            OffsetDateTime dateTime,
+            OffsetDateTime dateTimeRfc1123,
+            String password,
+            String uri,
+            KnownValues extensibleEnum,
+            KnownValuesScalar extensibleEnumScalar) {
         this.base64Encoded = Base64Url.encode(base64Encoded);
         this.binary = binary;
         this.dateTime = dateTime;
@@ -103,6 +102,28 @@ public final class FormatString {
         this.uri = uri;
         this.extensibleEnum = extensibleEnum;
         this.extensibleEnumScalar = extensibleEnumScalar;
+    }
+
+    @Generated
+    @JsonCreator
+    private FormatString(
+            @JsonProperty(value = "base64Encoded") Base64Url base64Encoded,
+            @JsonProperty(value = "binary") byte[] binary,
+            @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
+            @JsonProperty(value = "dateTimeRfc1123") DateTimeRfc1123 dateTimeRfc1123,
+            @JsonProperty(value = "password") String password,
+            @JsonProperty(value = "uri") String uri,
+            @JsonProperty(value = "extensibleEnum") KnownValues extensibleEnum,
+            @JsonProperty(value = "extensibleEnumScalar") KnownValuesScalar extensibleEnumScalar) {
+        this(
+                base64Encoded.decodedBytes(),
+                binary,
+                dateTime,
+                dateTimeRfc1123.getDateTime(),
+                password,
+                uri,
+                extensibleEnum,
+                extensibleEnumScalar);
     }
 
     /**
