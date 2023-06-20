@@ -117,12 +117,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         return classSignature + " implements " + interfaceName + "<" + model.getName() + ">";
     }
 
-    @Override
-    protected void addModelConstructorParameter(ClientModelProperty property,
-        StringBuilder constructorSignatureBuilder) {
-        constructorSignatureBuilder.append(property.getClientType()).append(" ").append(property.getName());
-    }
-
     static void xmlWrapperClassXmlSerializableImplementation(JavaClass classBlock, String wrapperClassName,
         IType iterableType, String xmlRootElementName, String xmlListElementName, String xmlElementNameCamelCase,
         String xmlNamespace) {
