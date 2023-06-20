@@ -325,7 +325,9 @@ public final class QueriesImpl {
         String valueConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeIterable(
-                                value.stream().map(value -> Base64Url.encode(value)).collect(Collectors.toList()),
+                                value.stream()
+                                        .map(paramItemValue -> Base64Url.encode(paramItemValue))
+                                        .collect(Collectors.toList()),
                                 CollectionFormat.CSV);
         return FluxUtil.withContext(context -> service.base64UrlArray(valueConverted, accept, requestOptions, context));
     }
@@ -347,7 +349,9 @@ public final class QueriesImpl {
         String valueConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeIterable(
-                                value.stream().map(value -> Base64Url.encode(value)).collect(Collectors.toList()),
+                                value.stream()
+                                        .map(paramItemValue -> Base64Url.encode(paramItemValue))
+                                        .collect(Collectors.toList()),
                                 CollectionFormat.CSV);
         return service.base64UrlArraySync(valueConverted, accept, requestOptions, Context.NONE);
     }

@@ -465,7 +465,7 @@ public final class BasicClient {
                 }
             }
         }
-        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(User.class));
+        return serviceClient.list(requestOptions).mapPage(responseBodyValue -> responseBodyValue.toObject(User.class));
     }
 
     /**
@@ -485,7 +485,7 @@ public final class BasicClient {
     public PagedIterable<User> list() {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(User.class));
+        return serviceClient.list(requestOptions).mapPage(responseBodyValue -> responseBodyValue.toObject(User.class));
     }
 
     /**
@@ -503,7 +503,9 @@ public final class BasicClient {
     public PagedIterable<User> listWithPage() {
         // Generated convenience method for listWithPage
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.listWithPage(requestOptions).mapPage(value -> value.toObject(User.class));
+        return serviceClient
+                .listWithPage(requestOptions)
+                .mapPage(responseBodyValue -> responseBodyValue.toObject(User.class));
     }
 
     /**
@@ -521,7 +523,9 @@ public final class BasicClient {
     public PagedIterable<User> listWithCustomPageModel() {
         // Generated convenience method for listWithCustomPageModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.listWithCustomPageModel(requestOptions).mapPage(value -> value.toObject(User.class));
+        return serviceClient
+                .listWithCustomPageModel(requestOptions)
+                .mapPage(responseBodyValue -> responseBodyValue.toObject(User.class));
     }
 
     /**

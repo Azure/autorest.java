@@ -394,7 +394,9 @@ public final class QueriesImpl {
         String valueConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeIterable(
-                                value.stream().map(value -> value.toEpochSecond()).collect(Collectors.toList()),
+                                value.stream()
+                                        .map(paramItemValue -> paramItemValue.toEpochSecond())
+                                        .collect(Collectors.toList()),
                                 CollectionFormat.CSV);
         return FluxUtil.withContext(
                 context -> service.unixTimestampArray(valueConverted, accept, requestOptions, context));
@@ -417,7 +419,9 @@ public final class QueriesImpl {
         String valueConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeIterable(
-                                value.stream().map(value -> value.toEpochSecond()).collect(Collectors.toList()),
+                                value.stream()
+                                        .map(paramItemValue -> paramItemValue.toEpochSecond())
+                                        .collect(Collectors.toList()),
                                 CollectionFormat.CSV);
         return service.unixTimestampArraySync(valueConverted, accept, requestOptions, Context.NONE);
     }

@@ -327,6 +327,8 @@ public final class ProtocolAndConvenientClient {
     public PagedIterable<ResourceJ> list() {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(ResourceJ.class));
+        return serviceClient
+                .list(requestOptions)
+                .mapPage(responseBodyValue -> responseBodyValue.toObject(ResourceJ.class));
     }
 }
