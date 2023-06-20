@@ -2710,7 +2710,9 @@ public final class Paths {
         }
         final String accept = "application/json";
         String arrayPathConverted =
-                arrayPath.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                arrayPath.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, context));
     }
@@ -2738,7 +2740,9 @@ public final class Paths {
         }
         final String accept = "application/json";
         String arrayPathConverted =
-                arrayPath.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                arrayPath.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, context);
     }
 

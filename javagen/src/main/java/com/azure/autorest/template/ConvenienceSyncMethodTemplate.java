@@ -99,10 +99,10 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
 
         if (convenienceMethod.getType() == ClientMethodType.PagingSync) {
             methodBlock.methodReturn(String.format(
-                    "serviceClient.%1$s(%2$s).mapPage(value -> %3$s)",
+                    "serviceClient.%1$s(%2$s).mapPage(bodyItemValue -> %3$s)",
                     protocolMethod.getName(),
                     invocationExpression,
-                    expressionConvertFromBinaryData(responseBodyType, "value", typeReferenceStaticClasses)));
+                    expressionConvertFromBinaryData(responseBodyType, "bodyItemValue", typeReferenceStaticClasses)));
         } else if (convenienceMethod.getType() == ClientMethodType.LongRunningBeginSync){
             String methodName = protocolMethod.getName();
             methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));

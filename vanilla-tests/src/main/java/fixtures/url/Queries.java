@@ -3314,7 +3314,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
@@ -3343,7 +3343,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(","));
         return service.arrayStringCsvValid(this.client.getHost(), arrayQueryConverted, accept, context);
     }
@@ -3459,7 +3459,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvNull(this.client.getHost(), arrayQueryConverted, accept, context));
@@ -3487,7 +3487,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(","));
         return service.arrayStringCsvNull(this.client.getHost(), arrayQueryConverted, accept, context);
     }
@@ -3595,7 +3595,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context -> service.arrayStringCsvEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
@@ -3623,7 +3623,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(","));
         return service.arrayStringCsvEmpty(this.client.getHost(), arrayQueryConverted, accept, context);
     }
@@ -3731,7 +3731,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
@@ -3762,7 +3762,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(","));
         return service.arrayStringNoCollectionFormatEmpty(this.client.getHost(), arrayQueryConverted, accept, context);
     }
@@ -3878,7 +3878,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(" "));
         return FluxUtil.withContext(
                 context -> service.arrayStringSsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
@@ -3907,7 +3907,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(" "));
         return service.arrayStringSsvValid(this.client.getHost(), arrayQueryConverted, accept, context);
     }
@@ -4024,7 +4024,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining("	"));
         return FluxUtil.withContext(
                 context -> service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
@@ -4053,7 +4053,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining("	"));
         return service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, accept, context);
     }
@@ -4171,7 +4171,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining("|"));
         return FluxUtil.withContext(
                 context -> service.arrayStringPipesValid(this.client.getHost(), arrayQueryConverted, accept, context));
@@ -4201,7 +4201,7 @@ public final class Queries {
                 (arrayQuery == null)
                         ? null
                         : arrayQuery.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining("|"));
         return service.arrayStringPipesValid(this.client.getHost(), arrayQueryConverted, accept, context);
     }
