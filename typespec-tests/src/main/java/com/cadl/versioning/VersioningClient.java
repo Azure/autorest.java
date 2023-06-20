@@ -234,7 +234,7 @@ public final class VersioningClient {
         }
         return serviceClient
                 .list(requestOptions)
-                .mapPage(responseBodyValue -> responseBodyValue.toObject(Resource.class));
+                .mapPage(bodyItemValue -> bodyItemValue.toObject(Resource.class));
     }
 
     /**
@@ -263,7 +263,7 @@ public final class VersioningClient {
         }
         return serviceClient
                 .list(requestOptions)
-                .mapPage(responseBodyValue -> responseBodyValue.toObject(Resource.class));
+                .mapPage(bodyItemValue -> bodyItemValue.toObject(Resource.class));
     }
 
     /**
@@ -283,7 +283,7 @@ public final class VersioningClient {
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient
                 .list(requestOptions)
-                .mapPage(responseBodyValue -> responseBodyValue.toObject(Resource.class));
+                .mapPage(bodyItemValue -> bodyItemValue.toObject(Resource.class));
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(VersioningClient.class);

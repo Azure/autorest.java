@@ -329,6 +329,6 @@ public final class ProtocolAndConvenientClient {
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient
                 .list(requestOptions)
-                .mapPage(responseBodyValue -> responseBodyValue.toObject(ResourceJ.class));
+                .mapPage(bodyItemValue -> bodyItemValue.toObject(ResourceJ.class));
     }
 }
