@@ -5,10 +5,12 @@ package com.cadl.server;
 
 import com.azure.core.http.rest.RequestOptions;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class ServerTests {
 
+    @Disabled("test calls httpbin.org")
     @Test
     public void serverTests() {
         // use default server
