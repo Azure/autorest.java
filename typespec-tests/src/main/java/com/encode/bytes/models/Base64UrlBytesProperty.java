@@ -26,9 +26,14 @@ public final class Base64UrlBytesProperty {
      * @param value the value value to set.
      */
     @Generated
-    @JsonCreator
-    public Base64UrlBytesProperty(@JsonProperty(value = "value") byte[] value) {
+    public Base64UrlBytesProperty(byte[] value) {
         this.value = Base64Url.encode(value);
+    }
+
+    @Generated
+    @JsonCreator
+    private Base64UrlBytesProperty(@JsonProperty(value = "value") Base64Url value) {
+        this(value.decodedBytes());
     }
 
     /**

@@ -61,19 +61,33 @@ public class TransformationAsRequiredFields {
      * @param unixTimeLongRequired the unixTimeLongRequired value to set.
      * @param unixTimeDateTimeRequired the unixTimeDateTimeRequired value to set.
      */
-    @JsonCreator
     protected TransformationAsRequiredFields(
-            @JsonProperty(value = "rfc1123Required", required = true) OffsetDateTime rfc1123Required,
-            @JsonProperty(value = "nameRequired", required = true) String nameRequired,
-            @JsonProperty(value = "urlBase64EncodedRequired", required = true) byte[] urlBase64EncodedRequired,
-            @JsonProperty(value = "unixTimeLongRequired", required = true) OffsetDateTime unixTimeLongRequired,
-            @JsonProperty(value = "unixTimeDateTimeRequired", required = true)
-                    OffsetDateTime unixTimeDateTimeRequired) {
+            OffsetDateTime rfc1123Required,
+            String nameRequired,
+            byte[] urlBase64EncodedRequired,
+            OffsetDateTime unixTimeLongRequired,
+            OffsetDateTime unixTimeDateTimeRequired) {
         this.rfc1123Required = new DateTimeRfc1123(rfc1123Required);
         this.nameRequired = nameRequired;
         this.urlBase64EncodedRequired = Base64Url.encode(urlBase64EncodedRequired);
         this.unixTimeLongRequired = unixTimeLongRequired.toEpochSecond();
         this.unixTimeDateTimeRequired = unixTimeDateTimeRequired;
+    }
+
+    @JsonCreator
+    private TransformationAsRequiredFields(
+            @JsonProperty(value = "rfc1123Required", required = true) DateTimeRfc1123 rfc1123Required,
+            @JsonProperty(value = "nameRequired", required = true) String nameRequired,
+            @JsonProperty(value = "urlBase64EncodedRequired", required = true) Base64Url urlBase64EncodedRequired,
+            @JsonProperty(value = "unixTimeLongRequired", required = true) long unixTimeLongRequired,
+            @JsonProperty(value = "unixTimeDateTimeRequired", required = true)
+                    OffsetDateTime unixTimeDateTimeRequired) {
+        this(
+                rfc1123Required.getDateTime(),
+                nameRequired,
+                urlBase64EncodedRequired.decodedBytes(),
+                OffsetDateTime.ofInstant(Instant.ofEpochSecond(unixTimeLongRequired), ZoneOffset.UTC),
+                unixTimeDateTimeRequired);
     }
 
     /**
