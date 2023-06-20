@@ -393,7 +393,9 @@ public final class QueriesImpl {
         String inputConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeIterable(
-                                input.stream().map(value -> value.getSeconds()).collect(Collectors.toList()),
+                                input.stream()
+                                        .map(paramItemValue -> paramItemValue.getSeconds())
+                                        .collect(Collectors.toList()),
                                 CollectionFormat.CSV);
         return FluxUtil.withContext(
                 context -> service.int32SecondsArray(inputConverted, accept, requestOptions, context));
@@ -416,7 +418,9 @@ public final class QueriesImpl {
         String inputConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
                         .serializeIterable(
-                                input.stream().map(value -> value.getSeconds()).collect(Collectors.toList()),
+                                input.stream()
+                                        .map(paramItemValue -> paramItemValue.getSeconds())
+                                        .collect(Collectors.toList()),
                                 CollectionFormat.CSV);
         return service.int32SecondsArraySync(inputConverted, accept, requestOptions, Context.NONE);
     }

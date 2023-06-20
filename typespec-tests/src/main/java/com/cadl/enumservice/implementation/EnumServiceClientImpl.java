@@ -1048,7 +1048,9 @@ public final class EnumServiceClientImpl {
             List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String colorArrayConverted =
-                colorArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                colorArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.setStringEnumArray(
@@ -1086,7 +1088,9 @@ public final class EnumServiceClientImpl {
     public Response<BinaryData> setStringEnumArrayWithResponse(List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String colorArrayConverted =
-                colorArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                colorArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.setStringEnumArraySync(
                 this.getEndpoint(), colorArrayConverted, accept, requestOptions, Context.NONE);
     }
@@ -1123,7 +1127,9 @@ public final class EnumServiceClientImpl {
             List<String> priorityArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String priorityArrayConverted =
-                priorityArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                priorityArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.setIntEnumArray(
@@ -1161,7 +1167,9 @@ public final class EnumServiceClientImpl {
     public Response<BinaryData> setIntEnumArrayWithResponse(List<String> priorityArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String priorityArrayConverted =
-                priorityArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                priorityArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.setIntEnumArraySync(
                 this.getEndpoint(), priorityArrayConverted, accept, requestOptions, Context.NONE);
     }
@@ -1198,7 +1206,9 @@ public final class EnumServiceClientImpl {
             List<String> stringArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String stringArrayConverted =
-                stringArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                stringArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.setStringArray(
@@ -1236,7 +1246,9 @@ public final class EnumServiceClientImpl {
     public Response<BinaryData> setStringArrayWithResponse(List<String> stringArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String stringArrayConverted =
-                stringArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                stringArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.setStringArraySync(
                 this.getEndpoint(), stringArrayConverted, accept, requestOptions, Context.NONE);
     }
@@ -1642,7 +1654,9 @@ public final class EnumServiceClientImpl {
             List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String colorArrayConverted =
-                colorArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                colorArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.setStringEnumArrayHeader(
@@ -1681,7 +1695,9 @@ public final class EnumServiceClientImpl {
             List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String colorArrayConverted =
-                colorArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                colorArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.setStringEnumArrayHeaderSync(
                 this.getEndpoint(), colorArrayConverted, accept, requestOptions, Context.NONE);
     }

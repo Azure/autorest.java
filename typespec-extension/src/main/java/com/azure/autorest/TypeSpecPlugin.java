@@ -97,7 +97,7 @@ public class TypeSpecPlugin extends Javagen {
             Path absoluteFilePath = Paths.get(emitterOptions.getOutputDir(), filePath);
             if (Files.exists(absoluteFilePath)) {
                 try {
-                    String existingFileContent = new String(Files.readAllBytes(absoluteFilePath));
+                    String existingFileContent = new String(Files.readAllBytes(absoluteFilePath), StandardCharsets.UTF_8);
                     String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedContent, existingFileContent);
                     return updatedContent;
                 } catch (Exception e) {

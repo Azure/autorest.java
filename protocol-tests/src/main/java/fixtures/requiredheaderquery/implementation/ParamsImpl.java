@@ -217,7 +217,7 @@ public final class ParamsImpl {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
                 parameterCsvStringArray.stream()
-                        .map(value -> Objects.toString(value, ""))
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                         .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
@@ -296,7 +296,7 @@ public final class ParamsImpl {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
                 parameterCsvStringArray.stream()
-                        .map(value -> Objects.toString(value, ""))
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                         .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
@@ -356,7 +356,7 @@ public final class ParamsImpl {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
                 parameterCsvStringArray.stream()
-                        .map(value -> Objects.toString(value, ""))
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                         .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
@@ -411,7 +411,7 @@ public final class ParamsImpl {
         final String accept = "application/json";
         String parameterCsvStringArrayConverted =
                 parameterCsvStringArray.stream()
-                        .map(value -> Objects.toString(value, ""))
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                         .collect(Collectors.joining(","));
         String parameterCsvIntArrayConverted =
                 JacksonAdapter.createDefaultSerializerAdapter()
