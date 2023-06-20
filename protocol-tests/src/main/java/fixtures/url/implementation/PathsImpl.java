@@ -2026,7 +2026,9 @@ public final class PathsImpl {
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath, RequestOptions requestOptions) {
         final String accept = "application/json";
         String arrayPathConverted =
-                arrayPath.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                arrayPath.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.arrayCsvInPath(
@@ -2050,7 +2052,9 @@ public final class PathsImpl {
     public Response<Void> arrayCsvInPathWithResponse(List<String> arrayPath, RequestOptions requestOptions) {
         final String accept = "application/json";
         String arrayPathConverted =
-                arrayPath.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                arrayPath.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.arrayCsvInPathSync(
                 this.client.getHost(), arrayPathConverted, accept, requestOptions, Context.NONE);
     }
