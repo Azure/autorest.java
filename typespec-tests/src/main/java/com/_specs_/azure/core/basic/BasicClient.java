@@ -503,9 +503,7 @@ public final class BasicClient {
     public PagedIterable<User> listWithPage() {
         // Generated convenience method for listWithPage
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient
-                .listWithPage(requestOptions)
-                .mapPage(bodyItemValue -> bodyItemValue.toObject(User.class));
+        return serviceClient.listWithPage(requestOptions).mapPage(bodyItemValue -> bodyItemValue.toObject(User.class));
     }
 
     /**

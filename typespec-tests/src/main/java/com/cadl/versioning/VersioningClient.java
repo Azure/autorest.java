@@ -232,9 +232,7 @@ public final class VersioningClient {
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);
         }
-        return serviceClient
-                .list(requestOptions)
-                .mapPage(bodyItemValue -> bodyItemValue.toObject(Resource.class));
+        return serviceClient.list(requestOptions).mapPage(bodyItemValue -> bodyItemValue.toObject(Resource.class));
     }
 
     /**
@@ -261,9 +259,7 @@ public final class VersioningClient {
                 }
             }
         }
-        return serviceClient
-                .list(requestOptions)
-                .mapPage(bodyItemValue -> bodyItemValue.toObject(Resource.class));
+        return serviceClient.list(requestOptions).mapPage(bodyItemValue -> bodyItemValue.toObject(Resource.class));
     }
 
     /**
@@ -281,9 +277,7 @@ public final class VersioningClient {
     public PagedIterable<Resource> list() {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient
-                .list(requestOptions)
-                .mapPage(bodyItemValue -> bodyItemValue.toObject(Resource.class));
+        return serviceClient.list(requestOptions).mapPage(bodyItemValue -> bodyItemValue.toObject(Resource.class));
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(VersioningClient.class);
