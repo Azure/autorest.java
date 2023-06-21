@@ -1646,14 +1646,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
 
             // TODO (alzimmer): Handle nested container types when needed.
-            if (fromSuper) {
-                // When the property is maintained by the super class use the setter to set a new ArrayList.
-                deserializationBlock.line(propertiesManager.getDeserializedModelName() + "." + property.getSetterName()
-                    + "(new ArrayList<>());");
-            } else {
-                deserializationBlock.ifBlock(fieldAccess + " == null",
-                    ifStatement -> ifStatement.line(fieldAccess + " = new ArrayList<>();"));
-            }
+            deserializationBlock.ifBlock(fieldAccess + " == null", ifStatement -> {
+                if (fromSuper) {
+                    ifStatement.line(propertiesManager.getDeserializedModelName() + "." + property.getSetterName()
+                        + "(new ArrayList<>());");
+                } else {
+                    ifStatement.line(fieldAccess + " = new ArrayList<>();");
+                }
+            });
 
             if (sameNames) {
                 deserializationBlock.line(fieldAccess + ".add(" + elementDeserialization + ");");
@@ -1759,7 +1759,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static String getXmlNameConditional(String localPart, String namespace, String elementName) {
         String condition = "\"" + localPart + "\".equals(" + elementName + ".getLocalPart())";
-        if (namespace != null) {
+        if (!CoreUtils.isNullOrEmpty(namespace)) {
             condition += " && \"" + namespace + "\".equals(" + elementName + ".getNamespaceURI())";
         }
 

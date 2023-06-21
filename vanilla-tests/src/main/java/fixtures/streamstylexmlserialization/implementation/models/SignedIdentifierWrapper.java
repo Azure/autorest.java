@@ -12,6 +12,7 @@ import com.azure.xml.XmlWriter;
 import fixtures.streamstylexmlserialization.models.SignedIdentifier;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /** A wrapper around List&lt;SignedIdentifier&gt; which provides top-level metadata for serialization. */
@@ -66,9 +67,9 @@ public final class SignedIdentifierWrapper implements XmlSerializable<SignedIden
                     List<SignedIdentifier> items = null;
 
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        String elementName = reader.getElementName().getLocalPart();
+                        QName elementName = reader.getElementName();
 
-                        if ("SignedIdentifier".equals(elementName)) {
+                        if ("SignedIdentifier".equals(elementName.getLocalPart())) {
                             if (items == null) {
                                 items = new ArrayList<>();
                             }
