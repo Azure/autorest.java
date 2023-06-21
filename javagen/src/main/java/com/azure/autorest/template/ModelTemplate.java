@@ -50,7 +50,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -704,22 +703,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         StringBuilder superProperties = new StringBuilder(64 * requiredParentProperties.size());
 
         if (settings.isRequiredFieldsAsConstructorArgs()) {
-            final Predicate<ClientModelProperty> isWireTypeMismatch = p -> {
-                if (p.getClientType() == p.getWireType()) {
-                    // same type
-                    return false;
-                } else {
-                    // type mismatch
-                    if (p.getClientType() instanceof GenericType && p.getWireType() instanceof GenericType) {
-                        // at present, ignore generic type, as type erasure causes conflict of 2 constructors
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
-            };
             final boolean constructorParametersContainsMismatchWireType =
-                requiredProperties.stream().anyMatch(isWireTypeMismatch) || requiredParentProperties.stream().anyMatch(isWireTypeMismatch);
+                requiredProperties.stream().anyMatch(p -> ClientModelUtil.isWireTypeMismatch(p, true))
+                    || requiredParentProperties.stream().anyMatch(p -> ClientModelUtil.isWireTypeMismatch(p, true));
 
             if (constructorParametersContainsMismatchWireType && !settings.isStreamStyleSerialization()) {
                 generatePrivateConstructorForJackson = true;
@@ -843,10 +829,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     /**
      * Adds a constructor parameter to the constructor signature builder.
      * <p>
-     * This is an entry point for subclasses of ModelTemplate to generate different signatures, such as the case where
-     * Jackson Databind isn't used so no JsonProperty annotation is added to the parameter.
+     * The parameter takes client type of property in constructor.
      *
-     * @param property The constructor parameter.
+     * @param property The client model property as constructor parameter.
      * @param constructorSignatureBuilder The constructor signature builder.
      * @param addJsonPropertyAnnotation whether to add {@code @JsonProperty} annotation on parameter.
      */
@@ -859,6 +844,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         constructorSignatureBuilder.append(property.getClientType()).append(" ").append(property.getName());
     }
 
+    /**
+     * Adds a constructor parameter to the constructor signature builder.
+     * <p>
+     * The parameter takes wire type of property in constructor.
+     *
+     * @param property The client model property as constructor parameter.
+     * @param constructorSignatureBuilder The constructor signature builder.
+     */
     private static void addModelConstructorParameterAsWireType(
         ClientModelProperty property,
         StringBuilder constructorSignatureBuilder) {
