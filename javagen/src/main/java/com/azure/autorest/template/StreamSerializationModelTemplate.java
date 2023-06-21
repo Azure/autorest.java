@@ -124,8 +124,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     static void xmlWrapperClassXmlSerializableImplementation(JavaClass classBlock, String wrapperClassName,
-        IType iterableType, String xmlRootElementName, String xmlListElementName, String xmlElementNameCamelCase,
-        String xmlNamespace) {
+        IType iterableType, String xmlRootElementName, String xmlRootElementNamespace, String xmlListElementName,
+        String xmlElementNameCamelCase, String xmlListElementNamespace) {
         IType elementType = ((IterableType) iterableType).getElementType();
 
         classBlock.annotation("Override");
@@ -135,14 +135,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         classBlock.annotation("Override");
         classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException", writerMethod -> {
             writerMethod.line("rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? \"" + xmlRootElementName + "\" : rootElementName;");
-            String writeStartElement = (xmlNamespace != null)
-                ? "xmlWriter.writeStartElement(\"" + xmlNamespace + "\", rootElementName);"
+            String writeStartElement = (xmlRootElementNamespace != null)
+                ? "xmlWriter.writeStartElement(\"" + xmlRootElementNamespace + "\", rootElementName);"
                 : "xmlWriter.writeStartElement(rootElementName);";
             writerMethod.line(writeStartElement);
 
             writerMethod.ifBlock(xmlElementNameCamelCase + " != null", ifAction -> {
                 String xmlWrite = elementType.xmlSerializationMethodCall("xmlWriter", xmlListElementName,
-                    xmlNamespace, "element", false, false);
+                    xmlListElementNamespace, "element", false, false);
                 ifAction.line("for (%s element : %s) {", elementType, xmlElementNameCamelCase);
                 ifAction.indent(() -> ifAction.line(xmlWrite + ";"));
                 ifAction.line("}");
@@ -156,8 +156,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         classBlock.publicStaticMethod(wrapperClassName + " fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException", readerMethod -> {
             readerMethod.line("rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? \"" + xmlRootElementName + "\" : rootElementName;");
-            String readObject = (xmlNamespace != null)
-                ? "return xmlReader.readObject(\"" + xmlNamespace + "\", rootElementName, reader -> {"
+            String readObject = (xmlRootElementNamespace != null)
+                ? "return xmlReader.readObject(\"" + xmlRootElementNamespace + "\", rootElementName, reader -> {"
                 : "return xmlReader.readObject(rootElementName, reader -> {";
 
             readerMethod.line(readObject);
@@ -166,10 +166,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 readerMethod.line();
                 readerMethod.line("while (reader.nextElement() != XmlToken.END_ELEMENT) {");
                 readerMethod.indent(() -> {
-                    // TODO (alzimmer): Support namespace validation.
-                    readerMethod.line("String elementName = reader.getElementName().getLocalPart();");
+                    readerMethod.line("QName elementName = reader.getElementName();");
+                    String condition = getXmlNameConditional(xmlListElementName, xmlListElementNamespace, "elementName");
                     readerMethod.line();
-                    readerMethod.ifBlock("\"" + xmlListElementName + "\".equals(elementName)", ifBlock -> {
+                    readerMethod.ifBlock(condition, ifBlock -> {
                         ifBlock.ifBlock("items == null", ifBlock2 -> ifBlock2.line("items = new ArrayList<>();"));
                         ifBlock.line();
 
@@ -1222,11 +1222,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
                 if (!sameNames) {
-                    ifAction.line("xmlWriter.writeStartElement(\"" + element.getXmlName() + "\");");
+                    String writeStartElement = element.getXmlNamespace() == null
+                        ? "xmlWriter.writeStartElement(\"" + element.getXmlName() + "\");"
+                        : "xmlWriter.writeStartElement(\"" + element.getXmlNamespace() + "\", \"" + element.getXmlName() + "\");";
+                    ifAction.line(writeStartElement);
                 }
 
                 String xmlWrite = elementType.xmlSerializationMethodCall("xmlWriter", element.getXmlListElementName(),
-                    element.getXmlNamespace(), "element", false, false);
+                    element.getXmlListElementNamespace(), "element", false, false);
                 ifAction.line("for (%s element : %s) {", elementType, propertyValueGetter);
                 ifAction.indent(() -> ifAction.line(xmlWrite + ";"));
                 ifAction.line("}");
@@ -1546,16 +1549,19 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String xmlAttributeDeserialization = getSimpleXmlDeserialization(attribute.getWireType(),
             attribute.getClientType(), "reader", null, attribute.getXmlName(), attribute.getXmlNamespace());
 
+        if (attribute.isPolymorphicDiscriminator()) {
+            methodBlock.line("String discriminatorValue = " + xmlAttributeDeserialization + ";");
+            String ifStatement = String.format("!%s.equals(discriminatorValue)", attribute.getDefaultValue());
+            methodBlock.ifBlock(ifStatement, ifAction2 -> ifAction2.line(
+                "throw new IllegalStateException(\"'%s' was expected to be non-null and equal to '%s'. "
+                    + "The found '%s' was '\" + discriminatorValue + \"'.\");",
+                attribute.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
+                attribute.getSerializedName()));
+            return;
+        }
+
         if (propertiesManager.hasConstructorArguments()) {
             methodBlock.line("%s %s = %s;", attribute.getClientType(), attribute.getName(), xmlAttributeDeserialization);
-            if (attribute.isPolymorphicDiscriminator()) {
-                String ifStatement = String.format("!%s.equals(%s)", attribute.getDefaultValue(), attribute.getName());
-                methodBlock.ifBlock(ifStatement, ifAction2 -> ifAction2.line(
-                    "throw new IllegalStateException(\"'%s' was expected to be non-null and equal to '%s'. "
-                        + "The found '%s' was '\" + %s + \"'.\");",
-                    attribute.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
-                    attribute.getSerializedName(), attribute.getName()));
-            }
         } else {
             handleSettingDeserializedValue(methodBlock, propertiesManager.getDeserializedModelName(), attribute,
                 xmlAttributeDeserialization, fromSuper);
@@ -1600,11 +1606,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             return ifBlock;
         }
 
-        String condition = "\"" + xmlElementName + "\".equals(" + fieldNameVariableName + ".getLocalPart())";
-        if (xmlNamespace != null) {
-            condition += " && \"" + xmlNamespace + "\".equals(" + fieldNameVariableName + ".getNamespaceURI())";
-        }
-
+        String condition = getXmlNameConditional(xmlElementName, xmlNamespace, fieldNameVariableName);
         return ifOrElseIf(methodBlock, ifBlock, condition,
             deserializationBlock -> generateXmlDeserializationLogic(deserializationBlock, property, propertiesManager,
                 fromSuper, settings));
@@ -1631,21 +1633,36 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             boolean sameNames = Objects.equals(property.getXmlName(), property.getXmlListElementName());
             String elementDeserialization = getSimpleXmlDeserialization(elementType, elementType, "reader",
                 sameNames ? property.getXmlName() : property.getXmlListElementName(), null, null);
-            String fieldAccess = propertiesManager.hasConstructorArguments()
-                ? property.getName()
-                : propertiesManager.getDeserializedModelName() + "." + property.getName();
+            String fieldAccess;
+            if (propertiesManager.hasConstructorArguments()) {
+                // Cases with constructor arguments will have a local variable based on the name of the property.
+                fieldAccess = property.getName();
+            } else if (fromSuper) {
+                // Cases where the property is from the super type will need to access the getter.
+                fieldAccess = propertiesManager.getDeserializedModelName() + "." + property.getGetterName() + "()";
+            } else {
+                // Otherwise access the property directly.
+                fieldAccess = propertiesManager.getDeserializedModelName() + "." + property.getName();
+            }
 
             // TODO (alzimmer): Handle nested container types when needed.
-            deserializationBlock.ifBlock(fieldAccess + " == null",
-                ifStatement -> ifStatement.line(fieldAccess + " = new ArrayList<>();"));
+            if (fromSuper) {
+                // When the property is maintained by the super class use the setter to set a new ArrayList.
+                deserializationBlock.line(propertiesManager.getDeserializedModelName() + "." + property.getSetterName()
+                    + "(new ArrayList<>());");
+            } else {
+                deserializationBlock.ifBlock(fieldAccess + " == null",
+                    ifStatement -> ifStatement.line(fieldAccess + " = new ArrayList<>();"));
+            }
 
             if (sameNames) {
                 deserializationBlock.line(fieldAccess + ".add(" + elementDeserialization + ");");
             } else {
                 deserializationBlock.block("while (reader.nextElement() != XmlToken.END_ELEMENT)", whileBlock -> {
                     whileBlock.line("elementName = reader.getElementName();");
-                    whileBlock.ifBlock("\"" + property.getXmlListElementName() + "\".equals(elementName.getLocalPart())",
-                        ifBlock -> ifBlock.line(fieldAccess + ".add(" + elementDeserialization + ");"))
+                    String condition = getXmlNameConditional(property.getXmlListElementName(),
+                        property.getXmlListElementNamespace(), "elementName");
+                    whileBlock.ifBlock(condition, ifBlock -> ifBlock.line(fieldAccess + ".add(" + elementDeserialization + ");"))
                         .elseBlock(elseBlock -> elseBlock.line("reader.skipElement();"));
                 });
             }
@@ -1738,5 +1755,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             return treeProperties;
         }
+    }
+
+    private static String getXmlNameConditional(String localPart, String namespace, String elementName) {
+        String condition = "\"" + localPart + "\".equals(" + elementName + ".getLocalPart())";
+        if (namespace != null) {
+            condition += " && \"" + namespace + "\".equals(" + elementName + ".getNamespaceURI())";
+        }
+
+        return condition;
     }
 }

@@ -171,15 +171,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                         methodBlock, settings));
 
-                // If the model has derived types and the properties is an XML wrapper and stream-style serialization
-                // is being generated, generate an internal method that can access the direct value of the XML wrapper
-                // static class.
-                if (hasDerivedModels && property.isXmlWrapper() && settings.isStreamStyleSerialization()) {
-                    classBlock.method(JavaVisibility.PackagePrivate, null,
-                        getPropertyXmlWrapperClassName(property) + " " + getGetterName(model, property) + "Internal()",
-                        methodBlock -> methodBlock.methodReturn("this." + property.getName()));
-                }
-
                 if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputModel) {
                     generateSetterJavadoc(classBlock, model, property);
                     addGeneratedAnnotation(classBlock);
@@ -188,19 +179,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings));
-
-                    // If the model has derived types and the properties is an XML wrapper and stream-style serialization
-                    // is being generated, generate an internal method that can access the direct value of the XML wrapper
-                    // static class.
-                    if (hasDerivedModels && property.isXmlWrapper() && settings.isStreamStyleSerialization()) {
-                        classBlock.method(JavaVisibility.PackagePrivate, null,
-                            model.getName() + " " + property.getSetterName()
-                                + "Internal(" + getPropertyXmlWrapperClassName(property) + " " + property.getName() + ")",
-                            methodBlock -> {
-                                methodBlock.line("this." + property.getName() + " = " + property.getName() + ";");
-                                methodBlock.methodReturn("this");
-                            });
-                    }
                 }
 
                 // If the property is additional properties, and stream-style serialization isn't being used, add a
