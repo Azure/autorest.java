@@ -684,27 +684,42 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // Also get required properties from the super class structure.
         List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredWritableParentProperties(model);
 
+        // Jackson requires a constructor with @JsonCreator, with parameters in wire type. Ref https://github.com/Azure/autorest.java/issues/2170
+        boolean generatePrivateConstructorForJackson = false;
+
         // Description for the class is always the same, not matter whether there are required properties.
         // If there are required properties, the required properties will extend the consumer to add param Javadocs.
         Consumer<JavaJavadocComment> javadocCommentConsumer = comment ->
             comment.description("Creates an instance of " + model.getName() + " class.");
 
+        final int constructorPropertiesStringBuilderCapacity = 128 * (requiredProperties.size() + requiredParentProperties.size());
+
         // Use a StringBuilder with an initial capacity of 128 times the total number of required constructor properties.
         // If there are no required constructor properties this will simply be zero and result in a no-args constructor
         // being generated.
         StringBuilder constructorProperties =
-            new StringBuilder(128 * (requiredProperties.size() + requiredParentProperties.size()));
+            new StringBuilder(constructorPropertiesStringBuilderCapacity);
 
         StringBuilder superProperties = new StringBuilder(64 * requiredParentProperties.size());
 
         if (settings.isRequiredFieldsAsConstructorArgs()) {
+            final boolean constructorParametersContainsMismatchWireType =
+                requiredProperties.stream().anyMatch(p -> ClientModelUtil.isWireTypeMismatch(p, true))
+                    || requiredParentProperties.stream().anyMatch(p -> ClientModelUtil.isWireTypeMismatch(p, true));
+
+            if (constructorParametersContainsMismatchWireType && !settings.isStreamStyleSerialization()) {
+                generatePrivateConstructorForJackson = true;
+            }
+
+            final boolean addJsonPropertyAnnotation = !(settings.isStreamStyleSerialization() || generatePrivateConstructorForJackson);
+
             // Properties required by the super class structure come first.
             for (ClientModelProperty property : requiredParentProperties) {
                 if (constructorProperties.length() > 0) {
                     constructorProperties.append(", ");
                 }
 
-                addModelConstructorParameter(property, constructorProperties);
+                addModelConstructorParameter(property, constructorProperties, addJsonPropertyAnnotation);
 
                 javadocCommentConsumer = javadocCommentConsumer.andThen(comment -> comment.param(property.getName(),
                     "the " + property.getName() + " value to set"));
@@ -722,7 +737,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     constructorProperties.append(", ");
                 }
 
-                addModelConstructorParameter(property, constructorProperties);
+                addModelConstructorParameter(property, constructorProperties, addJsonPropertyAnnotation);
 
                 javadocCommentConsumer = javadocCommentConsumer.andThen(comment -> comment.param(property.getName(),
                     "the " + property.getName() + " value to set"));
@@ -732,11 +747,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // Add the Javadocs for the constructor.
         classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), javadocCommentConsumer);
 
-
         addGeneratedAnnotation(classBlock);
         // If there are any constructor arguments indicate that this is the JsonCreator. No args constructors are
         // implicitly used as the JsonCreator if the class doesn't indicate one.
-        if (constructorProperties.length() > 0 && !settings.isStreamStyleSerialization()) {
+        if (constructorProperties.length() > 0 && !settings.isStreamStyleSerialization()
+                // @JsonCreator will be on the other private constructor
+                && !generatePrivateConstructorForJackson) {
             classBlock.annotation("JsonCreator");
         }
 
@@ -762,22 +778,87 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
         });
+
+        if (generatePrivateConstructorForJackson) {
+            addGeneratedAnnotation(classBlock);
+            classBlock.annotation("JsonCreator");
+
+            StringBuilder constructorPropertiesAsWireType =
+                    new StringBuilder(constructorPropertiesStringBuilderCapacity);
+
+            StringBuilder constructorPropertiesInvokePublicConstructor =
+                    new StringBuilder(constructorPropertiesStringBuilderCapacity);
+
+            final Consumer<ClientModelProperty> addParameterInvokePublicConstructor = p -> {
+                if (constructorPropertiesInvokePublicConstructor.length() > 0) {
+                    constructorPropertiesInvokePublicConstructor.append(", ");
+                }
+
+                if (p.getWireType() == p.getClientType()) {
+                    constructorPropertiesInvokePublicConstructor.append(p.getName());
+                } else {
+                    constructorPropertiesInvokePublicConstructor.append(p.getWireType().convertToClientType(p.getName()));
+                }
+            };
+
+            for (ClientModelProperty property : requiredParentProperties) {
+                if (constructorPropertiesAsWireType.length() > 0) {
+                    constructorPropertiesAsWireType.append(", ");
+                }
+
+                addModelConstructorParameterAsWireType(property, constructorPropertiesAsWireType);
+
+                addParameterInvokePublicConstructor.accept(property);
+            }
+            for (ClientModelProperty property : requiredProperties) {
+                if (constructorPropertiesAsWireType.length() > 0) {
+                    constructorPropertiesAsWireType.append(", ");
+                }
+
+                addModelConstructorParameterAsWireType(property, constructorPropertiesAsWireType);
+
+                addParameterInvokePublicConstructor.accept(property);
+            }
+
+            classBlock.privateConstructor(model.getName() + "(" + constructorPropertiesAsWireType + ")", constructor -> {
+                constructor.line("this(" + constructorPropertiesInvokePublicConstructor + ");");
+            });
+        }
     }
 
     /**
      * Adds a constructor parameter to the constructor signature builder.
      * <p>
-     * This is an entry point for subclasses of ModelTemplate to generate different signatures, such as the case where
-     * Jackson Databind isn't used so no JsonProperty annotation is added to the parameter.
+     * The parameter takes client type of property in constructor.
      *
-     * @param property The constructor parameter.
+     * @param property The client model property as constructor parameter.
+     * @param constructorSignatureBuilder The constructor signature builder.
+     * @param addJsonPropertyAnnotation whether to add {@code @JsonProperty} annotation on parameter.
+     */
+    private static void addModelConstructorParameter(ClientModelProperty property,
+        StringBuilder constructorSignatureBuilder, boolean addJsonPropertyAnnotation) {
+
+        if (addJsonPropertyAnnotation) {
+            constructorSignatureBuilder.append("@JsonProperty(").append(property.getAnnotationArguments()).append(") ");
+        }
+        constructorSignatureBuilder.append(property.getClientType()).append(" ").append(property.getName());
+    }
+
+    /**
+     * Adds a constructor parameter to the constructor signature builder.
+     * <p>
+     * The parameter takes wire type of property in constructor.
+     *
+     * @param property The client model property as constructor parameter.
      * @param constructorSignatureBuilder The constructor signature builder.
      */
-    protected void addModelConstructorParameter(ClientModelProperty property,
+    private static void addModelConstructorParameterAsWireType(
+        ClientModelProperty property,
         StringBuilder constructorSignatureBuilder) {
-        constructorSignatureBuilder.append("@JsonProperty(").append(property.getAnnotationArguments())
-            .append(") ").append(property.getClientType())
-            .append(" ").append(property.getName());
+
+        constructorSignatureBuilder
+            .append("@JsonProperty(").append(property.getAnnotationArguments()).append(") ")
+            .append(property.getWireType()).append(" ").append(property.getName());
     }
 
     /**

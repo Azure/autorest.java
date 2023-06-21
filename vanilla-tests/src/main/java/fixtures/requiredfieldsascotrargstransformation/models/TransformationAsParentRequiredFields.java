@@ -5,10 +5,13 @@
 package fixtures.requiredfieldsascotrargstransformation.models;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 /** The TransformationAsParentRequiredFields model. */
 @Immutable
@@ -35,16 +38,32 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      * @param unixTimeDateTimeRequired the unixTimeDateTimeRequired value to set.
      * @param rfc1123RequiredChild the rfc1123RequiredChild value to set.
      */
-    @JsonCreator
     private TransformationAsParentRequiredFields(
-            @JsonProperty(value = "rfc1123Required", required = true) OffsetDateTime rfc1123Required,
-            @JsonProperty(value = "nameRequired", required = true) String nameRequired,
-            @JsonProperty(value = "urlBase64EncodedRequired", required = true) byte[] urlBase64EncodedRequired,
-            @JsonProperty(value = "unixTimeLongRequired", required = true) OffsetDateTime unixTimeLongRequired,
-            @JsonProperty(value = "unixTimeDateTimeRequired", required = true) OffsetDateTime unixTimeDateTimeRequired,
-            @JsonProperty(value = "rfc1123RequiredChild", required = true) OffsetDateTime rfc1123RequiredChild) {
+            OffsetDateTime rfc1123Required,
+            String nameRequired,
+            byte[] urlBase64EncodedRequired,
+            OffsetDateTime unixTimeLongRequired,
+            OffsetDateTime unixTimeDateTimeRequired,
+            OffsetDateTime rfc1123RequiredChild) {
         super(rfc1123Required, nameRequired, urlBase64EncodedRequired, unixTimeLongRequired, unixTimeDateTimeRequired);
         this.rfc1123RequiredChild = new DateTimeRfc1123(rfc1123RequiredChild);
+    }
+
+    @JsonCreator
+    private TransformationAsParentRequiredFields(
+            @JsonProperty(value = "rfc1123Required", required = true) DateTimeRfc1123 rfc1123Required,
+            @JsonProperty(value = "nameRequired", required = true) String nameRequired,
+            @JsonProperty(value = "urlBase64EncodedRequired", required = true) Base64Url urlBase64EncodedRequired,
+            @JsonProperty(value = "unixTimeLongRequired", required = true) long unixTimeLongRequired,
+            @JsonProperty(value = "unixTimeDateTimeRequired", required = true) OffsetDateTime unixTimeDateTimeRequired,
+            @JsonProperty(value = "rfc1123RequiredChild", required = true) DateTimeRfc1123 rfc1123RequiredChild) {
+        this(
+                rfc1123Required.getDateTime(),
+                nameRequired,
+                urlBase64EncodedRequired.decodedBytes(),
+                OffsetDateTime.ofInstant(Instant.ofEpochSecond(unixTimeLongRequired), ZoneOffset.UTC),
+                unixTimeDateTimeRequired,
+                rfc1123RequiredChild.getDateTime());
     }
 
     /**

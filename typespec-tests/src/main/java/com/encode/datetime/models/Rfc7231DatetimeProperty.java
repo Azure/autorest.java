@@ -27,9 +27,14 @@ public final class Rfc7231DatetimeProperty {
      * @param value the value value to set.
      */
     @Generated
-    @JsonCreator
-    public Rfc7231DatetimeProperty(@JsonProperty(value = "value") OffsetDateTime value) {
+    public Rfc7231DatetimeProperty(OffsetDateTime value) {
         this.value = new DateTimeRfc1123(value);
+    }
+
+    @Generated
+    @JsonCreator
+    private Rfc7231DatetimeProperty(@JsonProperty(value = "value") DateTimeRfc1123 value) {
+        this(value.getDateTime());
     }
 
     /**

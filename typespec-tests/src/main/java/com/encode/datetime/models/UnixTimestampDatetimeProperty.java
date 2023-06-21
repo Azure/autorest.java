@@ -28,9 +28,14 @@ public final class UnixTimestampDatetimeProperty {
      * @param value the value value to set.
      */
     @Generated
-    @JsonCreator
-    public UnixTimestampDatetimeProperty(@JsonProperty(value = "value") OffsetDateTime value) {
+    public UnixTimestampDatetimeProperty(OffsetDateTime value) {
         this.value = value.toEpochSecond();
+    }
+
+    @Generated
+    @JsonCreator
+    private UnixTimestampDatetimeProperty(@JsonProperty(value = "value") long value) {
+        this(OffsetDateTime.ofInstant(Instant.ofEpochSecond(value), ZoneOffset.UTC));
     }
 
     /**
