@@ -54,11 +54,6 @@ public class Main {
     // java -jar target/azure-typespec-extension-jar-with-dependencies.jar
     public static void main(String[] args) throws IOException {
         // parameters
-        LOGGER.info("Test info 1");
-        LOGGER.error("Test error 1");
-        LOGGER.warn("Test warn 1");
-        LOGGER.trace("Test trace 1");
-
         String inputYamlFileName = "typespec-tests/tsp-output/code-model.yaml";
         if (args.length >= 1) {
             inputYamlFileName = args[0];
