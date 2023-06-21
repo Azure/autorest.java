@@ -20,6 +20,6 @@ if (Test-Path package-lock.json) {
 npm install
 
 # delete output
-if (Test-Path tsp-output) {
-    Remove-Item tsp-output -Recurse -Force
-}
+#if (Test-Path tsp-output) {
+#    Remove-Item tsp-output -Recurse -Force
+#}

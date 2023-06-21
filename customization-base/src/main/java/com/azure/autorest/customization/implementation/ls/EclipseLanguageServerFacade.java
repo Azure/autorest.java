@@ -34,7 +34,7 @@ public class EclipseLanguageServerFacade {
                 command += "-configuration ./config_linux";
             }
             server = Runtime.getRuntime().exec(command, new String[]{"CLIENT_PORT=" + port},
-                Paths.get(pathToLanguageServerPlugin, "jdt-language-server").toFile());
+                Paths.get(pathToLanguageServerPlugin, "../postprocessor/jdt-language-server").toFile());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

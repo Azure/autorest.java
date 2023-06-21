@@ -35,7 +35,7 @@ public final class NamingClient {
     }
 
     /**
-     * summary of POST op
+     * Protocol method for POST operation.
      *
      * <p>description of POST op.
      *

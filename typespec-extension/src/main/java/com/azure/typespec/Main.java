@@ -11,9 +11,9 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.typespec.model.EmitterOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
+import com.azure.typespec.model.EmitterOptions;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,9 +52,13 @@ public class Main {
     }
 
     // java -jar target/azure-typespec-extension-jar-with-dependencies.jar
-
     public static void main(String[] args) throws IOException {
         // parameters
+        LOGGER.info("Test info 1");
+        LOGGER.error("Test error 1");
+        LOGGER.warn("Test warn 1");
+        LOGGER.trace("Test trace 1");
+
         String inputYamlFileName = "typespec-tests/tsp-output/code-model.yaml";
         if (args.length >= 1) {
             inputYamlFileName = args[0];
@@ -106,6 +110,9 @@ public class Main {
             }
         });
 
+        // handle customization
+        javaFiles.putAll(typeSpecPlugin.customizeGeneratedCode(javaFiles, outputDir));
+
         // format
         Formatter formatter = new Formatter();
 
@@ -137,7 +144,6 @@ public class Main {
             typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
                     "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
         }
-
         System.exit(0);
     }
 

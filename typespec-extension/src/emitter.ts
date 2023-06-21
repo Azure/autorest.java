@@ -7,12 +7,13 @@ import {
   createTypeSpecLibrary,
 } from "@typespec/compiler";
 import { dump } from "js-yaml";
-import { promisify } from "util";
-import { execFile } from "child_process";
+import { spawn } from "child_process";
 import { promises } from "fs";
 import { CodeModelBuilder } from "./code-model-builder.js";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+
+
 
 export interface EmitterOptions {
   "namespace"?: string;
@@ -36,6 +37,8 @@ export interface EmitterOptions {
 export interface DevOptions {
   "generate-code-model"?: boolean;
   "support-versioning"?: boolean;
+  "debug"?: boolean;
+  "loglevel"?: "off" | "debug" | "info" | "warn" | "error";
 }
 
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
@@ -101,14 +104,19 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     const jarFileName = resolvePath(moduleRoot, "target", "azure-typespec-extension-jar-with-dependencies.jar");
     program.trace("typespec-java", `Exec JAR ${jarFileName}`);
 
+    const javaArgs: string[] = [];
+    javaArgs.push(`-DemitterOptions=${emitterOptions}`);
+    if (options["dev-options"]?.debug) {
+      javaArgs.push("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005")
+    }
+    if (options["dev-options"]?.loglevel) {
+      javaArgs.push("-Dloglevel=" + options["dev-options"]?.loglevel);
+    }
+    javaArgs.push("-jar");
+    javaArgs.push(jarFileName);
+    javaArgs.push(codeModelFileName);
     try {
-      const output = await promisify(execFile)("java", [
-        `-DemitterOptions=${emitterOptions}`,
-        "-jar",
-        jarFileName,
-        codeModelFileName,
-      ]);
-      program.trace("typespec-java", output.stdout ? output.stdout : output.stderr);
+      spawn("java", javaArgs, {stdio: "inherit"});
     } catch (err: any) {
       if ("code" in err && err.code === "ENOENT") {
         const msg = "'java' is not on PATH. Please install JDK 11 or above.";

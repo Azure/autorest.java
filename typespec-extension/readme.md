@@ -36,7 +36,7 @@ emit:
 
 # Generate Java
 
-`npx tsp compile client.tsp --emit=@azure-tools/typespec-java` or `npx tsp compile client.tsp --emit=@azure-tools/typespec-java --options='@azure-tools/typespec-java.emitter-output-dir=<target=folder>`.
+`npx tsp compile client.tsp --emit=@azure-tools/typespec-java` or `npx tsp compile client.tsp --emit=@azure-tools/typespec-java --options='@azure-tools/typespec-java.emitter-output-dir=<target-folder>`.
 
 If `emitter-output-dir` option is not provided, generated Java code will be under `tsp-output/@azure-tools/typespec-java` folder.
 
@@ -72,6 +72,89 @@ A few exceptions are API of JSON Merge Patch, and API of long-running operation 
 
 See "convenientAPI" decorator from [typespec-client-generator-core](https://github.com/Azure/typespec-azure/tree/main/packages/typespec-client-generator-core).
 
+
+# Customization
+All post-code customizations listed in this [documentation](https://github.com/Azure/autorest.java/tree/main/customization-base/README.md) are supported for code generated from TypeSpec.
+
+To configure customization with TypeSpec, Java's emitter options should include a `customization-class`. The `customization-class` option should specify the path to the file containing the customization code relative to `emitter-output-dir`. Note that the path should end with `src/main/java/<YourCustomizationClassName>.java`. The recommended practice is to place the customization class in `<output-dir>/customization/src/main/java/<YourCustomizationClassName>.java` and the `customization-class` option will have the value of `customization-class: customization/src/main/java/<YourCustomizationClassName>.java`. See example `tspconfig.yaml` below:
+
+```yaml
+emit:
+  - "@azure-tools/typespec-java"
+options:
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{project-root}/azure-ai-language-authoring"
+    namespace: "com.azure.ai.language.authoring"
+    service-name: "Authoring"
+    partial-update: false
+    service-versions:
+      - "2022-05-15-preview"
+    namer: false
+    generate-samples: true
+    generate-tests: true
+    examples-directory: "./examples"
+    custom-types-subpackage: "implementation.models"
+    custom-types: InternalModel1,InternalModel2
+    customization-class: customization/src/main/java/MyCustomization.java
+```
+
 # Changelog
 
 See [changelog](https://github.com/Azure/autorest.java/blob/main/typespec-extension/changelog.md).
+
+# Troubleshooting
+
+### Enable logging in Java code
+
+To enable logging, use `tspconfig.yaml` to add the `loglevel: ` option. Typically, `tspconfig.yaml` file will be
+located in the same directory as the `<target.tsp>` file. The `loglevel` setting is a developer option and should be set under `options->dev-options`. The acceptable values for `loglevel` are
+`off`, `debug`, `info`, `warn` and `error`. A sample `tspconfig.yaml` is shown below that enables logging at `info` level. By default,
+logging is enabled at `error` level.
+
+```yaml
+emit:
+  - "@azure-tools/typespec-java"
+options:
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{project-root}/tsp-output"
+    partial-update: true
+    namer: true
+    dev-options:
+      support-versioning: true
+      loglevel: info
+```
+
+### Debugging Java code
+
+In order to set breakpoints and debug Java code locally on your development workspace, use the `tspconfig.yaml` file to
+set the `debug` option to `true` under `options->dev-options` as shown in the example below. If the `debug` option is set
+to `true`, then `tsp compile <target.tsp>` command will start the emitter which then invokes the Java process but the process
+will be suspended until a debugger is attached to the process. The process listens on port 5005. Run the remote debugger
+with this port on your IntelliJ or VS Code to connect to the Java process. This should now run the Java code generator
+and breaks at all applicable breakpoints.
+
+The remote debugger configuration is shown below for reference.
+
+![img.png](../docs/images/img.png)
+
+```yaml
+emit:
+  - "@azure-tools/typespec-java"
+options:
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{project-root}/tsp-output"
+    partial-update: true
+    namer: true
+    dev-options:
+      support-versioning: true
+      debug: true
+```
+
+### New version of `@typespec/compiler` etc.
+
+Force an installation of new version via deleting `package-lock.json` and `node_modules` in `./typespec-extension` folder.
+
+```shell
+rm -rf node_modules
+rm package-lock.json
+```
