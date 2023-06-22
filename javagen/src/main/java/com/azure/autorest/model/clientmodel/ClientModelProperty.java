@@ -55,6 +55,11 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
      */
     private final String xmlListElementName;
     /**
+     * The namespace of each list element tag within an XML list property.
+     */
+    private final String xmlListElementNamespace;
+    private final String xmlListElementPrefix;
+    /**
      * The type of this property as it is transmitted across the network (across the wire).
      */
     private final IType wireType;
@@ -118,10 +123,10 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
      */
     private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute,
         String xmlName, String xmlNamespace, String serializedName, boolean isXmlWrapper, String xmlListElementName,
-        IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly,
-        List<Mutability> mutabilities, boolean isRequired, String headerCollectionPrefix,
-        boolean isAdditionalProperties, boolean needsFlatten, boolean clientFlatten, boolean polymorphicDiscriminator,
-        boolean isXmlText, String xmlPrefix) {
+        String xmlListElementNamespace, String xmlListElementPrefix, IType wireType, IType clientType,
+        boolean isConstant, String defaultValue, boolean isReadOnly, List<Mutability> mutabilities, boolean isRequired,
+        String headerCollectionPrefix, boolean isAdditionalProperties, boolean needsFlatten, boolean clientFlatten,
+        boolean polymorphicDiscriminator, boolean isXmlText, String xmlPrefix) {
         this.name = name;
         this.description = description;
         this.annotationArguments = annotationArguments;
@@ -131,6 +136,8 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         this.serializedName = serializedName;
         this.isXmlWrapper = isXmlWrapper;
         this.xmlListElementName = xmlListElementName;
+        this.xmlListElementNamespace = xmlListElementNamespace;
+        this.xmlListElementPrefix = xmlListElementPrefix;
         this.wireType = wireType;
         this.clientType = clientType;
         this.isConstant = isConstant;
@@ -189,6 +196,14 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
 
     public final String getXmlListElementName() {
         return xmlListElementName;
+    }
+
+    public final String getXmlListElementNamespace() {
+        return xmlListElementNamespace;
+    }
+
+    public final String getXmlListElementPrefix() {
+        return xmlListElementPrefix;
     }
 
     public final IType getWireType() {
@@ -344,6 +359,8 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         private String serializedName;
         private boolean isXmlWrapper;
         private String xmlListElementName;
+        private String xmlListElementNamespace;
+        private String xmlListElementPrefix;
         private IType wireType;
         private IType clientType;
         private boolean isConstant = false;
@@ -447,6 +464,26 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
          */
         public Builder xmlListElementName(String xmlListElementName) {
             this.xmlListElementName = xmlListElementName;
+            return this;
+        }
+
+        /**
+         * Sets the namespace of each list element tag within an XML list property.
+         * @param xmlListElementNamespace the namespace of each list element tag within an XML list property
+         * @return the Builder itself
+         */
+        public Builder xmlListElementNamespace(String xmlListElementNamespace) {
+            this.xmlListElementNamespace = xmlListElementNamespace;
+            return this;
+        }
+
+        /**
+         * Sets the prefix of each list element tag within an XML list property.
+         * @param xmlListElementPrefix the prefix of each list element tag within an XML list property
+         * @return the Builder itself
+         */
+        public Builder xmlListElementPrefix(String xmlListElementPrefix) {
+            this.xmlListElementPrefix = xmlListElementPrefix;
             return this;
         }
 
@@ -601,9 +638,10 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
 
         public ClientModelProperty build() {
             return new ClientModelProperty(name, description, annotationArguments, isXmlAttribute, xmlName,
-                xmlNamespace, serializedName, isXmlWrapper, xmlListElementName, wireType, clientType, isConstant,
-                defaultValue, isReadOnly, mutabilities, isRequired, headerCollectionPrefix, isAdditionalProperties,
-                needsFlatten, clientFlatten, polymorphicDiscriminator, isXmlText, xmlPrefix);
+                xmlNamespace, serializedName, isXmlWrapper, xmlListElementName, xmlListElementNamespace,
+                xmlListElementPrefix, wireType, clientType, isConstant, defaultValue, isReadOnly, mutabilities,
+                isRequired, headerCollectionPrefix, isAdditionalProperties, needsFlatten, clientFlatten,
+                polymorphicDiscriminator, isXmlText, xmlPrefix);
         }
     }
 }

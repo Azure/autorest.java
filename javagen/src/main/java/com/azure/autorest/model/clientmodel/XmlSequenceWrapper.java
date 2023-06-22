@@ -3,6 +3,15 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.util.CodeNamer;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -12,18 +21,52 @@ public class XmlSequenceWrapper {
     private final String packageName;
     private final IType sequenceType;
     private final String xmlRootElementName;
+    private final String xmlRootElementNamespace;
     private final String xmlListElementName;
+    private final String xmlListElementNamespace;
     private final String wrapperClassName;
     private final Set<String> imports;
 
-    public XmlSequenceWrapper(String packageName, IType sequenceType, String modelTypeName, String xmlRootElementName,
-        String xmlListElementName, Set<String> imports) {
-        this.packageName = packageName;
-        this.sequenceType = sequenceType;
-        this.xmlRootElementName = xmlRootElementName;
-        this.xmlListElementName = xmlListElementName;
+    public XmlSequenceWrapper(String modelTypeName, ArraySchema arraySchema, JavaSettings settings) {
+        boolean wrapperHasXmlSerialization = arraySchema.getSerialization() != null
+            && arraySchema.getSerialization().getXml() != null;
+        boolean elementHasXmlSerialization = arraySchema.getElementType().getSerialization() != null
+            && arraySchema.getElementType().getSerialization().getXml() != null;
+
+
+        if (wrapperHasXmlSerialization) {
+            xmlRootElementName = arraySchema.getSerialization().getXml().getName();
+            xmlRootElementNamespace = arraySchema.getSerialization().getXml().getNamespace();
+        } else {
+            xmlRootElementName = arraySchema.getLanguage().getDefault().getSerializedName();
+            xmlRootElementNamespace = arraySchema.getLanguage().getDefault().getNamespace();
+        }
+
+        if (elementHasXmlSerialization) {
+            xmlListElementName = arraySchema.getElementType().getSerialization().getXml().getName();
+            xmlListElementNamespace = arraySchema.getElementType().getSerialization().getXml().getNamespace();
+        } else {
+            xmlListElementName = arraySchema.getElementType().getLanguage().getDefault().getSerializedName();
+            xmlListElementNamespace = arraySchema.getElementType().getLanguage().getDefault().getNamespace();
+        }
+
+        sequenceType = Mappers.getSchemaMapper().map(arraySchema);
+        Set<String> imports = getXmlSequenceWrapperImports();
+        sequenceType.addImportsTo(imports, true);
+        boolean isCustomType = settings.isCustomType(CodeNamer.toPascalCase(modelTypeName + "Wrapper"));
+        packageName = isCustomType
+            ? settings.getPackage(settings.getCustomTypesSubpackage())
+            : settings.getPackage(settings.getImplementationSubpackage() + ".models");
+
         this.wrapperClassName = modelTypeName + "Wrapper";
         this.imports = imports;
+    }
+
+    private static Set<String> getXmlSequenceWrapperImports() {
+        return new HashSet<>(Arrays.asList(JsonCreator.class.getName(), JsonProperty.class.getName(),
+            "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty",
+            "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement",
+            "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText"));
     }
 
     public final String getPackage() {
@@ -38,8 +81,16 @@ public class XmlSequenceWrapper {
         return xmlRootElementName;
     }
 
+    public final String getXmlRootElementNamespace() {
+        return xmlRootElementNamespace;
+    }
+
     public final String getXmlListElementName() {
         return xmlListElementName;
+    }
+
+    public String getXmlListElementNamespace() {
+        return xmlListElementNamespace;
     }
 
     public final String getWrapperClassName() {
