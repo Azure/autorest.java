@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.List;
 
 public class EncodeDurationTests {
 
@@ -63,7 +64,8 @@ public class EncodeDurationTests {
 
         propertyClient.iso8601(new Iso8601DurationProperty(DAY40));
 
-        propertyClient.floatSecondsArray(new FloatSecondsDurationArrayProperty(
-                Arrays.asList(SECOND35, Duration.ofSeconds(46, 781_000_000))));
+        List<Duration> array = Arrays.asList(SECOND35, Duration.ofSeconds(46, 781_000_000));
+        FloatSecondsDurationArrayProperty ret = propertyClient.floatSecondsArray(new FloatSecondsDurationArrayProperty(array));
+        Assertions.assertEquals(array, ret.getValue());
     }
 }
