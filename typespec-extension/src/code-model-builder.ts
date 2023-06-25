@@ -394,13 +394,14 @@ export class CodeModelBuilder {
         codeModelClient.globalParameters!,
         codeModelClient.apiVersions,
       );
+      clientContext.preProcessOperations(this.sdkContext, client);
 
       const operationGroups = listOperationGroups(this.sdkContext, client);
 
       const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
-        if (!this.needToSkipProcessingOperation(operation)) {
+        if (!this.needToSkipProcessingOperation(operation, clientContext)) {
           codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
         }
       }
@@ -412,7 +413,7 @@ export class CodeModelBuilder {
         const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
         codeModelGroup = new OperationGroup(operationGroup.type.name);
         for (const operation of operations) {
-          if (!this.needToSkipProcessingOperation(operation)) {
+          if (!this.needToSkipProcessingOperation(operation, clientContext)) {
             codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
           }
         }
@@ -455,10 +456,16 @@ export class CodeModelBuilder {
     }
   }
 
-  private needToSkipProcessingOperation(operation: Operation): boolean {
+  private needToSkipProcessingOperation(operation: Operation, clientContext: ClientContext): boolean {
     // don't generate protocol and convenience method for overloaded operations
     // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
     if (getOverloadedOperation(this.program, operation)) {
+      this.trace(`Operation '${operation.name}' is temporary skipped, as it is an overloaded operation`);
+      return true;
+    } else if (clientContext.ignoredOperations.has(operation)) {
+      this.trace(
+        `Operation '${operation.name}' is skipped, as it is used in '@pollingOperation' of a long running operation`,
+      );
       return true;
     }
     return false;
