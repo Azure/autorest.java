@@ -10,10 +10,8 @@ import com._specs_.azure.core.lro.rpc.models.JobPollResult;
 import com._specs_.azure.core.lro.rpc.models.JobResult;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
-import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -168,44 +166,6 @@ public final class RpcClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/azure/core/lro/rpc/same-poll-result/jobs/{jobId}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getJob(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("jobId") String jobId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
-
-        @Get("/azure/core/lro/rpc/same-poll-result/jobs/{jobId}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getJobSync(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("jobId") String jobId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
-
         @Post("/azure/core/lro/rpc/different-poll-result/jobs")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(
@@ -241,44 +201,6 @@ public final class RpcClientImpl {
                 @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 @BodyParam("application/json") BinaryData jobData,
-                RequestOptions requestOptions,
-                Context context);
-
-        @Get("/azure/core/lro/rpc/different-poll-result/jobs/operations/{operationId}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getPoll(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("operationId") String operationId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
-
-        @Get("/azure/core/lro/rpc/different-poll-result/jobs/operations/{operationId}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getPollSync(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("operationId") String operationId,
-                @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -653,100 +575,6 @@ public final class RpcClientImpl {
     }
 
     /**
-     * Gets the status of a Job.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Optional)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Required): [
-     *         String (Required)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param jobId A processing job identifier.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the status of a Job along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getJobWithResponseAsync(String jobId, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getJob(this.getServiceVersion().getVersion(), jobId, accept, requestOptions, context));
-    }
-
-    /**
-     * Gets the status of a Job.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Optional)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Required): [
-     *         String (Required)
-     *     ]
-     * }
-     * }</pre>
-     *
-     * @param jobId A processing job identifier.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the status of a Job along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getJobWithResponse(String jobId, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.getJobSync(this.getServiceVersion().getVersion(), jobId, accept, requestOptions, Context.NONE);
-    }
-
-    /**
      * Creates a Job.
      *
      * <p><strong>Request Body Schema</strong>
@@ -998,61 +826,5 @@ public final class RpcClientImpl {
                                                 : Context.NONE)),
                 TypeReference.createInstance(JobPollResult.class),
                 TypeReference.createInstance(JobDataJobResultJobPollResultLongRunningFinalLocationJobResult.class));
-    }
-
-    /**
-     * Gets the status of a Job.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     operationId: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     * }
-     * }</pre>
-     *
-     * @param operationId Operation identifier.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the status of a Job along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getPollWithResponseAsync(String operationId, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getPoll(
-                                this.getServiceVersion().getVersion(), operationId, accept, requestOptions, context));
-    }
-
-    /**
-     * Gets the status of a Job.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     operationId: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
-     * }
-     * }</pre>
-     *
-     * @param operationId Operation identifier.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the status of a Job along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getPollWithResponse(String operationId, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.getPollSync(
-                this.getServiceVersion().getVersion(), operationId, accept, requestOptions, Context.NONE);
     }
 }
