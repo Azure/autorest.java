@@ -610,7 +610,7 @@ export class CodeModelBuilder {
       let finalSchema = undefined;
 
       const verb = httpOperation.verb;
-      const useNewPollStrategy = isLroNewPollingStrategy(operation, lroMetadata);
+      const useNewPollStrategy = isLroNewPollingStrategy(httpOperation, lroMetadata);
 
       let pollingStrategy: Metadata | undefined = undefined;
       if (useNewPollStrategy) {
