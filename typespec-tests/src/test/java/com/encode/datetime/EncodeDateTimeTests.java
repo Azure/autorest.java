@@ -3,6 +3,8 @@
 
 package com.encode.datetime;
 
+import com.encode.datetime.models.DefaultDatetimeProperty;
+import com.encode.datetime.models.Rfc3339DatetimeProperty;
 import com.encode.datetime.models.Rfc7231DatetimeProperty;
 import com.encode.datetime.models.UnixTimestampArrayDatetimeProperty;
 import com.encode.datetime.models.UnixTimestampDatetimeProperty;
@@ -28,9 +30,9 @@ public class EncodeDateTimeTests {
 
     @Test
     public void testQuery() {
-//        queryClient.defaultMethod(DATE1);
+        queryClient.defaultMethod(DATE1);
 
-//        queryClient.rfc3339(DATE1);
+        queryClient.rfc3339(DATE1);
 
         queryClient.rfc7231(DATE0);
 
@@ -41,9 +43,9 @@ public class EncodeDateTimeTests {
 
     @Test
     public void testHeader() {
-//        headerClient.defaultMethod(DATE1);
+        headerClient.defaultMethod(DATE0);
 
-//        headerClient.rfc3339(DATE1);
+        headerClient.rfc3339(DATE1);
 
         headerClient.rfc7231(DATE0);
 
@@ -54,9 +56,9 @@ public class EncodeDateTimeTests {
 
     @Test
     public void testProperty() {
-//        propertyClient.defaultMethod(new DefaultDatetimeProperty(DATE1));
+        propertyClient.defaultMethod(new DefaultDatetimeProperty(DATE1));
 
-//        propertyClient.rfc3339(new Rfc3339DatetimeProperty(DATE1));
+        propertyClient.rfc3339(new Rfc3339DatetimeProperty(DATE1));
 
         propertyClient.rfc7231(new Rfc7231DatetimeProperty(DATE0));
 
