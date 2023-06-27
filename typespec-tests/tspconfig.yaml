@@ -8,6 +8,9 @@ options:
     generate-samples: false
     generate-tests: false
     enable-sync-stack: true
+    skip-special-headers:
+      - client-request-id
+      - return-client-request-id
     dev-options:
       generate-code-model: true
       support-versioning: true

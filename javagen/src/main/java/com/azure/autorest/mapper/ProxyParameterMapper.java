@@ -71,7 +71,9 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         }
         builder.clientType(clientType);
 
-        if (wireType instanceof ListType && settings.isGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.BODY){
+        if (wireType instanceof ListType
+            && SchemaUtil.treatAsXml(parameterJvWireType)
+            && parameterRequestLocation == RequestParameterLocation.BODY) {
             String modelTypeName = ((ArraySchema) parameterJvWireType).getElementType().getLanguage().getJava().getName();
             boolean isCustomType = settings.isCustomType(CodeNamer.toPascalCase(modelTypeName + "Wrapper"));
             String packageName = isCustomType
@@ -80,6 +82,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             wireType = new ClassType.Builder()
                 .packageName(packageName)
                 .name(modelTypeName + "Wrapper")
+                .usedInXml(true)
                 .build();
         } else if (wireType == ArrayType.ByteArray) {
             if (parameterRequestLocation != RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {

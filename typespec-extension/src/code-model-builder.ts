@@ -151,6 +151,7 @@ import {
   loadExamples,
   isLroNewPollingStrategy,
   operationIsMultipleContentTypes,
+  cloneOperationParameter,
 } from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -173,6 +174,10 @@ export class CodeModelBuilder {
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
     this.program = program1;
+
+    if (this.options["skip-special-headers"]) {
+      this.options["skip-special-headers"].forEach((it) => specialHeaderNames.add(it.toLowerCase()));
+    }
 
     this.sdkContext = createSdkContext(context as EmitContext<any>);
     const service = listServices(this.program)[0];
@@ -389,13 +394,14 @@ export class CodeModelBuilder {
         codeModelClient.globalParameters!,
         codeModelClient.apiVersions,
       );
+      clientContext.preProcessOperations(this.sdkContext, client);
 
       const operationGroups = listOperationGroups(this.sdkContext, client);
 
       const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
-        if (!this.needToSkipProcessingOperation(operation)) {
+        if (!this.needToSkipProcessingOperation(operation, clientContext)) {
           codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
         }
       }
@@ -407,7 +413,7 @@ export class CodeModelBuilder {
         const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
         codeModelGroup = new OperationGroup(operationGroup.type.name);
         for (const operation of operations) {
-          if (!this.needToSkipProcessingOperation(operation)) {
+          if (!this.needToSkipProcessingOperation(operation, clientContext)) {
             codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
           }
         }
@@ -450,10 +456,16 @@ export class CodeModelBuilder {
     }
   }
 
-  private needToSkipProcessingOperation(operation: Operation): boolean {
+  private needToSkipProcessingOperation(operation: Operation, clientContext: ClientContext): boolean {
     // don't generate protocol and convenience method for overloaded operations
     // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
     if (getOverloadedOperation(this.program, operation)) {
+      this.trace(`Operation '${operation.name}' is temporary skipped, as it is an overloaded operation`);
+      return true;
+    } else if (clientContext.ignoredOperations.has(operation)) {
+      this.trace(
+        `Operation '${operation.name}' is skipped, as it is used in '@pollingOperation' of a long running operation`,
+      );
       return true;
     }
     return false;
@@ -517,7 +529,7 @@ export class CodeModelBuilder {
     // body
     if (op.parameters.body) {
       if (op.parameters.body.parameter) {
-        this.processParameterBody(codeModelOperation, op.parameters.body.parameter, operation.parameters);
+        this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
       } else if (op.parameters.body.type) {
         let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
 
@@ -536,10 +548,13 @@ export class CodeModelBuilder {
             }
           }
 
-          this.processParameterBody(codeModelOperation, bodyType, operation.parameters);
+          this.processParameterBody(codeModelOperation, op, bodyType);
         }
       }
     }
+
+    // group ETag header parameters, if exists
+    this.processEtagHeaderParameters(codeModelOperation, op);
 
     // lro metadata
     const lroMetadata = this.processLroMetadata(codeModelOperation, op);
@@ -595,7 +610,7 @@ export class CodeModelBuilder {
       let finalSchema = undefined;
 
       const verb = httpOperation.verb;
-      const useNewPollStrategy = isLroNewPollingStrategy(operation, lroMetadata);
+      const useNewPollStrategy = isLroNewPollingStrategy(httpOperation, lroMetadata);
 
       let pollingStrategy: Metadata | undefined = undefined;
       if (useNewPollStrategy) {
@@ -852,7 +867,137 @@ export class CodeModelBuilder {
     );
   }
 
-  private processParameterBody(op: CodeModelOperation, body: ModelProperty | Model, parameters: Model) {
+  private processEtagHeaderParameters(op: CodeModelOperation, httpOperation: HttpOperation) {
+    if (op.convenienceApi && op.parameters && op.signatureParameters) {
+      const etagHeadersNames = new Set<string>([
+        "if-match",
+        "if-none-match",
+        "if-unmodified-since",
+        "if-modified-since",
+      ]);
+
+      // collect etag headers in parameters
+      const etagHeaders: string[] = [];
+      if (op.parameters) {
+        for (const parameter of op.parameters) {
+          if (
+            parameter.language.default.serializedName &&
+            etagHeadersNames.has(parameter.language.default.serializedName.toLowerCase())
+          ) {
+            etagHeaders.push(parameter.language.default.serializedName);
+          }
+        }
+      }
+
+      let groupToRequestConditions = false;
+      let groupToMatchConditions = false;
+
+      if (etagHeaders.length === 4) {
+        // all 4 headers available, use RequestConditions
+        groupToRequestConditions = true;
+      } else if (etagHeaders.length === 2) {
+        const etagHeadersLowerCase = etagHeaders.map((it) => it.toLowerCase());
+        if (etagHeadersLowerCase.includes("if-match") && etagHeadersLowerCase.includes("if-none-match")) {
+          // only 2 headers available, use MatchConditions
+          groupToMatchConditions = true;
+        }
+      }
+
+      if (groupToRequestConditions || groupToMatchConditions) {
+        op.convenienceApi.requests = [];
+        const request = new Request();
+        request.parameters = [];
+        request.signatureParameters = [];
+        op.convenienceApi.requests.push(request);
+
+        for (const parameter of op.parameters) {
+          // copy all parameters to request
+          const clonedParameter = cloneOperationParameter(parameter);
+          request.parameters.push(clonedParameter);
+
+          // copy signatureParameters, but exclude etag headers (as they won't be in method signature)
+          if (
+            op.signatureParameters.includes(parameter) &&
+            !(
+              parameter.language.default.serializedName &&
+              etagHeaders.includes(parameter.language.default.serializedName)
+            )
+          ) {
+            request.signatureParameters.push(clonedParameter);
+          }
+        }
+
+        const namespace = getNamespace(httpOperation.operation);
+        const schemaName = groupToRequestConditions ? "RequestConditions" : "MatchConditions";
+        const schemaDescription = groupToRequestConditions
+          ? "Specifies HTTP options for conditional requests based on modification time."
+          : "Specifies HTTP options for conditional requests.";
+
+        // group schema
+        const requestConditionsSchema = this.codeModel.schemas.add(
+          new GroupSchema(schemaName, schemaDescription, {
+            language: {
+              default: {
+                namespace: namespace,
+              },
+              java: {
+                namespace: "com.azure.core.http",
+              },
+            },
+          }),
+        );
+
+        // parameter (optional) of the group schema
+        const requestConditionsParameter = new Parameter(
+          schemaName,
+          requestConditionsSchema.language.default.description,
+          requestConditionsSchema,
+          {
+            implementation: ImplementationLocation.Method,
+            required: false,
+            nullable: true,
+          },
+        );
+
+        this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Input, SchemaContext.ConvenienceApi] });
+
+        // update group schema for properties
+        for (const parameter of request.parameters) {
+          if (
+            parameter.language.default.serializedName &&
+            etagHeaders.includes(parameter.language.default.serializedName)
+          ) {
+            parameter.groupedBy = requestConditionsParameter;
+
+            requestConditionsSchema.add(
+              // name is serializedName, as it must be same as that in RequestConditions class
+              new GroupProperty(
+                parameter.language.default.serializedName,
+                parameter.language.default.description,
+                parameter.schema,
+                {
+                  originalParameter: [parameter],
+                  summary: parameter.summary,
+                  required: false,
+                  nullable: true,
+                  readOnly: false,
+                  serializedName: parameter.language.default.serializedName,
+                },
+              ),
+            );
+          }
+        }
+
+        // put RequestConditions/MatchConditions as last parameter/signatureParameters
+        request.parameters.push(requestConditionsParameter);
+        request.signatureParameters.push(requestConditionsParameter);
+      }
+    }
+  }
+
+  private processParameterBody(op: CodeModelOperation, httpOperation: HttpOperation, body: ModelProperty | Model) {
+    const parameters = httpOperation.operation.parameters;
+
     let schema: Schema;
     if (body.kind === "ModelProperty" && body.type.kind === "Scalar" && body.type.name === "bytes") {
       // handle binary request body
@@ -900,26 +1045,7 @@ export class CodeModelBuilder {
               existParameter.implementation === ImplementationLocation.Method &&
               (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true)
             ) {
-              request.parameters.push(
-                new Parameter(
-                  existParameter.language.default.name,
-                  existParameter.language.default.description,
-                  existParameter.schema,
-                  {
-                    language: {
-                      default: {
-                        serializedName: existParameter.language.default.serializedName,
-                      },
-                    },
-                    protocol: existParameter.protocol,
-                    summary: existParameter.summary,
-                    implementation: ImplementationLocation.Method,
-                    required: existParameter.required,
-                    nullable: existParameter.nullable,
-                    extensions: existParameter.extensions,
-                  },
-                ),
-              );
+              request.parameters.push(cloneOperationParameter(existParameter));
             }
           } else {
             // property from anonymous model
@@ -953,7 +1079,7 @@ export class CodeModelBuilder {
         if (request.signatureParameters.length > 6) {
           // create an option bag
           const name = op.language.default.name + "Options";
-          const namespace = body.kind === "Model" ? getNamespace(body) : this.namespace;
+          const namespace = getNamespace(httpOperation.operation);
           // option bag schema
           const optionBagSchema = this.codeModel.schemas.add(
             new GroupSchema(name, `Options for ${op.language.default.name} API`, {

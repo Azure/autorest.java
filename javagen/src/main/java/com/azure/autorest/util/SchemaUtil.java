@@ -49,9 +49,9 @@ public class SchemaUtil {
                 chain = new LinkedList<>();
                 chain.addFirst(schema);
                 while (schema instanceof ObjectSchema
-                        && ((ObjectSchema) schema).getParents() != null
-                        && ((ObjectSchema) schema).getParents().getImmediate() != null
-                        && !((ObjectSchema) schema).getParents().getImmediate().isEmpty()) {
+                    && ((ObjectSchema) schema).getParents() != null
+                    && ((ObjectSchema) schema).getParents().getImmediate() != null
+                    && !((ObjectSchema) schema).getParents().getImmediate().isEmpty()) {
                     // Assume always inheriting from an ObjectSchema and no multiple inheritance
                     schema = ((ObjectSchema) schema).getParents().getImmediate().get(0);
                     chain.addFirst(schema);
@@ -60,9 +60,9 @@ public class SchemaUtil {
                 Stack<Schema> newChain = new Stack<>();
                 newChain.push(schema);
                 while (schema instanceof ObjectSchema
-                        && ((ObjectSchema) schema).getParents() != null
-                        && ((ObjectSchema) schema).getParents().getImmediate() != null
-                        && !((ObjectSchema) schema).getParents().getImmediate().isEmpty()) {
+                    && ((ObjectSchema) schema).getParents() != null
+                    && ((ObjectSchema) schema).getParents().getImmediate() != null
+                    && !((ObjectSchema) schema).getParents().getImmediate().isEmpty()) {
                     // Assume always inheriting from an ObjectSchema and no multiple inheritance
                     schema = ((ObjectSchema) schema).getParents().getImmediate().get(0);
                     newChain.push(schema);
@@ -109,7 +109,7 @@ public class SchemaUtil {
 
         if (responseBodyType == null) {
             if (operation.getRequests().stream().anyMatch(req -> HttpMethod.HEAD.name().equalsIgnoreCase(req.getProtocol().getHttp().getMethod()))
-                    && operation.getResponses().stream().flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream()).anyMatch(c -> c.equals("404"))) {
+                && operation.getResponses().stream().flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream()).anyMatch(c -> c.equals("404"))) {
                 // Azure core would internally convert the response status code to boolean.
                 responseBodyType = PrimitiveType.Boolean;
             } else if (containsBinaryResponse(operation)) {
@@ -160,7 +160,7 @@ public class SchemaUtil {
         }
         if (discriminator == null) {
             throw new IllegalArgumentException(String.format("discriminator not found in type %s and its parents",
-                    compositeType.getLanguage().getJava().getName()));
+                compositeType.getLanguage().getJava().getName()));
         }
         return discriminator;
     }
@@ -176,10 +176,10 @@ public class SchemaUtil {
      */
     public static boolean responseContainsHeaderSchemas(Operation operation, JavaSettings settings) {
         return operation.getResponses().stream()
-                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
-                .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
-                .anyMatch(Objects::nonNull)
-                && notFluentLRO(operation, settings) && notDataPlaneLRO(operation, settings);
+            .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
+            .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
+            .anyMatch(Objects::nonNull)
+            && notFluentLRO(operation, settings) && notDataPlaneLRO(operation, settings);
     }
 
     /**
@@ -211,13 +211,13 @@ public class SchemaUtil {
         if (parameterRequestLocation == RequestParameterLocation.BODY) {
             returnType = ClassType.BinaryData;
         } else if (!(returnType instanceof PrimitiveType)) {
-            if(type instanceof EnumType) {
+            if (type instanceof EnumType) {
                 returnType = ClassType.String;
             }
-            if(type instanceof IterableType && ((IterableType) type).getElementType() instanceof EnumType) {
+            if (type instanceof IterableType && ((IterableType) type).getElementType() instanceof EnumType) {
                 returnType = new IterableType(ClassType.String);
             }
-            if(type instanceof ListType && ((ListType) type).getElementType() instanceof EnumType) {
+            if (type instanceof ListType && ((ListType) type).getElementType() instanceof EnumType) {
                 returnType = new ListType(ClassType.String);
             }
         }
@@ -239,25 +239,34 @@ public class SchemaUtil {
             String name = compositeType.getLanguage().getDefault().getName();
 
             if (!CoreUtils.isNullOrEmpty(namespace) && !CoreUtils.isNullOrEmpty(name)) {
-                if ("Azure.Core.Foundations".equals(namespace)) {
+                if (Objects.equals(namespace, "Azure.Core.Foundations")) {
                     // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/core/azure-core/src/main/java/com/azure/core/models/ResponseError.java
-                    if ("Error".equals(name)) {
+                    if (Objects.equals(name, "Error")) {
                         classType = ClassType.ResponseError;
-                    } else if ("InnerError".equals(name)) {
+                    } else if (Objects.equals(name, "InnerError")) {
                         // InnerError is not public, but usually it is only referenced from Error
                         classType = ClassType.ResponseInnerError;
                     }
                     // ErrorResponse is not available, but that should only be used in Exception
+                }
+
+                if (compositeType.getLanguage().getJava() != null
+                        && compositeType.getLanguage().getJava().getNamespace() != null) {
 
                     // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/core/azure-core-experimental/src/main/java/com/azure/core/experimental/models/PollResult.java
                     if ("PollResult".equals(name)
-                            && compositeType.getLanguage().getJava() != null
-                            && compositeType.getLanguage().getJava().getNamespace() != null
-                            && compositeType.getLanguage().getJava().getNamespace().startsWith("com.azure.core")) {
+                        && compositeType.getLanguage().getJava().getNamespace().startsWith("com.azure.core")) {
                         classType = new ClassType.Builder()
-                                .name(name)
-                                .packageName(compositeType.getLanguage().getJava().getNamespace())
-                                .build();
+                            .name(name)
+                            .packageName(compositeType.getLanguage().getJava().getNamespace())
+                            .usedInXml(treatAsXml(compositeType))
+                            .build();
+                    } else if (Objects.equals(name, ClassType.REQUEST_CONDITIONS.getName())
+                            && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), "com.azure.core.http")) {
+                        classType = ClassType.REQUEST_CONDITIONS;
+                    } else if (Objects.equals(name, ClassType.MATCH_CONDITIONS.getName())
+                            && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), "com.azure.core.http")) {
+                        classType = ClassType.MATCH_CONDITIONS;
                     }
                 }
             }
@@ -276,8 +285,8 @@ public class SchemaUtil {
             return Collections.emptySet();
         }
         return schemaContexts.stream()
-                .map(c -> ImplementationDetails.Usage.fromValue(c.value()))
-                .collect(Collectors.toSet());
+            .map(c -> ImplementationDetails.Usage.fromValue(c.value()))
+            .collect(Collectors.toSet());
     }
 
     private static boolean containsBinaryResponse(Operation operation) {
@@ -305,5 +314,10 @@ public class SchemaUtil {
             return null;
         }
         return m.getLanguage().getJava().getName();
+    }
+
+    public static boolean treatAsXml(Schema schema) {
+        return (schema.getSerializationFormats() != null && schema.getSerializationFormats().contains("xml"))
+            || (schema.getSerialization() != null && schema.getSerialization().getXml() != null);
     }
 }

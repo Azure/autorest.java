@@ -8,7 +8,7 @@ import {
   getAllHttpServices,
 } from "@typespec/http";
 import { resolveOperationId } from "@typespec/openapi";
-import { ApiVersions } from "@autorest/codemodel";
+import { ApiVersions, Parameter } from "@autorest/codemodel";
 import { LroMetadata } from "@azure-tools/typespec-azure-core";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
@@ -142,7 +142,7 @@ export function getServiceVersion(client: CodeModelClient | CodeModel): ServiceV
   return new ServiceVersion(name, description);
 }
 
-export function isLroNewPollingStrategy(operation: Operation, lroMetadata: LroMetadata): boolean {
+export function isLroNewPollingStrategy(httpOperation: HttpOperation, lroMetadata: LroMetadata): boolean {
   // at present, checks if operation uses template from Azure.Core
   const azureCoreLroSvs = [
     "LongRunningResourceCreateOrReplace",
@@ -152,7 +152,8 @@ export function isLroNewPollingStrategy(operation: Operation, lroMetadata: LroMe
     "LongRunningRpcOperation",
   ];
 
-  let ret = false;
+  const operation = httpOperation.operation;
+  let useNewStrategy = false;
   if (
     lroMetadata.pollingInfo &&
     lroMetadata.statusMonitorStep &&
@@ -162,22 +163,43 @@ export function isLroNewPollingStrategy(operation: Operation, lroMetadata: LroMe
     if (operation.node.signature.kind === SyntaxKind.OperationSignatureReference) {
       if (operation.node.signature.baseOperation.target.kind === SyntaxKind.MemberExpression) {
         const sv = operation.node.signature.baseOperation.target.id.sv;
-        ret = azureCoreLroSvs.includes(sv);
+        useNewStrategy = azureCoreLroSvs.includes(sv);
       }
     }
   }
-  return ret;
 
-  // if (verb === "put" && !lroMetadata.finalStep) {
-  //   // PUT without last GET on resource
-  //   useNewPollStrategy = true;
-  // } else if (
-  //   verb === "post" &&
-  //   lroMetadata.finalStep &&
-  //   lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
-  //   lroMetadata.finalStep.target.name === "result"
-  // ) {
-  //   // POST with final result in "result" property
-  //   useNewPollStrategy = true;
-  // }
+  if (!useNewStrategy) {
+    // following 2 pattern in LroMetadata requires new polling strategy
+
+    if (httpOperation.verb === "put" && !lroMetadata.finalStep) {
+      // PUT without last GET on resource
+      useNewStrategy = true;
+    } else if (
+      httpOperation.verb === "post" &&
+      lroMetadata.finalStep &&
+      lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
+      lroMetadata.finalStep.target.name === "result"
+    ) {
+      // POST with final result in "result" property
+      useNewStrategy = true;
+    }
+  }
+
+  return useNewStrategy;
+}
+
+export function cloneOperationParameter(parameter: Parameter): Parameter {
+  return new Parameter(parameter.language.default.name, parameter.language.default.description, parameter.schema, {
+    language: {
+      default: {
+        serializedName: parameter.language.default.serializedName,
+      },
+    },
+    protocol: parameter.protocol,
+    summary: parameter.summary,
+    implementation: parameter.implementation,
+    required: parameter.required,
+    nullable: parameter.nullable,
+    extensions: parameter.extensions,
+  });
 }

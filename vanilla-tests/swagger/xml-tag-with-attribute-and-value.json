@@ -22,6 +22,7 @@
   },
   "definitions": {
     "BlobName": {
+      "xml": {},
       "type": "object",
       "properties": {
         "Encoded": {

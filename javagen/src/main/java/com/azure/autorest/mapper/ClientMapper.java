@@ -47,8 +47,6 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -445,15 +443,14 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     private List<XmlSequenceWrapper> parseXmlSequenceWrappers(CodeModel codeModel, JavaSettings settings) {
-        if (!settings.isGenerateXmlSerialization()) {
-            return new ArrayList<>();
-        }
-
         Map<String, XmlSequenceWrapper> xmlSequenceWrappers = new LinkedHashMap<>();
         for (OperationGroup operationGroup : codeModel.getOperationGroups()) {
             for (Operation operation : operationGroup.getOperations()) {
                 Schema responseBodySchema = SchemaUtil.getLowestCommonParent(operation.getResponses().stream()
-                    .map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+                    .map(Response::getSchema)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList()));
+
                 if (responseBodySchema instanceof ArraySchema) {
                     parseXmlSequenceWrappers((ArraySchema) responseBodySchema, xmlSequenceWrappers, settings);
                 }
@@ -479,34 +476,17 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         return new ArrayList<>(xmlSequenceWrappers.values());
     }
 
-    private static Set<String> getXmlSequenceWrapperImports() {
-        return new HashSet<>(Arrays.asList(JsonCreator.class.getName(), JsonProperty.class.getName(),
-            "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty",
-            "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement",
-            "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText"));
-    }
-
     private static void parseXmlSequenceWrappers(ArraySchema arraySchema,
         Map<String, XmlSequenceWrapper> xmlSequenceWrappers, JavaSettings settings) {
-        if (arraySchema.getSerialization() == null || arraySchema.getSerialization().getXml() == null) {
+        if (!SchemaUtil.treatAsXml(arraySchema)) {
             return;
         }
 
-        IType type = Mappers.getSchemaMapper().map(arraySchema);
-        String modelTypeName = arraySchema.getElementType().getLanguage().getJava().getName();
-        String xmlRootElementName = arraySchema.getSerialization().getXml().getName();
-        String xmlListElementName = arraySchema.getElementType().getSerialization().getXml().getName();
-        xmlSequenceWrappers.computeIfAbsent(modelTypeName, ignored -> {
-            Set<String> imports = getXmlSequenceWrapperImports();
-            type.addImportsTo(imports, true);
-            boolean isCustomType = settings.isCustomType(CodeNamer.toPascalCase(modelTypeName + "Wrapper"));
-            String packageName = isCustomType
-                ? settings.getPackage(settings.getCustomTypesSubpackage())
-                : settings.getPackage(settings.getImplementationSubpackage() + ".models");
+        String modelTypeName = arraySchema.getElementType().getLanguage().getJava() != null
+            ? arraySchema.getElementType().getLanguage().getJava().getName()
+            : arraySchema.getElementType().getLanguage().getDefault().getName();
 
-            return new XmlSequenceWrapper(packageName, type, modelTypeName, xmlRootElementName, xmlListElementName,
-                imports);
-        });
+        xmlSequenceWrappers.computeIfAbsent(modelTypeName, name -> new XmlSequenceWrapper(name, arraySchema, settings));
     }
 
     static ObjectSchema parseHeader(Operation operation, JavaSettings settings) {

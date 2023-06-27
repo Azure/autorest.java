@@ -173,8 +173,11 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                 && sequence.getElementType().getSerialization().getXml() != null
                 && sequence.getElementType().getSerialization().getXml().getName() != null) {
                 builder.xmlListElementName(sequence.getElementType().getSerialization().getXml().getName());
+                builder.xmlListElementNamespace(sequence.getElementType().getSerialization().getXml().getNamespace());
+                builder.xmlListElementPrefix(sequence.getElementType().getSerialization().getXml().getPrefix());
             } else {
                 builder.xmlListElementName(sequence.getElementType().getLanguage().getDefault().getName());
+                builder.xmlListElementNamespace(sequence.getElementType().getLanguage().getDefault().getNamespace());
             }
         }
 

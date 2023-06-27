@@ -391,23 +391,23 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                             if (alreadyNullChecked) {
                                 expression =
                                     parameterName + ".stream()\n" +
-                                        "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                        "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                             } else {
                                 expression =
                                     "(" + parameterName + " == null) ? null : " + parameterName + ".stream()\n" +
-                                        "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                        "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                             }
                         } else {
                             if (elementType == ClassType.String) {
                                 if (alreadyNullChecked) {
                                     expression = parameterName + ".stream()\n" +
-                                        "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                        "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                                 } else {
                                     expression = "(" + parameterName + " == null) ? null : " + parameterName + ".stream()\n" +
-                                        "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                        "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                                 }
                             } else {
@@ -423,9 +423,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                                 if (elementWireType != elementType) {
                                     // convert List<ClientType> to List<WireType>, if necessary
                                     serializeIterableInput = String.format(
-                                            "%1$s.stream().map(value -> %2$s).collect(Collectors.toList())",
+                                            "%1$s.stream().map(paramItemValue -> %2$s).collect(Collectors.toList())",
                                             parameterName,
-                                            elementWireType.convertFromClientType("value"));
+                                            elementWireType.convertFromClientType("paramItemValue"));
                                 }
                                 // convert List<WireType> to String
                                 expression = String.format(
@@ -448,8 +448,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
             }
 
-            if (settings.isGenerateXmlSerialization()
-                && parameterClientType instanceof ListType
+            if (parameter.getWireType().isUsedInXml() && parameterClientType instanceof ListType
                 && (parameterLocation == RequestParameterLocation.BODY /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
                 function.line("%s %s = new %s(%s);", parameter.getWireType(), parameterWireName,
                     parameter.getWireType(), alwaysNull ? "null" : parameterName);

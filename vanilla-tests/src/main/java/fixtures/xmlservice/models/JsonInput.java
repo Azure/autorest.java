@@ -6,10 +6,8 @@ package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /** The JsonInput model. */
-@JacksonXmlRootElement(localName = "JsonInput")
 @Fluent
 public final class JsonInput {
     /*

@@ -3139,7 +3139,9 @@ public final class Explicits {
         }
         final String accept = "application/json";
         String headerParameterConverted =
-                headerParameter.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                headerParameter.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.postRequiredArrayHeader(
@@ -3170,7 +3172,9 @@ public final class Explicits {
         }
         final String accept = "application/json";
         String headerParameterConverted =
-                headerParameter.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                headerParameter.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.postRequiredArrayHeader(this.client.getHost(), headerParameterConverted, accept, context);
     }
 
@@ -3255,7 +3259,7 @@ public final class Explicits {
                 (headerParameter == null)
                         ? null
                         : headerParameter.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
@@ -3285,7 +3289,7 @@ public final class Explicits {
                 (headerParameter == null)
                         ? null
                         : headerParameter.stream()
-                                .map(value -> Objects.toString(value, ""))
+                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
                                 .collect(Collectors.joining(","));
         return service.postOptionalArrayHeader(this.client.getHost(), headerParameterConverted, accept, context);
     }

@@ -5,17 +5,15 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
-import com.azure.xml.XmlReader;
-import com.azure.xml.XmlSerializable;
-import com.azure.xml.XmlToken;
-import com.azure.xml.XmlWriter;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The JsonOutput model. */
 @Fluent
-public final class JsonOutput implements XmlSerializable<JsonOutput> {
+public final class JsonOutput implements JsonSerializable<JsonOutput> {
     /*
      * The id property.
      */
@@ -52,53 +50,32 @@ public final class JsonOutput implements XmlSerializable<JsonOutput> {
     public void validate() {}
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        return toXml(xmlWriter, null);
-    }
-
-    @Override
-    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "JsonOutput" : rootElementName;
-        xmlWriter.writeStartElement(rootElementName);
-        xmlWriter.writeNumberElement("id", this.id);
-        return xmlWriter.writeEndElement();
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeNumberField("id", this.id);
+        return jsonWriter.writeEndObject();
     }
 
     /**
-     * Reads an instance of JsonOutput from the XmlReader.
+     * Reads an instance of JsonOutput from the JsonReader.
      *
-     * @param xmlReader The XmlReader being read.
-     * @return An instance of JsonOutput if the XmlReader was pointing to an instance of it, or null if it was pointing
-     *     to XML null.
-     * @throws XMLStreamException If an error occurs while reading the JsonOutput.
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of JsonOutput if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IOException If an error occurs while reading the JsonOutput.
      */
-    public static JsonOutput fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return fromXml(xmlReader, null);
-    }
-
-    /**
-     * Reads an instance of JsonOutput from the XmlReader.
-     *
-     * @param xmlReader The XmlReader being read.
-     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
-     * @return An instance of JsonOutput if the XmlReader was pointing to an instance of it, or null if it was pointing
-     *     to XML null.
-     * @throws XMLStreamException If an error occurs while reading the JsonOutput.
-     */
-    public static JsonOutput fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "JsonOutput" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
+    public static JsonOutput fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
                 reader -> {
                     JsonOutput deserializedJsonOutput = new JsonOutput();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
 
-                        if ("id".equals(elementName.getLocalPart())) {
-                            deserializedJsonOutput.id = reader.getNullableElement(Integer::parseInt);
+                        if ("id".equals(fieldName)) {
+                            deserializedJsonOutput.id = reader.getNullable(JsonReader::getInt);
                         } else {
-                            reader.skipElement();
+                            reader.skipChildren();
                         }
                     }
 

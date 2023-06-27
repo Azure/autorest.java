@@ -93,6 +93,26 @@ public final class ModelTemplateHeaderHelper {
     }
 
     /**
+     * Gets an expression of HttpHeaderName instance.
+     * <p>
+     * For known name, it would be {@code HttpHeaderName.IF_MATCH}. For unknown name, it would be {@code HttpHeaderName.fromString("foo")}.
+     *
+     * @param headerName the header name
+     * @return the expression of HttpHeaderName instance.
+     */
+    public static String getHttpHeaderNameInstanceExpression(String headerName) {
+        // match the init logic of HEADER_TO_KNOWN_HTTPHEADERNAME
+        String caseInsensitiveName = HttpHeaderName.fromString(headerName).getCaseInsensitiveName();
+
+        if (HEADER_TO_KNOWN_HTTPHEADERNAME.containsKey(caseInsensitiveName)) {
+            // known name
+            return String.format("HttpHeaderName.%s", HEADER_TO_KNOWN_HTTPHEADERNAME.get(caseInsensitiveName));
+        } else {
+            return String.format("HttpHeaderName.fromString(%s)", ClassType.String.defaultValueExpression(headerName));
+        }
+    }
+
+    /**
      * Adds {@code private static final} {@link HttpHeaderName} constants representing the headers that are used by the
      * {@link ClientModel}.
      *
