@@ -31,7 +31,6 @@ jobs:
   - checkout: azure-sdk-tools
     fetchDepth: 1
   - checkout: azure-sdk-for-java
-    displayName: Checkout azure-sdk-for-java
 
   - task: NodeTool@0
     displayName: 'Install Node.js $(NodeVersion)'
@@ -43,7 +42,7 @@ jobs:
 #    displayName: 'Install autorest'
 
   - script: |
-      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$(node -p -e "require('./typespec-extension/package.json').version")
+      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$(node -p -e "require('../autorest.java/typespec-extension/package.json').version")
     displayName: 'Generate SDK'
     workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-java
 
