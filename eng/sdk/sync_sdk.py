@@ -10,9 +10,12 @@ import argparse
 import subprocess
 import glob
 import json
+from typing import List
 
 
 sdk_root: str
+
+skip_artifacts: List[str] = ['azure-ai-anomalydetector']
 
 
 def parse_args() -> argparse.Namespace:
@@ -46,6 +49,9 @@ def update_sdks():
     for tsp_location_file in glob.glob(os.path.join(sdk_root, 'sdk/*/*/tsp-location.yaml')):
         artifact_path = os.path.dirname(tsp_location_file)
         artifact = os.path.basename(artifact_path)
+
+        if artifact in skip_artifacts:
+            continue
 
         logging.info('Generate for module %s', artifact)
 
