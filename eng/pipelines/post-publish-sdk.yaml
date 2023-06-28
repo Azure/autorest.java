@@ -1,0 +1,41 @@
+trigger: none
+pr: none
+
+pool:
+  vmImage: "ubuntu-latest"
+
+variables:
+- group: Release Secrets for GitHub
+- name: NodeVersion
+  value: '18.x'
+
+jobs:
+- job: Create PR to SDK Repository
+
+  timeoutInMinutes: 60
+
+  steps:
+  - checkout: azure-sdk-for-java
+    displayName: Checkout azure-sdk-for-java
+
+  - task: NodeTool@0
+    displayName: 'Install Node.js $(NodeVersion)'
+    inputs:
+      versionSpec: '$(NodeVersion)'
+
+#  - bash: |
+#      npm install -g @typespec/compiler
+#    displayName: 'Install autorest'
+
+  - script: |
+      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$(node -p -e "require('./typespec-extension/package.json').version")
+    displayName: 'Generate SDK'
+    workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-java
+
+  - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
+    parameters:
+      PRBranchName: typespec-java-generation-$(Build.BuildId)
+      CommitMsg: '[Automation] Generate SDK based on TypeSpec'
+      PRTitle: '[Automation] Generate SDK based on TypeSpec'
+      PRLabels: 'DPG'
+      OpenAsDraft: 'true'
