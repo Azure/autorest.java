@@ -12,7 +12,6 @@ import glob
 import json
 from typing import List
 
-
 sdk_root: str
 
 skip_artifacts: List[str] = ['azure-ai-anomalydetector']
@@ -55,7 +54,7 @@ def update_sdks():
 
         logging.info('Generate for module %s', artifact)
 
-        cmd=[
+        cmd = [
             'pwsh',
             os.path.join(sdk_root, 'eng/common/scripts/TypeSpec-Project-Sync.ps1'),
             artifact_path
@@ -64,8 +63,9 @@ def update_sdks():
 
         cmd[1] = os.path.join(sdk_root, 'eng/common/scripts/TypeSpec-Project-Generate.ps1')
         subprocess.check_call(cmd, cwd=sdk_root)
-        
-    subprocess.check_call('git add .', cwd=sdk_root)
+
+    cmd = ['git', 'add', '.']
+    subprocess.check_call(cmd, cwd=sdk_root)
 
 
 def main():
