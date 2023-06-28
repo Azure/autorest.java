@@ -9,11 +9,6 @@ variables:
 
 resources:
   repositories:
-  - repository: azure-sdk-tools
-    type: github
-    name: Azure/azure-sdk-tools
-    endpoint: azure
-    ref: main
   - repository: azure-sdk-for-java
     type: github
     name: Azure/azure-sdk-for-java
@@ -28,8 +23,6 @@ jobs:
   steps:
   - checkout: self
     fetchDepth: 1
-  - checkout: azure-sdk-tools
-    fetchDepth: 1
   - checkout: azure-sdk-for-java
 
   - task: NodeTool@0
@@ -42,8 +35,10 @@ jobs:
     displayName: 'Generate SDK'
     workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
-  - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
+  - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-for-java
     parameters:
+      WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-java
+      ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-for-java/eng/common/scripts
       PRBranchName: typespec-java-generation-$(Build.BuildId)
       CommitMsg: '[Automation] Generate SDK based on TypeSpec'
       PRTitle: '[Automation] Generate SDK based on TypeSpec'
