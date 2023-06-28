@@ -4,6 +4,7 @@
 #  Licensed under the MIT License.
 
 import os
+import sys
 import logging
 import argparse
 import subprocess
@@ -49,12 +50,13 @@ def update_sdks():
         logging.info('Generate for module %s', artifact)
 
         cmd=[
+            'pwsh',
             os.path.join(sdk_root, 'eng/common/scripts/TypeSpec-Project-Sync.ps1'),
             artifact_path
         ]
         subprocess.check_call(cmd, cwd=sdk_root)
 
-        cmd[0] = os.path.join(sdk_root, 'eng/common/scripts/TypeSpec-Project-Generate.ps1')
+        cmd[1] = os.path.join(sdk_root, 'eng/common/scripts/TypeSpec-Project-Generate.ps1')
         subprocess.check_call(cmd, cwd=sdk_root)
         
     subprocess.check_call('git add .', cwd=sdk_root)
