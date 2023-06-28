@@ -5,7 +5,9 @@ pool:
   vmImage: "ubuntu-latest"
 
 variables:
-  NodeVersion: '18.x'
+- group: Release Secrets for GitHub
+- name: NodeVersion
+  value: '18.x'
 
 resources:
   repositories:
