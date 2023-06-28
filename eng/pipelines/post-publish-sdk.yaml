@@ -42,9 +42,9 @@ jobs:
 #    displayName: 'Install autorest'
 
   - script: |
-      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$(node -p -e "require('../autorest.java/typespec-extension/package.json').version")
+      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$(node -p -e "require('./typespec-extension/package.json').version")
     displayName: 'Generate SDK'
-    workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-java
+    workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
