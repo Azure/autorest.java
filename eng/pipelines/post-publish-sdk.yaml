@@ -5,16 +5,31 @@ pool:
   vmImage: "ubuntu-latest"
 
 variables:
-- group: Release Secrets for GitHub
-- name: NodeVersion
-  value: '18.x'
+  NodeVersion: '18.x'
+
+resources:
+  repositories:
+  - repository: azure-sdk-tools
+    type: github
+    name: Azure/azure-sdk-tools
+    endpoint: azure
+    ref: main
+  - repository: azure-sdk-for-java
+    type: github
+    name: Azure/azure-sdk-for-java
+    endpoint: azure
+    ref: main
 
 jobs:
-- job: Create PR to SDK Repository
+- job: Generate_SDK
 
   timeoutInMinutes: 60
 
   steps:
+  - checkout: self
+    fetchDepth: 1
+  - checkout: azure-sdk-tools
+    fetchDepth: 1
   - checkout: azure-sdk-for-java
     displayName: Checkout azure-sdk-for-java
 
