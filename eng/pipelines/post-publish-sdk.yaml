@@ -41,6 +41,7 @@ jobs:
     parameters:
       WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-java
       ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-for-java/eng/common/scripts
+      RepoName: azure-sdk-for-java
       PRBranchName: typespec-java-generation-$(Build.BuildId)
       CommitMsg: '[Automation] Generate SDK based on TypeSpec'
       PRTitle: '[Automation] Generate SDK based on TypeSpec'
