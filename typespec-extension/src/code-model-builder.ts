@@ -66,6 +66,8 @@ import {
   createSdkContext,
   shouldGenerateProtocol,
   isInternal,
+  getAllModels,
+  isInclude,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -233,6 +235,8 @@ export class CodeModelBuilder {
 
     this.processClients();
 
+    this.processModels();
+
     this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
 
     if (this.options.namer) {
@@ -344,6 +348,19 @@ export class CodeModelBuilder {
       this.codeModel.security = new Security(true, {
         schemes: securitySchemes,
       });
+    }
+  }
+
+  private processModels() {
+    const allModels = getAllModels(this.sdkContext);
+    for (const model of allModels) {
+      if (isInclude(this.sdkContext, model)) {
+        const schema = this.processSchema(model, model.name);
+
+        this.trackSchemaUsage(schema, {
+          usage: [SchemaContext.Input, SchemaContext.Output, SchemaContext.ConvenienceApi],
+        });
+      }
     }
   }
 

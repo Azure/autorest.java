@@ -1,6 +1,12 @@
 # Release History
 
-## 0.8.2 (2023-06-25)
+## 0.8.4 (2023-06-30)
+
+Compatible with compiler 0.45.
+
+- Supported `@include` from typespec-client-generator-core.
+
+## 0.8.3 (2023-06-25)
 
 Compatible with compiler 0.45.
 
