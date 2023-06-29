@@ -38,11 +38,7 @@ function Generate($tspFile) {
     Remove-Item ./tsp-output/src/main/java/module-info.java
   }
 
-  if (Test-Path ./tsp-output/src/samples) {
-    Remove-Item ./tsp-output/src/samples -Recurse -Force
-  }
-
-  Copy-Item -Path ./tsp-output/src -Destination ./ -Recurse -Force
+  Copy-Item -Path ./tsp-output/src -Destination ./ -Recurse -Force -Exclude ReadmeSamples.java
 
   Remove-Item ./tsp-output -Recurse -Force
 }
