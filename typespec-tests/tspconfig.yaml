@@ -5,12 +5,13 @@ options:
     emitter-output-dir: "{project-root}/tsp-output"
     partial-update: true
     namer: true
-    generate-samples: false
+    generate-samples: true
     generate-tests: false
     enable-sync-stack: true
     skip-special-headers:
       - client-request-id
       - return-client-request-id
+    examples-directory: "{project-root}/tsp/examples"
     dev-options:
       generate-code-model: true
       support-versioning: true
