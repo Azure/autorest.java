@@ -256,11 +256,25 @@ public class MethodUtil {
 
     /**
      * Get a list of 1-1 pairs of proxy method parameter and client method parameter.
+     *
      * @param clientMethod the client method
      * @return the list of 1-1 pair of proxy method parameter and client method parameter
      */
     public static List<MethodParameter> getParameters(ClientMethod clientMethod) {
-        Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = clientMethod.getProxyMethod().getParameters().stream()
+        return getParameters(clientMethod, false);
+    }
+
+    /**
+     * Get a list of 1-1 pairs of proxy method parameter and client method parameter.
+     *
+     * @param allParameter whether to match non-required proxy method parameter
+     * @param clientMethod the client method
+     * @return the list of 1-1 pair of proxy method parameter and client method parameter
+     */
+    public static List<MethodParameter> getParameters(ClientMethod clientMethod, boolean allParameter) {
+        List<ProxyMethodParameter> parameters = allParameter ? clientMethod.getProxyMethod().getAllParameters()
+                : clientMethod.getProxyMethod().getParameters();
+        Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = parameters.stream()
                 .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
         return clientMethod.getMethodParameters().stream()
                 .filter(p -> proxyMethodParameterByClientParameterName.containsKey(p.getName()))

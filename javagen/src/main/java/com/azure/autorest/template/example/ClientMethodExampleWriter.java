@@ -28,7 +28,7 @@ public class ClientMethodExampleWriter {
     public ClientMethodExampleWriter(ClientMethod method, String clientVarName, ProxyMethodExample proxyMethodExample){
         ModelExampleWriter.ExampleNodeModelInitializationVisitor nodeVisitor = new ModelExampleWriter.ExampleNodeModelInitializationVisitor();
 
-        List<MethodParameter> methodParameters = MethodUtil.getParameters(method);
+        List<MethodParameter> methodParameters = MethodUtil.getParameters(method, true);
         List<ExampleNode> exampleNodes = methodParameters
                 .stream()
                 .map(methodParameter -> ModelExampleUtil.parseNodeFromParameter(proxyMethodExample, methodParameter))
