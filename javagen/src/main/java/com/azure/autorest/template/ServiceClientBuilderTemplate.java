@@ -513,7 +513,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new " +
                     "RetryPolicy()));");
             function.line("policies.add(new AddDatePolicy());");
-            function.line("policies.add(new CookiePolicy());");
 
             if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
                 if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderName())) {

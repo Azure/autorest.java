@@ -236,7 +236,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                         if (constructor.getParameters().isEmpty()) {
                             final String initializeRetryPolicy = writeRetryPolicyInitialization();
                             final String initializeSerializer = writeSerializerInitialization();
-                            constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), %1$s, new CookiePolicy()).build(), %2$s%3$s);", initializeRetryPolicy, initializeSerializer, constructorArgsFinal);
+                            constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), %1$s).build(), %2$s%3$s);", initializeRetryPolicy, initializeSerializer, constructorArgsFinal);
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
                             final String createDefaultSerializerAdapter = writeSerializerInitialization();
                             constructorBlock.line("this(httpPipeline, %1$s%2$s);", createDefaultSerializerAdapter, constructorArgsFinal);

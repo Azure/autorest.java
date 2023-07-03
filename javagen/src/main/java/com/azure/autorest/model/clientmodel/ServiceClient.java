@@ -258,7 +258,6 @@ public class ServiceClient {
     }
 
     protected void addHttpPolicyImports(Set<String> imports) {
-        imports.add("com.azure.core.http.policy.CookiePolicy");
         imports.add("com.azure.core.http.policy.RetryPolicy");
         imports.add("com.azure.core.http.policy.UserAgentPolicy");
     }

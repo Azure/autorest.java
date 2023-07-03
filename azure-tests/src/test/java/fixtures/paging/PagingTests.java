@@ -1,6 +1,7 @@
 package fixtures.paging;
 
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.rest.PagedIterable;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
@@ -20,10 +21,14 @@ public class PagingTests {
 
     @BeforeAll
     public static void setup() {
+        // testserver uses cookie for scenario on error and retry
+
         client = new AutoRestPagingTestServiceBuilder()
+                .addPolicy(new CookiePolicy())
                 .buildClient();
 
         asyncClient = new AutoRestPagingTestServiceBuilder()
+                .addPolicy(new CookiePolicy())
                 .buildAsyncClient();
     }
 
