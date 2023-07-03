@@ -317,7 +317,7 @@ public class SchemaUtil {
     }
 
     public static boolean treatAsXml(Schema schema) {
-        return (schema.getUsage() == null || !Objects.equals(schema.getUsage(), Collections.singleton(SchemaContext.EXCEPTION)))
+        return (schema.getUsage() == null || !Objects.equals(schema.getUsage(), Collections.singleton(SchemaContext.EXCEPTION)))    // exclude model for Exception, as Azure required error response to be JSON
             && ((schema.getSerializationFormats() != null && schema.getSerializationFormats().contains("xml"))
             || (schema.getSerialization() != null && schema.getSerialization().getXml() != null));
     }
