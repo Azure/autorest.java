@@ -357,8 +357,15 @@ export class CodeModelBuilder {
       if (isInclude(this.sdkContext, model)) {
         const schema = this.processSchema(model, model.name);
 
+        if (this.isSchemaUsageEmpty(schema)) {
+          // if the model/schema is not processed by any operation, treat it as a stand-alone model, and make it input-output
+          this.trackSchemaUsage(schema, {
+            usage: [SchemaContext.Input, SchemaContext.Output],
+          });
+        }
+
         this.trackSchemaUsage(schema, {
-          usage: [SchemaContext.Input, SchemaContext.Output, SchemaContext.ConvenienceApi],
+          usage: [SchemaContext.ConvenienceApi],
         });
       }
     }
@@ -2287,5 +2294,23 @@ export class CodeModelBuilder {
     } else if (schema instanceof ArraySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
     }
+  }
+
+  private isSchemaUsageEmpty(schema: Schema): boolean {
+    if (
+      schema instanceof ObjectSchema ||
+      schema instanceof GroupSchema ||
+      schema instanceof ChoiceSchema ||
+      schema instanceof SealedChoiceSchema ||
+      schema instanceof OrSchema ||
+      schema instanceof ConstantSchema
+    ) {
+      return !(schema.usage && schema.usage.length > 0);
+    } else if (schema instanceof DictionarySchema) {
+      return this.isSchemaUsageEmpty(schema.elementType);
+    } else if (schema instanceof ArraySchema) {
+      return this.isSchemaUsageEmpty(schema.elementType);
+    }
+    return false;
   }
 }

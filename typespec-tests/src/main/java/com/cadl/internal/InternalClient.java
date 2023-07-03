@@ -33,7 +33,7 @@ public final class InternalClient {
     }
 
     /**
-     * The getInternal operation.
+     * The postInternal operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -65,7 +65,31 @@ public final class InternalClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<BinaryData> getInternalWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.getInternalWithResponse(request, requestOptions);
+    Response<BinaryData> postInternalWithResponse(BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.postInternalWithResponse(request, requestOptions);
+    }
+
+    /**
+     * The getInternal operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<BinaryData> getInternalWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getInternalWithResponse(requestOptions);
     }
 }
