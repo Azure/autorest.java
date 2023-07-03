@@ -317,7 +317,8 @@ public class SchemaUtil {
     }
 
     public static boolean treatAsXml(Schema schema) {
-        return (schema.getSerializationFormats() != null && schema.getSerializationFormats().contains("xml"))
-            || (schema.getSerialization() != null && schema.getSerialization().getXml() != null);
+        return (schema.getUsage() == null || !Objects.equals(schema.getUsage(), Collections.singleton(SchemaContext.EXCEPTION)))
+            && ((schema.getSerializationFormats() != null && schema.getSerializationFormats().contains("xml"))
+            || (schema.getSerialization() != null && schema.getSerialization().getXml() != null));
     }
 }
