@@ -21,18 +21,40 @@ model RequestInner {
   name: string;
 }
 
-// Response and ResponseInner will not be generated
-model Response {
-  property: ResponseInner;
+// ResponseInternal and ResponseInternalInner will not be generated
+model ResponseInternal {
+  property: ResponseInternalInner;
 }
 
-model ResponseInner {
+model ResponseInternalInner {
+  name: string;
+}
+
+// Response will be generated as output-only
+@include
+model Response {
+  name: string;
+}
+
+// StandAloneData and StandAloneDataInner will be generated
+@include
+model StandAloneData {
+  property: StandAloneDataInner;
+}
+
+model StandAloneDataInner {
   name: string;
 }
 
 @route("/internal")
 interface InternalOp {
+  // test Request with @include
   @internal
+  @post
+  postInternal(...Request): ResponseInternal;
+
+  // test Response with @include
   @get
-  getInternal(...Request): Response;
+  @internal
+  getInternal(): Response;
 }

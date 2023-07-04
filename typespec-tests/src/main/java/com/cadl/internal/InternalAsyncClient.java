@@ -34,7 +34,7 @@ public final class InternalAsyncClient {
     }
 
     /**
-     * The getInternal operation.
+     * The postInternal operation.
      *
      * <p><strong>Request Body Schema</strong>
      *
@@ -66,7 +66,31 @@ public final class InternalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<Response<BinaryData>> getInternalWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.getInternalWithResponseAsync(request, requestOptions);
+    Mono<Response<BinaryData>> postInternalWithResponse(BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.postInternalWithResponseAsync(request, requestOptions);
+    }
+
+    /**
+     * The getInternal operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Mono<Response<BinaryData>> getInternalWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getInternalWithResponseAsync(requestOptions);
     }
 }
