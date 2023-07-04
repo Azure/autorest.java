@@ -7,13 +7,11 @@ import {
   createTypeSpecLibrary,
 } from "@typespec/compiler";
 import { dump } from "js-yaml";
-import { spawn } from "child_process";
+import {execFile, spawn, spawnSync} from "child_process";
 import { promises } from "fs";
 import { CodeModelBuilder } from "./code-model-builder.js";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-
-
 
 export interface EmitterOptions {
   "namespace"?: string;
@@ -116,20 +114,22 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     javaArgs.push(jarFileName);
     javaArgs.push(codeModelFileName);
     try {
-      spawn("java", javaArgs, {stdio: "inherit"});
-    } catch (err: any) {
-      if ("code" in err && err.code === "ENOENT") {
-        const msg = "'java' is not on PATH. Please install JDK 11 or above.";
-        program.trace("typespec-java", msg);
-        program.reportDiagnostic({
-          code: "typespec-java",
-          severity: "error",
-          message: msg,
-          target: NoTarget,
-        });
-      } else {
+      const childProcess = spawn("java", javaArgs, {stdio: "inherit"});
+      childProcess.on('exit', (code, signal) => {
+        if (code !== 0) {
+          throw new Error("Failed to successfully run Java code generation. The process terminated with exit code " + code);
+        }
+        console.log("Code generation completed successfully.");
+      });
+      childProcess.on('error', (err) => {
+        if (err.message.endsWith("ENOENT")) {
+          const msg = "'java' is not on PATH. Please install JDK 11 or above.";
+          throw new Error(msg + ": " + err.message);
+        }
         throw err;
-      }
+      });
+    } catch (err: any) {
+      throw err;
     }
 
     if (!options["dev-options"]?.["generate-code-model"]) {

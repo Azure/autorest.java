@@ -236,9 +236,6 @@ public class Postprocessor extends NewPlugin {
             editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
             attemptMavenInstall(Paths.get(tempDirWithPrefix.toString(), "pom.xml"), logger);
             editor.addFile(fileName.substring(fileName.indexOf("src/")), code);
-
-            System.out.println("Code filename is " + fileName);
-            Files.walk(tempDirWithPrefix).forEach(file -> System.out.println("In temp directory " + file));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
