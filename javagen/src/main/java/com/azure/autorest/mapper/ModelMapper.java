@@ -133,11 +133,10 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             boolean compositeTypeUsedWithXml = SchemaUtil.treatAsXml(compositeType);
-            if (compositeTypeUsedWithXml) {
-                modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
-            }
             if (!compositeTypeProperties.isEmpty()) {
                 if (compositeTypeUsedWithXml) {
+                    modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
+
                     if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema() instanceof ArraySchema)) {
                         modelImports.add(ArrayList.class.getName());
                     }
