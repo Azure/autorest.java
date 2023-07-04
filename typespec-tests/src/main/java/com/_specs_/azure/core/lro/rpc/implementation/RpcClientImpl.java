@@ -5,7 +5,7 @@
 package com._specs_.azure.core.lro.rpc.implementation;
 
 import com._specs_.azure.core.lro.rpc.RpcServiceVersion;
-import com._specs_.azure.core.lro.rpc.models.GeneratonResult;
+import com._specs_.azure.core.lro.rpc.models.GenerationResult;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
@@ -399,7 +399,7 @@ public final class RpcClientImpl {
      * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, GeneratonResult> beginLongRunningRpcWithModelAsync(
+    public PollerFlux<PollResult, GenerationResult> beginLongRunningRpcWithModelAsync(
             BinaryData generationOptions, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
@@ -412,7 +412,7 @@ public final class RpcClientImpl {
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
                 TypeReference.createInstance(PollResult.class),
-                TypeReference.createInstance(GeneratonResult.class));
+                TypeReference.createInstance(GenerationResult.class));
     }
 
     /**
@@ -452,7 +452,7 @@ public final class RpcClientImpl {
      * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, GeneratonResult> beginLongRunningRpcWithModel(
+    public SyncPoller<PollResult, GenerationResult> beginLongRunningRpcWithModel(
             BinaryData generationOptions, RequestOptions requestOptions) {
         return SyncPoller.createPoller(
                 Duration.ofSeconds(1),
@@ -465,6 +465,6 @@ public final class RpcClientImpl {
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)),
                 TypeReference.createInstance(PollResult.class),
-                TypeReference.createInstance(GeneratonResult.class));
+                TypeReference.createInstance(GenerationResult.class));
     }
 }

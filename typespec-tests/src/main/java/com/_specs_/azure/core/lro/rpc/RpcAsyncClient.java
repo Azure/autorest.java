@@ -5,7 +5,7 @@ package com._specs_.azure.core.lro.rpc;
 
 import com._specs_.azure.core.lro.rpc.implementation.RpcClientImpl;
 import com._specs_.azure.core.lro.rpc.models.GenerationOptions;
-import com._specs_.azure.core.lro.rpc.models.GeneratonResult;
+import com._specs_.azure.core.lro.rpc.models.GenerationResult;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -92,7 +92,7 @@ public final class RpcAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, GeneratonResult> beginLongRunningRpc(GenerationOptions generationOptions) {
+    public PollerFlux<PollResult, GenerationResult> beginLongRunningRpc(GenerationOptions generationOptions) {
         // Generated convenience method for beginLongRunningRpcWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginLongRunningRpcWithModelAsync(

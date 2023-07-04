@@ -4,7 +4,7 @@
 package com._specs_.azure.core.lro.rpc;
 
 import com._specs_.azure.core.lro.rpc.models.GenerationOptions;
-import com._specs_.azure.core.lro.rpc.models.GeneratonResult;
+import com._specs_.azure.core.lro.rpc.models.GenerationResult;
 import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
@@ -22,7 +22,7 @@ public class RpcTests {
 
     @Test
     public void testRpc() {
-        SyncPoller<PollResult, GeneratonResult> poller = client.beginLongRunningRpc(new GenerationOptions("text"));
+        SyncPoller<PollResult, GenerationResult> poller = client.beginLongRunningRpc(new GenerationOptions("text"));
 
         PollResponse<PollResult> response = poller.waitForCompletion();
 
@@ -30,7 +30,7 @@ public class RpcTests {
         Assertions.assertEquals("operation1", response.getValue().getOperationId());
         Assertions.assertNull(response.getValue().getError());
 
-        GeneratonResult finalResult = poller.getFinalResult();
+        GenerationResult finalResult = poller.getFinalResult();
         Assertions.assertEquals("text data", finalResult.getData());
     }
 }
