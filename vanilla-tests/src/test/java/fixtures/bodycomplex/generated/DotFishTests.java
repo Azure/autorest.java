@@ -12,8 +12,7 @@ public final class DotFishTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         DotFish model =
-                BinaryData.fromString("{\"fish.type\":\"DotFish\",\"species\":\"gejspodmailzyde\"}")
-                        .toObject(DotFish.class);
-        Assertions.assertEquals("gejspodmailzyde", model.getSpecies());
+                BinaryData.fromString("{\"fish.type\":\"DotFish\",\"species\":\"ryffdfdosy\"}").toObject(DotFish.class);
+        Assertions.assertEquals("ryffdfdosy", model.getSpecies());
     }
 }
