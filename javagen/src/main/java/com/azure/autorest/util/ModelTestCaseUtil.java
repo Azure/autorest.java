@@ -56,11 +56,6 @@ public class ModelTestCaseUtil {
     }
 
     private static Map<String, Object> jsonFromModel(int depth, ClientModel model) {
-        if (depth > CONFIGURATION.maxDepth) {
-            // abort
-            return null;
-        }
-
         Map<String, Object> jsonObject = new LinkedHashMap<>();
 
         // polymorphism
@@ -206,14 +201,20 @@ public class ModelTestCaseUtil {
 
     private static void addForProperty(int depth, Map<String, Object> jsonObject,
                                        ClientModelProperty property, boolean modelNeedsFlatten) {
+        final boolean maxDepthReached = depth > CONFIGURATION.maxDepth;
+
         Object value = null;
         if (property.isConstant()) {
             // TODO (weidxu): skip for now, as the property.getDefaultValue() is the code, not the raw data
             //value = property.getDefaultValue();
             return;
         } else {
-            if (property.isRequired() || RANDOM.nextFloat() > CONFIGURATION.nullableProbability) {
-                value = jsonFromType(depth + 1, property.getWireType());
+            if (property.isRequired()
+                    // required property must be generated
+                    // optional property only be generated when still have depth remains
+                    // we assume here that there is no infinitely nested required properties
+                    || (!maxDepthReached && RANDOM.nextFloat() > CONFIGURATION.nullableProbability)) {
+                value = jsonFromType(depth, property.getWireType());
             }
         }
 
