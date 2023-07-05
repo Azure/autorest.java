@@ -6,12 +6,12 @@ import {
   NoTarget,
   resolvePath,
 } from "@typespec/compiler";
-import {dump} from "js-yaml";
-import {spawnSync} from "child_process";
-import {promises} from "fs";
-import {CodeModelBuilder} from "./code-model-builder.js";
-import {dirname} from "path";
-import {fileURLToPath} from "url";
+import { dump } from "js-yaml";
+import { spawnSync } from "child_process";
+import { promises } from "fs";
+import { CodeModelBuilder } from "./code-model-builder.js";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 export interface EmitterOptions {
   "namespace"?: string;
@@ -105,7 +105,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     const javaArgs: string[] = [];
     javaArgs.push(`-DemitterOptions=${emitterOptions}`);
     if (options["dev-options"]?.debug) {
-      javaArgs.push("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005")
+      javaArgs.push("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005");
     }
     if (options["dev-options"]?.loglevel) {
       javaArgs.push("-Dloglevel=" + options["dev-options"]?.loglevel);
@@ -113,7 +113,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     javaArgs.push("-jar");
     javaArgs.push(jarFileName);
     javaArgs.push(codeModelFileName);
-    const output = spawnSync("java", javaArgs, {stdio: "inherit"});
+    const output = spawnSync("java", javaArgs, { stdio: "inherit" });
 
     if (output.status !== 0) {
       const error = output.error;
