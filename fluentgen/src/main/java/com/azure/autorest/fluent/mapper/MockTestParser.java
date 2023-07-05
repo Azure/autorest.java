@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
+import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
@@ -117,7 +118,15 @@ public class MockTestParser extends ExampleParser {
                 serializedName = methodParameter.getProxyMethodParameter().getName();
             }
 
-            Object jsonParam = ModelTestCaseUtil.jsonFromType(0, methodParameter.getProxyMethodParameter().getWireType());
+            Object jsonParam;
+            if (methodParameter.getProxyMethodParameter().getCollectionFormat() != null
+                    && methodParameter.getProxyMethodParameter().getWireType() == ClassType.String
+                    && methodParameter.getProxyMethodParameter().getClientType() instanceof ListType) {
+                // use element type without delimiter
+                jsonParam = ModelTestCaseUtil.jsonFromType(0, ((ListType) methodParameter.getProxyMethodParameter().getClientType()).getElementType()).toString();
+            } else {
+                jsonParam = ModelTestCaseUtil.jsonFromType(0, methodParameter.getProxyMethodParameter().getWireType());
+            }
 
             example.parameter(serializedName, jsonParam);
         }

@@ -13,15 +13,15 @@ public final class DotFishMarketTests {
     public void testDeserialize() throws Exception {
         DotFishMarket model =
                 BinaryData.fromString(
-                                "{\"sampleSalmon\":{\"fish.type\":\"DotSalmon\",\"location\":\"wyahuxinpmqnja\",\"iswild\":true,\"species\":\"jsprozvcpute\"},\"salmons\":[{\"fish.type\":\"DotSalmon\",\"location\":\"mfdatscmdvpj\",\"iswild\":true,\"species\":\"uuvmkjozkrwfnd\"}],\"sampleFish\":{\"fish.type\":\"DotFish\",\"species\":\"jpslwejd\"},\"fishes\":[{\"fish.type\":\"DotFish\",\"species\":\"yoqpsoaccta\"},{\"fish.type\":\"DotFish\",\"species\":\"kljla\"},{\"fish.type\":\"DotFish\",\"species\":\"cr\"}]}")
+                                "{\"sampleSalmon\":{\"fish.type\":\"DotSalmon\",\"location\":\"paojakhmsbzjh\",\"iswild\":false,\"species\":\"vdphlxaolthqtr\"},\"salmons\":[{\"fish.type\":\"DotSalmon\",\"location\":\"pfzfsinzgvfc\",\"iswild\":false,\"species\":\"oxxjtfelluwf\"}],\"sampleFish\":{\"fish.type\":\"DotFish\",\"species\":\"onpeqfpjkjlxofp\"},\"fishes\":[{\"fish.type\":\"DotFish\",\"species\":\"fxxypininmayhuy\"}]}")
                         .toObject(DotFishMarket.class);
-        Assertions.assertEquals("jsprozvcpute", model.getSampleSalmon().getSpecies());
-        Assertions.assertEquals("wyahuxinpmqnja", model.getSampleSalmon().getLocation());
-        Assertions.assertEquals(true, model.getSampleSalmon().iswild());
-        Assertions.assertEquals("uuvmkjozkrwfnd", model.getSalmons().get(0).getSpecies());
-        Assertions.assertEquals("mfdatscmdvpj", model.getSalmons().get(0).getLocation());
-        Assertions.assertEquals(true, model.getSalmons().get(0).iswild());
-        Assertions.assertEquals("jpslwejd", model.getSampleFish().getSpecies());
-        Assertions.assertEquals("yoqpsoaccta", model.getFishes().get(0).getSpecies());
+        Assertions.assertEquals("vdphlxaolthqtr", model.getSampleSalmon().getSpecies());
+        Assertions.assertEquals("paojakhmsbzjh", model.getSampleSalmon().getLocation());
+        Assertions.assertEquals(false, model.getSampleSalmon().iswild());
+        Assertions.assertEquals("oxxjtfelluwf", model.getSalmons().get(0).getSpecies());
+        Assertions.assertEquals("pfzfsinzgvfc", model.getSalmons().get(0).getLocation());
+        Assertions.assertEquals(false, model.getSalmons().get(0).iswild());
+        Assertions.assertEquals("onpeqfpjkjlxofp", model.getSampleFish().getSpecies());
+        Assertions.assertEquals("fxxypininmayhuy", model.getFishes().get(0).getSpecies());
     }
 }
