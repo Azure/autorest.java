@@ -9,6 +9,10 @@ import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.util.TemplateUtil;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 public class ReadmeTemplate extends com.azure.autorest.template.ReadmeTemplate {
 
     public String write(FluentProject project) {
@@ -27,6 +31,17 @@ public class ReadmeTemplate extends com.azure.autorest.template.ReadmeTemplate {
                     .append("\n");
         }
 
+        String impression = "";
+        if (project.getSdkRepositoryPath().isPresent()) {
+            try {
+                impression = "![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/"
+                        + URLEncoder.encode("azure-sdk-for-java/" + project.getSdkRepositoryPath().get() + "/README.png", StandardCharsets.UTF_8.name())
+                        + ")";
+            } catch (UnsupportedEncodingException e) {
+                // NOOP
+            }
+        }
+
         return FluentUtils.loadTextFromResource("Readme.txt",
                 TemplateUtil.SERVICE_NAME, project.getServiceName(),
                 TemplateUtil.SERVICE_DESCRIPTION, project.getServiceDescriptionForMarkdown(),
@@ -34,7 +49,8 @@ public class ReadmeTemplate extends com.azure.autorest.template.ReadmeTemplate {
                 TemplateUtil.ARTIFACT_ID, project.getArtifactId(),
                 TemplateUtil.ARTIFACT_VERSION, project.getVersion(),
                 TemplateUtil.MANAGER_CLASS, FluentStatic.getFluentManager().getType().getName(),
-                TemplateUtil.SAMPLE_CODES, sampleCodesBuilder.toString()
+                TemplateUtil.SAMPLE_CODES, sampleCodesBuilder.toString(),
+                TemplateUtil.IMPRESSION_PIXEL, impression
         );
     }
 }
