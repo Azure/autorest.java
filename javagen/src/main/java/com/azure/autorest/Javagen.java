@@ -316,6 +316,9 @@ public class Javagen extends NewPlugin {
                 }
                 javaPackage.addChangelogMarkdown(project);
 
+                // test proxy asserts.json
+                javaPackage.addTestProxyAssetsJson(project);
+
                 // Blank readme sample
                 javaPackage.addProtocolExamplesBlank();
             }
