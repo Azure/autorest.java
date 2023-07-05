@@ -58,6 +58,7 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str,
         '-Djacoco.skip',
         '-Drevapi.skip',
         '-Dmaven.javadoc.skip',
+        '-Dmaven.test.skip',
         '--no-transfer-progress'
     ]
     subprocess.check_call(cmd, cwd=output_folder)
