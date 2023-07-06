@@ -23,10 +23,6 @@ public class ClassCustomizationTests {
         final String fileContent = String.join(System.lineSeparator(),
                 "public class Foo {",
                 "}");
-        final String pathToLanguageServerPlugin = Paths.get(ClassCustomizationTests.class.getResource("").toURI())
-                .resolve("../../../../../../../postprocessor")
-                .normalize()
-                .toString();
 
         final String expectedFileContent = String.join(System.lineSeparator(),
                 "public class Foo {",
@@ -47,7 +43,7 @@ public class ClassCustomizationTests {
             }
         };
 
-        customization.run(pathToLanguageServerPlugin, Collections.singletonMap(fileName, fileContent), LOGGER);
+        customization.run(null, Collections.singletonMap(fileName, fileContent), LOGGER);
     }
 
     @Test
@@ -61,10 +57,6 @@ public class ClassCustomizationTests {
                 "       this.foo = foo;",
                 "    }",
                 "}");
-        final String pathToLanguageServerPlugin = Paths.get(ClassCustomizationTests.class.getResource("").toURI())
-                .resolve("../../../../../../../postprocessor")
-                .normalize()
-                .toString();
 
         final String expectedFileContent = String.join(System.lineSeparator(),
                 "import com.azure.core.util.BinaryData;",
@@ -91,7 +83,7 @@ public class ClassCustomizationTests {
             }
         };
 
-        customization.run(pathToLanguageServerPlugin, Collections.singletonMap(fileName, fileContent), LOGGER);
+        customization.run(null, Collections.singletonMap(fileName, fileContent), LOGGER);
     }
 
     private static String standardizeFileForComparison(String content) {

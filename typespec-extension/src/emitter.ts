@@ -1,14 +1,13 @@
 import {
-  resolvePath,
-  getNormalizedAbsolutePath,
-  EmitContext,
-  NoTarget,
-  JSONSchemaType,
   createTypeSpecLibrary,
+  EmitContext,
+  getNormalizedAbsolutePath,
+  JSONSchemaType,
+  NoTarget,
+  resolvePath,
 } from "@typespec/compiler";
 import { dump } from "js-yaml";
-import { promisify } from "util";
-import { execFile } from "child_process";
+import { spawnSync } from "child_process";
 import { promises } from "fs";
 import { CodeModelBuilder } from "./code-model-builder.js";
 import { dirname } from "path";
@@ -36,6 +35,8 @@ export interface EmitterOptions {
 export interface DevOptions {
   "generate-code-model"?: boolean;
   "support-versioning"?: boolean;
+  "debug"?: boolean;
+  "loglevel"?: "off" | "debug" | "info" | "warn" | "error";
 }
 
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
@@ -101,16 +102,22 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     const jarFileName = resolvePath(moduleRoot, "target", "azure-typespec-extension-jar-with-dependencies.jar");
     program.trace("typespec-java", `Exec JAR ${jarFileName}`);
 
-    try {
-      const output = await promisify(execFile)("java", [
-        `-DemitterOptions=${emitterOptions}`,
-        "-jar",
-        jarFileName,
-        codeModelFileName,
-      ]);
-      program.trace("typespec-java", output.stdout ? output.stdout : output.stderr);
-    } catch (err: any) {
-      if ("code" in err && err.code === "ENOENT") {
+    const javaArgs: string[] = [];
+    javaArgs.push(`-DemitterOptions=${emitterOptions}`);
+    if (options["dev-options"]?.debug) {
+      javaArgs.push("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005");
+    }
+    if (options["dev-options"]?.loglevel) {
+      javaArgs.push("-Dloglevel=" + options["dev-options"]?.loglevel);
+    }
+    javaArgs.push("-jar");
+    javaArgs.push(jarFileName);
+    javaArgs.push(codeModelFileName);
+    const output = spawnSync("java", javaArgs, { stdio: "inherit" });
+
+    if (output.status !== 0) {
+      const error = output.error;
+      if (error && "code" in error && error["code"] === "ENOENT") {
         const msg = "'java' is not on PATH. Please install JDK 11 or above.";
         program.trace("typespec-java", msg);
         program.reportDiagnostic({
@@ -119,9 +126,9 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
           message: msg,
           target: NoTarget,
         });
-      } else {
-        throw err;
+        throw new Error(msg);
       }
+      throw new Error("Failed to run Java code generation. The process terminated with exit code " + output.status);
     }
 
     if (!options["dev-options"]?.["generate-code-model"]) {

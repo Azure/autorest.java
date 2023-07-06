@@ -116,7 +116,7 @@ public class Postprocessor extends NewPlugin {
                     return true;
                 }
             } else if (className.startsWith("src") && className.endsWith(".java")) {
-                customizationClass = loadCustomizationClassFromJavaCode(className);
+                customizationClass = loadCustomizationClassFromJavaCode(className, getBaseDirectory(), logger);
             } else {
                 customizationClass = loadCustomizationClassFromReadme(className, readme);
             }
@@ -202,28 +202,27 @@ public class Postprocessor extends NewPlugin {
             return null;
         }
 
-        return loadCustomizationClass(className, customizationFile, code);
+        return loadCustomizationClass(className, customizationFile, code, this.logger);
     }
 
-    private Class<? extends Customization> loadCustomizationClassFromJavaCode(String filePath) {
+    public static Class<? extends Customization> loadCustomizationClassFromJavaCode(String filePath, String baseDirectory, Logger logger) {
         Path customizationFile = Paths.get(filePath);
         if (!customizationFile.isAbsolute()) {
-            String baseDirectory = getBaseDirectory();
             if (baseDirectory != null) {
                 customizationFile = Paths.get(baseDirectory, filePath);
             }
         }
         try {
             String code = new String(Files.readAllBytes(customizationFile), StandardCharsets.UTF_8);
-            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), filePath, code);
+            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), filePath, code, logger);
         } catch (IOException e) {
-            logger.error("Cannot read customization from " + filePath);
+            logger.error("Cannot read customization from base directory " + baseDirectory + " and file " + customizationFile);
             return null;
         }
     }
 
     @SuppressWarnings("unchecked")
-    private Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code) {
+    public static Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code, Logger logger) {
         Path tempDirWithPrefix;
 
         // Populate editor
@@ -236,7 +235,7 @@ public class Postprocessor extends NewPlugin {
             pomStream.read(buffer);
             editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
             attemptMavenInstall(Paths.get(tempDirWithPrefix.toString(), "pom.xml"), logger);
-            editor.addFile(fileName, code);
+            editor.addFile(fileName.substring(fileName.indexOf("src/")), code);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
