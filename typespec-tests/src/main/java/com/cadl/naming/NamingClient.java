@@ -37,41 +37,16 @@ public final class NamingClient {
     /**
      * Protocol method for POST operation.
      *
-     * <p>description of POST op.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
-     *
-     * description of etag header parameter</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     name: String (Required)
-     *     data (Required): {
-     *         data: byte[] (Required)
-     *     }
-     *     type: String(Blob/File) (Required)
-     *     status: String(Running/Completed/Failed) (Required)
-     * }
-     * }</pre>
-     *
-     * @param name summary of name query parameter
-     *     <p>description of name query parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @param name summary of name query parameter
      * @return summary of Response along with {@link Response}.
+     * @throws ResourceModifiedException ResourceModifiedException thrown if the request is rejected by server on status
+     *     code 409.
+     * @throws ResourceNotFoundException ResourceNotFoundException thrown if the request is rejected by server on status
+     *     code 404.
+     * @throws ClientAuthenticationException ClientAuthenticationException thrown if the request is rejected by server
+     *     on status code 401.
+     * @throws HttpResponseException HttpResponseException thrown if the request is rejected by server.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
