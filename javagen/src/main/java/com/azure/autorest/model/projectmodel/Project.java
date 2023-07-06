@@ -47,7 +47,7 @@ public class Project {
     protected String artifactId;
     protected String version = "1.0.0-beta.1";
     protected final List<String> pomDependencyIdentifiers = new ArrayList<>();
-    protected String sdkRepositoryUri;
+    protected String sdkRepositoryPath;
 
     private List<String> apiVersions;
 
@@ -172,8 +172,8 @@ public class Project {
             }
             if (path != null) {
                 Collections.reverse(pathSegment);
-                sdkRepositoryUri = "https://github.com/Azure/azure-sdk-for-java/blob/main/" + String.join("/", pathSegment);
-                LOGGER.info("Repository URI '{}' deduced from 'output-folder' parameter", sdkRepositoryUri);
+                sdkRepositoryPath = String.join("/", pathSegment);
+                LOGGER.info("Repository path '{}' deduced from 'output-folder' parameter", sdkRepositoryPath);
             }
         }
     }
@@ -400,7 +400,11 @@ public class Project {
     }
 
     public Optional<String> getSdkRepositoryUri() {
-        return Optional.ofNullable(sdkRepositoryUri);
+        return Optional.ofNullable(sdkRepositoryPath == null ? null : ("https://github.com/Azure/azure-sdk-for-java/blob/main/" + sdkRepositoryPath));
+    }
+
+    public Optional<String> getSdkRepositoryPath() {
+        return Optional.ofNullable(sdkRepositoryPath);
     }
 
     public boolean isIntegratedWithSdk() {
