@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 import com.azure.autorest.customization.ClassCustomization;
+import com.azure.autorest.customization.ConstructorCustomization;
 import com.azure.autorest.customization.Customization;
 import com.azure.autorest.customization.LibraryCustomization;
 import com.azure.autorest.customization.PackageCustomization;
@@ -16,9 +17,16 @@ public class CustomizationEncodeBytes extends Customization {
 
     @Override
     public void customize(LibraryCustomization customization, Logger logger) {
-        logger.info("Customizing the Base64UrlArrayBytesProperty, add default private constructor");
+        logger.info("Customizing the Base64UrlArrayBytesPropert");
+
         PackageCustomization packageCustomization = customization.getPackage("com.encode.bytes.models");
         ClassCustomization classCustomization = packageCustomization.getClass("Base64UrlArrayBytesProperty");
+
+        ConstructorCustomization constructorCustomization = classCustomization.getConstructor("Base64UrlArrayBytesProperty");
+        constructorCustomization.removeAnnotation("JsonCreator");
+        constructorCustomization = classCustomization.getConstructor("Base64UrlArrayBytesProperty");
+        constructorCustomization.addAnnotation("JsonCreator(mode=JsonCreator.Mode.DISABLED)");
+
         classCustomization.addConstructor("@Generated private Base64UrlArrayBytesProperty() {}");
     }
 }

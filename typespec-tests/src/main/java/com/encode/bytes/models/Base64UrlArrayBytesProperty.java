@@ -27,7 +27,7 @@ public final class Base64UrlArrayBytesProperty {
      * @param value the value value to set.
      */
     @Generated
-    @JsonCreator
+    @JsonCreator(mode=JsonCreator.Mode.DISABLED)
     public Base64UrlArrayBytesProperty(@JsonProperty(value = "value") List<byte[]> value) {
         this.value = value.stream().map(el -> Base64Url.encode(el)).collect(java.util.stream.Collectors.toList());
     }
