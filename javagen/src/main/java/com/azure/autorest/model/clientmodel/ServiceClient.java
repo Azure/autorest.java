@@ -76,6 +76,8 @@ public class ServiceClient {
 
     private String baseUrl;
 
+    private PipelinePolicyDetails pipelinePolicyDetails;
+
     /**
      * Create a new ServiceClient with the provided properties.
      * @param packageName The package that this service client belongs to.
@@ -94,7 +96,7 @@ public class ServiceClient {
      */
     protected ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
                             ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter, String defaultCredentialScopes,
-                            boolean builderDisabled, SecurityInfo securityInfo, String baseUrl) {
+                            boolean builderDisabled, SecurityInfo securityInfo, String baseUrl, PipelinePolicyDetails pipelinePolicyDetails) {
         this.packageName = packageName;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -113,6 +115,7 @@ public class ServiceClient {
         this.builderDisabled = builderDisabled;
         this.securityInfo = securityInfo;
         this.baseUrl = baseUrl;
+        this.pipelinePolicyDetails = pipelinePolicyDetails;
     }
 
     public final String getPackage() {
@@ -188,6 +191,13 @@ public class ServiceClient {
      */
     public String getBaseUrl() {
         return baseUrl;
+    }
+
+    /**
+     * @return the configuration for HttpPipelinePolicy
+     */
+    public PipelinePolicyDetails getPipelinePolicyDetails() {
+        return pipelinePolicyDetails;
     }
 
     /**
@@ -284,6 +294,7 @@ public class ServiceClient {
         protected boolean builderDisabled;
         protected SecurityInfo securityInfo;
         protected String baseUrl;
+        protected PipelinePolicyDetails pipelinePolicyDetails;
 
         /**
          * Sets the package that this service client belongs to.
@@ -455,6 +466,17 @@ public class ServiceClient {
             return this;
         }
 
+        /**
+         * Configures the HttpPipelinePolicy
+         *
+         * @param pipelinePolicyDetails the configuration of HttpPipelinePolicy
+         * @return the Builder itself
+         */
+        public Builder pipelinePolicyDetails(PipelinePolicyDetails pipelinePolicyDetails) {
+            this.pipelinePolicyDetails = pipelinePolicyDetails;
+            return this;
+        }
+
         public ServiceClient build() {
             return new ServiceClient(packageName,
                     className,
@@ -472,7 +494,8 @@ public class ServiceClient {
                     defaultCredentialScopes,
                     builderDisabled,
                     securityInfo,
-                    baseUrl);
+                    baseUrl,
+                    pipelinePolicyDetails);
         }
     }
 }

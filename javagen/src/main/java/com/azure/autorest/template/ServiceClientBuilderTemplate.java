@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientBuilderTraitMethod;
+import com.azure.autorest.model.clientmodel.PipelinePolicyDetails;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
@@ -305,7 +306,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             });
 
             if (!settings.isAzureOrFluent()) {
-                addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes(), serviceClient.getSecurityInfo());
+                addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes(), serviceClient.getSecurityInfo(), serviceClient.getPipelinePolicyDetails());
             }
 
             if (JavaSettings.getInstance().isGenerateSyncAsyncClients()) {
@@ -477,7 +478,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
     }
 
-    protected void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock, String defaultCredentialScopes, SecurityInfo securityInfo) {
+    protected void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock,
+                                               String defaultCredentialScopes, SecurityInfo securityInfo,
+                                               PipelinePolicyDetails pipelinePolicyDetails) {
         addGeneratedAnnotation(classBlock);
         classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
@@ -498,7 +501,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                     + "clientVersion, buildConfiguration));");
 
-            function.line("policies.add(new RequestIdPolicy());");
+            if (pipelinePolicyDetails != null && !CoreUtils.isNullOrEmpty(pipelinePolicyDetails.getRequestIdHeaderName())) {
+                function.line(String.format("policies.add(new RequestIdPolicy(%s));", pipelinePolicyDetails.getRequestIdHeaderName()));
+            } else {
+                function.line("policies.add(new RequestIdPolicy());");
+            }
             function.line("policies.add(new AddHeadersFromContextPolicy());");
 
             // clientOptions header

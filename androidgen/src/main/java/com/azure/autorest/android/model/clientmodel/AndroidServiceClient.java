@@ -50,7 +50,8 @@ public class AndroidServiceClient extends ServiceClient {
                 defaultCredentialScopes,
                 builderDisabled,
                 securityInfo,
-                baseUrl);
+                baseUrl,
+                null);
     }
 
     @Override
