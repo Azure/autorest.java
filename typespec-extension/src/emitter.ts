@@ -27,6 +27,10 @@ export interface EmitterOptions {
   "generate-tests"?: boolean;
   "enable-sync-stack"?: boolean;
 
+  "custom-types"?: string;
+  "custom-types-subpackage"?: string;
+  "customization-class"?: string;
+
   "examples-directory"?: string;
 
   "dev-options"?: DevOptions;
@@ -55,6 +59,10 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "generate-samples": { type: "boolean", nullable: true, default: true },
     "generate-tests": { type: "boolean", nullable: true, default: true },
     "enable-sync-stack": { type: "boolean", nullable: true, default: true },
+
+    "custom-types": { type: "string", nullable: true },
+    "custom-types-subpackage": { type: "string", nullable: true },
+    "customization-class": { type: "string", nullable: true },
 
     "examples-directory": { type: "string", nullable: true },
 
