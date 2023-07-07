@@ -32,6 +32,9 @@ public final class Base64UrlArrayBytesProperty {
         this.value = value.stream().map(el -> Base64Url.encode(el)).collect(java.util.stream.Collectors.toList());
     }
 
+    @Generated
+    private Base64UrlArrayBytesProperty() {}
+
     /**
      * Get the value property: The value property.
      *
