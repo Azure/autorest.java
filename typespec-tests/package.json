@@ -6,13 +6,13 @@
     "format": "npm run -s prettier -- --write",
     "check-format": "npm run prettier -- --check",
     "prettier": "prettier --config ./.prettierrc.yaml **/*.tsp",
-    "start-test-server": "npx cadl-ranch serve ./node_modules/@azure-tools/cadl-ranch-specs/http  --coverageFile ./cadl-ranch-coverage-java.json"
+    "start-test-server": "npx cadl-ranch serve ./node_modules/@azure-tools/cadl-ranch-specs/http --coverageFile ./cadl-ranch-coverage-java.json"
   },
   "dependencies": {
     "@typespec/openapi": ">=0.45.0 <1.0.0",
     "@azure-tools/typespec-autorest": ">=0.31.0 <1.0.0",
     "@azure-tools/cadl-ranch-specs": "0.16.2",
-    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.8.4.tgz"
+    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.8.5.tgz"
   },
   "devDependencies": {
     "@typespec/prettier-plugin-typespec": ">=0.45.0 <1.0.0",
