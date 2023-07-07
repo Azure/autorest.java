@@ -67,7 +67,7 @@ public class TypeSpecServiceClientMapper extends ServiceClientMapper {
         final String clientRequestIdHeaderName = "client-request-id";
         final boolean clientRequestIdHeaderInClient = client.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
-                .anyMatch(o -> o.getSpecialHeaders().contains(clientRequestIdHeaderName));
+                .anyMatch(o -> o.getSpecialHeaders() != null && o.getSpecialHeaders().contains(clientRequestIdHeaderName));
         if (clientRequestIdHeaderInClient) {
             builder.pipelinePolicyDetails(new PipelinePolicyDetails().setRequestIdHeaderName(clientRequestIdHeaderName));
         }
