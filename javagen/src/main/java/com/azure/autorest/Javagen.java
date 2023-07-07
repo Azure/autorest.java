@@ -164,8 +164,8 @@ public class Javagen extends NewPlugin {
         return newYaml.loadAs(file, CodeModel.class);
     }
 
-    JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings,
-                                 boolean generateSwaggerMarkdown) {
+    protected JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings,
+                                           boolean generateSwaggerMarkdown) {
         JavaPackage javaPackage = new JavaPackage(this);
         // Service client
         if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {

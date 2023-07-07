@@ -25,6 +25,18 @@ function Generate($tspFile) {
   if ($overridedNamespace) {
     $tspOptions = "--options=""@azure-tools/typespec-java.namespace=$overridedNamespace"""
   }
+
+  # Test customization for one of the TypeSpec definitions - naming.tsp
+  if ($tspFile -match 'naming.tsp$') {
+    # since tsp-output directory will be cleaned up after each test tsp, we copy the customization
+    # code into output directory from customization directory in tsp-output/customization directory just before
+    # generating the code
+    Copy-Item -Path ./customization -Destination ./tsp-output/customization -Recurse -Force
+
+    # Add the customization-class option for Java emitter
+    $tspOptions = "--options=""@azure-tools/typespec-java.customization-class=customization/src/main/java/CustomizationTest.java"""
+  }
+
   $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"
   $tspCommand = "npx tsp compile $tspFile $tspOptions $tspTrace"
   Write-Host $tspCommand

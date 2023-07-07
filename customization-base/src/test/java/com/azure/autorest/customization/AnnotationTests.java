@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -65,10 +64,6 @@ public class AnnotationTests {
             "    public void methodWithComplexAnnotation() {",
             "    }",
             "}");
-        final String pathToLanguageServerPlugin = Paths.get(AnnotationTests.class.getResource("").toURI())
-            .resolve("../../../../../../../postprocessor")
-            .normalize()
-            .toString();
 
         final String expectedFileContent = String.join(System.lineSeparator(),
             "public class RemoveComplexAnnotation {",
@@ -91,7 +86,7 @@ public class AnnotationTests {
             }
         };
 
-        customization.run(pathToLanguageServerPlugin, Collections.singletonMap(fileName, fileContent), LOGGER);
+        customization.run(null, Collections.singletonMap(fileName, fileContent), LOGGER);
     }
 
     private static String standardizeFileForComparison(String content) {
