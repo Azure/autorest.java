@@ -27,7 +27,7 @@ function Generate($tspFile) {
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp
-  if ($tspFile -match 'naming.tsp$') {
+  if ($tspFile -match "tsp[\\/]naming.tsp$") {
     # since tsp-output directory will be cleaned up after each test tsp, we copy the customization
     # code into output directory from customization directory in tsp-output/customization directory just before
     # generating the code
@@ -35,6 +35,10 @@ function Generate($tspFile) {
 
     # Add the customization-class option for Java emitter
     $tspOptions = "--options=""@azure-tools/typespec-java.customization-class=customization/src/main/java/CustomizationTest.java"""
+  } elseif ($tspFile -match "encode[\\/]bytes[\\/]main.tsp") {
+    Copy-Item -Path ./customization -Destination ./tsp-output/customization -Recurse -Force
+
+    $tspOptions = "--options=""@azure-tools/typespec-java.customization-class=customization/src/main/java/CustomizationEncodeBytes.java"""
   }
 
   $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"
