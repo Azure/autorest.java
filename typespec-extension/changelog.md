@@ -4,7 +4,8 @@
 
 Compatible with compiler 0.45.
 
-- Supported `customization-class` emitter option. See [Customization](https://github.com/Azure/autorest.java/blob/main/typespec-extension/readme.md#customization).
+- Supported `customization-class` as emitter option. See [Customization](https://github.com/Azure/autorest.java/blob/main/typespec-extension/readme.md#customization).
+- `enable-sync-stack` emitter option default to `true`.
 
 ## 0.8.4 (2023-06-30)
 
