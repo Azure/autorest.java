@@ -502,7 +502,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     + "clientVersion, buildConfiguration));");
 
             if (pipelinePolicyDetails != null && !CoreUtils.isNullOrEmpty(pipelinePolicyDetails.getRequestIdHeaderName())) {
-                function.line(String.format("policies.add(new RequestIdPolicy(%s));", pipelinePolicyDetails.getRequestIdHeaderName()));
+                function.line(String.format("policies.add(new RequestIdPolicy(\"%s\"));", pipelinePolicyDetails.getRequestIdHeaderName()));
             } else {
                 function.line("policies.add(new RequestIdPolicy());");
             }
