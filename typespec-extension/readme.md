@@ -85,16 +85,6 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{project-root}/azure-ai-language-authoring"
     namespace: "com.azure.ai.language.authoring"
-    service-name: "Authoring"
-    partial-update: false
-    service-versions:
-      - "2022-05-15-preview"
-    namer: false
-    generate-samples: true
-    generate-tests: true
-    examples-directory: "./examples"
-    custom-types-subpackage: "implementation.models"
-    custom-types: InternalModel1,InternalModel2
     customization-class: customization/src/main/java/MyCustomization.java
 ```
 
@@ -117,10 +107,8 @@ emit:
 options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{project-root}/tsp-output"
-    partial-update: true
-    namer: true
+    namespace: "com.azure.ai.language.authoring"
     dev-options:
-      support-versioning: true
       loglevel: info
 ```
 

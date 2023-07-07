@@ -1,5 +1,11 @@
 # Release History
 
+## 0.8.5 (Unreleased)
+
+Compatible with compiler 0.45.
+
+- Supported `customization-class` emitter option. See [Customization](https://github.com/Azure/autorest.java/blob/main/typespec-extension/readme.md#customization).
+
 ## 0.8.4 (2023-06-30)
 
 Compatible with compiler 0.45.
