@@ -63,17 +63,19 @@ Flatten results to a single `MethodTransformationDetail`, which represents the f
 For example:
 
 ```yaml
-outParameter: "request"
-inputParameter: "user"
-outputParameterPropertyName: "user"
-inputParameter: "input"
-outputParameterPropertyName: "input"
+outParameter: request
+parameterMappings:
+- inputParameter: user
+  outputParameterPropertyName: user
+- inputParameter: input
+  outputParameterPropertyName: input
 ```
 
 ```java
 Map<String, Object> requestObj = new HashMap<>();
 requestObj.put("user", user);
 requestObj.put("input", input);
+BinaryData request = BinaryData.fromObject(requestObj);
 ```
 
 ## Grouping
@@ -162,9 +164,10 @@ Grouping results in multiple `MethodTransformationDetail` under `ClientMethod`, 
 For example:
 
 ```yaml
-outParameter: "ifMatch"
-inputParameter: "requestConditions"
-inputParameterProperty: "ifMatch"
+outParameter: ifMatch
+parameterMappings:
+- inputParameter: requestConditions
+  inputParameterProperty: ifMatch
 ```
 
 ```java
