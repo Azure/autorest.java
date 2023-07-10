@@ -50,9 +50,15 @@ language:
 
 Client model has `ClientMethod.methodTransformationDetails`.
 
-Flatten results to a single `MethodTransformationDetail`, which represents the flattening of the single body parameter (`outParameter` is that body parameter).
+Flatten results to a single `MethodTransformationDetail`, which represents the flattening of the single body parameter.
 
 `MethodTransformationDetail` contains multiple `ParameterMapping`, one for each property of the flattened body parameter.
+
+`outputParameter` represents the flattened body parameter (the real parameter).
+
+`ParameterMapping.inputParameter` represents the parameter in method signature.
+`inputParameterProperty` be `null`.
+`outputParameterPropertyName` and `outputParameterProperty` be property in body parameter/schema.
 
 ## Grouping
 
@@ -128,6 +134,14 @@ properties:
 ```
 
 ### Client Model
+
+Grouping results in multiple `MethodTransformationDetail` under `ClientMethod`, each represents mapping from property of a grouping parameter to a grouped parameter.
+
+`outputParameter` represents the grouped parameter (the real parameter).
+
+`ParameterMapping.inputParameter` represents the grouping parameter (the parameter in method signature).
+`inputParameterProperty` represents the property of that grouping parameter/schema, i.e. the `GroupProperty`.
+`outputParameterPropertyName` and `outputParameterProperty` be `null`.
 
 ## Flattening then Grouping
 
