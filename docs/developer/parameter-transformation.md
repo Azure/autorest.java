@@ -60,6 +60,22 @@ Flatten results to a single `MethodTransformationDetail`, which represents the f
 `inputParameterProperty` be `null`.
 `outputParameterPropertyName` and `outputParameterProperty` be property in body parameter/schema.
 
+For example:
+
+```yaml
+outParameter: "request"
+inputParameter: "user"
+outputParameterPropertyName: "user"
+inputParameter: "input"
+outputParameterPropertyName: "input"
+```
+
+```java
+Map<String, Object> requestObj = new HashMap<>();
+requestObj.put("user", user);
+requestObj.put("input", input);
+```
+
 ## Grouping
 
 ### ModerFour
@@ -142,6 +158,18 @@ Grouping results in multiple `MethodTransformationDetail` under `ClientMethod`, 
 `ParameterMapping.inputParameter` represents the grouping parameter (the parameter in method signature).
 `inputParameterProperty` represents the property of that grouping parameter/schema, i.e. the `GroupProperty`.
 `outputParameterPropertyName` and `outputParameterProperty` be `null`.
+
+For example:
+
+```yaml
+outParameter: "ifMatch"
+inputParameter: "requestConditions"
+inputParameterProperty: "ifMatch"
+```
+
+```java
+String ifMatch = requestConditions == null ? null : requestConditions.getIfMatch();
+```
 
 ## Flattening then Grouping
 
