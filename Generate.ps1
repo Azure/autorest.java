@@ -1,4 +1,6 @@
-# Before running this script the 'local' profile must be built, 'mvn install -P local'. And 'autorest' must be installed, 'npm install -g autorest'.
+# Use case:
+#
+# The purpose of this script is to compact the steps required # Before running this script the 'local' profile must be built, 'mvn install -P local'. And 'autorest' must be installed, 'npm install -g autorest'.
 #
 # If 'com.azure.autorest.customization' tests fails, re-install 'customization-base'.
 

@@ -4,6 +4,7 @@
 package com.encode.bytes;
 
 import com.encode.bytes.models.Base64BytesProperty;
+import com.encode.bytes.models.Base64UrlArrayBytesProperty;
 import com.encode.bytes.models.Base64UrlBytesProperty;
 import com.encode.bytes.models.DefaultBytesProperty;
 import org.junit.jupiter.api.Test;
@@ -50,6 +51,6 @@ public class EncodeBytesTests {
         propertyClient.base64Url(new Base64UrlBytesProperty(DATA));
 
         // fails due to this corner case https://github.com/Azure/autorest.java/issues/2170#issuecomment-1598116813
-//        propertyClient.base64UrlArray(new Base64UrlArrayBytesProperty(Arrays.asList(DATA, DATA)));
+        propertyClient.base64UrlArray(new Base64UrlArrayBytesProperty(Arrays.asList(DATA, DATA)));
     }
 }
