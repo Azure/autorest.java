@@ -30,6 +30,8 @@ Historically, data-plane leaves all of these options as `true`, while management
 Usually `preprocessor` and `fluentnamer` would save the input from pipeline to `code-model.yaml` in module root.
 The content of this file is helpful for inspecting Modeler Four output.
 
+One can set `--output-artifact=code-model-v4-no-tags` option to let AutoRest write the code-model file to output folder.
+
 ## RPC within AutoRest Java
 
 ### Between `preprocessor` and `javagen`
