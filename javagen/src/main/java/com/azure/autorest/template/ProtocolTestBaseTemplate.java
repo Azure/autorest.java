@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.TestContext;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
@@ -23,6 +24,12 @@ public class ProtocolTestBaseTemplate implements IJavaTemplate<TestContext, Java
     public void write(TestContext testContext, JavaFile context) {
 
         ProtocolTestWriter writer = new ProtocolTestWriter(testContext);
+
+        context.lineComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), javaLineComment -> {
+            javaLineComment.line("The Java test files under 'generated' package are generated for your reference.");
+            javaLineComment.line("If you wish to modify the test based on these files, please copy it out of the 'generated' package, and modify them there.");
+            javaLineComment.line("See https://github.com/Azure/azure-sdk-for-java/wiki/TypeSpec-Java-Quickstart#adding-tests for guide on adding a test.");
+        });
 
         context.declareImport(writer.getImports());
 
