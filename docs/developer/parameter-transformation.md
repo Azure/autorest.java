@@ -13,7 +13,7 @@ And emitter may choose to group some parameters, for example, etag headers.
 
 ## Flattening
 
-### ModerFour
+### Modeler Four
 
 The parameters under `parameters` and `signatureParameters` would be a mix of `Parameter` from existing parameters, and new `VirtualParameter` from the property of the flattened body parameter.
 
@@ -80,7 +80,7 @@ BinaryData request = BinaryData.fromObject(requestObj);
 
 ## Grouping
 
-### ModerFour
+### Modeler Four
 
 First, the grouping will result in a `GroupSchema` and `GroupProperty`s.
 
