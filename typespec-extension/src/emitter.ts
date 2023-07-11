@@ -7,7 +7,6 @@ import {
   resolvePath,
 } from "@typespec/compiler";
 import { dump } from "js-yaml";
-import { promisify } from "util";
 import { spawn } from "child_process";
 import { promises } from "fs";
 import { CodeModelBuilder } from "./code-model-builder.js";
@@ -123,7 +122,53 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     javaArgs.push(jarFileName);
     javaArgs.push(codeModelFileName);
     try {
-      await promisify(spawn)("java", javaArgs, { stdio: "inherit" });
+      type SpawnPromise = {
+        stdout: string;
+        stderr: string;
+      };
+      const output = await new Promise<SpawnPromise>((resolve, reject) => {
+        const childProcess = spawn("java", javaArgs, { stdio: "inherit" });
+
+        let error: Error | undefined = undefined;
+        const stdout: string[] = [];
+        const stderr: string[] = [];
+        if (childProcess.stdout) {
+          childProcess.stdout.on("data", (data) => {
+            stdout.push(data.toString());
+          });
+        }
+        if (childProcess.stderr) {
+          childProcess.stderr.on("data", (data) => {
+            stderr.push(data.toString());
+          });
+        }
+
+        childProcess.on("error", (e) => {
+          error = e;
+        });
+
+        childProcess.on("exit", (code, signal) => {
+          if (code !== 0) {
+            if (code) {
+              error = new Error(`JAR ended with code '${code}'.`);
+            } else {
+              error = new Error(`JAR terminated by signal '${signal}'.`);
+            }
+          }
+        });
+
+        childProcess.on("close", () => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve({
+              stdout: stdout.join(""),
+              stderr: stderr.join(""),
+            });
+          }
+        });
+      });
+      program.trace("typespec-java", output.stdout ? output.stdout : output.stderr);
     } catch (error: any) {
       if (error && "code" in error && error["code"] === "ENOENT") {
         const msg = "'java' is not on PATH. Please install JDK 11 or above.";
