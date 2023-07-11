@@ -126,10 +126,12 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
         stdout: string;
         stderr: string;
       };
-      const output = await new Promise<SpawnPromise>((resolve, reject) => {
+      await new Promise<SpawnPromise>((resolve, reject) => {
         const childProcess = spawn("java", javaArgs, { stdio: "inherit" });
 
         let error: Error | undefined = undefined;
+
+        // std
         const stdout: string[] = [];
         const stderr: string[] = [];
         if (childProcess.stdout) {
@@ -143,10 +145,12 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
           });
         }
 
+        // failed to spawn the process
         childProcess.on("error", (e) => {
           error = e;
         });
 
+        // process exits with error
         childProcess.on("exit", (code, signal) => {
           if (code !== 0) {
             if (code) {
@@ -157,6 +161,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
           }
         });
 
+        // close and complete Promise
         childProcess.on("close", () => {
           if (error) {
             reject(error);
@@ -168,7 +173,9 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
           }
         });
       });
-      program.trace("typespec-java", output.stdout ? output.stdout : output.stderr);
+
+      // as stdio: "inherit", std is not captured by spawn
+      // program.trace("typespec-java", output.stdout ? output.stdout : output.stderr);
     } catch (error: any) {
       if (error && "code" in error && error["code"] === "ENOENT") {
         const msg = "'java' is not on PATH. Please install JDK 11 or above.";
