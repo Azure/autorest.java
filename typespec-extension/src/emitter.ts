@@ -122,11 +122,11 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     javaArgs.push(jarFileName);
     javaArgs.push(codeModelFileName);
     try {
-      type SpawnPromise = {
+      type SpawnReturns = {
         stdout: string;
         stderr: string;
       };
-      await new Promise<SpawnPromise>((resolve, reject) => {
+      await new Promise<SpawnReturns>((resolve, reject) => {
         const childProcess = spawn("java", javaArgs, { stdio: "inherit" });
 
         let error: Error | undefined = undefined;
