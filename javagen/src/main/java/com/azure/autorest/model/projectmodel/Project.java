@@ -58,16 +58,16 @@ public class Project {
         AZURE_CLIENT_SDK_PARENT("com.azure", "azure-client-sdk-parent", "1.7.0"),
         AZURE_JSON("com.azure", "azure-json", "1.0.1"),
         AZURE_XML("com.azure", "azure-xml", "1.0.0-beta.2"),
-        AZURE_CORE("com.azure", "azure-core", "1.40.0"),
-        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.2"),
-        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.4"),
-        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.18.0"),
-        AZURE_IDENTITY("com.azure", "azure-identity", "1.9.1"),
-        AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.40"),
+        AZURE_CORE("com.azure", "azure-core", "1.41.0"),
+        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.3"),
+        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.5"),
+        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.18.1"),
+        AZURE_IDENTITY("com.azure", "azure-identity", "1.9.2"),
+        AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.41"),
 
         // external
-        JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.1"),
-        JUNIT_JUPITER_ENGINE("org.junit.jupiter", "junit-jupiter-engine", "5.9.1"),
+        JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.3"),
+        JUNIT_JUPITER_ENGINE("org.junit.jupiter", "junit-jupiter-engine", "5.9.3"),
         MOCKITO_CORE("org.mockito", "mockito-core", "4.5.1"),
         SLF4J_SIMPLE("org.slf4j", "slf4j-simple", "1.7.36");
 
