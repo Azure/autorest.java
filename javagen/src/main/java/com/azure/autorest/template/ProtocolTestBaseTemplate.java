@@ -27,9 +27,10 @@ public class ProtocolTestBaseTemplate implements IJavaTemplate<TestContext, Java
 
         context.lineComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), javaLineComment -> {
             javaLineComment.line("The Java test files under 'generated' package are generated for your reference.");
-            javaLineComment.line("If you wish to modify the test based on these files, please copy it out of the 'generated' package, and modify them there.");
-            javaLineComment.line("See https://github.com/Azure/azure-sdk-for-java/wiki/TypeSpec-Java-Quickstart#adding-tests for guide on adding a test.");
+            javaLineComment.line("If you wish to modify these files, please copy them out of the 'generated' package, and modify there.");
+            javaLineComment.line("See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.");
         });
+        context.line();
 
         context.declareImport(writer.getImports());
 
