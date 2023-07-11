@@ -20,6 +20,8 @@ export const specialHeaderNames = new Set([
   "repeatability-request-id",
   "repeatability-first-sent",
   "x-ms-client-request-id",
+  "client-request-id",
+  "return-client-request-id",
 ]);
 
 export const originApiVersion = "modelerfour:synthesized/api-version";

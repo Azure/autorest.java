@@ -222,7 +222,7 @@ public final class SpecialHeadersClientBuilder
         String clientVersion = PROPERTIES.getOrDefault(SDK_VERSION, "UnknownVersion");
         String applicationId = CoreUtils.getApplicationId(localClientOptions, localHttpLogOptions);
         policies.add(new UserAgentPolicy(applicationId, clientName, clientVersion, buildConfiguration));
-        policies.add(new RequestIdPolicy());
+        policies.add(new RequestIdPolicy("client-request-id"));
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
         localClientOptions.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));
