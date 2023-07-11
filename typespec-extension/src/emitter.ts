@@ -7,7 +7,8 @@ import {
   resolvePath,
 } from "@typespec/compiler";
 import { dump } from "js-yaml";
-import { spawnSync } from "child_process";
+import { promisify } from "util";
+import { spawn } from "child_process";
 import { promises } from "fs";
 import { CodeModelBuilder } from "./code-model-builder.js";
 import { dirname } from "path";
@@ -121,10 +122,9 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     javaArgs.push("-jar");
     javaArgs.push(jarFileName);
     javaArgs.push(codeModelFileName);
-    const output = spawnSync("java", javaArgs, { stdio: "inherit" });
-
-    if (output.status !== 0) {
-      const error = output.error;
+    try {
+      await promisify(spawn)("java", javaArgs, { stdio: "inherit" });
+    } catch (error: any) {
       if (error && "code" in error && error["code"] === "ENOENT") {
         const msg = "'java' is not on PATH. Please install JDK 11 or above.";
         program.trace("typespec-java", msg);
@@ -135,8 +135,9 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
           target: NoTarget,
         });
         throw new Error(msg);
+      } else {
+        throw error;
       }
-      throw new Error("Failed to run Java code generation. The process terminated with exit code " + output.status);
     }
 
     if (!options["dev-options"]?.["generate-code-model"]) {
