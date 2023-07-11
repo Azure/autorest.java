@@ -276,8 +276,7 @@ public class MethodUtil {
                 : clientMethod.getProxyMethod().getParameters();
         Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = parameters.stream()
                 .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
-        return clientMethod.getMethodParameters().stream()
-                .filter(p -> proxyMethodParameterByClientParameterName.containsKey(p.getName()))
+        return clientMethod.getMethodInputParameters().stream()
                 .filter(p -> !p.isConstant() && !p.isFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());

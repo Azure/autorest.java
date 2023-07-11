@@ -1,0 +1,36 @@
+{
+  "operationId": "EtagHeaders_PutWithRequestHeaders",
+  "title": "Etag headers PutWithRequestHeaders",
+  "parameters": {
+    "name":  "name",
+    "If-Match": "abc",
+    "resource": {
+      "type": "PutWithRequestHeaders",
+      "description": "This is sample for Etag headers"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "myId",
+            "name": "name",
+            "type": "PutWithRequestHeaders",
+            "description": "This is sample for Etag headers"
+          }
+        ]
+      }
+    },
+    "default": {
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      },
+      "body": {
+        "code": "Error Code",
+        "message": "Error Message"
+      }
+    }
+  }
+}

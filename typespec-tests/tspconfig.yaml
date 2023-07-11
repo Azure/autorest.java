@@ -13,3 +13,4 @@ options:
       generate-code-model: true
       support-versioning: true
       loglevel: info
+      debug: true

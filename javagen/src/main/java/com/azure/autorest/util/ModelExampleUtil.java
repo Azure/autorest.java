@@ -248,6 +248,8 @@ public class ModelExampleUtil {
             serializedName = methodParameter.getProxyMethodParameter().getName();
         }
 
+        Object requestParameterValue = findRequestParameterValue(example, serializedName, methodParameter.getProxyMethodParameter().getRequestParameterLocation());
+
         ProxyMethodExample.ParameterValue parameterValue = findParameter(example, serializedName);
         if (parameterValue == null && methodParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
             // special handling for body, as it does not have serializedName
