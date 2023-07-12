@@ -53,7 +53,7 @@ model ArrayData {
 }
 
 @route("/flatten")
-interface FlattenOp {
+interface UnionFlattenOp {
   @route("send")
   @post
   send(@query id: string, ...Request, ...ApiVersionParameter): OkResponse;
