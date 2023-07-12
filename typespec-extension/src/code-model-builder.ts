@@ -235,7 +235,8 @@ export class CodeModelBuilder {
 
     this.processClients();
 
-    this.processModels();
+    // TODO (weidxu): temporarily disabled support for `@include`
+    // this.processModels();
 
     this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
 

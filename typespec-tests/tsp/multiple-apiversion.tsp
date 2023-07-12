@@ -25,6 +25,7 @@ namespace Cadl.MultipleApiVersion {
     @key
     @visibility("read")
     name: string;
+
     type: string;
   }
 
@@ -59,6 +60,7 @@ namespace Cadl.MultipleApiVersion2 {
     @key
     @visibility("read")
     name: string;
+
     type: string;
   }
 
