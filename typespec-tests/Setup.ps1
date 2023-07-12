@@ -4,7 +4,7 @@ param (
 )
 
 if ($RebuildJar) {
-    mvn clean package -f ../pom.xml -Plocal -Ptsp -DskipTests
+    mvn clean install package -f ../pom.xml -Plocal -Ptsp -DskipTests
 }
 
 # re-build typespec-java

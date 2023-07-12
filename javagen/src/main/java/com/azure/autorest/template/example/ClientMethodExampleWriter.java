@@ -78,19 +78,46 @@ public class ClientMethodExampleWriter {
         if (isGroupingParameter(convenienceMethod, methodParameter)) {
             // group example values into a map
             Map<String, Object> exampleValue = new HashMap<>();
-            for (MethodTransformationDetail transformationDetail : convenienceMethod.getMethodTransformationDetails()) {
-                ParameterMapping parameterMapping = transformationDetail.getParameterMappings().iterator().next();
-                String serializedParameterName = parameterMapping.getInputParameterProperty().getSerializedName();
-                ClientMethodParameter parameter = parameterMapping.getInputParameter();
-                if (serializedParameterName != null) {
-                    exampleValue.put(
-                            serializedParameterName,
-                            ModelExampleUtil.getParameterExampleValue(proxyMethodExample, serializedParameterName, parameter.getRequestParameterLocation()));
+            for (MethodTransformationDetail detail : convenienceMethod.getMethodTransformationDetails()) {
+                for (ParameterMapping parameterMapping : detail.getParameterMappings()) {
+                    String serializedParameterName = parameterMapping.getInputParameterProperty().getSerializedName();
+                    ClientMethodParameter parameter = detail.getOutParameter();
+                    if (parameterMapping.getOutputParameterPropertyName() != null) {
+                        // this is a flattened property, so put flattening(real parameter) value
+                        serializedParameterName = detail.getOutParameter().getName();
+                        Map<String, Object> flattenedParameterValue = (Map<String, Object>) ModelExampleUtil.getParameterExampleValue(proxyMethodExample, serializedParameterName, parameter.getRequestParameterLocation());
+                        if (flattenedParameterValue != null) {
+                            exampleValue.putAll(flattenedParameterValue);
+                        }
+                    } else {
+                        exampleValue.put(serializedParameterName,
+                                ModelExampleUtil.getParameterExampleValue(
+                                        proxyMethodExample, serializedParameterName, parameter.getRequestParameterLocation()));
+                    }
                 }
             }
             IType type = methodParameter.getClientMethodParameter().getClientType();
             IType wireType = methodParameter.getClientMethodParameter().getWireType();
             return ModelExampleUtil.parseNode(type, wireType, exampleValue);
+        } else if (isFlattenParameter(convenienceMethod, methodParameter)) {
+            String realParameterName = convenienceMethod.getMethodTransformationDetails().iterator().next().getOutParameter().getName();
+            Map<String, Object> realParameterValue = (Map<String, Object>) proxyMethodExample.getParameters().get(realParameterName).getObjectValue();
+
+            IType type = methodParameter.getClientMethodParameter().getClientType();
+            IType wireType = methodParameter.getClientMethodParameter().getWireType();
+
+            Object flatteningParameterValue = null;
+            if (realParameterValue != null) {
+                flatteningParameterValue = realParameterValue
+                        .entrySet()
+                        .stream()
+                        .filter(entry -> Objects.equals(
+                                CodeNamer.getEscapedReservedClientMethodParameterName(entry.getKey()),
+                                methodParameter.getClientMethodParameter().getName()))
+                        .findFirst()
+                        .map(Map.Entry::getValue).orElse(null);
+            }
+            return ModelExampleUtil.parseNode(type, wireType, flatteningParameterValue);
         } else {
             return ModelExampleUtil.parseNodeFromParameter(proxyMethodExample, methodParameter);
         }
@@ -98,17 +125,42 @@ public class ClientMethodExampleWriter {
 
     private boolean isGroupingParameter(ClientMethod convenienceMethod, MethodParameter methodParameter) {
         List<MethodTransformationDetail> details = convenienceMethod.getMethodTransformationDetails();
-        if (CoreUtils.isNullOrEmpty(details)) {
+        if (CoreUtils.isNullOrEmpty(details) || details.size() <= 1) {
             return false;
         }
 
-        return details.stream().anyMatch(detail -> !CoreUtils.isNullOrEmpty(detail.getParameterMappings())
-            && detail.getParameterMappings().iterator().next().getOutputParameterPropertyName() == null
-            && detail.getOutParameter() != null
-            &&
-            Objects.equals(
-                CodeNamer.getEscapedReservedClientMethodParameterName(detail.getParameterMappings().iterator().next().getInputParameter().getName()),
-                methodParameter.getClientMethodParameter().getName()));
+        return details.stream().allMatch(
+                detail ->
+                        !CoreUtils.isNullOrEmpty(detail.getParameterMappings())
+                                && detail.getOutParameter() != null
+                                &&
+                                // same name
+                                Objects.equals(
+                                        CodeNamer.getEscapedReservedClientMethodParameterName(
+                                                detail.getParameterMappings().iterator().next().getInputParameter().getName()),
+                                        methodParameter.getClientMethodParameter().getName())
+                                // same client type
+                                && detail.getParameterMappings().iterator().next().getInputParameter().getClientType()
+                                .equals(methodParameter.getClientMethodParameter().getClientType())
+        );
+    }
+
+    private boolean isFlattenParameter(ClientMethod convenienceMethod, MethodParameter methodParameter) {
+        List<MethodTransformationDetail> details = convenienceMethod.getMethodTransformationDetails();
+        if (CoreUtils.isNullOrEmpty(details) || details.size() != 1) {
+            return false;
+        }
+        return details.stream().anyMatch(
+                detail ->
+                        !CoreUtils.isNullOrEmpty(detail.getParameterMappings())
+                                && detail.getOutParameter() != null
+                                && detail.getParameterMappings().stream()
+                                .allMatch(mapping -> mapping.getOutputParameterPropertyName() != null
+                                        && mapping.getInputParameterProperty() == null)
+                        && detail.getParameterMappings()
+                                .stream()
+                                .anyMatch(mapping -> Objects.equals(methodParameter.getClientMethodParameter().getName(), mapping.getInputParameter().getName()))
+        );
     }
 
     public Set<String> getImports() {
