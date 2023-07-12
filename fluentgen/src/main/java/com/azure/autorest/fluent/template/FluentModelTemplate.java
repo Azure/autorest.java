@@ -77,10 +77,16 @@ public class FluentModelTemplate extends ModelTemplate {
         if (FluentType.ManagementError.getName().equals(model.getParentModelName())) {
             // subclass of ManagementError
 
-            if (modelNamer == null) {
-                modelNamer = new ModelNamer();
+            if (model.getImplementationDetails() != null && model.getImplementationDetails().isException()) {
+                // model used in Exception
+
+                if (modelNamer == null) {
+                    modelNamer = new ModelNamer();
+                }
+                return modelNamer.modelPropertyGetterName(property);
+            } else {
+                return super.getGetterName(model, property);
             }
-            return modelNamer.modelPropertyGetterName(property);
         } else {
             return super.getGetterName(model, property);
         }
