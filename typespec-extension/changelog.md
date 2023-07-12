@@ -1,11 +1,12 @@
 # Release History
 
-## 0.8.5 (2023-07-11)
+## 0.8.5 (2023-07-12)
 
-Compatible with compiler 0.45.
+Compatible with compiler 0.46.
 
 - Supported `customization-class` as emitter option. See [Customization](https://github.com/Azure/autorest.java/blob/main/typespec-extension/readme.md#customization).
 - `enable-sync-stack` emitter option default to `true`.
+- Temporarily disabled support for `@include`.
 
 ## 0.8.4 (2023-06-30)
 
