@@ -3,9 +3,9 @@
   "title": "Etag headers PutWithRequestHeaders",
   "parameters": {
     "name":  "name",
-    "If-Match": "abc",
+    "If-Match": "64e005",
     "resource": {
-      "type": "PutWithRequestHeaders",
+      "type": "myType",
       "description": "This is sample for Etag headers"
     }
   },
@@ -16,7 +16,7 @@
           {
             "id": "myId",
             "name": "name",
-            "type": "PutWithRequestHeaders",
+            "type": "myType",
             "description": "This is sample for Etag headers"
           }
         ]

@@ -269,7 +269,7 @@ public class ModelExampleWriter {
                     List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredWritableParentProperties(model);
                     List<ClientModelProperty> requiredProperties = model.getProperties().stream()
                             .filter(ClientModelProperty::isRequired)
-                            .filter(property -> !property.isConstant())
+                            .filter(property -> !property.isConstant() && !property.isReadOnly())
                             .collect(Collectors.toList());
 
                     List<ModelProperty> properties = Stream.concat(

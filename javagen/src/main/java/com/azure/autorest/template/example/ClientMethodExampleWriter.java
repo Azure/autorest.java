@@ -76,16 +76,16 @@ public class ClientMethodExampleWriter {
      */
     private ExampleNode parseNodeFromParameter(ClientMethod convenienceMethod, ProxyMethodExample proxyMethodExample, MethodParameter methodParameter) {
         if (isGroupingParameter(convenienceMethod, methodParameter)) {
+            // group example values into a map
             Map<String, Object> exampleValue = new HashMap<>();
             for (MethodTransformationDetail transformationDetail : convenienceMethod.getMethodTransformationDetails()) {
                 ParameterMapping parameterMapping = transformationDetail.getParameterMappings().iterator().next();
                 String serializedParameterName = parameterMapping.getInputParameterProperty().getSerializedName();
+                ClientMethodParameter parameter = parameterMapping.getInputParameter();
                 if (serializedParameterName != null) {
-                    ProxyMethodExample.ParameterValue parameterValue = ModelExampleUtil.findParameter(proxyMethodExample, serializedParameterName);
-                    if (parameterValue != null) {
-
-                    }
-                    exampleValue.put(serializedParameterName, );
+                    exampleValue.put(
+                            serializedParameterName,
+                            ModelExampleUtil.getParameterExampleValue(proxyMethodExample, serializedParameterName, parameter.getRequestParameterLocation()));
                 }
             }
             IType type = methodParameter.getClientMethodParameter().getClientType();
