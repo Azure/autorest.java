@@ -22,6 +22,7 @@ model Resource {
   @key
   @visibility("read")
   name: string;
+
   description?: string;
   type: string;
 }
@@ -81,7 +82,7 @@ interface EtagHeadersOptionalBody {
     @query filter?: string,
     ...ConditionalRequestHeaders,
     @header @encode(DateTimeKnownEncoding.unixTimestamp, int64) timestamp?: utcDateTime,
-    @body body?: Resource
+    @body body?: Resource,
   ): Resource;
 }
 

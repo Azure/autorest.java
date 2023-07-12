@@ -39,6 +39,7 @@ model FormatString {
 
   @format("date-time")
   dateTime: string;
+
   dateTimeRfc1123: DateTimeRfc1123;
 
   @format("password")
@@ -49,6 +50,7 @@ model FormatString {
 
   @knownValues(KnownValues)
   extensibleEnum: string;
+
   extensibleEnumScalar: KnownValuesScalar;
 }
 
@@ -58,6 +60,7 @@ scalar myDuration extends duration;
 model Encoded {
   @encode(DurationKnownEncoding.seconds, int32)
   timeInSeconds?: duration;
+
   timeInSecondsFraction?: myDuration;
 
   @encode(DateTimeKnownEncoding.rfc3339, string)

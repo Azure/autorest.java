@@ -489,7 +489,7 @@ public final class SpecialHeadersClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Resource read operation template.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -525,7 +525,7 @@ public final class SpecialHeadersClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Resource read operation template.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1127,7 +1127,7 @@ public final class SpecialHeadersClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Create or replace operation template.
      *
      * <p><strong>Header Parameters</strong>
      *
@@ -1190,7 +1190,7 @@ public final class SpecialHeadersClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Create or replace operation template.
      *
      * <p><strong>Header Parameters</strong>
      *
@@ -1251,7 +1251,7 @@ public final class SpecialHeadersClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Create or replace operation template.
      *
      * <p><strong>Header Parameters</strong>
      *
@@ -1312,7 +1312,7 @@ public final class SpecialHeadersClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Create or replace operation template.
      *
      * <p><strong>Header Parameters</strong>
      *

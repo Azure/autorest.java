@@ -76,6 +76,8 @@ public class ClientMethodExampleWriter {
      */
     private ExampleNode parseNodeFromParameter(ClientMethod convenienceMethod, ProxyMethodExample proxyMethodExample, MethodParameter methodParameter) {
         if (isGroupingParameter(convenienceMethod, methodParameter)) {
+            // grouping, possible with flattening first
+
             // group example values into a map
             Map<String, Object> exampleValue = new HashMap<>();
             for (MethodTransformationDetail detail : convenienceMethod.getMethodTransformationDetails()) {
@@ -100,6 +102,7 @@ public class ClientMethodExampleWriter {
             IType wireType = methodParameter.getClientMethodParameter().getWireType();
             return ModelExampleUtil.parseNode(type, wireType, exampleValue);
         } else if (isFlattenParameter(convenienceMethod, methodParameter)) {
+            // flatten, no grouping
             String realParameterName = convenienceMethod.getMethodTransformationDetails().iterator().next().getOutParameter().getName();
             Map<String, Object> realParameterValue = (Map<String, Object>) proxyMethodExample.getParameters().get(realParameterName).getObjectValue();
 

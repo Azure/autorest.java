@@ -21,6 +21,7 @@ model Resource {
   @key
   @visibility("read")
   name: string;
+
   description?: string;
   type: string;
 }
@@ -32,6 +33,6 @@ interface Patch {
   createOrUpdate(
     @header("content-type") contentType: "application/merge-patch+json",
     @path name: string,
-    @body body: Resource
+    @body body: Resource,
   ): Resource | ErrorResponse;
 }

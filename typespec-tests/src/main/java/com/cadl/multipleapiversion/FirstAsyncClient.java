@@ -36,7 +36,7 @@ public final class FirstAsyncClient {
     }
 
     /**
-     * The most basic operation.
+     * Resource read operation template.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -63,7 +63,7 @@ public final class FirstAsyncClient {
     }
 
     /**
-     * The most basic operation.
+     * Resource read operation template.
      *
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
