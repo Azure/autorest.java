@@ -13,6 +13,7 @@ namespace Cadl.Visibility;
 model Dog {
   @visibility("read") id: int32;
   @visibility("update") secretName: string;
+
   // no flags are like specifying all flags at once, so in this case
   // equivalent to @visibility("read", "write")
   name: string;

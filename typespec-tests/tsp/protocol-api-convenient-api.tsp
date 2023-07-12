@@ -20,48 +20,56 @@ namespace Cadl.ProtocolAndConvenient;
 model ResourceA {
   @visibility("read")
   id: string;
+
   name: string;
 }
 
 model ResourceB {
   @visibility("read")
   id: string;
+
   name: string;
 }
 
 model ResourceC {
   @visibility("read")
   id: string;
+
   name: string;
 }
 
 model ResourceD {
   @visibility("read")
   id: string;
+
   name: string;
 }
 
 model ResourceE {
   @visibility("read")
   id: string;
+
   name: string;
 }
 
 model ResourceF {
   @visibility("read")
   id: string;
+
   name: string;
 }
 
 model ResourceG {
   @visibility("read")
   id: string;
+
   name: string;
 }
 
 model ResourceH {
   @visibility("read")
   id: string;
+
   name: string;
 }
 
@@ -73,6 +81,7 @@ model ResourceI {
   @visibility("read")
   @key
   name: string;
+
   type: string;
 }
 
@@ -84,6 +93,7 @@ model ResourceJ {
   @visibility("read")
   @key
   name: string;
+
   type: string;
 }
 

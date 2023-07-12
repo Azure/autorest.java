@@ -43,7 +43,7 @@ interface MultipleContentTypesOnRequest {
   @post
   uploadBytesWithSingleBodyTypeForMultiContentTypes(
     @body data: bytes,
-    @header contentType: "application/octet-stream" | "image/jpeg" | "image/png"
+    @header contentType: "application/octet-stream" | "image/jpeg" | "image/png",
   ): void;
 
   @doc("multiple data types map to multiple content types using shared route")
@@ -52,7 +52,7 @@ interface MultipleContentTypesOnRequest {
   @post
   uploadBytesWithMultiBodyTypesForMultiContentTypes(
     @body data: bytes,
-    @header contentType: "application/octet-stream" | "image/jpeg" | "image/png"
+    @header contentType: "application/octet-stream" | "image/jpeg" | "image/png",
   ): void;
 
   @doc("multiple data types map to multiple content types using shared route")
@@ -67,7 +67,7 @@ interface MultipleContentTypesOnRequest {
   @post
   uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes(
     @body data: bytes | Resource,
-    @header contentType: "application/json" | "application/octet-stream" | "image/jpeg" | "image/png"
+    @header contentType: "application/json" | "application/octet-stream" | "image/jpeg" | "image/png",
   ): void;
 }
 
@@ -98,7 +98,7 @@ interface MultipleContentTypesOnRequest {
 @post
 op uploadWithOverload(
   @body data: string | bytes | Resource,
-  @header contentType: "text/plain" | "application/json" | "application/octet-stream" | "image/jpeg" | "image/png"
+  @header contentType: "text/plain" | "application/json" | "application/octet-stream" | "image/jpeg" | "image/png",
 ): void;
 
 @doc("multiple data types map to multiple content types")
@@ -119,5 +119,5 @@ op uploadImagesWithOverload(@body data: bytes, @header contentType: "image/jpeg"
 @overload(uploadWithOverload)
 op uploadBytesOrJsonWithOverload(
   @body data: bytes | Resource,
-  @header contentType: "application/octet-stream" | "image/jpeg" | "image/png" | "application/json"
+  @header contentType: "application/octet-stream" | "image/jpeg" | "image/png" | "application/json",
 ): void;
