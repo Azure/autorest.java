@@ -40,7 +40,7 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * The most basic operation.
+     * Resource read operation template.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -210,7 +210,7 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * The most basic operation.
+     * Create or replace operation template.
      *
      * <p><strong>Header Parameters</strong>
      *
@@ -264,7 +264,7 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * The most basic operation.
+     * Create or replace operation template.
      *
      * <p><strong>Header Parameters</strong>
      *
@@ -397,7 +397,7 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * The most basic operation.
+     * Resource read operation template.
      *
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -460,7 +460,7 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * The most basic operation.
+     * Create or replace operation template.
      *
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
@@ -502,7 +502,7 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * The most basic operation.
+     * Create or replace operation template.
      *
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
@@ -525,7 +525,7 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * The most basic operation.
+     * Create or replace operation template.
      *
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
@@ -557,7 +557,7 @@ public final class SpecialHeadersClient {
     }
 
     /**
-     * The most basic operation.
+     * Create or replace operation template.
      *
      * @param name A sequence of textual characters.
      * @param resource The resource instance.

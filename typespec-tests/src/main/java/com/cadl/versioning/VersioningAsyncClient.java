@@ -43,7 +43,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The most basic operation.
+     * Long-running resource action operation template.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -88,7 +88,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The most basic operation.
+     * Resource list operation template.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -125,7 +125,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The most basic operation.
+     * Long-running resource action operation template.
      *
      * @param name A sequence of textual characters.
      * @param projectFileVersion A sequence of textual characters.
@@ -159,7 +159,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The most basic operation.
+     * Long-running resource action operation template.
      *
      * @param name A sequence of textual characters.
      * @param projectFileVersion A sequence of textual characters.
@@ -183,7 +183,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The most basic operation.
+     * Long-running resource action operation template.
      *
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -203,7 +203,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The most basic operation.
+     * Resource list operation template.
      *
      * @param select Select the specified fields to be included in the response.
      * @param filter Filter the result list using the given expression.
@@ -263,7 +263,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The most basic operation.
+     * Resource list operation template.
      *
      * @param select Select the specified fields to be included in the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -311,7 +311,7 @@ public final class VersioningAsyncClient {
     }
 
     /**
-     * The most basic operation.
+     * Resource list operation template.
      *
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
