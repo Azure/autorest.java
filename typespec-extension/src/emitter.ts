@@ -7,7 +7,7 @@ import {
   resolvePath,
 } from "@typespec/compiler";
 import { dump } from "js-yaml";
-import { spawnSync } from "child_process";
+import { spawn } from "child_process";
 import { promises } from "fs";
 import { CodeModelBuilder } from "./code-model-builder.js";
 import { dirname } from "path";
@@ -121,10 +121,62 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     javaArgs.push("-jar");
     javaArgs.push(jarFileName);
     javaArgs.push(codeModelFileName);
-    const output = spawnSync("java", javaArgs, { stdio: "inherit" });
+    try {
+      type SpawnReturns = {
+        stdout: string;
+        stderr: string;
+      };
+      await new Promise<SpawnReturns>((resolve, reject) => {
+        const childProcess = spawn("java", javaArgs, { stdio: "inherit" });
 
-    if (output.status !== 0) {
-      const error = output.error;
+        let error: Error | undefined = undefined;
+
+        // std
+        const stdout: string[] = [];
+        const stderr: string[] = [];
+        if (childProcess.stdout) {
+          childProcess.stdout.on("data", (data) => {
+            stdout.push(data.toString());
+          });
+        }
+        if (childProcess.stderr) {
+          childProcess.stderr.on("data", (data) => {
+            stderr.push(data.toString());
+          });
+        }
+
+        // failed to spawn the process
+        childProcess.on("error", (e) => {
+          error = e;
+        });
+
+        // process exits with error
+        childProcess.on("exit", (code, signal) => {
+          if (code !== 0) {
+            if (code) {
+              error = new Error(`JAR ended with code '${code}'.`);
+            } else {
+              error = new Error(`JAR terminated by signal '${signal}'.`);
+            }
+          }
+        });
+
+        // close and complete Promise
+        childProcess.on("close", () => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve({
+              stdout: stdout.join(""),
+              stderr: stderr.join(""),
+            });
+          }
+        });
+      });
+
+      // as stdio: "inherit", std is not captured by spawn
+      // program.trace("typespec-java", output.stdout ? output.stdout : output.stderr);
+    } catch (error: any) {
       if (error && "code" in error && error["code"] === "ENOENT") {
         const msg = "'java' is not on PATH. Please install JDK 11 or above.";
         program.trace("typespec-java", msg);
@@ -135,8 +187,9 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
           target: NoTarget,
         });
         throw new Error(msg);
+      } else {
+        throw error;
       }
-      throw new Error("Failed to run Java code generation. The process terminated with exit code " + output.status);
     }
 
     if (!options["dev-options"]?.["generate-code-model"]) {
