@@ -18,7 +18,7 @@ public class TestProxyAssertsTemplateTests {
             serviceDescription = "OpenAI Service";
             namespace = "com.azure.ai.openai";
             artifactId = "azure-ai-openai";
-            sdkRepositoryUri = "https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/openai/azure-ai-openai";
+            sdkRepositoryPath = "sdk/openai/azure-ai-openai";
         }
     }
 
