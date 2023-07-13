@@ -34,7 +34,7 @@ public class ProtocolTestBaseTemplate implements IJavaTemplate<TestContext, Java
 
         context.declareImport(writer.getImports());
 
-        context.classBlock(JavaVisibility.PackagePrivate, null, String.format("%s extends TestBase", testContext.getTestBaseClassName()), classBlock -> {
+        context.classBlock(JavaVisibility.PackagePrivate, null, String.format("%s extends TestProxyTestBase", testContext.getTestBaseClassName()), classBlock -> {
 
             writer.writeClientVariables(classBlock);
 
