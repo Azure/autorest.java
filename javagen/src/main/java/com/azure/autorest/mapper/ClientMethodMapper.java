@@ -584,7 +584,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 returnTypeHolder.asyncReturnType = createAsyncVoidReturnType();
             }
             returnTypeHolder.syncReturnType = responseBodyType.getClientType();
-            if (responseBodyType == GenericType.FluxByteBuffer) {
+            if (responseBodyType == GenericType.FluxByteBuffer && !settings.isFluent()) {
                 returnTypeHolder.syncReturnType = ClassType.BinaryData;
             }
         }
