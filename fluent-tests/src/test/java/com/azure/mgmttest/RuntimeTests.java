@@ -28,6 +28,8 @@ import com.azure.mgmtlitetest.advisor.AdvisorManager;
 import com.azure.mgmtlitetest.advisor.models.ResourceRecommendationBase;
 import com.azure.mgmtlitetest.advisor.models.SuppressionContract;
 import com.azure.mgmtlitetest.botservice.models.Site;
+import com.azure.mgmtlitetest.managednetworkfabric.fluent.models.CommonPostActionResponseForDeviceUpdateInner;
+import com.azure.mgmtlitetest.managednetworkfabric.models.ConfigurationState;
 import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
 import com.azure.mgmtlitetest.mediaservices.models.MediaService;
 import com.azure.mgmtlitetest.mediaservices.models.StorageAccountType;
@@ -180,6 +182,23 @@ public class RuntimeTests {
 
         Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.CloudError"));
         Assertions.assertThrows(ClassNotFoundException.class, () -> Class.forName("com.azure.mgmtlitetest.schemacleanup.models.CloudErrorBody"));
+    }
+
+    @Test
+    public void testModelInheritErrorResponse() throws IOException {
+        SerializerAdapter serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
+        String json = "{\n" +
+                "  \"configurationState\": \"Succeeded\",\n" +
+                "  \"error\": {\n" +
+                "    \"code\": \"CODE\",\n" +
+                "    \"message\": \"MESSAGE\"\n" +
+                "  }\n" +
+                "}";
+
+        CommonPostActionResponseForDeviceUpdateInner model = serializerAdapter.deserialize(json, CommonPostActionResponseForDeviceUpdateInner.class, SerializerEncoding.JSON);
+        Assertions.assertEquals(ConfigurationState.SUCCEEDED, model.configurationState());
+        Assertions.assertEquals("CODE", model.error().getCode());
+        Assertions.assertEquals("MESSAGE", model.error().getMessage());
     }
 
     @Test
