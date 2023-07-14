@@ -197,8 +197,8 @@ public class RuntimeTests {
 
         CommonPostActionResponseForDeviceUpdateInner model = serializerAdapter.deserialize(json, CommonPostActionResponseForDeviceUpdateInner.class, SerializerEncoding.JSON);
         Assertions.assertEquals(ConfigurationState.SUCCEEDED, model.configurationState());
-        Assertions.assertEquals("CODE", model.getCode());
-        Assertions.assertEquals("MESSAGE", model.getMessage());
+        Assertions.assertEquals("CODE", model.error().getCode());
+        Assertions.assertEquals("MESSAGE", model.error().getMessage());
     }
 
     @Test
