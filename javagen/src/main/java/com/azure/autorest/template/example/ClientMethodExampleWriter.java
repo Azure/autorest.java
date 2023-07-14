@@ -82,16 +82,24 @@ public class ClientMethodExampleWriter {
             Map<String, Object> exampleValue = new HashMap<>();
             for (MethodTransformationDetail detail : convenienceMethod.getMethodTransformationDetails()) {
                 for (ParameterMapping parameterMapping : detail.getParameterMappings()) {
-                    String serializedParameterName = parameterMapping.getInputParameterProperty().getSerializedName();
-                    ClientMethodParameter parameter = detail.getOutParameter();
                     if (parameterMapping.getOutputParameterPropertyName() != null) {
                         // this is a flattened property, so put flattening(real parameter) value
-                        serializedParameterName = detail.getOutParameter().getName();
-                        Map<String, Object> flattenedParameterValue = (Map<String, Object>) ModelExampleUtil.getParameterExampleValue(proxyMethodExample, serializedParameterName, parameter.getRequestParameterLocation());
+
+                        // output parameter's name is the "escaped reserved client method parameter name" of the real parameter's serialized name
+                        // since flattened parameter is always in body, we can deal with that explicitly
+                        ClientMethodParameter outputParameter = detail.getOutParameter();
+                        Map<String, Object> flattenedParameterValue = findFlattenedBodyParameterValue(proxyMethodExample, outputParameter.getName());
                         if (flattenedParameterValue != null) {
                             exampleValue.putAll(flattenedParameterValue);
                         }
+                        // since it's flattened property, all parameterMappings share the same outputParameter(real parameter)
+                        // we only need to put example value once, which is the real parameter's value
+                        break;
                     } else {
+                        // Group property's "serializedName" is the real parameter's "serializedName" on the wire.
+                        // This implicit equivalence is defined in emitter and preserved in mapping client method.
+                        String serializedParameterName = parameterMapping.getInputParameterProperty().getSerializedName();
+                        ClientMethodParameter parameter = detail.getOutParameter();
                         exampleValue.put(serializedParameterName,
                                 ModelExampleUtil.getParameterExampleValue(
                                         proxyMethodExample, serializedParameterName, parameter.getRequestParameterLocation()));
@@ -109,21 +117,34 @@ public class ClientMethodExampleWriter {
             IType type = methodParameter.getClientMethodParameter().getClientType();
             IType wireType = methodParameter.getClientMethodParameter().getWireType();
 
-            Object flatteningParameterValue = null;
-            if (realParameterValue != null) {
-                flatteningParameterValue = realParameterValue
-                        .entrySet()
-                        .stream()
-                        .filter(entry -> Objects.equals(
-                                CodeNamer.getEscapedReservedClientMethodParameterName(entry.getKey()),
-                                methodParameter.getClientMethodParameter().getName()))
-                        .findFirst()
-                        .map(Map.Entry::getValue).orElse(null);
+            ParameterMapping parameterMapping = convenienceMethod.getMethodTransformationDetails().iterator().next()
+                    .getParameterMappings()
+                    .stream()
+                    .filter(mapping -> Objects.equals(mapping.getInputParameter().getName(), methodParameter.getClientMethodParameter().getName()))
+                    .findFirst().orElse(null);
+
+            Object methodParameterValue = null;
+            if (realParameterValue != null && parameterMapping != null) {
+                methodParameterValue = realParameterValue.get(parameterMapping.getOutputParameterProperty().getSerializedName());
             }
-            return ModelExampleUtil.parseNode(type, wireType, flatteningParameterValue);
+            return ModelExampleUtil.parseNode(type, wireType, methodParameterValue);
         } else {
             return ModelExampleUtil.parseNodeFromParameter(proxyMethodExample, methodParameter);
         }
+    }
+
+    private Map<String, Object> findFlattenedBodyParameterValue(ProxyMethodExample example, String outputParameterName) {
+        ProxyMethodExample.ParameterValue parameterValue = example.getParameters().entrySet()
+                .stream().filter(
+                        p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getKey())
+                                .equalsIgnoreCase(outputParameterName))
+                .map(Map.Entry::getValue)
+                .findFirst()
+                .orElse(null);
+        if (parameterValue == null) {
+            return null;
+        }
+        return (Map<String, Object>) parameterValue.getObjectValue();
     }
 
     private boolean isGroupingParameter(ClientMethod convenienceMethod, MethodParameter methodParameter) {
@@ -138,13 +159,11 @@ public class ClientMethodExampleWriter {
                                 && detail.getOutParameter() != null
                                 &&
                                 // same name
-                                Objects.equals(
-                                        CodeNamer.getEscapedReservedClientMethodParameterName(
-                                                detail.getParameterMappings().iterator().next().getInputParameter().getName()),
-                                        methodParameter.getClientMethodParameter().getName())
-                                // same client type
-                                && detail.getParameterMappings().iterator().next().getInputParameter().getClientType()
-                                .equals(methodParameter.getClientMethodParameter().getClientType())
+                                detail.getParameterMappings()
+                                        .stream()
+                                        .allMatch(mapping -> Objects.equals(
+                                                mapping.getInputParameter().getName(),
+                                                methodParameter.getClientMethodParameter().getName()))
         );
     }
 
