@@ -88,12 +88,12 @@ public class ClientMethodExampleWriter {
                         // output parameter's name is the "escaped reserved client method parameter name" of the real parameter's serialized name
                         // since flattened parameter is always in body, we can deal with that explicitly
                         ClientMethodParameter outputParameter = detail.getOutParameter();
-                        Map<String, Object> flattenedParameterValue = findFlattenedBodyParameterValue(proxyMethodExample, outputParameter.getName());
+                        Map<String, Object> flattenedParameterValue = getFlattenedBodyParameterExampleValue(proxyMethodExample, outputParameter.getName());
                         if (flattenedParameterValue != null) {
                             exampleValue.putAll(flattenedParameterValue);
                         }
                         // since it's flattened property, all parameterMappings share the same outputParameter(real parameter)
-                        // we only need to put example value once, which is the real parameter's value
+                        // we only need to put example value once, which is the flattened(real) parameter's value
                         break;
                     } else {
                         // Group property's "serializedName" is the real parameter's "serializedName" on the wire.
@@ -111,8 +111,8 @@ public class ClientMethodExampleWriter {
             return ModelExampleUtil.parseNode(type, wireType, exampleValue);
         } else if (isFlattenParameter(convenienceMethod, methodParameter)) {
             // flatten, no grouping
-            String realParameterName = convenienceMethod.getMethodTransformationDetails().iterator().next().getOutParameter().getName();
-            Map<String, Object> realParameterValue = (Map<String, Object>) proxyMethodExample.getParameters().get(realParameterName).getObjectValue();
+            String outputParameterName = convenienceMethod.getMethodTransformationDetails().iterator().next().getOutParameter().getName();
+            Map<String, Object> realParameterValue = getFlattenedBodyParameterExampleValue(proxyMethodExample, outputParameterName);
 
             IType type = methodParameter.getClientMethodParameter().getClientType();
             IType wireType = methodParameter.getClientMethodParameter().getWireType();
@@ -133,11 +133,11 @@ public class ClientMethodExampleWriter {
         }
     }
 
-    private Map<String, Object> findFlattenedBodyParameterValue(ProxyMethodExample example, String outputParameterName) {
+    private Map<String, Object> getFlattenedBodyParameterExampleValue(ProxyMethodExample example, String clientMethodParameterName) {
         ProxyMethodExample.ParameterValue parameterValue = example.getParameters().entrySet()
                 .stream().filter(
                         p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getKey())
-                                .equalsIgnoreCase(outputParameterName))
+                                .equalsIgnoreCase(clientMethodParameterName))
                 .map(Map.Entry::getValue)
                 .findFirst()
                 .orElse(null);
