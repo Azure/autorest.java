@@ -333,12 +333,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                     .filter(clientMethod -> Templates.getClientMethodSampleTemplate()
                         .isExampleIncluded(clientMethod, convenienceMethod))
                     .max((clientMethod1, clientMethod2) -> {
-                        int m1ParameterCount = clientMethod1.getOnlyRequiredParameters()
-                            ? clientMethod1.getMethodRequiredParameters().size()
-                            : clientMethod1.getMethodParameters().size();
-                        int m2ParameterCount = clientMethod2.getOnlyRequiredParameters()
-                            ? clientMethod2.getMethodRequiredParameters().size()
-                            : clientMethod2.getMethodParameters().size();
+                        int m1ParameterCount = clientMethod1.getMethodInputParameters().size();
+                        int m2ParameterCount = clientMethod2.getMethodInputParameters().size();
                         return m1ParameterCount - m2ParameterCount;
                     })
                     .ifPresent(clientMethod ->

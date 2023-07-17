@@ -1,3 +1,12 @@
+param (
+    # re-build autorest.java
+    [switch] $RebuildJar = $false
+)
+
+if ($RebuildJar) {
+    mvn clean install package -f ../pom.xml -Plocal -Ptsp -DskipTests
+}
+
 # re-build typespec-java
 Set-Location ../typespec-extension/
 # Remove-Item node_modules -Recurse -Force

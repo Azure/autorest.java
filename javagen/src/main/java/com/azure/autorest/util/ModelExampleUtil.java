@@ -240,7 +240,7 @@ public class ModelExampleUtil {
      * Parse method parameter (client model or others) to example node.
      * @param example proxy method example
      * @param methodParameter method parameter
-     * @return
+     * @return example node
      */
     public static ExampleNode parseNodeFromParameter(ProxyMethodExample example, MethodParameter methodParameter) {
         String serializedName = methodParameter.getSerializedName();
@@ -248,8 +248,34 @@ public class ModelExampleUtil {
             serializedName = methodParameter.getProxyMethodParameter().getName();
         }
 
+        Object exampleValue = getParameterExampleValue(example, serializedName, methodParameter.getProxyMethodParameter().getRequestParameterLocation());
+
+        ExampleNode node;
+        if (exampleValue == null) {
+            if (ClassType.Context.equals(methodParameter.getClientMethodParameter().getClientType())) {
+                node = new LiteralNode(ClassType.Context, "").setLiteralsValue("");
+            } else {
+                node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
+            }
+        } else {
+            node = parseNodeFromMethodParameter(methodParameter, exampleValue);
+        }
+        return node;
+    }
+
+    /**
+     * Get the example value for the parameter.
+     *
+     * @param example proxy method example
+     * @param serializedName parameter serialized name
+     * @param requestParameterLocation parameter location
+     * @return the example value for the parameter, null if not found
+     */
+    public static Object getParameterExampleValue(ProxyMethodExample example, String serializedName, RequestParameterLocation requestParameterLocation) {
+
         ProxyMethodExample.ParameterValue parameterValue = findParameter(example, serializedName);
-        if (parameterValue == null && methodParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
+
+        if (parameterValue == null && requestParameterLocation == RequestParameterLocation.BODY) {
             // special handling for body, as it does not have serializedName
             String paramSuffix = "Param";
             if (serializedName.endsWith(paramSuffix)) {
@@ -261,20 +287,15 @@ public class ModelExampleUtil {
             }
         }
 
-        ExampleNode node;
-        if (parameterValue == null) {
-            if (ClassType.Context.equals(methodParameter.getClientMethodParameter().getClientType())) {
-                node = new LiteralNode(ClassType.Context, "").setLiteralsValue("");
-            } else {
-                node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
-            }
-        } else {
-            Object exampleValue = methodParameter.getClientMethodParameter().getRequestParameterLocation() == RequestParameterLocation.QUERY
+        Object exampleValue = parameterValue;
+
+        if (parameterValue != null) {
+            exampleValue = requestParameterLocation == RequestParameterLocation.QUERY
                     ? parameterValue.getUnescapedQueryValue()
                     : parameterValue.getObjectValue();
-            node = parseNodeFromMethodParameter(methodParameter, exampleValue);
         }
-        return node;
+
+        return exampleValue;
     }
 
     /**
