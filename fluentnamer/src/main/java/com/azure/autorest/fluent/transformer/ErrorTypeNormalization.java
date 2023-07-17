@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class ErrorTypeNormalization {
 
     private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), ErrorTypeNormalization.class);
 
-    private final Set<ObjectSchema> clonedObjects = new HashSet<>();
+    private static final String ERROR_PROPERTY_NAME = "error";
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getOperationGroups().stream()
@@ -45,8 +46,6 @@ public class ErrorTypeNormalization {
                 .filter(Objects::nonNull)
                 .distinct()
                 .forEach(s -> process((ObjectSchema) s));
-
-        codeModel.getSchemas().getObjects().addAll(clonedObjects);
 
         return codeModel;
     }
@@ -73,7 +72,7 @@ public class ErrorTypeNormalization {
         ObjectSchema errorSchema = error;
 
         Optional<ObjectSchema> errorSchemaOpt = error.getProperties().stream()
-                .filter(p -> p.getSerializedName().equalsIgnoreCase("error"))
+                .filter(p -> ERROR_PROPERTY_NAME.equalsIgnoreCase(p.getSerializedName()))
                 .map(Value::getSchema)
                 .filter(s -> s instanceof ObjectSchema)
                 .map(s -> (ObjectSchema) s)
@@ -90,25 +89,22 @@ public class ErrorTypeNormalization {
         switch (getErrorType(errorSchema)) {
             case MANAGEMENT_ERROR:
                 final boolean updateChildrenParent = errorSchema != error && existNoneExceptionChildren(error);
-                final ObjectSchema clonedError = new ObjectSchema();
-                if (updateChildrenParent) {
-                    // clone ErrorResponse model, as we need it for input/output
-                    // this only solve the case when its subclass is referenced in operation; it won't solve the case that ErrorResponse itself is used in operation.
-                    LOGGER.info("Clone error '{}'", Utils.getJavaName(error));
-                    Utils.shallowCopy(error, clonedError, ObjectSchema.class, LOGGER);
-                    clonedError.setLanguage(new Languages());
-                    Utils.shallowCopy(error.getLanguage(), clonedError.getLanguage(), Languages.class, LOGGER);
-                    clonedError.getLanguage().setJava(new Language());
-                    Utils.shallowCopy(error.getLanguage().getJava(), clonedError.getLanguage().getJava(), Language.class, LOGGER);
-                    clonedObjects.add(clonedError);
-                }
 
                 LOGGER.info("Rename error from '{}' to 'ManagementError'", Utils.getJavaName(error));
+
                 error.getLanguage().getJava().setName(FluentType.ManagementError.getName());
 
                 if (errorSchema != error) {
-                    LOGGER.info("Rename error from '{}' to 'ManagementError'", Utils.getJavaName(errorSchema));
                     errorSchema.getLanguage().getJava().setName(FluentType.ManagementError.getName());
+                }
+
+                if (updateChildrenParent) {
+                    // update its subclass of usage=input/output, to avoid inherit from this error model "ErrorResponse"
+                    error.getChildren().getAll().stream().filter(ErrorTypeNormalization::usedMoreThanException).forEach(o -> {
+                        if (o instanceof ObjectSchema) {
+                            adaptForParentSchema((ObjectSchema) o, error);
+                        }
+                    });
                 }
 
                 if (errorSchema != error && !updateChildrenParent) {
@@ -116,17 +112,6 @@ public class ErrorTypeNormalization {
                 }
 
                 normalizeSubclass(errorSchema);
-
-                if (updateChildrenParent) {
-                    // update its children to point to the cloned ErrorResponse model
-                    clonedError.getChildren().getAll().stream().filter(ErrorTypeNormalization::usedMoreThanException).forEach(o -> {
-                        if (o instanceof ObjectSchema) {
-                            ObjectSchema schema = (ObjectSchema) o;
-                            schema.getParents().getImmediate().replaceAll(p -> p == error ? clonedError : p);
-                            schema.getParents().getAll().replaceAll(p -> p == error ? clonedError : p);
-                        }
-                    });
-                }
 
                 break;
 
@@ -158,6 +143,34 @@ public class ErrorTypeNormalization {
 
             case GENERIC:
                 break;
+        }
+    }
+
+    private void adaptForParentSchema(ObjectSchema compositeType, ObjectSchema error) {
+        // remove "ErrorResponse" from its parents
+        Iterator<Schema> itor = compositeType.getParents().getImmediate().iterator();
+        while (itor.hasNext()) {
+            Schema type = itor.next();
+            if (type == error) {
+                itor.remove();
+                break;
+            }
+        }
+        itor = compositeType.getParents().getAll().iterator();
+        while (itor.hasNext()) {
+            Schema type = itor.next();
+            if (type == error) {
+                itor.remove();
+                break;
+            }
+        }
+
+        // move "error" to subclass, make it composite with "error", instead of inherit from "ErrorResponse"
+        if (compositeType.getProperties() == null || compositeType.getProperties().stream().noneMatch(p -> ERROR_PROPERTY_NAME.equalsIgnoreCase(p.getSerializedName()))) {
+            if (compositeType.getProperties() == null) {
+                compositeType.setProperties(new ArrayList<>());
+            }
+            compositeType.getProperties().add(error.getProperties().stream().filter(p -> ERROR_PROPERTY_NAME.equalsIgnoreCase(p.getSerializedName())).findFirst().get());
         }
     }
 
