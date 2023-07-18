@@ -37,6 +37,9 @@ public class EmitterOptions {
     @JsonProperty(value = "generate-samples")
     private Boolean generateSamples = true;
 
+    @JsonProperty(value = "enable-sync-stack")
+    private Boolean enableSyncStack;
+
     @JsonProperty(value="dev-options")
     private DevOptions devOptions;
 
@@ -71,6 +74,10 @@ public class EmitterOptions {
 
     public Boolean getGenerateSamples() {
         return generateSamples;
+    }
+
+    public Boolean getEnableSyncStack() {
+        return enableSyncStack;
     }
 
     public EmitterOptions setNamespace(String namespace) {
