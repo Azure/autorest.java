@@ -16,8 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.UnionClientImpl;
-import com.type.union.models.ModelWithNamedUnionProperty;
-import com.type.union.models.ModelWithSimpleUnionProperty;
 
 /** Initializes a new instance of the synchronous UnionClient type. */
 @ServiceClient(builder = UnionClientBuilder.class)
@@ -132,81 +130,5 @@ public final class UnionClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendSecondNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
         return this.serviceClient.sendSecondNamedUnionValueWithResponse(input, requestOptions);
-    }
-
-    /**
-     * The sendInt operation.
-     *
-     * @param input The input parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void sendInt(ModelWithSimpleUnionProperty input) {
-        // Generated convenience method for sendIntWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        sendIntWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
-    }
-
-    /**
-     * The sendIntArray operation.
-     *
-     * @param input The input parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void sendIntArray(ModelWithSimpleUnionProperty input) {
-        // Generated convenience method for sendIntArrayWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        sendIntArrayWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
-    }
-
-    /**
-     * The sendFirstNamedUnionValue operation.
-     *
-     * @param input The input parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void sendFirstNamedUnionValue(ModelWithNamedUnionProperty input) {
-        // Generated convenience method for sendFirstNamedUnionValueWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        sendFirstNamedUnionValueWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
-    }
-
-    /**
-     * The sendSecondNamedUnionValue operation.
-     *
-     * @param input The input parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void sendSecondNamedUnionValue(ModelWithNamedUnionProperty input) {
-        // Generated convenience method for sendSecondNamedUnionValueWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        sendSecondNamedUnionValueWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
     }
 }
