@@ -146,7 +146,7 @@ import {
 import {
   getClientApiVersions,
   getServiceVersion,
-  operationContainsJsonMergePatch,
+  operationContainsJsonMergePatch as operationIsJsonMergePatch,
   isPayloadProperty,
   originApiVersion,
   specialHeaderNames,
@@ -154,6 +154,7 @@ import {
   isLroNewPollingStrategy,
   operationIsMultipleContentTypes,
   cloneOperationParameter,
+  operationRefersUnion,
 } from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -515,13 +516,19 @@ export class CodeModelBuilder {
       },
     });
 
-    if (operationContainsJsonMergePatch(op)) {
+    if (operationIsJsonMergePatch(op)) {
       // do not generate convenience method for JSON Merge Patch
-      this.trace(`Operation '${op.operation.name}' contains 'application/merge-patch+json'`);
+      this.trace(`Operation '${op.operation.name}' is 'application/merge-patch+json'`);
     } else if (operationIsMultipleContentTypes(op)) {
       // and multiple content types
       // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
       this.trace(`Operation '${op.operation.name}' is multiple content-type`);
+    } else if (
+      operationRefersUnion(this.program, op, (it: Type) => {
+        return getTypeName(it, this.typeNameOptions);
+      })
+    ) {
+      // and Union
     } else {
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName && !isInternal(this.sdkContext, operation)) {

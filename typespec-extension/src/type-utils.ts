@@ -2,9 +2,11 @@ import {
   EncodeData,
   IntrinsicScalarName,
   Model,
+  Program,
   Scalar,
   TemplatedTypeBase,
   Type,
+  Union,
   UnionVariant,
   isNullType,
   isTemplateDeclaration,
@@ -129,4 +131,40 @@ export function hasScalarAsBase(type: Scalar, scalarName: IntrinsicScalarName): 
     scalarType = scalarType.baseScalar;
   }
   return false;
+}
+
+export function unionReferedByType(program: Program, type: Type, visited: Set<Type>): Union | undefined {
+  if (visited.has(type)) {
+    return undefined;
+  }
+  visited.add(type);
+
+  if (type.kind === "Union") {
+    // ref CodeModelBuilder.processUnionSchema
+    const nonNullVariants = Array.from(type.variants.values()).filter((it) => !isNullType(it.type));
+    if (nonNullVariants.length === 1) {
+      return unionReferedByType(program, nonNullVariants[0], visited);
+    } else if (isSameLiteralTypes(nonNullVariants)) {
+      return undefined;
+    } else {
+      // found Union
+      return type;
+    }
+  } else if (type.kind === "Model") {
+    if (type.indexer) {
+      const ret = unionReferedByType(program, type.indexer.value, visited);
+      if (ret) {
+        return ret;
+      }
+    }
+    for (const property of type.properties.values()) {
+      const ret = unionReferedByType(program, property.type, visited);
+      if (ret) {
+        return ret;
+      }
+    }
+    return undefined;
+  } else {
+    return undefined;
+  }
 }
