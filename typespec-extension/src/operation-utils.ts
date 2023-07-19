@@ -1,4 +1,4 @@
-import { ModelProperty, Operation, Program, SyntaxKind, ignoreDiagnostics, resolvePath } from "@typespec/compiler";
+import { ModelProperty, Operation, Program, ignoreDiagnostics, resolvePath } from "@typespec/compiler";
 import {
   HttpOperation,
   getHeaderFieldName,
@@ -145,15 +145,6 @@ export function getServiceVersion(client: CodeModelClient | CodeModel): ServiceV
 }
 
 export function isLroNewPollingStrategy(httpOperation: HttpOperation, lroMetadata: LroMetadata): boolean {
-  // at present, checks if operation uses template from Azure.Core
-  const azureCoreLroSvs = [
-    "LongRunningResourceCreateOrReplace",
-    "LongRunningResourceCreateOrUpdate",
-    "LongRunningResourceDelete",
-    "LongRunningResourceAction",
-    "LongRunningRpcOperation",
-  ];
-
   const operation = httpOperation.operation;
   let useNewStrategy = false;
   if (
@@ -162,12 +153,8 @@ export function isLroNewPollingStrategy(httpOperation: HttpOperation, lroMetadat
     lroMetadata.pollingInfo.responseModel.name === "OperationStatus" &&
     getNamespace(lroMetadata.pollingInfo.responseModel) === "Azure.Core.Foundations"
   ) {
-    if (operation.node.signature.kind === SyntaxKind.OperationSignatureReference) {
-      if (operation.node.signature.baseOperation.target.kind === SyntaxKind.MemberExpression) {
-        const sv = operation.node.signature.baseOperation.target.id.sv;
-        useNewStrategy = azureCoreLroSvs.includes(sv);
-      }
-    }
+    useNewStrategy =
+      operation.sourceOperation !== undefined && getNamespace(operation.sourceOperation) === "Azure.Core";
   }
 
   if (!useNewStrategy) {
