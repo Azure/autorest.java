@@ -143,6 +143,8 @@ export function operationRefersUnion(
       return true;
     }
   }
+  // TODO (weidxu): request parameters
+  // TODO (weidxu): LRO response
   return false;
 }
 
