@@ -143,8 +143,10 @@ export function unionReferedByType(program: Program, type: Type, visited: Set<Ty
     // ref CodeModelBuilder.processUnionSchema
     const nonNullVariants = Array.from(type.variants.values()).filter((it) => !isNullType(it.type));
     if (nonNullVariants.length === 1) {
+      // Type | null, follow that Type
       return unionReferedByType(program, nonNullVariants[0], visited);
     } else if (isSameLiteralTypes(nonNullVariants)) {
+      // "literal1" | "literal2" -> Enum
       return undefined;
     } else {
       // found Union
@@ -152,11 +154,13 @@ export function unionReferedByType(program: Program, type: Type, visited: Set<Ty
     }
   } else if (type.kind === "Model") {
     if (type.indexer) {
+      // follow indexer (for Array/Record)
       const ret = unionReferedByType(program, type.indexer.value, visited);
       if (ret) {
         return ret;
       }
     }
+    // follow properties
     for (const property of type.properties.values()) {
       const ret = unionReferedByType(program, property.type, visited);
       if (ret) {
