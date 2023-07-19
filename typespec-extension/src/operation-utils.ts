@@ -119,6 +119,14 @@ export function operationRefersUnion(
   getTypeName: (type: Type) => string,
 ): boolean {
   const visited = new Set<Type>();
+  // request parameters
+  for (const parameter of op.parameters.parameters) {
+    const ret = unionReferedByType(program, parameter.param.type, visited);
+    if (ret) {
+      trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
+      return true;
+    }
+  }
   // request body
   if (op.parameters.body) {
     if (op.parameters.body.parameter) {
@@ -143,7 +151,6 @@ export function operationRefersUnion(
       return true;
     }
   }
-  // TODO (weidxu): request parameters
   // TODO (weidxu): LRO response
   return false;
 }
