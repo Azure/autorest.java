@@ -87,7 +87,7 @@ function pascalCaseForOperationId(name: string) {
     .join("_");
 }
 
-export function operationContainsJsonMergePatch(op: HttpOperation): boolean {
+export function operationIsJsonMergePatch(op: HttpOperation): boolean {
   for (const param of op.parameters.parameters) {
     if (param.type === "header" && param.name.toLowerCase() === "content-type") {
       if (param.param.type.kind === "String" && param.param.type.value === "application/merge-patch+json") {

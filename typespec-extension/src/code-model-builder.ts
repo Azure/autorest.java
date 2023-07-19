@@ -146,7 +146,7 @@ import {
 import {
   getClientApiVersions,
   getServiceVersion,
-  operationContainsJsonMergePatch as operationIsJsonMergePatch,
+  operationIsJsonMergePatch,
   isPayloadProperty,
   originApiVersion,
   specialHeaderNames,
