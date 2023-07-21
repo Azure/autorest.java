@@ -170,7 +170,7 @@ export class CodeModelBuilder {
   private codeModel: CodeModel;
 
   readonly schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
-  readonly operationCache = new Map<Operation, CodeModelOperation>();
+  readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, nndefined means type visited but not completed
 
   private operationExamples: Map<Operation, any> = new Map<Operation, any>();
 
@@ -524,7 +524,7 @@ export class CodeModelBuilder {
       // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
       this.trace(`Operation '${op.operation.name}' is multiple content-type`);
     } else if (
-      operationRefersUnion(this.program, op, (it: Type) => {
+      operationRefersUnion(this.program, op, this.typeUnionRefCache, (it: Type) => {
         return getTypeName(it, this.typeNameOptions);
       })
     ) {

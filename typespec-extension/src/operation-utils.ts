@@ -116,12 +116,12 @@ export function operationIsMultipleContentTypes(op: HttpOperation): boolean {
 export function operationRefersUnion(
   program: Program,
   op: HttpOperation,
+  cache: Map<Type, Union | null | undefined>,
   getTypeName: (type: Type) => string,
 ): boolean {
-  const visited = new Set<Type>();
   // request parameters
   for (const parameter of op.parameters.parameters) {
-    const ret = unionReferedByType(program, parameter.param.type, visited);
+    const ret = unionReferedByType(program, parameter.param.type, cache);
     if (ret) {
       trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
       return true;
@@ -130,13 +130,13 @@ export function operationRefersUnion(
   // request body
   if (op.parameters.body) {
     if (op.parameters.body.parameter) {
-      const ret = unionReferedByType(program, op.parameters.body.parameter.type, visited);
+      const ret = unionReferedByType(program, op.parameters.body.parameter.type, cache);
       if (ret) {
         trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
         return true;
       }
     } else if (op.parameters.body.type) {
-      const ret = unionReferedByType(program, op.parameters.body.type, visited);
+      const ret = unionReferedByType(program, op.parameters.body.type, cache);
       if (ret) {
         trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
         return true;
@@ -145,7 +145,7 @@ export function operationRefersUnion(
   }
   // response body
   if (op.responses && op.responses.length > 0 && op.responses[0].type) {
-    const ret = unionReferedByType(program, op.responses[0].type, visited);
+    const ret = unionReferedByType(program, op.responses[0].type, cache);
     if (ret) {
       trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
       return true;
