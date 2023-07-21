@@ -1,5 +1,11 @@
 # Release History
 
+## 0.8.6 (2023-07-21)
+
+Compatible with compiler 0.46.
+
+- Operation which refers `Union` type is treated as protocol API, i.e. with `convenientAPI(false)`.
+
 ## 0.8.6 (2023-07-18)
 
 Compatible with compiler 0.46.

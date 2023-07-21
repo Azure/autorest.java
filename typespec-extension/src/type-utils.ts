@@ -2,9 +2,11 @@ import {
   EncodeData,
   IntrinsicScalarName,
   Model,
+  Program,
   Scalar,
   TemplatedTypeBase,
   Type,
+  Union,
   UnionVariant,
   isNullType,
   isTemplateDeclaration,
@@ -129,4 +131,62 @@ export function hasScalarAsBase(type: Scalar, scalarName: IntrinsicScalarName): 
     scalarType = scalarType.baseScalar;
   }
   return false;
+}
+
+export function unionReferedByType(
+  program: Program,
+  type: Type,
+  cache: Map<Type, Union | null | undefined>,
+): Union | null {
+  if (cache.has(type)) {
+    const ret = cache.get(type);
+    if (ret) {
+      return ret;
+    } else {
+      return null;
+    }
+  }
+  cache.set(type, undefined);
+
+  if (type.kind === "Union") {
+    // ref CodeModelBuilder.processUnionSchema
+    const nonNullVariants = Array.from(type.variants.values()).filter((it) => !isNullType(it.type));
+    if (nonNullVariants.length === 1) {
+      // Type | null, follow that Type
+      const ret = unionReferedByType(program, nonNullVariants[0], cache);
+      if (ret) {
+        cache.set(type, ret);
+        return ret;
+      }
+    } else if (isSameLiteralTypes(nonNullVariants)) {
+      // "literal1" | "literal2" -> Enum
+      cache.set(type, null);
+      return null;
+    } else {
+      // found Union
+      cache.set(type, type);
+      return type;
+    }
+  } else if (type.kind === "Model") {
+    if (type.indexer) {
+      // follow indexer (for Array/Record)
+      const ret = unionReferedByType(program, type.indexer.value, cache);
+      if (ret) {
+        cache.set(type, ret);
+        return ret;
+      }
+    }
+    // follow properties
+    for (const property of type.properties.values()) {
+      const ret = unionReferedByType(program, property.type, cache);
+      if (ret) {
+        cache.set(type, ret);
+        return ret;
+      }
+    }
+    cache.set(type, null);
+    return null;
+  }
+  cache.set(type, null);
+  return null;
 }

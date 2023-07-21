@@ -15,12 +15,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.polling.SyncPoller;
 import com.cadl.union.implementation.UnionClientImpl;
-import com.cadl.union.models.InputModelBase;
-import com.cadl.union.models.SendLongOptions;
-import com.cadl.union.models.User;
-import java.util.HashMap;
-import java.util.Map;
 
 /** Initializes a new instance of the synchronous UnionClient type. */
 @ServiceClient(builder = UnionClientBuilder.class)
@@ -106,82 +102,61 @@ public final class UnionClient {
     }
 
     /**
-     * The send operation.
+     * The get operation.
      *
-     * @param id A sequence of textual characters.
-     * @param input The input parameter.
-     * @param user The user parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>data</td><td>DataModelBase</td><td>No</td><td>The data parameter</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(String id, InputModelBase input, User user) {
-        // Generated convenience method for sendWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("user", user);
-        requestObj.put("input", input);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(id, request, requestOptions).getValue();
+    public Response<Void> getWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getWithResponse(requestOptions);
     }
 
     /**
-     * The send operation.
+     * A long-running remote procedure call (RPC) operation.
      *
-     * @param id A sequence of textual characters.
-     * @param input The input parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(String id, InputModelBase input) {
-        // Generated convenience method for sendWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("input", input);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(id, request, requestOptions).getValue();
-    }
-
-    /**
-     * The sendLong operation.
-     *
-     * @param options Options for sendLong API.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void sendLong(SendLongOptions options) {
-        // Generated convenience method for sendLongWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        String id = options.getId();
-        String filter = options.getFilter();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("user", options.getUser());
-        requestObj.put("input", options.getInput());
-        requestObj.put("dataInt", options.getDataInt());
-        requestObj.put("dataUnion", options.getDataUnion());
-        requestObj.put("dataLong", options.getDataLong());
-        requestObj.put("data_float", options.getDataFloat());
-        BinaryData request = BinaryData.fromObject(requestObj);
-        if (filter != null) {
-            requestOptions.addQueryParam("filter", filter, false);
-        }
-        sendLongWithResponse(id, request, requestOptions).getValue();
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginGenerate(RequestOptions requestOptions) {
+        return this.serviceClient.beginGenerate(requestOptions);
     }
 }
