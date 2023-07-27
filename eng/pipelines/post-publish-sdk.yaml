@@ -42,7 +42,7 @@ jobs:
       workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
   - script: |
-      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$PackageVersion
+      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$(PackageVersion)
     displayName: 'Generate SDK'
     workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
@@ -53,7 +53,7 @@ jobs:
       RepoName: azure-sdk-for-java
       BaseBranchName: 'refs/heads/main'
       PRBranchName: typespec-java-generation-$(Build.BuildId)
-      CommitMsg: '[Automation] Generate SDK based on TypeSpec $PackageVersion'
-      PRTitle: '[Automation] Generate SDK based on TypeSpec $PackageVersion'
+      CommitMsg: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
+      PRTitle: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
       PRLabels: 'DPG'
       OpenAsDraft: 'true'
