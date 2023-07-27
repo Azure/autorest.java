@@ -39,6 +39,7 @@ jobs:
       script: |
         $PACKAGE_VERSION = node -p -e "require('./typespec-extension/package.json').version"
         Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
+      workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
   - script: |
       python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$PackageVersion
