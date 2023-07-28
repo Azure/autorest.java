@@ -1777,11 +1777,18 @@ export class CodeModelBuilder {
         discriminatorPropertyName = (parentWithDiscriminator as ObjectSchema).discriminator!.property.serializedName;
 
         const discriminatorProperty = Array.from(type.properties.values()).find(
-          (it) => it.name === discriminatorPropertyName && it.type.kind === "String",
+          (it) => it.name === discriminatorPropertyName && (it.type.kind === "String" || it.type.kind === "EnumMember"),
         );
         if (discriminatorProperty) {
-          // value of the StringLiteral of the discriminator property
-          objectSchema.discriminatorValue = (discriminatorProperty.type as StringLiteral).value;
+          if (discriminatorProperty.type.kind === "String") {
+            // value of StringLiteral of the discriminator property
+            objectSchema.discriminatorValue = discriminatorProperty.type.value;
+          } else if (discriminatorProperty.type.kind === "EnumMember") {
+            // value of EnumMember of the discriminator property
+            // lint requires value be string, not number
+            objectSchema.discriminatorValue =
+              (discriminatorProperty.type.value as string) ?? discriminatorProperty.type.name;
+          }
         } else {
           // fallback to name of the Model
           objectSchema.discriminatorValue = name;
