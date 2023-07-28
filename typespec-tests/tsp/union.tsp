@@ -70,6 +70,27 @@ model Query {
   data?: url | bytes;
 }
 
+model ResultDiscriminatedUnion {
+  name: string;
+  data?: Pet;
+}
+
+@discriminator("kind")
+union Pet {
+  cat: Cat,
+  dog: Dog,
+}
+
+model Cat {
+  kind: "cat";
+  meow: boolean;
+}
+
+model Dog {
+  kind: "dog";
+  bark: boolean;
+}
+
 @route("/union")
 interface UnionFlattenOp {
   @route("send")
@@ -86,4 +107,8 @@ interface UnionFlattenOp {
 
   @route("generate")
   generate is LongRunningRpcOperation<{}, OperationStatus<Result>, Result>;
+
+  @route("pet")
+  @get
+  getPet(): ResultDiscriminatedUnion;
 }
