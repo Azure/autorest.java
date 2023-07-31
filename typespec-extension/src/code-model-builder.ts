@@ -1057,6 +1057,9 @@ export class CodeModelBuilder {
     if (!schema.language.default.name && schema instanceof ObjectSchema) {
       // anonymous model
 
+      // name the schema for documentation
+      schema.language.default.name = op.language.default.name + "Request";
+
       if (!parameter.language.default.name) {
         // name the parameter for documentation
         parameter.language.default.name = "request";
