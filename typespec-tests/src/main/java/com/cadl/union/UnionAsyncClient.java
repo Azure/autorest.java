@@ -83,7 +83,11 @@ public final class UnionAsyncClient {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModelBase (Required)
+     *     input: String (Required)
+     *     dataInt: int (Required)
+     *     dataUnion: DataUnionModelBase (Optional)
+     *     dataLong: Long (Optional)
+     *     data_float: Double (Optional)
      * }
      * }</pre>
      *

@@ -86,6 +86,10 @@ public final class FlattenClient {
      *         user: String (Required)
      *     }
      *     input: String (Required)
+     *     dataInt: int (Required)
+     *     dataIntOptional: Integer (Optional)
+     *     dataLong: Long (Optional)
+     *     data_float: Double (Optional)
      * }
      * }</pre>
      *

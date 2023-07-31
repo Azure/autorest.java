@@ -97,7 +97,12 @@ public final class AliasAsyncClient {
      *
      * <pre>{@code
      * {
-     *     name: String (Required)
+     *     prop1: String (Required)
+     *     prop2: String (Required)
+     *     prop3: String (Required)
+     *     prop4: String (Required)
+     *     prop5: String (Required)
+     *     prop6: String (Required)
      * }
      * }</pre>
      *
