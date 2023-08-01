@@ -4,48 +4,47 @@
 
 package com.cadl.enumservice.models;
 
+import com.azure.core.annotation.Generated;
+import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Collection;
 
 /** Defines values for Name. */
-public enum Name {
-    /** Enum value Read. */
-    READ("Read"),
+public final class Name extends ExpandableStringEnum<Name> {
+    /** Static value Read for Name. */
+    @Generated public static final Name READ = fromString("Read");
 
-    /** Enum value Write. */
-    WRITE("Write");
+    /** Static value Write for Name. */
+    @Generated public static final Name WRITE = fromString("Write");
 
-    /** The actual serialized value for a Name instance. */
-    private final String value;
+    /**
+     * Creates a new instance of Name value.
+     *
+     * @deprecated Use the {@link #fromString(String)} factory method.
+     */
+    @Generated
+    @Deprecated
+    public Name() {}
 
-    Name(String value) {
-        this.value = value;
+    /**
+     * Creates or finds a Name from its string representation.
+     *
+     * @param name a name to look for.
+     * @return the corresponding Name.
+     */
+    @Generated
+    @JsonCreator
+    public static Name fromString(String name) {
+        return fromString(name, Name.class);
     }
 
     /**
-     * Parses a serialized value to a Name instance.
+     * Gets known Name values.
      *
-     * @param value the serialized value to parse.
-     * @return the parsed Name object, or null if unable to parse.
+     * @return known Name values.
      */
-    @JsonCreator
-    public static Name fromString(String value) {
-        if (value == null) {
-            return null;
-        }
-        Name[] items = Name.values();
-        for (Name item : items) {
-            if (item.toString().equalsIgnoreCase(value)) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    /** {@inheritDoc} */
-    @JsonValue
-    @Override
-    public String toString() {
-        return this.value;
+    @Generated
+    public static Collection<Name> values() {
+        return values(Name.class);
     }
 }

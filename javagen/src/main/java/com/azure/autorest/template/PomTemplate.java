@@ -109,6 +109,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
             projectBlock.block("properties", propertiesBlock -> {
                 propertiesBlock.tag("project.build.sourceEncoding", "UTF-8");
                 writeJacoco(propertiesBlock);
+                writeRevapi(propertiesBlock, pom);
             });
 
             if (pom.getDependencyIdentifiers() != null && pom.getDependencyIdentifiers().size() > 0) {
@@ -158,6 +159,15 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
      * @param propertiesBlock the "properties" xml block.
      */
     protected void writeJacoco(XmlBlock propertiesBlock) {
+        // NOOP for data-plane
+    }
+
+    /**
+     * Extension for writing revapi configuration.
+     *
+     * @param propertiesBlock the "properties" xml block.
+     */
+    protected void writeRevapi(XmlBlock propertiesBlock, Pom pom) {
         // NOOP for data-plane
     }
 

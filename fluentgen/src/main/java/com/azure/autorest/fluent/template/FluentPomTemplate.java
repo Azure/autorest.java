@@ -3,14 +3,13 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.template.PomTemplate;
 
 public class FluentPomTemplate extends PomTemplate {
 
     private static final FluentPomTemplate INSTANCE = new FluentPomTemplate();
-
-//    private static FluentProject project;
 
     protected FluentPomTemplate() {
     }
@@ -27,7 +26,13 @@ public class FluentPomTemplate extends PomTemplate {
         propertiesBlock.tag("jacoco.min.branchcoverage", "0");
     }
 
-//    public static void setProject(FluentProject project) {
-//        FluentPomTemplate.project = project;
-//    }
+    @Override
+    protected void writeRevapi(XmlBlock propertiesBlock, Pom pom) {
+        super.writeRevapi(propertiesBlock, pom);
+
+        // skip revapi if preview
+        if (pom.getVersion().contains("-beta.")) {
+            propertiesBlock.tag("revapi.skip", "true");
+        }
+    }
 }

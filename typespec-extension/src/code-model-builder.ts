@@ -1612,17 +1612,9 @@ export class CodeModelBuilder {
         value: new ConstantValue(type.value),
       }),
     );
-
-    // return this.codeModel.schemas.add(
-    //   new ChoiceSchema(name, this.getDoc(type), {
-    //     summary: this.getSummary(type),
-    //     choiceType: valueType as any,
-    //     choices: [new ChoiceValue(type.value.toString(), this.getDoc(type), type.value)]
-    //   })
-    // );
   }
 
-  private processChoiceSchemaForUnion(type: Union, variants: UnionVariant[], name: string): SealedChoiceSchema {
+  private processChoiceSchemaForUnion(type: Union, variants: UnionVariant[], name: string): ChoiceSchema {
     const kind = variants[0].type.kind;
     const valueType =
       kind === "String" ? this.stringSchema : kind === "Boolean" ? this.booleanSchema : this.integerSchema;
@@ -1634,7 +1626,7 @@ export class CodeModelBuilder {
 
     const namespace = getNamespace(type);
     return this.codeModel.schemas.add(
-      new SealedChoiceSchema(name, this.getDoc(type), {
+      new ChoiceSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
         choiceType: valueType as any,
         choices: choices,
