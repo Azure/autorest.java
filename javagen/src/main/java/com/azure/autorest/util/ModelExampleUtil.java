@@ -285,6 +285,12 @@ public class ModelExampleUtil {
                     parameterValue = findParameter(example, serializedName);
                 }
             }
+
+            // fallback, "body" is commonly used in example JSON for request body
+            if (parameterValue == null) {
+                serializedName = "body";
+                parameterValue = findParameter(example, serializedName);
+            }
         }
 
         Object exampleValue = parameterValue;
