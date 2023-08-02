@@ -14,8 +14,8 @@ import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
 import { getVersion } from "@typespec/versioning";
-import { getNamespace, logWarning, pascalCase, trace } from "./utils.js";
-import { unionReferedByType } from "./type-utils.js";
+import { getNamespace, logWarning, pascalCase } from "./utils.js";
+import { unionReferredByType } from "./type-utils.js";
 
 export const specialHeaderNames = new Set([
   "repeatability-request-id",
@@ -117,54 +117,37 @@ export function operationRefersUnion(
   program: Program,
   op: HttpOperation,
   cache: Map<Type, Union | null | undefined>,
-  getTypeName: (type: Type) => string,
-): boolean {
+): Union | null {
   // request parameters
   for (const parameter of op.parameters.parameters) {
-    const ret = unionReferedByType(program, parameter.param.type, cache);
+    const ret = unionReferredByType(program, parameter.param.type, cache);
     if (ret) {
-      trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
-      return true;
+      return ret;
     }
   }
   // request body
   if (op.parameters.body) {
     if (op.parameters.body.parameter) {
-      const ret = unionReferedByType(program, op.parameters.body.parameter.type, cache);
+      const ret = unionReferredByType(program, op.parameters.body.parameter.type, cache);
       if (ret) {
-        trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
-        return true;
+        return ret;
       }
     } else if (op.parameters.body.type) {
-      const ret = unionReferedByType(program, op.parameters.body.type, cache);
+      const ret = unionReferredByType(program, op.parameters.body.type, cache);
       if (ret) {
-        trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
-        return true;
+        return ret;
       }
     }
   }
   // response body
   if (op.responses && op.responses.length > 0 && op.responses[0].type) {
-    const ret = unionReferedByType(program, op.responses[0].type, cache);
+    const ret = unionReferredByType(program, op.responses[0].type, cache);
     if (ret) {
-      trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
-      return true;
+      return ret;
     }
   }
   // TODO (weidxu): LRO response
-  return false;
-}
-
-function getUnionName(union: Union, getTypeName: (type: Type) => string) {
-  let name = union.name;
-  if (!name) {
-    const names: string[] = [];
-    union.variants.forEach((it) => {
-      names.push(getTypeName(it.type));
-    });
-    name = names.join(" | ");
-  }
-  return name;
+  return null;
 }
 
 export function isPayloadProperty(program: Program, property: ModelProperty) {

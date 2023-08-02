@@ -110,6 +110,7 @@ import {
   SerializationStyle,
   Metadata,
   UnixTimeSchema,
+  Language,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient } from "./common/client.js";
@@ -516,24 +517,52 @@ export class CodeModelBuilder {
       },
     });
 
-    if (operationIsJsonMergePatch(op)) {
-      // do not generate convenience method for JSON Merge Patch
-      this.trace(`Operation '${op.operation.name}' is 'application/merge-patch+json'`);
-    } else if (operationIsMultipleContentTypes(op)) {
-      // and multiple content types
-      // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
-      this.trace(`Operation '${op.operation.name}' is multiple content-type`);
-    } else if (
-      operationRefersUnion(this.program, op, this.typeUnionRefCache, (it: Type) => {
-        return getTypeName(it, this.typeNameOptions);
-      })
-    ) {
-      // and Union
-    } else {
-      const convenienceApiName = this.getConvenienceApiName(operation);
-      if (convenienceApiName && !isInternal(this.sdkContext, operation)) {
-        codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
+    const convenienceApiName = this.getConvenienceApiName(operation);
+    let generateConvenienceApi: boolean = !!convenienceApiName && !isInternal(this.sdkContext, operation);
+
+    let apiComment: string | undefined = undefined;
+    if (generateConvenienceApi) {
+      // check if the convenience API need to be disabled for some special cases
+      if (operationIsJsonMergePatch(op)) {
+        // do not generate convenience method for JSON Merge Patch
+        generateConvenienceApi = false;
+        apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json'`;
+        this.logWarning(apiComment);
+      } else if (operationIsMultipleContentTypes(op)) {
+        // and multiple content types
+        // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
+        generateConvenienceApi = false;
+        apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is multiple content-type`;
+        this.logWarning(apiComment);
+      } else {
+        const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
+        if (union) {
+          // and Union
+          const getUnionName = (union: Union) => {
+            let name = union.name;
+            if (!name) {
+              const names: string[] = [];
+              union.variants.forEach((it) => {
+                names.push(getTypeName(it.type, this.typeNameOptions));
+              });
+              name = names.join(" | ");
+            }
+            return name;
+          };
+          generateConvenienceApi = false;
+          apiComment = `Convenience API is not generated, as operation '${
+            op.operation.name
+          }' refers Union '${getUnionName(union)}'`;
+          this.logWarning(apiComment);
+        }
       }
+    }
+    if (generateConvenienceApi && convenienceApiName) {
+      codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
+    }
+    if (apiComment) {
+      codeModelOperation.language.java = new Language();
+      codeModelOperation.language.java.comment = apiComment;
     }
 
     // check for generating protocol api or not
