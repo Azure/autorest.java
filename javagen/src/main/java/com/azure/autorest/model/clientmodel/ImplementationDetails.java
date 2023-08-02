@@ -95,6 +95,8 @@ public class ImplementationDetails {
 
     private final Set<Usage> usages;
 
+    private final String comment;
+
     /**
      * Usually on a method, that it is only required in implementation class (FooClientImpl),
      * but not in public class (FooClient).
@@ -131,14 +133,23 @@ public class ImplementationDetails {
         return usages.contains(Usage.EXCEPTION);
     }
 
-    protected ImplementationDetails(boolean implementationOnly, Set<Usage> usages) {
+    /**
+     * @return API comment.
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    protected ImplementationDetails(boolean implementationOnly, Set<Usage> usages, String comment) {
         this.implementationOnly = implementationOnly;
         this.usages = usages;
+        this.comment = comment;
     }
 
     public static final class Builder {
         private boolean implementationOnly = false;
         private Set<Usage> usages = new HashSet<>();
+        private String comment;
 
         public Builder() {
         }
@@ -153,8 +164,13 @@ public class ImplementationDetails {
             return this;
         }
 
+        public Builder comment(String comment) {
+            this.comment = comment;
+            return this;
+        }
+
         public ImplementationDetails build() {
-            return new ImplementationDetails(implementationOnly, usages);
+            return new ImplementationDetails(implementationOnly, usages, comment);
         }
     }
 }

@@ -16,6 +16,7 @@ import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.CoreUtils;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -62,6 +63,11 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
 
         String declaration = String.format("%1$s %2$s(%3$s)", clientMethod.getReturnValue().getType(), methodName, clientMethod.getParametersDeclaration());
         Consumer<JavaBlock> method = function -> {
+
+            // API comment
+            if (clientMethod.getImplementationDetails() != null && !CoreUtils.isNullOrEmpty(clientMethod.getImplementationDetails().getComment())) {
+                function.line("// " + clientMethod.getImplementationDetails().getComment());
+            }
 
             boolean shouldReturn = true;
             if (clientMethod.getReturnValue() != null && clientMethod.getReturnValue().getType() instanceof PrimitiveType) {
