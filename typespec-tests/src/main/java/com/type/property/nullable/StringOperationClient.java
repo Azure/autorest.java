@@ -107,6 +107,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchNonNullWithResponse(BinaryData body, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'patchNonNull' is 'application/merge-patch+json'
         return this.serviceClient.patchNonNullWithResponse(body, requestOptions);
     }
 
@@ -134,6 +135,7 @@ public final class StringOperationClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchNullWithResponse(BinaryData body, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'patchNull' is 'application/merge-patch+json'
         return this.serviceClient.patchNullWithResponse(body, requestOptions);
     }
 

@@ -54,6 +54,7 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendIntWithResponse(BinaryData input, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'sendInt' refers Union 'int32 | int32[]'
         return this.serviceClient.sendIntWithResponse(input, requestOptions);
     }
 
@@ -79,6 +80,7 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendIntArrayWithResponse(BinaryData input, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'sendIntArray' refers Union 'int32 | int32[]'
         return this.serviceClient.sendIntArrayWithResponse(input, requestOptions);
     }
 
@@ -104,6 +106,7 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendFirstNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'sendFirstNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.sendFirstNamedUnionValueWithResponse(input, requestOptions);
     }
 
@@ -129,6 +132,7 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendSecondNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'sendSecondNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.sendSecondNamedUnionValueWithResponse(input, requestOptions);
     }
 }
