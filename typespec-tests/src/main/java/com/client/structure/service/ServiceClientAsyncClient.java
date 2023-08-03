@@ -14,20 +14,22 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.client.structure.service.implementation.ServiceClientImpl;
+import com.azure.core.util.FluxUtil;
+import com.client.structure.service.implementation.ServiceClientClientImpl;
+import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the synchronous ServiceClient type. */
-@ServiceClient(builder = ServiceClientBuilder.class)
-public final class ServiceClient {
-    @Generated private final ServiceClientImpl serviceClient;
+/** Initializes a new instance of the asynchronous ServiceClientClient type. */
+@ServiceClient(builder = ServiceClientClientBuilder.class, isAsync = true)
+public final class ServiceClientAsyncClient {
+    @Generated private final ServiceClientClientImpl serviceClient;
 
     /**
-     * Initializes an instance of ServiceClient class.
+     * Initializes an instance of ServiceClientAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ServiceClient(ServiceClientImpl serviceClient) {
+    ServiceClientAsyncClient(ServiceClientClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -39,12 +41,12 @@ public final class ServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> oneWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.oneWithResponse(requestOptions);
+    public Mono<Response<Void>> oneWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.oneWithResponseAsync(requestOptions);
     }
 
     /**
@@ -55,12 +57,12 @@ public final class ServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> twoWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.twoWithResponse(requestOptions);
+    public Mono<Response<Void>> twoWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.twoWithResponseAsync(requestOptions);
     }
 
     /**
@@ -71,12 +73,12 @@ public final class ServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> threeWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.threeWithResponse(requestOptions);
+    public Mono<Response<Void>> threeWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.threeWithResponseAsync(requestOptions);
     }
 
     /**
@@ -87,12 +89,12 @@ public final class ServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> fourWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.fourWithResponse(requestOptions);
+    public Mono<Response<Void>> fourWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.fourWithResponseAsync(requestOptions);
     }
 
     /**
@@ -103,12 +105,12 @@ public final class ServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> fiveWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.fiveWithResponse(requestOptions);
+    public Mono<Response<Void>> fiveWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.fiveWithResponseAsync(requestOptions);
     }
 
     /**
@@ -119,12 +121,12 @@ public final class ServiceClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sixWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.sixWithResponse(requestOptions);
+    public Mono<Response<Void>> sixWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.sixWithResponseAsync(requestOptions);
     }
 
     /**
@@ -135,13 +137,14 @@ public final class ServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void one() {
+    public Mono<Void> one() {
         // Generated convenience method for oneWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        oneWithResponse(requestOptions).getValue();
+        return oneWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -152,13 +155,14 @@ public final class ServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void two() {
+    public Mono<Void> two() {
         // Generated convenience method for twoWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        twoWithResponse(requestOptions).getValue();
+        return twoWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -169,13 +173,14 @@ public final class ServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void three() {
+    public Mono<Void> three() {
         // Generated convenience method for threeWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        threeWithResponse(requestOptions).getValue();
+        return threeWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -186,13 +191,14 @@ public final class ServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void four() {
+    public Mono<Void> four() {
         // Generated convenience method for fourWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        fourWithResponse(requestOptions).getValue();
+        return fourWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -203,13 +209,14 @@ public final class ServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void five() {
+    public Mono<Void> five() {
         // Generated convenience method for fiveWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        fiveWithResponse(requestOptions).getValue();
+        return fiveWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -220,12 +227,13 @@ public final class ServiceClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void six() {
+    public Mono<Void> six() {
         // Generated convenience method for sixWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        sixWithResponse(requestOptions).getValue();
+        return sixWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 }

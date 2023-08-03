@@ -207,7 +207,10 @@ public final class ResponseClientBuilder
                 (serviceVersion != null) ? serviceVersion : ResponseServiceVersion.getLatest();
         ResponseClientImpl client =
                 new ResponseClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 

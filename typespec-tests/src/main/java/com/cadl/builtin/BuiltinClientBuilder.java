@@ -186,7 +186,7 @@ public final class BuiltinClientBuilder
     private BuiltinClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         BuiltinClientImpl client =
-                new BuiltinClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                new BuiltinClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

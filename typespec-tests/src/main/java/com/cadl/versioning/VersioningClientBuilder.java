@@ -207,7 +207,10 @@ public final class VersioningClientBuilder
                 (serviceVersion != null) ? serviceVersion : VersioningServiceVersion.getLatest();
         VersioningClientImpl client =
                 new VersioningClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 

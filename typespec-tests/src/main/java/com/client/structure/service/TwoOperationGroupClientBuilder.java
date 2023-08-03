@@ -31,7 +31,6 @@ import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.client.structure.service.implementation.TwoOperationGroupClientImpl;
-import com.client.structure.service.models.ClientType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -151,7 +150,7 @@ public final class TwoOperationGroupClientBuilder
     /*
      *
      */
-    @Generated private ClientType client;
+    @Generated private String client;
 
     /**
      * Sets.
@@ -160,7 +159,7 @@ public final class TwoOperationGroupClientBuilder
      * @return the TwoOperationGroupClientBuilder.
      */
     @Generated
-    public TwoOperationGroupClientBuilder client(ClientType client) {
+    public TwoOperationGroupClientBuilder client(String client) {
         this.client = client;
         return this;
     }
@@ -191,7 +190,8 @@ public final class TwoOperationGroupClientBuilder
     private TwoOperationGroupClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         TwoOperationGroupClientImpl client =
-                new TwoOperationGroupClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), client);
+                new TwoOperationGroupClientImpl(
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.client);
         return client;
     }
 

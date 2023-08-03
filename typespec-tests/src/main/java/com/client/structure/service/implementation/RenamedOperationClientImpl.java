@@ -28,7 +28,6 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.client.structure.service.models.ClientType;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the RenamedOperationClient type. */
@@ -37,14 +36,14 @@ public final class RenamedOperationClientImpl {
     private final RenamedOperationClientService service;
 
     /** */
-    private final ClientType client;
+    private final String client;
 
     /**
      * Gets.
      *
      * @return the client value.
      */
-    public ClientType getClient() {
+    public String getClient() {
         return this.client;
     }
 
@@ -89,7 +88,7 @@ public final class RenamedOperationClientImpl {
      *
      * @param client
      */
-    public RenamedOperationClientImpl(ClientType client) {
+    public RenamedOperationClientImpl(String client) {
         this(
                 new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
@@ -102,7 +101,7 @@ public final class RenamedOperationClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param client
      */
-    public RenamedOperationClientImpl(HttpPipeline httpPipeline, ClientType client) {
+    public RenamedOperationClientImpl(HttpPipeline httpPipeline, String client) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), client);
     }
 
@@ -113,8 +112,7 @@ public final class RenamedOperationClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param client
      */
-    public RenamedOperationClientImpl(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, ClientType client) {
+    public RenamedOperationClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String client) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.client = client;

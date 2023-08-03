@@ -30,17 +30,16 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.client.structure.service.implementation.ServiceClientImpl;
-import com.client.structure.service.models.ClientType;
+import com.client.structure.service.implementation.ServiceClientClientImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the ServiceClient type. */
-@ServiceClientBuilder(serviceClients = {ServiceClient.class, ServiceAsyncClient.class})
-public final class ServiceClientBuilder
-        implements HttpTrait<ServiceClientBuilder>, ConfigurationTrait<ServiceClientBuilder> {
+/** A builder for creating a new instance of the ServiceClientClient type. */
+@ServiceClientBuilder(serviceClients = {ServiceClientClient.class, ServiceClientAsyncClient.class})
+public final class ServiceClientClientBuilder
+        implements HttpTrait<ServiceClientClientBuilder>, ConfigurationTrait<ServiceClientClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -51,9 +50,9 @@ public final class ServiceClientBuilder
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the ServiceClientBuilder. */
+    /** Create an instance of the ServiceClientClientBuilder. */
     @Generated
-    public ServiceClientBuilder() {
+    public ServiceClientClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -65,7 +64,7 @@ public final class ServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServiceClientBuilder pipeline(HttpPipeline pipeline) {
+    public ServiceClientClientBuilder pipeline(HttpPipeline pipeline) {
         if (this.pipeline != null && pipeline == null) {
             LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
         }
@@ -81,7 +80,7 @@ public final class ServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServiceClientBuilder httpClient(HttpClient httpClient) {
+    public ServiceClientClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -94,7 +93,7 @@ public final class ServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServiceClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public ServiceClientClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -107,7 +106,7 @@ public final class ServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServiceClientBuilder clientOptions(ClientOptions clientOptions) {
+    public ServiceClientClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -120,7 +119,7 @@ public final class ServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServiceClientBuilder retryOptions(RetryOptions retryOptions) {
+    public ServiceClientClientBuilder retryOptions(RetryOptions retryOptions) {
         this.retryOptions = retryOptions;
         return this;
     }
@@ -128,7 +127,7 @@ public final class ServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServiceClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public ServiceClientClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
@@ -142,7 +141,7 @@ public final class ServiceClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public ServiceClientBuilder configuration(Configuration configuration) {
+    public ServiceClientClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -150,16 +149,16 @@ public final class ServiceClientBuilder
     /*
      *
      */
-    @Generated private ClientType client;
+    @Generated private String client;
 
     /**
      * Sets.
      *
      * @param client the client value.
-     * @return the ServiceClientBuilder.
+     * @return the ServiceClientClientBuilder.
      */
     @Generated
-    public ServiceClientBuilder client(ClientType client) {
+    public ServiceClientClientBuilder client(String client) {
         this.client = client;
         return this;
     }
@@ -173,24 +172,25 @@ public final class ServiceClientBuilder
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the ServiceClientBuilder.
+     * @return the ServiceClientClientBuilder.
      */
     @Generated
-    public ServiceClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public ServiceClientClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
 
     /**
-     * Builds an instance of ServiceClientImpl with the provided parameters.
+     * Builds an instance of ServiceClientClientImpl with the provided parameters.
      *
-     * @return an instance of ServiceClientImpl.
+     * @return an instance of ServiceClientClientImpl.
      */
     @Generated
-    private ServiceClientImpl buildInnerClient() {
+    private ServiceClientClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ServiceClientImpl client =
-                new ServiceClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), client);
+        ServiceClientClientImpl client =
+                new ServiceClientClientImpl(
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.client);
         return client;
     }
 
@@ -233,24 +233,24 @@ public final class ServiceClientBuilder
     }
 
     /**
-     * Builds an instance of ServiceAsyncClient class.
+     * Builds an instance of ServiceClientAsyncClient class.
      *
-     * @return an instance of ServiceAsyncClient.
+     * @return an instance of ServiceClientAsyncClient.
      */
     @Generated
-    public ServiceAsyncClient buildAsyncClient() {
-        return new ServiceAsyncClient(buildInnerClient());
+    public ServiceClientAsyncClient buildAsyncClient() {
+        return new ServiceClientAsyncClient(buildInnerClient());
     }
 
     /**
-     * Builds an instance of ServiceClient class.
+     * Builds an instance of ServiceClientClient class.
      *
-     * @return an instance of ServiceClient.
+     * @return an instance of ServiceClientClient.
      */
     @Generated
-    public ServiceClient buildClient() {
-        return new ServiceClient(buildInnerClient());
+    public ServiceClientClient buildClient() {
+        return new ServiceClientClient(buildInnerClient());
     }
 
-    private static final ClientLogger LOGGER = new ClientLogger(ServiceClientBuilder.class);
+    private static final ClientLogger LOGGER = new ClientLogger(ServiceClientClientBuilder.class);
 }

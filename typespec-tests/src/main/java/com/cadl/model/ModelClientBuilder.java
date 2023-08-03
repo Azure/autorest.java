@@ -186,7 +186,7 @@ public final class ModelClientBuilder
     private ModelClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ModelClientImpl client =
-                new ModelClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                new ModelClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

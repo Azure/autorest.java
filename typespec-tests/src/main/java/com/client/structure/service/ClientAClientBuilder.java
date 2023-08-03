@@ -31,7 +31,6 @@ import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.client.structure.service.implementation.ClientAClientImpl;
-import com.client.structure.service.models.ClientType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -150,7 +149,7 @@ public final class ClientAClientBuilder
     /*
      *
      */
-    @Generated private ClientType client;
+    @Generated private String client;
 
     /**
      * Sets.
@@ -159,7 +158,7 @@ public final class ClientAClientBuilder
      * @return the ClientAClientBuilder.
      */
     @Generated
-    public ClientAClientBuilder client(ClientType client) {
+    public ClientAClientBuilder client(String client) {
         this.client = client;
         return this;
     }
@@ -190,7 +189,7 @@ public final class ClientAClientBuilder
     private ClientAClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ClientAClientImpl client =
-                new ClientAClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), client);
+                new ClientAClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.client);
         return client;
     }
 

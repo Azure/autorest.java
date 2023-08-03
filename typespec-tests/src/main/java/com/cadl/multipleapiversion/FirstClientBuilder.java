@@ -207,7 +207,10 @@ public final class FirstClientBuilder
                 (serviceVersion != null) ? serviceVersion : FirstServiceVersion.getLatest();
         FirstClientImpl client =
                 new FirstClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 

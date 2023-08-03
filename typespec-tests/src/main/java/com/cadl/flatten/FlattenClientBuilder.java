@@ -206,7 +206,10 @@ public final class FlattenClientBuilder
                 (serviceVersion != null) ? serviceVersion : FlattenServiceVersion.getLatest();
         FlattenClientImpl client =
                 new FlattenClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 

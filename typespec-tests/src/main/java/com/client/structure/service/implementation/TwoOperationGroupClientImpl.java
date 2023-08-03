@@ -10,19 +10,18 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.client.structure.service.models.ClientType;
 
 /** Initializes a new instance of the TwoOperationGroupClient type. */
 public final class TwoOperationGroupClientImpl {
     /** */
-    private final ClientType client;
+    private final String client;
 
     /**
      * Gets.
      *
      * @return the client value.
      */
-    public ClientType getClient() {
+    public String getClient() {
         return this.client;
     }
 
@@ -79,7 +78,7 @@ public final class TwoOperationGroupClientImpl {
      *
      * @param client
      */
-    public TwoOperationGroupClientImpl(ClientType client) {
+    public TwoOperationGroupClientImpl(String client) {
         this(
                 new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
@@ -92,7 +91,7 @@ public final class TwoOperationGroupClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param client
      */
-    public TwoOperationGroupClientImpl(HttpPipeline httpPipeline, ClientType client) {
+    public TwoOperationGroupClientImpl(HttpPipeline httpPipeline, String client) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), client);
     }
 
@@ -103,8 +102,7 @@ public final class TwoOperationGroupClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param client
      */
-    public TwoOperationGroupClientImpl(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, ClientType client) {
+    public TwoOperationGroupClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String client) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.client = client;

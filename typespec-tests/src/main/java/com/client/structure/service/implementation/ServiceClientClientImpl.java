@@ -28,23 +28,22 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.client.structure.service.models.ClientType;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the ServiceClient type. */
-public final class ServiceClientImpl {
+/** Initializes a new instance of the ServiceClientClient type. */
+public final class ServiceClientClientImpl {
     /** The proxy service used to perform REST calls. */
-    private final ServiceClientService service;
+    private final ServiceClientClientService service;
 
     /** */
-    private final ClientType client;
+    private final String client;
 
     /**
      * Gets.
      *
      * @return the client value.
      */
-    public ClientType getClient() {
+    public String getClient() {
         return this.client;
     }
 
@@ -73,11 +72,11 @@ public final class ServiceClientImpl {
     }
 
     /**
-     * Initializes an instance of ServiceClient client.
+     * Initializes an instance of ServiceClientClient client.
      *
      * @param client
      */
-    public ServiceClientImpl(ClientType client) {
+    public ServiceClientClientImpl(String client) {
         this(
                 new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
@@ -85,35 +84,37 @@ public final class ServiceClientImpl {
     }
 
     /**
-     * Initializes an instance of ServiceClient client.
+     * Initializes an instance of ServiceClientClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param client
      */
-    public ServiceClientImpl(HttpPipeline httpPipeline, ClientType client) {
+    public ServiceClientClientImpl(HttpPipeline httpPipeline, String client) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), client);
     }
 
     /**
-     * Initializes an instance of ServiceClient client.
+     * Initializes an instance of ServiceClientClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param client
      */
-    public ServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, ClientType client) {
+    public ServiceClientClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String client) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.client = client;
-        this.service = RestProxy.create(ServiceClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service =
+                RestProxy.create(ServiceClientClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
-     * The interface defining all the services for ServiceClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ServiceClientClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000/client/structure/{client}")
-    @ServiceInterface(name = "ServiceClient")
-    public interface ServiceClientService {
+    @ServiceInterface(name = "ServiceClientClient")
+    public interface ServiceClientClientService {
         @Get("/one")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(

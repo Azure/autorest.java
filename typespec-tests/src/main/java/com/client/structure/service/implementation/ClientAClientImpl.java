@@ -28,7 +28,6 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.client.structure.service.models.ClientType;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the ClientAClient type. */
@@ -37,14 +36,14 @@ public final class ClientAClientImpl {
     private final ClientAClientService service;
 
     /** */
-    private final ClientType client;
+    private final String client;
 
     /**
      * Gets.
      *
      * @return the client value.
      */
-    public ClientType getClient() {
+    public String getClient() {
         return this.client;
     }
 
@@ -77,7 +76,7 @@ public final class ClientAClientImpl {
      *
      * @param client
      */
-    public ClientAClientImpl(ClientType client) {
+    public ClientAClientImpl(String client) {
         this(
                 new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
@@ -90,7 +89,7 @@ public final class ClientAClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param client
      */
-    public ClientAClientImpl(HttpPipeline httpPipeline, ClientType client) {
+    public ClientAClientImpl(HttpPipeline httpPipeline, String client) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), client);
     }
 
@@ -101,7 +100,7 @@ public final class ClientAClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param client
      */
-    public ClientAClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, ClientType client) {
+    public ClientAClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String client) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.client = client;

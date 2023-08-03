@@ -216,7 +216,7 @@ public final class ResiliencyServiceDrivenClientBuilder
                 new ResiliencyServiceDrivenClientImpl(
                         localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
-                        serviceDeploymentVersion,
+                        this.serviceDeploymentVersion,
                         localServiceVersion);
         return client;
     }

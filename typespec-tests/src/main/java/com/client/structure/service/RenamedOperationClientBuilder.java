@@ -31,7 +31,6 @@ import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.client.structure.service.implementation.RenamedOperationClientImpl;
-import com.client.structure.service.models.ClientType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -156,7 +155,7 @@ public final class RenamedOperationClientBuilder
     /*
      *
      */
-    @Generated private ClientType client;
+    @Generated private String client;
 
     /**
      * Sets.
@@ -165,7 +164,7 @@ public final class RenamedOperationClientBuilder
      * @return the RenamedOperationClientBuilder.
      */
     @Generated
-    public RenamedOperationClientBuilder client(ClientType client) {
+    public RenamedOperationClientBuilder client(String client) {
         this.client = client;
         return this;
     }
@@ -196,7 +195,8 @@ public final class RenamedOperationClientBuilder
     private RenamedOperationClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         RenamedOperationClientImpl client =
-                new RenamedOperationClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), client);
+                new RenamedOperationClientImpl(
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.client);
         return client;
     }
 

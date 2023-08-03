@@ -208,7 +208,10 @@ public final class ProtocolAndConvenientClientBuilder
                 (serviceVersion != null) ? serviceVersion : ProtocolAndConvenientServiceVersion.getLatest();
         ProtocolAndConvenientClientImpl client =
                 new ProtocolAndConvenientClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 
