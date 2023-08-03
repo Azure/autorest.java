@@ -11,7 +11,6 @@ using Azure.ClientGenerator.Core;
 namespace Cadl.Builtin;
 
 model Builtin {
-  formatString: FormatString;
   boolean: boolean;
   string: string;
   bytes: bytes;
@@ -28,30 +27,6 @@ model Builtin {
   url: url;
   nullableFloatDict: Record<float64 | null>;
   encoded: Encoded;
-}
-
-model FormatString {
-  @format("byte")
-  base64Encoded: string;
-
-  @format("binary")
-  binary: string;
-
-  @format("date-time")
-  dateTime: string;
-
-  dateTimeRfc1123: DateTimeRfc1123;
-
-  @format("password")
-  password: string;
-
-  @format("url")
-  uri: string;
-
-  @knownValues(KnownValues)
-  extensibleEnum: string;
-
-  extensibleEnumScalar: KnownValuesScalar;
 }
 
 @encode(DurationKnownEncoding.seconds, float32)
@@ -78,20 +53,6 @@ model Encoded {
   @encode(BytesKnownEncoding.base64url, string)
   base64url?: bytes;
 }
-
-@summary("summary of RFC1123 date-time")
-@doc("description of RFC1123 date-time")
-@friendlyName("DateTime")
-@format("date-time-rfc1123")
-scalar DateTimeRfc1123 extends string;
-
-enum KnownValues {
-  Value1,
-  Value2,
-}
-
-@knownValues(KnownValues)
-scalar KnownValuesScalar extends string;
 
 model Request {
   @header("x-ms-date")
