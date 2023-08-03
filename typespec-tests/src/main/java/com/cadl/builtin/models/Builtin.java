@@ -20,13 +20,6 @@ import java.util.Map;
 @Immutable
 public final class Builtin {
     /*
-     * The formatString property.
-     */
-    @Generated
-    @JsonProperty(value = "formatString")
-    private FormatString formatString;
-
-    /*
      * The boolean property.
      */
     @Generated
@@ -142,7 +135,6 @@ public final class Builtin {
     /**
      * Creates an instance of Builtin class.
      *
-     * @param formatString the formatString value to set.
      * @param booleanProperty the booleanProperty value to set.
      * @param string the string value to set.
      * @param bytes the bytes value to set.
@@ -163,7 +155,6 @@ public final class Builtin {
     @Generated
     @JsonCreator
     public Builtin(
-            @JsonProperty(value = "formatString") FormatString formatString,
             @JsonProperty(value = "boolean") boolean booleanProperty,
             @JsonProperty(value = "string") String string,
             @JsonProperty(value = "bytes") byte[] bytes,
@@ -180,7 +171,6 @@ public final class Builtin {
             @JsonProperty(value = "url") String url,
             @JsonProperty(value = "nullableFloatDict") Map<String, Double> nullableFloatDict,
             @JsonProperty(value = "encoded") Encoded encoded) {
-        this.formatString = formatString;
         this.booleanProperty = booleanProperty;
         this.string = string;
         this.bytes = bytes;
@@ -197,16 +187,6 @@ public final class Builtin {
         this.url = url;
         this.nullableFloatDict = nullableFloatDict;
         this.encoded = encoded;
-    }
-
-    /**
-     * Get the formatString property: The formatString property.
-     *
-     * @return the formatString value.
-     */
-    @Generated
-    public FormatString getFormatString() {
-        return this.formatString;
     }
 
     /**
