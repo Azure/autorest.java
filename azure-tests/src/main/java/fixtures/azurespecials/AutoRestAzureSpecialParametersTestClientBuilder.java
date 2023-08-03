@@ -243,7 +243,7 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestAzureSpecialParametersTestClient client =
                 new AutoRestAzureSpecialParametersTestClient(
-                        localPipeline, localSerializerAdapter, subscriptionId, localHost, localApiVersion);
+                        localPipeline, localSerializerAdapter, this.subscriptionId, localHost, localApiVersion);
         return client;
     }
 

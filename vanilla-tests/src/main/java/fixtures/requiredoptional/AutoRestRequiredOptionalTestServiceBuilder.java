@@ -259,9 +259,9 @@ public final class AutoRestRequiredOptionalTestServiceBuilder
                 new AutoRestRequiredOptionalTestService(
                         localPipeline,
                         localSerializerAdapter,
-                        requiredGlobalPath,
-                        requiredGlobalQuery,
-                        optionalGlobalQuery,
+                        this.requiredGlobalPath,
+                        this.requiredGlobalQuery,
+                        this.optionalGlobalQuery,
                         localHost);
         return client;
     }

@@ -224,8 +224,8 @@ public final class PathsClientBuilder implements HttpTrait<PathsClientBuilder>, 
                 new AutoRestUrlTestServiceClientImpl(
                         localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
-                        globalStringPath,
-                        globalStringQuery,
+                        this.globalStringPath,
+                        this.globalStringQuery,
                         localHost);
         return client;
     }

@@ -263,8 +263,8 @@ public final class AutoRestSwaggerConstantServiceBuilder
                 new AutoRestSwaggerConstantService(
                         localPipeline,
                         localSerializerAdapter,
-                        headerConstant,
-                        queryConstant,
+                        this.headerConstant,
+                        this.queryConstant,
                         localPathConstant,
                         localHost);
         return client;

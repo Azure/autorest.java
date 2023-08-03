@@ -220,7 +220,7 @@ public final class AzureSchemaRegistryImplBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AzureSchemaRegistryImpl client =
-                new AzureSchemaRegistryImpl(localPipeline, localSerializerAdapter, endpoint, localApiVersion);
+                new AzureSchemaRegistryImpl(localPipeline, localSerializerAdapter, this.endpoint, localApiVersion);
         return client;
     }
 
