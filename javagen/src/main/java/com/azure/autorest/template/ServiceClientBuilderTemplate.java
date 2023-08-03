@@ -373,7 +373,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 && !(property.getType() instanceof PrimitiveType)) {
             return getLocalBuildVariableName((property.getName()));
         }
-        return property.getName();
+        return "this." + property.getName();
     }
 
     private void addTraitMethods(ClientBuilder clientBuilder, JavaSettings settings, String serviceClientBuilderName, JavaClass classBlock) {
