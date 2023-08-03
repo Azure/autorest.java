@@ -207,7 +207,10 @@ public final class ApiVersionClientBuilder
                 (serviceVersion != null) ? serviceVersion : ApiVersionServiceVersion.getLatest();
         ApiVersionClientImpl client =
                 new ApiVersionClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 

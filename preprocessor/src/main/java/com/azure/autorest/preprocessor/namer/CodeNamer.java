@@ -82,7 +82,7 @@ public class CodeNamer {
     static {
         RESERVED_WORDS_CLASSES.addAll(Arrays.asList(
                 // following are commonly used classes/annotations in service client, from azure-core
-                "Host", "ServiceInterface", "ServiceMethod", "ReturnType",
+                "Host", "ServiceInterface", "ServiceMethod", "ServiceClient", "ReturnType",
                 "Get", "Put", "Post", "Patch", "Delete", "Headers",
                 "ExpectedResponses", "UnexpectedResponseExceptionType", "UnexpectedResponseExceptionTypes",
                 "HostParam", "PathParam", "QueryParam", "HeaderParam", "FormParam", "BodyParam",
@@ -189,6 +189,13 @@ public class CodeNamer {
         }
 
         return correctName;
+    }
+
+    public static String getClientName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return name;
+        }
+        return getEscapedReservedNameAndClasses(toPascalCase(removeInvalidCharacters(name)), "Client");
     }
 
     public static String getTypeName(String name) {

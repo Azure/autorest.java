@@ -225,8 +225,8 @@ public final class PathItemsClientBuilder
                 new AutoRestUrlTestServiceClientImpl(
                         localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
-                        globalStringPath,
-                        globalStringQuery,
+                        this.globalStringPath,
+                        this.globalStringQuery,
                         localHost);
         return client;
     }

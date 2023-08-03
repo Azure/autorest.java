@@ -225,7 +225,10 @@ public final class FormRecognizerClientBuilder
                 (serviceVersion != null) ? serviceVersion : FormRecognizerServiceVersion.getLatest();
         FormRecognizerClientImpl client =
                 new FormRecognizerClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 

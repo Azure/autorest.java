@@ -249,8 +249,8 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
                 new AutoRestSwaggerConstantServiceClientImpl(
                         localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
-                        headerConstant,
-                        queryConstant,
+                        this.headerConstant,
+                        this.queryConstant,
                         localPathConstant,
                         localHost);
         return client;

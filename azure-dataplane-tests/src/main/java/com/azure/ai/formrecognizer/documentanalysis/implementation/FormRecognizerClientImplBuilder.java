@@ -237,7 +237,7 @@ public final class FormRecognizerClientImplBuilder
         SerializerAdapter localSerializerAdapter =
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         FormRecognizerClientImpl client =
-                new FormRecognizerClientImpl(localPipeline, localSerializerAdapter, endpoint, localApiVersion);
+                new FormRecognizerClientImpl(localPipeline, localSerializerAdapter, this.endpoint, localApiVersion);
         return client;
     }
 

@@ -206,7 +206,10 @@ public final class ContosoClientBuilder
                 (serviceVersion != null) ? serviceVersion : ContosoServiceVersion.getLatest();
         ContosoClientImpl client =
                 new ContosoClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 

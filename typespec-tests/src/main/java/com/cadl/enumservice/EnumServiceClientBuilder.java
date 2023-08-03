@@ -187,7 +187,8 @@ public final class EnumServiceClientBuilder
     private EnumServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         EnumServiceClientImpl client =
-                new EnumServiceClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                new EnumServiceClientImpl(
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

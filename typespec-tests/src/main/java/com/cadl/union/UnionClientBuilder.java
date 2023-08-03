@@ -206,7 +206,10 @@ public final class UnionClientBuilder
                 (serviceVersion != null) ? serviceVersion : UnionServiceVersion.getLatest();
         UnionClientImpl client =
                 new UnionClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 

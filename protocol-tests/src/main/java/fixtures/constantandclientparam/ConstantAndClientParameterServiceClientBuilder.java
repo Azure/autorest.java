@@ -250,9 +250,9 @@ public final class ConstantAndClientParameterServiceClientBuilder
                 new ConstantAndClientParameterServiceClientImpl(
                         localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
-                        queryRequiredClientParam,
-                        queryRequiredDefaultValueClientParam,
-                        queryNonRequiredClientParam,
+                        this.queryRequiredClientParam,
+                        this.queryRequiredDefaultValueClientParam,
+                        this.queryNonRequiredClientParam,
                         localHost);
         return client;
     }

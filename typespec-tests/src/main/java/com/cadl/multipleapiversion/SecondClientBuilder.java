@@ -207,7 +207,10 @@ public final class SecondClientBuilder
                 (serviceVersion != null) ? serviceVersion : SecondServiceVersion.getLatest();
         SecondClientImpl client =
                 new SecondClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 

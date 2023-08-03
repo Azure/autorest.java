@@ -258,6 +258,9 @@ export class CodeModelBuilder {
           parameter = this.createApiVersionParameter(it.name, ParameterLocation.Uri);
         } else {
           const schema = this.processSchema(it.type, it.name);
+          this.trackSchemaUsage(schema, {
+            usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.ConvenienceApi*/],
+          });
           parameter = new Parameter(it.name, this.getDoc(it), schema, {
             implementation: ImplementationLocation.Client,
             origin: "modelerfour:synthesized/host",

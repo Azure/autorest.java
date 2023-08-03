@@ -207,7 +207,10 @@ public final class MultipleClientBuilder
                 (serviceVersion != null) ? serviceVersion : MultipleServiceVersion.getLatest();
         MultipleClientImpl client =
                 new MultipleClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 

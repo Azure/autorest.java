@@ -187,7 +187,8 @@ public final class SpecialCharsClientBuilder
     private SpecialCharsClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SpecialCharsClientImpl client =
-                new SpecialCharsClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                new SpecialCharsClientImpl(
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

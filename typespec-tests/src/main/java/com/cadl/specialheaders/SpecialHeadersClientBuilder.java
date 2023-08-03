@@ -207,7 +207,10 @@ public final class SpecialHeadersClientBuilder
                 (serviceVersion != null) ? serviceVersion : SpecialHeadersServiceVersion.getLatest();
         SpecialHeadersClientImpl client =
                 new SpecialHeadersClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 

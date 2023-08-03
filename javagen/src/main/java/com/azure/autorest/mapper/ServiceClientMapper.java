@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -27,6 +28,7 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
+import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -202,6 +204,10 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             String serviceClientPropertyName = CodeNamer.getPropertyName(p.getLanguage().getJava().getName());
 
             IType serviceClientPropertyClientType = Mappers.getSchemaMapper().map(p.getSchema());
+            if (settings.isDataPlaneClient()) {
+                // mostly for Enum to String
+                serviceClientPropertyClientType = SchemaUtil.removeModelFromParameter(RequestParameterLocation.URI, serviceClientPropertyClientType);
+            }
             if (p.isNullable() && serviceClientPropertyClientType != null) {
                 serviceClientPropertyClientType = serviceClientPropertyClientType.asNullable();
             }

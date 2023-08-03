@@ -240,7 +240,7 @@ public final class MicrosoftAzureTestUrlBuilder
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         MicrosoftAzureTestUrl client =
                 new MicrosoftAzureTestUrl(
-                        localPipeline, localSerializerAdapter, subscriptionId, localHost, localApiVersion);
+                        localPipeline, localSerializerAdapter, this.subscriptionId, localHost, localApiVersion);
         return client;
     }
 

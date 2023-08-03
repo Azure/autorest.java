@@ -188,7 +188,7 @@ public final class MultiContentTypesClientBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         MultiContentTypesClientImpl client =
                 new MultiContentTypesClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

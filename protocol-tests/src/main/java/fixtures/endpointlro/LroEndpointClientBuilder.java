@@ -205,7 +205,10 @@ public final class LroEndpointClientBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         LroEndpointClientImpl client =
                 new LroEndpointClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, projectName);
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        this.projectName);
         return client;
     }
 

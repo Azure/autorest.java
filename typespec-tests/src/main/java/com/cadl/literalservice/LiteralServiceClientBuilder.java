@@ -187,7 +187,8 @@ public final class LiteralServiceClientBuilder
     private LiteralServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         LiteralServiceClientImpl client =
-                new LiteralServiceClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                new LiteralServiceClientImpl(
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

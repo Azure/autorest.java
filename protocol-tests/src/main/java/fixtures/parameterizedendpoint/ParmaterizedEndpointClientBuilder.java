@@ -189,7 +189,7 @@ public final class ParmaterizedEndpointClientBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ParmaterizedEndpointClientImpl client =
                 new ParmaterizedEndpointClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

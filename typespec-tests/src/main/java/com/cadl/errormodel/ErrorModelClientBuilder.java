@@ -187,7 +187,7 @@ public final class ErrorModelClientBuilder
     private ErrorModelClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ErrorModelClientImpl client =
-                new ErrorModelClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                new ErrorModelClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

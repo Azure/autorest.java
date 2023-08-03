@@ -187,7 +187,8 @@ public final class PartialUpdateClientBuilder
     private PartialUpdateClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         PartialUpdateClientImpl client =
-                new PartialUpdateClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                new PartialUpdateClientImpl(
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

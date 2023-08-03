@@ -223,7 +223,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         AutoRestParameterizedCustomHostTestClient client =
                 new AutoRestParameterizedCustomHostTestClient(
-                        localPipeline, localSerializerAdapter, subscriptionId, localDnsSuffix);
+                        localPipeline, localSerializerAdapter, this.subscriptionId, localDnsSuffix);
         return client;
     }
 
