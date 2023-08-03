@@ -67,16 +67,6 @@ public final class BuiltinAsyncClient {
      *
      * <pre>{@code
      * {
-     *     formatString (Required): {
-     *         base64Encoded: Base64Url (Required)
-     *         binary: byte[] (Required)
-     *         dateTime: OffsetDateTime (Required)
-     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
-     *         password: String (Required)
-     *         uri: String (Required)
-     *         extensibleEnum: String(Value1/Value2) (Required)
-     *         extensibleEnumScalar: String(Value1/Value2) (Required)
-     *     }
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
@@ -133,16 +123,6 @@ public final class BuiltinAsyncClient {
      *
      * <pre>{@code
      * {
-     *     formatString (Required): {
-     *         base64Encoded: Base64Url (Required)
-     *         binary: byte[] (Required)
-     *         dateTime: OffsetDateTime (Required)
-     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
-     *         password: String (Required)
-     *         uri: String (Required)
-     *         extensibleEnum: String(Value1/Value2) (Required)
-     *         extensibleEnumScalar: String(Value1/Value2) (Required)
-     *     }
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
