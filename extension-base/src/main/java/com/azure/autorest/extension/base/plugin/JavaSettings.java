@@ -106,7 +106,7 @@ public class JavaSettings {
                 header,
                 120,
                 getStringValue(host, "service-name"),
-                getStringValue(host, "namespace", "").toLowerCase(),
+                getStringValue(host, "namespace", "com.mycompany.app").toLowerCase(),
                 getBooleanValue(host, "enable-xml", false),
                 getBooleanValue(host, "non-null-annotations", false),
                 getBooleanValue(host, "client-side-validations", false),

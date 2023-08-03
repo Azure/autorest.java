@@ -1,4 +1,6 @@
-# Before running this script the 'local' profile must be built, 'mvn install -P local'. And 'autorest' must be installed, 'npm install -g autorest'.
+# Use case:
+#
+# The purpose of this script is to compact the steps required # Before running this script the 'local' profile must be built, 'mvn install -P local'. And 'autorest' must be installed, 'npm install -g autorest'.
 #
 # If 'com.azure.autorest.customization' tests fails, re-install 'customization-base'.
 
@@ -6,7 +8,7 @@ param (
     [switch]$notimeout = $false
 )
 
-$AUTOREST_CORE_VERSION = "3.9.3"
+$AUTOREST_CORE_VERSION = "3.9.7"
 $VANILLA_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=vanilla-tests --sync-methods=all --client-side-validations --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL"
 $AZURE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=azure-tests --sync-methods=all --client-side-validations --required-parameter-client-methods --license-header=MICROSOFT_MIT_SMALL"
 $PROTOCOL_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=protocol-tests --data-plane --generate-samples"

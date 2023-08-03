@@ -55,7 +55,7 @@ interface OptionalOp {
     @query stringNullable?: string | null,
     @query stringRequired: string,
     @query stringRequiredNullable: string | null,
-    @body Optional?: Optional
+    @body Optional?: Optional,
   ): {
     @header headerRequired: string;
     @header headerOptional?: string;

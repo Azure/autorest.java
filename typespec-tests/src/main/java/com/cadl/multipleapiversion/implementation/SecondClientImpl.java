@@ -180,7 +180,7 @@ public final class SecondClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Resource read operation template.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -215,7 +215,7 @@ public final class SecondClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Resource read operation template.
      *
      * <p><strong>Response Body Schema</strong>
      *

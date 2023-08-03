@@ -17,40 +17,68 @@ public final class SmartSalmonTests {
     public void testDeserialize() throws Exception {
         SmartSalmon model =
                 BinaryData.fromString(
-                                "{\"fishtype\":\"smart_salmon\",\"college_degree\":\"ayhuy\",\"\":{\"inuvamiheogn\":\"datapodepoo\",\"usivye\":\"datarxzxtheo\"},\"location\":\"ciqihnhung\",\"iswild\":false,\"species\":\"rnfygxgispem\",\"length\":55.453957,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"ufubl\",\"length\":16.258835,\"siblings\":[]},{\"fishtype\":\"Fish\",\"species\":\"eofjaeqjh\",\"length\":91.61654,\"siblings\":[]}]}")
+                                "{\"fishtype\":\"smart_salmon\",\"college_degree\":\"lssai\",\"\":{\"eebvmgxsab\":\"datajwnzlljfmp\"},\"location\":\"qduujitcjczdz\",\"iswild\":false,\"species\":\"hkr\",\"length\":38.019188,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"p\",\"length\":43.59222,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vwrwj\",\"length\":48.286907,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":93.839714}]},{\"fishtype\":\"Fish\",\"species\":\"utjeltmrldhugj\",\"length\":66.317825,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":68.56524},{\"fishtype\":\"Fish\",\"length\":94.724525}]},{\"fishtype\":\"Fish\",\"species\":\"hocdgeab\",\"length\":70.60696,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":91.44667},{\"fishtype\":\"Fish\",\"length\":9.046102},{\"fishtype\":\"Fish\",\"length\":89.55463}]}]}]}")
                         .toObject(SmartSalmon.class);
-        Assertions.assertEquals("rnfygxgispem", model.getSpecies());
-        Assertions.assertEquals(55.453957f, model.getLength());
-        Assertions.assertEquals("ufubl", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(16.258835f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("ciqihnhung", model.getLocation());
+        Assertions.assertEquals("hkr", model.getSpecies());
+        Assertions.assertEquals(38.019188f, model.getLength());
+        Assertions.assertEquals("p", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(43.59222f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("vwrwj", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(48.286907f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(
+                93.839714f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals("qduujitcjczdz", model.getLocation());
         Assertions.assertEquals(false, model.iswild());
-        Assertions.assertEquals("ayhuy", model.getCollegeDegree());
+        Assertions.assertEquals("lssai", model.getCollegeDegree());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         SmartSalmon model =
-                new SmartSalmon(55.453957f)
-                        .setSpecies("rnfygxgispem")
+                new SmartSalmon(38.019188f)
+                        .setSpecies("hkr")
                         .setSiblings(
                                 Arrays.asList(
-                                        new Fish(16.258835f).setSpecies("ufubl").setSiblings(Arrays.asList()),
-                                        new Fish(91.61654f).setSpecies("eofjaeqjh").setSiblings(Arrays.asList())))
-                        .setLocation("ciqihnhung")
+                                        new Fish(43.59222f)
+                                                .setSpecies("p")
+                                                .setSiblings(
+                                                        Arrays.asList(
+                                                                new Fish(48.286907f)
+                                                                        .setSpecies("vwrwj")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(new Fish(93.839714f))),
+                                                                new Fish(66.317825f)
+                                                                        .setSpecies("utjeltmrldhugj")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(68.56524f),
+                                                                                        new Fish(94.724525f))),
+                                                                new Fish(70.60696f)
+                                                                        .setSpecies("hocdgeab")
+                                                                        .setSiblings(
+                                                                                Arrays.asList(
+                                                                                        new Fish(91.44667f),
+                                                                                        new Fish(9.046102f),
+                                                                                        new Fish(89.55463f)))))))
+                        .setLocation("qduujitcjczdz")
                         .setIswild(false)
-                        .setCollegeDegree("ayhuy")
+                        .setCollegeDegree("lssai")
                         .setAdditionalProperties(mapOf("fishtype", "smart_salmon"));
         model = BinaryData.fromObject(model).toObject(SmartSalmon.class);
-        Assertions.assertEquals("rnfygxgispem", model.getSpecies());
-        Assertions.assertEquals(55.453957f, model.getLength());
-        Assertions.assertEquals("ufubl", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(16.258835f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("ciqihnhung", model.getLocation());
+        Assertions.assertEquals("hkr", model.getSpecies());
+        Assertions.assertEquals(38.019188f, model.getLength());
+        Assertions.assertEquals("p", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(43.59222f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("vwrwj", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(48.286907f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(
+                93.839714f, model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals("qduujitcjczdz", model.getLocation());
         Assertions.assertEquals(false, model.iswild());
-        Assertions.assertEquals("ayhuy", model.getCollegeDegree());
+        Assertions.assertEquals("lssai", model.getCollegeDegree());
     }
 
+    // Use "Map.of" if available
     @SuppressWarnings("unchecked")
     private static <T> Map<String, T> mapOf(Object... inputs) {
         Map<String, T> map = new HashMap<>();

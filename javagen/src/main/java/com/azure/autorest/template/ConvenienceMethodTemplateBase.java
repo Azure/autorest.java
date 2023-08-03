@@ -99,7 +99,7 @@ abstract class ConvenienceMethodTemplateBase {
         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 
         // parameter transformation
-        if (convenienceMethod.getMethodTransformationDetails() != null) {
+        if (!CoreUtils.isNullOrEmpty(convenienceMethod.getMethodTransformationDetails())) {
             convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, protocolMethod, methodBlock, parametersMap));
         }
 

@@ -146,7 +146,7 @@ import {
 import {
   getClientApiVersions,
   getServiceVersion,
-  operationContainsJsonMergePatch,
+  operationIsJsonMergePatch,
   isPayloadProperty,
   originApiVersion,
   specialHeaderNames,
@@ -154,6 +154,7 @@ import {
   isLroNewPollingStrategy,
   operationIsMultipleContentTypes,
   cloneOperationParameter,
+  operationRefersUnion,
 } from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -169,7 +170,7 @@ export class CodeModelBuilder {
   private codeModel: CodeModel;
 
   readonly schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
-  readonly operationCache = new Map<Operation, CodeModelOperation>();
+  readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, nndefined means type visited but not completed
 
   private operationExamples: Map<Operation, any> = new Map<Operation, any>();
 
@@ -235,7 +236,8 @@ export class CodeModelBuilder {
 
     this.processClients();
 
-    this.processModels();
+    // TODO (weidxu): temporarily disabled support for `@include`
+    // this.processModels();
 
     this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
 
@@ -514,13 +516,19 @@ export class CodeModelBuilder {
       },
     });
 
-    if (operationContainsJsonMergePatch(op)) {
+    if (operationIsJsonMergePatch(op)) {
       // do not generate convenience method for JSON Merge Patch
-      this.trace(`Operation '${op.operation.name}' contains 'application/merge-patch+json'`);
+      this.trace(`Operation '${op.operation.name}' is 'application/merge-patch+json'`);
     } else if (operationIsMultipleContentTypes(op)) {
       // and multiple content types
       // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
       this.trace(`Operation '${op.operation.name}' is multiple content-type`);
+    } else if (
+      operationRefersUnion(this.program, op, this.typeUnionRefCache, (it: Type) => {
+        return getTypeName(it, this.typeNameOptions);
+      })
+    ) {
+      // and Union
     } else {
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName && !isInternal(this.sdkContext, operation)) {
@@ -1048,6 +1056,9 @@ export class CodeModelBuilder {
 
     if (!schema.language.default.name && schema instanceof ObjectSchema) {
       // anonymous model
+
+      // name the schema for documentation
+      schema.language.default.name = op.language.default.name + "Request";
 
       if (!parameter.language.default.name) {
         // name the parameter for documentation
@@ -1601,17 +1612,9 @@ export class CodeModelBuilder {
         value: new ConstantValue(type.value),
       }),
     );
-
-    // return this.codeModel.schemas.add(
-    //   new ChoiceSchema(name, this.getDoc(type), {
-    //     summary: this.getSummary(type),
-    //     choiceType: valueType as any,
-    //     choices: [new ChoiceValue(type.value.toString(), this.getDoc(type), type.value)]
-    //   })
-    // );
   }
 
-  private processChoiceSchemaForUnion(type: Union, variants: UnionVariant[], name: string): SealedChoiceSchema {
+  private processChoiceSchemaForUnion(type: Union, variants: UnionVariant[], name: string): ChoiceSchema {
     const kind = variants[0].type.kind;
     const valueType =
       kind === "String" ? this.stringSchema : kind === "Boolean" ? this.booleanSchema : this.integerSchema;
@@ -1623,7 +1626,7 @@ export class CodeModelBuilder {
 
     const namespace = getNamespace(type);
     return this.codeModel.schemas.add(
-      new SealedChoiceSchema(name, this.getDoc(type), {
+      new ChoiceSchema(name, this.getDoc(type), {
         summary: this.getSummary(type),
         choiceType: valueType as any,
         choices: choices,
@@ -1769,11 +1772,18 @@ export class CodeModelBuilder {
         discriminatorPropertyName = (parentWithDiscriminator as ObjectSchema).discriminator!.property.serializedName;
 
         const discriminatorProperty = Array.from(type.properties.values()).find(
-          (it) => it.name === discriminatorPropertyName && it.type.kind === "String",
+          (it) => it.name === discriminatorPropertyName && (it.type.kind === "String" || it.type.kind === "EnumMember"),
         );
         if (discriminatorProperty) {
-          // value of the StringLiteral of the discriminator property
-          objectSchema.discriminatorValue = (discriminatorProperty.type as StringLiteral).value;
+          if (discriminatorProperty.type.kind === "String") {
+            // value of StringLiteral of the discriminator property
+            objectSchema.discriminatorValue = discriminatorProperty.type.value;
+          } else if (discriminatorProperty.type.kind === "EnumMember") {
+            // value of EnumMember of the discriminator property
+            // lint requires value be string, not number
+            objectSchema.discriminatorValue =
+              (discriminatorProperty.type.value as string) ?? discriminatorProperty.type.name;
+          }
         } else {
           // fallback to name of the Model
           objectSchema.discriminatorValue = name;

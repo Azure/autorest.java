@@ -13,8 +13,8 @@ public final class MyBaseTypeTests {
     public void testDeserialize() throws Exception {
         MyBaseType model =
                 BinaryData.fromString(
-                                "{\"kind\":\"MyBaseType\",\"propB1\":\"jlxofpdvhpfxxyp\",\"helper\":{\"propBH1\":\"i\"}}")
+                                "{\"kind\":\"MyBaseType\",\"propB1\":\"kwt\",\"helper\":{\"propBH1\":\"xbnjbiksq\"}}")
                         .toObject(MyBaseType.class);
-        Assertions.assertEquals("jlxofpdvhpfxxyp", model.getPropB1());
+        Assertions.assertEquals("kwt", model.getPropB1());
     }
 }

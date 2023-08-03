@@ -1,8 +1,8 @@
-com.azure:azure-core;1.40.0;1.40.0
-com.azure:azure-core-experimental;1.0.0-beta.40;1.0.0-beta.40
-com.azure:azure-core-http-netty;1.13.4;1.13.4
-com.azure:azure-core-management;1.11.2;1.11.2
-com.azure:azure-core-test;1.18.0;1.18.0
+com.azure:azure-core;1.41.0;1.41.0
+com.azure:azure-core-experimental;1.0.0-beta.41;1.0.0-beta.41
+com.azure:azure-core-http-netty;1.13.5;1.13.5
+com.azure:azure-core-management;1.11.3;1.11.3
+com.azure:azure-core-test;1.18.1;1.18.1
 
-com.azure:azure-identity;1.9.1;1.9.1
+com.azure:azure-identity;1.9.2;1.9.2
 com.azure:azure-json;1.0.1;1.0.1

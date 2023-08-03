@@ -29,6 +29,7 @@ model Resource {
   @key
   @visibility("read")
   name: string;
+
   type: string;
 }
 

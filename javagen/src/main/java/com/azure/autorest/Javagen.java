@@ -164,8 +164,8 @@ public class Javagen extends NewPlugin {
         return newYaml.loadAs(file, CodeModel.class);
     }
 
-    JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings,
-                                 boolean generateSwaggerMarkdown) {
+    protected JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings,
+                                           boolean generateSwaggerMarkdown) {
         JavaPackage javaPackage = new JavaPackage(this);
         // Service client
         if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
@@ -315,6 +315,9 @@ public class Javagen extends NewPlugin {
                     javaPackage.addSwaggerReadmeMarkdown(project);
                 }
                 javaPackage.addChangelogMarkdown(project);
+
+                // test proxy asserts.json
+                javaPackage.addTestProxyAssetsJson(project);
 
                 // Blank readme sample
                 javaPackage.addProtocolExamplesBlank();

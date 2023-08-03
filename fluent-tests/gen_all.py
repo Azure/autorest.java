@@ -13,7 +13,7 @@ import datetime
 from typing import List
 
 
-AUTOREST_CORE_VERSION = '3.9.3'
+AUTOREST_CORE_VERSION = '3.9.7'
 OS_WINDOWS = platform.system().lower() == 'windows'
 
 

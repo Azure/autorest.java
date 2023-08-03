@@ -32,8 +32,17 @@ jobs:
     inputs:
       versionSpec: '$(NodeVersion)'
 
+  - task: PowerShell@2
+    displayName: 'Get Package Version'
+    inputs:
+      targetType: 'inline'
+      script: |
+        $PACKAGE_VERSION = node -p -e "require('./typespec-extension/package.json').version"
+        Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
+      workingDirectory: $(Build.SourcesDirectory)/autorest.java
+
   - script: |
-      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$(node -p -e "require('./typespec-extension/package.json').version")
+      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$(PackageVersion)
     displayName: 'Generate SDK'
     workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
@@ -44,7 +53,7 @@ jobs:
       RepoName: azure-sdk-for-java
       BaseBranchName: 'refs/heads/main'
       PRBranchName: typespec-java-generation-$(Build.BuildId)
-      CommitMsg: '[Automation] Generate SDK based on TypeSpec'
-      PRTitle: '[Automation] Generate SDK based on TypeSpec'
+      CommitMsg: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
+      PRTitle: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
       PRLabels: 'DPG'
       OpenAsDraft: 'true'

@@ -35,6 +35,7 @@ import com.azure.autorest.template.ReadmeTemplate;
 import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.SwaggerReadmeTemplate;
 import com.azure.autorest.template.Templates;
+import com.azure.autorest.template.TestProxyAssetsTemplate;
 import com.azure.autorest.util.PossibleCredentialException;
 import org.slf4j.Logger;
 
@@ -278,6 +279,12 @@ public class JavaPackage {
 
     public void addChangelogMarkdown(Project project) {
         TextFile textFile = new TextFile("CHANGELOG.md", new ChangelogTemplate().write(project));
+        this.checkDuplicateFile(textFile.getFilePath());
+        textFiles.add(textFile);
+    }
+
+    public void addTestProxyAssetsJson(Project project) {
+        TextFile textFile = new TextFile("assets.json", new TestProxyAssetsTemplate().write(project));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
     }

@@ -12,17 +12,20 @@ import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Relations;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.Value;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -32,6 +35,8 @@ import java.util.stream.Collectors;
 public class ErrorTypeNormalization {
 
     private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), ErrorTypeNormalization.class);
+
+    private static final String ERROR_PROPERTY_NAME = "error";
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getOperationGroups().stream()
@@ -67,7 +72,7 @@ public class ErrorTypeNormalization {
         ObjectSchema errorSchema = error;
 
         Optional<ObjectSchema> errorSchemaOpt = error.getProperties().stream()
-                .filter(p -> p.getSerializedName().equalsIgnoreCase("error"))
+                .filter(p -> ERROR_PROPERTY_NAME.equalsIgnoreCase(p.getSerializedName()))
                 .map(Value::getSchema)
                 .filter(s -> s instanceof ObjectSchema)
                 .map(s -> (ObjectSchema) s)
@@ -83,6 +88,8 @@ public class ErrorTypeNormalization {
     private void normalizeErrorType(ObjectSchema error, ObjectSchema errorSchema) {
         switch (getErrorType(errorSchema)) {
             case MANAGEMENT_ERROR:
+                final boolean updateChildrenParent = errorSchema != error && existNoneExceptionChildren(error);
+
                 LOGGER.info("Rename error from '{}' to 'ManagementError'", Utils.getJavaName(error));
 
                 error.getLanguage().getJava().setName(FluentType.ManagementError.getName());
@@ -91,7 +98,16 @@ public class ErrorTypeNormalization {
                     errorSchema.getLanguage().getJava().setName(FluentType.ManagementError.getName());
                 }
 
-                if (errorSchema != error) {
+                if (updateChildrenParent) {
+                    // update its subclass of usage=input/output, to avoid inherit from this error model "ErrorResponse"
+                    error.getChildren().getAll().stream().filter(ErrorTypeNormalization::usedMoreThanException).forEach(o -> {
+                        if (o instanceof ObjectSchema) {
+                            adaptForParentSchema((ObjectSchema) o, error);
+                        }
+                    });
+                }
+
+                if (errorSchema != error && !updateChildrenParent) {
                     error.setChildren(errorSchema.getChildren());
                 }
 
@@ -128,6 +144,44 @@ public class ErrorTypeNormalization {
             case GENERIC:
                 break;
         }
+    }
+
+    private void adaptForParentSchema(ObjectSchema compositeType, ObjectSchema error) {
+        // remove "ErrorResponse" from its parents
+        Iterator<Schema> itor = compositeType.getParents().getImmediate().iterator();
+        while (itor.hasNext()) {
+            Schema type = itor.next();
+            if (type == error) {
+                itor.remove();
+                break;
+            }
+        }
+        itor = compositeType.getParents().getAll().iterator();
+        while (itor.hasNext()) {
+            Schema type = itor.next();
+            if (type == error) {
+                itor.remove();
+                break;
+            }
+        }
+
+        // move "error" to subclass, make it composite with "error", instead of inherit from "ErrorResponse"
+        if (compositeType.getProperties() == null || compositeType.getProperties().stream().noneMatch(p -> ERROR_PROPERTY_NAME.equalsIgnoreCase(p.getSerializedName()))) {
+            if (compositeType.getProperties() == null) {
+                compositeType.setProperties(new ArrayList<>());
+            }
+            compositeType.getProperties().add(error.getProperties().stream().filter(p -> ERROR_PROPERTY_NAME.equalsIgnoreCase(p.getSerializedName())).findFirst().get());
+        }
+    }
+
+    private static boolean existNoneExceptionChildren(ObjectSchema error) {
+        return error.getChildren() != null && error.getChildren().getAll().stream()
+                .anyMatch(ErrorTypeNormalization::usedMoreThanException);
+    }
+
+    private static boolean usedMoreThanException(Schema schema) {
+        return !CoreUtils.isNullOrEmpty(schema.getUsage())
+                && (schema.getUsage().contains(SchemaContext.INPUT) || schema.getUsage().contains(SchemaContext.OUTPUT));
     }
 
     private void normalizeSubclass(ObjectSchema errorSchema) {

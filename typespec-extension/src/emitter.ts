@@ -1,14 +1,13 @@
 import {
-  resolvePath,
-  getNormalizedAbsolutePath,
-  EmitContext,
-  NoTarget,
-  JSONSchemaType,
   createTypeSpecLibrary,
+  EmitContext,
+  getNormalizedAbsolutePath,
+  JSONSchemaType,
+  NoTarget,
+  resolvePath,
 } from "@typespec/compiler";
 import { dump } from "js-yaml";
-import { promisify } from "util";
-import { execFile } from "child_process";
+import { spawn } from "child_process";
 import { promises } from "fs";
 import { CodeModelBuilder } from "./code-model-builder.js";
 import { dirname } from "path";
@@ -28,6 +27,10 @@ export interface EmitterOptions {
   "generate-tests"?: boolean;
   "enable-sync-stack"?: boolean;
 
+  "custom-types"?: string;
+  "custom-types-subpackage"?: string;
+  "customization-class"?: string;
+
   "examples-directory"?: string;
 
   "dev-options"?: DevOptions;
@@ -36,6 +39,8 @@ export interface EmitterOptions {
 export interface DevOptions {
   "generate-code-model"?: boolean;
   "support-versioning"?: boolean;
+  "debug"?: boolean;
+  "loglevel"?: "off" | "debug" | "info" | "warn" | "error";
 }
 
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
@@ -54,6 +59,10 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "generate-samples": { type: "boolean", nullable: true, default: true },
     "generate-tests": { type: "boolean", nullable: true, default: true },
     "enable-sync-stack": { type: "boolean", nullable: true, default: true },
+
+    "custom-types": { type: "string", nullable: true },
+    "custom-types-subpackage": { type: "string", nullable: true },
+    "customization-class": { type: "string", nullable: true },
 
     "examples-directory": { type: "string", nullable: true },
 
@@ -101,16 +110,74 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     const jarFileName = resolvePath(moduleRoot, "target", "azure-typespec-extension-jar-with-dependencies.jar");
     program.trace("typespec-java", `Exec JAR ${jarFileName}`);
 
+    const javaArgs: string[] = [];
+    javaArgs.push(`-DemitterOptions=${emitterOptions}`);
+    if (options["dev-options"]?.debug) {
+      javaArgs.push("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005");
+    }
+    if (options["dev-options"]?.loglevel) {
+      javaArgs.push("-Dloglevel=" + options["dev-options"]?.loglevel);
+    }
+    javaArgs.push("-jar");
+    javaArgs.push(jarFileName);
+    javaArgs.push(codeModelFileName);
     try {
-      const output = await promisify(execFile)("java", [
-        `-DemitterOptions=${emitterOptions}`,
-        "-jar",
-        jarFileName,
-        codeModelFileName,
-      ]);
-      program.trace("typespec-java", output.stdout ? output.stdout : output.stderr);
-    } catch (err: any) {
-      if ("code" in err && err.code === "ENOENT") {
+      type SpawnReturns = {
+        stdout: string;
+        stderr: string;
+      };
+      await new Promise<SpawnReturns>((resolve, reject) => {
+        const childProcess = spawn("java", javaArgs, { stdio: "inherit" });
+
+        let error: Error | undefined = undefined;
+
+        // std
+        const stdout: string[] = [];
+        const stderr: string[] = [];
+        if (childProcess.stdout) {
+          childProcess.stdout.on("data", (data) => {
+            stdout.push(data.toString());
+          });
+        }
+        if (childProcess.stderr) {
+          childProcess.stderr.on("data", (data) => {
+            stderr.push(data.toString());
+          });
+        }
+
+        // failed to spawn the process
+        childProcess.on("error", (e) => {
+          error = e;
+        });
+
+        // process exits with error
+        childProcess.on("exit", (code, signal) => {
+          if (code !== 0) {
+            if (code) {
+              error = new Error(`JAR ended with code '${code}'.`);
+            } else {
+              error = new Error(`JAR terminated by signal '${signal}'.`);
+            }
+          }
+        });
+
+        // close and complete Promise
+        childProcess.on("close", () => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve({
+              stdout: stdout.join(""),
+              stderr: stderr.join(""),
+            });
+          }
+        });
+      });
+
+      // as stdio: "inherit", std is not captured by spawn
+      // program.trace("typespec-java", output.stdout ? output.stdout : output.stderr);
+    } catch (error: any) {
+      if (error && "code" in error && error["code"] === "ENOENT") {
         const msg = "'java' is not on PATH. Please install JDK 11 or above.";
         program.trace("typespec-java", msg);
         program.reportDiagnostic({
@@ -119,8 +186,9 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
           message: msg,
           target: NoTarget,
         });
+        throw new Error(msg);
       } else {
-        throw err;
+        throw error;
       }
     }
 

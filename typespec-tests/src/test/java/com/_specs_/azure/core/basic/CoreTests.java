@@ -11,7 +11,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.test.http.AssertingHttpClientBuilder;
 import com.azure.core.util.BinaryData;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -134,8 +133,6 @@ public class CoreTests {
     }
 
     @Test
-    @Disabled
-    // TODO(xiaofei) enable when PagedIterable::mapPage is fixed in azure-core
     public void testListSync() {
         PagedIterable<User> response = syncClient.list(5, 10, 100,
                 Collections.singletonList("id"),

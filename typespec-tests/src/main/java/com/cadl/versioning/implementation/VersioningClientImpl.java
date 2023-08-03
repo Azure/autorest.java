@@ -272,7 +272,7 @@ public final class VersioningClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Long-running resource action operation template.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -326,7 +326,7 @@ public final class VersioningClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Long-running resource action operation template.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -372,7 +372,7 @@ public final class VersioningClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Long-running resource action operation template.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -427,7 +427,7 @@ public final class VersioningClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Long-running resource action operation template.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -482,7 +482,7 @@ public final class VersioningClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Long-running resource action operation template.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -538,7 +538,7 @@ public final class VersioningClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Long-running resource action operation template.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -593,7 +593,7 @@ public final class VersioningClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Resource list operation template.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -647,7 +647,7 @@ public final class VersioningClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Resource list operation template.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -690,7 +690,7 @@ public final class VersioningClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Resource list operation template.
      *
      * <p><strong>Query Parameters</strong>
      *
@@ -740,7 +740,7 @@ public final class VersioningClientImpl {
     }
 
     /**
-     * The most basic operation.
+     * Resource list operation template.
      *
      * <p><strong>Query Parameters</strong>
      *

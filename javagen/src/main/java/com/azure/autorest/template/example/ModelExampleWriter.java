@@ -83,6 +83,7 @@ public class ModelExampleWriter {
     }
 
     public static void writeMapOfMethod(JavaClass classBlock) {
+        classBlock.lineComment("Use \"Map.of\" if available");
         classBlock.annotation("SuppressWarnings(\"unchecked\")");
         classBlock.method(JavaVisibility.Private, Collections.singletonList(JavaModifier.Static), "<T> Map<String, T> mapOf(Object... inputs)", methodBlock -> {
             methodBlock.line("Map<String, T> map = new HashMap<>();");
@@ -269,7 +270,7 @@ public class ModelExampleWriter {
                     List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredWritableParentProperties(model);
                     List<ClientModelProperty> requiredProperties = model.getProperties().stream()
                             .filter(ClientModelProperty::isRequired)
-                            .filter(property -> !property.isConstant())
+                            .filter(property -> !property.isConstant() && !property.isReadOnly())
                             .collect(Collectors.toList());
 
                     List<ModelProperty> properties = Stream.concat(

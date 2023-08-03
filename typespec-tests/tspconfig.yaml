@@ -7,11 +7,8 @@ options:
     namer: true
     generate-samples: true
     generate-tests: false
-    enable-sync-stack: true
-    skip-special-headers:
-      - client-request-id
-      - return-client-request-id
     examples-directory: "{project-root}/tsp/examples"
     dev-options:
       generate-code-model: true
       support-versioning: true
+      loglevel: info

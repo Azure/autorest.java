@@ -1,5 +1,27 @@
 # Release History
 
+## 0.8.6 (2023-07-21)
+
+Compatible with compiler 0.46.
+
+- Operation which refers `Union` type is treated as protocol API, i.e. with `convenientAPI(false)`.
+
+## 0.8.6 (2023-07-18)
+
+Compatible with compiler 0.46.
+
+## 0.8.6 (2023-07-17)
+
+Compatible with compiler 0.46.
+
+## 0.8.5 (2023-07-12)
+
+Compatible with compiler 0.46.
+
+- Supported `customization-class` as emitter option. See [Customization](https://github.com/Azure/autorest.java/blob/main/typespec-extension/readme.md#customization).
+- `enable-sync-stack` emitter option default to `true`.
+- Temporarily disabled support for `@include`.
+
 ## 0.8.4 (2023-06-30)
 
 Compatible with compiler 0.45.

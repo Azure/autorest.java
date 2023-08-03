@@ -1,4 +1,4 @@
-import { ModelProperty, Operation, Program, SyntaxKind, ignoreDiagnostics, resolvePath } from "@typespec/compiler";
+import { ModelProperty, Operation, Program, Type, Union, ignoreDiagnostics, resolvePath } from "@typespec/compiler";
 import {
   HttpOperation,
   getHeaderFieldName,
@@ -14,12 +14,15 @@ import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
 import { getVersion } from "@typespec/versioning";
-import { getNamespace, logWarning, pascalCase } from "./utils.js";
+import { getNamespace, logWarning, pascalCase, trace } from "./utils.js";
+import { unionReferedByType } from "./type-utils.js";
 
 export const specialHeaderNames = new Set([
   "repeatability-request-id",
   "repeatability-first-sent",
   "x-ms-client-request-id",
+  "client-request-id",
+  "return-client-request-id",
 ]);
 
 export const originApiVersion = "modelerfour:synthesized/api-version";
@@ -84,7 +87,7 @@ function pascalCaseForOperationId(name: string) {
     .join("_");
 }
 
-export function operationContainsJsonMergePatch(op: HttpOperation): boolean {
+export function operationIsJsonMergePatch(op: HttpOperation): boolean {
   for (const param of op.parameters.parameters) {
     if (param.type === "header" && param.name.toLowerCase() === "content-type") {
       if (param.param.type.kind === "String" && param.param.type.value === "application/merge-patch+json") {
@@ -95,10 +98,10 @@ export function operationContainsJsonMergePatch(op: HttpOperation): boolean {
   return false;
 }
 
-export function operationIsMultipleContentTypes(httpOperation: HttpOperation): boolean {
+export function operationIsMultipleContentTypes(op: HttpOperation): boolean {
   if (
-    httpOperation.parameters.parameters &&
-    httpOperation.parameters.parameters.some(
+    op.parameters.parameters &&
+    op.parameters.parameters.some(
       (parameter) =>
         parameter?.type === "header" &&
         parameter?.name?.toLowerCase() === "content-type" &&
@@ -108,6 +111,60 @@ export function operationIsMultipleContentTypes(httpOperation: HttpOperation): b
     return true;
   }
   return false;
+}
+
+export function operationRefersUnion(
+  program: Program,
+  op: HttpOperation,
+  cache: Map<Type, Union | null | undefined>,
+  getTypeName: (type: Type) => string,
+): boolean {
+  // request parameters
+  for (const parameter of op.parameters.parameters) {
+    const ret = unionReferedByType(program, parameter.param.type, cache);
+    if (ret) {
+      trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
+      return true;
+    }
+  }
+  // request body
+  if (op.parameters.body) {
+    if (op.parameters.body.parameter) {
+      const ret = unionReferedByType(program, op.parameters.body.parameter.type, cache);
+      if (ret) {
+        trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
+        return true;
+      }
+    } else if (op.parameters.body.type) {
+      const ret = unionReferedByType(program, op.parameters.body.type, cache);
+      if (ret) {
+        trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
+        return true;
+      }
+    }
+  }
+  // response body
+  if (op.responses && op.responses.length > 0 && op.responses[0].type) {
+    const ret = unionReferedByType(program, op.responses[0].type, cache);
+    if (ret) {
+      trace(program, `Operation '${op.operation.name}' refers Union '${getUnionName(ret, getTypeName)}'`);
+      return true;
+    }
+  }
+  // TODO (weidxu): LRO response
+  return false;
+}
+
+function getUnionName(union: Union, getTypeName: (type: Type) => string) {
+  let name = union.name;
+  if (!name) {
+    const names: string[] = [];
+    union.variants.forEach((it) => {
+      names.push(getTypeName(it.type));
+    });
+    name = names.join(" | ");
+  }
+  return name;
 }
 
 export function isPayloadProperty(program: Program, property: ModelProperty) {
@@ -143,15 +200,6 @@ export function getServiceVersion(client: CodeModelClient | CodeModel): ServiceV
 }
 
 export function isLroNewPollingStrategy(httpOperation: HttpOperation, lroMetadata: LroMetadata): boolean {
-  // at present, checks if operation uses template from Azure.Core
-  const azureCoreLroSvs = [
-    "LongRunningResourceCreateOrReplace",
-    "LongRunningResourceCreateOrUpdate",
-    "LongRunningResourceDelete",
-    "LongRunningResourceAction",
-    "LongRunningRpcOperation",
-  ];
-
   const operation = httpOperation.operation;
   let useNewStrategy = false;
   if (
@@ -160,12 +208,8 @@ export function isLroNewPollingStrategy(httpOperation: HttpOperation, lroMetadat
     lroMetadata.pollingInfo.responseModel.name === "OperationStatus" &&
     getNamespace(lroMetadata.pollingInfo.responseModel) === "Azure.Core.Foundations"
   ) {
-    if (operation.node.signature.kind === SyntaxKind.OperationSignatureReference) {
-      if (operation.node.signature.baseOperation.target.kind === SyntaxKind.MemberExpression) {
-        const sv = operation.node.signature.baseOperation.target.id.sv;
-        useNewStrategy = azureCoreLroSvs.includes(sv);
-      }
-    }
+    useNewStrategy =
+      operation.sourceOperation !== undefined && getNamespace(operation.sourceOperation) === "Azure.Core";
   }
 
   if (!useNewStrategy) {
