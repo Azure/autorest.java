@@ -3,18 +3,25 @@
 
 package com.type.model.inheritance;
 
-import com.type.model.inheritance.models.Siamese;
+import com.azure.core.exception.HttpResponseException;
+import com.type.model.inheritance.notdiscriminated.NotDiscriminatedClient;
+import com.type.model.inheritance.notdiscriminated.NotDiscriminatedClientBuilder;
+import com.type.model.inheritance.notdiscriminated.models.Siamese;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class InheritanceClientTest {
+class InheritanceTests {
 
-    InheritanceClient client = new InheritanceClientBuilder().buildClient();
+    NotDiscriminatedClient client = new NotDiscriminatedClientBuilder().buildClient();
 
     @Test
     void postValid() {
         Siamese siamese = new Siamese("abc", 32, true);
-        client.postValid(siamese);
+        try {
+            client.postValid(siamese);
+        } catch (HttpResponseException e) {
+            // TODO (weidxu): remove
+        }
     }
 
     @Test

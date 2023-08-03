@@ -3,30 +3,29 @@
 
 package com.type.model.inheritance;
 
-import com.type.model.inheritance.models.Fish;
-import com.type.model.inheritance.models.GoblinShark;
-import com.type.model.inheritance.models.Salmon;
-import com.type.model.inheritance.models.Shark;
+import com.type.model.inheritance.nesteddiscriminator.NestedDiscriminatorClient;
+import com.type.model.inheritance.nesteddiscriminator.NestedDiscriminatorClientBuilder;
+import com.type.model.inheritance.nesteddiscriminator.models.Fish;
+import com.type.model.inheritance.nesteddiscriminator.models.Salmon;
+import com.type.model.inheritance.nesteddiscriminator.models.Shark;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class DiscriminatedClientTest {
+class NestedDiscriminatorTests {
 
-    InheritanceClient client = new InheritanceClientBuilder().buildClient();
+    NestedDiscriminatorClient client = new NestedDiscriminatorClientBuilder().buildClient();
 
     @Test
     void getModel() {
         Fish fish = client.getModel();
         Assertions.assertEquals(1, fish.getAge());
-
     }
 
     @Disabled("Polymorphic deserialization doesn't support multiple levels of inheritance in Jackson, https://github.com/FasterXML/jackson-databind/issues/1188")
     @Test
     void putModel() {
-        Fish shark = new GoblinShark(1);
-        client.putModel(shark);
+
     }
 
     @Test
