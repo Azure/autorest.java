@@ -32,8 +32,8 @@ public final class Int32SecondsDurationProperty {
 
     @Generated
     @JsonCreator
-    private Int32SecondsDurationProperty(@JsonProperty(value = "value") long value) {
-        this(Duration.ofSeconds(value));
+    private static Int32SecondsDurationProperty fromJson(@JsonProperty(value = "value") long value) {
+        return new Int32SecondsDurationProperty(Duration.ofSeconds(value));
     }
 
     /**

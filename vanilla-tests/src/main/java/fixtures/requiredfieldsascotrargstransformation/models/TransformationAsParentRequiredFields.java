@@ -50,14 +50,14 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
     }
 
     @JsonCreator
-    private TransformationAsParentRequiredFields(
+    private static TransformationAsParentRequiredFields fromJson(
             @JsonProperty(value = "rfc1123Required", required = true) DateTimeRfc1123 rfc1123Required,
             @JsonProperty(value = "nameRequired", required = true) String nameRequired,
             @JsonProperty(value = "urlBase64EncodedRequired", required = true) Base64Url urlBase64EncodedRequired,
             @JsonProperty(value = "unixTimeLongRequired", required = true) long unixTimeLongRequired,
             @JsonProperty(value = "unixTimeDateTimeRequired", required = true) OffsetDateTime unixTimeDateTimeRequired,
             @JsonProperty(value = "rfc1123RequiredChild", required = true) DateTimeRfc1123 rfc1123RequiredChild) {
-        this(
+        return new TransformationAsParentRequiredFields(
                 rfc1123Required.getDateTime(),
                 nameRequired,
                 urlBase64EncodedRequired.decodedBytes(),

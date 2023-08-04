@@ -35,10 +35,10 @@ public final class SubClass extends SuperClassMismatch {
 
     @Generated
     @JsonCreator
-    private SubClass(
+    private static SubClass fromJson(
             @JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231,
             @JsonProperty(value = "dateTime") OffsetDateTime dateTime) {
-        this(dateTimeRfc7231.getDateTime(), dateTime);
+        return new SubClass(dateTimeRfc7231.getDateTime(), dateTime);
     }
 
     /**
