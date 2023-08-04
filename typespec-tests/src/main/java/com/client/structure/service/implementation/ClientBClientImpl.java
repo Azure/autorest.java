@@ -5,10 +5,10 @@
 package com.client.structure.service.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -113,7 +113,7 @@ public final class ClientBClientImpl {
     @Host("http://localhost:3000/client/structure/{client}")
     @ServiceInterface(name = "ClientBClient")
     public interface ClientBClientService {
-        @Get("/two")
+        @Patch("/two")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -131,7 +131,7 @@ public final class ClientBClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/two")
+        @Patch("/two")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -149,7 +149,7 @@ public final class ClientBClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/four")
+        @Patch("/four")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -167,7 +167,7 @@ public final class ClientBClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/four")
+        @Patch("/four")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -185,7 +185,7 @@ public final class ClientBClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/six")
+        @Patch("/six")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -203,7 +203,7 @@ public final class ClientBClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/six")
+        @Patch("/six")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,

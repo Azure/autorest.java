@@ -6,7 +6,6 @@ package com.client.structure;
 import com.client.structure.service.Group1Client;
 import com.client.structure.service.Group2Client;
 import com.client.structure.service.TwoOperationGroupClientBuilder;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class OperationGroupClientTests {
@@ -14,7 +13,6 @@ public class OperationGroupClientTests {
     private final Group1Client client1 = new TwoOperationGroupClientBuilder().client("two-operation-group").buildGroup1Client();
     private final Group2Client client2 = new TwoOperationGroupClientBuilder().client("two-operation-group").buildGroup2Client();
 
-    @Disabled("mockapi bug")
     @Test
     public void testClient() {
         client1.one();

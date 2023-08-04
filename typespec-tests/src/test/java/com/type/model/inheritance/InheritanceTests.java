@@ -3,7 +3,6 @@
 
 package com.type.model.inheritance;
 
-import com.azure.core.exception.HttpResponseException;
 import com.type.model.inheritance.notdiscriminated.NotDiscriminatedClient;
 import com.type.model.inheritance.notdiscriminated.NotDiscriminatedClientBuilder;
 import com.type.model.inheritance.notdiscriminated.models.Siamese;
@@ -17,11 +16,7 @@ class InheritanceTests {
     @Test
     void postValid() {
         Siamese siamese = new Siamese("abc", 32, true);
-        try {
-            client.postValid(siamese);
-        } catch (HttpResponseException e) {
-            // TODO (weidxu): remove
-        }
+        client.postValid(siamese);
     }
 
     @Test
