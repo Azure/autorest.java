@@ -36,6 +36,8 @@ public class Language {
 
     private String namespace;
 
+    private String comment;
+
     /**
      * name used in actual implementation
      * (Required)
@@ -94,6 +96,14 @@ public class Language {
 
     public void setNamespace(String namespace) {
         this.namespace = namespace;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     @Override

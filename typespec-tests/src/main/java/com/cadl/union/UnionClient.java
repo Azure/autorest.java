@@ -59,6 +59,8 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'send' refers Union 'string | string[] | integer[] |
+        // integer[][]'
         return this.serviceClient.sendWithResponse(id, request, requestOptions);
     }
 
@@ -102,6 +104,8 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'sendLong' refers Union 'string | ArrayData | bytes |
+        // utcDateTime'
         return this.serviceClient.sendLongWithResponse(id, request, requestOptions);
     }
 
@@ -128,6 +132,7 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'get' refers Union 'url | bytes'
         return this.serviceClient.getWithResponse(requestOptions);
     }
 
@@ -161,6 +166,7 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginGenerate(RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'generate' refers Union 'bytes | Result'
         return this.serviceClient.beginGenerate(requestOptions);
     }
 }

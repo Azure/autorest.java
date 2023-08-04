@@ -56,6 +56,7 @@ public final class MultiContentTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadWithOverloadWithResponse(
             String contentType, BinaryData data, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'uploadWithOverload' is multiple content-type
         return this.serviceClient.uploadWithOverloadWithResponse(contentType, data, requestOptions);
     }
 
@@ -127,6 +128,8 @@ public final class MultiContentTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponse(
             String contentType, BinaryData data, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'uploadBytesWithSingleBodyTypeForMultiContentTypes' is
+        // multiple content-type
         return this.serviceClient.uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponse(
                 contentType, data, requestOptions);
     }
@@ -154,6 +157,8 @@ public final class MultiContentTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponse(
             String contentType, BinaryData data, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'uploadBytesWithMultiBodyTypesForMultiContentTypes' is
+        // multiple content-type
         return this.serviceClient.uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponse(
                 contentType, data, requestOptions);
     }
@@ -208,6 +213,8 @@ public final class MultiContentTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponse(
             String contentType, BinaryData data, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes' is
+        // multiple content-type
         return this.serviceClient.uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponse(
                 contentType, data, requestOptions);
     }

@@ -111,6 +111,7 @@ public final class BytesAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patchNonNullWithResponse(BinaryData body, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'patchNonNull' is 'application/merge-patch+json'
         return this.serviceClient.patchNonNullWithResponseAsync(body, requestOptions);
     }
 
@@ -138,6 +139,7 @@ public final class BytesAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patchNullWithResponse(BinaryData body, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'patchNull' is 'application/merge-patch+json'
         return this.serviceClient.patchNullWithResponseAsync(body, requestOptions);
     }
 

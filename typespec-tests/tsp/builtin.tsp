@@ -38,19 +38,19 @@ model Encoded {
 
   timeInSecondsFraction?: myDuration;
 
-  @encode(DateTimeKnownEncoding.rfc3339, string)
+  @encode(DateTimeKnownEncoding.rfc3339)
   dateTime?: utcDateTime;
 
-  @encode(DateTimeKnownEncoding.rfc7231, string)
+  @encode(DateTimeKnownEncoding.rfc7231)
   dateTimeRfc7231?: utcDateTime;
 
   @encode(DateTimeKnownEncoding.unixTimestamp, int64)
   unixTimestamp?: utcDateTime;
 
-  @encode(BytesKnownEncoding.base64, string)
+  @encode(BytesKnownEncoding.base64)
   base64?: bytes;
 
-  @encode(BytesKnownEncoding.base64url, string)
+  @encode(BytesKnownEncoding.base64url)
   base64url?: bytes;
 }
 

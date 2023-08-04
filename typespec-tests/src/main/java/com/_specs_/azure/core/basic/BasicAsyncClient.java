@@ -93,6 +93,7 @@ public final class BasicAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrUpdateWithResponse(
             int id, BinaryData resource, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'createOrUpdate' is 'application/merge-patch+json'
         return this.serviceClient.createOrUpdateWithResponseAsync(id, resource, requestOptions);
     }
 

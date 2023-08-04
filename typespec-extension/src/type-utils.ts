@@ -133,7 +133,7 @@ export function hasScalarAsBase(type: Scalar, scalarName: IntrinsicScalarName): 
   return false;
 }
 
-export function unionReferedByType(
+export function unionReferredByType(
   program: Program,
   type: Type,
   cache: Map<Type, Union | null | undefined>,
@@ -153,7 +153,7 @@ export function unionReferedByType(
     const nonNullVariants = Array.from(type.variants.values()).filter((it) => !isNullType(it.type));
     if (nonNullVariants.length === 1) {
       // Type | null, follow that Type
-      const ret = unionReferedByType(program, nonNullVariants[0], cache);
+      const ret = unionReferredByType(program, nonNullVariants[0], cache);
       if (ret) {
         cache.set(type, ret);
         return ret;
@@ -170,7 +170,7 @@ export function unionReferedByType(
   } else if (type.kind === "Model") {
     if (type.indexer) {
       // follow indexer (for Array/Record)
-      const ret = unionReferedByType(program, type.indexer.value, cache);
+      const ret = unionReferredByType(program, type.indexer.value, cache);
       if (ret) {
         cache.set(type, ret);
         return ret;
@@ -178,7 +178,7 @@ export function unionReferedByType(
     }
     // follow properties
     for (const property of type.properties.values()) {
-      const ret = unionReferedByType(program, property.type, cache);
+      const ret = unionReferredByType(program, property.type, cache);
       if (ret) {
         cache.set(type, ret);
         return ret;

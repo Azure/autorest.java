@@ -208,6 +208,7 @@ public final class SpecialHeadersAsyncClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCreateLro(
             String name, BinaryData resource, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'createLro' is 'application/merge-patch+json'
         return this.serviceClient.beginCreateLroAsync(name, resource, requestOptions);
     }
 

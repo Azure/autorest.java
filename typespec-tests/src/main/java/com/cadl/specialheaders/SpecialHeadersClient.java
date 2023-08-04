@@ -206,6 +206,7 @@ public final class SpecialHeadersClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateLro(
             String name, BinaryData resource, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'createLro' is 'application/merge-patch+json'
         return this.serviceClient.beginCreateLro(name, resource, requestOptions);
     }
 

@@ -70,6 +70,7 @@ public final class PatchClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(
             String name, BinaryData body, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'createOrUpdate' is 'application/merge-patch+json'
         return this.serviceClient.createOrUpdateWithResponse(name, body, requestOptions);
     }
 }

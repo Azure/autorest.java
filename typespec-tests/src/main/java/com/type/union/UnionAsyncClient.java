@@ -55,6 +55,7 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendIntWithResponse(BinaryData input, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'sendInt' refers Union 'int32 | int32[]'
         return this.serviceClient.sendIntWithResponseAsync(input, requestOptions);
     }
 
@@ -80,6 +81,7 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendIntArrayWithResponse(BinaryData input, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'sendIntArray' refers Union 'int32 | int32[]'
         return this.serviceClient.sendIntArrayWithResponseAsync(input, requestOptions);
     }
 
@@ -105,6 +107,7 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendFirstNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'sendFirstNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.sendFirstNamedUnionValueWithResponseAsync(input, requestOptions);
     }
 
@@ -130,6 +133,7 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendSecondNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'sendSecondNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.sendSecondNamedUnionValueWithResponseAsync(input, requestOptions);
     }
 }

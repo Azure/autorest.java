@@ -184,6 +184,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
         }
 
+        // API comment
+        ImplementationDetails.Builder implDetailsBuilder = null;
+        if (operation.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(operation.getLanguage().getJava().getComment())) {
+            implDetailsBuilder = new ImplementationDetails.Builder().comment(operation.getLanguage().getJava().getComment());
+            builder.implementationDetails(implDetailsBuilder.build());
+        }
 
         // map externalDocs property
         if (operation.getExternalDocs() != null) {
@@ -438,7 +444,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         // additional LRO method for data-plane, with intermediate/final type, for convenience of grow-up
                         // it is public in implementation, but not exposed in wrapper client
 
-                        ImplementationDetails.Builder implDetailsBuilder = new ImplementationDetails.Builder().implementationOnly(true);
+                        if (implDetailsBuilder == null) {
+                            implDetailsBuilder = new ImplementationDetails.Builder();
+                        }
+                        implDetailsBuilder.implementationOnly(true);
 
                         builder = builder.implementationDetails(implDetailsBuilder.build());
 

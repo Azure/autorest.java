@@ -60,6 +60,8 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'send' refers Union 'string | string[] | integer[] |
+        // integer[][]'
         return this.serviceClient.sendWithResponseAsync(id, request, requestOptions);
     }
 
@@ -103,6 +105,8 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'sendLong' refers Union 'string | ArrayData | bytes |
+        // utcDateTime'
         return this.serviceClient.sendLongWithResponseAsync(id, request, requestOptions);
     }
 
@@ -129,6 +133,7 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithResponse(RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'get' refers Union 'url | bytes'
         return this.serviceClient.getWithResponseAsync(requestOptions);
     }
 
@@ -162,6 +167,7 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginGenerate(RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'generate' refers Union 'bytes | Result'
         return this.serviceClient.beginGenerateAsync(requestOptions);
     }
 }
