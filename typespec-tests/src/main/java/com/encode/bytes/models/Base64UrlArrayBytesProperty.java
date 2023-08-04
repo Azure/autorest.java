@@ -9,6 +9,7 @@ import com.azure.core.util.Base64Url;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** The Base64UrlArrayBytesProperty model. */
 @Immutable
@@ -32,8 +33,10 @@ public final class Base64UrlArrayBytesProperty {
         this.value = value.stream().map(el -> Base64Url.encode(el)).collect(java.util.stream.Collectors.toList());
     }
 
-    @Generated
-    private Base64UrlArrayBytesProperty() {}
+    @JsonCreator
+    private static Base64UrlArrayBytesProperty fromJson(@JsonProperty(value = "value") List<Base64Url> value) {
+        return new Base64UrlArrayBytesProperty(value.stream().map(el -> el.decodedBytes()).collect(Collectors.toList()));
+    }
 
     /**
      * Get the value property: The value property.
