@@ -43,8 +43,6 @@ function Generate($tspFile) {
 
     # Add the customization-class option for Java emitter
     $tspOptions = "--options=""@azure-tools/typespec-java.customization-class=../customization/src/main/java/CustomizationTest.java"""
-  } elseif ($tspFile -match "encode[\\/]bytes[\\/]main.tsp") {
-    $tspOptions = "--options=""@azure-tools/typespec-java.customization-class=../customization/src/main/java/CustomizationEncodeBytes.java"""
   }
 
   $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"

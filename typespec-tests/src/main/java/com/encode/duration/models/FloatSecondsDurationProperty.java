@@ -32,8 +32,8 @@ public final class FloatSecondsDurationProperty {
 
     @Generated
     @JsonCreator
-    private FloatSecondsDurationProperty(@JsonProperty(value = "value") double value) {
-        this(Duration.ofNanos((long) (value * 1000_000_000L)));
+    private static FloatSecondsDurationProperty fromJson(@JsonProperty(value = "value") double value) {
+        return new FloatSecondsDurationProperty(Duration.ofNanos((long) (value * 1000_000_000L)));
     }
 
     /**

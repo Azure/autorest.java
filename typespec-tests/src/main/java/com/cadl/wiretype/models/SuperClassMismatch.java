@@ -33,8 +33,9 @@ public class SuperClassMismatch {
 
     @Generated
     @JsonCreator
-    private SuperClassMismatch(@JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231) {
-        this(dateTimeRfc7231.getDateTime());
+    private static SuperClassMismatch fromJson(
+            @JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231) {
+        return new SuperClassMismatch(dateTimeRfc7231.getDateTime());
     }
 
     /**

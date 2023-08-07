@@ -663,7 +663,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredWritableParentProperties(model);
 
         // Jackson requires a constructor with @JsonCreator, with parameters in wire type. Ref https://github.com/Azure/autorest.java/issues/2170
-        boolean generatePrivateConstructorForJackson = false;
+        boolean generatePrivateJsonCreatorForJackson = false;
 
         // Description for the class is always the same, not matter whether there are required properties.
         // If there are required properties, the required properties will extend the consumer to add param Javadocs.
@@ -682,14 +682,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         if (settings.isRequiredFieldsAsConstructorArgs()) {
             final boolean constructorParametersContainsMismatchWireType =
-                requiredProperties.stream().anyMatch(p -> ClientModelUtil.isWireTypeMismatch(p, true))
-                    || requiredParentProperties.stream().anyMatch(p -> ClientModelUtil.isWireTypeMismatch(p, true));
+                requiredProperties.stream().anyMatch(ClientModelUtil::isWireTypeMismatch)
+                    || requiredParentProperties.stream().anyMatch(ClientModelUtil::isWireTypeMismatch);
 
             if (constructorParametersContainsMismatchWireType && !settings.isStreamStyleSerialization()) {
-                generatePrivateConstructorForJackson = true;
+                generatePrivateJsonCreatorForJackson = true;
             }
 
-            final boolean addJsonPropertyAnnotation = !(settings.isStreamStyleSerialization() || generatePrivateConstructorForJackson);
+            final boolean addJsonPropertyAnnotation = !(settings.isStreamStyleSerialization() || generatePrivateJsonCreatorForJackson);
 
             // Properties required by the super class structure come first.
             for (ClientModelProperty property : requiredParentProperties) {
@@ -730,7 +730,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // implicitly used as the JsonCreator if the class doesn't indicate one.
         if (constructorProperties.length() > 0 && !settings.isStreamStyleSerialization()
                 // @JsonCreator will be on the other private constructor
-                && !generatePrivateConstructorForJackson) {
+                && !generatePrivateJsonCreatorForJackson) {
             classBlock.annotation("JsonCreator");
         }
 
@@ -757,49 +757,49 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
         });
 
-        if (generatePrivateConstructorForJackson) {
+        if (generatePrivateJsonCreatorForJackson) {
             addGeneratedAnnotation(classBlock);
             classBlock.annotation("JsonCreator");
 
-            StringBuilder constructorPropertiesAsWireType =
+            StringBuilder methodPropertiesAsWireType =
                     new StringBuilder(constructorPropertiesStringBuilderCapacity);
 
-            StringBuilder constructorPropertiesInvokePublicConstructor =
+            StringBuilder methodPropertiesInvokePublicConstructor =
                     new StringBuilder(constructorPropertiesStringBuilderCapacity);
 
             final Consumer<ClientModelProperty> addParameterInvokePublicConstructor = p -> {
-                if (constructorPropertiesInvokePublicConstructor.length() > 0) {
-                    constructorPropertiesInvokePublicConstructor.append(", ");
+                if (methodPropertiesInvokePublicConstructor.length() > 0) {
+                    methodPropertiesInvokePublicConstructor.append(", ");
                 }
 
                 if (p.getWireType() == p.getClientType()) {
-                    constructorPropertiesInvokePublicConstructor.append(p.getName());
+                    methodPropertiesInvokePublicConstructor.append(p.getName());
                 } else {
-                    constructorPropertiesInvokePublicConstructor.append(p.getWireType().convertToClientType(p.getName()));
+                    methodPropertiesInvokePublicConstructor.append(p.getWireType().convertToClientType(p.getName()));
                 }
             };
 
             for (ClientModelProperty property : requiredParentProperties) {
-                if (constructorPropertiesAsWireType.length() > 0) {
-                    constructorPropertiesAsWireType.append(", ");
+                if (methodPropertiesAsWireType.length() > 0) {
+                    methodPropertiesAsWireType.append(", ");
                 }
 
-                addModelConstructorParameterAsWireType(property, constructorPropertiesAsWireType);
+                addModelConstructorParameterAsWireType(property, methodPropertiesAsWireType);
 
                 addParameterInvokePublicConstructor.accept(property);
             }
             for (ClientModelProperty property : requiredProperties) {
-                if (constructorPropertiesAsWireType.length() > 0) {
-                    constructorPropertiesAsWireType.append(", ");
+                if (methodPropertiesAsWireType.length() > 0) {
+                    methodPropertiesAsWireType.append(", ");
                 }
 
-                addModelConstructorParameterAsWireType(property, constructorPropertiesAsWireType);
+                addModelConstructorParameterAsWireType(property, methodPropertiesAsWireType);
 
                 addParameterInvokePublicConstructor.accept(property);
             }
 
-            classBlock.privateConstructor(model.getName() + "(" + constructorPropertiesAsWireType + ")", constructor -> {
-                constructor.line("this(" + constructorPropertiesInvokePublicConstructor + ");");
+            classBlock.staticMethod(JavaVisibility.Private, model.getName() + " fromJson(" + methodPropertiesAsWireType + ")", method -> {
+                method.methodReturn(String.format("new %1$s(%2$s)", model.getName(), methodPropertiesInvokePublicConstructor));
             });
         }
     }

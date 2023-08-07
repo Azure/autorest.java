@@ -34,8 +34,9 @@ public final class UnixTimestampDatetimeProperty {
 
     @Generated
     @JsonCreator
-    private UnixTimestampDatetimeProperty(@JsonProperty(value = "value") long value) {
-        this(OffsetDateTime.ofInstant(Instant.ofEpochSecond(value), ZoneOffset.UTC));
+    private static UnixTimestampDatetimeProperty fromJson(@JsonProperty(value = "value") long value) {
+        return new UnixTimestampDatetimeProperty(
+                OffsetDateTime.ofInstant(Instant.ofEpochSecond(value), ZoneOffset.UTC));
     }
 
     /**

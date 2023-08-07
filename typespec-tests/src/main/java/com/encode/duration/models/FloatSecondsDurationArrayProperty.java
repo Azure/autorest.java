@@ -27,12 +27,20 @@ public final class FloatSecondsDurationArrayProperty {
      * @param value the value value to set.
      */
     @Generated
-    @JsonCreator
-    public FloatSecondsDurationArrayProperty(@JsonProperty(value = "value") List<Duration> value) {
+    public FloatSecondsDurationArrayProperty(List<Duration> value) {
         this.value =
                 value.stream()
                         .map(el -> (double) el.toNanos() / 1000_000_000L)
                         .collect(java.util.stream.Collectors.toList());
+    }
+
+    @Generated
+    @JsonCreator
+    private static FloatSecondsDurationArrayProperty fromJson(@JsonProperty(value = "value") List<Double> value) {
+        return new FloatSecondsDurationArrayProperty(
+                value.stream()
+                        .map(el -> Duration.ofNanos((long) (el * 1000_000_000L)))
+                        .collect(java.util.stream.Collectors.toList()));
     }
 
     /**

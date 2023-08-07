@@ -75,14 +75,14 @@ public class TransformationAsRequiredFields {
     }
 
     @JsonCreator
-    private TransformationAsRequiredFields(
+    private static TransformationAsRequiredFields fromJson(
             @JsonProperty(value = "rfc1123Required", required = true) DateTimeRfc1123 rfc1123Required,
             @JsonProperty(value = "nameRequired", required = true) String nameRequired,
             @JsonProperty(value = "urlBase64EncodedRequired", required = true) Base64Url urlBase64EncodedRequired,
             @JsonProperty(value = "unixTimeLongRequired", required = true) long unixTimeLongRequired,
             @JsonProperty(value = "unixTimeDateTimeRequired", required = true)
                     OffsetDateTime unixTimeDateTimeRequired) {
-        this(
+        return new TransformationAsRequiredFields(
                 rfc1123Required.getDateTime(),
                 nameRequired,
                 urlBase64EncodedRequired.decodedBytes(),
