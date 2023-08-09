@@ -63,10 +63,7 @@ public final class SameBodiesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getAvatarAsPng(
-                @HeaderParam("accept") String accept,
-                @HeaderParam("accept") String acceptParam,
-                RequestOptions requestOptions,
-                Context context);
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/content-negotiation/same-body")
         @ExpectedResponses({200})
@@ -81,10 +78,7 @@ public final class SameBodiesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getAvatarAsPngSync(
-                @HeaderParam("accept") String accept,
-                @HeaderParam("accept") String acceptParam,
-                RequestOptions requestOptions,
-                Context context);
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/content-negotiation/same-body")
         @ExpectedResponses({200})
@@ -99,10 +93,7 @@ public final class SameBodiesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getAvatarAsJpeg(
-                @HeaderParam("accept") String accept,
-                @HeaderParam("accept") String acceptParam,
-                RequestOptions requestOptions,
-                Context context);
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/content-negotiation/same-body")
         @ExpectedResponses({200})
@@ -117,10 +108,7 @@ public final class SameBodiesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getAvatarAsJpegSync(
-                @HeaderParam("accept") String accept,
-                @HeaderParam("accept") String acceptParam,
-                RequestOptions requestOptions,
-                Context context);
+                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -142,8 +130,7 @@ public final class SameBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getAvatarAsPngWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "image/png";
-        final String acceptParam = "application/json, image/png";
-        return FluxUtil.withContext(context -> service.getAvatarAsPng(accept, acceptParam, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getAvatarAsPng(accept, requestOptions, context));
     }
 
     /**
@@ -165,8 +152,7 @@ public final class SameBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAvatarAsPngWithResponse(RequestOptions requestOptions) {
         final String accept = "image/png";
-        final String acceptParam = "application/json, image/png";
-        return service.getAvatarAsPngSync(accept, acceptParam, requestOptions, Context.NONE);
+        return service.getAvatarAsPngSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -188,8 +174,7 @@ public final class SameBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getAvatarAsJpegWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "image/jpeg";
-        final String acceptParam = "application/json, image/jpeg";
-        return FluxUtil.withContext(context -> service.getAvatarAsJpeg(accept, acceptParam, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getAvatarAsJpeg(accept, requestOptions, context));
     }
 
     /**
@@ -211,7 +196,6 @@ public final class SameBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAvatarAsJpegWithResponse(RequestOptions requestOptions) {
         final String accept = "image/jpeg";
-        final String acceptParam = "application/json, image/jpeg";
-        return service.getAvatarAsJpegSync(accept, acceptParam, requestOptions, Context.NONE);
+        return service.getAvatarAsJpegSync(accept, requestOptions, Context.NONE);
     }
 }

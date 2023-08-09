@@ -894,6 +894,11 @@ export class CodeModelBuilder {
   }
 
   private addAcceptHeaderParameter(op: CodeModelOperation, responses: HttpOperationResponse[]) {
+    if (op.parameters?.some((it) => it.language.default.serializedName?.toLowerCase() === "accept")) {
+      // parameters already include "accept" header
+      return;
+    }
+
     const produces = new Set<string>(["application/json"]);
     for (const resp of responses) {
       if (resp.responses && resp.responses.length > 0) {
