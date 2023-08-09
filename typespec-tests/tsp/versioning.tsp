@@ -57,7 +57,9 @@ model ListQueryParams {
 }
 
 interface ResourceOperations
-  extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
 
 @route("/versioning")
 interface VersioningOp {

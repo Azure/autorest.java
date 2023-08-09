@@ -28,10 +28,14 @@ model Resource {
 }
 
 interface ResourceOperations
-  extends Azure.Core.ResourceOperations<SupportsRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
+  extends Azure.Core.ResourceOperations<SupportsRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
 
 interface StandardResourceOperations
-  extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
 
 @route("/repeatability-headers")
 interface RepeatabilityHeaders {
