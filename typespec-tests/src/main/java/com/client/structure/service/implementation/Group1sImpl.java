@@ -8,7 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
-import com.azure.core.annotation.Patch;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -49,7 +49,7 @@ public final class Group1sImpl {
     @Host("http://localhost:3000/client/structure/{client}")
     @ServiceInterface(name = "TwoOperationGroupCli")
     public interface Group1sService {
-        @Patch("/one")
+        @Post("/one")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -67,7 +67,7 @@ public final class Group1sImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Patch("/one")
+        @Post("/one")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -85,7 +85,7 @@ public final class Group1sImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Patch("/three")
+        @Post("/three")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -103,7 +103,7 @@ public final class Group1sImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Patch("/three")
+        @Post("/three")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -121,7 +121,7 @@ public final class Group1sImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Patch("/four")
+        @Post("/four")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -139,7 +139,7 @@ public final class Group1sImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Patch("/four")
+        @Post("/four")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,

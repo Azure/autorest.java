@@ -8,7 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
-import com.azure.core.annotation.Patch;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -113,7 +113,7 @@ public final class ClientAClientImpl {
     @Host("http://localhost:3000/client/structure/{client}")
     @ServiceInterface(name = "ClientAClient")
     public interface ClientAClientService {
-        @Patch("/one")
+        @Post("/one")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -131,7 +131,7 @@ public final class ClientAClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Patch("/one")
+        @Post("/one")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -149,7 +149,7 @@ public final class ClientAClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Patch("/three")
+        @Post("/three")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -167,7 +167,7 @@ public final class ClientAClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Patch("/three")
+        @Post("/three")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -185,7 +185,7 @@ public final class ClientAClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Patch("/five")
+        @Post("/five")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -203,7 +203,7 @@ public final class ClientAClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Patch("/five")
+        @Post("/five")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
