@@ -55,5 +55,10 @@ interface FlattenOp {
 
   @route("send-long")
   @post
-  sendLong(@query id: string, @query filter?: string, ...LongRequest, ...ApiVersionParameter): OkResponse;
+  sendLong(
+    @query id: string,
+    @query filter?: string,
+    ...LongRequest,
+    ...ApiVersionParameter,
+  ): OkResponse;
 }

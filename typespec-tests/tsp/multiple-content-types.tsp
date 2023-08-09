@@ -59,7 +59,10 @@ interface MultipleContentTypesOnRequest {
   @route("upload/multi-body-types")
   @sharedRoute
   @post
-  uploadJsonWithMultiBodyTypesForMultiContentTypes(@body data: Resource, @header contentType: "application/json"): void;
+  uploadJsonWithMultiBodyTypesForMultiContentTypes(
+    @body data: Resource,
+    @header contentType: "application/json",
+  ): void;
 
   @doc("multiple data types map to multiple content types using shared route")
   @route("upload/multi-body-types")
@@ -67,7 +70,11 @@ interface MultipleContentTypesOnRequest {
   @post
   uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes(
     @body data: bytes | Resource,
-    @header contentType: "application/json" | "application/octet-stream" | "image/jpeg" | "image/png",
+    @header contentType:
+      | "application/json"
+      | "application/octet-stream"
+      | "image/jpeg"
+      | "image/png",
   ): void;
 }
 
@@ -98,7 +105,12 @@ interface MultipleContentTypesOnRequest {
 @post
 op uploadWithOverload(
   @body data: string | bytes | Resource,
-  @header contentType: "text/plain" | "application/json" | "application/octet-stream" | "image/jpeg" | "image/png",
+  @header contentType:
+    | "text/plain"
+    | "application/json"
+    | "application/octet-stream"
+    | "image/jpeg"
+    | "image/png",
 ): void;
 
 @doc("multiple data types map to multiple content types")
@@ -111,7 +123,10 @@ op uploadStringWithOverload(@body data: string, @header contentType: "text/plain
 @route("upload/overload/multi-body-types")
 @post
 @overload(uploadWithOverload)
-op uploadImagesWithOverload(@body data: bytes, @header contentType: "image/jpeg" | "image/png"): void;
+op uploadImagesWithOverload(
+  @body data: bytes,
+  @header contentType: "image/jpeg" | "image/png",
+): void;
 
 @doc("multiple data types map to multiple content types using `@overload`")
 @route("upload/overload/multi-body-types")
