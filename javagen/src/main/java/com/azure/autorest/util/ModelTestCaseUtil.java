@@ -135,6 +135,10 @@ public class ModelTestCaseUtil {
         } else if (type instanceof EnumType) {
             IType elementType = ((EnumType) type).getElementType();
             List<String> values = ((EnumType) type).getValues().stream().map(ClientEnumValue::getValue).collect(Collectors.toList());
+            if (values.isEmpty()) {
+                // empty enum
+                return null;
+            }
             int index = RANDOM.nextInt(values.size());
             String value = values.get(index);
             if (elementType.asNullable() == ClassType.Integer) {
