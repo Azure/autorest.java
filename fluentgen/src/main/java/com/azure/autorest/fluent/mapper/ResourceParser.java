@@ -191,12 +191,12 @@ public class ResourceParser {
         Set<FluentResourceModel> foundModels = new HashSet<>();
 
         for (ModelCategory category : categories) {
-            Map<FluentResourceModel, ResourceCreate> modelOfResourceGroupAsParent =
+            Map<FluentResourceModel, ResourceCreate> modelResourceCreateMap =
                     findResourceCreateForCategory(collection, fluentModelMapByName, availableModels, foundModels, category);
 
-            foundModels.addAll(modelOfResourceGroupAsParent.keySet());
+            foundModels.addAll(modelResourceCreateMap.keySet());
 
-            for (Map.Entry<FluentResourceModel, ResourceCreate> entry : modelOfResourceGroupAsParent.entrySet()) {
+            for (Map.Entry<FluentResourceModel, ResourceCreate> entry : modelResourceCreateMap.entrySet()) {
                 FluentResourceModel fluentModel = entry.getKey();
                 ResourceCreate resourceCreate = entry.getValue();
 
