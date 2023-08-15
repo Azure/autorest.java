@@ -42,6 +42,8 @@ public class FluentJavaSettings {
 
     private final Set<String> javaNamesForRemoveOperationGroup = new HashSet<>();
 
+    private final Map<String, String> resourceCollectionAssociation = new HashMap<>();
+
 //    /**
 //     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
 //     */
@@ -140,6 +142,10 @@ public class FluentJavaSettings {
         return renameOperationGroup;
     }
 
+    public Map<String, String> getResourceCollectionAssociation() {
+        return resourceCollectionAssociation;
+    }
+
     public String getPomFilename() {
         return pomFilename;
     }
@@ -218,6 +224,8 @@ public class FluentJavaSettings {
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 
+        loadMapSetting("resource-collection-association", resourceCollectionAssociation::putAll);
+
         Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentnamer.naming.override");
         if (namingOverride != null) {
             this.namingOverride.putAll(namingOverride);
@@ -243,6 +251,14 @@ public class FluentJavaSettings {
 
     private void loadStringSetting(String settingName, Consumer<String> action) {
         String settingValue = host.getStringValue(settingName);
+        if (settingValue != null) {
+            logger.debug("Option, string, {} : {}", settingName, settingValue);
+            action.accept(settingValue);
+        }
+    }
+
+    private void loadMapSetting(String settingName, Consumer<Map<String, String>> action) {
+        Map<String, String> settingValue = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), settingName);
         if (settingValue != null) {
             logger.debug("Option, string, {} : {}", settingName, settingValue);
             action.accept(settingValue);
