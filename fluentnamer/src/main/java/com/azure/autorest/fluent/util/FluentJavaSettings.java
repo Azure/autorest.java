@@ -261,7 +261,7 @@ public class FluentJavaSettings {
     private void loadMapSetting(String settingName, Consumer<Map<String, String>> action) {
         Map<String, String> settingValue = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), settingName);
         if (settingValue != null) {
-            logger.debug("Option, string, {} : {}", settingName, settingValue);
+            logger.debug("Option, dictionary, {} : {}", settingName, settingValue);
             action.accept(settingValue);
         }
     }
