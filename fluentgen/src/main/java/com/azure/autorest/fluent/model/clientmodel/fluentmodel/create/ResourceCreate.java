@@ -49,12 +49,16 @@ public class ResourceCreate extends ResourceOperation {
 
     private FluentDefineMethod defineMethod;
 
+    public static final ResourceCreate NO_ASSOCIATION = new ResourceCreate(null, null, null, null, null);
+
     public ResourceCreate(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
 
-        LOGGER.info("ResourceCreate: Fluent model '{}', method reference '{}', body parameter '{}'",
-                resourceModel.getName(), methodName, bodyParameterModel.getName());
+        if (resourceModel != null) {
+            LOGGER.info("ResourceCreate: Fluent model '{}', method reference '{}', body parameter '{}'",
+                    resourceModel.getName(), methodName, bodyParameterModel.getName());
+        }
     }
 
     public List<DefinitionStage> getDefinitionStages() {

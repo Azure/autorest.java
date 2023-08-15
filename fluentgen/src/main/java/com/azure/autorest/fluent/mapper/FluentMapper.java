@@ -18,7 +18,10 @@ import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentManager;
 import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
+import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
@@ -28,8 +31,11 @@ import org.slf4j.Logger;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -53,8 +59,36 @@ public class FluentMapper {
         FluentClient fluentClient = basicMap(codeModel, client);
 
         // parse resource collections to identify create/update/refresh flow on resource instance
+        for (Map.Entry<String, String> overrideAssociation : fluentJavaSettings.getResourceCollectionAssociation().entrySet()) {
+            String modelName = overrideAssociation.getKey();
+            String collectionName = overrideAssociation.getValue();
+            Optional<FluentResourceModel> modelOpt = fluentClient.getResourceModels().stream().filter(m -> Objects.equals(m.getName(), modelName)).findFirst();
+            if (modelOpt.isPresent()) {
+                FluentResourceModel model = modelOpt.get();
+                if (collectionName == null) {
+                    // this resource model does not associate with any collection
+                    // a dummy ResourceCreate to avoid future parseResourcesCategory to associate the model
+                    model.setResourceCreate(ResourceCreate.NO_ASSOCIATION);
+                } else {
+                    Optional<FluentResourceCollection> collectionOpt = fluentClient.getResourceCollections().stream().filter(c -> Objects.equals(c.getInterfaceType().getName(), collectionName)).findFirst();
+                    if (collectionOpt.isPresent()) {
+                        FluentResourceCollection collection = collectionOpt.get();
+                        ResourceParser.parseResourcesCategory(collection, Collections.singletonList(model), FluentStatic.getClient().getModels());
+                    } else {
+                        LOGGER.warn("Resource collection '{}' not found in association override '{}' to '{}'.", collectionName, modelName, collectionName);
+                    }
+                }
+            } else {
+                LOGGER.warn("Resource model '{}' not found in association override '{}' to '{}'.", modelName, modelName, collectionName);
+            }
+        }
         fluentClient.getResourceCollections()
                 .forEach(c -> ResourceParser.parseResourcesCategory(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels()));
+        for (FluentResourceModel model : fluentClient.getResourceModels()) {
+            if (model.getResourceCreate() == ResourceCreate.NO_ASSOCIATION) {
+                model.setResourceCreate(null);
+            }
+        }
         ResourceParser.processAdditionalMethods(fluentClient);
 
         // samples

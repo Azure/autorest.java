@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -42,7 +43,7 @@ public class FluentJavaSettings {
 
     private final Set<String> javaNamesForRemoveOperationGroup = new HashSet<>();
 
-    private final Map<String, String> resourceCollectionAssociation = new HashMap<>();
+    private final Map<String, String> resourceCollectionAssociation = new TreeMap<>();
 
 //    /**
 //     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
