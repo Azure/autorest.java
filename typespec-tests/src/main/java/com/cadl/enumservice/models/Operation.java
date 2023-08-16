@@ -47,6 +47,27 @@ public final class Operation {
     @JsonProperty(value = "color")
     private ColorModel color;
 
+    /*
+     * The priorityValue property.
+     */
+    @Generated
+    @JsonProperty(value = "priorityValue")
+    private Priority priorityValue = Priority.LOW;
+
+    /*
+     * The colorValue property.
+     */
+    @Generated
+    @JsonProperty(value = "colorValue")
+    private Color colorValue = Color.GREEN;
+
+    /*
+     * The colorModelValue property.
+     */
+    @Generated
+    @JsonProperty(value = "colorModelValue")
+    private ColorModel colorModelValue = ColorModel.BLUE;
+
     /**
      * Creates an instance of Operation class.
      *
@@ -62,6 +83,9 @@ public final class Operation {
             @JsonProperty(value = "color") ColorModel color) {
         best = true;
         age = 50L;
+        priorityValue = Priority.LOW;
+        colorValue = Color.GREEN;
+        colorModelValue = ColorModel.BLUE;
         this.name = name;
         this.priority = priority;
         this.color = color;
@@ -115,5 +139,35 @@ public final class Operation {
     @Generated
     public ColorModel getColor() {
         return this.color;
+    }
+
+    /**
+     * Get the priorityValue property: The priorityValue property.
+     *
+     * @return the priorityValue value.
+     */
+    @Generated
+    public Priority getPriorityValue() {
+        return this.priorityValue;
+    }
+
+    /**
+     * Get the colorValue property: The colorValue property.
+     *
+     * @return the colorValue value.
+     */
+    @Generated
+    public Color getColorValue() {
+        return this.colorValue;
+    }
+
+    /**
+     * Get the colorModelValue property: The colorModelValue property.
+     *
+     * @return the colorModelValue value.
+     */
+    @Generated
+    public ColorModel getColorModelValue() {
+        return this.colorModelValue;
     }
 }
