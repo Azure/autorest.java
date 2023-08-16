@@ -32,8 +32,8 @@ public final class Base64UrlBytesProperty {
 
     @Generated
     @JsonCreator
-    private static Base64UrlBytesProperty fromJson(@JsonProperty(value = "value") Base64Url value) {
-        return new Base64UrlBytesProperty(value.decodedBytes());
+    private Base64UrlBytesProperty(@JsonProperty(value = "value") Base64Url value) {
+        this(value.decodedBytes());
     }
 
     /**

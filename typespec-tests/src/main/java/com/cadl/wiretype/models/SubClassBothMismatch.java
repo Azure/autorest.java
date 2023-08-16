@@ -36,10 +36,10 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
 
     @Generated
     @JsonCreator
-    private static SubClassBothMismatch fromJson(
+    private SubClassBothMismatch(
             @JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231,
             @JsonProperty(value = "base64url") Base64Url base64Url) {
-        return new SubClassBothMismatch(dateTimeRfc7231.getDateTime(), base64Url.decodedBytes());
+        this(dateTimeRfc7231.getDateTime(), base64Url.decodedBytes());
     }
 
     /**
