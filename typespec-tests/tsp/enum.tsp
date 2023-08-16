@@ -45,6 +45,9 @@ model Operation {
   age: 50;
   priority: Priority;
   color: ColorModel;
+  priorityValue: Priority.Low;
+  colorValue: Color.Green;
+  colorModelValue: ColorModel.Blue;
 }
 
 @route("/enum")

@@ -99,6 +99,9 @@ public final class EnumServiceClient {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -128,6 +131,9 @@ public final class EnumServiceClient {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -157,6 +163,9 @@ public final class EnumServiceClient {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -185,6 +194,9 @@ public final class EnumServiceClient {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *

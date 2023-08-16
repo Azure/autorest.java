@@ -38,6 +38,7 @@ import {
   getEncode,
   getOverloadedOperation,
   isErrorModel,
+  EnumMember,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -1383,14 +1384,14 @@ export class CodeModelBuilder {
         }
 
       case "String":
-        return this.processChoiceSchemaForLiteral(type, nameHint);
+        return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Number":
         // TODO: float
-        return this.processChoiceSchemaForLiteral(type, nameHint);
+        return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Boolean":
-        return this.processChoiceSchemaForLiteral(type, nameHint);
+        return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Enum":
         return this.processChoiceSchema(type, this.getName(type), isFixed(this.program, type));
@@ -1422,6 +1423,10 @@ export class CodeModelBuilder {
         } else {
           return this.processObjectSchema(type, this.getName(type));
         }
+
+      case "EnumMember":
+        // e.g. "type: TypeEnum.EnumValue1"
+        return this.processConstantSchemaForEnumMember(type, this.getName(type));
     }
     throw new Error(`Unrecognized type: '${type.kind}'.`);
   }
@@ -1635,7 +1640,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processChoiceSchemaForLiteral(
+  private processConstantSchemaForLiteral(
     type: StringLiteral | NumericLiteral | BooleanLiteral,
     name: string,
   ): ConstantSchema {
@@ -1647,6 +1652,18 @@ export class CodeModelBuilder {
         summary: this.getSummary(type),
         valueType: valueType,
         value: new ConstantValue(type.value),
+      }),
+    );
+  }
+
+  private processConstantSchemaForEnumMember(type: EnumMember, name: string): ConstantSchema {
+    const valueType = this.processChoiceSchema(type.enum, this.getName(type.enum), isFixed(this.program, type.enum));
+
+    return this.codeModel.schemas.add(
+      new ConstantSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+        valueType: valueType,
+        value: new ConstantValue(type.value ?? type.name),
       }),
     );
   }
@@ -2093,7 +2110,7 @@ export class CodeModelBuilder {
     return getSummary(this.program, target);
   }
 
-  private getName(target: Model | Enum | ModelProperty | Scalar | Operation): string {
+  private getName(target: Model | Enum | EnumMember | ModelProperty | Scalar | Operation): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const languageProjectedName = getProjectedName(this.program, target, "java");
     if (languageProjectedName) {
