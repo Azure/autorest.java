@@ -5,18 +5,20 @@ package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.model.ResourceCollectionAssociation;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -43,7 +45,7 @@ public class FluentJavaSettings {
 
     private final Set<String> javaNamesForRemoveOperationGroup = new HashSet<>();
 
-    private final Map<String, String> resourceCollectionAssociation = new TreeMap<>();
+    private final List<ResourceCollectionAssociation> resourceCollectionAssociations = new ArrayList<>();
 
 //    /**
 //     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
@@ -143,8 +145,8 @@ public class FluentJavaSettings {
         return renameOperationGroup;
     }
 
-    public Map<String, String> getResourceCollectionAssociation() {
-        return resourceCollectionAssociation;
+    public List<ResourceCollectionAssociation> getResourceCollectionAssociations() {
+        return resourceCollectionAssociations;
     }
 
     public String getPomFilename() {
@@ -216,6 +218,8 @@ public class FluentJavaSettings {
 
         loadStringSetting("property-include-always", s -> splitStringToSet(s, javaNamesForPropertyIncludeAlways));
 
+        loadResourceCollectionAssociationSetting(resourceCollectionAssociations::addAll);
+
         loadStringSetting("pom-file", s -> pomFilename = s);
         loadStringSetting("package-version", s -> artifactVersion = s);
 
@@ -224,8 +228,6 @@ public class FluentJavaSettings {
         loadBooleanSetting("generate-samples", s -> generateSamples = (s ? SampleGeneration.AGGREGATED : SampleGeneration.NONE));
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
-
-        loadMapSetting("resource-collection-association", resourceCollectionAssociation::putAll);
 
         Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentnamer.naming.override");
         if (namingOverride != null) {
@@ -258,10 +260,11 @@ public class FluentJavaSettings {
         }
     }
 
-    private void loadMapSetting(String settingName, Consumer<Map<String, String>> action) {
-        Map<String, String> settingValue = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), settingName);
+    private void loadResourceCollectionAssociationSetting(Consumer<List<ResourceCollectionAssociation>> action) {
+        String settingName = "resource-collection-association";
+        List<ResourceCollectionAssociation> settingValue = host.getValue(new TypeReference<List<ResourceCollectionAssociation>>() {}.getType(), settingName);
         if (settingValue != null) {
-            logger.debug("Option, dictionary, {} : {}", settingName, settingValue);
+            logger.debug("Option, array, {} : {}", settingName, settingValue);
             action.accept(settingValue);
         }
     }
