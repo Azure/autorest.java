@@ -49,7 +49,7 @@ public class ResourceCreate extends ResourceOperation {
 
     private FluentDefineMethod defineMethod;
 
-    public static final ResourceCreate NO_ASSOCIATION = new ResourceCreate(null, null, null, null, null);
+//    public static final ResourceCreate NO_ASSOCIATION = new ResourceCreate(null, null, null, null, null);
 
     public ResourceCreate(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {

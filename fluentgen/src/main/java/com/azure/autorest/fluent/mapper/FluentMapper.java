@@ -22,7 +22,6 @@ import com.azure.autorest.fluent.model.clientmodel.FluentManagerProperty;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
-import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
@@ -66,9 +65,9 @@ public class FluentMapper {
             if (modelOpt.isPresent()) {
                 FluentResourceModel model = modelOpt.get();
                 if (collectionName == null) {
-                    // this resource model does not associate with any collection
-                    // use a dummy ResourceCreate to prevent future parseResourcesCategory invocation from process the model
-                    model.setResourceCreate(ResourceCreate.NO_ASSOCIATION);
+//                    // this resource model does not associate with any collection
+//                    // use a dummy ResourceCreate to prevent future parseResourcesCategory invocation from process the model
+//                    model.setResourceCreate(ResourceCreate.NO_ASSOCIATION);
                 } else {
                     Optional<FluentResourceCollection> collectionOpt = fluentClient.getResourceCollections().stream().filter(c -> Objects.equals(c.getInterfaceType().getName(), collectionName)).findFirst();
                     if (collectionOpt.isPresent()) {
@@ -84,12 +83,12 @@ public class FluentMapper {
         }
         fluentClient.getResourceCollections()
                 .forEach(c -> ResourceParser.parseResourcesCategory(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels()));
-        // clean up NO_ASSOCIATION
-        for (FluentResourceModel model : fluentClient.getResourceModels()) {
-            if (model.getResourceCreate() == ResourceCreate.NO_ASSOCIATION) {
-                model.setResourceCreate(null);
-            }
-        }
+//        // clean up NO_ASSOCIATION
+//        for (FluentResourceModel model : fluentClient.getResourceModels()) {
+//            if (model.getResourceCreate() == ResourceCreate.NO_ASSOCIATION) {
+//                model.setResourceCreate(null);
+//            }
+//        }
         ResourceParser.processAdditionalMethods(fluentClient);
 
         // samples
