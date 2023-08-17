@@ -29,17 +29,9 @@ public final class UnixTimestampArrayDatetimeProperty {
      * @param value the value value to set.
      */
     @Generated
-    public UnixTimestampArrayDatetimeProperty(List<OffsetDateTime> value) {
-        this.value = value.stream().map(el -> el.toEpochSecond()).collect(java.util.stream.Collectors.toList());
-    }
-
-    @Generated
     @JsonCreator
-    private static UnixTimestampArrayDatetimeProperty fromJson(@JsonProperty(value = "value") List<Long> value) {
-        return new UnixTimestampArrayDatetimeProperty(
-                value.stream()
-                        .map(el -> OffsetDateTime.ofInstant(Instant.ofEpochSecond(el), ZoneOffset.UTC))
-                        .collect(java.util.stream.Collectors.toList()));
+    public UnixTimestampArrayDatetimeProperty(@JsonProperty(value = "value") List<OffsetDateTime> value) {
+        this.value = value.stream().map(el -> el.toEpochSecond()).collect(java.util.stream.Collectors.toList());
     }
 
     /**

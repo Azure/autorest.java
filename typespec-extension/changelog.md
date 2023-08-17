@@ -1,8 +1,14 @@
 # Release History
 
-## 0.8.9 (Unreleased)
+## 0.8.10 (2023-08-16)
 
 Compatible with compiler 0.47.
+
+## 0.8.9 (2023-08-16)
+
+Compatible with compiler 0.47.
+
+- Supported `EnumMember` as type.
 
 ## 0.8.8 (2023-07-21)
 

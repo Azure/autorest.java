@@ -236,7 +236,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             if (!packageInfos.containsKey(customTypesPackage)) {
                 packageInfos.put(customTypesPackage, new PackageInfo(
                     customTypesPackage,
-                    String.format("Package containing classes for %s.\n%s", serviceClientName,
+                    String.format("Package containing the data models for %s.\n%s", serviceClientName,
                         serviceClientDescription)));
             }
         }

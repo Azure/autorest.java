@@ -50,6 +50,7 @@ public class EncodeBytesTests {
 
         propertyClient.base64Url(new Base64UrlBytesProperty(DATA));
 
+        // fails due to this corner case https://github.com/Azure/autorest.java/issues/2170#issuecomment-1598116813
         propertyClient.base64UrlArray(new Base64UrlArrayBytesProperty(Arrays.asList(DATA, DATA)));
     }
 }

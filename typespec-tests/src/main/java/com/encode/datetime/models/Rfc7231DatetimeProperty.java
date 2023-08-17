@@ -33,8 +33,8 @@ public final class Rfc7231DatetimeProperty {
 
     @Generated
     @JsonCreator
-    private static Rfc7231DatetimeProperty fromJson(@JsonProperty(value = "value") DateTimeRfc1123 value) {
-        return new Rfc7231DatetimeProperty(value.getDateTime());
+    private Rfc7231DatetimeProperty(@JsonProperty(value = "value") DateTimeRfc1123 value) {
+        this(value.getDateTime());
     }
 
     /**
