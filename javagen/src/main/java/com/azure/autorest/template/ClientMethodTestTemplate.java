@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.TestContext;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -11,19 +12,19 @@ import com.azure.autorest.template.example.ProtocolTestWriter;
 
 import java.util.Set;
 
-public class ProtocolTestTemplate implements IJavaTemplate<TestContext<ProtocolExample>, JavaFile> {
+public class ClientMethodTestTemplate implements IJavaTemplate<TestContext<ClientMethodExample>, JavaFile> {
 
-    private static final ProtocolTestTemplate INSTANCE = new ProtocolTestTemplate();
+    private static final ClientMethodTestTemplate INSTANCE = new ClientMethodTestTemplate();
 
-    protected ProtocolTestTemplate() {
+    protected ClientMethodTestTemplate() {
     }
 
-    public static ProtocolTestTemplate getInstance() {
+    public static ClientMethodTestTemplate getInstance() {
         return INSTANCE;
     }
 
     @Override
-    public void write(TestContext<ProtocolExample> testContext, JavaFile context) {
+    public void write(TestContext<ClientMethodExample> testContext, JavaFile context) {
 
         final String className = testContext.getTestCase().getFilename() + "Tests";
 

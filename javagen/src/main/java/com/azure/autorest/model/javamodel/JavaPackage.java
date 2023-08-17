@@ -244,10 +244,18 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public void addProtocolTest(TestContext testContext) {
+    public void addProtocolTest(TestContext<ProtocolExample> testContext) {
         String className = testContext.getTestCase().getFilename() + "Tests";
         JavaFile javaFile = javaFileFactory.createTestFile(testContext.getPackageName(), className);
         ProtocolTestTemplate.getInstance().write(testContext, javaFile);
+        this.checkDuplicateFile(javaFile.getFilePath());
+        javaFiles.add(javaFile);
+    }
+
+    public void addClientMethodTest(TestContext<ClientMethodExample> testContext) {
+        String className = testContext.getTestCase().getFilename() + "Tests";
+        JavaFile javaFile = javaFileFactory.createTestFile(testContext.getPackageName(), className);
+        ClientMethodTestTemplate.getInstance().write(testContext, javaFile);
         this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
     }
