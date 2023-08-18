@@ -3,12 +3,13 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodExample;
-import com.azure.autorest.model.clientmodel.ProtocolExample;
 import com.azure.autorest.model.clientmodel.TestContext;
 import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.autorest.template.example.ProtocolExampleWriter;
+import com.azure.autorest.template.example.ClientMethodExampleWriter;
 import com.azure.autorest.template.example.ProtocolTestWriter;
+import com.azure.autorest.util.CodeNamer;
 
 import java.util.Set;
 
@@ -29,17 +30,23 @@ public class ClientMethodTestTemplate implements IJavaTemplate<TestContext<Clien
         final String className = testContext.getTestCase().getFilename() + "Tests";
 
         ProtocolTestWriter writer = new ProtocolTestWriter(testContext);
-        ProtocolExampleWriter caseWriter = new ProtocolExampleWriter(testContext.getTestCase());
+        ClientMethodExample clientMethodExample = testContext.getTestCase();
+        ClientMethod clientMethod = clientMethodExample.getClientMethod();
+        ClientMethodExampleWriter caseWriter = new ClientMethodExampleWriter(
+                clientMethod,
+                CodeNamer.toCamelCase(clientMethodExample.getSyncClient().getClassName()),
+                clientMethodExample.getProxyMethodExample());
 
         Set<String> imports = writer.getImports();
         imports.addAll(caseWriter.getImports());
+        clientMethod.getReturnValue().getType().addImportsTo(imports, false);
         context.declareImport(imports);
 
         context.publicFinalClass(String.format("%1$s extends %2$s", className, testContext.getTestBaseClassName()), classBlock -> {
             classBlock.annotation("Test", "Disabled");  // "DoNotRecord(skipInPlayback = true)" not added
             classBlock.publicMethod(String.format("void test%1$s()", className), methodBlock -> {
-                caseWriter.writeClientMethodInvocation(methodBlock);
-                caseWriter.writeAssertion(methodBlock);
+                caseWriter.writeMethodInvocation(methodBlock);
+                // TODO(xiaofei) response assertions
             });
         });
     }
