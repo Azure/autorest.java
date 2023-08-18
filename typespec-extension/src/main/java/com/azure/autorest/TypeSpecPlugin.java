@@ -125,6 +125,7 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("generate-builder-per-client", false);
         SETTINGS_MAP.put("sync-methods", "all");
         SETTINGS_MAP.put("enable-sync-stack", true);
+        SETTINGS_MAP.put("enable-page-size", true);
 
         SETTINGS_MAP.put("use-default-http-status-code-to-exception-type-mapping", true);
         SETTINGS_MAP.put("polling", new HashMap<String, Object>());

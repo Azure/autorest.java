@@ -35,6 +35,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -280,6 +281,14 @@ public class MethodUtil {
                 .filter(p -> !p.isConstant() && !p.isFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
+    }
+
+    public static boolean isMaxPageSizeParameter(Parameter p) {
+        return p.getProtocol() != null && p.getProtocol().getHttp() != null
+                // query parameter
+                && p.getProtocol().getHttp().getIn() == RequestParameterLocation.QUERY
+                // serialized name == maxpagesize, or relax a bit, client name == maxPageSize
+                && (Objects.equals(p.getLanguage().getDefault().getSerializedName(), "maxpagesize") || Objects.equals(SchemaUtil.getJavaName(p), "maxPageSize"));
     }
 
     /**
