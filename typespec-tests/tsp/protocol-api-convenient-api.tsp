@@ -97,6 +97,19 @@ model ResourceJ {
   type: string;
 }
 
+@trait
+model ListTrait {
+  @traitContext(TraitContext.List)
+  reqeust: {
+    @traitLocation(TraitLocation.Parameters)
+    properties: {
+      @projectedName("client", "maxPageSize")
+      @query
+      maxresults?: safeint;
+    };
+  };
+}
+
 interface ResourceOperations
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
@@ -139,5 +152,5 @@ interface ProtocolAndConvenienceOp {
 
   @doc("Paging operation")
   @protocolAPI(false)
-  list is ResourceOperations.ResourceList<ResourceJ>;
+  list is ResourceOperations.ResourceList<ResourceJ, ListTrait>;
 }
