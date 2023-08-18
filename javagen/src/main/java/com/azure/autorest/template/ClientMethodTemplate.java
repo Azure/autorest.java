@@ -39,6 +39,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -657,36 +658,31 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         generatePagingSync(clientMethod, typeBlock, restAPIMethod, settings);
     }
 
-    protected void generateProtocolPagingPlainSync(ClientMethod clientMethod, JavaType typeBlock,
-        ProxyMethod restAPIMethod, JavaSettings settings) {
+    protected void generateProtocolPagingPlainSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod);
+
                 function.line("RequestOptions requestOptionsForNextPage = new RequestOptions();");
                 function.line("requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);");
+
                 function.line("return new PagedIterable<>(");
-
-                String nextMethodArgs = clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage");
-                String firstPageArgs = clientMethod.getArgumentList();
-                if (clientMethod.getParameters()
-                        .stream()
-                        .noneMatch(p -> p.getClientType() == ClassType.Context)) {
-                    nextMethodArgs = nextMethodArgs.replace("context", "Context.NONE");
-
-                }
-                String effectiveNextMethodArgs = nextMethodArgs;
                 function.indent(() -> {
-                    function.line("() -> %s(%s),",
-                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(), firstPageArgs);
-                    function.line("nextLink -> %s(%s));",
+                    function.line("%s,", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                            clientMethod.getArgumentList(),
+                            settings));
+                    function.line("%s);", this.getPagingNextPageExpression(
+                            clientMethod,
                             clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingSinglePageMethodName(),
-                            effectiveNextMethodArgs);
+                            clientMethod.getMethodPageDetails().getNextMethod().getArgumentList(),
+                            settings));
                 });
             });
         } else {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                String firstPageArgs = clientMethod.getArgumentList();
                 if (clientMethod.getParameters()
                         .stream()
                         .noneMatch(p -> p.getClientType() == ClassType.Context)) {
@@ -694,8 +690,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 addOptionalVariables(function, clientMethod);
                 function.line("return new PagedIterable<>(");
                 function.indent(() -> {
-                    function.line("() -> %s(%s));",
-                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(), firstPageArgs);
+                    function.line("%s);", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                            clientMethod.getArgumentList(),
+                            settings));
                 });
             });
         }
@@ -800,12 +799,16 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 String effectiveNextMethodArgs = nextMethodArgs;
                 String effectiveFirstPageArgs = firstPageArgs;
                 function.indent(() -> {
-                    function.line("() -> %s(%s),",
-                        clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
-                        effectiveFirstPageArgs);
-                    function.line("nextLink -> %s(%s));",
-                        clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingSinglePageMethodName(),
-                        effectiveNextMethodArgs);
+                    function.line("%s,", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                            effectiveFirstPageArgs,
+                            settings));
+                    function.line("%s);", this.getPagingNextPageExpression(
+                            clientMethod,
+                            clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingSinglePageMethodName(),
+                            effectiveNextMethodArgs,
+                            settings));
                 });
             });
         } else {
@@ -826,9 +829,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 addOptionalVariables(function, clientMethod);
                 function.line("return new PagedIterable<>(");
                 function.indent(() -> {
-                    function.line("() -> %s(%s));",
-                        clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
-                        effectiveFirstPageArgs);
+                    function.line("%s,", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                            effectiveFirstPageArgs,
+                            settings));
                 });
             });
         }
@@ -845,21 +850,29 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
                 function.line("return new PagedFlux<>(");
                 function.indent(() -> {
-                    function.line("() -> %s(%s),",
-                        clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                        clientMethod.getArgumentList());
-                    function.line("nextLink -> %s(%s));",
-                        clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                        clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage"));
+                    function.line("%s,", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                            clientMethod.getArgumentList(),
+                            settings));
+                    function.line("%s);", this.getPagingNextPageExpression(
+                            clientMethod,
+                            clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                            clientMethod.getMethodPageDetails().getNextMethod().getArgumentList(),
+                            settings));
                 });
             });
         } else {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod);
                 function.line("return new PagedFlux<>(");
-                function.indent(() -> function.line("() -> %s(%s));",
-                    clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                    clientMethod.getArgumentList()));
+                function.indent(() -> {
+                    function.line("%s);", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                            clientMethod.getArgumentList(),
+                            settings));
+                });
             });
         }
     }
@@ -1437,7 +1450,49 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         });
     }
 
+    private String getPagingSinglePageExpression(ClientMethod clientMethod, String methodName, String argumentLine, JavaSettings settings) {
+        if (settings.isDataPlaneClient() && settings.isPageSizeEnabled()) {
+            Optional<String> serializedName = MethodUtil.serializedNameOfMaxPageSizeParameter(clientMethod.getProxyMethod());
+            if (serializedName.isPresent()) {
+                argumentLine = argumentLine.replace("requestOptions", "requestOptionsLocal");
+                StringBuilder expression = new StringBuilder();
+                expression.append("(pageSize) -> {");
+                expression.append("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;")
+                        .append("if (pageSize != null) {")
+                        .append(String.format("requestOptionsLocal.addQueryParam(\"%s\", String.valueOf(pageSize));", serializedName.get()))
+                        .append("}")
+                        .append(String.format("return %s(%s);", methodName, argumentLine));
+                expression.append("}");
+                return expression.toString();
+            }
+        }
 
+        return String.format("() -> %s(%s)", methodName, argumentLine);
+    }
+
+    private String getPagingNextPageExpression(ClientMethod clientMethod, String methodName, String argumentLine, JavaSettings settings) {
+        if (settings.isDataPlaneClient() && settings.isPageSizeEnabled()) {
+            Optional<String> serializedName = MethodUtil.serializedNameOfMaxPageSizeParameter(clientMethod.getProxyMethod());
+            if (serializedName.isPresent()) {
+                argumentLine = argumentLine.replace("requestOptions", "requestOptionsLocal");
+                StringBuilder expression = new StringBuilder();
+                expression.append("(nextLink, pageSize) -> {");
+                expression.append("RequestOptions requestOptionsLocal = new RequestOptions();")
+                        .append("requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());")
+                        .append("if (pageSize != null) {")
+                        .append(String.format("requestOptionsLocal.addQueryParam(\"%s\", String.valueOf(pageSize));", serializedName.get()))
+                        .append("}")
+                        .append(String.format("return %s(%s);", methodName, argumentLine));
+                expression.append("}");
+                return expression.toString();
+            }
+        }
+
+        if (settings.isDataPlaneClient()) {
+            argumentLine = argumentLine.replace("requestOptions", "requestOptionsForNextPage");
+        }
+        return String.format("nextLink -> %s(%s)", methodName, argumentLine);
+    }
 
     private String getPollingStrategy(ClientMethod clientMethod, String contextParam) {
         String endpoint = "null";

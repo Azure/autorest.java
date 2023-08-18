@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -289,6 +290,14 @@ public class MethodUtil {
                 && p.getProtocol().getHttp().getIn() == RequestParameterLocation.QUERY
                 // serialized name == maxpagesize, or relax a bit, client name == maxPageSize
                 && (Objects.equals(p.getLanguage().getDefault().getSerializedName(), "maxpagesize") || Objects.equals(SchemaUtil.getJavaName(p), "maxPageSize"));
+    }
+
+    public static Optional<String> serializedNameOfMaxPageSizeParameter(ProxyMethod proxyMethod) {
+        return proxyMethod.getAllParameters().stream()
+                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY
+                        && (Objects.equals(p.getRequestParameterName(), "maxpagesize") || Objects.equals(p.getName(), "maxPageSize")))
+                .map(ProxyMethodParameter::getRequestParameterName)
+                .findFirst();
     }
 
     /**
