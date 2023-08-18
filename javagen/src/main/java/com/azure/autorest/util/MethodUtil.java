@@ -284,14 +284,28 @@ public class MethodUtil {
                 .collect(Collectors.toList());
     }
 
-    public static boolean isMaxPageSizeParameter(Parameter p) {
-        return p.getProtocol() != null && p.getProtocol().getHttp() != null
+    /**
+     * Checks if the parameter is "maxpagesize".
+     * <p>
+     * It checks if the serialized name is "maxpagesize", or client name is "maxPageSize".
+     *
+     * @param parameter the parameter
+     * @return whether the parameter is "maxpagesize".
+     */
+    public static boolean isMaxPageSizeParameter(Parameter parameter) {
+        return parameter.getProtocol() != null && parameter.getProtocol().getHttp() != null
                 // query parameter
-                && p.getProtocol().getHttp().getIn() == RequestParameterLocation.QUERY
+                && parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.QUERY
                 // serialized name == maxpagesize, or relax a bit, client name == maxPageSize
-                && (Objects.equals(p.getLanguage().getDefault().getSerializedName(), "maxpagesize") || Objects.equals(SchemaUtil.getJavaName(p), "maxPageSize"));
+                && (Objects.equals(parameter.getLanguage().getDefault().getSerializedName(), "maxpagesize") || Objects.equals(SchemaUtil.getJavaName(parameter), "maxPageSize"));
     }
 
+    /**
+     * Finds the serialized name of "maxpagesize" parameter, if exists.
+     *
+     * @param proxyMethod the proxy method
+     * @return the serialized name of "maxpagesize" parameter, if exists.
+     */
     public static Optional<String> serializedNameOfMaxPageSizeParameter(ProxyMethod proxyMethod) {
         return proxyMethod.getAllParameters().stream()
                 .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY
