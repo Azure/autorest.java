@@ -5,13 +5,16 @@ package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.fluent.model.ResourceCollectionAssociation;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -41,6 +44,8 @@ public class FluentJavaSettings {
     private final Set<String> javaNamesForPreserveModel = new HashSet<>();
 
     private final Set<String> javaNamesForRemoveOperationGroup = new HashSet<>();
+
+    private final List<ResourceCollectionAssociation> resourceCollectionAssociations = new ArrayList<>();
 
 //    /**
 //     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
@@ -140,6 +145,10 @@ public class FluentJavaSettings {
         return renameOperationGroup;
     }
 
+    public List<ResourceCollectionAssociation> getResourceCollectionAssociations() {
+        return resourceCollectionAssociations;
+    }
+
     public String getPomFilename() {
         return pomFilename;
     }
@@ -209,6 +218,8 @@ public class FluentJavaSettings {
 
         loadStringSetting("property-include-always", s -> splitStringToSet(s, javaNamesForPropertyIncludeAlways));
 
+        loadResourceCollectionAssociationSetting(resourceCollectionAssociations::addAll);
+
         loadStringSetting("pom-file", s -> pomFilename = s);
         loadStringSetting("package-version", s -> artifactVersion = s);
 
@@ -245,6 +256,15 @@ public class FluentJavaSettings {
         String settingValue = host.getStringValue(settingName);
         if (settingValue != null) {
             logger.debug("Option, string, {} : {}", settingName, settingValue);
+            action.accept(settingValue);
+        }
+    }
+
+    private void loadResourceCollectionAssociationSetting(Consumer<List<ResourceCollectionAssociation>> action) {
+        String settingName = "resource-collection-associations";
+        List<ResourceCollectionAssociation> settingValue = host.getValue(new TypeReference<List<ResourceCollectionAssociation>>() {}.getType(), settingName);
+        if (settingValue != null) {
+            logger.debug("Option, array, {} : {}", settingName, settingValue);
             action.accept(settingValue);
         }
     }

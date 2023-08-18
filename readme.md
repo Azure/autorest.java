@@ -133,6 +133,7 @@ Following settings only works when `fluent` option is specified.
 | `--preserve-model` | CSV. Preserve classes from clean-up. |
 | `--remove-operation-group` | CSV. Remove operation groups. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite. |
+| `--resource-collection-associations` | Array. Prioritized association from resource model to resource collection. |
 
 `fluent` option will change the default value for some vanilla options.
 For example, `generate-client-interfaces`, `required-parameter-client-methods` option is by default `true`.
