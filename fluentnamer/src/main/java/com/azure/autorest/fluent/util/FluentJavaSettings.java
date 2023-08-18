@@ -261,7 +261,7 @@ public class FluentJavaSettings {
     }
 
     private void loadResourceCollectionAssociationSetting(Consumer<List<ResourceCollectionAssociation>> action) {
-        String settingName = "resource-collection-association";
+        String settingName = "resource-collection-associations";
         List<ResourceCollectionAssociation> settingValue = host.getValue(new TypeReference<List<ResourceCollectionAssociation>>() {}.getType(), settingName);
         if (settingValue != null) {
             logger.debug("Option, array, {} : {}", settingName, settingValue);
