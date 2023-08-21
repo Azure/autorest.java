@@ -67,8 +67,6 @@ import {
   createSdkContext,
   shouldGenerateProtocol,
   isInternal,
-  getAllModels,
-  isInclude,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -358,25 +356,25 @@ export class CodeModelBuilder {
     }
   }
 
-  private processModels() {
-    const allModels = getAllModels(this.sdkContext);
-    for (const model of allModels) {
-      if (isInclude(this.sdkContext, model)) {
-        const schema = this.processSchema(model, model.name);
+  // private processModels() {
+  //   const allModels = getAllModels(this.sdkContext);
+  //   for (const model of allModels) {
+  //     if (isInclude(this.sdkContext, model)) {
+  //       const schema = this.processSchema(model, model.name);
 
-        if (this.isSchemaUsageEmpty(schema)) {
-          // if the model/schema is not processed by any operation, treat it as a stand-alone model, and make it input-output
-          this.trackSchemaUsage(schema, {
-            usage: [SchemaContext.Input, SchemaContext.Output],
-          });
-        }
+  //       if (this.isSchemaUsageEmpty(schema)) {
+  //         // if the model/schema is not processed by any operation, treat it as a stand-alone model, and make it input-output
+  //         this.trackSchemaUsage(schema, {
+  //           usage: [SchemaContext.Input, SchemaContext.Output],
+  //         });
+  //       }
 
-        this.trackSchemaUsage(schema, {
-          usage: [SchemaContext.ConvenienceApi],
-        });
-      }
-    }
-  }
+  //       this.trackSchemaUsage(schema, {
+  //         usage: [SchemaContext.ConvenienceApi],
+  //       });
+  //     }
+  //   }
+  // }
 
   private processClients() {
     const clients = listClients(this.sdkContext);
