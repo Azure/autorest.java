@@ -233,7 +233,10 @@ public class Javagen extends NewPlugin {
 
                 // test cases as Disabled
                 if (!client.getProtocolExamples().isEmpty()) {
-                    client.getProtocolExamples().forEach(protocolExample -> javaPackage.addProtocolTest(new TestContext(testContext, protocolExample)));
+                    client.getProtocolExamples().forEach(protocolExample -> javaPackage.addProtocolTest(new TestContext<>(testContext, protocolExample)));
+                }
+                if (!client.getClientMethodExamples().isEmpty()) {
+                    client.getClientMethodExamples().forEach(clientMethodExample -> javaPackage.addClientMethodTest(new TestContext<>(testContext, clientMethodExample)));
                 }
             }
         }

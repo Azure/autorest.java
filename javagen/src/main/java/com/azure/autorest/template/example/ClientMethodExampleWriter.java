@@ -189,7 +189,7 @@ public class ClientMethodExampleWriter {
         return new HashSet<>(this.imports);
     }
 
-    public void write(JavaBlock javaBlock) {
+    public void writeMethodInvocation(JavaBlock javaBlock) {
         methodBodyWriter.accept(javaBlock);
     }
 
