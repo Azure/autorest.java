@@ -26,7 +26,7 @@ public class SharedRouteTests {
         Assertions.assertNotNull(png);
 
         PngImageAsJson pngJson = client2.getAvatarAsJson();
-//        Assertions.assertNotNull(pngJson.getContent());
+        Assertions.assertNotNull(pngJson.getContent());
         png = client2.getAvatarAsPng();
         Assertions.assertNotNull(png);
     }
