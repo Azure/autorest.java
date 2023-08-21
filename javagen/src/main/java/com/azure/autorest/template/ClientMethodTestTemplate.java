@@ -42,6 +42,7 @@ public class ClientMethodTestTemplate implements IJavaTemplate<TestContext<Clien
         clientMethod.getReturnValue().getType().addImportsTo(imports, false);
         context.declareImport(imports);
 
+        context.annotation("Disabled");
         context.publicFinalClass(String.format("%1$s extends %2$s", className, testContext.getTestBaseClassName()), classBlock -> {
             classBlock.annotation("Test", "Disabled");  // "DoNotRecord(skipInPlayback = true)" not added
             classBlock.publicMethod(String.format("void test%1$s()", className), methodBlock -> {

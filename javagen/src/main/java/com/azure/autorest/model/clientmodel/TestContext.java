@@ -8,12 +8,12 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import java.util.List;
 import java.util.Objects;
 
-public class TestContext<Example> {
+public class TestContext<TExample> {
 
     private final List<ServiceClient> serviceClients;
     private final List<AsyncSyncClient> syncClients;
 
-    private final Example testCase;
+    private final TExample testCase;
 
     public TestContext(List<ServiceClient> serviceClients, List<AsyncSyncClient> syncClients) {
         this.serviceClients = Objects.requireNonNull(serviceClients);
@@ -27,7 +27,7 @@ public class TestContext<Example> {
      * @param testContext test context
      * @param testCase an example as test case
      */
-    public TestContext(TestContext testContext, Example testCase) {
+    public TestContext(TestContext testContext, TExample testCase) {
         this.serviceClients = Objects.requireNonNull(testContext.getServiceClients());
         this.syncClients = Objects.requireNonNull(testContext.getSyncClients());
         this.testCase = testCase;
@@ -41,7 +41,7 @@ public class TestContext<Example> {
         return syncClients;
     }
 
-    public Example getTestCase() {
+    public TExample getTestCase() {
         return testCase;
     }
 
