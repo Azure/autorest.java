@@ -9,6 +9,7 @@ import com.cadl.flatten.models.User;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Disabled
 public final class FlattenOpSendLongTests extends FlattenClientTestBase {
     @Test
     @Disabled

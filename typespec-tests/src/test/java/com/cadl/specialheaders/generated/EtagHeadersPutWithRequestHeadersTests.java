@@ -9,6 +9,7 @@ import com.cadl.specialheaders.models.Resource;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Disabled
 public final class EtagHeadersPutWithRequestHeadersTests extends SpecialHeadersClientTestBase {
     @Test
     @Disabled

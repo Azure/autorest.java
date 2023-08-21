@@ -10,6 +10,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Disabled
 public final class VersioningOpListTests extends VersioningClientTestBase {
     @Test
     @Disabled
