@@ -1459,7 +1459,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 expression.append("(pageSize) -> {");
                 expression.append("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;")
                         .append("if (pageSize != null) {")
-                        .append(String.format("requestOptionsLocal.addQueryParam(\"%s\", String.valueOf(pageSize));", serializedName.get()))
+                        .append("  requestOptionsLocal.addRequestCallback(requestLocal -> {")
+                        .append("    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());")
+                        .append("    urlBuilder.setQueryParameter(\"").append(serializedName.get()).append("\", String.valueOf(pageSize));")
+                        .append("    requestLocal.setUrl(urlBuilder.toString());")
+                        .append("  });")
                         .append("}")
                         .append(String.format("return %s(%s);", methodName, argumentLine));
                 expression.append("}");
@@ -1480,7 +1484,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 expression.append("RequestOptions requestOptionsLocal = new RequestOptions();")
                         .append("requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());")
                         .append("if (pageSize != null) {")
-                        .append(String.format("requestOptionsLocal.addQueryParam(\"%s\", String.valueOf(pageSize));", serializedName.get()))
+                        .append("  requestOptionsLocal.addRequestCallback(requestLocal -> {")
+                        .append("    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());")
+                        .append("    urlBuilder.setQueryParameter(\"").append(serializedName.get()).append("\", String.valueOf(pageSize));")
+                        .append("    requestLocal.setUrl(urlBuilder.toString());")
+                        .append("  });")
                         .append("}")
                         .append(String.format("return %s(%s);", methodName, argumentLine));
                 expression.append("}");
