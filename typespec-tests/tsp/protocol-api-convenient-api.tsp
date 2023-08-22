@@ -100,7 +100,7 @@ model ResourceJ {
 @trait
 model ListTrait {
   @traitContext(TraitContext.List)
-  reqeust: {
+  request: {
     @traitLocation(TraitLocation.Parameters)
     properties: {
       @projectedName("client", "maxPageSize")
