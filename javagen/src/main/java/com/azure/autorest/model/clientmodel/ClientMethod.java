@@ -18,6 +18,7 @@ import com.azure.autorest.util.MethodUtil;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.UrlBuilder;
 import com.azure.core.util.polling.PollingStrategyOptions;
 
 import java.util.ArrayList;
@@ -359,6 +360,9 @@ public class ClientMethod {
         if (settings.isDataPlaneClient()) {
             // for some processing on RequestOptions (get/set header)
             ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
+
+            // for query parameter modification in RequestOptions (UrlBuilder.parse)
+            imports.add(UrlBuilder.class.getName());
         }
 
         getReturnValue().addImportsTo(imports, includeImplementationImports);

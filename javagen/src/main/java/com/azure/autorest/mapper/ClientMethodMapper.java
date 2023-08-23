@@ -213,6 +213,16 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                 List<Parameter> codeModelParameters = getCodeModelParameters(request, isProtocolMethod);
 
+                final boolean isPageable =
+                    operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null
+                        && shouldGeneratePagingMethods();
+                if (isPageable && JavaSettings.getInstance().isPageSizeEnabled()) {
+                    // remove maxpagesize parameter from client method API, it would be in e.g. PagedIterable.iterableByPage(int)
+                    codeModelParameters = codeModelParameters.stream()
+                        .filter(p -> !MethodUtil.isMaxPageSizeParameter(p))
+                        .collect(Collectors.toList());
+                }
+
                 boolean isJsonPatch = request.getProtocol() != null && request.getProtocol().getHttp() != null
                     && request.getProtocol().getHttp().getMediaTypes() != null
                     && request.getProtocol().getHttp().getMediaTypes().contains("application/json-patch+json");
@@ -293,8 +303,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     .methodVisibilityInWrapperClient(isProtocolMethod && operation.getGenerateProtocolApi() == Boolean.FALSE ? JavaVisibility.PackagePrivate : JavaVisibility.Public)
                     .methodPageDetails(null);
 
-                if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null
-                    && shouldGeneratePagingMethods()) {
+                if (isPageable) {
                     String pageableItemName = getPageableItemName(operation.getExtensions().getXmsPageable(), proxyMethod.getRawResponseBodyType() != null ? proxyMethod.getRawResponseBodyType() : proxyMethod.getResponseBodyType());
                     if (pageableItemName == null) {
                         // There is no pageable item name for this operation, skip it.

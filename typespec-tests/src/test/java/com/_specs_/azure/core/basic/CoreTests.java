@@ -78,7 +78,7 @@ public class CoreTests {
 
     @Test
     public void testList() {
-        PagedFlux<User> response = client.list(5, 10, 100,
+        PagedFlux<User> response = client.list(5, 10,
                 Collections.singletonList("id"),
                 "id lt 10",
                 Arrays.asList("id", "orders", "etag"),
@@ -134,7 +134,7 @@ public class CoreTests {
 
     @Test
     public void testListSync() {
-        PagedIterable<User> response = syncClient.list(5, 10, 100,
+        PagedIterable<User> response = syncClient.list(5, 10,
                 Collections.singletonList("id"),
                 "id lt 10",
                 Arrays.asList("id", "orders", "etag"),

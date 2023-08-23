@@ -417,7 +417,6 @@ public final class BasicAsyncClient {
      *
      * @param top The number of result items to return.
      * @param skip The number of result items to skip.
-     * @param maxPageSize The maximum number of result items per page.
      * @param orderBy Expressions that specify the order of returned results.
      * @param filter Filter the result list using the given expression.
      * @param select Select the specified fields to be included in the response.
@@ -433,13 +432,7 @@ public final class BasicAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<User> list(
-            Integer top,
-            Integer skip,
-            Integer maxPageSize,
-            List<String> orderBy,
-            String filter,
-            List<String> select,
-            List<String> expand) {
+            Integer top, Integer skip, List<String> orderBy, String filter, List<String> select, List<String> expand) {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         if (top != null) {
@@ -447,9 +440,6 @@ public final class BasicAsyncClient {
         }
         if (skip != null) {
             requestOptions.addQueryParam("skip", String.valueOf(skip), false);
-        }
-        if (maxPageSize != null) {
-            requestOptions.addQueryParam("maxpagesize", String.valueOf(maxPageSize), false);
         }
         if (orderBy != null) {
             for (String paramItemValue : orderBy) {
