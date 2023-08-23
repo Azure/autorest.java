@@ -6,7 +6,7 @@ options:
     partial-update: true
     namer: true
     generate-samples: true
-    generate-tests: false
+    generate-tests: true
     examples-directory: "{project-root}/tsp/examples"
     dev-options:
       generate-code-model: true

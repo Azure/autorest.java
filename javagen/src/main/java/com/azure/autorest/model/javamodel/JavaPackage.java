@@ -27,6 +27,7 @@ import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.ChangelogTemplate;
+import com.azure.autorest.template.ClientMethodTestTemplate;
 import com.azure.autorest.template.ModelTestTemplate;
 import com.azure.autorest.template.ProtocolSampleBlankTemplate;
 import com.azure.autorest.template.ProtocolTestBaseTemplate;
@@ -244,10 +245,18 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public void addProtocolTest(TestContext testContext) {
+    public void addProtocolTest(TestContext<ProtocolExample> testContext) {
         String className = testContext.getTestCase().getFilename() + "Tests";
         JavaFile javaFile = javaFileFactory.createTestFile(testContext.getPackageName(), className);
         ProtocolTestTemplate.getInstance().write(testContext, javaFile);
+        this.checkDuplicateFile(javaFile.getFilePath());
+        javaFiles.add(javaFile);
+    }
+
+    public void addClientMethodTest(TestContext<ClientMethodExample> testContext) {
+        String className = testContext.getTestCase().getFilename() + "Tests";
+        JavaFile javaFile = javaFileFactory.createTestFile(testContext.getPackageName(), className);
+        ClientMethodTestTemplate.getInstance().write(testContext, javaFile);
         this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
     }
