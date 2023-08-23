@@ -170,14 +170,13 @@ public final class PageableClientImpl {
     }
 
     /**
-     * The list operation.
+     * List users.
      *
      * <p><strong>Query Parameters</strong>
      *
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
      *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
      * </table>
      *
@@ -214,14 +213,13 @@ public final class PageableClientImpl {
     }
 
     /**
-     * The list operation.
+     * List users.
      *
      * <p><strong>Query Parameters</strong>
      *
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
      *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
      * </table>
      *
@@ -278,14 +276,13 @@ public final class PageableClientImpl {
     }
 
     /**
-     * The list operation.
+     * List users.
      *
      * <p><strong>Query Parameters</strong>
      *
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
      *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
      * </table>
      *
@@ -320,14 +317,13 @@ public final class PageableClientImpl {
     }
 
     /**
-     * The list operation.
+     * List users.
      *
      * <p><strong>Query Parameters</strong>
      *
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
      *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
      * </table>
      *
