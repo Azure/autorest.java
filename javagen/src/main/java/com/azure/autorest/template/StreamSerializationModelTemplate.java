@@ -263,10 +263,18 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             return;
         }
 
+        if (property.isReadOnly()) {
+            // Readonly properties are never serialized.
+            return;
+        }
+
+        IType clientType = property.getClientType();
         IType wireType = property.getWireType();
         String propertyValueGetter;
         if (fromSuperType) {
-            propertyValueGetter = property.getGetterName() + "()";
+            propertyValueGetter = (clientType != wireType)
+                ? wireType.convertFromClientType(property.getGetterName() + "()")
+                : property.getGetterName() + "()";
         } else if (property.isPolymorphicDiscriminator()) {
             propertyValueGetter = CodeNamer.getEnumMemberName(property.getName());
         } else {
@@ -278,7 +286,15 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String fieldSerializationMethod = wireType.jsonSerializationMethodCall("jsonWriter", serializedName,
             propertyValueGetter);
         if (fieldSerializationMethod != null) {
-            methodBlock.line(fieldSerializationMethod + ";");
+            if (fromSuperType && clientType != wireType) {
+                // If the property is from a super type and the client type is different from the wire type then a null
+                // check is required to prevent a NullPointerException when converting the value.
+                methodBlock.ifBlock(property.getGetterName() + "() != null", ifAction -> {
+                    ifAction.line(fieldSerializationMethod + ";");
+                });
+            } else {
+                methodBlock.line(fieldSerializationMethod + ";");
+            }
         } else if (wireType == ClassType.Object) {
             methodBlock.line("jsonWriter.writeUntyped(" + propertyValueGetter + ");");
         } else if (wireType instanceof IterableType) {
@@ -291,7 +307,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 serializedName, propertyValueGetter, 0);
         } else {
             // TODO (alzimmer): Resolve this as deserialization logic generation needs to handle all cases.
-            throw new RuntimeException("Unknown wire type " + wireType.getClass() + " in serialization. Need to add support for it.");
+            throw new RuntimeException("Unknown wire type " + wireType + " in serialization. Need to add support for it.");
         }
     }
 
@@ -607,9 +623,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         ifAction.line("String %s = reader.getString();", discriminatorProperty.getName());
                         String ifStatement2 = String.format("!%s.equals(%s)", discriminatorConstant,
                             discriminatorProperty.getName());
-                        ifAction.ifBlock(ifStatement2, ifAction2 -> ifAction2.line(
-                            "throw new IllegalStateException(\"'%s' was expected to be non-null and equal to '\" + %s + \"'. "
-                                + "The found '%s' was '\" + %s + \"'.\");",
+                        ifAction.ifBlock(ifStatement2, ifAction2 -> ifAction2.line("throw new IllegalStateException("
+                            + "\"'%s' was expected to be non-null and equal to '\" + %s + \"'. "
+                            + "The found '%s' was '\" + %s + \"'.\");",
                             discriminatorProperty.getSerializedName(), discriminatorConstant,
                             discriminatorProperty.getSerializedName(), discriminatorProperty.getName()));
                     });
@@ -866,8 +882,18 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // Attempt to determine whether the wire type is simple deserialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
-        String simpleDeserialization = getSimpleJsonDeserialization(wireType, clientType, "reader");
+        String simpleDeserialization = getSimpleJsonDeserialization(wireType, "reader");
         if (simpleDeserialization != null) {
+            if (clientType != wireType) {
+                if (hasConstructorArguments) {
+                    // Need to convert the wire type to the client type for constructors.
+                    simpleDeserialization = wireType.convertToClientType(simpleDeserialization);
+                } else if (fromSuper && !property.isReadOnly()) {
+                    // Need to convert the wire type to the client type for public setters.
+                    simpleDeserialization = wireType.convertToClientType(simpleDeserialization);
+                }
+            }
+
             if (!hasConstructorArguments) {
                 handleSettingDeserializedValue(deserializationBlock, modelVariableName, property, simpleDeserialization,
                     fromSuper);
@@ -935,7 +961,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         IType elementType, int depth) {
         String callingReaderName = depth == 0 ? "reader" : "reader" + depth;
         String lambdaReaderName = "reader" + (depth + 1);
-        String valueDeserializationMethod = getSimpleJsonDeserialization(elementType, elementType, lambdaReaderName);
+        String valueDeserializationMethod = getSimpleJsonDeserialization(elementType, lambdaReaderName);
 
         methodBlock.line(callingReaderName + "." + utilityMethod + "(" + lambdaReaderName + " -> ");
         methodBlock.indent(() -> {
@@ -964,17 +990,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
     }
 
-    private static String getSimpleJsonDeserialization(IType wireType, IType clientType, String readerName) {
-        String wireTypeDeserialization;
-        if (wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
-            wireTypeDeserialization = wireType + ".fromJson(" + readerName + ")";
-        } else {
-            wireTypeDeserialization = wireType.jsonDeserializationMethod(readerName);
-        }
-
-        return (wireType != clientType && wireTypeDeserialization != null)
-            ? wireType.convertToClientType(wireTypeDeserialization)
-            : wireTypeDeserialization;
+    private static String getSimpleJsonDeserialization(IType wireType, String readerName) {
+        return (wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType())
+            ? wireType + ".fromJson(" + readerName + ")"
+            : wireType.jsonDeserializationMethod(readerName);
     }
 
     private static void handleUnknownJsonFieldDeserialization(JavaBlock methodBlock, JavaIfBlock ifBlock,
@@ -993,7 +1012,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 } else {
                     // Another assumption, the additional properties value type is simple.
                     javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", "
-                        + getSimpleJsonDeserialization(valueType, valueType, "reader") + ");");
+                        + getSimpleJsonDeserialization(valueType, "reader") + ");");
                 }
             } else {
                 javaBlock.line("reader.skipChildren();");
@@ -1109,9 +1128,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static void handleSettingDeserializedValue(JavaBlock methodBlock, String modelVariableName,
         ClientModelProperty property, String value, boolean fromSuper) {
-        // If the property is defined in a super class or doesn't match the wire type use the setter as this will
-        // be able to set the value in the super class definition or handle converting the wire type.
-        if (fromSuper || property.getWireType() != property.getClientType()) {
+        // If the property is defined in a super class use the setter as this will be able to set the value in the
+        // super class.
+        if (fromSuper) {
             methodBlock.line(modelVariableName + "." + property.getSetterName() + "(" + value + ");");
         } else {
             methodBlock.line(modelVariableName + "." + property.getName() + " = " + value + ";");

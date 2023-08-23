@@ -81,8 +81,13 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("getStringAttribute(%s, %s)")
         .build();
 
-    public static final ClassType Base64Url = new ClassType.Builder(false)
+    public static final ClassType Base64Url = new Builder(false)
         .knownClass(com.azure.core.util.Base64Url.class)
+        .wrapSerializationWithObjectsToString(true)
+        .jsonDeserializationMethod("getNullable(nonNullReader -> new Base64Url(nonNullReader.getString()))")
+        .serializationMethodBase("writeString")
+        .xmlElementDeserializationMethod("getNullableElement(Base64Url::new)")
+        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Base64Url::new)")
         .build();
 
     public static final ClassType AndroidBase64Url = new ClassType.Builder(false)

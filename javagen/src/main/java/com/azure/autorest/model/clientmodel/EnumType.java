@@ -79,7 +79,7 @@ public class EnumType implements IType {
     }
 
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-        imports.add(String.format("%1$s.%2$s", getPackage(), getName()));
+        imports.add(getPackage() + "." + getName());
 
         // EnumTypes may result in Collectors being used, if Collectors isn't used the unused import will be removed.
         imports.add("java.util.stream.Collectors");
@@ -104,7 +104,7 @@ public class EnumType implements IType {
         if (this.getExpandable()) {
             for (ClientEnumValue enumValue : this.getValues()) {
                 if (sourceExpression.equals(enumValue.getValue())) {
-                    return String.format("%1$s.%2$s", getName(), enumValue.getName());
+                    return getName() + "." + enumValue.getName();
                 }
             }
             return String.format("%1$s.from%2$s(%3$s)", getName(),
@@ -113,7 +113,7 @@ public class EnumType implements IType {
         } else {
             for (ClientEnumValue enumValue : this.getValues()) {
                 if (sourceExpression.equals(enumValue.getValue())) {
-                    return String.format("%1$s.%2$s", getName(), enumValue.getName());
+                    return getName() + "." + enumValue.getName();
                 }
             }
             return null;

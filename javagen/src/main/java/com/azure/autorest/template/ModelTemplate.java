@@ -179,6 +179,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings));
+                } else if (settings.isStreamStyleSerialization() && property.isReadOnly()
+                    && !CoreUtils.isNullOrEmpty(model.getDerivedModels())) {
+                    // If stream-style serialization is being generated, the model has derived types, and the property
+                    // is readonly generate a package-private setter method that uses the wire type for setting the
+                    // value. This will be used in stream-style serialization as it doesn't perform reflective cracking
+                    // like Jackson Databind does, which means it needs a way to access the readonly property (aka one
+                    // without a public setter method).
+                    generateSetterJavadoc(classBlock, model, property);
+                    classBlock.method(JavaVisibility.PackagePrivate, null,
+                        model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " " + property.getName() + ")",
+                        methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,
+                            methodBlock, settings));
                 }
 
                 // If the property is additional properties, and stream-style serialization isn't being used, add a
