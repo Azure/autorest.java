@@ -92,7 +92,6 @@ public final class Sawshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", FISHTYPE);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday", Objects.toString(getBirthday(), null));
         jsonWriter.writeStringField("species", getSpecies());
