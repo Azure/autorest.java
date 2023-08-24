@@ -168,8 +168,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         ifBlock.line();
 
                         // TODO (alzimmer): Insert XML object reading logic.
-                        ifBlock.line("items.add(" + getSimpleXmlDeserialization(elementType, elementType, "reader",
-                            null, null, null) + ");");
+                        ifBlock.line("items.add(" + getSimpleXmlDeserialization(elementType, "reader", null, null,
+                                null) + ");");
                     }).elseBlock(elseBlock -> elseBlock.line("reader.nextElement();"));
                 });
                 readerMethod.line("}");
@@ -263,8 +263,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             return;
         }
 
-        if (property.isReadOnly()) {
-            // Readonly properties are never serialized.
+        if (property.isReadOnly() && !property.isPolymorphicDiscriminator()) {
+            // Non-polymorphic discriminator, readonly properties are never serialized.
             return;
         }
 
@@ -286,7 +286,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String fieldSerializationMethod = wireType.jsonSerializationMethodCall("jsonWriter", serializedName,
             propertyValueGetter);
         if (fieldSerializationMethod != null) {
-            if (fromSuperType && clientType != wireType) {
+            if (fromSuperType && clientType != wireType && clientType.isNullable()) {
                 // If the property is from a super type and the client type is different from the wire type then a null
                 // check is required to prevent a NullPointerException when converting the value.
                 methodBlock.ifBlock(property.getGetterName() + "() != null", ifAction -> {
@@ -1201,6 +1201,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     private static void serializeXml(JavaBlock methodBlock, ClientModelProperty element, boolean fromSuperType,
         String modelName) {
+        IType clientType = element.getClientType();
         IType wireType = element.getWireType();
         String propertyValueGetter;
         if (element.isPolymorphicDiscriminator()) {
@@ -1211,7 +1212,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 propertyValueGetter = CodeNamer.getEnumMemberName(element.getName());
             }
         } else if (fromSuperType) {
-            propertyValueGetter = element.getGetterName() + "()";
+            propertyValueGetter = (clientType != wireType)
+                    ? wireType.convertFromClientType(element.getGetterName() + "()")
+                    : element.getGetterName() + "()";
         } else {
             propertyValueGetter = "this." + element.getName();
         }
@@ -1221,11 +1224,21 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String xmlSerializationMethodCall = wireType.xmlSerializationMethodCall("xmlWriter", element.getXmlName(),
             element.getXmlNamespace(), propertyValueGetter, element.isXmlAttribute(), false);
         if (xmlSerializationMethodCall != null) {
-            // XML text has special handling.
-            if (element.isXmlText()) {
-                methodBlock.line("xmlWriter.writeString(" + propertyValueGetter + ");");
+            Consumer<JavaBlock> serializationLogic = javaBlock -> {
+                // XML text has special handling.
+                if (element.isXmlText()) {
+                    javaBlock.line("xmlWriter.writeString(" + propertyValueGetter + ");");
+                } else {
+                    javaBlock.line(xmlSerializationMethodCall + ";");
+                }
+            };
+
+            // If the property is from a super type and the client type is different from the wire type then a null
+            // check is required to prevent a NullPointerException when converting the value.
+            if (fromSuperType && clientType != wireType && clientType.isNullable()) {
+                methodBlock.ifBlock(propertyValueGetter + " != null", serializationLogic);
             } else {
-                methodBlock.line(xmlSerializationMethodCall + ";");
+                serializationLogic.accept(methodBlock);
             }
         } else if (wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
             methodBlock.line("xmlWriter.writeXml(" + propertyValueGetter + ");");
@@ -1559,8 +1572,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static void deserializeXmlAttribute(JavaBlock methodBlock, ClientModelProperty attribute,
         ClientModelPropertiesManager propertiesManager, boolean fromSuper) {
-        String xmlAttributeDeserialization = getSimpleXmlDeserialization(attribute.getWireType(),
-            attribute.getClientType(), "reader", null, attribute.getXmlName(), attribute.getXmlNamespace());
+        String xmlAttributeDeserialization = getSimpleXmlDeserialization(attribute.getWireType(), "reader", null,
+                attribute.getXmlName(), attribute.getXmlNamespace());
 
         if (attribute.isPolymorphicDiscriminator()) {
             methodBlock.line("String discriminatorValue = " + xmlAttributeDeserialization + ";");
@@ -1583,8 +1596,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static void deserializeXmlText(JavaBlock methodBlock, ClientModelProperty text,
         ClientModelPropertiesManager propertiesManager, boolean fromSuper) {
-        String xmlTextDeserialization = getSimpleXmlDeserialization(text.getWireType(), text.getClientType(),
-            "reader", null, null, null);
+        String xmlTextDeserialization = getSimpleXmlDeserialization(text.getWireType(), "reader", null, null, null);
         if (propertiesManager.hasConstructorArguments()) {
             methodBlock.line("%s %s = %s;", text.getClientType(), text.getName(), xmlTextDeserialization);
         } else {
@@ -1628,12 +1640,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static void generateXmlDeserializationLogic(JavaBlock deserializationBlock, ClientModelProperty property,
         ClientModelPropertiesManager propertiesManager, boolean fromSuper, JavaSettings settings) {
         IType wireType = property.getWireType();
-        IType clientType = property.getClientType();
 
         // Attempt to determine whether the wire type is simple deserialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
-        String simpleDeserialization = getSimpleXmlDeserialization(wireType, clientType, "reader",
-            property.getXmlName(), null, null);
+        String simpleDeserialization = getSimpleXmlDeserialization(wireType, "reader", property.getXmlName(), null,
+                null);
         if (simpleDeserialization != null) {
             if (propertiesManager.hasConstructorArguments()) {
                 deserializationBlock.line(property.getName() + " = " + simpleDeserialization + ";");
@@ -1644,7 +1655,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         } else if (wireType instanceof IterableType) {
             IType elementType = ((IterableType) wireType).getElementType();
             boolean sameNames = Objects.equals(property.getXmlName(), property.getXmlListElementName());
-            String elementDeserialization = getSimpleXmlDeserialization(elementType, elementType, "reader",
+            String elementDeserialization = getSimpleXmlDeserialization(elementType, "reader",
                 sameNames ? property.getXmlName() : property.getXmlListElementName(), null, null);
             String fieldAccess;
             if (propertiesManager.hasConstructorArguments()) {
@@ -1691,8 +1702,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             deserializationBlock.ifBlock(fieldAccess + " == null",
                 ifStatement -> ifStatement.line(fieldAccess + " = new LinkedHashMap<>();"));
 
-            String valueDeserialization = getSimpleXmlDeserialization(valueType, valueType, "reader",
-                property.getXmlName(), null, null);
+            String valueDeserialization = getSimpleXmlDeserialization(valueType, "reader", property.getXmlName(), null,
+                    null);
             deserializationBlock.block("while (reader.nextElement() != XmlToken.END_ELEMENT)", whileBlock -> whileBlock
                 .line(fieldAccess + ".put(reader.getElementName().getLocalPart(), " + valueDeserialization + ");"));
         } else {
@@ -1722,7 +1733,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 } else {
                     // Another assumption, the additional properties value type is simple.
                     javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", "
-                        + getSimpleXmlDeserialization(valueType, valueType, "reader", null, null, null) + ");");
+                        + getSimpleXmlDeserialization(valueType, "reader", null, null, null) + ");");
                 }
             } else {
                 javaBlock.line("reader.skipElement();");
@@ -1736,8 +1747,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
     }
 
-    private static String getSimpleXmlDeserialization(IType wireType, IType clientType, String readerName,
-        String elementName, String attributeName, String attributeNamespace) {
+    private static String getSimpleXmlDeserialization(IType wireType, String readerName, String elementName,
+                                                      String attributeName, String attributeNamespace) {
         String wireTypeDeserialization = null;
         if (wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
             wireTypeDeserialization = CoreUtils.isNullOrEmpty(elementName)
@@ -1750,9 +1761,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
         }
 
-        return (wireType != clientType && wireTypeDeserialization != null)
-            ? wireType.convertToClientType(wireTypeDeserialization)
-            : wireTypeDeserialization;
+        return wireTypeDeserialization;
     }
 
     private static List<ClientModelPropertyWithMetadata> getClientModelPropertiesInJsonTree(

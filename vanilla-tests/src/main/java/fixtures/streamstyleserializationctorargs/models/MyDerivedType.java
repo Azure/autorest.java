@@ -9,6 +9,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
+import java.util.Objects;
 
 /** The MyDerivedType model. */
 @Fluent
@@ -73,6 +74,7 @@ public final class MyDerivedType extends MyBaseType {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("kind", Objects.toString(KIND, null));
         jsonWriter.writeStringField("propB1", getPropB1());
         jsonWriter.writeStringField("propD1", this.propD1);
         if (getPropBH1() != null) {
