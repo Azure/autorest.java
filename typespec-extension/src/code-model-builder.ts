@@ -589,10 +589,28 @@ export class CodeModelBuilder {
     op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it, clientContext));
     // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
+
+    // quantum model
+    let groupModelName: string | undefined = undefined;
+    if (this.options["dev-options"] && this.options["dev-options"]["support-quantum-model"]) {
+      // from template
+      let templateOperation: Operation | undefined = operation;
+      while (templateOperation) {
+        if (templateOperation.templateMapper && templateOperation.templateMapper.args.length > 0) {
+          const type = templateOperation.templateMapper.args[0];
+          if (type.kind === "Model" && type.name.endsWith("Options")) {
+            groupModelName = type.name;
+            break;
+          }
+        }
+        templateOperation = templateOperation.sourceOperation;
+      }
+    }
+
     // body
     if (op.parameters.body) {
       if (op.parameters.body.parameter) {
-        this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
+        this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter, groupModelName);
       } else if (op.parameters.body.type) {
         let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
 
@@ -610,22 +628,22 @@ export class CodeModelBuilder {
               }
             }
           }
+          this.processParameterBody(codeModelOperation, op, bodyType);
+        }
+      }
+    } else {
+      if (groupModelName) {
+        if (codeModelOperation.convenienceApi && codeModelOperation.parameters) {
+          const namespace = getNamespace(op.operation);
+          // copy to convenienceApi.requests
+          codeModelOperation.convenienceApi.requests = [];
+          const request = new Request();
+          const parameters: Array<Parameter> = [];
+          request.parameters = parameters;
+          codeModelOperation.convenienceApi.requests.push(request);
+          codeModelOperation.parameters.forEach((it) => parameters.push(cloneOperationParameter(it)));
 
-          // quantum model
-          let groupModelName: string | undefined = undefined;
-          if (
-            this.options["dev-options"] &&
-            this.options["dev-options"]["support-quantum-model"] &&
-            op.operation.parameters.kind === "Model" &&
-            op.operation.parameters.properties.size > 0
-          ) {
-            const operationProperty = op.operation.parameters.properties.values().next().value;
-            if (operationProperty.sourceProperty.model.name.endsWith("Options")) {
-              groupModelName = operationProperty.sourceProperty.model.name;
-            }
-          }
-
-          this.processParameterBody(codeModelOperation, op, bodyType, groupModelName);
+          this.createOptionBag(codeModelOperation, request, groupModelName, namespace);
         }
       }
     }
@@ -1173,52 +1191,55 @@ export class CodeModelBuilder {
           // create an option bag
           const name = groupModelName ?? op.language.default.name + "Options";
           const namespace = getNamespace(httpOperation.operation);
-          // option bag schema
-          const optionBagSchema = this.codeModel.schemas.add(
-            new GroupSchema(name, `Options for ${op.language.default.name} API`, {
-              language: {
-                default: {
-                  namespace: namespace,
-                },
-                java: {
-                  namespace: getJavaNamespace(namespace),
-                },
-              },
-            }),
-          );
-          request.parameters.forEach((it) => {
-            optionBagSchema.add(
-              new GroupProperty(it.language.default.name, it.language.default.description, it.schema, {
-                originalParameter: [it],
-                summary: it.summary,
-                required: it.required,
-                nullable: it.nullable,
-                readOnly: false,
-                serializedName: it.language.default.serializedName,
-              }),
-            );
-          });
-
-          this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input, SchemaContext.ConvenienceApi] });
-
-          // option bag parameter
-          const optionBagParameter = new Parameter(
-            "options",
-            optionBagSchema.language.default.description,
-            optionBagSchema,
-            {
-              implementation: ImplementationLocation.Method,
-              required: true,
-              nullable: false,
-            },
-          );
-
-          request.signatureParameters = [optionBagParameter];
-          request.parameters.forEach((it) => (it.groupedBy = optionBagParameter));
-          request.parameters.push(optionBagParameter);
+          this.createOptionBag(op, request, name, namespace);
         }
       }
     }
+  }
+
+  private createOptionBag(op: CodeModelOperation, request: Request, name: string, namespace: string | undefined) {
+    if (!request.parameters) {
+      return;
+    }
+
+    // option bag schema
+    const optionBagSchema = this.codeModel.schemas.add(
+      new GroupSchema(name, `Options for ${op.language.default.name} API`, {
+        language: {
+          default: {
+            namespace: namespace,
+          },
+          java: {
+            namespace: getJavaNamespace(namespace),
+          },
+        },
+      }),
+    );
+    request.parameters.forEach((it) => {
+      optionBagSchema.add(
+        new GroupProperty(it.language.default.name, it.language.default.description, it.schema, {
+          originalParameter: [it],
+          summary: it.summary,
+          required: it.required,
+          nullable: it.nullable,
+          readOnly: false,
+          serializedName: it.language.default.serializedName,
+        }),
+      );
+    });
+
+    this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input, SchemaContext.ConvenienceApi] });
+
+    // option bag parameter
+    const optionBagParameter = new Parameter("options", optionBagSchema.language.default.description, optionBagSchema, {
+      implementation: ImplementationLocation.Method,
+      required: true,
+      nullable: false,
+    });
+
+    request.signatureParameters = [optionBagParameter];
+    request.parameters.forEach((it) => (it.groupedBy = optionBagParameter));
+    request.parameters.push(optionBagParameter);
   }
 
   private findResponseBody(bodyType: Type): Type {
