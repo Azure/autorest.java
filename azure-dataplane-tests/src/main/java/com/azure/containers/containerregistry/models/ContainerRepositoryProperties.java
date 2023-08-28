@@ -11,7 +11,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 /** Properties of this repository. */
 @Fluent
@@ -207,12 +206,6 @@ public class ContainerRepositoryProperties implements JsonSerializable<Container
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("registry", this.registryLoginServer);
-        jsonWriter.writeStringField("imageName", this.name);
-        jsonWriter.writeStringField("createdTime", Objects.toString(this.createdOn, null));
-        jsonWriter.writeStringField("lastUpdateTime", Objects.toString(this.lastUpdatedOn, null));
-        jsonWriter.writeIntField("manifestCount", this.manifestCount);
-        jsonWriter.writeIntField("tagCount", this.tagCount);
         if (deleteEnabled != null || writeEnabled != null || listEnabled != null || readEnabled != null) {
             jsonWriter.writeStartObject("changeableAttributes");
             jsonWriter.writeBooleanField("deleteEnabled", this.deleteEnabled);

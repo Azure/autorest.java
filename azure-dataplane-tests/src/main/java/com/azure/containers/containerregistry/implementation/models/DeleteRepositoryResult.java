@@ -49,9 +49,6 @@ public final class DeleteRepositoryResult implements JsonSerializable<DeleteRepo
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField(
-                "manifestsDeleted", this.deletedManifests, (writer, element) -> writer.writeString(element));
-        jsonWriter.writeArrayField("tagsDeleted", this.deletedTags, (writer, element) -> writer.writeString(element));
         return jsonWriter.writeEndObject();
     }
 
