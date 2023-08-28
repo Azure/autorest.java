@@ -39,8 +39,25 @@
     </dependency>
     <dependency>
       <groupId>com.azure.tools</groupId>
+      <artifactId>azure-autorest-postprocessor</artifactId>
+      <version>1.0.0-beta.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-nop</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-partial-update</artifactId>
       <version>1.0.0-beta.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-nop</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.azure.tools</groupId>
@@ -58,31 +75,38 @@
       <artifactId>azure-autorest-extension</artifactId>
       <version>1.0.0-beta.4</version>
     </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>1.7.36</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.slf4j</groupId>-->
+<!--      <artifactId>slf4j-simple</artifactId>-->
+<!--      <version>1.7.36</version>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.39.0</version>
+      <version>1.42.0</version>
     </dependency>
     <dependency>
       <groupId>com.google.googlejavaformat</groupId>
       <artifactId>google-java-format</artifactId>
       <version>1.0.0-beta.1</version>
     </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.9.1</version>
+      <version>5.9.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.9.1</version>
+      <version>5.9.3</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

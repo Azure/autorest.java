@@ -73,8 +73,8 @@ public final class AliasAsyncClient {
      * }
      * }</pre>
      *
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -97,12 +97,17 @@ public final class AliasAsyncClient {
      *
      * <pre>{@code
      * {
-     *     name: String (Required)
+     *     prop1: String (Required)
+     *     prop2: String (Required)
+     *     prop3: String (Required)
+     *     prop4: String (Required)
+     *     prop5: String (Required)
+     *     prop6: String (Required)
      * }
      * }</pre>
      *
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -122,7 +127,7 @@ public final class AliasAsyncClient {
     /**
      * The spreadAsRequestBody operation.
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -145,9 +150,9 @@ public final class AliasAsyncClient {
     /**
      * The spreadAsRequestParameter operation.
      *
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
-     * @param name The name parameter.
+     * @param id A sequence of textual characters.
+     * @param xMsTestHeader A sequence of textual characters.
+     * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

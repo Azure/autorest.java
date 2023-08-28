@@ -4,6 +4,7 @@
 
 package com.cadl.protocolandconvenient.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,19 +15,22 @@ public final class ResourceJ {
     /*
      * The id property.
      */
-    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @Generated
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
      * The name property.
      */
-    @JsonProperty(value = "name", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @Generated
+    @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /*
      * The type property.
      */
-    @JsonProperty(value = "type", required = true)
+    @Generated
+    @JsonProperty(value = "type")
     private String type;
 
     /**
@@ -34,8 +38,9 @@ public final class ResourceJ {
      *
      * @param type the type value to set.
      */
+    @Generated
     @JsonCreator
-    private ResourceJ(@JsonProperty(value = "type", required = true) String type) {
+    private ResourceJ(@JsonProperty(value = "type") String type) {
         this.type = type;
     }
 
@@ -44,6 +49,7 @@ public final class ResourceJ {
      *
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -53,6 +59,7 @@ public final class ResourceJ {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -62,6 +69,7 @@ public final class ResourceJ {
      *
      * @return the type value.
      */
+    @Generated
     public String getType() {
         return this.type;
     }

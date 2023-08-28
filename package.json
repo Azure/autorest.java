@@ -1,6 +1,6 @@
 {
   "name": "@autorest/java",
-  "version": "4.1.17",
+  "version": "4.1.19",
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
@@ -36,15 +36,7 @@
     "/javagen/*.md",
     "/postprocessor/*.md",
     "/preprocessor/*.md",
-    "*/target/*-jar-with-dependencies.jar",
-    "/postprocessor/jdt-language-server/config_linux/*.ini",
-    "/postprocessor/jdt-language-server/config_mac/*.ini",
-    "/postprocessor/jdt-language-server/config_ss_linux/*.ini",
-    "/postprocessor/jdt-language-server/config_ss_mac/*.ini",
-    "/postprocessor/jdt-language-server/config_ss_win/*.ini",
-    "/postprocessor/jdt-language-server/config_win/*.ini",
-    "/postprocessor/jdt-language-server/features",
-    "/postprocessor/jdt-language-server/plugins"
+    "*/target/*-jar-with-dependencies.jar"
   ],
   "devDependencies": {
     "autorest": "^3.0.0",

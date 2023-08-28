@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -23,9 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PartialUpdateHandlerTest {
 
     @Test
-    public void testClassOrInterfaceFile_AddMemberToExistingFile() throws IOException, URISyntaxException {
-        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithAddedMemberClient.java").toURI())));
-        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())));
+    public void testClassOrInterfaceFileToTestAddMemberToExistingFile() throws IOException, URISyntaxException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithAddedMemberClient.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
 
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
@@ -43,9 +44,9 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testClassOrInterfaceFile_UpdateMethodSignatureToExistingFile() throws URISyntaxException, IOException {
-        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithUpdateMemberClient.java").toURI())));
-        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())));
+    public void testClassOrInterfaceFileToTestUpdateMethodSignatureToExistingFile() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithUpdateMemberClient.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
 
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
@@ -58,9 +59,9 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testClassOrInterfaceFile_RemoveMethodToExistingFile() throws URISyntaxException, IOException {
-        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithRemovedMemberGeneratedClient.java").toURI())));
-        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())));
+    public void testClassOrInterfaceFileToTestRemoveMethodToExistingFile() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithRemovedMemberGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
 
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
@@ -73,9 +74,9 @@ public class PartialUpdateHandlerTest {
 
 
     @Test
-    public void testClassOrInterfaceFile_SawaggerAddAPI() throws URISyntaxException, IOException {
-        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())));
-        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithAddedMemberGeneratedClient.java").toURI())));
+    public void testClassOrInterfaceFileToTestSawaggerAddAPI() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithAddedMemberGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
 
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
@@ -86,9 +87,9 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testClassOrInterfaceFile_GeneratedFileRemoveAPI() throws URISyntaxException, IOException {
-        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())));
-        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithRemovedMemberGeneratedClient.java").toURI())));
+    public void testClassOrInterfaceFileToTestGeneratedFileRemoveAPI() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithRemovedMemberGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
 
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
@@ -98,9 +99,9 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testClassOrInterfaceFile_GeneratedFileUpdateAPI() throws URISyntaxException, IOException {
-        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())));
-        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithUpdateMemberGeneratedClient.java").toURI())));
+    public void testClassOrInterfaceFileToTestGeneratedFileUpdateAPI() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithUpdateMemberGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
 
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
@@ -112,9 +113,9 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testClassOrInterfaceFile_GeneratedFileUpdateAPIAndExistingFileUpdateMethod() throws URISyntaxException, IOException {
-        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithUpdateMemberClient.java").toURI())));
-        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithUpdateMemberGeneratedClient.java").toURI())));
+    public void testClassOrInterfaceFileToTestGeneratedFileUpdateAPIAndExistingFileUpdateMethod() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithUpdateMemberClient.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithUpdateMemberGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
 
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
@@ -127,9 +128,9 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testClassOrInterfaceFile_GeneratedFileRemoveAPIAndExistingFileUpdateMethod() throws URISyntaxException, IOException {
-        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithUpdateMemberClient.java").toURI())));
-        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithRemovedMemberGeneratedClient.java").toURI())));
+    public void testClassOrInterfaceFileToTestGeneratedFileRemoveAPIAndExistingFileUpdateMethod() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithUpdateMemberClient.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithRemovedMemberGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
 
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
@@ -141,9 +142,9 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testClassOrInterfaceFile_WhenGeneratedFileHasSameNameButDifferentSignatureWithExistingGeneratedMethod_ThenShouldIncludeThisSameNameMethod() throws URISyntaxException, IOException {
-        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClient.java").toURI())));
-        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
+    public void testClassOrInterfaceFileToTestWhenGeneratedFileHasSameNameButDifferentSignatureWithExistingGeneratedMethodToTestThenShouldIncludeThisSameNameMethod() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClient.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())), StandardCharsets.UTF_8);
 
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
@@ -158,9 +159,9 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testClassOrInterfaceFile_WhenNoChangesAreMadeOnNextGeneration_ThenTheFileShouldStaySame() throws URISyntaxException, IOException {
-        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
-        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())));
+    public void testClassOrInterfaceFileToTestWhenNoChangesAreMadeOnNextGenerationToTestThenTheFileShouldStaySame() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/PagedGeneratedAsyncClientWithConvenienceMethod.java").toURI())), StandardCharsets.UTF_8);
 
         String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
 
@@ -175,9 +176,9 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testClassOrInterfaceFile_VerifyGeneratedFileShouldNotContainDuplicateMethods() throws URISyntaxException, IOException {
-        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithDuplicateMethodGeneratedClient.java").toURI())));
-        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithDuplicateMethodGeneratedClient.java").toURI())));
+    public void testClassOrInterfaceFileToTestVerifyGeneratedFileShouldNotContainDuplicateMethods() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithDuplicateMethodGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/StringOperationWithDuplicateMethodGeneratedClient.java").toURI())), StandardCharsets.UTF_8);
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
             PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
@@ -189,8 +190,25 @@ public class PartialUpdateHandlerTest {
         assertTrue(actualMessage.contains(expectedMessage));
 
     }
+
     @Test
-    public void testModuleInfoFile_WhenGeneratedFileEqualsExistingFile_ThenUseGeneratedFile() {
+    public void testClassOrInterfaceFileToTestModelCustomization() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/Model.java").toURI())), StandardCharsets.UTF_8);
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/GeneratedModel.java").toURI())), StandardCharsets.UTF_8);
+
+        String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+
+        CompilationUnit compilationUnit = parse(output);
+        assertEquals(1, compilationUnit.getTypes().size());
+        assertEquals(9, compilationUnit.getTypes().get(0).getMembers().size());
+        assertEquals(3, compilationUnit.getTypes().get(0).getFields().size());
+        assertEquals(2, compilationUnit.getTypes().get(0).getConstructors().size());
+        assertEquals(4, compilationUnit.getTypes().get(0).getMethods().size());
+
+    }
+
+    @Test
+    public void testModuleInfoFileToTestWhenGeneratedFileEqualsExistingFileToTestThenUseGeneratedFile() {
         String existingFileContent = "// Copyright (c) Microsoft Corporation. All rights reserved.\n" +
                 "// Licensed under the MIT License.\n" +
                 "// Code generated by Microsoft (R) AutoRest Code Generator.\n" +
@@ -221,7 +239,7 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testModuleInfoFile_WhenExistingFileHasUpdates_ThenUseExistingFile() {
+    public void testModuleInfoFileToTestWhenExistingFileHasUpdatesToTestThenUseExistingFile() {
         String existingFileContent = "// Copyright (c) Microsoft Corporation. All rights reserved.\n" +
                 "// Licensed under the MIT License.\n" +
                 "// Code generated by Microsoft (R) AutoRest Code Generator.\n" +
@@ -255,7 +273,7 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testModuleInfoFile_MergeExistingFileAndGeneratedFile_WhenExistingFileContentHasMoreDirectives() {
+    public void testModuleInfoFileToTestMergeExistingFileAndGeneratedFileToTestWhenExistingFileContentHasMoreDirectives() {
         String existingFileContent = "// Copyright (c) Microsoft Corporation. All rights reserved.\n" +
                 "// Licensed under the MIT License.\n" +
                 "// Code generated by Microsoft (R) AutoRest Code Generator.\n" +
@@ -286,7 +304,7 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testModuleInfoFile_MergeExistingFileAndGeneratedFile_WhenGeneratedFileContentHasMoreDirectives() {
+    public void testModuleInfoFileToTestMergeExistingFileAndGeneratedFileToTestWhenGeneratedFileContentHasMoreDirectives() {
         String existingFileContent = "module com.azure.communication.phonenumbersdemo {\n" +
                 "    requires transitive com.azure.core;\n" +
                 "\n" +
@@ -320,7 +338,7 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testModuleInfoFile_MergeExistingFileAndGeneratedFile_WhenExistingAndGeneratedFileHasSameContent() {
+    public void testModuleInfoFileToTestMergeExistingFileAndGeneratedFileToTestWhenExistingAndGeneratedFileHasSameContent() {
         String existingFileContent = "module com.azure.communication.phonenumbersdemo {\n" +
                 "    requires transitive com.azure.core;\n" +
                 "\n" +
@@ -362,7 +380,7 @@ public class PartialUpdateHandlerTest {
     }
 
     @Test
-    public void testModuleInfoFile_MergeExistingFileAndGeneratedFile_IgnoreEmptyLineAndWhiteSpace() {
+    public void testModuleInfoFileToTestMergeExistingFileAndGeneratedFileToTestIgnoreEmptyLineAndWhiteSpace() {
         String existingFileContent = "module com.azure.communication.phonenumbersdemo {\n" +
                 "    requires transitive com.azure.core;\n" +
                 "\n" +
@@ -389,9 +407,5 @@ public class PartialUpdateHandlerTest {
         assertEquals("exports com.azure.communication.phonenumbersdemo;", compilationUnit.getModule().get().getDirectives().get(1).asModuleExportsDirective().getTokenRange().get().toString());
         assertEquals("exports com.azure.communication.phonenumbersdemo.models;", compilationUnit.getModule().get().getDirectives().get(2).asModuleExportsDirective().getTokenRange().get().toString());
     }
-
-
-
-
 
 }

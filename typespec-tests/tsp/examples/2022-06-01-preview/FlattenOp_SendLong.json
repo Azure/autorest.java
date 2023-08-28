@@ -1,0 +1,31 @@
+{
+  "operationId": "FlattenOp_SendLong",
+  "title": "FlattenOp SendLong",
+  "parameters": {
+    "id":  "myRequiredId",
+    "filter": "name=myName",
+    "request": {
+      "user": {
+        "user": "myOptionalUser"
+      },
+      "input": "myRequiredInput",
+      "dataInt": 11,
+      "dataIntOptional": 12,
+      "dataLong": 13,
+      "data_float": 14.0
+    }
+  },
+  "responses": {
+    "200": {},
+    "default": {
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      },
+      "body": {
+        "code": "Error Code",
+        "message": "Error Message"
+      }
+    }
+  }
+}

@@ -86,6 +86,7 @@ public final class BasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(int id, BinaryData resource, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'createOrUpdate' is 'application/merge-patch+json'
         return this.serviceClient.createOrUpdateWithResponse(id, resource, requestOptions);
     }
 
@@ -407,7 +408,6 @@ public final class BasicClient {
      *
      * @param top The number of result items to return.
      * @param skip The number of result items to skip.
-     * @param maxPageSize The maximum number of result items per page.
      * @param orderBy Expressions that specify the order of returned results.
      * @param filter Filter the result list using the given expression.
      * @param select Select the specified fields to be included in the response.
@@ -423,13 +423,7 @@ public final class BasicClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<User> list(
-            Integer top,
-            Integer skip,
-            Integer maxPageSize,
-            List<String> orderBy,
-            String filter,
-            List<String> select,
-            List<String> expand) {
+            Integer top, Integer skip, List<String> orderBy, String filter, List<String> select, List<String> expand) {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         if (top != null) {
@@ -437,9 +431,6 @@ public final class BasicClient {
         }
         if (skip != null) {
             requestOptions.addQueryParam("skip", String.valueOf(skip), false);
-        }
-        if (maxPageSize != null) {
-            requestOptions.addQueryParam("maxpagesize", String.valueOf(maxPageSize), false);
         }
         if (orderBy != null) {
             for (String paramItemValue : orderBy) {
@@ -465,7 +456,7 @@ public final class BasicClient {
                 }
             }
         }
-        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(User.class));
+        return serviceClient.list(requestOptions).mapPage(bodyItemValue -> bodyItemValue.toObject(User.class));
     }
 
     /**
@@ -485,7 +476,7 @@ public final class BasicClient {
     public PagedIterable<User> list() {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.list(requestOptions).mapPage(value -> value.toObject(User.class));
+        return serviceClient.list(requestOptions).mapPage(bodyItemValue -> bodyItemValue.toObject(User.class));
     }
 
     /**
@@ -503,7 +494,7 @@ public final class BasicClient {
     public PagedIterable<User> listWithPage() {
         // Generated convenience method for listWithPage
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.listWithPage(requestOptions).mapPage(value -> value.toObject(User.class));
+        return serviceClient.listWithPage(requestOptions).mapPage(bodyItemValue -> bodyItemValue.toObject(User.class));
     }
 
     /**
@@ -521,7 +512,9 @@ public final class BasicClient {
     public PagedIterable<User> listWithCustomPageModel() {
         // Generated convenience method for listWithCustomPageModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.listWithCustomPageModel(requestOptions).mapPage(value -> value.toObject(User.class));
+        return serviceClient
+                .listWithCustomPageModel(requestOptions)
+                .mapPage(bodyItemValue -> bodyItemValue.toObject(User.class));
     }
 
     /**

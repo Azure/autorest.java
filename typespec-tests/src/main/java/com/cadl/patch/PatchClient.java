@@ -57,7 +57,7 @@ public final class PatchClient {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -70,6 +70,7 @@ public final class PatchClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(
             String name, BinaryData body, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'createOrUpdate' is 'application/merge-patch+json'
         return this.serviceClient.createOrUpdateWithResponse(name, body, requestOptions);
     }
 }

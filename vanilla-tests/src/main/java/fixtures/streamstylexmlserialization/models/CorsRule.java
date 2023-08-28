@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -186,7 +187,13 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("CorsRule");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "CorsRule" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("AllowedOrigins", this.allowedOrigins);
         xmlWriter.writeStringElement("AllowedMethods", this.allowedMethods);
         xmlWriter.writeStringElement("AllowedHeaders", this.allowedHeaders);
@@ -202,39 +209,46 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
      * @return An instance of CorsRule if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the CorsRule.
      */
     public static CorsRule fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return xmlReader.readObject(
-                "CorsRule",
-                reader -> {
-                    String allowedOrigins = null;
-                    String allowedMethods = null;
-                    String allowedHeaders = null;
-                    String exposedHeaders = null;
-                    int maxAgeInSeconds = 0;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+        return fromXml(xmlReader, null);
+    }
 
-                        if ("AllowedOrigins".equals(fieldName.getLocalPart())) {
-                            allowedOrigins = reader.getStringElement();
-                        } else if ("AllowedMethods".equals(fieldName.getLocalPart())) {
-                            allowedMethods = reader.getStringElement();
-                        } else if ("AllowedHeaders".equals(fieldName.getLocalPart())) {
-                            allowedHeaders = reader.getStringElement();
-                        } else if ("ExposedHeaders".equals(fieldName.getLocalPart())) {
-                            exposedHeaders = reader.getStringElement();
-                        } else if ("MaxAgeInSeconds".equals(fieldName.getLocalPart())) {
-                            maxAgeInSeconds = reader.getIntElement();
+    /**
+     * Reads an instance of CorsRule from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of CorsRule if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the CorsRule.
+     */
+    public static CorsRule fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "CorsRule" : rootElementName;
+        return xmlReader.readObject(
+                finalRootElementName,
+                reader -> {
+                    CorsRule deserializedCorsRule = new CorsRule();
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName elementName = reader.getElementName();
+
+                        if ("AllowedOrigins".equals(elementName.getLocalPart())) {
+                            deserializedCorsRule.allowedOrigins = reader.getStringElement();
+                        } else if ("AllowedMethods".equals(elementName.getLocalPart())) {
+                            deserializedCorsRule.allowedMethods = reader.getStringElement();
+                        } else if ("AllowedHeaders".equals(elementName.getLocalPart())) {
+                            deserializedCorsRule.allowedHeaders = reader.getStringElement();
+                        } else if ("ExposedHeaders".equals(elementName.getLocalPart())) {
+                            deserializedCorsRule.exposedHeaders = reader.getStringElement();
+                        } else if ("MaxAgeInSeconds".equals(elementName.getLocalPart())) {
+                            deserializedCorsRule.maxAgeInSeconds = reader.getIntElement();
                         } else {
                             reader.skipElement();
                         }
                     }
-                    CorsRule deserializedCorsRule = new CorsRule();
-                    deserializedCorsRule.allowedOrigins = allowedOrigins;
-                    deserializedCorsRule.allowedMethods = allowedMethods;
-                    deserializedCorsRule.allowedHeaders = allowedHeaders;
-                    deserializedCorsRule.exposedHeaders = exposedHeaders;
-                    deserializedCorsRule.maxAgeInSeconds = maxAgeInSeconds;
 
                     return deserializedCorsRule;
                 });

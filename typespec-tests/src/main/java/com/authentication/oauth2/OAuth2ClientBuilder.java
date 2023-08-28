@@ -20,7 +20,6 @@ import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
 import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -33,6 +32,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +71,9 @@ public final class OAuth2ClientBuilder
     @Generated
     @Override
     public OAuth2ClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -215,7 +218,6 @@ public final class OAuth2ClientBuilder
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        policies.add(new CookiePolicy());
         if (tokenCredential != null) {
             policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, DEFAULT_SCOPES));
         }
@@ -252,4 +254,6 @@ public final class OAuth2ClientBuilder
     public OAuth2Client buildClient() {
         return new OAuth2Client(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(OAuth2ClientBuilder.class);
 }

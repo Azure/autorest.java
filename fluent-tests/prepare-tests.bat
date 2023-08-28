@@ -12,7 +12,7 @@ RMDIR /S /Q "src\main\java\com\azure\mgmtlitetest"
 RMDIR /S /Q "src\samples"
 RMDIR /S /Q "src\test\java\com\azure\mgmtlitetest"
 
-SET AUTOREST_CORE_VERSION=3.9.3
+SET AUTOREST_CORE_VERSION=3.9.7
 SET COMMON_ARGUMENTS=--java --use=../ --java.output-folder=./ --modelerfour.additional-checks=false --modelerfour.lenient-model-deduplication=true --azure-arm --java.license-header=MICROSOFT_MIT_SMALL
 SET FLUENT_ARGUMENTS=%COMMON_ARGUMENTS% --fluent
 SET FLUENTLITE_ARGUMENTS=%COMMON_ARGUMENTS% --fluent=lite --generate-samples --generate-tests
@@ -63,7 +63,7 @@ REM flatten the empty model which has non-empty parent model
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/monitor/resource-manager/Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json --namespace=com.azure.mgmttest.monitor
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-REM swagger customed Resource and ProxyResource
+REM swagger customized Resource and ProxyResource
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2018-08-01/trafficmanager.json --namespace=com.azure.mgmttest.trafficmanager
 if %errorlevel% neq 0 exit /b %errorlevel%
 
@@ -71,7 +71,7 @@ REM fluent lite
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --pom-file=pom_generated_resources.xml https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/readme.md --tag=package-resources-2021-01 --java.namespace=com.azure.mgmtlitetest.resources
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/storage/resource-manager/readme.md --tag=package-2021-01 --java.namespace=com.azure.mgmtlitetest.storage
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/da0cfefaa0e6c237e1e3819f1cb2e11d7606878d/specification/storage/resource-manager/readme.md --tag=package-2021-01 --java.namespace=com.azure.mgmtlitetest.storage
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/advisor/resource-manager/readme.md --tag=package-2020-01 --java.namespace=com.azure.mgmtlitetest.advisor
@@ -90,6 +90,10 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM multiple inheritance with conflict field
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/readme.md --tag=package-preview-2021-05 --java.namespace=com.azure.mgmtlitetest.botservice
+if %errorlevel% neq 0 exit /b %errorlevel%
+
+REM model inherit ErrorResponse
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/196886564583ff59186bd0ef44d923120aaf3f78/specification/managednetworkfabric/resource-manager/Microsoft.ManagedNetworkFabric/stable/2023-06-15/NetworkFabrics.json --java.namespace=com.azure.mgmtlitetest.managednetworkfabric
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM schema clean-up

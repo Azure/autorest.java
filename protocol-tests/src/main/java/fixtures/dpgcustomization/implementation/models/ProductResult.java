@@ -5,6 +5,7 @@
 package fixtures.dpgcustomization.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fixtures.dpgcustomization.models.Product;
 import java.util.List;
@@ -15,16 +16,19 @@ public final class ProductResult {
     /*
      * The values property.
      */
+    @Generated
     @JsonProperty(value = "values")
     private List<Product> values;
 
     /*
      * The nextLink property.
      */
+    @Generated
     @JsonProperty(value = "nextLink")
     private String nextLink;
 
     /** Creates an instance of ProductResult class. */
+    @Generated
     public ProductResult() {}
 
     /**
@@ -32,6 +36,7 @@ public final class ProductResult {
      *
      * @return the values value.
      */
+    @Generated
     public List<Product> getValues() {
         return this.values;
     }
@@ -42,6 +47,7 @@ public final class ProductResult {
      * @param values the values value to set.
      * @return the ProductResult object itself.
      */
+    @Generated
     public ProductResult setValues(List<Product> values) {
         this.values = values;
         return this;
@@ -52,6 +58,7 @@ public final class ProductResult {
      *
      * @return the nextLink value.
      */
+    @Generated
     public String getNextLink() {
         return this.nextLink;
     }
@@ -62,6 +69,7 @@ public final class ProductResult {
      * @param nextLink the nextLink value to set.
      * @return the ProductResult object itself.
      */
+    @Generated
     public ProductResult setNextLink(String nextLink) {
         this.nextLink = nextLink;
         return this;

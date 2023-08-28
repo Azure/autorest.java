@@ -31,6 +31,7 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.CollectionFormat;
 
@@ -38,6 +39,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -390,30 +392,46 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                             if (alreadyNullChecked) {
                                 expression =
                                     parameterName + ".stream()\n" +
-                                        "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                        "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                             } else {
                                 expression =
                                     "(" + parameterName + " == null) ? null : " + parameterName + ".stream()\n" +
-                                        "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                        "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                             }
                         } else {
                             if (elementType == ClassType.String) {
                                 if (alreadyNullChecked) {
                                     expression = parameterName + ".stream()\n" +
-                                        "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                        "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                                 } else {
                                     expression = "(" + parameterName + " == null) ? null : " + parameterName + ".stream()\n" +
-                                        "    .map(value -> Objects.toString(value, \"\"))\n" +
+                                        "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                                 }
                             } else {
                                 // Always use serializeIterable as Iterable supports both Iterable and List.
+
+                                // this logic depends on rawType of proxy method parameter be List<WireType>
+                                // alternative would be check wireType of client method parameter
+                                IType elementWireType = parameter.getRawType() instanceof IterableType
+                                        ? ((IterableType) parameter.getRawType()).getElementType()
+                                        : elementType;
+
+                                String serializeIterableInput = parameterName;
+                                if (elementWireType != elementType) {
+                                    // convert List<ClientType> to List<WireType>, if necessary
+                                    serializeIterableInput = String.format(
+                                            "%1$s.stream().map(paramItemValue -> %2$s).collect(Collectors.toList())",
+                                            parameterName,
+                                            elementWireType.convertFromClientType("paramItemValue"));
+                                }
+                                // convert List<WireType> to String
                                 expression = String.format(
-                                    "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%s, CollectionFormat.%s)",
-                                    parameterName, collectionFormat.toString().toUpperCase(Locale.ROOT));
+                                        "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%s, CollectionFormat.%s)",
+                                        serializeIterableInput, collectionFormat.toString().toUpperCase(Locale.ROOT));
                             }
                         }
                     } else {
@@ -431,8 +449,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
             }
 
-            if (settings.isGenerateXmlSerialization()
-                && parameterClientType instanceof ListType
+            if (parameter.getWireType().isUsedInXml() && parameterClientType instanceof ListType
                 && (parameterLocation == RequestParameterLocation.BODY /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
                 function.line("%s %s = new %s(%s);", parameter.getWireType(), parameterWireName,
                     parameter.getWireType(), alwaysNull ? "null" : parameterName);
@@ -448,22 +465,57 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     private static boolean addSpecialHeadersToRequestOptions(JavaBlock function, ClientMethod clientMethod) {
+        // logic only works for DPG, protocol API, on RequestOptions
+
         boolean requestOptionsLocal = false;
-        addSpecialHeadersToLocalVariables(function, clientMethod);
-        if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod())) {
+
+        final boolean repeatabilityRequestHeaders = MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod());
+
+        // optional parameter is in getAllParameters
+        boolean bodyParameterOptional = clientMethod.getProxyMethod().getAllParameters().stream()
+                .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.BODY
+                        && !p.isConstant() && !p.isFromClient() && !p.isRequired());
+        // this logic relies on: codegen requires either source defines "content-type" header parameter, or codegen generates a "content-type" header parameter (ref ProxyMethodMapper class)
+        boolean singleContentType = clientMethod.getProxyMethod().getAllParameters().stream()
+                .noneMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.HEADER
+                        && HttpHeaderName.CONTENT_TYPE.getCaseInsensitiveName().equalsIgnoreCase(p.getRequestParameterName())
+                        && p.getRawType() instanceof EnumType
+                        && ((EnumType) p.getRawType()).getValues().size() > 1);
+        final boolean contentTypeRequestHeaders = bodyParameterOptional && singleContentType;
+
+        // need a "final" variable for RequestOptions
+        if (repeatabilityRequestHeaders || contentTypeRequestHeaders) {
             requestOptionsLocal = true;
             function.line("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;");
+        }
+
+        // repeatability headers
+        if (repeatabilityRequestHeaders) {
+            addSpecialHeadersToLocalVariables(function, clientMethod);
             requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME, MethodUtil.REPEATABILITY_REQUEST_ID_HEADER);
             requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME, MethodUtil.REPEATABILITY_FIRST_SENT_HEADER);
         }
+
+        // content-type headers for optional body parameter
+        if (contentTypeRequestHeaders) {
+            final String contentType = clientMethod.getProxyMethod().getRequestContentType();
+            function.line("requestOptionsLocal.addRequestCallback(requestLocal -> {");
+            function.indent(() -> {
+                function.ifBlock("requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null", ifBlock -> {
+                    function.line(String.format("requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, \"%1$s\");", contentType));
+                });
+            });
+            function.line("});");
+        }
+
         return requestOptionsLocal;
     }
 
     private static void requestOptionsSetHeaderIfAbsent(JavaBlock function, String variableName, String headerName) {
         function.line("requestOptionsLocal.addRequestCallback(requestLocal -> {");
         function.indent(() -> {
-            function.ifBlock(String.format("requestLocal.getHeaders().get(\"%1$s\") == null", headerName), ifBlock -> {
-                function.line(String.format("requestLocal.getHeaders().set(\"%1$s\", %2$s);", headerName, variableName));
+            function.ifBlock(String.format("requestLocal.getHeaders().get(HttpHeaderName.fromString(\"%1$s\")) == null", headerName), ifBlock -> {
+                function.line(String.format("requestLocal.getHeaders().set(HttpHeaderName.fromString(\"%1$s\"), %2$s);", headerName, variableName));
             });
         });
         function.line("});");
@@ -606,36 +658,31 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         generatePagingSync(clientMethod, typeBlock, restAPIMethod, settings);
     }
 
-    protected void generateProtocolPagingPlainSync(ClientMethod clientMethod, JavaType typeBlock,
-        ProxyMethod restAPIMethod, JavaSettings settings) {
+    protected void generateProtocolPagingPlainSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod);
+
                 function.line("RequestOptions requestOptionsForNextPage = new RequestOptions();");
                 function.line("requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);");
+
                 function.line("return new PagedIterable<>(");
-
-                String nextMethodArgs = clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage");
-                String firstPageArgs = clientMethod.getArgumentList();
-                if (clientMethod.getParameters()
-                        .stream()
-                        .noneMatch(p -> p.getClientType() == ClassType.Context)) {
-                    nextMethodArgs = nextMethodArgs.replace("context", "Context.NONE");
-
-                }
-                String effectiveNextMethodArgs = nextMethodArgs;
                 function.indent(() -> {
-                    function.line("() -> %s(%s),",
-                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(), firstPageArgs);
-                    function.line("nextLink -> %s(%s));",
+                    function.line("%s,", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                            clientMethod.getArgumentList(),
+                            settings));
+                    function.line("%s);", this.getPagingNextPageExpression(
+                            clientMethod,
                             clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingSinglePageMethodName(),
-                            effectiveNextMethodArgs);
+                            clientMethod.getMethodPageDetails().getNextMethod().getArgumentList(),
+                            settings));
                 });
             });
         } else {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
-                String firstPageArgs = clientMethod.getArgumentList();
                 if (clientMethod.getParameters()
                         .stream()
                         .noneMatch(p -> p.getClientType() == ClassType.Context)) {
@@ -643,8 +690,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 addOptionalVariables(function, clientMethod);
                 function.line("return new PagedIterable<>(");
                 function.indent(() -> {
-                    function.line("() -> %s(%s));",
-                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(), firstPageArgs);
+                    function.line("%s);", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                            clientMethod.getArgumentList(),
+                            settings));
                 });
             });
         }
@@ -749,12 +799,16 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 String effectiveNextMethodArgs = nextMethodArgs;
                 String effectiveFirstPageArgs = firstPageArgs;
                 function.indent(() -> {
-                    function.line("() -> %s(%s),",
-                        clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
-                        effectiveFirstPageArgs);
-                    function.line("nextLink -> %s(%s));",
-                        clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingSinglePageMethodName(),
-                        effectiveNextMethodArgs);
+                    function.line("%s,", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                            effectiveFirstPageArgs,
+                            settings));
+                    function.line("%s);", this.getPagingNextPageExpression(
+                            clientMethod,
+                            clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingSinglePageMethodName(),
+                            effectiveNextMethodArgs,
+                            settings));
                 });
             });
         } else {
@@ -775,9 +829,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 addOptionalVariables(function, clientMethod);
                 function.line("return new PagedIterable<>(");
                 function.indent(() -> {
-                    function.line("() -> %s(%s));",
-                        clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
-                        effectiveFirstPageArgs);
+                    function.line("%s,", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
+                            effectiveFirstPageArgs,
+                            settings));
                 });
             });
         }
@@ -794,21 +850,29 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
                 function.line("return new PagedFlux<>(");
                 function.indent(() -> {
-                    function.line("() -> %s(%s),",
-                        clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                        clientMethod.getArgumentList());
-                    function.line("nextLink -> %s(%s));",
-                        clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                        clientMethod.getMethodPageDetails().getNextMethod().getArgumentList().replace("requestOptions", "requestOptionsForNextPage"));
+                    function.line("%s,", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                            clientMethod.getArgumentList(),
+                            settings));
+                    function.line("%s);", this.getPagingNextPageExpression(
+                            clientMethod,
+                            clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                            clientMethod.getMethodPageDetails().getNextMethod().getArgumentList(),
+                            settings));
                 });
             });
         } else {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod);
                 function.line("return new PagedFlux<>(");
-                function.indent(() -> function.line("() -> %s(%s));",
-                    clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                    clientMethod.getArgumentList()));
+                function.indent(() -> {
+                    function.line("%s);", this.getPagingSinglePageExpression(
+                            clientMethod,
+                            clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                            clientMethod.getArgumentList(),
+                            settings));
+                });
             });
         }
     }
@@ -1386,7 +1450,57 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         });
     }
 
+    private String getPagingSinglePageExpression(ClientMethod clientMethod, String methodName, String argumentLine, JavaSettings settings) {
+        if (settings.isDataPlaneClient() && settings.isPageSizeEnabled()) {
+            Optional<String> serializedName = MethodUtil.serializedNameOfMaxPageSizeParameter(clientMethod.getProxyMethod());
+            if (serializedName.isPresent()) {
+                argumentLine = argumentLine.replace("requestOptions", "requestOptionsLocal");
+                StringBuilder expression = new StringBuilder();
+                expression.append("(pageSize) -> {");
+                expression.append("RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;")
+                        .append("if (pageSize != null) {")
+                        .append("  requestOptionsLocal.addRequestCallback(requestLocal -> {")
+                        .append("    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());")
+                        .append("    urlBuilder.setQueryParameter(\"").append(serializedName.get()).append("\", String.valueOf(pageSize));")
+                        .append("    requestLocal.setUrl(urlBuilder.toString());")
+                        .append("  });")
+                        .append("}")
+                        .append(String.format("return %s(%s);", methodName, argumentLine));
+                expression.append("}");
+                return expression.toString();
+            }
+        }
 
+        return String.format("() -> %s(%s)", methodName, argumentLine);
+    }
+
+    private String getPagingNextPageExpression(ClientMethod clientMethod, String methodName, String argumentLine, JavaSettings settings) {
+        if (settings.isDataPlaneClient() && settings.isPageSizeEnabled()) {
+            Optional<String> serializedName = MethodUtil.serializedNameOfMaxPageSizeParameter(clientMethod.getProxyMethod());
+            if (serializedName.isPresent()) {
+                argumentLine = argumentLine.replace("requestOptions", "requestOptionsLocal");
+                StringBuilder expression = new StringBuilder();
+                expression.append("(nextLink, pageSize) -> {");
+                expression.append("RequestOptions requestOptionsLocal = new RequestOptions();")
+                        .append("requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());")
+                        .append("if (pageSize != null) {")
+                        .append("  requestOptionsLocal.addRequestCallback(requestLocal -> {")
+                        .append("    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());")
+                        .append("    urlBuilder.setQueryParameter(\"").append(serializedName.get()).append("\", String.valueOf(pageSize));")
+                        .append("    requestLocal.setUrl(urlBuilder.toString());")
+                        .append("  });")
+                        .append("}")
+                        .append(String.format("return %s(%s);", methodName, argumentLine));
+                expression.append("}");
+                return expression.toString();
+            }
+        }
+
+        if (settings.isDataPlaneClient()) {
+            argumentLine = argumentLine.replace("requestOptions", "requestOptionsForNextPage");
+        }
+        return String.format("nextLink -> %s(%s)", methodName, argumentLine);
+    }
 
     private String getPollingStrategy(ClientMethod clientMethod, String contextParam) {
         String endpoint = "null";

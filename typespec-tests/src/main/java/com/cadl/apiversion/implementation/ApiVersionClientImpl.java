@@ -19,7 +19,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
@@ -94,9 +93,7 @@ public final class ApiVersionClientImpl {
      */
     public ApiVersionClientImpl(String endpoint, ApiVersionServiceVersion serviceVersion) {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 endpoint,
                 serviceVersion);
@@ -193,7 +190,7 @@ public final class ApiVersionClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> readWithResponseAsync(RequestOptions requestOptions) {
@@ -222,7 +219,7 @@ public final class ApiVersionClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {

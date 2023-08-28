@@ -4,6 +4,7 @@
 
 package com.type.property.nullable.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,13 +15,15 @@ public final class StringProperty {
     /*
      * Required property
      */
-    @JsonProperty(value = "requiredProperty", required = true)
+    @Generated
+    @JsonProperty(value = "requiredProperty")
     private String requiredProperty;
 
     /*
      * Property
      */
-    @JsonProperty(value = "nullableProperty", required = true)
+    @Generated
+    @JsonProperty(value = "nullableProperty")
     private String nullableProperty;
 
     /**
@@ -29,10 +32,11 @@ public final class StringProperty {
      * @param requiredProperty the requiredProperty value to set.
      * @param nullableProperty the nullableProperty value to set.
      */
+    @Generated
     @JsonCreator
     public StringProperty(
-            @JsonProperty(value = "requiredProperty", required = true) String requiredProperty,
-            @JsonProperty(value = "nullableProperty", required = true) String nullableProperty) {
+            @JsonProperty(value = "requiredProperty") String requiredProperty,
+            @JsonProperty(value = "nullableProperty") String nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }
@@ -42,6 +46,7 @@ public final class StringProperty {
      *
      * @return the requiredProperty value.
      */
+    @Generated
     public String getRequiredProperty() {
         return this.requiredProperty;
     }
@@ -51,6 +56,7 @@ public final class StringProperty {
      *
      * @return the nullableProperty value.
      */
+    @Generated
     public String getNullableProperty() {
         return this.nullableProperty;
     }

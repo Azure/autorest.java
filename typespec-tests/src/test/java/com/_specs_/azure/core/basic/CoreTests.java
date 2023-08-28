@@ -4,12 +4,13 @@
 package com._specs_.azure.core.basic;
 
 import com._specs_.azure.core.basic.models.User;
+import com.azure.core.http.HttpClient;
 import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
+import com.azure.core.test.http.AssertingHttpClientBuilder;
 import com.azure.core.util.BinaryData;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -24,9 +25,11 @@ import java.util.stream.Collectors;
 public class CoreTests {
 
     private BasicAsyncClient client = new BasicClientBuilder()
+            .httpClient(new AssertingHttpClientBuilder(HttpClient.createDefault()).assertAsync().build())
             .buildAsyncClient();
 
     private BasicClient syncClient = new BasicClientBuilder()
+            .httpClient(new AssertingHttpClientBuilder(HttpClient.createDefault()).assertSync().build())
             .buildClient();
 
     @Test
@@ -75,7 +78,7 @@ public class CoreTests {
 
     @Test
     public void testList() {
-        PagedFlux<User> response = client.list(5, 10, 100,
+        PagedFlux<User> response = client.list(5, 10,
                 Collections.singletonList("id"),
                 "id lt 10",
                 Arrays.asList("id", "orders", "etag"),
@@ -130,10 +133,8 @@ public class CoreTests {
     }
 
     @Test
-    @Disabled
-    // TODO(xiaofei) enable when PagedIterable::mapPage is fixed in azure-core
     public void testListSync() {
-        PagedIterable<User> response = syncClient.list(5, 10, 100,
+        PagedIterable<User> response = syncClient.list(5, 10,
                 Collections.singletonList("id"),
                 "id lt 10",
                 Arrays.asList("id", "orders", "etag"),

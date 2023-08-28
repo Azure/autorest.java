@@ -4,6 +4,7 @@
 
 package com.cadl.naming.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,7 +21,8 @@ public final class DataResponse {
      *
      * description of name property
      */
-    @JsonProperty(value = "name", required = true)
+    @Generated
+    @JsonProperty(value = "name")
     private String name;
 
     /*
@@ -28,7 +30,8 @@ public final class DataResponse {
      *
      * description of data property
      */
-    @JsonProperty(value = "data", required = true)
+    @Generated
+    @JsonProperty(value = "data")
     private BinaryData data;
 
     /*
@@ -36,7 +39,8 @@ public final class DataResponse {
      *
      * description of type property
      */
-    @JsonProperty(value = "type", required = true)
+    @Generated
+    @JsonProperty(value = "type")
     private TypesModel dataType;
 
     /*
@@ -44,7 +48,8 @@ public final class DataResponse {
      *
      * description of status property
      */
-    @JsonProperty(value = "status", required = true)
+    @Generated
+    @JsonProperty(value = "status")
     private DataStatus status;
 
     /**
@@ -55,12 +60,13 @@ public final class DataResponse {
      * @param dataType the dataType value to set.
      * @param status the status value to set.
      */
+    @Generated
     @JsonCreator
     private DataResponse(
-            @JsonProperty(value = "name", required = true) String name,
-            @JsonProperty(value = "data", required = true) BinaryData data,
-            @JsonProperty(value = "type", required = true) TypesModel dataType,
-            @JsonProperty(value = "status", required = true) DataStatus status) {
+            @JsonProperty(value = "name") String name,
+            @JsonProperty(value = "data") BinaryData data,
+            @JsonProperty(value = "type") TypesModel dataType,
+            @JsonProperty(value = "status") DataStatus status) {
         this.name = name;
         this.data = data;
         this.dataType = dataType;
@@ -74,6 +80,7 @@ public final class DataResponse {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -85,6 +92,7 @@ public final class DataResponse {
      *
      * @return the data value.
      */
+    @Generated
     public BinaryData getData() {
         return this.data;
     }
@@ -96,6 +104,7 @@ public final class DataResponse {
      *
      * @return the dataType value.
      */
+    @Generated
     public TypesModel getDataType() {
         return this.dataType;
     }
@@ -107,6 +116,7 @@ public final class DataResponse {
      *
      * @return the status value.
      */
+    @Generated
     public DataStatus getStatus() {
         return this.status;
     }

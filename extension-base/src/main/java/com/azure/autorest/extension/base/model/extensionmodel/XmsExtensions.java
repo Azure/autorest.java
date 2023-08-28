@@ -36,6 +36,8 @@ public class XmsExtensions {
 
     private Boolean xmsSecret;
 
+    private List<String> xmsVersioningAdded;
+
     public XmsEnum getXmsEnum() {
         return xmsEnum;
     }
@@ -154,5 +156,16 @@ public class XmsExtensions {
 
     public void setXmsSecret(Boolean xmsSecret) {
         this.xmsSecret = xmsSecret;
+    }
+
+    /**
+     * @return the versions of which this (optional) parameter/property exists
+     */
+    public List<String> getXmsVersioningAdded() {
+        return xmsVersioningAdded;
+    }
+
+    public void setXmsVersioningAdded(List<String> xmsVersioningAdded) {
+        this.xmsVersioningAdded = xmsVersioningAdded;
     }
 }

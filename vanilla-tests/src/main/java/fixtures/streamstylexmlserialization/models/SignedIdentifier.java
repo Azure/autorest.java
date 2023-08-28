@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -86,9 +87,15 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("SignedIdentifier");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "SignedIdentifier" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Id", this.id);
-        xmlWriter.writeXml(this.accessPolicy);
+        xmlWriter.writeXml(this.accessPolicy, "AccessPolicy");
         return xmlWriter.writeEndElement();
     }
 
@@ -99,27 +106,40 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
      * @return An instance of SignedIdentifier if the XmlReader was pointing to an instance of it, or null if it was
      *     pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the SignedIdentifier.
      */
     public static SignedIdentifier fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return xmlReader.readObject(
-                "SignedIdentifier",
-                reader -> {
-                    String id = null;
-                    AccessPolicy accessPolicy = null;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+        return fromXml(xmlReader, null);
+    }
 
-                        if ("Id".equals(fieldName.getLocalPart())) {
-                            id = reader.getStringElement();
-                        } else if ("AccessPolicy".equals(fieldName.getLocalPart())) {
-                            accessPolicy = AccessPolicy.fromXml(reader);
+    /**
+     * Reads an instance of SignedIdentifier from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of SignedIdentifier if the XmlReader was pointing to an instance of it, or null if it was
+     *     pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the SignedIdentifier.
+     */
+    public static SignedIdentifier fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "SignedIdentifier" : rootElementName;
+        return xmlReader.readObject(
+                finalRootElementName,
+                reader -> {
+                    SignedIdentifier deserializedSignedIdentifier = new SignedIdentifier();
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName elementName = reader.getElementName();
+
+                        if ("Id".equals(elementName.getLocalPart())) {
+                            deserializedSignedIdentifier.id = reader.getStringElement();
+                        } else if ("AccessPolicy".equals(elementName.getLocalPart())) {
+                            deserializedSignedIdentifier.accessPolicy = AccessPolicy.fromXml(reader, "AccessPolicy");
                         } else {
                             reader.skipElement();
                         }
                     }
-                    SignedIdentifier deserializedSignedIdentifier = new SignedIdentifier();
-                    deserializedSignedIdentifier.id = id;
-                    deserializedSignedIdentifier.accessPolicy = accessPolicy;
 
                     return deserializedSignedIdentifier;
                 });

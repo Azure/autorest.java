@@ -25,11 +25,14 @@ namespace Cadl.MultipleApiVersion {
     @key
     @visibility("read")
     name: string;
+
     type: string;
   }
 
   interface ResourceOperations
-    extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
+    extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+        NoConditionalRequests &
+        NoClientRequestId> {}
 
   enum Versions {
     @useDependency(global.Azure.Core.Versions.v1_0_Preview_2)
@@ -59,11 +62,14 @@ namespace Cadl.MultipleApiVersion2 {
     @key
     @visibility("read")
     name: string;
+
     type: string;
   }
 
   interface ResourceOperations
-    extends Azure.Core.ResourceOperations<NoRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
+    extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+        NoConditionalRequests &
+        NoClientRequestId> {}
 
   enum Versions {
     @useDependency(global.Azure.Core.Versions.v1_0_Preview_2)

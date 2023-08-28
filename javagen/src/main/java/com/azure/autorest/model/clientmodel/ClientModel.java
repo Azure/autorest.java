@@ -4,12 +4,11 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.util.ClientModelUtil;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * A model that is defined by the client.
@@ -80,9 +79,11 @@ public class ClientModel {
     private final boolean stronglyTypedHeader;
 
     private final ImplementationDetails implementationDetails;
+    private final boolean usedInXml;
 
     /**
      * Create a new ServiceModel with the provided properties.
+     *
      * @param name The name of this model.
      * @param imports The imports for this model.
      * @param description The description of this model.
@@ -97,12 +98,13 @@ public class ClientModel {
      * @param propertyReferences The property references for this model.
      * @param modelType the type of the model.
      * @param stronglyTypedHeader Whether this model is a strongly-typed HTTP headers class.
+     * @param usedInXml Whether the model is used in XML serialization.
      */
     protected ClientModel(String packageKeyword, String name, List<String> imports, String description,
-            boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
-            String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
-            List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences,
-            IType modelType, boolean stronglyTypedHeader, ImplementationDetails implementationDetails) {
+        boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
+        String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
+        List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences,
+        IType modelType, boolean stronglyTypedHeader, ImplementationDetails implementationDetails, boolean usedInXml) {
         packageName = packageKeyword;
         this.name = name;
         this.imports = imports;
@@ -120,6 +122,7 @@ public class ClientModel {
         this.modelType = modelType;
         this.stronglyTypedHeader = stronglyTypedHeader;
         this.implementationDetails = implementationDetails;
+        this.usedInXml = usedInXml;
     }
 
     public final String getPackage() {
@@ -204,26 +207,35 @@ public class ClientModel {
 
     /**
      * List the properties that have access (getter or setter) methods.
-     *
-     * It does not include properties from superclass (even though they can be accessed via inheritance).
-     * It does not include properties that only have private access (e.g. property of a flattened model).
-     * It includes properties that can be accessed from the model but not declared in this model (e.g. properties from a flattened model).
+     * <p>
+     * It does not include properties from superclass (even though they can be accessed via inheritance). It does not
+     * include properties that only have private access (e.g. property of a flattened model). It includes properties
+     * that can be accessed from the model but not declared in this model (e.g. properties from a flattened model).
      *
      * @return The properties that have access (getter or setter) methods.
      */
     public List<ClientModelPropertyAccess> getAccessibleProperties() {
-        List<ClientModelProperty> properties1 = this.getProperties() == null ? Collections.emptyList() : this.getProperties();
-        List<ClientModelPropertyAccess> properties = properties1.stream()
-                .filter(p -> !p.getClientFlatten())
-                .collect(Collectors.toList());
-        properties.addAll(this.getPropertyReferences().stream()
-                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
-                .collect(Collectors.toList()));
-        return properties;
+        List<ClientModelPropertyAccess> propertyAccesses = new ArrayList<>();
+        if (properties != null) {
+            for (ClientModelProperty property : properties) {
+                if (!property.getClientFlatten()) {
+                    propertyAccesses.add(property);
+                }
+            }
+        }
+
+        for (ClientModelPropertyReference clientModelPropertyReference : getPropertyReferences()) {
+            if (clientModelPropertyReference.isFromFlattenedProperty()) {
+                propertyAccesses.add(clientModelPropertyReference);
+            }
+        }
+
+        return propertyAccesses;
     }
 
     /**
      * Add this ServiceModel's imports to the provided ISet of imports.
+     *
      * @param imports The set of imports to add to.
      * @param settings The settings for this Java generator session.
      */
@@ -250,7 +262,7 @@ public class ClientModel {
         }
 
         for (ClientModelProperty property : getProperties()) {
-            property.addImportsTo(imports, ClientModelUtil.treatAsXml(settings, this));
+            property.addImportsTo(imports, usedInXml);
         }
     }
 
@@ -264,6 +276,15 @@ public class ClientModel {
 
     protected void addFluentAnnotationImport(Set<String> imports) {
         imports.add("com.azure.core.annotation.Fluent");
+    }
+
+    /**
+     * Whether the model is used in XML serialization.
+     *
+     * @return Whether the model is used in XML serialization.
+     */
+    public final boolean isUsedInXml() {
+        return usedInXml;
     }
 
     public static class Builder {
@@ -284,9 +305,11 @@ public class ClientModel {
         protected IType modelType;
         protected boolean stronglyTypedHeader;
         protected ImplementationDetails implementationDetails;
+        protected boolean usedInXml;
 
         /**
          * Sets the package that this model class belongs to.
+         *
          * @param packageName the package that this model class belongs to
          * @return the Builder itself
          */
@@ -297,6 +320,7 @@ public class ClientModel {
 
         /**
          * Sets the name of this model.
+         *
          * @param name the name of this model
          * @return the Builder itself
          */
@@ -307,6 +331,7 @@ public class ClientModel {
 
         /**
          * Sets the imports for this model.
+         *
          * @param imports the imports for this model
          * @return the Builder itself
          */
@@ -317,6 +342,7 @@ public class ClientModel {
 
         /**
          * Sets the description of this model.
+         *
          * @param description the description of this model
          * @return the Builder itself
          */
@@ -327,6 +353,7 @@ public class ClientModel {
 
         /**
          * Sets whether this model has model types that derive from it.
+         *
          * @param isPolymorphic whether this model has model types that derive from it
          * @return the Builder itself
          */
@@ -337,7 +364,9 @@ public class ClientModel {
 
         /**
          * Sets the name of the property that determines which polymorphic model type to create.
-         * @param polymorphicDiscriminator the name of the property that determines which polymorphic model type to create
+         *
+         * @param polymorphicDiscriminator the name of the property that determines which polymorphic model type to
+         * create
          * @return the Builder itself
          */
         public Builder polymorphicDiscriminator(String polymorphicDiscriminator) {
@@ -347,6 +376,7 @@ public class ClientModel {
 
         /**
          * Sets the name that is used for this model when it is serialized.
+         *
          * @param serializedName the name that is used for this model when it is serialized
          * @return the Builder itself
          */
@@ -357,6 +387,7 @@ public class ClientModel {
 
         /**
          * Sets whether this model needs serialization flattening.
+         *
          * @param needsFlatten whether this model needs serialization flattening
          * @return the Builder itself
          */
@@ -367,6 +398,7 @@ public class ClientModel {
 
         /**
          * Sets the parent model of this model.
+         *
          * @param parentModelName the parent model of this model
          * @return the Builder itself
          */
@@ -377,6 +409,7 @@ public class ClientModel {
 
         /**
          * Sets the models that derive from this model.
+         *
          * @param derivedModels the models that derive from this model
          * @return the Builder itself
          */
@@ -387,6 +420,7 @@ public class ClientModel {
 
         /**
          * Sets the name that will be used for this model's XML element representation.
+         *
          * @param xmlName the name that will be used for this model's XML element representation
          * @return the Builder itself
          */
@@ -397,6 +431,7 @@ public class ClientModel {
 
         /**
          * Sets the XML namespace that will be used for this model's XML element representation.
+         *
          * @param xmlNamespace the XML namespace that will be used for this model's XML element representation
          * @return the Builder itself
          */
@@ -407,6 +442,7 @@ public class ClientModel {
 
         /**
          * Sets the properties for this model.
+         *
          * @param properties the properties for this model
          * @return the Builder itself
          */
@@ -416,8 +452,8 @@ public class ClientModel {
         }
 
         /**
-         * Sets the property references for this model.
-         * They are used to call property method from i.e. a parent model.
+         * Sets the property references for this model. They are used to call property method from i.e. a parent model.
+         *
          * @param propertyReferences the property references.
          * @return the Builder itself
          */
@@ -428,6 +464,7 @@ public class ClientModel {
 
         /**
          * Sets the model type.
+         *
          * @param modelType the model type.
          * @return the Builder itself
          */
@@ -449,6 +486,7 @@ public class ClientModel {
 
         /**
          * Sets the implementation details for the model.
+         *
          * @param implementationDetails the implementation details.
          * @return the Builder itself
          */
@@ -457,24 +495,36 @@ public class ClientModel {
             return this;
         }
 
+        /**
+         * Sets whether the model is used in XML serialization.
+         *
+         * @param usedInXml Whether the model is used in XML serialization.
+         * @return the Builder itself
+         */
+        public Builder usedInXml(boolean usedInXml) {
+            this.usedInXml = usedInXml;
+            return this;
+        }
+
         public ClientModel build() {
             return new ClientModel(packageName,
-                    name,
-                    imports,
-                    description,
-                    isPolymorphic,
-                    polymorphicDiscriminator,
-                    serializedName,
-                    needsFlatten,
-                    parentModelName,
-                    derivedModels,
-                    xmlName,
-                    xmlNamespace,
-                    properties,
-                    propertyReferences,
-                    modelType,
-                    stronglyTypedHeader,
-                    implementationDetails);
+                name,
+                imports,
+                description,
+                isPolymorphic,
+                polymorphicDiscriminator,
+                serializedName,
+                needsFlatten,
+                parentModelName,
+                derivedModels,
+                xmlName,
+                xmlNamespace,
+                properties,
+                propertyReferences,
+                modelType,
+                stronglyTypedHeader,
+                implementationDetails,
+                usedInXml);
         }
     }
 }

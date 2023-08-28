@@ -34,7 +34,7 @@ public final class FirstClient {
     }
 
     /**
-     * The get operation.
+     * Resource read operation template.
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -46,7 +46,7 @@ public final class FirstClient {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -61,9 +61,9 @@ public final class FirstClient {
     }
 
     /**
-     * The get operation.
+     * Resource read operation template.
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

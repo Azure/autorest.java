@@ -116,7 +116,7 @@ public class Postprocessor extends NewPlugin {
                     return true;
                 }
             } else if (className.startsWith("src") && className.endsWith(".java")) {
-                customizationClass = loadCustomizationClassFromJavaCode(className);
+                customizationClass = loadCustomizationClassFromJavaCode(className, getBaseDirectory(), logger);
             } else {
                 customizationClass = loadCustomizationClassFromReadme(className, readme);
             }
@@ -202,28 +202,27 @@ public class Postprocessor extends NewPlugin {
             return null;
         }
 
-        return loadCustomizationClass(className, customizationFile, code);
+        return loadCustomizationClass(className, customizationFile, code, this.logger);
     }
 
-    private Class<? extends Customization> loadCustomizationClassFromJavaCode(String filePath) {
+    public static Class<? extends Customization> loadCustomizationClassFromJavaCode(String filePath, String baseDirectory, Logger logger) {
         Path customizationFile = Paths.get(filePath);
         if (!customizationFile.isAbsolute()) {
-            String baseDirectory = getBaseDirectory();
             if (baseDirectory != null) {
                 customizationFile = Paths.get(baseDirectory, filePath);
             }
         }
         try {
             String code = new String(Files.readAllBytes(customizationFile), StandardCharsets.UTF_8);
-            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), filePath, code);
+            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), filePath, code, logger);
         } catch (IOException e) {
-            logger.error("Cannot read customization from " + filePath);
+            logger.error("Cannot read customization from base directory " + baseDirectory + " and file " + customizationFile);
             return null;
         }
     }
 
     @SuppressWarnings("unchecked")
-    private Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code) {
+    public static Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code, Logger logger) {
         Path tempDirWithPrefix;
 
         // Populate editor
@@ -236,9 +235,16 @@ public class Postprocessor extends NewPlugin {
             pomStream.read(buffer);
             editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
             attemptMavenInstall(Paths.get(tempDirWithPrefix.toString(), "pom.xml"), logger);
-            editor.addFile(fileName, code);
+            editor.addFile(fileName.substring(fileName.indexOf("src/")), code);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+
+        int javaVersion = getJavaVersion(logger);
+        if (javaVersion != -1 && javaVersion < 11) {
+            throw new IllegalStateException("Java version was '" + javaVersion + "', code customizations require "
+                + "Java 11+ to be used. Please update your environment to Java 11+, preferably Java 17, and run "
+                + "Autorest again.");
         }
 
         // Start language client
@@ -280,7 +286,7 @@ public class Postprocessor extends NewPlugin {
                 // check if existingFile exists, if not, no need to handle partial update
                 if (Files.exists(existingFilePath)) {
                     try {
-                        String existingFileContent = new String(Files.readAllBytes(existingFilePath));
+                        String existingFileContent = new String(Files.readAllBytes(existingFilePath), StandardCharsets.UTF_8);
                         String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
                         return updatedContent;
                     } catch (Exception e) {
@@ -314,5 +320,52 @@ public class Postprocessor extends NewPlugin {
 
     private void clear() {
         JavaSettings.clear();
+    }
+
+    private static int getJavaVersion(Logger logger) {
+        // java.version format:
+        // 8 and lower: 1.7, 1.8.0
+        // 9 and above: 12, 14.1.1
+        String version = System.getProperty("java.version");
+        if (version == null || version.isEmpty()) {
+            logger.info("Unable to determine Java version to verify if Java 11+ is being used, which is the "
+                + "requirement to run Autorest code customizations.");
+            return -1;
+        }
+
+        if (version.startsWith("1.")) {
+            if (version.length() < 3) {
+                logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
+                    + "requirement to run Autorest code customizations. Version was: " + version);
+                return -1;
+            }
+
+            try {
+                return Integer.parseInt(version.substring(2, 3));
+            } catch (NumberFormatException t) {
+                logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
+                    + "requirement to run Autorest code customizations. Version was: " + version);
+                return -1;
+            }
+        } else {
+            int idx = version.indexOf(".");
+
+            if (idx == -1) {
+                try {
+                    return Integer.parseInt(version);
+                } catch (NumberFormatException ex) {
+                    logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
+                        + "requirement to run Autorest code customizations. Version was: " + version);
+                    return -1;
+                }
+            }
+            try {
+                return Integer.parseInt(version.substring(0, idx));
+            } catch (NumberFormatException t) {
+                logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
+                    + "requirement to run Autorest code customizations. Version was: " + version);
+                return -1;
+            }
+        }
     }
 }

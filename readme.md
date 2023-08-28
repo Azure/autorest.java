@@ -5,7 +5,7 @@ This is the next gen (v4) of AutoRest Java generator. It's built on AutoRest v3,
 You need to have the following installed on your machine:
 
 - Node.JS v12+
-- Java 8+
+- Java 11+
 - Maven 3
 
 You need to have [autorest](https://www.npmjs.com/package/autorest) installed through NPM:
@@ -18,7 +18,7 @@ npm install -g autorest
 To use the latest released preview(https://github.com/Azure/autorest.java/releases), run
 ```bash
 autorest --java
-    --use:@autorest/java@4.0.x
+    --use:@autorest/java@4.x.x
     --input-file:path/to/specs.json
     --output-folder:where/to/generate/java/files
     --namespace:specified.java.package
@@ -133,6 +133,7 @@ Following settings only works when `fluent` option is specified.
 | `--preserve-model` | CSV. Preserve classes from clean-up. |
 | `--remove-operation-group` | CSV. Remove operation groups. |
 | `--name-for-ungrouped-operations` | String. Name for ungrouped operation group. Default to `ResourceProviders` for Lite. |
+| `--resource-collection-associations` | Array. Prioritized association from resource model to resource collection. |
 
 `fluent` option will change the default value for some vanilla options.
 For example, `generate-client-interfaces`, `required-parameter-client-methods` option is by default `true`.

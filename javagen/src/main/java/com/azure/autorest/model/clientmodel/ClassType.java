@@ -7,13 +7,15 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.MatchConditions;
+import com.azure.core.http.RequestConditions;
 import com.azure.core.util.CoreUtils;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -46,12 +48,8 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Integer::parseInt)")
         .build();
 
-    public static final ClassType Long = new Builder(false).knownClass(Long.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
-        .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
+    public static final ClassType Long = new Builder(false)
+        .prototypeAsLong()
         .build();
 
     public static final ClassType Float = new Builder(false).knownClass(Float.class)
@@ -63,11 +61,7 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType Double = new Builder(false).knownClass(Double.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D')
-        .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)")
+        .prototypeAsDouble()
         .build();
 
     public static final ClassType Character = new Builder(false).knownClass(Character.class)
@@ -184,30 +178,15 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType UnixTimeLong = new ClassType.Builder(false)
-        .knownClass(java.lang.Long.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
-        .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
+        .prototypeAsLong()
         .build();
 
     public static final ClassType DurationLong = new ClassType.Builder(false)
-        .knownClass(java.lang.Long.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.ofSeconds(%s)", defaultValueExpression + 'L'))
-        .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)")
+        .prototypeAsLong()
         .build();
 
     public static final ClassType DurationDouble = new ClassType.Builder(false)
-        .knownClass(java.lang.Double.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D'))
-        .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
-        .serializationMethodBase("writeNumber")
-        .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
-        .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)")
+        .prototypeAsDouble()
         .build();
 
     public static final ClassType HttpPipeline = new ClassType.Builder(false)
@@ -388,6 +367,14 @@ public class ClassType implements IType {
         .packageName("com.azure.core.models").name("ResponseInnerError")
         .build();
 
+    public static final ClassType REQUEST_CONDITIONS = new Builder()
+        .knownClass(RequestConditions.class)
+        .build();
+
+    public static final ClassType MATCH_CONDITIONS = new Builder()
+            .knownClass(MatchConditions.class)
+            .build();
+
     private final String fullName;
     private final String packageName;
     private final String name;
@@ -400,12 +387,13 @@ public class ClassType implements IType {
     private final String jsonDeserializationMethod;
     private final String xmlAttributeDeserializationTemplate;
     private final String xmlElementDeserializationMethod;
+    private final boolean usedInXml;
 
     private ClassType(String packageKeyword, String name, List<String> implementationImports, XmsExtensions extensions,
         java.util.function.Function<String, String> defaultValueExpressionConverter, boolean isSwaggerType,
         String serializationMethodBase, boolean wrapSerializationWithObjectsToString,
         String jsonDeserializationMethod, String xmlAttributeDeserializationTemplate,
-        String xmlElementDeserializationMethod) {
+        String xmlElementDeserializationMethod, boolean usedInXml) {
         this.fullName = packageKeyword + "." + name;
         this.packageName = packageKeyword;
         this.name = name;
@@ -418,6 +406,7 @@ public class ClassType implements IType {
         this.jsonDeserializationMethod = jsonDeserializationMethod;
         this.xmlAttributeDeserializationTemplate = xmlAttributeDeserializationTemplate;
         this.xmlElementDeserializationMethod = xmlElementDeserializationMethod;
+        this.usedInXml = usedInXml;
     }
 
     public final String getPackage() {
@@ -490,6 +479,11 @@ public class ClassType implements IType {
             imports.add(fullName);
         }
 
+        if (this == ClassType.UnixTimeLong) {
+            imports.add(Instant.class.getName());
+            imports.add(ZoneOffset.class.getName());
+        }
+
         if (includeImplementationImports && getImplementationImports() != null) {
             imports.addAll(getImplementationImports());
         }
@@ -516,6 +510,8 @@ public class ClassType implements IType {
         IType clientType = this;
         if (this == ClassType.DateTimeRfc1123) {
             clientType = ClassType.DateTime;
+        } else if (this == ClassType.UnixTimeLong) {
+            clientType = ClassType.DateTime;
         } else if (this == ClassType.Base64Url) {
             clientType = ArrayType.ByteArray;
         } else if (this == ClassType.DurationLong) {
@@ -530,6 +526,8 @@ public class ClassType implements IType {
         if (this == ClassType.DateTimeRfc1123
             || this == ClassType.AndroidDateTimeRfc1123) {
             expression = java.lang.String.format("%s.getDateTime()", expression);
+        } else if (this == ClassType.UnixTimeLong) {
+            expression = java.lang.String.format("OffsetDateTime.ofInstant(Instant.ofEpochSecond(%1$s), ZoneOffset.UTC)", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("%s.decodedBytes()", expression);
         } else if (this == ClassType.URL) {
@@ -547,6 +545,8 @@ public class ClassType implements IType {
         if (this == ClassType.DateTimeRfc1123
             || this == ClassType.AndroidDateTimeRfc1123) {
             expression = java.lang.String.format("new DateTimeRfc1123(%s)", expression);
+        } else if (this == ClassType.UnixTimeLong) {
+            expression = java.lang.String.format("%1$s.toEpochSecond()", expression);
         } else if (this == ClassType.Base64Url) {
             expression = java.lang.String.format("Base64Url.encode(%s)", expression);
         } else if (this == ClassType.URL) {
@@ -618,12 +618,17 @@ public class ClassType implements IType {
                 throw new RuntimeException("Swagger types cannot be written as attributes.");
             }
 
-            return java.lang.String.format("%s.writeXml(%s)", xmlWriterName, valueGetter);
+            return xmlWriterName + ".writeXml(" + valueGetter + ", \"" + attributeOrElementName + "\")";
         }
 
         String value = wrapSerializationWithObjectsToString ? "Objects.toString(" + valueGetter + ", null)" : valueGetter;
         return xmlSerializationCallHelper(xmlWriterName, serializationMethodBase, attributeOrElementName, namespaceUri,
             value, isAttribute, nameIsVariable);
+    }
+
+    @Override
+    public boolean isUsedInXml() {
+        return usedInXml;
     }
 
     public static class Builder {
@@ -638,11 +643,12 @@ public class ClassType implements IType {
         private List<String> implementationImports;
         private XmsExtensions extensions;
         private java.util.function.Function<String, String> defaultValueExpressionConverter;
-        private boolean wrapSerializationWithObjectsToString;
+        private boolean wrapSerializationWithObjectsToString = false;
         private String jsonDeserializationMethod;
         private String serializationMethodBase;
         private String xmlAttributeDeserializationTemplate;
         private String xmlElementDeserializationMethod;
+        private boolean usedInXml;
 
         public Builder() {
             this(true);
@@ -660,6 +666,26 @@ public class ClassType implements IType {
         public Builder name(String name) {
             this.name = name;
             return this;
+        }
+
+        public Builder prototypeAsLong() {
+            return this.knownClass(Long.class)
+                .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
+                .serializationMethodBase("writeNumber")
+                .wrapSerializationWithObjectsToString(false)
+                .jsonDeserializationMethod("getNullable(JsonReader::getLong)")
+                .xmlElementDeserializationMethod("getNullableElement(Long::parseLong)")
+                .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Long::parseLong)");
+        }
+
+        public Builder prototypeAsDouble() {
+            return this.knownClass(Double.class)
+                .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)) + 'D')
+                .serializationMethodBase("writeNumber")
+                .wrapSerializationWithObjectsToString(false)
+                .jsonDeserializationMethod("getNullable(JsonReader::getDouble)")
+                .xmlElementDeserializationMethod("getNullableElement(Double::parseDouble)")
+                .xmlAttributeDeserializationTemplate("getNullableAttribute(%s, %s, Double::parseDouble)");
         }
 
         public Builder knownClass(Class<?> clazz) {
@@ -707,6 +733,11 @@ public class ClassType implements IType {
             return this;
         }
 
+        public Builder usedInXml(boolean usedInXml) {
+            this.usedInXml = usedInXml;
+            return this;
+        }
+
         public ClassType build() {
             // Deserialization of Swagger types needs to be handled differently as the named reader needs
             // to be passed to the deserialization method and the reader name cannot be determined here.
@@ -717,7 +748,8 @@ public class ClassType implements IType {
 
             return new ClassType(packageName, name, implementationImports, extensions, defaultValueExpressionConverter,
                 isSwaggerType, serializationMethodBase, wrapSerializationWithObjectsToString,
-                jsonDeserializationMethod, xmlAttributeDeserializationTemplate, xmlElementDeserializationMethod);
+                jsonDeserializationMethod, xmlAttributeDeserializationTemplate, xmlElementDeserializationMethod,
+                usedInXml);
         }
     }
 

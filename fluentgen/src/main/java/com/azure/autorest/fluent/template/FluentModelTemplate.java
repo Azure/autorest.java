@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.template.ModelTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
@@ -76,10 +77,19 @@ public class FluentModelTemplate extends ModelTemplate {
         if (FluentType.ManagementError.getName().equals(model.getParentModelName())) {
             // subclass of ManagementError
 
-            if (modelNamer == null) {
-                modelNamer = new ModelNamer();
+            if (model.getImplementationDetails() != null
+                    && model.getImplementationDetails().isException()
+                    && !model.getImplementationDetails().isOutput()
+                    && !model.getImplementationDetails().isInput()) {
+                // model used in Exception, also not in any non-Exception input or output
+
+                if (modelNamer == null) {
+                    modelNamer = new ModelNamer();
+                }
+                return modelNamer.modelPropertyGetterName(property);
+            } else {
+                return super.getGetterName(model, property);
             }
-            return modelNamer.modelPropertyGetterName(property);
         } else {
             return super.getGetterName(model, property);
         }
@@ -117,6 +127,14 @@ public class FluentModelTemplate extends ModelTemplate {
         }
 
         return propertyReferences;
+    }
+
+    @Override
+    protected void addGeneratedImport(Set<String> imports) {
+    }
+
+    @Override
+    protected void addGeneratedAnnotation(JavaContext classBlock) {
     }
 
     private Optional<ClientModel> getPredefinedModel(String modelName) {

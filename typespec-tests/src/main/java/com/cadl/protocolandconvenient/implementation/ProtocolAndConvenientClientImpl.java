@@ -25,7 +25,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.PagedFlux;
@@ -38,6 +37,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncPoller;
@@ -113,9 +113,7 @@ public final class ProtocolAndConvenientClientImpl {
      */
     public ProtocolAndConvenientClientImpl(String endpoint, ProtocolAndConvenientServiceVersion serviceVersion) {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 endpoint,
                 serviceVersion);
@@ -744,7 +742,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -792,7 +790,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -838,7 +836,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -887,7 +885,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -936,7 +934,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -985,7 +983,7 @@ public final class ProtocolAndConvenientClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1013,6 +1011,16 @@ public final class ProtocolAndConvenientClientImpl {
 
     /**
      * Paging operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1057,6 +1065,16 @@ public final class ProtocolAndConvenientClientImpl {
     /**
      * Paging operation.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1082,12 +1100,45 @@ public final class ProtocolAndConvenientClientImpl {
                         ? requestOptions.getContext()
                         : Context.NONE);
         return new PagedFlux<>(
-                () -> listSinglePageAsync(requestOptions),
-                nextLink -> listNextSinglePageAsync(nextLink, requestOptionsForNextPage));
+                (pageSize) -> {
+                    RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+                    if (pageSize != null) {
+                        requestOptionsLocal.addRequestCallback(
+                                requestLocal -> {
+                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
+                                    requestLocal.setUrl(urlBuilder.toString());
+                                });
+                    }
+                    return listSinglePageAsync(requestOptionsLocal);
+                },
+                (nextLink, pageSize) -> {
+                    RequestOptions requestOptionsLocal = new RequestOptions();
+                    requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
+                    if (pageSize != null) {
+                        requestOptionsLocal.addRequestCallback(
+                                requestLocal -> {
+                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
+                                    requestLocal.setUrl(urlBuilder.toString());
+                                });
+                    }
+                    return listNextSinglePageAsync(nextLink, requestOptionsLocal);
+                });
     }
 
     /**
      * Paging operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -1128,6 +1179,16 @@ public final class ProtocolAndConvenientClientImpl {
     /**
      * Paging operation.
      *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -1153,8 +1214,31 @@ public final class ProtocolAndConvenientClientImpl {
                         ? requestOptions.getContext()
                         : Context.NONE);
         return new PagedIterable<>(
-                () -> listSinglePage(requestOptions),
-                nextLink -> listNextSinglePage(nextLink, requestOptionsForNextPage));
+                (pageSize) -> {
+                    RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+                    if (pageSize != null) {
+                        requestOptionsLocal.addRequestCallback(
+                                requestLocal -> {
+                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
+                                    requestLocal.setUrl(urlBuilder.toString());
+                                });
+                    }
+                    return listSinglePage(requestOptionsLocal);
+                },
+                (nextLink, pageSize) -> {
+                    RequestOptions requestOptionsLocal = new RequestOptions();
+                    requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
+                    if (pageSize != null) {
+                        requestOptionsLocal.addRequestCallback(
+                                requestLocal -> {
+                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
+                                    requestLocal.setUrl(urlBuilder.toString());
+                                });
+                    }
+                    return listNextSinglePage(nextLink, requestOptionsLocal);
+                });
     }
 
     /**

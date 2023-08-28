@@ -16,7 +16,6 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -241,7 +240,7 @@ public final class MicrosoftAzureTestUrlBuilder
                 (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         MicrosoftAzureTestUrl client =
                 new MicrosoftAzureTestUrl(
-                        localPipeline, localSerializerAdapter, subscriptionId, localHost, localApiVersion);
+                        localPipeline, localSerializerAdapter, this.subscriptionId, localHost, localApiVersion);
         return client;
     }
 
@@ -269,7 +268,6 @@ public final class MicrosoftAzureTestUrlBuilder
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        policies.add(new CookiePolicy());
         this.pipelinePolicies.stream()
                 .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
                 .forEach(p -> policies.add(p));

@@ -1,0 +1,59 @@
+trigger: none
+pr: none
+
+pool:
+  vmImage: "ubuntu-latest"
+
+variables:
+- group: Release Secrets for GitHub
+- name: NodeVersion
+  value: '18.x'
+
+resources:
+  repositories:
+  - repository: azure-sdk-for-java
+    type: github
+    name: Azure/azure-sdk-for-java
+    endpoint: azure
+    ref: main
+
+jobs:
+- job: Generate_SDK
+
+  timeoutInMinutes: 60
+
+  steps:
+  - checkout: self
+    fetchDepth: 1
+  - checkout: azure-sdk-for-java
+
+  - task: NodeTool@0
+    displayName: 'Install Node.js $(NodeVersion)'
+    inputs:
+      versionSpec: '$(NodeVersion)'
+
+  - task: PowerShell@2
+    displayName: 'Get Package Version'
+    inputs:
+      targetType: 'inline'
+      script: |
+        $PACKAGE_VERSION = node -p -e "require('./typespec-extension/package.json').version"
+        Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
+      workingDirectory: $(Build.SourcesDirectory)/autorest.java
+
+  - script: |
+      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$(PackageVersion)
+    displayName: 'Generate SDK'
+    workingDirectory: $(Build.SourcesDirectory)/autorest.java
+
+  - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-for-java
+    parameters:
+      WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-java
+      ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-for-java/eng/common/scripts
+      RepoName: azure-sdk-for-java
+      BaseBranchName: 'refs/heads/main'
+      PRBranchName: typespec-java-generation-$(Build.BuildId)
+      CommitMsg: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
+      PRTitle: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
+      PRLabels: 'DPG'
+      OpenAsDraft: 'true'

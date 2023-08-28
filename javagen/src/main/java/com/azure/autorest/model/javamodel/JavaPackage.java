@@ -27,6 +27,7 @@ import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.ChangelogTemplate;
+import com.azure.autorest.template.ClientMethodTestTemplate;
 import com.azure.autorest.template.ModelTestTemplate;
 import com.azure.autorest.template.ProtocolSampleBlankTemplate;
 import com.azure.autorest.template.ProtocolTestBaseTemplate;
@@ -35,6 +36,7 @@ import com.azure.autorest.template.ReadmeTemplate;
 import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.SwaggerReadmeTemplate;
 import com.azure.autorest.template.Templates;
+import com.azure.autorest.template.TestProxyAssetsTemplate;
 import com.azure.autorest.util.PossibleCredentialException;
 import org.slf4j.Logger;
 
@@ -243,10 +245,18 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public void addProtocolTest(TestContext testContext) {
+    public void addProtocolTest(TestContext<ProtocolExample> testContext) {
         String className = testContext.getTestCase().getFilename() + "Tests";
         JavaFile javaFile = javaFileFactory.createTestFile(testContext.getPackageName(), className);
         ProtocolTestTemplate.getInstance().write(testContext, javaFile);
+        this.checkDuplicateFile(javaFile.getFilePath());
+        javaFiles.add(javaFile);
+    }
+
+    public void addClientMethodTest(TestContext<ClientMethodExample> testContext) {
+        String className = testContext.getTestCase().getFilename() + "Tests";
+        JavaFile javaFile = javaFileFactory.createTestFile(testContext.getPackageName(), className);
+        ClientMethodTestTemplate.getInstance().write(testContext, javaFile);
         this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
     }
@@ -278,6 +288,12 @@ public class JavaPackage {
 
     public void addChangelogMarkdown(Project project) {
         TextFile textFile = new TextFile("CHANGELOG.md", new ChangelogTemplate().write(project));
+        this.checkDuplicateFile(textFile.getFilePath());
+        textFiles.add(textFile);
+    }
+
+    public void addTestProxyAssetsJson(Project project) {
+        TextFile textFile = new TextFile("assets.json", new TestProxyAssetsTemplate().write(project));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
     }

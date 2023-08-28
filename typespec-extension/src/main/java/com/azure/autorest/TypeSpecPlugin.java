@@ -3,6 +3,7 @@
 
 package com.azure.autorest;
 
+import com.azure.autorest.customization.Customization;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
@@ -11,19 +12,21 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
+import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
-import com.azure.typespec.model.EmitterOptions;
-import com.azure.typespec.mapper.TypeSpecMapperFactory;
-import com.azure.typespec.util.ModelUtil;
 import com.azure.core.util.CoreUtils;
+import com.azure.typespec.mapper.TypeSpecMapperFactory;
+import com.azure.typespec.model.EmitterOptions;
+import com.azure.typespec.util.ModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -82,7 +85,7 @@ public class TypeSpecPlugin extends Javagen {
         if (!parentFile.exists()) {
             parentFile.mkdirs();
         }
-        try (FileWriter writer = new FileWriter(outputFile)) {
+        try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(outputFile.toPath()), StandardCharsets.UTF_8)) {
             writer.write(content);
         } catch (IOException e) {
             throw new IllegalStateException(e);
@@ -96,7 +99,7 @@ public class TypeSpecPlugin extends Javagen {
             Path absoluteFilePath = Paths.get(emitterOptions.getOutputDir(), filePath);
             if (Files.exists(absoluteFilePath)) {
                 try {
-                    String existingFileContent = new String(Files.readAllBytes(absoluteFilePath));
+                    String existingFileContent = new String(Files.readAllBytes(absoluteFilePath), StandardCharsets.UTF_8);
                     String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedContent, existingFileContent);
                     return updatedContent;
                 } catch (Exception e) {
@@ -121,8 +124,8 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("generate-sync-async-clients", true);
         SETTINGS_MAP.put("generate-builder-per-client", false);
         SETTINGS_MAP.put("sync-methods", "all");
-        // TODO(xiaofei) set to true when PagedIterable::mapPage is fixed in azure-core
-        SETTINGS_MAP.put("enable-sync-stack", false);
+        SETTINGS_MAP.put("enable-sync-stack", true);
+        SETTINGS_MAP.put("enable-page-size", true);
 
         SETTINGS_MAP.put("use-default-http-status-code-to-exception-type-mapping", true);
         SETTINGS_MAP.put("polling", new HashMap<String, Object>());
@@ -133,14 +136,40 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("required-parameter-client-methods", true);
         SETTINGS_MAP.put("generic-response-type", true);
         SETTINGS_MAP.put("output-model-immutable", true);
+        SETTINGS_MAP.put("disable-required-property-annotation", true);
+    }
+
+    public Map<String, String> customizeGeneratedCode(Map<String, String> fileContents, String outputDir) {
+        String className = JavaSettings.getInstance().getCustomizationClass();
+
+        if (className == null) {
+            return fileContents;
+        }
+
+        Class<? extends Customization> customizationClass = null;
+        if (className.endsWith(".java")) {
+            customizationClass = Postprocessor.loadCustomizationClassFromJavaCode(className, outputDir, LOGGER);
+        } else {
+            LOGGER.warn("Invalid customization class. No customizations are applied to the generated code."
+                    + " The customization java file should end with .java but was " + className);
+
+            return fileContents;
+        }
+        try {
+            Customization customization = customizationClass.getConstructor().newInstance();
+            LOGGER.info("Running customization, this may take a while...");
+            fileContents = customization.run(fileContents, LOGGER);
+            return fileContents;
+        } catch (Exception e) {
+            LOGGER.error("Unable to complete customization", e);
+            throw new RuntimeException(e);
+        }
     }
 
     public static class MockConnection extends Connection {
-
         public MockConnection() {
             super(null, null);
         }
-
     }
 
     public TypeSpecPlugin(EmitterOptions options, boolean sdkIntegration) {
@@ -178,6 +207,10 @@ public class TypeSpecPlugin extends Javagen {
 
         if (options.getCustomTypeSubpackage() != null) {
             SETTINGS_MAP.put("custom-types-subpackage", options.getCustomTypeSubpackage());
+        }
+
+        if (options.getCustomizationClass() != null) {
+            SETTINGS_MAP.put("customization-class", options.getCustomizationClass());
         }
 
         JavaSettingsAccessor.setHost(this);

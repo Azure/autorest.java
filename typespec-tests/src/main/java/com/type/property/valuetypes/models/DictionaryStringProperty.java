@@ -4,6 +4,7 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +16,8 @@ public final class DictionaryStringProperty {
     /*
      * Property
      */
-    @JsonProperty(value = "property", required = true)
+    @Generated
+    @JsonProperty(value = "property")
     private Map<String, String> property;
 
     /**
@@ -23,8 +25,9 @@ public final class DictionaryStringProperty {
      *
      * @param property the property value to set.
      */
+    @Generated
     @JsonCreator
-    public DictionaryStringProperty(@JsonProperty(value = "property", required = true) Map<String, String> property) {
+    public DictionaryStringProperty(@JsonProperty(value = "property") Map<String, String> property) {
         this.property = property;
     }
 
@@ -33,6 +36,7 @@ public final class DictionaryStringProperty {
      *
      * @return the property value.
      */
+    @Generated
     public Map<String, String> getProperty() {
         return this.property;
     }

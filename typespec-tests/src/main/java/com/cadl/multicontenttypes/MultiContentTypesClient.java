@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.multicontenttypes.implementation.MultiContentTypesClientImpl;
-import com.cadl.multicontenttypes.models.ContentType;
+import com.cadl.multicontenttypes.models.Resource;
 
 /** Initializes a new instance of the synchronous MultiContentTypesClient type. */
 @ServiceClient(builder = MultiContentTypesClientBuilder.class)
@@ -31,6 +31,33 @@ public final class MultiContentTypesClient {
     @Generated
     MultiContentTypesClient(MultiContentTypesClientImpl serviceClient) {
         this.serviceClient = serviceClient;
+    }
+
+    /**
+     * multiple data types map to multiple content types.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * DataModelBase
+     * }</pre>
+     *
+     * @param contentType The contentType parameter. Allowed values: "text/plain", "application/json",
+     *     "application/octet-stream", "image/jpeg", "image/png".
+     * @param data The data parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> uploadWithOverloadWithResponse(
+            String contentType, BinaryData data, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'uploadWithOverload' is multiple content-type
+        return this.serviceClient.uploadWithOverloadWithResponse(contentType, data, requestOptions);
     }
 
     /**
@@ -51,8 +78,8 @@ public final class MultiContentTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> downloadImageWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.downloadImageWithResponse(requestOptions);
+    public Response<BinaryData> downloadImageForSingleContentTypeWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.downloadImageForSingleContentTypeWithResponse(requestOptions);
     }
 
     /**
@@ -64,7 +91,7 @@ public final class MultiContentTypesClient {
      * BinaryData
      * }</pre>
      *
-     * @param data The data parameter.
+     * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -74,8 +101,8 @@ public final class MultiContentTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadImageWithResponse(BinaryData data, RequestOptions requestOptions) {
-        return this.serviceClient.uploadImageWithResponse(data, requestOptions);
+    public Response<Void> uploadImageForSingleContentTypeWithResponse(BinaryData data, RequestOptions requestOptions) {
+        return this.serviceClient.uploadImageForSingleContentTypeWithResponse(data, requestOptions);
     }
 
     /**
@@ -89,6 +116,65 @@ public final class MultiContentTypesClient {
      *
      * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
      *     "image/png".
+     * @param data Represent a byte array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponse(
+            String contentType, BinaryData data, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'uploadBytesWithSingleBodyTypeForMultiContentTypes' is
+        // multiple content-type
+        return this.serviceClient.uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponse(
+                contentType, data, requestOptions);
+    }
+
+    /**
+     * multiple data types map to multiple content types using shared route.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     *     "image/png".
+     * @param data Represent a byte array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponse(
+            String contentType, BinaryData data, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'uploadBytesWithMultiBodyTypesForMultiContentTypes' is
+        // multiple content-type
+        return this.serviceClient.uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponse(
+                contentType, data, requestOptions);
+    }
+
+    /**
+     * multiple data types map to multiple content types using shared route.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -99,8 +185,38 @@ public final class MultiContentTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadBytesWithResponse(String contentType, BinaryData data, RequestOptions requestOptions) {
-        return this.serviceClient.uploadBytesWithResponse(contentType, data, requestOptions);
+    public Response<Void> uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponse(
+            BinaryData data, RequestOptions requestOptions) {
+        return this.serviceClient.uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponse(data, requestOptions);
+    }
+
+    /**
+     * multiple data types map to multiple content types using shared route.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * DataModelBase
+     * }</pre>
+     *
+     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream",
+     *     "image/jpeg", "image/png".
+     * @param data The data parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponse(
+            String contentType, BinaryData data, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes' is
+        // multiple content-type
+        return this.serviceClient.uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponse(
+                contentType, data, requestOptions);
     }
 
     /**
@@ -115,16 +231,16 @@ public final class MultiContentTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData downloadImage() {
-        // Generated convenience method for downloadImageWithResponse
+    public BinaryData downloadImageForSingleContentType() {
+        // Generated convenience method for downloadImageForSingleContentTypeWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return downloadImageWithResponse(requestOptions).getValue();
+        return downloadImageForSingleContentTypeWithResponse(requestOptions).getValue();
     }
 
     /**
      * request is binary.
      *
-     * @param data The data parameter.
+     * @param data Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -134,16 +250,15 @@ public final class MultiContentTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void uploadImage(BinaryData data) {
-        // Generated convenience method for uploadImageWithResponse
+    public void uploadImageForSingleContentType(BinaryData data) {
+        // Generated convenience method for uploadImageForSingleContentTypeWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        uploadImageWithResponse(data, requestOptions).getValue();
+        uploadImageForSingleContentTypeWithResponse(data, requestOptions).getValue();
     }
 
     /**
-     * one data type maps to multiple content types.
+     * multiple data types map to multiple content types using shared route.
      *
-     * @param contentType The contentType parameter.
      * @param data The data parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -154,9 +269,10 @@ public final class MultiContentTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void uploadBytes(ContentType contentType, BinaryData data) {
-        // Generated convenience method for uploadBytesWithResponse
+    public void uploadJsonWithMultiBodyTypesForMultiContentTypes(Resource data) {
+        // Generated convenience method for uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        uploadBytesWithResponse(contentType.toString(), data, requestOptions).getValue();
+        uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponse(BinaryData.fromObject(data), requestOptions)
+                .getValue();
     }
 }

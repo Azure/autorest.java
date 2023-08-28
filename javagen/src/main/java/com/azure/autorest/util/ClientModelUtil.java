@@ -19,6 +19,7 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
@@ -507,16 +508,27 @@ public class ClientModelUtil {
     }
 
     /**
-     * Determines whether the caller should treat the model as XML.
-     * <p>
-     * XML is used when either {@link JavaSettings#isGenerateXmlSerialization()} is true or the model or property was
-     * defined in Swagger with an {@code xml} property.
+     * Checks whether wire type and client type mismatch on this client model property.
      *
-     * @param settings The Autorest generation settings.
-     * @param model The model.
-     * @return Whether the model should be treated as XML.
+     * @param clientModelProperty the client model property.
+     * @param ignoreGenericType whether to ignore the mismatch, if both wire type and client type is generic type.
+     *                          <p>For example, ignore the case of {@code List<OffsetDateTime>} vs {@code List<Long>}.
+     * @return whether wire type and client type mismatch.
      */
-    public static boolean treatAsXml(JavaSettings settings, ClientModel model) {
-        return settings.isGenerateXmlSerialization() || model.getXmlName() != null;
+    public static boolean isWireTypeMismatch(ClientModelProperty clientModelProperty, boolean ignoreGenericType) {
+        if (clientModelProperty.getClientType() == clientModelProperty.getWireType()) {
+            // same type
+            return false;
+        } else {
+            // type mismatch
+            if (ignoreGenericType
+                    && clientModelProperty.getClientType() instanceof GenericType
+                    && clientModelProperty.getWireType() instanceof GenericType) {
+                // at present, ignore generic type, as type erasure causes conflict of 2 constructors
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 }

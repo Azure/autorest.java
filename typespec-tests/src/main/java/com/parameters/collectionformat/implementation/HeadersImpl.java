@@ -103,7 +103,9 @@ public final class HeadersImpl {
     public Mono<Response<Void>> csvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
         String colorsConverted =
-                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                colors.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(context -> service.csv(colorsConverted, accept, requestOptions, context));
     }
 
@@ -122,7 +124,9 @@ public final class HeadersImpl {
     public Response<Void> csvWithResponse(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
         String colorsConverted =
-                colors.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                colors.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.csvSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 }

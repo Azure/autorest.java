@@ -49,6 +49,9 @@ public class EmitterOptions {
     @JsonProperty(value="custom-types-subpackage")
     private String customTypeSubpackage;
 
+    @JsonProperty(value="customization-class")
+    private String customizationClass;
+
     public String getNamespace() {
         return namespace;
     }
@@ -73,6 +76,10 @@ public class EmitterOptions {
         return generateSamples;
     }
 
+    public Boolean getEnableSyncStack() {
+        return enableSyncStack;
+    }
+
     public EmitterOptions setNamespace(String namespace) {
         this.namespace = namespace;
         return this;
@@ -87,10 +94,6 @@ public class EmitterOptions {
         return serviceVersions;
     }
 
-    public Boolean getEnableSyncStack() {
-        return enableSyncStack;
-    }
-
     public DevOptions getDevOptions() {
         return devOptions;
     }
@@ -101,6 +104,10 @@ public class EmitterOptions {
 
     public String getCustomTypeSubpackage() {
         return customTypeSubpackage;
+    }
+
+    public String getCustomizationClass() {
+        return customizationClass;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {

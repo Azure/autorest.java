@@ -5,6 +5,7 @@
 package com.type.property.optional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Template type for testing models with optional property. Pass in the type of the property you are looking for. */
@@ -13,10 +14,12 @@ public final class StringProperty {
     /*
      * Property
      */
+    @Generated
     @JsonProperty(value = "property")
     private String property;
 
     /** Creates an instance of StringProperty class. */
+    @Generated
     public StringProperty() {}
 
     /**
@@ -24,6 +27,7 @@ public final class StringProperty {
      *
      * @return the property value.
      */
+    @Generated
     public String getProperty() {
         return this.property;
     }
@@ -34,6 +38,7 @@ public final class StringProperty {
      * @param property the property value to set.
      * @return the StringProperty object itself.
      */
+    @Generated
     public StringProperty setProperty(String property) {
         this.property = property;
         return this;

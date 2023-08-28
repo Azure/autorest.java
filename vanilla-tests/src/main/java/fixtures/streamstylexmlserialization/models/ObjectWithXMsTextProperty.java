@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlWriter;
@@ -75,7 +76,13 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("Data");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Data" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringAttribute("language", this.language);
         xmlWriter.writeString(this.content);
         return xmlWriter.writeEndElement();
@@ -87,16 +94,31 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
      * @param xmlReader The XmlReader being read.
      * @return An instance of ObjectWithXMsTextProperty if the XmlReader was pointing to an instance of it, or null if
      *     it was pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the ObjectWithXMsTextProperty.
      */
     public static ObjectWithXMsTextProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of ObjectWithXMsTextProperty from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of ObjectWithXMsTextProperty if the XmlReader was pointing to an instance of it, or null if
+     *     it was pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the ObjectWithXMsTextProperty.
+     */
+    public static ObjectWithXMsTextProperty fromXml(XmlReader xmlReader, String rootElementName)
+            throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Data" : rootElementName;
         return xmlReader.readObject(
-                "Data",
+                finalRootElementName,
                 reader -> {
-                    String language = reader.getStringAttribute(null, "language");
-                    String content = reader.getStringElement();
                     ObjectWithXMsTextProperty deserializedObjectWithXMsTextProperty = new ObjectWithXMsTextProperty();
-                    deserializedObjectWithXMsTextProperty.language = language;
-                    deserializedObjectWithXMsTextProperty.content = content;
+                    deserializedObjectWithXMsTextProperty.language = reader.getStringAttribute(null, "language");
+                    deserializedObjectWithXMsTextProperty.content = reader.getStringElement();
 
                     return deserializedObjectWithXMsTextProperty;
                 });

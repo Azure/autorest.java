@@ -40,17 +40,17 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.39.0</version>
+      <version>1.42.0</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-json</artifactId>
-      <version>1.0.1</version>
+      <version>1.1.0</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-xml</artifactId>
-      <version>1.0.0-beta.1</version>
+      <version>1.0.0-beta.2</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -60,7 +60,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.13.3</version>
+      <version>1.13.6</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -72,25 +72,25 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.9.1</version>
+      <version>5.9.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.9.1</version>
+      <version>5.9.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
-      <version>5.9.1</version>
+      <version>5.9.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-test</artifactId>
-      <version>3.4.27</version>
+      <version>3.4.30</version>
       <scope>test</scope>
     </dependency>
     <dependency>

@@ -4,6 +4,7 @@
 package com.azure.autorest.util;
 
 import com.azure.autorest.Javagen;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -13,25 +14,30 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ListNode;
 import com.azure.autorest.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.model.clientmodel.examplemodel.MapNode;
+import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.model.clientmodel.examplemodel.ObjectNode;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
+import com.azure.core.util.serializer.CollectionFormat;
 import org.slf4j.Logger;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ModelExampleUtil {
@@ -228,6 +234,128 @@ public class ModelExampleUtil {
             }
         }
         return found ? childObjectValue : null;
+    }
+
+    /**
+     * Parse method parameter (client model or others) to example node.
+     * @param example proxy method example
+     * @param methodParameter method parameter
+     * @return example node
+     */
+    public static ExampleNode parseNodeFromParameter(ProxyMethodExample example, MethodParameter methodParameter) {
+        String serializedName = methodParameter.getSerializedName();
+        if (serializedName == null && methodParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
+            serializedName = methodParameter.getProxyMethodParameter().getName();
+        }
+
+        Object exampleValue = getParameterExampleValue(example, serializedName, methodParameter.getProxyMethodParameter().getRequestParameterLocation());
+
+        ExampleNode node;
+        if (exampleValue == null) {
+            if (ClassType.Context.equals(methodParameter.getClientMethodParameter().getClientType())) {
+                node = new LiteralNode(ClassType.Context, "").setLiteralsValue("");
+            } else {
+                node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
+            }
+        } else {
+            node = parseNodeFromMethodParameter(methodParameter, exampleValue);
+        }
+        return node;
+    }
+
+    /**
+     * Get the example value for the parameter.
+     *
+     * @param example proxy method example
+     * @param serializedName parameter serialized name
+     * @param requestParameterLocation parameter location
+     * @return the example value for the parameter, null if not found
+     */
+    public static Object getParameterExampleValue(ProxyMethodExample example, String serializedName, RequestParameterLocation requestParameterLocation) {
+
+        ProxyMethodExample.ParameterValue parameterValue = findParameter(example, serializedName);
+
+        if (parameterValue == null && requestParameterLocation == RequestParameterLocation.BODY) {
+            // special handling for body, as it does not have serializedName
+            String paramSuffix = "Param";
+            if (serializedName.endsWith(paramSuffix)) {
+                // hack, remove Param, as it likely added by codegen to avoid naming conflict
+                serializedName = serializedName.substring(0, serializedName.length() - paramSuffix.length());
+                if (!serializedName.isEmpty()) {
+                    parameterValue = findParameter(example, serializedName);
+                }
+            }
+
+            // fallback, "body" is commonly used in example JSON for request body
+            if (parameterValue == null) {
+                serializedName = "body";
+                parameterValue = findParameter(example, serializedName);
+            }
+        }
+
+        Object exampleValue = parameterValue;
+
+        if (parameterValue != null) {
+            exampleValue = requestParameterLocation == RequestParameterLocation.QUERY
+                    ? parameterValue.getUnescapedQueryValue()
+                    : parameterValue.getObjectValue();
+        }
+
+        return exampleValue;
+    }
+
+    /**
+     * Find parameter example value from proxy method example by serialized parameter name.
+     * @param example proxy method example
+     * @param serializedName parameter serialized name
+     * @return example value for this parameter
+     */
+    public static ProxyMethodExample.ParameterValue findParameter(ProxyMethodExample example, String serializedName) {
+        return example.getParameters().entrySet()
+                .stream().filter(p -> p.getKey().equalsIgnoreCase(serializedName))
+                .map(Map.Entry::getValue)
+                .findFirst().orElse(null);
+    }
+
+    private static ExampleNode parseNodeFromMethodParameter(MethodParameter methodParameter, Object objectValue) {
+        IType type = methodParameter.getClientMethodParameter().getClientType();
+        IType wireType = methodParameter.getClientMethodParameter().getWireType();
+        if (methodParameter.getProxyMethodParameter().getCollectionFormat() != null && type instanceof ListType && objectValue instanceof String) {
+            // handle parameter style
+
+            IType elementType = ((ListType) type).getElementType();
+            ListNode listNode = new ListNode(elementType, objectValue);
+            String value = (String) objectValue;
+
+            CollectionFormat collectionFormat = methodParameter.getProxyMethodParameter().getCollectionFormat();
+            List<String> elements;
+            switch (collectionFormat) {
+                case CSV:
+                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
+                    break;
+                case SSV:
+                    elements = Arrays.asList(value.split(Pattern.quote(" "), -1));
+                    break;
+                case PIPES:
+                    elements = Arrays.asList(value.split(Pattern.quote("|"), -1));
+                    break;
+                case TSV:
+                    elements = Arrays.asList(value.split(Pattern.quote("\t"), -1));
+                    break;
+                default:
+                    // TODO (weidxu): CollectionFormat.MULTI
+                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
+                    LOGGER.error("Parameter style '{}' is not supported, fallback to CSV", collectionFormat);
+                    break;
+            }
+            for (String childObjectValue : elements) {
+                ExampleNode childNode = ModelExampleUtil.parseNode(elementType, childObjectValue);
+                listNode.getChildNodes().add(childNode);
+            }
+            return listNode;
+        } else {
+            return ModelExampleUtil.parseNode(type, wireType, objectValue);
+        }
     }
 
     private static ModelProperty getAdditionalPropertiesProperty(ClientModel model) {

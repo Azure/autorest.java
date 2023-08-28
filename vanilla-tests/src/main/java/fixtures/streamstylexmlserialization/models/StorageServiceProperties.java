@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -32,52 +33,10 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      */
     private Metrics minuteMetrics;
 
-    private static final class CorsWrapper implements XmlSerializable<CorsWrapper> {
-        private final List<CorsRule> items;
-
-        private CorsWrapper(List<CorsRule> items) {
-            this.items = items;
-        }
-
-        @Override
-        public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-            xmlWriter.writeStartElement("Cors");
-            if (items != null) {
-                for (CorsRule element : items) {
-                    xmlWriter.writeXml(element);
-                }
-            }
-            return xmlWriter.writeEndElement();
-        }
-
-        public static CorsWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
-            return xmlReader.readObject(
-                    "Cors",
-                    reader -> {
-                        List<CorsRule> items = null;
-
-                        while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                            String elementName = reader.getElementName().getLocalPart();
-
-                            if ("CorsRule".equals(elementName)) {
-                                if (items == null) {
-                                    items = new ArrayList<>();
-                                }
-
-                                items.add(CorsRule.fromXml(reader));
-                            } else {
-                                reader.nextElement();
-                            }
-                        }
-                        return new CorsWrapper(items);
-                    });
-        }
-    }
-
     /*
      * The set of CORS rules.
      */
-    private CorsWrapper cors;
+    private List<CorsRule> cors = new ArrayList<>();
 
     /*
      * The default version to use for requests to the Blob service if an incoming request's version is not specified.
@@ -160,9 +119,9 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      */
     public List<CorsRule> getCors() {
         if (this.cors == null) {
-            this.cors = new CorsWrapper(new ArrayList<CorsRule>());
+            this.cors = new ArrayList<>();
         }
-        return this.cors.items;
+        return this.cors;
     }
 
     /**
@@ -172,7 +131,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * @return the StorageServiceProperties object itself.
      */
     public StorageServiceProperties setCors(List<CorsRule> cors) {
-        this.cors = new CorsWrapper(cors);
+        this.cors = cors;
         return this;
     }
 
@@ -245,13 +204,25 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("StorageServiceProperties");
-        xmlWriter.writeXml(this.logging);
-        xmlWriter.writeXml(this.hourMetrics);
-        xmlWriter.writeXml(this.minuteMetrics);
-        xmlWriter.writeXml(this.cors);
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "StorageServiceProperties" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
+        xmlWriter.writeXml(this.logging, "Logging");
+        xmlWriter.writeXml(this.hourMetrics, "HourMetrics");
+        xmlWriter.writeXml(this.minuteMetrics, "MinuteMetrics");
+        if (this.cors != null) {
+            xmlWriter.writeStartElement("Cors");
+            for (CorsRule element : this.cors) {
+                xmlWriter.writeXml(element, "CorsRule");
+            }
+            xmlWriter.writeEndElement();
+        }
         xmlWriter.writeStringElement("DefaultServiceVersion", this.defaultServiceVersion);
-        xmlWriter.writeXml(this.deleteRetentionPolicy);
+        xmlWriter.writeXml(this.deleteRetentionPolicy, "DeleteRetentionPolicy");
         return xmlWriter.writeEndElement();
     }
 
@@ -261,43 +232,61 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * @param xmlReader The XmlReader being read.
      * @return An instance of StorageServiceProperties if the XmlReader was pointing to an instance of it, or null if it
      *     was pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the StorageServiceProperties.
      */
     public static StorageServiceProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return xmlReader.readObject(
-                "StorageServiceProperties",
-                reader -> {
-                    Logging logging = null;
-                    Metrics hourMetrics = null;
-                    Metrics minuteMetrics = null;
-                    CorsWrapper cors = null;
-                    String defaultServiceVersion = null;
-                    RetentionPolicy deleteRetentionPolicy = null;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+        return fromXml(xmlReader, null);
+    }
 
-                        if ("Logging".equals(fieldName.getLocalPart())) {
-                            logging = Logging.fromXml(reader);
-                        } else if ("HourMetrics".equals(fieldName.getLocalPart())) {
-                            hourMetrics = Metrics.fromXml(reader);
-                        } else if ("MinuteMetrics".equals(fieldName.getLocalPart())) {
-                            minuteMetrics = Metrics.fromXml(reader);
-                        } else if ("Cors".equals(fieldName.getLocalPart())) {
-                            cors = CorsWrapper.fromXml(reader);
-                        } else if ("DefaultServiceVersion".equals(fieldName.getLocalPart())) {
-                            defaultServiceVersion = reader.getStringElement();
-                        } else if ("DeleteRetentionPolicy".equals(fieldName.getLocalPart())) {
-                            deleteRetentionPolicy = RetentionPolicy.fromXml(reader);
+    /**
+     * Reads an instance of StorageServiceProperties from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of StorageServiceProperties if the XmlReader was pointing to an instance of it, or null if it
+     *     was pointing to XML null.
+     * @throws XMLStreamException If an error occurs while reading the StorageServiceProperties.
+     */
+    public static StorageServiceProperties fromXml(XmlReader xmlReader, String rootElementName)
+            throws XMLStreamException {
+        String finalRootElementName =
+                CoreUtils.isNullOrEmpty(rootElementName) ? "StorageServiceProperties" : rootElementName;
+        return xmlReader.readObject(
+                finalRootElementName,
+                reader -> {
+                    StorageServiceProperties deserializedStorageServiceProperties = new StorageServiceProperties();
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName elementName = reader.getElementName();
+
+                        if ("Logging".equals(elementName.getLocalPart())) {
+                            deserializedStorageServiceProperties.logging = Logging.fromXml(reader, "Logging");
+                        } else if ("HourMetrics".equals(elementName.getLocalPart())) {
+                            deserializedStorageServiceProperties.hourMetrics = Metrics.fromXml(reader, "HourMetrics");
+                        } else if ("MinuteMetrics".equals(elementName.getLocalPart())) {
+                            deserializedStorageServiceProperties.minuteMetrics =
+                                    Metrics.fromXml(reader, "MinuteMetrics");
+                        } else if ("Cors".equals(elementName.getLocalPart())) {
+                            if (deserializedStorageServiceProperties.cors == null) {
+                                deserializedStorageServiceProperties.cors = new ArrayList<>();
+                            }
+                            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                                elementName = reader.getElementName();
+                                if ("CorsRule".equals(elementName.getLocalPart())) {
+                                    deserializedStorageServiceProperties.cors.add(CorsRule.fromXml(reader, "CorsRule"));
+                                } else {
+                                    reader.skipElement();
+                                }
+                            }
+                        } else if ("DefaultServiceVersion".equals(elementName.getLocalPart())) {
+                            deserializedStorageServiceProperties.defaultServiceVersion = reader.getStringElement();
+                        } else if ("DeleteRetentionPolicy".equals(elementName.getLocalPart())) {
+                            deserializedStorageServiceProperties.deleteRetentionPolicy =
+                                    RetentionPolicy.fromXml(reader, "DeleteRetentionPolicy");
                         } else {
                             reader.skipElement();
                         }
                     }
-                    StorageServiceProperties deserializedStorageServiceProperties = new StorageServiceProperties();
-                    deserializedStorageServiceProperties.logging = logging;
-                    deserializedStorageServiceProperties.hourMetrics = hourMetrics;
-                    deserializedStorageServiceProperties.minuteMetrics = minuteMetrics;
-                    deserializedStorageServiceProperties.cors = cors;
-                    deserializedStorageServiceProperties.defaultServiceVersion = defaultServiceVersion;
-                    deserializedStorageServiceProperties.deleteRetentionPolicy = deleteRetentionPolicy;
 
                     return deserializedStorageServiceProperties;
                 });

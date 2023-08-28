@@ -12,7 +12,7 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
-import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
+import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
 import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceOperation;
@@ -49,12 +49,16 @@ public class ResourceCreate extends ResourceOperation {
 
     private FluentDefineMethod defineMethod;
 
+//    public static final ResourceCreate NO_ASSOCIATION = new ResourceCreate(null, null, null, null, null);
+
     public ResourceCreate(FluentResourceModel resourceModel, FluentResourceCollection resourceCollection,
                           UrlPathSegments urlPathSegments, String methodName, ClientModel bodyParameterModel) {
         super(resourceModel, resourceCollection, urlPathSegments, methodName, bodyParameterModel);
 
-        LOGGER.info("ResourceCreate: Fluent model '{}', method reference '{}', body parameter '{}'",
-                resourceModel.getName(), methodName, bodyParameterModel.getName());
+        if (resourceModel != null) {
+            LOGGER.info("ResourceCreate: Fluent model '{}', method reference '{}', body parameter '{}'",
+                    resourceModel.getName(), methodName, bodyParameterModel.getName());
+        }
     }
 
     public List<DefinitionStage> getDefinitionStages() {

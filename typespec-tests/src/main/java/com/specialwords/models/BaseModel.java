@@ -4,6 +4,7 @@
 
 package com.specialwords.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -20,5 +21,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Immutable
 public class BaseModel {
     /** Creates an instance of BaseModel class. */
+    @Generated
     public BaseModel() {}
 }

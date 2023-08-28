@@ -9,8 +9,8 @@ import java.util.Arrays;
 
 class CollectionFormatClientTest {
 
-    QueryClient client = new CollectionFormatClientBuilder().buildQueryClient();
-    HeaderClient headerClient = new CollectionFormatClientBuilder().buildHeaderClient();
+    private final QueryClient client = new CollectionFormatClientBuilder().buildQueryClient();
+    private final HeaderClient headerClient = new CollectionFormatClientBuilder().buildHeaderClient();
 
     @Test
     void testMulti() {
@@ -20,6 +20,21 @@ class CollectionFormatClientTest {
     @Test
     void testCsv() {
         client.csv(Arrays.asList("blue", "red", "green"));
+    }
+
+    @Test
+    void testSsv() {
+        client.ssv(Arrays.asList("blue", "red", "green"));
+    }
+
+    @Test
+    void testTsv() {
+        client.tsv(Arrays.asList("blue", "red", "green"));
+    }
+
+    @Test
+    void testPipe() {
+        client.pipes(Arrays.asList("blue", "red", "green"));
     }
 
     @Test

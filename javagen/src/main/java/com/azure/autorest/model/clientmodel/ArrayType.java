@@ -120,4 +120,9 @@ public class ArrayType implements IType {
         return ClassType.xmlSerializationCallHelper(xmlWriterName, "writeBinary", attributeOrElementName, namespaceUri,
             valueGetter, isAttribute, nameIsVariable);
     }
+
+    @Override
+    public boolean isUsedInXml() {
+        return false;
+    }
 }

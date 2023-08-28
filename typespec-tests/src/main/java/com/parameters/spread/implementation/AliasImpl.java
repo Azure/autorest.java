@@ -230,8 +230,8 @@ public final class AliasImpl {
      * }
      * }</pre>
      *
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -260,8 +260,8 @@ public final class AliasImpl {
      * }
      * }</pre>
      *
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -284,12 +284,17 @@ public final class AliasImpl {
      *
      * <pre>{@code
      * {
-     *     name: String (Required)
+     *     prop1: String (Required)
+     *     prop2: String (Required)
+     *     prop3: String (Required)
+     *     prop4: String (Required)
+     *     prop5: String (Required)
+     *     prop6: String (Required)
      * }
      * }</pre>
      *
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -315,12 +320,17 @@ public final class AliasImpl {
      *
      * <pre>{@code
      * {
-     *     name: String (Required)
+     *     prop1: String (Required)
+     *     prop2: String (Required)
+     *     prop3: String (Required)
+     *     prop4: String (Required)
+     *     prop5: String (Required)
+     *     prop6: String (Required)
      * }
      * }</pre>
      *
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

@@ -35,28 +35,28 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.39.0</version>
+      <version>1.42.0</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-identity</artifactId>
-      <version>1.9.0</version>
+      <version>1.10.0</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-experimental</artifactId>
-      <version>1.0.0-beta.39</version>
+      <version>1.0.0-beta.42</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.13.3</version>
+      <version>1.13.6</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.9.1</version>
+      <version>5.9.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -68,7 +68,7 @@
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-test</artifactId>
-      <version>3.4.27</version>
+      <version>3.4.30</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -79,7 +79,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-test</artifactId>
-      <version>1.17.0</version>
+      <version>1.19.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

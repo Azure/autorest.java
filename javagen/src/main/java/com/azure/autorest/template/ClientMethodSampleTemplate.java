@@ -9,8 +9,14 @@ import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.example.ClientInitializationExampleWriter;
+import com.azure.autorest.template.example.ClientMethodExampleWriter;
+import com.azure.autorest.template.example.ModelExampleWriter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ClientMethodSampleTemplate implements IJavaTemplate<ClientMethodExample, JavaFile> {
     private static final ClientMethodSampleTemplate INSTANCE = new ClientMethodSampleTemplate();
@@ -33,14 +39,44 @@ public class ClientMethodSampleTemplate implements IJavaTemplate<ClientMethodExa
                         method,
                         proxyMethodExample,
                         serviceClient);
-        javaFile.declareImport(clientInitializationExampleWriter.getImports());
+
+        ClientMethodExampleWriter clientMethodExampleWriter =
+                new ClientMethodExampleWriter(method, clientInitializationExampleWriter.getClientVarName(), proxyMethodExample);
+
+        // declare imports
+        Set<String> imports = new HashSet<>();
+        imports.addAll(clientInitializationExampleWriter.getImports());
+        imports.addAll(clientMethodExampleWriter.getImports());
+        method.getReturnValue().getType().addImportsTo(imports, false);
+        javaFile.declareImport(imports);
 
         javaFile.publicClass(null, filename, classBlock -> {
-            classBlock.publicStaticMethod("void main(String[] args)", methodBlock -> {
+            Set<ExampleHelperFeature> helperFeatures = clientMethodExampleWriter.getHelperFeatures();
+            String methodSignature = "void main(String[] args)";
+            if (helperFeatures.contains(ExampleHelperFeature.ThrowsIOException)) {
+                methodSignature += " throws IOException";
+            }
+            classBlock.publicStaticMethod(methodSignature, methodBlock -> {
+                // write client initialization
                 clientInitializationExampleWriter.write(methodBlock);
-                // TODO(xiaofei) add method body
-                methodBlock.line("// TODO(xiaofei) add method body");
+
+                // write method invocation
+
+                // codesnippet begin
+                if (proxyMethodExample.getCodeSnippetIdentifier() != null) {
+                    methodBlock.line(String.format("// BEGIN:%s", proxyMethodExample.getCodeSnippetIdentifier()));
+                }
+
+                clientMethodExampleWriter.writeMethodInvocation(methodBlock);
+
+                // codesnippet end
+                if (proxyMethodExample.getCodeSnippetIdentifier() != null) {
+                    methodBlock.line(String.format("// END:%s", proxyMethodExample.getCodeSnippetIdentifier()));
+                }
             });
+            if (helperFeatures.contains(ExampleHelperFeature.MapOfMethod)) {
+                ModelExampleWriter.writeMapOfMethod(classBlock);
+            }
         });
     }
 

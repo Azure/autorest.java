@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -166,11 +167,17 @@ public final class Blob implements XmlSerializable<Blob> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("Blob");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Blob" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Name", this.name);
         xmlWriter.writeBooleanElement("Deleted", this.deleted);
         xmlWriter.writeStringElement("Snapshot", this.snapshot);
-        xmlWriter.writeXml(this.properties);
+        xmlWriter.writeXml(this.properties, "Properties");
         if (this.metadata != null) {
             xmlWriter.writeStartElement("Metadata");
             for (Map.Entry<String, String> entry : this.metadata.entrySet()) {
@@ -188,44 +195,52 @@ public final class Blob implements XmlSerializable<Blob> {
      * @return An instance of Blob if the XmlReader was pointing to an instance of it, or null if it was pointing to XML
      *     null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the Blob.
      */
     public static Blob fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return xmlReader.readObject(
-                "Blob",
-                reader -> {
-                    String name = null;
-                    boolean deleted = false;
-                    String snapshot = null;
-                    BlobProperties properties = null;
-                    Map<String, String> metadata = null;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+        return fromXml(xmlReader, null);
+    }
 
-                        if ("Name".equals(fieldName.getLocalPart())) {
-                            name = reader.getStringElement();
-                        } else if ("Deleted".equals(fieldName.getLocalPart())) {
-                            deleted = reader.getBooleanElement();
-                        } else if ("Snapshot".equals(fieldName.getLocalPart())) {
-                            snapshot = reader.getStringElement();
-                        } else if ("Properties".equals(fieldName.getLocalPart())) {
-                            properties = BlobProperties.fromXml(reader);
-                        } else if ("Metadata".equals(fieldName.getLocalPart())) {
-                            if (metadata == null) {
-                                metadata = new LinkedHashMap<>();
+    /**
+     * Reads an instance of Blob from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of Blob if the XmlReader was pointing to an instance of it, or null if it was pointing to XML
+     *     null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the Blob.
+     */
+    public static Blob fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Blob" : rootElementName;
+        return xmlReader.readObject(
+                finalRootElementName,
+                reader -> {
+                    Blob deserializedBlob = new Blob();
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName elementName = reader.getElementName();
+
+                        if ("Name".equals(elementName.getLocalPart())) {
+                            deserializedBlob.name = reader.getStringElement();
+                        } else if ("Deleted".equals(elementName.getLocalPart())) {
+                            deserializedBlob.deleted = reader.getBooleanElement();
+                        } else if ("Snapshot".equals(elementName.getLocalPart())) {
+                            deserializedBlob.snapshot = reader.getStringElement();
+                        } else if ("Properties".equals(elementName.getLocalPart())) {
+                            deserializedBlob.properties = BlobProperties.fromXml(reader, "Properties");
+                        } else if ("Metadata".equals(elementName.getLocalPart())) {
+                            if (deserializedBlob.metadata == null) {
+                                deserializedBlob.metadata = new LinkedHashMap<>();
                             }
                             while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                                metadata.put(reader.getElementName().getLocalPart(), reader.getStringElement());
+                                deserializedBlob.metadata.put(
+                                        reader.getElementName().getLocalPart(), reader.getStringElement());
                             }
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Blob deserializedBlob = new Blob();
-                    deserializedBlob.name = name;
-                    deserializedBlob.deleted = deleted;
-                    deserializedBlob.snapshot = snapshot;
-                    deserializedBlob.properties = properties;
-                    deserializedBlob.metadata = metadata;
 
                     return deserializedBlob;
                 });

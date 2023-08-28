@@ -22,15 +22,23 @@ model Resource {
   @key
   @visibility("read")
   name: string;
+
   description?: string;
   type: string;
 }
 
 interface ResourceOperations
-  extends Azure.Core.ResourceOperations<SupportsRepeatableRequests & NoConditionalRequests & NoClientRequestId> {}
+  extends Azure.Core.ResourceOperations<SupportsRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
 
-@route("/special-headers")
-interface SpecialHeadersOp {
+interface StandardResourceOperations
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
+
+@route("/repeatability-headers")
+interface RepeatabilityHeaders {
   @get
   get is ResourceOperations.ResourceRead<Resource>;
 
@@ -44,4 +52,53 @@ interface SpecialHeadersOp {
 
   @doc("Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent")
   createLro is ResourceOperations.LongRunningResourceCreateOrUpdate<Resource>;
+}
+
+@route("/etag-headers")
+interface EtagHeaders {
+  @put
+  putWithRequestHeaders is StandardResourceOperations.ResourceCreateOrReplace<
+    Resource,
+    RequestHeadersTrait<ConditionalRequestHeaders>
+  >;
+
+  @patch
+  patchWithMatchHeaders is StandardResourceOperations.ResourceCreateOrReplace<
+    Resource,
+    RequestHeadersTrait<{
+      @header("If-Match")
+      @doc("The request should only proceed if an entity matches this string.")
+      ifMatch?: string;
+
+      @header("If-None-Match")
+      @doc("The request should only proceed if no entity matches this string.")
+      ifNoneMatch?: string;
+    }>
+  >;
+}
+
+@route("/etag-headers-optional-body")
+interface EtagHeadersOptionalBody {
+  @put
+  @doc("etag headers among other optional query/header/body parameters")
+  putWithOptionalBody(
+    @query format: string,
+    @query filter?: string,
+    ...ConditionalRequestHeaders,
+    @header @encode(DateTimeKnownEncoding.unixTimestamp, int64) timestamp?: utcDateTime,
+    @body body?: Resource,
+  ): Resource;
+}
+
+@route("/skip-special-headers")
+interface SkipSpecialHeaders {
+  @doc("skip special headers")
+  deleteWithSpecialHeaders is StandardResourceOperations.ResourceDelete<
+    Resource,
+    RequestHeadersTrait<{
+      @header("client-request-id") clientRequestId: string;
+      @header("return-client-request-id") returnClientRequestId: boolean;
+      @header foo: string;
+    }>
+  >;
 }

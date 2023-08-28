@@ -4,6 +4,7 @@
 
 package com.cadl.visibility.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,19 +15,22 @@ public final class Dog {
     /*
      * The id property.
      */
-    @JsonProperty(value = "id", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @Generated
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private int id;
 
     /*
      * The secretName property.
      */
+    @Generated
     @JsonProperty(value = "secretName")
     private String secretName;
 
     /*
      * The name property.
      */
-    @JsonProperty(value = "name", required = true)
+    @Generated
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -35,10 +39,9 @@ public final class Dog {
      * @param secretName the secretName value to set.
      * @param name the name value to set.
      */
+    @Generated
     @JsonCreator
-    private Dog(
-            @JsonProperty(value = "secretName") String secretName,
-            @JsonProperty(value = "name", required = true) String name) {
+    private Dog(@JsonProperty(value = "secretName") String secretName, @JsonProperty(value = "name") String name) {
         this.secretName = secretName;
         this.name = name;
     }
@@ -48,6 +51,7 @@ public final class Dog {
      *
      * @return the id value.
      */
+    @Generated
     public int getId() {
         return this.id;
     }
@@ -57,6 +61,7 @@ public final class Dog {
      *
      * @return the secretName value.
      */
+    @Generated
     public String getSecretName() {
         return this.secretName;
     }
@@ -66,6 +71,7 @@ public final class Dog {
      *
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }

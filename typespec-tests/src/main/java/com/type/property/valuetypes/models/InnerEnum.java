@@ -4,6 +4,7 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
@@ -11,16 +12,17 @@ import java.util.Collection;
 /** Enum that will be used as a property for model EnumProperty. Non-extensible. */
 public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
     /** First value. */
-    public static final InnerEnum VALUE_ONE = fromString("ValueOne");
+    @Generated public static final InnerEnum VALUE_ONE = fromString("ValueOne");
 
     /** Second value. */
-    public static final InnerEnum VALUE_TWO = fromString("ValueTwo");
+    @Generated public static final InnerEnum VALUE_TWO = fromString("ValueTwo");
 
     /**
      * Creates a new instance of InnerEnum value.
      *
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public InnerEnum() {}
 
@@ -30,6 +32,7 @@ public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
      * @param name a name to look for.
      * @return the corresponding InnerEnum.
      */
+    @Generated
     @JsonCreator
     public static InnerEnum fromString(String name) {
         return fromString(name, InnerEnum.class);
@@ -40,6 +43,7 @@ public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
      *
      * @return known InnerEnum values.
      */
+    @Generated
     public static Collection<InnerEnum> values() {
         return values(InnerEnum.class);
     }

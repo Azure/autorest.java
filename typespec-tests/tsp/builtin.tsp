@@ -11,7 +11,6 @@ using Azure.ClientGenerator.Core;
 namespace Cadl.Builtin;
 
 model Builtin {
-  formatString: FormatString;
   boolean: boolean;
   string: string;
   bytes: bytes;
@@ -30,53 +29,30 @@ model Builtin {
   encoded: Encoded;
 }
 
-model FormatString {
-  @format("byte")
-  base64Encoded: string;
-
-  @format("binary")
-  binary: string;
-
-  @format("date-time")
-  dateTime: string;
-  dateTimeRfc1123: DateTimeRfc1123;
-
-  @format("password")
-  password: string;
-
-  @format("url")
-  uri: string;
-
-  @knownValues(KnownValues)
-  extensibleEnum: string;
-  extensibleEnumScalar: KnownValuesScalar;
-}
-
 @encode(DurationKnownEncoding.seconds, float32)
 scalar myDuration extends duration;
 
 model Encoded {
   @encode(DurationKnownEncoding.seconds, int32)
-  timeInSeconds: duration;
-  timeInSecondsFraction: myDuration;
+  timeInSeconds?: duration;
 
-  @encode(DurationKnownEncoding.seconds, int32)
-  timeInSecondsOptional?: duration;
+  timeInSecondsFraction?: myDuration;
+
+  @encode(DateTimeKnownEncoding.rfc3339)
+  dateTime?: utcDateTime;
+
+  @encode(DateTimeKnownEncoding.rfc7231)
+  dateTimeRfc7231?: utcDateTime;
+
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  unixTimestamp?: utcDateTime;
+
+  @encode(BytesKnownEncoding.base64)
+  base64?: bytes;
+
+  @encode(BytesKnownEncoding.base64url)
+  base64url?: bytes;
 }
-
-@summary("summary of RFC1123 date-time")
-@doc("description of RFC1123 date-time")
-@friendlyName("DateTime")
-@format("date-time-rfc1123")
-scalar DateTimeRfc1123 extends string;
-
-enum KnownValues {
-  Value1,
-  Value2,
-}
-
-@knownValues(KnownValues)
-scalar KnownValuesScalar extends string;
 
 model Request {
   @header("x-ms-date")

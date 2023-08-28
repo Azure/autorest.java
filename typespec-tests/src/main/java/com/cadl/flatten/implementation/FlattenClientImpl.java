@@ -21,7 +21,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
@@ -96,9 +95,7 @@ public final class FlattenClientImpl {
      */
     public FlattenClientImpl(String endpoint, FlattenServiceVersion serviceVersion) {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 endpoint,
                 serviceVersion);
@@ -240,7 +237,7 @@ public final class FlattenClientImpl {
      * }
      * }</pre>
      *
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -278,7 +275,7 @@ public final class FlattenClientImpl {
      * }
      * }</pre>
      *
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -308,7 +305,7 @@ public final class FlattenClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -321,10 +318,14 @@ public final class FlattenClientImpl {
      *         user: String (Required)
      *     }
      *     input: String (Required)
+     *     dataInt: int (Required)
+     *     dataIntOptional: Integer (Optional)
+     *     dataLong: Long (Optional)
+     *     data_float: Double (Optional)
      * }
      * }</pre>
      *
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -357,7 +358,7 @@ public final class FlattenClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -370,10 +371,14 @@ public final class FlattenClientImpl {
      *         user: String (Required)
      *     }
      *     input: String (Required)
+     *     dataInt: int (Required)
+     *     dataIntOptional: Integer (Optional)
+     *     dataLong: Long (Optional)
+     *     data_float: Double (Optional)
      * }
      * }</pre>
      *
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

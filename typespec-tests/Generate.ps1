@@ -1,3 +1,11 @@
+# Use case:
+#
+# The purpose of this script is to compact the steps required to regenerate TypeSpec into a single script.
+#
+# If 'com.azure.autorest.customization' tests fails, re-install 'customization-base'.
+#
+# Before running this script the 'tsp' profile must be built, 'mvn install -P local,tsp'.
+
 $tspPattern2NamespaceMapping = @{
   # override namespace for reserved keyword "enum"
   "type[\\/]enum[\\/]extensible[\\/]*" = "com.type.enums.extensible";
@@ -15,10 +23,30 @@ function Generate($tspFile) {
       break
     }
   }
+
+  $tspClientFile = $tspFile -replace 'main.tsp', 'client.tsp'
+  if (($tspClientFile -match 'client.tsp$') -and (Test-Path $tspClientFile)) {
+    $tspFile = $tspClientFile
+  }
+
   $tspOptions = ""
   if ($overridedNamespace) {
     $tspOptions = "--options=""@azure-tools/typespec-java.namespace=$overridedNamespace"""
   }
+
+  # Test customization for one of the TypeSpec definitions - naming.tsp
+  if ($tspFile -match "tsp[\\/]naming.tsp$") {
+#     # since tsp-output directory will be cleaned up after each test tsp, we copy the customization
+#     # code into output directory from customization directory in tsp-output/customization directory just before
+#     # generating the code
+#     Copy-Item -Path ./customization -Destination ./tsp-output/customization -Recurse -Force
+
+    # Add the customization-class option for Java emitter
+    $tspOptions = "--options=""@azure-tools/typespec-java.customization-class=../customization/src/main/java/CustomizationTest.java"""
+  } elseif ($tspFile -match "encode[\\/]bytes[\\/]main.tsp") {
+    $tspOptions = "--options=""@azure-tools/typespec-java.customization-class=../customization/src/main/java/CustomizationEncodeBytes.java"""
+  }
+
   $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"
   $tspCommand = "npx tsp compile $tspFile $tspOptions $tspTrace"
   Write-Host $tspCommand
@@ -32,11 +60,7 @@ function Generate($tspFile) {
     Remove-Item ./tsp-output/src/main/java/module-info.java
   }
 
-  if (Test-Path ./tsp-output/src/samples) {
-    Remove-Item ./tsp-output/src/samples -Recurse -Force
-  }
-
-  Copy-Item -Path ./tsp-output/src -Destination ./ -Recurse -Force
+  Copy-Item -Path ./tsp-output/src -Destination ./ -Recurse -Force -Exclude ReadmeSamples.java
 
   Remove-Item ./tsp-output -Recurse -Force
 }

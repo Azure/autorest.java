@@ -164,14 +164,13 @@ public class Javagen extends NewPlugin {
         return newYaml.loadAs(file, CodeModel.class);
     }
 
-    JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings,
-                                 boolean generateSwaggerMarkdown) {
+    protected JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings,
+                                           boolean generateSwaggerMarkdown) {
         JavaPackage javaPackage = new JavaPackage(this);
         // Service client
         if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
-            javaPackage
-                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
-                    client.getServiceClient());
+            javaPackage.addServiceClient(client.getServiceClient().getPackage(),
+                client.getServiceClient().getClassName(), client.getServiceClient());
         } else {
             // multi-client from TypeSpec
             for (ServiceClient serviceClient : client.getServiceClients()) {
@@ -180,8 +179,8 @@ public class Javagen extends NewPlugin {
         }
 
         if (settings.isGenerateClientInterfaces()) {
-            javaPackage
-                .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
+            javaPackage.addServiceClientInterface(client.getServiceClient().getInterfaceName(),
+                client.getServiceClient());
         }
 
         // Async/sync service clients
@@ -234,7 +233,10 @@ public class Javagen extends NewPlugin {
 
                 // test cases as Disabled
                 if (!client.getProtocolExamples().isEmpty()) {
-                    client.getProtocolExamples().forEach(protocolExample -> javaPackage.addProtocolTest(new TestContext(testContext, protocolExample)));
+                    client.getProtocolExamples().forEach(protocolExample -> javaPackage.addProtocolTest(new TestContext<>(testContext, protocolExample)));
+                }
+                if (!client.getClientMethodExamples().isEmpty()) {
+                    client.getClientMethodExamples().forEach(clientMethodExample -> javaPackage.addClientMethodTest(new TestContext<>(testContext, clientMethodExample)));
                 }
             }
         }
@@ -316,6 +318,9 @@ public class Javagen extends NewPlugin {
                     javaPackage.addSwaggerReadmeMarkdown(project);
                 }
                 javaPackage.addChangelogMarkdown(project);
+
+                // test proxy asserts.json
+                javaPackage.addTestProxyAssetsJson(project);
 
                 // Blank readme sample
                 javaPackage.addProtocolExamplesBlank();

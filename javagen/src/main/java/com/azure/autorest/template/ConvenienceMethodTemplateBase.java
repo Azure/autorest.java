@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -22,15 +23,18 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.TypeReference;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -95,9 +99,11 @@ abstract class ConvenienceMethodTemplateBase {
         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 
         // parameter transformation
-        if (convenienceMethod.getMethodTransformationDetails() != null) {
+        if (!CoreUtils.isNullOrEmpty(convenienceMethod.getMethodTransformationDetails())) {
             convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, protocolMethod, methodBlock, parametersMap));
         }
+
+        writeValidationForVersioning(convenienceMethod, parametersMap.keySet(), methodBlock);
 
         Map<String, String> parameterExpressionsMap = new HashMap<>();
         for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
@@ -154,6 +160,33 @@ abstract class ConvenienceMethodTemplateBase {
         writeInvocationAndConversion(convenienceMethod, protocolMethod, invocationExpression, methodBlock, typeReferenceStaticClasses);
     }
 
+
+    /**
+     * Write the validation for parameters against current api-version.
+     *
+     * @param parameters the parameters
+     * @param methodBlock the method block
+     */
+    protected void writeValidationForVersioning(ClientMethod convenienceMethod, Set<MethodParameter> parameters, JavaBlock methodBlock) {
+        // validate parameter for versioning
+        for (MethodParameter parameter : parameters) {
+            if (parameter.getClientMethodParameter().getVersioning() != null && parameter.getClientMethodParameter().getVersioning().getAdded() != null) {
+                String condition = String.format(
+                        "!Arrays.asList(%1$s).contains(serviceClient.getServiceVersion().getVersion())",
+                        parameter.getClientMethodParameter().getVersioning().getAdded().stream().map(ClassType.String::defaultValueExpression).collect(Collectors.joining(", ")));
+                methodBlock.ifBlock(condition, ifBlock -> {
+                    String exceptionExpression = String.format(
+                            "new IllegalArgumentException(\"Parameter %1$s is only available in api-version %2$s.\")",
+                            parameter.getName(),
+                            String.join(", ", parameter.getClientMethodParameter().getVersioning().getAdded()));
+                    writeThrowException(convenienceMethod.getType(), exceptionExpression, ifBlock);
+                });
+            }
+        }
+    }
+
+    abstract void writeThrowException(ClientMethodType methodType, String exceptionExpression, JavaBlock methodBlock);
+
     private static boolean isGroupByTransformation(MethodTransformationDetail detail) {
         return !CoreUtils.isNullOrEmpty(detail.getParameterMappings())
                 && detail.getParameterMappings().iterator().next().getOutputParameterPropertyName() == null;
@@ -171,20 +204,37 @@ abstract class ConvenienceMethodTemplateBase {
             ParameterMapping mapping = detail.getParameterMappings().iterator().next();
             ClientMethodParameter sourceParameter = mapping.getInputParameter();
 
-            methodBlock.line(String.format("%1$s %2$s = %3$s.%4$s();",
-                    detail.getOutParameter().getWireType(),
-                    detail.getOutParameter().getName(),
-                    sourceParameter.getName(),
-                    CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty())));
+            boolean sourceParameterInMethod = false;
+            for (MethodParameter parameter: parametersMap.keySet()) {
+                if (parameter.clientMethodParameter != null && parameter.clientMethodParameter.getName() != null
+                        && Objects.equals(parameter.clientMethodParameter.getName(), sourceParameter.getName())) {
+                    sourceParameterInMethod = true;
+                    break;
+                }
+            }
 
-            if (detail.getOutParameter().getRequestParameterLocation() != null) {
-                ClientMethodParameter clientMethodParameter = detail.getOutParameter();
-                ProxyMethodParameter proxyMethodParameter = convenienceMethod.getProxyMethod().getAllParameters().stream()
-                        .filter(p -> clientMethodParameter.getName().equals(CodeNamer.getEscapedReservedClientMethodParameterName(p.getName())))
-                        .findFirst().orElse(null);
-                if (proxyMethodParameter != null) {
-                    MethodParameter methodParameter = new MethodParameter(proxyMethodParameter, clientMethodParameter);
-                    parametersMap.put(methodParameter, findParameterForConvenienceMethod(methodParameter, protocolMethod));
+            if (sourceParameterInMethod) {
+                // null check on input parameter
+                String assignmentExpression = "%1$s %2$s = %3$s.%4$s();";
+                if (!sourceParameter.isRequired()) {
+                    assignmentExpression = "%1$s %2$s = %3$s == null ? null : %3$s.%4$s();";
+                }
+
+                methodBlock.line(String.format(assignmentExpression,
+                        detail.getOutParameter().getClientType(),
+                        detail.getOutParameter().getName(),
+                        sourceParameter.getName(),
+                        CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty())));
+
+                if (detail.getOutParameter().getRequestParameterLocation() != null) {
+                    ClientMethodParameter clientMethodParameter = detail.getOutParameter();
+                    ProxyMethodParameter proxyMethodParameter = convenienceMethod.getProxyMethod().getAllParameters().stream()
+                            .filter(p -> clientMethodParameter.getName().equals(CodeNamer.getEscapedReservedClientMethodParameterName(p.getName())))
+                            .findFirst().orElse(null);
+                    if (proxyMethodParameter != null) {
+                        MethodParameter methodParameter = new MethodParameter(proxyMethodParameter, clientMethodParameter);
+                        parametersMap.put(methodParameter, findParameterForConvenienceMethod(methodParameter, protocolMethod));
+                    }
                 }
             }
         } else {
@@ -228,6 +278,7 @@ abstract class ConvenienceMethodTemplateBase {
                     }
                 });
 
+        ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
         ClassType.BinaryData.addImportsTo(imports, false);
         ClassType.RequestOptions.addImportsTo(imports, false);
         imports.add(Collectors.class.getName());
@@ -242,10 +293,13 @@ abstract class ConvenienceMethodTemplateBase {
         // flatten payload
         imports.add(Map.class.getName());
         imports.add(HashMap.class.getName());
+
+        // versioning
+        imports.add(Arrays.class.getName());
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
-        typeBlock.annotation("Generated");
+        typeBlock.annotation(Generated.class.getSimpleName());
     }
 
     /**
@@ -312,7 +366,7 @@ abstract class ConvenienceMethodTemplateBase {
     private static void writeHeader(MethodParameter parameter, JavaBlock methodBlock) {
         Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
                 String.format("requestOptions.setHeader(%1$s, %2$s);",
-                        ClassType.String.defaultValueExpression(parameter.getSerializedName()),
+                        ModelTemplateHeaderHelper.getHttpHeaderNameInstanceExpression(parameter.getSerializedName()),
                         expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter())));
         if (!parameter.getClientMethodParameter().isRequired()) {
             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {

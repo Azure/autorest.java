@@ -6,6 +6,10 @@ package com.azure.autorest.template;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.util.TemplateUtil;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 public class ReadmeTemplate {
 
     public String write(Project project) {
@@ -15,7 +19,22 @@ public class ReadmeTemplate {
                 TemplateUtil.GROUP_ID, project.getGroupId(),
                 TemplateUtil.ARTIFACT_ID, project.getArtifactId(),
                 TemplateUtil.ARTIFACT_VERSION, project.getVersion(),
-                TemplateUtil.PACKAGE_NAME, project.getNamespace()
+                TemplateUtil.PACKAGE_NAME, project.getNamespace(),
+                TemplateUtil.IMPRESSION_PIXEL, getImpression(project)
         );
+    }
+
+    protected static String getImpression(Project project) {
+        String impression = "";
+        if (project.getSdkRepositoryPath().isPresent()) {
+            try {
+                impression = "![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/"
+                        + URLEncoder.encode("azure-sdk-for-java/" + project.getSdkRepositoryPath().get() + "/README.png", StandardCharsets.UTF_8.name())
+                        + ")";
+            } catch (UnsupportedEncodingException e) {
+                // NOOP
+            }
+        }
+        return impression;
     }
 }

@@ -4,6 +4,7 @@
 
 package com.projection.projectedname.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +15,8 @@ public final class JsonProjectedNameModel {
     /*
      * Pass in true
      */
-    @JsonProperty(value = "wireName", required = true)
+    @Generated
+    @JsonProperty(value = "wireName")
     private boolean defaultName;
 
     /**
@@ -22,8 +24,9 @@ public final class JsonProjectedNameModel {
      *
      * @param defaultName the defaultName value to set.
      */
+    @Generated
     @JsonCreator
-    public JsonProjectedNameModel(@JsonProperty(value = "wireName", required = true) boolean defaultName) {
+    public JsonProjectedNameModel(@JsonProperty(value = "wireName") boolean defaultName) {
         this.defaultName = defaultName;
     }
 
@@ -32,6 +35,7 @@ public final class JsonProjectedNameModel {
      *
      * @return the defaultName value.
      */
+    @Generated
     public boolean isDefaultName() {
         return this.defaultName;
     }

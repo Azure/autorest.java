@@ -21,7 +21,6 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.Response;
@@ -108,9 +107,7 @@ public final class AutoRestValidationTest {
      */
     AutoRestValidationTest(String subscriptionId, String host, String apiVersion) {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 subscriptionId,
                 host,

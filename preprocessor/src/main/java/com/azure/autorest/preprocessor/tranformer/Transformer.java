@@ -140,6 +140,7 @@ public class Transformer {
           if (operation.getConvenienceApi().getRequests() != null) {
             for (Request request : operation.getConvenienceApi().getRequests()) {
               for (Parameter parameter : request.getParameters()) {
+                parameter.setOperation(operation);
                 renameVariable(parameter);
               }
             }
@@ -424,8 +425,17 @@ public class Transformer {
     renameType(codeModel);
     if (codeModel.getLanguage().getJava().getName() == null
         || codeModel.getLanguage().getJava().getName().isEmpty()) {
-      codeModel.getLanguage().getJava().setName(CodeNamer.getTypeName(codeModel.getInfo().getTitle()));
+      codeModel.getLanguage().getJava().setName(CodeNamer.getClientName(codeModel.getInfo().getTitle()));
+      codeModel.getLanguage().getJava().setDescription(codeModel.getInfo().getDescription());
     }
+  }
+
+  private void renameClient(Metadata client) {
+    Language language = client.getLanguage().getDefault();
+    Language java = addJavaLanguage(client);
+    java.setName(CodeNamer.getClientName(language.getName()));
+    java.setDescription(language.getDescription());
+    client.getLanguage().setJava(java);
   }
 
   private void renameVariable(Metadata schema) {
@@ -452,15 +462,6 @@ public class Transformer {
     java.setName(CodeNamer.getMethodName(language.getName()));
     java.setSerializedName(language.getSerializedName());
     java.setDescription(language.getDescription());
-  }
-
-  private void renameClient(Metadata client) {
-    Language language = client.getLanguage().getDefault();
-    Language java = addJavaLanguage(client);
-    java.setName(CodeNamer.toPascalCase(language.getName())); // Name of client should always ends with Client, hence it should not require escaping
-    java.setSerializedName(language.getSerializedName());
-    java.setDescription(language.getDescription());
-    client.getLanguage().setJava(java);
   }
 
   private Language addJavaLanguage(Metadata schema) {

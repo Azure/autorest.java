@@ -20,9 +20,12 @@ import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
@@ -31,7 +34,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class MethodUtil {
@@ -170,9 +177,9 @@ public class MethodUtil {
         Parameter contentType = new Parameter();
         contentType.setOperation(operation);
         contentType.setDescription("The content type");
-        for (int i = 0; i < request.getParameters().size(); ++i) {
-            if (request.getParameters().get(i).getSchema() instanceof BinarySchema) {
-                contentType.setRequired(request.getParameters().get(i).isRequired());
+        for (Parameter parameter : request.getParameters()) {
+            if (parameter.getSchema() instanceof BinarySchema) {
+                contentType.setRequired(parameter.isRequired());
                 break;
             }
         }
@@ -247,6 +254,64 @@ public class MethodUtil {
         }
         res += ".";
         return res;
+    }
+
+    /**
+     * Get a list of 1-1 pairs of proxy method parameter and client method parameter.
+     *
+     * @param clientMethod the client method
+     * @return the list of 1-1 pair of proxy method parameter and client method parameter
+     */
+    public static List<MethodParameter> getParameters(ClientMethod clientMethod) {
+        return getParameters(clientMethod, false);
+    }
+
+    /**
+     * Get a list of 1-1 pairs of proxy method parameter and client method parameter.
+     *
+     * @param allParameter whether to match non-required proxy method parameter
+     * @param clientMethod the client method
+     * @return the list of 1-1 pair of proxy method parameter and client method parameter
+     */
+    public static List<MethodParameter> getParameters(ClientMethod clientMethod, boolean allParameter) {
+        List<ProxyMethodParameter> parameters = allParameter ? clientMethod.getProxyMethod().getAllParameters()
+                : clientMethod.getProxyMethod().getParameters();
+        Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = parameters.stream()
+                .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
+        return clientMethod.getMethodInputParameters().stream()
+                .filter(p -> !p.isConstant() && !p.isFromClient())
+                .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Checks if the parameter is "maxpagesize".
+     * <p>
+     * It checks if the serialized name is "maxpagesize", or client name is "maxPageSize".
+     *
+     * @param parameter the parameter
+     * @return whether the parameter is "maxpagesize".
+     */
+    public static boolean isMaxPageSizeParameter(Parameter parameter) {
+        return parameter.getProtocol() != null && parameter.getProtocol().getHttp() != null
+                // query parameter
+                && parameter.getProtocol().getHttp().getIn() == RequestParameterLocation.QUERY
+                // serialized name == maxpagesize, or relax a bit, client name == maxPageSize
+                && (Objects.equals(parameter.getLanguage().getDefault().getSerializedName(), "maxpagesize") || Objects.equals(SchemaUtil.getJavaName(parameter), "maxPageSize"));
+    }
+
+    /**
+     * Finds the serialized name of "maxpagesize" parameter, if exists.
+     *
+     * @param proxyMethod the proxy method
+     * @return the serialized name of "maxpagesize" parameter, if exists.
+     */
+    public static Optional<String> serializedNameOfMaxPageSizeParameter(ProxyMethod proxyMethod) {
+        return proxyMethod.getAllParameters().stream()
+                .filter(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY
+                        && (Objects.equals(p.getRequestParameterName(), "maxpagesize") || Objects.equals(p.getName(), "maxPageSize")))
+                .map(ProxyMethodParameter::getRequestParameterName)
+                .findFirst();
     }
 
     /**

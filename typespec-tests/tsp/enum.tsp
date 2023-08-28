@@ -45,6 +45,9 @@ model Operation {
   age: 50;
   priority: Priority;
   color: ColorModel;
+  priorityValue: Priority.Low;
+  colorValue: Color.Green;
+  colorModelValue: ColorModel.Blue;
 }
 
 @route("/enum")
@@ -84,7 +87,7 @@ interface EnumOp {
     @query({
       format: "csv",
     })
-    colorArrayOpt?: ColorModel[]
+    colorArrayOpt?: ColorModel[],
   ): string;
 
   @post
@@ -98,7 +101,7 @@ interface EnumOp {
     @query({
       format: "csv",
     })
-    priorityArrayOpt?: Priority[]
+    priorityArrayOpt?: Priority[],
   ): string;
 
   @post
@@ -112,7 +115,7 @@ interface EnumOp {
     @query({
       format: "csv",
     })
-    stringArrayOpt?: string[]
+    stringArrayOpt?: string[],
   ): string;
 
   @post
@@ -126,7 +129,7 @@ interface EnumOp {
     @query({
       format: "csv",
     })
-    intArrayOpt?: int32[]
+    intArrayOpt?: int32[],
   ): string;
 
   @post
@@ -140,7 +143,7 @@ interface EnumOp {
     @query({
       format: "multi",
     })
-    colorArrayOpt?: ColorModel[]
+    colorArrayOpt?: ColorModel[],
   ): string;
 
   @post
@@ -154,7 +157,7 @@ interface EnumOp {
     @query({
       format: "multi",
     })
-    priorityArrayOpt?: Priority[]
+    priorityArrayOpt?: Priority[],
   ): string;
 
   @post
@@ -168,7 +171,7 @@ interface EnumOp {
     @query({
       format: "multi",
     })
-    stringArrayOpt?: string[]
+    stringArrayOpt?: string[],
   ): string;
 
   @post
@@ -182,7 +185,7 @@ interface EnumOp {
     @query({
       format: "multi",
     })
-    intArrayOpt?: int32[]
+    intArrayOpt?: int32[],
   ): string;
 
   @post
@@ -196,6 +199,6 @@ interface EnumOp {
     @header({
       format: "csv",
     })
-    colorArrayOpt?: ColorModel[]
+    colorArrayOpt?: ColorModel[],
   ): string;
 }

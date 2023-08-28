@@ -24,6 +24,7 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.core.http.ContentType;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.polling.LongRunningOperationStatus;
@@ -81,6 +82,7 @@ public class ProtocolExampleWriter {
         // assertion
         imports.add("org.junit.jupiter.api.Assertions");
         imports.add(LongRunningOperationStatus.class.getName());
+        imports.add(HttpHeaderName.class.getName());
 
         // method invocation
         // parameter values and required invocation on RequestOptions
@@ -246,7 +248,7 @@ public class ProtocolExampleWriter {
                         response.getHttpHeaders().stream().forEach(header -> {
                             String expectedValueStr = ClassType.String.defaultValueExpression(header.getValue());
                             String keyStr = ClassType.String.defaultValueExpression(header.getName());
-                            methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getHeaders().get(%2$s).getValue());", expectedValueStr, keyStr));
+                            methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
                         });
                         // assert JSON body
                         if (ContentType.APPLICATION_JSON.equals(method.getProxyMethod().getRequestContentType())
@@ -272,7 +274,7 @@ public class ProtocolExampleWriter {
                         response.getHttpHeaders().stream().forEach(header -> {
                             String expectedValueStr = ClassType.String.defaultValueExpression(header.getValue());
                             String keyStr = ClassType.String.defaultValueExpression(header.getName());
-                            methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getHeaders().get(%2$s).getValue());", expectedValueStr, keyStr));
+                            methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
                         });
                         // assert JSON of first item, or assert count=0
                         if (ContentType.APPLICATION_JSON.equals(method.getProxyMethod().getRequestContentType())

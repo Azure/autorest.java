@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.multicontenttypes.implementation.MultiContentTypesClientImpl;
-import com.cadl.multicontenttypes.models.ContentType;
+import com.cadl.multicontenttypes.models.Resource;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous MultiContentTypesClient type. */
@@ -33,6 +33,33 @@ public final class MultiContentTypesAsyncClient {
     @Generated
     MultiContentTypesAsyncClient(MultiContentTypesClientImpl serviceClient) {
         this.serviceClient = serviceClient;
+    }
+
+    /**
+     * multiple data types map to multiple content types.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * DataModelBase
+     * }</pre>
+     *
+     * @param contentType The contentType parameter. Allowed values: "text/plain", "application/json",
+     *     "application/octet-stream", "image/jpeg", "image/png".
+     * @param data The data parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> uploadWithOverloadWithResponse(
+            String contentType, BinaryData data, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'uploadWithOverload' is multiple content-type
+        return this.serviceClient.uploadWithOverloadWithResponseAsync(contentType, data, requestOptions);
     }
 
     /**
@@ -53,8 +80,8 @@ public final class MultiContentTypesAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> downloadImageWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.downloadImageWithResponseAsync(requestOptions);
+    public Mono<Response<BinaryData>> downloadImageForSingleContentTypeWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.downloadImageForSingleContentTypeWithResponseAsync(requestOptions);
     }
 
     /**
@@ -66,7 +93,7 @@ public final class MultiContentTypesAsyncClient {
      * BinaryData
      * }</pre>
      *
-     * @param data The data parameter.
+     * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -76,8 +103,9 @@ public final class MultiContentTypesAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadImageWithResponse(BinaryData data, RequestOptions requestOptions) {
-        return this.serviceClient.uploadImageWithResponseAsync(data, requestOptions);
+    public Mono<Response<Void>> uploadImageForSingleContentTypeWithResponse(
+            BinaryData data, RequestOptions requestOptions) {
+        return this.serviceClient.uploadImageForSingleContentTypeWithResponseAsync(data, requestOptions);
     }
 
     /**
@@ -91,6 +119,65 @@ public final class MultiContentTypesAsyncClient {
      *
      * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
      *     "image/png".
+     * @param data Represent a byte array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponse(
+            String contentType, BinaryData data, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'uploadBytesWithSingleBodyTypeForMultiContentTypes' is
+        // multiple content-type
+        return this.serviceClient.uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponseAsync(
+                contentType, data, requestOptions);
+    }
+
+    /**
+     * multiple data types map to multiple content types using shared route.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * BinaryData
+     * }</pre>
+     *
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     *     "image/png".
+     * @param data Represent a byte array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponse(
+            String contentType, BinaryData data, RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'uploadBytesWithMultiBodyTypesForMultiContentTypes' is
+        // multiple content-type
+        return this.serviceClient.uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponseAsync(
+                contentType, data, requestOptions);
+    }
+
+    /**
+     * multiple data types map to multiple content types using shared route.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -101,9 +188,39 @@ public final class MultiContentTypesAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadBytesWithResponse(
+    public Mono<Response<Void>> uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponse(
+            BinaryData data, RequestOptions requestOptions) {
+        return this.serviceClient.uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponseAsync(
+                data, requestOptions);
+    }
+
+    /**
+     * multiple data types map to multiple content types using shared route.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * DataModelBase
+     * }</pre>
+     *
+     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream",
+     *     "image/jpeg", "image/png".
+     * @param data The data parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponse(
             String contentType, BinaryData data, RequestOptions requestOptions) {
-        return this.serviceClient.uploadBytesWithResponseAsync(contentType, data, requestOptions);
+        // Convenience API is not generated, as operation 'uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes' is
+        // multiple content-type
+        return this.serviceClient.uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponseAsync(
+                contentType, data, requestOptions);
     }
 
     /**
@@ -118,16 +235,16 @@ public final class MultiContentTypesAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> downloadImage() {
-        // Generated convenience method for downloadImageWithResponse
+    public Mono<BinaryData> downloadImageForSingleContentType() {
+        // Generated convenience method for downloadImageForSingleContentTypeWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return downloadImageWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+        return downloadImageForSingleContentTypeWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
      * request is binary.
      *
-     * @param data The data parameter.
+     * @param data Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -138,16 +255,15 @@ public final class MultiContentTypesAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> uploadImage(BinaryData data) {
-        // Generated convenience method for uploadImageWithResponse
+    public Mono<Void> uploadImageForSingleContentType(BinaryData data) {
+        // Generated convenience method for uploadImageForSingleContentTypeWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return uploadImageWithResponse(data, requestOptions).flatMap(FluxUtil::toMono);
+        return uploadImageForSingleContentTypeWithResponse(data, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
-     * one data type maps to multiple content types.
+     * multiple data types map to multiple content types using shared route.
      *
-     * @param contentType The contentType parameter.
      * @param data The data parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -159,9 +275,10 @@ public final class MultiContentTypesAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> uploadBytes(ContentType contentType, BinaryData data) {
-        // Generated convenience method for uploadBytesWithResponse
+    public Mono<Void> uploadJsonWithMultiBodyTypesForMultiContentTypes(Resource data) {
+        // Generated convenience method for uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return uploadBytesWithResponse(contentType.toString(), data, requestOptions).flatMap(FluxUtil::toMono);
+        return uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponse(BinaryData.fromObject(data), requestOptions)
+                .flatMap(FluxUtil::toMono);
     }
 }

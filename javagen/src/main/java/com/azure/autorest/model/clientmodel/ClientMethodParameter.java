@@ -61,6 +61,8 @@ public class ClientMethodParameter extends MethodParameter {
      */
     private final List<ClassType> annotations;
 
+    private final Versioning versioning;
+
     /**
      * Create a new Parameter with the provided properties.
      * @param description The description of this parameter.
@@ -75,11 +77,12 @@ public class ClientMethodParameter extends MethodParameter {
      */
     private ClientMethodParameter(String description, boolean isFinal, IType wireType, IType rawType, String name,
         boolean isRequired, boolean isConstant, boolean fromClient, String defaultValue, List<ClassType> annotations,
-        RequestParameterLocation location) {
+        RequestParameterLocation location, Versioning versioning) {
         super(description, wireType, rawType, wireType.getClientType(), name, location, isConstant, isRequired,
             fromClient, defaultValue);
         this.isFinal = isFinal;
         this.annotations = annotations;
+        this.versioning = versioning;
     }
 
     public final boolean isFinal() {
@@ -90,12 +93,16 @@ public class ClientMethodParameter extends MethodParameter {
         return annotations;
     }
 
+    public Versioning getVersioning() {
+        return versioning;
+    }
+
     /**
      * Creates a builder that is initialized with all the builder properties set to current values of this instance.
      * @return A new builder instance initialized with properties values of this instance.
      */
     public ClientMethodParameter.Builder toNewBuilder() {
-        return new ClientMethodParameter.Builder()
+        return new Builder()
                 .fromClient(this.isFromClient())
                 .annotations(this.getAnnotations())
                 .defaultValue(this.getDefaultValue())
@@ -106,7 +113,8 @@ public class ClientMethodParameter extends MethodParameter {
                 .required(this.isRequired())
                 .location(this.getRequestParameterLocation())
                 .rawType(this.getRawType())
-                .wireType(this.getWireType());
+                .wireType(this.getWireType())
+                .versioning(this.getVersioning());
     }
 
 
@@ -142,6 +150,7 @@ public class ClientMethodParameter extends MethodParameter {
         private String defaultValue;
         private List<ClassType> annotations;
         private RequestParameterLocation location;
+        private Versioning versioning;
 
         /**
          * Sets the description of this parameter.
@@ -253,6 +262,11 @@ public class ClientMethodParameter extends MethodParameter {
             return this;
         }
 
+        public Builder versioning(Versioning versioning) {
+            this.versioning = versioning;
+            return this;
+        }
+
         public ClientMethodParameter build() {
             return new ClientMethodParameter(description,
                     isFinal,
@@ -264,7 +278,8 @@ public class ClientMethodParameter extends MethodParameter {
                     fromClient,
                     defaultValue,
                     annotations,
-                    location);
+                    location,
+                    versioning);
         }
     }
 }

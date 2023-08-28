@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.ServiceClientMapper;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.PipelinePolicyDetails;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.util.ClientModelUtil;
@@ -56,6 +57,19 @@ public class TypeSpecServiceClientMapper extends ServiceClientMapper {
                 client.getServiceVersion() == null ? null : client.getServiceVersion().getLanguage().getJava().getName(),
                 proxy);
 
+        processPipelinePolicyDetails(builder, client);
+
         return builder.build();
+    }
+
+    private static void processPipelinePolicyDetails(ServiceClient.Builder builder, Client client) {
+        // handle corner case of RequestIdPolicy with header name "client-request-id"
+        final String clientRequestIdHeaderName = "client-request-id";
+        final boolean clientRequestIdHeaderInClient = client.getOperationGroups().stream()
+                .flatMap(og -> og.getOperations().stream())
+                .anyMatch(o -> o.getSpecialHeaders() != null && o.getSpecialHeaders().contains(clientRequestIdHeaderName));
+        if (clientRequestIdHeaderInClient) {
+            builder.pipelinePolicyDetails(new PipelinePolicyDetails().setRequestIdHeaderName(clientRequestIdHeaderName));
+        }
     }
 }

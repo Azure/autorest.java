@@ -21,7 +21,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
@@ -86,9 +85,7 @@ public final class EnumServiceClientImpl {
      */
     public EnumServiceClientImpl(String endpoint) {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 endpoint);
     }
@@ -792,6 +789,9 @@ public final class EnumServiceClientImpl {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -822,6 +822,9 @@ public final class EnumServiceClientImpl {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -851,6 +854,9 @@ public final class EnumServiceClientImpl {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -881,6 +887,9 @@ public final class EnumServiceClientImpl {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -910,6 +919,9 @@ public final class EnumServiceClientImpl {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -940,6 +952,9 @@ public final class EnumServiceClientImpl {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -969,6 +984,9 @@ public final class EnumServiceClientImpl {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -999,6 +1017,9 @@ public final class EnumServiceClientImpl {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     priorityValue: String(100/0) (Required)
+     *     colorValue: String(Red/Blue/Green) (Required)
+     *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
      *
@@ -1041,14 +1062,16 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setStringEnumArrayWithResponseAsync(
             List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String colorArrayConverted =
-                colorArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                colorArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.setStringEnumArray(
@@ -1080,13 +1103,15 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringEnumArrayWithResponse(List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String colorArrayConverted =
-                colorArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                colorArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.setStringEnumArraySync(
                 this.getEndpoint(), colorArrayConverted, accept, requestOptions, Context.NONE);
     }
@@ -1116,14 +1141,16 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setIntEnumArrayWithResponseAsync(
             List<String> priorityArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String priorityArrayConverted =
-                priorityArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                priorityArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.setIntEnumArray(
@@ -1155,13 +1182,15 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntEnumArrayWithResponse(List<String> priorityArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String priorityArrayConverted =
-                priorityArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                priorityArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.setIntEnumArraySync(
                 this.getEndpoint(), priorityArrayConverted, accept, requestOptions, Context.NONE);
     }
@@ -1191,14 +1220,16 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setStringArrayWithResponseAsync(
             List<String> stringArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String stringArrayConverted =
-                stringArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                stringArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.setStringArray(
@@ -1230,13 +1261,15 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringArrayWithResponse(List<String> stringArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String stringArrayConverted =
-                stringArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                stringArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.setStringArraySync(
                 this.getEndpoint(), stringArrayConverted, accept, requestOptions, Context.NONE);
     }
@@ -1266,7 +1299,7 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setIntArrayWithResponseAsync(
@@ -1303,7 +1336,7 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntArrayWithResponse(List<Integer> intArray, RequestOptions requestOptions) {
@@ -1338,7 +1371,7 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setStringEnumMultiWithResponseAsync(
@@ -1377,7 +1410,7 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringEnumMultiWithResponse(List<String> colorArray, RequestOptions requestOptions) {
@@ -1413,7 +1446,7 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setIntEnumMultiWithResponseAsync(
@@ -1452,7 +1485,7 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntEnumMultiWithResponse(List<String> priorityArray, RequestOptions requestOptions) {
@@ -1488,7 +1521,7 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setStringMultiWithResponseAsync(
@@ -1527,7 +1560,7 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringMultiWithResponse(List<String> stringArray, RequestOptions requestOptions) {
@@ -1563,7 +1596,7 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setIntMultiWithResponseAsync(
@@ -1600,7 +1633,7 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntMultiWithResponse(List<Integer> intArray, RequestOptions requestOptions) {
@@ -1635,14 +1668,16 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setStringEnumArrayHeaderWithResponseAsync(
             List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String colorArrayConverted =
-                colorArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                colorArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return FluxUtil.withContext(
                 context ->
                         service.setStringEnumArrayHeader(
@@ -1674,14 +1709,16 @@ public final class EnumServiceClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return a sequence of textual characters along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringEnumArrayHeaderWithResponse(
             List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String colorArrayConverted =
-                colorArray.stream().map(value -> Objects.toString(value, "")).collect(Collectors.joining(","));
+                colorArray.stream()
+                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+                        .collect(Collectors.joining(","));
         return service.setStringEnumArrayHeaderSync(
                 this.getEndpoint(), colorArrayConverted, accept, requestOptions, Context.NONE);
     }

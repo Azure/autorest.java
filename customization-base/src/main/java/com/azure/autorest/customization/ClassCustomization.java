@@ -470,7 +470,7 @@ public final class ClassCustomization extends CodeCustomization {
                 }
                 FileEvent fileEvent = new FileEvent();
                 fileEvent.setUri(edit.getKey());
-                if (oldEntry.endsWith(className + ".java")) {
+                if (oldEntry.endsWith("/" + className + ".java")) {
                     String newEntry = oldEntry.replace(className + ".java", newName + ".java");
                     editor.renameFile(oldEntry, newEntry);
                     URI newUri = URI.create(edit.getKey().toString().replace(className + ".java", newName + ".java"));

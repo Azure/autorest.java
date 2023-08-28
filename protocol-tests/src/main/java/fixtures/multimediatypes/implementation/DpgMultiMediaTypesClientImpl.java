@@ -18,9 +18,9 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
@@ -81,9 +81,7 @@ public final class DpgMultiMediaTypesClientImpl {
      */
     public DpgMultiMediaTypesClientImpl(String host) {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 host);
     }
@@ -1326,8 +1324,16 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> imageTypeWithNonRequiredBodyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "image/jpeg");
+                    }
+                });
         return FluxUtil.withContext(
-                context -> service.imageTypeWithNonRequiredBody(this.getHost(), accept, requestOptions, context));
+                context -> service.imageTypeWithNonRequiredBody(this.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
@@ -1365,7 +1371,15 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> imageTypeWithNonRequiredBodyWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.imageTypeWithNonRequiredBodySync(this.getHost(), accept, requestOptions, Context.NONE);
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(
+                requestLocal -> {
+                    if (requestLocal.getBody() != null
+                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "image/jpeg");
+                    }
+                });
+        return service.imageTypeWithNonRequiredBodySync(this.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**

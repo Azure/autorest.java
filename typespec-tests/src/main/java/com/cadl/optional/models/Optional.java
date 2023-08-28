@@ -5,6 +5,7 @@
 package com.cadl.optional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,102 +20,119 @@ public final class Optional {
     /*
      * The boolean property.
      */
+    @Generated
     @JsonProperty(value = "boolean")
     private Boolean booleanProperty;
 
     /*
      * The booleanNullable property.
      */
+    @Generated
     @JsonProperty(value = "booleanNullable")
     private Boolean booleanNullable;
 
     /*
      * The booleanRequired property.
      */
-    @JsonProperty(value = "booleanRequired", required = true)
+    @Generated
+    @JsonProperty(value = "booleanRequired")
     private boolean booleanRequired;
 
     /*
      * The booleanRequiredNullable property.
      */
-    @JsonProperty(value = "booleanRequiredNullable", required = true)
+    @Generated
+    @JsonProperty(value = "booleanRequiredNullable")
     private Boolean booleanRequiredNullable;
 
     /*
      * The string property.
      */
+    @Generated
     @JsonProperty(value = "string")
     private String string;
 
     /*
      * The stringNullable property.
      */
+    @Generated
     @JsonProperty(value = "stringNullable")
     private String stringNullable;
 
     /*
      * The stringRequired property.
      */
-    @JsonProperty(value = "stringRequired", required = true)
+    @Generated
+    @JsonProperty(value = "stringRequired")
     private String stringRequired;
 
     /*
      * The stringRequiredNullable property.
      */
-    @JsonProperty(value = "stringRequiredNullable", required = true)
+    @Generated
+    @JsonProperty(value = "stringRequiredNullable")
     private String stringRequiredNullable;
 
     /*
      * The bytes property.
      */
+    @Generated
     @JsonProperty(value = "bytes")
     private byte[] bytes;
 
     /*
      * The int property.
      */
+    @Generated
     @JsonProperty(value = "int")
     private Integer intProperty;
 
     /*
      * The long property.
      */
+    @Generated
     @JsonProperty(value = "long")
     private Long longProperty;
 
     /*
      * The float property.
      */
+    @Generated
     @JsonProperty(value = "float")
     private Double floatProperty;
 
     /*
      * The double property.
      */
+    @Generated
     @JsonProperty(value = "double")
     private Double doubleProperty;
 
     /*
      * The duration property.
      */
+    @Generated
     @JsonProperty(value = "duration")
     private Duration duration;
 
     /*
      * The dateTime property.
      */
+    @Generated
     @JsonProperty(value = "dateTime")
     private OffsetDateTime dateTime;
 
     /*
      * The stringList property.
      */
+    @Generated
     @JsonProperty(value = "stringList")
     private List<String> stringList;
 
     /*
      * The bytesDict property.
      */
+    @Generated
     @JsonProperty(value = "bytesDict")
     private Map<String, byte[]> bytesDict;
 
@@ -126,12 +144,13 @@ public final class Optional {
      * @param stringRequired the stringRequired value to set.
      * @param stringRequiredNullable the stringRequiredNullable value to set.
      */
+    @Generated
     @JsonCreator
     public Optional(
-            @JsonProperty(value = "booleanRequired", required = true) boolean booleanRequired,
-            @JsonProperty(value = "booleanRequiredNullable", required = true) Boolean booleanRequiredNullable,
-            @JsonProperty(value = "stringRequired", required = true) String stringRequired,
-            @JsonProperty(value = "stringRequiredNullable", required = true) String stringRequiredNullable) {
+            @JsonProperty(value = "booleanRequired") boolean booleanRequired,
+            @JsonProperty(value = "booleanRequiredNullable") Boolean booleanRequiredNullable,
+            @JsonProperty(value = "stringRequired") String stringRequired,
+            @JsonProperty(value = "stringRequiredNullable") String stringRequiredNullable) {
         this.booleanRequired = booleanRequired;
         this.booleanRequiredNullable = booleanRequiredNullable;
         this.stringRequired = stringRequired;
@@ -143,6 +162,7 @@ public final class Optional {
      *
      * @return the booleanProperty value.
      */
+    @Generated
     public Boolean isBooleanProperty() {
         return this.booleanProperty;
     }
@@ -153,6 +173,7 @@ public final class Optional {
      * @param booleanProperty the booleanProperty value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setBooleanProperty(Boolean booleanProperty) {
         this.booleanProperty = booleanProperty;
         return this;
@@ -163,6 +184,7 @@ public final class Optional {
      *
      * @return the booleanNullable value.
      */
+    @Generated
     public Boolean isBooleanNullable() {
         return this.booleanNullable;
     }
@@ -173,6 +195,7 @@ public final class Optional {
      * @param booleanNullable the booleanNullable value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setBooleanNullable(Boolean booleanNullable) {
         this.booleanNullable = booleanNullable;
         return this;
@@ -183,6 +206,7 @@ public final class Optional {
      *
      * @return the booleanRequired value.
      */
+    @Generated
     public boolean isBooleanRequired() {
         return this.booleanRequired;
     }
@@ -192,6 +216,7 @@ public final class Optional {
      *
      * @return the booleanRequiredNullable value.
      */
+    @Generated
     public Boolean isBooleanRequiredNullable() {
         return this.booleanRequiredNullable;
     }
@@ -201,6 +226,7 @@ public final class Optional {
      *
      * @return the string value.
      */
+    @Generated
     public String getString() {
         return this.string;
     }
@@ -211,6 +237,7 @@ public final class Optional {
      * @param string the string value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setString(String string) {
         this.string = string;
         return this;
@@ -221,6 +248,7 @@ public final class Optional {
      *
      * @return the stringNullable value.
      */
+    @Generated
     public String getStringNullable() {
         return this.stringNullable;
     }
@@ -231,6 +259,7 @@ public final class Optional {
      * @param stringNullable the stringNullable value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setStringNullable(String stringNullable) {
         this.stringNullable = stringNullable;
         return this;
@@ -241,6 +270,7 @@ public final class Optional {
      *
      * @return the stringRequired value.
      */
+    @Generated
     public String getStringRequired() {
         return this.stringRequired;
     }
@@ -250,6 +280,7 @@ public final class Optional {
      *
      * @return the stringRequiredNullable value.
      */
+    @Generated
     public String getStringRequiredNullable() {
         return this.stringRequiredNullable;
     }
@@ -259,6 +290,7 @@ public final class Optional {
      *
      * @return the bytes value.
      */
+    @Generated
     public byte[] getBytes() {
         return CoreUtils.clone(this.bytes);
     }
@@ -269,6 +301,7 @@ public final class Optional {
      * @param bytes the bytes value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setBytes(byte[] bytes) {
         this.bytes = CoreUtils.clone(bytes);
         return this;
@@ -279,6 +312,7 @@ public final class Optional {
      *
      * @return the intProperty value.
      */
+    @Generated
     public Integer getIntProperty() {
         return this.intProperty;
     }
@@ -289,6 +323,7 @@ public final class Optional {
      * @param intProperty the intProperty value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setIntProperty(Integer intProperty) {
         this.intProperty = intProperty;
         return this;
@@ -299,6 +334,7 @@ public final class Optional {
      *
      * @return the longProperty value.
      */
+    @Generated
     public Long getLongProperty() {
         return this.longProperty;
     }
@@ -309,6 +345,7 @@ public final class Optional {
      * @param longProperty the longProperty value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setLongProperty(Long longProperty) {
         this.longProperty = longProperty;
         return this;
@@ -319,6 +356,7 @@ public final class Optional {
      *
      * @return the floatProperty value.
      */
+    @Generated
     public Double getFloatProperty() {
         return this.floatProperty;
     }
@@ -329,6 +367,7 @@ public final class Optional {
      * @param floatProperty the floatProperty value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setFloatProperty(Double floatProperty) {
         this.floatProperty = floatProperty;
         return this;
@@ -339,6 +378,7 @@ public final class Optional {
      *
      * @return the doubleProperty value.
      */
+    @Generated
     public Double getDoubleProperty() {
         return this.doubleProperty;
     }
@@ -349,6 +389,7 @@ public final class Optional {
      * @param doubleProperty the doubleProperty value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setDoubleProperty(Double doubleProperty) {
         this.doubleProperty = doubleProperty;
         return this;
@@ -359,6 +400,7 @@ public final class Optional {
      *
      * @return the duration value.
      */
+    @Generated
     public Duration getDuration() {
         return this.duration;
     }
@@ -369,6 +411,7 @@ public final class Optional {
      * @param duration the duration value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setDuration(Duration duration) {
         this.duration = duration;
         return this;
@@ -379,6 +422,7 @@ public final class Optional {
      *
      * @return the dateTime value.
      */
+    @Generated
     public OffsetDateTime getDateTime() {
         return this.dateTime;
     }
@@ -389,6 +433,7 @@ public final class Optional {
      * @param dateTime the dateTime value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setDateTime(OffsetDateTime dateTime) {
         this.dateTime = dateTime;
         return this;
@@ -399,6 +444,7 @@ public final class Optional {
      *
      * @return the stringList value.
      */
+    @Generated
     public List<String> getStringList() {
         return this.stringList;
     }
@@ -409,6 +455,7 @@ public final class Optional {
      * @param stringList the stringList value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setStringList(List<String> stringList) {
         this.stringList = stringList;
         return this;
@@ -419,6 +466,7 @@ public final class Optional {
      *
      * @return the bytesDict value.
      */
+    @Generated
     public Map<String, byte[]> getBytesDict() {
         return this.bytesDict;
     }
@@ -429,6 +477,7 @@ public final class Optional {
      * @param bytesDict the bytesDict value to set.
      * @return the Optional object itself.
      */
+    @Generated
     public Optional setBytesDict(Map<String, byte[]> bytesDict) {
         this.bytesDict = bytesDict;
         return this;

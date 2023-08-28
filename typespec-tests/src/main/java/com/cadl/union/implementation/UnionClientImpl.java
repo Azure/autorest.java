@@ -6,6 +6,7 @@ package com.cadl.union.implementation;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -21,7 +22,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
@@ -30,9 +30,16 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.polling.DefaultPollingStrategy;
+import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollingStrategyOptions;
+import com.azure.core.util.polling.SyncDefaultPollingStrategy;
+import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.cadl.union.UnionServiceVersion;
+import java.time.Duration;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the UnionClient type. */
@@ -96,9 +103,7 @@ public final class UnionClientImpl {
      */
     public UnionClientImpl(String endpoint, UnionServiceVersion serviceVersion) {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 endpoint,
                 serviceVersion);
@@ -141,7 +146,7 @@ public final class UnionClientImpl {
     @Host("{endpoint}/openai")
     @ServiceInterface(name = "UnionClient")
     public interface UnionClientService {
-        @Post("/flatten/send")
+        @Post("/union/send")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -162,7 +167,7 @@ public final class UnionClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/flatten/send")
+        @Post("/union/send")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -183,7 +188,7 @@ public final class UnionClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/flatten/send-long")
+        @Post("/union/send-long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -204,7 +209,7 @@ public final class UnionClientImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Post("/flatten/send-long")
+        @Post("/union/send-long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -224,6 +229,80 @@ public final class UnionClientImpl {
                 @BodyParam("application/json") BinaryData request,
                 RequestOptions requestOptions,
                 Context context);
+
+        @Get("/union/param")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> get(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/union/param")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> getSync(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/union/generate")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> generate(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Post("/union/generate")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> generateSync(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
     }
 
     /**
@@ -240,7 +319,7 @@ public final class UnionClientImpl {
      * }
      * }</pre>
      *
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -278,7 +357,7 @@ public final class UnionClientImpl {
      * }
      * }</pre>
      *
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -308,7 +387,7 @@ public final class UnionClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -320,11 +399,15 @@ public final class UnionClientImpl {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModelBase (Required)
+     *     input: String (Required)
+     *     dataInt: int (Required)
+     *     dataUnion: DataUnionModelBase (Optional)
+     *     dataLong: Long (Optional)
+     *     data_float: Double (Optional)
      * }
      * }</pre>
      *
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -357,7 +440,7 @@ public final class UnionClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -369,11 +452,15 @@ public final class UnionClientImpl {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModelBase (Required)
+     *     input: String (Required)
+     *     dataInt: int (Required)
+     *     dataUnion: DataUnionModelBase (Optional)
+     *     dataLong: Long (Optional)
+     *     data_float: Double (Optional)
      * }
      * }</pre>
      *
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -393,5 +480,218 @@ public final class UnionClientImpl {
                 request,
                 requestOptions,
                 Context.NONE);
+    }
+
+    /**
+     * The get operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>data</td><td>DataModelBase</td><td>No</td><td>The data parameter</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get(this.getEndpoint(), accept, requestOptions, context));
+    }
+
+    /**
+     * The get operation.
+     *
+     * <p><strong>Query Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>data</td><td>DataModelBase</td><td>No</td><td>The data parameter</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getWithResponse(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.getSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * A long-running remote procedure call (RPC) operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return status details for long running operations along with {@link Response} on successful completion of {@link
+     *     Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<BinaryData>> generateWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.generate(
+                                this.getEndpoint(),
+                                this.getServiceVersion().getVersion(),
+                                accept,
+                                requestOptions,
+                                context));
+    }
+
+    /**
+     * A long-running remote procedure call (RPC) operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return status details for long running operations along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> generateWithResponse(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.generateSync(
+                this.getEndpoint(), this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * A long-running remote procedure call (RPC) operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of status details for long running operations.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginGenerateAsync(RequestOptions requestOptions) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.generateWithResponseAsync(requestOptions),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}/openai".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * A long-running remote procedure call (RPC) operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of status details for long running operations.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginGenerate(RequestOptions requestOptions) {
+        return SyncPoller.createPoller(
+                Duration.ofSeconds(1),
+                () -> this.generateWithResponse(requestOptions),
+                new SyncDefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.getHttpPipeline())
+                                .setEndpoint("{endpoint}/openai".replace("{endpoint}", this.getEndpoint()))
+                                .setContext(
+                                        requestOptions != null && requestOptions.getContext() != null
+                                                ? requestOptions.getContext()
+                                                : Context.NONE)),
+                TypeReference.createInstance(BinaryData.class),
+                TypeReference.createInstance(BinaryData.class));
     }
 }

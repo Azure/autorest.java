@@ -5,16 +5,15 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.xml.XmlReader;
-import com.azure.xml.XmlSerializable;
-import com.azure.xml.XmlToken;
-import com.azure.xml.XmlWriter;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** The JsonInput model. */
 @Fluent
-public final class JsonInput implements XmlSerializable<JsonInput> {
+public final class JsonInput implements JsonSerializable<JsonInput> {
     /*
      * The id property.
      */
@@ -51,35 +50,34 @@ public final class JsonInput implements XmlSerializable<JsonInput> {
     public void validate() {}
 
     @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("JsonInput");
-        xmlWriter.writeNumberElement("id", this.id);
-        return xmlWriter.writeEndElement();
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeNumberField("id", this.id);
+        return jsonWriter.writeEndObject();
     }
 
     /**
-     * Reads an instance of JsonInput from the XmlReader.
+     * Reads an instance of JsonInput from the JsonReader.
      *
-     * @param xmlReader The XmlReader being read.
-     * @return An instance of JsonInput if the XmlReader was pointing to an instance of it, or null if it was pointing
-     *     to XML null.
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of JsonInput if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IOException If an error occurs while reading the JsonInput.
      */
-    public static JsonInput fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return xmlReader.readObject(
-                "JsonInput",
+    public static JsonInput fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
                 reader -> {
-                    Integer id = null;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+                    JsonInput deserializedJsonInput = new JsonInput();
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
 
-                        if ("id".equals(fieldName.getLocalPart())) {
-                            id = reader.getNullableElement(Integer::parseInt);
+                        if ("id".equals(fieldName)) {
+                            deserializedJsonInput.id = reader.getNullable(JsonReader::getInt);
                         } else {
-                            reader.skipElement();
+                            reader.skipChildren();
                         }
                     }
-                    JsonInput deserializedJsonInput = new JsonInput();
-                    deserializedJsonInput.id = id;
 
                     return deserializedJsonInput;
                 });

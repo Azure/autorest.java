@@ -1,6 +1,7 @@
 package fixtures.paging;
 
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.BinaryData;
@@ -22,8 +23,12 @@ public class PagingTests {
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new AutoRestPagingTestServiceClientBuilder().buildAsyncClient();
-        client = new AutoRestPagingTestServiceClientBuilder().buildClient();
+        asyncClient = new AutoRestPagingTestServiceClientBuilder()
+                .addPolicy(new CookiePolicy())
+                .buildAsyncClient();
+        client = new AutoRestPagingTestServiceClientBuilder()
+                .addPolicy(new CookiePolicy())
+                .buildClient();
     }
 
     @Test

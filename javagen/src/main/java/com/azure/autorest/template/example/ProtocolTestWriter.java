@@ -51,7 +51,7 @@ public class ProtocolTestWriter {
                 OffsetDateTime.class.getName(),
                 Mono.class.getName(),
                 "com.azure.identity.DefaultAzureCredentialBuilder",
-                "com.azure.core.test.TestBase",
+                "com.azure.core.test.TestProxyTestBase",
                 "com.azure.core.test.TestMode",
 //                "com.azure.core.test.annotation.DoNotRecord",
                 "org.junit.jupiter.api.Disabled",

@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -161,12 +162,18 @@ public final class Logging implements XmlSerializable<Logging> {
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        xmlWriter.writeStartElement("Logging");
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Logging" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Version", this.version);
         xmlWriter.writeBooleanElement("Delete", this.delete);
         xmlWriter.writeBooleanElement("Read", this.read);
         xmlWriter.writeBooleanElement("Write", this.write);
-        xmlWriter.writeXml(this.retentionPolicy);
+        xmlWriter.writeXml(this.retentionPolicy, "RetentionPolicy");
         return xmlWriter.writeEndElement();
     }
 
@@ -177,39 +184,46 @@ public final class Logging implements XmlSerializable<Logging> {
      * @return An instance of Logging if the XmlReader was pointing to an instance of it, or null if it was pointing to
      *     XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the Logging.
      */
     public static Logging fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return xmlReader.readObject(
-                "Logging",
-                reader -> {
-                    String version = null;
-                    boolean delete = false;
-                    boolean read = false;
-                    boolean write = false;
-                    RetentionPolicy retentionPolicy = null;
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName fieldName = reader.getElementName();
+        return fromXml(xmlReader, null);
+    }
 
-                        if ("Version".equals(fieldName.getLocalPart())) {
-                            version = reader.getStringElement();
-                        } else if ("Delete".equals(fieldName.getLocalPart())) {
-                            delete = reader.getBooleanElement();
-                        } else if ("Read".equals(fieldName.getLocalPart())) {
-                            read = reader.getBooleanElement();
-                        } else if ("Write".equals(fieldName.getLocalPart())) {
-                            write = reader.getBooleanElement();
-                        } else if ("RetentionPolicy".equals(fieldName.getLocalPart())) {
-                            retentionPolicy = RetentionPolicy.fromXml(reader);
+    /**
+     * Reads an instance of Logging from the XmlReader.
+     *
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     *     cases where the model can deserialize from different root element names.
+     * @return An instance of Logging if the XmlReader was pointing to an instance of it, or null if it was pointing to
+     *     XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the Logging.
+     */
+    public static Logging fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Logging" : rootElementName;
+        return xmlReader.readObject(
+                finalRootElementName,
+                reader -> {
+                    Logging deserializedLogging = new Logging();
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        QName elementName = reader.getElementName();
+
+                        if ("Version".equals(elementName.getLocalPart())) {
+                            deserializedLogging.version = reader.getStringElement();
+                        } else if ("Delete".equals(elementName.getLocalPart())) {
+                            deserializedLogging.delete = reader.getBooleanElement();
+                        } else if ("Read".equals(elementName.getLocalPart())) {
+                            deserializedLogging.read = reader.getBooleanElement();
+                        } else if ("Write".equals(elementName.getLocalPart())) {
+                            deserializedLogging.write = reader.getBooleanElement();
+                        } else if ("RetentionPolicy".equals(elementName.getLocalPart())) {
+                            deserializedLogging.retentionPolicy = RetentionPolicy.fromXml(reader, "RetentionPolicy");
                         } else {
                             reader.skipElement();
                         }
                     }
-                    Logging deserializedLogging = new Logging();
-                    deserializedLogging.version = version;
-                    deserializedLogging.delete = delete;
-                    deserializedLogging.read = read;
-                    deserializedLogging.write = write;
-                    deserializedLogging.retentionPolicy = retentionPolicy;
 
                     return deserializedLogging;
                 });

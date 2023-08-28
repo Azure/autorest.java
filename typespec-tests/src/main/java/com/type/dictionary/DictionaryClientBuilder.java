@@ -16,7 +16,6 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -29,6 +28,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.type.dictionary.implementation.DictionaryClientImpl;
 import java.util.ArrayList;
@@ -88,6 +88,9 @@ public final class DictionaryClientBuilder
     @Generated
     @Override
     public DictionaryClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -220,7 +223,6 @@ public final class DictionaryClientBuilder
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        policies.add(new CookiePolicy());
         this.pipelinePolicies.stream()
                 .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
                 .forEach(p -> policies.add(p));
@@ -454,4 +456,6 @@ public final class DictionaryClientBuilder
     public NullableFloatValueClient buildNullableFloatValueClient() {
         return new NullableFloatValueClient(buildInnerClient().getNullableFloatValues());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(DictionaryClientBuilder.class);
 }

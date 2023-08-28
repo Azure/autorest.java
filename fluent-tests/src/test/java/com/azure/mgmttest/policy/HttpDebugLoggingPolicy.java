@@ -7,6 +7,7 @@ package com.azure.mgmttest.policy;
 
 import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpHeader;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipelineCallContext;
 import com.azure.core.http.HttpPipelineNextPolicy;
@@ -91,7 +92,7 @@ public class HttpDebugLoggingPolicy implements HttpPipelinePolicy {
             return logAndReturn(logger, requestLogMessage, null);
         }
 
-        String contentType = request.getHeaders().getValue("Content-Type");
+        String contentType = request.getHeaders().getValue(HttpHeaderName.CONTENT_TYPE);
         long contentLength = getContentLength(logger, request.getHeaders());
 
         if (shouldBodyBeLogged(contentType, contentLength)) {
@@ -144,7 +145,7 @@ public class HttpDebugLoggingPolicy implements HttpPipelinePolicy {
 
         long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
 
-        String contentLengthString = response.getHeaderValue("Content-Length");
+        String contentLengthString = response.getHeaderValue(HttpHeaderName.CONTENT_LENGTH);
         String bodySize = (CoreUtils.isNullOrEmpty(contentLengthString))
                 ? "unknown-length body"
                 : contentLengthString + "-byte body";
@@ -163,7 +164,7 @@ public class HttpDebugLoggingPolicy implements HttpPipelinePolicy {
 
         addHeadersToLogMessage(logger, response.getHeaders(), responseLogMessage);
 
-        String contentTypeHeader = response.getHeaderValue("Content-Type");
+        String contentTypeHeader = response.getHeaderValue(HttpHeaderName.CONTENT_TYPE);
         long contentLength = getContentLength(logger, response.getHeaders());
 
         if (shouldBodyBeLogged(contentTypeHeader, contentLength)) {
@@ -226,7 +227,7 @@ public class HttpDebugLoggingPolicy implements HttpPipelinePolicy {
     private long getContentLength(Logger logger, HttpHeaders headers) {
         long contentLength = 0;
 
-        String contentLengthString = headers.getValue("Content-Length");
+        String contentLengthString = headers.getValue(HttpHeaderName.CONTENT_LENGTH);
         if (CoreUtils.isNullOrEmpty(contentLengthString)) {
             return contentLength;
         }
@@ -235,7 +236,7 @@ public class HttpDebugLoggingPolicy implements HttpPipelinePolicy {
             contentLength = Long.parseLong(contentLengthString);
         } catch (NumberFormatException | NullPointerException e) {
             logger.warn("Could not parse the HTTP header content-length: '{}'.",
-                    headers.getValue("content-length"), e);
+                    headers.getValue(HttpHeaderName.CONTENT_LENGTH), e);
         }
 
         return contentLength;

@@ -17,7 +17,6 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -30,6 +29,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.server.path.single.implementation.SingleClientImpl;
 import java.util.ArrayList;
@@ -67,6 +67,9 @@ public final class SingleClientBuilder
     @Generated
     @Override
     public SingleClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -184,7 +187,7 @@ public final class SingleClientBuilder
     private SingleClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SingleClientImpl client =
-                new SingleClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                new SingleClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
@@ -212,7 +215,6 @@ public final class SingleClientBuilder
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        policies.add(new CookiePolicy());
         this.pipelinePolicies.stream()
                 .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
                 .forEach(p -> policies.add(p));
@@ -246,4 +248,6 @@ public final class SingleClientBuilder
     public SingleClient buildClient() {
         return new SingleClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(SingleClientBuilder.class);
 }

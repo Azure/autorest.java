@@ -4,6 +4,7 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +15,8 @@ public final class FloatProperty {
     /*
      * Property
      */
-    @JsonProperty(value = "property", required = true)
+    @Generated
+    @JsonProperty(value = "property")
     private double property;
 
     /**
@@ -22,8 +24,9 @@ public final class FloatProperty {
      *
      * @param property the property value to set.
      */
+    @Generated
     @JsonCreator
-    public FloatProperty(@JsonProperty(value = "property", required = true) double property) {
+    public FloatProperty(@JsonProperty(value = "property") double property) {
         this.property = property;
     }
 
@@ -32,6 +35,7 @@ public final class FloatProperty {
      *
      * @return the property value.
      */
+    @Generated
     public double getProperty() {
         return this.property;
     }

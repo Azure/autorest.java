@@ -1,5 +1,82 @@
 # Release History
 
+## 0.8.10 (2023-08-16)
+
+Compatible with compiler 0.47.
+
+## 0.8.9 (2023-08-16)
+
+Compatible with compiler 0.47.
+
+- Supported `EnumMember` as type.
+
+## 0.8.8 (2023-07-21)
+
+Compatible with compiler 0.46.
+
+- Operation which refers `Union` type is treated as protocol API, i.e. with `convenientAPI(false)`.
+
+## 0.8.7 (2023-07-18)
+
+Compatible with compiler 0.46.
+
+## 0.8.6 (2023-07-17)
+
+Compatible with compiler 0.46.
+
+## 0.8.5 (2023-07-12)
+
+Compatible with compiler 0.46.
+
+- Supported `customization-class` as emitter option. See [Customization](https://github.com/Azure/autorest.java/blob/main/typespec-extension/readme.md#customization).
+- `enable-sync-stack` emitter option default to `true`.
+- Temporarily disabled support for `@include`.
+
+## 0.8.4 (2023-06-30)
+
+Compatible with compiler 0.45.
+
+- Supported `@include` from typespec-client-generator-core.
+
+## 0.8.3 (2023-06-25)
+
+Compatible with compiler 0.45.
+
+## 0.8.2 (2023-06-15)
+
+Compatible with compiler 0.45.
+
+- (Preview) Supported `RequestConditions` and `MatchConditions` for eTag headers.
+
+## 0.8.1 (2023-06-14)
+
+Compatible with compiler 0.45.
+
+## 0.8.0 (2023-06-08)
+
+Compatible with compiler 0.45.
+
+## 0.7.4 (2023-06-06)
+
+Compatible with compiler 0.44.
+
+- Supported partial update for models and extensible enums.
+- Supported custom scheme for AuthType.http.
+
+## 0.7.3 (2023-05-30)
+
+Compatible with compiler 0.44.
+
+## 0.7.2 (2023-05-24)
+
+Compatible with compiler 0.44.
+
+## 0.7.1 (2023-05-19)
+
+Compatible with compiler 0.44.
+
+- Supported generating samples with convenience API.
+
 ## 0.7.0 (2023-05-11)
 
 Compatible with compiler 0.44.

@@ -10,7 +10,7 @@ import argparse
 from os import path
 
 
-AUTOREST_CORE_VERSION = '3.9.3'
+AUTOREST_CORE_VERSION = '3.9.7'
 OS_WINDOWS = platform.system().lower() == 'windows'
 MAVEN_CLI = 'mvn' + ('.cmd' if OS_WINDOWS else '')
 
@@ -58,6 +58,7 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str,
         '-Djacoco.skip',
         '-Drevapi.skip',
         '-Dmaven.javadoc.skip',
+        '-Dmaven.test.skip',
         '--no-transfer-progress'
     ]
     subprocess.check_call(cmd, cwd=output_folder)

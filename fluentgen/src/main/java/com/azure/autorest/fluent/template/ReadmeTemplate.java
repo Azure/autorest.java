@@ -34,7 +34,8 @@ public class ReadmeTemplate extends com.azure.autorest.template.ReadmeTemplate {
                 TemplateUtil.ARTIFACT_ID, project.getArtifactId(),
                 TemplateUtil.ARTIFACT_VERSION, project.getVersion(),
                 TemplateUtil.MANAGER_CLASS, FluentStatic.getFluentManager().getType().getName(),
-                TemplateUtil.SAMPLE_CODES, sampleCodesBuilder.toString()
+                TemplateUtil.SAMPLE_CODES, sampleCodesBuilder.toString(),
+                TemplateUtil.IMPRESSION_PIXEL, getImpression(project)
         );
     }
 }

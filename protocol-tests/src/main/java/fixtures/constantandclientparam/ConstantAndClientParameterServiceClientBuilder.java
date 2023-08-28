@@ -16,7 +16,6 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -29,6 +28,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.constantandclientparam.implementation.ConstantAndClientParameterServiceClientImpl;
 import java.util.ArrayList;
@@ -70,6 +70,9 @@ public final class ConstantAndClientParameterServiceClientBuilder
     @Generated
     @Override
     public ConstantAndClientParameterServiceClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -247,9 +250,9 @@ public final class ConstantAndClientParameterServiceClientBuilder
                 new ConstantAndClientParameterServiceClientImpl(
                         localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
-                        queryRequiredClientParam,
-                        queryRequiredDefaultValueClientParam,
-                        queryNonRequiredClientParam,
+                        this.queryRequiredClientParam,
+                        this.queryRequiredDefaultValueClientParam,
+                        this.queryNonRequiredClientParam,
                         localHost);
         return client;
     }
@@ -278,7 +281,6 @@ public final class ConstantAndClientParameterServiceClientBuilder
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        policies.add(new CookiePolicy());
         this.pipelinePolicies.stream()
                 .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
                 .forEach(p -> policies.add(p));
@@ -312,4 +314,6 @@ public final class ConstantAndClientParameterServiceClientBuilder
     public ConstantAndClientParameterServiceClient buildClient() {
         return new ConstantAndClientParameterServiceClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ConstantAndClientParameterServiceClientBuilder.class);
 }

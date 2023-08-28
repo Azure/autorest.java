@@ -228,7 +228,8 @@ public class FluentManagerTemplate {
             });
 
             classBlock.javadocComment(comment -> {
-                comment.methodReturns(String.format("Wrapped service client %1$s providing direct access to the underlying auto-generated API implementation, based on Azure REST API.", serviceClientTypeName));
+                comment.description(String.format("Gets wrapped service client %1$s providing direct access to the underlying auto-generated API implementation, based on Azure REST API.", serviceClientTypeName));
+                comment.methodReturns(String.format("Wrapped service client %1$s.", serviceClientTypeName));
             });
             classBlock.publicMethod(String.format("%1$s %2$s()", serviceClientTypeName, ModelNaming.METHOD_SERVICE_CLIENT), methodBlock -> {
                 methodBlock.methodReturn(String.format("this.%1$s", ModelNaming.MANAGER_PROPERTY_CLIENT));

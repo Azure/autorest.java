@@ -1,8 +1,15 @@
-trailingComma: "all"
-printWidth: 120
-quoteProps: "consistent"
-endOfLine: auto
 arrowParens: always
+trailingComma: es5
+bracketSpacing: true
+endOfLine: lf
+printWidth: 100
+semi: true
+singleQuote: false
+tabWidth: 2
 plugins:
-  - "./node_modules/@typespec/prettier-plugin-typespec"
-overrides: [{ "files": "*.tsp", "options": { "parser": "typespec" } }]
+  - "./node_modules/@typespec/prettier-plugin-typespec/dist/index.js"
+  - "./node_modules/prettier-plugin-organize-imports/index.js"
+overrides:
+  - files: "*.tsp"
+    options:
+      parser: typespec

@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.mapper.PrimitiveMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 
 public class TypeSpecPrimitiveMapper extends PrimitiveMapper {
 
@@ -21,6 +22,8 @@ public class TypeSpecPrimitiveMapper extends PrimitiveMapper {
     protected IType createPrimitiveType(PrimitiveSchema primaryType) {
         if (primaryType.getType() == Schema.AllSchemaTypes.DATE) {
             return ClassType.LocalDate;
+        } else if (primaryType.getType() == Schema.AllSchemaTypes.UNIXTIME) {
+            return PrimitiveType.UnixTimeLong;
         } else {
             return super.createPrimitiveType(primaryType);
         }

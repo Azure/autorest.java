@@ -17,7 +17,6 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -30,6 +29,7 @@ import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.cadl.response.implementation.ResponseClientImpl;
 import java.util.ArrayList;
@@ -67,6 +67,9 @@ public final class ResponseClientBuilder
     @Generated
     @Override
     public ResponseClientBuilder pipeline(HttpPipeline pipeline) {
+        if (this.pipeline != null && pipeline == null) {
+            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+        }
         this.pipeline = pipeline;
         return this;
     }
@@ -159,6 +162,23 @@ public final class ResponseClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated private ResponseServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     *
+     * @param serviceVersion the serviceVersion value.
+     * @return the ResponseClientBuilder.
+     */
+    @Generated
+    public ResponseClientBuilder serviceVersion(ResponseServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated private RetryPolicy retryPolicy;
@@ -183,8 +203,14 @@ public final class ResponseClientBuilder
     @Generated
     private ResponseClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        ResponseServiceVersion localServiceVersion =
+                (serviceVersion != null) ? serviceVersion : ResponseServiceVersion.getLatest();
         ResponseClientImpl client =
-                new ResponseClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+                new ResponseClientImpl(
+                        localPipeline,
+                        JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
+                        localServiceVersion);
         return client;
     }
 
@@ -212,7 +238,6 @@ public final class ResponseClientBuilder
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        policies.add(new CookiePolicy());
         this.pipelinePolicies.stream()
                 .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
                 .forEach(p -> policies.add(p));
@@ -246,4 +271,6 @@ public final class ResponseClientBuilder
     public ResponseClient buildClient() {
         return new ResponseClient(buildInnerClient());
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ResponseClientBuilder.class);
 }

@@ -22,7 +22,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
@@ -83,9 +82,7 @@ public final class BuiltinClientImpl {
      */
     public BuiltinClientImpl(String endpoint) {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 endpoint);
     }
@@ -207,9 +204,9 @@ public final class BuiltinClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
-     *     <tr><td>query-opt</td><td>String</td><td>No</td><td>The queryParamOptional parameter</td></tr>
-     *     <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>The queryParamOptionalEncoded parameter</td></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     *     <tr><td>query-opt</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     *     <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>Represent a URL string as described by https://url.spec.whatwg.org/</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -219,7 +216,7 @@ public final class BuiltinClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>x-ms-date</td><td>OffsetDateTime</td><td>No</td><td>The dateTime parameter</td></tr>
+     *     <tr><td>x-ms-date</td><td>OffsetDateTime</td><td>No</td><td>An instant in coordinated universal time (UTC)"</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -228,16 +225,6 @@ public final class BuiltinClientImpl {
      *
      * <pre>{@code
      * {
-     *     formatString (Required): {
-     *         base64Encoded: Base64Url (Required)
-     *         binary: byte[] (Required)
-     *         dateTime: OffsetDateTime (Required)
-     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
-     *         password: String (Required)
-     *         uri: String (Required)
-     *         extensibleEnum: String(Value1/Value2) (Required)
-     *         extensibleEnumScalar: String(Value1/Value2) (Required)
-     *     }
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
@@ -260,15 +247,19 @@ public final class BuiltinClientImpl {
      *         String: double (Required)
      *     }
      *     encoded (Required): {
-     *         timeInSeconds: long (Required)
-     *         timeInSecondsFraction: double (Required)
-     *         timeInSecondsOptional: Long (Optional)
+     *         timeInSeconds: Long (Optional)
+     *         timeInSecondsFraction: Double (Optional)
+     *         dateTime: OffsetDateTime (Optional)
+     *         dateTimeRfc7231: DateTimeRfc1123 (Optional)
+     *         unixTimestamp: Long (Optional)
+     *         base64: byte[] (Optional)
+     *         base64url: Base64Url (Optional)
      *     }
      * }
      * }</pre>
      *
-     * @param queryParam The queryParam parameter.
-     * @param queryParamEncoded The queryParamEncoded parameter.
+     * @param queryParam A sequence of textual characters.
+     * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -294,9 +285,9 @@ public final class BuiltinClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
-     *     <tr><td>query-opt</td><td>String</td><td>No</td><td>The queryParamOptional parameter</td></tr>
-     *     <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>The queryParamOptionalEncoded parameter</td></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     *     <tr><td>query-opt</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     *     <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>Represent a URL string as described by https://url.spec.whatwg.org/</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -306,7 +297,7 @@ public final class BuiltinClientImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>x-ms-date</td><td>OffsetDateTime</td><td>No</td><td>The dateTime parameter</td></tr>
+     *     <tr><td>x-ms-date</td><td>OffsetDateTime</td><td>No</td><td>An instant in coordinated universal time (UTC)"</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -315,16 +306,6 @@ public final class BuiltinClientImpl {
      *
      * <pre>{@code
      * {
-     *     formatString (Required): {
-     *         base64Encoded: Base64Url (Required)
-     *         binary: byte[] (Required)
-     *         dateTime: OffsetDateTime (Required)
-     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
-     *         password: String (Required)
-     *         uri: String (Required)
-     *         extensibleEnum: String(Value1/Value2) (Required)
-     *         extensibleEnumScalar: String(Value1/Value2) (Required)
-     *     }
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
@@ -347,15 +328,19 @@ public final class BuiltinClientImpl {
      *         String: double (Required)
      *     }
      *     encoded (Required): {
-     *         timeInSeconds: long (Required)
-     *         timeInSecondsFraction: double (Required)
-     *         timeInSecondsOptional: Long (Optional)
+     *         timeInSeconds: Long (Optional)
+     *         timeInSecondsFraction: Double (Optional)
+     *         dateTime: OffsetDateTime (Optional)
+     *         dateTimeRfc7231: DateTimeRfc1123 (Optional)
+     *         unixTimestamp: Long (Optional)
+     *         base64: byte[] (Optional)
+     *         base64url: Base64Url (Optional)
      *     }
      * }
      * }</pre>
      *
-     * @param queryParam The queryParam parameter.
-     * @param queryParamEncoded The queryParamEncoded parameter.
+     * @param queryParam A sequence of textual characters.
+     * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -378,16 +363,6 @@ public final class BuiltinClientImpl {
      *
      * <pre>{@code
      * {
-     *     formatString (Required): {
-     *         base64Encoded: Base64Url (Required)
-     *         binary: byte[] (Required)
-     *         dateTime: OffsetDateTime (Required)
-     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
-     *         password: String (Required)
-     *         uri: String (Required)
-     *         extensibleEnum: String(Value1/Value2) (Required)
-     *         extensibleEnumScalar: String(Value1/Value2) (Required)
-     *     }
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
@@ -410,9 +385,13 @@ public final class BuiltinClientImpl {
      *         String: double (Required)
      *     }
      *     encoded (Required): {
-     *         timeInSeconds: long (Required)
-     *         timeInSecondsFraction: double (Required)
-     *         timeInSecondsOptional: Long (Optional)
+     *         timeInSeconds: Long (Optional)
+     *         timeInSecondsFraction: Double (Optional)
+     *         dateTime: OffsetDateTime (Optional)
+     *         dateTimeRfc7231: DateTimeRfc1123 (Optional)
+     *         unixTimestamp: Long (Optional)
+     *         base64: byte[] (Optional)
+     *         base64url: Base64Url (Optional)
      *     }
      * }
      * }</pre>
@@ -439,16 +418,6 @@ public final class BuiltinClientImpl {
      *
      * <pre>{@code
      * {
-     *     formatString (Required): {
-     *         base64Encoded: Base64Url (Required)
-     *         binary: byte[] (Required)
-     *         dateTime: OffsetDateTime (Required)
-     *         dateTimeRfc1123: DateTimeRfc1123 (Required)
-     *         password: String (Required)
-     *         uri: String (Required)
-     *         extensibleEnum: String(Value1/Value2) (Required)
-     *         extensibleEnumScalar: String(Value1/Value2) (Required)
-     *     }
      *     boolean: boolean (Required)
      *     string: String (Required)
      *     bytes: byte[] (Required)
@@ -471,9 +440,13 @@ public final class BuiltinClientImpl {
      *         String: double (Required)
      *     }
      *     encoded (Required): {
-     *         timeInSeconds: long (Required)
-     *         timeInSecondsFraction: double (Required)
-     *         timeInSecondsOptional: Long (Optional)
+     *         timeInSeconds: Long (Optional)
+     *         timeInSecondsFraction: Double (Optional)
+     *         dateTime: OffsetDateTime (Optional)
+     *         dateTimeRfc7231: DateTimeRfc1123 (Optional)
+     *         unixTimestamp: Long (Optional)
+     *         base64: byte[] (Optional)
+     *         base64url: Base64Url (Optional)
      *     }
      * }
      * }</pre>

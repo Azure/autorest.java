@@ -6,7 +6,6 @@ package com.type.array.implementation;
 
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
@@ -161,9 +160,7 @@ public final class ArrayClientImpl {
     /** Initializes an instance of ArrayClient client. */
     public ArrayClientImpl() {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter());
     }
 

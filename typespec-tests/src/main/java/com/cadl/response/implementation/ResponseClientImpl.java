@@ -7,10 +7,12 @@ package com.cadl.response.implementation;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.Head;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -21,7 +23,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
@@ -32,6 +33,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import com.cadl.response.ResponseServiceVersion;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the ResponseClient type. */
@@ -49,6 +51,18 @@ public final class ResponseClientImpl {
      */
     public String getEndpoint() {
         return this.endpoint;
+    }
+
+    /** Service version. */
+    private final ResponseServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     *
+     * @return the serviceVersion value.
+     */
+    public ResponseServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -79,14 +93,14 @@ public final class ResponseClientImpl {
      * Initializes an instance of ResponseClient client.
      *
      * @param endpoint Server parameter.
+     * @param serviceVersion Service version.
      */
-    public ResponseClientImpl(String endpoint) {
+    public ResponseClientImpl(String endpoint, ResponseServiceVersion serviceVersion) {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint);
+                endpoint,
+                serviceVersion);
     }
 
     /**
@@ -94,9 +108,10 @@ public final class ResponseClientImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
+     * @param serviceVersion Service version.
      */
-    public ResponseClientImpl(HttpPipeline httpPipeline, String endpoint) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+    public ResponseClientImpl(HttpPipeline httpPipeline, String endpoint, ResponseServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -105,11 +120,17 @@ public final class ResponseClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
+     * @param serviceVersion Service version.
      */
-    public ResponseClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
+    public ResponseClientImpl(
+            HttpPipeline httpPipeline,
+            SerializerAdapter serializerAdapter,
+            String endpoint,
+            ResponseServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
+        this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(ResponseClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
@@ -295,6 +316,38 @@ public final class ResponseClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> deleteWithHeadersSync(
                 @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Head("/response/exists")
+        @ExpectedResponses({200, 404})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Boolean>> exists(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Head("/response/exists")
+        @ExpectedResponses({200, 404})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Boolean> existsSync(
+                @HostParam("endpoint") String endpoint,
+                @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -547,5 +600,55 @@ public final class ResponseClientImpl {
     public Response<Void> deleteWithHeadersWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.deleteWithHeadersSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * The most basic operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * boolean
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Boolean>> existsWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context ->
+                        service.exists(
+                                this.getEndpoint(),
+                                this.getServiceVersion().getVersion(),
+                                accept,
+                                requestOptions,
+                                context));
+    }
+
+    /**
+     * The most basic operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * boolean
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return whether resource exists along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Boolean> existsWithResponse(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.existsSync(
+                this.getEndpoint(), this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
     }
 }

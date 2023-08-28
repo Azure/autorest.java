@@ -4,6 +4,7 @@
 
 package com.type.property.nullable.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,13 +16,15 @@ public final class CollectionsByteProperty {
     /*
      * Required property
      */
-    @JsonProperty(value = "requiredProperty", required = true)
+    @Generated
+    @JsonProperty(value = "requiredProperty")
     private String requiredProperty;
 
     /*
      * Property
      */
-    @JsonProperty(value = "nullableProperty", required = true)
+    @Generated
+    @JsonProperty(value = "nullableProperty")
     private List<byte[]> nullableProperty;
 
     /**
@@ -30,10 +33,11 @@ public final class CollectionsByteProperty {
      * @param requiredProperty the requiredProperty value to set.
      * @param nullableProperty the nullableProperty value to set.
      */
+    @Generated
     @JsonCreator
     public CollectionsByteProperty(
-            @JsonProperty(value = "requiredProperty", required = true) String requiredProperty,
-            @JsonProperty(value = "nullableProperty", required = true) List<byte[]> nullableProperty) {
+            @JsonProperty(value = "requiredProperty") String requiredProperty,
+            @JsonProperty(value = "nullableProperty") List<byte[]> nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }
@@ -43,6 +47,7 @@ public final class CollectionsByteProperty {
      *
      * @return the requiredProperty value.
      */
+    @Generated
     public String getRequiredProperty() {
         return this.requiredProperty;
     }
@@ -52,6 +57,7 @@ public final class CollectionsByteProperty {
      *
      * @return the nullableProperty value.
      */
+    @Generated
     public List<byte[]> getNullableProperty() {
         return this.nullableProperty;
     }

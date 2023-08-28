@@ -7,7 +7,6 @@ import {
   ImplementationLocation,
   Response,
   SchemaType,
-  Schema,
 } from "@autorest/codemodel";
 import { LongRunningMetadata } from "./long-running-metadata.js";
 
@@ -55,9 +54,6 @@ export interface Operation extends Aspect {
   /** a boolean to represent should generate protocol api or not */
   generateProtocolApi?: boolean;
 
-  /** the operation links, referring to related operations, e.g. "polling" for long-running operation to the status monitor operation */
-  operationLinks?: Record<string, OperationLink>;
-
   /** the long-running operation metadata */
   lroMetadata?: LongRunningMetadata;
 }
@@ -78,18 +74,6 @@ export class ConvenienceApi extends Metadata {
   }
 
   requests?: Array<Request>;
-}
-
-export class OperationLink {
-  constructor(operation: Operation) {
-    this.operation = operation;
-  }
-
-  /** the operation */
-  operation: Operation;
-
-  /** the parameters as Schema */
-  parameters?: Schema;
 }
 
 export interface Request extends Metadata {

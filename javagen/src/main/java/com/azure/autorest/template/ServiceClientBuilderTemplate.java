@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientBuilderTraitMethod;
+import com.azure.autorest.model.clientmodel.PipelinePolicyDetails;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
@@ -22,6 +23,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
@@ -86,6 +88,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add("java.util.ArrayList");
         imports.add("com.azure.core.http.HttpHeaders");
         imports.add("java.util.Objects");
+        if (settings.isUseClientLogger()) {
+            ClassType.ClientLogger.addImportsTo(imports, false);
+        }
         addServiceClientBuilderAnnotationImport(imports);
         addHttpPolicyImports(imports);
         addImportForCoreUtils(imports);
@@ -301,7 +306,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             });
 
             if (!settings.isAzureOrFluent()) {
-                addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes(), serviceClient.getSecurityInfo());
+                addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes(), serviceClient.getSecurityInfo(), serviceClient.getPipelinePolicyDetails());
             }
 
             if (JavaSettings.getInstance().isGenerateSyncAsyncClients()) {
@@ -349,6 +354,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     ++syncClientIndex;
                 }
             }
+
+            TemplateUtil.addClientLogger(classBlock, serviceClientBuilderName, javaFile.getContents());
         });
     }
 
@@ -366,7 +373,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 && !(property.getType() instanceof PrimitiveType)) {
             return getLocalBuildVariableName((property.getName()));
         }
-        return property.getName();
+        return "this." + property.getName();
     }
 
     private void addTraitMethods(ClientBuilder clientBuilder, JavaSettings settings, String serviceClientBuilderName, JavaClass classBlock) {
@@ -471,7 +478,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
     }
 
-    protected void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock, String defaultCredentialScopes, SecurityInfo securityInfo) {
+    protected void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock,
+                                               String defaultCredentialScopes, SecurityInfo securityInfo,
+                                               PipelinePolicyDetails pipelinePolicyDetails) {
         addGeneratedAnnotation(classBlock);
         classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
             function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
@@ -492,7 +501,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                     + "clientVersion, buildConfiguration));");
 
-            function.line("policies.add(new RequestIdPolicy());");
+            if (pipelinePolicyDetails != null && !CoreUtils.isNullOrEmpty(pipelinePolicyDetails.getRequestIdHeaderName())) {
+                function.line(String.format("policies.add(new RequestIdPolicy(\"%s\"));", pipelinePolicyDetails.getRequestIdHeaderName()));
+            } else {
+                function.line("policies.add(new RequestIdPolicy());");
+            }
             function.line("policies.add(new AddHeadersFromContextPolicy());");
 
             // clientOptions header
@@ -507,20 +520,26 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new " +
                     "RetryPolicy()));");
             function.line("policies.add(new AddDatePolicy());");
-            function.line("policies.add(new CookiePolicy());");
 
             if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-                if (securityInfo.getHeaderName() == null
-                    || securityInfo.getHeaderName().isEmpty()) {
+                if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderName())) {
                     logger.error("key-credential-header-name is required for " +
                             "azurekeycredential credential type");
                     throw new IllegalStateException("key-credential-header-name is required for " +
                             "azurekeycredential credential type");
                 }
                 function.ifBlock("azureKeyCredential != null", action -> {
-                    function.line("policies.add(new AzureKeyCredentialPolicy(\""
-                            + securityInfo.getHeaderName()
-                            + "\", azureKeyCredential));");
+                    if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
+                        function.line("policies.add(new AzureKeyCredentialPolicy(\""
+                                + securityInfo.getHeaderName()
+                                + "\", azureKeyCredential));");
+                    } else {
+                        function.line("policies.add(new AzureKeyCredentialPolicy(\""
+                                + securityInfo.getHeaderName()
+                                + "\", azureKeyCredential, \""
+                                + securityInfo.getHeaderValuePrefix()
+                                + "\"));");
+                    }
                 });
             }
             if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
@@ -585,7 +604,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
-        classBlock.annotation("Generated");
+        classBlock.annotation(Generated.class.getSimpleName());
     }
 
     protected void addOverrideAnnotation(JavaContext classBlock) {

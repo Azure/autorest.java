@@ -5,6 +5,7 @@
 package com.type.property.optional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -14,10 +15,12 @@ public final class CollectionsModelProperty {
     /*
      * Property
      */
+    @Generated
     @JsonProperty(value = "property")
     private List<StringProperty> property;
 
     /** Creates an instance of CollectionsModelProperty class. */
+    @Generated
     public CollectionsModelProperty() {}
 
     /**
@@ -25,6 +28,7 @@ public final class CollectionsModelProperty {
      *
      * @return the property value.
      */
+    @Generated
     public List<StringProperty> getProperty() {
         return this.property;
     }
@@ -35,6 +39,7 @@ public final class CollectionsModelProperty {
      * @param property the property value to set.
      * @return the CollectionsModelProperty object itself.
      */
+    @Generated
     public CollectionsModelProperty setProperty(List<StringProperty> property) {
         this.property = property;
         return this;

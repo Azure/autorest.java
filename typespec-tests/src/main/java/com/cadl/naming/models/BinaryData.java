@@ -4,6 +4,7 @@
 
 package com.cadl.naming.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -21,7 +22,8 @@ public final class BinaryData {
      *
      * description of data property
      */
-    @JsonProperty(value = "data", required = true)
+    @Generated
+    @JsonProperty(value = "data")
     private byte[] data;
 
     /**
@@ -29,8 +31,9 @@ public final class BinaryData {
      *
      * @param data the data value to set.
      */
+    @Generated
     @JsonCreator
-    private BinaryData(@JsonProperty(value = "data", required = true) byte[] data) {
+    private BinaryData(@JsonProperty(value = "data") byte[] data) {
         this.data = data;
     }
 
@@ -41,6 +44,7 @@ public final class BinaryData {
      *
      * @return the data value.
      */
+    @Generated
     public byte[] getData() {
         return CoreUtils.clone(this.data);
     }

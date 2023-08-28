@@ -19,7 +19,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
@@ -76,9 +75,7 @@ public final class InternalClientImpl {
     /** Initializes an instance of InternalClient client. */
     public InternalClientImpl() {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter());
     }
 
@@ -194,7 +191,7 @@ public final class InternalClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -220,7 +217,7 @@ public final class InternalClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -245,7 +242,7 @@ public final class InternalClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -271,7 +268,7 @@ public final class InternalClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

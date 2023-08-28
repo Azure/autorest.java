@@ -4,6 +4,7 @@
 
 package com.projection.projectedname.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +15,8 @@ public final class JsonAndClientProjectedNameModel {
     /*
      * Pass in true
      */
-    @JsonProperty(value = "wireName", required = true)
+    @Generated
+    @JsonProperty(value = "wireName")
     private boolean clientName;
 
     /**
@@ -22,8 +24,9 @@ public final class JsonAndClientProjectedNameModel {
      *
      * @param clientName the clientName value to set.
      */
+    @Generated
     @JsonCreator
-    public JsonAndClientProjectedNameModel(@JsonProperty(value = "wireName", required = true) boolean clientName) {
+    public JsonAndClientProjectedNameModel(@JsonProperty(value = "wireName") boolean clientName) {
         this.clientName = clientName;
     }
 
@@ -32,6 +35,7 @@ public final class JsonAndClientProjectedNameModel {
      *
      * @return the clientName value.
      */
+    @Generated
     public boolean isClientName() {
         return this.clientName;
     }

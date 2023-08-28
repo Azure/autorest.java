@@ -45,6 +45,7 @@ public class TemplateUtil {
     public static final String ARTIFACT_ID = "artifact-id";
     public static final String ARTIFACT_VERSION = "artifact-version";
     public static final String PACKAGE_NAME = "package-name";
+    public static final String IMPRESSION_PIXEL = "impression-pixel";
 
     public static final String MANAGER_CLASS = "manager-class";
 
@@ -256,7 +257,8 @@ public class TemplateUtil {
         String content = javaFileContents.toString();
         if (content.contains("throw LOGGER")
                 || content.contains("LOGGER.logThrowable")
-                || content.contains("LOGGER.logException")) {
+                || content.contains("LOGGER.logException")
+                || content.contains("LOGGER.info")) {
             // hack to add LOGGER class variable only if LOGGER is used in code
             classBlock.privateStaticFinalVariable(String.format("%1$s LOGGER = new ClientLogger(%2$s.class)",
                     ClassType.ClientLogger.toString(), className));

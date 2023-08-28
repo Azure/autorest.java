@@ -11,16 +11,11 @@ import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
-import com.azure.autorest.fluent.model.clientmodel.MethodParameter;
-import com.azure.autorest.model.clientmodel.ModelProperty;
-import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentClientMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentCollectionMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceCreateExample;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentResourceUpdateExample;
-import com.azure.autorest.model.clientmodel.examplemodel.ListNode;
-import com.azure.autorest.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.ParameterExample;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStage;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.DefinitionStageBlank;
@@ -39,25 +34,23 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
-import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
+import com.azure.autorest.model.clientmodel.examplemodel.LiteralNode;
+import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ModelExampleUtil;
-import com.azure.core.util.serializer.CollectionFormat;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ExampleParser {
@@ -165,7 +158,7 @@ public class ExampleParser {
         if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod)) {
             ret = new ArrayList<>();
 
-            List<MethodParameter> methodParameters = getParameters(clientMethod);
+            List<MethodParameter> methodParameters = MethodUtil.getParameters(clientMethod);
             for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
                 LOGGER.info("Parse collection method example '{}'", entry.getKey());
 
@@ -183,7 +176,7 @@ public class ExampleParser {
         if (FluentUtils.validRequestContentTypeToGenerateExample(clientMethod)) {
             ret = new ArrayList<>();
 
-            List<MethodParameter> methodParameters = getParameters(clientMethod);
+            List<MethodParameter> methodParameters = MethodUtil.getParameters(clientMethod);
             for (Map.Entry<String, ProxyMethodExample> entry : clientMethod.getProxyMethod().getExamples().entrySet()) {
                 LOGGER.info("Parse client method example '{}'", entry.getKey());
 
@@ -208,7 +201,7 @@ public class ExampleParser {
 
     public static FluentCollectionMethodExample parseMethodExample(FluentResourceCollection resourceCollection, Collection<FluentCollectionMethod> collectionMethods, ProxyMethodExample example) {
         FluentCollectionMethod collectionMethod = collectionMethods.stream().filter(method -> FluentUtils.requiresExample(method.getInnerClientMethod())).findFirst().get();
-        return parseMethodForExample(resourceCollection, collectionMethod, getParameters(collectionMethod.getInnerClientMethod()), example.getName(), example);
+        return parseMethodForExample(resourceCollection, collectionMethod, MethodUtil.getParameters(collectionMethod.getInnerClientMethod()), example.getName(), example);
     }
 
     private static FluentClientMethodExample parseMethodForExample(
@@ -224,7 +217,7 @@ public class ExampleParser {
 
     private static void addMethodParametersToMethodExample(List<MethodParameter> methodParameters, ProxyMethodExample proxyMethodExample, FluentMethodExample methodExample) {
         for (MethodParameter methodParameter : methodParameters) {
-            ExampleNode node = parseNodeFromParameter(proxyMethodExample, methodParameter);
+            ExampleNode node = ModelExampleUtil.parseNodeFromParameter(proxyMethodExample, methodParameter);
 
             if (node.getObjectValue() == null) {
                 if (methodParameter.getClientMethodParameter().isRequired()) {
@@ -250,7 +243,7 @@ public class ExampleParser {
                     ret = new ArrayList<>();
                 }
 
-                List<MethodParameter> methodParameters = getParameters(clientMethod);
+                List<MethodParameter> methodParameters = MethodUtil.getParameters(clientMethod);
                 MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
 
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
@@ -280,7 +273,7 @@ public class ExampleParser {
         ExampleNode defineNode = null;
         if (defineMethod.getMethodParameter() != null) {
             MethodParameter methodParameter = findMethodParameter(methodParameters, defineMethod.getMethodParameter());
-            defineNode = parseNodeFromParameter(example, methodParameter);
+            defineNode = ModelExampleUtil.parseNodeFromParameter(example, methodParameter);
 
             if (defineNode.getObjectValue() == null) {
                 LOGGER.warn("Failed to assign sample value to define method '{}'", defineMethod.getName());
@@ -301,12 +294,12 @@ public class ExampleParser {
                             .map(p -> findMethodParameter(methodParameters, p))
                             .collect(Collectors.toList());
                     exampleNodes.addAll(parameters.stream()
-                            .map(p -> parseNodeFromParameter(example, p))
+                            .map(p -> ModelExampleUtil.parseNodeFromParameter(example, p))
                             .collect(Collectors.toList()));
                 } else if (stage instanceof DefinitionStageMisc) {
                     DefinitionStageMisc miscStage = (DefinitionStageMisc) stage;
                     MethodParameter methodParameter = findMethodParameter(methodParameters, miscStage.getMethodParameter());
-                    ExampleNode node = parseNodeFromParameter(example, methodParameter);
+                    ExampleNode node = ModelExampleUtil.parseNodeFromParameter(example, methodParameter);
 
                     if (stage.isMandatoryStage() || !node.isNull()) {
                         exampleNodes.add(node);
@@ -337,7 +330,7 @@ public class ExampleParser {
     }
 
     public static FluentResourceCreateExample parseResourceCreate(FluentResourceCollection resourceCollection, ResourceCreate create, ProxyMethodExample example) {
-        List<MethodParameter> methodParameters = getParameters(
+        List<MethodParameter> methodParameters = MethodUtil.getParameters(
             create.getMethodReferences()
                 .stream()
                 .filter(collectionMethod-> FluentUtils.requiresExample(collectionMethod.getInnerClientMethod()))
@@ -356,7 +349,7 @@ public class ExampleParser {
             // 'get' method not found
             return null;
         }
-        List<MethodParameter> resourceGetMethodParameters = getParameters(resourceGetMethod.getInnerClientMethod());
+        List<MethodParameter> resourceGetMethodParameters = MethodUtil.getParameters(resourceGetMethod.getInnerClientMethod());
 
         List<FluentCollectionMethod> collectionMethods = resourceUpdate.getMethodReferences();
         for (FluentCollectionMethod collectionMethod : collectionMethods) {
@@ -366,7 +359,7 @@ public class ExampleParser {
                     ret = new ArrayList<>();
                 }
 
-                List<MethodParameter> methodParameters = getParameters(clientMethod);
+                List<MethodParameter> methodParameters = MethodUtil.getParameters(clientMethod);
                 MethodParameter requestBodyParameter = findRequestBodyParameter(methodParameters);
 
                 for (Map.Entry<String, ProxyMethodExample> entry : collectionMethod.getInnerClientMethod().getProxyMethod().getExamples().entrySet()) {
@@ -416,7 +409,7 @@ public class ExampleParser {
                 } else if (stage instanceof UpdateStageMisc) {
                     UpdateStageMisc miscStage = (UpdateStageMisc) stage;
                     MethodParameter methodParameter = findMethodParameter(methodParameters, miscStage.getMethodParameter());
-                    ExampleNode node = parseNodeFromParameter(example, methodParameter);
+                    ExampleNode node = ModelExampleUtil.parseNodeFromParameter(example, methodParameter);
 
                     if (!node.isNull()) {
                         exampleNodes.add(node);
@@ -446,8 +439,8 @@ public class ExampleParser {
             // 'get' method not found
             return null;
         }
-        List<MethodParameter> resourceGetMethodParameters = getParameters(resourceGetMethod.getInnerClientMethod());
-        List<MethodParameter> methodParameters = getParameters(
+        List<MethodParameter> resourceGetMethodParameters = MethodUtil.getParameters(resourceGetMethod.getInnerClientMethod());
+        List<MethodParameter> methodParameters = MethodUtil.getParameters(
             resourceUpdate.getMethodReferences()
                 .stream()
                 .filter(collectionMethod-> FluentUtils.requiresExample(collectionMethod.getInnerClientMethod()))
@@ -465,13 +458,6 @@ public class ExampleParser {
                 .findFirst().orElse(null);
     }
 
-    private static ProxyMethodExample.ParameterValue findParameter(ProxyMethodExample example, String serializedName) {
-        return example.getParameters().entrySet()
-                .stream().filter(p -> p.getKey().equalsIgnoreCase(serializedName))
-                .map(Map.Entry::getValue)
-                .findFirst().orElse(null);
-    }
-
     private static MethodParameter findMethodParameter(List<MethodParameter> methodParameters, ClientMethodParameter clientMethodParameter) {
         MethodParameter parameter = methodParameters.stream()
                 .filter(p -> p.getClientMethodParameter() == clientMethodParameter)
@@ -484,46 +470,11 @@ public class ExampleParser {
         return parameter;
     }
 
-    private static ExampleNode parseNodeFromParameter(ProxyMethodExample example, MethodParameter methodParameter) {
-        String serializedName = methodParameter.getSerializedName();
-        if (serializedName == null && methodParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
-            serializedName = methodParameter.getProxyMethodParameter().getName();
-        }
-
-        ProxyMethodExample.ParameterValue parameterValue = findParameter(example, serializedName);
-        if (parameterValue == null && methodParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
-            // special handling for body, as it does not have serializedName
-            String paramSuffix = "Param";
-            if (serializedName.endsWith(paramSuffix)) {
-                // hack, remove Param, as it likely added by codegen to avoid naming conflict
-                serializedName = serializedName.substring(0, serializedName.length() - paramSuffix.length());
-                if (!serializedName.isEmpty()) {
-                    parameterValue = findParameter(example, serializedName);
-                }
-            }
-        }
-
-        ExampleNode node;
-        if (parameterValue == null) {
-            if (ClassType.Context.equals(methodParameter.getClientMethodParameter().getClientType())) {
-                node = new LiteralNode(ClassType.Context, "").setLiteralsValue("");
-            } else {
-                node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
-            }
-        } else {
-            Object exampleValue = methodParameter.getClientMethodParameter().getRequestParameterLocation() == RequestParameterLocation.QUERY
-                    ? parameterValue.getUnescapedQueryValue()
-                    : parameterValue.getObjectValue();
-            node = parseNodeFromMethodParameter(methodParameter, exampleValue);
-        }
-        return node;
-    }
-
     private static ExampleNode parseNodeFromModelProperty(ProxyMethodExample example, MethodParameter methodParameter,
                                                           ClientModel clientModel, ModelProperty modelProperty) {
         String serializedName = methodParameter.getProxyMethodParameter().getName();
 
-        ProxyMethodExample.ParameterValue parameterValue = findParameter(example, serializedName);
+        ProxyMethodExample.ParameterValue parameterValue = ModelExampleUtil.findParameter(example, serializedName);
         ExampleNode node;
         if (parameterValue == null) {
             node = new LiteralNode(modelProperty.getClientType(), null);
@@ -538,57 +489,6 @@ public class ExampleParser {
             }
         }
         return node;
-    }
-
-    private static ExampleNode parseNodeFromMethodParameter(MethodParameter methodParameter, Object objectValue) {
-        IType type = methodParameter.getClientMethodParameter().getClientType();
-        IType wireType = methodParameter.getClientMethodParameter().getWireType();
-        if (methodParameter.getProxyMethodParameter().getCollectionFormat() != null && type instanceof ListType && objectValue instanceof String) {
-            // handle parameter style
-
-            IType elementType = ((ListType) type).getElementType();
-            ListNode listNode = new ListNode(elementType, objectValue);
-            String value = (String) objectValue;
-
-            CollectionFormat collectionFormat = methodParameter.getProxyMethodParameter().getCollectionFormat();
-            List<String> elements;
-            switch (collectionFormat) {
-                case CSV:
-                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
-                    break;
-                case SSV:
-                    elements = Arrays.asList(value.split(Pattern.quote(" "), -1));
-                    break;
-                case PIPES:
-                    elements = Arrays.asList(value.split(Pattern.quote("|"), -1));
-                    break;
-                case TSV:
-                    elements = Arrays.asList(value.split(Pattern.quote("\t"), -1));
-                    break;
-                default:
-                    // TODO (weidxu): CollectionFormat.MULTI
-                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
-                    LOGGER.error("Parameter style '{}' is not supported, fallback to CSV", collectionFormat);
-                    break;
-            }
-            for (String childObjectValue : elements) {
-                ExampleNode childNode = ModelExampleUtil.parseNode(elementType, childObjectValue);
-                listNode.getChildNodes().add(childNode);
-            }
-            return listNode;
-        } else {
-            return ModelExampleUtil.parseNode(type, wireType, objectValue);
-        }
-    }
-
-    protected static List<MethodParameter> getParameters(ClientMethod clientMethod) {
-        Map<String, ProxyMethodParameter> proxyMethodParameterByClientParameterName = clientMethod.getProxyMethod().getParameters().stream()
-                .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
-        return clientMethod.getMethodParameters().stream()
-                .filter(p -> proxyMethodParameterByClientParameterName.containsKey(p.getName()))
-                .filter(p -> !p.isConstant() && !p.isFromClient())
-                .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
-                .collect(Collectors.toList());
     }
 
     private static boolean methodIsCreateOrUpdate(FluentResourceModel resourceModel) {

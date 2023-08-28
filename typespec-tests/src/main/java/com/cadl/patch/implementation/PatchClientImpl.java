@@ -21,7 +21,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
@@ -82,9 +81,7 @@ public final class PatchClientImpl {
      */
     public PatchClientImpl(String endpoint) {
         this(
-                new HttpPipelineBuilder()
-                        .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
-                        .build(),
+                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 endpoint);
     }
@@ -187,7 +184,7 @@ public final class PatchClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -232,7 +229,7 @@ public final class PatchClientImpl {
      * }
      * }</pre>
      *
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
