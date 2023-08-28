@@ -47,7 +47,7 @@ public class ClientMethodTestTemplate implements IJavaTemplate<TestContext<Clien
             classBlock.annotation("Test", "Disabled");  // "DoNotRecord(skipInPlayback = true)" not added
             classBlock.publicMethod(String.format("void test%1$s()", className), methodBlock -> {
                 caseWriter.writeMethodInvocation(methodBlock);
-                // TODO(xiaofei) response assertions
+                caseWriter.writeResponseAssertion(methodBlock);
             });
         });
     }

@@ -6,6 +6,7 @@ package com.azure.autorest.template.example;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
@@ -14,16 +15,21 @@ import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ModelExampleUtil;
+import com.azure.core.http.ContentType;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.polling.SyncPoller;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -32,6 +38,7 @@ public class ClientMethodExampleWriter {
 
     private final Set<String> imports = new HashSet<>();
     private final Consumer<JavaBlock> methodBodyWriter;
+    private final Consumer<JavaBlock> responseAssertionWriter;
     private final Set<ExampleHelperFeature> helperFeatures = new HashSet<>();
 
     public ClientMethodExampleWriter(ClientMethod method, String clientVarName, ProxyMethodExample proxyMethodExample){
@@ -64,6 +71,65 @@ public class ClientMethodExampleWriter {
                         parameterInvocations));
 
         methodBodyWriter = javaBlock -> javaBlock.line(methodInvocation.toString());
+        responseAssertionWriter = methodBlock -> {
+            Optional<ProxyMethodExample.Response> responseOpt = proxyMethodExample.getPrimaryResponse();
+            if (responseOpt.isPresent()) {
+                ProxyMethodExample.Response response = responseOpt.get();
+                IType returnType = method.getReturnValue().getType();
+                if (returnType instanceof GenericType) {
+                    GenericType responseType = (GenericType) returnType;
+                    if (SyncPoller.class.getSimpleName().equals(responseType.getName())) {
+                        // SyncPoller<>
+
+                        if (response.getStatusCode() / 100 == 2) {
+                            // it should have a 202 leading to SUCCESSFULLY_COMPLETED
+                            // but x-ms-examples usually does not include the final result
+                            methodBlock.line("Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.waitForCompletion().getStatus());");
+                        }
+                    } else if (PagedIterable.class.getSimpleName().equals(responseType.getName())) {
+                        // PagedIterable<>
+
+                        // assert status code
+                        methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getStatusCode());", response.getStatusCode()));
+                        // assert headers
+                        response.getHttpHeaders().stream().forEach(header -> {
+                            String expectedValueStr = ClassType.String.defaultValueExpression(header.getValue());
+                            String keyStr = ClassType.String.defaultValueExpression(header.getName());
+                            methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
+                        });
+                        // assert JSON of first item, or assert count=0
+                        if (ContentType.APPLICATION_JSON.equals(method.getProxyMethod().getRequestContentType())
+                            && responseType.getTypeArguments().length > 0
+                            && ClientModelUtil.isClientModel(responseType.getTypeArguments()[0])
+                            && method.getMethodPageDetails() != null
+                            && response.getBody() instanceof Map) {
+                            Map<String, Object> bodyMap = (Map<String, Object>) response.getBody();
+                            if (bodyMap.containsKey(method.getMethodPageDetails().getSerializedItemName())) {
+                                Object items = bodyMap.get(method.getMethodPageDetails().getSerializedItemName());
+                                if (items instanceof List) {
+                                    List<Object> itemArray = (List<Object>) items;
+                                    if (itemArray.isEmpty()) {
+                                        methodBlock.line("Assertions.assertEquals(0, response.stream().count());");
+                                    } else {
+                                        Object firstItem = itemArray.iterator().next();
+                                        writeModelAssertion(responseType.getTypeArguments()[0], (Map<String, Object>) firstItem, "response.iterator().next()");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if (ClientModelUtil.isClientModel(returnType) && response.getBody() instanceof Map) {
+                    writeModelAssertion(returnType, (Map<String, Object>) response.getBody(), "response");
+                }
+            } else {
+                methodBlock.line("Assertions.assertNotNull(response);");
+            }
+        };
+    }
+
+    private void writeModelAssertion(IType modelType, Map<String, Object> body, String variableReference) {
+        // TODO
+        throw new UnsupportedOperationException("method [writeModelAssertion] not implemented in class [com.azure.autorest.template.example.ClientMethodExampleWriter]");
     }
 
     /**
@@ -195,5 +261,9 @@ public class ClientMethodExampleWriter {
 
     public Set<ExampleHelperFeature> getHelperFeatures() {
         return helperFeatures;
+    }
+
+    public void writeResponseAssertion(JavaBlock methodBlock) {
+        responseAssertionWriter.accept(methodBlock);
     }
 }
