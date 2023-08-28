@@ -611,13 +611,20 @@ export class CodeModelBuilder {
             }
           }
 
+          // quantum model
           let groupModelName: string | undefined = undefined;
-          if (op.operation.parameters.kind === "Model" && op.operation.parameters.properties.size > 0) {
+          if (
+            this.options["dev-options"] &&
+            this.options["dev-options"]["support-quantum-model"] &&
+            op.operation.parameters.kind === "Model" &&
+            op.operation.parameters.properties.size > 0
+          ) {
             const operationProperty = op.operation.parameters.properties.values().next().value;
             if (operationProperty.sourceProperty.model.name.endsWith("Options")) {
               groupModelName = operationProperty.sourceProperty.model.name;
             }
           }
+
           this.processParameterBody(codeModelOperation, op, bodyType, groupModelName);
         }
       }
