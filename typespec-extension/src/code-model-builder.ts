@@ -641,7 +641,13 @@ export class CodeModelBuilder {
           const parameters: Array<Parameter> = [];
           request.parameters = parameters;
           codeModelOperation.convenienceApi.requests.push(request);
-          codeModelOperation.parameters.forEach((it) => parameters.push(cloneOperationParameter(it)));
+          codeModelOperation.parameters
+            .filter(
+              (it) =>
+                it.implementation === ImplementationLocation.Method &&
+                !it.origin?.startsWith("modelerfour:synthesized/"),
+            )
+            .forEach((it) => parameters.push(cloneOperationParameter(it)));
 
           this.createOptionBag(codeModelOperation, request, groupModelName, namespace);
         }
@@ -1152,9 +1158,10 @@ export class CodeModelBuilder {
           const existParameter = op.parameters.find((it) => it.language.default.serializedName === key);
           if (existParameter) {
             // parameter
+            // filter client parameters, like "endpoint"
             if (
               existParameter.implementation === ImplementationLocation.Method &&
-              (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true)
+              !existParameter.origin?.startsWith("modelerfour:synthesized/")
             ) {
               request.parameters.push(cloneOperationParameter(existParameter));
             }
