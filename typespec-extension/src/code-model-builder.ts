@@ -596,9 +596,22 @@ export class CodeModelBuilder {
       // from template
       let templateOperation: Operation | undefined = operation;
       while (templateOperation) {
-        if (templateOperation.templateMapper && templateOperation.templateMapper.args.length > 0) {
-          const type = templateOperation.templateMapper.args[0];
-          if (type.kind === "Model" && type.name.endsWith("Options")) {
+        if (
+          templateOperation.templateMapper &&
+          templateOperation.templateMapper.args.length > 0 &&
+          getNamespace(templateOperation) === "Azure.Core"
+        ) {
+          let type = undefined;
+          // take TParam
+          if (templateOperation.name === "RpcOperation") {
+            type = templateOperation.templateMapper.args[0];
+          } else if (
+            (templateOperation.name === "ResourceAction" || templateOperation.name === "ResourceCollectionAction") &&
+            templateOperation.templateMapper.args.length > 1
+          ) {
+            type = templateOperation.templateMapper.args[1];
+          }
+          if (type && type.kind === "Model" && type.name.endsWith("Options")) {
             groupModelName = type.name;
             break;
           }
