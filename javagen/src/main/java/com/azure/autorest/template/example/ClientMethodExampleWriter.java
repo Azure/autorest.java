@@ -61,6 +61,8 @@ public class ClientMethodExampleWriter {
 
         this.imports.add("org.junit.jupiter.api.Assertions");
         this.imports.addAll(nodeVisitor.getImports());
+        // for mapOf
+        this.imports.add(HashMap.class.getName());
         method.getReturnValue().getType().addImportsTo(imports, false);
         addClientModelImports(method.getReturnValue().getType());
 
