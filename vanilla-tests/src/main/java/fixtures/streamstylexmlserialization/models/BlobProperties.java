@@ -831,8 +831,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
                         QName elementName = reader.getElementName();
 
                         if ("Last-Modified".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.setLastModified(
-                                    reader.getNullableElement(DateTimeRfc1123::new).getDateTime());
+                            deserializedBlobProperties.lastModified = reader.getNullableElement(DateTimeRfc1123::new);
                         } else if ("Etag".equals(elementName.getLocalPart())) {
                             deserializedBlobProperties.etag = reader.getStringElement();
                         } else if ("Content-Length".equals(elementName.getLocalPart())) {
@@ -873,8 +872,8 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
                         } else if ("CopyProgress".equals(elementName.getLocalPart())) {
                             deserializedBlobProperties.copyProgress = reader.getStringElement();
                         } else if ("CopyCompletionTime".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.setCopyCompletionTime(
-                                    reader.getNullableElement(DateTimeRfc1123::new).getDateTime());
+                            deserializedBlobProperties.copyCompletionTime =
+                                    reader.getNullableElement(DateTimeRfc1123::new);
                         } else if ("CopyStatusDescription".equals(elementName.getLocalPart())) {
                             deserializedBlobProperties.copyStatusDescription = reader.getStringElement();
                         } else if ("ServerEncrypted".equals(elementName.getLocalPart())) {
@@ -886,8 +885,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
                         } else if ("DestinationSnapshot".equals(elementName.getLocalPart())) {
                             deserializedBlobProperties.destinationSnapshot = reader.getStringElement();
                         } else if ("DeletedTime".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.setDeletedTime(
-                                    reader.getNullableElement(DateTimeRfc1123::new).getDateTime());
+                            deserializedBlobProperties.deletedTime = reader.getNullableElement(DateTimeRfc1123::new);
                         } else if ("RemainingRetentionDays".equals(elementName.getLocalPart())) {
                             deserializedBlobProperties.remainingRetentionDays =
                                     reader.getNullableElement(Integer::parseInt);

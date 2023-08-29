@@ -10,7 +10,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.Objects;
 
 /** The artifact's platform, consisting of operating system and architecture. */
 @Immutable
@@ -63,9 +62,6 @@ public final class ArtifactManifestPlatform implements JsonSerializable<Artifact
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("digest", this.digest);
-        jsonWriter.writeStringField("architecture", Objects.toString(this.architecture, null));
-        jsonWriter.writeStringField("os", Objects.toString(this.operatingSystem, null));
         return jsonWriter.writeEndObject();
     }
 

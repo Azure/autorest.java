@@ -66,7 +66,6 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("id", this.id);
         jsonWriter.writeNumberField("size", this.size);
         return jsonWriter.writeEndObject();
     }

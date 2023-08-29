@@ -246,8 +246,8 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
                         QName elementName = reader.getElementName();
 
                         if ("Last-Modified".equals(elementName.getLocalPart())) {
-                            deserializedContainerProperties.setLastModified(
-                                    reader.getNullableElement(DateTimeRfc1123::new).getDateTime());
+                            deserializedContainerProperties.lastModified =
+                                    reader.getNullableElement(DateTimeRfc1123::new);
                         } else if ("Etag".equals(elementName.getLocalPart())) {
                             deserializedContainerProperties.etag = reader.getStringElement();
                         } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
