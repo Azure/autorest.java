@@ -39,7 +39,7 @@ public final class UnionClient {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: SimpleUnionModelBase (Required)
+     *     simpleUnion: Object (Required)
      * }
      * }</pre>
      *
@@ -65,7 +65,7 @@ public final class UnionClient {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: SimpleUnionModelBase (Required)
+     *     simpleUnion: Object (Required)
      * }
      * }</pre>
      *
@@ -91,7 +91,7 @@ public final class UnionClient {
      *
      * <pre>{@code
      * {
-     *     namedUnion: NamedUnionModelBase (Required)
+     *     namedUnion: Object (Required)
      * }
      * }</pre>
      *
@@ -117,7 +117,7 @@ public final class UnionClient {
      *
      * <pre>{@code
      * {
-     *     namedUnion: NamedUnionModelBase (Required)
+     *     namedUnion: Object (Required)
      * }
      * }</pre>
      *

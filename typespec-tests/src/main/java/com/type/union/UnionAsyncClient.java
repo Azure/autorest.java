@@ -40,7 +40,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: SimpleUnionModelBase (Required)
+     *     simpleUnion: Object (Required)
      * }
      * }</pre>
      *
@@ -66,7 +66,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: SimpleUnionModelBase (Required)
+     *     simpleUnion: Object (Required)
      * }
      * }</pre>
      *
@@ -92,7 +92,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     namedUnion: NamedUnionModelBase (Required)
+     *     namedUnion: Object (Required)
      * }
      * }</pre>
      *
@@ -118,7 +118,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     namedUnion: NamedUnionModelBase (Required)
+     *     namedUnion: Object (Required)
      * }
      * }</pre>
      *
