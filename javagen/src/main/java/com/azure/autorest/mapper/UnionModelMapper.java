@@ -35,6 +35,7 @@ public class UnionModelMapper implements IMapper<OrSchema, List<UnionModel>> {
 
     @Override
     public List<UnionModel> map(OrSchema type) {
+        // disabled, use Object for now
         return Collections.emptyList();
     }
 
