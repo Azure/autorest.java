@@ -7,6 +7,7 @@ package com.cadl.versioning.generated;
 import com.azure.core.http.rest.PagedIterable;
 import com.cadl.versioning.models.Resource;
 import java.util.Arrays;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -16,5 +17,11 @@ public final class VersioningOpListTests extends VersioningClientTestBase {
     @Disabled
     public void testVersioningOpListTests() {
         PagedIterable<Resource> response = versioningClient.list(Arrays.asList("name=name"), "age gt 18");
+        Assertions.assertEquals(200, response.iterableByPage().iterator().next().getStatusCode());
+        Resource firstItem = response.iterator().next();
+        Assertions.assertNotNull(firstItem);
+        Assertions.assertEquals(firstItem.getId(), "myId");
+        Assertions.assertEquals(firstItem.getName(), "name");
+        Assertions.assertEquals(firstItem.getType(), "type");
     }
 }
