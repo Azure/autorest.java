@@ -3,13 +3,19 @@
 
 package com.azure.autorest.template.example;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
@@ -39,10 +45,9 @@ public class ClientMethodExampleWriter {
     private final Set<String> imports = new HashSet<>();
     private final Consumer<JavaBlock> methodBodyWriter;
     private final Consumer<JavaBlock> responseAssertionWriter;
-    private final Set<ExampleHelperFeature> helperFeatures = new HashSet<>();
+    private final ModelExampleWriter.ExampleNodeModelInitializationVisitor nodeVisitor = new ModelExampleWriter.ExampleNodeModelInitializationVisitor();
 
     public ClientMethodExampleWriter(ClientMethod method, String clientVarName, ProxyMethodExample proxyMethodExample){
-        ModelExampleWriter.ExampleNodeModelInitializationVisitor nodeVisitor = new ModelExampleWriter.ExampleNodeModelInitializationVisitor();
 
         List<MethodParameter> methodParameters = MethodUtil.getParameters(method, true);
         List<ExampleNode> exampleNodes = methodParameters
@@ -54,8 +59,10 @@ public class ClientMethodExampleWriter {
                 .map(nodeVisitor::accept)
                 .collect(Collectors.joining(", "));
 
+        this.imports.add("org.junit.jupiter.api.Assertions");
         this.imports.addAll(nodeVisitor.getImports());
-        this.helperFeatures.addAll(nodeVisitor.getHelperFeatures());
+        method.getReturnValue().getType().addImportsTo(imports, false);
+        addClientModelImports(method.getReturnValue().getType());
 
         StringBuilder methodInvocation = new StringBuilder();
 
@@ -99,10 +106,10 @@ public class ClientMethodExampleWriter {
                         });
                         // assert JSON of first item, or assert count=0
                         if (ContentType.APPLICATION_JSON.equals(method.getProxyMethod().getRequestContentType())
-                            && responseType.getTypeArguments().length > 0
-                            && ClientModelUtil.isClientModel(responseType.getTypeArguments()[0])
-                            && method.getMethodPageDetails() != null
-                            && response.getBody() instanceof Map) {
+                                && responseType.getTypeArguments().length > 0
+                                && ClientModelUtil.isClientModel(responseType.getTypeArguments()[0])
+                                && method.getMethodPageDetails() != null
+                                && response.getBody() instanceof Map) {
                             Map<String, Object> bodyMap = (Map<String, Object>) response.getBody();
                             if (bodyMap.containsKey(method.getMethodPageDetails().getSerializedItemName())) {
                                 Object items = bodyMap.get(method.getMethodPageDetails().getSerializedItemName());
@@ -112,14 +119,17 @@ public class ClientMethodExampleWriter {
                                         methodBlock.line("Assertions.assertEquals(0, response.stream().count());");
                                     } else {
                                         Object firstItem = itemArray.iterator().next();
-                                        writeModelAssertion(responseType.getTypeArguments()[0], (Map<String, Object>) firstItem, "response.iterator().next()");
+                                        methodBlock.line("%s firstItem = %s;", responseType.getTypeArguments()[0], "response.iterator().next()");
+                                        writeModelAssertion(methodBlock, nodeVisitor, (ClassType) responseType.getTypeArguments()[0], (Map<String, Object>) firstItem, "firstItem");
                                     }
                                 }
                             }
                         }
                     }
                 } else if (ClientModelUtil.isClientModel(returnType) && response.getBody() instanceof Map) {
-                    writeModelAssertion(returnType, (Map<String, Object>) response.getBody(), "response");
+                    // Client Model
+                    // TODO(xiaofei) when return type is boolean (exists through HEAD), or Map/List and primitive types(are they possible?)
+                    writeModelAssertion(methodBlock, nodeVisitor, (ClassType) returnType, (Map<String, Object>) response.getBody(), "response");
                 }
             } else {
                 methodBlock.line("Assertions.assertNotNull(response);");
@@ -127,9 +137,74 @@ public class ClientMethodExampleWriter {
         };
     }
 
-    private void writeModelAssertion(IType modelType, Map<String, Object> body, String variableReference) {
-        // TODO
-        throw new UnsupportedOperationException("method [writeModelAssertion] not implemented in class [com.azure.autorest.template.example.ClientMethodExampleWriter]");
+    private void addClientModelImports(IType type) {
+        ClientModel clientModel = null;
+        if (type instanceof GenericType) {
+            GenericType responseType = (GenericType) type;
+            if (PagedIterable.class.getSimpleName().equals(responseType.getName())) {
+                if (ClientModelUtil.isClientModel(responseType.getTypeArguments()[0])) {
+                    clientModel = ClientModelUtil.getClientModel(((ClassType) responseType.getTypeArguments()[0]).getName());
+                }
+            }
+        } else if (type instanceof ClassType && ClientModelUtil.isClientModel(type)) {
+            clientModel = ClientModelUtil.getClientModel(((ClassType) type).getName());
+        }
+        if (clientModel != null) {
+            clientModel.addImportsTo(this.imports, JavaSettings.getInstance());
+        }
+    }
+
+    private void writeModelAssertion(JavaBlock methodBlock, ModelExampleWriter.ExampleNodeModelInitializationVisitor nodeVisitor, ClassType modelType, Map<String, Object> body, String variableReference) {
+        methodBlock.line(String.format("Assertions.assertNotNull(%s);", variableReference));
+        ClientModel clientModel = ClientModelUtil.getClientModel(modelType.getName());
+        if (clientModel.getProperties() != null) {
+            for (ClientModelProperty property : clientModel.getProperties()) {
+                String serializedName = property.getSerializedName();
+                Object value = body.get(serializedName);
+                if (value != null) {
+                    String propertyReference = String.format("%s.%s()", variableReference, property.getGetterName());
+                    if ((property.getClientType() instanceof ClassType
+                            && !ClientModelUtil.isClientModel(property.getClientType()))
+                            || property.getClientType() instanceof PrimitiveType
+                            || property.getClientType() instanceof MapType) {
+                        // simple model that can be compared by "Assertions.assertEquals()"
+                        methodBlock.line(String.format(
+                                "Assertions.assertEquals(%s, %s);",
+                                propertyReference,
+                                nodeVisitor.accept(ModelExampleUtil.parseNode(property.getClientType(), property.getWireType(), value))
+                        ));
+                    } else if (property.getClientType() instanceof ClassType
+                            && ClientModelUtil.isClientModel(property.getClientType())
+                            && value instanceof Map) {
+                        // Client Model
+                        String varName = String.format("%s%s", variableReference, CodeNamer.toPascalCase(property.getName()));
+                        methodBlock.line("%s %s = %s;", property.getClientType(), varName, propertyReference);
+                        writeModelAssertion(methodBlock, nodeVisitor, (ClassType) property.getClientType(),(Map<String, Object>) value, varName);
+                    } else if (property.getClientType() instanceof ListType && value instanceof List) {
+                        // property is List
+                        List<Object> values = (List<Object>) value;
+                        if (values.size() > 0) {
+                            ListType listType = (ListType) property.getClientType();
+                            IType elementType = listType.getElementType();
+                            Object firstItemValue = values.iterator().next();
+                            if (firstItemValue != null) {
+                                String firstItemVarName = String.format("%s%s", variableReference, "FirstItem");
+                                methodBlock.line("%s %s = %s.iterator().next();", elementType, firstItemVarName, propertyReference);
+                                if (ClientModelUtil.isClientModel(elementType) && firstItemValue instanceof Map) {
+                                    // List of Client Models
+                                    writeModelAssertion(methodBlock, nodeVisitor, (ClassType) elementType, (Map<String, Object>) firstItemValue, firstItemVarName);
+                                } else {
+                                    // List of simple types that can be compared by "equals", ignore List of List
+                                    methodBlock.line("Assertions.assertEquals(%s, %s);", firstItemVarName, nodeVisitor.accept(ModelExampleUtil.parseNode(elementType.getClientType(), firstItemValue)));
+                                }
+                            }
+                        } else {
+                            methodBlock.line("Assertions.assertEquals(0, %s);", String.format("%s.size()", propertyReference));
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -260,7 +335,7 @@ public class ClientMethodExampleWriter {
     }
 
     public Set<ExampleHelperFeature> getHelperFeatures() {
-        return helperFeatures;
+        return new HashSet<>(nodeVisitor.getHelperFeatures());
     }
 
     public void writeResponseAssertion(JavaBlock methodBlock) {
