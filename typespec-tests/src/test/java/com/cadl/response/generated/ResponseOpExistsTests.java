@@ -4,6 +4,7 @@
 
 package com.cadl.response.generated;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -13,5 +14,6 @@ public final class ResponseOpExistsTests extends ResponseClientTestBase {
     @Disabled
     public void testResponseOpExistsTests() {
         boolean response = responseClient.exists();
+        Assertions.assertTrue(response);
     }
 }

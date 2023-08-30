@@ -251,7 +251,8 @@ public class ProtocolExampleWriter {
                             methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
                         });
                         // assert JSON body
-                        if (ContentType.APPLICATION_JSON.equals(method.getProxyMethod().getRequestContentType())
+                        if (method.getProxyMethod().getResponseContentTypes() != null
+                                && method.getProxyMethod().getResponseContentTypes().contains(ContentType.APPLICATION_JSON)
                                 && responseType.getTypeArguments().length > 0
                                 && responseType.getTypeArguments()[0] == ClassType.BinaryData) {
                             String expectedJsonStr = ClassType.String.defaultValueExpression(response.getJsonBody());

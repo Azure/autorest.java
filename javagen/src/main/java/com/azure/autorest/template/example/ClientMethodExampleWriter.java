@@ -4,7 +4,6 @@
 package com.azure.autorest.template.example;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -14,9 +13,9 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
@@ -27,6 +26,7 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.core.http.ContentType;
+import com.azure.core.http.HttpMethod;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.polling.SyncPoller;
@@ -108,7 +108,8 @@ public class ClientMethodExampleWriter {
                             methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
                         });
                         // assert JSON of first item, or assert count=0
-                        if (ContentType.APPLICATION_JSON.equals(method.getProxyMethod().getRequestContentType())
+                        if (method.getProxyMethod().getResponseContentTypes() != null
+                                && method.getProxyMethod().getResponseContentTypes().contains(ContentType.APPLICATION_JSON)
                                 && responseType.getTypeArguments().length > 0
                                 && ClientModelUtil.isClientModel(responseType.getTypeArguments()[0])
                                 && method.getMethodPageDetails() != null
@@ -128,6 +129,12 @@ public class ClientMethodExampleWriter {
                                 }
                             }
                         }
+                    }
+                } else if (ClassType.Boolean.equals(returnType.asNullable()) && HttpMethod.HEAD.equals(method.getProxyMethod().getHttpMethod())) {
+                    if (response.getStatusCode() == 200) {
+                        methodBlock.line("Assertions.assertTrue(response);");
+                    } else if (response.getStatusCode() == 404) {
+                        methodBlock.line("Assertions.assertFalse(response)");
                     }
                 } else {
                     writeModelAssertion(methodBlock, nodeVisitor, returnType, returnType, response.getBody(), "response");
@@ -157,17 +164,7 @@ public class ClientMethodExampleWriter {
     private void writeModelAssertion(JavaBlock methodBlock, ModelExampleWriter.ExampleNodeModelInitializationVisitor nodeVisitor,
                                      IType modelClientType, IType modelWireType, Object modelValue, String modelReference) {
         if (modelValue != null) {
-            if (modelClientType instanceof MapType || modelClientType instanceof ArrayType) {
-                methodBlock.line("Assertions.assertNotNull(%s);", modelReference);
-            } else if ((!ClientModelUtil.isClientModel(modelClientType) && (!(modelClientType instanceof ListType)))
-                    || modelClientType instanceof EnumType) {
-                // simple model that can be compared by "Assertions.assertEquals()"
-                methodBlock.line(String.format(
-                        "Assertions.assertEquals(%s, %s);",
-                        nodeVisitor.accept(ModelExampleUtil.parseNode(modelClientType, modelWireType, modelValue)),
-                        modelReference
-                ));
-            } else if (modelClientType instanceof ClassType
+            if (modelClientType instanceof ClassType
                     && ClientModelUtil.isClientModel(modelClientType)
                     && modelValue instanceof Map) {
                 methodBlock.line("Assertions.assertNotNull(%s);", modelReference);
@@ -200,6 +197,17 @@ public class ClientMethodExampleWriter {
                 } else {
                     methodBlock.line("Assertions.assertEquals(0, %s);", String.format("%s.size()", modelReference));
                 }
+            } else if (modelClientType instanceof PrimitiveType || modelClientType instanceof EnumType
+                    || ClassType.String.equals(modelClientType) || ClassType.URL.equals(modelClientType)
+                    || (modelClientType instanceof ClassType && ((ClassType) modelClientType).isBoxedType())) {
+                // simple models that can be compared by "Assertions.assertEquals()"
+                methodBlock.line(String.format(
+                        "Assertions.assertEquals(%s, %s);",
+                        nodeVisitor.accept(ModelExampleUtil.parseNode(modelClientType, modelWireType, modelValue)),
+                        modelReference
+                ));
+            } else {
+                methodBlock.line("Assertions.assertNotNull(%s);", modelReference);
             }
         }
     }
