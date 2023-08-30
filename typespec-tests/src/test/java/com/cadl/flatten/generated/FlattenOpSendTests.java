@@ -15,7 +15,5 @@ public final class FlattenOpSendTests extends FlattenClientTestBase {
     public void testFlattenOpSendTests() {
         // method invocation
         flattenClient.send("myRequiredId", "myRequiredInput", new User("myOptionalUser"));
-
-        // response assertion
     }
 }

@@ -144,7 +144,7 @@ public class ClientMethodExampleWriter {
                     } else if (response.getStatusCode() == 404) {
                         methodBlock.line("Assertions.assertFalse(response)");
                     }
-                } else {
+                } else if (!ClassType.Void.equals(returnType.asNullable())){
                     methodBlock.line();
                     methodBlock.line("// response assertion");
                     writeModelAssertion(methodBlock, nodeVisitor, returnType, returnType, response.getBody(), "response");

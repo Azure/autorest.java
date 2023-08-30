@@ -22,7 +22,5 @@ public final class FlattenOpSendLongTests extends FlattenClientTestBase {
                         .setDataIntOptional(12)
                         .setDataLong(13L)
                         .setDataFloat(14.0D));
-
-        // response assertion
     }
 }
