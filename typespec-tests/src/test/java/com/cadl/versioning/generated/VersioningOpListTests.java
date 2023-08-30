@@ -20,8 +20,8 @@ public final class VersioningOpListTests extends VersioningClientTestBase {
         Assertions.assertEquals(200, response.iterableByPage().iterator().next().getStatusCode());
         Resource firstItem = response.iterator().next();
         Assertions.assertNotNull(firstItem);
-        Assertions.assertEquals(firstItem.getId(), "myId");
-        Assertions.assertEquals(firstItem.getName(), "name");
-        Assertions.assertEquals(firstItem.getType(), "type");
+        Assertions.assertEquals("myId", firstItem.getId());
+        Assertions.assertEquals("name", firstItem.getName());
+        Assertions.assertEquals("type", firstItem.getType());
     }
 }

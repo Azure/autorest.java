@@ -167,8 +167,8 @@ public class ClientMethodExampleWriter {
                         // simple model that can be compared by "Assertions.assertEquals()"
                         methodBlock.line(String.format(
                                 "Assertions.assertEquals(%s, %s);",
-                                propertyReference,
-                                nodeVisitor.accept(ModelExampleUtil.parseNode(property.getClientType(), property.getWireType(), value))
+                                nodeVisitor.accept(ModelExampleUtil.parseNode(property.getClientType(), property.getWireType(), value)),
+                                propertyReference
                         ));
                     } else if (property.getClientType() instanceof ClassType
                             && ClientModelUtil.isClientModel(property.getClientType())
@@ -192,7 +192,7 @@ public class ClientMethodExampleWriter {
                                     writeModelAssertion(methodBlock, nodeVisitor, (ClassType) elementType, (Map<String, Object>) firstItemValue, firstItemVarName);
                                 } else if (!(elementType instanceof ListType)){
                                     // List of simple types that can be compared by "equals", ignore List of List
-                                    methodBlock.line("Assertions.assertEquals(%s, %s);", firstItemVarName, nodeVisitor.accept(ModelExampleUtil.parseNode(elementType.getClientType(), firstItemValue)));
+                                    methodBlock.line("Assertions.assertEquals(%s, %s);", nodeVisitor.accept(ModelExampleUtil.parseNode(elementType.getClientType(), firstItemValue)), firstItemVarName);
                                 }
                             }
                         } else {

@@ -5,6 +5,7 @@
 package com.cadl.builtin.generated;
 
 import com.cadl.builtin.models.Builtin;
+import com.cadl.builtin.models.Encoded;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -21,19 +22,28 @@ public final class BuiltinOpReadTests extends BuiltinClientTestBase {
     public void testBuiltinOpReadTests() {
         Builtin response = builtinClient.read(null, null, null, "myFilter", null, null);
         Assertions.assertNotNull(response);
-        Assertions.assertEquals(response.isBooleanProperty(), true);
-        Assertions.assertEquals(response.getString(), "myString");
-        Assertions.assertEquals(response.getSafeint(), 32L);
-        Assertions.assertEquals(response.getLongProperty(), 64L);
-        Assertions.assertEquals(response.getFloatProperty(), 32.0);
-        Assertions.assertEquals(response.getDoubleProperty(), 64.0);
-        Assertions.assertEquals(response.getDuration(), Duration.parse("10"));
-        Assertions.assertEquals(response.getDate(), LocalDate.parse("2023-08-29"));
-        Assertions.assertEquals(response.getDateTime(), OffsetDateTime.parse("2019-10-12T07:20:50.520Z"));
+        Assertions.assertEquals(true, response.isBooleanProperty());
+        Assertions.assertEquals("myString", response.getString());
+        Assertions.assertEquals(32L, response.getSafeint());
+        Assertions.assertEquals(64L, response.getLongProperty());
+        Assertions.assertEquals(32.0, response.getFloatProperty());
+        Assertions.assertEquals(64.0, response.getDoubleProperty());
+        Assertions.assertEquals(Duration.parse("PT15M"), response.getDuration());
+        Assertions.assertEquals(LocalDate.parse("2023-08-29"), response.getDate());
+        Assertions.assertEquals(OffsetDateTime.parse("2019-10-12T07:20:50.520Z"), response.getDateTime());
         String responseFirstItem = response.getStringList().iterator().next();
-        Assertions.assertEquals(responseFirstItem, "a");
-        Assertions.assertEquals(response.getUrl(), "https://www.github.com");
-        Assertions.assertEquals(response.getNullableFloatDict(), mapOf("max", 15.0, "min", 14.0, "average", 14.3));
+        Assertions.assertEquals("a", responseFirstItem);
+        Assertions.assertEquals("https://www.github.com", response.getUrl());
+        Assertions.assertEquals(mapOf("max", 15.0, "min", 14.0, "average", 14.3), response.getNullableFloatDict());
+        Encoded responseEncoded = response.getEncoded();
+        Assertions.assertNotNull(responseEncoded);
+        Assertions.assertEquals(Duration.parse("PT15M"), responseEncoded.getTimeInSeconds());
+        Assertions.assertEquals(Duration.parse("PT20.345S"), responseEncoded.getTimeInSecondsFraction());
+        Assertions.assertEquals(OffsetDateTime.parse("1966-03-03T00:06:56.52Z"), responseEncoded.getDateTime());
+        Assertions.assertEquals(OffsetDateTime.parse("1994-11-06T08:49:37Z"), responseEncoded.getDateTimeRfc7231());
+        Assertions.assertEquals(OffsetDateTime.parse("1693362903"), responseEncoded.getUnixTimestamp());
+        Assertions.assertEquals("aHR0cHM6Ly93d3cuZ2l0aHViLmNvbQ==".getBytes(), responseEncoded.getBase64());
+        Assertions.assertEquals("aHR0cHM6Ly93d3cuZ2l0aHViLmNvbQ==".getBytes(), responseEncoded.getBase64Url());
     }
 
     // Use "Map.of" if available
