@@ -11,7 +11,7 @@
   "dependencies": {
     "@typespec/openapi": ">=0.45.0 <1.0.0",
     "@azure-tools/typespec-autorest": ">=0.31.0 <1.0.0",
-    "@azure-tools/cadl-ranch-specs": "0.19.0",
+    "@azure-tools/cadl-ranch-specs": "0.20.0",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.8.10.tgz"
   },
   "devDependencies": {
@@ -24,7 +24,8 @@
     "@typespec/http": ">=0.45.0 <1.0.0",
     "@typespec/rest": ">=0.45.0 <1.0.0",
     "@typespec/versioning": ">=0.45.0 <1.0.0",
-    "@azure-tools/typespec-azure-core": ">=0.31.0 <1.0.0"
+    "@azure-tools/typespec-azure-core": ">=0.31.0 <1.0.0",
+    "@azure-tools/typespec-client-generator-core": "0.34.0-dev.6"
   },
   "private": true
 }

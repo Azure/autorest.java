@@ -39,7 +39,7 @@ public final class MultiContentTypesClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * DataModelBase
+     * Object
      * }</pre>
      *
      * @param contentType The contentType parameter. Allowed values: "text/plain", "application/json",
@@ -196,7 +196,7 @@ public final class MultiContentTypesClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * DataModelBase
+     * Object
      * }</pre>
      *
      * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream",

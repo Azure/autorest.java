@@ -12,7 +12,7 @@ using Azure.ClientGenerator.Core;
 namespace Cadl.Internal;
 
 // Request and RequestInner will be generated
-@include
+@access(Access.public, "client")
 model Request {
   property: RequestInner;
 }
@@ -26,35 +26,46 @@ model ResponseInternal {
   property: ResponseInternalInner;
 }
 
+@access(Access.public, "python")
 model ResponseInternalInner {
   name: string;
 }
 
 // Response will be generated as output-only
-@include
+@access(Access.public)
 model Response {
   name: string;
 }
 
-// StandAloneData and StandAloneDataInner will be generated
-@include
+// StandAloneData will be generated as output
+@access(Access.public)
+@usage(Usage.output, "java")
 model StandAloneData {
   property: StandAloneDataInner;
 }
 
+// StandAloneDataInner will be generated as intput + output
+@usage(Usage.input | Usage.output, "client")
 model StandAloneDataInner {
   name: string;
 }
 
+// case when property be Union
+@access(Access.public)
+model StandAloneUnion {
+  data: url | bytes;
+}
+
 @route("/internal")
 interface InternalOp {
-  // test Request with @include
-  @internal
+  // test Request with Access.public
+  @access(Access.public, "python")
+  @access(Access.internal, "client")
   @post
   postInternal(...Request): ResponseInternal;
 
-  // test Response with @include
+  // test Response with Access.public
   @get
-  @internal
+  @access(Access.internal, "java")
   getInternal(): Response;
 }

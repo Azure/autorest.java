@@ -44,7 +44,7 @@ public final class UnionAsyncClient {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModelBase (Required)
+     *     input: Object (Required)
      * }
      * }</pre>
      *
@@ -87,7 +87,7 @@ public final class UnionAsyncClient {
      *     }
      *     input: String (Required)
      *     dataInt: int (Required)
-     *     dataUnion: DataUnionModelBase (Optional)
+     *     dataUnion: Object (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
      * }
@@ -118,7 +118,7 @@ public final class UnionAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>data</td><td>DataModelBase</td><td>No</td><td>The data parameter</td></tr>
+     *     <tr><td>data</td><td>Object</td><td>No</td><td>The data parameter</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}

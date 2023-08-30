@@ -16,6 +16,7 @@ import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,6 +35,11 @@ public class UnionModelMapper implements IMapper<OrSchema, List<UnionModel>> {
 
     @Override
     public List<UnionModel> map(OrSchema type) {
+        // disabled, use Object for now
+        return Collections.emptyList();
+    }
+
+    private List<UnionModel> mapUnionModel(OrSchema type) {
         ClassType baseModelType = Mappers.getUnionMapper().map(type);
         String baseModelName = baseModelType.getName();
         List<UnionModel> models = serviceModels.getModel(baseModelType.getName());

@@ -39,7 +39,7 @@ public final class UnionClient {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: SimpleUnionModelBase (Required)
+     *     simpleUnion: Object (Required)
      * }
      * }</pre>
      *
@@ -65,7 +65,7 @@ public final class UnionClient {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: SimpleUnionModelBase (Required)
+     *     simpleUnion: Object (Required)
      * }
      * }</pre>
      *
@@ -91,7 +91,7 @@ public final class UnionClient {
      *
      * <pre>{@code
      * {
-     *     namedUnion: NamedUnionModelBase (Required)
+     *     namedUnion: Object (Required)
      * }
      * }</pre>
      *
@@ -117,7 +117,7 @@ public final class UnionClient {
      *
      * <pre>{@code
      * {
-     *     namedUnion: NamedUnionModelBase (Required)
+     *     namedUnion: Object (Required)
      * }
      * }</pre>
      *
@@ -134,5 +134,105 @@ public final class UnionClient {
     public Response<Void> sendSecondNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
         // Convenience API is not generated, as operation 'sendSecondNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.sendSecondNamedUnionValueWithResponse(input, requestOptions);
+    }
+
+    /**
+     * The receiveString operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     simpleUnion: Object (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> receiveStringWithResponse(RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'receiveString' refers Union 'string | int32[]'
+        return this.serviceClient.receiveStringWithResponse(requestOptions);
+    }
+
+    /**
+     * The receiveIntArray operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     simpleUnion: Object (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> receiveIntArrayWithResponse(RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'receiveIntArray' refers Union 'string | int32[]'
+        return this.serviceClient.receiveIntArrayWithResponse(requestOptions);
+    }
+
+    /**
+     * The receiveFirstNamedUnionValue operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     namedUnion: Object (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> receiveFirstNamedUnionValueWithResponse(RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'receiveFirstNamedUnionValue' refers Union 'MyNamedUnion'
+        return this.serviceClient.receiveFirstNamedUnionValueWithResponse(requestOptions);
+    }
+
+    /**
+     * The receiveSecondNamedUnionValue operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     namedUnion: Object (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> receiveSecondNamedUnionValueWithResponse(RequestOptions requestOptions) {
+        // Convenience API is not generated, as operation 'receiveSecondNamedUnionValue' refers Union 'MyNamedUnion'
+        return this.serviceClient.receiveSecondNamedUnionValueWithResponse(requestOptions);
     }
 }
