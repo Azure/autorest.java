@@ -12,10 +12,8 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
-import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
@@ -165,10 +163,7 @@ public class ClientMethodExampleWriter {
                 Object value = body.get(serializedName);
                 if (value != null) {
                     String propertyReference = String.format("%s.%s()", variableReference, property.getGetterName());
-                    if ((property.getClientType() instanceof ClassType
-                            && !ClientModelUtil.isClientModel(property.getClientType()))
-                            || property.getClientType() instanceof PrimitiveType
-                            || property.getClientType() instanceof MapType) {
+                    if (!ClientModelUtil.isClientModel(property.getClientType()) && (!(property.getClientType() instanceof ListType))) {
                         // simple model that can be compared by "Assertions.assertEquals()"
                         methodBlock.line(String.format(
                                 "Assertions.assertEquals(%s, %s);",
@@ -195,7 +190,7 @@ public class ClientMethodExampleWriter {
                                 if (ClientModelUtil.isClientModel(elementType) && firstItemValue instanceof Map) {
                                     // List of Client Models
                                     writeModelAssertion(methodBlock, nodeVisitor, (ClassType) elementType, (Map<String, Object>) firstItemValue, firstItemVarName);
-                                } else {
+                                } else if (!(elementType instanceof ListType)){
                                     // List of simple types that can be compared by "equals", ignore List of List
                                     methodBlock.line("Assertions.assertEquals(%s, %s);", firstItemVarName, nodeVisitor.accept(ModelExampleUtil.parseNode(elementType.getClientType(), firstItemValue)));
                                 }
