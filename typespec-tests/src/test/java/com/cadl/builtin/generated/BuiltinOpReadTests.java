@@ -20,8 +20,12 @@ public final class BuiltinOpReadTests extends BuiltinClientTestBase {
     @Test
     @Disabled
     public void testBuiltinOpReadTests() {
+        // method invocation
         Builtin response = builtinClient.read(null, null, null, "myFilter", null, null);
+
+        // response assertion
         Assertions.assertNotNull(response);
+
         boolean responseBooleanProperty = response.isBooleanProperty();
         Assertions.assertEquals(true, responseBooleanProperty);
         String responseString = response.getString();
@@ -49,6 +53,7 @@ public final class BuiltinOpReadTests extends BuiltinClientTestBase {
         Assertions.assertNotNull(responseNullableFloatDict);
         Encoded responseEncoded = response.getEncoded();
         Assertions.assertNotNull(responseEncoded);
+
         Duration responseEncodedTimeInSeconds = responseEncoded.getTimeInSeconds();
         Assertions.assertNotNull(responseEncodedTimeInSeconds);
         Duration responseEncodedTimeInSecondsFraction = responseEncoded.getTimeInSecondsFraction();

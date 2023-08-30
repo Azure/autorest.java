@@ -48,6 +48,7 @@ public class ClientMethodTestTemplate implements IJavaTemplate<TestContext<Clien
         context.publicFinalClass(String.format("%1$s extends %2$s", className, testContext.getTestBaseClassName()), classBlock -> {
             classBlock.annotation("Test", "Disabled");  // "DoNotRecord(skipInPlayback = true)" not added
             classBlock.publicMethod(String.format("void test%1$s()", className), methodBlock -> {
+                methodBlock.line("// method invocation");
                 caseWriter.writeMethodInvocation(methodBlock);
                 caseWriter.writeResponseAssertion(methodBlock);
             });

@@ -16,10 +16,14 @@ public final class VersioningOpListTests extends VersioningClientTestBase {
     @Test
     @Disabled
     public void testVersioningOpListTests() {
+        // method invocation
         PagedIterable<Resource> response = versioningClient.list(Arrays.asList("name=name"), "age gt 18");
+
+        // response assertion
         Assertions.assertEquals(200, response.iterableByPage().iterator().next().getStatusCode());
         Resource firstItem = response.iterator().next();
         Assertions.assertNotNull(firstItem);
+
         String firstItemId = firstItem.getId();
         Assertions.assertEquals("myId", firstItemId);
         String firstItemName = firstItem.getName();

@@ -80,7 +80,9 @@ public class ClientMethodExampleWriter {
                         method.getName(),
                         parameterInvocations));
 
-        methodBodyWriter = javaBlock -> javaBlock.line(methodInvocation.toString());
+        methodBodyWriter = methodBlock -> {
+            methodBlock.line(methodInvocation.toString());
+        };
         responseAssertionWriter = methodBlock -> {
             Optional<ProxyMethodExample.Response> responseOpt = proxyMethodExample.getPrimaryResponse();
             if (responseOpt.isPresent()) {
@@ -92,6 +94,8 @@ public class ClientMethodExampleWriter {
                         // SyncPoller<>
 
                         if (response.getStatusCode() / 100 == 2) {
+                            methodBlock.line();
+                            methodBlock.line("// response assertion");
                             // it should have a 202 leading to SUCCESSFULLY_COMPLETED
                             // but x-ms-examples usually does not include the final result
                             methodBlock.line("Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.waitForCompletion().getStatus());");
@@ -99,6 +103,8 @@ public class ClientMethodExampleWriter {
                     } else if (PagedIterable.class.getSimpleName().equals(responseType.getName())) {
                         // PagedIterable<>
 
+                        methodBlock.line();
+                        methodBlock.line("// response assertion");
                         // assert status code
                         methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getStatusCode());", response.getStatusCode()));
                         // assert headers
@@ -131,15 +137,21 @@ public class ClientMethodExampleWriter {
                         }
                     }
                 } else if (ClassType.Boolean.equals(returnType.asNullable()) && HttpMethod.HEAD.equals(method.getProxyMethod().getHttpMethod())) {
+                    methodBlock.line();
+                    methodBlock.line("// response assertion");
                     if (response.getStatusCode() == 200) {
                         methodBlock.line("Assertions.assertTrue(response);");
                     } else if (response.getStatusCode() == 404) {
                         methodBlock.line("Assertions.assertFalse(response)");
                     }
                 } else {
+                    methodBlock.line();
+                    methodBlock.line("// response assertion");
                     writeModelAssertion(methodBlock, nodeVisitor, returnType, returnType, response.getBody(), "response");
                 }
             } else {
+                methodBlock.line();
+                methodBlock.line("// response assertion");
                 methodBlock.line("Assertions.assertNotNull(response);");
             }
         };
@@ -172,6 +184,7 @@ public class ClientMethodExampleWriter {
                 ClassType modelClassType = (ClassType) modelClientType;
                 ClientModel clientModel = ClientModelUtil.getClientModel(modelClassType.getName());
                 if (clientModel.getProperties() != null) {
+                    methodBlock.line();
                     for (ClientModelProperty property : clientModel.getProperties()) {
                         String serializedName = property.getSerializedName();
                         Object propertyValue = ((Map) modelValue).get(serializedName);

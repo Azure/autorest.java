@@ -14,6 +14,7 @@ public final class FlattenOpSendLongTests extends FlattenClientTestBase {
     @Test
     @Disabled
     public void testFlattenOpSendLongTests() {
+        // method invocation
         flattenClient.sendLong(
                 new SendLongOptions("myRequiredId", "myRequiredInput", 11)
                         .setFilter("name=myName")
@@ -21,5 +22,7 @@ public final class FlattenOpSendLongTests extends FlattenClientTestBase {
                         .setDataIntOptional(12)
                         .setDataLong(13L)
                         .setDataFloat(14.0D));
+
+        // response assertion
     }
 }
