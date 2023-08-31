@@ -367,7 +367,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: Object (Required)
+     *     simpleUnion: SimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -392,7 +392,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: Object (Required)
+     *     simpleUnion: SimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -417,7 +417,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: Object (Required)
+     *     simpleUnion: SimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -442,7 +442,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: Object (Required)
+     *     simpleUnion: SimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -467,7 +467,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     namedUnion: Object (Required)
+     *     namedUnion: NamedUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -494,7 +494,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     namedUnion: Object (Required)
+     *     namedUnion: NamedUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -519,7 +519,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     namedUnion: Object (Required)
+     *     namedUnion: NamedUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -546,7 +546,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     namedUnion: Object (Required)
+     *     namedUnion: NamedUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -571,7 +571,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: Object (Required)
+     *     simpleUnion: SimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -595,7 +595,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: Object (Required)
+     *     simpleUnion: SimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -619,7 +619,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: Object (Required)
+     *     simpleUnion: SimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -643,7 +643,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: Object (Required)
+     *     simpleUnion: SimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -667,7 +667,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     namedUnion: Object (Required)
+     *     namedUnion: NamedUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -691,7 +691,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     namedUnion: Object (Required)
+     *     namedUnion: NamedUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -715,7 +715,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     namedUnion: Object (Required)
+     *     namedUnion: NamedUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -739,7 +739,7 @@ public final class UnionClientImpl {
      *
      * <pre>{@code
      * {
-     *     namedUnion: Object (Required)
+     *     namedUnion: NamedUnionModelBase (Required)
      * }
      * }</pre>
      *
