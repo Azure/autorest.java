@@ -50,6 +50,12 @@ model StandAloneDataInner {
   name: string;
 }
 
+// case when property be Union
+@access(Access.internal)
+model StandAloneUnion {
+  data: url | bytes;
+}
+
 @route("/internal")
 interface InternalOp {
   // test Request with Access.public
