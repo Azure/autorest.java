@@ -6,10 +6,8 @@ package com.azure.autorest.template;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.TestContext;
-import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.example.ClientMethodExampleWriter;
-import com.azure.autorest.template.example.ModelExampleWriter;
 import com.azure.autorest.template.example.ProtocolTestWriter;
 import com.azure.autorest.util.CodeNamer;
 
@@ -52,12 +50,6 @@ public class ClientMethodTestTemplate implements IJavaTemplate<TestContext<Clien
                 caseWriter.writeMethodInvocation(methodBlock);
                 caseWriter.writeResponseAssertion(methodBlock);
             });
-
-            Set<ExampleHelperFeature> helperFeatures = caseWriter.getHelperFeatures();
-            if (helperFeatures.contains(ExampleHelperFeature.MapOfMethod)) {
-                ModelExampleWriter.writeMapOfMethod(classBlock);
-            }
         });
-
     }
 }

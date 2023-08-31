@@ -5,6 +5,9 @@ param (
 
 if ($RebuildJar) {
     mvn clean install package -f ../pom.xml -Plocal -Ptsp -DskipTests
+    if ($LASTEXITCODE -ne 0) {
+        exit $LASTEXITCODE
+    }
 }
 
 # re-build typespec-java
