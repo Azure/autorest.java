@@ -6,6 +6,7 @@ package com.cadl.specialheaders.generated;
 
 import com.azure.core.http.RequestConditions;
 import com.cadl.specialheaders.models.Resource;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +15,14 @@ public final class EtagHeadersPutWithRequestHeadersTests extends SpecialHeadersC
     @Test
     @Disabled
     public void testEtagHeadersPutWithRequestHeadersTests() {
+        // method invocation
         Resource response =
                 specialHeadersClient.putWithRequestHeaders(
                         "name",
                         new Resource("myType").setDescription("This is sample for Etag headers"),
                         new RequestConditions().setIfMatch("64e005"));
+
+        // response assertion
+        Assertions.assertNotNull(response);
     }
 }

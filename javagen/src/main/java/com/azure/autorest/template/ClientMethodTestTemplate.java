@@ -38,16 +38,17 @@ public class ClientMethodTestTemplate implements IJavaTemplate<TestContext<Clien
                 clientMethodExample.getProxyMethodExample());
 
         Set<String> imports = writer.getImports();
-        imports.addAll(caseWriter.getImports());
         clientMethod.getReturnValue().getType().addImportsTo(imports, false);
+        imports.addAll(caseWriter.getImports());
         context.declareImport(imports);
 
         context.annotation("Disabled");
         context.publicFinalClass(String.format("%1$s extends %2$s", className, testContext.getTestBaseClassName()), classBlock -> {
             classBlock.annotation("Test", "Disabled");  // "DoNotRecord(skipInPlayback = true)" not added
             classBlock.publicMethod(String.format("void test%1$s()", className), methodBlock -> {
+                methodBlock.line("// method invocation");
                 caseWriter.writeMethodInvocation(methodBlock);
-                // TODO(xiaofei) response assertions
+                caseWriter.writeResponseAssertion(methodBlock);
             });
         });
     }

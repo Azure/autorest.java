@@ -3,27 +3,40 @@
 
 package com.azure.autorest.template.example;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ModelExampleUtil;
+import com.azure.core.http.ContentType;
+import com.azure.core.http.HttpMethod;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.polling.SyncPoller;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -32,10 +45,10 @@ public class ClientMethodExampleWriter {
 
     private final Set<String> imports = new HashSet<>();
     private final Consumer<JavaBlock> methodBodyWriter;
-    private final Set<ExampleHelperFeature> helperFeatures = new HashSet<>();
+    private final Consumer<JavaBlock> responseAssertionWriter;
+    private final ModelExampleWriter.ExampleNodeModelInitializationVisitor nodeVisitor = new ModelExampleWriter.ExampleNodeModelInitializationVisitor();
 
     public ClientMethodExampleWriter(ClientMethod method, String clientVarName, ProxyMethodExample proxyMethodExample){
-        ModelExampleWriter.ExampleNodeModelInitializationVisitor nodeVisitor = new ModelExampleWriter.ExampleNodeModelInitializationVisitor();
 
         List<MethodParameter> methodParameters = MethodUtil.getParameters(method, true);
         List<ExampleNode> exampleNodes = methodParameters
@@ -47,8 +60,12 @@ public class ClientMethodExampleWriter {
                 .map(nodeVisitor::accept)
                 .collect(Collectors.joining(", "));
 
+        this.imports.add("org.junit.jupiter.api.Assertions");
         this.imports.addAll(nodeVisitor.getImports());
-        this.helperFeatures.addAll(nodeVisitor.getHelperFeatures());
+        // for mapOf
+        this.imports.add(HashMap.class.getName());
+        method.getReturnValue().getType().addImportsTo(imports, false);
+        addClientModelImports(method.getReturnValue().getType());
 
         StringBuilder methodInvocation = new StringBuilder();
 
@@ -63,7 +80,149 @@ public class ClientMethodExampleWriter {
                         method.getName(),
                         parameterInvocations));
 
-        methodBodyWriter = javaBlock -> javaBlock.line(methodInvocation.toString());
+        methodBodyWriter = methodBlock -> {
+            methodBlock.line(methodInvocation.toString());
+        };
+        responseAssertionWriter = methodBlock -> {
+            Optional<ProxyMethodExample.Response> responseOpt = proxyMethodExample.getPrimaryResponse();
+            if (responseOpt.isPresent()) {
+                ProxyMethodExample.Response response = responseOpt.get();
+                IType returnType = method.getReturnValue().getType();
+                if (returnType instanceof GenericType) {
+                    GenericType responseType = (GenericType) returnType;
+                    if (SyncPoller.class.getSimpleName().equals(responseType.getName())) {
+                        // SyncPoller<>
+
+                        if (response.getStatusCode() / 100 == 2) {
+                            methodBlock.line();
+                            methodBlock.line("// response assertion");
+                            // it should have a 202 leading to SUCCESSFULLY_COMPLETED
+                            // but x-ms-examples usually does not include the final result
+                            methodBlock.line("Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.waitForCompletion().getStatus());");
+                        }
+                    } else if (PagedIterable.class.getSimpleName().equals(responseType.getName())) {
+                        // PagedIterable<>
+
+                        methodBlock.line();
+                        methodBlock.line("// response assertion");
+                        // assert status code
+                        methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getStatusCode());", response.getStatusCode()));
+                        // assert headers
+                        response.getHttpHeaders().stream().forEach(header -> {
+                            String expectedValueStr = ClassType.String.defaultValueExpression(header.getValue());
+                            String keyStr = ClassType.String.defaultValueExpression(header.getName());
+                            methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
+                        });
+                        // assert JSON of first item, or assert count=0
+                        if (method.getProxyMethod().getResponseContentTypes() != null
+                                && method.getProxyMethod().getResponseContentTypes().contains(ContentType.APPLICATION_JSON)
+                                && responseType.getTypeArguments().length > 0
+                                && ClientModelUtil.isClientModel(responseType.getTypeArguments()[0])
+                                && method.getMethodPageDetails() != null
+                                && response.getBody() instanceof Map) {
+                            Map<String, Object> bodyMap = (Map<String, Object>) response.getBody();
+                            if (bodyMap.containsKey(method.getMethodPageDetails().getSerializedItemName())) {
+                                Object items = bodyMap.get(method.getMethodPageDetails().getSerializedItemName());
+                                if (items instanceof List) {
+                                    List<Object> itemArray = (List<Object>) items;
+                                    if (itemArray.isEmpty()) {
+                                        methodBlock.line("Assertions.assertEquals(0, response.stream().count());");
+                                    } else {
+                                        Object firstItem = itemArray.iterator().next();
+                                        methodBlock.line("%s firstItem = %s;", responseType.getTypeArguments()[0], "response.iterator().next()");
+                                        writeModelAssertion(methodBlock, nodeVisitor, responseType.getTypeArguments()[0], responseType.getTypeArguments()[0], firstItem, "firstItem");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if (ClassType.Boolean.equals(returnType.asNullable()) && HttpMethod.HEAD.equals(method.getProxyMethod().getHttpMethod())) {
+                    methodBlock.line();
+                    methodBlock.line("// response assertion");
+                    if (response.getStatusCode() == 200) {
+                        methodBlock.line("Assertions.assertTrue(response);");
+                    } else if (response.getStatusCode() == 404) {
+                        methodBlock.line("Assertions.assertFalse(response)");
+                    }
+                } else if (!ClassType.Void.equals(returnType.asNullable())){
+                    methodBlock.line();
+                    methodBlock.line("// response assertion");
+                    writeModelAssertion(methodBlock, nodeVisitor, returnType, returnType, response.getBody(), "response");
+                }
+            } else {
+                methodBlock.line();
+                methodBlock.line("// response assertion");
+                methodBlock.line("Assertions.assertNotNull(response);");
+            }
+        };
+    }
+
+    private void addClientModelImports(IType type) {
+        ClientModel clientModel = null;
+        if (type instanceof GenericType) {
+            GenericType responseType = (GenericType) type;
+            if (PagedIterable.class.getSimpleName().equals(responseType.getName())
+                    && ClientModelUtil.isClientModel(responseType.getTypeArguments()[0])) {
+                clientModel = ClientModelUtil.getClientModel(((ClassType) responseType.getTypeArguments()[0]).getName());
+            }
+        } else if (ClientModelUtil.isClientModel(type)) {
+            clientModel = ClientModelUtil.getClientModel(((ClassType) type).getName());
+        }
+        if (clientModel != null) {
+            clientModel.addImportsTo(this.imports, JavaSettings.getInstance());
+        }
+    }
+
+    private void writeModelAssertion(JavaBlock methodBlock, ModelExampleWriter.ExampleNodeModelInitializationVisitor nodeVisitor,
+                                     IType modelClientType, IType modelWireType, Object modelValue, String modelReference) {
+        if (modelValue != null) {
+            if (modelClientType instanceof ClassType
+                    && ClientModelUtil.isClientModel(modelClientType)
+                    && modelValue instanceof Map) {
+                methodBlock.line("Assertions.assertNotNull(%s);", modelReference);
+                // Client Model
+                ClassType modelClassType = (ClassType) modelClientType;
+                ClientModel clientModel = ClientModelUtil.getClientModel(modelClassType.getName());
+                if (clientModel.getProperties() != null) {
+                    methodBlock.line();
+                    for (ClientModelProperty property : clientModel.getProperties()) {
+                        String serializedName = property.getSerializedName();
+                        Object propertyValue = ((Map) modelValue).get(serializedName);
+                        if (propertyValue != null) {
+                            String propertyReference = String.format("%s%s", modelReference, CodeNamer.toPascalCase(property.getName()));
+                            methodBlock.line("%s %s = %s;", property.getClientType(), propertyReference, String.format("%s.%s()", modelReference, property.getGetterName()));
+                            writeModelAssertion(methodBlock, nodeVisitor, property.getClientType(), property.getWireType(), propertyValue, propertyReference);
+                        }
+                    }
+                }
+            } else if (modelClientType instanceof ListType && modelValue instanceof List) {
+                // List
+                List<Object> values = (List<Object>) modelValue;
+                if (values.size() > 0) {
+                    ListType listType = (ListType) modelClientType;
+                    IType elementType = listType.getElementType();
+                    Object firstItemValue = values.iterator().next();
+                    if (firstItemValue != null) {
+                        String firstItemReference = String.format("%s%s", modelReference, "FirstItem");
+                        methodBlock.line("%s %s = %s.iterator().next();", elementType, firstItemReference, modelReference);
+                        writeModelAssertion(methodBlock, nodeVisitor, elementType, elementType, values.iterator().next(), firstItemReference);
+                    }
+                } else {
+                    methodBlock.line("Assertions.assertEquals(0, %s);", String.format("%s.size()", modelReference));
+                }
+            } else if (modelClientType instanceof PrimitiveType || modelClientType instanceof EnumType
+                    || ClassType.String.equals(modelClientType) || ClassType.URL.equals(modelClientType)
+                    || (modelClientType instanceof ClassType && ((ClassType) modelClientType).isBoxedType())) {
+                // simple models that can be compared by "Assertions.assertEquals()"
+                methodBlock.line(String.format(
+                        "Assertions.assertEquals(%s, %s);",
+                        nodeVisitor.accept(ModelExampleUtil.parseNode(modelClientType, modelWireType, modelValue)),
+                        modelReference
+                ));
+            } else {
+                methodBlock.line("Assertions.assertNotNull(%s);", modelReference);
+            }
+        }
     }
 
     /**
@@ -194,6 +353,10 @@ public class ClientMethodExampleWriter {
     }
 
     public Set<ExampleHelperFeature> getHelperFeatures() {
-        return helperFeatures;
+        return new HashSet<>(nodeVisitor.getHelperFeatures());
+    }
+
+    public void writeResponseAssertion(JavaBlock methodBlock) {
+        responseAssertionWriter.accept(methodBlock);
     }
 }
