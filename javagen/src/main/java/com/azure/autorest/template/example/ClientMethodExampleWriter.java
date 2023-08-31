@@ -157,10 +157,8 @@ public class ClientMethodExampleWriter {
     private void writeModelAssertion(JavaBlock methodBlock, ModelExampleWriter.ExampleNodeModelInitializationVisitor nodeVisitor,
                                      IType modelClientType, IType modelWireType, Object modelValue, String modelReference) {
         if (modelValue != null) {
-            methodBlock.line("Assertions.assertNotNull(%s);", modelReference);
             if (modelClientType instanceof MapType || modelClientType instanceof ArrayType) {
-//                methodBlock.line("Assertions.assertNotNull(%s)", modelReference);
-                // NO-OP, assertNotNull is enough
+                methodBlock.line("Assertions.assertNotNull(%s);", modelReference);
             } else if ((!ClientModelUtil.isClientModel(modelClientType) && (!(modelClientType instanceof ListType)))
                     || modelClientType instanceof EnumType) {
                 // simple model that can be compared by "Assertions.assertEquals()"
@@ -172,17 +170,17 @@ public class ClientMethodExampleWriter {
             } else if (modelClientType instanceof ClassType
                     && ClientModelUtil.isClientModel(modelClientType)
                     && modelValue instanceof Map) {
+                methodBlock.line("Assertions.assertNotNull(%s);", modelReference);
                 // Client Model
                 ClassType modelClassType = (ClassType) modelClientType;
-                String varName = String.format("%s%s", modelReference, CodeNamer.toPascalCase(modelClassType.getName()));
-                methodBlock.line("%s %s = %s;", modelClientType, varName, modelReference);
                 ClientModel clientModel = ClientModelUtil.getClientModel(modelClassType.getName());
                 if (clientModel.getProperties() != null) {
                     for (ClientModelProperty property : clientModel.getProperties()) {
                         String serializedName = property.getSerializedName();
                         Object propertyValue = ((Map) modelValue).get(serializedName);
                         if (propertyValue != null) {
-                            String propertyReference = String.format("%s.%s()", modelReference, property.getGetterName());
+                            String propertyReference = String.format("%s%s", modelReference, CodeNamer.toPascalCase(property.getName()));
+                            methodBlock.line("%s %s = %s;", property.getClientType(), propertyReference, String.format("%s.%s()", modelReference, property.getGetterName()));
                             writeModelAssertion(methodBlock, nodeVisitor, property.getClientType(), property.getWireType(), propertyValue, propertyReference);
                         }
                     }

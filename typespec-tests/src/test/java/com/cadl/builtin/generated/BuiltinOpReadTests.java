@@ -9,7 +9,7 @@ import com.cadl.builtin.models.Encoded;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -22,39 +22,46 @@ public final class BuiltinOpReadTests extends BuiltinClientTestBase {
     public void testBuiltinOpReadTests() {
         Builtin response = builtinClient.read(null, null, null, "myFilter", null, null);
         Assertions.assertNotNull(response);
-        Assertions.assertEquals(true, response.isBooleanProperty());
-        Assertions.assertEquals("myString", response.getString());
-        Assertions.assertEquals(32L, response.getSafeint());
-        Assertions.assertEquals(64L, response.getLongProperty());
-        Assertions.assertEquals(32.0, response.getFloatProperty());
-        Assertions.assertEquals(64.0, response.getDoubleProperty());
-        Assertions.assertEquals(Duration.parse("PT15M"), response.getDuration());
-        Assertions.assertEquals(LocalDate.parse("2023-08-29"), response.getDate());
-        Assertions.assertEquals(OffsetDateTime.parse("2019-10-12T07:20:50.520Z"), response.getDateTime());
-        String responseFirstItem = response.getStringList().iterator().next();
-        Assertions.assertEquals("a", responseFirstItem);
-        Assertions.assertEquals("https://www.github.com", response.getUrl());
-        Assertions.assertEquals(mapOf("max", 15.0, "min", 14.0, "average", 14.3), response.getNullableFloatDict());
+        boolean responseBooleanProperty = response.isBooleanProperty();
+        Assertions.assertEquals(true, responseBooleanProperty);
+        String responseString = response.getString();
+        Assertions.assertEquals("myString", responseString);
+        long responseSafeint = response.getSafeint();
+        Assertions.assertEquals(32L, responseSafeint);
+        long responseLongProperty = response.getLongProperty();
+        Assertions.assertEquals(64L, responseLongProperty);
+        double responseFloatProperty = response.getFloatProperty();
+        Assertions.assertEquals(32.0, responseFloatProperty);
+        double responseDoubleProperty = response.getDoubleProperty();
+        Assertions.assertEquals(64.0, responseDoubleProperty);
+        Duration responseDuration = response.getDuration();
+        Assertions.assertEquals(Duration.parse("PT15M"), responseDuration);
+        LocalDate responseDate = response.getDate();
+        Assertions.assertEquals(LocalDate.parse("2023-08-29"), responseDate);
+        OffsetDateTime responseDateTime = response.getDateTime();
+        Assertions.assertEquals(OffsetDateTime.parse("2019-10-12T07:20:50.520Z"), responseDateTime);
+        List<String> responseStringList = response.getStringList();
+        String responseStringListFirstItem = responseStringList.iterator().next();
+        Assertions.assertEquals("a", responseStringListFirstItem);
+        String responseUrl = response.getUrl();
+        Assertions.assertEquals("https://www.github.com", responseUrl);
+        Map<String, Double> responseNullableFloatDict = response.getNullableFloatDict();
+        Assertions.assertNotNull(responseNullableFloatDict);
         Encoded responseEncoded = response.getEncoded();
         Assertions.assertNotNull(responseEncoded);
-        Assertions.assertEquals(Duration.parse("PT15M"), responseEncoded.getTimeInSeconds());
-        Assertions.assertEquals(Duration.parse("PT20.345S"), responseEncoded.getTimeInSecondsFraction());
-        Assertions.assertEquals(OffsetDateTime.parse("1966-03-03T00:06:56.52Z"), responseEncoded.getDateTime());
-        Assertions.assertEquals(OffsetDateTime.parse("1994-11-06T08:49:37Z"), responseEncoded.getDateTimeRfc7231());
-        Assertions.assertEquals(OffsetDateTime.parse("1693362903"), responseEncoded.getUnixTimestamp());
-        Assertions.assertEquals("aHR0cHM6Ly93d3cuZ2l0aHViLmNvbQ==".getBytes(), responseEncoded.getBase64());
-        Assertions.assertEquals("aHR0cHM6Ly93d3cuZ2l0aHViLmNvbQ==".getBytes(), responseEncoded.getBase64Url());
-    }
-
-    // Use "Map.of" if available
-    @SuppressWarnings("unchecked")
-    private static <T> Map<String, T> mapOf(Object... inputs) {
-        Map<String, T> map = new HashMap<>();
-        for (int i = 0; i < inputs.length; i += 2) {
-            String key = (String) inputs[i];
-            T value = (T) inputs[i + 1];
-            map.put(key, value);
-        }
-        return map;
+        Duration responseEncodedTimeInSeconds = responseEncoded.getTimeInSeconds();
+        Assertions.assertEquals(Duration.parse("PT15M"), responseEncodedTimeInSeconds);
+        Duration responseEncodedTimeInSecondsFraction = responseEncoded.getTimeInSecondsFraction();
+        Assertions.assertEquals(Duration.parse("PT20.345S"), responseEncodedTimeInSecondsFraction);
+        OffsetDateTime responseEncodedDateTime = responseEncoded.getDateTime();
+        Assertions.assertEquals(OffsetDateTime.parse("1966-03-03T00:06:56.52Z"), responseEncodedDateTime);
+        OffsetDateTime responseEncodedDateTimeRfc7231 = responseEncoded.getDateTimeRfc7231();
+        Assertions.assertEquals(OffsetDateTime.parse("1994-11-06T08:49:37Z"), responseEncodedDateTimeRfc7231);
+        OffsetDateTime responseEncodedUnixTimestamp = responseEncoded.getUnixTimestamp();
+        Assertions.assertEquals(OffsetDateTime.parse("1693362903"), responseEncodedUnixTimestamp);
+        byte[] responseEncodedBase64 = responseEncoded.getBase64();
+        Assertions.assertNotNull(responseEncodedBase64);
+        byte[] responseEncodedBase64Url = responseEncoded.getBase64Url();
+        Assertions.assertNotNull(responseEncodedBase64Url);
     }
 }
