@@ -11,6 +11,7 @@ generate-sync-async-clients: true
 generate-builder-per-client: true
 sync-methods: all
 enable-sync-stack: true
+enable-page-size: true
 
 use-default-http-status-code-to-exception-type-mapping: true
 polling: {}
