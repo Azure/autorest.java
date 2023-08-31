@@ -12,8 +12,10 @@ import {
   StringLiteral,
   TemplatedTypeBase,
   Type,
+  TypeNameOptions,
   Union,
   UnionVariant,
+  getTypeName,
   isNullType,
   isTemplateDeclaration,
   isTemplateInstance,
@@ -196,6 +198,18 @@ export function unionReferredByType(
   }
   cache.set(type, null);
   return null;
+}
+
+export function getUnionName(union: Union, typeNameOptions: TypeNameOptions): string {
+  let name = union.name;
+  if (!name) {
+    const names: string[] = [];
+    union.variants.forEach((it) => {
+      names.push(getTypeName(it.type, typeNameOptions));
+    });
+    name = names.join(" | ");
+  }
+  return name;
 }
 
 export function getAccess(type: Model | Operation | Enum): string | undefined {
