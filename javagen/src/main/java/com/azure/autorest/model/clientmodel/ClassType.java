@@ -528,38 +528,36 @@ public class ClassType implements IType {
     }
 
     public String convertToClientType(String expression) {
-        if (this == ClassType.DateTimeRfc1123
-            || this == ClassType.AndroidDateTimeRfc1123) {
-            expression = java.lang.String.format("%s.getDateTime()", expression);
+        if (this == ClassType.DateTimeRfc1123 || this == ClassType.AndroidDateTimeRfc1123) {
+            expression = expression + ".getDateTime()";
         } else if (this == ClassType.UnixTimeLong) {
-            expression = java.lang.String.format("OffsetDateTime.ofInstant(Instant.ofEpochSecond(%1$s), ZoneOffset.UTC)", expression);
+            expression = "OffsetDateTime.ofInstant(Instant.ofEpochSecond(" + expression + "), ZoneOffset.UTC)";
         } else if (this == ClassType.Base64Url) {
-            expression = java.lang.String.format("%s.decodedBytes()", expression);
+            expression = expression + ".decodedBytes()";
         } else if (this == ClassType.URL) {
-            expression = java.lang.String.format("new URL(%s)", expression);
+            expression = "new URL(" + expression + ")";
         } else if (this == ClassType.DurationLong) {
-            expression = java.lang.String.format("Duration.ofSeconds(%s)", expression);
+            expression = "Duration.ofSeconds(" + expression + ")";
         } else if (this == ClassType.DurationDouble) {
-            expression = java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", expression);
+            expression = "Duration.ofNanos((long) (" + expression + " * 1000_000_000L))";
         }
 
         return expression;
     }
 
     public String convertFromClientType(String expression) {
-        if (this == ClassType.DateTimeRfc1123
-            || this == ClassType.AndroidDateTimeRfc1123) {
-            expression = java.lang.String.format("new DateTimeRfc1123(%s)", expression);
+        if (this == ClassType.DateTimeRfc1123 || this == ClassType.AndroidDateTimeRfc1123) {
+            expression = "new DateTimeRfc1123(" + expression + ")";
         } else if (this == ClassType.UnixTimeLong) {
-            expression = java.lang.String.format("%1$s.toEpochSecond()", expression);
+            expression = expression + ".toEpochSecond()";
         } else if (this == ClassType.Base64Url) {
-            expression = java.lang.String.format("Base64Url.encode(%s)", expression);
+            expression = "Base64Url.encode(" + expression + ")";
         } else if (this == ClassType.URL) {
-            expression = java.lang.String.format("%s.toString()", expression);
+            expression = expression + ".toString()";
         } else if (this == ClassType.DurationLong) {
-            expression = java.lang.String.format("%s.getSeconds()", expression);
+            expression = expression + ".getSeconds()";
         } else if (this == ClassType.DurationDouble) {
-            expression = java.lang.String.format("(double) %s.toNanos() / 1000_000_000L", expression);
+            expression = "(double) " + expression + ".toNanos() / 1000_000_000L";
         }
 
         return expression;
