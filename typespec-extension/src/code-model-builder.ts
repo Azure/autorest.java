@@ -544,7 +544,10 @@ export class CodeModelBuilder {
     const serviceOperation = getServiceOperation(this.program, operation);
     if (serviceOperation) {
       if (operation.parameters.properties.size === 1) {
-        groupModelName = operation.parameters.properties.values().next().value.type.name;
+        const paramTypeName = operation.parameters.properties.values().next().value.type.name;
+        if (paramTypeName.endsWith("Options")) {
+          groupModelName = paramTypeName;
+        }
       }
       operation = serviceOperation;
     }
