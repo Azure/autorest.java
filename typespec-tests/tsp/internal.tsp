@@ -51,7 +51,7 @@ model StandAloneDataInner {
 }
 
 // case when property be Union
-@access(Access.public)
+@access(Access.internal)
 model StandAloneUnion {
   data: url | bytes;
 }

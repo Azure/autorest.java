@@ -145,6 +145,8 @@ import {
   isSameLiteralTypes,
   getAccess,
   getUsage,
+  unionReferredByType,
+  getUnionName,
 } from "./type-utils.js";
 import {
   getClientApiVersions,
@@ -377,6 +379,16 @@ export class CodeModelBuilder {
         if (!processedModels.has(model)) {
           const access = getAccess(model);
           if (access === "public") {
+            // check it does not contain Union
+            const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
+            if (union) {
+              const errorMsg = `Model '${getTypeName(
+                model,
+                this.typeNameOptions,
+              )}' cannot be set as access=public, as it refers Union '${getUnionName(union, this.typeNameOptions)}'`;
+              throw new Error(errorMsg);
+            }
+
             const schema = this.processSchema(model, model.name);
 
             this.trackSchemaUsage(schema, {
@@ -565,21 +577,10 @@ export class CodeModelBuilder {
         const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
         if (union) {
           // and Union
-          const getUnionName = (union: Union) => {
-            let name = union.name;
-            if (!name) {
-              const names: string[] = [];
-              union.variants.forEach((it) => {
-                names.push(getTypeName(it.type, this.typeNameOptions));
-              });
-              name = names.join(" | ");
-            }
-            return name;
-          };
           generateConvenienceApi = false;
           apiComment = `Convenience API is not generated, as operation '${
             op.operation.name
-          }' refers Union '${getUnionName(union)}'`;
+          }' refers Union '${getUnionName(union, this.typeNameOptions)}'`;
           this.logWarning(apiComment);
         }
       }

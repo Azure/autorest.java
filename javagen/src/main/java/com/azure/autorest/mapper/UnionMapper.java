@@ -25,14 +25,11 @@ public class UnionMapper implements IMapper<OrSchema, IType> {
 
     @Override
     public ClassType map(OrSchema compositeType) {
-        // use Object for now
-        return ClassType.Object;
+        if (compositeType == null) {
+            return null;
+        }
 
-//        if (compositeType == null) {
-//            return null;
-//        }
-//
-//        return parsed.computeIfAbsent(compositeType, this::createClassType);
+        return parsed.computeIfAbsent(compositeType, this::createClassType);
     }
 
     private ClassType createClassType(OrSchema compositeType) {

@@ -315,7 +315,7 @@ public final class UnionClientImpl {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: Object (Required)
+     *     input: InputModelBase (Required)
      * }
      * }</pre>
      *
@@ -353,7 +353,7 @@ public final class UnionClientImpl {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: Object (Required)
+     *     input: InputModelBase (Required)
      * }
      * }</pre>
      *
@@ -401,7 +401,7 @@ public final class UnionClientImpl {
      *     }
      *     input: String (Required)
      *     dataInt: int (Required)
-     *     dataUnion: Object (Optional)
+     *     dataUnion: DataUnionModelBase (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
      * }
@@ -454,7 +454,7 @@ public final class UnionClientImpl {
      *     }
      *     input: String (Required)
      *     dataInt: int (Required)
-     *     dataUnion: Object (Optional)
+     *     dataUnion: DataUnionModelBase (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
      * }
@@ -490,7 +490,7 @@ public final class UnionClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>data</td><td>Object</td><td>No</td><td>The data parameter</td></tr>
+     *     <tr><td>data</td><td>DataModelBase</td><td>No</td><td>The data parameter</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -516,7 +516,7 @@ public final class UnionClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>data</td><td>Object</td><td>No</td><td>The data parameter</td></tr>
+     *     <tr><td>data</td><td>DataModelBase</td><td>No</td><td>The data parameter</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
