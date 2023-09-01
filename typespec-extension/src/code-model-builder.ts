@@ -160,6 +160,7 @@ import {
   operationIsMultipleContentTypes,
   cloneOperationParameter,
   operationRefersUnion,
+  getServiceOperation,
 } from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -538,6 +539,16 @@ export class CodeModelBuilder {
   }
 
   private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
+    // quantum model
+    let groupModelName: string | undefined = undefined;
+    const serviceOperation = getServiceOperation(this.program, operation);
+    if (serviceOperation) {
+      if (operation.parameters.properties.size === 1) {
+        groupModelName = operation.parameters.properties.values().next().value.type.name;
+      }
+      operation = serviceOperation;
+    }
+
     const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
 
     const operationGroup = this.codeModel.getOperationGroup(groupName);
@@ -615,36 +626,6 @@ export class CodeModelBuilder {
     op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it, clientContext));
     // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
-
-    // quantum model
-    let groupModelName: string | undefined = undefined;
-    if (this.options["dev-options"] && this.options["dev-options"]["support-quantum-model"]) {
-      // from template
-      let templateOperation: Operation | undefined = operation;
-      while (templateOperation) {
-        if (
-          templateOperation.templateMapper &&
-          templateOperation.templateMapper.args.length > 0 &&
-          getNamespace(templateOperation) === "Azure.Core"
-        ) {
-          let type = undefined;
-          // take TParam
-          if (templateOperation.name === "RpcOperation") {
-            type = templateOperation.templateMapper.args[0];
-          } else if (
-            (templateOperation.name === "ResourceAction" || templateOperation.name === "ResourceCollectionAction") &&
-            templateOperation.templateMapper.args.length > 1
-          ) {
-            type = templateOperation.templateMapper.args[1];
-          }
-          if (type && type.kind === "Model" && type.name.endsWith("Options")) {
-            groupModelName = type.name;
-            break;
-          }
-        }
-        templateOperation = templateOperation.sourceOperation;
-      }
-    }
 
     // body
     if (op.parameters.body) {

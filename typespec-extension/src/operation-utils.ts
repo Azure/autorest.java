@@ -9,7 +9,7 @@ import {
 } from "@typespec/http";
 import { resolveOperationId } from "@typespec/openapi";
 import { ApiVersions, Parameter } from "@autorest/codemodel";
-import { LroMetadata } from "@azure-tools/typespec-azure-core";
+import { LroMetadata, getOperationLink } from "@azure-tools/typespec-azure-core";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
@@ -229,4 +229,8 @@ export function cloneOperationParameter(parameter: Parameter): Parameter {
     nullable: parameter.nullable,
     extensions: parameter.extensions,
   });
+}
+
+export function getServiceOperation(program: Program, operation: Operation): Operation | undefined {
+  return getOperationLink(program, operation, "serviceOperation")?.linkedOperation;
 }
