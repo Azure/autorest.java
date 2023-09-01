@@ -39,7 +39,6 @@ export interface EmitterOptions {
 export interface DevOptions {
   "generate-code-model"?: boolean;
   "support-versioning"?: boolean;
-  "support-quantum-model"?: boolean;
   "debug"?: boolean;
   "loglevel"?: "off" | "debug" | "info" | "warn" | "error";
 }
