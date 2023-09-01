@@ -67,6 +67,7 @@ import {
   createSdkContext,
   shouldGenerateProtocol,
   isInternal,
+  SdkClient,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -142,6 +143,10 @@ import {
   hasScalarAsBase,
   isNullableType,
   isSameLiteralTypes,
+  getAccess,
+  getUsage,
+  unionReferredByType,
+  getUnionName,
 } from "./type-utils.js";
 import {
   getClientApiVersions,
@@ -234,10 +239,9 @@ export class CodeModelBuilder {
   public async build(): Promise<CodeModel> {
     this.operationExamples = await loadExamples(this.program, this.options);
 
-    this.processClients();
+    const clients = this.processClients();
 
-    // TODO (weidxu): temporarily disabled support for `@include`
-    // this.processModels();
+    this.processModels(clients);
 
     this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
 
@@ -356,27 +360,58 @@ export class CodeModelBuilder {
     }
   }
 
-  // private processModels() {
-  //   const allModels = getAllModels(this.sdkContext);
-  //   for (const model of allModels) {
-  //     if (isInclude(this.sdkContext, model)) {
-  //       const schema = this.processSchema(model, model.name);
+  private isInternal(context: SdkContext, operation: Operation): boolean {
+    const access = getAccess(operation);
+    if (access) {
+      return access === "internal";
+    } else {
+      // fallback to "internal", it will be
+      return isInternal(context, operation);
+    }
+  }
 
-  //       if (this.isSchemaUsageEmpty(schema)) {
-  //         // if the model/schema is not processed by any operation, treat it as a stand-alone model, and make it input-output
-  //         this.trackSchemaUsage(schema, {
-  //           usage: [SchemaContext.Input, SchemaContext.Output],
-  //         });
-  //       }
+  private processModels(clients: SdkClient[]) {
+    const processedModels: Set<Type> = new Set();
+    for (const client of clients) {
+      const models = client.service.models;
 
-  //       this.trackSchemaUsage(schema, {
-  //         usage: [SchemaContext.ConvenienceApi],
-  //       });
-  //     }
-  //   }
-  // }
+      for (const model of models.values()) {
+        if (!processedModels.has(model)) {
+          const access = getAccess(model);
+          if (access === "public") {
+            // check it does not contain Union
+            const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
+            if (union) {
+              const errorMsg = `Model '${getTypeName(
+                model,
+                this.typeNameOptions,
+              )}' cannot be set as access=public, as it refers Union '${getUnionName(union, this.typeNameOptions)}'`;
+              throw new Error(errorMsg);
+            }
 
-  private processClients() {
+            const schema = this.processSchema(model, model.name);
+
+            this.trackSchemaUsage(schema, {
+              usage: [SchemaContext.ConvenienceApi],
+            });
+          }
+
+          const usage = getUsage(model);
+          if (usage) {
+            const schema = this.processSchema(model, model.name);
+
+            this.trackSchemaUsage(schema, {
+              usage: usage,
+            });
+          }
+
+          processedModels.add(model);
+        }
+      }
+    }
+  }
+
+  private processClients(): SdkClient[] {
     const clients = listClients(this.sdkContext);
     for (const client of clients) {
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
@@ -483,6 +518,8 @@ export class CodeModelBuilder {
         }
       }
     }
+
+    return clients;
   }
 
   private needToSkipProcessingOperation(operation: Operation, clientContext: ClientContext): boolean {
@@ -520,7 +557,7 @@ export class CodeModelBuilder {
     });
 
     const convenienceApiName = this.getConvenienceApiName(operation);
-    let generateConvenienceApi: boolean = !!convenienceApiName && !isInternal(this.sdkContext, operation);
+    let generateConvenienceApi: boolean = !!convenienceApiName && !this.isInternal(this.sdkContext, operation);
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -540,21 +577,10 @@ export class CodeModelBuilder {
         const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
         if (union) {
           // and Union
-          const getUnionName = (union: Union) => {
-            let name = union.name;
-            if (!name) {
-              const names: string[] = [];
-              union.variants.forEach((it) => {
-                names.push(getTypeName(it.type, this.typeNameOptions));
-              });
-              name = names.join(" | ");
-            }
-            return name;
-          };
           generateConvenienceApi = false;
           apiComment = `Convenience API is not generated, as operation '${
             op.operation.name
-          }' refers Union '${getUnionName(union)}'`;
+          }' refers Union '${getUnionName(union, this.typeNameOptions)}'`;
           this.logWarning(apiComment);
         }
       }
@@ -569,7 +595,7 @@ export class CodeModelBuilder {
 
     // check for generating protocol api or not
     codeModelOperation.generateProtocolApi =
-      shouldGenerateProtocol(this.sdkContext, operation) && !isInternal(this.sdkContext, operation);
+      shouldGenerateProtocol(this.sdkContext, operation) && !this.isInternal(this.sdkContext, operation);
 
     codeModelOperation.addRequest(
       new Request({

@@ -1,18 +1,27 @@
 import {
+  DecoratedType,
+  DecoratorApplication,
   EncodeData,
+  Enum,
+  EnumMember,
   IntrinsicScalarName,
   Model,
+  Operation,
   Program,
   Scalar,
+  StringLiteral,
   TemplatedTypeBase,
   Type,
+  TypeNameOptions,
   Union,
   UnionVariant,
+  getTypeName,
   isNullType,
   isTemplateDeclaration,
   isTemplateInstance,
 } from "@typespec/compiler";
 import { DurationSchema } from "./common/schemas/time";
+import { SchemaContext } from "@autorest/codemodel";
 
 /** Acts as a cache for processing inputs.
  *
@@ -189,4 +198,95 @@ export function unionReferredByType(
   }
   cache.set(type, null);
   return null;
+}
+
+export function getUnionName(union: Union, typeNameOptions: TypeNameOptions): string {
+  let name = union.name;
+  if (!name) {
+    const names: string[] = [];
+    union.variants.forEach((it) => {
+      names.push(getTypeName(it.type, typeNameOptions));
+    });
+    name = names.join(" | ");
+  }
+  return name;
+}
+
+export function getAccess(type: Model | Operation | Enum): string | undefined {
+  return getDecoratorScopedValue(type, "$access", (it) => {
+    const value = it.args[0].value;
+    if (value.kind === "EnumMember") {
+      return value.name;
+    } else {
+      return undefined;
+    }
+  });
+}
+
+export function getUsage(type: Model | Operation | Enum): SchemaContext[] | undefined {
+  return getDecoratorScopedValue(type, "$usage", (it) => {
+    const value = it.args[0].value;
+    const values: EnumMember[] = [];
+    const ret: SchemaContext[] = [];
+    if (value.kind === "EnumMember") {
+      values.push(value);
+    } else if (value.kind === "Union") {
+      for (const v of value.variants.values()) {
+        values.push(v.type as EnumMember);
+      }
+    } else {
+      return undefined;
+    }
+    for (const v of values) {
+      switch (v.name) {
+        case "input":
+          ret.push(SchemaContext.Input);
+          break;
+        case "output":
+          ret.push(SchemaContext.Output);
+          break;
+      }
+    }
+    if (ret.length === 0) {
+      return undefined;
+    }
+    return ret;
+  });
+}
+
+function getDecoratorScopedValue<T>(
+  type: DecoratedType,
+  decorator: string,
+  mapFunc: (d: DecoratorApplication) => T,
+): T | undefined {
+  let value = type.decorators
+    .filter(
+      (it) =>
+        it.decorator.name === decorator && it.args.length == 2 && (it.args[1].value as StringLiteral).value === "java",
+    )
+    .map((it) => mapFunc(it))
+    .find(() => true);
+  if (value) {
+    return value;
+  }
+  value = type.decorators
+    .filter(
+      (it) =>
+        it.decorator.name === decorator &&
+        it.args.length == 2 &&
+        (it.args[1].value as StringLiteral).value === "client",
+    )
+    .map((it) => mapFunc(it))
+    .find(() => true);
+  if (value) {
+    return value;
+  }
+  value = type.decorators
+    .filter((it) => it.decorator.name === decorator && it.args.length == 1)
+    .map((it) => mapFunc(it))
+    .find(() => true);
+  if (value) {
+    return value;
+  }
+  return undefined;
 }

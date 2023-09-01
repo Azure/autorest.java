@@ -1,5 +1,11 @@
 # Release History
 
+## 0.8.11 (2023-09-01)
+
+Compatible with compiler 0.47.
+
+- Supported `@access` and `@usage` from typespec-client-generator-core.
+
 ## 0.8.10 (2023-08-16)
 
 Compatible with compiler 0.47.

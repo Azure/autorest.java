@@ -3,10 +3,10 @@
 
 package com.type.union;
 
+import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 class UnionsClientTest {
 
@@ -30,5 +30,29 @@ class UnionsClientTest {
     @Test
     void sendSecondNamedUnionValue() {
         client.sendSecondNamedUnionValueWithResponse(BinaryData.fromString("{ \"namedUnion\": { \"name\": \"model2\", \"prop2\": 2 } }\n"), null);
+    }
+
+    @Test
+    void receiveString() {
+        Response<BinaryData> response = client.receiveStringWithResponse(null);
+        Assertions.assertNotNull(response.getValue());
+    }
+
+    @Test
+    void receiveIntArray() {
+        Response<BinaryData> response = client.receiveIntArrayWithResponse(null);
+        Assertions.assertNotNull(response.getValue());
+    }
+
+    @Test
+    void receiveFirstNamedUnionValue() {
+        Response<BinaryData> response = client.receiveFirstNamedUnionValueWithResponse(null);
+        Assertions.assertNotNull(response.getValue());
+    }
+
+    @Test
+    void receiveSecondNamedUnionValue() {
+        Response<BinaryData> response = client.receiveSecondNamedUnionValueWithResponse(null);
+        Assertions.assertNotNull(response.getValue());
     }
 }
