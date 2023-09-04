@@ -723,13 +723,15 @@ export class CodeModelBuilder {
         if (modelIs(lroMetadata.pollingInfo.responseModel, "OperationStatus", "Azure.Core.Foundations")) {
           pollingSchema = this.pollResultSchema;
         } else {
-          pollingSchema = this.processSchema(lroMetadata.pollingInfo.responseModel, "pollResult");
+          const pollType = this.findResponseBody(lroMetadata.pollingInfo.responseModel);
+          pollingSchema = this.processSchema(pollType, "pollResult");
         }
       }
 
       // finalSchema
       if (verb !== "delete" && lroMetadata.logicalResult) {
-        finalSchema = this.processSchema(lroMetadata.logicalResult, "finalResult");
+        const finalType = this.findResponseBody(lroMetadata.logicalResult);
+        finalSchema = this.processSchema(finalType, "finalResult");
       }
 
       // track usage
