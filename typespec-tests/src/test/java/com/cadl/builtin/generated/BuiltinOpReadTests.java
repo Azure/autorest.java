@@ -6,11 +6,7 @@ package com.cadl.builtin.generated;
 
 import com.cadl.builtin.models.Builtin;
 import com.cadl.builtin.models.Encoded;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -25,48 +21,40 @@ public final class BuiltinOpReadTests extends BuiltinClientTestBase {
 
         // response assertion
         Assertions.assertNotNull(response);
-
-        boolean responseBooleanProperty = response.isBooleanProperty();
-        Assertions.assertEquals(true, responseBooleanProperty);
-        String responseString = response.getString();
-        Assertions.assertEquals("myString", responseString);
-        long responseSafeint = response.getSafeint();
-        Assertions.assertEquals(32L, responseSafeint);
-        long responseLongProperty = response.getLongProperty();
-        Assertions.assertEquals(64L, responseLongProperty);
-        double responseFloatProperty = response.getFloatProperty();
-        Assertions.assertEquals(32.0, responseFloatProperty);
-        double responseDoubleProperty = response.getDoubleProperty();
-        Assertions.assertEquals(64.0, responseDoubleProperty);
-        Duration responseDuration = response.getDuration();
-        Assertions.assertNotNull(responseDuration);
-        LocalDate responseDate = response.getDate();
-        Assertions.assertNotNull(responseDate);
-        OffsetDateTime responseDateTime = response.getDateTime();
-        Assertions.assertNotNull(responseDateTime);
+        // verify property "booleanProperty"
+        Assertions.assertEquals(true, response.isBooleanProperty());
+        // verify property "string"
+        Assertions.assertEquals("myString", response.getString());
+        // verify property "safeint"
+        Assertions.assertEquals(32L, response.getSafeint());
+        // verify property "longProperty"
+        Assertions.assertEquals(64L, response.getLongProperty());
+        // verify property "floatProperty"
+        Assertions.assertEquals(32.0, response.getFloatProperty());
+        // verify property "doubleProperty"
+        Assertions.assertEquals(64.0, response.getDoubleProperty());
+        // verify property "duration"
+        Assertions.assertNotNull(response.getDuration());
+        // verify property "date"
+        Assertions.assertNotNull(response.getDate());
+        // verify property "dateTime"
+        Assertions.assertNotNull(response.getDateTime());
+        // verify property "stringList"
         List<String> responseStringList = response.getStringList();
-        String responseStringListFirstItem = responseStringList.iterator().next();
-        Assertions.assertEquals("a", responseStringListFirstItem);
-        String responseUrl = response.getUrl();
-        Assertions.assertEquals("https://www.github.com", responseUrl);
-        Map<String, Double> responseNullableFloatDict = response.getNullableFloatDict();
-        Assertions.assertNotNull(responseNullableFloatDict);
+        Assertions.assertEquals("a", responseStringList.iterator().next());
+        // verify property "url"
+        Assertions.assertEquals("https://www.github.com", response.getUrl());
+        // verify property "nullableFloatDict"
+        Assertions.assertNotNull(response.getNullableFloatDict());
+        // verify property "encoded"
         Encoded responseEncoded = response.getEncoded();
         Assertions.assertNotNull(responseEncoded);
-
-        Duration responseEncodedTimeInSeconds = responseEncoded.getTimeInSeconds();
-        Assertions.assertNotNull(responseEncodedTimeInSeconds);
-        Duration responseEncodedTimeInSecondsFraction = responseEncoded.getTimeInSecondsFraction();
-        Assertions.assertNotNull(responseEncodedTimeInSecondsFraction);
-        OffsetDateTime responseEncodedDateTime = responseEncoded.getDateTime();
-        Assertions.assertNotNull(responseEncodedDateTime);
-        OffsetDateTime responseEncodedDateTimeRfc7231 = responseEncoded.getDateTimeRfc7231();
-        Assertions.assertNotNull(responseEncodedDateTimeRfc7231);
-        OffsetDateTime responseEncodedUnixTimestamp = responseEncoded.getUnixTimestamp();
-        Assertions.assertNotNull(responseEncodedUnixTimestamp);
-        byte[] responseEncodedBase64 = responseEncoded.getBase64();
-        Assertions.assertNotNull(responseEncodedBase64);
-        byte[] responseEncodedBase64Url = responseEncoded.getBase64Url();
-        Assertions.assertNotNull(responseEncodedBase64Url);
+        Assertions.assertNotNull(responseEncoded.getTimeInSeconds());
+        Assertions.assertNotNull(responseEncoded.getTimeInSecondsFraction());
+        Assertions.assertNotNull(responseEncoded.getDateTime());
+        Assertions.assertNotNull(responseEncoded.getDateTimeRfc7231());
+        Assertions.assertNotNull(responseEncoded.getUnixTimestamp());
+        Assertions.assertNotNull(responseEncoded.getBase64());
+        Assertions.assertNotNull(responseEncoded.getBase64Url());
     }
 }
