@@ -47,6 +47,21 @@ model OutputData3 {
   data: string;
 }
 
+// root model
+model NestedModel {
+  nested1: NestedModel1;
+}
+
+// nested level1
+model NestedModel1 {
+  nested2: NestedModel2;
+}
+
+// nested level2
+model NestedModel2 {
+  data: string;
+}
+
 @route("/model")
 interface ModelOp {
   @put
@@ -60,4 +75,8 @@ interface ModelOp {
   @get
   @route("/resource3")
   get3(): Resource3;
+
+  @get
+  @route("/nested")
+  putNested(@body body: NestedModel): NestedModel;
 }
