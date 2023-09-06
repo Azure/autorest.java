@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.model.implementation.ModelClientImpl;
+import com.cadl.model.models.NestedModel;
 import com.cadl.model.models.Resource1;
 import com.cadl.model.models.Resource2;
 import com.cadl.model.models.Resource3;
@@ -147,6 +148,47 @@ public final class ModelClient {
     }
 
     /**
+     * The putNested operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     nested1 (Required): {
+     *         nested2 (Required): {
+     *             data: String (Required)
+     *         }
+     *     }
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     nested1 (Required): {
+     *         nested2 (Required): {
+     *             data: String (Required)
+     *         }
+     *     }
+     * }
+     * }</pre>
+     *
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> putNestedWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.putNestedWithResponse(body, requestOptions);
+    }
+
+    /**
      * The put1 operation.
      *
      * @param body The body parameter.
@@ -202,5 +244,27 @@ public final class ModelClient {
         // Generated convenience method for get3WithResponse
         RequestOptions requestOptions = new RequestOptions();
         return get3WithResponse(requestOptions).getValue().toObject(Resource3.class);
+    }
+
+    /**
+     * The putNested operation.
+     *
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public NestedModel putNested(NestedModel body) {
+        // Generated convenience method for putNestedWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putNestedWithResponse(BinaryData.fromObject(body), requestOptions)
+                .getValue()
+                .toObject(NestedModel.class);
     }
 }
