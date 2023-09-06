@@ -440,7 +440,7 @@ export class CodeModelBuilder {
       schema instanceof ConstantSchema
     ) {
       const schemaUsage: SchemaContext[] | undefined = schema.usage;
-      // ConvenienceApi (Public) override Internal
+      // Public override Internal
       if (schemaUsage?.includes(SchemaContext.Public)) {
         const index = schemaUsage.indexOf(SchemaContext.Internal);
         if (index >= 0) {
@@ -598,7 +598,7 @@ export class CodeModelBuilder {
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
-    let generateConvenienceApi: boolean = !!convenienceApiName && !codeModelOperation.internalApi;
+    let generateConvenienceApi: boolean = !!convenienceApiName && !codeModelOperation.internalApi; // at present, internalApi means not convenienceApi. this could change.
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
