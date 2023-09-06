@@ -374,9 +374,10 @@ export class CodeModelBuilder {
   private processModels(clients: SdkClient[]) {
     const processedModels: Set<Type> = new Set();
     for (const client of clients) {
-      const models = client.service.models;
+      const models: (Model | Enum)[] = Array.from(client.service.models.values());
+      Array.from(client.service.enums.values()).forEach((it) => models.push(it));
 
-      for (const model of models.values()) {
+      for (const model of models) {
         if (!processedModels.has(model)) {
           const access = getAccess(model);
           if (access === "public") {
