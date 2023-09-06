@@ -55,9 +55,11 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         } else if (settings.isFluent() && compositeType.isFlattenedSchema()) {
             // put class of flattened type to implementation package
             classPackage = settings.getPackage(settings.getFluentModelsSubpackage());
-        } else if (settings.isDataPlaneClient() && isPageModel(compositeType)) {
+        } else if (settings.isDataPlaneClient() && (isPageModel(compositeType) || isInternalModel(compositeType))) {
             // put class of Page<> type to implementation package
-            // For Cadl, these are not generated to class
+            // For TypeSpec, these are not generated to class
+
+            // same for internal type, which is not exposed to user
             classPackage = settings.getPackage(settings.getImplementationSubpackage(), settings.getModelsSubpackage());
         } else {
             classPackage = settings.getPackage(settings.getModelsSubpackage());
@@ -107,17 +109,16 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
      * Extension for Page model.
      * <p>
      * Page model does not need to be exposed to user, as it is internal wire data that will be converted to PagedFlux or PagedIterable.
-     * Check in Cadl.
+     * Check in TypeSpec.
      *
      * @param compositeType object type
      * @return whether the type is a Page model.
      */
-    protected boolean isPageModel(ObjectSchema compositeType) {
-        boolean ret = false;
+    private static boolean isPageModel(ObjectSchema compositeType) {
+        return compositeType.getUsage() != null && compositeType.getUsage().contains(SchemaContext.PAGED);
+    }
 
-        if (compositeType.getUsage() != null && compositeType.getUsage().contains(SchemaContext.PAGED)) {
-            ret = true;
-        }
-        return ret;
+    private static boolean isInternalModel(ObjectSchema compositeType) {
+        return compositeType.getUsage() != null && compositeType.getUsage().contains(SchemaContext.INTERNAL);
     }
 }

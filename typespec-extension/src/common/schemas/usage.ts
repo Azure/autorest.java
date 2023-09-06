@@ -13,6 +13,9 @@ export enum SchemaContext {
   /** Schema is used from the operation for generating convenience API. */
   ConvenienceApi = "convenience-api",
 
+  /** Schema is used for internal API, or dev purpose. Not exposed to user. */
+  Internal = "internal",
+
   /** Schema is used from the pageable operation. This usage does not propagate. */
   Paged = "paged",
 

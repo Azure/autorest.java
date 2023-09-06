@@ -63,7 +63,14 @@ public class ImplementationDetails {
          * Javadoc or test/sample generation will still need to process the model.
          * Codegen likely need to have additional "require" clause in module-info.java, and additional dependency in pom.xml.
          */
-        EXTERNAL("external");
+        EXTERNAL("external"),
+
+        /**
+         * Internal model.
+         * <p>
+         * Codegen should generate the class in implementation package.
+         */
+        INTERNAL("internal");
 
         private final static Map<String, Usage> CONSTANTS = new HashMap<>();
         static {
@@ -119,6 +126,10 @@ public class ImplementationDetails {
      */
     public boolean isConvenienceMethod() {
         return usages.contains(Usage.CONVENIENCE_API);
+    }
+
+    public boolean isInternal() {
+        return usages.contains(Usage.INTERNAL);
     }
 
     public boolean isInput() {

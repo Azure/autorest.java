@@ -244,7 +244,7 @@ export class CodeModelBuilder {
 
     this.processModels(clients);
 
-    this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
+    this.processSchemaUsage();
 
     if (this.options.namer) {
       this.codeModel = new PreNamer(this.codeModel).init().process();
@@ -395,6 +395,12 @@ export class CodeModelBuilder {
             this.trackSchemaUsage(schema, {
               usage: [SchemaContext.ConvenienceApi],
             });
+          } else if (access === "internal") {
+            const schema = this.processSchema(model, model.name);
+
+            this.trackSchemaUsage(schema, {
+              usage: [SchemaContext.Internal],
+            });
           }
 
           const usage = getUsage(model);
@@ -407,6 +413,38 @@ export class CodeModelBuilder {
           }
 
           processedModels.add(model);
+        }
+      }
+    }
+  }
+
+  private processSchemaUsage() {
+    this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
+
+    // post process for schema usage
+    this.codeModel.schemas.objects?.forEach((it) => this.resolveSchemaUsage(it));
+    this.codeModel.schemas.groups?.forEach((it) => this.resolveSchemaUsage(it));
+    this.codeModel.schemas.choices?.forEach((it) => this.resolveSchemaUsage(it));
+    this.codeModel.schemas.sealedChoices?.forEach((it) => this.resolveSchemaUsage(it));
+    this.codeModel.schemas.ors?.forEach((it) => this.resolveSchemaUsage(it));
+    this.codeModel.schemas.constants?.forEach((it) => this.resolveSchemaUsage(it));
+  }
+
+  private resolveSchemaUsage(schema: Schema) {
+    if (
+      schema instanceof ObjectSchema ||
+      schema instanceof GroupSchema ||
+      schema instanceof ChoiceSchema ||
+      schema instanceof SealedChoiceSchema ||
+      schema instanceof OrSchema ||
+      schema instanceof ConstantSchema
+    ) {
+      const schemaUsage: SchemaContext[] | undefined = schema.usage;
+      // ConvenienceApi (Public) override Internal
+      if (schemaUsage?.includes(SchemaContext.ConvenienceApi)) {
+        const index = schemaUsage.indexOf(SchemaContext.Internal);
+        if (index >= 0) {
+          schemaUsage.splice(index, 1);
         }
       }
     }
@@ -2318,7 +2356,7 @@ export class CodeModelBuilder {
       }
 
       processedSchemas.add(schema);
-      if (schema instanceof ObjectSchema) {
+      if (schema instanceof ObjectSchema || schema instanceof GroupSchema) {
         if (schemaUsage.usage || schemaUsage.serializationFormats) {
           schema.properties?.forEach((p) => {
             if (p.readOnly && schemaUsage.usage?.includes(SchemaContext.Input)) {
@@ -2332,11 +2370,13 @@ export class CodeModelBuilder {
             }
           });
 
-          schema.parents?.all?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
-          schema.parents?.immediate?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
+          if (schema instanceof ObjectSchema) {
+            schema.parents?.all?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
+            schema.parents?.immediate?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
 
-          schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
-          schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+            schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+            schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+          }
 
           // Object.values(schema.discriminator?.all ?? {}).forEach((d) => {
           //   innerApplySchemaUsage(d, schemaUsage);

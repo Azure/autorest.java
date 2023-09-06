@@ -17,6 +17,7 @@ model Request {
   property: RequestInner;
 }
 
+@access(Access.public, "client")
 model RequestInner {
   name: string;
 }
@@ -31,8 +32,8 @@ model ResponseInternalInner {
   name: string;
 }
 
-// Response will be generated as output-only
-@access(Access.public)
+// Response will be generated as output-only in implementation.models package
+@access(Access.internal)
 model Response {
   name: string;
 }
@@ -50,7 +51,7 @@ model StandAloneDataInner {
   name: string;
 }
 
-// case when property be Union
+// StandAloneUnion will be generated in implementation.models package
 @access(Access.internal)
 model StandAloneUnion {
   data: url | bytes;
