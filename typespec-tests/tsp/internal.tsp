@@ -22,7 +22,7 @@ model RequestInner {
   name: string;
 }
 
-// ResponseInternal and ResponseInternalInner will not be generated
+// ResponseInternal and ResponseInternalInner will be generated in implementation.models package
 model ResponseInternal {
   property: ResponseInternalInner;
 }
@@ -32,8 +32,8 @@ model ResponseInternalInner {
   name: string;
 }
 
-// Response will be generated as output-only in implementation.models package
-@access(Access.internal)
+// Response will be generated as output-only
+@access(Access.public)
 model Response {
   name: string;
 }
