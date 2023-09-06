@@ -1008,7 +1008,7 @@ export class CodeModelBuilder {
   }
 
   private processEtagHeaderParameters(op: CodeModelOperation, httpOperation: HttpOperation) {
-    if ((op.convenienceApi || op.internalApi) && op.parameters && op.signatureParameters) {
+    if (op.convenienceApi && op.parameters && op.signatureParameters) {
       const etagHeadersNames = new Set<string>([
         "if-match",
         "if-none-match",
