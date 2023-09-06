@@ -17,7 +17,6 @@ model Request {
   property: RequestInner;
 }
 
-@access(Access.public, "client")
 model RequestInner {
   name: string;
 }
