@@ -595,8 +595,10 @@ export class CodeModelBuilder {
       },
     });
 
+    codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
+
     const convenienceApiName = this.getConvenienceApiName(operation);
-    let generateConvenienceApi: boolean = !!convenienceApiName && !this.isInternal(this.sdkContext, operation);
+    let generateConvenienceApi: boolean = !!convenienceApiName && !codeModelOperation.internalApi;
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -777,12 +779,16 @@ export class CodeModelBuilder {
         this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
         if (op.convenienceApi) {
           this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.ConvenienceApi] });
+        } else if (op.internalApi) {
+          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Internal] });
         }
       }
       if (finalSchema) {
         this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
         if (op.convenienceApi) {
           this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.ConvenienceApi] });
+        } else if (op.internalApi) {
+          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Internal] });
         }
       }
 
@@ -942,6 +948,8 @@ export class CodeModelBuilder {
 
       if (op.convenienceApi) {
         this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
+      } else if (op.internalApi) {
+        this.trackSchemaUsage(schema, { usage: [SchemaContext.Internal] });
       }
 
       if (param.name.toLowerCase() === "content-type") {
@@ -1000,7 +1008,7 @@ export class CodeModelBuilder {
   }
 
   private processEtagHeaderParameters(op: CodeModelOperation, httpOperation: HttpOperation) {
-    if (op.convenienceApi && op.parameters && op.signatureParameters) {
+    if ((op.convenienceApi || op.internalApi) && op.parameters && op.signatureParameters) {
       const etagHeadersNames = new Set<string>([
         "if-match",
         "if-none-match",
@@ -1091,7 +1099,12 @@ export class CodeModelBuilder {
           },
         );
 
-        this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Input, SchemaContext.ConvenienceApi] });
+        this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Input] });
+        if (op.convenienceApi) {
+          this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.ConvenienceApi] });
+        } else if (op.internalApi) {
+          this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Internal] });
+        }
 
         // update group schema for properties
         for (const parameter of request.parameters) {
@@ -1152,6 +1165,8 @@ export class CodeModelBuilder {
 
     if (op.convenienceApi) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
+    } else if (op.internalApi) {
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.Internal] });
     }
 
     if (!schema.language.default.name && schema instanceof ObjectSchema) {
@@ -1415,6 +1430,8 @@ export class CodeModelBuilder {
 
         if (trackConvenienceApi) {
           this.trackSchemaUsage(response.schema, { usage: [SchemaContext.ConvenienceApi] });
+        } else if (op.internalApi) {
+          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Internal] });
         }
       }
     }
