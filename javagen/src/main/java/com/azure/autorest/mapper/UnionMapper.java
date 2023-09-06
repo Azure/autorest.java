@@ -42,10 +42,7 @@ public class UnionMapper implements IMapper<OrSchema, IType> {
             : settings.getPackage(settings.getModelsSubpackage());
 
         if (settings.isDataPlaneClient() && (compositeType.getUsage() != null && compositeType.getUsage().contains(SchemaContext.INTERNAL))) {
-            // put class of Page<> type to implementation package
-            // For TypeSpec, these are not generated to class
-
-            // same for internal type, which is not exposed to user
+            // internal type, which is not exposed to user
             classPackage = settings.getPackage(settings.getImplementationSubpackage(), settings.getModelsSubpackage());
         }
 
