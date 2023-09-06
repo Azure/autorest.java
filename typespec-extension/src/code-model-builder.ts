@@ -264,7 +264,7 @@ export class CodeModelBuilder {
         } else {
           const schema = this.processSchema(it.type, it.name);
           this.trackSchemaUsage(schema, {
-            usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.ConvenienceApi*/],
+            usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
           });
           parameter = new Parameter(it.name, this.getDoc(it), schema, {
             implementation: ImplementationLocation.Client,
@@ -393,7 +393,7 @@ export class CodeModelBuilder {
             const schema = this.processSchema(model, model.name);
 
             this.trackSchemaUsage(schema, {
-              usage: [SchemaContext.ConvenienceApi],
+              usage: [SchemaContext.Public],
             });
           } else if (access === "internal") {
             const schema = this.processSchema(model, model.name);
@@ -441,7 +441,7 @@ export class CodeModelBuilder {
     ) {
       const schemaUsage: SchemaContext[] | undefined = schema.usage;
       // ConvenienceApi (Public) override Internal
-      if (schemaUsage?.includes(SchemaContext.ConvenienceApi)) {
+      if (schemaUsage?.includes(SchemaContext.Public)) {
         const index = schemaUsage.indexOf(SchemaContext.Internal);
         if (index >= 0) {
           schemaUsage.splice(index, 1);
@@ -778,7 +778,7 @@ export class CodeModelBuilder {
       if (pollingSchema) {
         this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
         if (op.convenienceApi) {
-          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.ConvenienceApi] });
+          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Public] });
         } else if (op.internalApi) {
           this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Internal] });
         }
@@ -786,7 +786,7 @@ export class CodeModelBuilder {
       if (finalSchema) {
         this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
         if (op.convenienceApi) {
-          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.ConvenienceApi] });
+          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Public] });
         } else if (op.internalApi) {
           this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Internal] });
         }
@@ -947,7 +947,7 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
       if (op.convenienceApi) {
-        this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
+        this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
       } else if (op.internalApi) {
         this.trackSchemaUsage(schema, { usage: [SchemaContext.Internal] });
       }
@@ -1101,7 +1101,7 @@ export class CodeModelBuilder {
 
         this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Input] });
         if (op.convenienceApi) {
-          this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.ConvenienceApi] });
+          this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Public] });
         } else if (op.internalApi) {
           this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Internal] });
         }
@@ -1164,7 +1164,7 @@ export class CodeModelBuilder {
     this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
     if (op.convenienceApi) {
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
     } else if (op.internalApi) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Internal] });
     }
@@ -1256,7 +1256,7 @@ export class CodeModelBuilder {
             );
           });
 
-          this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input, SchemaContext.ConvenienceApi] });
+          this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input, SchemaContext.Public] });
 
           // option bag parameter
           const optionBagParameter = new Parameter(
@@ -1429,7 +1429,7 @@ export class CodeModelBuilder {
         this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
 
         if (trackConvenienceApi) {
-          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.ConvenienceApi] });
+          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Public] });
         } else if (op.internalApi) {
           this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Internal] });
         }

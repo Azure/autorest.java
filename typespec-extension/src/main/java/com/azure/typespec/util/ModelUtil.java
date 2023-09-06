@@ -16,7 +16,7 @@ public class ModelUtil {
 
     public static boolean isGeneratingModel(ClientModel model) {
         return model.getImplementationDetails() != null
-                && (model.getImplementationDetails().isConvenienceMethod() || model.getImplementationDetails().isInternal())
+                && (model.getImplementationDetails().isPublic() || model.getImplementationDetails().isInternal())
                 && !(isModelUsedOnlyInException(model.getImplementationDetails()))
                 && !(isAnonymousModel(model.getImplementationDetails()))
                 && !(isExternalModel(model.getImplementationDetails()))
@@ -25,7 +25,7 @@ public class ModelUtil {
 
     public static boolean isGeneratingModel(EnumType model) {
         return model.getImplementationDetails() != null
-                && (model.getImplementationDetails().isConvenienceMethod() || model.getImplementationDetails().isInternal())
+                && (model.getImplementationDetails().isPublic() || model.getImplementationDetails().isInternal())
                 && !(isModelUsedOnlyInException(model.getImplementationDetails()));
     }
 
@@ -44,7 +44,7 @@ public class ModelUtil {
 
     public static boolean isGeneratingModel(UnionModel model) {
         return model.getImplementationDetails() != null
-                && (model.getImplementationDetails().isConvenienceMethod() || model.getImplementationDetails().isInternal())
+                && (model.getImplementationDetails().isPublic() || model.getImplementationDetails().isInternal())
                 && !(isModelUsedOnlyInException(model.getImplementationDetails()))
                 && !(isAnonymousModel(model.getImplementationDetails())
                 && !(isExternalModel(model.getImplementationDetails())));

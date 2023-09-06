@@ -14,11 +14,12 @@ public enum SchemaContext {
 
     EXCEPTION("exception"),
 
-    CONVENIENCE_API("convenience-api"),
+    PUBLIC("public"),
 
     PAGED("paged"),
 
     ANONYMOUS("anonymous"),
+
     INTERNAL("internal");
 
     private final String value;
