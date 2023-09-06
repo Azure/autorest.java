@@ -137,6 +137,8 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("generic-response-type", true);
         SETTINGS_MAP.put("output-model-immutable", true);
         SETTINGS_MAP.put("disable-required-property-annotation", true);
+        // Defaulting to KeyCredential and not providing TypeSpec services to generate with AzureKeyCredential.
+        SETTINGS_MAP.put("use-key-credential", true);
     }
 
     public Map<String, String> customizeGeneratedCode(Map<String, String> fileContents, String outputDir) {

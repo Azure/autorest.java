@@ -5,12 +5,9 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.javamodel.JavaBlock;
-import com.azure.core.client.traits.AzureKeyCredentialTrait;
-import com.azure.core.client.traits.ConfigurationTrait;
-import com.azure.core.client.traits.EndpointTrait;
-import com.azure.core.client.traits.HttpTrait;
-import com.azure.core.client.traits.TokenCredentialTrait;
+import com.azure.core.client.traits.*;
 import com.azure.core.credential.AzureKeyCredential;
+import com.azure.core.credential.KeyCredential;
 import com.azure.core.credential.TokenCredential;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
@@ -34,6 +31,8 @@ public class ClientBuilderTrait {
     public static final ClientBuilderTrait CONFIGURATION_TRAIT = createConfigurationTrait();
 
     public static final ClientBuilderTrait AZURE_KEY_CREDENTIAL_TRAIT = createAzureKeyCredentialTrait();
+
+    public static final ClientBuilderTrait KEY_CREDENTIAL_TRAIT = createKeyCredentialTrait();
 
     public static final ClientBuilderTrait TOKEN_CREDENTIAL_TRAIT = createTokenCredentialTrait();
 
@@ -304,6 +303,32 @@ public class ClientBuilderTrait {
 
         clientBuilderTraitMethods.add(clientMethod);
         return azureKeyCredentialTrait;
+    }
+
+    private static ClientBuilderTrait createKeyCredentialTrait() {
+        ClientBuilderTrait keyCredentialTrait = new ClientBuilderTrait();
+        keyCredentialTrait.setTraitInterfaceName(KeyCredentialTrait.class.getSimpleName());
+        List<String> importPackages = new ArrayList<>();
+        keyCredentialTrait.setImportPackages(importPackages);
+        importPackages.add(KeyCredentialTrait.class.getName());
+
+        List<ClientBuilderTraitMethod> clientBuilderTraitMethods = new ArrayList<>();
+        keyCredentialTrait.setTraitMethods(clientBuilderTraitMethods);
+
+        String propertyName = "keyCredential";
+        ServiceClientProperty property = new ServiceClientProperty("The KeyCredential used for authentication.",
+                ClassType.KeyCredential, propertyName, false, null);
+
+        Consumer<JavaBlock> methodImpl = function -> {
+            function.line(String.format("this.%1$s = %2$s;", propertyName, propertyName));
+            function.methodReturn("this");
+        };
+        ClientBuilderTraitMethod clientMethod = createTraitMethod("credential", propertyName, ClassType.KeyCredential,
+                property, "{@inheritDoc}", methodImpl);
+        importPackages.add(KeyCredential.class.getName());
+
+        clientBuilderTraitMethods.add(clientMethod);
+        return keyCredentialTrait;
     }
 
     private static ClientBuilderTraitMethod createTraitMethod(String methodName, String methodParamName, ClassType paramType,

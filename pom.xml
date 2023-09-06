@@ -57,6 +57,12 @@
         <artifactId>jsonrpc4j</artifactId>
         <version>1.6.0</version>
       </dependency>
+
+      <dependency>
+        <groupId>com.azure</groupId>
+        <artifactId>azure-core</artifactId>
+        <version>1.43.0</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
