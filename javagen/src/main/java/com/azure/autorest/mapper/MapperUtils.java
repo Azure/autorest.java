@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.ChoiceValue;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
@@ -35,11 +36,13 @@ final class MapperUtils {
         if (enumTypeName == null || enumTypeName.isEmpty() || enumTypeName.equals("enum")) {
             return ClassType.String;
         } else {
-            String enumSubpackage = settings.getModelsSubpackage();
+            String enumPackage = settings.getPackage(settings.getModelsSubpackage());
             if (settings.isCustomType(enumTypeName)) {
-                enumSubpackage = settings.getCustomTypesSubpackage();
+                enumPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+            } else if (settings.isDataPlaneClient() && (enumType.getUsage() != null && enumType.getUsage().contains(SchemaContext.INTERNAL))) {
+                // internal type, which is not exposed to user
+                enumPackage = settings.getPackage(settings.getImplementationSubpackage(), settings.getModelsSubpackage());
             }
-            String enumPackage = settings.getPackage(enumSubpackage);
 
             String summary = enumType.getSummary();
             String description = enumType.getLanguage().getJava() == null ? null : enumType.getLanguage().getJava().getDescription();
