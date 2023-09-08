@@ -596,10 +596,12 @@ export class CodeModelBuilder {
       },
     });
 
-    codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
+    // TODO (weidxu): temporary disable codeModelOperation.internalApi
+    // codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
+    const internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
-    let generateConvenienceApi: boolean = !!convenienceApiName && !codeModelOperation.internalApi; // at present, internalApi means not convenienceApi. this could change.
+    let generateConvenienceApi: boolean = !!convenienceApiName && !internalApi; // at present, internalApi means not convenienceApi. this could change.
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
