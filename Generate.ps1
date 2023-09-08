@@ -65,6 +65,8 @@ autorest $arguments
     }
 }
 
+npm install
+
 java -version
 
 if (Test-Path ./vanilla-tests/src/main/java/fixtures/report/CoverageReporter.java) {
