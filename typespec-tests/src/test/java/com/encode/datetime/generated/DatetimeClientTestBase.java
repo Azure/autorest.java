@@ -17,6 +17,7 @@ import com.encode.datetime.DatetimeClientBuilder;
 import com.encode.datetime.HeaderClient;
 import com.encode.datetime.PropertyClient;
 import com.encode.datetime.QueryClient;
+import com.encode.datetime.ResponseHeaderClient;
 
 class DatetimeClientTestBase extends TestProxyTestBase {
     protected QueryClient queryClient;
@@ -24,6 +25,8 @@ class DatetimeClientTestBase extends TestProxyTestBase {
     protected PropertyClient propertyClient;
 
     protected HeaderClient headerClient;
+
+    protected ResponseHeaderClient responseHeaderClient;
 
     @Override
     protected void beforeTest() {
@@ -59,5 +62,16 @@ class DatetimeClientTestBase extends TestProxyTestBase {
             headerClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         headerClient = headerClientbuilder.buildHeaderClient();
+
+        DatetimeClientBuilder responseHeaderClientbuilder =
+                new DatetimeClientBuilder()
+                        .httpClient(HttpClient.createDefault())
+                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            responseHeaderClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            responseHeaderClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        responseHeaderClient = responseHeaderClientbuilder.buildResponseHeaderClient();
     }
 }
