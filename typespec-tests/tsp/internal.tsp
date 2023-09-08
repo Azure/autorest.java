@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 
 @service({
@@ -54,6 +56,23 @@ model StandAloneDataInner {
 @access(Access.internal)
 model StandAloneUnion {
   data: url | bytes;
+}
+
+// Color and ColorModel will be generated in implementation.models package
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
+@access(Access.internal)
+@fixed
+enum Color {
+  Red,
+  Blue,
+  Green,
+}
+
+@access(Access.internal, "client")
+enum ColorModel {
+  Red,
+  Blue,
+  Green,
 }
 
 @route("/internal")
