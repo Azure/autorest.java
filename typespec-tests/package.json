@@ -11,8 +11,8 @@
   "dependencies": {
     "@typespec/openapi": ">=0.45.0 <1.0.0",
     "@azure-tools/typespec-autorest": ">=0.31.0 <1.0.0",
-    "@azure-tools/cadl-ranch-specs": "0.20.0",
-    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.8.11.tgz"
+    "@azure-tools/cadl-ranch-specs": "0.21.0",
+    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.8.12.tgz"
   },
   "devDependencies": {
     "@typespec/prettier-plugin-typespec": ">=0.45.0 <1.0.0",

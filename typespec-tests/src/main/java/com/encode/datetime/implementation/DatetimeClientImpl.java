@@ -73,6 +73,18 @@ public final class DatetimeClientImpl {
         return this.headers;
     }
 
+    /** The ResponseHeadersImpl object to access its operations. */
+    private final ResponseHeadersImpl responseHeaders;
+
+    /**
+     * Gets the ResponseHeadersImpl object to access its operations.
+     *
+     * @return the ResponseHeadersImpl object.
+     */
+    public ResponseHeadersImpl getResponseHeaders() {
+        return this.responseHeaders;
+    }
+
     /** Initializes an instance of DatetimeClient client. */
     public DatetimeClientImpl() {
         this(
@@ -101,5 +113,6 @@ public final class DatetimeClientImpl {
         this.queries = new QueriesImpl(this);
         this.properties = new PropertiesImpl(this);
         this.headers = new HeadersImpl(this);
+        this.responseHeaders = new ResponseHeadersImpl(this);
     }
 }

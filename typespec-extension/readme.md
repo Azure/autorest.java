@@ -123,7 +123,7 @@ and breaks at all applicable breakpoints.
 
 The remote debugger configuration is shown below for reference.
 
-![img.png](../docs/images/remote-debugger-config.png)
+![img.png](https://raw.githubusercontent.com/Azure/autorest.java/main/docs/images/remote-debugger-config.png)
 
 ```yaml
 emit:
