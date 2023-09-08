@@ -780,18 +780,18 @@ export class CodeModelBuilder {
       // track usage
       if (pollingSchema) {
         this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
-        if (op.convenienceApi) {
-          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Public] });
-        } else if (op.internalApi) {
+        if (op.internalApi) {
           this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Internal] });
+        } else if (op.convenienceApi) {
+          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Public] });
         }
       }
       if (finalSchema) {
         this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
-        if (op.convenienceApi) {
-          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Public] });
-        } else if (op.internalApi) {
+        if (op.internalApi) {
           this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Internal] });
+        } else if (op.convenienceApi) {
+          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Public] });
         }
       }
 
@@ -949,10 +949,10 @@ export class CodeModelBuilder {
 
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
-      if (op.convenienceApi) {
-        this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
-      } else if (op.internalApi) {
+      if (op.internalApi) {
         this.trackSchemaUsage(schema, { usage: [SchemaContext.Internal] });
+      } else if (op.convenienceApi) {
+        this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
       }
 
       if (param.name.toLowerCase() === "content-type") {
@@ -1103,10 +1103,10 @@ export class CodeModelBuilder {
         );
 
         this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Input] });
-        if (op.convenienceApi) {
-          this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Public] });
-        } else if (op.internalApi) {
+        if (op.internalApi) {
           this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Internal] });
+        } else if (op.convenienceApi) {
+          this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Public] });
         }
 
         // update group schema for properties
@@ -1166,10 +1166,10 @@ export class CodeModelBuilder {
 
     this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
-    if (op.convenienceApi) {
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
-    } else if (op.internalApi) {
+    if (op.internalApi) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Internal] });
+    } else if (op.convenienceApi) {
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
     }
 
     if (!schema.language.default.name && schema instanceof ObjectSchema) {
@@ -1431,10 +1431,10 @@ export class CodeModelBuilder {
       if (response instanceof SchemaResponse) {
         this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
 
-        if (trackConvenienceApi) {
-          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Public] });
-        } else if (op.internalApi) {
+        if (op.internalApi) {
           this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Internal] });
+        } else if (trackConvenienceApi) {
+          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Public] });
         }
       }
     }
