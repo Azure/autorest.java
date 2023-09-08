@@ -86,7 +86,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add("java.util.Map");
         imports.add("java.util.HashMap");
         imports.add("java.util.ArrayList");
-        imports.add("com.azure.core.http.HttpHeaders");
+        ClassType.HttpHeaders.addImportsTo(imports, false);
+        ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
         imports.add("java.util.Objects");
         if (settings.isUseClientLogger()) {
             ClassType.ClientLogger.addImportsTo(imports, false);
@@ -510,7 +511,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             // clientOptions header
             function.line("HttpHeaders headers = new HttpHeaders();");
-            function.line(String.format("%s.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));", localClientOptionsName));
+            function.line(String.format("%s.getHeaders().forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));", localClientOptionsName));
             function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
 
             function.line("this.pipelinePolicies.stream()" +
