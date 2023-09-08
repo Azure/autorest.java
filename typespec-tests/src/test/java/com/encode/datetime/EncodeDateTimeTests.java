@@ -3,6 +3,8 @@
 
 package com.encode.datetime;
 
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.rest.Response;
 import com.encode.datetime.models.DefaultDatetimeProperty;
 import com.encode.datetime.models.Rfc3339DatetimeProperty;
 import com.encode.datetime.models.Rfc7231DatetimeProperty;
@@ -21,6 +23,7 @@ public class EncodeDateTimeTests {
 
     private final QueryClient queryClient = new DatetimeClientBuilder().buildQueryClient();
     private final HeaderClient headerClient = new DatetimeClientBuilder().buildHeaderClient();
+    private final ResponseHeaderClient responseHeaderClient = new DatetimeClientBuilder().buildResponseHeaderClient();
     private final PropertyClient propertyClient = new DatetimeClientBuilder().buildPropertyClient();
 
     private final static OffsetDateTime DATE0 = OffsetDateTime.of(2022, 8, 26, 14, 38, 0, 0, ZoneOffset.UTC);
@@ -42,7 +45,7 @@ public class EncodeDateTimeTests {
     }
 
     @Test
-    public void testHeader() {
+    public void testRequestHeader() {
         headerClient.defaultMethod(DATE0);
 
         headerClient.rfc3339(DATE1);
@@ -52,6 +55,24 @@ public class EncodeDateTimeTests {
         headerClient.unixTimestamp(DATE2);
 
         headerClient.unixTimestampArray(Arrays.asList(DATE2, DATE3));
+    }
+
+
+    @Test
+    public void testResponseHeader() {
+        HttpHeaderName valueHeaderName = HttpHeaderName.fromString("value");
+
+        Response<Void> response = responseHeaderClient.defaultMethodWithResponse(null);
+        Assertions.assertNotNull(response.getHeaders().getValue(valueHeaderName));
+
+        response = responseHeaderClient.rfc3339WithResponse(null);
+        Assertions.assertNotNull(response.getHeaders().getValue(valueHeaderName));
+
+        response = responseHeaderClient.rfc7231WithResponse(null);
+        Assertions.assertNotNull(response.getHeaders().getValue(valueHeaderName));
+
+        response = responseHeaderClient.unixTimestampWithResponse(null);
+        Assertions.assertNotNull(response.getHeaders().getValue(valueHeaderName));
     }
 
     @Test
