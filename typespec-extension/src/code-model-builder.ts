@@ -1298,7 +1298,7 @@ export class CodeModelBuilder {
       // headers
       headers = [];
       for (const [key, header] of Object.entries(resp.responses[0].headers)) {
-        const schema = this.processSchema(header.type, key);
+        const schema = this.processSchema(header, key);
         headers.push(
           new HttpHeader(key, schema, {
             language: {
