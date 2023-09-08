@@ -6,6 +6,7 @@ package com.authentication.util;
 import com.azure.core.credential.AccessToken;
 import com.azure.core.credential.TokenCredential;
 import com.azure.core.credential.TokenRequestContext;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipelineCallContext;
 import com.azure.core.http.HttpPipelineNextPolicy;
@@ -102,7 +103,7 @@ public class BearerTokenAuthenticationPolicy implements HttpPipelinePolicy {
         return authorizeRequest(context)
             .then(Mono.defer(() -> next.process()))
             .flatMap(httpResponse -> {
-                String authHeader = httpResponse.getHeaderValue(WWW_AUTHENTICATE);
+                String authHeader = httpResponse.getHeaderValue(HttpHeaderName.WWW_AUTHENTICATE);
                 if (httpResponse.getStatusCode() == 401 && authHeader != null) {
                     return authorizeRequestOnChallenge(context, httpResponse).flatMap(retry -> {
                         if (retry) {
@@ -134,7 +135,7 @@ public class BearerTokenAuthenticationPolicy implements HttpPipelinePolicy {
 
         authorizeRequestSync(context);
         HttpResponse httpResponse = next.processSync();
-        String authHeader = httpResponse.getHeaderValue(WWW_AUTHENTICATE);
+        String authHeader = httpResponse.getHeaderValue(HttpHeaderName.WWW_AUTHENTICATE);
         if (httpResponse.getStatusCode() == 401 && authHeader != null) {
             if (authorizeRequestOnChallengeSync(context, httpResponse)) {
                 // Both Netty and OkHttp expect the requestBody to be closed after the response has been read.
@@ -191,6 +192,6 @@ public class BearerTokenAuthenticationPolicy implements HttpPipelinePolicy {
     private static void setAuthorizationHeader(HttpHeaders headers, String token) {
 //        HttpHeadersHelper.setNoKeyFormatting(headers, AUTHORIZATION_HEADER_LOWER_CASE, AUTHORIZATION_HEADER,
 //            BEARER + " " + token);
-        headers.add(AUTHORIZATION_HEADER_LOWER_CASE, BEARER + " " + token);
+        headers.add(HttpHeaderName.AUTHORIZATION, BEARER + " " + token);
     }
 }
