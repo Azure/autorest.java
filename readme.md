@@ -54,6 +54,8 @@ To debug, add `--java.debugger` to the argument list. The JVM will suspend at th
 - `required-fields-as-ctor-args`, create a constructor taking required properties, for model classes. The correctness of this constructor highly depends on the correctness of Swagger.
 - `output-model-immutable: true`, make model classes immutable, if model is used only in response.
 - `enable-sync-stack: true`, let sync method invoke sync RestProxy method.
+- `enable-page-size: true`, let `maxpagesize` query parameter be supplied via `byPage` API in `PagedFlux` or `PagedIterable`.
+- `use-key-credential: true`, use `KeyCredential` in builder for API key.
 
 - `generate-client-as-impl: true`, generate Client in implementation package, for customization.
 - `models-subpackage: implementation.models`, generate model classes in implementation package.
@@ -94,13 +96,15 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--required-fields-as-ctor-args`|Indicates that class models have constructor taking required properties.|
 |`--output-model-immutable`|Indicates that output-only models be generated as immutable, and without public constructor.|
 |`--use-input-stream-for-binary`|Indicates that `InputStream` is used for binary response body. By default, `BinaryData` is used.|
+|`--enable-page-size`|Indicates that `maxpagesize` query parameter be supplied via `byPage` API in `PagedFlux` or `PagedIterable`, instead of via client method parameter.|
+|`--use-key-credential`|Indicates that builder uses `KeyCredential` for API key.|
 
 ## Settings for minimal data-plane clients
 
 `data-plane` option enables the generator to generate code for minimal data-plane clients.
 
 `data-plane` option will change the default value for some vanilla options.
-For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-sync-async-clients`, `generate-builder-per-client` option is by default `true`.
+For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-sync-async-clients`, `generate-builder-per-client`, `enable-page-size`, `use-key-credential` option is by default `true`.
 `polling` is by default enabled as default settings globally (`polling={}`).
 
 `sdk-integration` option can be used for integrating to [azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java/).
