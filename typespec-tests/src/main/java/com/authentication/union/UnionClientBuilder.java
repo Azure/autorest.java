@@ -7,11 +7,11 @@ package com.authentication.union;
 import com.authentication.union.implementation.UnionClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
-import com.azure.core.client.traits.AzureKeyCredentialTrait;
 import com.azure.core.client.traits.ConfigurationTrait;
 import com.azure.core.client.traits.HttpTrait;
+import com.azure.core.client.traits.KeyCredentialTrait;
 import com.azure.core.client.traits.TokenCredentialTrait;
-import com.azure.core.credential.AzureKeyCredential;
+import com.azure.core.credential.KeyCredential;
 import com.azure.core.credential.TokenCredential;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaderName;
@@ -22,12 +22,12 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.AzureKeyCredentialPolicy;
 import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
+import com.azure.core.http.policy.KeyCredentialPolicy;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryOptions;
 import com.azure.core.http.policy.RetryPolicy;
@@ -49,7 +49,7 @@ public final class UnionClientBuilder
         implements HttpTrait<UnionClientBuilder>,
                 ConfigurationTrait<UnionClientBuilder>,
                 TokenCredentialTrait<UnionClientBuilder>,
-                AzureKeyCredentialTrait<UnionClientBuilder> {
+                KeyCredentialTrait<UnionClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -171,15 +171,15 @@ public final class UnionClientBuilder
     }
 
     /*
-     * The AzureKeyCredential used for authentication.
+     * The KeyCredential used for authentication.
      */
-    @Generated private AzureKeyCredential azureKeyCredential;
+    @Generated private KeyCredential keyCredential;
 
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public UnionClientBuilder credential(AzureKeyCredential azureKeyCredential) {
-        this.azureKeyCredential = azureKeyCredential;
+    public UnionClientBuilder credential(KeyCredential keyCredential) {
+        this.keyCredential = keyCredential;
         return this;
     }
 
@@ -238,8 +238,8 @@ public final class UnionClientBuilder
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        if (azureKeyCredential != null) {
-            policies.add(new AzureKeyCredentialPolicy("x-ms-api-key", azureKeyCredential));
+        if (keyCredential != null) {
+            policies.add(new KeyCredentialPolicy("x-ms-api-key", keyCredential));
         }
         if (tokenCredential != null) {
             policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, DEFAULT_SCOPES));
