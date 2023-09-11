@@ -4,6 +4,8 @@
 
 Compatible with compiler 0.47.
 
+- Configuration of API key in builder is via `KeyCredential`.
+
 ## 0.8.11 (2023-09-01)
 
 Compatible with compiler 0.47.

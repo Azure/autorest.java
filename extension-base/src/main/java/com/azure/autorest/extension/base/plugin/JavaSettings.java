@@ -33,6 +33,7 @@ public class JavaSettings {
     private static final Map<String, Object> SIMPLE_JAVA_SETTINGS = new HashMap<>();
 
     private static Logger logger;
+    private final boolean useKeyCredential;
     private boolean noCustomHeaders;
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
@@ -165,7 +166,8 @@ public class JavaSettings {
                 // setting this to false by default as a lot of existing libraries still use swagger and
                 // were generated with required = true set in JsonProperty annotation
                 getBooleanValue(host, "disable-required-property-annotation", false),
-                getBooleanValue(host, "enable-page-size", false)
+                getBooleanValue(host, "enable-page-size", false),
+                getBooleanValue(host, "use-key-credential", false)
             );
         }
         return instance;
@@ -317,7 +319,8 @@ public class JavaSettings {
         boolean includeReadOnlyInConstructorArgs,
         boolean urlAsString,
         boolean disableRequiredPropertyAnnotation,
-        boolean pageSizeEnabled) {
+        boolean pageSizeEnabled,
+        boolean useKeyCredential) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -414,6 +417,7 @@ public class JavaSettings {
         this.urlAsString = urlAsString;
         this.disableRequiredJsonAnnotation = disableRequiredPropertyAnnotation;
         this.pageSizeEnabled = pageSizeEnabled;
+        this.useKeyCredential = useKeyCredential;
     }
 
 
@@ -1071,6 +1075,10 @@ public class JavaSettings {
      */
     public boolean isIncludeReadOnlyInConstructorArgs() {
         return includeReadOnlyInConstructorArgs;
+    }
+
+    public boolean isUseKeyCredential() {
+        return this.useKeyCredential;
     }
 
     private static final String DEFAULT_CODE_GENERATION_HEADER = String.join("\r\n",
