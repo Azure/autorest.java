@@ -83,7 +83,6 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.42.0</version>
     </dependency>
     <dependency>
       <groupId>com.google.googlejavaformat</groupId>
