@@ -244,7 +244,7 @@ export class CodeModelBuilder {
 
     this.processModels(clients);
 
-    this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
+    this.processSchemaUsage();
 
     if (this.options.namer) {
       this.codeModel = new PreNamer(this.codeModel).init().process();
@@ -264,7 +264,7 @@ export class CodeModelBuilder {
         } else {
           const schema = this.processSchema(it.type, it.name);
           this.trackSchemaUsage(schema, {
-            usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.ConvenienceApi*/],
+            usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
           });
           parameter = new Parameter(it.name, this.getDoc(it), schema, {
             implementation: ImplementationLocation.Client,
@@ -374,9 +374,10 @@ export class CodeModelBuilder {
   private processModels(clients: SdkClient[]) {
     const processedModels: Set<Type> = new Set();
     for (const client of clients) {
-      const models = client.service.models;
+      const models: (Model | Enum)[] = Array.from(client.service.models.values());
+      Array.from(client.service.enums.values()).forEach((it) => models.push(it));
 
-      for (const model of models.values()) {
+      for (const model of models) {
         if (!processedModels.has(model)) {
           const access = getAccess(model);
           if (access === "public") {
@@ -393,7 +394,13 @@ export class CodeModelBuilder {
             const schema = this.processSchema(model, model.name);
 
             this.trackSchemaUsage(schema, {
-              usage: [SchemaContext.ConvenienceApi],
+              usage: [SchemaContext.Public],
+            });
+          } else if (access === "internal") {
+            const schema = this.processSchema(model, model.name);
+
+            this.trackSchemaUsage(schema, {
+              usage: [SchemaContext.Internal],
             });
           }
 
@@ -407,6 +414,38 @@ export class CodeModelBuilder {
           }
 
           processedModels.add(model);
+        }
+      }
+    }
+  }
+
+  private processSchemaUsage() {
+    this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
+
+    // post process for schema usage
+    this.codeModel.schemas.objects?.forEach((it) => this.resolveSchemaUsage(it));
+    this.codeModel.schemas.groups?.forEach((it) => this.resolveSchemaUsage(it));
+    this.codeModel.schemas.choices?.forEach((it) => this.resolveSchemaUsage(it));
+    this.codeModel.schemas.sealedChoices?.forEach((it) => this.resolveSchemaUsage(it));
+    this.codeModel.schemas.ors?.forEach((it) => this.resolveSchemaUsage(it));
+    this.codeModel.schemas.constants?.forEach((it) => this.resolveSchemaUsage(it));
+  }
+
+  private resolveSchemaUsage(schema: Schema) {
+    if (
+      schema instanceof ObjectSchema ||
+      schema instanceof GroupSchema ||
+      schema instanceof ChoiceSchema ||
+      schema instanceof SealedChoiceSchema ||
+      schema instanceof OrSchema ||
+      schema instanceof ConstantSchema
+    ) {
+      const schemaUsage: SchemaContext[] | undefined = schema.usage;
+      // Public override Internal
+      if (schemaUsage?.includes(SchemaContext.Public)) {
+        const index = schemaUsage.indexOf(SchemaContext.Internal);
+        if (index >= 0) {
+          schemaUsage.splice(index, 1);
         }
       }
     }
@@ -557,8 +596,12 @@ export class CodeModelBuilder {
       },
     });
 
+    // TODO (weidxu): temporary disable codeModelOperation.internalApi
+    // codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
+    const internalApi = this.isInternal(this.sdkContext, operation);
+
     const convenienceApiName = this.getConvenienceApiName(operation);
-    let generateConvenienceApi: boolean = !!convenienceApiName && !this.isInternal(this.sdkContext, operation);
+    let generateConvenienceApi: boolean = !!convenienceApiName && !internalApi; // at present, internalApi means not convenienceApi. this could change.
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -737,14 +780,18 @@ export class CodeModelBuilder {
       // track usage
       if (pollingSchema) {
         this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
-        if (op.convenienceApi) {
-          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.ConvenienceApi] });
+        if (op.internalApi) {
+          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Internal] });
+        } else if (op.convenienceApi) {
+          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Public] });
         }
       }
       if (finalSchema) {
         this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
-        if (op.convenienceApi) {
-          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.ConvenienceApi] });
+        if (op.internalApi) {
+          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Internal] });
+        } else if (op.convenienceApi) {
+          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Public] });
         }
       }
 
@@ -902,8 +949,10 @@ export class CodeModelBuilder {
 
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
-      if (op.convenienceApi) {
-        this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
+      if (op.internalApi) {
+        this.trackSchemaUsage(schema, { usage: [SchemaContext.Internal] });
+      } else if (op.convenienceApi) {
+        this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
       }
 
       if (param.name.toLowerCase() === "content-type") {
@@ -1053,7 +1102,12 @@ export class CodeModelBuilder {
           },
         );
 
-        this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Input, SchemaContext.ConvenienceApi] });
+        this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Input] });
+        if (op.internalApi) {
+          this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Internal] });
+        } else if (op.convenienceApi) {
+          this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Public] });
+        }
 
         // update group schema for properties
         for (const parameter of request.parameters) {
@@ -1112,8 +1166,10 @@ export class CodeModelBuilder {
 
     this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
-    if (op.convenienceApi) {
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.ConvenienceApi] });
+    if (op.internalApi) {
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.Internal] });
+    } else if (op.convenienceApi) {
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
     }
 
     if (!schema.language.default.name && schema instanceof ObjectSchema) {
@@ -1203,7 +1259,7 @@ export class CodeModelBuilder {
             );
           });
 
-          this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input, SchemaContext.ConvenienceApi] });
+          this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input, SchemaContext.Public] });
 
           // option bag parameter
           const optionBagParameter = new Parameter(
@@ -1242,7 +1298,7 @@ export class CodeModelBuilder {
       // headers
       headers = [];
       for (const [key, header] of Object.entries(resp.responses[0].headers)) {
-        const schema = this.processSchema(header.type, key);
+        const schema = this.processSchema(header, key);
         headers.push(
           new HttpHeader(key, schema, {
             language: {
@@ -1375,8 +1431,10 @@ export class CodeModelBuilder {
       if (response instanceof SchemaResponse) {
         this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
 
-        if (trackConvenienceApi) {
-          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.ConvenienceApi] });
+        if (op.internalApi) {
+          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Internal] });
+        } else if (trackConvenienceApi) {
+          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Public] });
         }
       }
     }
@@ -2318,7 +2376,7 @@ export class CodeModelBuilder {
       }
 
       processedSchemas.add(schema);
-      if (schema instanceof ObjectSchema) {
+      if (schema instanceof ObjectSchema || schema instanceof GroupSchema) {
         if (schemaUsage.usage || schemaUsage.serializationFormats) {
           schema.properties?.forEach((p) => {
             if (p.readOnly && schemaUsage.usage?.includes(SchemaContext.Input)) {
@@ -2332,11 +2390,13 @@ export class CodeModelBuilder {
             }
           });
 
-          schema.parents?.all?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
-          schema.parents?.immediate?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
+          if (schema instanceof ObjectSchema) {
+            schema.parents?.all?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
+            schema.parents?.immediate?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
 
-          schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
-          schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+            schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+            schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+          }
 
           // Object.values(schema.discriminator?.all ?? {}).forEach((d) => {
           //   innerApplySchemaUsage(d, schemaUsage);

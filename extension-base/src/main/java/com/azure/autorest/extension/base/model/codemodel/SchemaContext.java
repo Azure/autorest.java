@@ -14,11 +14,13 @@ public enum SchemaContext {
 
     EXCEPTION("exception"),
 
-    CONVENIENCE_API("convenience-api"),
+    PUBLIC("public"),
 
     PAGED("paged"),
 
-    ANONYMOUS("anonymous");
+    ANONYMOUS("anonymous"),
+
+    INTERNAL("internal");
 
     private final String value;
     private final static Map<String, SchemaContext> CONSTANTS = new HashMap<>();

@@ -35,12 +35,12 @@ public class ImplementationDetails {
         EXCEPTION("exception"),
 
         /**
-         * Model used in input or output of methods marked as convenience API.
+         * Public model.
          * <p>
-         * In DPG, it means the model need to be written to Java class.
-         * Else, it may only exist in memory for Javadoc purpose.
+         * Usually it means that the model is used in input or output of methods marked as convenience API (and that API is not marked as internal).
+         * Codegen should generate the class in models package.
          */
-        CONVENIENCE_API("convenience-api"),
+        PUBLIC("public"),
 
         /**
          * Model used in paged response.
@@ -63,7 +63,14 @@ public class ImplementationDetails {
          * Javadoc or test/sample generation will still need to process the model.
          * Codegen likely need to have additional "require" clause in module-info.java, and additional dependency in pom.xml.
          */
-        EXTERNAL("external");
+        EXTERNAL("external"),
+
+        /**
+         * Internal model.
+         * <p>
+         * Codegen should generate the class in implementation package.
+         */
+        INTERNAL("internal");
 
         private final static Map<String, Usage> CONSTANTS = new HashMap<>();
         static {
@@ -115,10 +122,17 @@ public class ImplementationDetails {
     }
 
     /**
-     * @return whether the model used for convenience method, or the method requires a convenience method.
+     * @return whether the model need to be generated for public use.
      */
-    public boolean isConvenienceMethod() {
-        return usages.contains(Usage.CONVENIENCE_API);
+    public boolean isPublic() {
+        return usages.contains(Usage.PUBLIC);
+    }
+
+    /**
+     * @return whether the model need to be generated for internal use.
+     */
+    public boolean isInternal() {
+        return usages.contains(Usage.INTERNAL);
     }
 
     public boolean isInput() {

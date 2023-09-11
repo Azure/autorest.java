@@ -51,8 +51,11 @@ export interface Operation extends Aspect {
   /** the name of convenience API */
   convenienceApi?: ConvenienceApi;
 
-  /** a boolean to represent should generate protocol api or not */
+  /** generate protocol api or not */
   generateProtocolApi?: boolean;
+
+  /** genrate as internal API */
+  internalApi?: boolean;
 
   /** the long-running operation metadata */
   lroMetadata?: LongRunningMetadata;

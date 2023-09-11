@@ -101,7 +101,7 @@ configure the remote debugger. Set the debugger mode to "Attach to remote JVM", 
 "localhost" and Port to "5005". Set the command line arguments to "-agentlib:jdwp=transport=dt_socket,server=y,
 suspend=n,address=*:5005".
 
-![img.png](../images/remote-debugger-config.png)
+![img.png](https://raw.githubusercontent.com/Azure/autorest.java/main/docs/images/remote-debugger-config.png)
 
 After the remote debugger is configured, run autorest with this additional argument `--java.debugger`. The AutoRest 
 process will block until the JVM debugger is attached, so, after the AutoRest process pauses, start the debugger 
