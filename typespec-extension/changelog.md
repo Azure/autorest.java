@@ -4,6 +4,9 @@
 
 Compatible with compiler 0.47.
 
+- Supported `@include` from typespec-client-generator-core.
+- Supported generate model classes to implementation package, for API of `@access(Access.internal)` or `@internal`.
+
 ## 0.8.12 (2023-09-12)
 
 Compatible with compiler 0.47.
