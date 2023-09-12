@@ -68,6 +68,7 @@ import {
   shouldGenerateProtocol,
   isInternal,
   SdkClient,
+  isInclude,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -366,7 +367,7 @@ export class CodeModelBuilder {
     if (access) {
       return access === "internal";
     } else {
-      // fallback to "internal", it will be
+      // TODO: deprecate "internal"
       return isInternal(context, operation);
     }
   }
@@ -377,31 +378,39 @@ export class CodeModelBuilder {
       const models: (Model | Enum)[] = Array.from(client.service.models.values());
       Array.from(client.service.enums.values()).forEach((it) => models.push(it));
 
+      // lambda to mark model as public
+      const modelAsPublic = (model: Model | Enum) => {
+        // check it does not contain Union
+        const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
+        if (union) {
+          const errorMsg = `Model '${getTypeName(
+            model,
+            this.typeNameOptions,
+          )}' cannot be set as access=public, as it refers Union '${getUnionName(union, this.typeNameOptions)}'`;
+          throw new Error(errorMsg);
+        }
+
+        const schema = this.processSchema(model, model.name);
+
+        this.trackSchemaUsage(schema, {
+          usage: [SchemaContext.Public],
+        });
+      };
+
       for (const model of models) {
         if (!processedModels.has(model)) {
           const access = getAccess(model);
           if (access === "public") {
-            // check it does not contain Union
-            const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
-            if (union) {
-              const errorMsg = `Model '${getTypeName(
-                model,
-                this.typeNameOptions,
-              )}' cannot be set as access=public, as it refers Union '${getUnionName(union, this.typeNameOptions)}'`;
-              throw new Error(errorMsg);
-            }
-
-            const schema = this.processSchema(model, model.name);
-
-            this.trackSchemaUsage(schema, {
-              usage: [SchemaContext.Public],
-            });
+            modelAsPublic(model);
           } else if (access === "internal") {
             const schema = this.processSchema(model, model.name);
 
             this.trackSchemaUsage(schema, {
               usage: [SchemaContext.Internal],
             });
+          } else if (model.kind === "Model" && isInclude(this.sdkContext, model)) {
+            // TODO: deprecate "include"
+            modelAsPublic(model);
           }
 
           const usage = getUsage(model);
