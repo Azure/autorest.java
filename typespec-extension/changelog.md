@@ -1,6 +1,6 @@
 # Release History
 
-## 0.8.12 (Unreleased)
+## 0.8.12 (2023-09-12)
 
 Compatible with compiler 0.47.
 
