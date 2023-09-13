@@ -5,6 +5,7 @@
 package com._specs_.azure.clientgenerator.core.internal;
 
 import com._specs_.azure.clientgenerator.core.internal.implementation.InternalClientImpl;
+import com._specs_.azure.clientgenerator.core.internal.implementation.models.InternalModel;
 import com._specs_.azure.clientgenerator.core.internal.models.PublicModel;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
@@ -101,5 +102,25 @@ public final class InternalClient {
         // Generated convenience method for publicOnlyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return publicOnlyWithResponse(name, requestOptions).getValue().toObject(PublicModel.class);
+    }
+
+    /**
+     * The internalOnly operation.
+     *
+     * @param name A sequence of textual characters.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is a model only used by internal operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    InternalModel internalOnly(String name) {
+        // Generated convenience method for internalOnlyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return internalOnlyWithResponse(name, requestOptions).getValue().toObject(InternalModel.class);
     }
 }
