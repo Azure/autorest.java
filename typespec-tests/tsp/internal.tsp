@@ -13,9 +13,9 @@ using Azure.ClientGenerator.Core;
 })
 namespace Cadl.Internal;
 
-// Request and RequestInner will be generated
+// ApiRequest and RequestInner will be generated
 @access(Access.public, "client")
-model Request {
+model ApiRequest {
   property: RequestInner;
 }
 
@@ -35,7 +35,7 @@ model ResponseInternalInner {
 
 // Response will be generated as output-only
 @access(Access.public)
-model Response {
+model ApiResponse {
   name: string;
 }
 
@@ -77,14 +77,14 @@ enum ColorModel {
 
 @route("/internal")
 interface InternalOp {
-  // test Request with Access.public
+  // test ApiRequest with Access.public
   @access(Access.public, "python")
   @access(Access.internal, "client")
   @post
-  postInternal(...Request): ResponseInternal;
+  postInternal(...ApiRequest): ResponseInternal;
 
-  // test Response with Access.public
+  // test ApiResponse with Access.public
   @get
   @access(Access.internal, "java")
-  getInternal(): Response;
+  getInternal(): ApiResponse;
 }
