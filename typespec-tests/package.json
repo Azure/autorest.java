@@ -15,9 +15,9 @@
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.8.13.tgz"
   },
   "devDependencies": {
-    "@typespec/prettier-plugin-typespec": ">=0.45.0 <1.0.0",
+    "@typespec/prettier-plugin-typespec": "~0.48.0",
     "prettier-plugin-organize-imports": "3.2.3",
-    "prettier": "~3.0.1"
+    "prettier": "~3.0.3"
   },
   "overrides": {
     "@typespec/compiler": ">=0.48.0 <1.0.0",
