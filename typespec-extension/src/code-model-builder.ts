@@ -608,7 +608,7 @@ export class CodeModelBuilder {
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
-    let generateConvenienceApi: boolean = !!convenienceApiName && !codeModelOperation.internalApi; // at present, internalApi means not convenienceApi. this could change.
+    let generateConvenienceApi: boolean = !!convenienceApiName;
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -1266,7 +1266,12 @@ export class CodeModelBuilder {
             );
           });
 
-          this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input, SchemaContext.Public] });
+          this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input] });
+          if (op.internalApi) {
+            this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Internal] });
+          } else if (op.convenienceApi) {
+            this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Public] });
+          }
 
           // option bag parameter
           const optionBagParameter = new Parameter(
