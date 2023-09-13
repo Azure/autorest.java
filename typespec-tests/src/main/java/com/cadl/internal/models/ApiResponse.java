@@ -9,9 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Response model. */
+/** The ApiResponse model. */
 @Immutable
-public final class Response {
+public final class ApiResponse {
     /*
      * The name property.
      */
@@ -20,13 +20,13 @@ public final class Response {
     private String name;
 
     /**
-     * Creates an instance of Response class.
+     * Creates an instance of ApiResponse class.
      *
      * @param name the name value to set.
      */
     @Generated
     @JsonCreator
-    private Response(@JsonProperty(value = "name") String name) {
+    private ApiResponse(@JsonProperty(value = "name") String name) {
         this.name = name;
     }
 

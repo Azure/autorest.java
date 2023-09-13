@@ -15,7 +15,11 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.cadl.internal.implementation.InternalClientImpl;
+import com.cadl.internal.implementation.models.ResponseInternal;
+import com.cadl.internal.models.ApiRequest;
+import com.cadl.internal.models.ApiResponse;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous InternalClient type. */
@@ -56,7 +60,7 @@ public final class InternalAsyncClient {
      * }
      * }</pre>
      *
-     * @param request The request parameter.
+     * @param apiRequest The apiRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -66,8 +70,8 @@ public final class InternalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<Response<BinaryData>> postInternalWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.postInternalWithResponseAsync(request, requestOptions);
+    Mono<Response<BinaryData>> postInternalWithResponse(BinaryData apiRequest, RequestOptions requestOptions) {
+        return this.serviceClient.postInternalWithResponseAsync(apiRequest, requestOptions);
     }
 
     /**
@@ -92,5 +96,47 @@ public final class InternalAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<BinaryData>> getInternalWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getInternalWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * The postInternal operation.
+     *
+     * @param apiRequest The apiRequest parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Mono<ResponseInternal> postInternal(ApiRequest apiRequest) {
+        // Generated convenience method for postInternalWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return postInternalWithResponse(BinaryData.fromObject(apiRequest), requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(ResponseInternal.class));
+    }
+
+    /**
+     * The getInternal operation.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Mono<ApiResponse> getInternal() {
+        // Generated convenience method for getInternalWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getInternalWithResponse(requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(ApiResponse.class));
     }
 }

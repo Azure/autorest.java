@@ -5,6 +5,9 @@
 package com._specs_.azure.clientgenerator.core.access;
 
 import com._specs_.azure.clientgenerator.core.access.implementation.InternalOperationsImpl;
+import com._specs_.azure.clientgenerator.core.access.implementation.models.InternalDecoratorModelInInternal;
+import com._specs_.azure.clientgenerator.core.access.implementation.models.NoDecoratorModelInInternal;
+import com._specs_.azure.clientgenerator.core.access.implementation.models.PublicDecoratorModelInInternal;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -106,5 +109,71 @@ public final class InternalOperationClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<BinaryData> publicDecoratorInInternalWithResponse(String name, RequestOptions requestOptions) {
         return this.serviceClient.publicDecoratorInInternalWithResponse(name, requestOptions);
+    }
+
+    /**
+     * The noDecoratorInInternal operation.
+     *
+     * @param name A sequence of textual characters.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return used in an internal operation, should be generated but not exported.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    NoDecoratorModelInInternal noDecoratorInInternal(String name) {
+        // Generated convenience method for noDecoratorInInternalWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return noDecoratorInInternalWithResponse(name, requestOptions)
+                .getValue()
+                .toObject(NoDecoratorModelInInternal.class);
+    }
+
+    /**
+     * The internalDecoratorInInternal operation.
+     *
+     * @param name A sequence of textual characters.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return used in an internal operation, should be generated but not exported.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    InternalDecoratorModelInInternal internalDecoratorInInternal(String name) {
+        // Generated convenience method for internalDecoratorInInternalWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return internalDecoratorInInternalWithResponse(name, requestOptions)
+                .getValue()
+                .toObject(InternalDecoratorModelInInternal.class);
+    }
+
+    /**
+     * The publicDecoratorInInternal operation.
+     *
+     * @param name A sequence of textual characters.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return used in an internal operation but with public decorator, should be generated and exported.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    PublicDecoratorModelInInternal publicDecoratorInInternal(String name) {
+        // Generated convenience method for publicDecoratorInInternalWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return publicDecoratorInInternalWithResponse(name, requestOptions)
+                .getValue()
+                .toObject(PublicDecoratorModelInInternal.class);
     }
 }

@@ -9,9 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Request model. */
+/** The ApiRequest model. */
 @Immutable
-public final class Request {
+public final class ApiRequest {
     /*
      * The property property.
      */
@@ -20,13 +20,13 @@ public final class Request {
     private RequestInner property;
 
     /**
-     * Creates an instance of Request class.
+     * Creates an instance of ApiRequest class.
      *
      * @param property the property value to set.
      */
     @Generated
     @JsonCreator
-    public Request(@JsonProperty(value = "property") RequestInner property) {
+    public ApiRequest(@JsonProperty(value = "property") RequestInner property) {
         this.property = property;
     }
 

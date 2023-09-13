@@ -108,4 +108,26 @@ public final class SharedAsyncClient {
                 .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(SharedModel.class));
     }
+
+    /**
+     * The internal operation.
+     *
+     * @param name A sequence of textual characters.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is a model used by both public and internal operation on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Mono<SharedModel> internal(String name) {
+        // Generated convenience method for internalWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return internalWithResponse(name, requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(SharedModel.class));
+    }
 }
