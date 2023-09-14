@@ -118,7 +118,7 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("sdk-integration", true);
         SETTINGS_MAP.put("regenerate-pom", true);
 
-        SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL");
+        SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL_TYPESPEC");
         SETTINGS_MAP.put("generate-client-interfaces", false);
         SETTINGS_MAP.put("generate-client-as-impl", true);
         SETTINGS_MAP.put("generate-sync-async-clients", true);
