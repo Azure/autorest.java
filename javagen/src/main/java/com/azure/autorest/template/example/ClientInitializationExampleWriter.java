@@ -4,6 +4,7 @@
 package com.azure.autorest.template.example;
 
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -42,6 +43,7 @@ public class ClientInitializationExampleWriter {
         // credential
         imports.add("com.azure.identity.DefaultAzureCredentialBuilder");
         ClassType.AzureKeyCredential.addImportsTo(imports, false);
+        ClassType.KeyCredential.addImportsTo(imports, false);
         ClassType.Configuration.addImportsTo(imports, false);
 
         // client initialization
@@ -88,7 +90,11 @@ public class ClientInitializationExampleWriter {
             if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
                 credentialExpr = ".credential(new DefaultAzureCredentialBuilder().build())";
             } else if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-                credentialExpr = ".credential(new AzureKeyCredential(Configuration.getGlobalConfiguration().get(\"API_KEY\")))";
+                if (JavaSettings.getInstance().isUseKeyCredential()) {
+                    credentialExpr = ".credential(new KeyCredential(Configuration.getGlobalConfiguration().get(\"API_KEY\")))";
+                } else {
+                    credentialExpr = ".credential(new AzureKeyCredential(Configuration.getGlobalConfiguration().get(\"API_KEY\")))";
+                }
             } else {
                 credentialExpr = "";
             }
