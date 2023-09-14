@@ -17,8 +17,7 @@
   "devDependencies": {
     "@typespec/prettier-plugin-typespec": "~0.48.0",
     "prettier-plugin-organize-imports": "3.2.3",
-    "prettier": "~3.0.3",
-    "functions-have-names": "~1.2.3"
+    "prettier": "~3.0.3"
   },
   "overrides": {
     "@typespec/compiler": ">=0.48.0 <1.0.0",

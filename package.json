@@ -40,7 +40,6 @@
   ],
   "devDependencies": {
     "autorest": "^3.0.0",
-    "@microsoft.azure/autorest.testserver": "3.3.45",
-    "functions-have-names": "~1.2.3"
+    "@microsoft.azure/autorest.testserver": "3.3.45"
   }
 }
