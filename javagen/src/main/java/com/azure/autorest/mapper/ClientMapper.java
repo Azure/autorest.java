@@ -330,7 +330,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             if (clientBuilder != null && convenienceMethod.getProtocolMethod().getProxyMethod().getExamples() != null) {
                 // only generate sample for convenience methods with max overload parameters
                 convenienceMethod.getConvenienceMethods().stream()
-                    .filter(clientMethod -> clientMethod.getMethodVisibilityInWrapperClient() == JavaVisibility.Public)
+                    .filter(clientMethod -> clientMethod.getMethodVisibility() == JavaVisibility.Public && clientMethod.getMethodVisibilityInWrapperClient() == JavaVisibility.Public)
                     .filter(clientMethod -> Templates.getClientMethodSampleTemplate()
                         .isExampleIncluded(clientMethod, convenienceMethod))
                     .max((clientMethod1, clientMethod2) -> {
