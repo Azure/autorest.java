@@ -40,12 +40,35 @@ class ResourceTypeNormalization {
 
     private static final Logger LOGGER = new PluginLogger(FluentNamer.getPluginInstance(), ResourceTypeNormalization.class);
 
+    // Move Resource, ProxyResource, TrackedResource as last to process.
+    // This provides chance for extra properties in these schemas to be extracted.
+    // Example: CustomResource extends ProxyResource extends Resource (systemData)
+    // If ProxyResource is processed before CustomResource, it would be replaced by the standard ProxyResource, hence lost systemData property.
+    // Hence, we need to have CustomResource processed first.
+    private static final Set<String> LAST_TO_PROCESS_SCHEMA_NAMES = new HashSet<>(Arrays.asList(
+            ResourceTypeName.PROXY_RESOURCE,
+            ResourceTypeName.PROXY_RESOURCE_AUTO_GENERATED,
+            ResourceTypeName.TRACKED_RESOURCE,
+            ResourceTypeName.TRACKED_RESOURCE_AUTO_GENERATED,
+            ResourceTypeName.RESOURCE,
+            ResourceTypeName.RESOURCE_AUTO_GENERATED,
+            ResourceTypeName.AZURE_RESOURCE,
+            ResourceTypeName.AZURE_RESOURCE_AUTO_GENERATED
+    ));
+
     public CodeModel process(CodeModel codeModel) {
-        codeModel.getSchemas().getObjects().forEach(compositeType -> {
+        List<ObjectSchema> objectSchemas = codeModel.getSchemas().getObjects();
+        List<ObjectSchema> moveToLast = objectSchemas.stream()
+                .filter(o -> LAST_TO_PROCESS_SCHEMA_NAMES.contains(Utils.getJavaName(o)))
+                .collect(Collectors.toList());
+        objectSchemas.removeAll(moveToLast);
+        objectSchemas.addAll(moveToLast);
+
+        objectSchemas.forEach(compositeType -> {
             Optional<ObjectSchema> parentType = getObjectParent(compositeType);
             if (parentType.isPresent()) {
                 getSchemaResourceType(parentType.get())
-                        .ifPresent(type -> adaptForParentSchema(compositeType, type));
+                        .ifPresent(type -> adaptForParentSchema(compositeType, parentType.get(), type));
 
                 if (FluentType.SystemData.getName().equals(Utils.getJavaName(parentType.get()))) {
                     adaptAsSystemData(compositeType);
@@ -223,8 +246,7 @@ class ResourceTypeNormalization {
         return Optional.ofNullable(type);
     }
 
-    private static void adaptForParentSchema(ObjectSchema compositeType, ResourceType type) {
-        ObjectSchema parentType = (ObjectSchema) compositeType.getParents().getImmediate().get(0);
+    private static void adaptForParentSchema(ObjectSchema compositeType, ObjectSchema parentType, ResourceType type) {
         switch (type) {
             case SUB_RESOURCE:
             {
