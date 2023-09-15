@@ -12,13 +12,16 @@ import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Context;
 import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.containerregistrylite.ContainerRegistryManager;
 import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
+import com.azure.mgmtlitetest.mediaservices.models.LiveEventStatus;
 import com.azure.mgmtlitetest.mediaservices.models.MediaService;
 import com.azure.mgmtlitetest.mediaservices.models.SyncStorageKeysInput;
+import com.azure.mgmtlitetest.postgresqlhsc.models.ServerConfiguration;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
@@ -187,6 +190,12 @@ public class LiteCompilationTests {
 
     public void testLroPageable() {
         MediaServicesManager manager = mock(MediaServicesManager.class);
-        manager.liveEvents().listGetStatus(anyString(), anyString(), anyString());
+        PagedIterable<LiveEventStatus> eventStatuses = manager.liveEvents().listGetStatus(anyString(), anyString(), anyString());
+    }
+
+    public void testPropertyExtractFromResource() {
+        ServerConfiguration serverConfiguration = mock(ServerConfiguration.class);
+        // systemData from ProxyResource > Resource
+        SystemData systemData = serverConfiguration.systemData();
     }
 }
