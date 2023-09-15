@@ -300,6 +300,10 @@ public class ClassType implements IType {
         .knownClass(com.azure.core.credential.AzureKeyCredential.class)
         .build();
 
+    public static final ClassType KeyCredential = new ClassType.Builder(false)
+            .knownClass(com.azure.core.credential.KeyCredential.class)
+            .build();
+
     public static final ClassType RetryPolicy = new ClassType.Builder(false)
         .knownClass(com.azure.core.http.policy.RetryPolicy.class)
         .build();

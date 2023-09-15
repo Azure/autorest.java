@@ -20,8 +20,9 @@ import {
   isTemplateDeclaration,
   isTemplateInstance,
 } from "@typespec/compiler";
-import { DurationSchema } from "./common/schemas/time";
 import { SchemaContext } from "@autorest/codemodel";
+import { DurationSchema } from "./common/schemas/time.js";
+import { getNamespace } from "./utils.js";
 
 /** Acts as a cache for processing inputs.
  *
@@ -210,6 +211,17 @@ export function getUnionName(union: Union, typeNameOptions: TypeNameOptions): st
     name = names.join(" | ");
   }
   return name;
+}
+
+export function modelIs(model: Model, name: string, namespace: string): boolean {
+  let currentModel: Model | undefined = model;
+  while (currentModel) {
+    if (currentModel.name === name && getNamespace(currentModel) === namespace) {
+      return true;
+    }
+    currentModel = currentModel.sourceModel;
+  }
+  return false;
 }
 
 export function getAccess(type: Model | Operation | Enum): string | undefined {

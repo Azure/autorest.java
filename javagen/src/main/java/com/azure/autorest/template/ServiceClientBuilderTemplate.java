@@ -34,6 +34,7 @@ import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
+import com.azure.core.http.policy.KeyCredentialPolicy;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
@@ -86,7 +87,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add("java.util.Map");
         imports.add("java.util.HashMap");
         imports.add("java.util.ArrayList");
-        imports.add("com.azure.core.http.HttpHeaders");
+        ClassType.HttpHeaders.addImportsTo(imports, false);
+        ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
         imports.add("java.util.Objects");
         if (settings.isUseClientLogger()) {
             ClassType.ClientLogger.addImportsTo(imports, false);
@@ -458,7 +460,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
     protected void addHttpPolicyImports(Set<String> imports) {
         imports.add(BearerTokenAuthenticationPolicy.class.getName());
+
+        // one of the key credential policy imports will be removed by the formatter depending
+        // on which one is used
         imports.add(AzureKeyCredentialPolicy.class.getName());
+        imports.add(KeyCredentialPolicy.class.getName());
+
         imports.add(HttpPolicyProviders.class.getName());
         imports.add(HttpPipelinePolicy.class.getName());
         imports.add(HttpLoggingPolicy.class.getName());
@@ -510,7 +517,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             // clientOptions header
             function.line("HttpHeaders headers = new HttpHeaders();");
-            function.line(String.format("%s.getHeaders().forEach(header -> headers.set(header.getName(), header.getValue()));", localClientOptionsName));
+            function.line(String.format("%s.getHeaders().forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));", localClientOptionsName));
             function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
 
             function.line("this.pipelinePolicies.stream()" +
@@ -524,23 +531,40 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
                 if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderName())) {
                     logger.error("key-credential-header-name is required for " +
-                            "azurekeycredential credential type");
+                            "key-based credential type");
                     throw new IllegalStateException("key-credential-header-name is required for " +
-                            "azurekeycredential credential type");
+                            "key-based credential type");
                 }
-                function.ifBlock("azureKeyCredential != null", action -> {
-                    if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
-                        function.line("policies.add(new AzureKeyCredentialPolicy(\""
-                                + securityInfo.getHeaderName()
-                                + "\", azureKeyCredential));");
-                    } else {
-                        function.line("policies.add(new AzureKeyCredentialPolicy(\""
-                                + securityInfo.getHeaderName()
-                                + "\", azureKeyCredential, \""
-                                + securityInfo.getHeaderValuePrefix()
-                                + "\"));");
-                    }
-                });
+
+                if (settings.isUseKeyCredential()) {
+                    function.ifBlock("keyCredential != null", action -> {
+                        if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
+                            function.line("policies.add(new KeyCredentialPolicy(\""
+                                    + securityInfo.getHeaderName()
+                                    + "\", keyCredential));");
+                        } else {
+                            function.line("policies.add(new KeyCredentialPolicy(\""
+                                    + securityInfo.getHeaderName()
+                                    + "\", keyCredential, \""
+                                    + securityInfo.getHeaderValuePrefix()
+                                    + "\"));");
+                        }
+                    });
+                } else {
+                    function.ifBlock("azureKeyCredential != null", action -> {
+                        if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
+                            function.line("policies.add(new AzureKeyCredentialPolicy(\""
+                                    + securityInfo.getHeaderName()
+                                    + "\", azureKeyCredential));");
+                        } else {
+                            function.line("policies.add(new AzureKeyCredentialPolicy(\""
+                                    + securityInfo.getHeaderName()
+                                    + "\", azureKeyCredential, \""
+                                    + securityInfo.getHeaderValuePrefix()
+                                    + "\"));");
+                        }
+                    });
+                }
             }
             if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
                 function.ifBlock("tokenCredential != null", action -> {

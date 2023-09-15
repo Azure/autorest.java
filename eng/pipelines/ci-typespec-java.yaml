@@ -2,11 +2,16 @@ trigger:
   branches:
     include:
       - main
+      - hotfix/*
+      - release/*
 
 pr:
   branches:
     include:
       - main
+      - feature/*
+      - hotfix/*
+      - release/*
   paths:
     include:
       - '*'

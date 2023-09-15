@@ -4,6 +4,7 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.OrSchema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -39,6 +40,11 @@ public class UnionMapper implements IMapper<OrSchema, IType> {
         String classPackage = settings.isCustomType(className)
             ? settings.getPackage(settings.getCustomTypesSubpackage())
             : settings.getPackage(settings.getModelsSubpackage());
+
+        if (settings.isDataPlaneClient() && (compositeType.getUsage() != null && compositeType.getUsage().contains(SchemaContext.INTERNAL))) {
+            // internal type, which is not exposed to user
+            classPackage = settings.getPackage(settings.getImplementationSubpackage(), settings.getModelsSubpackage());
+        }
 
         return new ClassType.Builder()
             .packageName(classPackage)

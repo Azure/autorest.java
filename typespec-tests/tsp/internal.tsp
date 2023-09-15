@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 
 @service({
@@ -11,9 +13,9 @@ using Azure.ClientGenerator.Core;
 })
 namespace Cadl.Internal;
 
-// Request and RequestInner will be generated
+// ApiRequest and RequestInner will be generated
 @access(Access.public, "client")
-model Request {
+model ApiRequest {
   property: RequestInner;
 }
 
@@ -21,7 +23,7 @@ model RequestInner {
   name: string;
 }
 
-// ResponseInternal and ResponseInternalInner will not be generated
+// ResponseInternal and ResponseInternalInner will be generated in implementation.models package
 model ResponseInternal {
   property: ResponseInternalInner;
 }
@@ -33,7 +35,7 @@ model ResponseInternalInner {
 
 // Response will be generated as output-only
 @access(Access.public)
-model Response {
+model ApiResponse {
   name: string;
 }
 
@@ -50,22 +52,39 @@ model StandAloneDataInner {
   name: string;
 }
 
-// case when property be Union
+// StandAloneUnion will be generated in implementation.models package
 @access(Access.internal)
 model StandAloneUnion {
   data: url | bytes;
 }
 
+// Color and ColorModel will be generated in implementation.models package
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
+@access(Access.internal)
+@fixed
+enum Color {
+  Red,
+  Blue,
+  Green,
+}
+
+@access(Access.internal, "client")
+enum ColorModel {
+  Red,
+  Blue,
+  Green,
+}
+
 @route("/internal")
 interface InternalOp {
-  // test Request with Access.public
+  // test ApiRequest with Access.public
   @access(Access.public, "python")
   @access(Access.internal, "client")
   @post
-  postInternal(...Request): ResponseInternal;
+  postInternal(...ApiRequest): ResponseInternal;
 
-  // test Response with Access.public
+  // test ApiResponse with Access.public
   @get
   @access(Access.internal, "java")
-  getInternal(): Response;
+  getInternal(): ApiResponse;
 }

@@ -296,11 +296,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 final MethodOverloadType defaultOverloadType = hasNonRequiredParameters(parameters) ? MethodOverloadType.OVERLOAD_MAXIMUM : MethodOverloadType.OVERLOAD_MINIMUM_MAXIMUM;
                 final boolean generateOnlyRequiredParameters = settings.isRequiredParameterClientMethods() && defaultOverloadType == MethodOverloadType.OVERLOAD_MAXIMUM;
 
+                JavaVisibility methodVisibilityInWrapperClient = JavaVisibility.Public;
+                if (operation.getInternalApi() == Boolean.TRUE
+                        || (isProtocolMethod && operation.getGenerateProtocolApi() == Boolean.FALSE)) {
+                    // Client method is package private in wrapper client, so that the client or developer can still invoke it.
+                    methodVisibilityInWrapperClient = JavaVisibility.PackagePrivate;
+                }
+
                 builder.parameters(parameters)
                     .requiredNullableParameterExpressions(requiredParameterExpressions)
                     .validateExpressions(validateExpressions)
                     .methodTransformationDetails(methodTransformationDetails)
-                    .methodVisibilityInWrapperClient(isProtocolMethod && operation.getGenerateProtocolApi() == Boolean.FALSE ? JavaVisibility.PackagePrivate : JavaVisibility.Public)
+                    .methodVisibilityInWrapperClient(methodVisibilityInWrapperClient)
                     .methodPageDetails(null);
 
                 if (isPageable) {

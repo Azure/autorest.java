@@ -3,7 +3,6 @@
 
 package com.azure.autorest.template.example;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -21,6 +20,7 @@ import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.javamodel.JavaFileContents;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
@@ -61,11 +61,7 @@ public class ClientMethodExampleWriter {
                 .collect(Collectors.joining(", "));
 
         this.imports.add("org.junit.jupiter.api.Assertions");
-        this.imports.addAll(nodeVisitor.getImports());
-        // for mapOf
-        this.imports.add(HashMap.class.getName());
         method.getReturnValue().getType().addImportsTo(imports, false);
-        addClientModelImports(method.getReturnValue().getType());
 
         StringBuilder methodInvocation = new StringBuilder();
 
@@ -130,7 +126,7 @@ public class ClientMethodExampleWriter {
                                     } else {
                                         Object firstItem = itemArray.iterator().next();
                                         methodBlock.line("%s firstItem = %s;", responseType.getTypeArguments()[0], "response.iterator().next()");
-                                        writeModelAssertion(methodBlock, nodeVisitor, responseType.getTypeArguments()[0], responseType.getTypeArguments()[0], firstItem, "firstItem");
+                                        writeModelAssertion(methodBlock, nodeVisitor, responseType.getTypeArguments()[0], responseType.getTypeArguments()[0], firstItem, "firstItem", true);
                                     }
                                 }
                             }
@@ -147,7 +143,7 @@ public class ClientMethodExampleWriter {
                 } else if (!ClassType.Void.equals(returnType.asNullable())){
                     methodBlock.line();
                     methodBlock.line("// response assertion");
-                    writeModelAssertion(methodBlock, nodeVisitor, returnType, returnType, response.getBody(), "response");
+                    writeModelAssertion(methodBlock, nodeVisitor, returnType, returnType, response.getBody(), "response", true);
                 }
             } else {
                 methodBlock.line();
@@ -155,47 +151,59 @@ public class ClientMethodExampleWriter {
                 methodBlock.line("Assertions.assertNotNull(response);");
             }
         };
+
+        addNecessaryImports();
     }
 
-    private void addClientModelImports(IType type) {
-        ClientModel clientModel = null;
-        if (type instanceof GenericType) {
-            GenericType responseType = (GenericType) type;
-            if (PagedIterable.class.getSimpleName().equals(responseType.getName())
-                    && ClientModelUtil.isClientModel(responseType.getTypeArguments()[0])) {
-                clientModel = ClientModelUtil.getClientModel(((ClassType) responseType.getTypeArguments()[0]).getName());
-            }
-        } else if (ClientModelUtil.isClientModel(type)) {
-            clientModel = ClientModelUtil.getClientModel(((ClassType) type).getName());
-        }
-        if (clientModel != null) {
-            clientModel.addImportsTo(this.imports, JavaSettings.getInstance());
-        }
+    private void addNecessaryImports() {
+        // write dummy, allow nodeVisitor to collect all necessary imports
+        responseAssertionWriter.accept(new JavaBlock(new JavaFileContents()));
+        this.imports.addAll(nodeVisitor.getImports());
     }
 
+    /**
+     * Write assertions for the given model and its example value.
+     *
+     * @param methodBlock the method block to write assertions to
+     * @param nodeVisitor node visitor for example values
+     * @param modelClientType client type of the model
+     * @param modelWireType wire type of the model
+     * @param modelValue example value of the model
+     * @param modelReference reference of the model that can be used to access the model in generated code
+     * @param rootModel whether the model is in the root of the response
+     */
     private void writeModelAssertion(JavaBlock methodBlock, ModelExampleWriter.ExampleNodeModelInitializationVisitor nodeVisitor,
-                                     IType modelClientType, IType modelWireType, Object modelValue, String modelReference) {
+                                     IType modelClientType, IType modelWireType, Object modelValue, String modelReference, boolean rootModel) {
         if (modelValue != null) {
-            if (modelClientType instanceof ClassType
-                    && ClientModelUtil.isClientModel(modelClientType)
-                    && modelValue instanceof Map) {
+            modelClientType.addImportsTo(this.imports, false);
+            if (modelWireType != null) {
+                modelWireType.addImportsTo(this.imports, false);
+            }
+            if (isClientModel(modelClientType, modelValue)) {
                 methodBlock.line("Assertions.assertNotNull(%s);", modelReference);
                 // Client Model
                 ClassType modelClassType = (ClassType) modelClientType;
                 ClientModel clientModel = ClientModelUtil.getClientModel(modelClassType.getName());
                 if (clientModel.getProperties() != null) {
-                    methodBlock.line();
                     for (ClientModelProperty property : clientModel.getProperties()) {
                         String serializedName = property.getSerializedName();
                         Object propertyValue = ((Map) modelValue).get(serializedName);
                         if (propertyValue != null) {
-                            String propertyReference = String.format("%s%s", modelReference, CodeNamer.toPascalCase(property.getName()));
-                            methodBlock.line("%s %s = %s;", property.getClientType(), propertyReference, String.format("%s.%s()", modelReference, property.getGetterName()));
-                            writeModelAssertion(methodBlock, nodeVisitor, property.getClientType(), property.getWireType(), propertyValue, propertyReference);
+                            if (rootModel) {
+                                methodBlock.line("// verify property \"%s\"", property.getName());
+                            }
+                            String propertyGetter = String.format("%s.%s()", modelReference, property.getGetterName());
+                            if (isClientModel(property.getClientType(), propertyValue) || isList(property.getClientType(), propertyValue)) {
+                                String propertyReference = String.format("%s%s", modelReference, CodeNamer.toPascalCase(property.getName()));
+                                methodBlock.line("%s %s = %s;", property.getClientType(), propertyReference, propertyGetter);
+                                writeModelAssertion(methodBlock, nodeVisitor, property.getClientType(), property.getWireType(), propertyValue, propertyReference, false);
+                            } else {
+                                writeModelAssertion(methodBlock, nodeVisitor, property.getClientType(), property.getWireType(), propertyValue, propertyGetter, false);
+                            }
                         }
                     }
                 }
-            } else if (modelClientType instanceof ListType && modelValue instanceof List) {
+            } else if (isList(modelClientType, modelValue)) {
                 // List
                 List<Object> values = (List<Object>) modelValue;
                 if (values.size() > 0) {
@@ -203,9 +211,14 @@ public class ClientMethodExampleWriter {
                     IType elementType = listType.getElementType();
                     Object firstItemValue = values.iterator().next();
                     if (firstItemValue != null) {
-                        String firstItemReference = String.format("%s%s", modelReference, "FirstItem");
-                        methodBlock.line("%s %s = %s.iterator().next();", elementType, firstItemReference, modelReference);
-                        writeModelAssertion(methodBlock, nodeVisitor, elementType, elementType, values.iterator().next(), firstItemReference);
+                        String firstItemGetter = String.format("%s.iterator().next()", modelReference);
+                        if (isClientModel(elementType, firstItemValue) || isList(elementType, firstItemValue)) {
+                            String firstItemReference = String.format("%s%s", modelReference, "FirstItem");
+                            methodBlock.line("%s %s = %s;", elementType, firstItemReference, firstItemGetter);
+                            writeModelAssertion(methodBlock, nodeVisitor, elementType, elementType, values.iterator().next(), firstItemReference, rootModel);
+                        } else {
+                            writeModelAssertion(methodBlock, nodeVisitor, elementType, elementType, values.iterator().next(), firstItemGetter, rootModel);
+                        }
                     }
                 } else {
                     methodBlock.line("Assertions.assertEquals(0, %s);", String.format("%s.size()", modelReference));
@@ -223,6 +236,16 @@ public class ClientMethodExampleWriter {
                 methodBlock.line("Assertions.assertNotNull(%s);", modelReference);
             }
         }
+    }
+
+    private boolean isList(IType modelClientType, Object modelValue) {
+        return modelClientType instanceof ListType && modelValue instanceof List;
+    }
+
+    private boolean isClientModel(IType modelClientType, Object modelValue) {
+        return modelClientType instanceof ClassType
+                && ClientModelUtil.isClientModel(modelClientType)
+                && modelValue instanceof Map;
     }
 
     /**

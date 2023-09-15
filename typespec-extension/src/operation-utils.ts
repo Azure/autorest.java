@@ -10,12 +10,12 @@ import {
 import { resolveOperationId } from "@typespec/openapi";
 import { ApiVersions, Parameter } from "@autorest/codemodel";
 import { LroMetadata } from "@azure-tools/typespec-azure-core";
+import { getVersion } from "@typespec/versioning";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
-import { getVersion } from "@typespec/versioning";
 import { getNamespace, logWarning, pascalCase } from "./utils.js";
-import { unionReferredByType } from "./type-utils.js";
+import { modelIs, unionReferredByType } from "./type-utils.js";
 
 export const specialHeaderNames = new Set([
   "repeatability-request-id",
@@ -188,11 +188,9 @@ export function isLroNewPollingStrategy(httpOperation: HttpOperation, lroMetadat
   if (
     lroMetadata.pollingInfo &&
     lroMetadata.statusMonitorStep &&
-    lroMetadata.pollingInfo.responseModel.name === "OperationStatus" &&
-    getNamespace(lroMetadata.pollingInfo.responseModel) === "Azure.Core.Foundations"
+    modelIs(lroMetadata.pollingInfo.responseModel, "OperationStatus", "Azure.Core.Foundations")
   ) {
-    useNewStrategy =
-      operation.sourceOperation !== undefined && getNamespace(operation.sourceOperation) === "Azure.Core";
+    useNewStrategy = operationIs(operation, undefined, "Azure.Core");
   }
 
   if (!useNewStrategy) {
@@ -229,4 +227,15 @@ export function cloneOperationParameter(parameter: Parameter): Parameter {
     nullable: parameter.nullable,
     extensions: parameter.extensions,
   });
+}
+
+function operationIs(operation: Operation, name: string | undefined, namespace: string): boolean {
+  let currentOp: Operation | undefined = operation;
+  while (currentOp) {
+    if ((!name || currentOp.name === name) && getNamespace(currentOp) === namespace) {
+      return true;
+    }
+    currentOp = currentOp.sourceOperation;
+  }
+  return false;
 }

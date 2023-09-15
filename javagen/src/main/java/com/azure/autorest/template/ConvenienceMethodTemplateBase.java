@@ -68,9 +68,11 @@ abstract class ConvenienceMethodTemplateBase {
                     addGeneratedAnnotation(classBlock);
                     TemplateUtil.writeClientMethodServiceMethodAnnotation(convenienceMethod, classBlock);
 
+                    JavaVisibility methodVisibility = convenienceMethod.getMethodVisibilityInWrapperClient();
+
                     // convenience method
                     String methodDeclaration = String.format("%1$s %2$s(%3$s)", convenienceMethod.getReturnValue().getType(), getMethodName(convenienceMethod), convenienceMethod.getParametersDeclaration());
-                    classBlock.publicMethod(methodDeclaration, methodBlock -> {
+                    classBlock.method(methodVisibility, null, methodDeclaration, methodBlock -> {
                         methodBlock.line("// Generated convenience method for " + getMethodName(protocolMethod));
 
                         writeMethodImplementation(protocolMethod, convenienceMethod, methodBlock, typeReferenceStaticClasses);

@@ -330,6 +330,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             if (clientBuilder != null && convenienceMethod.getProtocolMethod().getProxyMethod().getExamples() != null) {
                 // only generate sample for convenience methods with max overload parameters
                 convenienceMethod.getConvenienceMethods().stream()
+                    .filter(clientMethod -> clientMethod.getMethodVisibility() == JavaVisibility.Public && clientMethod.getMethodVisibilityInWrapperClient() == JavaVisibility.Public)
                     .filter(clientMethod -> Templates.getClientMethodSampleTemplate()
                         .isExampleIncluded(clientMethod, convenienceMethod))
                     .max((clientMethod1, clientMethod2) -> {
@@ -363,6 +364,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         BiConsumer<AsyncSyncClient, ClientMethod> handleExample = (c, m) -> {
             if (m.getMethodVisibility() == JavaVisibility.Public
+                && m.getMethodVisibilityInWrapperClient() == JavaVisibility.Public
                 && !m.isImplementationOnly() &&
                 (m.getType() == ClientMethodType.SimpleSyncRestResponse
                     || m.getType() == ClientMethodType.PagingSync
@@ -430,7 +432,11 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             clientBuilder.addBuilderTrait(ClientBuilderTrait.TOKEN_CREDENTIAL_TRAIT);
         }
         if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-            clientBuilder.addBuilderTrait(ClientBuilderTrait.AZURE_KEY_CREDENTIAL_TRAIT);
+            if (JavaSettings.getInstance().isUseKeyCredential()) {
+                clientBuilder.addBuilderTrait(ClientBuilderTrait.KEY_CREDENTIAL_TRAIT);
+            } else {
+                clientBuilder.addBuilderTrait(ClientBuilderTrait.AZURE_KEY_CREDENTIAL_TRAIT);
+            }
         }
         serviceClient.getProperties().stream()
             .filter(property -> property.getName().equals("endpoint"))
