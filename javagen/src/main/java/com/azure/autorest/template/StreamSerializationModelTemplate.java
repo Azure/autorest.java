@@ -884,21 +884,39 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String simpleDeserialization = getSimpleJsonDeserialization(wireType, "reader");
         if (simpleDeserialization != null) {
-            if (clientType != wireType) {
-                if (hasConstructorArguments) {
-                    // Need to convert the wire type to the client type for constructors.
-                    simpleDeserialization = wireType.convertToClientType(simpleDeserialization);
-                } else if (fromSuper && !property.isReadOnly()) {
-                    // Need to convert the wire type to the client type for public setters.
-                    simpleDeserialization = wireType.convertToClientType(simpleDeserialization);
+            // Need to convert the wire type to the client type for constructors.
+            // Need to convert the wire type to the client type for public setters.
+            boolean convertToClientType = (clientType != wireType)
+                    && (hasConstructorArguments || (fromSuper && !property.isReadOnly()));
+            BiConsumer<String, JavaBlock> simpleDeserializationConsumer = (logic, block) -> {
+                if (!hasConstructorArguments) {
+                    handleSettingDeserializedValue(block, modelVariableName, property, logic,
+                            fromSuper);
+                } else {
+                    block.line(property.getName() + " = " + logic + ";");
                 }
-            }
+            };
 
-            if (!hasConstructorArguments) {
-                handleSettingDeserializedValue(deserializationBlock, modelVariableName, property, simpleDeserialization,
-                    fromSuper);
+            if (convertToClientType) {
+                // If the wire type is nullable don't attempt to call the convert to client type until it's known that
+                // a value was deserialized. This protects against cases such as UnixTimeLong where the wire type is
+                // Long and the client type of OffsetDateTime. This is converted using Instant.ofEpochMilli(long) which
+                // would result in a null if the Long is null, which is already guarded using
+                // reader.readNullable(nonNullReader -> Instant.ofEpochMillis(nonNullReader.readLong())) but this itself
+                // returns null which would have been passed to OffsetDateTime.ofInstant(Instant, ZoneId) which would
+                // have thrown a NullPointerException.
+                if (wireType.isNullable()) {
+                    deserializationBlock.line(wireType + " " + property.getName() + " = " + simpleDeserialization
+                            + ";");
+                    deserializationBlock.ifBlock(property.getName() + " != null", ifBlock -> {
+                        simpleDeserializationConsumer.accept(wireType.convertToClientType(property.getName()), ifBlock);
+                    });
+                } else {
+                    simpleDeserializationConsumer.accept(wireType.convertToClientType(simpleDeserialization),
+                            deserializationBlock);
+                }
             } else {
-                deserializationBlock.line(property.getName() + " = " + simpleDeserialization + ";");
+                simpleDeserializationConsumer.accept(simpleDeserialization, deserializationBlock);
             }
         } else if (wireType == ClassType.Object) {
             if (!hasConstructorArguments) {
