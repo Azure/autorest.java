@@ -8,7 +8,7 @@ using TypeSpec.Http;
 })
 namespace Cadl.Multipart;
 
-model Data {
+model FormData {
   name: string;
   image: bytes;
 }
@@ -16,4 +16,4 @@ model Data {
 @doc("request is binary")
 @route("/upload/image")
 @post
-op upload(@header contentType: "multipart/form-data", data: Data): void;
+op upload(@header contentType: "multipart/form-data", data: FormData): void;

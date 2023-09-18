@@ -57,7 +57,8 @@ public final class MultipartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> uploadWithResponse(BinaryData request, RequestOptions requestOptions) {
-        // Protocol API does not work, as operation 'upload' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'upload' is
+        // 'multipart/form-data'
         return this.serviceClient.uploadWithResponse(request, requestOptions);
     }
 }

@@ -68,7 +68,6 @@ import {
   shouldGenerateProtocol,
   isInternal,
   SdkClient,
-  isInclude,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -409,9 +408,6 @@ export class CodeModelBuilder {
             this.trackSchemaUsage(schema, {
               usage: [SchemaContext.Internal],
             });
-          } else if (model.kind === "Model" && isInclude(this.sdkContext, model)) {
-            // TODO: deprecate "include"
-            modelAsPublic(model);
           }
 
           const usage = getUsage(model);
@@ -624,7 +620,7 @@ export class CodeModelBuilder {
         generateConvenienceApi = false;
         // make it internal
         codeModelOperation.internalApi = true;
-        apiComment = `Protocol API does not work, as operation '${op.operation.name}' is 'multipart/form-data'`;
+        apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${op.operation.name}' is 'multipart/form-data'`;
         this.logWarning(apiComment);
       } else if (operationIsMultipleContentTypes(op)) {
         // and multiple content types

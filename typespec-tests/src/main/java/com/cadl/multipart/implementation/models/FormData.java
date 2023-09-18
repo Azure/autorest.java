@@ -10,9 +10,9 @@ import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Data model. */
+/** The FormData model. */
 @Immutable
-public final class Data {
+public final class FormData {
     /*
      * The name property.
      */
@@ -28,14 +28,14 @@ public final class Data {
     private byte[] image;
 
     /**
-     * Creates an instance of Data class.
+     * Creates an instance of FormData class.
      *
      * @param name the name value to set.
      * @param image the image value to set.
      */
     @Generated
     @JsonCreator
-    public Data(@JsonProperty(value = "name") String name, @JsonProperty(value = "image") byte[] image) {
+    public FormData(@JsonProperty(value = "name") String name, @JsonProperty(value = "image") byte[] image) {
         this.name = name;
         this.image = image;
     }
