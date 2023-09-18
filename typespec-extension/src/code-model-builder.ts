@@ -611,6 +611,10 @@ export class CodeModelBuilder {
     const convenienceApiName = this.getConvenienceApiName(operation);
     let generateConvenienceApi: boolean = !!convenienceApiName;
 
+    // check for generating protocol api or not
+    codeModelOperation.generateProtocolApi =
+      shouldGenerateProtocol(this.sdkContext, operation) && !codeModelOperation.internalApi;
+
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
       // check if the convenience API need to be disabled for some special cases
@@ -622,7 +626,8 @@ export class CodeModelBuilder {
       } else if (operationIsMultipart(op)) {
         // do not generate convenience method for multipart/form-data
         generateConvenienceApi = false;
-        codeModelOperation.internalApi = true;
+        // do not generate protocol method
+        codeModelOperation.generateProtocolApi = false;
         apiComment = `Protocol API does not work, as operation '${op.operation.name}' is 'multipart/form-data'`;
         this.logWarning(apiComment);
       } else if (operationIsMultipleContentTypes(op)) {
@@ -650,10 +655,6 @@ export class CodeModelBuilder {
       codeModelOperation.language.java = new Language();
       codeModelOperation.language.java.comment = apiComment;
     }
-
-    // check for generating protocol api or not
-    codeModelOperation.generateProtocolApi =
-      shouldGenerateProtocol(this.sdkContext, operation) && !codeModelOperation.internalApi;
 
     codeModelOperation.addRequest(
       new Request({
