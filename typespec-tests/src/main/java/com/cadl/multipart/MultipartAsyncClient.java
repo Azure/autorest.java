@@ -57,7 +57,7 @@ public final class MultipartAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadWithResponse(BinaryData request, RequestOptions requestOptions) {
+    Mono<Response<Void>> uploadWithResponse(BinaryData request, RequestOptions requestOptions) {
         // Protocol API does not work, as operation 'upload' is 'multipart/form-data'
         return this.serviceClient.uploadWithResponseAsync(request, requestOptions);
     }
