@@ -162,6 +162,7 @@ import {
   operationIsMultipleContentTypes,
   cloneOperationParameter,
   operationRefersUnion,
+  operationIsMultipart,
 } from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -617,6 +618,11 @@ export class CodeModelBuilder {
         // do not generate convenience method for JSON Merge Patch
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json'`;
+        this.logWarning(apiComment);
+      } else if (operationIsMultipart(op)) {
+        // do not generate convenience method for multipart/form-data
+        generateConvenienceApi = false;
+        apiComment = `Protocol API does not work, as operation '${op.operation.name}' is 'multipart/form-data'`;
         this.logWarning(apiComment);
       } else if (operationIsMultipleContentTypes(op)) {
         // and multiple content types
