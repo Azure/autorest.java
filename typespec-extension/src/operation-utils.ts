@@ -88,9 +88,17 @@ function pascalCaseForOperationId(name: string) {
 }
 
 export function operationIsJsonMergePatch(op: HttpOperation): boolean {
+  return operationIsContentType(op, "application/merge-patch+json");
+}
+
+export function operationIsMultipart(op: HttpOperation): boolean {
+  return operationIsContentType(op, "multipart/form-data");
+}
+
+function operationIsContentType(op: HttpOperation, contentType: string): boolean {
   for (const param of op.parameters.parameters) {
     if (param.type === "header" && param.name.toLowerCase() === "content-type") {
-      if (param.param.type.kind === "String" && param.param.type.value === "application/merge-patch+json") {
+      if (param.param.type.kind === "String" && param.param.type.value === contentType) {
         return true;
       }
     }

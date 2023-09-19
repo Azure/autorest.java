@@ -68,7 +68,6 @@ import {
   shouldGenerateProtocol,
   isInternal,
   SdkClient,
-  isInclude,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -162,6 +161,7 @@ import {
   operationIsMultipleContentTypes,
   cloneOperationParameter,
   operationRefersUnion,
+  operationIsMultipart,
 } from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -408,9 +408,6 @@ export class CodeModelBuilder {
             this.trackSchemaUsage(schema, {
               usage: [SchemaContext.Internal],
             });
-          } else if (model.kind === "Model" && isInclude(this.sdkContext, model)) {
-            // TODO: deprecate "include"
-            modelAsPublic(model);
           }
 
           const usage = getUsage(model);
@@ -618,6 +615,13 @@ export class CodeModelBuilder {
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json'`;
         this.logWarning(apiComment);
+      } else if (operationIsMultipart(op)) {
+        // do not generate convenience method for multipart/form-data
+        generateConvenienceApi = false;
+        // make it internal
+        codeModelOperation.internalApi = true;
+        apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${op.operation.name}' is 'multipart/form-data'`;
+        this.logWarning(apiComment);
       } else if (operationIsMultipleContentTypes(op)) {
         // and multiple content types
         // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
@@ -646,7 +650,7 @@ export class CodeModelBuilder {
 
     // check for generating protocol api or not
     codeModelOperation.generateProtocolApi =
-      shouldGenerateProtocol(this.sdkContext, operation) && !this.isInternal(this.sdkContext, operation);
+      shouldGenerateProtocol(this.sdkContext, operation) && !codeModelOperation.internalApi;
 
     codeModelOperation.addRequest(
       new Request({
