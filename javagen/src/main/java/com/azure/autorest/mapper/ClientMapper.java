@@ -35,6 +35,7 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.GraalVmConfig;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.clientmodel.PackageInfo;
@@ -316,6 +317,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         if (settings.isGenerateTests() && codeModel.getTestModel() != null) {
             builder.liveTests(LiveTestsMapper.getInstance().map(codeModel.getTestModel()));
         }
+
+        builder.graalVmConfig(GraalVmConfig.fromClient(clientModels, serviceClientsMap.keySet()));
 
         return builder.build();
     }

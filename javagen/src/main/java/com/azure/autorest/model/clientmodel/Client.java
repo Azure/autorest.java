@@ -63,6 +63,7 @@ public class Client {
     private final List<LiveTests> liveTests;
     private final List<UnionModel> unionModels;
     private final List<ClientMethodExample> clientMethodExamples;
+    private final GraalVmConfig graalVmConfig;
 
     /**
      * Create a new Client with the provided values.
@@ -88,7 +89,8 @@ public class Client {
                    ServiceClient serviceClient, List<ServiceClient> serviceClients, ModuleInfo moduleInfo,
                    List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
                    List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
-                   List<LiveTests> liveTests, List<UnionModel> unionModels, List<ClientMethodExample> clientMethodExamples
+                   List<LiveTests> liveTests, List<UnionModel> unionModels, List<ClientMethodExample> clientMethodExamples,
+                   GraalVmConfig graalVmConfig
     ) {
         this.clientName = clientName;
         this.clientDescription = clientDescription;
@@ -109,6 +111,7 @@ public class Client {
         this.liveTests = liveTests;
         this.unionModels = unionModels;
         this.clientMethodExamples = clientMethodExamples;
+        this.graalVmConfig = graalVmConfig;
     }
 
     public final String getClientName() {
@@ -213,6 +216,7 @@ public class Client {
         private List<LiveTests> liveTests = Collections.emptyList();
         private List<UnionModel> unionModels = Collections.emptyList();
         private List<ClientMethodExample> clientMethodExamples = Collections.emptyList();
+        private GraalVmConfig graalVmConfig;
 
         /**
          * Sets the name of this service client.
@@ -394,6 +398,11 @@ public class Client {
             return this;
         }
 
+        public Builder graalVmConfig(GraalVmConfig graalVmConfig) {
+            this.graalVmConfig = graalVmConfig;
+            return this;
+        }
+
         public Client build() {
             if (serviceClient == null && !serviceClients.isEmpty()) {
                 serviceClient = serviceClients.iterator().next();
@@ -416,7 +425,8 @@ public class Client {
                     protocolExamples,
                     liveTests,
                     unionModels,
-                    clientMethodExamples
+                    clientMethodExamples,
+                    graalVmConfig
                 );
         }
     }
