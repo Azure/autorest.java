@@ -4,6 +4,7 @@
 package com.azure.mgmttest;
 
 import com.azure.core.management.Resource;
+import com.azure.core.management.SystemData;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.mgmttest.appservice.fluent.WebSiteManagementClient;
@@ -22,6 +23,7 @@ import com.azure.mgmttest.network.fluent.NetworkInterfacesClient;
 import com.azure.mgmttest.network.fluent.models.NetworkInterfaceInner;
 import com.azure.mgmttest.network.fluent.models.NetworkSecurityGroupInner;
 import com.azure.mgmttest.networkwatcher.fluent.models.PacketCaptureResultInner;
+import com.azure.mgmttest.postgresqlhsc.fluent.models.ServerConfigurationInner;
 import com.azure.mgmttest.resources.fluent.DeploymentsClient;
 import com.azure.mgmttest.resources.fluent.models.DeploymentExtendedInner;
 import com.azure.mgmttest.resources.fluent.models.ResourceGroupInner;
@@ -145,5 +147,11 @@ public class CompilationTests {
 
         GraphErrorException graphException = new GraphErrorException(anyString(), null);
         GraphError graphError = graphException.getValue();
+    }
+
+    public void testPropertyExtractFromResource() {
+        ServerConfigurationInner serverConfiguration = mock(ServerConfigurationInner.class);
+        // systemData from ProxyResource > Resource
+        SystemData systemData = serverConfiguration.systemData();
     }
 }
