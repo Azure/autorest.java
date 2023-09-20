@@ -63,8 +63,16 @@ REM flatten the empty model which has non-empty parent model
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/monitor/resource-manager/Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json --namespace=com.azure.mgmttest.monitor
 if %errorlevel% neq 0 exit /b %errorlevel%
 
+REM extract systemData from Resource
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/29f3116d3ce31f2125d1e2cfb92d6511fcb01c41/specification/postgresqlhsc/resource-manager/Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json --java.namespace=com.azure.mgmttest.postgresqlhsc
+if %errorlevel% neq 0 exit /b %errorlevel%
+
 REM swagger customized Resource and ProxyResource
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2018-08-01/trafficmanager.json --namespace=com.azure.mgmttest.trafficmanager
+if %errorlevel% neq 0 exit /b %errorlevel%
+
+REM ErrorDetails shared in exception and output
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENT_ARGUMENTS% --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/8fa9b5051129dd4808c9be1f5b753af226b044db/specification/iothub/resource-manager/Microsoft.Devices/stable/2023-06-30/iothub.json --namespace=com.azure.mgmttest.iothub
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM fluent lite
@@ -94,10 +102,6 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM model inherit ErrorResponse
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/196886564583ff59186bd0ef44d923120aaf3f78/specification/managednetworkfabric/resource-manager/Microsoft.ManagedNetworkFabric/stable/2023-06-15/NetworkFabrics.json --java.namespace=com.azure.mgmtlitetest.managednetworkfabric
-if %errorlevel% neq 0 exit /b %errorlevel%
-
-REM extract systemData from Resource
-CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/29f3116d3ce31f2125d1e2cfb92d6511fcb01c41/specification/postgresqlhsc/resource-manager/Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json --java.namespace=com.azure.mgmtlitetest.postgresqlhsc
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 REM schema clean-up
