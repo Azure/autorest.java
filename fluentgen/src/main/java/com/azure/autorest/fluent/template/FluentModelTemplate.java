@@ -77,19 +77,25 @@ public class FluentModelTemplate extends ModelTemplate {
         if (FluentType.ManagementError.getName().equals(model.getParentModelName())) {
             // subclass of ManagementError
 
-            if (model.getImplementationDetails() != null
-                    && model.getImplementationDetails().isException()
-                    && !model.getImplementationDetails().isOutput()
-                    && !model.getImplementationDetails().isInput()) {
-                // model used in Exception, also not in any non-Exception input or output
-
-                if (modelNamer == null) {
-                    modelNamer = new ModelNamer();
-                }
-                return modelNamer.modelPropertyGetterName(property);
-            } else {
-                return super.getGetterName(model, property);
+            if (modelNamer == null) {
+                modelNamer = new ModelNamer();
             }
+            return modelNamer.modelPropertyGetterName(property);
+
+            // disabled for now, as e.g. https://github.com/Azure/azure-rest-api-specs/blob/8fa9b5051129dd4808c9be1f5b753af226b044db/specification/iothub/resource-manager/Microsoft.Devices/stable/2023-06-30/iothub.json#L298-L303 makes it usage=output
+//            if (model.getImplementationDetails() != null
+//                    && model.getImplementationDetails().isException()
+//                    && !model.getImplementationDetails().isOutput()
+//                    && !model.getImplementationDetails().isInput()) {
+//                // model used in Exception, also not in any non-Exception input or output
+//
+//                if (modelNamer == null) {
+//                    modelNamer = new ModelNamer();
+//                }
+//                return modelNamer.modelPropertyGetterName(property);
+//            } else {
+//                return super.getGetterName(model, property);
+//            }
         } else {
             return super.getGetterName(model, property);
         }
