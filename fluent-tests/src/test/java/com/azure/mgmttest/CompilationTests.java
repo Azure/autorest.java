@@ -18,6 +18,7 @@ import com.azure.mgmttest.cosmos.models.SqlDatabaseGetPropertiesResource;
 import com.azure.mgmttest.hybridnetwork.fluent.models.DeviceInner;
 import com.azure.mgmttest.hybridnetwork.models.AzureStackEdgeFormat;
 import com.azure.mgmttest.hybridnetwork.models.DevicePropertiesFormat;
+import com.azure.mgmttest.iothub.models.ErrorDetails;
 import com.azure.mgmttest.monitor.fluent.models.DataCollectionRuleResourceInner;
 import com.azure.mgmttest.network.fluent.NetworkInterfacesClient;
 import com.azure.mgmttest.network.fluent.models.NetworkInterfaceInner;
@@ -153,5 +154,10 @@ public class CompilationTests {
         ServerConfigurationInner serverConfiguration = mock(ServerConfigurationInner.class);
         // systemData from ProxyResource > Resource
         SystemData systemData = serverConfiguration.systemData();
+    }
+
+    public void testSharedError() {
+        ErrorDetails errorDetails = mock(ErrorDetails.class);
+        errorDetails.getHttpStatusCode();
     }
 }

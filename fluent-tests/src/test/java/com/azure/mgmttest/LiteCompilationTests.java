@@ -196,5 +196,6 @@ public class LiteCompilationTests {
     public void testModelExtendsErrorResponse() {
         CommonPostActionResponseForStateUpdate actionResponse = mock(CommonPostActionResponseForStateUpdate.class);
         ManagementError error = actionResponse.error();
+        error = actionResponse.innerModel().error();
     }
 }
