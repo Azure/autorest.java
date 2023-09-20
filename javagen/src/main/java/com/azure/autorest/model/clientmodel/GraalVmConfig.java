@@ -34,10 +34,13 @@ public class GraalVmConfig {
     // TODO: Builder
     public static GraalVmConfig fromClient(Collection<ClientModel> models, Collection<ServiceClient> serviceClients) {
         GraalVmConfig result = new GraalVmConfig();
+
+        // Reflect
         result.reflects = models.stream()
                 .map(m -> m.getPackage() + "." + m.getName())
                 .collect(Collectors.toList());
-        // TODO: include Proxy from ServiceClient
+
+        // Proxy
         result.proxies = serviceClients.stream()
                 .flatMap(sc -> {
                     if (sc.getMethodGroupClients() != null) {
@@ -46,8 +49,14 @@ public class GraalVmConfig {
                         return Stream.empty();
                     }
                 })
+                .filter(m -> m.getProxy() != null)
                 .map(m -> m.getPackage() + "." + m.getClassName() + "$" + m.getProxy().getName())
                 .collect(Collectors.toList());
+        result.proxies.addAll(serviceClients.stream()
+                .filter(sc -> sc.getProxy() != null)
+                .map(sc -> sc.getPackage() + "." + sc.getClassName() + "$" + sc.getProxy().getName())
+                .collect(Collectors.toList()));
+
         return result;
     }
 }
