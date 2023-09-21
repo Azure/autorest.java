@@ -38,13 +38,21 @@ public class GraalVmConfig {
     }
 
     // TODO: Builder
-    public static GraalVmConfig fromClient(Collection<ClientModel> models, Collection<ServiceClient> serviceClients) {
+    public static GraalVmConfig fromClient(Collection<ClientModel> models, Collection<EnumType> enums,
+                                           Collection<ClientException> exceptions,
+                                           Collection<ServiceClient> serviceClients) {
         GraalVmConfig result = new GraalVmConfig();
 
         // Reflect
         result.reflects = models.stream()
                 .map(m -> m.getPackage() + "." + m.getName())
                 .collect(Collectors.toList());
+        result.reflects.addAll(enums.stream()
+                .map(e -> e.getPackage() + "." + e.getName())
+                .collect(Collectors.toList()));
+        result.reflects.addAll(exceptions.stream()
+                .map(e -> e.getPackage() + "." + e.getName())
+                .collect(Collectors.toList()));
 
         // Proxy
         result.proxies = serviceClients.stream()
