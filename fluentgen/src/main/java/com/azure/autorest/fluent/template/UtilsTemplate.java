@@ -89,6 +89,7 @@ public class UtilsTemplate implements IJavaTemplate<Void, JavaFile> {
         javaFile.declareImport(imports);
 
         javaFile.classBlock(JavaVisibility.PackagePrivate, Collections.singletonList(JavaModifier.Final), ModelNaming.CLASS_UTILS, classBlock -> {
+            classBlock.constructor(JavaVisibility.Private, String.format("%s()", ModelNaming.CLASS_UTILS), (constructorBlock) -> {});
             METHOD_TEMPLATES.forEach(mt -> mt.writeMethod(classBlock));
 
             // mapPage and PagedIterableImpl class
