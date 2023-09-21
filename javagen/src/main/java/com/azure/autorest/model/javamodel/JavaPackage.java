@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.GraalVmConfig;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.clientmodel.PackageInfo;
@@ -40,6 +41,7 @@ import com.azure.autorest.template.TestProxyAssetsTemplate;
 import com.azure.autorest.util.PossibleCredentialException;
 import org.slf4j.Logger;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -296,6 +298,14 @@ public class JavaPackage {
         TextFile textFile = new TextFile("assets.json", new TestProxyAssetsTemplate().write(project));
         this.checkDuplicateFile(textFile.getFilePath());
         textFiles.add(textFile);
+    }
+
+    public final void addGraalVmConfig(String groupId, String artifactId, GraalVmConfig graalVmConfig) {
+        String metaInfPath = Paths.get("src", "main", "resources", "META-INF", "native-image", groupId, artifactId).toString();
+        TextFile proxyConfigFile = new TextFile(Paths.get(metaInfPath, "proxy-config.json").toString(), graalVmConfig.toProxyConfigJson());
+        textFiles.add(proxyConfigFile);
+        TextFile reflectConfigFile = new TextFile(Paths.get(metaInfPath, "reflect-config.json").toString(), graalVmConfig.toReflectConfigJson());
+        textFiles.add(reflectConfigFile);
     }
 
     protected void checkDuplicateFile(String filePath) {

@@ -325,6 +325,9 @@ public class Javagen extends NewPlugin {
                 // Blank readme sample
                 javaPackage.addProtocolExamplesBlank();
             }
+
+            // GraalVM config
+            javaPackage.addGraalVmConfig(project.getGroupId(), project.getArtifactId(), client.getGraalVmConfig());
         }
         return javaPackage;
     }

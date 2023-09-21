@@ -196,6 +196,11 @@ public class Client {
         return clientMethodExamples;
     }
 
+    /** @return the Graal VM config */
+    public GraalVmConfig getGraalVmConfig() {
+        return graalVmConfig;
+    }
+
     public static class Builder {
         private String clientName;
         private String clientDescription;
