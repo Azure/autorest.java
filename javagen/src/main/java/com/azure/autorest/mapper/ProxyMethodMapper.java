@@ -13,11 +13,8 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModels;
-import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
@@ -113,14 +110,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         IType responseBodyType = MapperUtils.handleResponseSchema(operation, settings);
         if (settings.isDataPlaneClient()) {
             builder.rawResponseBodyType(responseBodyType);
-            if (responseBodyType instanceof ClassType
-                    || responseBodyType instanceof ListType
-                    || responseBodyType instanceof MapType
-                    || responseBodyType == GenericType.FluxByteBuffer) {
-                responseBodyType = ClassType.BinaryData;
-            } else if (responseBodyType instanceof EnumType) {
-                responseBodyType = ClassType.String;
-            }
+            responseBodyType = SchemaUtil.removeModelFromResponse(responseBodyType);
         }
         builder.responseBodyType(responseBodyType);
         IType asyncRestResponseReturnType = getAsyncRestResponseReturnType(operation, responseBodyType, settings.isDataPlaneClient(), settings);

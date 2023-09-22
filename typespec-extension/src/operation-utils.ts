@@ -17,7 +17,7 @@ import { EmitterOptions } from "./emitter.js";
 import { getNamespace, logWarning, pascalCase } from "./utils.js";
 import { modelIs, unionReferredByType } from "./type-utils.js";
 
-export const specialHeaderNames = new Set([
+export const SPECIAL_HEADER_NAMES = new Set([
   "repeatability-request-id",
   "repeatability-first-sent",
   "x-ms-client-request-id",
@@ -25,7 +25,10 @@ export const specialHeaderNames = new Set([
   "return-client-request-id",
 ]);
 
-export const originApiVersion = "modelerfour:synthesized/api-version";
+export const ORIGIN_API_VERSION = "modelerfour:synthesized/api-version";
+
+export const CONTENT_TYPE_KEY = "content-type";
+export const CONTENT_TYPE_APPLICATION_JSON = "application/json";
 
 export async function loadExamples(program: Program, options: EmitterOptions): Promise<Map<Operation, any>> {
   const operationExamplesMap = new Map<Operation, any>();
@@ -167,7 +170,7 @@ export function isPayloadProperty(program: Program, property: ModelProperty) {
 }
 
 export function getClientApiVersions(client: CodeModelClient): ApiVersions | undefined {
-  if (client.globalParameters?.find((it) => it.origin === originApiVersion)) {
+  if (client.globalParameters?.find((it) => it.origin === ORIGIN_API_VERSION)) {
     return client.apiVersions;
   } else {
     return undefined;

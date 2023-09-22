@@ -224,6 +224,10 @@ public class SchemaUtil {
         return returnType;
     }
 
+    public static IType removeModelFromResponse(IType type) {
+        return ClassType.BinaryData;
+    }
+
     /**
      * Maps CADL model to model from external packages.
      *

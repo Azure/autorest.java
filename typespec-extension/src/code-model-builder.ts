@@ -154,14 +154,16 @@ import {
   getServiceVersion,
   operationIsJsonMergePatch,
   isPayloadProperty,
-  originApiVersion,
-  specialHeaderNames,
+  ORIGIN_API_VERSION,
+  SPECIAL_HEADER_NAMES,
   loadExamples,
   isLroNewPollingStrategy,
   operationIsMultipleContentTypes,
   cloneOperationParameter,
   operationRefersUnion,
   operationIsMultipart,
+  CONTENT_TYPE_KEY,
+  CONTENT_TYPE_APPLICATION_JSON,
 } from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -186,7 +188,7 @@ export class CodeModelBuilder {
     this.program = program1;
 
     if (this.options["skip-special-headers"]) {
-      this.options["skip-special-headers"].forEach((it) => specialHeaderNames.add(it.toLowerCase()));
+      this.options["skip-special-headers"].forEach((it) => SPECIAL_HEADER_NAMES.add(it.toLowerCase()));
     }
 
     this.sdkContext = createSdkContext(context as EmitContext<any>);
@@ -839,11 +841,13 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
+    op.requests![0].protocol.http!.mediaTypes = [CONTENT_TYPE_APPLICATION_JSON];
+
     if (isApiVersion(this.sdkContext, param)) {
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
       clientContext.addGlobalParameter(parameter);
-    } else if (specialHeaderNames.has(param.name.toLowerCase())) {
+    } else if (SPECIAL_HEADER_NAMES.has(param.name.toLowerCase())) {
       // special headers
       op.specialHeaders = op.specialHeaders ?? [];
       if (!stringArrayContainsIgnoreCase(op.specialHeaders, param.name)) {
@@ -891,8 +895,7 @@ export class CodeModelBuilder {
       if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
         if (param.type === "query") {
           const queryParamOptions = getQueryParamOptions(this.program, param.param);
-          // TODO (weidxu): remove "as string" after http lib fix the type of queryParamOptions.format
-          switch (queryParamOptions?.format as string) {
+          switch (queryParamOptions?.format) {
             case "csv":
               style = SerializationStyle.Simple;
               break;
@@ -966,14 +969,16 @@ export class CodeModelBuilder {
         this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
       }
 
-      if (param.name.toLowerCase() === "content-type") {
-        let mediaTypes = ["application/json"];
+      if (param.name.toLowerCase() === CONTENT_TYPE_KEY) {
+        let mediaTypes: string[] | undefined = undefined;
         if (schema instanceof ConstantSchema) {
           mediaTypes = [schema.value.value.toString()];
         } else if (schema instanceof SealedChoiceSchema) {
           mediaTypes = schema.choices.map((it) => it.value.toString());
         }
-        op.requests![0].protocol.http!.mediaTypes = mediaTypes;
+        if (mediaTypes) {
+          op.requests![0].protocol.http!.mediaTypes = mediaTypes;
+        }
       }
     }
   }
@@ -1157,12 +1162,22 @@ export class CodeModelBuilder {
   private processParameterBody(op: CodeModelOperation, httpOperation: HttpOperation, body: ModelProperty | Model) {
     const parameters = httpOperation.operation.parameters;
 
+    const requestBodyIsBinary =
+      op.requests![0].protocol.http!.mediaTypes &&
+      op.requests![0].protocol.http!.mediaTypes.length &&
+      !op.requests![0].protocol.http!.mediaTypes.includes(CONTENT_TYPE_APPLICATION_JSON);
+
     let schema: Schema;
-    if (body.kind === "ModelProperty" && body.type.kind === "Scalar" && body.type.name === "bytes") {
+    if (
+      requestBodyIsBinary &&
+      body.kind === "ModelProperty" &&
+      body.type.kind === "Scalar" &&
+      body.type.name === "bytes"
+    ) {
       // handle binary request body
       schema = this.processBinarySchema(body.type);
     } else {
-      schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
+      schema = this.processSchema(body, body.name);
     }
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
       summary: this.getSummary(body),
@@ -1332,8 +1347,11 @@ export class CodeModelBuilder {
     let trackConvenienceApi = op.convenienceApi ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
+      const responseBodyIsBinary =
+        responseBody.contentTypes.length > 0 && !responseBody.contentTypes?.includes(CONTENT_TYPE_APPLICATION_JSON);
+
       bodyType = this.findResponseBody(responseBody.type);
-      if (bodyType.kind === "Scalar" && bodyType.name === "bytes") {
+      if (responseBodyIsBinary && bodyType.kind === "Scalar" && bodyType.name === "bytes") {
         // binary
         response = new BinaryResponse({
           protocol: {
@@ -2347,7 +2365,7 @@ export class CodeModelBuilder {
       ),
       {
         implementation: ImplementationLocation.Client,
-        origin: originApiVersion,
+        origin: ORIGIN_API_VERSION,
         required: true,
         protocol: {
           http: new HttpParameter(parameterLocation),
