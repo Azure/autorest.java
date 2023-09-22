@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
 import com.encode.bytes.implementation.ResponseBodiesImpl;
 
@@ -38,7 +39,7 @@ public final class ResponseBodyClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * byte[]
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -46,7 +47,7 @@ public final class ResponseBodyClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return represent a byte array along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -104,7 +105,7 @@ public final class ResponseBodyClient {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * byte[]
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -112,7 +113,7 @@ public final class ResponseBodyClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return represent a byte array along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -150,14 +151,14 @@ public final class ResponseBodyClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return represent a byte array.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData defaultMethod() {
+    public byte[] defaultMethod() {
         // Generated convenience method for defaultMethodWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return defaultMethodWithResponse(requestOptions).getValue();
+        return defaultMethodWithResponse(requestOptions).getValue().toObject(byte[].class);
     }
 
     /**
@@ -204,14 +205,14 @@ public final class ResponseBodyClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return represent a byte array.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData base64() {
+    public byte[] base64() {
         // Generated convenience method for base64WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64WithResponse(requestOptions).getValue();
+        return base64WithResponse(requestOptions).getValue().toObject(byte[].class);
     }
 
     /**
@@ -226,9 +227,9 @@ public final class ResponseBodyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData base64Url() {
+    public byte[] base64Url() {
         // Generated convenience method for base64UrlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(requestOptions).getValue();
+        return base64UrlWithResponse(requestOptions).getValue().toObject(Base64Url.class).decodedBytes();
     }
 }

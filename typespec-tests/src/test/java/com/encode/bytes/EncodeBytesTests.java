@@ -62,26 +62,28 @@ public class EncodeBytesTests {
 
     @Test
     public void testRequestBody() {
-//        requestClient.defaultMethod(BinaryData.fromBytes(DATA));
-
+        requestClient.defaultMethod(DATA);
 //        requestClient.octetStream(BinaryData.fromBytes(PNG));
-
 //        requestClient.customContentType(BinaryData.fromBytes(PNG));
-
-//        requestClient.base64(DATA);
-
-//        requestClient.base64Url(DATA);
+        requestClient.base64(DATA);
+        requestClient.base64Url(DATA);
     }
 
     @Test
     public void testResponseBody() {
-//        BinaryData ret = responseClient.defaultMethod();
-//        Assertions.assertArrayEquals(DATA, ret.toBytes());
+        byte[] bytes = responseClient.defaultMethod();
+        Assertions.assertArrayEquals(DATA, bytes);
 
-        BinaryData ret = responseClient.octetStream();
-        Assertions.assertArrayEquals(PNG, ret.toBytes());
+        BinaryData binary = responseClient.octetStream();
+        Assertions.assertArrayEquals(PNG, binary.toBytes());
 
-        ret = responseClient.customContentType();
-        Assertions.assertArrayEquals(PNG, ret.toBytes());
+        binary = responseClient.customContentType();
+        Assertions.assertArrayEquals(PNG, binary.toBytes());
+
+        bytes = responseClient.base64();
+        Assertions.assertArrayEquals(DATA, bytes);
+
+        bytes = responseClient.base64Url();
+        Assertions.assertArrayEquals(DATA, bytes);
     }
 }

@@ -207,7 +207,7 @@ public final class ResponseBodiesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * byte[]
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -215,7 +215,7 @@ public final class ResponseBodiesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return represent a byte array along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> defaultMethodWithResponseAsync(RequestOptions requestOptions) {
@@ -229,7 +229,7 @@ public final class ResponseBodiesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * byte[]
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -237,7 +237,7 @@ public final class ResponseBodiesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return represent a byte array along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> defaultMethodWithResponse(RequestOptions requestOptions) {
@@ -339,7 +339,7 @@ public final class ResponseBodiesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * byte[]
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -347,7 +347,7 @@ public final class ResponseBodiesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return represent a byte array along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> base64WithResponseAsync(RequestOptions requestOptions) {
@@ -361,7 +361,7 @@ public final class ResponseBodiesImpl {
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * byte[]
      * }</pre>
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -369,7 +369,7 @@ public final class ResponseBodiesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return represent a byte array along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> base64WithResponse(RequestOptions requestOptions) {

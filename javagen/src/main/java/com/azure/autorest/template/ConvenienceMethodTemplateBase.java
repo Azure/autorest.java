@@ -35,6 +35,7 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.TypeReference;
 
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -291,6 +292,9 @@ abstract class ConvenienceMethodTemplateBase {
         imports.add(JacksonAdapter.class.getName());
         imports.add(CollectionFormat.class.getName());
         imports.add(TypeReference.class.getName());
+
+        // byte[]
+        ClassType.Base64Url.addImportsTo(imports, false);
 
         // flatten payload
         imports.add(Map.class.getName());

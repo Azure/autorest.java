@@ -225,7 +225,10 @@ public class SchemaUtil {
     }
 
     public static IType removeModelFromResponse(IType type) {
-        return ClassType.BinaryData;
+        if (type.asNullable() != ClassType.Void) {
+            type = ClassType.BinaryData;
+        }
+        return type;
     }
 
     /**
