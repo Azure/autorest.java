@@ -17,6 +17,8 @@ import com.encode.bytes.BytesClientBuilder;
 import com.encode.bytes.HeaderClient;
 import com.encode.bytes.PropertyClient;
 import com.encode.bytes.QueryClient;
+import com.encode.bytes.RequestBodyClient;
+import com.encode.bytes.ResponseBodyClient;
 
 class BytesClientTestBase extends TestProxyTestBase {
     protected QueryClient queryClient;
@@ -24,6 +26,10 @@ class BytesClientTestBase extends TestProxyTestBase {
     protected PropertyClient propertyClient;
 
     protected HeaderClient headerClient;
+
+    protected RequestBodyClient requestBodyClient;
+
+    protected ResponseBodyClient responseBodyClient;
 
     @Override
     protected void beforeTest() {
@@ -59,5 +65,27 @@ class BytesClientTestBase extends TestProxyTestBase {
             headerClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         headerClient = headerClientbuilder.buildHeaderClient();
+
+        BytesClientBuilder requestBodyClientbuilder =
+                new BytesClientBuilder()
+                        .httpClient(HttpClient.createDefault())
+                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            requestBodyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            requestBodyClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        requestBodyClient = requestBodyClientbuilder.buildRequestBodyClient();
+
+        BytesClientBuilder responseBodyClientbuilder =
+                new BytesClientBuilder()
+                        .httpClient(HttpClient.createDefault())
+                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            responseBodyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            responseBodyClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        responseBodyClient = responseBodyClientbuilder.buildResponseBodyClient();
     }
 }
