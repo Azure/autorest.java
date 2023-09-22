@@ -202,16 +202,6 @@ public final class HeadersImpl {
     /**
      * The defaultMethod operation.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -229,16 +219,6 @@ public final class HeadersImpl {
 
     /**
      * The defaultMethod operation.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -258,16 +238,6 @@ public final class HeadersImpl {
     /**
      * The base64 operation.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -285,16 +255,6 @@ public final class HeadersImpl {
 
     /**
      * The base64 operation.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -314,16 +274,6 @@ public final class HeadersImpl {
     /**
      * The base64Url operation.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -342,16 +292,6 @@ public final class HeadersImpl {
     /**
      * The base64Url operation.
      *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -369,16 +309,6 @@ public final class HeadersImpl {
 
     /**
      * The base64UrlArray operation.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * @param value Array of Value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -403,16 +333,6 @@ public final class HeadersImpl {
 
     /**
      * The base64UrlArray operation.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
-     * </table>
-     *
-     * You can add these to a request with {@link RequestOptions#addHeader}
      *
      * @param value Array of Value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

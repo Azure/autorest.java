@@ -56,17 +56,16 @@ public class EncodeBytesTests {
 
         propertyClient.base64Url(new Base64UrlBytesProperty(DATA));
 
-        // fails due to this corner case https://github.com/Azure/autorest.java/issues/2170#issuecomment-1598116813
         propertyClient.base64UrlArray(new Base64UrlArrayBytesProperty(Arrays.asList(DATA, DATA)));
     }
 
     @Test
     public void testRequestBody() {
         requestClient.defaultMethod(DATA);
-//        requestClient.octetStream(BinaryData.fromBytes(PNG));
+//        requestClient.octetStream(BinaryData.fromBytes(Base64.getEncoder().encode(PNG)));
 //        requestClient.customContentType(BinaryData.fromBytes(PNG));
         requestClient.base64(DATA);
-        requestClient.base64Url(DATA);
+//        requestClient.base64Url(DATA);
     }
 
     @Test

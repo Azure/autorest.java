@@ -162,8 +162,8 @@ import {
   cloneOperationParameter,
   operationRefersUnion,
   operationIsMultipart,
+  isKnownContentType,
   CONTENT_TYPE_KEY,
-  CONTENT_TYPE_APPLICATION_JSON,
 } from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -841,8 +841,6 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
-    op.requests![0].protocol.http!.mediaTypes = [CONTENT_TYPE_APPLICATION_JSON];
-
     if (isApiVersion(this.sdkContext, param)) {
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
@@ -970,15 +968,13 @@ export class CodeModelBuilder {
       }
 
       if (param.name.toLowerCase() === CONTENT_TYPE_KEY) {
-        let mediaTypes: string[] | undefined = undefined;
+        let mediaTypes = ["application/json"];
         if (schema instanceof ConstantSchema) {
           mediaTypes = [schema.value.value.toString()];
         } else if (schema instanceof SealedChoiceSchema) {
           mediaTypes = schema.choices.map((it) => it.value.toString());
         }
-        if (mediaTypes) {
-          op.requests![0].protocol.http!.mediaTypes = mediaTypes;
-        }
+        op.requests![0].protocol.http!.mediaTypes = mediaTypes;
       }
     }
   }
@@ -1162,14 +1158,14 @@ export class CodeModelBuilder {
   private processParameterBody(op: CodeModelOperation, httpOperation: HttpOperation, body: ModelProperty | Model) {
     const parameters = httpOperation.operation.parameters;
 
-    const requestBodyIsBinary =
+    const unknownRequestBody =
       op.requests![0].protocol.http!.mediaTypes &&
-      op.requests![0].protocol.http!.mediaTypes.length &&
-      !op.requests![0].protocol.http!.mediaTypes.includes(CONTENT_TYPE_APPLICATION_JSON);
+      op.requests![0].protocol.http!.mediaTypes.length > 0 &&
+      !isKnownContentType(op.requests![0].protocol.http!.mediaTypes);
 
     let schema: Schema;
     if (
-      requestBodyIsBinary &&
+      unknownRequestBody &&
       body.kind === "ModelProperty" &&
       body.type.kind === "Scalar" &&
       body.type.name === "bytes"
@@ -1347,11 +1343,11 @@ export class CodeModelBuilder {
     let trackConvenienceApi = op.convenienceApi ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
-      const responseBodyIsBinary =
-        responseBody.contentTypes.length > 0 && !responseBody.contentTypes?.includes(CONTENT_TYPE_APPLICATION_JSON);
+      const unknownResponseBody =
+        responseBody.contentTypes.length > 0 && !isKnownContentType(responseBody.contentTypes);
 
       bodyType = this.findResponseBody(responseBody.type);
-      if (responseBodyIsBinary && bodyType.kind === "Scalar" && bodyType.name === "bytes") {
+      if (unknownResponseBody && bodyType.kind === "Scalar" && bodyType.name === "bytes") {
         // binary
         response = new BinaryResponse({
           protocol: {
