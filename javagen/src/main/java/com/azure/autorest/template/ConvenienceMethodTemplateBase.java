@@ -365,7 +365,11 @@ abstract class ConvenienceMethodTemplateBase {
         if (type == ClassType.BinaryData) {
             return name;
         } else {
-            return String.format("BinaryData.fromObject(%s)", name);
+            if (type == ClassType.Base64Url) {
+                return String.format("BinaryData.fromObject(Base64Url.encode(%s))", name);
+            } else {
+                return String.format("BinaryData.fromObject(%s)", name);
+            }
         }
     }
 

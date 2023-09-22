@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.encode.bytes.implementation.RequestBodiesImpl;
@@ -246,6 +247,7 @@ public final class RequestBodyAsyncClient {
     public Mono<Void> base64Url(byte[] value) {
         // Generated convenience method for base64UrlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(BinaryData.fromObject(value), requestOptions).flatMap(FluxUtil::toMono);
+        return base64UrlWithResponse(BinaryData.fromObject(Base64Url.encode(value)), requestOptions)
+                .flatMap(FluxUtil::toMono);
     }
 }
