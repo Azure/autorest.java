@@ -73,6 +73,30 @@ public final class BytesClientImpl {
         return this.headers;
     }
 
+    /** The RequestBodiesImpl object to access its operations. */
+    private final RequestBodiesImpl requestBodies;
+
+    /**
+     * Gets the RequestBodiesImpl object to access its operations.
+     *
+     * @return the RequestBodiesImpl object.
+     */
+    public RequestBodiesImpl getRequestBodies() {
+        return this.requestBodies;
+    }
+
+    /** The ResponseBodiesImpl object to access its operations. */
+    private final ResponseBodiesImpl responseBodies;
+
+    /**
+     * Gets the ResponseBodiesImpl object to access its operations.
+     *
+     * @return the ResponseBodiesImpl object.
+     */
+    public ResponseBodiesImpl getResponseBodies() {
+        return this.responseBodies;
+    }
+
     /** Initializes an instance of BytesClient client. */
     public BytesClientImpl() {
         this(
@@ -101,5 +125,7 @@ public final class BytesClientImpl {
         this.queries = new QueriesImpl(this);
         this.properties = new PropertiesImpl(this);
         this.headers = new HeadersImpl(this);
+        this.requestBodies = new RequestBodiesImpl(this);
+        this.responseBodies = new ResponseBodiesImpl(this);
     }
 }
