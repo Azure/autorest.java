@@ -582,7 +582,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         IType responseBodyType = MapperUtils.handleResponseSchema(operation, settings);
         if (isProtocolMethod) {
-            responseBodyType = SchemaUtil.removeModelFromResponse(responseBodyType);
+            responseBodyType = SchemaUtil.removeModelFromResponse(responseBodyType, operation);
         }
 
         returnTypeHolder.asyncRestResponseReturnType = Mappers.getProxyMethodMapper()

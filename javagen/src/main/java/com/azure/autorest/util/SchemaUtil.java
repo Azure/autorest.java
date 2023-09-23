@@ -108,8 +108,7 @@ public class SchemaUtil {
         IType responseBodyType = Mappers.getSchemaMapper().map(responseBodySchema);
 
         if (responseBodyType == null) {
-            if (operation.getRequests().stream().anyMatch(req -> HttpMethod.HEAD.name().equalsIgnoreCase(req.getProtocol().getHttp().getMethod()))
-                && operation.getResponses().stream().flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream()).anyMatch(c -> c.equals("404"))) {
+            if (operationIsHeadAsBoolean(operation)) {
                 // Azure core would internally convert the response status code to boolean.
                 responseBodyType = PrimitiveType.Boolean;
             } else if (containsBinaryResponse(operation)) {
@@ -179,7 +178,7 @@ public class SchemaUtil {
             .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
             .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
             .anyMatch(Objects::nonNull)
-            && notFluentLRO(operation, settings) && notDataPlaneLRO(operation, settings);
+            && operationIsNotFluentLRO(operation, settings) && operationIsNotDataPlaneLRO(operation, settings);
     }
 
     /**
@@ -224,11 +223,18 @@ public class SchemaUtil {
         return returnType;
     }
 
-    public static IType removeModelFromResponse(IType type) {
+    public static IType removeModelFromResponse(IType type, Operation operation) {
         if (type.asNullable() != ClassType.Void) {
-            type = ClassType.BinaryData;
+            if (!operationIsHeadAsBoolean(operation)) {
+                type = ClassType.BinaryData;
+            }
         }
         return type;
+    }
+
+    private static boolean operationIsHeadAsBoolean(Operation operation) {
+        return operation.getRequests().stream().anyMatch(req -> HttpMethod.HEAD.name().equalsIgnoreCase(req.getProtocol().getHttp().getMethod()))
+                && operation.getResponses().stream().flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream()).anyMatch(c -> c.equals("404"));
     }
 
     /**
@@ -301,11 +307,11 @@ public class SchemaUtil {
     }
 
     // SyncPoller or PollerFlux does not contain full Response and hence does not have headers
-    private static boolean notFluentLRO(Operation operation, JavaSettings settings) {
+    private static boolean operationIsNotFluentLRO(Operation operation, JavaSettings settings) {
         return !(settings.isFluent() && operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation());
     }
 
-    private static boolean notDataPlaneLRO(Operation operation, JavaSettings settings) {
+    private static boolean operationIsNotDataPlaneLRO(Operation operation, JavaSettings settings) {
         return !(settings.isDataPlaneClient() && operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation());
     }
 

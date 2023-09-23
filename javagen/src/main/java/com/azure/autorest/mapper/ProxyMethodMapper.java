@@ -110,7 +110,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         IType responseBodyType = MapperUtils.handleResponseSchema(operation, settings);
         if (settings.isDataPlaneClient()) {
             builder.rawResponseBodyType(responseBodyType);
-            responseBodyType = SchemaUtil.removeModelFromResponse(responseBodyType);
+            responseBodyType = SchemaUtil.removeModelFromResponse(responseBodyType, operation);
         }
         builder.responseBodyType(responseBodyType);
         IType asyncRestResponseReturnType = getAsyncRestResponseReturnType(operation, responseBodyType, settings.isDataPlaneClient(), settings);

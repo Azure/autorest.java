@@ -569,11 +569,11 @@ public final class HttpSuccessClient {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return whether resource exists along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> head404WithResponse(RequestOptions requestOptions) {
+    public Response<Boolean> head404WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.head404WithResponse(requestOptions);
     }
 }
