@@ -106,7 +106,7 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Boolean>> get200(
+        Mono<Response<BinaryData>> get200(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -124,7 +124,7 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Boolean> get200Sync(
+        Response<BinaryData> get200Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -142,7 +142,7 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Boolean>> options200(
+        Mono<Response<BinaryData>> options200(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -160,7 +160,7 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Boolean> options200Sync(
+        Response<BinaryData> options200Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -743,7 +743,7 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Boolean>> head404(
+        Mono<Response<BinaryData>> head404(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -758,7 +758,7 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Boolean> head404Sync(
+        Response<BinaryData> head404Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -814,7 +814,7 @@ public final class HttpSuccessImpl {
      * @return 200 success along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> get200WithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> get200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get200(this.client.getHost(), accept, requestOptions, context));
     }
@@ -836,7 +836,7 @@ public final class HttpSuccessImpl {
      * @return 200 success along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> get200WithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> get200WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.get200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
@@ -858,7 +858,7 @@ public final class HttpSuccessImpl {
      * @return simple boolean along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> options200WithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> options200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.options200(this.client.getHost(), accept, requestOptions, context));
@@ -881,7 +881,7 @@ public final class HttpSuccessImpl {
      * @return simple boolean along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> options200WithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> options200WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.options200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
@@ -1869,10 +1869,10 @@ public final class HttpSuccessImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> head404WithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> head404WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head404(this.client.getHost(), accept, requestOptions, context));
     }
@@ -1890,10 +1890,10 @@ public final class HttpSuccessImpl {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return whether resource exists along with {@link Response}.
+     * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> head404WithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> head404WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.head404Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }

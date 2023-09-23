@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.HttpSuccessImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
@@ -65,7 +66,7 @@ public final class HttpSuccessClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> get200WithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> get200WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get200WithResponse(requestOptions);
     }
 
@@ -87,7 +88,7 @@ public final class HttpSuccessClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> options200WithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> options200WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.options200WithResponse(requestOptions);
     }
 
@@ -568,11 +569,11 @@ public final class HttpSuccessClient {
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return whether resource exists along with {@link Response}.
+     * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> head404WithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> head404WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.head404WithResponse(requestOptions);
     }
 }
