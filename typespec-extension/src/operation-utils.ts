@@ -29,24 +29,26 @@ export const ORIGIN_API_VERSION = "modelerfour:synthesized/api-version";
 
 export const CONTENT_TYPE_KEY = "content-type";
 
-export function isKnownContentType(contentTypes: string[]): boolean {
-  // azure-core SerializerEncoding.SUPPORTED_MIME_TYPES
-  const supported_mime_types = new Set<string>([
-    "text/xml",
-    "application/xml",
-    "application/json",
-    "text/css",
-    "text/csv",
-    "text/html",
-    "text/javascript",
-    "text/plain",
-    // not in azure-core
-    "application/merge-patch+json",
-  ]);
+// azure-core SerializerEncoding.SUPPORTED_MIME_TYPES
+const SUPPORTED_MIME_TYPES = new Set<string>([
+  "text/xml",
+  "application/xml",
+  "application/json",
+  "text/css",
+  "text/csv",
+  "text/html",
+  "text/javascript",
+  "text/plain",
+  // not in azure-core
+  "application/merge-patch+json",
+]);
 
-  return contentTypes.some((it) => {
-    return supported_mime_types.has(it);
-  });
+export function isKnownContentType(contentTypes: string[]): boolean {
+  return contentTypes
+    .map((it) => it.toLowerCase())
+    .some((it) => {
+      return SUPPORTED_MIME_TYPES.has(it);
+    });
 }
 
 export async function loadExamples(program: Program, options: EmitterOptions): Promise<Map<Operation, any>> {
