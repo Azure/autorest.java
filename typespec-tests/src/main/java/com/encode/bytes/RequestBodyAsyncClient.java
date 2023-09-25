@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.encode.bytes.implementation.RequestBodiesImpl;
@@ -106,22 +107,11 @@ public final class RequestBodyAsyncClient {
     /**
      * The base64 operation.
      *
-     * @param value Represent a byte array.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64WithResponse(byte[] value, RequestOptions requestOptions) {
-        return this.serviceClient.base64WithResponseAsync(value, requestOptions);
-    }
-
-    /**
-     * The base64Url operation.
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * byte[]
+     * }</pre>
      *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -133,7 +123,30 @@ public final class RequestBodyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64UrlWithResponse(byte[] value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> base64WithResponse(BinaryData value, RequestOptions requestOptions) {
+        return this.serviceClient.base64WithResponseAsync(value, requestOptions);
+    }
+
+    /**
+     * The base64Url operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Base64Url
+     * }</pre>
+     *
+     * @param value Represent a byte array.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> base64UrlWithResponse(BinaryData value, RequestOptions requestOptions) {
         return this.serviceClient.base64UrlWithResponseAsync(value, requestOptions);
     }
 
@@ -214,7 +227,7 @@ public final class RequestBodyAsyncClient {
     public Mono<Void> base64(byte[] value) {
         // Generated convenience method for base64WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64WithResponse(value, requestOptions).flatMap(FluxUtil::toMono);
+        return base64WithResponse(BinaryData.fromObject(value), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -234,6 +247,7 @@ public final class RequestBodyAsyncClient {
     public Mono<Void> base64Url(byte[] value) {
         // Generated convenience method for base64UrlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(value, requestOptions).flatMap(FluxUtil::toMono);
+        return base64UrlWithResponse(BinaryData.fromObject(Base64Url.encode(value)), requestOptions)
+                .flatMap(FluxUtil::toMono);
     }
 }

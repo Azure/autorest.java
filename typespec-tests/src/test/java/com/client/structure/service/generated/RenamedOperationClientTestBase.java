@@ -27,6 +27,7 @@ class RenamedOperationClientTestBase extends TestProxyTestBase {
     protected void beforeTest() {
         RenamedOperationClientBuilder renamedOperationClientbuilder =
                 new RenamedOperationClientBuilder()
+                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
                         .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
@@ -39,6 +40,7 @@ class RenamedOperationClientTestBase extends TestProxyTestBase {
 
         RenamedOperationClientBuilder groupClientbuilder =
                 new RenamedOperationClientBuilder()
+                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
                         .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));

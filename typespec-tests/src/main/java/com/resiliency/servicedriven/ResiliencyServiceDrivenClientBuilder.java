@@ -7,6 +7,7 @@ package com.resiliency.servicedriven;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaderName;
@@ -41,7 +42,8 @@ import java.util.Objects;
 @ServiceClientBuilder(serviceClients = {ResiliencyServiceDrivenClient.class, ResiliencyServiceDrivenAsyncClient.class})
 public final class ResiliencyServiceDrivenClientBuilder
         implements HttpTrait<ResiliencyServiceDrivenClientBuilder>,
-                ConfigurationTrait<ResiliencyServiceDrivenClientBuilder> {
+                ConfigurationTrait<ResiliencyServiceDrivenClientBuilder>,
+                EndpointTrait<ResiliencyServiceDrivenClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -149,6 +151,19 @@ public final class ResiliencyServiceDrivenClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated private String endpoint;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public ResiliencyServiceDrivenClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the
      * deployment when the service had only one api version. 'v2' is for the deployment when the service had
      * api-versions 'v1' and 'v2'.
@@ -217,6 +232,7 @@ public final class ResiliencyServiceDrivenClientBuilder
                 new ResiliencyServiceDrivenClientImpl(
                         localPipeline,
                         JacksonAdapter.createDefaultSerializerAdapter(),
+                        this.endpoint,
                         this.serviceDeploymentVersion,
                         localServiceVersion);
         return client;

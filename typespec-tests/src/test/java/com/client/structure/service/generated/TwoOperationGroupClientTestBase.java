@@ -27,6 +27,7 @@ class TwoOperationGroupClientTestBase extends TestProxyTestBase {
     protected void beforeTest() {
         TwoOperationGroupClientBuilder group1Clientbuilder =
                 new TwoOperationGroupClientBuilder()
+                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
                         .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
@@ -39,6 +40,7 @@ class TwoOperationGroupClientTestBase extends TestProxyTestBase {
 
         TwoOperationGroupClientBuilder group2Clientbuilder =
                 new TwoOperationGroupClientBuilder()
+                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
                         .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));

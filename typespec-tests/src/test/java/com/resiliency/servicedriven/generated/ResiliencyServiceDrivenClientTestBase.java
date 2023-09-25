@@ -24,6 +24,7 @@ class ResiliencyServiceDrivenClientTestBase extends TestProxyTestBase {
     protected void beforeTest() {
         ResiliencyServiceDrivenClientBuilder resiliencyServiceDrivenClientbuilder =
                 new ResiliencyServiceDrivenClientBuilder()
+                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
                         .serviceDeploymentVersion(
                                 Configuration.getGlobalConfiguration()
                                         .get("SERVICEDEPLOYMENTVERSION", "servicedeploymentversion"))

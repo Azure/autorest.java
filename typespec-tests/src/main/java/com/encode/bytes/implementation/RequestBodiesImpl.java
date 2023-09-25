@@ -6,7 +6,6 @@ package com.encode.bytes.implementation;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.Post;
@@ -21,8 +20,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.util.Base64Url;
-import com.azure.core.util.Base64Util;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -166,7 +163,7 @@ public final class RequestBodiesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/encode/bytes/body/request/base64")
+        @Post("/encode/bytes/body/request/base64")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -179,12 +176,12 @@ public final class RequestBodiesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> base64(
-                @HeaderParam("value") String value,
                 @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData value,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/encode/bytes/body/request/base64")
+        @Post("/encode/bytes/body/request/base64")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -197,12 +194,12 @@ public final class RequestBodiesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> base64Sync(
-                @HeaderParam("value") String value,
                 @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData value,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/encode/bytes/body/request/base64url")
+        @Post("/encode/bytes/body/request/base64url")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -215,12 +212,12 @@ public final class RequestBodiesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> base64Url(
-                @HeaderParam("value") Base64Url value,
                 @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData value,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/encode/bytes/body/request/base64url")
+        @Post("/encode/bytes/body/request/base64url")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -233,8 +230,8 @@ public final class RequestBodiesImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> base64UrlSync(
-                @HeaderParam("value") Base64Url value,
                 @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData value,
                 RequestOptions requestOptions,
                 Context context);
     }
@@ -386,6 +383,12 @@ public final class RequestBodiesImpl {
     /**
      * The base64 operation.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * byte[]
+     * }</pre>
+     *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -395,15 +398,20 @@ public final class RequestBodiesImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64WithResponseAsync(byte[] value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> base64WithResponseAsync(BinaryData value, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String valueConverted = Base64Util.encodeToString(value);
-        return FluxUtil.withContext(context -> service.base64(valueConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.base64(accept, value, requestOptions, context));
     }
 
     /**
      * The base64 operation.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * byte[]
+     * }</pre>
+     *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -413,14 +421,19 @@ public final class RequestBodiesImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64WithResponse(byte[] value, RequestOptions requestOptions) {
+    public Response<Void> base64WithResponse(BinaryData value, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String valueConverted = Base64Util.encodeToString(value);
-        return service.base64Sync(valueConverted, accept, requestOptions, Context.NONE);
+        return service.base64Sync(accept, value, requestOptions, Context.NONE);
     }
 
     /**
      * The base64Url operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Base64Url
+     * }</pre>
      *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -431,14 +444,19 @@ public final class RequestBodiesImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64UrlWithResponseAsync(byte[] value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> base64UrlWithResponseAsync(BinaryData value, RequestOptions requestOptions) {
         final String accept = "application/json";
-        Base64Url valueConverted = Base64Url.encode(value);
-        return FluxUtil.withContext(context -> service.base64Url(valueConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.base64Url(accept, value, requestOptions, context));
     }
 
     /**
      * The base64Url operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * Base64Url
+     * }</pre>
      *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -449,9 +467,8 @@ public final class RequestBodiesImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64UrlWithResponse(byte[] value, RequestOptions requestOptions) {
+    public Response<Void> base64UrlWithResponse(BinaryData value, RequestOptions requestOptions) {
         final String accept = "application/json";
-        Base64Url valueConverted = Base64Url.encode(value);
-        return service.base64UrlSync(valueConverted, accept, requestOptions, Context.NONE);
+        return service.base64UrlSync(accept, value, requestOptions, Context.NONE);
     }
 }

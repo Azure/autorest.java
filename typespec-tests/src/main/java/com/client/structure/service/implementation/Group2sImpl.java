@@ -46,7 +46,7 @@ public final class Group2sImpl {
      * The interface defining all the services for TwoOperationGroupClientGroup2s to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000/client/structure/{client}")
+    @Host("{endpoint}/client/structure/{client}")
     @ServiceInterface(name = "TwoOperationGroupCli")
     public interface Group2sService {
         @Post("/two")
@@ -62,6 +62,7 @@ public final class Group2sImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> two(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -80,6 +81,7 @@ public final class Group2sImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> twoSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -98,6 +100,7 @@ public final class Group2sImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> five(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -116,6 +119,7 @@ public final class Group2sImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fiveSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -134,6 +138,7 @@ public final class Group2sImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> six(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -152,6 +157,7 @@ public final class Group2sImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> sixSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -171,7 +177,10 @@ public final class Group2sImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> twoWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.two(this.client.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context ->
+                        service.two(
+                                this.client.getEndpoint(), this.client.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -187,7 +196,8 @@ public final class Group2sImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> twoWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.twoSync(this.client.getClient(), accept, requestOptions, Context.NONE);
+        return service.twoSync(
+                this.client.getEndpoint(), this.client.getClient(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -203,7 +213,10 @@ public final class Group2sImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fiveWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.five(this.client.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context ->
+                        service.five(
+                                this.client.getEndpoint(), this.client.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -219,7 +232,8 @@ public final class Group2sImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fiveWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.fiveSync(this.client.getClient(), accept, requestOptions, Context.NONE);
+        return service.fiveSync(
+                this.client.getEndpoint(), this.client.getClient(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -235,7 +249,10 @@ public final class Group2sImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sixWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.six(this.client.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context ->
+                        service.six(
+                                this.client.getEndpoint(), this.client.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -251,6 +268,7 @@ public final class Group2sImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sixWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.sixSync(this.client.getClient(), accept, requestOptions, Context.NONE);
+        return service.sixSync(
+                this.client.getEndpoint(), this.client.getClient(), accept, requestOptions, Context.NONE);
     }
 }
