@@ -302,10 +302,17 @@ public class JavaPackage {
 
     public final void addGraalVmConfig(String groupId, String artifactId, GraalVmConfig graalVmConfig) {
         String metaInfPath = Paths.get("src", "main", "resources", "META-INF", "native-image", groupId, artifactId).toString();
+
         TextFile proxyConfigFile = new TextFile(Paths.get(metaInfPath, "proxy-config.json").toString(), graalVmConfig.toProxyConfigJson());
         textFiles.add(proxyConfigFile);
+
         TextFile reflectConfigFile = new TextFile(Paths.get(metaInfPath, "reflect-config.json").toString(), graalVmConfig.toReflectConfigJson());
         textFiles.add(reflectConfigFile);
+
+        if (graalVmConfig.generateResourceConfig()) {
+            TextFile resourceConfigFile = new TextFile(Paths.get(metaInfPath, "resource-config.json").toString(), graalVmConfig.toResourceConfigJson(artifactId));
+            textFiles.add(resourceConfigFile);
+        }
     }
 
     protected void checkDuplicateFile(String filePath) {

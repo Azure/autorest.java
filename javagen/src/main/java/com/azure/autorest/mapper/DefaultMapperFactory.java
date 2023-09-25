@@ -118,4 +118,9 @@ public class DefaultMapperFactory implements MapperFactory {
     public UnionModelMapper getUnionModelMapper() {
         return UnionModelMapper.getInstance();
     }
+
+    @Override
+    public GraalVmConfigMapper getGraalVmConfigMapper() {
+        return GraalVmConfigMapper.getInstance();
+    }
 }

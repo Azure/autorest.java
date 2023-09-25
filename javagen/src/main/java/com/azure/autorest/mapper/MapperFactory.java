@@ -50,4 +50,6 @@ public interface MapperFactory {
     UnionMapper getUnionMapper();
 
     UnionModelMapper getUnionModelMapper();
+
+    GraalVmConfigMapper getGraalVmConfigMapper();
 }

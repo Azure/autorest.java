@@ -40,10 +40,12 @@ public class Project {
 
     private static final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), Project.class);
 
+    public static final String AZURE_GROUP_ID = "com.azure";
+
     protected String serviceName;
     protected String serviceDescription;
     protected String namespace;
-    protected String groupId = "com.azure";
+    protected String groupId = AZURE_GROUP_ID;
     protected String artifactId;
     protected String version = "1.0.0-beta.1";
     protected final List<String> pomDependencyIdentifiers = new ArrayList<>();

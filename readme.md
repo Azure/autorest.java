@@ -71,7 +71,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--generate-client-as-impl`|Append "Impl" to the names of service clients and method groups and place them in the `implementation` sub-package. Default is false.|
 |`--generate-client-interfaces`|Implies `--generate-client-as-impl` and generates interfaces for all the "Impl"s. Default is false.|
 |`--generate-sync-async-clients`|Implies `--generate-client-as-impl` and generates sync and async convenience layer clients for all the "Impl"s. Default is false.|
-|`--generate-builder-per-client`| Requires `--generate-sync-async-clients`, and generates one ClientBuilder for each Client. Default is false.|
+|`--generate-builder-per-client`|Requires `--generate-sync-async-clients`, and generates one ClientBuilder for each Client. Default is false.|
 |`--implementation-subpackage=STRING`|The sub-package that the Service client and Method Group client implementation classes will be put into. Default is `implementation`.|
 |`--models-subpackage=STRING`|The sub-package that Enums, Exceptions, and Model types will be put into. Default is `models`.|
 |`--sync-methods=all\|essential\|none`|Specifies mode for generating sync wrappers. Supported value are <br>&nbsp;&nbsp;`essential` - generates only one sync returning body or header (default) <br>&nbsp;&nbsp;`all` - generates one sync method for each async method<br>&nbsp;&nbsp;`none` - does not generate any sync methods|
@@ -98,6 +98,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--use-input-stream-for-binary`|Indicates that `InputStream` is used for binary response body. By default, `BinaryData` is used.|
 |`--enable-page-size`|Indicates that `maxpagesize` query parameter be supplied via `byPage` API in `PagedFlux` or `PagedIterable`, instead of via client method parameter.|
 |`--use-key-credential`|Indicates that builder uses `KeyCredential` for API key.|
+|`--graal-vm-config`|Generates GraalVM config under `resources/META-INF/native-image`.|
 
 ## Settings for minimal data-plane clients
 

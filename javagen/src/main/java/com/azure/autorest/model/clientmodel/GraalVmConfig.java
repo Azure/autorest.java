@@ -6,73 +6,23 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.util.TemplateUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class GraalVmConfig {
 
-    private List<String> proxies = new ArrayList<>();
-    private List<String> reflects = new ArrayList<>();
-    private List<String> resources = new ArrayList<>();
+    private final List<String> proxies;
+    private final List<String> reflects;
+    private final boolean fluent;
 
-    private GraalVmConfig() {
-
+    public GraalVmConfig(List<String> proxies, List<String> reflects, boolean fluent) {
+        this.proxies = proxies;
+        this.reflects = reflects;
+        this.fluent = fluent;
     }
 
-    public List<String> getProxies() {
-        return proxies;
-    }
-
-    public List<String> getReflects() {
-        return reflects;
-    }
-
-    public List<String> getResources() {
-        return resources;
-    }
-
-    // TODO: Builder
-    public static GraalVmConfig fromClient(Collection<ClientModel> models, Collection<EnumType> enums,
-                                           Collection<ClientException> exceptions,
-                                           Collection<ServiceClient> serviceClients) {
-        GraalVmConfig result = new GraalVmConfig();
-
-        // Reflect
-        result.reflects = models.stream()
-                .map(m -> m.getPackage() + "." + m.getName())
-                .collect(Collectors.toList());
-        result.reflects.addAll(enums.stream()
-                .map(e -> e.getPackage() + "." + e.getName())
-                .collect(Collectors.toList()));
-        result.reflects.addAll(exceptions.stream()
-                .map(e -> e.getPackage() + "." + e.getName())
-                .collect(Collectors.toList()));
-
-        // Proxy
-        result.proxies = serviceClients.stream()
-                .flatMap(sc -> {
-                    if (sc.getMethodGroupClients() != null) {
-                        return sc.getMethodGroupClients().stream();
-                    } else {
-                        return Stream.empty();
-                    }
-                })
-                .filter(m -> m.getProxy() != null)
-                .map(m -> m.getPackage() + "." + m.getClassName() + "$" + m.getProxy().getName())
-                .collect(Collectors.toList());
-        result.proxies.addAll(serviceClients.stream()
-                .filter(sc -> sc.getProxy() != null)
-                .map(sc -> sc.getPackage() + "." + sc.getClassName() + "$" + sc.getProxy().getName())
-                .collect(Collectors.toList()));
-
-        return result;
-    }
-
-    private static class Reflect {
+    private static class ReflectConfig {
         @JsonProperty("name")
         private final String name;
         @JsonProperty("allDeclaredConstructors")
@@ -82,9 +32,43 @@ public class GraalVmConfig {
         @JsonProperty("allDeclaredMethods")
         private final boolean allDeclaredMethods = true;
 
-        private Reflect(String name) {
+        private ReflectConfig(String name) {
             this.name = name;
         }
+    }
+
+    private static class ResourceConfig {
+
+        private static class Pattern {
+            @JsonProperty("pattern")
+            private final String pattern;
+
+            private Pattern(String pattern) {
+                this.pattern = pattern;
+            }
+        }
+
+        private static class Resource {
+            @JsonProperty("includes")
+            private final List<Pattern> includes;
+
+            public Resource(List<Pattern> includes) {
+                this.includes = includes;
+            }
+        }
+
+        @JsonProperty("resources")
+        private final Resource resources;
+        private final List<Object> bundles = Collections.emptyList();
+
+        private ResourceConfig(String artifactId) {
+            this.resources = new Resource(Collections.singletonList(
+                    new Pattern("\\Q" + artifactId + ".properties" + "\\E")));
+        }
+    }
+
+    public boolean generateResourceConfig() {
+        return !this.fluent;
     }
 
     // TODO: Template
@@ -94,7 +78,11 @@ public class GraalVmConfig {
     }
 
     public String toReflectConfigJson() {
-        List<Reflect> result = reflects.stream().map(Reflect::new).collect(Collectors.toList());
+        List<ReflectConfig> result = reflects.stream().map(ReflectConfig::new).collect(Collectors.toList());
         return TemplateUtil.prettyPrintToJson(result);
+    }
+
+    public String toResourceConfigJson(String artifactId) {
+        return TemplateUtil.prettyPrintToJson(new ResourceConfig(artifactId));
     }
 }

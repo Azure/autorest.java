@@ -35,6 +35,7 @@ public class JavaSettings {
     private static Logger logger;
     private final boolean useKeyCredential;
     private boolean noCustomHeaders;
+
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
             header = MICROSOFT_MIT_LICENSE_HEADER + "\n" + String.format(DEFAULT_CODE_GENERATION_HEADER, VERSION);
@@ -169,7 +170,8 @@ public class JavaSettings {
                 // were generated with required = true set in JsonProperty annotation
                 getBooleanValue(host, "disable-required-property-annotation", false),
                 getBooleanValue(host, "enable-page-size", false),
-                getBooleanValue(host, "use-key-credential", false)
+                getBooleanValue(host, "use-key-credential", false),
+                getBooleanValue(host, "graal-vm-config", false)
             );
         }
         return instance;
@@ -322,7 +324,8 @@ public class JavaSettings {
         boolean urlAsString,
         boolean disableRequiredPropertyAnnotation,
         boolean pageSizeEnabled,
-        boolean useKeyCredential) {
+        boolean useKeyCredential,
+        boolean generateGraalVmConfig) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -420,6 +423,7 @@ public class JavaSettings {
         this.disableRequiredJsonAnnotation = disableRequiredPropertyAnnotation;
         this.pageSizeEnabled = pageSizeEnabled;
         this.useKeyCredential = useKeyCredential;
+        this.generateGraalVmConfig = generateGraalVmConfig;
     }
 
 
@@ -895,6 +899,12 @@ public class JavaSettings {
     private final boolean pageSizeEnabled;
     public boolean isPageSizeEnabled() {
         return pageSizeEnabled;
+    }
+
+    private final boolean generateGraalVmConfig;
+
+    public boolean isGenerateGraalVmConfig() {
+        return generateGraalVmConfig;
     }
 
     public static class PollingDetails {
