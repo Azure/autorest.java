@@ -16,6 +16,8 @@ import java.time.ZoneOffset;
 /** The TransformationAsRequiredFields model. */
 @Immutable
 public class TransformationAsRequiredFields {
+    private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+
     /*
      * The rfc1123NonRequired property.
      */
@@ -130,7 +132,7 @@ public class TransformationAsRequiredFields {
      */
     public byte[] getUrlBase64EncodedRequired() {
         if (this.urlBase64EncodedRequired == null) {
-            return new byte[0];
+            return EMPTY_BYTE_ARRAY;
         }
         return this.urlBase64EncodedRequired.decodedBytes();
     }

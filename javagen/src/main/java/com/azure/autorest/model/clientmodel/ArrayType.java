@@ -3,6 +3,8 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+
 import java.util.Set;
 import java.util.function.Function;
 
@@ -14,10 +16,14 @@ public class ArrayType implements IType {
     /**
      * The {@code byte[]} type.
      */
-    public static final ArrayType ByteArray = new ArrayType(PrimitiveType.Byte,
-        defaultValueExpression -> defaultValueExpression == null
-            ? "new byte[0]" // TODO (alzimmer): Should this be new byte[0] or null?
-            : String.format("\"%1$s\".getBytes()", defaultValueExpression));
+    public static final ArrayType BYTE_ARRAY = new ArrayType(PrimitiveType.Byte,
+        defaultValueExpression -> {
+            if (defaultValueExpression != null) {
+                return String.format("\"%1$s\".getBytes()", defaultValueExpression);
+            } else {
+                return JavaSettings.getInstance().isDefaultByteArrayReturnsEmptyArray() ? "EMPTY_BYTE_ARRAY" : "null";
+            }
+        });
 
     private final String toStringValue;
     private final IType elementType;

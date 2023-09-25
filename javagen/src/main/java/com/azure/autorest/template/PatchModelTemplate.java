@@ -133,7 +133,7 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
                                     patchClassNameWithBaseType, property.getSetterName(), setterPropertyOptionType, property.getName()),
                             (methodBlock) -> {
                                 String expression;
-                                if (propertyClientType.equals(ArrayType.ByteArray)) {
+                                if (propertyClientType.equals(ArrayType.BYTE_ARRAY)) {
                                     expression = String.format("CoreUtils.clone(%s)", property.getName());
                                 } else {
                                     expression = property.getName();
