@@ -3,10 +3,8 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.util.TemplateUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -89,24 +87,14 @@ public class GraalVmConfig {
         }
     }
 
-    static final ObjectMapper OBJECT_MAPPER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-
     // TODO: Template
     public String toProxyConfigJson() {
         List<List<String>> result = proxies.stream().map(Collections::singletonList).collect(Collectors.toList());
-        try {
-            return OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(result);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        return TemplateUtil.prettyPrintToJson(result);
     }
 
     public String toReflectConfigJson() {
         List<Reflect> result = reflects.stream().map(Reflect::new).collect(Collectors.toList());
-        try {
-            return OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(result);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        return TemplateUtil.prettyPrintToJson(result);
     }
 }

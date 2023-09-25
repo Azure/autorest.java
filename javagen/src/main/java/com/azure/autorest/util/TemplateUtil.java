@@ -19,6 +19,9 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFileContents;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.Templates;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
@@ -37,6 +40,8 @@ public class TemplateUtil {
 
     private static final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), TemplateUtil.class);
 
+    private static final ObjectMapper PRETTY_PRINT_MAPPER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+
     // begin of constant for template replacement, used in ResourceUtil.loadTextFromResource
     public static final String SERVICE_NAME = "service-name";
     public static final String SERVICE_DESCRIPTION = "service-description";
@@ -53,6 +58,20 @@ public class TemplateUtil {
 
     public static final String DATE_UTC = "date-utc";
     // end of constant for template replacement
+
+    /**
+     * Print object to JSON string with indent.
+     *
+     * @param jsonObject the Java object
+     * @return the JSON string
+     */
+    public static String prettyPrintToJson(Object jsonObject) {
+        try {
+            return PRETTY_PRINT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(jsonObject);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * Load text from resources, with string replacement.
