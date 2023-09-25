@@ -197,7 +197,8 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     private String expressionConvertFromBinaryData(IType responseBodyType, IType rawType, String invocationExpression, Set<GenericType> typeReferenceStaticClasses) {
         if (responseBodyType instanceof EnumType) {
             // enum
-            return String.format("%1$s.from%2$s(%3$s)", responseBodyType, ((EnumType) responseBodyType).getElementType(), invocationExpression);
+            IType elementType = ((EnumType) responseBodyType).getElementType();
+            return String.format("%1$s.from%2$s(%3$s.toObject(%2$s.class))", responseBodyType, elementType, invocationExpression);
         } else if (responseBodyType instanceof GenericType) {
             // generic, e.g. list, map
             typeReferenceStaticClasses.add((GenericType) responseBodyType);

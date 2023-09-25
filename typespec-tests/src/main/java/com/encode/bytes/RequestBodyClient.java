@@ -14,7 +14,6 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
 import com.encode.bytes.implementation.RequestBodiesImpl;
 
@@ -105,12 +104,6 @@ public final class RequestBodyClient {
     /**
      * The base64 operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * byte[]
-     * }</pre>
-     *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -121,19 +114,13 @@ public final class RequestBodyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64WithResponse(BinaryData value, RequestOptions requestOptions) {
+    public Response<Void> base64WithResponse(byte[] value, RequestOptions requestOptions) {
         return this.serviceClient.base64WithResponse(value, requestOptions);
     }
 
     /**
      * The base64Url operation.
      *
-     * <p><strong>Request Body Schema</strong>
-     *
-     * <pre>{@code
-     * Base64Url
-     * }</pre>
-     *
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -144,7 +131,7 @@ public final class RequestBodyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64UrlWithResponse(BinaryData value, RequestOptions requestOptions) {
+    public Response<Void> base64UrlWithResponse(byte[] value, RequestOptions requestOptions) {
         return this.serviceClient.base64UrlWithResponse(value, requestOptions);
     }
 
@@ -221,7 +208,7 @@ public final class RequestBodyClient {
     public void base64(byte[] value) {
         // Generated convenience method for base64WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        base64WithResponse(BinaryData.fromObject(value), requestOptions).getValue();
+        base64WithResponse(value, requestOptions).getValue();
     }
 
     /**
@@ -240,6 +227,6 @@ public final class RequestBodyClient {
     public void base64Url(byte[] value) {
         // Generated convenience method for base64UrlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        base64UrlWithResponse(BinaryData.fromObject(Base64Url.encode(value)), requestOptions).getValue();
+        base64UrlWithResponse(value, requestOptions).getValue();
     }
 }

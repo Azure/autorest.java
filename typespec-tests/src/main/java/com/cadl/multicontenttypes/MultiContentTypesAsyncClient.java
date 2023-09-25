@@ -114,7 +114,7 @@ public final class MultiContentTypesAsyncClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * byte[]
      * }</pre>
      *
      * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
@@ -143,7 +143,7 @@ public final class MultiContentTypesAsyncClient {
      * <p><strong>Request Body Schema</strong>
      *
      * <pre>{@code
-     * BinaryData
+     * byte[]
      * }</pre>
      *
      * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",

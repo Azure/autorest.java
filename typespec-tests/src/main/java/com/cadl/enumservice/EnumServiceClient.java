@@ -61,7 +61,7 @@ public final class EnumServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getColorWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getColorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getColorWithResponse(requestOptions);
     }
 
@@ -83,7 +83,7 @@ public final class EnumServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getColorModelWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getColorModelWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getColorModelWithResponse(requestOptions);
     }
 
@@ -527,7 +527,7 @@ public final class EnumServiceClient {
     public Color getColor() {
         // Generated convenience method for getColorWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return Color.fromString(getColorWithResponse(requestOptions).getValue());
+        return Color.fromString(getColorWithResponse(requestOptions).getValue().toObject(String.class));
     }
 
     /**
@@ -545,7 +545,7 @@ public final class EnumServiceClient {
     public ColorModel getColorModel() {
         // Generated convenience method for getColorModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return ColorModel.fromString(getColorModelWithResponse(requestOptions).getValue());
+        return ColorModel.fromString(getColorModelWithResponse(requestOptions).getValue().toObject(String.class));
     }
 
     /**

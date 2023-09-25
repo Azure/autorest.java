@@ -137,7 +137,7 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         String mapExpression = null;
         if (responseBodyType instanceof EnumType) {
             // enum
-            mapExpression = String.format("%1$s::from%2$s", responseBodyType, ((EnumType) responseBodyType).getElementType());
+            mapExpression = String.format("protocolMethodData -> %1$s.from%2$s(protocolMethodData.toObject(%2$s.class))", responseBodyType, ((EnumType) responseBodyType).getElementType());
         } else if (responseBodyType instanceof GenericType) {
             // generic, e.g. list, map
             typeReferenceStaticClasses.add((GenericType) responseBodyType);
