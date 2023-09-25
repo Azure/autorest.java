@@ -292,6 +292,9 @@ abstract class ConvenienceMethodTemplateBase {
         imports.add(CollectionFormat.class.getName());
         imports.add(TypeReference.class.getName());
 
+        // byte[]
+        ClassType.Base64Url.addImportsTo(imports, false);
+
         // flatten payload
         imports.add(Map.class.getName());
         imports.add(HashMap.class.getName());
@@ -361,7 +364,11 @@ abstract class ConvenienceMethodTemplateBase {
         if (type == ClassType.BinaryData) {
             return name;
         } else {
-            return String.format("BinaryData.fromObject(%s)", name);
+            if (type == ClassType.Base64Url) {
+                return String.format("BinaryData.fromObject(Base64Url.encode(%s))", name);
+            } else {
+                return String.format("BinaryData.fromObject(%s)", name);
+            }
         }
     }
 

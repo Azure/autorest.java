@@ -53,7 +53,7 @@ public final class FixedAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getKnownValueWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getKnownValueWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getKnownValueWithResponseAsync(requestOptions);
     }
 
@@ -118,7 +118,9 @@ public final class FixedAsyncClient {
     public Mono<DaysOfWeekEnum> getKnownValue() {
         // Generated convenience method for getKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getKnownValueWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(DaysOfWeekEnum::fromString);
+        return getKnownValueWithResponse(requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> DaysOfWeekEnum.fromString(protocolMethodData.toObject(String.class)));
     }
 
     /**

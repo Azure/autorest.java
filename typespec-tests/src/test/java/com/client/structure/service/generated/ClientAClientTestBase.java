@@ -28,6 +28,7 @@ class ClientAClientTestBase extends TestProxyTestBase {
     protected void beforeTest() {
         ClientAClientBuilder clientAClientbuilder =
                 new ClientAClientBuilder()
+                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
                         .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
@@ -40,6 +41,7 @@ class ClientAClientTestBase extends TestProxyTestBase {
 
         ClientBClientBuilder clientBClientbuilder =
                 new ClientBClientBuilder()
+                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
                         .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));

@@ -20,6 +20,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
@@ -62,7 +63,7 @@ public final class HttpFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Boolean>> getEmptyError(
+        Mono<Response<BinaryData>> getEmptyError(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -80,7 +81,7 @@ public final class HttpFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Boolean> getEmptyErrorSync(
+        Response<BinaryData> getEmptyErrorSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -98,7 +99,7 @@ public final class HttpFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Boolean>> getNoModelError(
+        Mono<Response<BinaryData>> getNoModelError(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -116,7 +117,7 @@ public final class HttpFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Boolean> getNoModelErrorSync(
+        Response<BinaryData> getNoModelErrorSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -134,7 +135,7 @@ public final class HttpFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Boolean>> getNoModelEmpty(
+        Mono<Response<BinaryData>> getNoModelEmpty(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -152,7 +153,7 @@ public final class HttpFailuresImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Boolean> getNoModelEmptySync(
+        Response<BinaryData> getNoModelEmptySync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -176,7 +177,7 @@ public final class HttpFailuresImpl {
      * @return empty error form server along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getEmptyErrorWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getEmptyError(this.client.getHost(), accept, requestOptions, context));
@@ -199,7 +200,7 @@ public final class HttpFailuresImpl {
      * @return empty error form server along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getEmptyErrorWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getEmptyErrorSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
@@ -221,7 +222,7 @@ public final class HttpFailuresImpl {
      * @return empty error form server along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getNoModelErrorWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getNoModelError(this.client.getHost(), accept, requestOptions, context));
@@ -244,7 +245,7 @@ public final class HttpFailuresImpl {
      * @return empty error form server along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getNoModelErrorWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getNoModelErrorSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
@@ -266,7 +267,7 @@ public final class HttpFailuresImpl {
      * @return empty response from server along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getNoModelEmptyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getNoModelEmpty(this.client.getHost(), accept, requestOptions, context));
@@ -289,7 +290,7 @@ public final class HttpFailuresImpl {
      * @return empty response from server along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getNoModelEmptySync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }

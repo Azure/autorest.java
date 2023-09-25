@@ -63,7 +63,7 @@ public final class EnumServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getColorWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getColorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getColorWithResponseAsync(requestOptions);
     }
 
@@ -85,7 +85,7 @@ public final class EnumServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getColorModelWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getColorModelWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getColorModelWithResponseAsync(requestOptions);
     }
 
@@ -535,7 +535,9 @@ public final class EnumServiceAsyncClient {
     public Mono<Color> getColor() {
         // Generated convenience method for getColorWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getColorWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(Color::fromString);
+        return getColorWithResponse(requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> Color.fromString(protocolMethodData.toObject(String.class)));
     }
 
     /**
@@ -553,7 +555,9 @@ public final class EnumServiceAsyncClient {
     public Mono<ColorModel> getColorModel() {
         // Generated convenience method for getColorModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getColorModelWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(ColorModel::fromString);
+        return getColorModelWithResponse(requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> ColorModel.fromString(protocolMethodData.toObject(String.class)));
     }
 
     /**

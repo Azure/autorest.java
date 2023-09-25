@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.HttpSuccessImpl;
 import reactor.core.publisher.Mono;
 
@@ -66,7 +67,7 @@ public final class HttpSuccessAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> get200WithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> get200WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get200WithResponseAsync(requestOptions);
     }
 
@@ -88,7 +89,7 @@ public final class HttpSuccessAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> options200WithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> options200WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.options200WithResponseAsync(requestOptions);
     }
 

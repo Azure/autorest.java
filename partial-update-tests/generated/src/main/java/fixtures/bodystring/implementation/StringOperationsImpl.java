@@ -397,7 +397,7 @@ public final class StringOperationsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<byte[]>> getBase64Encoded(
+        Mono<Response<BinaryData>> getBase64Encoded(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -415,7 +415,7 @@ public final class StringOperationsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<byte[]> getBase64EncodedSync(
+        Response<BinaryData> getBase64EncodedSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -1045,7 +1045,7 @@ public final class StringOperationsImpl {
      * @return value that is base64 encoded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<byte[]>> getBase64EncodedWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getBase64EncodedWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getBase64Encoded(this.client.getHost(), accept, requestOptions, context));
@@ -1068,7 +1068,7 @@ public final class StringOperationsImpl {
      * @return value that is base64 encoded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<byte[]> getBase64EncodedWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getBase64EncodedWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getBase64EncodedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }

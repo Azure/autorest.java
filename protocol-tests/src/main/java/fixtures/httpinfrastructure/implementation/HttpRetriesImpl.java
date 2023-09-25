@@ -218,7 +218,7 @@ public final class HttpRetriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Boolean>> options502(
+        Mono<Response<BinaryData>> options502(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -236,7 +236,7 @@ public final class HttpRetriesImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Boolean> options502Sync(
+        Response<BinaryData> options502Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -610,7 +610,7 @@ public final class HttpRetriesImpl {
      * @return simple boolean along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> options502WithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> options502WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.options502(this.client.getHost(), accept, requestOptions, context));
@@ -633,7 +633,7 @@ public final class HttpRetriesImpl {
      * @return simple boolean along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> options502WithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> options502WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.options502Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }

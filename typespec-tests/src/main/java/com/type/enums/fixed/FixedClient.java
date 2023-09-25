@@ -51,7 +51,7 @@ public final class FixedClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getKnownValueWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getKnownValueWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getKnownValueWithResponse(requestOptions);
     }
 
@@ -116,7 +116,7 @@ public final class FixedClient {
     public DaysOfWeekEnum getKnownValue() {
         // Generated convenience method for getKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return DaysOfWeekEnum.fromString(getKnownValueWithResponse(requestOptions).getValue());
+        return DaysOfWeekEnum.fromString(getKnownValueWithResponse(requestOptions).getValue().toObject(String.class));
     }
 
     /**

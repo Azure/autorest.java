@@ -35,11 +35,23 @@ public final class ServiceClientClientImpl {
     /** The proxy service used to perform REST calls. */
     private final ServiceClientClientService service;
 
-    /** */
+    /** Need to be set as 'http://localhost:3000' in client. */
+    private final String endpoint;
+
+    /**
+     * Gets Need to be set as 'http://localhost:3000' in client.
+     *
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /** Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. */
     private final String client;
 
     /**
-     * Gets.
+     * Gets Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      *
      * @return the client value.
      */
@@ -74,12 +86,14 @@ public final class ServiceClientClientImpl {
     /**
      * Initializes an instance of ServiceClientClient client.
      *
-     * @param client
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
+     * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    public ServiceClientClientImpl(String client) {
+    public ServiceClientClientImpl(String endpoint, String client) {
         this(
                 new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
+                endpoint,
                 client);
     }
 
@@ -87,10 +101,11 @@ public final class ServiceClientClientImpl {
      * Initializes an instance of ServiceClientClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param client
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
+     * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    public ServiceClientClientImpl(HttpPipeline httpPipeline, String client) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), client);
+    public ServiceClientClientImpl(HttpPipeline httpPipeline, String endpoint, String client) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client);
     }
 
     /**
@@ -98,11 +113,14 @@ public final class ServiceClientClientImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param client
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
+     * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    public ServiceClientClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String client) {
+    public ServiceClientClientImpl(
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, String client) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.client = client;
         this.service =
                 RestProxy.create(ServiceClientClientService.class, this.httpPipeline, this.getSerializerAdapter());
@@ -112,7 +130,7 @@ public final class ServiceClientClientImpl {
      * The interface defining all the services for ServiceClientClient to be used by the proxy service to perform REST
      * calls.
      */
-    @Host("http://localhost:3000/client/structure/{client}")
+    @Host("{endpoint}/client/structure/{client}")
     @ServiceInterface(name = "ServiceClientClient")
     public interface ServiceClientClientService {
         @Post("/one")
@@ -128,6 +146,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> one(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -146,6 +165,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> oneSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -164,6 +184,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> two(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -182,6 +203,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> twoSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -200,6 +222,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> three(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -218,6 +241,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> threeSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -236,6 +260,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> four(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -254,6 +279,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fourSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -272,6 +298,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> five(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -290,6 +317,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fiveSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -308,6 +336,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> six(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -326,6 +355,7 @@ public final class ServiceClientClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> sixSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -345,7 +375,8 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> oneWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.one(this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.one(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -361,7 +392,7 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> oneWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.oneSync(this.getClient(), accept, requestOptions, Context.NONE);
+        return service.oneSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -377,7 +408,8 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> twoWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.two(this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.two(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -393,7 +425,7 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> twoWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.twoSync(this.getClient(), accept, requestOptions, Context.NONE);
+        return service.twoSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -409,7 +441,8 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> threeWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.three(this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.three(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -425,7 +458,7 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> threeWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.threeSync(this.getClient(), accept, requestOptions, Context.NONE);
+        return service.threeSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -441,7 +474,8 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fourWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.four(this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.four(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -457,7 +491,7 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fourWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.fourSync(this.getClient(), accept, requestOptions, Context.NONE);
+        return service.fourSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -473,7 +507,8 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fiveWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.five(this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.five(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -489,7 +524,7 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fiveWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.fiveSync(this.getClient(), accept, requestOptions, Context.NONE);
+        return service.fiveSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -505,7 +540,8 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sixWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.six(this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.six(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -521,6 +557,6 @@ public final class ServiceClientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sixWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.sixSync(this.getClient(), accept, requestOptions, Context.NONE);
+        return service.sixSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 }

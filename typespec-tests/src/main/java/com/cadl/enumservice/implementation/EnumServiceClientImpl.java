@@ -133,7 +133,7 @@ public final class EnumServiceClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> getColor(
+        Mono<Response<BinaryData>> getColor(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -151,7 +151,7 @@ public final class EnumServiceClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<String> getColorSync(
+        Response<BinaryData> getColorSync(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -169,7 +169,7 @@ public final class EnumServiceClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> getColorModel(
+        Mono<Response<BinaryData>> getColorModel(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -187,7 +187,7 @@ public final class EnumServiceClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<String> getColorModelSync(
+        Response<BinaryData> getColorModelSync(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -705,7 +705,7 @@ public final class EnumServiceClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getColorWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getColorWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getColor(this.getEndpoint(), accept, requestOptions, context));
     }
@@ -727,7 +727,7 @@ public final class EnumServiceClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getColorWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getColorWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getColorSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
@@ -749,7 +749,7 @@ public final class EnumServiceClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getColorModelWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getColorModelWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getColorModel(this.getEndpoint(), accept, requestOptions, context));
@@ -772,7 +772,7 @@ public final class EnumServiceClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getColorModelWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getColorModelWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getColorModelSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }

@@ -13,11 +13,23 @@ import com.azure.core.util.serializer.SerializerAdapter;
 
 /** Initializes a new instance of the TwoOperationGroupClient type. */
 public final class TwoOperationGroupClientImpl {
-    /** */
+    /** Need to be set as 'http://localhost:3000' in client. */
+    private final String endpoint;
+
+    /**
+     * Gets Need to be set as 'http://localhost:3000' in client.
+     *
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /** Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. */
     private final String client;
 
     /**
-     * Gets.
+     * Gets Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      *
      * @return the client value.
      */
@@ -76,12 +88,14 @@ public final class TwoOperationGroupClientImpl {
     /**
      * Initializes an instance of TwoOperationGroupClient client.
      *
-     * @param client
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
+     * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    public TwoOperationGroupClientImpl(String client) {
+    public TwoOperationGroupClientImpl(String endpoint, String client) {
         this(
                 new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
+                endpoint,
                 client);
     }
 
@@ -89,10 +103,11 @@ public final class TwoOperationGroupClientImpl {
      * Initializes an instance of TwoOperationGroupClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param client
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
+     * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    public TwoOperationGroupClientImpl(HttpPipeline httpPipeline, String client) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), client);
+    public TwoOperationGroupClientImpl(HttpPipeline httpPipeline, String endpoint, String client) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client);
     }
 
     /**
@@ -100,11 +115,14 @@ public final class TwoOperationGroupClientImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param client
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
+     * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    public TwoOperationGroupClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String client) {
+    public TwoOperationGroupClientImpl(
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, String client) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.client = client;
         this.group1s = new Group1sImpl(this);
         this.group2s = new Group2sImpl(this);

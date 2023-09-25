@@ -7,6 +7,7 @@ package com.client.structure.service;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaderName;
@@ -40,7 +41,9 @@ import java.util.Objects;
 /** A builder for creating a new instance of the ServiceClientClient type. */
 @ServiceClientBuilder(serviceClients = {ServiceClientClient.class, ServiceClientAsyncClient.class})
 public final class ServiceClientClientBuilder
-        implements HttpTrait<ServiceClientClientBuilder>, ConfigurationTrait<ServiceClientClientBuilder> {
+        implements HttpTrait<ServiceClientClientBuilder>,
+                ConfigurationTrait<ServiceClientClientBuilder>,
+                EndpointTrait<ServiceClientClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -148,12 +151,25 @@ public final class ServiceClientClientBuilder
     }
 
     /*
-     *
+     * The service endpoint
+     */
+    @Generated private String endpoint;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public ServiceClientClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
+     * Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
     @Generated private String client;
 
     /**
-     * Sets.
+     * Sets Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      *
      * @param client the client value.
      * @return the ServiceClientClientBuilder.
@@ -191,7 +207,7 @@ public final class ServiceClientClientBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ServiceClientClientImpl client =
                 new ServiceClientClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.client);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
         return client;
     }
 

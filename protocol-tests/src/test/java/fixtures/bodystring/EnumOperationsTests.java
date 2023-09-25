@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 public class EnumOperationsTests {
     private static EnumClient client;
 
@@ -19,29 +21,29 @@ public class EnumOperationsTests {
     }
 
     @Test
-    public void getNotExpandable() throws Exception {
-        String result = client.getNotExpandableWithResponse(null).getValue();
+    public void getNotExpandable() {
+        String result = client.getNotExpandableWithResponse(null).getValue().toObject(String.class);
         Assertions.assertEquals("red color", result);
     }
 
     @Test
-    public void putNotExpandable() throws Exception {
+    public void putNotExpandable() {
         client.putNotExpandableWithResponse(BinaryData.fromObject("red color"), null);
     }
 
     @Test
-    public void getReferenced() throws Exception {
-        String actual = client.getReferencedWithResponse(null).getValue();
+    public void getReferenced() {
+        String actual = client.getReferencedWithResponse(null).getValue().toObject(String.class);
         Assertions.assertEquals("red color", actual);
     }
 
     @Test
-    public void putReferenced() throws Exception {
+    public void putReferenced() {
         client.putReferencedWithResponse(BinaryData.fromObject("red color"), null);
     }
 
     @Test
-    public void getReferencedConstant() throws Exception {
+    public void getReferencedConstant() throws IOException {
         BinaryData res = client.getReferencedConstantWithResponse(null).getValue();
         JsonNode jsonNode = OBJECT_MAPPER.readTree(res.toBytes());
         // ColorConstant=green-color is constant in RefColorConstant, service does not respond with it in JSON
@@ -49,7 +51,7 @@ public class EnumOperationsTests {
     }
 
     @Test
-    public void putReferencedConstant() throws Exception {
+    public void putReferencedConstant() {
         ObjectNode jsonNode = OBJECT_MAPPER.createObjectNode();
         jsonNode.put("ColorConstant", "green-color");
         client.putReferencedConstantWithResponse(BinaryData.fromObject(jsonNode), null);
