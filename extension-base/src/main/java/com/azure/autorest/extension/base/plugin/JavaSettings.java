@@ -170,7 +170,7 @@ public class JavaSettings {
                 getBooleanValue(host, "disable-required-property-annotation", false),
                 getBooleanValue(host, "enable-page-size", false),
                 getBooleanValue(host, "use-key-credential", false),
-                getBooleanValue(host, "default-byte-array-returns-empty-array", false)
+                getBooleanValue(host, "null-byte-array-maps-to-empty-array", false)
             );
         }
         return instance;
@@ -259,7 +259,7 @@ public class JavaSettings {
      * previously read-only required were included in constructors.
      * @param urlAsString This generates all URLs as String type. This is enabled by default as required by the Java
      * design guidelines. For backward compatability, this can be set to false.
-     * @param defaultByteArrayReturnsEmptyArray If set to true, {@code ArrayType.BYTE_ARRAY} will return an empty array
+     * @param nullByteArrayMapsToEmptyArray If set to true, {@code ArrayType.BYTE_ARRAY} will return an empty array
      * instead of null when the default value expression is null.
      */
     private JavaSettings(AutorestSettings autorestSettings,
@@ -326,7 +326,7 @@ public class JavaSettings {
         boolean disableRequiredPropertyAnnotation,
         boolean pageSizeEnabled,
         boolean useKeyCredential,
-        boolean defaultByteArrayReturnsEmptyArray) {
+        boolean nullByteArrayMapsToEmptyArray) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -424,7 +424,7 @@ public class JavaSettings {
         this.disableRequiredJsonAnnotation = disableRequiredPropertyAnnotation;
         this.pageSizeEnabled = pageSizeEnabled;
         this.useKeyCredential = useKeyCredential;
-        this.defaultByteArrayReturnsEmptyArray = defaultByteArrayReturnsEmptyArray;
+        this.nullByteArrayMapsToEmptyArray = nullByteArrayMapsToEmptyArray;
     }
 
 
@@ -1088,7 +1088,7 @@ public class JavaSettings {
         return this.useKeyCredential;
     }
 
-    private final boolean defaultByteArrayReturnsEmptyArray;
+    private final boolean nullByteArrayMapsToEmptyArray;
 
     /**
      * Whether {@code ArrayType.BYTE_ARRAY} will return an empty array instead of null when the default value expression
@@ -1099,8 +1099,8 @@ public class JavaSettings {
      * @return Whether {@code ArrayType.BYTE_ARRAY} will return an empty array instead of null when the default value
      * expression is null.
      */
-    public boolean isDefaultByteArrayReturnsEmptyArray() {
-        return defaultByteArrayReturnsEmptyArray;
+    public boolean isNullByteArrayMapsToEmptyArray() {
+        return nullByteArrayMapsToEmptyArray;
     }
 
     private static final String DEFAULT_CODE_GENERATION_HEADER = String.join("\r\n",

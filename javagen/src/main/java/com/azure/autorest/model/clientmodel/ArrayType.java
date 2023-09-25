@@ -21,7 +21,7 @@ public class ArrayType implements IType {
             if (defaultValueExpression != null) {
                 return String.format("\"%1$s\".getBytes()", defaultValueExpression);
             } else {
-                return JavaSettings.getInstance().isDefaultByteArrayReturnsEmptyArray() ? "EMPTY_BYTE_ARRAY" : "null";
+                return JavaSettings.getInstance().isNullByteArrayMapsToEmptyArray() ? "EMPTY_BYTE_ARRAY" : "null";
             }
         });
 

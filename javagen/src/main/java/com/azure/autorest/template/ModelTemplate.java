@@ -135,7 +135,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // If code is being generated with the behavior to return an empty byte array when the default value
             // expression is null and the model has any array types that will need conversion within getter methods
             // generate a static byte[] that will be returned instead of creating a new instance each get.
-            if (settings.isDefaultByteArrayReturnsEmptyArray()
+            if (settings.isNullByteArrayMapsToEmptyArray()
                 && model.getProperties().stream().anyMatch(property -> property.getClientType() instanceof ArrayType
                     && property.getWireType() != property.getClientType())) {
                 classBlock.privateStaticFinalVariable("byte[] EMPTY_BYTE_ARRAY = new byte[0]");
