@@ -17,7 +17,7 @@ while (idItrReverted.hasNext() && pathIndex > 0) {
                 segments.add(idSegment);
                 idItrReverted.forEachRemaining(segments::add);
                 Collections.reverse(segments);
-                if (segments.size() > 0 && segments.get(0).isEmpty()) {
+                if (!segments.isEmpty() && segments.get(0).isEmpty()) {
                     segments.remove(0);
                 }
                 return String.join("/", segments);
