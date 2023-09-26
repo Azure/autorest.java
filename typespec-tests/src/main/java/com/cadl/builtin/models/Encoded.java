@@ -239,7 +239,7 @@ public final class Encoded {
     @Generated
     public byte[] getBase64Url() {
         if (this.base64Url == null) {
-            return new byte[0];
+            return null;
         }
         return this.base64Url.decodedBytes();
     }
