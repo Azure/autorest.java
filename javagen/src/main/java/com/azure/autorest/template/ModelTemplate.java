@@ -132,6 +132,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 classBlock.privateStaticFinalVariable("Pattern KEY_ESCAPER = Pattern.compile(\"\\\\.\");");
             }
 
+            // If code is being generated with the behavior to return an empty byte array when the default value
+            // expression is null and the model has any array types that will need conversion within getter methods
+            // generate a static byte[] that will be returned instead of creating a new instance each get.
+            if (settings.isNullByteArrayMapsToEmptyArray()
+                && model.getProperties().stream().anyMatch(property -> property.getClientType() instanceof ArrayType
+                    && property.getWireType() != property.getClientType())) {
+                classBlock.privateStaticFinalVariable("byte[] EMPTY_BYTE_ARRAY = new byte[0]");
+            }
+
             // properties
             addProperties(model, classBlock, settings);
 
@@ -867,7 +876,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         String expression = property.isPolymorphicDiscriminator()
             ? CodeNamer.getEnumMemberName(property.getName())
             : "this." + property.getName();
-        if (propertyWireType.equals(ArrayType.ByteArray)) {
+        if (propertyWireType.equals(ArrayType.BYTE_ARRAY)) {
             expression = String.format("CoreUtils.clone(%s)", expression);
         }
 
@@ -913,7 +922,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     private static void addSetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
         boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings) {
-        String expression = (propertyClientType.equals(ArrayType.ByteArray))
+        String expression = (propertyClientType.equals(ArrayType.BYTE_ARRAY))
             ? "CoreUtils.clone(" + property.getName() + ")"
             : property.getName();
 

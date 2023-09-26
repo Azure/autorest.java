@@ -522,7 +522,7 @@ public class ClassType implements IType {
         } else if (this == ClassType.UnixTimeLong) {
             clientType = ClassType.DateTime;
         } else if (this == ClassType.Base64Url) {
-            clientType = ArrayType.ByteArray;
+            clientType = ArrayType.BYTE_ARRAY;
         } else if (this == ClassType.DurationLong) {
             clientType = ClassType.Duration;
         } else if (this == ClassType.DurationDouble) {

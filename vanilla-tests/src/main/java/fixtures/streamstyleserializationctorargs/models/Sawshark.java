@@ -122,7 +122,7 @@ public final class Sawshark extends Shark {
                     String species = null;
                     List<Fish> siblings = null;
                     Integer age = null;
-                    byte[] picture = new byte[0];
+                    byte[] picture = null;
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         String fieldName = reader.getFieldName();
                         reader.nextToken();

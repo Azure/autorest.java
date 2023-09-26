@@ -75,7 +75,7 @@ public class AndroidProxyMethodParameter extends ProxyMethodParameter {
             imports.add(String.format("com.azure.android.core.rest.annotation.%1$sParam", CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
         }
         if (getRequestParameterLocation() != RequestParameterLocation.BODY) {
-            if (getClientType() == com.azure.autorest.model.clientmodel.ArrayType.ByteArray) {
+            if (getClientType() == com.azure.autorest.model.clientmodel.ArrayType.BYTE_ARRAY) {
                 imports.add("com.azure.android.core.util.Base64Util");
             }
         }
