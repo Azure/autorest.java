@@ -494,8 +494,16 @@ public class JavaSettings {
         return isAzure() || isFluent();
     }
 
+    // configure for model flatten in client
     public enum ClientFlattenAnnotationTarget {
-        TYPE, FIELD, NONE
+        // @JsonFlatten on class
+        TYPE,
+        // @JsonFlatten on class variable
+        FIELD,
+        // Do not use @JsonFlatten. The model flatten is implemented as class variable getter/setter access the flattened properties.
+        NONE,
+        // Disable the model flatten
+        DISABLED
     }
 
     // target for @JsonFlatten annotation for x-ms-client-flatten
