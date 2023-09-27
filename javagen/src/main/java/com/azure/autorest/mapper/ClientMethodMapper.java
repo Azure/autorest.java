@@ -169,7 +169,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         // If this operation is part of a group it'll need to be referenced with a more specific target.
         ClientMethod.Builder builder = getClientMethodBuilder()
-            .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this" : "this.client");
+            .clientReference((operation.getOperationGroup() == null || operation.getOperationGroup().getLanguage().getJava().getName().isEmpty()) ? "this" : "this.client")
+            .setCrossLanguageDefinitionId(operation.getCrossLanguageDefinitionId());
 
         // merge summary and description
         String summary = operation.getSummary();

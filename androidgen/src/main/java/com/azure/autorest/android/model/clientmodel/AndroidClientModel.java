@@ -22,7 +22,7 @@ public class AndroidClientModel extends ClientModel {
         boolean usedInXml) {
         super(packageKeyword, name, imports, description, isPolymorphic, polymorphicDiscriminator, serializedName,
             needsFlatten, parentModelName, derivedModels, xmlName, xmlNamespace, properties, propertyReferences,
-            modelType, stronglyTypedHeader, null, usedInXml);
+            modelType, stronglyTypedHeader, null, usedInXml, null);
     }
 
     @Override

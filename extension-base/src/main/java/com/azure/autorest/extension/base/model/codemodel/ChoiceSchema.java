@@ -23,6 +23,8 @@ public class ChoiceSchema extends ValueSchema {
     private List<ChoiceValue> choices = new ArrayList<>();
     private String summary;
 
+    private String crossLanguageDefinitionId;
+
     /**
      * a Schema that represents a string value (Required)
      */
@@ -59,6 +61,14 @@ public class ChoiceSchema extends ValueSchema {
     @Override
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
+    }
+
+    public void setCrossLanguageDefinitionId(String crossLanguageDefinitionId) {
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }
 
     @Override

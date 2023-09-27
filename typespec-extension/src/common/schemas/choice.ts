@@ -10,6 +10,11 @@ export interface ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
   choiceType: ChoiceType;
   /** the possible choices for in the set */
   choices: Array<ChoiceValue>;
+
+  crossLanguageDefinitionId?: string;
+
+  // setCrossLanguageDefinitionId(id: string) : void;
+
 }
 
 export class ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
@@ -20,6 +25,10 @@ export class ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
     super(name, description, SchemaType.Choice);
     this.apply(objectInitializer);
   }
+
+  // setCrossLanguageDefinitionId(id: string) {
+  //   // this.crossLanguageDefinitionId = id;
+  // }
 }
 
 /** a schema that represents a choice of several values (ie, an 'enum') */
@@ -34,14 +43,25 @@ export interface SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringS
 
   /** the possible choices for in the set */
   choices: Array<ChoiceValue>;
+
+  crossLanguageDefinitionId?: string;
+
+  // setCrossLanguageDefinitionId(id: string) : void;
 }
 
 export class SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
   extends Schema
   implements SealedChoiceSchema<ChoiceType>
 {
+  // crossLanguageDefinitionId?: string;
+
   constructor(name: string, description: string, objectInitializer?: DeepPartial<ChoiceSchema<ChoiceType>>) {
     super(name, description, SchemaType.SealedChoice);
     this.apply(objectInitializer);
   }
+
+    // setCrossLanguageDefinitionId(id: string) {
+    //   // this.crossLanguageDefinitionId = id;
+    // }
+
 }

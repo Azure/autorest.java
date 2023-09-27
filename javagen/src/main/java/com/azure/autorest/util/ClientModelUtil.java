@@ -63,7 +63,8 @@ public class ClientModelUtil {
         if (serviceClient.getProxy() != null) {
             AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
                     .packageName(packageName)
-                    .serviceClient(serviceClient);
+                    .serviceClient(serviceClient)
+                    .crossLanguageDefinitionId(client.getCrossLanguageDefinitionId());
 
             final List<ConvenienceMethod> convenienceMethods = client.getOperationGroups().stream()
                     .filter(og -> CoreUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))    // no resource group

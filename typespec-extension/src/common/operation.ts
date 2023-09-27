@@ -112,6 +112,8 @@ export class Request extends Metadata implements Request {
   }
 }
 export class Operation extends Aspect implements Operation {
+  crossLanguageDefinitionId?: string;
+
   constructor($key: string, description: string, initializer?: DeepPartial<Operation>) {
     super($key, description);
     this.apply(initializer);
@@ -152,6 +154,10 @@ export class Operation extends Aspect implements Operation {
   addProfile(profileName: string, apiVersion: ApiVersion) {
     (this.profile = this.profile || {})[profileName] = apiVersion;
     return this;
+  }
+
+  setCrossLanguageDefinitionId(id: string) {
+    this.crossLanguageDefinitionId = id;
   }
 }
 

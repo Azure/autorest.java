@@ -10,6 +10,8 @@ import java.util.List;
  * A container for the types associated for accessing a specific service.
  */
 public class Client {
+    private final String crossLanguageDefinitionId;
+
     /**
      * The name of this service client.
      */
@@ -55,15 +57,14 @@ public class Client {
      * Get the module info.
      */
     private ModuleInfo moduleInfo;
-
     private final List<AsyncSyncClient> syncClients;
+
     private final List<AsyncSyncClient> asyncClients;
     private final List<ClientBuilder> clientBuilders;
     private final List<ProtocolExample> protocolExamples;
     private final List<LiveTests> liveTests;
     private final List<UnionModel> unionModels;
     private final List<ClientMethodExample> clientMethodExamples;
-
     /**
      * Create a new Client with the provided values.
      * @param clientName The name of the service client.
@@ -88,7 +89,7 @@ public class Client {
                    ServiceClient serviceClient, List<ServiceClient> serviceClients, ModuleInfo moduleInfo,
                    List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
                    List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
-                   List<LiveTests> liveTests, List<UnionModel> unionModels, List<ClientMethodExample> clientMethodExamples
+                   List<LiveTests> liveTests, List<UnionModel> unionModels, List<ClientMethodExample> clientMethodExamples, String crossLanguageDefinitionId
     ) {
         this.clientName = clientName;
         this.clientDescription = clientDescription;
@@ -109,6 +110,11 @@ public class Client {
         this.liveTests = liveTests;
         this.unionModels = unionModels;
         this.clientMethodExamples = clientMethodExamples;
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
     }
 
     public final String getClientName() {
@@ -213,6 +219,13 @@ public class Client {
         private List<LiveTests> liveTests = Collections.emptyList();
         private List<UnionModel> unionModels = Collections.emptyList();
         private List<ClientMethodExample> clientMethodExamples = Collections.emptyList();
+
+        public Builder crossLanguageDefinitionId(String crossLanguageDefinitionId) {
+            this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+            return this;
+        }
+
+        private String crossLanguageDefinitionId;
 
         /**
          * Sets the name of this service client.
@@ -394,6 +407,8 @@ public class Client {
             return this;
         }
 
+
+
         public Client build() {
             if (serviceClient == null && !serviceClients.isEmpty()) {
                 serviceClient = serviceClients.iterator().next();
@@ -416,7 +431,8 @@ public class Client {
                     protocolExamples,
                     liveTests,
                     unionModels,
-                    clientMethodExamples
+                    clientMethodExamples,
+                    crossLanguageDefinitionId
                 );
         }
     }

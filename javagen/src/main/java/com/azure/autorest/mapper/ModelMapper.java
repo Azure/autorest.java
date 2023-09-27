@@ -295,6 +295,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
             builder.properties(properties);
             builder.propertyReferences(propertyReferences);
+            builder.crossLanguageDefinitionId(compositeType.getCrossLanguageDefinitionId());
 
             result = builder.build();
             serviceModels.addModel(result);

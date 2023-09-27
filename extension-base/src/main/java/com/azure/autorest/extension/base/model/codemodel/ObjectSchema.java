@@ -46,6 +46,8 @@ public class ObjectSchema extends ComplexSchema {
     // internal use, not from modelerfour
     private boolean stronglyTypedHeader;
 
+    private String crossLanguageDefinitionId;
+
     /**
      * a property is a child value in an object
      *
@@ -158,5 +160,13 @@ public class ObjectSchema extends ComplexSchema {
      */
     public void setStronglyTypedHeader(boolean stronglyTypedHeader) {
         this.stronglyTypedHeader = stronglyTypedHeader;
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
+    }
+
+    public void setCrossLanguageDefinitionId(String crossLanguageDefinitionId) {
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }
 }

@@ -65,7 +65,8 @@ public class AndroidClientMethod extends ClientMethod {
                 methodVisibilityInWrapperClient,
                 null,
                 methodPollingDetails,
-                externalDocumentation);
+                externalDocumentation,
+                null);
     }
 
     @Override

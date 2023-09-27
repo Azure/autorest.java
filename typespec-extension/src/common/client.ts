@@ -1,5 +1,5 @@
 import { DeepPartial } from "@azure-tools/codegen";
-import { Aspect, Metadata, OperationGroup, Parameter, Security } from "@autorest/codemodel";
+import {Aspect, Metadata, ObjectSchema, OperationGroup, Parameter, Security} from "@autorest/codemodel";
 
 export interface Client extends Aspect {
   /** All operations  */
@@ -9,7 +9,9 @@ export interface Client extends Aspect {
 
   security: Security;
 
-  serviceVersion?: ServiceVersion; // apiVersions is in Aspect
+  serviceVersion?: ServiceVersion; // apiVersions is in
+
+  crossLanguageDefinitionId?: string;
 }
 
 export class Client extends Aspect implements Client {
@@ -29,6 +31,10 @@ export class Client extends Aspect implements Client {
   addGlobalParameters(parameters: Parameter[]) {
     this.globals.push(...parameters);
   }
+
+  setCrossLanguageDefinitionId(id: string) {
+    this.crossLanguageDefinitionId = id;
+  }
 }
 
 export class ServiceVersion extends Metadata {
@@ -46,4 +52,15 @@ export class ServiceVersion extends Metadata {
       initializer,
     );
   }
+}
+
+export class ObjectScheme extends ObjectSchema {
+    crossLanguageDefinitionId?: string;
+    constructor(name: string, description: string, objectInitializer?: DeepPartial<ObjectSchema>) {
+        super(name, description, objectInitializer);
+    }
+
+    setCrossLanguageDefinitionId(id: string) {
+        this.crossLanguageDefinitionId = id;
+    }
 }

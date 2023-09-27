@@ -68,6 +68,7 @@ import {
   shouldGenerateProtocol,
   isInternal,
   SdkClient,
+  getCrossLanguageDefinitionId
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -113,7 +114,7 @@ import {
   Language,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
-import { Client as CodeModelClient } from "./common/client.js";
+import {Client as CodeModelClient, ObjectScheme} from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
@@ -466,6 +467,7 @@ export class CodeModelBuilder {
         // at present, use global security definition
         security: this.codeModel.security,
       });
+      codeModelClient.setCrossLanguageDefinitionId(client.crossLanguageDefinitionId);
 
       // versioning
       const versioning = getVersion(this.program, client.service);
@@ -602,6 +604,7 @@ export class CodeModelBuilder {
       },
     });
 
+    codeModelOperation.setCrossLanguageDefinitionId(getCrossLanguageDefinitionId(operation));
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
@@ -1704,37 +1707,37 @@ export class CodeModelBuilder {
     type.members.forEach((it) => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
 
     if (sealed) {
-      return this.codeModel.schemas.add(
-        new SealedChoiceSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-          choiceType: valueType as any,
-          choices: choices,
-          language: {
-            default: {
-              namespace: namespace,
-            },
-            java: {
-              namespace: getJavaNamespace(namespace),
-            },
+      const sealedChoiceSchema = new SealedChoiceSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+        choiceType: valueType as any,
+        choices: choices,
+        language: {
+          default: {
+            namespace: namespace,
           },
-        }),
-      );
+          java: {
+            namespace: getJavaNamespace(namespace),
+          },
+        },
+      });
+      sealedChoiceSchema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
+      return this.codeModel.schemas.add(sealedChoiceSchema);
     } else {
-      return this.codeModel.schemas.add(
-        new ChoiceSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-          choiceType: valueType as any,
-          choices: choices,
-          language: {
-            default: {
-              namespace: namespace,
-            },
-            java: {
-              namespace: getJavaNamespace(namespace),
-            },
+      const choiceSchema = new ChoiceSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+        choiceType: valueType as any,
+        choices: choices,
+        language: {
+          default: {
+            namespace: namespace,
           },
-        }),
-      );
+          java: {
+            namespace: getJavaNamespace(namespace),
+          },
+        },
+      });
+      choiceSchema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
+      return this.codeModel.schemas.add(choiceSchema);
     }
   }
 
@@ -1850,19 +1853,19 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
-    const objectSchema = this.codeModel.schemas.add(
-      new ObjectSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-        language: {
-          default: {
-            namespace: namespace,
-          },
-          java: {
-            namespace: getJavaNamespace(namespace),
-          },
+    const objectSchema = new ObjectScheme(name, this.getDoc(type), {
+      summary: this.getSummary(type),
+      language: {
+        default: {
+          namespace: namespace,
         },
-      }),
-    );
+        java: {
+          namespace: getJavaNamespace(namespace),
+        },
+      },
+    });
+    objectSchema.setCrossLanguageDefinitionId(getCrossLanguageDefinitionId(type));
+    this.codeModel.schemas.add(objectSchema);
 
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(type, objectSchema);

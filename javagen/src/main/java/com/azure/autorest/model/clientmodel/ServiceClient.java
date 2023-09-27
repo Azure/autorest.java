@@ -13,6 +13,7 @@ import java.util.Set;
  * The details of a ServiceClient.
  */
 public class ServiceClient {
+    private final String crossLanguageDefinitionId;
     /**
      * The package that this service client belongs to.
      */
@@ -96,7 +97,7 @@ public class ServiceClient {
      */
     protected ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
                             ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter, String defaultCredentialScopes,
-                            boolean builderDisabled, SecurityInfo securityInfo, String baseUrl, PipelinePolicyDetails pipelinePolicyDetails) {
+                            boolean builderDisabled, SecurityInfo securityInfo, String baseUrl, PipelinePolicyDetails pipelinePolicyDetails, String crossLanguageDefinitionId) {
         this.packageName = packageName;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -116,6 +117,7 @@ public class ServiceClient {
         this.securityInfo = securityInfo;
         this.baseUrl = baseUrl;
         this.pipelinePolicyDetails = pipelinePolicyDetails;
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }
 
     public final String getPackage() {
@@ -198,6 +200,10 @@ public class ServiceClient {
      */
     public PipelinePolicyDetails getPipelinePolicyDetails() {
         return pipelinePolicyDetails;
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
     }
 
     /**
@@ -295,6 +301,7 @@ public class ServiceClient {
         protected SecurityInfo securityInfo;
         protected String baseUrl;
         protected PipelinePolicyDetails pipelinePolicyDetails;
+        private String crossLanguageDefinitionId;
 
         /**
          * Sets the package that this service client belongs to.
@@ -495,7 +502,13 @@ public class ServiceClient {
                     builderDisabled,
                     securityInfo,
                     baseUrl,
-                    pipelinePolicyDetails);
+                    pipelinePolicyDetails,
+                    crossLanguageDefinitionId);
+        }
+
+        public Builder crossLanguageDefinitionId(String crossLanguageDefinitionId) {
+            this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+            return this;
         }
     }
 }
