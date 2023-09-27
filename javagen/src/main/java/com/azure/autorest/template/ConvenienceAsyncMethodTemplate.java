@@ -147,7 +147,7 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
             mapExpression = null;
         } else if (isModelOrBuiltin(responseBodyType)) {
             // class
-            mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(%1$s.class)", responseBodyType);
+            mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(%1$s.class)", responseBodyType.asNullable());
         } else if (responseBodyType == ArrayType.BYTE_ARRAY) {
             // byte[]
             if (rawType == ClassType.Base64Url) {

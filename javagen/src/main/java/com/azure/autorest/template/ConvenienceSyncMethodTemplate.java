@@ -208,7 +208,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             return invocationExpression;
         } else if (isModelOrBuiltin(responseBodyType)) {
             // class
-            return String.format("%2$s.toObject(%1$s.class)", responseBodyType, invocationExpression);
+            return String.format("%2$s.toObject(%1$s.class)", responseBodyType.asNullable(), invocationExpression);
         } else if (responseBodyType == ArrayType.BYTE_ARRAY) {
             // byte[]
             if (rawType == ClassType.Base64Url) {
