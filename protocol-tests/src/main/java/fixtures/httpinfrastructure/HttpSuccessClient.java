@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.HttpSuccessImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
@@ -65,7 +66,7 @@ public final class HttpSuccessClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> get200WithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> get200WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.get200WithResponse(requestOptions);
     }
 
@@ -87,7 +88,7 @@ public final class HttpSuccessClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> options200WithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> options200WithResponse(RequestOptions requestOptions) {
         return this.serviceClient.options200WithResponse(requestOptions);
     }
 

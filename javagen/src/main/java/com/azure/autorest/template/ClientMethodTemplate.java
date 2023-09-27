@@ -363,7 +363,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 //parameterLocation != RequestParameterLocation.FormData &&
                 (parameterClientType instanceof ArrayType || parameterClientType instanceof IterableType)) {
 
-                if (parameterClientType == ArrayType.ByteArray) {
+                if (parameterClientType == ArrayType.BYTE_ARRAY) {
                     String expression = "null";
                     if (!alwaysNull) {
                         expression = String.format("%s(%s)",

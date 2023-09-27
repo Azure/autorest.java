@@ -107,7 +107,7 @@ public final class FixedClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> getKnownValue(
+        Mono<Response<BinaryData>> getKnownValue(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/enum/fixed/string/known-value")
@@ -122,7 +122,7 @@ public final class FixedClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<String> getKnownValueSync(
+        Response<BinaryData> getKnownValueSync(
                 @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/type/enum/fixed/string/known-value")
@@ -215,7 +215,7 @@ public final class FixedClientImpl {
      * @return days of the week along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getKnownValueWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getKnownValueWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getKnownValue(accept, requestOptions, context));
     }
@@ -237,7 +237,7 @@ public final class FixedClientImpl {
      * @return days of the week along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getKnownValueWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getKnownValueWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getKnownValueSync(accept, requestOptions, Context.NONE);
     }

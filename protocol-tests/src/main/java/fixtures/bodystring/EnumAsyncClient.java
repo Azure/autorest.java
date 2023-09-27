@@ -52,7 +52,7 @@ public final class EnumAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getNotExpandableWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getNotExpandableWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotExpandableWithResponseAsync(requestOptions);
     }
 
@@ -98,7 +98,7 @@ public final class EnumAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getReferencedWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getReferencedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getReferencedWithResponseAsync(requestOptions);
     }
 

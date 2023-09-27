@@ -7,6 +7,7 @@ package com.client.structure.service;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaderName;
@@ -41,7 +42,9 @@ import java.util.Objects;
 @ServiceClientBuilder(
         serviceClients = {Group1Client.class, Group2Client.class, Group1AsyncClient.class, Group2AsyncClient.class})
 public final class TwoOperationGroupClientBuilder
-        implements HttpTrait<TwoOperationGroupClientBuilder>, ConfigurationTrait<TwoOperationGroupClientBuilder> {
+        implements HttpTrait<TwoOperationGroupClientBuilder>,
+                ConfigurationTrait<TwoOperationGroupClientBuilder>,
+                EndpointTrait<TwoOperationGroupClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -149,12 +152,25 @@ public final class TwoOperationGroupClientBuilder
     }
 
     /*
-     *
+     * The service endpoint
+     */
+    @Generated private String endpoint;
+
+    /** {@inheritDoc}. */
+    @Generated
+    @Override
+    public TwoOperationGroupClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
+     * Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
     @Generated private String client;
 
     /**
-     * Sets.
+     * Sets Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      *
      * @param client the client value.
      * @return the TwoOperationGroupClientBuilder.
@@ -192,7 +208,7 @@ public final class TwoOperationGroupClientBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         TwoOperationGroupClientImpl client =
                 new TwoOperationGroupClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.client);
+                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
         return client;
     }
 

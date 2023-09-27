@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 
 public class DefaultClientTests {
 
-    private final ServiceClientClient client = new ServiceClientClientBuilder().client("default").buildClient();
+    private final ServiceClientClient client = new ServiceClientClientBuilder()
+            .endpoint("http://localhost:3000")
+            .client("default").buildClient();
 
     @Test
     public void testClient() {

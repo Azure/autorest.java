@@ -17,7 +17,7 @@ import { EmitterOptions } from "./emitter.js";
 import { getNamespace, logWarning, pascalCase } from "./utils.js";
 import { modelIs, unionReferredByType } from "./type-utils.js";
 
-export const specialHeaderNames = new Set([
+export const SPECIAL_HEADER_NAMES = new Set([
   "repeatability-request-id",
   "repeatability-first-sent",
   "x-ms-client-request-id",
@@ -25,7 +25,31 @@ export const specialHeaderNames = new Set([
   "return-client-request-id",
 ]);
 
-export const originApiVersion = "modelerfour:synthesized/api-version";
+export const ORIGIN_API_VERSION = "modelerfour:synthesized/api-version";
+
+export const CONTENT_TYPE_KEY = "content-type";
+
+// azure-core SerializerEncoding.SUPPORTED_MIME_TYPES
+const SUPPORTED_MIME_TYPES = new Set<string>([
+  "text/xml",
+  "application/xml",
+  "application/json",
+  "text/css",
+  "text/csv",
+  "text/html",
+  "text/javascript",
+  "text/plain",
+  // not in azure-core
+  "application/merge-patch+json",
+]);
+
+export function isKnownContentType(contentTypes: string[]): boolean {
+  return contentTypes
+    .map((it) => it.toLowerCase())
+    .some((it) => {
+      return SUPPORTED_MIME_TYPES.has(it);
+    });
+}
 
 export async function loadExamples(program: Program, options: EmitterOptions): Promise<Map<Operation, any>> {
   const operationExamplesMap = new Map<Operation, any>();
@@ -97,7 +121,7 @@ export function operationIsMultipart(op: HttpOperation): boolean {
 
 function operationIsContentType(op: HttpOperation, contentType: string): boolean {
   for (const param of op.parameters.parameters) {
-    if (param.type === "header" && param.name.toLowerCase() === "content-type") {
+    if (param.type === "header" && param.name.toLowerCase() === CONTENT_TYPE_KEY) {
       if (param.param.type.kind === "String" && param.param.type.value === contentType) {
         return true;
       }
@@ -112,7 +136,7 @@ export function operationIsMultipleContentTypes(op: HttpOperation): boolean {
     op.parameters.parameters.some(
       (parameter) =>
         parameter?.type === "header" &&
-        parameter?.name?.toLowerCase() === "content-type" &&
+        parameter?.name?.toLowerCase() === CONTENT_TYPE_KEY &&
         parameter?.param?.type?.kind === "Union",
     )
   ) {
@@ -167,7 +191,7 @@ export function isPayloadProperty(program: Program, property: ModelProperty) {
 }
 
 export function getClientApiVersions(client: CodeModelClient): ApiVersions | undefined {
-  if (client.globalParameters?.find((it) => it.origin === originApiVersion)) {
+  if (client.globalParameters?.find((it) => it.origin === ORIGIN_API_VERSION)) {
     return client.apiVersions;
   } else {
     return undefined;

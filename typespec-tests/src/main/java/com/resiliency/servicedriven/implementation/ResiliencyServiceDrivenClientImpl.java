@@ -39,6 +39,18 @@ public final class ResiliencyServiceDrivenClientImpl {
     /** The proxy service used to perform REST calls. */
     private final ResiliencyServiceDrivenClientService service;
 
+    /** Need to be set as 'http://localhost:3000' in client. */
+    private final String endpoint;
+
+    /**
+     * Gets Need to be set as 'http://localhost:3000' in client.
+     *
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
     /**
      * Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the
      * deployment when the service had only one api version. 'v2' is for the deployment when the service had
@@ -96,16 +108,18 @@ public final class ResiliencyServiceDrivenClientImpl {
     /**
      * Initializes an instance of ResiliencyServiceDrivenClient client.
      *
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
      *     in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment
      *     when the service had api-versions 'v1' and 'v2'.
      * @param serviceVersion Service version.
      */
     public ResiliencyServiceDrivenClientImpl(
-            String serviceDeploymentVersion, ServiceDrivenServiceVersion serviceVersion) {
+            String endpoint, String serviceDeploymentVersion, ServiceDrivenServiceVersion serviceVersion) {
         this(
                 new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
+                endpoint,
                 serviceDeploymentVersion,
                 serviceVersion);
     }
@@ -114,14 +128,23 @@ public final class ResiliencyServiceDrivenClientImpl {
      * Initializes an instance of ResiliencyServiceDrivenClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
      *     in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment
      *     when the service had api-versions 'v1' and 'v2'.
      * @param serviceVersion Service version.
      */
     public ResiliencyServiceDrivenClientImpl(
-            HttpPipeline httpPipeline, String serviceDeploymentVersion, ServiceDrivenServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), serviceDeploymentVersion, serviceVersion);
+            HttpPipeline httpPipeline,
+            String endpoint,
+            String serviceDeploymentVersion,
+            ServiceDrivenServiceVersion serviceVersion) {
+        this(
+                httpPipeline,
+                JacksonAdapter.createDefaultSerializerAdapter(),
+                endpoint,
+                serviceDeploymentVersion,
+                serviceVersion);
     }
 
     /**
@@ -129,6 +152,7 @@ public final class ResiliencyServiceDrivenClientImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
      *     in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment
      *     when the service had api-versions 'v1' and 'v2'.
@@ -137,10 +161,12 @@ public final class ResiliencyServiceDrivenClientImpl {
     public ResiliencyServiceDrivenClientImpl(
             HttpPipeline httpPipeline,
             SerializerAdapter serializerAdapter,
+            String endpoint,
             String serviceDeploymentVersion,
             ServiceDrivenServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.serviceDeploymentVersion = serviceDeploymentVersion;
         this.serviceVersion = serviceVersion;
         this.service =
@@ -152,8 +178,7 @@ public final class ResiliencyServiceDrivenClientImpl {
      * The interface defining all the services for ResiliencyServiceDrivenClient to be used by the proxy service to
      * perform REST calls.
      */
-    @Host(
-            "http://localhost:3000/resiliency/service-driven/client:v2/service:{serviceDeploymentVersion}/api-version:{apiVersion}")
+    @Host("{endpoint}/resiliency/service-driven/client:v2/service:{serviceDeploymentVersion}/api-version:{apiVersion}")
     @ServiceInterface(name = "ResiliencyServiceDri")
     public interface ResiliencyServiceDrivenClientService {
         @Delete("/add-operation")
@@ -169,6 +194,7 @@ public final class ResiliencyServiceDrivenClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> addOperation(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
                 @HostParam("apiVersion") String apiVersion,
                 @HeaderParam("accept") String accept,
@@ -188,6 +214,7 @@ public final class ResiliencyServiceDrivenClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> addOperationSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
                 @HostParam("apiVersion") String apiVersion,
                 @HeaderParam("accept") String accept,
@@ -207,6 +234,7 @@ public final class ResiliencyServiceDrivenClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> fromNone(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
                 @HostParam("apiVersion") String apiVersion,
                 @HeaderParam("accept") String accept,
@@ -226,6 +254,7 @@ public final class ResiliencyServiceDrivenClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fromNoneSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
                 @HostParam("apiVersion") String apiVersion,
                 @HeaderParam("accept") String accept,
@@ -245,6 +274,7 @@ public final class ResiliencyServiceDrivenClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> fromOneRequired(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
                 @HostParam("apiVersion") String apiVersion,
                 @QueryParam("parameter") String parameter,
@@ -265,6 +295,7 @@ public final class ResiliencyServiceDrivenClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fromOneRequiredSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
                 @HostParam("apiVersion") String apiVersion,
                 @QueryParam("parameter") String parameter,
@@ -285,6 +316,7 @@ public final class ResiliencyServiceDrivenClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> fromOneOptional(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
                 @HostParam("apiVersion") String apiVersion,
                 @HeaderParam("accept") String accept,
@@ -304,6 +336,7 @@ public final class ResiliencyServiceDrivenClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fromOneOptionalSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
                 @HostParam("apiVersion") String apiVersion,
                 @HeaderParam("accept") String accept,
@@ -327,6 +360,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         return FluxUtil.withContext(
                 context ->
                         service.addOperation(
+                                this.getEndpoint(),
                                 this.getServiceDeploymentVersion(),
                                 this.getServiceVersion().getVersion(),
                                 accept,
@@ -348,6 +382,7 @@ public final class ResiliencyServiceDrivenClientImpl {
     public Response<Void> addOperationWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.addOperationSync(
+                this.getEndpoint(),
                 this.getServiceDeploymentVersion(),
                 this.getServiceVersion().getVersion(),
                 accept,
@@ -381,6 +416,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         return FluxUtil.withContext(
                 context ->
                         service.fromNone(
+                                this.getEndpoint(),
                                 this.getServiceDeploymentVersion(),
                                 this.getServiceVersion().getVersion(),
                                 accept,
@@ -412,6 +448,7 @@ public final class ResiliencyServiceDrivenClientImpl {
     public Response<Void> fromNoneWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.fromNoneSync(
+                this.getEndpoint(),
                 this.getServiceDeploymentVersion(),
                 this.getServiceVersion().getVersion(),
                 accept,
@@ -447,6 +484,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         return FluxUtil.withContext(
                 context ->
                         service.fromOneRequired(
+                                this.getEndpoint(),
                                 this.getServiceDeploymentVersion(),
                                 this.getServiceVersion().getVersion(),
                                 parameter,
@@ -481,6 +519,7 @@ public final class ResiliencyServiceDrivenClientImpl {
     public Response<Void> fromOneRequiredWithResponse(String parameter, RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.fromOneRequiredSync(
+                this.getEndpoint(),
                 this.getServiceDeploymentVersion(),
                 this.getServiceVersion().getVersion(),
                 parameter,
@@ -517,6 +556,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         return FluxUtil.withContext(
                 context ->
                         service.fromOneOptional(
+                                this.getEndpoint(),
                                 this.getServiceDeploymentVersion(),
                                 this.getServiceVersion().getVersion(),
                                 accept,
@@ -550,6 +590,7 @@ public final class ResiliencyServiceDrivenClientImpl {
     public Response<Void> fromOneOptionalWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.fromOneOptionalSync(
+                this.getEndpoint(),
                 this.getServiceDeploymentVersion(),
                 this.getServiceVersion().getVersion(),
                 accept,

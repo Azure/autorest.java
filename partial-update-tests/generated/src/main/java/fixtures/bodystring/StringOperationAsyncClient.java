@@ -265,7 +265,7 @@ public final class StringOperationAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<byte[]>> getBase64EncodedWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getBase64EncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBase64EncodedWithResponseAsync(requestOptions);
     }
 

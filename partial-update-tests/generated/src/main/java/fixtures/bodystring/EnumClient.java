@@ -51,7 +51,7 @@ public final class EnumClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getNotExpandableWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNotExpandableWithResponse(requestOptions);
     }
 
@@ -97,7 +97,7 @@ public final class EnumClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getReferencedWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getReferencedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getReferencedWithResponse(requestOptions);
     }
 

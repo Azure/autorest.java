@@ -34,7 +34,7 @@ public class AndroidPrimitiveMapper extends PrimitiveMapper {
                 if (byteArraySchema.getFormat() == ByteArraySchema.Format.BASE_64_URL) {
                     return ClassType.AndroidBase64Url;
                 } else {
-                    return ArrayType.ByteArray;
+                    return ArrayType.BYTE_ARRAY;
                 }
             case DATE_TIME:
                 DateTimeSchema dateTimeSchema = (DateTimeSchema) primaryType;

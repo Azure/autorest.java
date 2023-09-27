@@ -3,10 +3,13 @@
 
 package com.encode.bytes;
 
+import com.Utils;
+import com.azure.core.util.BinaryData;
 import com.encode.bytes.models.Base64BytesProperty;
 import com.encode.bytes.models.Base64UrlArrayBytesProperty;
 import com.encode.bytes.models.Base64UrlBytesProperty;
 import com.encode.bytes.models.DefaultBytesProperty;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
@@ -17,8 +20,11 @@ public class EncodeBytesTests {
     private final QueryClient queryClient = new BytesClientBuilder().buildQueryClient();
     private final HeaderClient headerClient = new BytesClientBuilder().buildHeaderClient();
     private final PropertyClient propertyClient = new BytesClientBuilder().buildPropertyClient();
+    private final RequestBodyClient requestClient = new BytesClientBuilder().buildRequestBodyClient();
+    private final ResponseBodyClient responseClient = new BytesClientBuilder().buildResponseBodyClient();
 
     private final static byte[] DATA = "test".getBytes(StandardCharsets.UTF_8);
+    private final static byte[] PNG = Utils.getPngBytes();
 
     @Test
     public void testQuery() {
@@ -50,7 +56,33 @@ public class EncodeBytesTests {
 
         propertyClient.base64Url(new Base64UrlBytesProperty(DATA));
 
-        // fails due to this corner case https://github.com/Azure/autorest.java/issues/2170#issuecomment-1598116813
         propertyClient.base64UrlArray(new Base64UrlArrayBytesProperty(Arrays.asList(DATA, DATA)));
+    }
+
+    @Test
+    public void testRequestBody() {
+        requestClient.defaultMethod(DATA);
+//        requestClient.octetStream(BinaryData.fromBytes(PNG));
+//        requestClient.customContentType(BinaryData.fromBytes(PNG));
+        requestClient.base64(DATA);
+        requestClient.base64Url(DATA);
+    }
+
+    @Test
+    public void testResponseBody() {
+        byte[] bytes = responseClient.defaultMethod();
+        Assertions.assertArrayEquals(DATA, bytes);
+
+        BinaryData binary = responseClient.octetStream();
+        Assertions.assertArrayEquals(PNG, binary.toBytes());
+
+        binary = responseClient.customContentType();
+        Assertions.assertArrayEquals(PNG, binary.toBytes());
+
+        bytes = responseClient.base64();
+        Assertions.assertArrayEquals(DATA, bytes);
+
+        bytes = responseClient.base64Url();
+        Assertions.assertArrayEquals(DATA, bytes);
     }
 }

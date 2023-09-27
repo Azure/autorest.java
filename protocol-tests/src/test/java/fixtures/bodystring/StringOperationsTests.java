@@ -8,10 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
 
 public class StringOperationsTests {
     private static StringOperationClient client;
@@ -25,13 +22,13 @@ public class StringOperationsTests {
     }
 
     @Test
-    public void getNull() throws Exception {
+    public void getNull() {
         String result = client.getNullWithResponse(null).getValue().toObject(String.class);
         Assertions.assertNull(result);
     }
 
     @Test
-    public void putNull() throws Exception {
+    public void putNull() {
         try {
             client.putNullWithResponse(null).getValue();
         } catch (Exception ex) {
@@ -41,43 +38,41 @@ public class StringOperationsTests {
     }
 
     @Test
-    public void getEmpty() throws Exception {
+    public void getEmpty() {
         String result = client.getEmptyWithResponse(null).getValue().toObject(String.class);
         Assertions.assertEquals("", result);
     }
 
     @Test
-    public void putEmpty() throws Exception {
-        asyncClient.putEmptyWithResponse(null).subscribe(v -> {}, t -> Assertions.fail(t.getMessage()),
-            () -> lock.countDown());
-        Assertions.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+    public void putEmpty() {
+        asyncClient.putEmptyWithResponse(null).block();
     }
 
     @Test
-    public void getMbcs() throws Exception {
+    public void getMbcs() {
         String result = client.getMbcsWithResponse(null).getValue().toObject(String.class);
         String expected = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑ\uE7C7ɡ〇〾⿻⺁\uE843䜣\uE864€";
         Assertions.assertEquals(expected, result);
     }
 
     @Test
-    public void putMbcs() throws Exception {
+    public void putMbcs() {
         client.putMbcsWithResponse(null).getValue();
     }
 
     @Test
-    public void getWhitespace() throws Exception {
+    public void getWhitespace() {
         String result = client.getWhitespaceWithResponse(null).getValue().toObject(String.class);
         Assertions.assertEquals("    Now is the time for all good men to come to the aid of their country    ", result);
     }
 
     @Test
-    public void putWhitespace() throws Exception {
+    public void putWhitespace() {
         client.putWhitespaceWithResponse(null).getValue();
     }
 
     @Test
-    public void getNotProvided() throws Exception {
+    public void getNotProvided() {
         try {
             client.getNotProvidedWithResponse(null).getValue();
         } catch (Exception ex) {
@@ -87,10 +82,10 @@ public class StringOperationsTests {
     }
 
     @Test
-    public void getBase64Encoded() throws Exception {
-        byte[] result = client.getBase64EncodedWithResponse(null).getValue();
+    public void getBase64Encoded() {
+        BinaryData result = client.getBase64EncodedWithResponse(null).getValue();
         Assertions.assertEquals("a string that gets encoded with base64",
-            new String(Base64.getDecoder().decode(unquote(new String(result, StandardCharsets.UTF_8))), StandardCharsets.UTF_8));
+            new String(result.toObject(byte[].class), StandardCharsets.UTF_8));
     }
 
     // copied from azure-core
@@ -109,20 +104,20 @@ public class StringOperationsTests {
     }
 
     @Test
-    public void getBase64UrlEncoded() throws Exception {
+    public void getBase64UrlEncoded() {
         String result = client.getBase64UrlEncodedWithResponse(null).getValue().toObject(String.class);
         Assertions.assertEquals("a string that gets encoded with base64url",
                 new String(Base64Util.decodeURL(result.getBytes(StandardCharsets.UTF_8))));
     }
 
     @Test
-    public void getNullBase64UrlEncoded() throws Exception {
+    public void getNullBase64UrlEncoded() {
         byte[] result = client.getNullBase64UrlEncodedWithResponse(null).getValue().toBytes();
         Assertions.assertEquals(0, result.length);
     }
 
     @Test
-    public void putBase64UrlEncoded() throws Exception {
+    public void putBase64UrlEncoded() {
         client.putBase64UrlEncodedWithResponse(
                 BinaryData.fromObject(new String(Base64Util.encodeURLWithoutPadding(
                 "a string that gets encoded with base64url".getBytes(StandardCharsets.UTF_8)))),

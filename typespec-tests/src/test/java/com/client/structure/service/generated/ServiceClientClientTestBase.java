@@ -24,6 +24,7 @@ class ServiceClientClientTestBase extends TestProxyTestBase {
     protected void beforeTest() {
         ServiceClientClientBuilder serviceClientClientbuilder =
                 new ServiceClientClientBuilder()
+                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
                         .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));

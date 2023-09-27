@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.HttpFailuresImpl;
 
 /** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
@@ -49,7 +50,7 @@ public final class HttpFailureClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getEmptyErrorWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getEmptyErrorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyErrorWithResponse(requestOptions);
     }
 
@@ -71,7 +72,7 @@ public final class HttpFailureClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getNoModelErrorWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getNoModelErrorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNoModelErrorWithResponse(requestOptions);
     }
 
@@ -93,7 +94,7 @@ public final class HttpFailureClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNoModelEmptyWithResponse(requestOptions);
     }
 }

@@ -168,7 +168,7 @@ public final class ModelTemplateHeaderHelper {
             setter = String.format("Integer.parseInt(%s)", rawHeaderAccess);
         } else if (wireType == PrimitiveType.Long || wireType == ClassType.Long) {
             setter = String.format("Long.parseLong(%s)", rawHeaderAccess);
-        } else if (wireType == ArrayType.ByteArray) {
+        } else if (wireType == ArrayType.BYTE_ARRAY) {
             setter = String.format("Base64.getDecoder().decode(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.String) {
             setter = rawHeaderAccess;

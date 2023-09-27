@@ -14,6 +14,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.HttpFailuresImpl;
 import reactor.core.publisher.Mono;
 
@@ -50,7 +51,7 @@ public final class HttpFailureAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> getEmptyErrorWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getEmptyErrorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyErrorWithResponseAsync(requestOptions);
     }
 
@@ -72,7 +73,7 @@ public final class HttpFailureAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> getNoModelErrorWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getNoModelErrorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNoModelErrorWithResponseAsync(requestOptions);
     }
 
@@ -94,7 +95,7 @@ public final class HttpFailureAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getNoModelEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getNoModelEmptyWithResponseAsync(requestOptions);
     }
 }

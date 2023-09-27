@@ -35,11 +35,23 @@ public final class ClientAClientImpl {
     /** The proxy service used to perform REST calls. */
     private final ClientAClientService service;
 
-    /** */
+    /** Need to be set as 'http://localhost:3000' in client. */
+    private final String endpoint;
+
+    /**
+     * Gets Need to be set as 'http://localhost:3000' in client.
+     *
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /** Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. */
     private final String client;
 
     /**
-     * Gets.
+     * Gets Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      *
      * @return the client value.
      */
@@ -74,12 +86,14 @@ public final class ClientAClientImpl {
     /**
      * Initializes an instance of ClientAClient client.
      *
-     * @param client
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
+     * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    public ClientAClientImpl(String client) {
+    public ClientAClientImpl(String endpoint, String client) {
         this(
                 new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
+                endpoint,
                 client);
     }
 
@@ -87,10 +101,11 @@ public final class ClientAClientImpl {
      * Initializes an instance of ClientAClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param client
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
+     * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    public ClientAClientImpl(HttpPipeline httpPipeline, String client) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), client);
+    public ClientAClientImpl(HttpPipeline httpPipeline, String endpoint, String client) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client);
     }
 
     /**
@@ -98,11 +113,14 @@ public final class ClientAClientImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param client
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
+     * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    public ClientAClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String client) {
+    public ClientAClientImpl(
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, String client) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.client = client;
         this.service = RestProxy.create(ClientAClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -110,7 +128,7 @@ public final class ClientAClientImpl {
     /**
      * The interface defining all the services for ClientAClient to be used by the proxy service to perform REST calls.
      */
-    @Host("http://localhost:3000/client/structure/{client}")
+    @Host("{endpoint}/client/structure/{client}")
     @ServiceInterface(name = "ClientAClient")
     public interface ClientAClientService {
         @Post("/one")
@@ -126,6 +144,7 @@ public final class ClientAClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> renamedOne(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -144,6 +163,7 @@ public final class ClientAClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> renamedOneSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -162,6 +182,7 @@ public final class ClientAClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> renamedThree(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -180,6 +201,7 @@ public final class ClientAClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> renamedThreeSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -198,6 +220,7 @@ public final class ClientAClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> renamedFive(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -216,6 +239,7 @@ public final class ClientAClientImpl {
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> renamedFiveSync(
+                @HostParam("endpoint") String endpoint,
                 @HostParam("client") String client,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -235,7 +259,8 @@ public final class ClientAClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> renamedOneWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.renamedOne(this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.renamedOne(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -251,7 +276,7 @@ public final class ClientAClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> renamedOneWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.renamedOneSync(this.getClient(), accept, requestOptions, Context.NONE);
+        return service.renamedOneSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -267,7 +292,8 @@ public final class ClientAClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> renamedThreeWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.renamedThree(this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.renamedThree(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -283,7 +309,7 @@ public final class ClientAClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> renamedThreeWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.renamedThreeSync(this.getClient(), accept, requestOptions, Context.NONE);
+        return service.renamedThreeSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -299,7 +325,8 @@ public final class ClientAClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> renamedFiveWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.renamedFive(this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.renamedFive(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -315,6 +342,6 @@ public final class ClientAClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> renamedFiveWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.renamedFiveSync(this.getClient(), accept, requestOptions, Context.NONE);
+        return service.renamedFiveSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 }

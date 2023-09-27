@@ -25,13 +25,11 @@ import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
-import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.ExternalDocumentation;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
 import com.azure.autorest.model.clientmodel.MethodParameter;
 import com.azure.autorest.model.clientmodel.MethodPollingDetails;
@@ -584,14 +582,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         IType responseBodyType = MapperUtils.handleResponseSchema(operation, settings);
         if (isProtocolMethod) {
-            if (responseBodyType instanceof ClassType
-                    || responseBodyType instanceof ListType
-                    || responseBodyType instanceof MapType
-                    || responseBodyType == GenericType.FluxByteBuffer) {
-                responseBodyType = ClassType.BinaryData;
-            } else if (responseBodyType instanceof EnumType) {
-                responseBodyType = ClassType.String;
-            }
+            responseBodyType = SchemaUtil.removeModelFromResponse(responseBodyType, operation);
         }
 
         returnTypeHolder.asyncRestResponseReturnType = Mappers.getProxyMethodMapper()

@@ -6,6 +6,7 @@ package fixtures.bodystring.generated;
 
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
 import fixtures.bodystring.EnumClient;
 import fixtures.bodystring.EnumClientBuilder;
 
@@ -14,7 +15,7 @@ public class EnumGetNotExpandable {
         EnumClient enumClient = new EnumClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodystring.generated.enumgetnotexpandable.enumgetnotexpandable
         RequestOptions requestOptions = new RequestOptions();
-        Response<String> response = enumClient.getNotExpandableWithResponse(requestOptions);
+        Response<BinaryData> response = enumClient.getNotExpandableWithResponse(requestOptions);
         // END:fixtures.bodystring.generated.enumgetnotexpandable.enumgetnotexpandable
     }
 }
