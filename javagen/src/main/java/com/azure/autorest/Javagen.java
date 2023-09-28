@@ -241,6 +241,11 @@ public class Javagen extends NewPlugin {
             }
         }
 
+        // GraalVM config
+        if (settings.isGenerateGraalVmConfig()) {
+            javaPackage.addGraalVmConfig(Project.AZURE_GROUP_ID, ClientModelUtil.getArtifactId(), client.getGraalVmConfig());
+        }
+
         // Service version
         if (settings.isDataPlaneClient()) {
             String packageName = settings.getPackage();

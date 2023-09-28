@@ -7,6 +7,7 @@ import com.azure.autorest.MockUnitJavagen;
 import com.azure.autorest.model.projectmodel.Project;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,7 +31,7 @@ public class TestProxyAssertsTemplateTests {
 
         String output = new TestProxyAssetsTemplate().write(project);
 
-        JsonNode jsonNode = TestProxyAssetsTemplate.OBJECT_MAPPER.readTree(output);
+        JsonNode jsonNode = new ObjectMapper().readTree(output);
         Assert.assertEquals("Azure/azure-sdk-assets", jsonNode.get("AssetsRepo").asText());
         Assert.assertEquals("java", jsonNode.get("AssetsRepoPrefixPath").asText());
         Assert.assertEquals("java/openai/azure-ai-openai", jsonNode.get("TagPrefix").asText());
