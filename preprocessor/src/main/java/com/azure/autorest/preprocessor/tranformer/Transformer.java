@@ -68,6 +68,9 @@ public class Transformer {
       for (Property property : objectSchema.getProperties()) {
         renameProperty(property);
       }
+      if (objectSchema.getDiscriminator() != null) {
+        renameProperty(objectSchema.getDiscriminator().getProperty());
+      }
     }
     for (AndSchema andSchema : schemas.getAnds()) {
       renameType(andSchema);
