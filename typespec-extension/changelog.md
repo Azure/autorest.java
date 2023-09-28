@@ -1,6 +1,8 @@
 # Release History
 
-## 0.9.0 (Unreleased)
+## 0.9.1 (Unreleased)
+
+## 0.9.0 (2023-09-29)
 
 Compatible with compiler 0.48.
 
