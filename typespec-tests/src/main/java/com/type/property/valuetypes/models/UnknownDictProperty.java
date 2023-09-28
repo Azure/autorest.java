@@ -6,18 +6,21 @@ package com.type.property.valuetypes.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Model with a property unknown, and the data is a dictionnary. */
 @Immutable
-public final class UnknownDictProperty {
+public final class UnknownDictProperty implements JsonSerializable<UnknownDictProperty> {
     /*
      * Property
      */
-    @Generated
-    @JsonProperty(value = "property")
-    private Object property;
+    @Generated private final Object property;
 
     /**
      * Creates an instance of UnknownDictProperty class.
@@ -25,8 +28,7 @@ public final class UnknownDictProperty {
      * @param property the property value to set.
      */
     @Generated
-    @JsonCreator
-    public UnknownDictProperty(@JsonProperty(value = "property") Object property) {
+    public UnknownDictProperty(Object property) {
         this.property = property;
     }
 
@@ -38,5 +40,52 @@ public final class UnknownDictProperty {
     @Generated
     public Object getProperty() {
         return this.property;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeUntyped(this.property);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of UnknownDictProperty from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of UnknownDictProperty if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the UnknownDictProperty.
+     */
+    public static UnknownDictProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean propertyFound = false;
+                    Object property = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("property".equals(fieldName)) {
+                            property = reader.readUntyped();
+                            propertyFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (propertyFound) {
+                        UnknownDictProperty deserializedUnknownDictProperty = new UnknownDictProperty(property);
+
+                        return deserializedUnknownDictProperty;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!propertyFound) {
+                        missingProperties.add("property");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

@@ -298,6 +298,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -323,6 +324,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -348,6 +350,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -373,6 +376,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -398,6 +402,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -423,6 +428,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -448,6 +454,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -473,6 +480,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -498,6 +506,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -523,6 +532,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -548,6 +558,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -573,6 +584,7 @@ public final class NestedDiscriminatorClientImpl {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>

@@ -6,7 +6,6 @@ package com._specs_.azure.core.lro.rpc.legacy.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /** The status of the processing job. */
@@ -45,7 +44,6 @@ public final class JobStatus extends ExpandableStringEnum<JobStatus> {
      * @return the corresponding JobStatus.
      */
     @Generated
-    @JsonCreator
     public static JobStatus fromString(String name) {
         return fromString(name, JobStatus.class);
     }

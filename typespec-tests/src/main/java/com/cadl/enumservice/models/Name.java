@@ -6,7 +6,6 @@ package com.cadl.enumservice.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /** Defines values for Name. */
@@ -33,7 +32,6 @@ public final class Name extends ExpandableStringEnum<Name> {
      * @return the corresponding Name.
      */
     @Generated
-    @JsonCreator
     public static Name fromString(String name) {
         return fromString(name, Name.class);
     }

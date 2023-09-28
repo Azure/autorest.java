@@ -4,9 +4,6 @@
 
 package com.cadl.enumservice.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /** Defines values for OperationStateValues. */
 public enum OperationStateValues {
     /** Enum value Running. */
@@ -31,7 +28,6 @@ public enum OperationStateValues {
      * @param value the serialized value to parse.
      * @return the parsed OperationStateValues object, or null if unable to parse.
      */
-    @JsonCreator
     public static OperationStateValues fromString(String value) {
         if (value == null) {
             return null;
@@ -46,7 +42,6 @@ public enum OperationStateValues {
     }
 
     /** {@inheritDoc} */
-    @JsonValue
     @Override
     public String toString() {
         return this.value;

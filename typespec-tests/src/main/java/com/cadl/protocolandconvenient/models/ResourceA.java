@@ -6,25 +6,26 @@ package com.cadl.protocolandconvenient.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** The ResourceA model. */
 @Immutable
-public final class ResourceA {
+public final class ResourceA implements JsonSerializable<ResourceA> {
     /*
      * The id property.
      */
-    @Generated
-    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
-    private String id;
+    @Generated private String id;
 
     /*
      * The name property.
      */
-    @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    @Generated private final String name;
 
     /**
      * Creates an instance of ResourceA class.
@@ -32,8 +33,7 @@ public final class ResourceA {
      * @param name the name value to set.
      */
     @Generated
-    @JsonCreator
-    public ResourceA(@JsonProperty(value = "name") String name) {
+    public ResourceA(String name) {
         this.name = name;
     }
 
@@ -55,5 +55,56 @@ public final class ResourceA {
     @Generated
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of ResourceA from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ResourceA if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the ResourceA.
+     */
+    public static ResourceA fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    String id = null;
+                    boolean nameFound = false;
+                    String name = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("id".equals(fieldName)) {
+                            id = reader.getString();
+                        } else if ("name".equals(fieldName)) {
+                            name = reader.getString();
+                            nameFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (nameFound) {
+                        ResourceA deserializedResourceA = new ResourceA(name);
+                        deserializedResourceA.id = id;
+
+                        return deserializedResourceA;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!nameFound) {
+                        missingProperties.add("name");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

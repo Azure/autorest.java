@@ -6,46 +6,40 @@ package com._specs_.azure.core.lro.rpc.legacy.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /** Result of the job. */
 @Immutable
-public final class JobResult {
+public final class JobResult implements JsonSerializable<JobResult> {
     /*
      * A processing job identifier.
      */
-    @Generated
-    @JsonProperty(value = "jobId", access = JsonProperty.Access.WRITE_ONLY)
-    private String jobId;
+    @Generated private String jobId;
 
     /*
      * Comment.
      */
-    @Generated
-    @JsonProperty(value = "comment", access = JsonProperty.Access.WRITE_ONLY)
-    private String comment;
+    @Generated private String comment;
 
     /*
      * The status of the processing job.
      */
-    @Generated
-    @JsonProperty(value = "status", access = JsonProperty.Access.WRITE_ONLY)
-    private JobStatus status;
+    @Generated private JobStatus status;
 
     /*
      * Error objects that describes the error when status is "Failed".
      */
-    @Generated
-    @JsonProperty(value = "errors", access = JsonProperty.Access.WRITE_ONLY)
-    private List<ErrorResponse> errors;
+    @Generated private List<ErrorResponse> errors;
 
     /*
      * The results.
      */
-    @Generated
-    @JsonProperty(value = "results", access = JsonProperty.Access.WRITE_ONLY)
-    private List<String> results;
+    @Generated private List<String> results;
 
     /** Creates an instance of JobResult class. */
     @Generated
@@ -99,5 +93,57 @@ public final class JobResult {
     @Generated
     public List<String> getResults() {
         return this.results;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of JobResult from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of JobResult if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the JobResult.
+     */
+    public static JobResult fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    String jobId = null;
+                    String comment = null;
+                    JobStatus status = null;
+                    List<ErrorResponse> errors = null;
+                    List<String> results = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("jobId".equals(fieldName)) {
+                            jobId = reader.getString();
+                        } else if ("comment".equals(fieldName)) {
+                            comment = reader.getString();
+                        } else if ("status".equals(fieldName)) {
+                            status = JobStatus.fromString(reader.getString());
+                        } else if ("errors".equals(fieldName)) {
+                            errors = reader.readArray(reader1 -> ErrorResponse.fromJson(reader1));
+                        } else if ("results".equals(fieldName)) {
+                            results = reader.readArray(reader1 -> reader1.getString());
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    JobResult deserializedJobResult = new JobResult();
+                    deserializedJobResult.jobId = jobId;
+                    deserializedJobResult.comment = comment;
+                    deserializedJobResult.status = status;
+                    deserializedJobResult.errors = errors;
+                    deserializedJobResult.results = results;
+
+                    return deserializedJobResult;
+                });
     }
 }

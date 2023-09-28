@@ -6,67 +6,57 @@ package com.cadl.enumservice.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /** The Operation model. */
 @Immutable
-public final class Operation {
+public final class Operation implements JsonSerializable<Operation> {
     /*
      * The name property.
      */
-    @Generated
-    @JsonProperty(value = "name")
-    private Name name;
+    @Generated private final Name name;
 
     /*
      * The best property.
      */
-    @Generated
-    @JsonProperty(value = "best")
-    private boolean best = true;
+    @Generated private final boolean best = true;
 
     /*
      * The age property.
      */
-    @Generated
-    @JsonProperty(value = "age")
-    private long age = 50L;
+    @Generated private final long age = 50L;
 
     /*
      * The priority property.
      */
-    @Generated
-    @JsonProperty(value = "priority")
-    private Priority priority;
+    @Generated private final Priority priority;
 
     /*
      * The color property.
      */
-    @Generated
-    @JsonProperty(value = "color")
-    private ColorModel color;
+    @Generated private final ColorModel color;
 
     /*
      * The priorityValue property.
      */
-    @Generated
-    @JsonProperty(value = "priorityValue")
-    private Priority priorityValue = Priority.LOW;
+    @Generated private final Priority priorityValue = Priority.LOW;
 
     /*
      * The colorValue property.
      */
-    @Generated
-    @JsonProperty(value = "colorValue")
-    private Color colorValue = Color.GREEN;
+    @Generated private final Color colorValue = Color.GREEN;
 
     /*
      * The colorModelValue property.
      */
-    @Generated
-    @JsonProperty(value = "colorModelValue")
-    private ColorModel colorModelValue = ColorModel.BLUE;
+    @Generated private final ColorModel colorModelValue = ColorModel.BLUE;
 
     /**
      * Creates an instance of Operation class.
@@ -76,11 +66,7 @@ public final class Operation {
      * @param color the color value to set.
      */
     @Generated
-    @JsonCreator
-    private Operation(
-            @JsonProperty(value = "name") Name name,
-            @JsonProperty(value = "priority") Priority priority,
-            @JsonProperty(value = "color") ColorModel color) {
+    private Operation(Name name, Priority priority, ColorModel color) {
         best = true;
         age = 50L;
         priorityValue = Priority.LOW;
@@ -169,5 +155,124 @@ public final class Operation {
     @Generated
     public ColorModel getColorModelValue() {
         return this.colorModelValue;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", Objects.toString(this.name, null));
+        jsonWriter.writeBooleanField("best", this.best);
+        jsonWriter.writeLongField("age", this.age);
+        jsonWriter.writeStringField("priority", Objects.toString(this.priority, null));
+        jsonWriter.writeStringField("color", Objects.toString(this.color, null));
+        jsonWriter.writeStringField("priorityValue", Objects.toString(this.priorityValue, null));
+        jsonWriter.writeStringField("colorValue", Objects.toString(this.colorValue, null));
+        jsonWriter.writeStringField("colorModelValue", Objects.toString(this.colorModelValue, null));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Operation from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Operation if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Operation.
+     */
+    public static Operation fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean nameFound = false;
+                    Name name = null;
+                    boolean bestFound = false;
+                    boolean best = false;
+                    boolean ageFound = false;
+                    long age = 0L;
+                    boolean priorityFound = false;
+                    Priority priority = null;
+                    boolean colorFound = false;
+                    ColorModel color = null;
+                    boolean priorityValueFound = false;
+                    Priority priorityValue = null;
+                    boolean colorValueFound = false;
+                    Color colorValue = null;
+                    boolean colorModelValueFound = false;
+                    ColorModel colorModelValue = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("name".equals(fieldName)) {
+                            name = Name.fromString(reader.getString());
+                            nameFound = true;
+                        } else if ("best".equals(fieldName)) {
+                            best = reader.getBoolean();
+                            bestFound = true;
+                        } else if ("age".equals(fieldName)) {
+                            age = reader.getLong();
+                            ageFound = true;
+                        } else if ("priority".equals(fieldName)) {
+                            priority = Priority.fromLong(reader.getString());
+                            priorityFound = true;
+                        } else if ("color".equals(fieldName)) {
+                            color = ColorModel.fromString(reader.getString());
+                            colorFound = true;
+                        } else if ("priorityValue".equals(fieldName)) {
+                            priorityValue = Priority.fromLong(reader.getString());
+                            priorityValueFound = true;
+                        } else if ("colorValue".equals(fieldName)) {
+                            colorValue = Color.fromString(reader.getString());
+                            colorValueFound = true;
+                        } else if ("colorModelValue".equals(fieldName)) {
+                            colorModelValue = ColorModel.fromString(reader.getString());
+                            colorModelValueFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (nameFound
+                            && bestFound
+                            && ageFound
+                            && priorityFound
+                            && colorFound
+                            && priorityValueFound
+                            && colorValueFound
+                            && colorModelValueFound) {
+                        Operation deserializedOperation =
+                                new Operation(
+                                        name, best, age, priority, color, priorityValue, colorValue, colorModelValue);
+
+                        return deserializedOperation;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!nameFound) {
+                        missingProperties.add("name");
+                    }
+                    if (!bestFound) {
+                        missingProperties.add("best");
+                    }
+                    if (!ageFound) {
+                        missingProperties.add("age");
+                    }
+                    if (!priorityFound) {
+                        missingProperties.add("priority");
+                    }
+                    if (!colorFound) {
+                        missingProperties.add("color");
+                    }
+                    if (!priorityValueFound) {
+                        missingProperties.add("priorityValue");
+                    }
+                    if (!colorValueFound) {
+                        missingProperties.add("colorValue");
+                    }
+                    if (!colorModelValueFound) {
+                        missingProperties.add("colorModelValue");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

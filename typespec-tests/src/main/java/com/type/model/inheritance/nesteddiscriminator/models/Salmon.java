@@ -6,10 +6,11 @@ package com.type.model.inheritance.nesteddiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,30 +18,27 @@ import java.util.Map;
  * The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic
  * instances.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
-@JsonTypeName("salmon")
 @Fluent
 public final class Salmon extends Fish {
     /*
+     * kind
+     */
+    @Generated private static final String KIND = "salmon";
+
+    /*
      * The friends property.
      */
-    @Generated
-    @JsonProperty(value = "friends")
-    private List<Fish> friends;
+    @Generated private List<Fish> friends;
 
     /*
      * The hate property.
      */
-    @Generated
-    @JsonProperty(value = "hate")
-    private Map<String, Fish> hate;
+    @Generated private Map<String, Fish> hate;
 
     /*
      * The partner property.
      */
-    @Generated
-    @JsonProperty(value = "partner")
-    private Fish partner;
+    @Generated private Fish partner;
 
     /**
      * Creates an instance of Salmon class.
@@ -48,8 +46,7 @@ public final class Salmon extends Fish {
      * @param age the age value to set.
      */
     @Generated
-    @JsonCreator
-    public Salmon(@JsonProperty(value = "age") int age) {
+    public Salmon(int age) {
         super(age);
     }
 
@@ -117,5 +114,79 @@ public final class Salmon extends Fish {
     public Salmon setPartner(Fish partner) {
         this.partner = partner;
         return this;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("kind", KIND);
+        jsonWriter.writeIntField("age", getAge());
+        jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeJsonField("partner", this.partner);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Salmon from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Salmon if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     *     JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     *     polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the Salmon.
+     */
+    public static Salmon fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean ageFound = false;
+                    int age = 0;
+                    List<Fish> friends = null;
+                    Map<String, Fish> hate = null;
+                    Fish partner = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("kind".equals(fieldName)) {
+                            String kind = reader.getString();
+                            if (!KIND.equals(kind)) {
+                                throw new IllegalStateException(
+                                        "'kind' was expected to be non-null and equal to '"
+                                                + KIND
+                                                + "'. The found 'kind' was '"
+                                                + kind
+                                                + "'.");
+                            }
+                        } else if ("age".equals(fieldName)) {
+                            age = reader.getInt();
+                            ageFound = true;
+                        } else if ("friends".equals(fieldName)) {
+                            friends = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                        } else if ("hate".equals(fieldName)) {
+                            hate = reader.readMap(reader1 -> Fish.fromJson(reader1));
+                        } else if ("partner".equals(fieldName)) {
+                            partner = Fish.fromJson(reader);
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (ageFound) {
+                        Salmon deserializedSalmon = new Salmon(age);
+                        deserializedSalmon.friends = friends;
+                        deserializedSalmon.hate = hate;
+                        deserializedSalmon.partner = partner;
+
+                        return deserializedSalmon;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!ageFound) {
+                        missingProperties.add("age");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

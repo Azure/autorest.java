@@ -6,8 +6,12 @@ package com.type.model.inheritance.notdiscriminated.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** The second level model in the normal multiple levels inheritance. */
 @Immutable
@@ -15,9 +19,7 @@ public class Cat extends Pet {
     /*
      * The age property.
      */
-    @Generated
-    @JsonProperty(value = "age")
-    private int age;
+    @Generated private final int age;
 
     /**
      * Creates an instance of Cat class.
@@ -26,8 +28,7 @@ public class Cat extends Pet {
      * @param age the age value to set.
      */
     @Generated
-    @JsonCreator
-    public Cat(@JsonProperty(value = "name") String name, @JsonProperty(value = "age") int age) {
+    public Cat(String name, int age) {
         super(name);
         this.age = age;
     }
@@ -40,5 +41,61 @@ public class Cat extends Pet {
     @Generated
     public int getAge() {
         return this.age;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", getName());
+        jsonWriter.writeIntField("age", this.age);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Cat from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Cat if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     *     JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Cat.
+     */
+    public static Cat fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean nameFound = false;
+                    String name = null;
+                    boolean ageFound = false;
+                    int age = 0;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("name".equals(fieldName)) {
+                            name = reader.getString();
+                            nameFound = true;
+                        } else if ("age".equals(fieldName)) {
+                            age = reader.getInt();
+                            ageFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (nameFound && ageFound) {
+                        Cat deserializedCat = new Cat(name, age);
+
+                        return deserializedCat;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!nameFound) {
+                        missingProperties.add("name");
+                    }
+                    if (!ageFound) {
+                        missingProperties.add("age");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

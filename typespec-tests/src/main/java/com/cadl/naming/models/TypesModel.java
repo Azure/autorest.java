@@ -4,9 +4,6 @@
 
 package com.cadl.naming.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
  * summary of Types
  *
@@ -32,7 +29,6 @@ public enum TypesModel {
      * @param value the serialized value to parse.
      * @return the parsed TypesModel object, or null if unable to parse.
      */
-    @JsonCreator
     public static TypesModel fromString(String value) {
         if (value == null) {
             return null;
@@ -47,7 +43,6 @@ public enum TypesModel {
     }
 
     /** {@inheritDoc} */
-    @JsonValue
     @Override
     public String toString() {
         return this.value;

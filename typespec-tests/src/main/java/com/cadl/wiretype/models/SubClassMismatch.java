@@ -7,9 +7,14 @@ package com.cadl.wiretype.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.DateTimeRfc1123;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /** The SubClassMismatch model. */
 @Immutable
@@ -17,9 +22,7 @@ public final class SubClassMismatch extends SuperClass {
     /*
      * The dateTimeRfc7231 property.
      */
-    @Generated
-    @JsonProperty(value = "dateTimeRfc7231")
-    private DateTimeRfc1123 dateTimeRfc7231;
+    @Generated private final DateTimeRfc1123 dateTimeRfc7231;
 
     /**
      * Creates an instance of SubClassMismatch class.
@@ -33,14 +36,6 @@ public final class SubClassMismatch extends SuperClass {
         this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
     }
 
-    @Generated
-    @JsonCreator
-    private SubClassMismatch(
-            @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
-            @JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231) {
-        this(dateTime, dateTimeRfc7231.getDateTime());
-    }
-
     /**
      * Get the dateTimeRfc7231 property: The dateTimeRfc7231 property.
      *
@@ -52,5 +47,67 @@ public final class SubClassMismatch extends SuperClass {
             return null;
         }
         return this.dateTimeRfc7231.getDateTime();
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("dateTime", Objects.toString(getDateTime(), null));
+        jsonWriter.writeStringField("dateTimeRfc7231", Objects.toString(this.dateTimeRfc7231, null));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of SubClassMismatch from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of SubClassMismatch if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the SubClassMismatch.
+     */
+    public static SubClassMismatch fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean dateTimeFound = false;
+                    OffsetDateTime dateTime = null;
+                    boolean dateTimeRfc7231Found = false;
+                    OffsetDateTime dateTimeRfc7231 = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("dateTime".equals(fieldName)) {
+                            dateTime =
+                                    reader.getNullable(
+                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                            dateTimeFound = true;
+                        } else if ("dateTimeRfc7231".equals(fieldName)) {
+                            DateTimeRfc1123 dateTimeRfc7231 =
+                                    reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
+                            if (dateTimeRfc7231 != null) {
+                                dateTimeRfc7231 = dateTimeRfc7231.getDateTime();
+                            }
+                            dateTimeRfc7231Found = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (dateTimeFound && dateTimeRfc7231Found) {
+                        SubClassMismatch deserializedSubClassMismatch = new SubClassMismatch(dateTime, dateTimeRfc7231);
+
+                        return deserializedSubClassMismatch;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!dateTimeFound) {
+                        missingProperties.add("dateTime");
+                    }
+                    if (!dateTimeRfc7231Found) {
+                        missingProperties.add("dateTimeRfc7231");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

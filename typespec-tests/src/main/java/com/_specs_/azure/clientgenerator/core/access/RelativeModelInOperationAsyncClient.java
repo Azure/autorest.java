@@ -74,6 +74,7 @@ public final class RelativeModelInOperationAsyncClient {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     name: String (Required)
      * }
      * }</pre>

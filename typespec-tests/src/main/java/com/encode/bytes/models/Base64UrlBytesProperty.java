@@ -7,18 +7,22 @@ package com.encode.bytes.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /** The Base64UrlBytesProperty model. */
 @Immutable
-public final class Base64UrlBytesProperty {
+public final class Base64UrlBytesProperty implements JsonSerializable<Base64UrlBytesProperty> {
     /*
      * The value property.
      */
-    @Generated
-    @JsonProperty(value = "value")
-    private Base64Url value;
+    @Generated private final Base64Url value;
 
     /**
      * Creates an instance of Base64UrlBytesProperty class.
@@ -28,12 +32,6 @@ public final class Base64UrlBytesProperty {
     @Generated
     public Base64UrlBytesProperty(byte[] value) {
         this.value = Base64Url.encode(value);
-    }
-
-    @Generated
-    @JsonCreator
-    private Base64UrlBytesProperty(@JsonProperty(value = "value") Base64Url value) {
-        this(value.decodedBytes());
     }
 
     /**
@@ -47,5 +45,56 @@ public final class Base64UrlBytesProperty {
             return null;
         }
         return this.value.decodedBytes();
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("value", Objects.toString(this.value, null));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Base64UrlBytesProperty from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Base64UrlBytesProperty if the JsonReader was pointing to an instance of it, or null if it
+     *     was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Base64UrlBytesProperty.
+     */
+    public static Base64UrlBytesProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean valueFound = false;
+                    byte[] value = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("value".equals(fieldName)) {
+                            Base64Url value =
+                                    reader.getNullable(nonNullReader -> new Base64Url(nonNullReader.getString()));
+                            if (value != null) {
+                                value = value.decodedBytes();
+                            }
+                            valueFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (valueFound) {
+                        Base64UrlBytesProperty deserializedBase64UrlBytesProperty = new Base64UrlBytesProperty(value);
+
+                        return deserializedBase64UrlBytesProperty;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!valueFound) {
+                        missingProperties.add("value");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

@@ -40,6 +40,7 @@ public final class ModelClient {
      *
      * <pre>{@code
      * {
+     *     model.kind: String (Optional)
      * }
      * }</pre>
      *
@@ -63,6 +64,7 @@ public final class ModelClient {
      *
      * <pre>{@code
      * {
+     *     model.kind: String (Optional)
      * }
      * }</pre>
      *

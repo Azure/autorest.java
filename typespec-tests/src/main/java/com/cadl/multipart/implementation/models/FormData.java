@@ -7,25 +7,26 @@ package com.cadl.multipart.implementation.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** The FormData model. */
 @Immutable
-public final class FormData {
+public final class FormData implements JsonSerializable<FormData> {
     /*
      * The name property.
      */
-    @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    @Generated private final String name;
 
     /*
      * The image property.
      */
-    @Generated
-    @JsonProperty(value = "image")
-    private byte[] image;
+    @Generated private final byte[] image;
 
     /**
      * Creates an instance of FormData class.
@@ -34,8 +35,7 @@ public final class FormData {
      * @param image the image value to set.
      */
     @Generated
-    @JsonCreator
-    public FormData(@JsonProperty(value = "name") String name, @JsonProperty(value = "image") byte[] image) {
+    public FormData(String name, byte[] image) {
         this.name = name;
         this.image = image;
     }
@@ -58,5 +58,61 @@ public final class FormData {
     @Generated
     public byte[] getImage() {
         return CoreUtils.clone(this.image);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeBinaryField("image", this.image);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of FormData from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of FormData if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the FormData.
+     */
+    public static FormData fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean nameFound = false;
+                    String name = null;
+                    boolean imageFound = false;
+                    byte[] image = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("name".equals(fieldName)) {
+                            name = reader.getString();
+                            nameFound = true;
+                        } else if ("image".equals(fieldName)) {
+                            image = reader.getBinary();
+                            imageFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (nameFound && imageFound) {
+                        FormData deserializedFormData = new FormData(name, image);
+
+                        return deserializedFormData;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!nameFound) {
+                        missingProperties.add("name");
+                    }
+                    if (!imageFound) {
+                        missingProperties.add("image");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

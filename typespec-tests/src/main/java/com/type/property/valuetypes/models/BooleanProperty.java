@@ -6,18 +6,21 @@ package com.type.property.valuetypes.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Model with a boolean property. */
 @Immutable
-public final class BooleanProperty {
+public final class BooleanProperty implements JsonSerializable<BooleanProperty> {
     /*
      * Property
      */
-    @Generated
-    @JsonProperty(value = "property")
-    private boolean property;
+    @Generated private final boolean property;
 
     /**
      * Creates an instance of BooleanProperty class.
@@ -25,8 +28,7 @@ public final class BooleanProperty {
      * @param property the property value to set.
      */
     @Generated
-    @JsonCreator
-    public BooleanProperty(@JsonProperty(value = "property") boolean property) {
+    public BooleanProperty(boolean property) {
         this.property = property;
     }
 
@@ -38,5 +40,52 @@ public final class BooleanProperty {
     @Generated
     public boolean isProperty() {
         return this.property;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeBooleanField("property", this.property);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of BooleanProperty from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of BooleanProperty if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the BooleanProperty.
+     */
+    public static BooleanProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean propertyFound = false;
+                    boolean property = false;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("property".equals(fieldName)) {
+                            property = reader.getBoolean();
+                            propertyFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (propertyFound) {
+                        BooleanProperty deserializedBooleanProperty = new BooleanProperty(property);
+
+                        return deserializedBooleanProperty;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!propertyFound) {
+                        missingProperties.add("property");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

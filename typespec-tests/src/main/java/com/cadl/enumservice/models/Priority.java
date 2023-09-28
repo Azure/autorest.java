@@ -4,9 +4,6 @@
 
 package com.cadl.enumservice.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /** Defines values for Priority. */
 public enum Priority {
     /** Enum value 100. */
@@ -28,7 +25,6 @@ public enum Priority {
      * @param value the serialized value to parse.
      * @return the parsed Priority object, or null if unable to parse.
      */
-    @JsonCreator
     public static Priority fromLong(long value) {
         Priority[] items = Priority.values();
         for (Priority item : items) {
@@ -44,7 +40,6 @@ public enum Priority {
      *
      * @return the long value.
      */
-    @JsonValue
     public long toLong() {
         return this.value;
     }

@@ -6,32 +6,31 @@ package com._specs_.azure.core.basic.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** UserOrder for testing list with expand. */
 @Immutable
-public final class UserOrder {
+public final class UserOrder implements JsonSerializable<UserOrder> {
     /*
      * The user's id.
      */
-    @Generated
-    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
-    private int id;
+    @Generated private int id;
 
     /*
      * The user's id.
      */
-    @Generated
-    @JsonProperty(value = "userId")
-    private int userId;
+    @Generated private final int userId;
 
     /*
      * The user's order detail
      */
-    @Generated
-    @JsonProperty(value = "detail")
-    private String detail;
+    @Generated private final String detail;
 
     /**
      * Creates an instance of UserOrder class.
@@ -40,8 +39,7 @@ public final class UserOrder {
      * @param detail the detail value to set.
      */
     @Generated
-    @JsonCreator
-    public UserOrder(@JsonProperty(value = "userId") int userId, @JsonProperty(value = "detail") String detail) {
+    public UserOrder(int userId, String detail) {
         this.userId = userId;
         this.detail = detail;
     }
@@ -74,5 +72,65 @@ public final class UserOrder {
     @Generated
     public String getDetail() {
         return this.detail;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntField("userId", this.userId);
+        jsonWriter.writeStringField("detail", this.detail);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of UserOrder from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of UserOrder if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the UserOrder.
+     */
+    public static UserOrder fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    int id = 0;
+                    boolean userIdFound = false;
+                    int userId = 0;
+                    boolean detailFound = false;
+                    String detail = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("id".equals(fieldName)) {
+                            id = reader.getInt();
+                        } else if ("userId".equals(fieldName)) {
+                            userId = reader.getInt();
+                            userIdFound = true;
+                        } else if ("detail".equals(fieldName)) {
+                            detail = reader.getString();
+                            detailFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (userIdFound && detailFound) {
+                        UserOrder deserializedUserOrder = new UserOrder(userId, detail);
+                        deserializedUserOrder.id = id;
+
+                        return deserializedUserOrder;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!userIdFound) {
+                        missingProperties.add("userId");
+                    }
+                    if (!detailFound) {
+                        missingProperties.add("detail");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

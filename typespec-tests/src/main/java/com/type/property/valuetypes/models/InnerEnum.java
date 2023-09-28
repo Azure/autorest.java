@@ -6,7 +6,6 @@ package com.type.property.valuetypes.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /** Enum that will be used as a property for model EnumProperty. Non-extensible. */
@@ -33,7 +32,6 @@ public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
      * @return the corresponding InnerEnum.
      */
     @Generated
-    @JsonCreator
     public static InnerEnum fromString(String name) {
         return fromString(name, InnerEnum.class);
     }

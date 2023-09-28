@@ -6,7 +6,6 @@ package com.cadl.naming.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -40,7 +39,6 @@ public final class DataStatus extends ExpandableStringEnum<DataStatus> {
      * @return the corresponding DataStatus.
      */
     @Generated
-    @JsonCreator
     public static DataStatus fromString(String name) {
         return fromString(name, DataStatus.class);
     }

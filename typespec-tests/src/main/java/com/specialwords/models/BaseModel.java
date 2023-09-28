@@ -6,21 +6,62 @@ package com.specialwords.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** This is a base model has discriminator name containing dot. */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "model.kind",
-        defaultImpl = BaseModel.class)
-@JsonTypeName("BaseModel")
-@JsonSubTypes({@JsonSubTypes.Type(name = "derived", value = DerivedModel.class)})
 @Immutable
-public class BaseModel {
+public class BaseModel implements JsonSerializable<BaseModel> {
     /** Creates an instance of BaseModel class. */
     @Generated
     public BaseModel() {}
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of BaseModel from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of BaseModel if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the BaseModel.
+     */
+    public static BaseModel fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    String discriminatorValue = null;
+                    JsonReader readerToUse = reader.bufferObject();
+
+                    readerToUse.nextToken(); // Prepare for reading
+                    while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = readerToUse.getFieldName();
+                        readerToUse.nextToken();
+                        if ("model.kind".equals(fieldName)) {
+                            discriminatorValue = readerToUse.getString();
+                            break;
+                        } else {
+                            readerToUse.skipChildren();
+                        }
+                    }
+
+                    if (discriminatorValue != null) {
+                        readerToUse = readerToUse.reset();
+                    }
+                    // Use the discriminator value to determine which subtype should be deserialized.
+                    if ("derived".equals(discriminatorValue)) {
+                        return DerivedModel.fromJson(readerToUse);
+                    } else {
+                        throw new IllegalStateException(
+                                "Discriminator field 'model.kind' didn't match one of the expected values 'derived'");
+                    }
+                });
+    }
 }

@@ -6,8 +6,14 @@ package com.cadl.naming.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * summary of Response
@@ -15,42 +21,34 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * <p>description of Response.
  */
 @Immutable
-public final class DataResponse {
+public final class DataResponse implements JsonSerializable<DataResponse> {
     /*
      * summary of name property
      *
      * description of name property
      */
-    @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    @Generated private final String name;
 
     /*
      * summary of data property
      *
      * description of data property
      */
-    @Generated
-    @JsonProperty(value = "data")
-    private BinaryData data;
+    @Generated private final BinaryData data;
 
     /*
      * summary of type property
      *
      * description of type property
      */
-    @Generated
-    @JsonProperty(value = "type")
-    private TypesModel dataType;
+    @Generated private final TypesModel dataType;
 
     /*
      * summary of status property
      *
      * description of status property
      */
-    @Generated
-    @JsonProperty(value = "status")
-    private DataStatus status;
+    @Generated private final DataStatus status;
 
     /**
      * Creates an instance of DataResponse class.
@@ -61,12 +59,7 @@ public final class DataResponse {
      * @param status the status value to set.
      */
     @Generated
-    @JsonCreator
-    private DataResponse(
-            @JsonProperty(value = "name") String name,
-            @JsonProperty(value = "data") BinaryData data,
-            @JsonProperty(value = "type") TypesModel dataType,
-            @JsonProperty(value = "status") DataStatus status) {
+    private DataResponse(String name, BinaryData data, TypesModel dataType, DataStatus status) {
         this.name = name;
         this.data = data;
         this.dataType = dataType;
@@ -119,5 +112,79 @@ public final class DataResponse {
     @Generated
     public DataStatus getStatus() {
         return this.status;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeJsonField("data", this.data);
+        jsonWriter.writeStringField("type", Objects.toString(this.dataType, null));
+        jsonWriter.writeStringField("status", Objects.toString(this.status, null));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of DataResponse from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DataResponse if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the DataResponse.
+     */
+    public static DataResponse fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean nameFound = false;
+                    String name = null;
+                    boolean dataFound = false;
+                    BinaryData data = null;
+                    boolean dataTypeFound = false;
+                    TypesModel dataType = null;
+                    boolean statusFound = false;
+                    DataStatus status = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("name".equals(fieldName)) {
+                            name = reader.getString();
+                            nameFound = true;
+                        } else if ("data".equals(fieldName)) {
+                            data = BinaryData.fromJson(reader);
+                            dataFound = true;
+                        } else if ("type".equals(fieldName)) {
+                            dataType = TypesModel.fromString(reader.getString());
+                            dataTypeFound = true;
+                        } else if ("status".equals(fieldName)) {
+                            status = DataStatus.fromString(reader.getString());
+                            statusFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (nameFound && dataFound && dataTypeFound && statusFound) {
+                        DataResponse deserializedDataResponse = new DataResponse(name, data, dataType, status);
+
+                        return deserializedDataResponse;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!nameFound) {
+                        missingProperties.add("name");
+                    }
+                    if (!dataFound) {
+                        missingProperties.add("data");
+                    }
+                    if (!dataTypeFound) {
+                        missingProperties.add("type");
+                    }
+                    if (!statusFound) {
+                        missingProperties.add("status");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

@@ -6,19 +6,22 @@ package com.type.property.valuetypes.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /** Model with dictionary string properties. */
 @Immutable
-public final class DictionaryStringProperty {
+public final class DictionaryStringProperty implements JsonSerializable<DictionaryStringProperty> {
     /*
      * Property
      */
-    @Generated
-    @JsonProperty(value = "property")
-    private Map<String, String> property;
+    @Generated private final Map<String, String> property;
 
     /**
      * Creates an instance of DictionaryStringProperty class.
@@ -26,8 +29,7 @@ public final class DictionaryStringProperty {
      * @param property the property value to set.
      */
     @Generated
-    @JsonCreator
-    public DictionaryStringProperty(@JsonProperty(value = "property") Map<String, String> property) {
+    public DictionaryStringProperty(Map<String, String> property) {
         this.property = property;
     }
 
@@ -39,5 +41,53 @@ public final class DictionaryStringProperty {
     @Generated
     public Map<String, String> getProperty() {
         return this.property;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeMapField("property", this.property, (writer, element) -> writer.writeString(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of DictionaryStringProperty from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DictionaryStringProperty if the JsonReader was pointing to an instance of it, or null if
+     *     it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the DictionaryStringProperty.
+     */
+    public static DictionaryStringProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean propertyFound = false;
+                    Map<String, String> property = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("property".equals(fieldName)) {
+                            property = reader.readMap(reader1 -> reader1.getString());
+                            propertyFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (propertyFound) {
+                        DictionaryStringProperty deserializedDictionaryStringProperty =
+                                new DictionaryStringProperty(property);
+
+                        return deserializedDictionaryStringProperty;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!propertyFound) {
+                        missingProperties.add("property");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

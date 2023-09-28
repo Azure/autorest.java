@@ -4,9 +4,6 @@
 
 package com.type.property.valuetypes.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /** Enum that will be used as a property for model EnumProperty. Non-extensible. */
 public enum FixedInnerEnum {
     /** First value. */
@@ -28,7 +25,6 @@ public enum FixedInnerEnum {
      * @param value the serialized value to parse.
      * @return the parsed FixedInnerEnum object, or null if unable to parse.
      */
-    @JsonCreator
     public static FixedInnerEnum fromString(String value) {
         if (value == null) {
             return null;
@@ -43,7 +39,6 @@ public enum FixedInnerEnum {
     }
 
     /** {@inheritDoc} */
-    @JsonValue
     @Override
     public String toString() {
         return this.value;

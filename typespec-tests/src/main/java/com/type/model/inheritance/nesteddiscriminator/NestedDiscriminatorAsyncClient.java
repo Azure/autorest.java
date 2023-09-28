@@ -42,6 +42,7 @@ public final class NestedDiscriminatorAsyncClient {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -67,6 +68,7 @@ public final class NestedDiscriminatorAsyncClient {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -92,6 +94,7 @@ public final class NestedDiscriminatorAsyncClient {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -117,6 +120,7 @@ public final class NestedDiscriminatorAsyncClient {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -142,6 +146,7 @@ public final class NestedDiscriminatorAsyncClient {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -167,6 +172,7 @@ public final class NestedDiscriminatorAsyncClient {
      *
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>

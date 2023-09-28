@@ -6,18 +6,21 @@ package com.cadl.specialchars.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** The Resource model. */
 @Immutable
-public final class Resource {
+public final class Resource implements JsonSerializable<Resource> {
     /*
      * id
      */
-    @Generated
-    @JsonProperty(value = "id")
-    private String id;
+    @Generated private final String id;
 
     /*
      * The aggregation function to be applied on the client metric. Allowed functions
@@ -25,31 +28,23 @@ public final class Resource {
      * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
      * ‘count’ - for requests
      */
-    @Generated
-    @JsonProperty(value = "aggregate")
-    private String aggregate;
+    @Generated private String aggregate;
 
     /*
      * The comparison operator. Supported types ‘>’, ‘<’
      */
-    @Generated
-    @JsonProperty(value = "condition")
-    private String condition;
+    @Generated private String condition;
 
     /*
      * Request name for which the Pass fail criteria has to be applied
      */
-    @Generated
-    @JsonProperty(value = "requestName")
-    private String requestName;
+    @Generated private String requestName;
 
     /*
      * The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
      * 100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
      */
-    @Generated
-    @JsonProperty(value = "value")
-    private Double value;
+    @Generated private Double value;
 
     /**
      * Creates an instance of Resource class.
@@ -57,8 +52,7 @@ public final class Resource {
      * @param id the id value to set.
      */
     @Generated
-    @JsonCreator
-    private Resource(@JsonProperty(value = "id") String id) {
+    private Resource(String id) {
         this.id = id;
     }
 
@@ -113,5 +107,72 @@ public final class Resource {
     @Generated
     public Double getValue() {
         return this.value;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("id", this.id);
+        jsonWriter.writeStringField("aggregate", this.aggregate);
+        jsonWriter.writeStringField("condition", this.condition);
+        jsonWriter.writeStringField("requestName", this.requestName);
+        jsonWriter.writeNumberField("value", this.value);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Resource from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Resource if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Resource.
+     */
+    public static Resource fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean idFound = false;
+                    String id = null;
+                    String aggregate = null;
+                    String condition = null;
+                    String requestName = null;
+                    Double value = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("id".equals(fieldName)) {
+                            id = reader.getString();
+                            idFound = true;
+                        } else if ("aggregate".equals(fieldName)) {
+                            aggregate = reader.getString();
+                        } else if ("condition".equals(fieldName)) {
+                            condition = reader.getString();
+                        } else if ("requestName".equals(fieldName)) {
+                            requestName = reader.getString();
+                        } else if ("value".equals(fieldName)) {
+                            value = reader.getNullable(JsonReader::getDouble);
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (idFound) {
+                        Resource deserializedResource = new Resource(id);
+                        deserializedResource.aggregate = aggregate;
+                        deserializedResource.condition = condition;
+                        deserializedResource.requestName = requestName;
+                        deserializedResource.value = value;
+
+                        return deserializedResource;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!idFound) {
+                        missingProperties.add("id");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

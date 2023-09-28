@@ -4,9 +4,6 @@
 
 package com.cadl.literalservice.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /** Defines values for OptionalLiteral. */
 public enum OptionalLiteral {
     /** Enum value optionalLiteral. */
@@ -25,7 +22,6 @@ public enum OptionalLiteral {
      * @param value the serialized value to parse.
      * @return the parsed OptionalLiteral object, or null if unable to parse.
      */
-    @JsonCreator
     public static OptionalLiteral fromString(String value) {
         if (value == null) {
             return null;
@@ -40,7 +36,6 @@ public enum OptionalLiteral {
     }
 
     /** {@inheritDoc} */
-    @JsonValue
     @Override
     public String toString() {
         return this.value;

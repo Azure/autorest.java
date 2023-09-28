@@ -6,24 +6,27 @@ package com.cadl.literalservice.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /** The Model model. */
 @Fluent
-public final class Model {
+public final class Model implements JsonSerializable<Model> {
     /*
      * The literal property.
      */
-    @Generated
-    @JsonProperty(value = "literal")
-    private String literal = "literal";
+    @Generated private final String literal = "literal";
 
     /*
      * The optionalLiteral property.
      */
-    @Generated
-    @JsonProperty(value = "optionalLiteral")
-    private OptionalLiteral optionalLiteral;
+    @Generated private OptionalLiteral optionalLiteral;
 
     /** Creates an instance of Model class. */
     @Generated
@@ -61,5 +64,57 @@ public final class Model {
     public Model setOptionalLiteral(OptionalLiteral optionalLiteral) {
         this.optionalLiteral = optionalLiteral;
         return this;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("literal", this.literal);
+        jsonWriter.writeStringField("optionalLiteral", Objects.toString(this.optionalLiteral, null));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Model from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Model if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     *     JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Model.
+     */
+    public static Model fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean literalFound = false;
+                    String literal = null;
+                    OptionalLiteral optionalLiteral = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("literal".equals(fieldName)) {
+                            literal = reader.getString();
+                            literalFound = true;
+                        } else if ("optionalLiteral".equals(fieldName)) {
+                            optionalLiteral = OptionalLiteral.fromString(reader.getString());
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (literalFound) {
+                        Model deserializedModel = new Model(literal);
+                        deserializedModel.optionalLiteral = optionalLiteral;
+
+                        return deserializedModel;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!literalFound) {
+                        missingProperties.add("literal");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

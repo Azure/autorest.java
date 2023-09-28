@@ -42,6 +42,7 @@ public final class ModelAsyncClient {
      *
      * <pre>{@code
      * {
+     *     model.kind: String (Optional)
      * }
      * }</pre>
      *
@@ -66,6 +67,7 @@ public final class ModelAsyncClient {
      *
      * <pre>{@code
      * {
+     *     model.kind: String (Optional)
      * }
      * }</pre>
      *

@@ -6,18 +6,21 @@ package com.cadl.internal.implementation.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** The ResponseInternal model. */
 @Immutable
-public final class ResponseInternal {
+public final class ResponseInternal implements JsonSerializable<ResponseInternal> {
     /*
      * The property property.
      */
-    @Generated
-    @JsonProperty(value = "property")
-    private ResponseInternalInner property;
+    @Generated private final ResponseInternalInner property;
 
     /**
      * Creates an instance of ResponseInternal class.
@@ -25,8 +28,7 @@ public final class ResponseInternal {
      * @param property the property value to set.
      */
     @Generated
-    @JsonCreator
-    private ResponseInternal(@JsonProperty(value = "property") ResponseInternalInner property) {
+    private ResponseInternal(ResponseInternalInner property) {
         this.property = property;
     }
 
@@ -38,5 +40,52 @@ public final class ResponseInternal {
     @Generated
     public ResponseInternalInner getProperty() {
         return this.property;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeJsonField("property", this.property);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of ResponseInternal from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ResponseInternal if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the ResponseInternal.
+     */
+    public static ResponseInternal fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean propertyFound = false;
+                    ResponseInternalInner property = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("property".equals(fieldName)) {
+                            property = ResponseInternalInner.fromJson(reader);
+                            propertyFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (propertyFound) {
+                        ResponseInternal deserializedResponseInternal = new ResponseInternal(property);
+
+                        return deserializedResponseInternal;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!propertyFound) {
+                        missingProperties.add("property");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

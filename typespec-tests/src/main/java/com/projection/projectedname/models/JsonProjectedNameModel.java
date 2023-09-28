@@ -6,18 +6,21 @@ package com.projection.projectedname.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** The JsonProjectedNameModel model. */
 @Immutable
-public final class JsonProjectedNameModel {
+public final class JsonProjectedNameModel implements JsonSerializable<JsonProjectedNameModel> {
     /*
      * Pass in true
      */
-    @Generated
-    @JsonProperty(value = "wireName")
-    private boolean defaultName;
+    @Generated private final boolean defaultName;
 
     /**
      * Creates an instance of JsonProjectedNameModel class.
@@ -25,8 +28,7 @@ public final class JsonProjectedNameModel {
      * @param defaultName the defaultName value to set.
      */
     @Generated
-    @JsonCreator
-    public JsonProjectedNameModel(@JsonProperty(value = "wireName") boolean defaultName) {
+    public JsonProjectedNameModel(boolean defaultName) {
         this.defaultName = defaultName;
     }
 
@@ -38,5 +40,53 @@ public final class JsonProjectedNameModel {
     @Generated
     public boolean isDefaultName() {
         return this.defaultName;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeBooleanField("wireName", this.defaultName);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of JsonProjectedNameModel from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of JsonProjectedNameModel if the JsonReader was pointing to an instance of it, or null if it
+     *     was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the JsonProjectedNameModel.
+     */
+    public static JsonProjectedNameModel fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean defaultNameFound = false;
+                    boolean defaultName = false;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("wireName".equals(fieldName)) {
+                            defaultName = reader.getBoolean();
+                            defaultNameFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (defaultNameFound) {
+                        JsonProjectedNameModel deserializedJsonProjectedNameModel =
+                                new JsonProjectedNameModel(defaultName);
+
+                        return deserializedJsonProjectedNameModel;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!defaultNameFound) {
+                        missingProperties.add("wireName");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

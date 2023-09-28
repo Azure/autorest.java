@@ -7,25 +7,26 @@ package com.cadl.errormodel.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** The Diagnostic model. */
 @Immutable
-public final class Diagnostic {
+public final class Diagnostic implements JsonSerializable<Diagnostic> {
     /*
      * The name property.
      */
-    @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    @Generated private final String name;
 
     /*
      * The error property.
      */
-    @Generated
-    @JsonProperty(value = "error")
-    private ResponseError error;
+    @Generated private final ResponseError error;
 
     /**
      * Creates an instance of Diagnostic class.
@@ -34,8 +35,7 @@ public final class Diagnostic {
      * @param error the error value to set.
      */
     @Generated
-    @JsonCreator
-    private Diagnostic(@JsonProperty(value = "name") String name, @JsonProperty(value = "error") ResponseError error) {
+    private Diagnostic(String name, ResponseError error) {
         this.name = name;
         this.error = error;
     }
@@ -58,5 +58,61 @@ public final class Diagnostic {
     @Generated
     public ResponseError getError() {
         return this.error;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeJsonField("error", this.error);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Diagnostic from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Diagnostic if the JsonReader was pointing to an instance of it, or null if it was pointing
+     *     to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Diagnostic.
+     */
+    public static Diagnostic fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean nameFound = false;
+                    String name = null;
+                    boolean errorFound = false;
+                    ResponseError error = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("name".equals(fieldName)) {
+                            name = reader.getString();
+                            nameFound = true;
+                        } else if ("error".equals(fieldName)) {
+                            error = ResponseError.fromJson(reader);
+                            errorFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (nameFound && errorFound) {
+                        Diagnostic deserializedDiagnostic = new Diagnostic(name, error);
+
+                        return deserializedDiagnostic;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!nameFound) {
+                        missingProperties.add("name");
+                    }
+                    if (!errorFound) {
+                        missingProperties.add("error");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

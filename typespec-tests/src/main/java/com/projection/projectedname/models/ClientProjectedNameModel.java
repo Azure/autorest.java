@@ -6,18 +6,21 @@ package com.projection.projectedname.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** The ClientProjectedNameModel model. */
 @Immutable
-public final class ClientProjectedNameModel {
+public final class ClientProjectedNameModel implements JsonSerializable<ClientProjectedNameModel> {
     /*
      * Pass in true
      */
-    @Generated
-    @JsonProperty(value = "defaultName")
-    private boolean clientName;
+    @Generated private final boolean clientName;
 
     /**
      * Creates an instance of ClientProjectedNameModel class.
@@ -25,8 +28,7 @@ public final class ClientProjectedNameModel {
      * @param clientName the clientName value to set.
      */
     @Generated
-    @JsonCreator
-    public ClientProjectedNameModel(@JsonProperty(value = "defaultName") boolean clientName) {
+    public ClientProjectedNameModel(boolean clientName) {
         this.clientName = clientName;
     }
 
@@ -38,5 +40,53 @@ public final class ClientProjectedNameModel {
     @Generated
     public boolean isClientName() {
         return this.clientName;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeBooleanField("defaultName", this.clientName);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of ClientProjectedNameModel from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ClientProjectedNameModel if the JsonReader was pointing to an instance of it, or null if
+     *     it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the ClientProjectedNameModel.
+     */
+    public static ClientProjectedNameModel fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean clientNameFound = false;
+                    boolean clientName = false;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("defaultName".equals(fieldName)) {
+                            clientName = reader.getBoolean();
+                            clientNameFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (clientNameFound) {
+                        ClientProjectedNameModel deserializedClientProjectedNameModel =
+                                new ClientProjectedNameModel(clientName);
+
+                        return deserializedClientProjectedNameModel;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!clientNameFound) {
+                        missingProperties.add("defaultName");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

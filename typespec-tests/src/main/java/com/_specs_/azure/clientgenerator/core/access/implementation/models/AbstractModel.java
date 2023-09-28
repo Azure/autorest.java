@@ -6,28 +6,19 @@ package com._specs_.azure.clientgenerator.core.access.implementation.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /** Used in internal operations, should be generated but not exported. */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "kind",
-        defaultImpl = AbstractModel.class)
-@JsonTypeName("AbstractModel")
-@JsonSubTypes({@JsonSubTypes.Type(name = "real", value = RealModel.class)})
 @Immutable
-public class AbstractModel {
+public class AbstractModel implements JsonSerializable<AbstractModel> {
     /*
      * The name property.
      */
-    @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    @Generated private final String name;
 
     /**
      * Creates an instance of AbstractModel class.
@@ -35,8 +26,7 @@ public class AbstractModel {
      * @param name the name value to set.
      */
     @Generated
-    @JsonCreator
-    protected AbstractModel(@JsonProperty(value = "name") String name) {
+    protected AbstractModel(String name) {
         this.name = name;
     }
 
@@ -48,5 +38,53 @@ public class AbstractModel {
     @Generated
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of AbstractModel from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of AbstractModel if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     *     polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the AbstractModel.
+     */
+    public static AbstractModel fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    String discriminatorValue = null;
+                    JsonReader readerToUse = reader.bufferObject();
+
+                    readerToUse.nextToken(); // Prepare for reading
+                    while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = readerToUse.getFieldName();
+                        readerToUse.nextToken();
+                        if ("kind".equals(fieldName)) {
+                            discriminatorValue = readerToUse.getString();
+                            break;
+                        } else {
+                            readerToUse.skipChildren();
+                        }
+                    }
+
+                    if (discriminatorValue != null) {
+                        readerToUse = readerToUse.reset();
+                    }
+                    // Use the discriminator value to determine which subtype should be deserialized.
+                    if ("real".equals(discriminatorValue)) {
+                        return RealModel.fromJson(readerToUse);
+                    } else {
+                        throw new IllegalStateException(
+                                "Discriminator field 'kind' didn't match one of the expected values 'real'");
+                    }
+                });
     }
 }

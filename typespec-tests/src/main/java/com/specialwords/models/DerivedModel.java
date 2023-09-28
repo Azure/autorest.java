@@ -6,29 +6,30 @@ package com.specialwords.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** This is a model has property names of special words or characters. */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "model.kind")
-@JsonTypeName("derived")
 @Immutable
 public final class DerivedModel extends BaseModel {
     /*
+     * model.kind
+     */
+    @Generated private static final String MODEL_KIND = "derived";
+
+    /*
      * The derived.name property.
      */
-    @Generated
-    @JsonProperty(value = "derived.name")
-    private String derivedName;
+    @Generated private final String derivedName;
 
     /*
      * The for property.
      */
-    @Generated
-    @JsonProperty(value = "for")
-    private String forProperty;
+    @Generated private final String forProperty;
 
     /**
      * Creates an instance of DerivedModel class.
@@ -37,9 +38,7 @@ public final class DerivedModel extends BaseModel {
      * @param forProperty the forProperty value to set.
      */
     @Generated
-    @JsonCreator
-    public DerivedModel(
-            @JsonProperty(value = "derived.name") String derivedName, @JsonProperty(value = "for") String forProperty) {
+    public DerivedModel(String derivedName, String forProperty) {
         this.derivedName = derivedName;
         this.forProperty = forProperty;
     }
@@ -62,5 +61,73 @@ public final class DerivedModel extends BaseModel {
     @Generated
     public String getForProperty() {
         return this.forProperty;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("model.kind", MODEL_KIND);
+        jsonWriter.writeStringField("derived.name", this.derivedName);
+        jsonWriter.writeStringField("for", this.forProperty);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of DerivedModel from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DerivedModel if the JsonReader was pointing to an instance of it, or null if it was
+     *     pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     *     polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the DerivedModel.
+     */
+    public static DerivedModel fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(
+                reader -> {
+                    boolean derivedNameFound = false;
+                    String derivedName = null;
+                    boolean forPropertyFound = false;
+                    String forProperty = null;
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        String fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("model.kind".equals(fieldName)) {
+                            String modelKind = reader.getString();
+                            if (!MODEL_KIND.equals(modelKind)) {
+                                throw new IllegalStateException(
+                                        "'model.kind' was expected to be non-null and equal to '"
+                                                + MODEL_KIND
+                                                + "'. The found 'model.kind' was '"
+                                                + modelKind
+                                                + "'.");
+                            }
+                        } else if ("derived.name".equals(fieldName)) {
+                            derivedName = reader.getString();
+                            derivedNameFound = true;
+                        } else if ("for".equals(fieldName)) {
+                            forProperty = reader.getString();
+                            forPropertyFound = true;
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                    if (derivedNameFound && forPropertyFound) {
+                        DerivedModel deserializedDerivedModel = new DerivedModel(derivedName, forProperty);
+
+                        return deserializedDerivedModel;
+                    }
+                    List<String> missingProperties = new ArrayList<>();
+                    if (!derivedNameFound) {
+                        missingProperties.add("derived.name");
+                    }
+                    if (!forPropertyFound) {
+                        missingProperties.add("for");
+                    }
+
+                    throw new IllegalStateException(
+                            "Missing required property/properties: " + String.join(", ", missingProperties));
+                });
     }
 }

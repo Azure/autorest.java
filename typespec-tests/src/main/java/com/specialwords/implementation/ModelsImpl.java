@@ -125,6 +125,7 @@ public final class ModelsImpl {
      *
      * <pre>{@code
      * {
+     *     model.kind: String (Optional)
      * }
      * }</pre>
      *
@@ -149,6 +150,7 @@ public final class ModelsImpl {
      *
      * <pre>{@code
      * {
+     *     model.kind: String (Optional)
      * }
      * }</pre>
      *
@@ -172,6 +174,7 @@ public final class ModelsImpl {
      *
      * <pre>{@code
      * {
+     *     model.kind: String (Optional)
      * }
      * }</pre>
      *
@@ -196,6 +199,7 @@ public final class ModelsImpl {
      *
      * <pre>{@code
      * {
+     *     model.kind: String (Optional)
      * }
      * }</pre>
      *
