@@ -338,6 +338,8 @@ public class PartialUpdateHandler {
 
         if (lines.length == 0) {
             compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(new JavadocComment());
+        } else if (lines.length == 1) {
+            compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(new JavadocComment(lines[0]));
         } else {
             compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(
                     new JavadocComment(String.join("\r\n", Arrays.copyOfRange(lines, 1, lines.length - 1))));
