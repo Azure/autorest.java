@@ -336,8 +336,12 @@ public class PartialUpdateHandler {
 
         String[] lines = mergedJavadoc.split("\r\n");
 
-        compilationUnitForGeneratedFile.getPackageDeclaration().get()
-                .setComment(new JavadocComment(String.join("\r\n", Arrays.copyOfRange(lines, 1, lines.length - 1))));
+        if (lines.length == 0) {
+            compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(new JavadocComment());
+        } else {
+            compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(
+                    new JavadocComment(String.join("\r\n", Arrays.copyOfRange(lines, 1, lines.length - 1))));
+        }
 
         return compilationUnitForGeneratedFile.toString();
     }
