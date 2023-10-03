@@ -287,8 +287,7 @@ public class Postprocessor extends NewPlugin {
                 if (Files.exists(existingFilePath)) {
                     try {
                         String existingFileContent = new String(Files.readAllBytes(existingFilePath), StandardCharsets.UTF_8);
-                        String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
-                        return updatedContent;
+                        return PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
                     } catch (Exception e) {
                         logger.error("Unable to get content from file path", e);
                         throw new RuntimeException(e);
