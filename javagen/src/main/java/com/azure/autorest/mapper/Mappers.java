@@ -102,4 +102,8 @@ public class Mappers {
     public static UnionModelMapper getUnionModelMapper() {
         return factory.getUnionModelMapper();
     }
+
+    public static GraalVmConfigMapper getGraalVmConfigMapper() {
+        return factory.getGraalVmConfigMapper();
+    }
 }

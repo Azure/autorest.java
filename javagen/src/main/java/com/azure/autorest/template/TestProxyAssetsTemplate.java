@@ -4,13 +4,10 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.model.projectmodel.Project;
+import com.azure.autorest.util.TemplateUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TestProxyAssetsTemplate {
-
-    static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private static class Assets {
         @JsonProperty("AssetsRepo")
@@ -42,10 +39,6 @@ public class TestProxyAssetsTemplate {
             group = segments[segments.length - 1];
         }
         asserts.setTagPrefix(String.format("java/%1$s/%2$s", group, project.getArtifactId()));
-        try {
-            return OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(asserts);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        return TemplateUtil.prettyPrintToJson(asserts);
     }
 }

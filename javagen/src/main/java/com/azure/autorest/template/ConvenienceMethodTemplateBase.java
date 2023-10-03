@@ -357,7 +357,13 @@ abstract class ConvenienceMethodTemplateBase {
 
     protected boolean isModelOrBuiltin(IType type) {
         // TODO: other built-in types
-        return type == ClassType.String || ClientModelUtil.isClientModel(type);
+        return type ==
+                // string
+                ClassType.String
+                // boolean, int, float, etc.
+                || (type instanceof PrimitiveType && type.asNullable() != ClassType.Void)
+                // client model
+                || ClientModelUtil.isClientModel(type);
     }
 
     private static String expressionConvertToBinaryData(String name, IType type) {

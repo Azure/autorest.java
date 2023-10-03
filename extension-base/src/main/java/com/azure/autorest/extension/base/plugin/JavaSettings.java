@@ -34,7 +34,8 @@ public class JavaSettings {
 
     private static Logger logger;
     private final boolean useKeyCredential;
-    private final boolean noCustomHeaders;
+    private boolean noCustomHeaders;
+
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
             header = MICROSOFT_MIT_LICENSE_HEADER + "\n" + String.format(DEFAULT_CODE_GENERATION_HEADER, VERSION);
@@ -170,7 +171,8 @@ public class JavaSettings {
                 getBooleanValue(host, "disable-required-property-annotation", false),
                 getBooleanValue(host, "enable-page-size", false),
                 getBooleanValue(host, "use-key-credential", false),
-                getBooleanValue(host, "null-byte-array-maps-to-empty-array", false)
+                getBooleanValue(host, "null-byte-array-maps-to-empty-array", false),
+                getBooleanValue(host, "graal-vm-config", false)
             );
         }
         return instance;
@@ -326,7 +328,8 @@ public class JavaSettings {
         boolean disableRequiredPropertyAnnotation,
         boolean pageSizeEnabled,
         boolean useKeyCredential,
-        boolean nullByteArrayMapsToEmptyArray) {
+        boolean nullByteArrayMapsToEmptyArray,
+        boolean generateGraalVmConfig) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -425,6 +428,7 @@ public class JavaSettings {
         this.pageSizeEnabled = pageSizeEnabled;
         this.useKeyCredential = useKeyCredential;
         this.nullByteArrayMapsToEmptyArray = nullByteArrayMapsToEmptyArray;
+        this.generateGraalVmConfig = generateGraalVmConfig;
     }
 
 
@@ -494,8 +498,16 @@ public class JavaSettings {
         return isAzure() || isFluent();
     }
 
+    // configure for model flatten in client
     public enum ClientFlattenAnnotationTarget {
-        TYPE, FIELD, NONE
+        // @JsonFlatten on class
+        TYPE,
+        // @JsonFlatten on class variable
+        FIELD,
+        // Do not use @JsonFlatten. The model flatten is implemented as class variable getter/setter access the flattened properties.
+        NONE,
+        // Disable the model flatten
+        DISABLED
     }
 
     // target for @JsonFlatten annotation for x-ms-client-flatten
@@ -900,6 +912,12 @@ public class JavaSettings {
     private final boolean pageSizeEnabled;
     public boolean isPageSizeEnabled() {
         return pageSizeEnabled;
+    }
+
+    private final boolean generateGraalVmConfig;
+
+    public boolean isGenerateGraalVmConfig() {
+        return generateGraalVmConfig;
     }
 
     public static class PollingDetails {
