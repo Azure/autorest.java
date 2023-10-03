@@ -20,11 +20,13 @@ import com.github.javaparser.ast.modules.ModuleDeclaration;
 import com.github.javaparser.ast.modules.ModuleDirective;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 
+import java.io.BufferedReader;
+import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 /**
@@ -334,15 +336,15 @@ public class PartialUpdateHandler {
                 generatedJavadocString.substring(startGenerateDocPosition, endGenerateDocPosition + 26) +
                 existingJavadocString.substring(existingGeneratedDocEndPosition + 26);
 
-        String[] lines = mergedJavadoc.split("\r\n");
+        List<String> lines = new BufferedReader(new StringReader(mergedJavadoc)).lines().collect(Collectors.toList());
 
-        if (lines.length == 0) {
+        if (lines.isEmpty()) {
             compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(new JavadocComment());
-        } else if (lines.length == 1) {
-            compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(new JavadocComment(lines[0]));
+        } else if (lines.size() == 1) {
+            compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(new JavadocComment(lines.get(0)));
         } else {
             compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(
-                    new JavadocComment(String.join("\r\n", Arrays.copyOfRange(lines, 1, lines.length - 1))));
+                    new JavadocComment(String.join("\r\n", lines.subList(1, lines.size() - 1))));
         }
 
         return compilationUnitForGeneratedFile.toString();
