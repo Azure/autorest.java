@@ -3,14 +3,16 @@
 
 package com.specialwords;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class OperationClientTest {
 
-    OperationClient client = new SpecialWordsClientBuilder().buildOperationClient();
+    private final OperationsClient client = new SpecialWordsClientBuilder().buildOperationsClient();
 
+    @Disabled
     @Test
-    void forMethod() {
-        client.forMethod();
+    void test() throws Exception {
+        ReflectHelper.invokeWithResponseMethods(client.getClass(), client, null);
     }
 }

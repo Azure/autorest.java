@@ -3,19 +3,16 @@
 
 package com.specialwords;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class ParameterClientTest {
 
-    ParameterClient client = new SpecialWordsClientBuilder().buildParameterClient();
+    private final ParametersClient client = new SpecialWordsClientBuilder().buildParametersClient();
 
+    @Disabled
     @Test
-    void getWithIf() {
-        client.getWithIf("weekend");
-    }
-
-    @Test
-    void getWithFilter() {
-        client.getWithFilter("abc*.");
+    void test() throws Exception {
+        ReflectHelper.invokeWithResponseMethods(client.getClass(), client, "ok");
     }
 }

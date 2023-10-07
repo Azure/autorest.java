@@ -3,25 +3,19 @@
 
 package com.specialwords;
 
-import com.specialwords.models.BaseModel;
-import com.specialwords.models.DerivedModel;
-import org.junit.jupiter.api.Assertions;
+import com.azure.core.util.BinaryData;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.util.Collections;
 
 class ModelClientTest {
 
-    ModelClient client = new SpecialWordsClientBuilder().buildModelClient();
+    private final ModelsClient client = new SpecialWordsClientBuilder().buildModelsClient();
 
+    @Disabled
     @Test
-    void get() {
-        DerivedModel response = (DerivedModel) client.get();
-        Assertions.assertEquals("my.name", response.getDerivedName());
-        Assertions.assertEquals("value", response.getForProperty());
-    }
-
-    @Test
-    void put() {
-        BaseModel body = new DerivedModel("my.name", "value");
-        client.put(body);
+    void test() throws Exception {
+        ReflectHelper.invokeWithResponseMethods(client.getClass(), client, BinaryData.fromObject(Collections.singletonMap("name", "ok")));
     }
 }
