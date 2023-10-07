@@ -12,8 +12,9 @@ import {
 import { CodeModel } from "../common/code-model.js";
 import { ChoiceSchema, SealedChoiceSchema } from "../common/schemas/choice.js";
 import { Request, Operation } from "../common/operation.js";
-import { selectName, Style } from "@azure-tools/codegen";
+import { selectName } from "@azure-tools/codegen";
 import { getNameOptions, isUnassigned, ScopeNamer, NamingService } from "./naming-utils.js";
+import { Style } from "./formatter.js";
 import pkg from "lodash";
 const { partition } = pkg;
 
