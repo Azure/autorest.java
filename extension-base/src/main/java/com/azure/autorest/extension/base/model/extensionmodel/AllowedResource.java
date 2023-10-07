@@ -7,9 +7,9 @@ import java.util.List;
 
 public class AllowedResource {
 
-    List<String> scopes;
+    private List<String> scopes;
 
-    String type;
+    private String type;
 
     public List<String> getScopes() {
         return scopes;

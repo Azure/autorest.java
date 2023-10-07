@@ -7,7 +7,7 @@ import java.util.List;
 
 public class XmsArmIdDetails {
 
-    List<AllowedResource> allowedResources;
+    private List<AllowedResource> allowedResources;
 
     public List<AllowedResource> getAllowedResources() {
         return allowedResources;
