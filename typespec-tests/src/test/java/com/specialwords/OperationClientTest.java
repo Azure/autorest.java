@@ -13,6 +13,6 @@ class OperationClientTest {
     @Disabled
     @Test
     void test() throws Exception {
-        ReflectHelper.invokeWithResponseMethods(client.getClass(), client, null);
+        ReflectHelper.invokeWithResponseMethods(client.getClass(), client);
     }
 }

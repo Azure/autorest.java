@@ -7,17 +7,17 @@ import com.azure.core.http.rest.RequestOptions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
+// use reflection to call mock server, as special-words test is about compiler, not runtime
 class ReflectHelper {
 
-    public static <T> void invokeWithResponseMethods(Class<T> clazz, Object client, Object parameter) throws InvocationTargetException, IllegalAccessException {
+    public static <T> void invokeWithResponseMethods(Class<T> clazz, Object client, Object... parameters) throws InvocationTargetException, IllegalAccessException {
         for (Method m : clazz.getDeclaredMethods()) {
             if (m.getName().endsWith("WithResponse")) {
-                if (parameter != null) {
-                    m.invoke(client, parameter, (RequestOptions) null);
-                } else {
-                    m.invoke(client, (RequestOptions) null);
-                }
+                Object[] args = Stream.concat(Arrays.stream(parameters), Stream.of((RequestOptions) null)).toArray(Object[]::new);
+                m.invoke(client, args);
             }
         }
     }
