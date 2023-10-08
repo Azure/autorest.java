@@ -37,6 +37,30 @@ public final class SpecialWordsClientImpl {
         return this.serializerAdapter;
     }
 
+    /** The ModelsImpl object to access its operations. */
+    private final ModelsImpl models;
+
+    /**
+     * Gets the ModelsImpl object to access its operations.
+     *
+     * @return the ModelsImpl object.
+     */
+    public ModelsImpl getModels() {
+        return this.models;
+    }
+
+    /** The ModelPropertiesImpl object to access its operations. */
+    private final ModelPropertiesImpl modelProperties;
+
+    /**
+     * Gets the ModelPropertiesImpl object to access its operations.
+     *
+     * @return the ModelPropertiesImpl object.
+     */
+    public ModelPropertiesImpl getModelProperties() {
+        return this.modelProperties;
+    }
+
     /** The OperationsImpl object to access its operations. */
     private final OperationsImpl operations;
 
@@ -59,18 +83,6 @@ public final class SpecialWordsClientImpl {
      */
     public ParametersImpl getParameters() {
         return this.parameters;
-    }
-
-    /** The ModelsImpl object to access its operations. */
-    private final ModelsImpl models;
-
-    /**
-     * Gets the ModelsImpl object to access its operations.
-     *
-     * @return the ModelsImpl object.
-     */
-    public ModelsImpl getModels() {
-        return this.models;
     }
 
     /** Initializes an instance of SpecialWordsClient client. */
@@ -98,8 +110,9 @@ public final class SpecialWordsClientImpl {
     public SpecialWordsClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.models = new ModelsImpl(this);
+        this.modelProperties = new ModelPropertiesImpl(this);
         this.operations = new OperationsImpl(this);
         this.parameters = new ParametersImpl(this);
-        this.models = new ModelsImpl(this);
     }
 }

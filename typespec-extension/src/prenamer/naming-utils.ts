@@ -1,5 +1,6 @@
 import { Languages } from "@autorest/codemodel";
-import { removeSequentialDuplicates, fixLeadingNumber, deconstruct, Style, Styler } from "@azure-tools/codegen";
+import { removeSequentialDuplicates, fixLeadingNumber, deconstruct } from "@azure-tools/codegen";
+import { Style, Styler } from "./formatter.js";
 import pkg from "lodash";
 const { last } = pkg;
 
