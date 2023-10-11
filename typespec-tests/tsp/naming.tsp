@@ -75,6 +75,10 @@ model Request {
   @summary("summary of etag header parameter")
   @doc("description of etag header parameter")
   etag?: string;
+
+  parameters?: {
+    type: "Type1" | "Type2";
+  };
 }
 
 @summary("summary of naming route")
@@ -85,4 +89,8 @@ interface NamingOp {
   @doc("description of POST op")
   @post
   post(...Request): Response | ErrorResponse;
+
+  getAnonymouse(): {
+    name: string;
+  };
 }
