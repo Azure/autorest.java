@@ -1518,7 +1518,7 @@ export class CodeModelBuilder {
           // use it for extensible enum
           schema = this.processChoiceSchema(knownValues, this.getName(knownValues), false);
         } else {
-          schema = this.processSchema(type.type, nameHint + "Data");
+          schema = this.processSchema(type.type, nameHint + "Model");
         }
         return this.applyModelPropertyDecorators(type, nameHint, schema);
       }
@@ -2113,13 +2113,13 @@ export class CodeModelBuilder {
 
     // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(type);
-    const unionSchema = new OrSchema(pascalCase(name) + "ModelBase", this.getDoc(type), {
+    const unionSchema = new OrSchema(pascalCase(name) + "Base", this.getDoc(type), {
       summary: this.getSummary(type),
     });
     unionSchema.anyOf = [];
     nonNullVariants.forEach((it) => {
       const variantName = this.getUnionVariantName(it.type, { depth: 0 });
-      const modelName = variantName + pascalCase(name) + "Model";
+      const modelName = variantName + pascalCase(name);
       const propertyName = "value";
 
       // these ObjectSchema is not added to codeModel.schemas
