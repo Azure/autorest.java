@@ -1412,7 +1412,7 @@ export class CodeModelBuilder {
             // for standard LRO action, return type is the pollResultType
             schema = op.lroMetadata.pollResultType;
           } else {
-            schema = this.processSchema(bodyType, "response");
+            schema = this.processSchema(bodyType, op.language.default.name + "Response");
           }
         }
         response = new SchemaResponse(schema, {
@@ -1518,7 +1518,7 @@ export class CodeModelBuilder {
           // use it for extensible enum
           schema = this.processChoiceSchema(knownValues, this.getName(knownValues), false);
         } else {
-          schema = this.processSchema(type.type, nameHint);
+          schema = this.processSchema(type.type, nameHint + "Data");
         }
         return this.applyModelPropertyDecorators(type, nameHint, schema);
       }
@@ -1533,7 +1533,7 @@ export class CodeModelBuilder {
           // "pure" Record that does not have properties in it
           return this.processDictionarySchema(type, nameHint);
         } else {
-          return this.processObjectSchema(type, this.getName(type));
+          return this.processObjectSchema(type, this.getName(type, nameHint));
         }
 
       case "EnumMember":
@@ -2222,7 +2222,10 @@ export class CodeModelBuilder {
     return getSummary(this.program, target);
   }
 
-  private getName(target: Model | Enum | EnumMember | ModelProperty | Scalar | Operation): string {
+  private getName(
+    target: Model | Enum | EnumMember | ModelProperty | Scalar | Operation,
+    nameHint: string = undefined,
+  ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const languageProjectedName = getProjectedName(this.program, target, "java");
     if (languageProjectedName) {
@@ -2249,6 +2252,12 @@ export class CodeModelBuilder {
       const tspName = getTypeName(target, this.typeNameOptions);
       const newName = getNameForTemplate(target);
       this.logWarning(`Rename TypeSpec model '${tspName}' to '${newName}'`);
+      return newName;
+    }
+
+    if (!target.name && nameHint) {
+      const newName = nameHint;
+      this.logWarning(`Rename anonymous TypeSpec model to '${newName}'`);
       return newName;
     }
     return target.name;
