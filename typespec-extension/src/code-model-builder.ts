@@ -1352,7 +1352,7 @@ export class CodeModelBuilder {
         response = new BinaryResponse({
           protocol: {
             http: {
-              statusCodes: [this.getStatusCode(resp.statusCodes)],
+              statusCodes: this.getStatusCodes(resp.statusCodes),
               headers: headers,
               mediaTypes: responseBody.contentTypes,
               knownMediaType: "binary",
@@ -1418,7 +1418,7 @@ export class CodeModelBuilder {
         response = new SchemaResponse(schema, {
           protocol: {
             http: {
-              statusCodes: [this.getStatusCode(resp.statusCodes)],
+              statusCodes: this.getStatusCodes(resp.statusCodes),
               headers: headers,
               mediaTypes: responseBody.contentTypes,
             },
@@ -1436,7 +1436,7 @@ export class CodeModelBuilder {
       response = new Response({
         protocol: {
           http: {
-            statusCodes: [this.getStatusCode(resp.statusCodes)],
+            statusCodes: this.getStatusCodes(resp.statusCodes),
             headers: headers,
           },
         },
@@ -1470,14 +1470,17 @@ export class CodeModelBuilder {
     }
   }
 
-  private getStatusCode(statusCodes: HttpStatusCodesEntry): string[] {
+  private getStatusCodes(statusCodes: HttpStatusCodesEntry): string[] {
     if (statusCodes === "*") {
       return ["default"];
     } else if (typeof statusCodes === "number") {
       return [statusCodes.toString()];
     } else {
       // HttpStatusCodeRange
-      return Array(statusCodes.end - statusCodes.start + 1).fill(statusCodes.start).map((_, index) => index + 1).map(it => it.toString());
+      return Array(statusCodes.end - statusCodes.start + 1)
+        .fill(statusCodes.start)
+        .map((it, index) => it + index)
+        .map((it) => it.toString());
     }
   }
 
