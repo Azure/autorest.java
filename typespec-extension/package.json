@@ -45,12 +45,12 @@
     "target/azure-typespec-extension-jar-with-dependencies.jar"
   ],
   "peerDependencies": {
-    "@typespec/compiler": ">=0.45.0 <1.0.0",
-    "@typespec/rest": ">=0.45.0 <1.0.0",
-    "@typespec/openapi": ">=0.45.0 <1.0.0",
-    "@typespec/versioning": ">=0.45.0 <1.0.0",
-    "@azure-tools/typespec-azure-core": ">=0.31.0 <1.0.0",
-    "@azure-tools/typespec-client-generator-core": ">=0.31.0 <1.0.0"
+    "@typespec/compiler": ">=0.49.0 <1.0.0",
+    "@typespec/rest": ">=0.49.0 <1.0.0",
+    "@typespec/openapi": ">=0.49.0 <1.0.0",
+    "@typespec/versioning": ">=0.49.0 <1.0.0",
+    "@azure-tools/typespec-azure-core": ">=0.35.0 <1.0.0",
+    "@azure-tools/typespec-client-generator-core": ">=0.35.0 <1.0.0"
   },
   "dependencies": {
     "@autorest/codemodel": "~4.19.3",
@@ -58,18 +58,18 @@
     "js-yaml": "~4.1.0"
   },
   "devDependencies": {
-    "@types/lodash": "~4.14.198",
-    "@types/js-yaml": "~4.0.5",
-    "@types/mocha": "~10.0.1",
-    "@types/node": "~20.6.0",
+    "@types/lodash": "~4.14.199",
+    "@types/js-yaml": "~4.0.7",
+    "@types/mocha": "~10.0.2",
+    "@types/node": "~20.8.4",
     "@types/prettier": "~2.7.3",
     "c8": "~8.0.1",
-    "eslint": "~8.49.0",
+    "eslint": "~8.51.0",
     "mocha": "~10.2.0",
-    "rimraf": "~5.0.1",
+    "rimraf": "~5.0.5",
     "typescript": "~5.2.2",
-    "@typescript-eslint/parser": "~6.7.0",
-    "@typescript-eslint/eslint-plugin": "~6.7.0",
-    "eslint-plugin-deprecation": "~1.5.0"
+    "@typescript-eslint/parser": "~6.7.5",
+    "@typescript-eslint/eslint-plugin": "~6.7.5",
+    "eslint-plugin-deprecation": "~2.0.0"
   }
 }
