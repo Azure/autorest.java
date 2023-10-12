@@ -1477,6 +1477,7 @@ export class CodeModelBuilder {
       return [statusCodes.toString()];
     } else {
       // HttpStatusCodeRange
+      // azure-core does not support "status code range", hence here we expand the range to array of status codes
       return Array(statusCodes.end - statusCodes.start + 1)
         .fill(statusCodes.start)
         .map((it, index) => it + index)
