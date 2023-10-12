@@ -50,7 +50,7 @@ import {
   HttpOperationResponse,
   HttpServer,
   ServiceAuthentication,
-  StatusCode,
+  HttpStatusCodesEntry,
   getHttpOperation,
   getQueryParamOptions,
   getHeaderFieldOptions,
@@ -1352,7 +1352,7 @@ export class CodeModelBuilder {
         response = new BinaryResponse({
           protocol: {
             http: {
-              statusCodes: [this.getStatusCode(resp.statusCode)],
+              statusCodes: this.getStatusCodes(resp.statusCodes),
               headers: headers,
               mediaTypes: responseBody.contentTypes,
               knownMediaType: "binary",
@@ -1418,7 +1418,7 @@ export class CodeModelBuilder {
         response = new SchemaResponse(schema, {
           protocol: {
             http: {
-              statusCodes: [this.getStatusCode(resp.statusCode)],
+              statusCodes: this.getStatusCodes(resp.statusCodes),
               headers: headers,
               mediaTypes: responseBody.contentTypes,
             },
@@ -1436,7 +1436,7 @@ export class CodeModelBuilder {
       response = new Response({
         protocol: {
           http: {
-            statusCodes: [this.getStatusCode(resp.statusCode)],
+            statusCodes: this.getStatusCodes(resp.statusCodes),
             headers: headers,
           },
         },
@@ -1448,7 +1448,7 @@ export class CodeModelBuilder {
         },
       });
     }
-    if (resp.statusCode === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
+    if (resp.statusCodes === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
       // "*", or the model is @error
       op.addException(response);
 
@@ -1470,14 +1470,25 @@ export class CodeModelBuilder {
     }
   }
 
-  private getStatusCode(statusCode: StatusCode): string {
-    return statusCode === "*" ? "default" : statusCode;
+  private getStatusCodes(statusCodes: HttpStatusCodesEntry): string[] {
+    if (statusCodes === "*") {
+      return ["default"];
+    } else if (typeof statusCodes === "number") {
+      return [statusCodes.toString()];
+    } else {
+      // HttpStatusCodeRange
+      // azure-core does not support "status code range", hence here we expand the range to array of status codes
+      return Array(statusCodes.end - statusCodes.start + 1)
+        .fill(statusCodes.start)
+        .map((it, index) => it + index)
+        .map((it) => it.toString());
+    }
   }
 
   private getResponseDescription(resp: HttpOperationResponse): string {
     return (
       resp.description ||
-      (resp.statusCode === "*" ? "An unexpected error response" : getStatusCodeDescription(resp.statusCode)) ||
+      (resp.statusCodes === "*" ? "An unexpected error response" : getStatusCodeDescription(resp.statusCodes)) ||
       ""
     );
   }
