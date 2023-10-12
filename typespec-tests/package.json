@@ -11,7 +11,7 @@
   "dependencies": {
     "@typespec/openapi": ">=0.48.0 <1.0.0",
     "@azure-tools/typespec-autorest": ">=0.34.0 <1.0.0",
-    "@azure-tools/cadl-ranch-specs": "0.23.0",
+    "@azure-tools/cadl-ranch-specs": "0.24.0",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.9.1.tgz"
   },
   "devDependencies": {
