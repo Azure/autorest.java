@@ -2235,7 +2235,7 @@ export class CodeModelBuilder {
 
   private getName(
     target: Model | Enum | EnumMember | ModelProperty | Scalar | Operation,
-    nameHint: string = undefined,
+    nameHint: string | undefined = undefined,
   ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const languageProjectedName = getProjectedName(this.program, target, "java");
@@ -2266,7 +2266,7 @@ export class CodeModelBuilder {
       return newName;
     }
 
-    if (!target.name && nameHint) {
+    if (!target.name && nameHint && this.options['namer']) {
       const newName = nameHint;
       this.logWarning(`Rename anonymous TypeSpec model to '${newName}'`);
       return newName;
