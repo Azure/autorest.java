@@ -370,6 +370,7 @@ export class CodeModelBuilder {
       return access === "internal";
     } else {
       // TODO: deprecate "internal"
+      // eslint-disable-next-line deprecation/deprecation
       return isInternal(context, operation);
     }
   }
