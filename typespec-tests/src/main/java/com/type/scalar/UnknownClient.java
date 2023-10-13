@@ -92,7 +92,7 @@ public final class UnknownClient {
     public Object get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue();
+        return getWithResponse(requestOptions).getValue().toObject(Object.class);
     }
 
     /**

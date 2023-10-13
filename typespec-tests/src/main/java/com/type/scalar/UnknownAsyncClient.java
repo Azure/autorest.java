@@ -94,7 +94,9 @@ public final class UnknownAsyncClient {
     public Mono<Object> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+        return getWithResponse(requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(Object.class));
     }
 
     /**
