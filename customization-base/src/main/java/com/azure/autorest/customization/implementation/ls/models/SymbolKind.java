@@ -6,9 +6,6 @@ package com.azure.autorest.customization.implementation.ls.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public enum SymbolKind {
     FILE(1),
     MODULE(2),
@@ -37,13 +34,13 @@ public enum SymbolKind {
     OPERATOR(25),
     TYPE_PARAMETER(26);
 
-    private static final Map<Integer, SymbolKind> INT_TO_KIND_MAP;
+    private static final SymbolKind[] INT_TO_KIND_MAP;
 
     static {
-        INT_TO_KIND_MAP = new HashMap<>();
+        INT_TO_KIND_MAP = new SymbolKind[27];
 
         for (SymbolKind kind : SymbolKind.values()) {
-            INT_TO_KIND_MAP.putIfAbsent(kind.value, kind);
+            INT_TO_KIND_MAP[kind.value] = kind;
         }
     }
 
@@ -57,7 +54,7 @@ public enum SymbolKind {
 
     @JsonCreator
     public static SymbolKind fromInt(int value) {
-        return INT_TO_KIND_MAP.get(value);
+        return (value < 0 || value >= INT_TO_KIND_MAP.length) ? null : INT_TO_KIND_MAP[value];
     }
 
     @JsonValue

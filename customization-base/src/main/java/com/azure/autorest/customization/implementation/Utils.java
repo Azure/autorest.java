@@ -19,7 +19,6 @@ import com.azure.autorest.customization.models.Range;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.expr.AnnotationExpr;
-import com.sun.jna.Platform;
 
 import java.io.File;
 import java.lang.reflect.Modifier;
@@ -522,7 +521,13 @@ public class Utils {
     }
 
     public static boolean isWindows() {
-        return Platform.isWindows();
+        String osName = System.getProperty("os.name");
+        return osName != null && osName.startsWith("Windows");
+    }
+
+    public static boolean isMac() {
+        String osName = System.getProperty("os.name");
+        return osName != null && (osName.startsWith("Mac") || osName.startsWith("Darwin"));
     }
 
     private Utils() {

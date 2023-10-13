@@ -558,6 +558,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             addFieldAnnotations(model, property, classBlock, settings);
 
             if (property.isPolymorphicDiscriminator()) {
+                if (settings.isStreamStyleSerialization()) {
+                    // Stream-style serialization doesn't need the polymorphic discriminator constant.
+                    continue;
+                }
+
                 classBlock.privateStaticFinalVariable(fieldSignature);
             } else if ((ClientModelUtil.includePropertyInConstructor(property, settings) && settings.isStreamStyleSerialization())) {
                 classBlock.privateFinalMemberVariable(fieldSignature);

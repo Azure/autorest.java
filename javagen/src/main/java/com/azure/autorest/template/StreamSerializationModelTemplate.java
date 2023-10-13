@@ -19,7 +19,6 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaVisibility;
-import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -212,8 +211,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             if (propertiesManager.getDiscriminatorProperty() != null
                 && !CoreUtils.isNullOrEmpty(propertiesManager.getDiscriminatorProperty().getDefaultValue())) {
                 ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
-                serializeJsonProperty(methodBlock, discriminatorProperty, discriminatorProperty.getSerializedName(), false,
-                    true);
+                serializeJsonProperty(methodBlock, discriminatorProperty, discriminatorProperty.getSerializedName(),
+                        false, true);
             }
 
             BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty = (property, fromSuper) ->
@@ -276,7 +275,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 ? wireType.convertFromClientType(property.getGetterName() + "()")
                 : property.getGetterName() + "()";
         } else if (property.isPolymorphicDiscriminator()) {
-            propertyValueGetter = CodeNamer.getEnumMemberName(property.getName());
+            propertyValueGetter = property.getDefaultValue();
         } else {
             propertyValueGetter = "this." + property.getName();
         }
@@ -503,6 +502,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // For now, reading polymorphic types will always buffer the current object.
             // In the future this can be enhanced to switch if the first property is the discriminator field and to use
             // a Map to contain all properties found while searching for the discriminator field.
+            // TODO (alzimmer): Need to handle non-string wire type discriminator types.
             methodBlock.line(String.join("\n",
                 "String discriminatorValue = null;",
                 "JsonReader readerToUse = reader.bufferObject();",
@@ -615,18 +615,16 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
                 if (propertiesManager.getDiscriminatorProperty() != null) {
                     ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
-                    String discriminatorConstant = CodeNamer.getEnumMemberName(discriminatorProperty.getName());
                     String ifStatement = String.format("\"%s\".equals(%s)", discriminatorProperty.getSerializedName(),
                         fieldNameVariableName);
 
                     ifBlock = methodBlock.ifBlock(ifStatement, ifAction -> {
                         ifAction.line("String %s = reader.getString();", discriminatorProperty.getName());
-                        String ifStatement2 = String.format("!%s.equals(%s)", discriminatorConstant,
+                        String ifStatement2 = String.format("!%s.equals(%s)", discriminatorProperty.getDefaultValue(),
                             discriminatorProperty.getName());
                         ifAction.ifBlock(ifStatement2, ifAction2 -> ifAction2.line("throw new IllegalStateException("
-                            + "\"'%s' was expected to be non-null and equal to '\" + %s + \"'. "
-                            + "The found '%s' was '\" + %s + \"'.\");",
-                            discriminatorProperty.getSerializedName(), discriminatorConstant,
+                            + "\"'%s' was expected to be non-null and equal to '\\\"%s\\\"'. The found '%s' was '\" + %s + \"'.\");",
+                            discriminatorProperty.getSerializedName(), stripQuotes(discriminatorProperty.getDefaultValue()),
                             discriminatorProperty.getSerializedName(), discriminatorProperty.getName()));
                     });
                 }
@@ -723,6 +721,22 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             methodBlock.line("});");
         });
+    }
+
+    private static String stripQuotes(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+
+        if (str.charAt(0) == '"' && str.charAt(str.length() - 1) == '"') {
+            return str.substring(1, str.length() - 1);
+        } else if (str.charAt(0) == '"') {
+            return str.substring(1);
+        } else if (str.charAt(str.length() - 1) == '"') {
+            return str.substring(0, str.length() - 1);
+        } else {
+            return str;
+        }
     }
 
     /**
@@ -1227,7 +1241,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             if (CoreUtils.isNullOrEmpty(element.getDefaultValue())) {
                 propertyValueGetter = "\"" + modelName + "\"";
             } else {
-                propertyValueGetter = CodeNamer.getEnumMemberName(element.getName());
+                propertyValueGetter = element.getDefaultValue();
             }
         } else if (fromSuperType) {
             propertyValueGetter = (clientType != wireType)

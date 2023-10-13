@@ -20,8 +20,6 @@ public final class SmartSalmon extends Salmon {
     /*
      * The fishtype property.
      */
-    private static final String FISHTYPE = "smart_salmon";
-
     /*
      * The college_degree property.
      */
@@ -122,7 +120,7 @@ public final class SmartSalmon extends Salmon {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", FISHTYPE);
+        jsonWriter.writeStringField("fishtype", "smart_salmon");
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
@@ -164,11 +162,9 @@ public final class SmartSalmon extends Salmon {
 
                         if ("fishtype".equals(fieldName)) {
                             String fishtype = reader.getString();
-                            if (!FISHTYPE.equals(fishtype)) {
+                            if (!"smart_salmon".equals(fishtype)) {
                                 throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to '"
-                                                + FISHTYPE
-                                                + "'. The found 'fishtype' was '"
+                                        "'fishtype' was expected to be non-null and equal to '\"smart_salmon\"'. The found 'fishtype' was '"
                                                 + fishtype
                                                 + "'.");
                             }

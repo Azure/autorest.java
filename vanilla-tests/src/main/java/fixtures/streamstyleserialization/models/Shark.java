@@ -20,8 +20,6 @@ public class Shark extends Fish {
     /*
      * The fishtype property.
      */
-    private static final String FISHTYPE = "shark";
-
     /*
      * The age property.
      */
@@ -115,7 +113,7 @@ public class Shark extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", FISHTYPE);
+        jsonWriter.writeStringField("fishtype", "shark");
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
@@ -183,11 +181,9 @@ public class Shark extends Fish {
 
                         if ("fishtype".equals(fieldName)) {
                             String fishtype = reader.getString();
-                            if (!FISHTYPE.equals(fishtype)) {
+                            if (!"shark".equals(fishtype)) {
                                 throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to '"
-                                                + FISHTYPE
-                                                + "'. The found 'fishtype' was '"
+                                        "'fishtype' was expected to be non-null and equal to '\"shark\"'. The found 'fishtype' was '"
                                                 + fishtype
                                                 + "'.");
                             }

@@ -3,6 +3,7 @@
 
 package com.azure.autorest.customization.implementation.ls;
 
+import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.models.ClientCapabilities;
 import com.azure.autorest.customization.implementation.ls.models.CodeAction;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionClientCapabilities;
@@ -43,7 +44,6 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
-import com.sun.jna.Platform;
 import com.sun.jna.platform.win32.Kernel32;
 
 import java.io.File;
@@ -105,12 +105,8 @@ public class EclipseLanguageClient implements AutoCloseable {
     }
 
     public void initialize() {
-        int pid;
-        if (Platform.isWindows()) {
-            pid = Kernel32.INSTANCE.GetCurrentProcessId();
-        } else {
-            pid = CLibrary.INSTANCE.getpid();
-        }
+        int pid = Utils.isWindows() ? Kernel32.INSTANCE.GetCurrentProcessId() : CLibrary.INSTANCE.getpid();
+
         InitializeParams initializeParams = new InitializeParams();
         initializeParams.setProcessId(pid);
         initializeParams.setRootUri(workspaceDir);

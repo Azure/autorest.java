@@ -16,8 +16,6 @@ public class DotSalmon extends DotFish {
     /*
      * The fish.type property.
      */
-    private static final String FISH_TYPE = "DotSalmon";
-
     /*
      * The location property.
      */
@@ -91,7 +89,7 @@ public class DotSalmon extends DotFish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fish\\.type", FISH_TYPE);
+        jsonWriter.writeStringField("fish\\.type", "DotSalmon");
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.iswild);
@@ -117,11 +115,9 @@ public class DotSalmon extends DotFish {
 
                         if ("fish\\.type".equals(fieldName)) {
                             String fishType = reader.getString();
-                            if (!FISH_TYPE.equals(fishType)) {
+                            if (!"DotSalmon".equals(fishType)) {
                                 throw new IllegalStateException(
-                                        "'fish\\.type' was expected to be non-null and equal to '"
-                                                + FISH_TYPE
-                                                + "'. The found 'fish\\.type' was '"
+                                        "'fish\\.type' was expected to be non-null and equal to '\"DotSalmon\"'. The found 'fish\\.type' was '"
                                                 + fishType
                                                 + "'.");
                             }
