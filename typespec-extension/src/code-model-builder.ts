@@ -2266,7 +2266,7 @@ export class CodeModelBuilder {
       return newName;
     }
 
-    if (!target.name && nameHint && this.options['namer']) {
+    if (!target.name && nameHint && this.options["namer"]) {
       const newName = nameHint;
       this.logWarning(`Rename anonymous TypeSpec model to '${newName}'`);
       return newName;
