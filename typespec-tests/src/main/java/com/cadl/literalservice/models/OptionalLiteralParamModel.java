@@ -7,31 +7,31 @@ package com.cadl.literalservice.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for OptionalLiteral. */
-public enum OptionalLiteral {
-    /** Enum value optionalLiteral. */
-    OPTIONAL_LITERAL("optionalLiteral");
+/** Defines values for OptionalLiteralParamModel. */
+public enum OptionalLiteralParamModel {
+    /** Enum value optionalLiteralParam. */
+    OPTIONAL_LITERAL_PARAM("optionalLiteralParam");
 
-    /** The actual serialized value for a OptionalLiteral instance. */
+    /** The actual serialized value for a OptionalLiteralParamModel instance. */
     private final String value;
 
-    OptionalLiteral(String value) {
+    OptionalLiteralParamModel(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a OptionalLiteral instance.
+     * Parses a serialized value to a OptionalLiteralParamModel instance.
      *
      * @param value the serialized value to parse.
-     * @return the parsed OptionalLiteral object, or null if unable to parse.
+     * @return the parsed OptionalLiteralParamModel object, or null if unable to parse.
      */
     @JsonCreator
-    public static OptionalLiteral fromString(String value) {
+    public static OptionalLiteralParamModel fromString(String value) {
         if (value == null) {
             return null;
         }
-        OptionalLiteral[] items = OptionalLiteral.values();
-        for (OptionalLiteral item : items) {
+        OptionalLiteralParamModel[] items = OptionalLiteralParamModel.values();
+        for (OptionalLiteralParamModel item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }
