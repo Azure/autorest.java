@@ -175,7 +175,7 @@ public class Salmon extends Fish {
                             String fishtype = reader.getString();
                             if (!"salmon".equals(fishtype)) {
                                 throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to '\"salmon\"'. The found 'fishtype' was '"
+                                        "'fishtype' was expected to be non-null and equal to 'salmon'. The found 'fishtype' was '"
                                                 + fishtype
                                                 + "'.");
                             }

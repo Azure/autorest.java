@@ -117,7 +117,7 @@ public class DotSalmon extends DotFish {
                             String fishType = reader.getString();
                             if (!"DotSalmon".equals(fishType)) {
                                 throw new IllegalStateException(
-                                        "'fish\\.type' was expected to be non-null and equal to '\"DotSalmon\"'. The found 'fish\\.type' was '"
+                                        "'fish\\.type' was expected to be non-null and equal to 'DotSalmon'. The found 'fish\\.type' was '"
                                                 + fishType
                                                 + "'.");
                             }

@@ -153,7 +153,7 @@ public final class Goblinshark extends Shark {
                             String fishtype = reader.getString();
                             if (!"goblin".equals(fishtype)) {
                                 throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to '\"goblin\"'. The found 'fishtype' was '"
+                                        "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
                                                 + fishtype
                                                 + "'.");
                             }

@@ -180,7 +180,7 @@ public class Shark extends Fish {
                             String fishtype = reader.getString();
                             if (!"shark".equals(fishtype)) {
                                 throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to '\"shark\"'. The found 'fishtype' was '"
+                                        "'fishtype' was expected to be non-null and equal to 'shark'. The found 'fishtype' was '"
                                                 + fishtype
                                                 + "'.");
                             }

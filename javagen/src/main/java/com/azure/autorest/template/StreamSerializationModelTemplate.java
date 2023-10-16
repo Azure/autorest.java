@@ -620,11 +620,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
                     ifBlock = methodBlock.ifBlock(ifStatement, ifAction -> {
                         ifAction.line("String %s = reader.getString();", discriminatorProperty.getName());
-                        String ifStatement2 = String.format("!%s.equals(%s)", discriminatorProperty.getDefaultValue(),
+                        String ifStatement2 = String.format("!\"%s\".equals(%s)", propertiesManager.getExpectedDiscriminator(),
                             discriminatorProperty.getName());
                         ifAction.ifBlock(ifStatement2, ifAction2 -> ifAction2.line("throw new IllegalStateException("
-                            + "\"'%s' was expected to be non-null and equal to '\\\"%s\\\"'. The found '%s' was '\" + %s + \"'.\");",
-                            discriminatorProperty.getSerializedName(), stripQuotes(discriminatorProperty.getDefaultValue()),
+                            + "\"'%s' was expected to be non-null and equal to '%s'. The found '%s' was '\" + %s + \"'.\");",
+                            discriminatorProperty.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
                             discriminatorProperty.getSerializedName(), discriminatorProperty.getName()));
                     });
                 }
@@ -1567,7 +1567,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 if (propertiesManager.getDiscriminatorProperty() != null
                     && !propertiesManager.getDiscriminatorProperty().isXmlAttribute()) {
                     ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
-                    String ifStatement = String.format("\"%s\".equals(%s)", discriminatorProperty.getSerializedName(),
+                    String ifStatement = String.format("\"%s\".equals(%s)", propertiesManager.getExpectedDiscriminator(),
                         fieldNameVariableName);
 
                     ifBlock = methodBlock.ifBlock(ifStatement, ifAction -> {
@@ -1575,7 +1575,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         String ifStatement2 = String.format("!%s.equals(%s)", discriminatorProperty.getDefaultValue(),
                             discriminatorProperty.getName());
                         ifAction.ifBlock(ifStatement2, ifAction2 -> ifAction2.line(
-                            "throw new IllegalStateException(\"'%s' was expected to be non-null and equal to '%s'. "
+                            "throw new IllegalStateException(\"'%s' was expected to be non-null and equal to '\"%s\"'. "
                                 + "The found '%s' was '\" + %s + \"'.\");",
                             discriminatorProperty.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
                             discriminatorProperty.getSerializedName(), discriminatorProperty.getName()));

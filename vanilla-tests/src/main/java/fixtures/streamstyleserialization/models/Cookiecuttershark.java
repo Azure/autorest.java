@@ -101,7 +101,7 @@ public final class Cookiecuttershark extends Shark {
                             String fishtype = reader.getString();
                             if (!"cookiecuttershark".equals(fishtype)) {
                                 throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to '\"cookiecuttershark\"'. The found 'fishtype' was '"
+                                        "'fishtype' was expected to be non-null and equal to 'cookiecuttershark'. The found 'fishtype' was '"
                                                 + fishtype
                                                 + "'.");
                             }

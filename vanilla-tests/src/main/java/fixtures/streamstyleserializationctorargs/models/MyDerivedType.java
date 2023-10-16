@@ -102,9 +102,9 @@ public final class MyDerivedType extends MyBaseType {
 
                         if ("kind".equals(fieldName)) {
                             String kind = reader.getString();
-                            if (!MyKind.KIND1.equals(kind)) {
+                            if (!"Kind1".equals(kind)) {
                                 throw new IllegalStateException(
-                                        "'kind' was expected to be non-null and equal to '\"MyKind.KIND1\"'. The found 'kind' was '"
+                                        "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '"
                                                 + kind
                                                 + "'.");
                             }

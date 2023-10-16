@@ -128,7 +128,7 @@ public final class Sawshark extends Shark {
                             String fishtype = reader.getString();
                             if (!"sawshark".equals(fishtype)) {
                                 throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to '\"sawshark\"'. The found 'fishtype' was '"
+                                        "'fishtype' was expected to be non-null and equal to 'sawshark'. The found 'fishtype' was '"
                                                 + fishtype
                                                 + "'.");
                             }
