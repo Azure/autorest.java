@@ -191,7 +191,7 @@ export class CodeModelBuilder {
       this.options["skip-special-headers"].forEach((it) => SPECIAL_HEADER_NAMES.add(it.toLowerCase()));
     }
 
-    this.sdkContext = createSdkContext(context, "java");
+    this.sdkContext = createSdkContext(context as EmitContext<any>);
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
