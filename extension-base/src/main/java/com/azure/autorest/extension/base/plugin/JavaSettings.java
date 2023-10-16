@@ -741,6 +741,16 @@ public class JavaSettings {
         return syncMethods;
     }
 
+    public final boolean isGenerateAsyncMethods() {
+        SyncMethodsGeneration syncMethodsGeneration = getSyncMethods();
+        return syncMethodsGeneration == SyncMethodsGeneration.ALL || syncMethodsGeneration == SyncMethodsGeneration.ESSENTIAL;
+    }
+
+    public final boolean isGenerateSyncMethods() {
+        SyncMethodsGeneration syncMethodsGeneration = getSyncMethods();
+        return syncMethodsGeneration == SyncMethodsGeneration.ALL || syncMethodsGeneration == SyncMethodsGeneration.SYNC_ONLY;
+    }
+
     private final boolean requiredFieldsAsConstructorArgs;
 
     public boolean isRequiredFieldsAsConstructorArgs() {
@@ -756,6 +766,7 @@ public class JavaSettings {
     public enum SyncMethodsGeneration {
         ALL,
         ESSENTIAL,
+        SYNC_ONLY,  // SYNC_ONLY requires "enable-sync-stack"
         NONE;
 
         public static SyncMethodsGeneration fromValue(String value) {
@@ -767,6 +778,8 @@ public class JavaSettings {
                 return ESSENTIAL;
             } else if (value.equals("none")) {
                 return NONE;
+            } else if (value.equals("sync-only")) {
+                return SYNC_ONLY;
             }
             return null;
         }
