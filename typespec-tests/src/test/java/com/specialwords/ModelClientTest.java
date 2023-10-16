@@ -4,18 +4,16 @@
 package com.specialwords;
 
 import com.azure.core.util.BinaryData;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
-class ModelClientTest {
+public class ModelClientTest {
 
     private final ModelsClient client = new SpecialWordsClientBuilder().buildModelsClient();
 
-    @Disabled
     @Test
-    void test() throws Exception {
+    public void test() throws Exception {
         ReflectHelper.invokeWithResponseMethods(client.getClass(), client, BinaryData.fromObject(Collections.singletonMap("name", "ok")));
     }
 }

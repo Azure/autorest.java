@@ -60,12 +60,12 @@ public class Project {
         AZURE_CLIENT_SDK_PARENT("com.azure", "azure-client-sdk-parent", "1.7.0"),
         AZURE_JSON("com.azure", "azure-json", "1.1.0"),
         AZURE_XML("com.azure", "azure-xml", "1.0.0-beta.2"),
-        AZURE_CORE("com.azure", "azure-core", "1.43.0"),
-        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.5"),
-        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.7"),
-        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.20.0"),
-        AZURE_IDENTITY("com.azure", "azure-identity", "1.10.1"),
-        AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.43"),
+        AZURE_CORE("com.azure", "azure-core", "1.44.0"),
+        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.6"),
+        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.8"),
+        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.21.0"),
+        AZURE_IDENTITY("com.azure", "azure-identity", "1.10.3"),
+        AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.44"),
 
         // external
         JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.3"),

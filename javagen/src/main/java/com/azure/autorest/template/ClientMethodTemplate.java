@@ -829,7 +829,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 addOptionalVariables(function, clientMethod);
                 function.line("return new PagedIterable<>(");
                 function.indent(() -> {
-                    function.line("%s,", this.getPagingSinglePageExpression(
+                    function.line("%s);", this.getPagingSinglePageExpression(
                             clientMethod,
                             clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
                             effectiveFirstPageArgs,

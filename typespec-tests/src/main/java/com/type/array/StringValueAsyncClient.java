@@ -52,7 +52,7 @@ public final class StringValueAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return array of Response along with {@link Response} on successful completion of {@link Mono}.
+     * @return array of GetResponse along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -71,7 +71,7 @@ public final class StringValueAsyncClient {
      * ]
      * }</pre>
      *
-     * @param body Array of Response.
+     * @param body Array of GetResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -93,7 +93,7 @@ public final class StringValueAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return array of Response on successful completion of {@link Mono}.
+     * @return array of GetResponse on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -108,7 +108,7 @@ public final class StringValueAsyncClient {
     /**
      * The put operation.
      *
-     * @param body Array of Response.
+     * @param body Array of GetResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
