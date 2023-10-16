@@ -123,7 +123,7 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("generate-client-as-impl", true);
         SETTINGS_MAP.put("generate-sync-async-clients", true);
         SETTINGS_MAP.put("generate-builder-per-client", false);
-        SETTINGS_MAP.put("sync-methods", "sync-only");
+        SETTINGS_MAP.put("sync-methods", "all");
         SETTINGS_MAP.put("enable-sync-stack", true);
         SETTINGS_MAP.put("enable-page-size", true);
 
