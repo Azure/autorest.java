@@ -1526,6 +1526,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
             .replace("{endpoint}", endpoint)
             .replace("{context}", contextParam)
+            .replace("{serviceVersion}", clientMethod.getClientReference() + ".getServiceVersion().getVersion()")
             .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
             .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
             .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
@@ -1555,6 +1556,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
                 .replace("{endpoint}", endpoint)
                 .replace("{context}", contextParam)
+                .replace("{serviceVersion}", clientMethod.getClientReference() + ".getServiceVersion().getVersion()")
                 .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
                 .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
                 .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
