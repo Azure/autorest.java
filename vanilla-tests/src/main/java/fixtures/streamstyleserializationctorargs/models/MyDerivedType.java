@@ -15,11 +15,6 @@ import java.util.Objects;
 @Fluent
 public final class MyDerivedType extends MyBaseType {
     /*
-     * The kind property.
-     */
-    private static final MyKind KIND = MyKind.KIND1;
-
-    /*
      * The propD1 property.
      */
     private String propD1;
@@ -74,7 +69,7 @@ public final class MyDerivedType extends MyBaseType {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", Objects.toString(KIND, null));
+        jsonWriter.writeStringField("kind", Objects.toString(MyKind.KIND1, null));
         jsonWriter.writeStringField("propB1", getPropB1());
         jsonWriter.writeStringField("propD1", this.propD1);
         if (getPropBH1() != null) {
@@ -104,11 +99,9 @@ public final class MyDerivedType extends MyBaseType {
 
                         if ("kind".equals(fieldName)) {
                             String kind = reader.getString();
-                            if (!KIND.equals(kind)) {
+                            if (!"Kind1".equals(kind)) {
                                 throw new IllegalStateException(
-                                        "'kind' was expected to be non-null and equal to '"
-                                                + KIND
-                                                + "'. The found 'kind' was '"
+                                        "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '"
                                                 + kind
                                                 + "'.");
                             }

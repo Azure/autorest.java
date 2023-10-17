@@ -17,11 +17,6 @@ import java.util.Objects;
 @Fluent
 public final class Goblinshark extends Shark {
     /*
-     * The fishtype property.
-     */
-    private static final String FISHTYPE = "goblin";
-
-    /*
      * The jawsize property.
      */
     private Integer jawsize;
@@ -122,7 +117,7 @@ public final class Goblinshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", FISHTYPE);
+        jsonWriter.writeStringField("fishtype", "goblin");
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday", Objects.toString(getBirthday(), null));
         jsonWriter.writeStringField("species", getSpecies());
@@ -153,11 +148,9 @@ public final class Goblinshark extends Shark {
 
                         if ("fishtype".equals(fieldName)) {
                             String fishtype = reader.getString();
-                            if (!FISHTYPE.equals(fishtype)) {
+                            if (!"goblin".equals(fishtype)) {
                                 throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to '"
-                                                + FISHTYPE
-                                                + "'. The found 'fishtype' was '"
+                                        "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
                                                 + fishtype
                                                 + "'.");
                             }

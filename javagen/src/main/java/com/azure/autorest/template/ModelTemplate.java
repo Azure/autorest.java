@@ -551,6 +551,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
+            if (property.isPolymorphicDiscriminator() && settings.isStreamStyleSerialization()) {
+                // Stream-style serialization doesn't need the polymorphic discriminator constant.
+                continue;
+            }
+
             classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
                 comment -> comment.line(property.getDescription()));
 

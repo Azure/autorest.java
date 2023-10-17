@@ -6,21 +6,18 @@ package com.azure.autorest.customization.implementation.ls.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public enum FileChangeType {
     CREATED(1),
     CHANGED(2),
     DELETED(3);
 
-    private static final Map<Integer, FileChangeType> INT_TO_KIND_MAP;
+    private static final FileChangeType[] INT_TO_KIND_MAP;
 
     static {
-        INT_TO_KIND_MAP = new HashMap<>();
+        INT_TO_KIND_MAP = new FileChangeType[4];
 
         for (FileChangeType kind : FileChangeType.values()) {
-            INT_TO_KIND_MAP.putIfAbsent(kind.value, kind);
+            INT_TO_KIND_MAP[kind.value] = kind;
         }
     }
 
@@ -34,7 +31,7 @@ public enum FileChangeType {
 
     @JsonCreator
     public static FileChangeType fromInt(int value) {
-        return INT_TO_KIND_MAP.get(value);
+        return (value < 0 || value >= INT_TO_KIND_MAP.length) ? null : INT_TO_KIND_MAP[value];
     }
 
     @JsonValue
