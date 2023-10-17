@@ -106,81 +106,100 @@ public class ModelExampleUtil {
             }
         } else if (type == ClassType.Object) {
             node = new ObjectNode(type, objectValue);
-        } else if (type instanceof ClassType && ClientModelUtil.getClientModel(((ClassType) type).getName()) != null
-                && objectValue instanceof Map) {
+        } else if (type instanceof ClassType && objectValue instanceof Map) {
             ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
-            if (model.isPolymorphic()) {
-                // polymorphic, need to get the correct subclass from discriminator
-                String serializedName = model.getPolymorphicDiscriminator();
-                List<String> jsonPropertyNames = Collections.singletonList(serializedName);
-                if (model.getNeedsFlatten()) {
-                    jsonPropertyNames = ClientModelUtil.splitFlattenedSerializedName(serializedName);
-                }
-
-                Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
-                if (childObjectValue instanceof String) {
-                    String discriminatorValue = (String) childObjectValue;
-                    ClientModel derivedModel = getDerivedModel(model, discriminatorValue);
-                    if (derivedModel != null) {
-                        // use the subclass
-                        type = derivedModel.getType();
-                        model = derivedModel;
-                    } else {
-                        LOGGER.warn("Failed to find the subclass with discriminator value '{}'", discriminatorValue);
+            if (model != null) {
+                if (model.isPolymorphic()) {
+                    // polymorphic, need to get the correct subclass from discriminator
+                    String serializedName = model.getPolymorphicDiscriminator();
+                    List<String> jsonPropertyNames = Collections.singletonList(serializedName);
+                    if (model.getNeedsFlatten()) {
+                        jsonPropertyNames = ClientModelUtil.splitFlattenedSerializedName(serializedName);
                     }
-                } else {
-                    LOGGER.warn("Failed to find the sample value for discriminator property '{}'", serializedName);
+
+                    Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
+                    if (childObjectValue instanceof String) {
+                        String discriminatorValue = (String) childObjectValue;
+                        ClientModel derivedModel = getDerivedModel(model, discriminatorValue);
+                        if (derivedModel != null) {
+                            // use the subclass
+                            type = derivedModel.getType();
+                            model = derivedModel;
+                        } else {
+                            LOGGER.warn("Failed to find the subclass with discriminator value '{}'", discriminatorValue);
+                        }
+                    } else {
+                        LOGGER.warn("Failed to find the sample value for discriminator property '{}'", serializedName);
+                    }
                 }
-            }
 
-            ClientModelNode clientModelNode = new ClientModelNode(type, objectValue).setClientModel(model);
-            node = clientModelNode;
+                ClientModelNode clientModelNode = new ClientModelNode(type, objectValue).setClientModel(model);
+                node = clientModelNode;
 
-            List<ModelProperty> modelProperties = getWritablePropertiesIncludeSuperclass(model);
-            for (ModelProperty modelProperty : modelProperties) {
-                List<String> jsonPropertyNames = modelProperty.getSerializedNames();
+                List<ModelProperty> modelProperties = getWritablePropertiesIncludeSuperclass(model);
+                for (ModelProperty modelProperty : modelProperties) {
+                    List<String> jsonPropertyNames = modelProperty.getSerializedNames();
 
-                Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
-                if (childObjectValue != null) {
-                    ExampleNode childNode = parseNode(modelProperty.getClientType(), modelProperty.getWireType(), childObjectValue);
-                    node.getChildNodes().add(childNode);
-                    clientModelNode.getClientModelProperties().put(childNode, modelProperty);
+                    Object childObjectValue = getChildObjectValue(jsonPropertyNames, objectValue);
+                    if (childObjectValue != null) {
+                        ExampleNode childNode = parseNode(modelProperty.getClientType(), modelProperty.getWireType(), childObjectValue);
+                        node.getChildNodes().add(childNode);
+                        clientModelNode.getClientModelProperties().put(childNode, modelProperty);
 
-                    // redact possible credential
-                    if (childNode instanceof LiteralNode && childObjectValue instanceof String) {
-                        LiteralNode literalChildNode = (LiteralNode) childNode;
-                        if (literalChildNode.getClientType() == ClassType.String && literalChildNode.getLiteralsValue() != null) {
-                            literalChildNode.setLiteralsValue(ModelTestCaseUtil.redactStringValue(jsonPropertyNames, literalChildNode.getLiteralsValue()));
+                        // redact possible credential
+                        if (childNode instanceof LiteralNode && childObjectValue instanceof String) {
+                            LiteralNode literalChildNode = (LiteralNode) childNode;
+                            if (literalChildNode.getClientType() == ClassType.String && literalChildNode.getLiteralsValue() != null) {
+                                literalChildNode.setLiteralsValue(ModelTestCaseUtil.redactStringValue(jsonPropertyNames, literalChildNode.getLiteralsValue()));
+                            }
                         }
                     }
                 }
-            }
 
-            // additional properties
-            ModelProperty additionalPropertiesProperty = getAdditionalPropertiesProperty(model);
-            if (additionalPropertiesProperty != null) {
-                // properties already defined in model
-                Set<String> propertySerializedNames = modelProperties.stream()
-                        .map(p -> p.getSerializedNames().iterator().next())
-                        .collect(Collectors.toSet());
-                // the remaining properties in json
-                Map<String, Object> remainingValues = ((Map<String, Object>) objectValue).entrySet().stream()
-                        .filter(e -> !propertySerializedNames.contains(e.getKey()))
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                // additional properties
+                ModelProperty additionalPropertiesProperty = getAdditionalPropertiesProperty(model);
+                if (additionalPropertiesProperty != null) {
+                    // properties already defined in model
+                    Set<String> propertySerializedNames = modelProperties.stream()
+                            .map(p -> p.getSerializedNames().iterator().next())
+                            .collect(Collectors.toSet());
+                    // the remaining properties in json
+                    Map<String, Object> remainingValues = ((Map<String, Object>) objectValue).entrySet().stream()
+                            .filter(e -> !propertySerializedNames.contains(e.getKey()))
+                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-                ExampleNode childNode = parseNode(additionalPropertiesProperty.getClientType(), additionalPropertiesProperty.getWireType(), remainingValues);
-                node.getChildNodes().add(childNode);
-                clientModelNode.getClientModelProperties().put(childNode, additionalPropertiesProperty);
+                    ExampleNode childNode = parseNode(additionalPropertiesProperty.getClientType(), additionalPropertiesProperty.getWireType(), remainingValues);
+                    node.getChildNodes().add(childNode);
+                    clientModelNode.getClientModelProperties().put(childNode, additionalPropertiesProperty);
+                }
+            } else {
+                // e.g. BinaryData type with "{}" as example value
+                node = defaultNode(type, wireType, objectValue);
             }
         } else if (objectValue == null) {
             node = null;
         } else {
-            LiteralNode literalNode = new LiteralNode(type, objectValue);
-            node = literalNode;
-
-            String literalValue = convertLiteralToClientValue(wireType, objectValue.toString());
-            literalNode.setLiteralsValue(literalValue);
+            node = defaultNode(type, wireType, objectValue);
         }
+        return node;
+    }
+
+    /**
+     * Default String literal node.
+     * Generated example will be the type's defaultValueExpression.
+     *
+     * @param clientType the client type
+     * @param wireType the wire type
+     * @param exampleValue the example value
+     * @return string literal node
+     */
+    private static ExampleNode defaultNode(IType clientType, IType wireType, Object exampleValue) {
+        ExampleNode node;
+        LiteralNode literalNode = new LiteralNode(clientType, exampleValue);
+        node = literalNode;
+
+        String literalValue = convertLiteralToClientValue(wireType, exampleValue.toString());
+        literalNode.setLiteralsValue(literalValue);
         return node;
     }
 
