@@ -81,6 +81,19 @@ public class Main {
             }
         }
 
+        if (emitterOptions.getFluent() != null) {
+            handleDPG(codeModel, emitterOptions, sdkIntegration, outputDir);
+        } else {
+            handleFluent(codeModel, emitterOptions, sdkIntegration, outputDir);
+        }
+    }
+
+    private static void handleFluent(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
+        // TODO
+        throw new UnsupportedOperationException("method [handleFluent] not implemented in class [com.azure.typespec.Main]");
+    }
+
+    private static void handleDPG(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
         // initialize plugin
         TypeSpecPlugin typeSpecPlugin = new TypeSpecPlugin(emitterOptions, sdkIntegration);
 

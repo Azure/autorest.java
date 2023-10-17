@@ -37,6 +37,8 @@ export interface EmitterOptions {
   "custom-types-subpackage"?: string;
   "customization-class"?: string;
 
+  "fluent"?: string;
+
   "dev-options"?: DevOptions;
 }
 
@@ -78,6 +80,8 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "custom-types": { type: "string", nullable: true },
     "custom-types-subpackage": { type: "string", nullable: true },
     "customization-class": { type: "string", nullable: true },
+
+    "fluent": { type: "string", nullable: true},
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },

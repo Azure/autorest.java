@@ -61,7 +61,7 @@
     </dependency>
     <dependency>
       <groupId>com.azure.tools</groupId>
-      <artifactId>azure-autorest-preprocessor</artifactId>
+      <artifactId>azure-autorest-fluentgen</artifactId>
       <version>1.0.0-beta.1</version>
       <exclusions>
         <exclusion>
