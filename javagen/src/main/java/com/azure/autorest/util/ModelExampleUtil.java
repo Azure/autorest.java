@@ -106,7 +106,8 @@ public class ModelExampleUtil {
             }
         } else if (type == ClassType.Object) {
             node = new ObjectNode(type, objectValue);
-        } else if (ClientModelUtil.isClientModel(type) && objectValue instanceof Map) {
+        } else if (type instanceof ClassType && ClientModelUtil.getClientModel(((ClassType) type).getName()) != null
+                && objectValue instanceof Map) {
             ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (model.isPolymorphic()) {
                 // polymorphic, need to get the correct subclass from discriminator
