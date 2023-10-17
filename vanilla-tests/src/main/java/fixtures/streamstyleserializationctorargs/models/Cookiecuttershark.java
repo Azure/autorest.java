@@ -17,9 +17,6 @@ import java.util.Objects;
 /** The Cookiecuttershark model. */
 @Fluent
 public final class Cookiecuttershark extends Shark {
-    /*
-     * The fishtype property.
-     */
     /**
      * Creates an instance of Cookiecuttershark class.
      *

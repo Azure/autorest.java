@@ -15,9 +15,6 @@ import java.util.Objects;
 @Fluent
 public final class MyDerivedType extends MyBaseType {
     /*
-     * The kind property.
-     */
-    /*
      * The propD1 property.
      */
     private String propD1;

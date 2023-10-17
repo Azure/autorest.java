@@ -14,9 +14,6 @@ import java.io.IOException;
 @Fluent
 public class DotSalmon extends DotFish {
     /*
-     * The fish.type property.
-     */
-    /*
      * The location property.
      */
     private String location;

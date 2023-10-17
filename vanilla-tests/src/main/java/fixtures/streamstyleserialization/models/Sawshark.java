@@ -18,9 +18,6 @@ import java.util.Objects;
 @Fluent
 public final class Sawshark extends Shark {
     /*
-     * The fishtype property.
-     */
-    /*
      * The picture property.
      */
     private byte[] picture;

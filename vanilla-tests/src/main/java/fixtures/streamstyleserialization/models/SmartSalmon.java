@@ -17,9 +17,6 @@ import java.util.Map;
 @Fluent
 public final class SmartSalmon extends Salmon {
     /*
-     * The fishtype property.
-     */
-    /*
      * The college_degree property.
      */
     private String collegeDegree;

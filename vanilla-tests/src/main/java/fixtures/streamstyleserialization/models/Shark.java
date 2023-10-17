@@ -18,9 +18,6 @@ import java.util.Objects;
 @Fluent
 public class Shark extends Fish {
     /*
-     * The fishtype property.
-     */
-    /*
      * The age property.
      */
     private Integer age;

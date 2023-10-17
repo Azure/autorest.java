@@ -16,9 +16,6 @@ import java.util.List;
 @Fluent
 public class Salmon extends Fish {
     /*
-     * The fishtype property.
-     */
-    /*
      * The location property.
      */
     private String location;

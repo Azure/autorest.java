@@ -18,9 +18,6 @@ import java.util.Objects;
 @Fluent
 public final class Goblinshark extends Shark {
     /*
-     * The fishtype property.
-     */
-    /*
      * The jawsize property.
      */
     private Integer jawsize;
