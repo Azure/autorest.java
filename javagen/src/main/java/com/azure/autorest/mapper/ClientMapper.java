@@ -28,6 +28,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientBuilderTrait;
+import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
@@ -111,7 +112,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         builder.enums(enumTypes);
 
         // exception
-        builder.exceptions(codeModel.getOperationGroups().stream()
+        List<ClientException> exceptions = codeModel.getOperationGroups().stream()
             .flatMap(og -> og.getOperations().stream())
             .flatMap(o -> o.getExceptions().stream())
             .map(Response::getSchema)
@@ -120,7 +121,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             .map(s -> Mappers.getExceptionMapper().map((ObjectSchema) s))
             .filter(Objects::nonNull)
             .distinct()
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList());
+        builder.exceptions(exceptions);
 
         builder.xmlSequenceWrappers(parseXmlSequenceWrappers(codeModel, settings));
 
@@ -317,6 +319,13 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         if (settings.isGenerateTests() && codeModel.getTestModel() != null) {
             builder.liveTests(LiveTestsMapper.getInstance().map(codeModel.getTestModel()));
         }
+
+        builder.graalVmConfig(Mappers.getGraalVmConfigMapper()
+                .map(new GraalVmConfigMapper.ServiceAndModel(
+                        serviceClientsMap.keySet(),
+                        exceptions,
+                        clientModels,
+                        enumTypes)));
 
         return builder.build();
     }

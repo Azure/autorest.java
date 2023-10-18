@@ -292,6 +292,9 @@ abstract class ConvenienceMethodTemplateBase {
         imports.add(CollectionFormat.class.getName());
         imports.add(TypeReference.class.getName());
 
+        // byte[]
+        ClassType.Base64Url.addImportsTo(imports, false);
+
         // flatten payload
         imports.add(Map.class.getName());
         imports.add(HashMap.class.getName());
@@ -354,14 +357,27 @@ abstract class ConvenienceMethodTemplateBase {
 
     protected boolean isModelOrBuiltin(IType type) {
         // TODO: other built-in types
-        return type == ClassType.String || ClientModelUtil.isClientModel(type);
+        boolean ret =
+                // string
+                type == ClassType.String
+                // unknown
+                || type == ClassType.Object
+                // boolean, int, float, etc.
+                || (type instanceof PrimitiveType && type.asNullable() != ClassType.Void)
+                // client model
+                || ClientModelUtil.isClientModel(type);
+        return ret;
     }
 
     private static String expressionConvertToBinaryData(String name, IType type) {
         if (type == ClassType.BinaryData) {
             return name;
         } else {
-            return String.format("BinaryData.fromObject(%s)", name);
+            if (type == ClassType.Base64Url) {
+                return String.format("BinaryData.fromObject(Base64Url.encode(%s))", name);
+            } else {
+                return String.format("BinaryData.fromObject(%s)", name);
+            }
         }
     }
 

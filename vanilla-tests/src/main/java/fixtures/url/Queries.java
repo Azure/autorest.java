@@ -2589,7 +2589,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteMultiByteAsync() {
-        final byte[] byteQuery = new byte[0];
+        final byte[] byteQuery = null;
         return byteMultiByteWithResponseAsync(byteQuery).flatMap(ignored -> Mono.empty());
     }
 
@@ -2644,7 +2644,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteMultiByte() {
-        final byte[] byteQuery = new byte[0];
+        final byte[] byteQuery = null;
         byteMultiByteWithResponse(byteQuery, Context.NONE);
     }
 
@@ -2807,7 +2807,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteNullAsync() {
-        final byte[] byteQuery = new byte[0];
+        final byte[] byteQuery = null;
         return byteNullWithResponseAsync(byteQuery).flatMap(ignored -> Mono.empty());
     }
 
@@ -2862,7 +2862,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteNull() {
-        final byte[] byteQuery = new byte[0];
+        final byte[] byteQuery = null;
         byteNullWithResponse(byteQuery, Context.NONE);
     }
 

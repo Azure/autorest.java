@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -93,6 +94,8 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             Set<GenericType> typeReferenceStaticClasses) {
 
         IType responseBodyType = getResponseBodyType(convenienceMethod);
+        IType protocolResponseBodyType = getResponseBodyType(protocolMethod);
+        IType rawResponseBodyType = convenienceMethod.getProxyMethod().getRawResponseBodyType();
 
         String convertFromResponse = convenienceMethod.getType() == ClientMethodType.SimpleSyncRestResponse
                 ? "" : ".getValue()";
@@ -102,7 +105,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                     "serviceClient.%1$s(%2$s).mapPage(bodyItemValue -> %3$s)",
                     protocolMethod.getName(),
                     invocationExpression,
-                    expressionConvertFromBinaryData(responseBodyType, "bodyItemValue", typeReferenceStaticClasses)));
+                    expressionConvertFromBinaryData(responseBodyType, rawResponseBodyType, "bodyItemValue", typeReferenceStaticClasses)));
         } else if (convenienceMethod.getType() == ClientMethodType.LongRunningBeginSync){
             String methodName = protocolMethod.getName();
             methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));
@@ -113,7 +116,10 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             methodBlock.line(getProtocolMethodResponseStatement(protocolMethod, invocationExpression));
 
             // e.g. protocolMethodResponse.getValue().toObject(...)
-            String expressConversion = expressionConvertFromBinaryData(responseBodyType, "protocolMethodResponse.getValue()", typeReferenceStaticClasses);
+            String expressConversion = "protocolMethodResponse.getValue()";
+            if (protocolResponseBodyType == ClassType.BinaryData) {
+                expressConversion = expressionConvertFromBinaryData(responseBodyType, rawResponseBodyType, expressConversion, typeReferenceStaticClasses);
+            }
 
             if (isResponseBase(convenienceMethod.getReturnValue().getType())) {
                 IType headerType = ((GenericType) convenienceMethod.getReturnValue().getType()).getTypeArguments()[0];
@@ -128,7 +134,9 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                     getMethodName(protocolMethod),
                     invocationExpression,
                     convertFromResponse);
-            statement = expressionConvertFromBinaryData(responseBodyType, statement, typeReferenceStaticClasses);
+            if (protocolResponseBodyType == ClassType.BinaryData) {
+                statement = expressionConvertFromBinaryData(responseBodyType, rawResponseBodyType, statement, typeReferenceStaticClasses);
+            }
             if (convenienceMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
                 if (isResponseBase(convenienceMethod.getReturnValue().getType())) {
                     IType headerType = ((GenericType) convenienceMethod.getReturnValue().getType()).getTypeArguments()[0];
@@ -176,13 +184,15 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     }
 
     private IType getResponseBodyType(ClientMethod method) {
-        IType type =  method.getReturnValue().getType();
+        // no need to care about LRO
+        IType type = method.getReturnValue().getType();
         if (type instanceof GenericType
                 && (
                 Response.class.getSimpleName().equals(((GenericType) type).getName())
                         || (PagedIterable.class.getSimpleName().equals(((GenericType) type).getName())))) {
             type = ((GenericType) type).getTypeArguments()[0];
         } else if (isResponseBase(type)) {
+            // TODO: ResponseBase is not in use, hence it may have bug
             type = ((GenericType) type).getTypeArguments()[1];
         }
         return type;
@@ -192,10 +202,11 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         return type instanceof GenericType && ResponseBase.class.getSimpleName().equals(((GenericType) type).getName());
     }
 
-    protected String expressionConvertFromBinaryData(IType responseBodyType, String invocationExpression, Set<GenericType> typeReferenceStaticClasses) {
+    private String expressionConvertFromBinaryData(IType responseBodyType, IType rawType, String invocationExpression, Set<GenericType> typeReferenceStaticClasses) {
         if (responseBodyType instanceof EnumType) {
             // enum
-            return String.format("%1$s.from%2$s(%3$s)", responseBodyType, ((EnumType) responseBodyType).getElementType(), invocationExpression);
+            IType elementType = ((EnumType) responseBodyType).getElementType();
+            return String.format("%1$s.from%2$s(%3$s.toObject(%2$s.class))", responseBodyType, elementType, invocationExpression);
         } else if (responseBodyType instanceof GenericType) {
             // generic, e.g. list, map
             typeReferenceStaticClasses.add((GenericType) responseBodyType);
@@ -205,7 +216,14 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             return invocationExpression;
         } else if (isModelOrBuiltin(responseBodyType)) {
             // class
-            return String.format("%2$s.toObject(%1$s.class)", responseBodyType, invocationExpression);
+            return String.format("%2$s.toObject(%1$s.class)", responseBodyType.asNullable(), invocationExpression);
+        } else if (responseBodyType == ArrayType.BYTE_ARRAY) {
+            // byte[]
+            if (rawType == ClassType.Base64Url) {
+                return String.format("%1$s.toObject(Base64Url.class).decodedBytes()", invocationExpression);
+            } else {
+                return String.format("%1$s.toObject(byte[].class)", invocationExpression);
+            }
         } else {
             return invocationExpression;
         }

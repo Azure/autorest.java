@@ -50,7 +50,7 @@ import {
   HttpOperationResponse,
   HttpServer,
   ServiceAuthentication,
-  StatusCode,
+  HttpStatusCodesEntry,
   getHttpOperation,
   getQueryParamOptions,
   getHeaderFieldOptions,
@@ -155,14 +155,16 @@ import {
   getServiceVersion,
   operationIsJsonMergePatch,
   isPayloadProperty,
-  originApiVersion,
-  specialHeaderNames,
+  ORIGIN_API_VERSION,
+  SPECIAL_HEADER_NAMES,
   loadExamples,
   isLroNewPollingStrategy,
   operationIsMultipleContentTypes,
   cloneOperationParameter,
   operationRefersUnion,
   operationIsMultipart,
+  isKnownContentType,
+  CONTENT_TYPE_KEY,
 } from "./operation-utils.js";
 import pkg from "lodash";
 const { isEqual } = pkg;
@@ -187,7 +189,7 @@ export class CodeModelBuilder {
     this.program = program1;
 
     if (this.options["skip-special-headers"]) {
-      this.options["skip-special-headers"].forEach((it) => specialHeaderNames.add(it.toLowerCase()));
+      this.options["skip-special-headers"].forEach((it) => SPECIAL_HEADER_NAMES.add(it.toLowerCase()));
     }
 
     this.sdkContext = createSdkContext(context as EmitContext<any>);
@@ -369,6 +371,7 @@ export class CodeModelBuilder {
       return access === "internal";
     } else {
       // TODO: deprecate "internal"
+      // eslint-disable-next-line deprecation/deprecation
       return isInternal(context, operation);
     }
   }
@@ -846,7 +849,7 @@ export class CodeModelBuilder {
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
       clientContext.addGlobalParameter(parameter);
-    } else if (specialHeaderNames.has(param.name.toLowerCase())) {
+    } else if (SPECIAL_HEADER_NAMES.has(param.name.toLowerCase())) {
       // special headers
       op.specialHeaders = op.specialHeaders ?? [];
       if (!stringArrayContainsIgnoreCase(op.specialHeaders, param.name)) {
@@ -894,8 +897,7 @@ export class CodeModelBuilder {
       if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
         if (param.type === "query") {
           const queryParamOptions = getQueryParamOptions(this.program, param.param);
-          // TODO (weidxu): remove "as string" after http lib fix the type of queryParamOptions.format
-          switch (queryParamOptions?.format as string) {
+          switch (queryParamOptions?.format) {
             case "csv":
               style = SerializationStyle.Simple;
               break;
@@ -969,7 +971,7 @@ export class CodeModelBuilder {
         this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
       }
 
-      if (param.name.toLowerCase() === "content-type") {
+      if (param.name.toLowerCase() === CONTENT_TYPE_KEY) {
         let mediaTypes = ["application/json"];
         if (schema instanceof ConstantSchema) {
           mediaTypes = [schema.value.value.toString()];
@@ -1160,12 +1162,22 @@ export class CodeModelBuilder {
   private processParameterBody(op: CodeModelOperation, httpOperation: HttpOperation, body: ModelProperty | Model) {
     const parameters = httpOperation.operation.parameters;
 
+    const unknownRequestBody =
+      op.requests![0].protocol.http!.mediaTypes &&
+      op.requests![0].protocol.http!.mediaTypes.length > 0 &&
+      !isKnownContentType(op.requests![0].protocol.http!.mediaTypes);
+
     let schema: Schema;
-    if (body.kind === "ModelProperty" && body.type.kind === "Scalar" && body.type.name === "bytes") {
+    if (
+      unknownRequestBody &&
+      body.kind === "ModelProperty" &&
+      body.type.kind === "Scalar" &&
+      body.type.name === "bytes"
+    ) {
       // handle binary request body
       schema = this.processBinarySchema(body.type);
     } else {
-      schema = this.processSchema(body.kind === "Model" ? body : body.type, body.name);
+      schema = this.processSchema(body, body.name);
     }
     const parameter = new Parameter(body.name, this.getDoc(body), schema, {
       summary: this.getSummary(body),
@@ -1335,13 +1347,16 @@ export class CodeModelBuilder {
     let trackConvenienceApi = op.convenienceApi ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
+      const unknownResponseBody =
+        responseBody.contentTypes.length > 0 && !isKnownContentType(responseBody.contentTypes);
+
       bodyType = this.findResponseBody(responseBody.type);
-      if (bodyType.kind === "Scalar" && bodyType.name === "bytes") {
+      if (unknownResponseBody && bodyType.kind === "Scalar" && bodyType.name === "bytes") {
         // binary
         response = new BinaryResponse({
           protocol: {
             http: {
-              statusCodes: [this.getStatusCode(resp.statusCode)],
+              statusCodes: this.getStatusCodes(resp.statusCodes),
               headers: headers,
               mediaTypes: responseBody.contentTypes,
               knownMediaType: "binary",
@@ -1401,13 +1416,13 @@ export class CodeModelBuilder {
             // for standard LRO action, return type is the pollResultType
             schema = op.lroMetadata.pollResultType;
           } else {
-            schema = this.processSchema(bodyType, "response");
+            schema = this.processSchema(bodyType, op.language.default.name + "Response");
           }
         }
         response = new SchemaResponse(schema, {
           protocol: {
             http: {
-              statusCodes: [this.getStatusCode(resp.statusCode)],
+              statusCodes: this.getStatusCodes(resp.statusCodes),
               headers: headers,
               mediaTypes: responseBody.contentTypes,
             },
@@ -1425,7 +1440,7 @@ export class CodeModelBuilder {
       response = new Response({
         protocol: {
           http: {
-            statusCodes: [this.getStatusCode(resp.statusCode)],
+            statusCodes: this.getStatusCodes(resp.statusCodes),
             headers: headers,
           },
         },
@@ -1437,7 +1452,7 @@ export class CodeModelBuilder {
         },
       });
     }
-    if (resp.statusCode === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
+    if (resp.statusCodes === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
       // "*", or the model is @error
       op.addException(response);
 
@@ -1459,14 +1474,25 @@ export class CodeModelBuilder {
     }
   }
 
-  private getStatusCode(statusCode: StatusCode): string {
-    return statusCode === "*" ? "default" : statusCode;
+  private getStatusCodes(statusCodes: HttpStatusCodesEntry): string[] {
+    if (statusCodes === "*") {
+      return ["default"];
+    } else if (typeof statusCodes === "number") {
+      return [statusCodes.toString()];
+    } else {
+      // HttpStatusCodeRange
+      // azure-core does not support "status code range", hence here we expand the range to array of status codes
+      return Array(statusCodes.end - statusCodes.start + 1)
+        .fill(statusCodes.start)
+        .map((it, index) => it + index)
+        .map((it) => it.toString());
+    }
   }
 
   private getResponseDescription(resp: HttpOperationResponse): string {
     return (
       resp.description ||
-      (resp.statusCode === "*" ? "An unexpected error response" : getStatusCodeDescription(resp.statusCode)) ||
+      (resp.statusCodes === "*" ? "An unexpected error response" : getStatusCodeDescription(resp.statusCodes)) ||
       ""
     );
   }
@@ -1507,7 +1533,7 @@ export class CodeModelBuilder {
           // use it for extensible enum
           schema = this.processChoiceSchema(knownValues, this.getName(knownValues), false);
         } else {
-          schema = this.processSchema(type.type, nameHint);
+          schema = this.processSchema(type.type, nameHint + "Model");
         }
         return this.applyModelPropertyDecorators(type, nameHint, schema);
       }
@@ -1522,7 +1548,7 @@ export class CodeModelBuilder {
           // "pure" Record that does not have properties in it
           return this.processDictionarySchema(type, nameHint);
         } else {
-          return this.processObjectSchema(type, this.getName(type));
+          return this.processObjectSchema(type, this.getName(type, nameHint));
         }
 
       case "EnumMember":
@@ -2102,13 +2128,13 @@ export class CodeModelBuilder {
 
     // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(type);
-    const unionSchema = new OrSchema(pascalCase(name) + "ModelBase", this.getDoc(type), {
+    const unionSchema = new OrSchema(pascalCase(name) + "Base", this.getDoc(type), {
       summary: this.getSummary(type),
     });
     unionSchema.anyOf = [];
     nonNullVariants.forEach((it) => {
       const variantName = this.getUnionVariantName(it.type, { depth: 0 });
-      const modelName = variantName + pascalCase(name) + "Model";
+      const modelName = variantName + pascalCase(name);
       const propertyName = "value";
 
       // these ObjectSchema is not added to codeModel.schemas
@@ -2211,7 +2237,10 @@ export class CodeModelBuilder {
     return getSummary(this.program, target);
   }
 
-  private getName(target: Model | Enum | EnumMember | ModelProperty | Scalar | Operation): string {
+  private getName(
+    target: Model | Enum | EnumMember | ModelProperty | Scalar | Operation,
+    nameHint: string | undefined = undefined,
+  ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const languageProjectedName = getProjectedName(this.program, target, "java");
     if (languageProjectedName) {
@@ -2238,6 +2267,12 @@ export class CodeModelBuilder {
       const tspName = getTypeName(target, this.typeNameOptions);
       const newName = getNameForTemplate(target);
       this.logWarning(`Rename TypeSpec model '${tspName}' to '${newName}'`);
+      return newName;
+    }
+
+    if (!target.name && nameHint && this.options["namer"]) {
+      const newName = nameHint;
+      this.logWarning(`Rename anonymous TypeSpec model to '${newName}'`);
       return newName;
     }
     return target.name;
@@ -2350,7 +2385,7 @@ export class CodeModelBuilder {
       ),
       {
         implementation: ImplementationLocation.Client,
-        origin: originApiVersion,
+        origin: ORIGIN_API_VERSION,
         required: true,
         protocol: {
           http: new HttpParameter(parameterLocation),

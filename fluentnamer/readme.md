@@ -62,4 +62,6 @@ client-logger: true
 generate-client-interfaces: true
 required-parameter-client-methods: true
 client-flattened-annotation-target: none
+null-byte-array-maps-to-empty-array: true
+graal-vm-config: true
 ```

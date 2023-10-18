@@ -13,51 +13,65 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.specialwords.ModelClient;
-import com.specialwords.OperationClient;
-import com.specialwords.ParameterClient;
+import com.specialwords.ModelPropertiesClient;
+import com.specialwords.ModelsClient;
+import com.specialwords.OperationsClient;
+import com.specialwords.ParametersClient;
 import com.specialwords.SpecialWordsClientBuilder;
 
 class SpecialWordsClientTestBase extends TestProxyTestBase {
-    protected OperationClient operationClient;
+    protected ModelsClient modelsClient;
 
-    protected ParameterClient parameterClient;
+    protected ModelPropertiesClient modelPropertiesClient;
 
-    protected ModelClient modelClient;
+    protected OperationsClient operationsClient;
+
+    protected ParametersClient parametersClient;
 
     @Override
     protected void beforeTest() {
-        SpecialWordsClientBuilder operationClientbuilder =
+        SpecialWordsClientBuilder modelsClientbuilder =
                 new SpecialWordsClientBuilder()
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
-            operationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+            modelsClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
-            operationClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+            modelsClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
-        operationClient = operationClientbuilder.buildOperationClient();
+        modelsClient = modelsClientbuilder.buildModelsClient();
 
-        SpecialWordsClientBuilder parameterClientbuilder =
+        SpecialWordsClientBuilder modelPropertiesClientbuilder =
                 new SpecialWordsClientBuilder()
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
-            parameterClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+            modelPropertiesClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
-            parameterClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+            modelPropertiesClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
-        parameterClient = parameterClientbuilder.buildParameterClient();
+        modelPropertiesClient = modelPropertiesClientbuilder.buildModelPropertiesClient();
 
-        SpecialWordsClientBuilder modelClientbuilder =
+        SpecialWordsClientBuilder operationsClientbuilder =
                 new SpecialWordsClientBuilder()
                         .httpClient(HttpClient.createDefault())
                         .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
-            modelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+            operationsClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
-            modelClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+            operationsClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
-        modelClient = modelClientbuilder.buildModelClient();
+        operationsClient = operationsClientbuilder.buildOperationsClient();
+
+        SpecialWordsClientBuilder parametersClientbuilder =
+                new SpecialWordsClientBuilder()
+                        .httpClient(HttpClient.createDefault())
+                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            parametersClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            parametersClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        parametersClient = parametersClientbuilder.buildParametersClient();
     }
 }

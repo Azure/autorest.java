@@ -84,9 +84,11 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 .name(modelTypeName + "Wrapper")
                 .usedInXml(true)
                 .build();
-        } else if (wireType == ArrayType.ByteArray) {
+        } else if (wireType == ArrayType.BYTE_ARRAY) {
             if (parameterRequestLocation != RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.String;
+            } else if (settings.isDataPlaneClient()) {
+                wireType = SchemaUtil.removeModelFromParameter(parameterRequestLocation, wireType);
             }
         } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
             if (parameter.getProtocol().getHttp().getExplode()) {

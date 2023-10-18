@@ -43,9 +43,13 @@ import java.util.Objects;
             QueryClient.class,
             PropertyClient.class,
             HeaderClient.class,
+            RequestBodyClient.class,
+            ResponseBodyClient.class,
             QueryAsyncClient.class,
             PropertyAsyncClient.class,
-            HeaderAsyncClient.class
+            HeaderAsyncClient.class,
+            RequestBodyAsyncClient.class,
+            ResponseBodyAsyncClient.class
         })
 public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, ConfigurationTrait<BytesClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
@@ -252,6 +256,26 @@ public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, 
     }
 
     /**
+     * Builds an instance of RequestBodyAsyncClient class.
+     *
+     * @return an instance of RequestBodyAsyncClient.
+     */
+    @Generated
+    public RequestBodyAsyncClient buildRequestBodyAsyncClient() {
+        return new RequestBodyAsyncClient(buildInnerClient().getRequestBodies());
+    }
+
+    /**
+     * Builds an instance of ResponseBodyAsyncClient class.
+     *
+     * @return an instance of ResponseBodyAsyncClient.
+     */
+    @Generated
+    public ResponseBodyAsyncClient buildResponseBodyAsyncClient() {
+        return new ResponseBodyAsyncClient(buildInnerClient().getResponseBodies());
+    }
+
+    /**
      * Builds an instance of QueryClient class.
      *
      * @return an instance of QueryClient.
@@ -279,6 +303,26 @@ public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, 
     @Generated
     public HeaderClient buildHeaderClient() {
         return new HeaderClient(buildInnerClient().getHeaders());
+    }
+
+    /**
+     * Builds an instance of RequestBodyClient class.
+     *
+     * @return an instance of RequestBodyClient.
+     */
+    @Generated
+    public RequestBodyClient buildRequestBodyClient() {
+        return new RequestBodyClient(buildInnerClient().getRequestBodies());
+    }
+
+    /**
+     * Builds an instance of ResponseBodyClient class.
+     *
+     * @return an instance of ResponseBodyClient.
+     */
+    @Generated
+    public ResponseBodyClient buildResponseBodyClient() {
+        return new ResponseBodyClient(buildInnerClient().getResponseBodies());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(BytesClientBuilder.class);

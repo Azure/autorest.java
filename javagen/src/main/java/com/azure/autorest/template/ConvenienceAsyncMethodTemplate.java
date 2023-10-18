@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
@@ -14,6 +15,7 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
+import com.azure.core.http.rest.Response;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Flux;
@@ -68,11 +70,11 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         ClientMethodType methodType = protocolMethod.getType();
 
         IType responseBodyType = getResponseBodyType(convenienceMethod);
-
-        String returnTypeConversionExpression = expressionConvertFromBinaryData(responseBodyType, typeReferenceStaticClasses);
+        IType protocolResponseBodyType = getResponseBodyType(protocolMethod);
+        IType rawResponseBodyType = convenienceMethod.getProxyMethod().getRawResponseBodyType();
 
         if (methodType == ClientMethodType.PagingAsync) {
-            String expressionMapFromBinaryData = expressionMapFromBinaryData(responseBodyType, typeReferenceStaticClasses);
+            String expressionMapFromBinaryData = expressionMapFromBinaryData(responseBodyType, rawResponseBodyType, typeReferenceStaticClasses);
             if (expressionMapFromBinaryData == null) {
                 // no need to do the map
                 methodBlock.methodReturn(String.format("%1$s(%2$s)", getMethodName(protocolMethod), invocationExpression));
@@ -97,6 +99,11 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
             String methodName = protocolMethod.getName();
             methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));
         } else {
+            String returnTypeConversionExpression = "";
+            if (protocolResponseBodyType == ClassType.BinaryData) {
+                returnTypeConversionExpression = expressionConvertFromBinaryData(responseBodyType, rawResponseBodyType, typeReferenceStaticClasses);
+            }
+
             methodBlock.methodReturn(
                     String.format("%1$s(%2$s).flatMap(FluxUtil::toMono)%3$s",
                             getMethodName(protocolMethod),
@@ -117,12 +124,18 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
     }
 
     private IType getResponseBodyType(ClientMethod method) {
-        // Mono<T>
-        return ((GenericType) method.getReturnValue().getType()).getTypeArguments()[0];
+        // no need to care about LRO
+        // Mono<T> / PagedFlux<T>
+        IType type = ((GenericType) method.getReturnValue().getType()).getTypeArguments()[0];
+        if (type instanceof GenericType && Response.class.getSimpleName().equals(((GenericType) type).getName())) {
+            // Mono<Response<T>>
+            type = ((GenericType) type).getTypeArguments()[0];
+        }
+        return type;
     }
 
-    private String expressionConvertFromBinaryData(IType responseBodyType, Set<GenericType> typeReferenceStaticClasses) {
-        String expressionMapFromBinaryData = expressionMapFromBinaryData(responseBodyType, typeReferenceStaticClasses);
+    private String expressionConvertFromBinaryData(IType responseBodyType, IType rawType, Set<GenericType> typeReferenceStaticClasses) {
+        String expressionMapFromBinaryData = expressionMapFromBinaryData(responseBodyType, rawType, typeReferenceStaticClasses);
         if (expressionMapFromBinaryData != null) {
             return String.format(".map(%s)", expressionMapFromBinaryData);
         } else {
@@ -131,11 +144,11 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         }
     }
 
-    private String expressionMapFromBinaryData(IType responseBodyType, Set<GenericType> typeReferenceStaticClasses) {
+    private String expressionMapFromBinaryData(IType responseBodyType, IType rawType, Set<GenericType> typeReferenceStaticClasses) {
         String mapExpression = null;
         if (responseBodyType instanceof EnumType) {
             // enum
-            mapExpression = String.format("%1$s::from%2$s", responseBodyType, ((EnumType) responseBodyType).getElementType());
+            mapExpression = String.format("protocolMethodData -> %1$s.from%2$s(protocolMethodData.toObject(%2$s.class))", responseBodyType, ((EnumType) responseBodyType).getElementType());
         } else if (responseBodyType instanceof GenericType) {
             // generic, e.g. list, map
             typeReferenceStaticClasses.add((GenericType) responseBodyType);
@@ -145,7 +158,14 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
             mapExpression = null;
         } else if (isModelOrBuiltin(responseBodyType)) {
             // class
-            mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(%1$s.class)", responseBodyType);
+            mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(%1$s.class)", responseBodyType.asNullable());
+        } else if (responseBodyType == ArrayType.BYTE_ARRAY) {
+            // byte[]
+            if (rawType == ClassType.Base64Url) {
+                return "protocolMethodData -> protocolMethodData.toObject(Base64Url.class).decodedBytes()";
+            } else {
+                return "protocolMethodData -> protocolMethodData.toObject(byte[].class)";
+            }
         }
         return mapExpression;
     }

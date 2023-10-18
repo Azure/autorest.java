@@ -51,7 +51,7 @@ public final class ExtensibleClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getKnownValueWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getKnownValueWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getKnownValueWithResponse(requestOptions);
     }
 
@@ -73,7 +73,7 @@ public final class ExtensibleClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getUnknownValueWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getUnknownValueWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getUnknownValueWithResponse(requestOptions);
     }
 
@@ -138,7 +138,8 @@ public final class ExtensibleClient {
     public DaysOfWeekExtensibleEnum getKnownValue() {
         // Generated convenience method for getKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return DaysOfWeekExtensibleEnum.fromString(getKnownValueWithResponse(requestOptions).getValue());
+        return DaysOfWeekExtensibleEnum.fromString(
+                getKnownValueWithResponse(requestOptions).getValue().toObject(String.class));
     }
 
     /**
@@ -156,7 +157,8 @@ public final class ExtensibleClient {
     public DaysOfWeekExtensibleEnum getUnknownValue() {
         // Generated convenience method for getUnknownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return DaysOfWeekExtensibleEnum.fromString(getUnknownValueWithResponse(requestOptions).getValue());
+        return DaysOfWeekExtensibleEnum.fromString(
+                getUnknownValueWithResponse(requestOptions).getValue().toObject(String.class));
     }
 
     /**

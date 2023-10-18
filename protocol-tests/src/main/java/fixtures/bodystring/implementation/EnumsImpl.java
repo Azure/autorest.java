@@ -64,7 +64,7 @@ public final class EnumsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> getNotExpandable(
+        Mono<Response<BinaryData>> getNotExpandable(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -82,7 +82,7 @@ public final class EnumsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<String> getNotExpandableSync(
+        Response<BinaryData> getNotExpandableSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -138,7 +138,7 @@ public final class EnumsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> getReferenced(
+        Mono<Response<BinaryData>> getReferenced(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -156,7 +156,7 @@ public final class EnumsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<String> getReferencedSync(
+        Response<BinaryData> getReferencedSync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -293,7 +293,7 @@ public final class EnumsImpl {
      *     Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getNotExpandableWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getNotExpandableWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getNotExpandable(this.client.getHost(), accept, requestOptions, context));
@@ -317,7 +317,7 @@ public final class EnumsImpl {
      *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getNotExpandableWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getNotExpandableWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getNotExpandableSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
@@ -389,7 +389,7 @@ public final class EnumsImpl {
      *     Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getReferencedWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getReferencedWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getReferenced(this.client.getHost(), accept, requestOptions, context));
@@ -413,7 +413,7 @@ public final class EnumsImpl {
      *     Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getReferencedWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getReferencedWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getReferencedSync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }

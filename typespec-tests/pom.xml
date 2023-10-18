@@ -14,23 +14,6 @@
   <artifactId>azure-typespec-tests</artifactId>
   <version>1.0.0-beta.1</version>
 
-  <repositories>
-    <repository>
-      <id>azuresdkmaven</id>
-      <url>https://azsdkartifacts.blob.core.windows.net/maven</url>
-    </repository>
-    <repository>
-      <id>azure-sdk-for-java</id>
-      <url>https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-java/maven/v1</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
   <dependencies>
     <dependency>
       <groupId>com.azure</groupId>
@@ -39,17 +22,17 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-identity</artifactId>
-      <version>1.10.1</version>
+      <version>1.10.3</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-experimental</artifactId>
-      <version>1.0.0-beta.43</version>
+      <version>1.0.0-beta.44</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.13.7</version>
+      <version>1.13.8</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -67,7 +50,7 @@
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-test</artifactId>
-      <version>3.4.31</version>
+      <version>3.4.32</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -78,7 +61,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-test</artifactId>
-      <version>1.20.0</version>
+      <version>1.21.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

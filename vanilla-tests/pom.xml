@@ -19,23 +19,6 @@
     <parallelizeTests>false</parallelizeTests>
   </properties>
 
-  <repositories>
-    <repository>
-      <id>azuresdkmaven</id>
-      <url>https://azsdkartifacts.blob.core.windows.net/maven</url>
-    </repository>
-    <repository>
-      <id>azure-sdk-for-java</id>
-      <url>https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-java/maven/v1</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
   <dependencies>
     <dependency>
       <groupId>com.azure</groupId>
@@ -59,7 +42,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.13.7</version>
+      <version>1.13.8</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -89,7 +72,7 @@
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-test</artifactId>
-      <version>3.4.31</version>
+      <version>3.4.32</version>
       <scope>test</scope>
     </dependency>
     <dependency>

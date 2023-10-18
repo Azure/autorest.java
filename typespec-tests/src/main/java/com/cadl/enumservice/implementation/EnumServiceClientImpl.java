@@ -133,7 +133,7 @@ public final class EnumServiceClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> getColor(
+        Mono<Response<BinaryData>> getColor(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -151,7 +151,7 @@ public final class EnumServiceClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<String> getColorSync(
+        Response<BinaryData> getColorSync(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -169,7 +169,7 @@ public final class EnumServiceClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> getColorModel(
+        Mono<Response<BinaryData>> getColorModel(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -187,7 +187,7 @@ public final class EnumServiceClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<String> getColorModelSync(
+        Response<BinaryData> getColorModelSync(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -705,7 +705,7 @@ public final class EnumServiceClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getColorWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getColorWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getColor(this.getEndpoint(), accept, requestOptions, context));
     }
@@ -727,7 +727,7 @@ public final class EnumServiceClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getColorWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getColorWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getColorSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
@@ -749,7 +749,7 @@ public final class EnumServiceClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getColorModelWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getColorModelWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.getColorModel(this.getEndpoint(), accept, requestOptions, context));
@@ -772,7 +772,7 @@ public final class EnumServiceClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> getColorModelWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getColorModelWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getColorModelSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
@@ -1203,7 +1203,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Response. In the form of "," separated string.</td></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -1214,7 +1214,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param stringArray Array of Response.
+     * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1244,7 +1244,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Response. In the form of "," separated string.</td></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -1255,7 +1255,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param stringArray Array of Response.
+     * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1282,7 +1282,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. In the form of "," separated string.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -1293,7 +1293,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param intArray Array of IntArray.
+     * @param intArray Array of IntArrayModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1319,7 +1319,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. In the form of "," separated string.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -1330,7 +1330,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param intArray Array of IntArray.
+     * @param intArray Array of IntArrayModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1504,7 +1504,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -1515,7 +1515,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param stringArray Array of Response.
+     * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1543,7 +1543,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -1554,7 +1554,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param stringArray Array of Response.
+     * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1579,7 +1579,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -1590,7 +1590,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param intArray Array of IntArray.
+     * @param intArray Array of IntArrayModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1616,7 +1616,7 @@ public final class EnumServiceClientImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -1627,7 +1627,7 @@ public final class EnumServiceClientImpl {
      * String
      * }</pre>
      *
-     * @param intArray Array of IntArray.
+     * @param intArray Array of IntArrayModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

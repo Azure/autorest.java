@@ -84,7 +84,7 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
                 .name(modelTypeName + "Wrapper")
                 .usedInXml(true)
                 .build();
-        } else if (wireType == ArrayType.ByteArray) {
+        } else if (wireType == ArrayType.BYTE_ARRAY) {
             if (parameterRequestLocation != RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.String;
             }

@@ -106,7 +106,7 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Boolean>> get200(
+        Mono<Response<BinaryData>> get200(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -124,7 +124,7 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Boolean> get200Sync(
+        Response<BinaryData> get200Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -142,7 +142,7 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Boolean>> options200(
+        Mono<Response<BinaryData>> options200(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -160,7 +160,7 @@ public final class HttpSuccessImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Boolean> options200Sync(
+        Response<BinaryData> options200Sync(
                 @HostParam("$host") String host,
                 @HeaderParam("Accept") String accept,
                 RequestOptions requestOptions,
@@ -814,7 +814,7 @@ public final class HttpSuccessImpl {
      * @return 200 success along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> get200WithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> get200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get200(this.client.getHost(), accept, requestOptions, context));
     }
@@ -836,7 +836,7 @@ public final class HttpSuccessImpl {
      * @return 200 success along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> get200WithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> get200WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.get200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }
@@ -858,7 +858,7 @@ public final class HttpSuccessImpl {
      * @return simple boolean along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> options200WithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> options200WithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context -> service.options200(this.client.getHost(), accept, requestOptions, context));
@@ -881,7 +881,7 @@ public final class HttpSuccessImpl {
      * @return simple boolean along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> options200WithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> options200WithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.options200Sync(this.client.getHost(), accept, requestOptions, Context.NONE);
     }

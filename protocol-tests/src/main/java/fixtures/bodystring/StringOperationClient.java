@@ -263,7 +263,7 @@ public final class StringOperationClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<byte[]> getBase64EncodedWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getBase64EncodedWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getBase64EncodedWithResponse(requestOptions);
     }
 

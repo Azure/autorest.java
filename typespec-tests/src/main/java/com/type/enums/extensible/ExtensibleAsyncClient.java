@@ -53,7 +53,7 @@ public final class ExtensibleAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getKnownValueWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getKnownValueWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getKnownValueWithResponseAsync(requestOptions);
     }
 
@@ -75,7 +75,7 @@ public final class ExtensibleAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> getUnknownValueWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getUnknownValueWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getUnknownValueWithResponseAsync(requestOptions);
     }
 
@@ -142,7 +142,9 @@ public final class ExtensibleAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getKnownValueWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(DaysOfWeekExtensibleEnum::fromString);
+                .map(
+                        protocolMethodData ->
+                                DaysOfWeekExtensibleEnum.fromString(protocolMethodData.toObject(String.class)));
     }
 
     /**
@@ -162,7 +164,9 @@ public final class ExtensibleAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getUnknownValueWithResponse(requestOptions)
                 .flatMap(FluxUtil::toMono)
-                .map(DaysOfWeekExtensibleEnum::fromString);
+                .map(
+                        protocolMethodData ->
+                                DaysOfWeekExtensibleEnum.fromString(protocolMethodData.toObject(String.class)));
     }
 
     /**

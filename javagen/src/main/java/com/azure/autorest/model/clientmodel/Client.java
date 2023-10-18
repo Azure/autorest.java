@@ -65,6 +65,8 @@ public class Client {
     private final List<LiveTests> liveTests;
     private final List<UnionModel> unionModels;
     private final List<ClientMethodExample> clientMethodExamples;
+    private final GraalVmConfig graalVmConfig;
+
     /**
      * Create a new Client with the provided values.
      * @param clientName The name of the service client.
@@ -89,7 +91,8 @@ public class Client {
                    ServiceClient serviceClient, List<ServiceClient> serviceClients, ModuleInfo moduleInfo,
                    List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
                    List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
-                   List<LiveTests> liveTests, List<UnionModel> unionModels, List<ClientMethodExample> clientMethodExamples, String crossLanguageDefinitionId
+                   List<LiveTests> liveTests, List<UnionModel> unionModels, List<ClientMethodExample> clientMethodExamples, String crossLanguageDefinitionId,
+                   GraalVmConfig graalVmConfig
     ) {
         this.clientName = clientName;
         this.clientDescription = clientDescription;
@@ -111,6 +114,7 @@ public class Client {
         this.unionModels = unionModels;
         this.clientMethodExamples = clientMethodExamples;
         this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+        this.graalVmConfig = graalVmConfig;
     }
 
     public String getCrossLanguageDefinitionId() {
@@ -199,6 +203,11 @@ public class Client {
         return clientMethodExamples;
     }
 
+    /** @return the Graal VM config */
+    public GraalVmConfig getGraalVmConfig() {
+        return graalVmConfig;
+    }
+
     public static class Builder {
         private String clientName;
         private String clientDescription;
@@ -219,13 +228,14 @@ public class Client {
         private List<LiveTests> liveTests = Collections.emptyList();
         private List<UnionModel> unionModels = Collections.emptyList();
         private List<ClientMethodExample> clientMethodExamples = Collections.emptyList();
+        private GraalVmConfig graalVmConfig;
+        private String crossLanguageDefinitionId;
+
 
         public Builder crossLanguageDefinitionId(String crossLanguageDefinitionId) {
             this.crossLanguageDefinitionId = crossLanguageDefinitionId;
             return this;
         }
-
-        private String crossLanguageDefinitionId;
 
         /**
          * Sets the name of this service client.
@@ -407,7 +417,10 @@ public class Client {
             return this;
         }
 
-
+        public Builder graalVmConfig(GraalVmConfig graalVmConfig) {
+            this.graalVmConfig = graalVmConfig;
+            return this;
+        }
 
         public Client build() {
             if (serviceClient == null && !serviceClients.isEmpty()) {
@@ -432,7 +445,8 @@ public class Client {
                     liveTests,
                     unionModels,
                     clientMethodExamples,
-                    crossLanguageDefinitionId
+                    crossLanguageDefinitionId,
+                    graalVmConfig
                 );
         }
     }

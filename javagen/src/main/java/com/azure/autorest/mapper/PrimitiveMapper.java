@@ -56,7 +56,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 ByteArraySchema byteArraySchema = (ByteArraySchema) primaryType;
                 return (byteArraySchema.getFormat() == ByteArraySchema.Format.BASE_64_URL)
                     ? ClassType.Base64Url
-                    : ArrayType.ByteArray;
+                    : ArrayType.BYTE_ARRAY;
             case CHAR: return PrimitiveType.Char;
             case DATE: return isLowLevelClient ? ClassType.String : ClassType.LocalDate;
             case DATE_TIME:

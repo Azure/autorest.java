@@ -44,7 +44,7 @@ public final class Base64UrlBytesProperty {
     @Generated
     public byte[] getValue() {
         if (this.value == null) {
-            return new byte[0];
+            return null;
         }
         return this.value.decodedBytes();
     }

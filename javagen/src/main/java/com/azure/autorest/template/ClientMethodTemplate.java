@@ -363,7 +363,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 //parameterLocation != RequestParameterLocation.FormData &&
                 (parameterClientType instanceof ArrayType || parameterClientType instanceof IterableType)) {
 
-                if (parameterClientType == ArrayType.ByteArray) {
+                if (parameterClientType == ArrayType.BYTE_ARRAY) {
                     String expression = "null";
                     if (!alwaysNull) {
                         expression = String.format("%s(%s)",
@@ -829,7 +829,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 addOptionalVariables(function, clientMethod);
                 function.line("return new PagedIterable<>(");
                 function.indent(() -> {
-                    function.line("%s,", this.getPagingSinglePageExpression(
+                    function.line("%s);", this.getPagingSinglePageExpression(
                             clientMethod,
                             clientMethod.getProxyMethod().getPagingSinglePageMethodName(),
                             effectiveFirstPageArgs,

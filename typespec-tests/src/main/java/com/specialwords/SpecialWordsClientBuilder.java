@@ -40,12 +40,14 @@ import java.util.Objects;
 /** A builder for creating a new instance of the SpecialWordsClient type. */
 @ServiceClientBuilder(
         serviceClients = {
-            OperationClient.class,
-            ParameterClient.class,
-            ModelClient.class,
-            OperationAsyncClient.class,
-            ParameterAsyncClient.class,
-            ModelAsyncClient.class
+            ModelsClient.class,
+            ModelPropertiesClient.class,
+            OperationsClient.class,
+            ParametersClient.class,
+            ModelsAsyncClient.class,
+            ModelPropertiesAsyncClient.class,
+            OperationsAsyncClient.class,
+            ParametersAsyncClient.class
         })
 public final class SpecialWordsClientBuilder
         implements HttpTrait<SpecialWordsClientBuilder>, ConfigurationTrait<SpecialWordsClientBuilder> {
@@ -224,63 +226,83 @@ public final class SpecialWordsClientBuilder
     }
 
     /**
-     * Builds an instance of OperationAsyncClient class.
+     * Builds an instance of ModelsAsyncClient class.
      *
-     * @return an instance of OperationAsyncClient.
+     * @return an instance of ModelsAsyncClient.
      */
     @Generated
-    public OperationAsyncClient buildOperationAsyncClient() {
-        return new OperationAsyncClient(buildInnerClient().getOperations());
+    public ModelsAsyncClient buildModelsAsyncClient() {
+        return new ModelsAsyncClient(buildInnerClient().getModels());
     }
 
     /**
-     * Builds an instance of ParameterAsyncClient class.
+     * Builds an instance of ModelPropertiesAsyncClient class.
      *
-     * @return an instance of ParameterAsyncClient.
+     * @return an instance of ModelPropertiesAsyncClient.
      */
     @Generated
-    public ParameterAsyncClient buildParameterAsyncClient() {
-        return new ParameterAsyncClient(buildInnerClient().getParameters());
+    public ModelPropertiesAsyncClient buildModelPropertiesAsyncClient() {
+        return new ModelPropertiesAsyncClient(buildInnerClient().getModelProperties());
     }
 
     /**
-     * Builds an instance of ModelAsyncClient class.
+     * Builds an instance of OperationsAsyncClient class.
      *
-     * @return an instance of ModelAsyncClient.
+     * @return an instance of OperationsAsyncClient.
      */
     @Generated
-    public ModelAsyncClient buildModelAsyncClient() {
-        return new ModelAsyncClient(buildInnerClient().getModels());
+    public OperationsAsyncClient buildOperationsAsyncClient() {
+        return new OperationsAsyncClient(buildInnerClient().getOperations());
     }
 
     /**
-     * Builds an instance of OperationClient class.
+     * Builds an instance of ParametersAsyncClient class.
      *
-     * @return an instance of OperationClient.
+     * @return an instance of ParametersAsyncClient.
      */
     @Generated
-    public OperationClient buildOperationClient() {
-        return new OperationClient(buildInnerClient().getOperations());
+    public ParametersAsyncClient buildParametersAsyncClient() {
+        return new ParametersAsyncClient(buildInnerClient().getParameters());
     }
 
     /**
-     * Builds an instance of ParameterClient class.
+     * Builds an instance of ModelsClient class.
      *
-     * @return an instance of ParameterClient.
+     * @return an instance of ModelsClient.
      */
     @Generated
-    public ParameterClient buildParameterClient() {
-        return new ParameterClient(buildInnerClient().getParameters());
+    public ModelsClient buildModelsClient() {
+        return new ModelsClient(buildInnerClient().getModels());
     }
 
     /**
-     * Builds an instance of ModelClient class.
+     * Builds an instance of ModelPropertiesClient class.
      *
-     * @return an instance of ModelClient.
+     * @return an instance of ModelPropertiesClient.
      */
     @Generated
-    public ModelClient buildModelClient() {
-        return new ModelClient(buildInnerClient().getModels());
+    public ModelPropertiesClient buildModelPropertiesClient() {
+        return new ModelPropertiesClient(buildInnerClient().getModelProperties());
+    }
+
+    /**
+     * Builds an instance of OperationsClient class.
+     *
+     * @return an instance of OperationsClient.
+     */
+    @Generated
+    public OperationsClient buildOperationsClient() {
+        return new OperationsClient(buildInnerClient().getOperations());
+    }
+
+    /**
+     * Builds an instance of ParametersClient class.
+     *
+     * @return an instance of ParametersClient.
+     */
+    @Generated
+    public ParametersClient buildParametersClient() {
+        return new ParametersClient(buildInnerClient().getParameters());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(SpecialWordsClientBuilder.class);

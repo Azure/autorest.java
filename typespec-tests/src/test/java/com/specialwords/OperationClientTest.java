@@ -5,12 +5,12 @@ package com.specialwords;
 
 import org.junit.jupiter.api.Test;
 
-class OperationClientTest {
+public class OperationClientTest {
 
-    OperationClient client = new SpecialWordsClientBuilder().buildOperationClient();
+    private final OperationsClient client = new SpecialWordsClientBuilder().buildOperationsClient();
 
     @Test
-    void forMethod() {
-        client.forMethod();
+    public void test() throws Exception {
+        ReflectHelper.invokeWithResponseMethods(client.getClass(), client);
     }
 }

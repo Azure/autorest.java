@@ -9,19 +9,23 @@ import org.junit.jupiter.api.Test;
 public class ServiceDrivenTests {
 
     private final com.resiliency.servicedriven.v1.ResiliencyServiceDrivenClient oldClient1 = new com.resiliency.servicedriven.v1.ResiliencyServiceDrivenClientBuilder()
+            .endpoint("http://localhost:3000")
             .serviceDeploymentVersion("v1")
             .buildClient();
 
     private final com.resiliency.servicedriven.v1.ResiliencyServiceDrivenClient oldClient2 = new com.resiliency.servicedriven.v1.ResiliencyServiceDrivenClientBuilder()
+            .endpoint("http://localhost:3000")
             .serviceDeploymentVersion("v2")
             .buildClient();
 
     private final ResiliencyServiceDrivenClient client2v1 = new ResiliencyServiceDrivenClientBuilder()
+            .endpoint("http://localhost:3000")
             .serviceDeploymentVersion("v2")
             .serviceVersion(ServiceDrivenServiceVersion.V1)
             .buildClient();
 
     private final ResiliencyServiceDrivenClient client2v2 = new ResiliencyServiceDrivenClientBuilder()
+            .endpoint("http://localhost:3000")
             .serviceDeploymentVersion("v2")
             .serviceVersion(ServiceDrivenServiceVersion.V2)
             .buildClient();
