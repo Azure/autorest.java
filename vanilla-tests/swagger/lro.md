@@ -10,7 +10,7 @@ required-parameter-client-methods: true
 sync-methods: all
 client-side-validations: true
 polling:
-  default:
+  LROs_put200Succeeded:
     strategy: >-
       new ChainedPollingStrategy<>(java.util.Arrays.asList(
             new OperationResourcePollingStrategy<>({httpPipeline}, null, "Azure-AsyncOperation", {context}),
