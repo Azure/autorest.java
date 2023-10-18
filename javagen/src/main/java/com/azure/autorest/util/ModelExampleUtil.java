@@ -173,17 +173,33 @@ public class ModelExampleUtil {
                     clientModelNode.getClientModelProperties().put(childNode, additionalPropertiesProperty);
                 }
             } else {
-                throw new IllegalStateException("Model type not found for type " + type + " and value " + objectValue);
+                // e.g. BinaryData type with "{}" as example value
+                node = defaultNode(type, wireType, objectValue);
             }
         } else if (objectValue == null) {
             node = null;
         } else {
-            LiteralNode literalNode = new LiteralNode(type, objectValue);
-            node = literalNode;
-
-            String literalValue = convertLiteralToClientValue(wireType, objectValue.toString());
-            literalNode.setLiteralsValue(literalValue);
+            node = defaultNode(type, wireType, objectValue);
         }
+        return node;
+    }
+
+    /**
+     * Default String literal node.
+     * Generated example will be the type's defaultValueExpression.
+     *
+     * @param clientType the client type
+     * @param wireType the wire type
+     * @param exampleValue the example value
+     * @return string literal node
+     */
+    private static ExampleNode defaultNode(IType clientType, IType wireType, Object exampleValue) {
+        ExampleNode node;
+        LiteralNode literalNode = new LiteralNode(clientType, exampleValue);
+        node = literalNode;
+
+        String literalValue = convertLiteralToClientValue(wireType, exampleValue.toString());
+        literalNode.setLiteralsValue(literalValue);
         return node;
     }
 
