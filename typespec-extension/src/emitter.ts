@@ -16,22 +16,24 @@ import { fileURLToPath } from "url";
 export interface EmitterOptions {
   "namespace"?: string;
   "output-dir"?: string;
-  "partial-update"?: boolean;
+
   "service-name"?: string;
   "service-versions"?: string[];
 
   "skip-special-headers"?: string[];
 
   "namer"?: boolean;
+
   "generate-samples"?: boolean;
   "generate-tests"?: boolean;
+  "examples-directory"?: string;
+
   "enable-sync-stack"?: boolean;
 
+  "partial-update"?: boolean;
   "custom-types"?: string;
   "custom-types-subpackage"?: string;
   "customization-class"?: string;
-
-  "examples-directory"?: string;
 
   "dev-options"?: DevOptions;
 }
@@ -49,22 +51,29 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   properties: {
     "namespace": { type: "string", nullable: true },
     "output-dir": { type: "string", nullable: true },
-    "partial-update": { type: "boolean", nullable: true, default: false },
+
+    // service
     "service-name": { type: "string", nullable: true },
     "service-versions": { type: "array", items: { type: "string" }, nullable: true },
 
+    // header
     "skip-special-headers": { type: "array", items: { type: "string" }, nullable: true },
 
+    // namer
     "namer": { type: "boolean", nullable: true, default: false },
+
+    // sample and test
     "generate-samples": { type: "boolean", nullable: true, default: true },
     "generate-tests": { type: "boolean", nullable: true, default: true },
+    "examples-directory": { type: "string", nullable: true },
+
     "enable-sync-stack": { type: "boolean", nullable: true, default: true },
 
+    // customization
+    "partial-update": { type: "boolean", nullable: true, default: false },
     "custom-types": { type: "string", nullable: true },
     "custom-types-subpackage": { type: "string", nullable: true },
     "customization-class": { type: "string", nullable: true },
-
-    "examples-directory": { type: "string", nullable: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },

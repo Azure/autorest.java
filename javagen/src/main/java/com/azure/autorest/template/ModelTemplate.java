@@ -135,9 +135,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // If code is being generated with the behavior to return an empty byte array when the default value
             // expression is null and the model has any array types that will need conversion within getter methods
             // generate a static byte[] that will be returned instead of creating a new instance each get.
-            if (settings.isNullByteArrayMapsToEmptyArray()
-                && model.getProperties().stream().anyMatch(property -> property.getClientType() instanceof ArrayType
-                    && property.getWireType() != property.getClientType())) {
+            if (isGenerateConstantEmptyByteArray(model, settings)) {
                 classBlock.privateStaticFinalVariable("byte[] EMPTY_BYTE_ARRAY = new byte[0]");
             }
 
@@ -549,6 +547,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         fieldSignature = propertyType + " " + propertyName;
                     }
                 }
+            }
+
+            if (property.isPolymorphicDiscriminator() && settings.isStreamStyleSerialization()) {
+                // Stream-style serialization doesn't need the polymorphic discriminator constant.
+                continue;
             }
 
             classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
@@ -1058,6 +1061,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             parentModelName = parentModel == null ? null : parentModel.getParentModelName();
         }
         return propertyReferences;
+    }
+
+    /**
+     * Extension for whether to generate constant "private final static byte[] EMPTY_BYTE_ARRAY = new byte[0];"
+     *
+     * @param model the model
+     * @param settings Java settings
+     * @return Whether to generate the constant.
+     */
+    protected boolean isGenerateConstantEmptyByteArray(ClientModel model, JavaSettings settings) {
+        return settings.isNullByteArrayMapsToEmptyArray()
+                && model.getProperties().stream().anyMatch(property -> property.getClientType() instanceof ArrayType
+                && property.getWireType() != property.getClientType());
     }
 
     /**
