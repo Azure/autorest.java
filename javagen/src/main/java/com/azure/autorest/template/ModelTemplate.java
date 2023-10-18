@@ -1064,16 +1064,28 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Extension for whether to generate constant "private final static byte[] EMPTY_BYTE_ARRAY = new byte[0];"
+     * Checks whether to generate constant "private final static byte[] EMPTY_BYTE_ARRAY = new byte[0];"
      *
      * @param model the model
      * @param settings Java settings
      * @return Whether to generate the constant.
      */
-    protected boolean isGenerateConstantEmptyByteArray(ClientModel model, JavaSettings settings) {
-        return settings.isNullByteArrayMapsToEmptyArray()
-                && model.getProperties().stream().anyMatch(property -> property.getClientType() instanceof ArrayType
-                && property.getWireType() != property.getClientType());
+    private static boolean isGenerateConstantEmptyByteArray(ClientModel model, JavaSettings settings) {
+        boolean ret = false;
+        if (settings.isNullByteArrayMapsToEmptyArray()) {
+            ret = model.getProperties().stream()
+                    .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
+                            && property.getWireType() != property.getClientType());
+
+            // flatten properties
+            if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+                // "return this.innerProperties() == null ? EMPTY_BYTE_ARRAY : this.innerProperties().property1();"
+                ret = model.getPropertyReferences().stream()
+                        .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                        .anyMatch(p -> p.getClientType() == ArrayType.BYTE_ARRAY);
+            }
+        }
+        return ret;
     }
 
     /**
