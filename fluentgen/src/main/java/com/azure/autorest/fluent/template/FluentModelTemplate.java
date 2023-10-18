@@ -7,7 +7,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.arm.ResourceClientModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
-import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
@@ -142,17 +141,6 @@ public class FluentModelTemplate extends ModelTemplate {
 
     @Override
     protected void addGeneratedAnnotation(JavaContext classBlock) {
-    }
-
-    @Override
-    protected boolean isGenerateConstantEmptyByteArray(ClientModel model, JavaSettings settings) {
-        boolean ret = super.isGenerateConstantEmptyByteArray(model, settings);
-        if (!ret) {
-            ret = getClientModelPropertyReferences(model).stream()
-                    // "return this.innerProperties() == null ? EMPTY_BYTE_ARRAY : this.innerProperties().property1();"
-                    .anyMatch(p -> p.getClientType() == ArrayType.BYTE_ARRAY);
-        }
-        return ret;
     }
 
     private Optional<ClientModel> getPredefinedModel(String modelName) {
