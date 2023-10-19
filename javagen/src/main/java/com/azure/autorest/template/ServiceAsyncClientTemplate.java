@@ -5,6 +5,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
@@ -137,7 +138,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
 
   protected void addServiceClientAnnotationImports(Set<String> imports) {
     imports.add("com.azure.core.annotation.ServiceClient");
-    imports.add("com.azure.core.annotation.Generated");
+    Annotation.GENERATED.addImportsTo(imports);
   }
 
   protected void addGeneratedAnnotation(JavaContext classBlock) {

@@ -12,6 +12,7 @@ package com.azure.autorest.template;
 
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.Constructor;
@@ -314,7 +315,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     protected void addServiceClientAnnotationImport(Set<String> imports) {
-        imports.add("com.azure.core.annotation.ServiceClient");
+        Annotation.SERVICE_CLIENT.addImportsTo(imports);
     }
 
     /**

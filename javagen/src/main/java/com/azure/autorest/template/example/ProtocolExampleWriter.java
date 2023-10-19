@@ -239,7 +239,7 @@ public class ProtocolExampleWriter {
                 IType returnType = method.getReturnValue().getType();
                 if (returnType instanceof GenericType) {
                     GenericType responseType = (GenericType) returnType;
-                    if (Response.class.getSimpleName().equals(responseType.getName())) {
+                    if (ClassType.RESPONSE.getName().equals(responseType.getName())) {
                         // Response<>
 
                         // assert status code

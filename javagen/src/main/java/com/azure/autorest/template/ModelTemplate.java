@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -1102,7 +1103,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     protected void addGeneratedImport(Set<String> imports) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            imports.add(Generated.class.getName());
+            Annotation.GENERATED.addImportsTo(imports);
         }
     }
 

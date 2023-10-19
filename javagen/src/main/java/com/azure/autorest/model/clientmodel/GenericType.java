@@ -3,6 +3,8 @@
 
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,8 +33,15 @@ public class GenericType implements IType {
      * @param typeArguments The type arguments of this generic type.
      */
     public GenericType(String packageKeyword, String name, IType... typeArguments) {
+        if (!JavaSettings.getInstance().isBranding()) {
+            packageKeyword = packageKeyword
+                    .replace("com.azure.core", "com.generic.core")
+                    .replace("com.azure.json", "com.generic.json");
+
+        }
+
         this.name = name;
-        packageName = packageKeyword;
+        this.packageName = packageKeyword;
         this.typeArguments = typeArguments;
     }
 

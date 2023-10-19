@@ -188,7 +188,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         IType type = method.getReturnValue().getType();
         if (type instanceof GenericType
                 && (
-                Response.class.getSimpleName().equals(((GenericType) type).getName())
+                ClassType.RESPONSE.getName().equals(((GenericType) type).getName())
                         || (PagedIterable.class.getSimpleName().equals(((GenericType) type).getName())))) {
             type = ((GenericType) type).getTypeArguments()[0];
         } else if (isResponseBase(type)) {

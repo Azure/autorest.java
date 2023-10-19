@@ -7,6 +7,7 @@ import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
@@ -454,7 +455,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addImportForCoreUtils(Set<String> imports) {
-        imports.add("com.azure.core.util.CoreUtils");
+        ClassType.CORE_UTILS.addImportsTo(imports, false);
         imports.add("com.azure.core.util.builder.ClientBuilderUtil");
     }
 
@@ -482,7 +483,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addServiceClientBuilderAnnotationImport(Set<String> imports) {
-        imports.add("com.azure.core.annotation.ServiceClientBuilder");
+        Annotation.SERVICE_CLIENT_BUILDER.addImportsTo(imports);
     }
 
     protected void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock,
@@ -607,7 +608,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
         if (!settings.isAzureOrFluent()) {
             commonProperties.add(new ServiceClientProperty("The retry policy that will attempt to retry failed "
-                    + "requests, if applicable.", ClassType.RetryPolicy, "retryPolicy", false, null));
+                    + "requests, if applicable.", ClassType.RETRY_POLICY, "retryPolicy", false, null));
         }
         return commonProperties;
     }
@@ -624,7 +625,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addGeneratedImport(Set<String> imports) {
-        imports.add(Generated.class.getName());
+        Annotation.GENERATED.addImportsTo(imports);
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {

@@ -571,7 +571,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
             // see ObjectMapper.mapPredefinedModel
             // this might be too simplified, and Android might require a different implementation
-            return compositeType.getPackage().startsWith("com.azure.core.");
+            return compositeType.getPackage().startsWith("com.azure.core.") || compositeType.getPackage().startsWith("com.generic.core.");
         } else {
             return false;
         }

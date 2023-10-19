@@ -7,8 +7,6 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.MatchConditions;
-import com.azure.core.http.RequestConditions;
 import com.azure.core.util.CoreUtils;
 
 import java.time.Instant;
@@ -304,7 +302,7 @@ public class ClassType implements IType {
             .knownClass(com.azure.core.credential.KeyCredential.class)
             .build();
 
-    public static final ClassType RetryPolicy = new ClassType.Builder(false)
+    public static final ClassType RETRY_POLICY = new ClassType.Builder(false)
         .knownClass(com.azure.core.http.policy.RetryPolicy.class)
         .build();
 
@@ -326,7 +324,7 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType RequestOptions = new Builder(false)
-        .packageName("com.azure.core.http.rest").name("RequestOptions")
+        .knownClass(com.azure.core.http.rest.RequestOptions.class)
         .build();
 
     public static final ClassType ClientOptions = new Builder(false)
@@ -377,12 +375,32 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType REQUEST_CONDITIONS = new Builder()
-        .knownClass(RequestConditions.class)
+        .knownClass(com.azure.core.http.RequestConditions.class)
         .build();
 
     public static final ClassType MATCH_CONDITIONS = new Builder()
-            .knownClass(MatchConditions.class)
-            .build();
+        .knownClass(com.azure.core.http.MatchConditions.class)
+        .build();
+
+    public static final ClassType RESPONSE = new Builder()
+        .knownClass(com.azure.core.http.rest.Response.class)
+        .build();
+
+    public static final ClassType SIMPLE_RESPONSE = new Builder()
+        .knownClass(com.azure.core.http.rest.SimpleResponse.class)
+        .build();
+
+    public static final ClassType HTTP_PIPELINE_BUILDER = new ClassType.Builder(false)
+        .knownClass(com.azure.core.http.HttpPipelineBuilder.class)
+        .build();
+
+    public static final ClassType USER_AGENT_POLICY = new ClassType.Builder(false)
+        .knownClass(com.azure.core.http.policy.UserAgentPolicy.class)
+        .build();
+
+    public static final ClassType CORE_UTILS = new ClassType.Builder(false)
+        .knownClass(com.azure.core.util.CoreUtils.class)
+        .build();
 
     private final String fullName;
     private final String packageName;
@@ -696,8 +714,27 @@ public class ClassType implements IType {
         }
 
         public Builder knownClass(Class<?> clazz) {
-            return packageName(clazz.getPackage().getName())
-                .name(clazz.getSimpleName());
+            this.packageName(clazz.getPackage().getName())
+                    .name(clazz.getSimpleName());
+
+            if (!JavaSettings.getInstance().isBranding()) {
+                if (Objects.equals(clazz, com.azure.core.util.ExpandableStringEnum.class)
+                        || Objects.equals(clazz, com.azure.core.util.Context.class)
+                        || Objects.equals(clazz, com.azure.core.util.BinaryData.class)
+                        || Objects.equals(clazz, com.azure.core.util.ClientOptions.class)) {
+                    this.packageName("com.generic.core.models");
+                } else if (Objects.equals(clazz, com.azure.core.util.Configuration.class)) {
+                    this.packageName("com.generic.core.util.configuration");
+                } else if (Objects.equals(clazz, com.azure.core.http.policy.RetryOptions.class)) {
+                    this.packageName("com.generic.core.http.policy.retry");
+                } else {
+                    this.packageName(clazz.getPackage().getName()
+                            .replace("com.azure.core", "com.generic.core")
+                            .replace("com.azure.json", "com.generic.json"));
+                }
+            }
+
+            return this;
         }
 
         public Builder implementationImports(String... implementationImports) {

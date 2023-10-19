@@ -264,16 +264,16 @@ public class ServiceClient {
     }
 
     protected void addRestProxyImport(Set<String> imports) {
-        imports.add("com.azure.core.http.rest.RestProxy");
+        ClassType.RestProxy.addImportsTo(imports, false);
     }
 
     protected void addHttpPolicyImports(Set<String> imports) {
-        imports.add("com.azure.core.http.policy.RetryPolicy");
-        imports.add("com.azure.core.http.policy.UserAgentPolicy");
+        ClassType.RETRY_POLICY.addImportsTo(imports, false);
+        ClassType.USER_AGENT_POLICY.addImportsTo(imports, false);
     }
 
     protected void addPipelineBuilderImport(Set<String> imports) {
-        imports.add("com.azure.core.http.HttpPipelineBuilder");
+        ClassType.HTTP_PIPELINE_BUILDER.addImportsTo(imports, false);
     }
 
     public static class Builder {

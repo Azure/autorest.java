@@ -349,13 +349,13 @@ public class ClientMethod {
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
 
-        imports.add("com.azure.core.annotation.ServiceMethod");
-        imports.add("com.azure.core.annotation.ReturnType");
+        Annotation.SERVICE_METHOD.addImportsTo(imports);
+        Annotation.RETURN_TYPE.addImportsTo(imports);
 
         imports.add("java.util.Objects");
         imports.add("java.util.stream.Collectors");
-        imports.add(Response.class.getName());
-        imports.add(SimpleResponse.class.getName());
+        ClassType.RESPONSE.addImportsTo(imports, includeImplementationImports);
+        ClassType.SIMPLE_RESPONSE.addImportsTo(imports, includeImplementationImports);
 
         if (settings.isDataPlaneClient()) {
             // for some processing on RequestOptions (get/set header)
@@ -449,7 +449,7 @@ public class ClientMethod {
             }
 
             if (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync) {
-                imports.add(SimpleResponse.class.getName());
+                ClassType.SIMPLE_RESPONSE.addImportsTo(imports, false);
                 ClassType.BinaryData.addImportsTo(imports, false);
                 ClassType.HttpRequest.addImportsTo(imports, false);
             }
