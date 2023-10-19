@@ -1135,7 +1135,8 @@ public class JavaSettings {
     }
 
     public boolean isBranding() {
-        return packageName.startsWith("com.azure");
+//        return packageName.startsWith("com.azure");
+        return true;
     }
 
     private static final String DEFAULT_CODE_GENERATION_HEADER = String.join("\r\n",

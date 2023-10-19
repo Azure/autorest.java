@@ -215,8 +215,7 @@ public class TypeSpecPlugin extends Javagen {
             SETTINGS_MAP.put("customization-class", options.getCustomizationClass());
         }
 
-        boolean branding = options.getNamespace().startsWith("com.azure");
-        if (!branding) {
+        if (!JavaSettings.getInstance().isBranding()) {
             SETTINGS_MAP.put("sync-methods", "sync-only");
             SETTINGS_MAP.put("stream-style-serialization", true);
             SETTINGS_MAP.put("enable-page-size", false);
