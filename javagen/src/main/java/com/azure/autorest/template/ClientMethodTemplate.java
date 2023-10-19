@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
+import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
@@ -1581,11 +1582,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         });
     }
 
-    private String getServiceVersionValue(ClientMethod clientMethod) {
+    private static String getServiceVersionValue(ClientMethod clientMethod) {
         String serviceVersion = "null";
         if (JavaSettings.getInstance().isDataPlaneClient() && clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
             if (clientMethod.getProxyMethod().getParameters().stream()
-                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY && "apiVersion".equals(p.getName()))) {
+                    .anyMatch(p -> p.getOrigin() == ParameterSynthesizedOrigin.API_VERSION)) {
                 serviceVersion = clientMethod.getClientReference() + ".getServiceVersion().getVersion()";
             }
         }
