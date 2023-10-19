@@ -1522,18 +1522,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
             }
         }
-        String serviceVersion = "null";
-        if (JavaSettings.getInstance().isDataPlaneClient() && clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
-            if (clientMethod.getProxyMethod().getParameters().stream()
-                .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY && "apiVersion".equals(p.getName()))) {
-                serviceVersion = clientMethod.getClientReference() + ".getServiceVersion().getVersion()";
-            }
-        }
         return clientMethod.getMethodPollingDetails().getPollingStrategy()
             .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
             .replace("{endpoint}", endpoint)
             .replace("{context}", contextParam)
-            .replace("{serviceVersion}", serviceVersion)
+            .replace("{serviceVersion}", getServiceVersionValue(clientMethod))
             .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
             .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
             .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
@@ -1559,18 +1552,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
             }
         }
-        String serviceVersion = "null";
-        if (JavaSettings.getInstance().isDataPlaneClient() && clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
-            if (clientMethod.getProxyMethod().getParameters().stream()
-                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY && "apiVersion".equals(p.getName()))) {
-                serviceVersion = clientMethod.getClientReference() + ".getServiceVersion().getVersion()";
-            }
-        }
         return clientMethod.getMethodPollingDetails().getSyncPollingStrategy()
                 .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
                 .replace("{endpoint}", endpoint)
                 .replace("{context}", contextParam)
-                .replace("{serviceVersion}", serviceVersion)
+                .replace("{serviceVersion}", getServiceVersionValue(clientMethod))
                 .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
                 .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
                 .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
@@ -1593,5 +1579,16 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             function.methodReturn("this.sendRequestAsync(httpRequest).contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly())).block()");
         });
+    }
+
+    private String getServiceVersionValue(ClientMethod clientMethod) {
+        String serviceVersion = "null";
+        if (JavaSettings.getInstance().isDataPlaneClient() && clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
+            if (clientMethod.getProxyMethod().getParameters().stream()
+                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY && "apiVersion".equals(p.getName()))) {
+                serviceVersion = clientMethod.getClientReference() + ".getServiceVersion().getVersion()";
+            }
+        }
+        return serviceVersion;
     }
 }
