@@ -1522,11 +1522,18 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
             }
         }
+        String serviceVersion = "null";
+        if (JavaSettings.getInstance().isDataPlaneClient() && clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
+            if (clientMethod.getProxyMethod().getParameters().stream()
+                .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY && "apiVersion".equals(p.getName()))) {
+                serviceVersion = clientMethod.getClientReference() + ".getServiceVersion().getVersion()";
+            }
+        }
         return clientMethod.getMethodPollingDetails().getPollingStrategy()
             .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
             .replace("{endpoint}", endpoint)
             .replace("{context}", contextParam)
-            .replace("{serviceVersion}", clientMethod.getClientReference() + ".getServiceVersion().getVersion()")
+            .replace("{serviceVersion}", serviceVersion)
             .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
             .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
             .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
@@ -1552,11 +1559,18 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 }
             }
         }
+        String serviceVersion = "null";
+        if (JavaSettings.getInstance().isDataPlaneClient() && clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
+            if (clientMethod.getProxyMethod().getParameters().stream()
+                    .anyMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.QUERY && "apiVersion".equals(p.getName()))) {
+                serviceVersion = clientMethod.getClientReference() + ".getServiceVersion().getVersion()";
+            }
+        }
         return clientMethod.getMethodPollingDetails().getSyncPollingStrategy()
                 .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
                 .replace("{endpoint}", endpoint)
                 .replace("{context}", contextParam)
-                .replace("{serviceVersion}", clientMethod.getClientReference() + ".getServiceVersion().getVersion()")
+                .replace("{serviceVersion}", serviceVersion)
                 .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
                 .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
                 .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
