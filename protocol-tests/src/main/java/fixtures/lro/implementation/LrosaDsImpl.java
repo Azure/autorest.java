@@ -1206,7 +1206,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1279,7 +1279,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1494,7 +1494,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1567,7 +1567,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1786,7 +1786,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1859,7 +1859,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2077,7 +2077,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2151,7 +2151,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2211,7 +2211,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2238,7 +2238,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2298,7 +2298,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2325,7 +2325,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2388,7 +2388,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2416,7 +2416,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -2576,7 +2576,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2631,7 +2631,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2791,7 +2791,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2846,7 +2846,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3010,7 +3010,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3066,7 +3066,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3285,7 +3285,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3359,7 +3359,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3582,7 +3582,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3657,7 +3657,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3882,7 +3882,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -3957,7 +3957,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4017,7 +4017,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4044,7 +4044,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4110,7 +4110,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4138,7 +4138,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4298,7 +4298,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4353,7 +4353,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4522,7 +4522,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4579,7 +4579,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4793,7 +4793,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -4866,7 +4866,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5088,7 +5088,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5162,7 +5162,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5387,7 +5387,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5463,7 +5463,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5526,7 +5526,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5554,7 +5554,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5620,7 +5620,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5648,7 +5648,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5716,7 +5716,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5744,7 +5744,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5908,7 +5908,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5964,7 +5964,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -6131,7 +6131,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -6187,7 +6187,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -6358,7 +6358,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -6416,7 +6416,7 @@ public final class LrosaDsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }

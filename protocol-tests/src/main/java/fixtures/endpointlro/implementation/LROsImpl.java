@@ -277,7 +277,7 @@ public final class LROsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -340,7 +340,7 @@ public final class LROsImpl {
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
                                                 : Context.NONE)
-                                .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
