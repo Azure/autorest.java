@@ -18,7 +18,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.naming.implementation.NamingClientImpl;
+import com.cadl.naming.models.DataRequest;
 import com.cadl.naming.models.DataResponse;
+import com.cadl.naming.models.GetAnonymouseResponse;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous NamingClient type. */
@@ -53,6 +55,16 @@ public final class NamingAsyncClient {
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     parameters (Optional): {
+     *         type: String(Type1/Type2) (Required)
+     *     }
+     * }
+     * }</pre>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -68,6 +80,8 @@ public final class NamingAsyncClient {
      *
      * @param name summary of name query parameter
      *     <p>description of name query parameter.
+     * @param request summary of Request
+     *     <p>description of Request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -77,8 +91,32 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postWithResponse(String name, RequestOptions requestOptions) {
-        return this.serviceClient.postWithResponseAsync(name, requestOptions);
+    public Mono<Response<BinaryData>> postWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.postWithResponseAsync(name, request, requestOptions);
+    }
+
+    /**
+     * The getAnonymouse operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getAnonymouseWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getAnonymouseWithResponseAsync(requestOptions);
     }
 
     /**
@@ -88,6 +126,8 @@ public final class NamingAsyncClient {
      *
      * @param name summary of name query parameter
      *     <p>description of name query parameter.
+     * @param request summary of Request
+     *     <p>description of Request.
      * @param etag summary of etag header parameter
      *     <p>description of etag header parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -100,13 +140,13 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<DataResponse> post(String name, String etag) {
+    public Mono<DataResponse> post(String name, DataRequest request, String etag) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {
             requestOptions.setHeader(HttpHeaderName.ETAG, etag);
         }
-        return postWithResponse(name, requestOptions)
+        return postWithResponse(name, BinaryData.fromObject(request), requestOptions)
                 .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(DataResponse.class));
     }
@@ -118,6 +158,8 @@ public final class NamingAsyncClient {
      *
      * @param name summary of name query parameter
      *     <p>description of name query parameter.
+     * @param request summary of Request
+     *     <p>description of Request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -128,11 +170,31 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<DataResponse> post(String name) {
+    public Mono<DataResponse> post(String name, DataRequest request) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postWithResponse(name, requestOptions)
+        return postWithResponse(name, BinaryData.fromObject(request), requestOptions)
                 .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(DataResponse.class));
+    }
+
+    /**
+     * The getAnonymouse operation.
+     *
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<GetAnonymouseResponse> getAnonymouse() {
+        // Generated convenience method for getAnonymouseWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getAnonymouseWithResponse(requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(GetAnonymouseResponse.class));
     }
 }

@@ -81,6 +81,8 @@ public class FluentJavaSettings {
 
     private SampleGeneration generateSamples = SampleGeneration.NONE;
 
+    private String graalVmConfigSuffix = null;
+
     private boolean sdkIntegration = false;
 
     private enum SampleGeneration {
@@ -165,6 +167,10 @@ public class FluentJavaSettings {
         return generateSamples != SampleGeneration.NONE;
     }
 
+    public Optional<String> getGraalVmConfigSuffix() {
+        return Optional.ofNullable(graalVmConfigSuffix);
+    }
+
     public boolean isSdkIntegration() {
         return sdkIntegration;
     }
@@ -226,6 +232,8 @@ public class FluentJavaSettings {
         loadBooleanSetting("generate-async-methods", s -> generateAsyncMethods = s);
 
         loadBooleanSetting("generate-samples", s -> generateSamples = (s ? SampleGeneration.AGGREGATED : SampleGeneration.NONE));
+
+        loadStringSetting("graalvm-config-suffix", s -> graalVmConfigSuffix = s);
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 

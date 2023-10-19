@@ -19,7 +19,7 @@
   <repositories>
     <repository>
       <id>azuresdkmaven</id>
-      <url>https://azsdkartifacts.blob.core.windows.net/maven</url>
+      <url>https://azuresdkmaven.blob.core.windows.net/maven2</url>
     </repository>
   </repositories>
 

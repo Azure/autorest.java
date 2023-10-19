@@ -4,7 +4,9 @@
 
 package com.cadl.naming.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -131,6 +133,7 @@ public final class NamingClientImpl {
                 @HostParam("endpoint") String endpoint,
                 @QueryParam("name") String name,
                 @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData request,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -149,6 +152,43 @@ public final class NamingClientImpl {
         Response<BinaryData> postSync(
                 @HostParam("endpoint") String endpoint,
                 @QueryParam("name") String name,
+                @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData request,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/naming")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> getAnonymouse(
+                @HostParam("endpoint") String endpoint,
+                @HeaderParam("accept") String accept,
+                RequestOptions requestOptions,
+                Context context);
+
+        @Get("/naming")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(
+                value = ClientAuthenticationException.class,
+                code = {401})
+        @UnexpectedResponseExceptionType(
+                value = ResourceNotFoundException.class,
+                code = {404})
+        @UnexpectedResponseExceptionType(
+                value = ResourceModifiedException.class,
+                code = {409})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getAnonymouseSync(
+                @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
                 Context context);
@@ -171,6 +211,16 @@ public final class NamingClientImpl {
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     parameters (Optional): {
+     *         type: String(Type1/Type2) (Required)
+     *     }
+     * }
+     * }</pre>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -186,6 +236,8 @@ public final class NamingClientImpl {
      *
      * @param name summary of name query parameter
      *     <p>description of name query parameter.
+     * @param request summary of Request
+     *     <p>description of Request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -194,9 +246,11 @@ public final class NamingClientImpl {
      * @return summary of Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postWithResponseAsync(String name, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> postWithResponseAsync(
+            String name, BinaryData request, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.post(this.getEndpoint(), name, accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.post(this.getEndpoint(), name, accept, request, requestOptions, context));
     }
 
     /**
@@ -216,6 +270,16 @@ public final class NamingClientImpl {
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     parameters (Optional): {
+     *         type: String(Type1/Type2) (Required)
+     *     }
+     * }
+     * }</pre>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -231,6 +295,8 @@ public final class NamingClientImpl {
      *
      * @param name summary of name query parameter
      *     <p>description of name query parameter.
+     * @param request summary of Request
+     *     <p>description of Request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -239,8 +305,57 @@ public final class NamingClientImpl {
      * @return summary of Response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postWithResponse(String name, RequestOptions requestOptions) {
+    public Response<BinaryData> postWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.postSync(this.getEndpoint(), name, accept, requestOptions, Context.NONE);
+        return service.postSync(this.getEndpoint(), name, accept, request, requestOptions, Context.NONE);
+    }
+
+    /**
+     * The getAnonymouse operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getAnonymouseWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+                context -> service.getAnonymouse(this.getEndpoint(), accept, requestOptions, context));
+    }
+
+    /**
+     * The getAnonymouse operation.
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getAnonymouseWithResponse(RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.getAnonymouseSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

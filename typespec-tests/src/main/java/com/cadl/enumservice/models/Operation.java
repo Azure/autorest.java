@@ -17,7 +17,7 @@ public final class Operation {
      */
     @Generated
     @JsonProperty(value = "name")
-    private Name name;
+    private NameModel name;
 
     /*
      * The best property.
@@ -78,7 +78,7 @@ public final class Operation {
     @Generated
     @JsonCreator
     private Operation(
-            @JsonProperty(value = "name") Name name,
+            @JsonProperty(value = "name") NameModel name,
             @JsonProperty(value = "priority") Priority priority,
             @JsonProperty(value = "color") ColorModel color) {
         best = true;
@@ -97,7 +97,7 @@ public final class Operation {
      * @return the name value.
      */
     @Generated
-    public Name getName() {
+    public NameModel getName() {
         return this.name;
     }
 

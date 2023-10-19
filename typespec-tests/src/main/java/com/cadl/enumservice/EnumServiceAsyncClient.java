@@ -292,7 +292,7 @@ public final class EnumServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Response. In the form of "," separated string.</td></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -303,7 +303,7 @@ public final class EnumServiceAsyncClient {
      * String
      * }</pre>
      *
-     * @param stringArray Array of Response.
+     * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -326,7 +326,7 @@ public final class EnumServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. In the form of "," separated string.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -337,7 +337,7 @@ public final class EnumServiceAsyncClient {
      * String
      * }</pre>
      *
-     * @param intArray Array of IntArray.
+     * @param intArray Array of IntArrayModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -427,7 +427,7 @@ public final class EnumServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -438,7 +438,7 @@ public final class EnumServiceAsyncClient {
      * String
      * }</pre>
      *
-     * @param stringArray Array of Response.
+     * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -461,7 +461,7 @@ public final class EnumServiceAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -472,7 +472,7 @@ public final class EnumServiceAsyncClient {
      * String
      * }</pre>
      *
-     * @param intArray Array of IntArray.
+     * @param intArray Array of IntArrayModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -773,8 +773,8 @@ public final class EnumServiceAsyncClient {
     /**
      * The setStringArray operation.
      *
-     * @param stringArray Array of Response.
-     * @param stringArrayOpt Array of Response.
+     * @param stringArray Array of SetStringEnumArrayResponse.
+     * @param stringArrayOpt Array of SetStringEnumArrayResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -804,7 +804,7 @@ public final class EnumServiceAsyncClient {
     /**
      * The setStringArray operation.
      *
-     * @param stringArray Array of Response.
+     * @param stringArray Array of SetStringEnumArrayResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -826,8 +826,8 @@ public final class EnumServiceAsyncClient {
     /**
      * The setIntArray operation.
      *
-     * @param intArray Array of IntArray.
-     * @param intArrayOpt Array of IntArray.
+     * @param intArray Array of IntArrayModel.
+     * @param intArrayOpt Array of IntArrayModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -856,7 +856,7 @@ public final class EnumServiceAsyncClient {
     /**
      * The setIntArray operation.
      *
-     * @param intArray Array of IntArray.
+     * @param intArray Array of IntArrayModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1002,8 +1002,8 @@ public final class EnumServiceAsyncClient {
     /**
      * The setStringMulti operation.
      *
-     * @param stringArray Array of Response.
-     * @param stringArrayOpt Array of Response.
+     * @param stringArray Array of SetStringEnumArrayResponse.
+     * @param stringArrayOpt Array of SetStringEnumArrayResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1032,7 +1032,7 @@ public final class EnumServiceAsyncClient {
     /**
      * The setStringMulti operation.
      *
-     * @param stringArray Array of Response.
+     * @param stringArray Array of SetStringEnumArrayResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1054,8 +1054,8 @@ public final class EnumServiceAsyncClient {
     /**
      * The setIntMulti operation.
      *
-     * @param intArray Array of IntArray.
-     * @param intArrayOpt Array of IntArray.
+     * @param intArray Array of IntArrayModel.
+     * @param intArrayOpt Array of IntArrayModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1082,7 +1082,7 @@ public final class EnumServiceAsyncClient {
     /**
      * The setIntMulti operation.
      *
-     * @param intArray Array of IntArray.
+     * @param intArray Array of IntArrayModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

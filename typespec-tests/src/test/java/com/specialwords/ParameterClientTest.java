@@ -5,17 +5,12 @@ package com.specialwords;
 
 import org.junit.jupiter.api.Test;
 
-class ParameterClientTest {
+public class ParameterClientTest {
 
-    ParameterClient client = new SpecialWordsClientBuilder().buildParameterClient();
-
-    @Test
-    void getWithIf() {
-        client.getWithIf("weekend");
-    }
+    private final ParametersClient client = new SpecialWordsClientBuilder().buildParametersClient();
 
     @Test
-    void getWithFilter() {
-        client.getWithFilter("abc*.");
+    public void test() throws Exception {
+        ReflectHelper.invokeWithResponseMethods(client.getClass(), client, "ok");
     }
 }

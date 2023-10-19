@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.literalservice.implementation.LiteralServiceClientImpl;
 import com.cadl.literalservice.models.Model;
-import com.cadl.literalservice.models.OptionalLiteralParam;
+import com.cadl.literalservice.models.OptionalLiteralParamModel;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous LiteralServiceClient type. */
@@ -96,7 +96,7 @@ public final class LiteralServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Model> put(Model model, OptionalLiteralParam optionalLiteralParam) {
+    public Mono<Model> put(Model model, OptionalLiteralParamModel optionalLiteralParam) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (optionalLiteralParam != null) {
