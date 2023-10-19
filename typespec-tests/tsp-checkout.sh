@@ -2,8 +2,8 @@
 # Licensed under the MIT License.
 
 export SPEC_REPO=https://github.com/Azure/azure-rest-api-specs.git
-export TSP_PATH=specification/eventgrid/Azure.Messaging.EventGrid
-export REPO_BRANCH=feature/eventgrid/typespec
+export TSP_PATH=specification/cognitiveservices/ContentSafety
+export REPO_BRANCH=main
 
 mkdir tsp-repo
 cd tsp-repo
