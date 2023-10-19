@@ -20,10 +20,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.core.util.CoreUtils;
-import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -77,10 +74,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         } else {
             imports.add(IOException.class.getName());
 
-            imports.add(JsonSerializable.class.getName());
-            imports.add(JsonWriter.class.getName());
-            imports.add(JsonReader.class.getName());
-            imports.add(JsonToken.class.getName());
+            ClassType.JSON_SERIALIZABLE.addImportsTo(imports, false);
+            ClassType.JSON_WRITER.addImportsTo(imports, false);
+            ClassType.JSON_READER.addImportsTo(imports, false);
+            ClassType.JSON_TOKEN.addImportsTo(imports, false);
         }
 
         imports.add(CoreUtils.class.getName());

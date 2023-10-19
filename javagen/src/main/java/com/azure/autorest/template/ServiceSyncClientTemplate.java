@@ -6,7 +6,6 @@ package com.azure.autorest.template;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
-import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.GenericType;

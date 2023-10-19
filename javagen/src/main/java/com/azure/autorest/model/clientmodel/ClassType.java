@@ -402,6 +402,22 @@ public class ClassType implements IType {
         .knownClass(com.azure.core.util.CoreUtils.class)
         .build();
 
+    public static final ClassType JSON_SERIALIZABLE = new ClassType.Builder(false)
+            .knownClass(com.azure.json.JsonSerializable.class)
+            .build();
+
+    public static final ClassType JSON_WRITER = new ClassType.Builder(false)
+            .knownClass(com.azure.json.JsonWriter.class)
+            .build();
+
+    public static final ClassType JSON_READER = new ClassType.Builder(false)
+            .knownClass(com.azure.json.JsonReader.class)
+            .build();
+
+    public static final ClassType JSON_TOKEN = new ClassType.Builder(false)
+            .knownClass(com.azure.json.JsonToken.class)
+            .build();
+
     private final String fullName;
     private final String packageName;
     private final String name;

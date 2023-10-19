@@ -15,7 +15,6 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
-import com.azure.core.http.rest.Response;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Flux;

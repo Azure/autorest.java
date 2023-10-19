@@ -5,7 +5,6 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
-import java.util.Objects;
 import java.util.Set;
 
 public class Annotation {
@@ -56,6 +55,14 @@ public class Annotation {
 
     public static final Annotation RETURN_TYPE = new Annotation.Builder()
             .knownClass(com.azure.core.annotation.ReturnType.class)
+            .build();
+
+    public static final Annotation IMMUTABLE = new Annotation.Builder()
+            .knownClass(com.azure.core.annotation.Immutable.class)
+            .build();
+
+    public static final Annotation FLUENT = new Annotation.Builder()
+            .knownClass(com.azure.core.annotation.Fluent.class)
             .build();
 
     private final String fullName;
