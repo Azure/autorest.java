@@ -16,7 +16,7 @@ public class SingleContentTypeUploadImageForSingleContentType {
                         .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT"))
                         .buildClient();
         // BEGIN:com.cadl.multicontenttypes.generated.uploadimageforsinglecontenttype.singlecontenttypeuploadimageforsinglecontenttype
-        multiContentTypesClient.uploadImageForSingleContentType(BinaryData.fromObject("{}"));
+        multiContentTypesClient.uploadImageForSingleContentType(BinaryData.fromBytes("{}".getBytes()));
         // END:com.cadl.multicontenttypes.generated.uploadimageforsinglecontenttype.singlecontenttypeuploadimageforsinglecontenttype
     }
 }
