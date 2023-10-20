@@ -64,7 +64,7 @@ public class Project {
         AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.7"),
         AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.9"),
         AZURE_CORE_TEST("com.azure", "azure-core-test", "1.21.1"),
-        AZURE_IDENTITY("com.azure", "azure-identity", "1.10.3"),
+        AZURE_IDENTITY("com.azure", "azure-identity", "1.10.4"),
         AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.45"),
 
         // external
