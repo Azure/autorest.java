@@ -12,9 +12,10 @@ import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.clientmodel.examplemodel.BinaryDataNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ClientModelNode;
-import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ListNode;
 import com.azure.autorest.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.model.clientmodel.examplemodel.MapNode;
@@ -24,6 +25,7 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.TemplateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -142,6 +144,9 @@ public class ModelExampleWriter {
                     String childGetterCode = getterCode + String.format(".%s()", modelProperty.getGetterName());
                     accept(childNode, childGetterCode);
                 }
+            } else if (node instanceof BinaryDataNode) {
+                this.imports.add(com.azure.core.util.BinaryData.class.getName());
+                addEqualsAssertion(binaryDataNodeExpression((BinaryDataNode) node), getterCode);
             }
         }
 
@@ -309,9 +314,15 @@ public class ModelExampleWriter {
                     }
                 }
                 return builder.toString();
+            } else if (node instanceof BinaryDataNode) {
+                this.imports.add(com.azure.core.util.BinaryData.class.getName());
+                return binaryDataNodeExpression((BinaryDataNode) node);
             }
             return null;
         }
     }
 
+    private static String binaryDataNodeExpression(BinaryDataNode binaryDataNode) {
+        return String.format("BinaryData.fromBytes(\"%s\".getBytes())", TemplateUtil.escapeString(binaryDataNode.getExampleValue()));
+    }
 }

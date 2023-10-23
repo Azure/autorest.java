@@ -2,7 +2,7 @@
   "operationId": "SingleContentType_UploadImageForSingleContentType",
   "title": "SingleContentType UploadImageForSingleContentType",
   "parameters": {
-    "data": {}
+    "data": "\"D:\\Program Files\""
   },
   "responses": {
     "200": {},

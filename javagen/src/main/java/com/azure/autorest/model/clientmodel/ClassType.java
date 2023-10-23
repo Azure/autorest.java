@@ -6,6 +6,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.MatchConditions;
 import com.azure.core.http.RequestConditions;
@@ -74,7 +75,7 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType String = new Builder(false).knownClass(String.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> "\"" + escapeString(defaultValueExpression) + "\"")
+        .defaultValueExpressionConverter(defaultValueExpression -> "\"" + TemplateUtil.escapeString(defaultValueExpression) + "\"")
         .jsonDeserializationMethod("getString()")
         .serializationMethodBase("writeString")
         .xmlElementDeserializationMethod("getStringElement()")
@@ -758,51 +759,6 @@ public class ClassType implements IType {
                 jsonDeserializationMethod, xmlAttributeDeserializationTemplate, xmlElementDeserializationMethod,
                 usedInXml);
         }
-    }
-
-    private static final String[] ESCAPE_REPLACEMENT;
-
-    static {
-        ESCAPE_REPLACEMENT = new String[256];
-        ESCAPE_REPLACEMENT['\\'] = "\\\\";
-        ESCAPE_REPLACEMENT['\t'] = "\\t";
-        ESCAPE_REPLACEMENT['\b'] = "\\b";
-        ESCAPE_REPLACEMENT['\n'] = "\\n";
-        ESCAPE_REPLACEMENT['\r'] = "\\r";
-        ESCAPE_REPLACEMENT['\f'] = "\\f";
-        ESCAPE_REPLACEMENT['\"'] = "\\\"";
-    }
-
-    private static String escapeString(String str) {
-        StringBuilder builder = null;
-
-        int last = 0;
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            String replacement = c < 256 ? ESCAPE_REPLACEMENT[c] : null;
-
-            if (replacement == null) {
-                continue;
-            }
-
-            if (builder == null) {
-                builder = new StringBuilder(str.length() * 2);
-            }
-
-            if (last != i) {
-                builder.append(str, last, i);
-            }
-
-            builder.append(replacement);
-            last = i + 1;
-        }
-
-        if (builder == null) {
-            return str;
-        }
-
-        builder.append(str, last, str.length());
-        return builder.toString();
     }
 
     static String xmlSerializationCallHelper(String xmlWriterName, String serializationMethodName,
