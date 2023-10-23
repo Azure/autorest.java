@@ -178,7 +178,7 @@ public class FluentGen extends Javagen {
         return codeModel;
     }
 
-    Client handleMap(CodeModel codeModel) {
+    protected Client handleMap(CodeModel codeModel) {
         JavaSettings settings = JavaSettings.getInstance();
         FluentStatic.setFluentJavaSettings(getFluentJavaSettings());
 
@@ -201,7 +201,7 @@ public class FluentGen extends Javagen {
         return client;
     }
 
-    FluentJavaPackage handleTemplate(Client client) {
+    protected FluentJavaPackage handleTemplate(Client client) {
         JavaSettings javaSettings = JavaSettings.getInstance();
 
         logger.info("Java template for client model");
@@ -300,7 +300,7 @@ public class FluentGen extends Javagen {
         return javaPackage;
     }
 
-    FluentClient handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {
+    protected FluentClient handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {
         FluentJavaSettings fluentJavaSettings = this.getFluentJavaSettings();
         JavaSettings javaSettings = JavaSettings.getInstance();
 
@@ -395,7 +395,7 @@ public class FluentGen extends Javagen {
         fluentPremiumExamples = null;
     }
 
-    private FluentJavaSettings getFluentJavaSettings() {
+    protected FluentJavaSettings getFluentJavaSettings() {
         if (fluentJavaSettings == null) {
             fluentJavaSettings = new FluentJavaSettings(this);
         }

@@ -18,6 +18,7 @@ import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.core.util.CoreUtils;
 import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
+import com.azure.typespec.util.FileUtil;
 import com.azure.typespec.util.ModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,16 +81,7 @@ public class TypeSpecPlugin extends Javagen {
 
     @Override
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
-        File outputFile = Paths.get(emitterOptions.getOutputDir(), fileName).toAbsolutePath().toFile();
-        File parentFile = outputFile.getParentFile();
-        if (!parentFile.exists()) {
-            parentFile.mkdirs();
-        }
-        try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(outputFile.toPath()), StandardCharsets.UTF_8)) {
-            writer.write(content);
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
+        File outputFile = FileUtil.writeToFile(emitterOptions.getOutputDir(), fileName, content);
         LOGGER.info("Write file: {}", outputFile.getAbsolutePath());
     }
 

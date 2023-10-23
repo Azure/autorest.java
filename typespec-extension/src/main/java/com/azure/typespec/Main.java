@@ -8,7 +8,10 @@ import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.TypeSpecFluentPlugin;
+import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.Configuration;
@@ -27,6 +30,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.inspector.TrustedTagInspector;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -37,6 +41,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -89,8 +95,23 @@ public class Main {
     }
 
     private static void handleFluent(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
-        // TODO
-        throw new UnsupportedOperationException("method [handleFluent] not implemented in class [com.azure.typespec.Main]");
+        // initialize plugin
+        TypeSpecFluentPlugin fluentPlugin = new TypeSpecFluentPlugin(emitterOptions, sdkIntegration);
+
+        // client
+        Client client = fluentPlugin.processClient(codeModel);
+
+        // template
+        FluentJavaPackage javaPackage = fluentPlugin.processTemplates(codeModel, client);
+
+        // write
+        formatAndWriteFiles(outputDir, new BiConsumer<String, String>() {
+            @Override
+            public void accept(String filePath, String content) {
+                // TODO (xiaofeicao, 2023-10-23 5:24 PM)
+                throw new UnsupportedOperationException("method [accept] not implemented in class []");
+            }
+        }, javaPackage, javaPackage.getJavaFiles().stream().collect(Collectors.toMap(JavaFile::getFilePath, javaFile -> javaFile.getContents().toString())));
     }
 
     private static void handleDPG(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
@@ -121,6 +142,17 @@ public class Main {
         // handle customization
         javaFiles.putAll(typeSpecPlugin.customizeGeneratedCode(javaFiles, outputDir));
 
+        formatAndWriteFiles(emitterOptions.getOutputDir(), (filePath, content) -> typeSpecPlugin.writeFile(filePath, content, null), javaPackage, javaFiles);
+        // resources
+        String artifactId = ClientModelUtil.getArtifactId();
+        if (!CoreUtils.isNullOrEmpty(artifactId)) {
+            typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
+                    "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
+        }
+        System.exit(0);
+    }
+
+    private static void formatAndWriteFiles(String outputDir, BiConsumer<String, String> fileWriter, JavaPackage javaPackage, Map<String, String> javaFiles) {
         // format
         Formatter formatter = new Formatter();
 
@@ -132,7 +164,7 @@ public class Main {
             try {
                 formattedSource = formatter.formatSourceAndFixImports(fileContent);
             } catch (Exception e) {
-                LOGGER.error("Failed to format file: {}", emitterOptions.getOutputDir() + filePath, e);
+                LOGGER.error("Failed to format file: {}", outputDir + filePath, e);
                 // but we continue so user can still check the file and see why format fails
             }
             formattedFiles.put(filePath, formattedSource);
@@ -140,19 +172,12 @@ public class Main {
 
         // write output
         // java files
-        formattedFiles.forEach((filePath, formattedSource) -> typeSpecPlugin.writeFile(filePath, formattedSource, null));
+        formattedFiles.forEach(fileWriter);
 
         // XML include POM
-        javaPackage.getXmlFiles().forEach(xmlFile -> typeSpecPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
+        javaPackage.getXmlFiles().forEach(xmlFile -> fileWriter.accept(xmlFile.getFilePath(), xmlFile.getContents().toString()));
         // Others
-        javaPackage.getTextFiles().forEach(textFile -> typeSpecPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
-        // resources
-        String artifactId = ClientModelUtil.getArtifactId();
-        if (!CoreUtils.isNullOrEmpty(artifactId)) {
-            typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
-                    "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
-        }
-        System.exit(0);
+        javaPackage.getTextFiles().forEach(textFile -> fileWriter.accept(textFile.getFilePath(), textFile.getContents()));
     }
 
     private static EmitterOptions loadEmitterOptions(CodeModel codeModel) {
