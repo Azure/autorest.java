@@ -14,6 +14,7 @@ public final class SingleContentTypeUploadImageForSingleContentTypeTests extends
     @Disabled
     public void testSingleContentTypeUploadImageForSingleContentTypeTests() {
         // method invocation
-        multiContentTypesClient.uploadImageForSingleContentType(BinaryData.fromBytes("{}".getBytes()));
+        multiContentTypesClient.uploadImageForSingleContentType(
+                BinaryData.fromBytes("\"D:\\Program Files\"".getBytes()));
     }
 }
