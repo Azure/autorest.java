@@ -25,6 +25,7 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.TemplateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -322,6 +323,6 @@ public class ModelExampleWriter {
     }
 
     private static String binaryDataNodeExpression(BinaryDataNode binaryDataNode) {
-        return String.format("BinaryData.fromBytes(\"%s\".getBytes())", binaryDataNode.getExampleValue());
+        return String.format("BinaryData.fromBytes(\"%s\".getBytes())", TemplateUtil.escapeString(binaryDataNode.getExampleValue()));
     }
 }
