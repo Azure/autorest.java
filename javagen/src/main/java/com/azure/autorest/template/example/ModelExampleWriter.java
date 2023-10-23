@@ -144,10 +144,6 @@ public class ModelExampleWriter {
                     String childGetterCode = getterCode + String.format(".%s()", modelProperty.getGetterName());
                     accept(childNode, childGetterCode);
                 }
-            } else if (node instanceof BinaryDataNode) {
-                this.imports.add(com.azure.core.util.BinaryData.class.getName());
-                this.imports.add(java.nio.charset.StandardCharsets.class.getName());
-                addEqualsAssertion(binaryDataNodeExpression((BinaryDataNode) node), getterCode);
             }
         }
 
