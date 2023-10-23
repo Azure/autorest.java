@@ -108,8 +108,8 @@ public class Annotation {
 
             if (!JavaSettings.getInstance().isBranding()) {
                 this.packageName(clazz.getPackage().getName()
-                        .replace("com.azure.core", "com.generic.core")
-                        .replace("com.azure.json", "com.generic.json"));
+                        .replace(ExternalPackage.AZURE_CORE_PACKAGE_NAME, ExternalPackage.GENERIC_CORE_PACKAGE_NAME)
+                        .replace(ExternalPackage.AZURE_JSON_PACKAGE_NAME, ExternalPackage.GENERIC_JSON_PACKAGE_NAME));
             }
 
             return this;

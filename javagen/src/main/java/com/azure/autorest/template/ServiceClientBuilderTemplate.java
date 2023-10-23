@@ -33,8 +33,6 @@ import com.azure.core.http.policy.AddHeadersPolicy;
 import com.azure.core.http.policy.AzureKeyCredentialPolicy;
 import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLoggingPolicy;
-import com.azure.core.http.policy.HttpPipelinePolicy;
-import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.KeyCredentialPolicy;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.util.CoreUtils;
@@ -467,8 +465,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add(AzureKeyCredentialPolicy.class.getName());
         imports.add(KeyCredentialPolicy.class.getName());
 
-        imports.add(HttpPolicyProviders.class.getName());
-        imports.add(HttpPipelinePolicy.class.getName());
+        ClassType.HTTP_POLICY_PROVIDERS.addImportsTo(imports, false);
+        ClassType.HttpPipelinePolicy.addImportsTo(imports, false);
         imports.add(HttpLoggingPolicy.class.getName());
         imports.add(AddHeadersPolicy.class.getName());
         imports.add(RequestIdPolicy.class.getName());
@@ -517,7 +515,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             function.line("policies.add(new AddHeadersFromContextPolicy());");
 
             // clientOptions header
-            function.line("HttpHeaders headers = new HttpHeaders();");
+            function.line(String.format("%1$s headers = new %1$s();", ClassType.HttpHeaders.getName()));
             function.line(String.format("%s.getHeaders().forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));", localClientOptionsName));
             function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
 

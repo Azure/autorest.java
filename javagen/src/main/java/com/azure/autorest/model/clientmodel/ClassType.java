@@ -418,6 +418,10 @@ public class ClassType implements IType {
             .knownClass(com.azure.json.JsonToken.class)
             .build();
 
+    public static final ClassType HTTP_POLICY_PROVIDERS = new ClassType.Builder(false)
+            .knownClass(com.azure.core.http.policy.HttpPolicyProviders.class)
+            .build();
+
     private final String fullName;
     private final String packageName;
     private final String name;
@@ -739,14 +743,34 @@ public class ClassType implements IType {
                         || Objects.equals(clazz, com.azure.core.util.BinaryData.class)
                         || Objects.equals(clazz, com.azure.core.util.ClientOptions.class)) {
                     this.packageName("com.generic.core.models");
+                } else if (Objects.equals(clazz, com.azure.core.http.HttpHeaders.class)
+                        || Objects.equals(clazz, com.azure.core.http.HttpHeader.class)) {
+                    this.packageName("com.generic.core.models");
+                    // HttpHeaders -> Headers
+                    this.name(clazz.getSimpleName().replace("Http", ""));
                 } else if (Objects.equals(clazz, com.azure.core.util.Configuration.class)) {
                     this.packageName("com.generic.core.util.configuration");
                 } else if (Objects.equals(clazz, com.azure.core.http.policy.RetryOptions.class)) {
                     this.packageName("com.generic.core.http.policy.retry");
+                } else if (Objects.equals(clazz, com.azure.core.http.rest.RequestOptions.class)
+                        || Objects.equals(clazz, com.azure.core.http.HttpHeaderName.class)) {
+                    this.packageName("com.generic.core.http.models");
+                } else if (Objects.equals(clazz, com.azure.core.http.rest.Response.class)
+                        || Objects.equals(clazz, com.azure.core.http.rest.SimpleResponse.class)
+                        || Objects.equals(clazz, com.azure.core.http.rest.RestProxy.class)) {
+                    this.packageName("com.generic.core.http");
+                } else if (Objects.equals(clazz, com.azure.core.http.HttpClient.class)) {
+                    this.packageName("com.generic.core.http.client");
+                } else if (Objects.equals(clazz, com.azure.core.http.HttpPipeline.class)
+                        || Objects.equals(clazz, com.azure.core.http.HttpPipelineBuilder.class)) {
+                    this.packageName("com.generic.core.http.pipeline");
+                } else if (Objects.equals(clazz, com.azure.core.http.policy.HttpLogOptions.class)
+                        || Objects.equals(clazz, com.azure.core.http.policy.HttpLoggingPolicy.class)) {
+                    this.packageName("com.generic.core.http.policy.logging");
                 } else {
                     this.packageName(clazz.getPackage().getName()
-                            .replace("com.azure.core", "com.generic.core")
-                            .replace("com.azure.json", "com.generic.json"));
+                            .replace(ExternalPackage.AZURE_CORE_PACKAGE_NAME, ExternalPackage.GENERIC_CORE_PACKAGE_NAME)
+                            .replace(ExternalPackage.AZURE_JSON_PACKAGE_NAME, ExternalPackage.GENERIC_JSON_PACKAGE_NAME));
                 }
             }
 

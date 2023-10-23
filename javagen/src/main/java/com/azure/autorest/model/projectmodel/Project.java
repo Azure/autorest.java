@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ExternalPackage;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
@@ -40,7 +41,7 @@ public class Project {
 
     private static final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), Project.class);
 
-    public static final String AZURE_GROUP_ID = "com.azure";
+    public static final String AZURE_GROUP_ID = ExternalPackage.CORE.getGroupId();
 
     protected String serviceName;
     protected String serviceDescription;

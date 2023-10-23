@@ -170,7 +170,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
   }
 
   protected void addServiceClientAnnotationImport(Set<String> imports) {
-    imports.add("com.azure.core.annotation.ServiceClient");
+    Annotation.SERVICE_CLIENT.addImportsTo(imports);
     Annotation.GENERATED.addImportsTo(imports);
   }
 

@@ -6,6 +6,7 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,10 +35,13 @@ public class GenericType implements IType {
      */
     public GenericType(String packageKeyword, String name, IType... typeArguments) {
         if (!JavaSettings.getInstance().isBranding()) {
-            packageKeyword = packageKeyword
-                    .replace("com.azure.core", "com.generic.core")
-                    .replace("com.azure.json", "com.generic.json");
-
+            if (Objects.equals(packageKeyword + "." + name, com.azure.core.http.rest.Response.class.getName())) {
+                packageKeyword = "com.generic.core.http";
+            } else {
+                packageKeyword = packageKeyword
+                        .replace(ExternalPackage.AZURE_CORE_PACKAGE_NAME, ExternalPackage.GENERIC_CORE_PACKAGE_NAME)
+                        .replace(ExternalPackage.AZURE_JSON_PACKAGE_NAME, ExternalPackage.GENERIC_JSON_PACKAGE_NAME);
+            }
         }
 
         this.name = name;
