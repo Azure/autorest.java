@@ -146,6 +146,7 @@ public class ModelExampleWriter {
                 }
             } else if (node instanceof BinaryDataNode) {
                 this.imports.add(com.azure.core.util.BinaryData.class.getName());
+                this.imports.add(java.nio.charset.StandardCharsets.class.getName());
                 addEqualsAssertion(binaryDataNodeExpression((BinaryDataNode) node), getterCode);
             }
         }
@@ -316,6 +317,7 @@ public class ModelExampleWriter {
                 return builder.toString();
             } else if (node instanceof BinaryDataNode) {
                 this.imports.add(com.azure.core.util.BinaryData.class.getName());
+                this.imports.add(java.nio.charset.StandardCharsets.class.getName());
                 return binaryDataNodeExpression((BinaryDataNode) node);
             }
             return null;
@@ -323,6 +325,6 @@ public class ModelExampleWriter {
     }
 
     private static String binaryDataNodeExpression(BinaryDataNode binaryDataNode) {
-        return String.format("BinaryData.fromBytes(\"%s\".getBytes())", TemplateUtil.escapeString(binaryDataNode.getExampleValue()));
+        return String.format("BinaryData.fromBytes(\"%s\".getBytes(StandardCharsets.UTF_8))", TemplateUtil.escapeString(binaryDataNode.getExampleValue()));
     }
 }

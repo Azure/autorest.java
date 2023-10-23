@@ -28,7 +28,7 @@
   <dependencies>
     <dependency>
       <groupId>com.azure.tools</groupId>
-      <artifactId>azure-autorest-javagen</artifactId>
+      <artifactId>azure-autorest-fluentgen</artifactId>
       <version>1.0.0-beta.1</version>
       <exclusions>
         <exclusion>
@@ -51,17 +51,6 @@
     <dependency>
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-partial-update</artifactId>
-      <version>1.0.0-beta.1</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-nop</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.azure.tools</groupId>
-      <artifactId>azure-autorest-preprocessor</artifactId>
       <version>1.0.0-beta.1</version>
       <exclusions>
         <exclusion>
