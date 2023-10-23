@@ -8,6 +8,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.Configuration;
 import com.cadl.multicontenttypes.MultiContentTypesClient;
 import com.cadl.multicontenttypes.MultiContentTypesClientBuilder;
+import java.nio.charset.StandardCharsets;
 
 public class SingleContentTypeUploadImageForSingleContentType {
     public static void main(String[] args) {
@@ -17,7 +18,7 @@ public class SingleContentTypeUploadImageForSingleContentType {
                         .buildClient();
         // BEGIN:com.cadl.multicontenttypes.generated.uploadimageforsinglecontenttype.singlecontenttypeuploadimageforsinglecontenttype
         multiContentTypesClient.uploadImageForSingleContentType(
-                BinaryData.fromBytes("\"D:\\Program Files\"".getBytes()));
+                BinaryData.fromBytes("\"D:\\Program Files\"".getBytes(StandardCharsets.UTF_8)));
         // END:com.cadl.multicontenttypes.generated.uploadimageforsinglecontenttype.singlecontenttypeuploadimageforsinglecontenttype
     }
 }
