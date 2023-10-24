@@ -109,11 +109,16 @@ export function isNullableType(type: Type): boolean {
 export function isSameLiteralTypes(variants: UnionVariant[]): boolean {
   const kindSet = new Set(variants.map((it) => it.type.kind));
   if (kindSet.size === 1) {
+    // Union of same literals
     const kind = kindSet.values().next().value;
     return kind === "String" || kind === "Number" || kind === "Boolean";
   } else {
-    return false;
+    if (kindSet.size === 2 && kindSet.has("String") && kindSet.has("Scalar")) {
+      // Union of string liberals and string scalar, treat as extensible enum
+      return variants.filter((it) => it.type.kind === "Scalar").every((it) => (it.type as Scalar).name === "string");
+    }
   }
+  return false;
 }
 
 export function getDurationFormat(encode: EncodeData): DurationSchema["format"] {

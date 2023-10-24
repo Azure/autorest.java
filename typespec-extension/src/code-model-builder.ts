@@ -1793,6 +1793,9 @@ export class CodeModelBuilder {
   }
 
   private processChoiceSchemaForUnion(type: Union, variants: UnionVariant[], name: string): ChoiceSchema {
+    variants = variants.filter(
+      (it) => it.type.kind === "String" || it.type.kind === "Number" || it.type.kind === "Boolean",
+    );
     const kind = variants[0].type.kind;
     const valueType =
       kind === "String" ? this.stringSchema : kind === "Boolean" ? this.booleanSchema : this.integerSchema;
