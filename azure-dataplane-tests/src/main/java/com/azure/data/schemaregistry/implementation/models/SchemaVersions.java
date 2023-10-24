@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Object received from the registry containing the list of schema versions and link to next batch page. */
+/**
+ * Object received from the registry containing the list of schema versions and link to next batch page.
+ */
 @Fluent
 public final class SchemaVersions {
     /*
@@ -23,12 +25,14 @@ public final class SchemaVersions {
     @JsonProperty(value = "nextLink")
     private String nextLink;
 
-    /** Creates an instance of SchemaVersions class. */
+    /**
+     * Creates an instance of SchemaVersions class.
+     */
     public SchemaVersions() {}
 
     /**
      * Get the versions property: Array of schema version integers.
-     *
+     * 
      * @return the versions value.
      */
     public List<Integer> getVersions() {
@@ -37,7 +41,7 @@ public final class SchemaVersions {
 
     /**
      * Set the versions property: Array of schema version integers.
-     *
+     * 
      * @param versions the versions value to set.
      * @return the SchemaVersions object itself.
      */
@@ -48,7 +52,7 @@ public final class SchemaVersions {
 
     /**
      * Get the nextLink property: URl to next batch of schema versions.
-     *
+     * 
      * @return the nextLink value.
      */
     public String getNextLink() {
@@ -57,7 +61,7 @@ public final class SchemaVersions {
 
     /**
      * Set the nextLink property: URl to next batch of schema versions.
-     *
+     * 
      * @param nextLink the nextLink value to set.
      * @return the SchemaVersions object itself.
      */

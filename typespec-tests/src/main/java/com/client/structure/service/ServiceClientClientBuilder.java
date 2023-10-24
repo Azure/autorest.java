@@ -18,10 +18,13 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.AzureKeyCredentialPolicy;
+import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
+import com.azure.core.http.policy.KeyCredentialPolicy;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryOptions;
 import com.azure.core.http.policy.RetryPolicy;
@@ -32,29 +35,35 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
 import com.client.structure.service.implementation.ServiceClientClientImpl;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the ServiceClientClient type. */
+/**
+ * A builder for creating a new instance of the ServiceClientClient type.
+ */
 @ServiceClientBuilder(serviceClients = {ServiceClientClient.class, ServiceClientAsyncClient.class})
-public final class ServiceClientClientBuilder
-        implements HttpTrait<ServiceClientClientBuilder>,
-                ConfigurationTrait<ServiceClientClientBuilder>,
-                EndpointTrait<ServiceClientClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
-
-    @Generated private static final String SDK_VERSION = "version";
+public final class ServiceClientClientBuilder implements HttpTrait<ServiceClientClientBuilder>, ConfigurationTrait<ServiceClientClientBuilder>, EndpointTrait<ServiceClientClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
     @Generated
-    private static final Map<String, String> PROPERTIES =
-            CoreUtils.getProperties("client-structure-service.properties");
+    private static final String SDK_VERSION = "version";
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("client-structure-service.properties");
 
-    /** Create an instance of the ServiceClientClientBuilder. */
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
+
+    /**
+     * Create an instance of the ServiceClientClientBuilder.
+     */
     @Generated
     public ServiceClientClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -63,9 +72,12 @@ public final class ServiceClientClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ServiceClientClientBuilder pipeline(HttpPipeline pipeline) {
@@ -79,9 +91,12 @@ public final class ServiceClientClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ServiceClientClientBuilder httpClient(HttpClient httpClient) {
@@ -92,9 +107,12 @@ public final class ServiceClientClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ServiceClientClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -105,9 +123,12 @@ public final class ServiceClientClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ServiceClientClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -118,9 +139,12 @@ public final class ServiceClientClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ServiceClientClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -128,7 +152,9 @@ public final class ServiceClientClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ServiceClientClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -140,9 +166,12 @@ public final class ServiceClientClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ServiceClientClientBuilder configuration(Configuration configuration) {
@@ -153,9 +182,12 @@ public final class ServiceClientClientBuilder
     /*
      * The service endpoint
      */
-    @Generated private String endpoint;
+    @Generated
+    private String endpoint;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ServiceClientClientBuilder endpoint(String endpoint) {
@@ -166,11 +198,12 @@ public final class ServiceClientClientBuilder
     /*
      * Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    @Generated private String client;
+    @Generated
+    private String client;
 
     /**
      * Sets Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
-     *
+     * 
      * @param client the client value.
      * @return the ServiceClientClientBuilder.
      */
@@ -183,11 +216,12 @@ public final class ServiceClientClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the ServiceClientClientBuilder.
      */
@@ -199,22 +233,19 @@ public final class ServiceClientClientBuilder
 
     /**
      * Builds an instance of ServiceClientClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of ServiceClientClientImpl.
      */
     @Generated
     private ServiceClientClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ServiceClientClientImpl client =
-                new ServiceClientClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
+        ServiceClientClientImpl client = new ServiceClientClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -225,35 +256,24 @@ public final class ServiceClientClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders().forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL).forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY).forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0])).httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of ServiceClientAsyncClient class.
-     *
+     * 
      * @return an instance of ServiceClientAsyncClient.
      */
     @Generated
@@ -263,7 +283,7 @@ public final class ServiceClientClientBuilder
 
     /**
      * Builds an instance of ServiceClientClient class.
-     *
+     * 
      * @return an instance of ServiceClientClient.
      */
     @Generated

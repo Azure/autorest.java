@@ -9,26 +9,35 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for TypeModel. */
+/**
+ * Defines values for TypeModel.
+ */
 public final class TypeModel extends ExpandableStringEnum<TypeModel> {
-    /** Static value Type1 for TypeModel. */
-    @Generated public static final TypeModel TYPE1 = fromString("Type1");
+    /**
+     * Static value Type1 for TypeModel.
+     */
+    @Generated
+    public static final TypeModel TYPE1 = fromString("Type1");
 
-    /** Static value Type2 for TypeModel. */
-    @Generated public static final TypeModel TYPE2 = fromString("Type2");
+    /**
+     * Static value Type2 for TypeModel.
+     */
+    @Generated
+    public static final TypeModel TYPE2 = fromString("Type2");
 
     /**
      * Creates a new instance of TypeModel value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public TypeModel() {}
+    public TypeModel() {
+    }
 
     /**
      * Creates or finds a TypeModel from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding TypeModel.
      */
@@ -40,7 +49,7 @@ public final class TypeModel extends ExpandableStringEnum<TypeModel> {
 
     /**
      * Gets known TypeModel values.
-     *
+     * 
      * @return known TypeModel values.
      */
     @Generated

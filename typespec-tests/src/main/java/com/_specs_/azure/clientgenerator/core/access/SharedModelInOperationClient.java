@@ -6,44 +6,69 @@ package com._specs_.azure.clientgenerator.core.access;
 
 import com._specs_.azure.clientgenerator.core.access.implementation.SharedModelInOperationsImpl;
 import com._specs_.azure.clientgenerator.core.access.models.SharedModel;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the synchronous AccessClient type. */
+/**
+ * Initializes a new instance of the synchronous AccessClient type.
+ */
 @ServiceClient(builder = AccessClientBuilder.class)
 public final class SharedModelInOperationClient {
-    @Generated private final SharedModelInOperationsImpl serviceClient;
+    @Generated
+    private final SharedModelInOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of SharedModelInOperationClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    SharedModelInOperationClient(SharedModelInOperationsImpl serviceClient) {
+     SharedModelInOperationClient(SharedModelInOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The publicMethod operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -60,15 +85,13 @@ public final class SharedModelInOperationClient {
 
     /**
      * The internal operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -79,13 +102,13 @@ public final class SharedModelInOperationClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<BinaryData> internalWithResponse(String name, RequestOptions requestOptions) {
+     Response<BinaryData> internalWithResponse(String name, RequestOptions requestOptions) {
         return this.serviceClient.internalWithResponse(name, requestOptions);
     }
 
     /**
      * The publicMethod operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -105,7 +128,7 @@ public final class SharedModelInOperationClient {
 
     /**
      * The internal operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -117,7 +140,7 @@ public final class SharedModelInOperationClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SharedModel internal(String name) {
+     SharedModel internal(String name) {
         // Generated convenience method for internalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return internalWithResponse(name, requestOptions).getValue().toObject(SharedModel.class);

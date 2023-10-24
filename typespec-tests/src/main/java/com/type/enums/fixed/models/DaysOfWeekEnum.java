@@ -4,33 +4,52 @@
 
 package com.type.enums.fixed.models;
 
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Days of the week. */
+/**
+ * Days of the week.
+ */
 public enum DaysOfWeekEnum {
-    /** Monday. */
+    /**
+     * Monday.
+     */
     MONDAY("Monday"),
 
-    /** Tuesday. */
+    /**
+     * Tuesday.
+     */
     TUESDAY("Tuesday"),
 
-    /** Wednesday. */
+    /**
+     * Wednesday.
+     */
     WEDNESDAY("Wednesday"),
 
-    /** Thursday. */
+    /**
+     * Thursday.
+     */
     THURSDAY("Thursday"),
 
-    /** Friday. */
+    /**
+     * Friday.
+     */
     FRIDAY("Friday"),
 
-    /** Saturday. */
+    /**
+     * Saturday.
+     */
     SATURDAY("Saturday"),
 
-    /** Sunday. */
+    /**
+     * Sunday.
+     */
     SUNDAY("Sunday");
 
-    /** The actual serialized value for a DaysOfWeekEnum instance. */
+    /**
+     * The actual serialized value for a DaysOfWeekEnum instance.
+     */
     private final String value;
 
     DaysOfWeekEnum(String value) {
@@ -39,7 +58,7 @@ public enum DaysOfWeekEnum {
 
     /**
      * Parses a serialized value to a DaysOfWeekEnum instance.
-     *
+     * 
      * @param value the serialized value to parse.
      * @return the parsed DaysOfWeekEnum object, or null if unable to parse.
      */
@@ -57,7 +76,9 @@ public enum DaysOfWeekEnum {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @JsonValue
     @Override
     public String toString() {

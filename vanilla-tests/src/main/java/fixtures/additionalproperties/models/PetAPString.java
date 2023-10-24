@@ -12,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
 import java.util.Map;
 
-/** The PetAPString model. */
+/**
+ * The PetAPString model.
+ */
 @Fluent
 public final class PetAPString {
     /*
@@ -36,14 +38,17 @@ public final class PetAPString {
     /*
      * Dictionary of <string>
      */
-    @JsonIgnore private Map<String, String> additionalProperties;
+    @JsonIgnore
+    private Map<String, String> additionalProperties;
 
-    /** Creates an instance of PetAPString class. */
+    /**
+     * Creates an instance of PetAPString class.
+     */
     public PetAPString() {}
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     public int getId() {
@@ -52,7 +57,7 @@ public final class PetAPString {
 
     /**
      * Set the id property: The id property.
-     *
+     * 
      * @param id the id value to set.
      * @return the PetAPString object itself.
      */
@@ -63,7 +68,7 @@ public final class PetAPString {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -72,7 +77,7 @@ public final class PetAPString {
 
     /**
      * Set the name property: The name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the PetAPString object itself.
      */
@@ -83,7 +88,7 @@ public final class PetAPString {
 
     /**
      * Get the status property: The status property.
-     *
+     * 
      * @return the status value.
      */
     public Boolean isStatus() {
@@ -92,7 +97,7 @@ public final class PetAPString {
 
     /**
      * Get the additionalProperties property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @return the additionalProperties value.
      */
     @JsonAnyGetter
@@ -102,7 +107,7 @@ public final class PetAPString {
 
     /**
      * Set the additionalProperties property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the PetAPString object itself.
      */
@@ -121,7 +126,7 @@ public final class PetAPString {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

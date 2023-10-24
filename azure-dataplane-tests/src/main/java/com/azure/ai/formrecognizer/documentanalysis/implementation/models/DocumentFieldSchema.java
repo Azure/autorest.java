@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-/** Description of the field semantic schema using a JSON Schema style syntax. */
+/**
+ * Description of the field semantic schema using a JSON Schema style syntax.
+ */
 @Fluent
 public final class DocumentFieldSchema {
     /*
@@ -41,12 +43,14 @@ public final class DocumentFieldSchema {
     @JsonProperty(value = "properties")
     private Map<String, DocumentFieldSchema> properties;
 
-    /** Creates an instance of DocumentFieldSchema class. */
+    /**
+     * Creates an instance of DocumentFieldSchema class.
+     */
     public DocumentFieldSchema() {}
 
     /**
      * Get the type property: Semantic data type of the field value.
-     *
+     * 
      * @return the type value.
      */
     public DocumentFieldType getType() {
@@ -55,7 +59,7 @@ public final class DocumentFieldSchema {
 
     /**
      * Set the type property: Semantic data type of the field value.
-     *
+     * 
      * @param type the type value to set.
      * @return the DocumentFieldSchema object itself.
      */
@@ -66,7 +70,7 @@ public final class DocumentFieldSchema {
 
     /**
      * Get the description property: Field description.
-     *
+     * 
      * @return the description value.
      */
     public String getDescription() {
@@ -75,7 +79,7 @@ public final class DocumentFieldSchema {
 
     /**
      * Set the description property: Field description.
-     *
+     * 
      * @param description the description value to set.
      * @return the DocumentFieldSchema object itself.
      */
@@ -86,7 +90,7 @@ public final class DocumentFieldSchema {
 
     /**
      * Get the example property: Example field content.
-     *
+     * 
      * @return the example value.
      */
     public String getExample() {
@@ -95,7 +99,7 @@ public final class DocumentFieldSchema {
 
     /**
      * Set the example property: Example field content.
-     *
+     * 
      * @param example the example value to set.
      * @return the DocumentFieldSchema object itself.
      */
@@ -106,7 +110,7 @@ public final class DocumentFieldSchema {
 
     /**
      * Get the items property: Field type schema of each array element.
-     *
+     * 
      * @return the items value.
      */
     public DocumentFieldSchema getItems() {
@@ -115,7 +119,7 @@ public final class DocumentFieldSchema {
 
     /**
      * Set the items property: Field type schema of each array element.
-     *
+     * 
      * @param items the items value to set.
      * @return the DocumentFieldSchema object itself.
      */
@@ -126,7 +130,7 @@ public final class DocumentFieldSchema {
 
     /**
      * Get the properties property: Named sub-fields of the object field.
-     *
+     * 
      * @return the properties value.
      */
     public Map<String, DocumentFieldSchema> getProperties() {
@@ -135,7 +139,7 @@ public final class DocumentFieldSchema {
 
     /**
      * Set the properties property: Named sub-fields of the object field.
-     *
+     * 
      * @param properties the properties value to set.
      * @return the DocumentFieldSchema object itself.
      */

@@ -4,6 +4,7 @@
 
 package com.type.model.inheritance.enumdiscriminator.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,15 +12,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.regex.Pattern;
 
-/** Test fixed enum type for discriminator. */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "kind",
-        defaultImpl = Snake.class)
+/**
+ * Test fixed enum type for discriminator.
+ */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind", defaultImpl = Snake.class)
 @JsonTypeName("Snake")
-@JsonSubTypes({@JsonSubTypes.Type(name = "cobra", value = Cobra.class)})
+@JsonSubTypes({
+    @JsonSubTypes.Type(name = "cobra", value = Cobra.class)
+})
 @Immutable
 public class Snake {
     /*
@@ -31,7 +33,7 @@ public class Snake {
 
     /**
      * Creates an instance of Snake class.
-     *
+     * 
      * @param length the length value to set.
      */
     @Generated
@@ -42,7 +44,7 @@ public class Snake {
 
     /**
      * Get the length property: Length of the snake.
-     *
+     * 
      * @return the length value.
      */
     @Generated

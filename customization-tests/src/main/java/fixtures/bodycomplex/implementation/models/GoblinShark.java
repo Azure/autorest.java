@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-/** The Goblinshark model. */
+/**
+ * The Goblinshark model.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("goblin")
 @Fluent
@@ -28,12 +30,14 @@ public final class GoblinShark extends Shark {
     @JsonProperty(value = "color")
     private GoblinSharkColor color;
 
-    /** Creates an instance of Goblinshark class. */
+    /**
+     * Creates an instance of Goblinshark class.
+     */
     public GoblinShark() {}
 
     /**
      * Get the jawsize property: The jawsize property.
-     *
+     * 
      * @return the jawsize value.
      */
     public Integer getJawsize() {
@@ -42,7 +46,7 @@ public final class GoblinShark extends Shark {
 
     /**
      * Set the jawsize property: The jawsize property.
-     *
+     * 
      * @param jawsize the jawsize value to set.
      * @return the Goblinshark object itself.
      */
@@ -53,7 +57,7 @@ public final class GoblinShark extends Shark {
 
     /**
      * Get the color property: Colors possible.
-     *
+     * 
      * @return the color value.
      */
     public GoblinSharkColor getColor() {
@@ -62,7 +66,7 @@ public final class GoblinShark extends Shark {
 
     /**
      * Set the color property: Colors possible.
-     *
+     * 
      * @param color the color value to set.
      * @return the Goblinshark object itself.
      */
@@ -71,35 +75,45 @@ public final class GoblinShark extends Shark {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GoblinShark setAge(Integer age) {
         super.setAge(age);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GoblinShark setBirthday(OffsetDateTime birthday) {
         super.setBirthday(birthday);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GoblinShark setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GoblinShark setLength(float length) {
         super.setLength(length);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GoblinShark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);

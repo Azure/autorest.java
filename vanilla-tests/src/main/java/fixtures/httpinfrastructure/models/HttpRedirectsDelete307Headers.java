@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The HttpRedirectsDelete307Headers model. */
+/**
+ * The HttpRedirectsDelete307Headers model.
+ */
 @Fluent
 public final class HttpRedirectsDelete307Headers {
     /*
@@ -21,7 +23,7 @@ public final class HttpRedirectsDelete307Headers {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HttpRedirectsDelete307Headers class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HttpRedirectsDelete307Headers(HttpHeaders rawHeaders) {
@@ -30,7 +32,7 @@ public final class HttpRedirectsDelete307Headers {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -39,7 +41,7 @@ public final class HttpRedirectsDelete307Headers {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the HttpRedirectsDelete307Headers object itself.
      */
@@ -50,7 +52,7 @@ public final class HttpRedirectsDelete307Headers {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.HttpFailuresImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestServiceClient type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestServiceClient type.
+ */
 @ServiceClient(builder = HttpFailureClientBuilder.class, isAsync = true)
 public final class HttpFailureAsyncClient {
-    @Generated private final HttpFailuresImpl serviceClient;
+    @Generated
+    private final HttpFailuresImpl serviceClient;
 
     /**
      * Initializes an instance of HttpFailureAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,13 +38,13 @@ public final class HttpFailureAsyncClient {
 
     /**
      * Get empty error form server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -57,13 +60,13 @@ public final class HttpFailureAsyncClient {
 
     /**
      * Get empty error form server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -79,13 +82,13 @@ public final class HttpFailureAsyncClient {
 
     /**
      * Get empty response from server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

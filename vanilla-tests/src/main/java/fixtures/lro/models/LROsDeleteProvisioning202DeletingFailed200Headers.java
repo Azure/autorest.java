@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LROsDeleteProvisioning202DeletingFailed200Headers model. */
+/**
+ * The LROsDeleteProvisioning202DeletingFailed200Headers model.
+ */
 @Fluent
 public final class LROsDeleteProvisioning202DeletingFailed200Headers {
     /*
@@ -27,7 +29,7 @@ public final class LROsDeleteProvisioning202DeletingFailed200Headers {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LROsDeleteProvisioning202DeletingFailed200Headers class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LROsDeleteProvisioning202DeletingFailed200Headers(HttpHeaders rawHeaders) {
@@ -40,7 +42,7 @@ public final class LROsDeleteProvisioning202DeletingFailed200Headers {
 
     /**
      * Get the retryAfter property: The Retry-After property.
-     *
+     * 
      * @return the retryAfter value.
      */
     public Integer getRetryAfter() {
@@ -49,7 +51,7 @@ public final class LROsDeleteProvisioning202DeletingFailed200Headers {
 
     /**
      * Set the retryAfter property: The Retry-After property.
-     *
+     * 
      * @param retryAfter the retryAfter value to set.
      * @return the LROsDeleteProvisioning202DeletingFailed200Headers object itself.
      */
@@ -60,7 +62,7 @@ public final class LROsDeleteProvisioning202DeletingFailed200Headers {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -69,7 +71,7 @@ public final class LROsDeleteProvisioning202DeletingFailed200Headers {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the LROsDeleteProvisioning202DeletingFailed200Headers object itself.
      */
@@ -80,7 +82,7 @@ public final class LROsDeleteProvisioning202DeletingFailed200Headers {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

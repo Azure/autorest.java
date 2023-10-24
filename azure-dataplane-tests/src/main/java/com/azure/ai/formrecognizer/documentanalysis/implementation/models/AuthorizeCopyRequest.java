@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-/** Request body to authorize document model copy. */
+/**
+ * Request body to authorize document model copy.
+ */
 @Fluent
 public final class AuthorizeCopyRequest {
     /*
@@ -29,12 +31,14 @@ public final class AuthorizeCopyRequest {
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
-    /** Creates an instance of AuthorizeCopyRequest class. */
+    /**
+     * Creates an instance of AuthorizeCopyRequest class.
+     */
     public AuthorizeCopyRequest() {}
 
     /**
      * Get the modelId property: Unique document model name.
-     *
+     * 
      * @return the modelId value.
      */
     public String getModelId() {
@@ -43,7 +47,7 @@ public final class AuthorizeCopyRequest {
 
     /**
      * Set the modelId property: Unique document model name.
-     *
+     * 
      * @param modelId the modelId value to set.
      * @return the AuthorizeCopyRequest object itself.
      */
@@ -54,7 +58,7 @@ public final class AuthorizeCopyRequest {
 
     /**
      * Get the description property: Document model description.
-     *
+     * 
      * @return the description value.
      */
     public String getDescription() {
@@ -63,7 +67,7 @@ public final class AuthorizeCopyRequest {
 
     /**
      * Set the description property: Document model description.
-     *
+     * 
      * @param description the description value to set.
      * @return the AuthorizeCopyRequest object itself.
      */
@@ -74,7 +78,7 @@ public final class AuthorizeCopyRequest {
 
     /**
      * Get the tags property: List of key-value tag attributes associated with the document model.
-     *
+     * 
      * @return the tags value.
      */
     public Map<String, String> getTags() {
@@ -83,7 +87,7 @@ public final class AuthorizeCopyRequest {
 
     /**
      * Set the tags property: List of key-value tag attributes associated with the document model.
-     *
+     * 
      * @param tags the tags value to set.
      * @return the AuthorizeCopyRequest object itself.
      */

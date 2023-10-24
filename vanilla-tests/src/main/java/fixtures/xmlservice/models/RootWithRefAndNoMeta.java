@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** I am root, and I ref a model with no meta. */
+/**
+ * I am root, and I ref a model with no meta.
+ */
 @JacksonXmlRootElement(localName = "RootWithRefAndNoMeta")
 @Fluent
 public final class RootWithRefAndNoMeta {
@@ -24,12 +26,14 @@ public final class RootWithRefAndNoMeta {
     @JsonProperty(value = "Something")
     private String something;
 
-    /** Creates an instance of RootWithRefAndNoMeta class. */
+    /**
+     * Creates an instance of RootWithRefAndNoMeta class.
+     */
     public RootWithRefAndNoMeta() {}
 
     /**
      * Get the refToModel property: XML will use RefToModel.
-     *
+     * 
      * @return the refToModel value.
      */
     public ComplexTypeNoMeta getRefToModel() {
@@ -38,7 +42,7 @@ public final class RootWithRefAndNoMeta {
 
     /**
      * Set the refToModel property: XML will use RefToModel.
-     *
+     * 
      * @param refToModel the refToModel value to set.
      * @return the RootWithRefAndNoMeta object itself.
      */
@@ -49,7 +53,7 @@ public final class RootWithRefAndNoMeta {
 
     /**
      * Get the something property: Something else (just to avoid flattening).
-     *
+     * 
      * @return the something value.
      */
     public String getSomething() {
@@ -58,7 +62,7 @@ public final class RootWithRefAndNoMeta {
 
     /**
      * Set the something property: Something else (just to avoid flattening).
-     *
+     * 
      * @param something the something value to set.
      * @return the RootWithRefAndNoMeta object itself.
      */
@@ -69,7 +73,7 @@ public final class RootWithRefAndNoMeta {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

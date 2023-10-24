@@ -7,7 +7,9 @@ package fixtures.requiredoptional.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ClassOptionalWrapper model. */
+/**
+ * The ClassOptionalWrapper model.
+ */
 @Fluent
 public final class ClassOptionalWrapper {
     /*
@@ -16,12 +18,14 @@ public final class ClassOptionalWrapper {
     @JsonProperty(value = "value")
     private Product value;
 
-    /** Creates an instance of ClassOptionalWrapper class. */
+    /**
+     * Creates an instance of ClassOptionalWrapper class.
+     */
     public ClassOptionalWrapper() {}
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     public Product getValue() {
@@ -30,7 +34,7 @@ public final class ClassOptionalWrapper {
 
     /**
      * Set the value property: The value property.
-     *
+     * 
      * @param value the value value to set.
      * @return the ClassOptionalWrapper object itself.
      */
@@ -41,7 +45,7 @@ public final class ClassOptionalWrapper {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

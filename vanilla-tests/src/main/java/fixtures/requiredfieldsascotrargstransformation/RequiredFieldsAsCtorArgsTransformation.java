@@ -11,42 +11,49 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the RequiredFieldsAsCtorArgsTransformation type. */
+/**
+ * Initializes a new instance of the RequiredFieldsAsCtorArgsTransformation type.
+ */
 public final class RequiredFieldsAsCtorArgsTransformation {
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** Initializes an instance of RequiredFieldsAsCtorArgsTransformation client. */
+    /**
+     * Initializes an instance of RequiredFieldsAsCtorArgsTransformation client.
+     */
     RequiredFieldsAsCtorArgsTransformation() {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
      * Initializes an instance of RequiredFieldsAsCtorArgsTransformation client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     RequiredFieldsAsCtorArgsTransformation(HttpPipeline httpPipeline) {
@@ -55,7 +62,7 @@ public final class RequiredFieldsAsCtorArgsTransformation {
 
     /**
      * Initializes an instance of RequiredFieldsAsCtorArgsTransformation client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      */

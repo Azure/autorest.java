@@ -8,17 +8,33 @@ package com.encode.duration.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
+import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.encode.duration.DurationClientBuilder;
+import com.encode.duration.HeaderAsyncClient;
 import com.encode.duration.HeaderClient;
+import com.encode.duration.PropertyAsyncClient;
 import com.encode.duration.PropertyClient;
+import com.encode.duration.QueryAsyncClient;
 import com.encode.duration.QueryClient;
+import com.encode.duration.implementation.DurationClientImpl;
+import java.time.OffsetDateTime;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import reactor.core.publisher.Mono;
 
-class DurationClientTestBase extends TestProxyTestBase {
+ class DurationClientTestBase extends TestProxyTestBase {
     protected QueryClient queryClient;
 
     protected PropertyClient propertyClient;
@@ -27,10 +43,9 @@ class DurationClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        DurationClientBuilder queryClientbuilder =
-                new DurationClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DurationClientBuilder queryClientbuilder = new DurationClientBuilder()
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             queryClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -38,10 +53,9 @@ class DurationClientTestBase extends TestProxyTestBase {
         }
         queryClient = queryClientbuilder.buildQueryClient();
 
-        DurationClientBuilder propertyClientbuilder =
-                new DurationClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DurationClientBuilder propertyClientbuilder = new DurationClientBuilder()
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             propertyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -49,15 +63,15 @@ class DurationClientTestBase extends TestProxyTestBase {
         }
         propertyClient = propertyClientbuilder.buildPropertyClient();
 
-        DurationClientBuilder headerClientbuilder =
-                new DurationClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DurationClientBuilder headerClientbuilder = new DurationClientBuilder()
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             headerClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             headerClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         headerClient = headerClientbuilder.buildHeaderClient();
+
     }
 }

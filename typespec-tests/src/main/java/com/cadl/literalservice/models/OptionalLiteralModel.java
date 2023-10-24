@@ -4,15 +4,22 @@
 
 package com.cadl.literalservice.models;
 
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for OptionalLiteralModel. */
+/**
+ * Defines values for OptionalLiteralModel.
+ */
 public enum OptionalLiteralModel {
-    /** Enum value optionalLiteral. */
+    /**
+     * Enum value optionalLiteral.
+     */
     OPTIONAL_LITERAL("optionalLiteral");
 
-    /** The actual serialized value for a OptionalLiteralModel instance. */
+    /**
+     * The actual serialized value for a OptionalLiteralModel instance.
+     */
     private final String value;
 
     OptionalLiteralModel(String value) {
@@ -21,7 +28,7 @@ public enum OptionalLiteralModel {
 
     /**
      * Parses a serialized value to a OptionalLiteralModel instance.
-     *
+     * 
      * @param value the serialized value to parse.
      * @return the parsed OptionalLiteralModel object, or null if unable to parse.
      */
@@ -39,7 +46,9 @@ public enum OptionalLiteralModel {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @JsonValue
     @Override
     public String toString() {

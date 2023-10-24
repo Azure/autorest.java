@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-/** Request body to build a new custom document model. */
+/**
+ * Request body to build a new custom document model.
+ */
 @Fluent
 public final class BuildDocumentModelRequest {
     /*
@@ -41,12 +43,14 @@ public final class BuildDocumentModelRequest {
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
-    /** Creates an instance of BuildDocumentModelRequest class. */
+    /**
+     * Creates an instance of BuildDocumentModelRequest class.
+     */
     public BuildDocumentModelRequest() {}
 
     /**
      * Get the modelId property: Unique document model name.
-     *
+     * 
      * @return the modelId value.
      */
     public String getModelId() {
@@ -55,7 +59,7 @@ public final class BuildDocumentModelRequest {
 
     /**
      * Set the modelId property: Unique document model name.
-     *
+     * 
      * @param modelId the modelId value to set.
      * @return the BuildDocumentModelRequest object itself.
      */
@@ -66,7 +70,7 @@ public final class BuildDocumentModelRequest {
 
     /**
      * Get the description property: Document model description.
-     *
+     * 
      * @return the description value.
      */
     public String getDescription() {
@@ -75,7 +79,7 @@ public final class BuildDocumentModelRequest {
 
     /**
      * Set the description property: Document model description.
-     *
+     * 
      * @param description the description value to set.
      * @return the BuildDocumentModelRequest object itself.
      */
@@ -86,7 +90,7 @@ public final class BuildDocumentModelRequest {
 
     /**
      * Get the buildMode property: Custom document model build mode.
-     *
+     * 
      * @return the buildMode value.
      */
     public DocumentBuildMode getBuildMode() {
@@ -95,7 +99,7 @@ public final class BuildDocumentModelRequest {
 
     /**
      * Set the buildMode property: Custom document model build mode.
-     *
+     * 
      * @param buildMode the buildMode value to set.
      * @return the BuildDocumentModelRequest object itself.
      */
@@ -106,7 +110,7 @@ public final class BuildDocumentModelRequest {
 
     /**
      * Get the azureBlobSource property: Azure Blob Storage location containing the training data.
-     *
+     * 
      * @return the azureBlobSource value.
      */
     public AzureBlobContentSource getAzureBlobSource() {
@@ -115,7 +119,7 @@ public final class BuildDocumentModelRequest {
 
     /**
      * Set the azureBlobSource property: Azure Blob Storage location containing the training data.
-     *
+     * 
      * @param azureBlobSource the azureBlobSource value to set.
      * @return the BuildDocumentModelRequest object itself.
      */
@@ -126,7 +130,7 @@ public final class BuildDocumentModelRequest {
 
     /**
      * Get the tags property: List of key-value tag attributes associated with the document model.
-     *
+     * 
      * @return the tags value.
      */
     public Map<String, String> getTags() {
@@ -135,7 +139,7 @@ public final class BuildDocumentModelRequest {
 
     /**
      * Set the tags property: List of key-value tag attributes associated with the document model.
-     *
+     * 
      * @param tags the tags value to set.
      * @return the BuildDocumentModelRequest object itself.
      */

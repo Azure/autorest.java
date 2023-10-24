@@ -33,17 +33,23 @@ import com.azure.core.util.serializer.TypeReference;
 import java.time.Duration;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in LROs. */
+/**
+ * An instance of this class provides access to all the operations defined in LROs.
+ */
 public final class LROsImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final LROsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final LroEndpointClientImpl client;
 
     /**
      * Initializes an instance of LROsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     LROsImpl(LroEndpointClientImpl client) {
@@ -59,60 +65,51 @@ public final class LROsImpl {
     @ServiceInterface(name = "AutoRestLongRunningO")
     public interface LROsService {
         @Put("/lro/put/200/succeeded")
-        @ExpectedResponses({200, 204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200, 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> put200Succeeded(
-                @HostParam("Endpoint") String endpoint,
-                @HostParam("ProjectName") String projectName,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> put200Succeeded(@HostParam("Endpoint") String endpoint,
+            @HostParam("ProjectName") String projectName, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Put("/lro/put/200/succeeded")
-        @ExpectedResponses({200, 204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200, 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> put200SucceededSync(
-                @HostParam("Endpoint") String endpoint,
-                @HostParam("ProjectName") String projectName,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> put200SucceededSync(@HostParam("Endpoint") String endpoint,
+            @HostParam("ProjectName") String projectName, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -121,9 +118,9 @@ public final class LROsImpl {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -132,7 +129,7 @@ public final class LROsImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -144,39 +141,40 @@ public final class LROsImpl {
     private Mono<Response<BinaryData>> put200SucceededWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
-                    }
-                });
-        return FluxUtil.withContext(
-                context ->
-                        service.put200Succeeded(
-                                this.client.getEndpoint(),
-                                this.client.getProjectName(),
-                                accept,
-                                requestOptionsLocal,
-                                context));
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+            }
+        });
+        return FluxUtil.withContext(context -> service.put200Succeeded(this.client.getEndpoint(),
+            this.client.getProjectName(), accept, requestOptionsLocal, context));
     }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -185,9 +183,9 @@ public final class LROsImpl {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -196,7 +194,7 @@ public final class LROsImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -208,33 +206,40 @@ public final class LROsImpl {
     private Response<BinaryData> put200SucceededWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
-                    }
-                });
-        return service.put200SucceededSync(
-                this.client.getEndpoint(), this.client.getProjectName(), accept, requestOptionsLocal, Context.NONE);
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+            }
+        });
+        return service.put200SucceededSync(this.client.getEndpoint(), this.client.getProjectName(), accept,
+            requestOptionsLocal, Context.NONE);
     }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -243,9 +248,9 @@ public final class LROsImpl {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -254,7 +259,7 @@ public final class LROsImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -264,40 +269,42 @@ public final class LROsImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPut200SucceededAsync(RequestOptions requestOptions) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.put200SucceededWithResponseAsync(requestOptions),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(
-                                        "https://{Endpoint}/resource/{ProjectName}"
-                                                .replace("{Endpoint}", this.client.getEndpoint())
-                                                .replace("{ProjectName}", this.client.getProjectName()))
-                                .setContext(
-                                        requestOptions != null && requestOptions.getContext() != null
-                                                ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.put200SucceededWithResponseAsync(requestOptions),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+                .setEndpoint(
+                    "https://{Endpoint}/resource/{ProjectName}".replace("{Endpoint}", this.client.getEndpoint())
+                        .replace("{ProjectName}", this.client.getProjectName()))
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
+                .setServiceVersion(null)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -306,9 +313,9 @@ public final class LROsImpl {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -317,7 +324,7 @@ public final class LROsImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -327,21 +334,14 @@ public final class LROsImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPut200Succeeded(RequestOptions requestOptions) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () -> this.put200SucceededWithResponse(requestOptions),
-                new SyncDefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(
-                                        "https://{Endpoint}/resource/{ProjectName}"
-                                                .replace("{Endpoint}", this.client.getEndpoint())
-                                                .replace("{ProjectName}", this.client.getProjectName()))
-                                .setContext(
-                                        requestOptions != null && requestOptions.getContext() != null
-                                                ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.put200SucceededWithResponse(requestOptions),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+                .setEndpoint(
+                    "https://{Endpoint}/resource/{ProjectName}".replace("{Endpoint}", this.client.getEndpoint())
+                        .replace("{ProjectName}", this.client.getProjectName()))
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
+                .setServiceVersion(null)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 }

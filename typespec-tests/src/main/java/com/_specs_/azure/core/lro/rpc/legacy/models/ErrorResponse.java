@@ -4,13 +4,17 @@
 
 package com._specs_.azure.core.lro.rpc.legacy.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** A response containing error details. */
+/**
+ * A response containing error details.
+ */
 @Immutable
 public final class ErrorResponse {
     /*
@@ -22,7 +26,7 @@ public final class ErrorResponse {
 
     /**
      * Creates an instance of ErrorResponse class.
-     *
+     * 
      * @param error the error value to set.
      */
     @Generated
@@ -33,7 +37,7 @@ public final class ErrorResponse {
 
     /**
      * Get the error property: The error object.
-     *
+     * 
      * @return the error value.
      */
     @Generated

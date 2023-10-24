@@ -11,27 +11,21 @@ import org.junit.jupiter.api.Assertions;
 public final class DoubleWrapperTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        DoubleWrapper model =
-                BinaryData.fromString(
-                                "{\"field1\":37.616192183070176,\"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose\":69.0779419799508}")
-                        .toObject(DoubleWrapper.class);
+        DoubleWrapper model = BinaryData.fromString(
+            "{\"field1\":37.616192183070176,\"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose\":69.0779419799508}")
+            .toObject(DoubleWrapper.class);
         Assertions.assertEquals(37.616192183070176D, model.getField1());
-        Assertions.assertEquals(
-                69.0779419799508D,
-                model.getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose());
+        Assertions.assertEquals(69.0779419799508D,
+            model.getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        DoubleWrapper model =
-                new DoubleWrapper()
-                        .setField1(37.616192183070176D)
-                        .setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(
-                                69.0779419799508D);
+        DoubleWrapper model = new DoubleWrapper().setField1(37.616192183070176D)
+            .setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(69.0779419799508D);
         model = BinaryData.fromObject(model).toObject(DoubleWrapper.class);
         Assertions.assertEquals(37.616192183070176D, model.getField1());
-        Assertions.assertEquals(
-                69.0779419799508D,
-                model.getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose());
+        Assertions.assertEquals(69.0779419799508D,
+            model.getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose());
     }
 }

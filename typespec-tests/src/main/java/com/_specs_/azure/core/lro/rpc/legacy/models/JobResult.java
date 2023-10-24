@@ -4,12 +4,18 @@
 
 package com._specs_.azure.core.lro.rpc.legacy.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-/** Result of the job. */
+/**
+ * Result of the job.
+ */
 @Immutable
 public final class JobResult {
     /*
@@ -47,13 +53,16 @@ public final class JobResult {
     @JsonProperty(value = "results", access = JsonProperty.Access.WRITE_ONLY)
     private List<String> results;
 
-    /** Creates an instance of JobResult class. */
+    /**
+     * Creates an instance of JobResult class.
+     */
     @Generated
-    private JobResult() {}
+    private JobResult() {
+    }
 
     /**
      * Get the jobId property: A processing job identifier.
-     *
+     * 
      * @return the jobId value.
      */
     @Generated
@@ -63,7 +72,7 @@ public final class JobResult {
 
     /**
      * Get the comment property: Comment.
-     *
+     * 
      * @return the comment value.
      */
     @Generated
@@ -73,7 +82,7 @@ public final class JobResult {
 
     /**
      * Get the status property: The status of the processing job.
-     *
+     * 
      * @return the status value.
      */
     @Generated
@@ -83,7 +92,7 @@ public final class JobResult {
 
     /**
      * Get the errors property: Error objects that describes the error when status is "Failed".
-     *
+     * 
      * @return the errors value.
      */
     @Generated
@@ -93,7 +102,7 @@ public final class JobResult {
 
     /**
      * Get the results property: The results.
-     *
+     * 
      * @return the results value.
      */
     @Generated

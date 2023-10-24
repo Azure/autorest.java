@@ -4,21 +4,25 @@
 
 package com.type.model.inheritance.singlediscriminator.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.regex.Pattern;
 
-/** The second level model in polymorphic single level inheritance. */
+/**
+ * The second level model in polymorphic single level inheritance.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("goose")
 @Immutable
 public final class Goose extends Bird {
     /**
      * Creates an instance of Goose class.
-     *
+     * 
      * @param wingspan the wingspan value to set.
      */
     @Generated

@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LROsPatch200SucceededIgnoreHeadersHeaders model. */
+/**
+ * The LROsPatch200SucceededIgnoreHeadersHeaders model.
+ */
 @Fluent
 public final class LROsPatch200SucceededIgnoreHeadersHeaders {
     /*
@@ -23,7 +25,7 @@ public final class LROsPatch200SucceededIgnoreHeadersHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LROsPatch200SucceededIgnoreHeadersHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LROsPatch200SucceededIgnoreHeadersHeaders(HttpHeaders rawHeaders) {
@@ -32,7 +34,7 @@ public final class LROsPatch200SucceededIgnoreHeadersHeaders {
 
     /**
      * Get the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @return the azureAsyncOperation value.
      */
     public String getAzureAsyncOperation() {
@@ -41,7 +43,7 @@ public final class LROsPatch200SucceededIgnoreHeadersHeaders {
 
     /**
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsPatch200SucceededIgnoreHeadersHeaders object itself.
      */
@@ -52,7 +54,7 @@ public final class LROsPatch200SucceededIgnoreHeadersHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

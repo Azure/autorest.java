@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 
-/** The DateWrapper model. */
+/**
+ * The DateWrapper model.
+ */
 @Fluent
 public final class DateWrapper {
     /*
@@ -23,12 +25,14 @@ public final class DateWrapper {
     @JsonProperty(value = "leap")
     private LocalDate leap;
 
-    /** Creates an instance of DateWrapper class. */
+    /**
+     * Creates an instance of DateWrapper class.
+     */
     public DateWrapper() {}
 
     /**
      * Get the field property: The field property.
-     *
+     * 
      * @return the field value.
      */
     public LocalDate getField() {
@@ -37,7 +41,7 @@ public final class DateWrapper {
 
     /**
      * Set the field property: The field property.
-     *
+     * 
      * @param field the field value to set.
      * @return the DateWrapper object itself.
      */
@@ -48,7 +52,7 @@ public final class DateWrapper {
 
     /**
      * Get the leap property: The leap property.
-     *
+     * 
      * @return the leap value.
      */
     public LocalDate getLeap() {
@@ -57,7 +61,7 @@ public final class DateWrapper {
 
     /**
      * Set the leap property: The leap property.
-     *
+     * 
      * @param leap the leap value to set.
      * @return the DateWrapper object itself.
      */

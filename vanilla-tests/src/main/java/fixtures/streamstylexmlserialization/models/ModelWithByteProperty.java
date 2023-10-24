@@ -13,7 +13,9 @@ import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** The ModelWithByteProperty model. */
+/**
+ * The ModelWithByteProperty model.
+ */
 @Fluent
 public final class ModelWithByteProperty implements XmlSerializable<ModelWithByteProperty> {
     /*
@@ -21,12 +23,14 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
      */
     private byte[] bytes;
 
-    /** Creates an instance of ModelWithByteProperty class. */
+    /**
+     * Creates an instance of ModelWithByteProperty class.
+     */
     public ModelWithByteProperty() {}
 
     /**
      * Get the bytes property: The Bytes property.
-     *
+     * 
      * @return the bytes value.
      */
     public byte[] getBytes() {
@@ -35,7 +39,7 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
 
     /**
      * Set the bytes property: The Bytes property.
-     *
+     * 
      * @param bytes the bytes value to set.
      * @return the ModelWithByteProperty object itself.
      */
@@ -46,7 +50,7 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}
@@ -66,10 +70,10 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
 
     /**
      * Reads an instance of ModelWithByteProperty from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of ModelWithByteProperty if the XmlReader was pointing to an instance of it, or null if it
-     *     was pointing to XML null.
+     * was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ModelWithByteProperty.
      */
     public static ModelWithByteProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -78,32 +82,30 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
 
     /**
      * Reads an instance of ModelWithByteProperty from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of ModelWithByteProperty if the XmlReader was pointing to an instance of it, or null if it
-     *     was pointing to XML null.
+     * was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ModelWithByteProperty.
      */
     public static ModelWithByteProperty fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName =
-                CoreUtils.isNullOrEmpty(rootElementName) ? "ModelWithByteProperty" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    ModelWithByteProperty deserializedModelWithByteProperty = new ModelWithByteProperty();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        String finalRootElementName
+            = CoreUtils.isNullOrEmpty(rootElementName) ? "ModelWithByteProperty" : rootElementName;
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            ModelWithByteProperty deserializedModelWithByteProperty = new ModelWithByteProperty();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("Bytes".equals(elementName.getLocalPart())) {
-                            deserializedModelWithByteProperty.bytes = reader.getBinaryElement();
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                if ("Bytes".equals(elementName.getLocalPart())) {
+                    deserializedModelWithByteProperty.bytes = reader.getBinaryElement();
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedModelWithByteProperty;
-                });
+            return deserializedModelWithByteProperty;
+        });
     }
 }

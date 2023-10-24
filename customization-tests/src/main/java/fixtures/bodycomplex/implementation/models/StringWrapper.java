@@ -7,7 +7,9 @@ package fixtures.bodycomplex.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The StringWrapper model. */
+/**
+ * The StringWrapper model.
+ */
 @Fluent
 public final class StringWrapper {
     /*
@@ -28,12 +30,14 @@ public final class StringWrapper {
     @JsonProperty(value = "null")
     private String nullProperty;
 
-    /** Creates an instance of StringWrapper class. */
+    /**
+     * Creates an instance of StringWrapper class.
+     */
     public StringWrapper() {}
 
     /**
      * Get the field property: The field property.
-     *
+     * 
      * @return the field value.
      */
     public String getField() {
@@ -42,7 +46,7 @@ public final class StringWrapper {
 
     /**
      * Set the field property: The field property.
-     *
+     * 
      * @param field the field value to set.
      * @return the StringWrapper object itself.
      */
@@ -53,7 +57,7 @@ public final class StringWrapper {
 
     /**
      * Get the empty property: The empty property.
-     *
+     * 
      * @return the empty value.
      */
     public String getEmpty() {
@@ -62,7 +66,7 @@ public final class StringWrapper {
 
     /**
      * Set the empty property: The empty property.
-     *
+     * 
      * @param empty the empty value to set.
      * @return the StringWrapper object itself.
      */
@@ -73,7 +77,7 @@ public final class StringWrapper {
 
     /**
      * Get the nullProperty property: The null property.
-     *
+     * 
      * @return the nullProperty value.
      */
     public String getNullProperty() {
@@ -82,7 +86,7 @@ public final class StringWrapper {
 
     /**
      * Set the nullProperty property: The null property.
-     *
+     * 
      * @param nullProperty the nullProperty value to set.
      * @return the StringWrapper object itself.
      */

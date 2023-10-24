@@ -4,67 +4,94 @@
 
 package com.cadl.literalservice;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Put;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.cadl.literalservice.implementation.LiteralServiceClientImpl;
 import com.cadl.literalservice.models.Model;
 import com.cadl.literalservice.models.OptionalLiteralParamModel;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the synchronous LiteralServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous LiteralServiceClient type.
+ */
 @ServiceClient(builder = LiteralServiceClientBuilder.class)
 public final class LiteralServiceClient {
-    @Generated private final LiteralServiceClientImpl serviceClient;
+    @Generated
+    private final LiteralServiceClientImpl serviceClient;
 
     /**
      * Initializes an instance of LiteralServiceClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    LiteralServiceClient(LiteralServiceClientImpl serviceClient) {
+     LiteralServiceClient(LiteralServiceClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The put operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>optionalLiteralParam</td><td>String</td><td>No</td><td>The optionalLiteralParam parameter. Allowed values: "optionalLiteralParam".</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     literal: String (Required)
      *     optionalLiteral: String(optionalLiteral) (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     literal: String (Required)
      *     optionalLiteral: String(optionalLiteral) (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param model The model parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -81,7 +108,7 @@ public final class LiteralServiceClient {
 
     /**
      * The put operation.
-     *
+     * 
      * @param model The model parameter.
      * @param optionalLiteralParam The optionalLiteralParam parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -105,7 +132,7 @@ public final class LiteralServiceClient {
 
     /**
      * The put operation.
-     *
+     * 
      * @param model The model parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

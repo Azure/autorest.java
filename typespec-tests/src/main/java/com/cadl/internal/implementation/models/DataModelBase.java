@@ -4,8 +4,16 @@
 
 package com.cadl.internal.implementation.models;
 
-/** The DataModelBase model. */
+import com.azure.core.annotation.Immutable;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+/**
+ * The DataModelBase model.
+ */
 public abstract class DataModelBase {
-    /** Creates an instance of DataModelBase class. */
-    protected DataModelBase() {}
+    /**
+     * Creates an instance of DataModelBase class.
+     */
+    protected DataModelBase() {
+    }
 }

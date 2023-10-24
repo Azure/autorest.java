@@ -4,12 +4,17 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-/** Model with extensible enum properties. */
+/**
+ * Model with extensible enum properties.
+ */
 @Immutable
 public final class ExtensibleEnumProperty {
     /*
@@ -21,7 +26,7 @@ public final class ExtensibleEnumProperty {
 
     /**
      * Creates an instance of ExtensibleEnumProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -32,7 +37,7 @@ public final class ExtensibleEnumProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

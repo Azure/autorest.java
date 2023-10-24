@@ -4,14 +4,18 @@
 
 package com.cadl.wiretype.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
+import java.util.regex.Pattern;
 
-/** The SuperClassMismatch model. */
+/**
+ * The SuperClassMismatch model.
+ */
 @Immutable
 public class SuperClassMismatch {
     /*
@@ -23,7 +27,7 @@ public class SuperClassMismatch {
 
     /**
      * Creates an instance of SuperClassMismatch class.
-     *
+     * 
      * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
      */
     @Generated
@@ -39,7 +43,7 @@ public class SuperClassMismatch {
 
     /**
      * Get the dateTimeRfc7231 property: The dateTimeRfc7231 property.
-     *
+     * 
      * @return the dateTimeRfc7231 value.
      */
     @Generated

@@ -16,30 +16,42 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Headers. */
+/**
+ * An instance of this class provides access to all the operations defined in Headers.
+ */
 public final class HeadersImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final HeadersService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final CollectionFormatClientImpl client;
 
     /**
      * Initializes an instance of HeadersImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
-    HeadersImpl(CollectionFormatClientImpl client) {
+     HeadersImpl(CollectionFormatClientImpl client) {
         this.service = RestProxy.create(HeadersService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
@@ -53,44 +65,24 @@ public final class HeadersImpl {
     public interface HeadersService {
         @Get("/parameters/collection-format/header/csv")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> csv(
-                @HeaderParam("colors") String colors,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> csv(@HeaderParam("colors") String colors, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/header/csv")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> csvSync(
-                @HeaderParam("colors") String colors,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> csvSync(@HeaderParam("colors") String colors, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
      * The csv operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -102,16 +94,15 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> csvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted =
-                colors.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
         return FluxUtil.withContext(context -> service.csv(colorsConverted, accept, requestOptions, context));
     }
 
     /**
      * The csv operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -123,10 +114,9 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> csvWithResponse(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted =
-                colors.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
         return service.csvSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 }

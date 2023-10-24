@@ -16,29 +16,40 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Operations. */
+/**
+ * An instance of this class provides access to all the operations defined in Operations.
+ */
 public final class OperationsImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final OperationsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final SpecialWordsClientImpl client;
 
     /**
      * Initializes an instance of OperationsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
-    OperationsImpl(SpecialWordsClientImpl client) {
-        this.service =
-                RestProxy.create(OperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+     OperationsImpl(SpecialWordsClientImpl client) {
+        this.service = RestProxy.create(OperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -51,965 +62,536 @@ public final class OperationsImpl {
     public interface OperationsService {
         @Get("/special-words/operations/and")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> and(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/and")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> andSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/as")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> as(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/as")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> asSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/assert")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> assertMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> assertMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/assert")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> assertMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> assertMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/async")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> async(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> async(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/async")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> asyncSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/await")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> await(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> await(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/await")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> awaitSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/break")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> breakMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> breakMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/break")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> breakMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> breakMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/class")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> classMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> classMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/class")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> classMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> classMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/constructor")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> constructor(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> constructor(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/constructor")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> constructorSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> constructorSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/continue")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> continueMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> continueMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/continue")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> continueMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> continueMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/def")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> def(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/def")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> defSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/del")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> del(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/del")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> delSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/elif")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> elif(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/elif")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> elifSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/else")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> elseMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> elseMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/else")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> elseMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> elseMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/except")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> except(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> except(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/except")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> exceptSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/exec")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> exec(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/exec")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> execSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/finally")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> finallyMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> finallyMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/finally")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> finallyMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> finallyMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/for")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> forMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> forMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/for")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> forMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> forMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/from")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> from(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/from")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fromSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/global")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> global(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> global(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/global")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> globalSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/if")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> ifMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> ifMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/if")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> ifMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> ifMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/import")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> importMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> importMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/import")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> importMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> importMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/in")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> in(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/in")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> inSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/is")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> is(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/is")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> isSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/lambda")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> lambda(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> lambda(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/lambda")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> lambdaSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/not")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> not(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/not")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> notSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/or")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> or(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/or")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> orSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/pass")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> pass(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/pass")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> passSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/raise")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> raise(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> raise(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/raise")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> raiseSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/return")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> returnMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> returnMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/return")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> returnMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> returnMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/try")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> tryMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> tryMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/try")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> tryMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> tryMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/while")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> whileMethod(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> whileMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/while")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> whileMethodSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> whileMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/with")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> with(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/with")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/yield")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> yield(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> yield(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/yield")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> yieldSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
      * The and operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1025,7 +607,7 @@ public final class OperationsImpl {
 
     /**
      * The and operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1041,7 +623,7 @@ public final class OperationsImpl {
 
     /**
      * The as operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1057,7 +639,7 @@ public final class OperationsImpl {
 
     /**
      * The as operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1073,7 +655,7 @@ public final class OperationsImpl {
 
     /**
      * The assertMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1089,7 +671,7 @@ public final class OperationsImpl {
 
     /**
      * The assertMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1105,7 +687,7 @@ public final class OperationsImpl {
 
     /**
      * The async operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1121,7 +703,7 @@ public final class OperationsImpl {
 
     /**
      * The async operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1137,7 +719,7 @@ public final class OperationsImpl {
 
     /**
      * The await operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1153,7 +735,7 @@ public final class OperationsImpl {
 
     /**
      * The await operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1169,7 +751,7 @@ public final class OperationsImpl {
 
     /**
      * The breakMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1185,7 +767,7 @@ public final class OperationsImpl {
 
     /**
      * The breakMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1201,7 +783,7 @@ public final class OperationsImpl {
 
     /**
      * The classMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1217,7 +799,7 @@ public final class OperationsImpl {
 
     /**
      * The classMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1233,7 +815,7 @@ public final class OperationsImpl {
 
     /**
      * The constructor operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1249,7 +831,7 @@ public final class OperationsImpl {
 
     /**
      * The constructor operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1265,7 +847,7 @@ public final class OperationsImpl {
 
     /**
      * The continueMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1281,7 +863,7 @@ public final class OperationsImpl {
 
     /**
      * The continueMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1297,7 +879,7 @@ public final class OperationsImpl {
 
     /**
      * The def operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1313,7 +895,7 @@ public final class OperationsImpl {
 
     /**
      * The def operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1329,7 +911,7 @@ public final class OperationsImpl {
 
     /**
      * The del operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1345,7 +927,7 @@ public final class OperationsImpl {
 
     /**
      * The del operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1361,7 +943,7 @@ public final class OperationsImpl {
 
     /**
      * The elif operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1377,7 +959,7 @@ public final class OperationsImpl {
 
     /**
      * The elif operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1393,7 +975,7 @@ public final class OperationsImpl {
 
     /**
      * The elseMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1409,7 +991,7 @@ public final class OperationsImpl {
 
     /**
      * The elseMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1425,7 +1007,7 @@ public final class OperationsImpl {
 
     /**
      * The except operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1441,7 +1023,7 @@ public final class OperationsImpl {
 
     /**
      * The except operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1457,7 +1039,7 @@ public final class OperationsImpl {
 
     /**
      * The exec operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1473,7 +1055,7 @@ public final class OperationsImpl {
 
     /**
      * The exec operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1489,7 +1071,7 @@ public final class OperationsImpl {
 
     /**
      * The finallyMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1505,7 +1087,7 @@ public final class OperationsImpl {
 
     /**
      * The finallyMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1521,7 +1103,7 @@ public final class OperationsImpl {
 
     /**
      * The forMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1537,7 +1119,7 @@ public final class OperationsImpl {
 
     /**
      * The forMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1553,7 +1135,7 @@ public final class OperationsImpl {
 
     /**
      * The from operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1569,7 +1151,7 @@ public final class OperationsImpl {
 
     /**
      * The from operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1585,7 +1167,7 @@ public final class OperationsImpl {
 
     /**
      * The global operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1601,7 +1183,7 @@ public final class OperationsImpl {
 
     /**
      * The global operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1617,7 +1199,7 @@ public final class OperationsImpl {
 
     /**
      * The ifMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1633,7 +1215,7 @@ public final class OperationsImpl {
 
     /**
      * The ifMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1649,7 +1231,7 @@ public final class OperationsImpl {
 
     /**
      * The importMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1665,7 +1247,7 @@ public final class OperationsImpl {
 
     /**
      * The importMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1681,7 +1263,7 @@ public final class OperationsImpl {
 
     /**
      * The in operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1697,7 +1279,7 @@ public final class OperationsImpl {
 
     /**
      * The in operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1713,7 +1295,7 @@ public final class OperationsImpl {
 
     /**
      * The is operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1729,7 +1311,7 @@ public final class OperationsImpl {
 
     /**
      * The is operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1745,7 +1327,7 @@ public final class OperationsImpl {
 
     /**
      * The lambda operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1761,7 +1343,7 @@ public final class OperationsImpl {
 
     /**
      * The lambda operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1777,7 +1359,7 @@ public final class OperationsImpl {
 
     /**
      * The not operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1793,7 +1375,7 @@ public final class OperationsImpl {
 
     /**
      * The not operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1809,7 +1391,7 @@ public final class OperationsImpl {
 
     /**
      * The or operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1825,7 +1407,7 @@ public final class OperationsImpl {
 
     /**
      * The or operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1841,7 +1423,7 @@ public final class OperationsImpl {
 
     /**
      * The pass operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1857,7 +1439,7 @@ public final class OperationsImpl {
 
     /**
      * The pass operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1873,7 +1455,7 @@ public final class OperationsImpl {
 
     /**
      * The raise operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1889,7 +1471,7 @@ public final class OperationsImpl {
 
     /**
      * The raise operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1905,7 +1487,7 @@ public final class OperationsImpl {
 
     /**
      * The returnMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1921,7 +1503,7 @@ public final class OperationsImpl {
 
     /**
      * The returnMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1937,7 +1519,7 @@ public final class OperationsImpl {
 
     /**
      * The tryMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1953,7 +1535,7 @@ public final class OperationsImpl {
 
     /**
      * The tryMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1969,7 +1551,7 @@ public final class OperationsImpl {
 
     /**
      * The whileMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1985,7 +1567,7 @@ public final class OperationsImpl {
 
     /**
      * The whileMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2001,7 +1583,7 @@ public final class OperationsImpl {
 
     /**
      * The with operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2017,7 +1599,7 @@ public final class OperationsImpl {
 
     /**
      * The with operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2033,7 +1615,7 @@ public final class OperationsImpl {
 
     /**
      * The yield operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2049,7 +1631,7 @@ public final class OperationsImpl {
 
     /**
      * The yield operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

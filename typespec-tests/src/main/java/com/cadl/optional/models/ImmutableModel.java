@@ -4,12 +4,16 @@
 
 package com.cadl.optional.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The ImmutableModel model. */
+/**
+ * The ImmutableModel model.
+ */
 @Immutable
 public final class ImmutableModel {
     /*
@@ -28,7 +32,7 @@ public final class ImmutableModel {
 
     /**
      * Creates an instance of ImmutableModel class.
-     *
+     * 
      * @param stringReadWriteRequired the stringReadWriteRequired value to set.
      */
     @Generated
@@ -39,7 +43,7 @@ public final class ImmutableModel {
 
     /**
      * Get the stringReadWriteRequired property: The stringReadWriteRequired property.
-     *
+     * 
      * @return the stringReadWriteRequired value.
      */
     @Generated
@@ -49,7 +53,7 @@ public final class ImmutableModel {
 
     /**
      * Get the stringReadOnlyOptional property: The stringReadOnlyOptional property.
-     *
+     * 
      * @return the stringReadOnlyOptional value.
      */
     @Generated

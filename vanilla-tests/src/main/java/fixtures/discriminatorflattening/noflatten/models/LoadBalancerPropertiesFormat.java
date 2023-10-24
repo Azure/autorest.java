@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Properties of the load balancer. */
+/**
+ * Properties of the load balancer.
+ */
 @Fluent
 public final class LoadBalancerPropertiesFormat {
     /*
@@ -17,12 +19,14 @@ public final class LoadBalancerPropertiesFormat {
     @JsonProperty(value = "backendAddressPools")
     private List<BackendAddressPool> backendAddressPools;
 
-    /** Creates an instance of LoadBalancerPropertiesFormat class. */
+    /**
+     * Creates an instance of LoadBalancerPropertiesFormat class.
+     */
     public LoadBalancerPropertiesFormat() {}
 
     /**
      * Get the backendAddressPools property: Collection of backend address pools used by a load balancer.
-     *
+     * 
      * @return the backendAddressPools value.
      */
     public List<BackendAddressPool> getBackendAddressPools() {
@@ -31,7 +35,7 @@ public final class LoadBalancerPropertiesFormat {
 
     /**
      * Set the backendAddressPools property: Collection of backend address pools used by a load balancer.
-     *
+     * 
      * @param backendAddressPools the backendAddressPools value to set.
      * @return the LoadBalancerPropertiesFormat object itself.
      */
@@ -42,7 +46,7 @@ public final class LoadBalancerPropertiesFormat {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

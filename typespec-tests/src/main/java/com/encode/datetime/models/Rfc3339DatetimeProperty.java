@@ -4,13 +4,17 @@
 
 package com.encode.datetime.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
+import java.util.regex.Pattern;
 
-/** The Rfc3339DatetimeProperty model. */
+/**
+ * The Rfc3339DatetimeProperty model.
+ */
 @Immutable
 public final class Rfc3339DatetimeProperty {
     /*
@@ -22,7 +26,7 @@ public final class Rfc3339DatetimeProperty {
 
     /**
      * Creates an instance of Rfc3339DatetimeProperty class.
-     *
+     * 
      * @param value the value value to set.
      */
     @Generated
@@ -33,7 +37,7 @@ public final class Rfc3339DatetimeProperty {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     @Generated

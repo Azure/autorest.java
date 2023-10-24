@@ -8,93 +8,108 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the AccessClient type. */
+/**
+ * Initializes a new instance of the AccessClient type.
+ */
 public final class AccessClientImpl {
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The PublicOperationsImpl object to access its operations. */
+    /**
+     * The PublicOperationsImpl object to access its operations.
+     */
     private final PublicOperationsImpl publicOperations;
 
     /**
      * Gets the PublicOperationsImpl object to access its operations.
-     *
+     * 
      * @return the PublicOperationsImpl object.
      */
     public PublicOperationsImpl getPublicOperations() {
         return this.publicOperations;
     }
 
-    /** The InternalOperationsImpl object to access its operations. */
+    /**
+     * The InternalOperationsImpl object to access its operations.
+     */
     private final InternalOperationsImpl internalOperations;
 
     /**
      * Gets the InternalOperationsImpl object to access its operations.
-     *
+     * 
      * @return the InternalOperationsImpl object.
      */
     public InternalOperationsImpl getInternalOperations() {
         return this.internalOperations;
     }
 
-    /** The SharedModelInOperationsImpl object to access its operations. */
+    /**
+     * The SharedModelInOperationsImpl object to access its operations.
+     */
     private final SharedModelInOperationsImpl sharedModelInOperations;
 
     /**
      * Gets the SharedModelInOperationsImpl object to access its operations.
-     *
+     * 
      * @return the SharedModelInOperationsImpl object.
      */
     public SharedModelInOperationsImpl getSharedModelInOperations() {
         return this.sharedModelInOperations;
     }
 
-    /** The RelativeModelInOperationsImpl object to access its operations. */
+    /**
+     * The RelativeModelInOperationsImpl object to access its operations.
+     */
     private final RelativeModelInOperationsImpl relativeModelInOperations;
 
     /**
      * Gets the RelativeModelInOperationsImpl object to access its operations.
-     *
+     * 
      * @return the RelativeModelInOperationsImpl object.
      */
     public RelativeModelInOperationsImpl getRelativeModelInOperations() {
         return this.relativeModelInOperations;
     }
 
-    /** Initializes an instance of AccessClient client. */
+    /**
+     * Initializes an instance of AccessClient client.
+     */
     public AccessClientImpl() {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
      * Initializes an instance of AccessClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AccessClientImpl(HttpPipeline httpPipeline) {
@@ -103,7 +118,7 @@ public final class AccessClientImpl {
 
     /**
      * Initializes an instance of AccessClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      */

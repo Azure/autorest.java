@@ -4,40 +4,72 @@
 
 package com.cadl.union;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Post;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.polling.DefaultPollingStrategy;
+import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollingStrategyOptions;
+import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.cadl.union.implementation.UnionClientImpl;
+import java.time.Duration;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the synchronous UnionClient type. */
+/**
+ * Initializes a new instance of the synchronous UnionClient type.
+ */
 @ServiceClient(builder = UnionClientBuilder.class)
 public final class UnionClient {
-    @Generated private final UnionClientImpl serviceClient;
+    @Generated
+    private final UnionClientImpl serviceClient;
 
     /**
      * Initializes an instance of UnionClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    UnionClient(UnionClientImpl serviceClient) {
+     UnionClient(UnionClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The send operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -46,7 +78,7 @@ public final class UnionClient {
      *     input: InputModelBase (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -59,26 +91,20 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'send' refers Union 'string | string[] | integer[] |
-        // integer[][]'
+        // Convenience API is not generated, as operation 'send' refers Union 'string | string[] | integer[] | integer[][]'
         return this.serviceClient.sendWithResponse(id, request, requestOptions);
     }
 
     /**
      * The sendLong operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -91,7 +117,7 @@ public final class UnionClient {
      *     data_float: Double (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -104,24 +130,20 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'sendLong' refers Union 'string | ArrayData | bytes |
-        // utcDateTime'
+        // Convenience API is not generated, as operation 'sendLong' refers Union 'string | ArrayData | bytes | utcDateTime'
         return this.serviceClient.sendLongWithResponse(id, request, requestOptions);
     }
 
     /**
      * The get operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>data</td><td>DataModelBase</td><td>No</td><td>The data parameter</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -138,9 +160,7 @@ public final class UnionClient {
 
     /**
      * A long-running remote procedure call (RPC) operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -155,7 +175,7 @@ public final class UnionClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

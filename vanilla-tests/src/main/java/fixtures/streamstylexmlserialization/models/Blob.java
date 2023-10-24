@@ -15,7 +15,9 @@ import java.util.Map;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** An Azure Storage blob. */
+/**
+ * An Azure Storage blob.
+ */
 @Fluent
 public final class Blob implements XmlSerializable<Blob> {
     /*
@@ -43,12 +45,14 @@ public final class Blob implements XmlSerializable<Blob> {
      */
     private Map<String, String> metadata;
 
-    /** Creates an instance of Blob class. */
+    /**
+     * Creates an instance of Blob class.
+     */
     public Blob() {}
 
     /**
      * Get the name property: The Name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -57,7 +61,7 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Set the name property: The Name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the Blob object itself.
      */
@@ -68,7 +72,7 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Get the deleted property: The Deleted property.
-     *
+     * 
      * @return the deleted value.
      */
     public boolean isDeleted() {
@@ -77,7 +81,7 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Set the deleted property: The Deleted property.
-     *
+     * 
      * @param deleted the deleted value to set.
      * @return the Blob object itself.
      */
@@ -88,7 +92,7 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Get the snapshot property: The Snapshot property.
-     *
+     * 
      * @return the snapshot value.
      */
     public String getSnapshot() {
@@ -97,7 +101,7 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Set the snapshot property: The Snapshot property.
-     *
+     * 
      * @param snapshot the snapshot value to set.
      * @return the Blob object itself.
      */
@@ -108,7 +112,7 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Get the properties property: Properties of a blob.
-     *
+     * 
      * @return the properties value.
      */
     public BlobProperties getProperties() {
@@ -117,7 +121,7 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Set the properties property: Properties of a blob.
-     *
+     * 
      * @param properties the properties value to set.
      * @return the Blob object itself.
      */
@@ -128,7 +132,7 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Get the metadata property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @return the metadata value.
      */
     public Map<String, String> getMetadata() {
@@ -137,7 +141,7 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Set the metadata property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @param metadata the metadata value to set.
      * @return the Blob object itself.
      */
@@ -148,7 +152,7 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
@@ -190,10 +194,10 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Reads an instance of Blob from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of Blob if the XmlReader was pointing to an instance of it, or null if it was pointing to XML
-     *     null.
+     * null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the Blob.
      */
@@ -203,46 +207,44 @@ public final class Blob implements XmlSerializable<Blob> {
 
     /**
      * Reads an instance of Blob from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of Blob if the XmlReader was pointing to an instance of it, or null if it was pointing to XML
-     *     null.
+     * null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the Blob.
      */
     public static Blob fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Blob" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    Blob deserializedBlob = new Blob();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            Blob deserializedBlob = new Blob();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("Name".equals(elementName.getLocalPart())) {
-                            deserializedBlob.name = reader.getStringElement();
-                        } else if ("Deleted".equals(elementName.getLocalPart())) {
-                            deserializedBlob.deleted = reader.getBooleanElement();
-                        } else if ("Snapshot".equals(elementName.getLocalPart())) {
-                            deserializedBlob.snapshot = reader.getStringElement();
-                        } else if ("Properties".equals(elementName.getLocalPart())) {
-                            deserializedBlob.properties = BlobProperties.fromXml(reader, "Properties");
-                        } else if ("Metadata".equals(elementName.getLocalPart())) {
-                            if (deserializedBlob.metadata == null) {
-                                deserializedBlob.metadata = new LinkedHashMap<>();
-                            }
-                            while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                                deserializedBlob.metadata.put(
-                                        reader.getElementName().getLocalPart(), reader.getStringElement());
-                            }
-                        } else {
-                            reader.skipElement();
-                        }
+                if ("Name".equals(elementName.getLocalPart())) {
+                    deserializedBlob.name = reader.getStringElement();
+                } else if ("Deleted".equals(elementName.getLocalPart())) {
+                    deserializedBlob.deleted = reader.getBooleanElement();
+                } else if ("Snapshot".equals(elementName.getLocalPart())) {
+                    deserializedBlob.snapshot = reader.getStringElement();
+                } else if ("Properties".equals(elementName.getLocalPart())) {
+                    deserializedBlob.properties = BlobProperties.fromXml(reader, "Properties");
+                } else if ("Metadata".equals(elementName.getLocalPart())) {
+                    if (deserializedBlob.metadata == null) {
+                        deserializedBlob.metadata = new LinkedHashMap<>();
                     }
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        deserializedBlob.metadata.put(reader.getElementName().getLocalPart(),
+                            reader.getStringElement());
+                    }
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedBlob;
-                });
+            return deserializedBlob;
+        });
     }
 }

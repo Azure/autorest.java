@@ -7,7 +7,9 @@ package fixtures.discriminatorflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Describes a virtual machine scale set virtual machine profile. */
+/**
+ * Describes a virtual machine scale set virtual machine profile.
+ */
 @Fluent
 public final class VirtualMachineScaleSetVMProfile {
     /*
@@ -16,13 +18,15 @@ public final class VirtualMachineScaleSetVMProfile {
     @JsonProperty(value = "networkProfile")
     private VirtualMachineScaleSetNetworkProfile networkProfile;
 
-    /** Creates an instance of VirtualMachineScaleSetVMProfile class. */
+    /**
+     * Creates an instance of VirtualMachineScaleSetVMProfile class.
+     */
     public VirtualMachineScaleSetVMProfile() {}
 
     /**
      * Get the networkProfile property: Specifies properties of the network interfaces of the virtual machines in the
      * scale set.
-     *
+     * 
      * @return the networkProfile value.
      */
     public VirtualMachineScaleSetNetworkProfile getNetworkProfile() {
@@ -32,7 +36,7 @@ public final class VirtualMachineScaleSetVMProfile {
     /**
      * Set the networkProfile property: Specifies properties of the network interfaces of the virtual machines in the
      * scale set.
-     *
+     * 
      * @param networkProfile the networkProfile value to set.
      * @return the VirtualMachineScaleSetVMProfile object itself.
      */
@@ -43,7 +47,7 @@ public final class VirtualMachineScaleSetVMProfile {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

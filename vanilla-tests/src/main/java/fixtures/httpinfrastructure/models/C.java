@@ -7,7 +7,9 @@ package fixtures.httpinfrastructure.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The C model. */
+/**
+ * The C model.
+ */
 @Fluent
 public final class C {
     /*
@@ -16,12 +18,14 @@ public final class C {
     @JsonProperty(value = "httpCode")
     private String httpCode;
 
-    /** Creates an instance of C class. */
+    /**
+     * Creates an instance of C class.
+     */
     public C() {}
 
     /**
      * Get the httpCode property: The httpCode property.
-     *
+     * 
      * @return the httpCode value.
      */
     public String getHttpCode() {
@@ -30,7 +34,7 @@ public final class C {
 
     /**
      * Set the httpCode property: The httpCode property.
-     *
+     * 
      * @param httpCode the httpCode value to set.
      * @return the C object itself.
      */
@@ -41,7 +45,7 @@ public final class C {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

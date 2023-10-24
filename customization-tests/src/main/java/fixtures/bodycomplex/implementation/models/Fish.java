@@ -11,17 +11,17 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
 
-/** The Fish model. */
+/**
+ * The Fish model.
+ */
 @JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "fishtype",
-        defaultImpl = Fish.class)
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "fishtype",
+    defaultImpl = Fish.class)
 @JsonTypeName("Fish")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "salmon", value = Salmon.class),
-    @JsonSubTypes.Type(name = "shark", value = Shark.class)
-})
+@JsonSubTypes({ @JsonSubTypes.Type(name = "salmon", value = Salmon.class),
+    @JsonSubTypes.Type(name = "shark", value = Shark.class) })
 @Fluent
 public class Fish {
     /*
@@ -42,12 +42,14 @@ public class Fish {
     @JsonProperty(value = "siblings")
     private List<Fish> siblings;
 
-    /** Creates an instance of Fish class. */
+    /**
+     * Creates an instance of Fish class.
+     */
     public Fish() {}
 
     /**
      * Get the species property: The species property.
-     *
+     * 
      * @return the species value.
      */
     public String getSpecies() {
@@ -56,7 +58,7 @@ public class Fish {
 
     /**
      * Set the species property: The species property.
-     *
+     * 
      * @param species the species value to set.
      * @return the Fish object itself.
      */
@@ -67,7 +69,7 @@ public class Fish {
 
     /**
      * Get the length property: The length property.
-     *
+     * 
      * @return the length value.
      */
     public float getLength() {
@@ -76,7 +78,7 @@ public class Fish {
 
     /**
      * Set the length property: The length property.
-     *
+     * 
      * @param length the length value to set.
      * @return the Fish object itself.
      */
@@ -87,7 +89,7 @@ public class Fish {
 
     /**
      * Get the siblings property: The siblings property.
-     *
+     * 
      * @return the siblings value.
      */
     public List<Fish> getSiblings() {
@@ -96,7 +98,7 @@ public class Fish {
 
     /**
      * Set the siblings property: The siblings property.
-     *
+     * 
      * @param siblings the siblings value to set.
      * @return the Fish object itself.
      */

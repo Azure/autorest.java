@@ -8,7 +8,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** The DotFishMarket model. */
+/**
+ * The DotFishMarket model.
+ */
 @Immutable
 public final class DotFishMarket {
     /*
@@ -35,12 +37,14 @@ public final class DotFishMarket {
     @JsonProperty(value = "fishes")
     private List<DotFish> fishes;
 
-    /** Creates an instance of DotFishMarket class. */
+    /**
+     * Creates an instance of DotFishMarket class.
+     */
     private DotFishMarket() {}
 
     /**
      * Get the sampleSalmon property: The sampleSalmon property.
-     *
+     * 
      * @return the sampleSalmon value.
      */
     public DotSalmon getSampleSalmon() {
@@ -49,7 +53,7 @@ public final class DotFishMarket {
 
     /**
      * Get the salmons property: The salmons property.
-     *
+     * 
      * @return the salmons value.
      */
     public List<DotSalmon> getSalmons() {
@@ -58,7 +62,7 @@ public final class DotFishMarket {
 
     /**
      * Get the sampleFish property: The sampleFish property.
-     *
+     * 
      * @return the sampleFish value.
      */
     public DotFish getSampleFish() {
@@ -67,7 +71,7 @@ public final class DotFishMarket {
 
     /**
      * Get the fishes property: The fishes property.
-     *
+     * 
      * @return the fishes value.
      */
     public List<DotFish> getFishes() {
@@ -76,7 +80,7 @@ public final class DotFishMarket {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

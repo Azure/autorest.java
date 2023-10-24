@@ -4,12 +4,16 @@
 
 package com.specialwords.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The Global model. */
+/**
+ * The Global model.
+ */
 @Immutable
 public final class Global {
     /*
@@ -21,7 +25,7 @@ public final class Global {
 
     /**
      * Creates an instance of Global class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +36,7 @@ public final class Global {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

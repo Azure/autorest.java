@@ -4,6 +4,7 @@
 
 package com.encode.datetime.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,8 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.regex.Pattern;
 
-/** The UnixTimestampDatetimeProperty model. */
+/**
+ * The UnixTimestampDatetimeProperty model.
+ */
 @Immutable
 public final class UnixTimestampDatetimeProperty {
     /*
@@ -24,7 +28,7 @@ public final class UnixTimestampDatetimeProperty {
 
     /**
      * Creates an instance of UnixTimestampDatetimeProperty class.
-     *
+     * 
      * @param value the value value to set.
      */
     @Generated
@@ -40,7 +44,7 @@ public final class UnixTimestampDatetimeProperty {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     @Generated

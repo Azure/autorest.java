@@ -18,10 +18,13 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.AzureKeyCredentialPolicy;
+import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
+import com.azure.core.http.policy.KeyCredentialPolicy;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryOptions;
 import com.azure.core.http.policy.RetryPolicy;
@@ -32,29 +35,35 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
 import com.cadl.protocolandconvenient.implementation.ProtocolAndConvenientClientImpl;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the ProtocolAndConvenientClient type. */
+/**
+ * A builder for creating a new instance of the ProtocolAndConvenientClient type.
+ */
 @ServiceClientBuilder(serviceClients = {ProtocolAndConvenientClient.class, ProtocolAndConvenientAsyncClient.class})
-public final class ProtocolAndConvenientClientBuilder
-        implements HttpTrait<ProtocolAndConvenientClientBuilder>,
-                ConfigurationTrait<ProtocolAndConvenientClientBuilder>,
-                EndpointTrait<ProtocolAndConvenientClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
-
-    @Generated private static final String SDK_VERSION = "version";
+public final class ProtocolAndConvenientClientBuilder implements HttpTrait<ProtocolAndConvenientClientBuilder>, ConfigurationTrait<ProtocolAndConvenientClientBuilder>, EndpointTrait<ProtocolAndConvenientClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
     @Generated
-    private static final Map<String, String> PROPERTIES =
-            CoreUtils.getProperties("cadl-protocolandconvenient.properties");
+    private static final String SDK_VERSION = "version";
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("cadl-protocolandconvenient.properties");
 
-    /** Create an instance of the ProtocolAndConvenientClientBuilder. */
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
+
+    /**
+     * Create an instance of the ProtocolAndConvenientClientBuilder.
+     */
     @Generated
     public ProtocolAndConvenientClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -63,9 +72,12 @@ public final class ProtocolAndConvenientClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ProtocolAndConvenientClientBuilder pipeline(HttpPipeline pipeline) {
@@ -79,9 +91,12 @@ public final class ProtocolAndConvenientClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ProtocolAndConvenientClientBuilder httpClient(HttpClient httpClient) {
@@ -92,9 +107,12 @@ public final class ProtocolAndConvenientClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ProtocolAndConvenientClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -105,9 +123,12 @@ public final class ProtocolAndConvenientClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ProtocolAndConvenientClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -118,9 +139,12 @@ public final class ProtocolAndConvenientClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ProtocolAndConvenientClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -128,7 +152,9 @@ public final class ProtocolAndConvenientClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ProtocolAndConvenientClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -140,9 +166,12 @@ public final class ProtocolAndConvenientClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ProtocolAndConvenientClientBuilder configuration(Configuration configuration) {
@@ -153,9 +182,12 @@ public final class ProtocolAndConvenientClientBuilder
     /*
      * The service endpoint
      */
-    @Generated private String endpoint;
+    @Generated
+    private String endpoint;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ProtocolAndConvenientClientBuilder endpoint(String endpoint) {
@@ -166,11 +198,12 @@ public final class ProtocolAndConvenientClientBuilder
     /*
      * Service version
      */
-    @Generated private ProtocolAndConvenientServiceVersion serviceVersion;
+    @Generated
+    private ProtocolAndConvenientServiceVersion serviceVersion;
 
     /**
      * Sets Service version.
-     *
+     * 
      * @param serviceVersion the serviceVersion value.
      * @return the ProtocolAndConvenientClientBuilder.
      */
@@ -183,11 +216,12 @@ public final class ProtocolAndConvenientClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the ProtocolAndConvenientClientBuilder.
      */
@@ -199,27 +233,20 @@ public final class ProtocolAndConvenientClientBuilder
 
     /**
      * Builds an instance of ProtocolAndConvenientClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of ProtocolAndConvenientClientImpl.
      */
     @Generated
     private ProtocolAndConvenientClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ProtocolAndConvenientServiceVersion localServiceVersion =
-                (serviceVersion != null) ? serviceVersion : ProtocolAndConvenientServiceVersion.getLatest();
-        ProtocolAndConvenientClientImpl client =
-                new ProtocolAndConvenientClientImpl(
-                        localPipeline,
-                        JacksonAdapter.createDefaultSerializerAdapter(),
-                        this.endpoint,
-                        localServiceVersion);
+        ProtocolAndConvenientServiceVersion localServiceVersion = (serviceVersion != null) ? serviceVersion : ProtocolAndConvenientServiceVersion.getLatest();
+        ProtocolAndConvenientClientImpl client = new ProtocolAndConvenientClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -230,35 +257,24 @@ public final class ProtocolAndConvenientClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders().forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL).forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY).forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0])).httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of ProtocolAndConvenientAsyncClient class.
-     *
+     * 
      * @return an instance of ProtocolAndConvenientAsyncClient.
      */
     @Generated
@@ -268,7 +284,7 @@ public final class ProtocolAndConvenientClientBuilder
 
     /**
      * Builds an instance of ProtocolAndConvenientClient class.
-     *
+     * 
      * @return an instance of ProtocolAndConvenientClient.
      */
     @Generated

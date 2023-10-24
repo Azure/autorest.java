@@ -4,12 +4,16 @@
 
 package com._specs_.azure.clientgenerator.core.access.implementation.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** Used in internal operations, should be generated but not exported. */
+/**
+ * Used in internal operations, should be generated but not exported.
+ */
 @Immutable
 public final class OuterModel extends BaseModel {
     /*
@@ -21,7 +25,7 @@ public final class OuterModel extends BaseModel {
 
     /**
      * Creates an instance of OuterModel class.
-     *
+     * 
      * @param name the name value to set.
      * @param inner the inner value to set.
      */
@@ -34,7 +38,7 @@ public final class OuterModel extends BaseModel {
 
     /**
      * Get the inner property: The inner property.
-     *
+     * 
      * @return the inner value.
      */
     @Generated

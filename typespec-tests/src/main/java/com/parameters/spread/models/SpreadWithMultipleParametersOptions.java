@@ -4,12 +4,16 @@
 
 package com.parameters.spread.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** Options for spreadWithMultipleParameters API. */
+/**
+ * Options for spreadWithMultipleParameters API.
+ */
 @Immutable
 public final class SpreadWithMultipleParametersOptions {
     /*
@@ -70,7 +74,7 @@ public final class SpreadWithMultipleParametersOptions {
 
     /**
      * Creates an instance of SpreadWithMultipleParametersOptions class.
-     *
+     * 
      * @param id the id value to set.
      * @param xMsTestHeader the xMsTestHeader value to set.
      * @param prop1 the prop1 value to set.
@@ -82,15 +86,7 @@ public final class SpreadWithMultipleParametersOptions {
      */
     @Generated
     @JsonCreator
-    public SpreadWithMultipleParametersOptions(
-            @JsonProperty(value = "id") String id,
-            @JsonProperty(value = "x-ms-test-header") String xMsTestHeader,
-            @JsonProperty(value = "prop1") String prop1,
-            @JsonProperty(value = "prop2") String prop2,
-            @JsonProperty(value = "prop3") String prop3,
-            @JsonProperty(value = "prop4") String prop4,
-            @JsonProperty(value = "prop5") String prop5,
-            @JsonProperty(value = "prop6") String prop6) {
+    public SpreadWithMultipleParametersOptions(@JsonProperty(value = "id") String id, @JsonProperty(value = "x-ms-test-header") String xMsTestHeader, @JsonProperty(value = "prop1") String prop1, @JsonProperty(value = "prop2") String prop2, @JsonProperty(value = "prop3") String prop3, @JsonProperty(value = "prop4") String prop4, @JsonProperty(value = "prop5") String prop5, @JsonProperty(value = "prop6") String prop6) {
         this.id = id;
         this.xMsTestHeader = xMsTestHeader;
         this.prop1 = prop1;
@@ -103,7 +99,7 @@ public final class SpreadWithMultipleParametersOptions {
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -113,7 +109,7 @@ public final class SpreadWithMultipleParametersOptions {
 
     /**
      * Get the xMsTestHeader property: The x-ms-test-header property.
-     *
+     * 
      * @return the xMsTestHeader value.
      */
     @Generated
@@ -123,7 +119,7 @@ public final class SpreadWithMultipleParametersOptions {
 
     /**
      * Get the prop1 property: The prop1 property.
-     *
+     * 
      * @return the prop1 value.
      */
     @Generated
@@ -133,7 +129,7 @@ public final class SpreadWithMultipleParametersOptions {
 
     /**
      * Get the prop2 property: The prop2 property.
-     *
+     * 
      * @return the prop2 value.
      */
     @Generated
@@ -143,7 +139,7 @@ public final class SpreadWithMultipleParametersOptions {
 
     /**
      * Get the prop3 property: The prop3 property.
-     *
+     * 
      * @return the prop3 value.
      */
     @Generated
@@ -153,7 +149,7 @@ public final class SpreadWithMultipleParametersOptions {
 
     /**
      * Get the prop4 property: The prop4 property.
-     *
+     * 
      * @return the prop4 value.
      */
     @Generated
@@ -163,7 +159,7 @@ public final class SpreadWithMultipleParametersOptions {
 
     /**
      * Get the prop5 property: The prop5 property.
-     *
+     * 
      * @return the prop5 value.
      */
     @Generated
@@ -173,7 +169,7 @@ public final class SpreadWithMultipleParametersOptions {
 
     /**
      * Get the prop6 property: The prop6 property.
-     *
+     * 
      * @return the prop6 value.
      */
     @Generated

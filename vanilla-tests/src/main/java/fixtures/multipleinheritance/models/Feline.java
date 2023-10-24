@@ -7,7 +7,9 @@ package fixtures.multipleinheritance.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Feline model. */
+/**
+ * The Feline model.
+ */
 @Fluent
 public class Feline {
     /*
@@ -22,12 +24,14 @@ public class Feline {
     @JsonProperty(value = "hisses")
     private Boolean hisses;
 
-    /** Creates an instance of Feline class. */
+    /**
+     * Creates an instance of Feline class.
+     */
     public Feline() {}
 
     /**
      * Get the meows property: The meows property.
-     *
+     * 
      * @return the meows value.
      */
     public Boolean isMeows() {
@@ -36,7 +40,7 @@ public class Feline {
 
     /**
      * Set the meows property: The meows property.
-     *
+     * 
      * @param meows the meows value to set.
      * @return the Feline object itself.
      */
@@ -47,7 +51,7 @@ public class Feline {
 
     /**
      * Get the hisses property: The hisses property.
-     *
+     * 
      * @return the hisses value.
      */
     public Boolean isHisses() {
@@ -56,7 +60,7 @@ public class Feline {
 
     /**
      * Set the hisses property: The hisses property.
-     *
+     * 
      * @param hisses the hisses value to set.
      * @return the Feline object itself.
      */
@@ -67,7 +71,7 @@ public class Feline {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

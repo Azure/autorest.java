@@ -6,12 +6,15 @@ package com.type.model.inheritance.nesteddiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic
@@ -44,7 +47,7 @@ public final class Salmon extends Fish {
 
     /**
      * Creates an instance of Salmon class.
-     *
+     * 
      * @param age the age value to set.
      */
     @Generated
@@ -55,7 +58,7 @@ public final class Salmon extends Fish {
 
     /**
      * Get the friends property: The friends property.
-     *
+     * 
      * @return the friends value.
      */
     @Generated
@@ -65,7 +68,7 @@ public final class Salmon extends Fish {
 
     /**
      * Set the friends property: The friends property.
-     *
+     * 
      * @param friends the friends value to set.
      * @return the Salmon object itself.
      */
@@ -77,7 +80,7 @@ public final class Salmon extends Fish {
 
     /**
      * Get the hate property: The hate property.
-     *
+     * 
      * @return the hate value.
      */
     @Generated
@@ -87,7 +90,7 @@ public final class Salmon extends Fish {
 
     /**
      * Set the hate property: The hate property.
-     *
+     * 
      * @param hate the hate value to set.
      * @return the Salmon object itself.
      */
@@ -99,7 +102,7 @@ public final class Salmon extends Fish {
 
     /**
      * Get the partner property: The partner property.
-     *
+     * 
      * @return the partner value.
      */
     @Generated
@@ -109,7 +112,7 @@ public final class Salmon extends Fish {
 
     /**
      * Set the partner property: The partner property.
-     *
+     * 
      * @param partner the partner value to set.
      * @return the Salmon object itself.
      */

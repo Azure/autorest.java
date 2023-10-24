@@ -18,6 +18,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -25,52 +26,65 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the SingleDiscriminatorClient type. */
+/**
+ * Initializes a new instance of the SingleDiscriminatorClient type.
+ */
 public final class SingleDiscriminatorClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final SingleDiscriminatorClientService service;
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** Initializes an instance of SingleDiscriminatorClient client. */
+    /**
+     * Initializes an instance of SingleDiscriminatorClient client.
+     */
     public SingleDiscriminatorClientImpl() {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
      * Initializes an instance of SingleDiscriminatorClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public SingleDiscriminatorClientImpl(HttpPipeline httpPipeline) {
@@ -79,16 +93,14 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * Initializes an instance of SingleDiscriminatorClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      */
     public SingleDiscriminatorClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
-        this.service =
-                RestProxy.create(
-                        SingleDiscriminatorClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service = RestProxy.create(SingleDiscriminatorClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
@@ -100,245 +112,132 @@ public final class SingleDiscriminatorClientImpl {
     public interface SingleDiscriminatorClientService {
         @Get("/type/model/inheritance/single-discriminator/model")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getModel(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getModel(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/model")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getModelSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> getModelSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/single-discriminator/model")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putModel(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putModel(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/single-discriminator/model")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putModelSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putModelSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/recursivemodel")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getRecursiveModel(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getRecursiveModel(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/recursivemodel")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getRecursiveModelSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> getRecursiveModelSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/single-discriminator/recursivemodel")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putRecursiveModel(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putRecursiveModel(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/single-discriminator/recursivemodel")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putRecursiveModelSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putRecursiveModelSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/missingdiscriminator")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getMissingDiscriminator(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getMissingDiscriminator(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/missingdiscriminator")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getMissingDiscriminatorSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> getMissingDiscriminatorSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/wrongdiscriminator")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getWrongDiscriminator(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getWrongDiscriminator(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/wrongdiscriminator")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getWrongDiscriminatorSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> getWrongDiscriminatorSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/legacy-model")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getLegacyModel(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getLegacyModel(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/legacy-model")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getLegacyModelSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> getLegacyModelSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
      * The getModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getModelWithResponseAsync(RequestOptions requestOptions) {
@@ -348,22 +247,19 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(RequestOptions requestOptions) {
@@ -373,15 +269,13 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The putModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input This is base model for polymorphic single level inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -398,15 +292,13 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The putModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input This is base model for polymorphic single level inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -423,22 +315,19 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getRecursiveModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRecursiveModelWithResponseAsync(RequestOptions requestOptions) {
@@ -448,22 +337,19 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getRecursiveModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRecursiveModelWithResponse(RequestOptions requestOptions) {
@@ -473,15 +359,13 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The putRecursiveModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input This is base model for polymorphic single level inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -498,15 +382,13 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The putRecursiveModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input This is base model for polymorphic single level inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -523,22 +405,19 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getMissingDiscriminator operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getMissingDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
@@ -548,22 +427,19 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getMissingDiscriminator operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getMissingDiscriminatorWithResponse(RequestOptions requestOptions) {
@@ -573,22 +449,19 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getWrongDiscriminator operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWrongDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
@@ -598,22 +471,19 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getWrongDiscriminator operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWrongDiscriminatorWithResponse(RequestOptions requestOptions) {
@@ -623,22 +493,19 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getLegacyModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     size: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return define a base class in the legacy way along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return define a base class in the legacy way along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getLegacyModelWithResponseAsync(RequestOptions requestOptions) {
@@ -648,15 +515,13 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getLegacyModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     size: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

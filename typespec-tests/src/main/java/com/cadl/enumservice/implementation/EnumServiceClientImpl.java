@@ -19,6 +19,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -26,52 +27,69 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the EnumServiceClient type. */
+/**
+ * Initializes a new instance of the EnumServiceClient type.
+ */
 public final class EnumServiceClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final EnumServiceClientService service;
 
-    /** Server parameter. */
+    /**
+     * Server parameter.
+     */
     private final String endpoint;
 
     /**
      * Gets Server parameter.
-     *
+     * 
      * @return the endpoint value.
      */
     public String getEndpoint() {
         return this.endpoint;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
@@ -80,19 +98,16 @@ public final class EnumServiceClientImpl {
 
     /**
      * Initializes an instance of EnumServiceClient client.
-     *
+     * 
      * @param endpoint Server parameter.
      */
     public EnumServiceClientImpl(String endpoint) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of EnumServiceClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
      */
@@ -102,7 +117,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * Initializes an instance of EnumServiceClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
@@ -123,580 +138,252 @@ public final class EnumServiceClientImpl {
     public interface EnumServiceClientService {
         @Get("/enum/color")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getColor(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> getColor(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/enum/color")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getColorSync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> getColorSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/enum/colormodel")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getColorModel(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> getColorModel(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/enum/colormodel")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getColorModelSync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> getColorModelSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/colormodel")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> setColorModel(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("color") String color,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> setColorModel(@HostParam("endpoint") String endpoint, @QueryParam("color") String color, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/colormodel")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> setColorModelSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("color") String color,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> setColorModelSync(@HostParam("endpoint") String endpoint, @QueryParam("color") String color, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/priority")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> setPriority(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("priority") String priority,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> setPriority(@HostParam("endpoint") String endpoint, @QueryParam("priority") String priority, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/priority")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> setPrioritySync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("priority") String priority,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> setPrioritySync(@HostParam("endpoint") String endpoint, @QueryParam("priority") String priority, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/enum/operation/state/running")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getRunningOperation(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("state") String state,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> getRunningOperation(@HostParam("endpoint") String endpoint, @QueryParam("state") String state, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/enum/operation/state/running")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getRunningOperationSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("state") String state,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> getRunningOperationSync(@HostParam("endpoint") String endpoint, @QueryParam("state") String state, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/enum/operation/state")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getOperation(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("state") String state,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> getOperation(@HostParam("endpoint") String endpoint, @QueryParam("state") String state, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/enum/operation/state")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getOperationSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("state") String state,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> getOperationSync(@HostParam("endpoint") String endpoint, @QueryParam("state") String state, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenumarray")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> setStringEnumArray(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("colorArray") String colorArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> setStringEnumArray(@HostParam("endpoint") String endpoint, @QueryParam("colorArray") String colorArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenumarray")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> setStringEnumArraySync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("colorArray") String colorArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> setStringEnumArraySync(@HostParam("endpoint") String endpoint, @QueryParam("colorArray") String colorArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intenumarray")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> setIntEnumArray(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("priorityArray") String priorityArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> setIntEnumArray(@HostParam("endpoint") String endpoint, @QueryParam("priorityArray") String priorityArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intenumarray")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> setIntEnumArraySync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("priorityArray") String priorityArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> setIntEnumArraySync(@HostParam("endpoint") String endpoint, @QueryParam("priorityArray") String priorityArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringarray")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> setStringArray(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("stringArray") String stringArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> setStringArray(@HostParam("endpoint") String endpoint, @QueryParam("stringArray") String stringArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringarray")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> setStringArraySync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("stringArray") String stringArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> setStringArraySync(@HostParam("endpoint") String endpoint, @QueryParam("stringArray") String stringArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intarray")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> setIntArray(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("intArray") String intArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> setIntArray(@HostParam("endpoint") String endpoint, @QueryParam("intArray") String intArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intarray")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> setIntArraySync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("intArray") String intArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> setIntArraySync(@HostParam("endpoint") String endpoint, @QueryParam("intArray") String intArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenummulti")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> setStringEnumMulti(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam(value = "colorArray", multipleQueryParams = true) List<String> colorArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> setStringEnumMulti(@HostParam("endpoint") String endpoint, @QueryParam(value = "colorArray", multipleQueryParams = true) List<String> colorArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenummulti")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> setStringEnumMultiSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam(value = "colorArray", multipleQueryParams = true) List<String> colorArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> setStringEnumMultiSync(@HostParam("endpoint") String endpoint, @QueryParam(value = "colorArray", multipleQueryParams = true) List<String> colorArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intenummulti")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> setIntEnumMulti(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam(value = "priorityArray", multipleQueryParams = true) List<String> priorityArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> setIntEnumMulti(@HostParam("endpoint") String endpoint, @QueryParam(value = "priorityArray", multipleQueryParams = true) List<String> priorityArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intenummulti")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> setIntEnumMultiSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam(value = "priorityArray", multipleQueryParams = true) List<String> priorityArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> setIntEnumMultiSync(@HostParam("endpoint") String endpoint, @QueryParam(value = "priorityArray", multipleQueryParams = true) List<String> priorityArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringmulti")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> setStringMulti(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam(value = "stringArray", multipleQueryParams = true) List<String> stringArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> setStringMulti(@HostParam("endpoint") String endpoint, @QueryParam(value = "stringArray", multipleQueryParams = true) List<String> stringArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringmulti")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> setStringMultiSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam(value = "stringArray", multipleQueryParams = true) List<String> stringArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> setStringMultiSync(@HostParam("endpoint") String endpoint, @QueryParam(value = "stringArray", multipleQueryParams = true) List<String> stringArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intmulti")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> setIntMulti(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam(value = "intArray", multipleQueryParams = true) List<String> intArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> setIntMulti(@HostParam("endpoint") String endpoint, @QueryParam(value = "intArray", multipleQueryParams = true) List<String> intArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intmulti")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> setIntMultiSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam(value = "intArray", multipleQueryParams = true) List<String> intArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> setIntMultiSync(@HostParam("endpoint") String endpoint, @QueryParam(value = "intArray", multipleQueryParams = true) List<String> intArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenumarrayheader")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> setStringEnumArrayHeader(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("color-array") String colorArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> setStringEnumArrayHeader(@HostParam("endpoint") String endpoint, @HeaderParam("color-array") String colorArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenumarrayheader")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> setStringEnumArrayHeaderSync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("color-array") String colorArray,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> setStringEnumArrayHeaderSync(@HostParam("endpoint") String endpoint, @HeaderParam("color-array") String colorArray, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
      * The getColor operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Red/Blue/Green)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -712,13 +399,11 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getColor operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Red/Blue/Green)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -734,13 +419,11 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getColorModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Red/Blue/Green)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -751,19 +434,16 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getColorModelWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getColorModel(this.getEndpoint(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getColorModel(this.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
      * The getColorModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Red/Blue/Green)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -779,9 +459,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setColorModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -794,7 +472,7 @@ public final class EnumServiceClientImpl {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param color The color parameter. Allowed values: "Red", "Blue", "Green".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -806,15 +484,12 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setColorModelWithResponseAsync(String color, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.setColorModel(this.getEndpoint(), color, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.setColorModel(this.getEndpoint(), color, accept, requestOptions, context));
     }
 
     /**
      * The setColorModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -827,7 +502,7 @@ public final class EnumServiceClientImpl {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param color The color parameter. Allowed values: "Red", "Blue", "Green".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -844,9 +519,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setPriority operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -859,7 +532,7 @@ public final class EnumServiceClientImpl {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param priority The priority parameter. Allowed values: 100, 0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -871,15 +544,12 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> setPriorityWithResponseAsync(String priority, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.setPriority(this.getEndpoint(), priority, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.setPriority(this.getEndpoint(), priority, accept, requestOptions, context));
     }
 
     /**
      * The setPriority operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -892,7 +562,7 @@ public final class EnumServiceClientImpl {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param priority The priority parameter. Allowed values: 100, 0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -909,9 +579,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getRunningOperation operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -924,7 +592,7 @@ public final class EnumServiceClientImpl {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -936,15 +604,12 @@ public final class EnumServiceClientImpl {
     public Mono<Response<BinaryData>> getRunningOperationWithResponseAsync(RequestOptions requestOptions) {
         final String state = "Running";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getRunningOperation(this.getEndpoint(), state, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getRunningOperation(this.getEndpoint(), state, accept, requestOptions, context));
     }
 
     /**
      * The getRunningOperation operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -957,7 +622,7 @@ public final class EnumServiceClientImpl {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -974,9 +639,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getOperation operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -989,7 +652,7 @@ public final class EnumServiceClientImpl {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param state The state parameter. Allowed values: "Running", "Completed", "Failed".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1001,15 +664,12 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getOperationWithResponseAsync(String state, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getOperation(this.getEndpoint(), state, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getOperation(this.getEndpoint(), state, accept, requestOptions, context));
     }
 
     /**
      * The getOperation operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -1022,7 +682,7 @@ public final class EnumServiceClientImpl {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param state The state parameter. Allowed values: "Running", "Completed", "Failed".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1039,23 +699,18 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setStringEnumArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel. In the form of "," separated string.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1065,38 +720,28 @@ public final class EnumServiceClientImpl {
      * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setStringEnumArrayWithResponseAsync(
-            List<String> colorArray, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setStringEnumArrayWithResponseAsync(List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorArrayConverted =
-                colorArray.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
-        return FluxUtil.withContext(
-                context ->
-                        service.setStringEnumArray(
-                                this.getEndpoint(), colorArrayConverted, accept, requestOptions, context));
+        String colorArrayConverted = colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
+        return FluxUtil.withContext(context -> service.setStringEnumArray(this.getEndpoint(), colorArrayConverted, accept, requestOptions, context));
     }
 
     /**
      * The setStringEnumArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel. In the form of "," separated string.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1108,33 +753,26 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringEnumArrayWithResponse(List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorArrayConverted =
-                colorArray.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
-        return service.setStringEnumArraySync(
-                this.getEndpoint(), colorArrayConverted, accept, requestOptions, Context.NONE);
+        String colorArrayConverted = colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
+        return service.setStringEnumArraySync(this.getEndpoint(), colorArrayConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The setIntEnumArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Priority. In the form of "," separated string.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param priorityArray Array of Priority.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1144,38 +782,28 @@ public final class EnumServiceClientImpl {
      * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setIntEnumArrayWithResponseAsync(
-            List<String> priorityArray, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setIntEnumArrayWithResponseAsync(List<String> priorityArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String priorityArrayConverted =
-                priorityArray.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
-        return FluxUtil.withContext(
-                context ->
-                        service.setIntEnumArray(
-                                this.getEndpoint(), priorityArrayConverted, accept, requestOptions, context));
+        String priorityArrayConverted = priorityArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
+        return FluxUtil.withContext(context -> service.setIntEnumArray(this.getEndpoint(), priorityArrayConverted, accept, requestOptions, context));
     }
 
     /**
      * The setIntEnumArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Priority. In the form of "," separated string.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param priorityArray Array of Priority.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1187,33 +815,26 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntEnumArrayWithResponse(List<String> priorityArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String priorityArrayConverted =
-                priorityArray.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
-        return service.setIntEnumArraySync(
-                this.getEndpoint(), priorityArrayConverted, accept, requestOptions, Context.NONE);
+        String priorityArrayConverted = priorityArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
+        return service.setIntEnumArraySync(this.getEndpoint(), priorityArrayConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The setStringArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. In the form of "," separated string.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1223,38 +844,28 @@ public final class EnumServiceClientImpl {
      * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setStringArrayWithResponseAsync(
-            List<String> stringArray, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setStringArrayWithResponseAsync(List<String> stringArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String stringArrayConverted =
-                stringArray.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
-        return FluxUtil.withContext(
-                context ->
-                        service.setStringArray(
-                                this.getEndpoint(), stringArrayConverted, accept, requestOptions, context));
+        String stringArrayConverted = stringArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
+        return FluxUtil.withContext(context -> service.setStringArray(this.getEndpoint(), stringArrayConverted, accept, requestOptions, context));
     }
 
     /**
      * The setStringArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. In the form of "," separated string.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1266,33 +877,26 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringArrayWithResponse(List<String> stringArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String stringArrayConverted =
-                stringArray.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
-        return service.setStringArraySync(
-                this.getEndpoint(), stringArrayConverted, accept, requestOptions, Context.NONE);
+        String stringArrayConverted = stringArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
+        return service.setStringArraySync(this.getEndpoint(), stringArrayConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The setIntArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. In the form of "," separated string.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param intArray Array of IntArrayModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1302,34 +906,26 @@ public final class EnumServiceClientImpl {
      * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setIntArrayWithResponseAsync(
-            List<Integer> intArray, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setIntArrayWithResponseAsync(List<Integer> intArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String intArrayConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(intArray, CollectionFormat.CSV);
-        return FluxUtil.withContext(
-                context -> service.setIntArray(this.getEndpoint(), intArrayConverted, accept, requestOptions, context));
+        String intArrayConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(intArray, CollectionFormat.CSV);
+        return FluxUtil.withContext(context -> service.setIntArray(this.getEndpoint(), intArrayConverted, accept, requestOptions, context));
     }
 
     /**
      * The setIntArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. In the form of "," separated string.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param intArray Array of IntArrayModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1341,30 +937,24 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntArrayWithResponse(List<Integer> intArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String intArrayConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(intArray, CollectionFormat.CSV);
+        String intArrayConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(intArray, CollectionFormat.CSV);
         return service.setIntArraySync(this.getEndpoint(), intArrayConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The setStringEnumMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1374,36 +964,28 @@ public final class EnumServiceClientImpl {
      * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setStringEnumMultiWithResponseAsync(
-            List<String> colorArray, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setStringEnumMultiWithResponseAsync(List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        List<String> colorArrayConverted =
-                colorArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return FluxUtil.withContext(
-                context ->
-                        service.setStringEnumMulti(
-                                this.getEndpoint(), colorArrayConverted, accept, requestOptions, context));
+        List<String> colorArrayConverted = colorArray.stream()
+            .map(item -> Objects.toString(item, ""))
+            .collect(Collectors.toList());
+        return FluxUtil.withContext(context -> service.setStringEnumMulti(this.getEndpoint(), colorArrayConverted, accept, requestOptions, context));
     }
 
     /**
      * The setStringEnumMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1415,31 +997,26 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringEnumMultiWithResponse(List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        List<String> colorArrayConverted =
-                colorArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return service.setStringEnumMultiSync(
-                this.getEndpoint(), colorArrayConverted, accept, requestOptions, Context.NONE);
+        List<String> colorArrayConverted = colorArray.stream()
+            .map(item -> Objects.toString(item, ""))
+            .collect(Collectors.toList());
+        return service.setStringEnumMultiSync(this.getEndpoint(), colorArrayConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The setIntEnumMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Priority. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param priorityArray Array of Priority.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1449,36 +1026,28 @@ public final class EnumServiceClientImpl {
      * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setIntEnumMultiWithResponseAsync(
-            List<String> priorityArray, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setIntEnumMultiWithResponseAsync(List<String> priorityArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        List<String> priorityArrayConverted =
-                priorityArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return FluxUtil.withContext(
-                context ->
-                        service.setIntEnumMulti(
-                                this.getEndpoint(), priorityArrayConverted, accept, requestOptions, context));
+        List<String> priorityArrayConverted = priorityArray.stream()
+            .map(item -> Objects.toString(item, ""))
+            .collect(Collectors.toList());
+        return FluxUtil.withContext(context -> service.setIntEnumMulti(this.getEndpoint(), priorityArrayConverted, accept, requestOptions, context));
     }
 
     /**
      * The setIntEnumMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Priority. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param priorityArray Array of Priority.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1490,31 +1059,26 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntEnumMultiWithResponse(List<String> priorityArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        List<String> priorityArrayConverted =
-                priorityArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return service.setIntEnumMultiSync(
-                this.getEndpoint(), priorityArrayConverted, accept, requestOptions, Context.NONE);
+        List<String> priorityArrayConverted = priorityArray.stream()
+            .map(item -> Objects.toString(item, ""))
+            .collect(Collectors.toList());
+        return service.setIntEnumMultiSync(this.getEndpoint(), priorityArrayConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The setStringMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1524,36 +1088,28 @@ public final class EnumServiceClientImpl {
      * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setStringMultiWithResponseAsync(
-            List<String> stringArray, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setStringMultiWithResponseAsync(List<String> stringArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        List<String> stringArrayConverted =
-                stringArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return FluxUtil.withContext(
-                context ->
-                        service.setStringMulti(
-                                this.getEndpoint(), stringArrayConverted, accept, requestOptions, context));
+        List<String> stringArrayConverted = stringArray.stream()
+            .map(item -> Objects.toString(item, ""))
+            .collect(Collectors.toList());
+        return FluxUtil.withContext(context -> service.setStringMulti(this.getEndpoint(), stringArrayConverted, accept, requestOptions, context));
     }
 
     /**
      * The setStringMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1565,31 +1121,26 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringMultiWithResponse(List<String> stringArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        List<String> stringArrayConverted =
-                stringArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return service.setStringMultiSync(
-                this.getEndpoint(), stringArrayConverted, accept, requestOptions, Context.NONE);
+        List<String> stringArrayConverted = stringArray.stream()
+            .map(item -> Objects.toString(item, ""))
+            .collect(Collectors.toList());
+        return service.setStringMultiSync(this.getEndpoint(), stringArrayConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The setIntMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param intArray Array of IntArrayModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1599,34 +1150,28 @@ public final class EnumServiceClientImpl {
      * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setIntMultiWithResponseAsync(
-            List<Integer> intArray, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setIntMultiWithResponseAsync(List<Integer> intArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        List<String> intArrayConverted =
-                intArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return FluxUtil.withContext(
-                context -> service.setIntMulti(this.getEndpoint(), intArrayConverted, accept, requestOptions, context));
+        List<String> intArrayConverted = intArray.stream()
+            .map(item -> Objects.toString(item, ""))
+            .collect(Collectors.toList());
+        return FluxUtil.withContext(context -> service.setIntMulti(this.getEndpoint(), intArrayConverted, accept, requestOptions, context));
     }
 
     /**
      * The setIntMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param intArray Array of IntArrayModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1638,30 +1183,26 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setIntMultiWithResponse(List<Integer> intArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        List<String> intArrayConverted =
-                intArray.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> intArrayConverted = intArray.stream()
+            .map(item -> Objects.toString(item, ""))
+            .collect(Collectors.toList());
         return service.setIntMultiSync(this.getEndpoint(), intArrayConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The setStringEnumArrayHeader operation.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>color-array-opt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1671,38 +1212,28 @@ public final class EnumServiceClientImpl {
      * @return a sequence of textual characters along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> setStringEnumArrayHeaderWithResponseAsync(
-            List<String> colorArray, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> setStringEnumArrayHeaderWithResponseAsync(List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorArrayConverted =
-                colorArray.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
-        return FluxUtil.withContext(
-                context ->
-                        service.setStringEnumArrayHeader(
-                                this.getEndpoint(), colorArrayConverted, accept, requestOptions, context));
+        String colorArrayConverted = colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
+        return FluxUtil.withContext(context -> service.setStringEnumArrayHeader(this.getEndpoint(), colorArrayConverted, accept, requestOptions, context));
     }
 
     /**
      * The setStringEnumArrayHeader operation.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>color-array-opt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1712,14 +1243,11 @@ public final class EnumServiceClientImpl {
      * @return a sequence of textual characters along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> setStringEnumArrayHeaderWithResponse(
-            List<String> colorArray, RequestOptions requestOptions) {
+    public Response<BinaryData> setStringEnumArrayHeaderWithResponse(List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorArrayConverted =
-                colorArray.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
-        return service.setStringEnumArrayHeaderSync(
-                this.getEndpoint(), colorArrayConverted, accept, requestOptions, Context.NONE);
+        String colorArrayConverted = colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
+        return service.setStringEnumArrayHeaderSync(this.getEndpoint(), colorArrayConverted, accept, requestOptions, Context.NONE);
     }
 }

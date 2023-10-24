@@ -7,7 +7,9 @@ package fixtures.constants.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ModelAsStringRequiredOneValueDefault model. */
+/**
+ * The ModelAsStringRequiredOneValueDefault model.
+ */
 @Fluent
 public final class ModelAsStringRequiredOneValueDefault {
     /*
@@ -16,12 +18,14 @@ public final class ModelAsStringRequiredOneValueDefault {
     @JsonProperty(value = "parameter", required = true)
     private ModelAsStringRequiredOneValueDefaultEnum parameter = ModelAsStringRequiredOneValueDefaultEnum.VALUE1;
 
-    /** Creates an instance of ModelAsStringRequiredOneValueDefault class. */
+    /**
+     * Creates an instance of ModelAsStringRequiredOneValueDefault class.
+     */
     public ModelAsStringRequiredOneValueDefault() {}
 
     /**
      * Get the parameter property: The parameter property.
-     *
+     * 
      * @return the parameter value.
      */
     public ModelAsStringRequiredOneValueDefaultEnum getParameter() {
@@ -30,7 +34,7 @@ public final class ModelAsStringRequiredOneValueDefault {
 
     /**
      * Set the parameter property: The parameter property.
-     *
+     * 
      * @param parameter the parameter value to set.
      * @return the ModelAsStringRequiredOneValueDefault object itself.
      */
@@ -41,13 +45,13 @@ public final class ModelAsStringRequiredOneValueDefault {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (getParameter() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property parameter in model ModelAsStringRequiredOneValueDefault");
+                "Missing required property parameter in model ModelAsStringRequiredOneValueDefault");
         }
     }
 }

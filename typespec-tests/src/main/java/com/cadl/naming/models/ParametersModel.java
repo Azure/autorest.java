@@ -4,12 +4,17 @@
 
 package com.cadl.naming.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-/** The ParametersModel model. */
+/**
+ * The ParametersModel model.
+ */
 @Immutable
 public final class ParametersModel {
     /*
@@ -21,7 +26,7 @@ public final class ParametersModel {
 
     /**
      * Creates an instance of ParametersModel class.
-     *
+     * 
      * @param type the type value to set.
      */
     @Generated
@@ -32,7 +37,7 @@ public final class ParametersModel {
 
     /**
      * Get the type property: The type property.
-     *
+     * 
      * @return the type value.
      */
     @Generated

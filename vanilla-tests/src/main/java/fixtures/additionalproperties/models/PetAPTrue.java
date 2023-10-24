@@ -12,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
 import java.util.Map;
 
-/** The PetAPTrue model. */
+/**
+ * The PetAPTrue model.
+ */
 @Fluent
 public class PetAPTrue {
     /*
@@ -36,14 +38,17 @@ public class PetAPTrue {
     /*
      * Dictionary of <any>
      */
-    @JsonIgnore private Map<String, Object> additionalProperties;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties;
 
-    /** Creates an instance of PetAPTrue class. */
+    /**
+     * Creates an instance of PetAPTrue class.
+     */
     public PetAPTrue() {}
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     public int getId() {
@@ -52,7 +57,7 @@ public class PetAPTrue {
 
     /**
      * Set the id property: The id property.
-     *
+     * 
      * @param id the id value to set.
      * @return the PetAPTrue object itself.
      */
@@ -63,7 +68,7 @@ public class PetAPTrue {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -72,7 +77,7 @@ public class PetAPTrue {
 
     /**
      * Set the name property: The name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the PetAPTrue object itself.
      */
@@ -83,7 +88,7 @@ public class PetAPTrue {
 
     /**
      * Get the status property: The status property.
-     *
+     * 
      * @return the status value.
      */
     public Boolean isStatus() {
@@ -92,7 +97,7 @@ public class PetAPTrue {
 
     /**
      * Get the additionalProperties property: Dictionary of &lt;any&gt;.
-     *
+     * 
      * @return the additionalProperties value.
      */
     @JsonAnyGetter
@@ -102,7 +107,7 @@ public class PetAPTrue {
 
     /**
      * Set the additionalProperties property: Dictionary of &lt;any&gt;.
-     *
+     * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the PetAPTrue object itself.
      */
@@ -121,7 +126,7 @@ public class PetAPTrue {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

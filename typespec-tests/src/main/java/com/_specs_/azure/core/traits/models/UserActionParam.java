@@ -4,12 +4,16 @@
 
 package com._specs_.azure.core.traits.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** User action param. */
+/**
+ * User action param.
+ */
 @Immutable
 public final class UserActionParam {
     /*
@@ -21,7 +25,7 @@ public final class UserActionParam {
 
     /**
      * Creates an instance of UserActionParam class.
-     *
+     * 
      * @param userActionValue the userActionValue value to set.
      */
     @Generated
@@ -32,7 +36,7 @@ public final class UserActionParam {
 
     /**
      * Get the userActionValue property: User action value.
-     *
+     * 
      * @return the userActionValue value.
      */
     @Generated

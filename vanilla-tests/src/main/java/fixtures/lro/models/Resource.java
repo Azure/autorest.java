@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-/** The Resource model. */
+/**
+ * The Resource model.
+ */
 @Fluent
 public class Resource {
     /*
@@ -41,12 +43,14 @@ public class Resource {
     @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
-    /** Creates an instance of Resource class. */
+    /**
+     * Creates an instance of Resource class.
+     */
     public Resource() {}
 
     /**
      * Get the id property: Resource Id.
-     *
+     * 
      * @return the id value.
      */
     public String getId() {
@@ -55,7 +59,7 @@ public class Resource {
 
     /**
      * Get the type property: Resource Type.
-     *
+     * 
      * @return the type value.
      */
     public String getType() {
@@ -64,7 +68,7 @@ public class Resource {
 
     /**
      * Get the tags property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @return the tags value.
      */
     public Map<String, String> getTags() {
@@ -73,7 +77,7 @@ public class Resource {
 
     /**
      * Set the tags property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @param tags the tags value to set.
      * @return the Resource object itself.
      */
@@ -84,7 +88,7 @@ public class Resource {
 
     /**
      * Get the location property: Resource Location.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -93,7 +97,7 @@ public class Resource {
 
     /**
      * Set the location property: Resource Location.
-     *
+     * 
      * @param location the location value to set.
      * @return the Resource object itself.
      */
@@ -104,7 +108,7 @@ public class Resource {
 
     /**
      * Get the name property: Resource Name.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -113,7 +117,7 @@ public class Resource {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

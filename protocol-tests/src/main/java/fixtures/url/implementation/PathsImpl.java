@@ -31,17 +31,23 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Paths. */
+/**
+ * An instance of this class provides access to all the operations defined in Paths.
+ */
 public final class PathsImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final PathsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestUrlTestServiceClientImpl client;
 
     /**
      * Initializes an instance of PathsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     PathsImpl(AutoRestUrlTestServiceClientImpl client) {
@@ -57,1037 +63,516 @@ public final class PathsImpl {
     @ServiceInterface(name = "AutoRestUrlTestServi")
     public interface PathsService {
         @Get("/paths/bool/true/{boolPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getBooleanTrue(
-                @HostParam("$host") String host,
-                @PathParam("boolPath") boolean boolPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getBooleanTrue(@HostParam("$host") String host, @PathParam("boolPath") boolean boolPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/bool/true/{boolPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getBooleanTrueSync(
-                @HostParam("$host") String host,
-                @PathParam("boolPath") boolean boolPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getBooleanTrueSync(@HostParam("$host") String host, @PathParam("boolPath") boolean boolPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/bool/false/{boolPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getBooleanFalse(
-                @HostParam("$host") String host,
-                @PathParam("boolPath") boolean boolPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getBooleanFalse(@HostParam("$host") String host, @PathParam("boolPath") boolean boolPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/bool/false/{boolPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getBooleanFalseSync(
-                @HostParam("$host") String host,
-                @PathParam("boolPath") boolean boolPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getBooleanFalseSync(@HostParam("$host") String host, @PathParam("boolPath") boolean boolPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/int/1000000/{intPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getIntOneMillion(
-                @HostParam("$host") String host,
-                @PathParam("intPath") int intPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getIntOneMillion(@HostParam("$host") String host, @PathParam("intPath") int intPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/int/1000000/{intPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getIntOneMillionSync(
-                @HostParam("$host") String host,
-                @PathParam("intPath") int intPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getIntOneMillionSync(@HostParam("$host") String host, @PathParam("intPath") int intPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/int/-1000000/{intPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getIntNegativeOneMillion(
-                @HostParam("$host") String host,
-                @PathParam("intPath") int intPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getIntNegativeOneMillion(@HostParam("$host") String host,
+            @PathParam("intPath") int intPath, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/paths/int/-1000000/{intPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getIntNegativeOneMillionSync(
-                @HostParam("$host") String host,
-                @PathParam("intPath") int intPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getIntNegativeOneMillionSync(@HostParam("$host") String host, @PathParam("intPath") int intPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/long/10000000000/{longPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getTenBillion(
-                @HostParam("$host") String host,
-                @PathParam("longPath") long longPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getTenBillion(@HostParam("$host") String host, @PathParam("longPath") long longPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/long/10000000000/{longPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getTenBillionSync(
-                @HostParam("$host") String host,
-                @PathParam("longPath") long longPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getTenBillionSync(@HostParam("$host") String host, @PathParam("longPath") long longPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/long/-10000000000/{longPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getNegativeTenBillion(
-                @HostParam("$host") String host,
-                @PathParam("longPath") long longPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getNegativeTenBillion(@HostParam("$host") String host,
+            @PathParam("longPath") long longPath, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/paths/long/-10000000000/{longPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getNegativeTenBillionSync(
-                @HostParam("$host") String host,
-                @PathParam("longPath") long longPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getNegativeTenBillionSync(@HostParam("$host") String host, @PathParam("longPath") long longPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/float/1.034E+20/{floatPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> floatScientificPositive(
-                @HostParam("$host") String host,
-                @PathParam("floatPath") float floatPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> floatScientificPositive(@HostParam("$host") String host,
+            @PathParam("floatPath") float floatPath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/float/1.034E+20/{floatPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> floatScientificPositiveSync(
-                @HostParam("$host") String host,
-                @PathParam("floatPath") float floatPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> floatScientificPositiveSync(@HostParam("$host") String host,
+            @PathParam("floatPath") float floatPath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/float/-1.034E-20/{floatPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> floatScientificNegative(
-                @HostParam("$host") String host,
-                @PathParam("floatPath") float floatPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> floatScientificNegative(@HostParam("$host") String host,
+            @PathParam("floatPath") float floatPath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/float/-1.034E-20/{floatPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> floatScientificNegativeSync(
-                @HostParam("$host") String host,
-                @PathParam("floatPath") float floatPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> floatScientificNegativeSync(@HostParam("$host") String host,
+            @PathParam("floatPath") float floatPath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/double/9999999.999/{doublePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> doubleDecimalPositive(
-                @HostParam("$host") String host,
-                @PathParam("doublePath") double doublePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> doubleDecimalPositive(@HostParam("$host") String host,
+            @PathParam("doublePath") double doublePath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/double/9999999.999/{doublePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> doubleDecimalPositiveSync(
-                @HostParam("$host") String host,
-                @PathParam("doublePath") double doublePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> doubleDecimalPositiveSync(@HostParam("$host") String host,
+            @PathParam("doublePath") double doublePath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/double/-9999999.999/{doublePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> doubleDecimalNegative(
-                @HostParam("$host") String host,
-                @PathParam("doublePath") double doublePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> doubleDecimalNegative(@HostParam("$host") String host,
+            @PathParam("doublePath") double doublePath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/double/-9999999.999/{doublePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> doubleDecimalNegativeSync(
-                @HostParam("$host") String host,
-                @PathParam("doublePath") double doublePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> doubleDecimalNegativeSync(@HostParam("$host") String host,
+            @PathParam("doublePath") double doublePath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/unicode/{stringPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> stringUnicode(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> stringUnicode(@HostParam("$host") String host, @PathParam("stringPath") String stringPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/unicode/{stringPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> stringUnicodeSync(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> stringUnicodeSync(@HostParam("$host") String host, @PathParam("stringPath") String stringPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> stringUrlEncoded(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> stringUrlEncoded(@HostParam("$host") String host,
+            @PathParam("stringPath") String stringPath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> stringUrlEncodedSync(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> stringUrlEncodedSync(@HostParam("$host") String host, @PathParam("stringPath") String stringPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/begin!*'();:@&=+$,end/{stringPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> stringUrlNonEncoded(
-                @HostParam("$host") String host,
-                @PathParam(value = "stringPath", encoded = true) String stringPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> stringUrlNonEncoded(@HostParam("$host") String host,
+            @PathParam(value = "stringPath", encoded = true) String stringPath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/begin!*'();:@&=+$,end/{stringPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> stringUrlNonEncodedSync(
-                @HostParam("$host") String host,
-                @PathParam(value = "stringPath", encoded = true) String stringPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> stringUrlNonEncodedSync(@HostParam("$host") String host,
+            @PathParam(value = "stringPath", encoded = true) String stringPath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/empty/{stringPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> stringEmpty(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> stringEmpty(@HostParam("$host") String host, @PathParam("stringPath") String stringPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/empty/{stringPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> stringEmptySync(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> stringEmptySync(@HostParam("$host") String host, @PathParam("stringPath") String stringPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/null/{stringPath}")
-        @ExpectedResponses({400})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 400 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> stringNull(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> stringNull(@HostParam("$host") String host, @PathParam("stringPath") String stringPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/null/{stringPath}")
-        @ExpectedResponses({400})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 400 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> stringNullSync(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> stringNullSync(@HostParam("$host") String host, @PathParam("stringPath") String stringPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/enum/green%20color/{enumPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> enumValid(
-                @HostParam("$host") String host,
-                @PathParam("enumPath") String enumPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> enumValid(@HostParam("$host") String host, @PathParam("enumPath") String enumPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/enum/green%20color/{enumPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> enumValidSync(
-                @HostParam("$host") String host,
-                @PathParam("enumPath") String enumPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> enumValidSync(@HostParam("$host") String host, @PathParam("enumPath") String enumPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/null/{enumPath}")
-        @ExpectedResponses({400})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 400 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> enumNull(
-                @HostParam("$host") String host,
-                @PathParam("enumPath") String enumPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> enumNull(@HostParam("$host") String host, @PathParam("enumPath") String enumPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/null/{enumPath}")
-        @ExpectedResponses({400})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 400 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> enumNullSync(
-                @HostParam("$host") String host,
-                @PathParam("enumPath") String enumPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> enumNullSync(@HostParam("$host") String host, @PathParam("enumPath") String enumPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/byte/multibyte/{bytePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> byteMultiByte(
-                @HostParam("$host") String host,
-                @PathParam("bytePath") String bytePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> byteMultiByte(@HostParam("$host") String host, @PathParam("bytePath") String bytePath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/byte/multibyte/{bytePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> byteMultiByteSync(
-                @HostParam("$host") String host,
-                @PathParam("bytePath") String bytePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> byteMultiByteSync(@HostParam("$host") String host, @PathParam("bytePath") String bytePath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/byte/empty/{bytePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> byteEmpty(
-                @HostParam("$host") String host,
-                @PathParam("bytePath") String bytePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> byteEmpty(@HostParam("$host") String host, @PathParam("bytePath") String bytePath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/byte/empty/{bytePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> byteEmptySync(
-                @HostParam("$host") String host,
-                @PathParam("bytePath") String bytePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> byteEmptySync(@HostParam("$host") String host, @PathParam("bytePath") String bytePath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/byte/null/{bytePath}")
-        @ExpectedResponses({400})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 400 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> byteNull(
-                @HostParam("$host") String host,
-                @PathParam("bytePath") String bytePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> byteNull(@HostParam("$host") String host, @PathParam("bytePath") String bytePath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/byte/null/{bytePath}")
-        @ExpectedResponses({400})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 400 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> byteNullSync(
-                @HostParam("$host") String host,
-                @PathParam("bytePath") String bytePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> byteNullSync(@HostParam("$host") String host, @PathParam("bytePath") String bytePath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/date/2012-01-01/{datePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> dateValid(
-                @HostParam("$host") String host,
-                @PathParam("datePath") String datePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> dateValid(@HostParam("$host") String host, @PathParam("datePath") String datePath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/date/2012-01-01/{datePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> dateValidSync(
-                @HostParam("$host") String host,
-                @PathParam("datePath") String datePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> dateValidSync(@HostParam("$host") String host, @PathParam("datePath") String datePath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/date/null/{datePath}")
-        @ExpectedResponses({400})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 400 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> dateNull(
-                @HostParam("$host") String host,
-                @PathParam("datePath") String datePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> dateNull(@HostParam("$host") String host, @PathParam("datePath") String datePath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/date/null/{datePath}")
-        @ExpectedResponses({400})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 400 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> dateNullSync(
-                @HostParam("$host") String host,
-                @PathParam("datePath") String datePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> dateNullSync(@HostParam("$host") String host, @PathParam("datePath") String datePath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> dateTimeValid(
-                @HostParam("$host") String host,
-                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> dateTimeValid(@HostParam("$host") String host,
+            @PathParam("dateTimePath") OffsetDateTime dateTimePath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> dateTimeValidSync(
-                @HostParam("$host") String host,
-                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> dateTimeValidSync(@HostParam("$host") String host,
+            @PathParam("dateTimePath") OffsetDateTime dateTimePath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/datetime/null/{dateTimePath}")
-        @ExpectedResponses({400})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 400 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> dateTimeNull(
-                @HostParam("$host") String host,
-                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> dateTimeNull(@HostParam("$host") String host,
+            @PathParam("dateTimePath") OffsetDateTime dateTimePath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/datetime/null/{dateTimePath}")
-        @ExpectedResponses({400})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 400 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> dateTimeNullSync(
-                @HostParam("$host") String host,
-                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> dateTimeNullSync(@HostParam("$host") String host,
+            @PathParam("dateTimePath") OffsetDateTime dateTimePath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/bG9yZW0/{base64UrlPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> base64Url(
-                @HostParam("$host") String host,
-                @PathParam("base64UrlPath") Base64Url base64UrlPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> base64Url(@HostParam("$host") String host,
+            @PathParam("base64UrlPath") Base64Url base64UrlPath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/string/bG9yZW0/{base64UrlPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> base64UrlSync(
-                @HostParam("$host") String host,
-                @PathParam("base64UrlPath") Base64Url base64UrlPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> base64UrlSync(@HostParam("$host") String host,
+            @PathParam("base64UrlPath") Base64Url base64UrlPath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
-        @Get(
-                "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @Get("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> arrayCsvInPath(
-                @HostParam("$host") String host,
-                @PathParam("arrayPath") String arrayPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> arrayCsvInPath(@HostParam("$host") String host, @PathParam("arrayPath") String arrayPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
-        @Get(
-                "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @Get("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> arrayCsvInPathSync(
-                @HostParam("$host") String host,
-                @PathParam("arrayPath") String arrayPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> arrayCsvInPathSync(@HostParam("$host") String host, @PathParam("arrayPath") String arrayPath,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/paths/int/1460505600/{unixTimeUrlPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> unixTimeUrl(
-                @HostParam("$host") String host,
-                @PathParam("unixTimeUrlPath") long unixTimeUrlPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> unixTimeUrl(@HostParam("$host") String host,
+            @PathParam("unixTimeUrlPath") long unixTimeUrlPath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/paths/int/1460505600/{unixTimeUrlPath}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> unixTimeUrlSync(
-                @HostParam("$host") String host,
-                @PathParam("unixTimeUrlPath") long unixTimeUrlPath,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> unixTimeUrlSync(@HostParam("$host") String host,
+            @PathParam("unixTimeUrlPath") long unixTimeUrlPath, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1100,12 +585,12 @@ public final class PathsImpl {
         final boolean boolPath = true;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getBooleanTrue(this.client.getHost(), boolPath, accept, requestOptions, context));
+            context -> service.getBooleanTrue(this.client.getHost(), boolPath, accept, requestOptions, context));
     }
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1122,7 +607,7 @@ public final class PathsImpl {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1135,12 +620,12 @@ public final class PathsImpl {
         final boolean boolPath = false;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getBooleanFalse(this.client.getHost(), boolPath, accept, requestOptions, context));
+            context -> service.getBooleanFalse(this.client.getHost(), boolPath, accept, requestOptions, context));
     }
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1157,7 +642,7 @@ public final class PathsImpl {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1170,12 +655,12 @@ public final class PathsImpl {
         final int intPath = 1000000;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getIntOneMillion(this.client.getHost(), intPath, accept, requestOptions, context));
+            context -> service.getIntOneMillion(this.client.getHost(), intPath, accept, requestOptions, context));
     }
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1192,7 +677,7 @@ public final class PathsImpl {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1204,15 +689,13 @@ public final class PathsImpl {
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync(RequestOptions requestOptions) {
         final int intPath = -1000000;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getIntNegativeOneMillion(
-                                this.client.getHost(), intPath, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getIntNegativeOneMillion(this.client.getHost(), intPath, accept,
+            requestOptions, context));
     }
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1224,13 +707,13 @@ public final class PathsImpl {
     public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions) {
         final int intPath = -1000000;
         final String accept = "application/json";
-        return service.getIntNegativeOneMillionSync(
-                this.client.getHost(), intPath, accept, requestOptions, Context.NONE);
+        return service.getIntNegativeOneMillionSync(this.client.getHost(), intPath, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1243,12 +726,12 @@ public final class PathsImpl {
         final long longPath = 10000000000L;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getTenBillion(this.client.getHost(), longPath, accept, requestOptions, context));
+            context -> service.getTenBillion(this.client.getHost(), longPath, accept, requestOptions, context));
     }
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1265,7 +748,7 @@ public final class PathsImpl {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1278,14 +761,12 @@ public final class PathsImpl {
         final long longPath = -10000000000L;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.getNegativeTenBillion(
-                                this.client.getHost(), longPath, accept, requestOptions, context));
+            context -> service.getNegativeTenBillion(this.client.getHost(), longPath, accept, requestOptions, context));
     }
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1302,7 +783,7 @@ public final class PathsImpl {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1314,15 +795,13 @@ public final class PathsImpl {
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync(RequestOptions requestOptions) {
         final float floatPath = 103400000000000000000f;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.floatScientificPositive(
-                                this.client.getHost(), floatPath, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.floatScientificPositive(this.client.getHost(), floatPath, accept,
+            requestOptions, context));
     }
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1334,13 +813,13 @@ public final class PathsImpl {
     public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
         final float floatPath = 103400000000000000000f;
         final String accept = "application/json";
-        return service.floatScientificPositiveSync(
-                this.client.getHost(), floatPath, accept, requestOptions, Context.NONE);
+        return service.floatScientificPositiveSync(this.client.getHost(), floatPath, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1352,15 +831,13 @@ public final class PathsImpl {
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync(RequestOptions requestOptions) {
         final float floatPath = -1.034E-20f;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.floatScientificNegative(
-                                this.client.getHost(), floatPath, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.floatScientificNegative(this.client.getHost(), floatPath, accept,
+            requestOptions, context));
     }
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1372,13 +849,13 @@ public final class PathsImpl {
     public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
         final float floatPath = -1.034E-20f;
         final String accept = "application/json";
-        return service.floatScientificNegativeSync(
-                this.client.getHost(), floatPath, accept, requestOptions, Context.NONE);
+        return service.floatScientificNegativeSync(this.client.getHost(), floatPath, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1390,15 +867,13 @@ public final class PathsImpl {
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync(RequestOptions requestOptions) {
         final double doublePath = 9999999.999;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.doubleDecimalPositive(
-                                this.client.getHost(), doublePath, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.doubleDecimalPositive(this.client.getHost(), doublePath, accept,
+            requestOptions, context));
     }
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1410,13 +885,13 @@ public final class PathsImpl {
     public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
         final double doublePath = 9999999.999;
         final String accept = "application/json";
-        return service.doubleDecimalPositiveSync(
-                this.client.getHost(), doublePath, accept, requestOptions, Context.NONE);
+        return service.doubleDecimalPositiveSync(this.client.getHost(), doublePath, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1428,15 +903,13 @@ public final class PathsImpl {
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync(RequestOptions requestOptions) {
         final double doublePath = -9999999.999;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.doubleDecimalNegative(
-                                this.client.getHost(), doublePath, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.doubleDecimalNegative(this.client.getHost(), doublePath, accept,
+            requestOptions, context));
     }
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1448,32 +921,32 @@ public final class PathsImpl {
     public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
         final double doublePath = -9999999.999;
         final String accept = "application/json";
-        return service.doubleDecimalNegativeSync(
-                this.client.getHost(), doublePath, accept, requestOptions, Context.NONE);
+        return service.doubleDecimalNegativeSync(this.client.getHost(), doublePath, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(RequestOptions requestOptions) {
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.stringUnicode(this.client.getHost(), stringPath, accept, requestOptions, context));
+            context -> service.stringUnicode(this.client.getHost(), stringPath, accept, requestOptions, context));
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1490,7 +963,7 @@ public final class PathsImpl {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1503,13 +976,12 @@ public final class PathsImpl {
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.stringUrlEncoded(this.client.getHost(), stringPath, accept, requestOptions, context));
+            context -> service.stringUrlEncoded(this.client.getHost(), stringPath, accept, requestOptions, context));
     }
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1526,9 +998,9 @@ public final class PathsImpl {
 
     /**
      * Get 'begin!*'();:@&amp;=+$,end
-     *
-     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
+     * 
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1541,16 +1013,14 @@ public final class PathsImpl {
         final String stringPath = "begin!*'();:@&=+$,end";
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.stringUrlNonEncoded(
-                                this.client.getHost(), stringPath, accept, requestOptions, context));
+            context -> service.stringUrlNonEncoded(this.client.getHost(), stringPath, accept, requestOptions, context));
     }
 
     /**
      * Get 'begin!*'();:@&amp;=+$,end
-     *
-     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
+     * 
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1567,7 +1037,7 @@ public final class PathsImpl {
 
     /**
      * Get ''.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1580,12 +1050,12 @@ public final class PathsImpl {
         final String stringPath = "";
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.stringEmpty(this.client.getHost(), stringPath, accept, requestOptions, context));
+            context -> service.stringEmpty(this.client.getHost(), stringPath, accept, requestOptions, context));
     }
 
     /**
      * Get ''.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1602,7 +1072,7 @@ public final class PathsImpl {
 
     /**
      * Get null (should throw).
-     *
+     * 
      * @param stringPath null string value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1615,12 +1085,12 @@ public final class PathsImpl {
     public Mono<Response<Void>> stringNullWithResponseAsync(String stringPath, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.stringNull(this.client.getHost(), stringPath, accept, requestOptions, context));
+            context -> service.stringNull(this.client.getHost(), stringPath, accept, requestOptions, context));
     }
 
     /**
      * Get null (should throw).
-     *
+     * 
      * @param stringPath null string value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1637,7 +1107,7 @@ public final class PathsImpl {
 
     /**
      * Get using uri with 'green color' in path parameter.
-     *
+     * 
      * @param enumPath send the value green. Allowed values: "red color", "green color", "blue color".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1645,18 +1115,18 @@ public final class PathsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return using uri with 'green color' in path parameter along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(String enumPath, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.enumValid(this.client.getHost(), enumPath, accept, requestOptions, context));
+            context -> service.enumValid(this.client.getHost(), enumPath, accept, requestOptions, context));
     }
 
     /**
      * Get using uri with 'green color' in path parameter.
-     *
+     * 
      * @param enumPath send the value green. Allowed values: "red color", "green color", "blue color".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1673,7 +1143,7 @@ public final class PathsImpl {
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
-     *
+     * 
      * @param enumPath send null should throw. Allowed values: "red color", "green color", "blue color".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1681,18 +1151,18 @@ public final class PathsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return null (should throw on the client before the request is sent on wire) along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(String enumPath, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.enumNull(this.client.getHost(), enumPath, accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.enumNull(this.client.getHost(), enumPath, accept, requestOptions, context));
     }
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
-     *
+     * 
      * @param enumPath send null should throw. Allowed values: "red color", "green color", "blue color".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1709,7 +1179,7 @@ public final class PathsImpl {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1717,21 +1187,19 @@ public final class PathsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] bytePath, RequestOptions requestOptions) {
         final String accept = "application/json";
         String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return FluxUtil.withContext(
-                context ->
-                        service.byteMultiByte(
-                                this.client.getHost(), bytePathConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.byteMultiByte(this.client.getHost(), bytePathConverted, accept,
+            requestOptions, context));
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1744,13 +1212,13 @@ public final class PathsImpl {
     public Response<Void> byteMultiByteWithResponse(byte[] bytePath, RequestOptions requestOptions) {
         final String accept = "application/json";
         String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return service.byteMultiByteSync(
-                this.client.getHost(), bytePathConverted, accept, requestOptions, Context.NONE);
+        return service.byteMultiByteSync(this.client.getHost(), bytePathConverted, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1764,13 +1232,12 @@ public final class PathsImpl {
         final String accept = "application/json";
         String bytePathConverted = Base64Util.encodeToString(bytePath);
         return FluxUtil.withContext(
-                context ->
-                        service.byteEmpty(this.client.getHost(), bytePathConverted, accept, requestOptions, context));
+            context -> service.byteEmpty(this.client.getHost(), bytePathConverted, accept, requestOptions, context));
     }
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1788,7 +1255,7 @@ public final class PathsImpl {
 
     /**
      * Get null as byte array (should throw).
-     *
+     * 
      * @param bytePath null as byte array (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1802,12 +1269,12 @@ public final class PathsImpl {
         final String accept = "application/json";
         String bytePathConverted = Base64Util.encodeToString(bytePath);
         return FluxUtil.withContext(
-                context -> service.byteNull(this.client.getHost(), bytePathConverted, accept, requestOptions, context));
+            context -> service.byteNull(this.client.getHost(), bytePathConverted, accept, requestOptions, context));
     }
 
     /**
      * Get null as byte array (should throw).
-     *
+     * 
      * @param bytePath null as byte array (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1825,7 +1292,7 @@ public final class PathsImpl {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1838,12 +1305,12 @@ public final class PathsImpl {
         final String datePath = "2012-01-01";
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.dateValid(this.client.getHost(), datePath, accept, requestOptions, context));
+            context -> service.dateValid(this.client.getHost(), datePath, accept, requestOptions, context));
     }
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1860,7 +1327,7 @@ public final class PathsImpl {
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
+     * 
      * @param datePath null as date (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1868,18 +1335,18 @@ public final class PathsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation
-     *     along with {@link Response} on successful completion of {@link Mono}.
+     * along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(String datePath, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.dateNull(this.client.getHost(), datePath, accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.dateNull(this.client.getHost(), datePath, accept, requestOptions, context));
     }
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
+     * 
      * @param datePath null as date (should throw).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1887,7 +1354,7 @@ public final class PathsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation
-     *     along with {@link Response}.
+     * along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateNullWithResponse(String datePath, RequestOptions requestOptions) {
@@ -1897,7 +1364,7 @@ public final class PathsImpl {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1910,12 +1377,12 @@ public final class PathsImpl {
         final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.dateTimeValid(this.client.getHost(), dateTimePath, accept, requestOptions, context));
+            context -> service.dateTimeValid(this.client.getHost(), dateTimePath, accept, requestOptions, context));
     }
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1932,7 +1399,7 @@ public final class PathsImpl {
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
+     * 
      * @param dateTimePath null as date-time.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1940,19 +1407,19 @@ public final class PathsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time along with
-     *     {@link Response} on successful completion of {@link Mono}.
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> dateTimeNullWithResponseAsync(
-            OffsetDateTime dateTimePath, RequestOptions requestOptions) {
+    public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimePath,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.dateTimeNull(this.client.getHost(), dateTimePath, accept, requestOptions, context));
+            context -> service.dateTimeNull(this.client.getHost(), dateTimePath, accept, requestOptions, context));
     }
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
+     * 
      * @param dateTimePath null as date-time.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1960,7 +1427,7 @@ public final class PathsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time along with
-     *     {@link Response}.
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeNullWithResponse(OffsetDateTime dateTimePath, RequestOptions requestOptions) {
@@ -1970,7 +1437,7 @@ public final class PathsImpl {
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
+     * 
      * @param base64UrlPath base64url encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1978,21 +1445,19 @@ public final class PathsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url) along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64UrlWithResponseAsync(byte[] base64UrlPath, RequestOptions requestOptions) {
         final String accept = "application/json";
         Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
-        return FluxUtil.withContext(
-                context ->
-                        service.base64Url(
-                                this.client.getHost(), base64UrlPathConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.base64Url(this.client.getHost(), base64UrlPathConverted, accept,
+            requestOptions, context));
     }
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
+     * 
      * @param base64UrlPath base64url encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2005,63 +1470,57 @@ public final class PathsImpl {
     public Response<Void> base64UrlWithResponse(byte[] base64UrlPath, RequestOptions requestOptions) {
         final String accept = "application/json";
         Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
-        return service.base64UrlSync(
-                this.client.getHost(), base64UrlPathConverted, accept, requestOptions, Context.NONE);
+        return service.base64UrlSync(this.client.getHost(), base64UrlPathConverted, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String arrayPathConverted =
-                arrayPath.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
-        return FluxUtil.withContext(
-                context ->
-                        service.arrayCsvInPath(
-                                this.client.getHost(), arrayPathConverted, accept, requestOptions, context));
+        String arrayPathConverted = arrayPath.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
+        return FluxUtil.withContext(context -> service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept,
+            requestOptions, context));
     }
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response}.
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayCsvInPathWithResponse(List<String> arrayPath, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String arrayPathConverted =
-                arrayPath.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
-        return service.arrayCsvInPathSync(
-                this.client.getHost(), arrayPathConverted, accept, requestOptions, Context.NONE);
+        String arrayPathConverted = arrayPath.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
+        return service.arrayCsvInPathSync(this.client.getHost(), arrayPathConverted, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
+     * 
      * @param unixTimeUrlPath Unix time encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2069,19 +1528,18 @@ public final class PathsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the date 2016-04-13 encoded value as '1460505600' (Unix time) along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimeUrlWithResponseAsync(long unixTimeUrlPath, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.unixTimeUrl(this.client.getHost(), unixTimeUrlPath, accept, requestOptions, context));
+            context -> service.unixTimeUrl(this.client.getHost(), unixTimeUrlPath, accept, requestOptions, context));
     }
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
+     * 
      * @param unixTimeUrlPath Unix time encoded value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

@@ -4,45 +4,77 @@
 
 package com.cadl.model;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.cadl.model.implementation.ModelClientImpl;
 import com.cadl.model.models.NestedModel;
 import com.cadl.model.models.Resource1;
 import com.cadl.model.models.Resource2;
 import com.cadl.model.models.Resource3;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ModelClient type. */
+/**
+ * Initializes a new instance of the asynchronous ModelClient type.
+ */
 @ServiceClient(builder = ModelClientBuilder.class, isAsync = true)
 public final class ModelAsyncClient {
-    @Generated private final ModelClientImpl serviceClient;
+    @Generated
+    private final ModelClientImpl serviceClient;
 
     /**
      * Initializes an instance of ModelAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ModelAsyncClient(ModelClientImpl serviceClient) {
+     ModelAsyncClient(ModelClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The put1 operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -54,9 +86,7 @@ public final class ModelAsyncClient {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -68,7 +98,7 @@ public final class ModelAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,9 +115,7 @@ public final class ModelAsyncClient {
 
     /**
      * The put2 operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -96,9 +124,7 @@ public final class ModelAsyncClient {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -107,7 +133,7 @@ public final class ModelAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -124,9 +150,7 @@ public final class ModelAsyncClient {
 
     /**
      * The get3 operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -135,7 +159,7 @@ public final class ModelAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -151,9 +175,7 @@ public final class ModelAsyncClient {
 
     /**
      * The putNested operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     nested1 (Required): {
@@ -163,9 +185,7 @@ public final class ModelAsyncClient {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     nested1 (Required): {
@@ -175,7 +195,7 @@ public final class ModelAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -192,7 +212,7 @@ public final class ModelAsyncClient {
 
     /**
      * The put1 operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -207,14 +227,12 @@ public final class ModelAsyncClient {
     public Mono<Resource1> put1(Resource1 body) {
         // Generated convenience method for put1WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return put1WithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Resource1.class));
+        return put1WithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Resource1.class));
     }
 
     /**
      * The put2 operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -229,14 +247,12 @@ public final class ModelAsyncClient {
     public Mono<Resource2> put2(Resource2 body) {
         // Generated convenience method for put2WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return put2WithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Resource2.class));
+        return put2WithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Resource2.class));
     }
 
     /**
      * The get3 operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -249,14 +265,12 @@ public final class ModelAsyncClient {
     public Mono<Resource3> get3() {
         // Generated convenience method for get3WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return get3WithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Resource3.class));
+        return get3WithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Resource3.class));
     }
 
     /**
      * The putNested operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -271,8 +285,6 @@ public final class ModelAsyncClient {
     public Mono<NestedModel> putNested(NestedModel body) {
         // Generated convenience method for putNestedWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putNestedWithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(NestedModel.class));
+        return putNestedWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(NestedModel.class));
     }
 }

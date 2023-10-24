@@ -7,7 +7,9 @@ package fixtures.paging.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Parameter group. */
+/**
+ * Parameter group.
+ */
 @Fluent
 public final class PagingGetOdataMultiplePagesOptions {
     /*
@@ -22,12 +24,14 @@ public final class PagingGetOdataMultiplePagesOptions {
     @JsonProperty(value = "timeout")
     private Integer timeout;
 
-    /** Creates an instance of PagingGetOdataMultiplePagesOptions class. */
+    /**
+     * Creates an instance of PagingGetOdataMultiplePagesOptions class.
+     */
     public PagingGetOdataMultiplePagesOptions() {}
 
     /**
      * Get the maxresults property: Sets the maximum number of items to return in the response.
-     *
+     * 
      * @return the maxresults value.
      */
     public Integer getMaxresults() {
@@ -36,7 +40,7 @@ public final class PagingGetOdataMultiplePagesOptions {
 
     /**
      * Set the maxresults property: Sets the maximum number of items to return in the response.
-     *
+     * 
      * @param maxresults the maxresults value to set.
      * @return the PagingGetOdataMultiplePagesOptions object itself.
      */
@@ -46,9 +50,9 @@ public final class PagingGetOdataMultiplePagesOptions {
     }
 
     /**
-     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
-     * default is 30 seconds.
-     *
+     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds.
+     * The default is 30 seconds.
+     * 
      * @return the timeout value.
      */
     public Integer getTimeout() {
@@ -56,9 +60,9 @@ public final class PagingGetOdataMultiplePagesOptions {
     }
 
     /**
-     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
-     * default is 30 seconds.
-     *
+     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds.
+     * The default is 30 seconds.
+     * 
      * @param timeout the timeout value to set.
      * @return the PagingGetOdataMultiplePagesOptions object itself.
      */
@@ -69,7 +73,7 @@ public final class PagingGetOdataMultiplePagesOptions {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

@@ -7,7 +7,9 @@ package fixtures.multipleinheritance.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Cat model. */
+/**
+ * The Cat model.
+ */
 @Fluent
 public class Cat extends Pet {
     /*
@@ -28,12 +30,14 @@ public class Cat extends Pet {
     @JsonProperty(value = "hisses")
     private Boolean hisses;
 
-    /** Creates an instance of Cat class. */
+    /**
+     * Creates an instance of Cat class.
+     */
     public Cat() {}
 
     /**
      * Get the likesMilk property: The likesMilk property.
-     *
+     * 
      * @return the likesMilk value.
      */
     public Boolean isLikesMilk() {
@@ -42,7 +46,7 @@ public class Cat extends Pet {
 
     /**
      * Set the likesMilk property: The likesMilk property.
-     *
+     * 
      * @param likesMilk the likesMilk value to set.
      * @return the Cat object itself.
      */
@@ -53,7 +57,7 @@ public class Cat extends Pet {
 
     /**
      * Get the meows property: The meows property.
-     *
+     * 
      * @return the meows value.
      */
     public Boolean isMeows() {
@@ -62,7 +66,7 @@ public class Cat extends Pet {
 
     /**
      * Set the meows property: The meows property.
-     *
+     * 
      * @param meows the meows value to set.
      * @return the Cat object itself.
      */
@@ -73,7 +77,7 @@ public class Cat extends Pet {
 
     /**
      * Get the hisses property: The hisses property.
-     *
+     * 
      * @return the hisses value.
      */
     public Boolean isHisses() {
@@ -82,7 +86,7 @@ public class Cat extends Pet {
 
     /**
      * Set the hisses property: The hisses property.
-     *
+     * 
      * @param hisses the hisses value to set.
      * @return the Cat object itself.
      */
@@ -91,7 +95,9 @@ public class Cat extends Pet {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Cat setName(String name) {
         super.setName(name);
@@ -100,7 +106,7 @@ public class Cat extends Pet {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

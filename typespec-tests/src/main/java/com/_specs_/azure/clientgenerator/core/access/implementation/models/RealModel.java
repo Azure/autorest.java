@@ -4,21 +4,25 @@
 
 package com._specs_.azure.clientgenerator.core.access.implementation.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.regex.Pattern;
 
-/** Used in internal operations, should be generated but not exported. */
+/**
+ * Used in internal operations, should be generated but not exported.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("real")
 @Immutable
 public final class RealModel extends AbstractModel {
     /**
      * Creates an instance of RealModel class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated

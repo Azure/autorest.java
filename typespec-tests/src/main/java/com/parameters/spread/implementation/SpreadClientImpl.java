@@ -8,69 +8,80 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the SpreadClient type. */
+/**
+ * Initializes a new instance of the SpreadClient type.
+ */
 public final class SpreadClientImpl {
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The ModelsImpl object to access its operations. */
+    /**
+     * The ModelsImpl object to access its operations.
+     */
     private final ModelsImpl models;
 
     /**
      * Gets the ModelsImpl object to access its operations.
-     *
+     * 
      * @return the ModelsImpl object.
      */
     public ModelsImpl getModels() {
         return this.models;
     }
 
-    /** The AliasImpl object to access its operations. */
+    /**
+     * The AliasImpl object to access its operations.
+     */
     private final AliasImpl alias;
 
     /**
      * Gets the AliasImpl object to access its operations.
-     *
+     * 
      * @return the AliasImpl object.
      */
     public AliasImpl getAlias() {
         return this.alias;
     }
 
-    /** Initializes an instance of SpreadClient client. */
+    /**
+     * Initializes an instance of SpreadClient client.
+     */
     public SpreadClientImpl() {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
      * Initializes an instance of SpreadClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public SpreadClientImpl(HttpPipeline httpPipeline) {
@@ -79,7 +90,7 @@ public final class SpreadClientImpl {
 
     /**
      * Initializes an instance of SpreadClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      */

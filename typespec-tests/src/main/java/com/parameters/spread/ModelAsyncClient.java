@@ -4,48 +4,73 @@
 
 package com.parameters.spread;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.parameters.spread.implementation.ModelsImpl;
 import com.parameters.spread.models.BodyParameter;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous SpreadClient type. */
+/**
+ * Initializes a new instance of the asynchronous SpreadClient type.
+ */
 @ServiceClient(builder = SpreadClientBuilder.class, isAsync = true)
 public final class ModelAsyncClient {
-    @Generated private final ModelsImpl serviceClient;
+    @Generated
+    private final ModelsImpl serviceClient;
 
     /**
      * Initializes an instance of ModelAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ModelAsyncClient(ModelsImpl serviceClient) {
+     ModelAsyncClient(ModelsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The spreadAsRequestBody operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param bodyParameter This is a simple model.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -56,14 +81,13 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> spreadAsRequestBodyWithResponse(
-            BinaryData bodyParameter, RequestOptions requestOptions) {
+    public Mono<Response<Void>> spreadAsRequestBodyWithResponse(BinaryData bodyParameter, RequestOptions requestOptions) {
         return this.serviceClient.spreadAsRequestBodyWithResponseAsync(bodyParameter, requestOptions);
     }
 
     /**
      * The spreadAsRequestBody operation.
-     *
+     * 
      * @param bodyParameter This is a simple model.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -78,7 +102,6 @@ public final class ModelAsyncClient {
     public Mono<Void> spreadAsRequestBody(BodyParameter bodyParameter) {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return spreadAsRequestBodyWithResponse(BinaryData.fromObject(bodyParameter), requestOptions)
-                .flatMap(FluxUtil::toMono);
+        return spreadAsRequestBodyWithResponse(BinaryData.fromObject(bodyParameter), requestOptions).flatMap(FluxUtil::toMono);
     }
 }

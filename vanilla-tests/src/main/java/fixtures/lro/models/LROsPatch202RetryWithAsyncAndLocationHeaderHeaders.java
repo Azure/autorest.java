@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LROsPatch202RetryWithAsyncAndLocationHeaderHeaders model. */
+/**
+ * The LROsPatch202RetryWithAsyncAndLocationHeaderHeaders model.
+ */
 @Fluent
 public final class LROsPatch202RetryWithAsyncAndLocationHeaderHeaders {
     /*
@@ -29,7 +31,7 @@ public final class LROsPatch202RetryWithAsyncAndLocationHeaderHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LROsPatch202RetryWithAsyncAndLocationHeaderHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LROsPatch202RetryWithAsyncAndLocationHeaderHeaders(HttpHeaders rawHeaders) {
@@ -39,7 +41,7 @@ public final class LROsPatch202RetryWithAsyncAndLocationHeaderHeaders {
 
     /**
      * Get the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @return the azureAsyncOperation value.
      */
     public String getAzureAsyncOperation() {
@@ -48,7 +50,7 @@ public final class LROsPatch202RetryWithAsyncAndLocationHeaderHeaders {
 
     /**
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsPatch202RetryWithAsyncAndLocationHeaderHeaders object itself.
      */
@@ -59,7 +61,7 @@ public final class LROsPatch202RetryWithAsyncAndLocationHeaderHeaders {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -68,7 +70,7 @@ public final class LROsPatch202RetryWithAsyncAndLocationHeaderHeaders {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the LROsPatch202RetryWithAsyncAndLocationHeaderHeaders object itself.
      */
@@ -79,7 +81,7 @@ public final class LROsPatch202RetryWithAsyncAndLocationHeaderHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

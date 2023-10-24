@@ -7,7 +7,9 @@ package fixtures.paging.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The OperationResult model. */
+/**
+ * The OperationResult model.
+ */
 @Fluent
 public final class OperationResult {
     /*
@@ -16,12 +18,14 @@ public final class OperationResult {
     @JsonProperty(value = "status")
     private OperationResultStatus status;
 
-    /** Creates an instance of OperationResult class. */
+    /**
+     * Creates an instance of OperationResult class.
+     */
     public OperationResult() {}
 
     /**
      * Get the status property: The status of the request.
-     *
+     * 
      * @return the status value.
      */
     public OperationResultStatus getStatus() {
@@ -30,7 +34,7 @@ public final class OperationResult {
 
     /**
      * Set the status property: The status of the request.
-     *
+     * 
      * @param status the status value to set.
      * @return the OperationResult object itself.
      */
@@ -41,7 +45,7 @@ public final class OperationResult {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

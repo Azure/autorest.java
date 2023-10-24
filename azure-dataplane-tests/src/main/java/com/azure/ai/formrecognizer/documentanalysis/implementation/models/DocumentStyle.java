@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** An object representing observed text styles. */
+/**
+ * An object representing observed text styles.
+ */
 @Fluent
 public final class DocumentStyle {
     /*
@@ -29,12 +31,14 @@ public final class DocumentStyle {
     @JsonProperty(value = "confidence", required = true)
     private float confidence;
 
-    /** Creates an instance of DocumentStyle class. */
+    /**
+     * Creates an instance of DocumentStyle class.
+     */
     public DocumentStyle() {}
 
     /**
      * Get the isHandwritten property: Is content handwritten?.
-     *
+     * 
      * @return the isHandwritten value.
      */
     public Boolean isHandwritten() {
@@ -43,7 +47,7 @@ public final class DocumentStyle {
 
     /**
      * Set the isHandwritten property: Is content handwritten?.
-     *
+     * 
      * @param isHandwritten the isHandwritten value to set.
      * @return the DocumentStyle object itself.
      */
@@ -54,7 +58,7 @@ public final class DocumentStyle {
 
     /**
      * Get the spans property: Location of the text elements in the concatenated content the style applies to.
-     *
+     * 
      * @return the spans value.
      */
     public List<DocumentSpan> getSpans() {
@@ -63,7 +67,7 @@ public final class DocumentStyle {
 
     /**
      * Set the spans property: Location of the text elements in the concatenated content the style applies to.
-     *
+     * 
      * @param spans the spans value to set.
      * @return the DocumentStyle object itself.
      */
@@ -74,7 +78,7 @@ public final class DocumentStyle {
 
     /**
      * Get the confidence property: Confidence of correctly identifying the style.
-     *
+     * 
      * @return the confidence value.
      */
     public float getConfidence() {
@@ -83,7 +87,7 @@ public final class DocumentStyle {
 
     /**
      * Set the confidence property: Confidence of correctly identifying the style.
-     *
+     * 
      * @param confidence the confidence value to set.
      * @return the DocumentStyle object itself.
      */

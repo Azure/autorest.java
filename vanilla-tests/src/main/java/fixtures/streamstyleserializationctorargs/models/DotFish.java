@@ -11,7 +11,9 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 
-/** The DotFish model. */
+/**
+ * The DotFish model.
+ */
 @Fluent
 public class DotFish implements JsonSerializable<DotFish> {
     /*
@@ -19,12 +21,14 @@ public class DotFish implements JsonSerializable<DotFish> {
      */
     private String species;
 
-    /** Creates an instance of DotFish class. */
+    /**
+     * Creates an instance of DotFish class.
+     */
     public DotFish() {}
 
     /**
      * Get the species property: The species property.
-     *
+     * 
      * @return the species value.
      */
     public String getSpecies() {
@@ -33,7 +37,7 @@ public class DotFish implements JsonSerializable<DotFish> {
 
     /**
      * Set the species property: The species property.
-     *
+     * 
      * @param species the species value to set.
      * @return the DotFish object itself.
      */
@@ -44,7 +48,7 @@ public class DotFish implements JsonSerializable<DotFish> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}
@@ -58,41 +62,40 @@ public class DotFish implements JsonSerializable<DotFish> {
 
     /**
      * Reads an instance of DotFish from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of DotFish if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     *     JSON null.
+     * JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      * @throws IOException If an error occurs while reading the DotFish.
      */
     public static DotFish fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    String discriminatorValue = null;
-                    JsonReader readerToUse = reader.bufferObject();
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            JsonReader readerToUse = reader.bufferObject();
 
-                    readerToUse.nextToken(); // Prepare for reading
-                    while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = readerToUse.getFieldName();
-                        readerToUse.nextToken();
-                        if ("fish\\.type".equals(fieldName)) {
-                            discriminatorValue = readerToUse.getString();
-                            break;
-                        } else {
-                            readerToUse.skipChildren();
-                        }
-                    }
+            readerToUse.nextToken(); // Prepare for reading
+            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = readerToUse.getFieldName();
+                readerToUse.nextToken();
+                if ("fish\\.type".equals(fieldName)) {
+                    discriminatorValue = readerToUse.getString();
+                    break;
+                } else {
+                    readerToUse.skipChildren();
+                }
+            }
 
-                    if (discriminatorValue != null) {
-                        readerToUse = readerToUse.reset();
-                    }
-                    // Use the discriminator value to determine which subtype should be deserialized.
-                    if ("DotSalmon".equals(discriminatorValue)) {
-                        return DotSalmon.fromJson(readerToUse);
-                    } else {
-                        throw new IllegalStateException(
-                                "Discriminator field 'fish\\.type' didn't match one of the expected values 'DotSalmon'");
-                    }
-                });
+            if (discriminatorValue != null) {
+                readerToUse = readerToUse.reset();
+            }
+            // Use the discriminator value to determine which subtype should be deserialized.
+            if ("DotSalmon".equals(discriminatorValue)) {
+                return DotSalmon.fromJson(readerToUse);
+            } else {
+                throw new IllegalStateException(
+                    "Discriminator field 'fish\\.type' didn't match one of the expected values 'DotSalmon'");
+            }
+        });
     }
 }

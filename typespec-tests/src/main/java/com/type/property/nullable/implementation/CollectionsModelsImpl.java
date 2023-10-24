@@ -18,31 +18,41 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in CollectionsModels. */
+/**
+ * An instance of this class provides access to all the operations defined in CollectionsModels.
+ */
 public final class CollectionsModelsImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final CollectionsModelsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final NullableClientImpl client;
 
     /**
      * Initializes an instance of CollectionsModelsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
-    CollectionsModelsImpl(NullableClientImpl client) {
-        this.service =
-                RestProxy.create(
-                        CollectionsModelsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+     CollectionsModelsImpl(NullableClientImpl client) {
+        this.service = RestProxy.create(CollectionsModelsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -55,146 +65,72 @@ public final class CollectionsModelsImpl {
     public interface CollectionsModelsService {
         @Get("/type/property/nullable/collections/model/non-null")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getNonNull(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getNonNull(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/property/nullable/collections/model/non-null")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getNonNullSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> getNonNullSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/property/nullable/collections/model/null")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getNull(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getNull(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/property/nullable/collections/model/null")
         @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getNullSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> getNullSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Patch("/type/property/nullable/collections/model/non-null")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patchNonNull(
-                @HeaderParam("Content-Type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/merge-patch+json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> patchNonNull(@HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Patch("/type/property/nullable/collections/model/non-null")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> patchNonNullSync(
-                @HeaderParam("Content-Type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/merge-patch+json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> patchNonNullSync(@HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Patch("/type/property/nullable/collections/model/null")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patchNull(
-                @HeaderParam("Content-Type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/merge-patch+json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> patchNull(@HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Patch("/type/property/nullable/collections/model/null")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> patchNullSync(
-                @HeaderParam("Content-Type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/merge-patch+json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> patchNullSync(@HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -205,14 +141,13 @@ public final class CollectionsModelsImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return all properties in the model along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * @return models that will return all properties in the model along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNonNullWithResponseAsync(RequestOptions requestOptions) {
@@ -222,9 +157,7 @@ public final class CollectionsModelsImpl {
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -235,7 +168,7 @@ public final class CollectionsModelsImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -251,9 +184,7 @@ public final class CollectionsModelsImpl {
 
     /**
      * Get models that will return the default object.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -264,14 +195,13 @@ public final class CollectionsModelsImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return the default object along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return models that will return the default object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions) {
@@ -281,9 +211,7 @@ public final class CollectionsModelsImpl {
 
     /**
      * Get models that will return the default object.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -294,7 +222,7 @@ public final class CollectionsModelsImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -310,9 +238,7 @@ public final class CollectionsModelsImpl {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -323,7 +249,7 @@ public final class CollectionsModelsImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -336,15 +262,12 @@ public final class CollectionsModelsImpl {
     public Mono<Response<Void>> patchNonNullWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.patchNonNull(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.patchNonNull(contentType, accept, body, requestOptions, context));
     }
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -355,7 +278,7 @@ public final class CollectionsModelsImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -373,9 +296,7 @@ public final class CollectionsModelsImpl {
 
     /**
      * Put a body with default properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -386,7 +307,7 @@ public final class CollectionsModelsImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -404,9 +325,7 @@ public final class CollectionsModelsImpl {
 
     /**
      * Put a body with default properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -417,7 +336,7 @@ public final class CollectionsModelsImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

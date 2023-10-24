@@ -4,12 +4,16 @@
 
 package com.cadl.internal.implementation.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The StandAloneUnion model. */
+/**
+ * The StandAloneUnion model.
+ */
 @Immutable
 public final class StandAloneUnion {
     /*
@@ -21,7 +25,7 @@ public final class StandAloneUnion {
 
     /**
      * Creates an instance of StandAloneUnion class.
-     *
+     * 
      * @param data the data value to set.
      */
     @Generated
@@ -32,7 +36,7 @@ public final class StandAloneUnion {
 
     /**
      * Get the data property: The data property.
-     *
+     * 
      * @return the data value.
      */
     @Generated

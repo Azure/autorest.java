@@ -13,7 +13,9 @@ import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** An enumeration of blobs. */
+/**
+ * An enumeration of blobs.
+ */
 @Fluent
 public final class ListBlobsResponse implements XmlSerializable<ListBlobsResponse> {
     /*
@@ -56,12 +58,14 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
      */
     private String nextMarker;
 
-    /** Creates an instance of ListBlobsResponse class. */
+    /**
+     * Creates an instance of ListBlobsResponse class.
+     */
     public ListBlobsResponse() {}
 
     /**
      * Get the serviceEndpoint property: The ServiceEndpoint property.
-     *
+     * 
      * @return the serviceEndpoint value.
      */
     public String getServiceEndpoint() {
@@ -70,7 +74,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Set the serviceEndpoint property: The ServiceEndpoint property.
-     *
+     * 
      * @param serviceEndpoint the serviceEndpoint value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -81,7 +85,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Get the containerName property: The ContainerName property.
-     *
+     * 
      * @return the containerName value.
      */
     public String getContainerName() {
@@ -90,7 +94,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Set the containerName property: The ContainerName property.
-     *
+     * 
      * @param containerName the containerName value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -101,7 +105,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Get the prefix property: The Prefix property.
-     *
+     * 
      * @return the prefix value.
      */
     public String getPrefix() {
@@ -110,7 +114,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Set the prefix property: The Prefix property.
-     *
+     * 
      * @param prefix the prefix value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -121,7 +125,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Get the marker property: The Marker property.
-     *
+     * 
      * @return the marker value.
      */
     public String getMarker() {
@@ -130,7 +134,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Set the marker property: The Marker property.
-     *
+     * 
      * @param marker the marker value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -141,7 +145,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Get the maxResults property: The MaxResults property.
-     *
+     * 
      * @return the maxResults value.
      */
     public int getMaxResults() {
@@ -150,7 +154,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Set the maxResults property: The MaxResults property.
-     *
+     * 
      * @param maxResults the maxResults value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -161,7 +165,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Get the delimiter property: The Delimiter property.
-     *
+     * 
      * @return the delimiter value.
      */
     public String getDelimiter() {
@@ -170,7 +174,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Set the delimiter property: The Delimiter property.
-     *
+     * 
      * @param delimiter the delimiter value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -181,7 +185,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Get the blobs property: The Blobs property.
-     *
+     * 
      * @return the blobs value.
      */
     public Blobs getBlobs() {
@@ -190,7 +194,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Set the blobs property: The Blobs property.
-     *
+     * 
      * @param blobs the blobs value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -201,7 +205,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Get the nextMarker property: The NextMarker property.
-     *
+     * 
      * @return the nextMarker value.
      */
     public String getNextMarker() {
@@ -210,7 +214,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Set the nextMarker property: The NextMarker property.
-     *
+     * 
      * @param nextMarker the nextMarker value to set.
      * @return the ListBlobsResponse object itself.
      */
@@ -221,7 +225,7 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
@@ -269,10 +273,10 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Reads an instance of ListBlobsResponse from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of ListBlobsResponse if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the ListBlobsResponse.
      */
@@ -282,44 +286,42 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
 
     /**
      * Reads an instance of ListBlobsResponse from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of ListBlobsResponse if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the ListBlobsResponse.
      */
     public static ListBlobsResponse fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "EnumerationResults" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    ListBlobsResponse deserializedListBlobsResponse = new ListBlobsResponse();
-                    deserializedListBlobsResponse.serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
-                    deserializedListBlobsResponse.containerName = reader.getStringAttribute(null, "ContainerName");
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            ListBlobsResponse deserializedListBlobsResponse = new ListBlobsResponse();
+            deserializedListBlobsResponse.serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
+            deserializedListBlobsResponse.containerName = reader.getStringAttribute(null, "ContainerName");
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("Prefix".equals(elementName.getLocalPart())) {
-                            deserializedListBlobsResponse.prefix = reader.getStringElement();
-                        } else if ("Marker".equals(elementName.getLocalPart())) {
-                            deserializedListBlobsResponse.marker = reader.getStringElement();
-                        } else if ("MaxResults".equals(elementName.getLocalPart())) {
-                            deserializedListBlobsResponse.maxResults = reader.getIntElement();
-                        } else if ("Delimiter".equals(elementName.getLocalPart())) {
-                            deserializedListBlobsResponse.delimiter = reader.getStringElement();
-                        } else if ("Blobs".equals(elementName.getLocalPart())) {
-                            deserializedListBlobsResponse.blobs = Blobs.fromXml(reader, "Blobs");
-                        } else if ("NextMarker".equals(elementName.getLocalPart())) {
-                            deserializedListBlobsResponse.nextMarker = reader.getStringElement();
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                if ("Prefix".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.prefix = reader.getStringElement();
+                } else if ("Marker".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.marker = reader.getStringElement();
+                } else if ("MaxResults".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.maxResults = reader.getIntElement();
+                } else if ("Delimiter".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.delimiter = reader.getStringElement();
+                } else if ("Blobs".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.blobs = Blobs.fromXml(reader, "Blobs");
+                } else if ("NextMarker".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.nextMarker = reader.getStringElement();
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedListBlobsResponse;
-                });
+            return deserializedListBlobsResponse;
+        });
     }
 }

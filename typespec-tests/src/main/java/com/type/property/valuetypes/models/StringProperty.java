@@ -4,12 +4,16 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** Model with a string property. */
+/**
+ * Model with a string property.
+ */
 @Immutable
 public final class StringProperty {
     /*
@@ -21,7 +25,7 @@ public final class StringProperty {
 
     /**
      * Creates an instance of StringProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -32,7 +36,7 @@ public final class StringProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

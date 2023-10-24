@@ -13,15 +13,19 @@ import java.util.Collection;
  * "inch".
  */
 public final class LengthUnit extends ExpandableStringEnum<LengthUnit> {
-    /** Static value pixel for LengthUnit. */
+    /**
+     * Static value pixel for LengthUnit.
+     */
     public static final LengthUnit PIXEL = fromString("pixel");
 
-    /** Static value inch for LengthUnit. */
+    /**
+     * Static value inch for LengthUnit.
+     */
     public static final LengthUnit INCH = fromString("inch");
 
     /**
      * Creates a new instance of LengthUnit value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
@@ -29,7 +33,7 @@ public final class LengthUnit extends ExpandableStringEnum<LengthUnit> {
 
     /**
      * Creates or finds a LengthUnit from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding LengthUnit.
      */
@@ -40,7 +44,7 @@ public final class LengthUnit extends ExpandableStringEnum<LengthUnit> {
 
     /**
      * Gets known LengthUnit values.
-     *
+     * 
      * @return known LengthUnit values.
      */
     public static Collection<LengthUnit> values() {

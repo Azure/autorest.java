@@ -6,10 +6,14 @@ package com.cadl.specialheaders.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The Resource model. */
+/**
+ * The Resource model.
+ */
 @Fluent
 public final class Resource {
     /*
@@ -42,7 +46,7 @@ public final class Resource {
 
     /**
      * Creates an instance of Resource class.
-     *
+     * 
      * @param type the type value to set.
      */
     @Generated
@@ -53,7 +57,7 @@ public final class Resource {
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -63,7 +67,7 @@ public final class Resource {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated
@@ -73,7 +77,7 @@ public final class Resource {
 
     /**
      * Get the description property: The description property.
-     *
+     * 
      * @return the description value.
      */
     @Generated
@@ -83,7 +87,7 @@ public final class Resource {
 
     /**
      * Set the description property: The description property.
-     *
+     * 
      * @param description the description value to set.
      * @return the Resource object itself.
      */
@@ -95,7 +99,7 @@ public final class Resource {
 
     /**
      * Get the type property: The type property.
-     *
+     * 
      * @return the type value.
      */
     @Generated

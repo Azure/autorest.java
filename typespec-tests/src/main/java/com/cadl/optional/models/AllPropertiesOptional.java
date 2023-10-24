@@ -4,16 +4,22 @@
 
 package com.cadl.optional.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
-/** The AllPropertiesOptional model. */
+/**
+ * The AllPropertiesOptional model.
+ */
 @Immutable
 public final class AllPropertiesOptional {
     /*
@@ -142,13 +148,16 @@ public final class AllPropertiesOptional {
     @JsonProperty(value = "immutable")
     private ImmutableModel immutable;
 
-    /** Creates an instance of AllPropertiesOptional class. */
+    /**
+     * Creates an instance of AllPropertiesOptional class.
+     */
     @Generated
-    private AllPropertiesOptional() {}
+    private AllPropertiesOptional() {
+    }
 
     /**
      * Get the booleanProperty property: The boolean property.
-     *
+     * 
      * @return the booleanProperty value.
      */
     @Generated
@@ -158,7 +167,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the booleanNullable property: The booleanNullable property.
-     *
+     * 
      * @return the booleanNullable value.
      */
     @Generated
@@ -168,7 +177,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the booleanRequired property: The booleanRequired property.
-     *
+     * 
      * @return the booleanRequired value.
      */
     @Generated
@@ -178,7 +187,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the booleanRequiredNullable property: The booleanRequiredNullable property.
-     *
+     * 
      * @return the booleanRequiredNullable value.
      */
     @Generated
@@ -188,7 +197,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the string property: The string property.
-     *
+     * 
      * @return the string value.
      */
     @Generated
@@ -198,7 +207,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the stringNullable property: The stringNullable property.
-     *
+     * 
      * @return the stringNullable value.
      */
     @Generated
@@ -208,7 +217,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the stringRequired property: The stringRequired property.
-     *
+     * 
      * @return the stringRequired value.
      */
     @Generated
@@ -218,7 +227,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the stringRequiredNullable property: The stringRequiredNullable property.
-     *
+     * 
      * @return the stringRequiredNullable value.
      */
     @Generated
@@ -228,7 +237,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the bytes property: The bytes property.
-     *
+     * 
      * @return the bytes value.
      */
     @Generated
@@ -238,7 +247,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the intProperty property: The int property.
-     *
+     * 
      * @return the intProperty value.
      */
     @Generated
@@ -248,7 +257,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the longProperty property: The long property.
-     *
+     * 
      * @return the longProperty value.
      */
     @Generated
@@ -258,7 +267,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the floatProperty property: The float property.
-     *
+     * 
      * @return the floatProperty value.
      */
     @Generated
@@ -268,7 +277,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the doubleProperty property: The double property.
-     *
+     * 
      * @return the doubleProperty value.
      */
     @Generated
@@ -278,7 +287,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the duration property: The duration property.
-     *
+     * 
      * @return the duration value.
      */
     @Generated
@@ -288,7 +297,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the dateTime property: The dateTime property.
-     *
+     * 
      * @return the dateTime value.
      */
     @Generated
@@ -298,7 +307,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the stringList property: The stringList property.
-     *
+     * 
      * @return the stringList value.
      */
     @Generated
@@ -308,7 +317,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the bytesDict property: The bytesDict property.
-     *
+     * 
      * @return the bytesDict value.
      */
     @Generated
@@ -318,7 +327,7 @@ public final class AllPropertiesOptional {
 
     /**
      * Get the immutable property: The immutable property.
-     *
+     * 
      * @return the immutable value.
      */
     @Generated

@@ -5,16 +5,19 @@
 package com.cadl.internal.implementation.models;
 
 import com.azure.core.annotation.Immutable;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** The UrlDataModel model. */
+/**
+ * The UrlDataModel model.
+ */
 @Immutable
 public final class UrlDataModel extends DataModelBase {
     private final String value;
 
     /**
      * Creates an instance of UrlDataModel class.
-     *
+     * 
      * @param value the value.
      */
     public UrlDataModel(String value) {
@@ -23,7 +26,7 @@ public final class UrlDataModel extends DataModelBase {
 
     /**
      * Gets the value.
-     *
+     * 
      * @return the value.
      */
     @JsonValue

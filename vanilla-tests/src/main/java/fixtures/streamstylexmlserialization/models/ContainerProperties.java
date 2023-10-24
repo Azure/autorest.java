@@ -16,7 +16,9 @@ import java.util.Objects;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** Properties of a container. */
+/**
+ * Properties of a container.
+ */
 @Fluent
 public final class ContainerProperties implements XmlSerializable<ContainerProperties> {
     /*
@@ -49,12 +51,14 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      */
     private PublicAccessType publicAccess;
 
-    /** Creates an instance of ContainerProperties class. */
+    /**
+     * Creates an instance of ContainerProperties class.
+     */
     public ContainerProperties() {}
 
     /**
      * Get the lastModified property: The Last-Modified property.
-     *
+     * 
      * @return the lastModified value.
      */
     public OffsetDateTime getLastModified() {
@@ -66,7 +70,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Set the lastModified property: The Last-Modified property.
-     *
+     * 
      * @param lastModified the lastModified value to set.
      * @return the ContainerProperties object itself.
      */
@@ -81,7 +85,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Get the etag property: The Etag property.
-     *
+     * 
      * @return the etag value.
      */
     public String getEtag() {
@@ -90,7 +94,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Set the etag property: The Etag property.
-     *
+     * 
      * @param etag the etag value to set.
      * @return the ContainerProperties object itself.
      */
@@ -101,7 +105,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Get the leaseStatus property: The LeaseStatus property.
-     *
+     * 
      * @return the leaseStatus value.
      */
     public LeaseStatusType getLeaseStatus() {
@@ -110,7 +114,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Set the leaseStatus property: The LeaseStatus property.
-     *
+     * 
      * @param leaseStatus the leaseStatus value to set.
      * @return the ContainerProperties object itself.
      */
@@ -121,7 +125,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Get the leaseState property: The LeaseState property.
-     *
+     * 
      * @return the leaseState value.
      */
     public LeaseStateType getLeaseState() {
@@ -130,7 +134,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Set the leaseState property: The LeaseState property.
-     *
+     * 
      * @param leaseState the leaseState value to set.
      * @return the ContainerProperties object itself.
      */
@@ -141,7 +145,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Get the leaseDuration property: The LeaseDuration property.
-     *
+     * 
      * @return the leaseDuration value.
      */
     public LeaseDurationType getLeaseDuration() {
@@ -150,7 +154,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Set the leaseDuration property: The LeaseDuration property.
-     *
+     * 
      * @param leaseDuration the leaseDuration value to set.
      * @return the ContainerProperties object itself.
      */
@@ -161,7 +165,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Get the publicAccess property: The PublicAccess property.
-     *
+     * 
      * @return the publicAccess value.
      */
     public PublicAccessType getPublicAccess() {
@@ -170,7 +174,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Set the publicAccess property: The PublicAccess property.
-     *
+     * 
      * @param publicAccess the publicAccess value to set.
      * @return the ContainerProperties object itself.
      */
@@ -181,7 +185,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
@@ -213,10 +217,10 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Reads an instance of ContainerProperties from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of ContainerProperties if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the ContainerProperties.
      */
@@ -226,48 +230,44 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
 
     /**
      * Reads an instance of ContainerProperties from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of ContainerProperties if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the ContainerProperties.
      */
     public static ContainerProperties fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName =
-                CoreUtils.isNullOrEmpty(rootElementName) ? "ContainerProperties" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    ContainerProperties deserializedContainerProperties = new ContainerProperties();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        String finalRootElementName
+            = CoreUtils.isNullOrEmpty(rootElementName) ? "ContainerProperties" : rootElementName;
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            ContainerProperties deserializedContainerProperties = new ContainerProperties();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("Last-Modified".equals(elementName.getLocalPart())) {
-                            deserializedContainerProperties.lastModified =
-                                    reader.getNullableElement(DateTimeRfc1123::new);
-                        } else if ("Etag".equals(elementName.getLocalPart())) {
-                            deserializedContainerProperties.etag = reader.getStringElement();
-                        } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
-                            deserializedContainerProperties.leaseStatus =
-                                    reader.getNullableElement(LeaseStatusType::fromString);
-                        } else if ("LeaseState".equals(elementName.getLocalPart())) {
-                            deserializedContainerProperties.leaseState =
-                                    reader.getNullableElement(LeaseStateType::fromString);
-                        } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
-                            deserializedContainerProperties.leaseDuration =
-                                    reader.getNullableElement(LeaseDurationType::fromString);
-                        } else if ("PublicAccess".equals(elementName.getLocalPart())) {
-                            deserializedContainerProperties.publicAccess =
-                                    reader.getNullableElement(PublicAccessType::fromString);
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                if ("Last-Modified".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.lastModified = reader.getNullableElement(DateTimeRfc1123::new);
+                } else if ("Etag".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.etag = reader.getStringElement();
+                } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.leaseStatus
+                        = reader.getNullableElement(LeaseStatusType::fromString);
+                } else if ("LeaseState".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.leaseState = reader.getNullableElement(LeaseStateType::fromString);
+                } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.leaseDuration
+                        = reader.getNullableElement(LeaseDurationType::fromString);
+                } else if ("PublicAccess".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.publicAccess
+                        = reader.getNullableElement(PublicAccessType::fromString);
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedContainerProperties;
-                });
+            return deserializedContainerProperties;
+        });
     }
 }

@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LrosaDsPostAsyncRelativeRetryNoPayloadHeaders model. */
+/**
+ * The LrosaDsPostAsyncRelativeRetryNoPayloadHeaders model.
+ */
 @Fluent
 public final class LrosaDsPostAsyncRelativeRetryNoPayloadHeaders {
     /*
@@ -35,7 +37,7 @@ public final class LrosaDsPostAsyncRelativeRetryNoPayloadHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LrosaDsPostAsyncRelativeRetryNoPayloadHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LrosaDsPostAsyncRelativeRetryNoPayloadHeaders(HttpHeaders rawHeaders) {
@@ -49,7 +51,7 @@ public final class LrosaDsPostAsyncRelativeRetryNoPayloadHeaders {
 
     /**
      * Get the retryAfter property: The Retry-After property.
-     *
+     * 
      * @return the retryAfter value.
      */
     public Integer getRetryAfter() {
@@ -58,7 +60,7 @@ public final class LrosaDsPostAsyncRelativeRetryNoPayloadHeaders {
 
     /**
      * Set the retryAfter property: The Retry-After property.
-     *
+     * 
      * @param retryAfter the retryAfter value to set.
      * @return the LrosaDsPostAsyncRelativeRetryNoPayloadHeaders object itself.
      */
@@ -69,7 +71,7 @@ public final class LrosaDsPostAsyncRelativeRetryNoPayloadHeaders {
 
     /**
      * Get the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @return the azureAsyncOperation value.
      */
     public String getAzureAsyncOperation() {
@@ -78,7 +80,7 @@ public final class LrosaDsPostAsyncRelativeRetryNoPayloadHeaders {
 
     /**
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LrosaDsPostAsyncRelativeRetryNoPayloadHeaders object itself.
      */
@@ -89,7 +91,7 @@ public final class LrosaDsPostAsyncRelativeRetryNoPayloadHeaders {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -98,7 +100,7 @@ public final class LrosaDsPostAsyncRelativeRetryNoPayloadHeaders {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the LrosaDsPostAsyncRelativeRetryNoPayloadHeaders object itself.
      */
@@ -109,7 +111,7 @@ public final class LrosaDsPostAsyncRelativeRetryNoPayloadHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

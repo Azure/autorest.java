@@ -4,19 +4,39 @@
 
 package fixtures.bodycomplex.generated;
 
+import com.azure.core.annotation.ReturnType;
+import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.credential.AzureKeyCredential;
+import com.azure.core.credential.KeyCredential;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Configuration;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.polling.LongRunningOperationStatus;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import fixtures.bodycomplex.AutoRestComplexTestServiceVersion;
+import fixtures.bodycomplex.PrimitiveAsyncClient;
 import fixtures.bodycomplex.PrimitiveClient;
 import fixtures.bodycomplex.PrimitiveClientBuilder;
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceClientImpl;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import org.junit.jupiter.api.Assertions;
 
 public class PrimitivePutDouble {
     public static void main(String[] args) {
         PrimitiveClient primitiveClient = new PrimitiveClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodycomplex.generated.primitiveputdouble.primitiveputdouble
-        BinaryData complexBody =
-                BinaryData.fromString(
-                        "{\"field1\":3.0E-100,\"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose\":-5.0E-57}");
+        BinaryData complexBody = BinaryData.fromString("{\"field1\":3.0E-100,\"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose\":-5.0E-57}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = primitiveClient.putDoubleWithResponse(complexBody, requestOptions);
         // END:fixtures.bodycomplex.generated.primitiveputdouble.primitiveputdouble

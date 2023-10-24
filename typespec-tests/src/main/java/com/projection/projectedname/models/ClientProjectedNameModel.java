@@ -4,12 +4,16 @@
 
 package com.projection.projectedname.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The ClientProjectedNameModel model. */
+/**
+ * The ClientProjectedNameModel model.
+ */
 @Immutable
 public final class ClientProjectedNameModel {
     /*
@@ -21,7 +25,7 @@ public final class ClientProjectedNameModel {
 
     /**
      * Creates an instance of ClientProjectedNameModel class.
-     *
+     * 
      * @param clientName the clientName value to set.
      */
     @Generated
@@ -32,7 +36,7 @@ public final class ClientProjectedNameModel {
 
     /**
      * Get the clientName property: Pass in true.
-     *
+     * 
      * @return the clientName value.
      */
     @Generated

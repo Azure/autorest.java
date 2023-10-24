@@ -9,7 +9,9 @@ import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/** The Datetimerfc1123Wrapper model. */
+/**
+ * The Datetimerfc1123Wrapper model.
+ */
 @Fluent
 public final class Datetimerfc1123Wrapper {
     /*
@@ -24,12 +26,14 @@ public final class Datetimerfc1123Wrapper {
     @JsonProperty(value = "now")
     private DateTimeRfc1123 now;
 
-    /** Creates an instance of Datetimerfc1123Wrapper class. */
+    /**
+     * Creates an instance of Datetimerfc1123Wrapper class.
+     */
     public Datetimerfc1123Wrapper() {}
 
     /**
      * Get the field property: The field property.
-     *
+     * 
      * @return the field value.
      */
     public OffsetDateTime getField() {
@@ -41,7 +45,7 @@ public final class Datetimerfc1123Wrapper {
 
     /**
      * Set the field property: The field property.
-     *
+     * 
      * @param field the field value to set.
      * @return the Datetimerfc1123Wrapper object itself.
      */
@@ -56,7 +60,7 @@ public final class Datetimerfc1123Wrapper {
 
     /**
      * Get the now property: The now property.
-     *
+     * 
      * @return the now value.
      */
     public OffsetDateTime getNow() {
@@ -68,7 +72,7 @@ public final class Datetimerfc1123Wrapper {
 
     /**
      * Set the now property: The now property.
-     *
+     * 
      * @param now the now value to set.
      * @return the Datetimerfc1123Wrapper object itself.
      */
@@ -83,7 +87,7 @@ public final class Datetimerfc1123Wrapper {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

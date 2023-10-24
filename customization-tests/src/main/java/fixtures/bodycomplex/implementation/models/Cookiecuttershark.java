@@ -10,43 +10,57 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-/** The Cookiecuttershark model. */
+/**
+ * The Cookiecuttershark model.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("cookiecuttershark")
 @Fluent
 public final class Cookiecuttershark extends Shark {
-    /** Creates an instance of Cookiecuttershark class. */
+    /**
+     * Creates an instance of Cookiecuttershark class.
+     */
     public Cookiecuttershark() {}
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Cookiecuttershark setAge(Integer age) {
         super.setAge(age);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Cookiecuttershark setBirthday(OffsetDateTime birthday) {
         super.setBirthday(birthday);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Cookiecuttershark setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Cookiecuttershark setLength(float length) {
         super.setLength(length);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Cookiecuttershark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);

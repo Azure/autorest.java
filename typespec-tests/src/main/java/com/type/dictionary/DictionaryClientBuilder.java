@@ -17,10 +17,13 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.AzureKeyCredentialPolicy;
+import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
+import com.azure.core.http.policy.KeyCredentialPolicy;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryOptions;
 import com.azure.core.http.policy.RetryPolicy;
@@ -31,50 +34,35 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
 import com.type.dictionary.implementation.DictionaryClientImpl;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the DictionaryClient type. */
-@ServiceClientBuilder(
-        serviceClients = {
-            Int32ValueClient.class,
-            Int64ValueClient.class,
-            BooleanValueClient.class,
-            StringValueClient.class,
-            Float32ValueClient.class,
-            DatetimeValueClient.class,
-            DurationValueClient.class,
-            UnknownValueClient.class,
-            ModelValueClient.class,
-            RecursiveModelValueClient.class,
-            NullableFloatValueClient.class,
-            Int32ValueAsyncClient.class,
-            Int64ValueAsyncClient.class,
-            BooleanValueAsyncClient.class,
-            StringValueAsyncClient.class,
-            Float32ValueAsyncClient.class,
-            DatetimeValueAsyncClient.class,
-            DurationValueAsyncClient.class,
-            UnknownValueAsyncClient.class,
-            ModelValueAsyncClient.class,
-            RecursiveModelValueAsyncClient.class,
-            NullableFloatValueAsyncClient.class
-        })
-public final class DictionaryClientBuilder
-        implements HttpTrait<DictionaryClientBuilder>, ConfigurationTrait<DictionaryClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
+/**
+ * A builder for creating a new instance of the DictionaryClient type.
+ */
+@ServiceClientBuilder(serviceClients = {Int32ValueClient.class, Int64ValueClient.class, BooleanValueClient.class, StringValueClient.class, Float32ValueClient.class, DatetimeValueClient.class, DurationValueClient.class, UnknownValueClient.class, ModelValueClient.class, RecursiveModelValueClient.class, NullableFloatValueClient.class, Int32ValueAsyncClient.class, Int64ValueAsyncClient.class, BooleanValueAsyncClient.class, StringValueAsyncClient.class, Float32ValueAsyncClient.class, DatetimeValueAsyncClient.class, DurationValueAsyncClient.class, UnknownValueAsyncClient.class, ModelValueAsyncClient.class, RecursiveModelValueAsyncClient.class, NullableFloatValueAsyncClient.class})
+public final class DictionaryClientBuilder implements HttpTrait<DictionaryClientBuilder>, ConfigurationTrait<DictionaryClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
-    @Generated private static final String SDK_VERSION = "version";
+    @Generated
+    private static final String SDK_VERSION = "version";
 
     @Generated
     private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("type-dictionary.properties");
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the DictionaryClientBuilder. */
+    /**
+     * Create an instance of the DictionaryClientBuilder.
+     */
     @Generated
     public DictionaryClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -83,9 +71,12 @@ public final class DictionaryClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DictionaryClientBuilder pipeline(HttpPipeline pipeline) {
@@ -99,9 +90,12 @@ public final class DictionaryClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DictionaryClientBuilder httpClient(HttpClient httpClient) {
@@ -112,9 +106,12 @@ public final class DictionaryClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DictionaryClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -125,9 +122,12 @@ public final class DictionaryClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DictionaryClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -138,9 +138,12 @@ public final class DictionaryClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DictionaryClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -148,7 +151,9 @@ public final class DictionaryClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DictionaryClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -160,9 +165,12 @@ public final class DictionaryClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DictionaryClientBuilder configuration(Configuration configuration) {
@@ -173,11 +181,12 @@ public final class DictionaryClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the DictionaryClientBuilder.
      */
@@ -189,21 +198,19 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of DictionaryClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of DictionaryClientImpl.
      */
     @Generated
     private DictionaryClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        DictionaryClientImpl client =
-                new DictionaryClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        DictionaryClientImpl client = new DictionaryClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -214,35 +221,24 @@ public final class DictionaryClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders().forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL).forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY).forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0])).httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of Int32ValueAsyncClient class.
-     *
+     * 
      * @return an instance of Int32ValueAsyncClient.
      */
     @Generated
@@ -252,7 +248,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of Int64ValueAsyncClient class.
-     *
+     * 
      * @return an instance of Int64ValueAsyncClient.
      */
     @Generated
@@ -262,7 +258,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of BooleanValueAsyncClient class.
-     *
+     * 
      * @return an instance of BooleanValueAsyncClient.
      */
     @Generated
@@ -272,7 +268,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of StringValueAsyncClient class.
-     *
+     * 
      * @return an instance of StringValueAsyncClient.
      */
     @Generated
@@ -282,7 +278,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of Float32ValueAsyncClient class.
-     *
+     * 
      * @return an instance of Float32ValueAsyncClient.
      */
     @Generated
@@ -292,7 +288,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of DatetimeValueAsyncClient class.
-     *
+     * 
      * @return an instance of DatetimeValueAsyncClient.
      */
     @Generated
@@ -302,7 +298,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of DurationValueAsyncClient class.
-     *
+     * 
      * @return an instance of DurationValueAsyncClient.
      */
     @Generated
@@ -312,7 +308,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of UnknownValueAsyncClient class.
-     *
+     * 
      * @return an instance of UnknownValueAsyncClient.
      */
     @Generated
@@ -322,7 +318,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of ModelValueAsyncClient class.
-     *
+     * 
      * @return an instance of ModelValueAsyncClient.
      */
     @Generated
@@ -332,7 +328,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of RecursiveModelValueAsyncClient class.
-     *
+     * 
      * @return an instance of RecursiveModelValueAsyncClient.
      */
     @Generated
@@ -342,7 +338,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of NullableFloatValueAsyncClient class.
-     *
+     * 
      * @return an instance of NullableFloatValueAsyncClient.
      */
     @Generated
@@ -352,7 +348,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of Int32ValueClient class.
-     *
+     * 
      * @return an instance of Int32ValueClient.
      */
     @Generated
@@ -362,7 +358,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of Int64ValueClient class.
-     *
+     * 
      * @return an instance of Int64ValueClient.
      */
     @Generated
@@ -372,7 +368,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of BooleanValueClient class.
-     *
+     * 
      * @return an instance of BooleanValueClient.
      */
     @Generated
@@ -382,7 +378,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of StringValueClient class.
-     *
+     * 
      * @return an instance of StringValueClient.
      */
     @Generated
@@ -392,7 +388,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of Float32ValueClient class.
-     *
+     * 
      * @return an instance of Float32ValueClient.
      */
     @Generated
@@ -402,7 +398,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of DatetimeValueClient class.
-     *
+     * 
      * @return an instance of DatetimeValueClient.
      */
     @Generated
@@ -412,7 +408,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of DurationValueClient class.
-     *
+     * 
      * @return an instance of DurationValueClient.
      */
     @Generated
@@ -422,7 +418,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of UnknownValueClient class.
-     *
+     * 
      * @return an instance of UnknownValueClient.
      */
     @Generated
@@ -432,7 +428,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of ModelValueClient class.
-     *
+     * 
      * @return an instance of ModelValueClient.
      */
     @Generated
@@ -442,7 +438,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of RecursiveModelValueClient class.
-     *
+     * 
      * @return an instance of RecursiveModelValueClient.
      */
     @Generated
@@ -452,7 +448,7 @@ public final class DictionaryClientBuilder
 
     /**
      * Builds an instance of NullableFloatValueClient class.
-     *
+     * 
      * @return an instance of NullableFloatValueClient.
      */
     @Generated

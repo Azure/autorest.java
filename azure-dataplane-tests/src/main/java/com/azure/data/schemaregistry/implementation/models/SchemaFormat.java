@@ -8,22 +8,30 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for SchemaFormat. */
+/**
+ * Defines values for SchemaFormat.
+ */
 public final class SchemaFormat extends ExpandableStringEnum<SchemaFormat> {
-    /** Static value application/json; serialization=Avro for SchemaFormat. */
-    public static final SchemaFormat APPLICATION_JSON_SERIALIZATION_AVRO =
-            fromString("application/json; serialization=Avro");
+    /**
+     * Static value application/json; serialization=Avro for SchemaFormat.
+     */
+    public static final SchemaFormat APPLICATION_JSON_SERIALIZATION_AVRO
+        = fromString("application/json; serialization=Avro");
 
-    /** Static value application/json; serialization=Json for SchemaFormat. */
-    public static final SchemaFormat APPLICATION_JSON_SERIALIZATION_JSON =
-            fromString("application/json; serialization=Json");
+    /**
+     * Static value application/json; serialization=Json for SchemaFormat.
+     */
+    public static final SchemaFormat APPLICATION_JSON_SERIALIZATION_JSON
+        = fromString("application/json; serialization=Json");
 
-    /** Static value text/plain; charset=utf-8 for SchemaFormat. */
+    /**
+     * Static value text/plain; charset=utf-8 for SchemaFormat.
+     */
     public static final SchemaFormat TEXT_PLAIN_CHARSET_UTF8 = fromString("text/plain; charset=utf-8");
 
     /**
      * Creates a new instance of SchemaFormat value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
@@ -31,7 +39,7 @@ public final class SchemaFormat extends ExpandableStringEnum<SchemaFormat> {
 
     /**
      * Creates or finds a SchemaFormat from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding SchemaFormat.
      */
@@ -42,7 +50,7 @@ public final class SchemaFormat extends ExpandableStringEnum<SchemaFormat> {
 
     /**
      * Gets known SchemaFormat values.
-     *
+     * 
      * @return known SchemaFormat values.
      */
     public static Collection<SchemaFormat> values() {

@@ -4,21 +4,25 @@
 
 package com.type.model.inheritance.nesteddiscriminator.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.regex.Pattern;
 
-/** The third level model GoblinShark in polymorphic multiple levels inheritance. */
+/**
+ * The third level model GoblinShark in polymorphic multiple levels inheritance.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "sharktype")
 @JsonTypeName("goblin")
 @Immutable
 public final class GoblinShark extends Shark {
     /**
      * Creates an instance of GoblinShark class.
-     *
+     * 
      * @param age the age value to set.
      * @param sharktype the sharktype value to set.
      */

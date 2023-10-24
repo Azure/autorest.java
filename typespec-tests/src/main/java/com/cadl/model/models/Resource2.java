@@ -4,12 +4,16 @@
 
 package com.cadl.model.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The Resource2 model. */
+/**
+ * The Resource2 model.
+ */
 @Immutable
 public final class Resource2 {
     /*
@@ -28,7 +32,7 @@ public final class Resource2 {
 
     /**
      * Creates an instance of Resource2 class.
-     *
+     * 
      * @param name the name value to set.
      * @param data2 the data2 value to set.
      */
@@ -41,7 +45,7 @@ public final class Resource2 {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated
@@ -51,7 +55,7 @@ public final class Resource2 {
 
     /**
      * Get the data2 property: The data2 property.
-     *
+     * 
      * @return the data2 value.
      */
     @Generated

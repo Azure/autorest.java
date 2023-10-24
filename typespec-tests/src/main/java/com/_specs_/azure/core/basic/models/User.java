@@ -6,11 +6,15 @@ package com._specs_.azure.core.basic.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import java.util.regex.Pattern;
 
-/** Details about a user. */
+/**
+ * Details about a user.
+ */
 @Fluent
 public final class User {
     /*
@@ -43,7 +47,7 @@ public final class User {
 
     /**
      * Creates an instance of User class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -54,7 +58,7 @@ public final class User {
 
     /**
      * Get the id property: The user's id.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -64,7 +68,7 @@ public final class User {
 
     /**
      * Get the name property: The user's name.
-     *
+     * 
      * @return the name value.
      */
     @Generated
@@ -74,7 +78,7 @@ public final class User {
 
     /**
      * Get the orders property: The user's order list.
-     *
+     * 
      * @return the orders value.
      */
     @Generated
@@ -84,7 +88,7 @@ public final class User {
 
     /**
      * Set the orders property: The user's order list.
-     *
+     * 
      * @param orders the orders value to set.
      * @return the User object itself.
      */
@@ -96,7 +100,7 @@ public final class User {
 
     /**
      * Get the etag property: The entity tag for this resource.
-     *
+     * 
      * @return the etag value.
      */
     @Generated

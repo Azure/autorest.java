@@ -8,11 +8,11 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema model.
+ * The PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+ * model.
  */
 @Fluent
-public final
-class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema {
+public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema {
     /*
      * Constant part of a formdata body.
      */
@@ -33,16 +33,16 @@ class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApp
 
     /**
      * Creates an instance of
-     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema class.
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+     * class.
      */
-    public
-    PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {
+    public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {
         grantType = "access_token";
     }
 
     /**
      * Get the grantType property: Constant part of a formdata body.
-     *
+     * 
      * @return the grantType value.
      */
     public String getGrantType() {
@@ -51,21 +51,21 @@ class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApp
 
     /**
      * Set the grantType property: Constant part of a formdata body.
-     *
+     * 
      * @param grantType the grantType value to set.
      * @return the
-     *     PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     *     object itself.
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+     * object itself.
      */
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-            setGrantType(String grantType) {
+        setGrantType(String grantType) {
         this.grantType = grantType;
         return this;
     }
 
     /**
      * Get the service property: Indicates the name of your Azure container registry.
-     *
+     * 
      * @return the service value.
      */
     public String getService() {
@@ -74,14 +74,14 @@ class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApp
 
     /**
      * Set the service property: Indicates the name of your Azure container registry.
-     *
+     * 
      * @param service the service value to set.
      * @return the
-     *     PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     *     object itself.
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+     * object itself.
      */
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-            setService(String service) {
+        setService(String service) {
         this.service = service;
         return this;
     }
@@ -89,7 +89,7 @@ class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApp
     /**
      * Get the aadAccessToken property: AAD access token, mandatory when grant_type is access_token_refresh_token or
      * access_token.
-     *
+     * 
      * @return the aadAccessToken value.
      */
     public String getAadAccessToken() {
@@ -99,31 +99,31 @@ class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApp
     /**
      * Set the aadAccessToken property: AAD access token, mandatory when grant_type is access_token_refresh_token or
      * access_token.
-     *
+     * 
      * @param aadAccessToken the aadAccessToken value to set.
      * @return the
-     *     PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     *     object itself.
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+     * object itself.
      */
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-            setAadAccessToken(String aadAccessToken) {
+        setAadAccessToken(String aadAccessToken) {
         this.aadAccessToken = aadAccessToken;
         return this;
     }
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (getService() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property service in model PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
+                "Missing required property service in model PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
         }
         if (getAadAccessToken() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property aadAccessToken in model PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
+                "Missing required property aadAccessToken in model PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
         }
     }
 }

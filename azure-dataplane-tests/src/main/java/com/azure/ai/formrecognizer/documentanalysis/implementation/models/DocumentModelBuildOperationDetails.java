@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
 import java.util.Map;
 
-/** Get Operation response object. */
+/**
+ * Get Operation response object.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("documentModelBuild")
 @Fluent
@@ -22,12 +24,14 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
     @JsonProperty(value = "result")
     private DocumentModelDetails result;
 
-    /** Creates an instance of DocumentModelBuildOperationDetails class. */
+    /**
+     * Creates an instance of DocumentModelBuildOperationDetails class.
+     */
     public DocumentModelBuildOperationDetails() {}
 
     /**
      * Get the result property: Operation result upon success.
-     *
+     * 
      * @return the result value.
      */
     public DocumentModelDetails getResult() {
@@ -36,7 +40,7 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
 
     /**
      * Set the result property: Operation result upon success.
-     *
+     * 
      * @param result the result value to set.
      * @return the DocumentModelBuildOperationDetails object itself.
      */
@@ -45,63 +49,81 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelBuildOperationDetails setOperationId(String operationId) {
         super.setOperationId(operationId);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelBuildOperationDetails setStatus(OperationStatus status) {
         super.setStatus(status);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelBuildOperationDetails setPercentCompleted(Integer percentCompleted) {
         super.setPercentCompleted(percentCompleted);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelBuildOperationDetails setCreatedDateTime(OffsetDateTime createdDateTime) {
         super.setCreatedDateTime(createdDateTime);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelBuildOperationDetails setLastUpdatedDateTime(OffsetDateTime lastUpdatedDateTime) {
         super.setLastUpdatedDateTime(lastUpdatedDateTime);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelBuildOperationDetails setResourceLocation(String resourceLocation) {
         super.setResourceLocation(resourceLocation);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelBuildOperationDetails setApiVersion(String apiVersion) {
         super.setApiVersion(apiVersion);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelBuildOperationDetails setTags(Map<String, String> tags) {
         super.setTags(tags);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelBuildOperationDetails setError(Error error) {
         super.setError(error);

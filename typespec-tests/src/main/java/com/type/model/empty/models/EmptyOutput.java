@@ -4,13 +4,21 @@
 
 package com.type.model.empty.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.regex.Pattern;
 
-/** Empty model used in operation return type. */
+/**
+ * Empty model used in operation return type.
+ */
 @Immutable
 public final class EmptyOutput {
-    /** Creates an instance of EmptyOutput class. */
+    /**
+     * Creates an instance of EmptyOutput class.
+     */
     @Generated
-    private EmptyOutput() {}
+    private EmptyOutput() {
+    }
 }

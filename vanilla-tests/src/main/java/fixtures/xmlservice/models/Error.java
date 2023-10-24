@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** The Error model. */
+/**
+ * The Error model.
+ */
 @JacksonXmlRootElement(localName = "Error")
 @Fluent
 public final class Error {
@@ -24,12 +26,14 @@ public final class Error {
     @JsonProperty(value = "message")
     private String message;
 
-    /** Creates an instance of Error class. */
+    /**
+     * Creates an instance of Error class.
+     */
     public Error() {}
 
     /**
      * Get the status property: The status property.
-     *
+     * 
      * @return the status value.
      */
     public Integer getStatus() {
@@ -38,7 +42,7 @@ public final class Error {
 
     /**
      * Set the status property: The status property.
-     *
+     * 
      * @param status the status value to set.
      * @return the Error object itself.
      */
@@ -49,7 +53,7 @@ public final class Error {
 
     /**
      * Get the message property: The message property.
-     *
+     * 
      * @return the message value.
      */
     public String getMessage() {
@@ -58,7 +62,7 @@ public final class Error {
 
     /**
      * Set the message property: The message property.
-     *
+     * 
      * @param message the message value to set.
      * @return the Error object itself.
      */
@@ -69,7 +73,7 @@ public final class Error {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

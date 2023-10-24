@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** Azure Analytics Logging settings. */
+/**
+ * Azure Analytics Logging settings.
+ */
 @JacksonXmlRootElement(localName = "Logging")
 @Fluent
 public final class Logging {
@@ -42,12 +44,14 @@ public final class Logging {
     @JsonProperty(value = "RetentionPolicy", required = true)
     private RetentionPolicy retentionPolicy;
 
-    /** Creates an instance of Logging class. */
+    /**
+     * Creates an instance of Logging class.
+     */
     public Logging() {}
 
     /**
      * Get the version property: The version of Storage Analytics to configure.
-     *
+     * 
      * @return the version value.
      */
     public String getVersion() {
@@ -56,7 +60,7 @@ public final class Logging {
 
     /**
      * Set the version property: The version of Storage Analytics to configure.
-     *
+     * 
      * @param version the version value to set.
      * @return the Logging object itself.
      */
@@ -67,7 +71,7 @@ public final class Logging {
 
     /**
      * Get the delete property: Indicates whether all delete requests should be logged.
-     *
+     * 
      * @return the delete value.
      */
     public boolean isDelete() {
@@ -76,7 +80,7 @@ public final class Logging {
 
     /**
      * Set the delete property: Indicates whether all delete requests should be logged.
-     *
+     * 
      * @param delete the delete value to set.
      * @return the Logging object itself.
      */
@@ -87,7 +91,7 @@ public final class Logging {
 
     /**
      * Get the read property: Indicates whether all read requests should be logged.
-     *
+     * 
      * @return the read value.
      */
     public boolean isRead() {
@@ -96,7 +100,7 @@ public final class Logging {
 
     /**
      * Set the read property: Indicates whether all read requests should be logged.
-     *
+     * 
      * @param read the read value to set.
      * @return the Logging object itself.
      */
@@ -107,7 +111,7 @@ public final class Logging {
 
     /**
      * Get the write property: Indicates whether all write requests should be logged.
-     *
+     * 
      * @return the write value.
      */
     public boolean isWrite() {
@@ -116,7 +120,7 @@ public final class Logging {
 
     /**
      * Set the write property: Indicates whether all write requests should be logged.
-     *
+     * 
      * @param write the write value to set.
      * @return the Logging object itself.
      */
@@ -127,7 +131,7 @@ public final class Logging {
 
     /**
      * Get the retentionPolicy property: the retention policy.
-     *
+     * 
      * @return the retentionPolicy value.
      */
     public RetentionPolicy getRetentionPolicy() {
@@ -136,7 +140,7 @@ public final class Logging {
 
     /**
      * Set the retentionPolicy property: the retention policy.
-     *
+     * 
      * @param retentionPolicy the retentionPolicy value to set.
      * @return the Logging object itself.
      */
@@ -147,7 +151,7 @@ public final class Logging {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

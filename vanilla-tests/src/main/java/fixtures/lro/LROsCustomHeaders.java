@@ -33,23 +33,28 @@ import fixtures.lro.models.Product;
 import java.time.Duration;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in LROsCustomHeaders. */
+/**
+ * An instance of this class provides access to all the operations defined in LROsCustomHeaders.
+ */
 public final class LROsCustomHeaders {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final LROsCustomHeadersService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestLongRunningOperationTestService client;
 
     /**
      * Initializes an instance of LROsCustomHeaders.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     LROsCustomHeaders(AutoRestLongRunningOperationTestService client) {
-        this.service =
-                RestProxy.create(
-                        LROsCustomHeadersService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(LROsCustomHeadersService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -61,40 +66,28 @@ public final class LROsCustomHeaders {
     @ServiceInterface(name = "AutoRestLongRunningO")
     public interface LROsCustomHeadersService {
         @Put("/lro/customheader/putasync/retry/succeeded")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsCustomHeadersPutAsyncRetrySucceededResponse> putAsyncRetrySucceeded(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Product product,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<LROsCustomHeadersPutAsyncRetrySucceededResponse> putAsyncRetrySucceeded(@HostParam("$host") String host,
+            @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/customheader/put/201/creating/succeeded/200")
-        @ExpectedResponses({200, 201})
+        @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<Response<Product>> put201CreatingSucceeded200(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Product product,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Product>> put201CreatingSucceeded200(@HostParam("$host") String host,
+            @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/customheader/post/202/retry/200")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsCustomHeadersPost202Retry200Response> post202Retry200(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Product product,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<LROsCustomHeadersPost202Retry200Response> post202Retry200(@HostParam("$host") String host,
+            @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/customheader/postasync/retry/succeeded")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsCustomHeadersPostAsyncRetrySucceededResponse> postAsyncRetrySucceeded(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Product product,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<LROsCustomHeadersPostAsyncRetrySucceededResponse> postAsyncRetrySucceeded(@HostParam("$host") String host,
+            @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -102,7 +95,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -110,18 +103,18 @@ public final class LROsCustomHeaders {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsCustomHeadersPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithResponseAsync(
-            Product product) {
+    public Mono<LROsCustomHeadersPutAsyncRetrySucceededResponse>
+        putAsyncRetrySucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.putAsyncRetrySucceeded(this.client.getHost(), product, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putAsyncRetrySucceeded(this.client.getHost(), product, accept, context));
     }
 
     /**
@@ -129,7 +122,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -138,11 +131,11 @@ public final class LROsCustomHeaders {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsCustomHeadersPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithResponseAsync(
-            Product product, Context context) {
+    public Mono<LROsCustomHeadersPutAsyncRetrySucceededResponse>
+        putAsyncRetrySucceededWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -156,7 +149,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -165,16 +158,10 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRetrySucceededAsync(Product product) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.putAsyncRetrySucceededWithResponseAsync(product),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(Product.class),
-                TypeReference.createInstance(Product.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.putAsyncRetrySucceededWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(Context.NONE).setServiceVersion(null)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -182,7 +169,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -190,16 +177,10 @@ public final class LROsCustomHeaders {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRetrySucceededAsync() {
         final Product product = null;
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.putAsyncRetrySucceededWithResponseAsync(product),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(Product.class),
-                TypeReference.createInstance(Product.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.putAsyncRetrySucceededWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(Context.NONE).setServiceVersion(null)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -207,7 +188,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -217,16 +198,11 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRetrySucceededAsync(Product product, Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.putAsyncRetrySucceededWithResponseAsync(product, context),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(context)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(Product.class),
-                TypeReference.createInstance(Product.class));
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncRetrySucceededWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(context).setServiceVersion(null)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -234,7 +210,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -251,7 +227,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
@@ -267,7 +243,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -285,7 +261,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -295,15 +271,15 @@ public final class LROsCustomHeaders {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put201CreatingSucceeded200WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.put201CreatingSucceeded200(this.client.getHost(), product, accept, context));
+            context -> service.put201CreatingSucceeded200(this.client.getHost(), product, accept, context));
     }
 
     /**
@@ -311,7 +287,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -322,8 +298,8 @@ public final class LROsCustomHeaders {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put201CreatingSucceeded200WithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -337,7 +313,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -346,16 +322,10 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut201CreatingSucceeded200Async(Product product) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.put201CreatingSucceeded200WithResponseAsync(product),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(Product.class),
-                TypeReference.createInstance(Product.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.put201CreatingSucceeded200WithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(Context.NONE).setServiceVersion(null)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -363,7 +333,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
-     *
+     * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -371,16 +341,10 @@ public final class LROsCustomHeaders {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut201CreatingSucceeded200Async() {
         final Product product = null;
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.put201CreatingSucceeded200WithResponseAsync(product),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(Product.class),
-                TypeReference.createInstance(Product.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.put201CreatingSucceeded200WithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(Context.NONE).setServiceVersion(null)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -388,7 +352,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -398,16 +362,11 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut201CreatingSucceeded200Async(Product product, Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.put201CreatingSucceeded200WithResponseAsync(product, context),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(context)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(Product.class),
-                TypeReference.createInstance(Product.class));
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.put201CreatingSucceeded200WithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(context).setServiceVersion(null)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
     }
 
     /**
@@ -415,7 +374,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -432,7 +391,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
-     *
+     * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
@@ -448,7 +407,7 @@ public final class LROsCustomHeaders {
      * running put request, service returns a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -465,7 +424,7 @@ public final class LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
      * Polls return a 200 with a response body after success.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -475,22 +434,22 @@ public final class LROsCustomHeaders {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsCustomHeadersPost202Retry200Response> post202Retry200WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.post202Retry200(this.client.getHost(), product, accept, context));
+        return FluxUtil
+            .withContext(context -> service.post202Retry200(this.client.getHost(), product, accept, context));
     }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
      * Polls return a 200 with a response body after success.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -499,11 +458,11 @@ public final class LROsCustomHeaders {
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsCustomHeadersPost202Retry200Response> post202Retry200WithResponseAsync(
-            Product product, Context context) {
+    public Mono<LROsCustomHeadersPost202Retry200Response> post202Retry200WithResponseAsync(Product product,
+        Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -516,7 +475,7 @@ public final class LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
      * Polls return a 200 with a response body after success.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -525,23 +484,17 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202Retry200Async(Product product) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.post202Retry200WithResponseAsync(product),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.post202Retry200WithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(Context.NONE).setServiceVersion(null)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
      * Polls return a 200 with a response body after success.
-     *
+     * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -549,23 +502,17 @@ public final class LROsCustomHeaders {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202Retry200Async() {
         final Product product = null;
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.post202Retry200WithResponseAsync(product),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.post202Retry200WithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(Context.NONE).setServiceVersion(null)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
      * Polls return a 200 with a response body after success.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -575,23 +522,17 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202Retry200Async(Product product, Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.post202Retry200WithResponseAsync(product, context),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(context)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.post202Retry200WithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(context).setServiceVersion(null)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
      * Polls return a 200 with a response body after success.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -607,7 +548,7 @@ public final class LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
      * Polls return a 200 with a response body after success.
-     *
+     * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
@@ -622,7 +563,7 @@ public final class LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers,
      * Polls return a 200 with a response body after success.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -640,7 +581,7 @@ public final class LROsCustomHeaders {
      * running post request, service returns a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -648,18 +589,18 @@ public final class LROsCustomHeaders {
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsCustomHeadersPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithResponseAsync(
-            Product product) {
+    public Mono<LROsCustomHeadersPostAsyncRetrySucceededResponse>
+        postAsyncRetrySucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.postAsyncRetrySucceeded(this.client.getHost(), product, accept, context));
+        return FluxUtil
+            .withContext(context -> service.postAsyncRetrySucceeded(this.client.getHost(), product, accept, context));
     }
 
     /**
@@ -667,7 +608,7 @@ public final class LROsCustomHeaders {
      * running post request, service returns a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -676,11 +617,11 @@ public final class LROsCustomHeaders {
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsCustomHeadersPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithResponseAsync(
-            Product product, Context context) {
+    public Mono<LROsCustomHeadersPostAsyncRetrySucceededResponse>
+        postAsyncRetrySucceededWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (product != null) {
             product.validate();
@@ -694,7 +635,7 @@ public final class LROsCustomHeaders {
      * running post request, service returns a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -703,16 +644,10 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetrySucceededAsync(Product product) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.postAsyncRetrySucceededWithResponseAsync(product),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.postAsyncRetrySucceededWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(Context.NONE).setServiceVersion(null)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -720,7 +655,7 @@ public final class LROsCustomHeaders {
      * running post request, service returns a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link PollerFlux} for polling of long-running operation.
@@ -728,16 +663,10 @@ public final class LROsCustomHeaders {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetrySucceededAsync() {
         final Product product = null;
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.postAsyncRetrySucceededWithResponseAsync(product),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.postAsyncRetrySucceededWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(Context.NONE).setServiceVersion(null)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -745,7 +674,7 @@ public final class LROsCustomHeaders {
      * running post request, service returns a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -755,16 +684,11 @@ public final class LROsCustomHeaders {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetrySucceededAsync(Product product, Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.postAsyncRetrySucceededWithResponseAsync(product, context),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(context)
-                                .setServiceVersion(null)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncRetrySucceededWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline()).setEndpoint(null)
+                .setContext(context).setServiceVersion(null)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
@@ -772,7 +696,7 @@ public final class LROsCustomHeaders {
      * running post request, service returns a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -789,7 +713,7 @@ public final class LROsCustomHeaders {
      * running post request, service returns a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link SyncPoller} for polling of long-running operation.
@@ -805,7 +729,7 @@ public final class LROsCustomHeaders {
      * running post request, service returns a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
-     *
+     * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders model. */
+/**
+ * The LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders model.
+ */
 @Fluent
 public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
     /*
@@ -35,7 +37,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders(HttpHeaders rawHeaders) {
@@ -49,7 +51,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Get the retryAfter property: The Retry-After property.
-     *
+     * 
      * @return the retryAfter value.
      */
     public Integer getRetryAfter() {
@@ -58,7 +60,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Set the retryAfter property: The Retry-After property.
-     *
+     * 
      * @param retryAfter the retryAfter value to set.
      * @return the LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders object itself.
      */
@@ -69,7 +71,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Get the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @return the azureAsyncOperation value.
      */
     public String getAzureAsyncOperation() {
@@ -78,7 +80,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders object itself.
      */
@@ -89,7 +91,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -98,7 +100,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders object itself.
      */
@@ -109,7 +111,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

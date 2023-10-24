@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 
-/** The ReadonlyObj model. */
+/**
+ * The ReadonlyObj model.
+ */
 @Fluent
 public final class ReadonlyObj {
     /*
@@ -19,7 +21,7 @@ public final class ReadonlyObj {
 
     /**
      * Set the ID of the object.
-     *
+     * 
      * @param id The ID value
      * @return The current ReadonlyObj instance
      */
@@ -34,12 +36,14 @@ public final class ReadonlyObj {
     @JsonProperty(value = "size")
     private Integer size;
 
-    /** Creates an instance of ReadonlyObj class. */
+    /**
+     * Creates an instance of ReadonlyObj class.
+     */
     public ReadonlyObj() {}
 
     /**
      * Get the ID of the object.
-     *
+     * 
      * @return the id value.
      */
     public UUID getId() {
@@ -49,7 +53,7 @@ public final class ReadonlyObj {
 
     /**
      * Get the size property: The size property.
-     *
+     * 
      * @return the size value.
      */
     public Integer getSize() {
@@ -58,7 +62,7 @@ public final class ReadonlyObj {
 
     /**
      * Set the size property: The size property.
-     *
+     * 
      * @param size the size value to set.
      * @return the ReadonlyObj object itself.
      */

@@ -4,59 +4,82 @@
 
 package com.encode.bytes;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.encode.bytes.implementation.PropertiesImpl;
 import com.encode.bytes.models.Base64BytesProperty;
 import com.encode.bytes.models.Base64UrlArrayBytesProperty;
 import com.encode.bytes.models.Base64UrlBytesProperty;
 import com.encode.bytes.models.DefaultBytesProperty;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous BytesClient type. */
+/**
+ * Initializes a new instance of the asynchronous BytesClient type.
+ */
 @ServiceClient(builder = BytesClientBuilder.class, isAsync = true)
 public final class PropertyAsyncClient {
-    @Generated private final PropertiesImpl serviceClient;
+    @Generated
+    private final PropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of PropertyAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    PropertyAsyncClient(PropertiesImpl serviceClient) {
+     PropertyAsyncClient(PropertiesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The defaultMethod operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -73,23 +96,19 @@ public final class PropertyAsyncClient {
 
     /**
      * The base64 operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -106,23 +125,19 @@ public final class PropertyAsyncClient {
 
     /**
      * The base64Url operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -139,9 +154,7 @@ public final class PropertyAsyncClient {
 
     /**
      * The base64UrlArray operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -149,9 +162,7 @@ public final class PropertyAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -159,7 +170,7 @@ public final class PropertyAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -176,7 +187,7 @@ public final class PropertyAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -191,14 +202,12 @@ public final class PropertyAsyncClient {
     public Mono<DefaultBytesProperty> defaultMethod(DefaultBytesProperty body) {
         // Generated convenience method for defaultMethodWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(DefaultBytesProperty.class));
+        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(DefaultBytesProperty.class));
     }
 
     /**
      * The base64 operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -213,14 +222,12 @@ public final class PropertyAsyncClient {
     public Mono<Base64BytesProperty> base64(Base64BytesProperty body) {
         // Generated convenience method for base64WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64WithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Base64BytesProperty.class));
+        return base64WithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Base64BytesProperty.class));
     }
 
     /**
      * The base64Url operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -235,14 +242,12 @@ public final class PropertyAsyncClient {
     public Mono<Base64UrlBytesProperty> base64Url(Base64UrlBytesProperty body) {
         // Generated convenience method for base64UrlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Base64UrlBytesProperty.class));
+        return base64UrlWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Base64UrlBytesProperty.class));
     }
 
     /**
      * The base64UrlArray operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -257,8 +262,6 @@ public final class PropertyAsyncClient {
     public Mono<Base64UrlArrayBytesProperty> base64UrlArray(Base64UrlArrayBytesProperty body) {
         // Generated convenience method for base64UrlArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlArrayWithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Base64UrlArrayBytesProperty.class));
+        return base64UrlArrayWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Base64UrlArrayBytesProperty.class));
     }
 }

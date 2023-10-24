@@ -4,13 +4,17 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
+import java.util.regex.Pattern;
 
-/** Model with a datetime property. */
+/**
+ * Model with a datetime property.
+ */
 @Immutable
 public final class DatetimeProperty {
     /*
@@ -22,7 +26,7 @@ public final class DatetimeProperty {
 
     /**
      * Creates an instance of DatetimeProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -33,7 +37,7 @@ public final class DatetimeProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

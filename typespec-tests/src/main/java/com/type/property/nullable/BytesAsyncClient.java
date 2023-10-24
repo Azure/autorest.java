@@ -4,56 +4,81 @@
 
 package com.type.property.nullable;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.type.property.nullable.implementation.BytesImpl;
 import com.type.property.nullable.models.BytesProperty;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous NullableClient type. */
+/**
+ * Initializes a new instance of the asynchronous NullableClient type.
+ */
 @ServiceClient(builder = NullableClientBuilder.class, isAsync = true)
 public final class BytesAsyncClient {
-    @Generated private final BytesImpl serviceClient;
+    @Generated
+    private final BytesImpl serviceClient;
 
     /**
      * Initializes an instance of BytesAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    BytesAsyncClient(BytesImpl serviceClient) {
+     BytesAsyncClient(BytesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: byte[] (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return all properties in the model along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * @return models that will return all properties in the model along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -63,23 +88,20 @@ public final class BytesAsyncClient {
 
     /**
      * Get models that will return the default object.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: byte[] (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return the default object along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return models that will return the default object along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -89,18 +111,15 @@ public final class BytesAsyncClient {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: byte[] (Required)
      * }
      * }</pre>
-     *
-     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
-     *     looking for.
+     * 
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -117,18 +136,15 @@ public final class BytesAsyncClient {
 
     /**
      * Put a body with default properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: byte[] (Required)
      * }
      * }</pre>
-     *
-     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
-     *     looking for.
+     * 
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -145,7 +161,7 @@ public final class BytesAsyncClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -158,14 +174,12 @@ public final class BytesAsyncClient {
     public Mono<BytesProperty> getNonNull() {
         // Generated convenience method for getNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getNonNullWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(BytesProperty.class));
+        return getNonNullWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(BytesProperty.class));
     }
 
     /**
      * Get models that will return the default object.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -178,8 +192,6 @@ public final class BytesAsyncClient {
     public Mono<BytesProperty> getNull() {
         // Generated convenience method for getNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getNullWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(BytesProperty.class));
+        return getNullWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(BytesProperty.class));
     }
 }

@@ -11,7 +11,9 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 
-/** The StringWrapper model. */
+/**
+ * The StringWrapper model.
+ */
 @Fluent
 public final class StringWrapper implements JsonSerializable<StringWrapper> {
     /*
@@ -29,12 +31,14 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      */
     private String nullProperty;
 
-    /** Creates an instance of StringWrapper class. */
+    /**
+     * Creates an instance of StringWrapper class.
+     */
     public StringWrapper() {}
 
     /**
      * Get the field property: The field property.
-     *
+     * 
      * @return the field value.
      */
     public String getField() {
@@ -43,7 +47,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
 
     /**
      * Set the field property: The field property.
-     *
+     * 
      * @param field the field value to set.
      * @return the StringWrapper object itself.
      */
@@ -54,7 +58,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
 
     /**
      * Get the empty property: The empty property.
-     *
+     * 
      * @return the empty value.
      */
     public String getEmpty() {
@@ -63,7 +67,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
 
     /**
      * Set the empty property: The empty property.
-     *
+     * 
      * @param empty the empty value to set.
      * @return the StringWrapper object itself.
      */
@@ -74,7 +78,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
 
     /**
      * Get the nullProperty property: The null property.
-     *
+     * 
      * @return the nullProperty value.
      */
     public String getNullProperty() {
@@ -83,7 +87,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
 
     /**
      * Set the nullProperty property: The null property.
-     *
+     * 
      * @param nullProperty the nullProperty value to set.
      * @return the StringWrapper object itself.
      */
@@ -94,7 +98,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}
@@ -110,32 +114,31 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
 
     /**
      * Reads an instance of StringWrapper from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of StringWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IOException If an error occurs while reading the StringWrapper.
      */
     public static StringWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    StringWrapper deserializedStringWrapper = new StringWrapper();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            StringWrapper deserializedStringWrapper = new StringWrapper();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("field".equals(fieldName)) {
-                            deserializedStringWrapper.field = reader.getString();
-                        } else if ("empty".equals(fieldName)) {
-                            deserializedStringWrapper.empty = reader.getString();
-                        } else if ("null".equals(fieldName)) {
-                            deserializedStringWrapper.nullProperty = reader.getString();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
+                if ("field".equals(fieldName)) {
+                    deserializedStringWrapper.field = reader.getString();
+                } else if ("empty".equals(fieldName)) {
+                    deserializedStringWrapper.empty = reader.getString();
+                } else if ("null".equals(fieldName)) {
+                    deserializedStringWrapper.nullProperty = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedStringWrapper;
-                });
+            return deserializedStringWrapper;
+        });
     }
 }

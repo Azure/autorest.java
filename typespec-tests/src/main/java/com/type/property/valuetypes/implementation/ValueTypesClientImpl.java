@@ -8,273 +8,318 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the ValueTypesClient type. */
+/**
+ * Initializes a new instance of the ValueTypesClient type.
+ */
 public final class ValueTypesClientImpl {
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The BooleanOperationsImpl object to access its operations. */
+    /**
+     * The BooleanOperationsImpl object to access its operations.
+     */
     private final BooleanOperationsImpl booleanOperations;
 
     /**
      * Gets the BooleanOperationsImpl object to access its operations.
-     *
+     * 
      * @return the BooleanOperationsImpl object.
      */
     public BooleanOperationsImpl getBooleanOperations() {
         return this.booleanOperations;
     }
 
-    /** The StringOperationsImpl object to access its operations. */
+    /**
+     * The StringOperationsImpl object to access its operations.
+     */
     private final StringOperationsImpl stringOperations;
 
     /**
      * Gets the StringOperationsImpl object to access its operations.
-     *
+     * 
      * @return the StringOperationsImpl object.
      */
     public StringOperationsImpl getStringOperations() {
         return this.stringOperations;
     }
 
-    /** The BytesImpl object to access its operations. */
+    /**
+     * The BytesImpl object to access its operations.
+     */
     private final BytesImpl bytes;
 
     /**
      * Gets the BytesImpl object to access its operations.
-     *
+     * 
      * @return the BytesImpl object.
      */
     public BytesImpl getBytes() {
         return this.bytes;
     }
 
-    /** The IntsImpl object to access its operations. */
+    /**
+     * The IntsImpl object to access its operations.
+     */
     private final IntsImpl ints;
 
     /**
      * Gets the IntsImpl object to access its operations.
-     *
+     * 
      * @return the IntsImpl object.
      */
     public IntsImpl getInts() {
         return this.ints;
     }
 
-    /** The FloatOperationsImpl object to access its operations. */
+    /**
+     * The FloatOperationsImpl object to access its operations.
+     */
     private final FloatOperationsImpl floatOperations;
 
     /**
      * Gets the FloatOperationsImpl object to access its operations.
-     *
+     * 
      * @return the FloatOperationsImpl object.
      */
     public FloatOperationsImpl getFloatOperations() {
         return this.floatOperations;
     }
 
-    /** The DatetimeOperationsImpl object to access its operations. */
+    /**
+     * The DatetimeOperationsImpl object to access its operations.
+     */
     private final DatetimeOperationsImpl datetimeOperations;
 
     /**
      * Gets the DatetimeOperationsImpl object to access its operations.
-     *
+     * 
      * @return the DatetimeOperationsImpl object.
      */
     public DatetimeOperationsImpl getDatetimeOperations() {
         return this.datetimeOperations;
     }
 
-    /** The DurationOperationsImpl object to access its operations. */
+    /**
+     * The DurationOperationsImpl object to access its operations.
+     */
     private final DurationOperationsImpl durationOperations;
 
     /**
      * Gets the DurationOperationsImpl object to access its operations.
-     *
+     * 
      * @return the DurationOperationsImpl object.
      */
     public DurationOperationsImpl getDurationOperations() {
         return this.durationOperations;
     }
 
-    /** The EnumsImpl object to access its operations. */
+    /**
+     * The EnumsImpl object to access its operations.
+     */
     private final EnumsImpl enums;
 
     /**
      * Gets the EnumsImpl object to access its operations.
-     *
+     * 
      * @return the EnumsImpl object.
      */
     public EnumsImpl getEnums() {
         return this.enums;
     }
 
-    /** The ExtensibleEnumsImpl object to access its operations. */
+    /**
+     * The ExtensibleEnumsImpl object to access its operations.
+     */
     private final ExtensibleEnumsImpl extensibleEnums;
 
     /**
      * Gets the ExtensibleEnumsImpl object to access its operations.
-     *
+     * 
      * @return the ExtensibleEnumsImpl object.
      */
     public ExtensibleEnumsImpl getExtensibleEnums() {
         return this.extensibleEnums;
     }
 
-    /** The ModelsImpl object to access its operations. */
+    /**
+     * The ModelsImpl object to access its operations.
+     */
     private final ModelsImpl models;
 
     /**
      * Gets the ModelsImpl object to access its operations.
-     *
+     * 
      * @return the ModelsImpl object.
      */
     public ModelsImpl getModels() {
         return this.models;
     }
 
-    /** The CollectionsStringsImpl object to access its operations. */
+    /**
+     * The CollectionsStringsImpl object to access its operations.
+     */
     private final CollectionsStringsImpl collectionsStrings;
 
     /**
      * Gets the CollectionsStringsImpl object to access its operations.
-     *
+     * 
      * @return the CollectionsStringsImpl object.
      */
     public CollectionsStringsImpl getCollectionsStrings() {
         return this.collectionsStrings;
     }
 
-    /** The CollectionsIntsImpl object to access its operations. */
+    /**
+     * The CollectionsIntsImpl object to access its operations.
+     */
     private final CollectionsIntsImpl collectionsInts;
 
     /**
      * Gets the CollectionsIntsImpl object to access its operations.
-     *
+     * 
      * @return the CollectionsIntsImpl object.
      */
     public CollectionsIntsImpl getCollectionsInts() {
         return this.collectionsInts;
     }
 
-    /** The CollectionsModelsImpl object to access its operations. */
+    /**
+     * The CollectionsModelsImpl object to access its operations.
+     */
     private final CollectionsModelsImpl collectionsModels;
 
     /**
      * Gets the CollectionsModelsImpl object to access its operations.
-     *
+     * 
      * @return the CollectionsModelsImpl object.
      */
     public CollectionsModelsImpl getCollectionsModels() {
         return this.collectionsModels;
     }
 
-    /** The DictionaryStringsImpl object to access its operations. */
+    /**
+     * The DictionaryStringsImpl object to access its operations.
+     */
     private final DictionaryStringsImpl dictionaryStrings;
 
     /**
      * Gets the DictionaryStringsImpl object to access its operations.
-     *
+     * 
      * @return the DictionaryStringsImpl object.
      */
     public DictionaryStringsImpl getDictionaryStrings() {
         return this.dictionaryStrings;
     }
 
-    /** The NeversImpl object to access its operations. */
+    /**
+     * The NeversImpl object to access its operations.
+     */
     private final NeversImpl nevers;
 
     /**
      * Gets the NeversImpl object to access its operations.
-     *
+     * 
      * @return the NeversImpl object.
      */
     public NeversImpl getNevers() {
         return this.nevers;
     }
 
-    /** The UnknownStringsImpl object to access its operations. */
+    /**
+     * The UnknownStringsImpl object to access its operations.
+     */
     private final UnknownStringsImpl unknownStrings;
 
     /**
      * Gets the UnknownStringsImpl object to access its operations.
-     *
+     * 
      * @return the UnknownStringsImpl object.
      */
     public UnknownStringsImpl getUnknownStrings() {
         return this.unknownStrings;
     }
 
-    /** The UnknownIntsImpl object to access its operations. */
+    /**
+     * The UnknownIntsImpl object to access its operations.
+     */
     private final UnknownIntsImpl unknownInts;
 
     /**
      * Gets the UnknownIntsImpl object to access its operations.
-     *
+     * 
      * @return the UnknownIntsImpl object.
      */
     public UnknownIntsImpl getUnknownInts() {
         return this.unknownInts;
     }
 
-    /** The UnknownDictsImpl object to access its operations. */
+    /**
+     * The UnknownDictsImpl object to access its operations.
+     */
     private final UnknownDictsImpl unknownDicts;
 
     /**
      * Gets the UnknownDictsImpl object to access its operations.
-     *
+     * 
      * @return the UnknownDictsImpl object.
      */
     public UnknownDictsImpl getUnknownDicts() {
         return this.unknownDicts;
     }
 
-    /** The UnknownArraysImpl object to access its operations. */
+    /**
+     * The UnknownArraysImpl object to access its operations.
+     */
     private final UnknownArraysImpl unknownArrays;
 
     /**
      * Gets the UnknownArraysImpl object to access its operations.
-     *
+     * 
      * @return the UnknownArraysImpl object.
      */
     public UnknownArraysImpl getUnknownArrays() {
         return this.unknownArrays;
     }
 
-    /** Initializes an instance of ValueTypesClient client. */
+    /**
+     * Initializes an instance of ValueTypesClient client.
+     */
     public ValueTypesClientImpl() {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
      * Initializes an instance of ValueTypesClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public ValueTypesClientImpl(HttpPipeline httpPipeline) {
@@ -283,7 +328,7 @@ public final class ValueTypesClientImpl {
 
     /**
      * Initializes an instance of ValueTypesClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      */

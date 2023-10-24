@@ -7,7 +7,9 @@ package fixtures.constants.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The NoModelAsStringRequiredTwoValueNoDefault model. */
+/**
+ * The NoModelAsStringRequiredTwoValueNoDefault model.
+ */
 @Fluent
 public final class NoModelAsStringRequiredTwoValueNoDefault {
     /*
@@ -16,12 +18,14 @@ public final class NoModelAsStringRequiredTwoValueNoDefault {
     @JsonProperty(value = "parameter", required = true)
     private NoModelAsStringRequiredTwoValueNoDefaultEnum parameter;
 
-    /** Creates an instance of NoModelAsStringRequiredTwoValueNoDefault class. */
+    /**
+     * Creates an instance of NoModelAsStringRequiredTwoValueNoDefault class.
+     */
     public NoModelAsStringRequiredTwoValueNoDefault() {}
 
     /**
      * Get the parameter property: The parameter property.
-     *
+     * 
      * @return the parameter value.
      */
     public NoModelAsStringRequiredTwoValueNoDefaultEnum getParameter() {
@@ -30,25 +34,25 @@ public final class NoModelAsStringRequiredTwoValueNoDefault {
 
     /**
      * Set the parameter property: The parameter property.
-     *
+     * 
      * @param parameter the parameter value to set.
      * @return the NoModelAsStringRequiredTwoValueNoDefault object itself.
      */
-    public NoModelAsStringRequiredTwoValueNoDefault setParameter(
-            NoModelAsStringRequiredTwoValueNoDefaultEnum parameter) {
+    public NoModelAsStringRequiredTwoValueNoDefault
+        setParameter(NoModelAsStringRequiredTwoValueNoDefaultEnum parameter) {
         this.parameter = parameter;
         return this;
     }
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (getParameter() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property parameter in model NoModelAsStringRequiredTwoValueNoDefault");
+                "Missing required property parameter in model NoModelAsStringRequiredTwoValueNoDefault");
         }
     }
 }

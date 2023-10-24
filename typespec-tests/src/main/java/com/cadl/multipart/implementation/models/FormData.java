@@ -4,13 +4,17 @@
 
 package com.cadl.multipart.implementation.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The FormData model. */
+/**
+ * The FormData model.
+ */
 @Immutable
 public final class FormData {
     /*
@@ -29,7 +33,7 @@ public final class FormData {
 
     /**
      * Creates an instance of FormData class.
-     *
+     * 
      * @param name the name value to set.
      * @param image the image value to set.
      */
@@ -42,7 +46,7 @@ public final class FormData {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated
@@ -52,7 +56,7 @@ public final class FormData {
 
     /**
      * Get the image property: The image property.
-     *
+     * 
      * @return the image value.
      */
     @Generated

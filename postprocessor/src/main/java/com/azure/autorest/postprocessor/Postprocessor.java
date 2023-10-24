@@ -60,8 +60,9 @@ public class Postprocessor extends NewPlugin {
             return true;
         }
 
-        if (jarPath == null) {
-            logger.warn("Must provide a JAR or source code path containing the customization class {}", className);
+        if (jarPath == null && !className.startsWith("src") && !className.endsWith(".java")) {
+            logger.warn("Must provide a JAR or source code path (src/*.java) containing the customization class {}",
+                    className);
             return false;
         }
 
@@ -129,6 +130,8 @@ public class Postprocessor extends NewPlugin {
         if (!settings.isSkipFormatting()) {
             try {
                 Path tmpDir = Files.createTempDirectory("spotless");
+                tmpDir.toFile().deleteOnExit();
+
                 for (Map.Entry<String, String> entry : fileContents.entrySet()) {
                     Path file = tmpDir.resolve(entry.getKey());
                     Files.createDirectories(file.getParent());

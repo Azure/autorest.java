@@ -8,31 +8,44 @@ package com.client.structure.service.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
+import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 import com.azure.core.util.Configuration;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import com.client.structure.service.ServiceClientAsyncClient;
 import com.client.structure.service.ServiceClientClient;
 import com.client.structure.service.ServiceClientClientBuilder;
+import com.client.structure.service.implementation.ServiceClientClientImpl;
+import java.time.OffsetDateTime;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import reactor.core.publisher.Mono;
 
-class ServiceClientClientTestBase extends TestProxyTestBase {
+ class ServiceClientClientTestBase extends TestProxyTestBase {
     protected ServiceClientClient serviceClientClient;
 
     @Override
     protected void beforeTest() {
-        ServiceClientClientBuilder serviceClientClientbuilder =
-                new ServiceClientClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ServiceClientClientBuilder serviceClientClientbuilder = new ServiceClientClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             serviceClientClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             serviceClientClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         serviceClientClient = serviceClientClientbuilder.buildClient();
+
     }
 }

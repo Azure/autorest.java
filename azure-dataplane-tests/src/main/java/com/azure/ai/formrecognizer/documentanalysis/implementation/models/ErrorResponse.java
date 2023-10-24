@@ -7,7 +7,9 @@ package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Error response object. */
+/**
+ * Error response object.
+ */
 @Fluent
 public final class ErrorResponse {
     /*
@@ -16,12 +18,14 @@ public final class ErrorResponse {
     @JsonProperty(value = "error", required = true)
     private Error error;
 
-    /** Creates an instance of ErrorResponse class. */
+    /**
+     * Creates an instance of ErrorResponse class.
+     */
     public ErrorResponse() {}
 
     /**
      * Get the error property: Error info.
-     *
+     * 
      * @return the error value.
      */
     public Error getError() {
@@ -30,7 +34,7 @@ public final class ErrorResponse {
 
     /**
      * Set the error property: Error info.
-     *
+     * 
      * @param error the error value to set.
      * @return the ErrorResponse object itself.
      */

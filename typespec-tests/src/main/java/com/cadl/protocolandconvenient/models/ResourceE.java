@@ -4,12 +4,16 @@
 
 package com.cadl.protocolandconvenient.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The ResourceE model. */
+/**
+ * The ResourceE model.
+ */
 @Immutable
 public final class ResourceE {
     /*
@@ -28,7 +32,7 @@ public final class ResourceE {
 
     /**
      * Creates an instance of ResourceE class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -39,7 +43,7 @@ public final class ResourceE {
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -49,7 +53,7 @@ public final class ResourceE {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

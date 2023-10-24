@@ -9,7 +9,9 @@ import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** The ModelWithByteProperty model. */
+/**
+ * The ModelWithByteProperty model.
+ */
 @JacksonXmlRootElement(localName = "ModelWithByteProperty")
 @Fluent
 public final class ModelWithByteProperty {
@@ -19,12 +21,14 @@ public final class ModelWithByteProperty {
     @JsonProperty(value = "Bytes")
     private byte[] bytes;
 
-    /** Creates an instance of ModelWithByteProperty class. */
+    /**
+     * Creates an instance of ModelWithByteProperty class.
+     */
     public ModelWithByteProperty() {}
 
     /**
      * Get the bytes property: The Bytes property.
-     *
+     * 
      * @return the bytes value.
      */
     public byte[] getBytes() {
@@ -33,7 +37,7 @@ public final class ModelWithByteProperty {
 
     /**
      * Set the bytes property: The Bytes property.
-     *
+     * 
      * @param bytes the bytes value to set.
      * @return the ModelWithByteProperty object itself.
      */
@@ -44,7 +48,7 @@ public final class ModelWithByteProperty {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

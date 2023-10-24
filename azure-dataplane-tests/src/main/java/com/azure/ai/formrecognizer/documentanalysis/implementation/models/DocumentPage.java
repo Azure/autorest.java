@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Content and layout elements extracted from a page from the input. */
+/**
+ * Content and layout elements extracted from a page from the input.
+ */
 @Fluent
 public final class DocumentPage {
     /*
@@ -66,12 +68,14 @@ public final class DocumentPage {
     @JsonProperty(value = "lines")
     private List<DocumentLine> lines;
 
-    /** Creates an instance of DocumentPage class. */
+    /**
+     * Creates an instance of DocumentPage class.
+     */
     public DocumentPage() {}
 
     /**
      * Get the pageNumber property: 1-based page number in the input document.
-     *
+     * 
      * @return the pageNumber value.
      */
     public int getPageNumber() {
@@ -80,7 +84,7 @@ public final class DocumentPage {
 
     /**
      * Set the pageNumber property: 1-based page number in the input document.
-     *
+     * 
      * @param pageNumber the pageNumber value to set.
      * @return the DocumentPage object itself.
      */
@@ -92,7 +96,7 @@ public final class DocumentPage {
     /**
      * Get the angle property: The general orientation of the content in clockwise direction, measured in degrees
      * between (-180, 180].
-     *
+     * 
      * @return the angle value.
      */
     public Float getAngle() {
@@ -102,7 +106,7 @@ public final class DocumentPage {
     /**
      * Set the angle property: The general orientation of the content in clockwise direction, measured in degrees
      * between (-180, 180].
-     *
+     * 
      * @param angle the angle value to set.
      * @return the DocumentPage object itself.
      */
@@ -113,7 +117,7 @@ public final class DocumentPage {
 
     /**
      * Get the width property: The width of the image/PDF in pixels/inches, respectively.
-     *
+     * 
      * @return the width value.
      */
     public Float getWidth() {
@@ -122,7 +126,7 @@ public final class DocumentPage {
 
     /**
      * Set the width property: The width of the image/PDF in pixels/inches, respectively.
-     *
+     * 
      * @param width the width value to set.
      * @return the DocumentPage object itself.
      */
@@ -133,7 +137,7 @@ public final class DocumentPage {
 
     /**
      * Get the height property: The height of the image/PDF in pixels/inches, respectively.
-     *
+     * 
      * @return the height value.
      */
     public Float getHeight() {
@@ -142,7 +146,7 @@ public final class DocumentPage {
 
     /**
      * Set the height property: The height of the image/PDF in pixels/inches, respectively.
-     *
+     * 
      * @param height the height value to set.
      * @return the DocumentPage object itself.
      */
@@ -154,7 +158,7 @@ public final class DocumentPage {
     /**
      * Get the unit property: The unit used by the width, height, and polygon properties. For images, the unit is
      * "pixel". For PDF, the unit is "inch".
-     *
+     * 
      * @return the unit value.
      */
     public LengthUnit getUnit() {
@@ -164,7 +168,7 @@ public final class DocumentPage {
     /**
      * Set the unit property: The unit used by the width, height, and polygon properties. For images, the unit is
      * "pixel". For PDF, the unit is "inch".
-     *
+     * 
      * @param unit the unit value to set.
      * @return the DocumentPage object itself.
      */
@@ -175,7 +179,7 @@ public final class DocumentPage {
 
     /**
      * Get the spans property: Location of the page in the reading order concatenated content.
-     *
+     * 
      * @return the spans value.
      */
     public List<DocumentSpan> getSpans() {
@@ -184,7 +188,7 @@ public final class DocumentPage {
 
     /**
      * Set the spans property: Location of the page in the reading order concatenated content.
-     *
+     * 
      * @param spans the spans value to set.
      * @return the DocumentPage object itself.
      */
@@ -195,7 +199,7 @@ public final class DocumentPage {
 
     /**
      * Get the words property: Extracted words from the page.
-     *
+     * 
      * @return the words value.
      */
     public List<DocumentWord> getWords() {
@@ -204,7 +208,7 @@ public final class DocumentPage {
 
     /**
      * Set the words property: Extracted words from the page.
-     *
+     * 
      * @param words the words value to set.
      * @return the DocumentPage object itself.
      */
@@ -215,7 +219,7 @@ public final class DocumentPage {
 
     /**
      * Get the selectionMarks property: Extracted selection marks from the page.
-     *
+     * 
      * @return the selectionMarks value.
      */
     public List<DocumentSelectionMark> getSelectionMarks() {
@@ -224,7 +228,7 @@ public final class DocumentPage {
 
     /**
      * Set the selectionMarks property: Extracted selection marks from the page.
-     *
+     * 
      * @param selectionMarks the selectionMarks value to set.
      * @return the DocumentPage object itself.
      */
@@ -235,7 +239,7 @@ public final class DocumentPage {
 
     /**
      * Get the lines property: Extracted lines from the page, potentially containing both textual and visual elements.
-     *
+     * 
      * @return the lines value.
      */
     public List<DocumentLine> getLines() {
@@ -244,7 +248,7 @@ public final class DocumentPage {
 
     /**
      * Set the lines property: Extracted lines from the page, potentially containing both textual and visual elements.
-     *
+     * 
      * @param lines the lines value to set.
      * @return the DocumentPage object itself.
      */

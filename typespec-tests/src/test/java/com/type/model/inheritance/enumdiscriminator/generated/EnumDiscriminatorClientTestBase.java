@@ -8,28 +8,42 @@ package com.type.model.inheritance.enumdiscriminator.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
+import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import com.type.model.inheritance.enumdiscriminator.EnumDiscriminatorAsyncClient;
 import com.type.model.inheritance.enumdiscriminator.EnumDiscriminatorClient;
 import com.type.model.inheritance.enumdiscriminator.EnumDiscriminatorClientBuilder;
+import com.type.model.inheritance.enumdiscriminator.implementation.EnumDiscriminatorClientImpl;
+import java.time.OffsetDateTime;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import reactor.core.publisher.Mono;
 
-class EnumDiscriminatorClientTestBase extends TestProxyTestBase {
+ class EnumDiscriminatorClientTestBase extends TestProxyTestBase {
     protected EnumDiscriminatorClient enumDiscriminatorClient;
 
     @Override
     protected void beforeTest() {
-        EnumDiscriminatorClientBuilder enumDiscriminatorClientbuilder =
-                new EnumDiscriminatorClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        EnumDiscriminatorClientBuilder enumDiscriminatorClientbuilder = new EnumDiscriminatorClientBuilder()
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             enumDiscriminatorClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             enumDiscriminatorClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         enumDiscriminatorClient = enumDiscriminatorClientbuilder.buildClient();
+
     }
 }

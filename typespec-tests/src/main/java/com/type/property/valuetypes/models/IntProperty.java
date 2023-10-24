@@ -4,12 +4,16 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** Model with a int property. */
+/**
+ * Model with a int property.
+ */
 @Immutable
 public final class IntProperty {
     /*
@@ -21,7 +25,7 @@ public final class IntProperty {
 
     /**
      * Creates an instance of IntProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -32,7 +36,7 @@ public final class IntProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

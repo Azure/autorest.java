@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The HeadersResponseExistingKeyHeaders model. */
+/**
+ * The HeadersResponseExistingKeyHeaders model.
+ */
 @Fluent
 public final class HeadersResponseExistingKeyHeaders {
     /*
@@ -21,7 +23,7 @@ public final class HeadersResponseExistingKeyHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseExistingKeyHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseExistingKeyHeaders(HttpHeaders rawHeaders) {
@@ -30,7 +32,7 @@ public final class HeadersResponseExistingKeyHeaders {
 
     /**
      * Get the userAgent property: The User-Agent property.
-     *
+     * 
      * @return the userAgent value.
      */
     public String getUserAgent() {
@@ -39,7 +41,7 @@ public final class HeadersResponseExistingKeyHeaders {
 
     /**
      * Set the userAgent property: The User-Agent property.
-     *
+     * 
      * @param userAgent the userAgent value to set.
      * @return the HeadersResponseExistingKeyHeaders object itself.
      */
@@ -50,7 +52,7 @@ public final class HeadersResponseExistingKeyHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

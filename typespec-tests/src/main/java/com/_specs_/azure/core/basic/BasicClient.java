@@ -6,42 +6,81 @@ package com._specs_.azure.core.basic;
 
 import com._specs_.azure.core.basic.implementation.BasicClientImpl;
 import com._specs_.azure.core.basic.models.User;
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.Delete;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.Patch;
+import com.azure.core.annotation.PathParam;
+import com.azure.core.annotation.Post;
+import com.azure.core.annotation.Put;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.core.util.serializer.TypeReference;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the synchronous BasicClient type. */
+/**
+ * Initializes a new instance of the synchronous BasicClient type.
+ */
 @ServiceClient(builder = BasicClientBuilder.class)
 public final class BasicClient {
-    @Generated private final BasicClientImpl serviceClient;
+    @Generated
+    private final BasicClientImpl serviceClient;
 
     /**
      * Initializes an instance of BasicClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    BasicClient(BasicClientImpl serviceClient) {
+     BasicClient(BasicClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * Adds a user or updates a user's fields.
-     *
-     * <p>Creates or updates a User.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * Creates or updates a User.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -56,9 +95,7 @@ public final class BasicClient {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -73,7 +110,7 @@ public final class BasicClient {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -92,11 +129,9 @@ public final class BasicClient {
 
     /**
      * Adds a user or replaces a user's fields.
-     *
-     * <p>Creates or replaces a User.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * Creates or replaces a User.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -111,9 +146,7 @@ public final class BasicClient {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -128,7 +161,7 @@ public final class BasicClient {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -140,18 +173,15 @@ public final class BasicClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrReplaceWithResponse(
-            int id, BinaryData resource, RequestOptions requestOptions) {
+    public Response<BinaryData> createOrReplaceWithResponse(int id, BinaryData resource, RequestOptions requestOptions) {
         return this.serviceClient.createOrReplaceWithResponse(id, resource, requestOptions);
     }
 
     /**
      * Gets a user.
-     *
-     * <p>Gets a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Gets a User.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -166,7 +196,7 @@ public final class BasicClient {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -183,11 +213,9 @@ public final class BasicClient {
 
     /**
      * Lists all users.
-     *
-     * <p>Lists all Users.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * 
+     * Lists all Users.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
@@ -199,11 +227,8 @@ public final class BasicClient {
      *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Expand the indicated resources into the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -218,7 +243,7 @@ public final class BasicClient {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -234,9 +259,7 @@ public final class BasicClient {
 
     /**
      * List with Azure.Core.Page&lt;&gt;.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -251,7 +274,7 @@ public final class BasicClient {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -267,9 +290,7 @@ public final class BasicClient {
 
     /**
      * List with custom page model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -284,7 +305,7 @@ public final class BasicClient {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -300,9 +321,9 @@ public final class BasicClient {
 
     /**
      * Deletes a user.
-     *
-     * <p>Deletes a User.
-     *
+     * 
+     * Deletes a User.
+     * 
      * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -319,11 +340,9 @@ public final class BasicClient {
 
     /**
      * Exports a user.
-     *
-     * <p>Exports a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Exports a User.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -338,7 +357,7 @@ public final class BasicClient {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param format The format of the data.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -356,9 +375,9 @@ public final class BasicClient {
 
     /**
      * Adds a user or replaces a user's fields.
-     *
-     * <p>Creates or replaces a User.
-     *
+     * 
+     * Creates or replaces a User.
+     * 
      * @param id The user's id.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -374,16 +393,14 @@ public final class BasicClient {
     public User createOrReplace(int id, User resource) {
         // Generated convenience method for createOrReplaceWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createOrReplaceWithResponse(id, BinaryData.fromObject(resource), requestOptions)
-                .getValue()
-                .toObject(User.class);
+        return createOrReplaceWithResponse(id, BinaryData.fromObject(resource), requestOptions).getValue().toObject(User.class);
     }
 
     /**
      * Gets a user.
-     *
-     * <p>Gets a User.
-     *
+     * 
+     * Gets a User.
+     * 
      * @param id The user's id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -403,9 +420,9 @@ public final class BasicClient {
 
     /**
      * Lists all users.
-     *
-     * <p>Lists all Users.
-     *
+     * 
+     * Lists all Users.
+     * 
      * @param top The number of result items to return.
      * @param skip The number of result items to skip.
      * @param orderBy Expressions that specify the order of returned results.
@@ -422,8 +439,7 @@ public final class BasicClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<User> list(
-            Integer top, Integer skip, List<String> orderBy, String filter, List<String> select, List<String> expand) {
+    public PagedIterable<User> list(Integer top, Integer skip, List<String> orderBy, String filter, List<String> select, List<String> expand) {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         if (top != null) {
@@ -461,9 +477,9 @@ public final class BasicClient {
 
     /**
      * Lists all users.
-     *
-     * <p>Lists all Users.
-     *
+     * 
+     * Lists all Users.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -481,7 +497,7 @@ public final class BasicClient {
 
     /**
      * List with Azure.Core.Page&lt;&gt;.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -499,7 +515,7 @@ public final class BasicClient {
 
     /**
      * List with custom page model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -512,16 +528,14 @@ public final class BasicClient {
     public PagedIterable<User> listWithCustomPageModel() {
         // Generated convenience method for listWithCustomPageModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient
-                .listWithCustomPageModel(requestOptions)
-                .mapPage(bodyItemValue -> bodyItemValue.toObject(User.class));
+        return serviceClient.listWithCustomPageModel(requestOptions).mapPage(bodyItemValue -> bodyItemValue.toObject(User.class));
     }
 
     /**
      * Deletes a user.
-     *
-     * <p>Deletes a User.
-     *
+     * 
+     * Deletes a User.
+     * 
      * @param id The user's id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -540,9 +554,9 @@ public final class BasicClient {
 
     /**
      * Exports a user.
-     *
-     * <p>Exports a User.
-     *
+     * 
+     * Exports a User.
+     * 
      * @param id The user's id.
      * @param format The format of the data.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

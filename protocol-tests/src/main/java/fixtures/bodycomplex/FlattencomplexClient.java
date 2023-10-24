@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.FlattencomplexesImpl;
 
-/** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type.
+ */
 @ServiceClient(builder = FlattencomplexClientBuilder.class)
 public final class FlattencomplexClient {
-    @Generated private final FlattencomplexesImpl serviceClient;
+    @Generated
+    private final FlattencomplexesImpl serviceClient;
 
     /**
      * Initializes an instance of FlattencomplexClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,9 +37,9 @@ public final class FlattencomplexClient {
 
     /**
      * The getValid operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     propB1: String (Optional)
@@ -45,7 +48,7 @@ public final class FlattencomplexClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

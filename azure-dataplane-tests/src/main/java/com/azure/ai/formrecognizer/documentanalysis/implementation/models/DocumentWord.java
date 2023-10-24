@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * A word object consisting of a contiguous sequence of characters. For non-space delimited languages, such as Chinese,
- * Japanese, and Korean, each character is represented as its own word.
+ * A word object consisting of a contiguous sequence of characters. For non-space delimited languages, such as
+ * Chinese, Japanese, and Korean, each character is represented as its own word.
  */
 @Fluent
 public final class DocumentWord {
@@ -38,12 +38,14 @@ public final class DocumentWord {
     @JsonProperty(value = "confidence", required = true)
     private float confidence;
 
-    /** Creates an instance of DocumentWord class. */
+    /**
+     * Creates an instance of DocumentWord class.
+     */
     public DocumentWord() {}
 
     /**
      * Get the content property: Text content of the word.
-     *
+     * 
      * @return the content value.
      */
     public String getContent() {
@@ -52,7 +54,7 @@ public final class DocumentWord {
 
     /**
      * Set the content property: Text content of the word.
-     *
+     * 
      * @param content the content value to set.
      * @return the DocumentWord object itself.
      */
@@ -63,7 +65,7 @@ public final class DocumentWord {
 
     /**
      * Get the polygon property: Bounding polygon of the word.
-     *
+     * 
      * @return the polygon value.
      */
     public List<Float> getPolygon() {
@@ -72,7 +74,7 @@ public final class DocumentWord {
 
     /**
      * Set the polygon property: Bounding polygon of the word.
-     *
+     * 
      * @param polygon the polygon value to set.
      * @return the DocumentWord object itself.
      */
@@ -83,7 +85,7 @@ public final class DocumentWord {
 
     /**
      * Get the span property: Location of the word in the reading order concatenated content.
-     *
+     * 
      * @return the span value.
      */
     public DocumentSpan getSpan() {
@@ -92,7 +94,7 @@ public final class DocumentWord {
 
     /**
      * Set the span property: Location of the word in the reading order concatenated content.
-     *
+     * 
      * @param span the span value to set.
      * @return the DocumentWord object itself.
      */
@@ -103,7 +105,7 @@ public final class DocumentWord {
 
     /**
      * Get the confidence property: Confidence of correctly extracting the word.
-     *
+     * 
      * @return the confidence value.
      */
     public float getConfidence() {
@@ -112,7 +114,7 @@ public final class DocumentWord {
 
     /**
      * Set the confidence property: Confidence of correctly extracting the word.
-     *
+     * 
      * @param confidence the confidence value to set.
      * @return the DocumentWord object itself.
      */

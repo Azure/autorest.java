@@ -8,69 +8,80 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the ContentNegotiationClient type. */
+/**
+ * Initializes a new instance of the ContentNegotiationClient type.
+ */
 public final class ContentNegotiationClientImpl {
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The SameBodiesImpl object to access its operations. */
+    /**
+     * The SameBodiesImpl object to access its operations.
+     */
     private final SameBodiesImpl sameBodies;
 
     /**
      * Gets the SameBodiesImpl object to access its operations.
-     *
+     * 
      * @return the SameBodiesImpl object.
      */
     public SameBodiesImpl getSameBodies() {
         return this.sameBodies;
     }
 
-    /** The DifferentBodiesImpl object to access its operations. */
+    /**
+     * The DifferentBodiesImpl object to access its operations.
+     */
     private final DifferentBodiesImpl differentBodies;
 
     /**
      * Gets the DifferentBodiesImpl object to access its operations.
-     *
+     * 
      * @return the DifferentBodiesImpl object.
      */
     public DifferentBodiesImpl getDifferentBodies() {
         return this.differentBodies;
     }
 
-    /** Initializes an instance of ContentNegotiationClient client. */
+    /**
+     * Initializes an instance of ContentNegotiationClient client.
+     */
     public ContentNegotiationClientImpl() {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
      * Initializes an instance of ContentNegotiationClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public ContentNegotiationClientImpl(HttpPipeline httpPipeline) {
@@ -79,7 +90,7 @@ public final class ContentNegotiationClientImpl {
 
     /**
      * Initializes an instance of ContentNegotiationClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      */

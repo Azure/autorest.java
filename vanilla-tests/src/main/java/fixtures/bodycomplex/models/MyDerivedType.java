@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** The MyDerivedType model. */
+/**
+ * The MyDerivedType model.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("Kind1")
 @Immutable
@@ -20,12 +22,14 @@ public final class MyDerivedType extends MyBaseType {
     @JsonProperty(value = "propD1")
     private String propD1;
 
-    /** Creates an instance of MyDerivedType class. */
+    /**
+     * Creates an instance of MyDerivedType class.
+     */
     private MyDerivedType() {}
 
     /**
      * Get the propD1 property: The propD1 property.
-     *
+     * 
      * @return the propD1 value.
      */
     public String getPropD1() {
@@ -34,7 +38,7 @@ public final class MyDerivedType extends MyBaseType {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

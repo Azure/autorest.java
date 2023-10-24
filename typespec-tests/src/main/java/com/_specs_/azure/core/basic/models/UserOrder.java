@@ -4,12 +4,16 @@
 
 package com._specs_.azure.core.basic.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** UserOrder for testing list with expand. */
+/**
+ * UserOrder for testing list with expand.
+ */
 @Immutable
 public final class UserOrder {
     /*
@@ -35,7 +39,7 @@ public final class UserOrder {
 
     /**
      * Creates an instance of UserOrder class.
-     *
+     * 
      * @param userId the userId value to set.
      * @param detail the detail value to set.
      */
@@ -48,7 +52,7 @@ public final class UserOrder {
 
     /**
      * Get the id property: The user's id.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -58,7 +62,7 @@ public final class UserOrder {
 
     /**
      * Get the userId property: The user's id.
-     *
+     * 
      * @return the userId value.
      */
     @Generated
@@ -68,7 +72,7 @@ public final class UserOrder {
 
     /**
      * Get the detail property: The user's order detail.
-     *
+     * 
      * @return the detail value.
      */
     @Generated

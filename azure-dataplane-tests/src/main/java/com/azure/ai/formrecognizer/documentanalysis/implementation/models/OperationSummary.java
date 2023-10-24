@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.Map;
 
-/** Operation info. */
+/**
+ * Operation info.
+ */
 @Fluent
 public final class OperationSummary {
     /*
@@ -66,12 +68,14 @@ public final class OperationSummary {
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
-    /** Creates an instance of OperationSummary class. */
+    /**
+     * Creates an instance of OperationSummary class.
+     */
     public OperationSummary() {}
 
     /**
      * Get the operationId property: Operation ID.
-     *
+     * 
      * @return the operationId value.
      */
     public String getOperationId() {
@@ -80,7 +84,7 @@ public final class OperationSummary {
 
     /**
      * Set the operationId property: Operation ID.
-     *
+     * 
      * @param operationId the operationId value to set.
      * @return the OperationSummary object itself.
      */
@@ -91,7 +95,7 @@ public final class OperationSummary {
 
     /**
      * Get the status property: Operation status.
-     *
+     * 
      * @return the status value.
      */
     public OperationStatus getStatus() {
@@ -100,7 +104,7 @@ public final class OperationSummary {
 
     /**
      * Set the status property: Operation status.
-     *
+     * 
      * @param status the status value to set.
      * @return the OperationSummary object itself.
      */
@@ -111,7 +115,7 @@ public final class OperationSummary {
 
     /**
      * Get the percentCompleted property: Operation progress (0-100).
-     *
+     * 
      * @return the percentCompleted value.
      */
     public Integer getPercentCompleted() {
@@ -120,7 +124,7 @@ public final class OperationSummary {
 
     /**
      * Set the percentCompleted property: Operation progress (0-100).
-     *
+     * 
      * @param percentCompleted the percentCompleted value to set.
      * @return the OperationSummary object itself.
      */
@@ -131,7 +135,7 @@ public final class OperationSummary {
 
     /**
      * Get the createdDateTime property: Date and time (UTC) when the operation was created.
-     *
+     * 
      * @return the createdDateTime value.
      */
     public OffsetDateTime getCreatedDateTime() {
@@ -140,7 +144,7 @@ public final class OperationSummary {
 
     /**
      * Set the createdDateTime property: Date and time (UTC) when the operation was created.
-     *
+     * 
      * @param createdDateTime the createdDateTime value to set.
      * @return the OperationSummary object itself.
      */
@@ -151,7 +155,7 @@ public final class OperationSummary {
 
     /**
      * Get the lastUpdatedDateTime property: Date and time (UTC) when the status was last updated.
-     *
+     * 
      * @return the lastUpdatedDateTime value.
      */
     public OffsetDateTime getLastUpdatedDateTime() {
@@ -160,7 +164,7 @@ public final class OperationSummary {
 
     /**
      * Set the lastUpdatedDateTime property: Date and time (UTC) when the status was last updated.
-     *
+     * 
      * @param lastUpdatedDateTime the lastUpdatedDateTime value to set.
      * @return the OperationSummary object itself.
      */
@@ -171,7 +175,7 @@ public final class OperationSummary {
 
     /**
      * Get the kind property: Type of operation.
-     *
+     * 
      * @return the kind value.
      */
     public OperationKind getKind() {
@@ -180,7 +184,7 @@ public final class OperationSummary {
 
     /**
      * Set the kind property: Type of operation.
-     *
+     * 
      * @param kind the kind value to set.
      * @return the OperationSummary object itself.
      */
@@ -191,7 +195,7 @@ public final class OperationSummary {
 
     /**
      * Get the resourceLocation property: URL of the resource targeted by this operation.
-     *
+     * 
      * @return the resourceLocation value.
      */
     public String getResourceLocation() {
@@ -200,7 +204,7 @@ public final class OperationSummary {
 
     /**
      * Set the resourceLocation property: URL of the resource targeted by this operation.
-     *
+     * 
      * @param resourceLocation the resourceLocation value to set.
      * @return the OperationSummary object itself.
      */
@@ -211,7 +215,7 @@ public final class OperationSummary {
 
     /**
      * Get the apiVersion property: API version used to create this operation.
-     *
+     * 
      * @return the apiVersion value.
      */
     public String getApiVersion() {
@@ -220,7 +224,7 @@ public final class OperationSummary {
 
     /**
      * Set the apiVersion property: API version used to create this operation.
-     *
+     * 
      * @param apiVersion the apiVersion value to set.
      * @return the OperationSummary object itself.
      */
@@ -231,7 +235,7 @@ public final class OperationSummary {
 
     /**
      * Get the tags property: List of key-value tag attributes associated with the document model.
-     *
+     * 
      * @return the tags value.
      */
     public Map<String, String> getTags() {
@@ -240,7 +244,7 @@ public final class OperationSummary {
 
     /**
      * Set the tags property: List of key-value tag attributes associated with the document model.
-     *
+     * 
      * @param tags the tags value to set.
      * @return the OperationSummary object itself.
      */

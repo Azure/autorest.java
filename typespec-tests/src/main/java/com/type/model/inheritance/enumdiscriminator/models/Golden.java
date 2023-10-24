@@ -4,21 +4,25 @@
 
 package com.type.model.inheritance.enumdiscriminator.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.regex.Pattern;
 
-/** Golden dog model. */
+/**
+ * Golden dog model.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("golden")
 @Immutable
 public final class Golden extends Dog {
     /**
      * Creates an instance of Golden class.
-     *
+     * 
      * @param weight the weight value to set.
      */
     @Generated

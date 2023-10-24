@@ -6,12 +6,15 @@ package com.cadl.naming.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
 /**
  * summary of Request
- *
- * <p>description of Request.
+ * 
+ * description of Request.
  */
 @Fluent
 public final class DataRequest {
@@ -22,13 +25,16 @@ public final class DataRequest {
     @JsonProperty(value = "parameters")
     private ParametersModel parameters;
 
-    /** Creates an instance of DataRequest class. */
+    /**
+     * Creates an instance of DataRequest class.
+     */
     @Generated
-    public DataRequest() {}
+    public DataRequest() {
+    }
 
     /**
      * Get the parameters property: The parameters property.
-     *
+     * 
      * @return the parameters value.
      */
     @Generated
@@ -38,7 +44,7 @@ public final class DataRequest {
 
     /**
      * Set the parameters property: The parameters property.
-     *
+     * 
      * @param parameters the parameters value to set.
      * @return the DataRequest object itself.
      */

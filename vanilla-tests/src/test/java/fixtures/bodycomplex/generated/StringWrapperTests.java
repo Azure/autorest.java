@@ -11,9 +11,8 @@ import org.junit.jupiter.api.Assertions;
 public final class StringWrapperTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        StringWrapper model =
-                BinaryData.fromString("{\"field\":\"htbmuf\",\"empty\":\"wnoi\",\"null\":\"wlrxyb\"}")
-                        .toObject(StringWrapper.class);
+        StringWrapper model = BinaryData.fromString("{\"field\":\"htbmuf\",\"empty\":\"wnoi\",\"null\":\"wlrxyb\"}")
+            .toObject(StringWrapper.class);
         Assertions.assertEquals("htbmuf", model.getField());
         Assertions.assertEquals("wnoi", model.getEmpty());
         Assertions.assertEquals("wlrxyb", model.getNullProperty());

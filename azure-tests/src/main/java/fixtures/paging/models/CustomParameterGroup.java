@@ -7,7 +7,9 @@ package fixtures.paging.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Parameter group. */
+/**
+ * Parameter group.
+ */
 @Fluent
 public final class CustomParameterGroup {
     /*
@@ -22,12 +24,14 @@ public final class CustomParameterGroup {
     @JsonProperty(value = "tenant", required = true)
     private String tenant;
 
-    /** Creates an instance of CustomParameterGroup class. */
+    /**
+     * Creates an instance of CustomParameterGroup class.
+     */
     public CustomParameterGroup() {}
 
     /**
      * Get the apiVersion property: Sets the api version to use.
-     *
+     * 
      * @return the apiVersion value.
      */
     public String getApiVersion() {
@@ -36,7 +40,7 @@ public final class CustomParameterGroup {
 
     /**
      * Set the apiVersion property: Sets the api version to use.
-     *
+     * 
      * @param apiVersion the apiVersion value to set.
      * @return the CustomParameterGroup object itself.
      */
@@ -47,7 +51,7 @@ public final class CustomParameterGroup {
 
     /**
      * Get the tenant property: Sets the tenant to use.
-     *
+     * 
      * @return the tenant value.
      */
     public String getTenant() {
@@ -56,7 +60,7 @@ public final class CustomParameterGroup {
 
     /**
      * Set the tenant property: Sets the tenant to use.
-     *
+     * 
      * @param tenant the tenant value to set.
      * @return the CustomParameterGroup object itself.
      */
@@ -67,7 +71,7 @@ public final class CustomParameterGroup {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** An object representing the location and content of a table cell. */
+/**
+ * An object representing the location and content of a table cell.
+ */
 @Fluent
 public final class DocumentTableCell {
     /*
@@ -59,12 +61,14 @@ public final class DocumentTableCell {
     @JsonProperty(value = "spans", required = true)
     private List<DocumentSpan> spans;
 
-    /** Creates an instance of DocumentTableCell class. */
+    /**
+     * Creates an instance of DocumentTableCell class.
+     */
     public DocumentTableCell() {}
 
     /**
      * Get the kind property: Table cell kind.
-     *
+     * 
      * @return the kind value.
      */
     public DocumentTableCellKind getKind() {
@@ -73,7 +77,7 @@ public final class DocumentTableCell {
 
     /**
      * Set the kind property: Table cell kind.
-     *
+     * 
      * @param kind the kind value to set.
      * @return the DocumentTableCell object itself.
      */
@@ -84,7 +88,7 @@ public final class DocumentTableCell {
 
     /**
      * Get the rowIndex property: Row index of the cell.
-     *
+     * 
      * @return the rowIndex value.
      */
     public int getRowIndex() {
@@ -93,7 +97,7 @@ public final class DocumentTableCell {
 
     /**
      * Set the rowIndex property: Row index of the cell.
-     *
+     * 
      * @param rowIndex the rowIndex value to set.
      * @return the DocumentTableCell object itself.
      */
@@ -104,7 +108,7 @@ public final class DocumentTableCell {
 
     /**
      * Get the columnIndex property: Column index of the cell.
-     *
+     * 
      * @return the columnIndex value.
      */
     public int getColumnIndex() {
@@ -113,7 +117,7 @@ public final class DocumentTableCell {
 
     /**
      * Set the columnIndex property: Column index of the cell.
-     *
+     * 
      * @param columnIndex the columnIndex value to set.
      * @return the DocumentTableCell object itself.
      */
@@ -124,7 +128,7 @@ public final class DocumentTableCell {
 
     /**
      * Get the rowSpan property: Number of rows spanned by this cell.
-     *
+     * 
      * @return the rowSpan value.
      */
     public Integer getRowSpan() {
@@ -133,7 +137,7 @@ public final class DocumentTableCell {
 
     /**
      * Set the rowSpan property: Number of rows spanned by this cell.
-     *
+     * 
      * @param rowSpan the rowSpan value to set.
      * @return the DocumentTableCell object itself.
      */
@@ -144,7 +148,7 @@ public final class DocumentTableCell {
 
     /**
      * Get the columnSpan property: Number of columns spanned by this cell.
-     *
+     * 
      * @return the columnSpan value.
      */
     public Integer getColumnSpan() {
@@ -153,7 +157,7 @@ public final class DocumentTableCell {
 
     /**
      * Set the columnSpan property: Number of columns spanned by this cell.
-     *
+     * 
      * @param columnSpan the columnSpan value to set.
      * @return the DocumentTableCell object itself.
      */
@@ -164,7 +168,7 @@ public final class DocumentTableCell {
 
     /**
      * Get the content property: Concatenated content of the table cell in reading order.
-     *
+     * 
      * @return the content value.
      */
     public String getContent() {
@@ -173,7 +177,7 @@ public final class DocumentTableCell {
 
     /**
      * Set the content property: Concatenated content of the table cell in reading order.
-     *
+     * 
      * @param content the content value to set.
      * @return the DocumentTableCell object itself.
      */
@@ -184,7 +188,7 @@ public final class DocumentTableCell {
 
     /**
      * Get the boundingRegions property: Bounding regions covering the table cell.
-     *
+     * 
      * @return the boundingRegions value.
      */
     public List<BoundingRegion> getBoundingRegions() {
@@ -193,7 +197,7 @@ public final class DocumentTableCell {
 
     /**
      * Set the boundingRegions property: Bounding regions covering the table cell.
-     *
+     * 
      * @param boundingRegions the boundingRegions value to set.
      * @return the DocumentTableCell object itself.
      */
@@ -204,7 +208,7 @@ public final class DocumentTableCell {
 
     /**
      * Get the spans property: Location of the table cell in the reading order concatenated content.
-     *
+     * 
      * @return the spans value.
      */
     public List<DocumentSpan> getSpans() {
@@ -213,7 +217,7 @@ public final class DocumentTableCell {
 
     /**
      * Set the spans property: Location of the table cell in the reading order concatenated content.
-     *
+     * 
      * @param spans the spans value to set.
      * @return the DocumentTableCell object itself.
      */

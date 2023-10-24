@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** The product documentation. */
+/**
+ * The product documentation.
+ */
 @Fluent
 public final class Product {
     /*
@@ -59,7 +61,9 @@ public final class Product {
     @JsonProperty(value = "constStringAsEnum")
     private String constStringAsEnum = "constant_string_as_enum";
 
-    /** Creates an instance of Product class. */
+    /**
+     * Creates an instance of Product class.
+     */
     public Product() {
         constInt = 0;
         constString = "constant";
@@ -68,7 +72,7 @@ public final class Product {
 
     /**
      * Get the displayNames property: Non required array of unique items from 0 to 6 elements.
-     *
+     * 
      * @return the displayNames value.
      */
     public List<String> getDisplayNames() {
@@ -77,7 +81,7 @@ public final class Product {
 
     /**
      * Set the displayNames property: Non required array of unique items from 0 to 6 elements.
-     *
+     * 
      * @param displayNames the displayNames value to set.
      * @return the Product object itself.
      */
@@ -88,7 +92,7 @@ public final class Product {
 
     /**
      * Get the capacity property: Non required int betwen 0 and 100 exclusive.
-     *
+     * 
      * @return the capacity value.
      */
     public Integer getCapacity() {
@@ -97,7 +101,7 @@ public final class Product {
 
     /**
      * Set the capacity property: Non required int betwen 0 and 100 exclusive.
-     *
+     * 
      * @param capacity the capacity value to set.
      * @return the Product object itself.
      */
@@ -108,7 +112,7 @@ public final class Product {
 
     /**
      * Get the image property: Image URL representing the product.
-     *
+     * 
      * @return the image value.
      */
     public String getImage() {
@@ -117,7 +121,7 @@ public final class Product {
 
     /**
      * Set the image property: Image URL representing the product.
-     *
+     * 
      * @param image the image value to set.
      * @return the Product object itself.
      */
@@ -128,7 +132,7 @@ public final class Product {
 
     /**
      * Get the child property: The product documentation.
-     *
+     * 
      * @return the child value.
      */
     public ChildProduct getChild() {
@@ -137,7 +141,7 @@ public final class Product {
 
     /**
      * Set the child property: The product documentation.
-     *
+     * 
      * @param child the child value to set.
      * @return the Product object itself.
      */
@@ -148,7 +152,7 @@ public final class Product {
 
     /**
      * Get the constChild property: The product documentation.
-     *
+     * 
      * @return the constChild value.
      */
     public ConstantProduct getConstChild() {
@@ -157,7 +161,7 @@ public final class Product {
 
     /**
      * Set the constChild property: The product documentation.
-     *
+     * 
      * @param constChild the constChild value to set.
      * @return the Product object itself.
      */
@@ -168,7 +172,7 @@ public final class Product {
 
     /**
      * Get the constInt property: Constant int.
-     *
+     * 
      * @return the constInt value.
      */
     public int getConstInt() {
@@ -177,7 +181,7 @@ public final class Product {
 
     /**
      * Set the constInt property: Constant int.
-     *
+     * 
      * @param constInt the constInt value to set.
      * @return the Product object itself.
      */
@@ -188,7 +192,7 @@ public final class Product {
 
     /**
      * Get the constString property: Constant string.
-     *
+     * 
      * @return the constString value.
      */
     public String getConstString() {
@@ -197,7 +201,7 @@ public final class Product {
 
     /**
      * Set the constString property: Constant string.
-     *
+     * 
      * @param constString the constString value to set.
      * @return the Product object itself.
      */
@@ -208,7 +212,7 @@ public final class Product {
 
     /**
      * Get the constStringAsEnum property: Constant string as Enum.
-     *
+     * 
      * @return the constStringAsEnum value.
      */
     public String getConstStringAsEnum() {
@@ -217,7 +221,7 @@ public final class Product {
 
     /**
      * Set the constStringAsEnum property: Constant string as Enum.
-     *
+     * 
      * @param constStringAsEnum the constStringAsEnum value to set.
      * @return the Product object itself.
      */
@@ -228,7 +232,7 @@ public final class Product {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

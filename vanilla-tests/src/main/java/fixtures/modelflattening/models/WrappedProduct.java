@@ -7,7 +7,9 @@ package fixtures.modelflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The wrapped produc. */
+/**
+ * The wrapped produc.
+ */
 @Fluent
 public final class WrappedProduct {
     /*
@@ -16,12 +18,14 @@ public final class WrappedProduct {
     @JsonProperty(value = "value")
     private String value;
 
-    /** Creates an instance of WrappedProduct class. */
+    /**
+     * Creates an instance of WrappedProduct class.
+     */
     public WrappedProduct() {}
 
     /**
      * Get the value property: the product value.
-     *
+     * 
      * @return the value value.
      */
     public String getValue() {
@@ -30,7 +34,7 @@ public final class WrappedProduct {
 
     /**
      * Set the value property: the product value.
-     *
+     * 
      * @param value the value value to set.
      * @return the WrappedProduct object itself.
      */
@@ -41,7 +45,7 @@ public final class WrappedProduct {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

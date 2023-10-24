@@ -20,27 +20,36 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in OptionalExplicits. */
+/**
+ * An instance of this class provides access to all the operations defined in OptionalExplicits.
+ */
 public final class OptionalExplicitsImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final OptionalExplicitsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final BodyOptionalityClientImpl client;
 
     /**
      * Initializes an instance of OptionalExplicitsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
-    OptionalExplicitsImpl(BodyOptionalityClientImpl client) {
-        this.service =
-                RestProxy.create(
-                        OptionalExplicitsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+     OptionalExplicitsImpl(BodyOptionalityClientImpl client) {
+        this.service = RestProxy.create(OptionalExplicitsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -53,72 +62,46 @@ public final class OptionalExplicitsImpl {
     public interface OptionalExplicitsService {
         @Post("/parameters/body-optionality/optional-explicit/set")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> set(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/set")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> setSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/omit")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> omit(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/omit")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> omitSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
      * The set operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -130,27 +113,23 @@ public final class OptionalExplicitsImpl {
     public Mono<Response<Void>> setWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
-                    }
-                });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+            }
+        });
         return FluxUtil.withContext(context -> service.set(accept, requestOptionsLocal, context));
     }
 
     /**
      * The set operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -162,27 +141,23 @@ public final class OptionalExplicitsImpl {
     public Response<Void> setWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
-                    }
-                });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+            }
+        });
         return service.setSync(accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
      * The omit operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -194,27 +169,23 @@ public final class OptionalExplicitsImpl {
     public Mono<Response<Void>> omitWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
-                    }
-                });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+            }
+        });
         return FluxUtil.withContext(context -> service.omit(accept, requestOptionsLocal, context));
     }
 
     /**
      * The omit operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -226,13 +197,11 @@ public final class OptionalExplicitsImpl {
     public Response<Void> omitWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
-                    }
-                });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+            }
+        });
         return service.omitSync(accept, requestOptionsLocal, Context.NONE);
     }
 }

@@ -24,17 +24,23 @@ import fixtures.azurespecials.models.HeadersCustomNamedRequestIdParamGroupingRes
 import fixtures.azurespecials.models.HeadersCustomNamedRequestIdResponse;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Headers. */
+/**
+ * An instance of this class provides access to all the operations defined in Headers.
+ */
 public final class Headers {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final HeadersService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestAzureSpecialParametersTestClient client;
 
     /**
      * Initializes an instance of Headers.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Headers(AutoRestAzureSpecialParametersTestClient client) {
@@ -50,36 +56,30 @@ public final class Headers {
     @ServiceInterface(name = "AutoRestAzureSpecial")
     public interface HeadersService {
         @Post("/azurespecials/customNamedRequestId")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersCustomNamedRequestIdResponse> customNamedRequestId(
-                @HostParam("$host") String host,
-                @HeaderParam("foo-client-request-id") String fooClientRequestId,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<HeadersCustomNamedRequestIdResponse> customNamedRequestId(@HostParam("$host") String host,
+            @HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Post("/azurespecials/customNamedRequestIdParamGrouping")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGrouping(
-                @HostParam("$host") String host,
-                @HeaderParam("foo-client-request-id") String fooClientRequestId,
-                @HeaderParam("Accept") String accept,
-                Context context);
+            @HostParam("$host") String host, @HeaderParam("foo-client-request-id") String fooClientRequestId,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Head("/azurespecials/customNamedRequestIdHead")
-        @ExpectedResponses({200, 404})
+        @ExpectedResponses({ 200, 404 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersCustomNamedRequestIdHeadResponse> customNamedRequestIdHead(
-                @HostParam("$host") String host,
-                @HeaderParam("foo-client-request-id") String fooClientRequestId,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<HeadersCustomNamedRequestIdHeadResponse> customNamedRequestIdHead(@HostParam("$host") String host,
+            @HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -89,21 +89,21 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersCustomNamedRequestIdResponse> customNamedRequestIdWithResponseAsync(String fooClientRequestId) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (fooClientRequestId == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.customNamedRequestId(this.client.getHost(), fooClientRequestId, accept, context));
+            context -> service.customNamedRequestId(this.client.getHost(), fooClientRequestId, accept, context));
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -112,15 +112,15 @@ public final class Headers {
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersCustomNamedRequestIdResponse> customNamedRequestIdWithResponseAsync(
-            String fooClientRequestId, Context context) {
+    public Mono<HeadersCustomNamedRequestIdResponse> customNamedRequestIdWithResponseAsync(String fooClientRequestId,
+        Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (fooClientRequestId == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.customNamedRequestId(this.client.getHost(), fooClientRequestId, accept, context);
@@ -128,7 +128,7 @@ public final class Headers {
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -142,7 +142,7 @@ public final class Headers {
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -157,7 +157,7 @@ public final class Headers {
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -166,14 +166,14 @@ public final class Headers {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersCustomNamedRequestIdResponse customNamedRequestIdWithResponse(
-            String fooClientRequestId, Context context) {
+    public HeadersCustomNamedRequestIdResponse customNamedRequestIdWithResponse(String fooClientRequestId,
+        Context context) {
         return customNamedRequestIdWithResponseAsync(fooClientRequestId, context).block();
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -187,7 +187,7 @@ public final class Headers {
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
      * group.
-     *
+     * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -196,30 +196,27 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGroupingWithResponseAsync(
-            HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
+        HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (headerCustomNamedRequestIdParamGroupingParameters == null) {
-            return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException(
+                "Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null."));
         } else {
             headerCustomNamedRequestIdParamGroupingParameters.validate();
         }
         final String accept = "application/json";
         String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.getFooClientRequestId();
-        return FluxUtil.withContext(
-                context ->
-                        service.customNamedRequestIdParamGrouping(
-                                this.client.getHost(), fooClientRequestId, accept, context));
+        return FluxUtil.withContext(context -> service.customNamedRequestIdParamGrouping(this.client.getHost(),
+            fooClientRequestId, accept, context));
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
      * group.
-     *
+     * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -229,16 +226,15 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGroupingWithResponseAsync(
-            HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters,
-            Context context) {
+        HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters,
+        Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (headerCustomNamedRequestIdParamGroupingParameters == null) {
-            return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException(
+                "Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null."));
         } else {
             headerCustomNamedRequestIdParamGroupingParameters.validate();
         }
@@ -250,7 +246,7 @@ public final class Headers {
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
      * group.
-     *
+     * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -259,15 +255,15 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> customNamedRequestIdParamGroupingAsync(
-            HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
+        HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
      * group.
-     *
+     * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -277,17 +273,16 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> customNamedRequestIdParamGroupingAsync(
-            HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters,
-            Context context) {
-        return customNamedRequestIdParamGroupingWithResponseAsync(
-                        headerCustomNamedRequestIdParamGroupingParameters, context)
-                .flatMap(ignored -> Mono.empty());
+        HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters,
+        Context context) {
+        return customNamedRequestIdParamGroupingWithResponseAsync(headerCustomNamedRequestIdParamGroupingParameters,
+            context).flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
      * group.
-     *
+     * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -297,17 +292,16 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public HeadersCustomNamedRequestIdParamGroupingResponse customNamedRequestIdParamGroupingWithResponse(
-            HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters,
-            Context context) {
-        return customNamedRequestIdParamGroupingWithResponseAsync(
-                        headerCustomNamedRequestIdParamGroupingParameters, context)
-                .block();
+        HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters,
+        Context context) {
+        return customNamedRequestIdParamGroupingWithResponseAsync(headerCustomNamedRequestIdParamGroupingParameters,
+            context).block();
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
      * group.
-     *
+     * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -315,13 +309,13 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void customNamedRequestIdParamGrouping(
-            HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
+        HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         customNamedRequestIdParamGroupingWithResponse(headerCustomNamedRequestIdParamGroupingParameters, Context.NONE);
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -329,25 +323,24 @@ public final class Headers {
      * @return whether resource exists on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersCustomNamedRequestIdHeadResponse> customNamedRequestIdHeadWithResponseAsync(
-            String fooClientRequestId) {
+    public Mono<HeadersCustomNamedRequestIdHeadResponse>
+        customNamedRequestIdHeadWithResponseAsync(String fooClientRequestId) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (fooClientRequestId == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.customNamedRequestIdHead(this.client.getHost(), fooClientRequestId, accept, context));
+            context -> service.customNamedRequestIdHead(this.client.getHost(), fooClientRequestId, accept, context));
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -356,15 +349,15 @@ public final class Headers {
      * @return whether resource exists on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersCustomNamedRequestIdHeadResponse> customNamedRequestIdHeadWithResponseAsync(
-            String fooClientRequestId, Context context) {
+    public Mono<HeadersCustomNamedRequestIdHeadResponse>
+        customNamedRequestIdHeadWithResponseAsync(String fooClientRequestId, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (fooClientRequestId == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.customNamedRequestIdHead(this.client.getHost(), fooClientRequestId, accept, context);
@@ -372,7 +365,7 @@ public final class Headers {
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -382,12 +375,12 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
         return customNamedRequestIdHeadWithResponseAsync(fooClientRequestId)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -398,12 +391,12 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, Context context) {
         return customNamedRequestIdHeadWithResponseAsync(fooClientRequestId, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -412,14 +405,14 @@ public final class Headers {
      * @return whether resource exists.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public HeadersCustomNamedRequestIdHeadResponse customNamedRequestIdHeadWithResponse(
-            String fooClientRequestId, Context context) {
+    public HeadersCustomNamedRequestIdHeadResponse customNamedRequestIdHeadWithResponse(String fooClientRequestId,
+        Context context) {
         return customNamedRequestIdHeadWithResponseAsync(fooClientRequestId, context).block();
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

@@ -9,26 +9,35 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for NameModel. */
+/**
+ * Defines values for NameModel.
+ */
 public final class NameModel extends ExpandableStringEnum<NameModel> {
-    /** Static value Read for NameModel. */
-    @Generated public static final NameModel READ = fromString("Read");
+    /**
+     * Static value Read for NameModel.
+     */
+    @Generated
+    public static final NameModel READ = fromString("Read");
 
-    /** Static value Write for NameModel. */
-    @Generated public static final NameModel WRITE = fromString("Write");
+    /**
+     * Static value Write for NameModel.
+     */
+    @Generated
+    public static final NameModel WRITE = fromString("Write");
 
     /**
      * Creates a new instance of NameModel value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public NameModel() {}
+    public NameModel() {
+    }
 
     /**
      * Creates or finds a NameModel from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding NameModel.
      */
@@ -40,7 +49,7 @@ public final class NameModel extends ExpandableStringEnum<NameModel> {
 
     /**
      * Gets known NameModel values.
-     *
+     * 
      * @return known NameModel values.
      */
     @Generated

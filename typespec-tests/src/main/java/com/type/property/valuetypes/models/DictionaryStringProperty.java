@@ -4,13 +4,18 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
+import java.util.regex.Pattern;
 
-/** Model with dictionary string properties. */
+/**
+ * Model with dictionary string properties.
+ */
 @Immutable
 public final class DictionaryStringProperty {
     /*
@@ -22,7 +27,7 @@ public final class DictionaryStringProperty {
 
     /**
      * Creates an instance of DictionaryStringProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -33,7 +38,7 @@ public final class DictionaryStringProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

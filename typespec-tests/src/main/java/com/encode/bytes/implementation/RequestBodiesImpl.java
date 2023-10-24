@@ -17,30 +17,41 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in RequestBodies. */
+/**
+ * An instance of this class provides access to all the operations defined in RequestBodies.
+ */
 public final class RequestBodiesImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final RequestBodiesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final BytesClientImpl client;
 
     /**
      * Initializes an instance of RequestBodiesImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
-    RequestBodiesImpl(BytesClientImpl client) {
-        this.service =
-                RestProxy.create(RequestBodiesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+     RequestBodiesImpl(BytesClientImpl client) {
+        this.service = RestProxy.create(RequestBodiesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -53,198 +64,92 @@ public final class RequestBodiesImpl {
     public interface RequestBodiesService {
         @Post("/encode/bytes/body/request/default")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> defaultMethod(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData value,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> defaultMethod(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData value, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/body/request/default")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> defaultMethodSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData value,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> defaultMethodSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData value, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/body/request/octet-stream")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> octetStream(
-                @HeaderParam("content-type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/octet-stream") BinaryData value,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> octetStream(@HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/octet-stream") BinaryData value, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/body/request/octet-stream")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> octetStreamSync(
-                @HeaderParam("content-type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/octet-stream") BinaryData value,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> octetStreamSync(@HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/octet-stream") BinaryData value, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/body/request/custom-content-type")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> customContentType(
-                @HeaderParam("content-type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("image/png") BinaryData value,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> customContentType(@HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("image/png") BinaryData value, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/body/request/custom-content-type")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> customContentTypeSync(
-                @HeaderParam("content-type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("image/png") BinaryData value,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> customContentTypeSync(@HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("image/png") BinaryData value, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/body/request/base64")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> base64(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData value,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> base64(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData value, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/body/request/base64")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> base64Sync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData value,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> base64Sync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData value, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/body/request/base64url")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> base64Url(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData value,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> base64Url(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData value, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/body/request/base64url")
         @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> base64UrlSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData value,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> base64UrlSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData value, RequestOptions requestOptions, Context context);
     }
 
     /**
      * The defaultMethod operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -261,13 +166,11 @@ public final class RequestBodiesImpl {
 
     /**
      * The defaultMethod operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -284,13 +187,11 @@ public final class RequestBodiesImpl {
 
     /**
      * The octetStream operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -303,19 +204,16 @@ public final class RequestBodiesImpl {
     public Mono<Response<Void>> octetStreamWithResponseAsync(BinaryData value, RequestOptions requestOptions) {
         final String contentType = "application/octet-stream";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.octetStream(contentType, accept, value, requestOptions, context));
+        return FluxUtil.withContext(context -> service.octetStream(contentType, accept, value, requestOptions, context));
     }
 
     /**
      * The octetStream operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -333,13 +231,11 @@ public final class RequestBodiesImpl {
 
     /**
      * The customContentType operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -352,19 +248,16 @@ public final class RequestBodiesImpl {
     public Mono<Response<Void>> customContentTypeWithResponseAsync(BinaryData value, RequestOptions requestOptions) {
         final String contentType = "image/png";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.customContentType(contentType, accept, value, requestOptions, context));
+        return FluxUtil.withContext(context -> service.customContentType(contentType, accept, value, requestOptions, context));
     }
 
     /**
      * The customContentType operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -382,13 +275,11 @@ public final class RequestBodiesImpl {
 
     /**
      * The base64 operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -405,13 +296,11 @@ public final class RequestBodiesImpl {
 
     /**
      * The base64 operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -428,13 +317,11 @@ public final class RequestBodiesImpl {
 
     /**
      * The base64Url operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -451,13 +338,11 @@ public final class RequestBodiesImpl {
 
     /**
      * The base64Url operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

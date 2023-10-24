@@ -7,7 +7,9 @@ package fixtures.subscriptionidapiversion.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The SampleResourceGroup model. */
+/**
+ * The SampleResourceGroup model.
+ */
 @Fluent
 public final class SampleResourceGroup {
     /*
@@ -22,12 +24,14 @@ public final class SampleResourceGroup {
     @JsonProperty(value = "location")
     private String location;
 
-    /** Creates an instance of SampleResourceGroup class. */
+    /**
+     * Creates an instance of SampleResourceGroup class.
+     */
     public SampleResourceGroup() {}
 
     /**
      * Get the name property: resource group name 'testgroup101'.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -36,7 +40,7 @@ public final class SampleResourceGroup {
 
     /**
      * Set the name property: resource group name 'testgroup101'.
-     *
+     * 
      * @param name the name value to set.
      * @return the SampleResourceGroup object itself.
      */
@@ -47,7 +51,7 @@ public final class SampleResourceGroup {
 
     /**
      * Get the location property: resource group location 'West US'.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -56,7 +60,7 @@ public final class SampleResourceGroup {
 
     /**
      * Set the location property: resource group location 'West US'.
-     *
+     * 
      * @param location the location value to set.
      * @return the SampleResourceGroup object itself.
      */
@@ -67,7 +71,7 @@ public final class SampleResourceGroup {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

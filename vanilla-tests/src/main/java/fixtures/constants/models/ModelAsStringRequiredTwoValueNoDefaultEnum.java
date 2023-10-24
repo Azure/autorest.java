@@ -8,18 +8,24 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for ModelAsStringRequiredTwoValueNoDefaultEnum. */
+/**
+ * Defines values for ModelAsStringRequiredTwoValueNoDefaultEnum.
+ */
 public final class ModelAsStringRequiredTwoValueNoDefaultEnum
-        extends ExpandableStringEnum<ModelAsStringRequiredTwoValueNoDefaultEnum> {
-    /** Static value value1 for ModelAsStringRequiredTwoValueNoDefaultEnum. */
+    extends ExpandableStringEnum<ModelAsStringRequiredTwoValueNoDefaultEnum> {
+    /**
+     * Static value value1 for ModelAsStringRequiredTwoValueNoDefaultEnum.
+     */
     public static final ModelAsStringRequiredTwoValueNoDefaultEnum VALUE1 = fromString("value1");
 
-    /** Static value value2 for ModelAsStringRequiredTwoValueNoDefaultEnum. */
+    /**
+     * Static value value2 for ModelAsStringRequiredTwoValueNoDefaultEnum.
+     */
     public static final ModelAsStringRequiredTwoValueNoDefaultEnum VALUE2 = fromString("value2");
 
     /**
      * Creates a new instance of ModelAsStringRequiredTwoValueNoDefaultEnum value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
@@ -27,7 +33,7 @@ public final class ModelAsStringRequiredTwoValueNoDefaultEnum
 
     /**
      * Creates or finds a ModelAsStringRequiredTwoValueNoDefaultEnum from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding ModelAsStringRequiredTwoValueNoDefaultEnum.
      */
@@ -38,7 +44,7 @@ public final class ModelAsStringRequiredTwoValueNoDefaultEnum
 
     /**
      * Gets known ModelAsStringRequiredTwoValueNoDefaultEnum values.
-     *
+     * 
      * @return known ModelAsStringRequiredTwoValueNoDefaultEnum values.
      */
     public static Collection<ModelAsStringRequiredTwoValueNoDefaultEnum> values() {

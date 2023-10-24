@@ -4,12 +4,16 @@
 
 package com.type.model.inheritance.notdiscriminated.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The second level model in the normal multiple levels inheritance. */
+/**
+ * The second level model in the normal multiple levels inheritance.
+ */
 @Immutable
 public class Cat extends Pet {
     /*
@@ -21,7 +25,7 @@ public class Cat extends Pet {
 
     /**
      * Creates an instance of Cat class.
-     *
+     * 
      * @param name the name value to set.
      * @param age the age value to set.
      */
@@ -34,7 +38,7 @@ public class Cat extends Pet {
 
     /**
      * Get the age property: The age property.
-     *
+     * 
      * @return the age value.
      */
     @Generated

@@ -8,93 +8,108 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the SpecialWordsClient type. */
+/**
+ * Initializes a new instance of the SpecialWordsClient type.
+ */
 public final class SpecialWordsClientImpl {
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The ModelsImpl object to access its operations. */
+    /**
+     * The ModelsImpl object to access its operations.
+     */
     private final ModelsImpl models;
 
     /**
      * Gets the ModelsImpl object to access its operations.
-     *
+     * 
      * @return the ModelsImpl object.
      */
     public ModelsImpl getModels() {
         return this.models;
     }
 
-    /** The ModelPropertiesImpl object to access its operations. */
+    /**
+     * The ModelPropertiesImpl object to access its operations.
+     */
     private final ModelPropertiesImpl modelProperties;
 
     /**
      * Gets the ModelPropertiesImpl object to access its operations.
-     *
+     * 
      * @return the ModelPropertiesImpl object.
      */
     public ModelPropertiesImpl getModelProperties() {
         return this.modelProperties;
     }
 
-    /** The OperationsImpl object to access its operations. */
+    /**
+     * The OperationsImpl object to access its operations.
+     */
     private final OperationsImpl operations;
 
     /**
      * Gets the OperationsImpl object to access its operations.
-     *
+     * 
      * @return the OperationsImpl object.
      */
     public OperationsImpl getOperations() {
         return this.operations;
     }
 
-    /** The ParametersImpl object to access its operations. */
+    /**
+     * The ParametersImpl object to access its operations.
+     */
     private final ParametersImpl parameters;
 
     /**
      * Gets the ParametersImpl object to access its operations.
-     *
+     * 
      * @return the ParametersImpl object.
      */
     public ParametersImpl getParameters() {
         return this.parameters;
     }
 
-    /** Initializes an instance of SpecialWordsClient client. */
+    /**
+     * Initializes an instance of SpecialWordsClient client.
+     */
     public SpecialWordsClientImpl() {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
      * Initializes an instance of SpecialWordsClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public SpecialWordsClientImpl(HttpPipeline httpPipeline) {
@@ -103,7 +118,7 @@ public final class SpecialWordsClientImpl {
 
     /**
      * Initializes an instance of SpecialWordsClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      */

@@ -4,46 +4,70 @@
 
 package com.encode.bytes;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.encode.bytes.implementation.RequestBodiesImpl;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous BytesClient type. */
+/**
+ * Initializes a new instance of the asynchronous BytesClient type.
+ */
 @ServiceClient(builder = BytesClientBuilder.class, isAsync = true)
 public final class RequestBodyAsyncClient {
-    @Generated private final RequestBodiesImpl serviceClient;
+    @Generated
+    private final RequestBodiesImpl serviceClient;
 
     /**
      * Initializes an instance of RequestBodyAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    RequestBodyAsyncClient(RequestBodiesImpl serviceClient) {
+     RequestBodyAsyncClient(RequestBodiesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The defaultMethod operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -60,13 +84,11 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The octetStream operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -83,13 +105,11 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The customContentType operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -106,13 +126,11 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The base64 operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -129,13 +147,11 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The base64Url operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -152,7 +168,7 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -172,7 +188,7 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The octetStream operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -192,7 +208,7 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The customContentType operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -212,7 +228,7 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The base64 operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -232,7 +248,7 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The base64Url operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -247,7 +263,6 @@ public final class RequestBodyAsyncClient {
     public Mono<Void> base64Url(byte[] value) {
         // Generated convenience method for base64UrlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(BinaryData.fromObject(Base64Url.encode(value)), requestOptions)
-                .flatMap(FluxUtil::toMono);
+        return base64UrlWithResponse(BinaryData.fromObject(Base64Url.encode(value)), requestOptions).flatMap(FluxUtil::toMono);
     }
 }

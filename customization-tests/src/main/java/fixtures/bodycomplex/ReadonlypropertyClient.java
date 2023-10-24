@@ -14,14 +14,17 @@ import fixtures.bodycomplex.implementation.ReadonlypropertiesImpl;
 import fixtures.bodycomplex.implementation.models.ErrorException;
 import fixtures.bodycomplex.implementation.models.ReadonlyObj;
 
-/** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestComplexTestService type.
+ */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class ReadonlypropertyClient {
-    @Generated private final ReadonlypropertiesImpl serviceClient;
+    @Generated
+    private final ReadonlypropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of ReadonlypropertyClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -31,7 +34,7 @@ public final class ReadonlypropertyClient {
 
     /**
      * Get complex types that have readonly properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -46,7 +49,7 @@ public final class ReadonlypropertyClient {
 
     /**
      * Get complex types that have readonly properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that have readonly properties.
@@ -59,7 +62,7 @@ public final class ReadonlypropertyClient {
 
     /**
      * Put complex types that have readonly properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -75,7 +78,7 @@ public final class ReadonlypropertyClient {
 
     /**
      * Put complex types that have readonly properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

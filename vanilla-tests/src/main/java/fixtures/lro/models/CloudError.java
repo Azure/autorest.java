@@ -7,7 +7,9 @@ package fixtures.lro.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The CloudError model. */
+/**
+ * The CloudError model.
+ */
 @Fluent
 public final class CloudError {
     /*
@@ -22,12 +24,14 @@ public final class CloudError {
     @JsonProperty(value = "message")
     private String message;
 
-    /** Creates an instance of CloudError class. */
+    /**
+     * Creates an instance of CloudError class.
+     */
     public CloudError() {}
 
     /**
      * Get the code property: The code property.
-     *
+     * 
      * @return the code value.
      */
     public Integer getCode() {
@@ -36,7 +40,7 @@ public final class CloudError {
 
     /**
      * Set the code property: The code property.
-     *
+     * 
      * @param code the code value to set.
      * @return the CloudError object itself.
      */
@@ -47,7 +51,7 @@ public final class CloudError {
 
     /**
      * Get the message property: The message property.
-     *
+     * 
      * @return the message value.
      */
     public String getMessage() {
@@ -56,7 +60,7 @@ public final class CloudError {
 
     /**
      * Set the message property: The message property.
-     *
+     * 
      * @param message the message value to set.
      * @return the CloudError object itself.
      */
@@ -67,7 +71,7 @@ public final class CloudError {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

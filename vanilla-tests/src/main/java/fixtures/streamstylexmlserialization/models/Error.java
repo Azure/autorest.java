@@ -13,7 +13,9 @@ import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** The Error model. */
+/**
+ * The Error model.
+ */
 @Fluent
 public final class Error implements XmlSerializable<Error> {
     /*
@@ -26,12 +28,14 @@ public final class Error implements XmlSerializable<Error> {
      */
     private String message;
 
-    /** Creates an instance of Error class. */
+    /**
+     * Creates an instance of Error class.
+     */
     public Error() {}
 
     /**
      * Get the status property: The status property.
-     *
+     * 
      * @return the status value.
      */
     public Integer getStatus() {
@@ -40,7 +44,7 @@ public final class Error implements XmlSerializable<Error> {
 
     /**
      * Set the status property: The status property.
-     *
+     * 
      * @param status the status value to set.
      * @return the Error object itself.
      */
@@ -51,7 +55,7 @@ public final class Error implements XmlSerializable<Error> {
 
     /**
      * Get the message property: The message property.
-     *
+     * 
      * @return the message value.
      */
     public String getMessage() {
@@ -60,7 +64,7 @@ public final class Error implements XmlSerializable<Error> {
 
     /**
      * Set the message property: The message property.
-     *
+     * 
      * @param message the message value to set.
      * @return the Error object itself.
      */
@@ -71,7 +75,7 @@ public final class Error implements XmlSerializable<Error> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}
@@ -92,10 +96,10 @@ public final class Error implements XmlSerializable<Error> {
 
     /**
      * Reads an instance of Error from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of Error if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     *     XML null.
+     * XML null.
      * @throws XMLStreamException If an error occurs while reading the Error.
      */
     public static Error fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -104,33 +108,31 @@ public final class Error implements XmlSerializable<Error> {
 
     /**
      * Reads an instance of Error from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of Error if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     *     XML null.
+     * XML null.
      * @throws XMLStreamException If an error occurs while reading the Error.
      */
     public static Error fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Error" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    Error deserializedError = new Error();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            Error deserializedError = new Error();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("status".equals(elementName.getLocalPart())) {
-                            deserializedError.status = reader.getNullableElement(Integer::parseInt);
-                        } else if ("message".equals(elementName.getLocalPart())) {
-                            deserializedError.message = reader.getStringElement();
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                if ("status".equals(elementName.getLocalPart())) {
+                    deserializedError.status = reader.getNullableElement(Integer::parseInt);
+                } else if ("message".equals(elementName.getLocalPart())) {
+                    deserializedError.message = reader.getStringElement();
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedError;
-                });
+            return deserializedError;
+        });
     }
 }

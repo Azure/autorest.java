@@ -7,7 +7,9 @@ package fixtures.azurespecials.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The OdataFilter model. */
+/**
+ * The OdataFilter model.
+ */
 @Fluent
 public final class OdataFilter {
     /*
@@ -22,12 +24,14 @@ public final class OdataFilter {
     @JsonProperty(value = "name")
     private String name;
 
-    /** Creates an instance of OdataFilter class. */
+    /**
+     * Creates an instance of OdataFilter class.
+     */
     public OdataFilter() {}
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     public Integer getId() {
@@ -36,7 +40,7 @@ public final class OdataFilter {
 
     /**
      * Set the id property: The id property.
-     *
+     * 
      * @param id the id value to set.
      * @return the OdataFilter object itself.
      */
@@ -47,7 +51,7 @@ public final class OdataFilter {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -56,7 +60,7 @@ public final class OdataFilter {
 
     /**
      * Set the name property: The name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the OdataFilter object itself.
      */
@@ -67,7 +71,7 @@ public final class OdataFilter {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

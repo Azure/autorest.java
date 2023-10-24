@@ -33,22 +33,28 @@ import fixtures.bodycomplex.implementation.models.LongWrapper;
 import fixtures.bodycomplex.implementation.models.StringWrapper;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Primitives. */
+/**
+ * An instance of this class provides access to all the operations defined in Primitives.
+ */
 public final class PrimitivesImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final PrimitivesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestComplexTestServiceImpl client;
 
     /**
      * Initializes an instance of PrimitivesImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     PrimitivesImpl(AutoRestComplexTestServiceImpl client) {
-        this.service =
-                RestProxy.create(PrimitivesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(PrimitivesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -60,178 +66,156 @@ public final class PrimitivesImpl {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface PrimitivesService {
         @Get("/complex/primitive/integer")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<IntWrapper>> getInt(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<IntWrapper>> getInt(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/primitive/integer")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putInt(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") IntWrapper complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putInt(@HostParam("$host") String host,
+            @BodyParam("application/json") IntWrapper complexBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/primitive/long")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<LongWrapper>> getLong(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<LongWrapper>> getLong(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/primitive/long")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putLong(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") LongWrapper complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putLong(@HostParam("$host") String host,
+            @BodyParam("application/json") LongWrapper complexBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/primitive/float")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<FloatWrapper>> getFloat(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<FloatWrapper>> getFloat(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/primitive/float")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putFloat(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") FloatWrapper complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putFloat(@HostParam("$host") String host,
+            @BodyParam("application/json") FloatWrapper complexBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/primitive/double")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DoubleWrapper>> getDouble(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<DoubleWrapper>> getDouble(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/primitive/double")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDouble(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") DoubleWrapper complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putDouble(@HostParam("$host") String host,
+            @BodyParam("application/json") DoubleWrapper complexBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/primitive/bool")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BooleanWrapper>> getBool(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<BooleanWrapper>> getBool(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/primitive/bool")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBool(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BooleanWrapper complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putBool(@HostParam("$host") String host,
+            @BodyParam("application/json") BooleanWrapper complexBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/primitive/string")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<StringWrapper>> getString(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<StringWrapper>> getString(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/primitive/string")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putString(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") StringWrapper complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putString(@HostParam("$host") String host,
+            @BodyParam("application/json") StringWrapper complexBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/primitive/date")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DateWrapper>> getDate(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<DateWrapper>> getDate(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/primitive/date")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDate(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") DateWrapper complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putDate(@HostParam("$host") String host,
+            @BodyParam("application/json") DateWrapper complexBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/primitive/datetime")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DatetimeWrapper>> getDateTime(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<DatetimeWrapper>> getDateTime(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/datetime")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDateTime(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") DatetimeWrapper complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putDateTime(@HostParam("$host") String host,
+            @BodyParam("application/json") DatetimeWrapper complexBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/primitive/datetimerfc1123")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/datetimerfc1123")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDateTimeRfc1123(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Datetimerfc1123Wrapper complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putDateTimeRfc1123(@HostParam("$host") String host,
+            @BodyParam("application/json") Datetimerfc1123Wrapper complexBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/primitive/duration")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DurationWrapper>> getDuration(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<DurationWrapper>> getDuration(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/duration")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDuration(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") DurationWrapper complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putDuration(@HostParam("$host") String host,
+            @BodyParam("application/json") DurationWrapper complexBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/primitive/byte")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<ByteWrapper>> getByte(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<ByteWrapper>> getByte(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/primitive/byte")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putByte(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") ByteWrapper complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putByte(@HostParam("$host") String host,
+            @BodyParam("application/json") ByteWrapper complexBody, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Get complex types with integer properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with integer properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with integer properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<IntWrapper>> getIntWithResponseAsync() {
@@ -241,13 +225,13 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with integer properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with integer properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with integer properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<IntWrapper>> getIntWithResponseAsync(Context context) {
@@ -257,7 +241,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with integer properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with integer properties on successful completion of {@link Mono}.
@@ -269,7 +253,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with integer properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -283,7 +267,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with integer properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -297,7 +281,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with integer properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with integer properties.
@@ -309,7 +293,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with integer properties.
-     *
+     * 
      * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -324,7 +308,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with integer properties.
-     *
+     * 
      * @param complexBody Please put -1 and 2.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -340,7 +324,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with integer properties.
-     *
+     * 
      * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -354,7 +338,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with integer properties.
-     *
+     * 
      * @param complexBody Please put -1 and 2.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -369,7 +353,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with integer properties.
-     *
+     * 
      * @param complexBody Please put -1 and 2.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -384,7 +368,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with integer properties.
-     *
+     * 
      * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -397,7 +381,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with long properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with long properties along with {@link Response} on successful completion of {@link Mono}.
@@ -410,7 +394,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with long properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -425,7 +409,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with long properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with long properties on successful completion of {@link Mono}.
@@ -437,7 +421,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with long properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -451,7 +435,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with long properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -465,7 +449,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with long properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with long properties.
@@ -477,7 +461,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with long properties.
-     *
+     * 
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -492,7 +476,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with long properties.
-     *
+     * 
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -508,7 +492,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with long properties.
-     *
+     * 
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -522,7 +506,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with long properties.
-     *
+     * 
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -537,7 +521,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with long properties.
-     *
+     * 
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -552,7 +536,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with long properties.
-     *
+     * 
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -565,7 +549,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with float properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with float properties along with {@link Response} on successful completion of {@link Mono}.
@@ -578,7 +562,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with float properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -593,7 +577,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with float properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with float properties on successful completion of {@link Mono}.
@@ -605,7 +589,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with float properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -619,7 +603,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with float properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -633,7 +617,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with float properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with float properties.
@@ -645,7 +629,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with float properties.
-     *
+     * 
      * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -660,7 +644,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with float properties.
-     *
+     * 
      * @param complexBody Please put 1.05 and -0.003.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -676,7 +660,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with float properties.
-     *
+     * 
      * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -690,7 +674,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with float properties.
-     *
+     * 
      * @param complexBody Please put 1.05 and -0.003.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -705,7 +689,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with float properties.
-     *
+     * 
      * @param complexBody Please put 1.05 and -0.003.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -720,7 +704,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with float properties.
-     *
+     * 
      * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -733,11 +717,11 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with double properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with double properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with double properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DoubleWrapper>> getDoubleWithResponseAsync() {
@@ -747,13 +731,13 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with double properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with double properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with double properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DoubleWrapper>> getDoubleWithResponseAsync(Context context) {
@@ -763,7 +747,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with double properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with double properties on successful completion of {@link Mono}.
@@ -775,7 +759,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with double properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -789,7 +773,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with double properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -803,7 +787,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with double properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with double properties.
@@ -815,7 +799,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with double properties.
-     *
+     * 
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -830,7 +814,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with double properties.
-     *
+     * 
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -846,7 +830,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with double properties.
-     *
+     * 
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -860,7 +844,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with double properties.
-     *
+     * 
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -875,7 +859,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with double properties.
-     *
+     * 
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -890,7 +874,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with double properties.
-     *
+     * 
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -903,7 +887,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with bool properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with bool properties along with {@link Response} on successful completion of {@link Mono}.
@@ -916,7 +900,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with bool properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -931,7 +915,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with bool properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with bool properties on successful completion of {@link Mono}.
@@ -943,7 +927,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with bool properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -957,7 +941,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with bool properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -971,7 +955,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with bool properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with bool properties.
@@ -983,7 +967,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with bool properties.
-     *
+     * 
      * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -998,7 +982,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with bool properties.
-     *
+     * 
      * @param complexBody Please put true and false.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1014,7 +998,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with bool properties.
-     *
+     * 
      * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1028,7 +1012,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with bool properties.
-     *
+     * 
      * @param complexBody Please put true and false.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1043,7 +1027,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with bool properties.
-     *
+     * 
      * @param complexBody Please put true and false.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1058,7 +1042,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with bool properties.
-     *
+     * 
      * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1071,11 +1055,11 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with string properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with string properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with string properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<StringWrapper>> getStringWithResponseAsync() {
@@ -1085,13 +1069,13 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with string properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with string properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with string properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<StringWrapper>> getStringWithResponseAsync(Context context) {
@@ -1101,7 +1085,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with string properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with string properties on successful completion of {@link Mono}.
@@ -1113,7 +1097,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with string properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1127,7 +1111,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with string properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1141,7 +1125,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with string properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with string properties.
@@ -1153,7 +1137,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with string properties.
-     *
+     * 
      * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1168,7 +1152,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with string properties.
-     *
+     * 
      * @param complexBody Please put 'goodrequest', '', and null.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1184,7 +1168,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with string properties.
-     *
+     * 
      * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1198,7 +1182,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with string properties.
-     *
+     * 
      * @param complexBody Please put 'goodrequest', '', and null.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1213,7 +1197,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with string properties.
-     *
+     * 
      * @param complexBody Please put 'goodrequest', '', and null.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1228,7 +1212,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with string properties.
-     *
+     * 
      * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1241,7 +1225,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with date properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with date properties along with {@link Response} on successful completion of {@link Mono}.
@@ -1254,7 +1238,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with date properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1269,7 +1253,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with date properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with date properties on successful completion of {@link Mono}.
@@ -1281,7 +1265,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with date properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1295,7 +1279,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with date properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1309,7 +1293,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with date properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with date properties.
@@ -1321,7 +1305,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with date properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1336,7 +1320,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with date properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1352,7 +1336,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with date properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1366,7 +1350,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with date properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1381,7 +1365,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with date properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1396,7 +1380,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with date properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1409,11 +1393,11 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetime properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetime properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with datetime properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DatetimeWrapper>> getDateTimeWithResponseAsync() {
@@ -1423,13 +1407,13 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetime properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetime properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with datetime properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DatetimeWrapper>> getDateTimeWithResponseAsync(Context context) {
@@ -1439,7 +1423,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetime properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetime properties on successful completion of {@link Mono}.
@@ -1451,7 +1435,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetime properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1465,7 +1449,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetime properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1479,7 +1463,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetime properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetime properties.
@@ -1491,7 +1475,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetime properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1501,13 +1485,13 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeWithResponseAsync(DatetimeWrapper complexBody) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.putDateTime(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putDateTime(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
      * Put complex types with datetime properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1523,7 +1507,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetime properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1537,7 +1521,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetime properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1552,7 +1536,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetime properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1567,7 +1551,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetime properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1580,11 +1564,11 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync() {
@@ -1594,13 +1578,13 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync(Context context) {
@@ -1610,7 +1594,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties on successful completion of {@link Mono}.
@@ -1622,7 +1606,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1636,7 +1620,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1650,7 +1634,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties.
@@ -1662,7 +1646,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1672,13 +1656,13 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(Datetimerfc1123Wrapper complexBody) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.putDateTimeRfc1123(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putDateTimeRfc1123(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
      * Put complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1687,15 +1671,15 @@ public final class PrimitivesImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(
-            Datetimerfc1123Wrapper complexBody, Context context) {
+    public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(Datetimerfc1123Wrapper complexBody,
+        Context context) {
         final String accept = "application/json";
         return service.putDateTimeRfc1123(this.client.getHost(), complexBody, accept, context);
     }
 
     /**
      * Put complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1709,7 +1693,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1724,7 +1708,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1739,7 +1723,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1752,11 +1736,11 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with duration properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with duration properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with duration properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DurationWrapper>> getDurationWithResponseAsync() {
@@ -1766,13 +1750,13 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with duration properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with duration properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with duration properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DurationWrapper>> getDurationWithResponseAsync(Context context) {
@@ -1782,7 +1766,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with duration properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with duration properties on successful completion of {@link Mono}.
@@ -1794,7 +1778,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with duration properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1808,7 +1792,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with duration properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1822,7 +1806,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with duration properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with duration properties.
@@ -1834,7 +1818,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with duration properties.
-     *
+     * 
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1844,13 +1828,13 @@ public final class PrimitivesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationWithResponseAsync(DurationWrapper complexBody) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.putDuration(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putDuration(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
      * Put complex types with duration properties.
-     *
+     * 
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1866,7 +1850,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with duration properties.
-     *
+     * 
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1880,7 +1864,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with duration properties.
-     *
+     * 
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1895,7 +1879,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with duration properties.
-     *
+     * 
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1910,7 +1894,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with duration properties.
-     *
+     * 
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1923,7 +1907,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with byte properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with byte properties along with {@link Response} on successful completion of {@link Mono}.
@@ -1936,7 +1920,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with byte properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1951,7 +1935,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with byte properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with byte properties on successful completion of {@link Mono}.
@@ -1963,7 +1947,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with byte properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1977,7 +1961,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with byte properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1991,7 +1975,7 @@ public final class PrimitivesImpl {
 
     /**
      * Get complex types with byte properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with byte properties.
@@ -2003,7 +1987,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with byte properties.
-     *
+     * 
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2018,7 +2002,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with byte properties.
-     *
+     * 
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2034,7 +2018,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with byte properties.
-     *
+     * 
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2048,7 +2032,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with byte properties.
-     *
+     * 
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2063,7 +2047,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with byte properties.
-     *
+     * 
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2078,7 +2062,7 @@ public final class PrimitivesImpl {
 
     /**
      * Put complex types with byte properties.
-     *
+     * 
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

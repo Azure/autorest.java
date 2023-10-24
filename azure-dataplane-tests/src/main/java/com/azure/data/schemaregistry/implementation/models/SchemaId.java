@@ -7,7 +7,9 @@ package com.azure.data.schemaregistry.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Object received from the registry containing schema identifiers. */
+/**
+ * Object received from the registry containing schema identifiers.
+ */
 @Fluent
 public final class SchemaId {
     /*
@@ -16,12 +18,14 @@ public final class SchemaId {
     @JsonProperty(value = "id")
     private String id;
 
-    /** Creates an instance of SchemaId class. */
+    /**
+     * Creates an instance of SchemaId class.
+     */
     public SchemaId() {}
 
     /**
      * Get the id property: Schema ID that uniquely identifies a schema in the registry namespace.
-     *
+     * 
      * @return the id value.
      */
     public String getId() {
@@ -30,7 +34,7 @@ public final class SchemaId {
 
     /**
      * Set the id property: Schema ID that uniquely identifies a schema in the registry namespace.
-     *
+     * 
      * @param id the id value to set.
      * @return the SchemaId object itself.
      */

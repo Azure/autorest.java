@@ -6,9 +6,15 @@ package com.cadl.literalservice.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-/** The Model model. */
+/**
+ * The Model model.
+ */
 @Fluent
 public final class Model {
     /*
@@ -25,7 +31,9 @@ public final class Model {
     @JsonProperty(value = "optionalLiteral")
     private OptionalLiteralModel optionalLiteral;
 
-    /** Creates an instance of Model class. */
+    /**
+     * Creates an instance of Model class.
+     */
     @Generated
     public Model() {
         literal = "literal";
@@ -33,7 +41,7 @@ public final class Model {
 
     /**
      * Get the literal property: The literal property.
-     *
+     * 
      * @return the literal value.
      */
     @Generated
@@ -43,7 +51,7 @@ public final class Model {
 
     /**
      * Get the optionalLiteral property: The optionalLiteral property.
-     *
+     * 
      * @return the optionalLiteral value.
      */
     @Generated
@@ -53,7 +61,7 @@ public final class Model {
 
     /**
      * Set the optionalLiteral property: The optionalLiteral property.
-     *
+     * 
      * @param optionalLiteral the optionalLiteral value to set.
      * @return the Model object itself.
      */

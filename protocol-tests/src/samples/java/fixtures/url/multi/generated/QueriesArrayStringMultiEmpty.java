@@ -4,21 +4,39 @@
 
 package fixtures.url.multi.generated;
 
+import com.azure.core.annotation.ReturnType;
+import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.credential.AzureKeyCredential;
+import com.azure.core.credential.KeyCredential;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.BinaryData;
+import com.azure.core.util.Configuration;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.polling.LongRunningOperationStatus;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceAsyncClient;
 import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceClient;
 import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceClientBuilder;
+import fixtures.url.multi.implementation.AutoRestUrlMutliCollectionFormatTestServiceClientImpl;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import org.junit.jupiter.api.Assertions;
 
 public class QueriesArrayStringMultiEmpty {
     public static void main(String[] args) {
-        AutoRestUrlMutliCollectionFormatTestServiceClient autoRestUrlMutliCollectionFormatTestServiceClient =
-                new AutoRestUrlMutliCollectionFormatTestServiceClientBuilder()
-                        .host("http://localhost:3000")
-                        .buildClient();
+        AutoRestUrlMutliCollectionFormatTestServiceClient autoRestUrlMutliCollectionFormatTestServiceClient = new AutoRestUrlMutliCollectionFormatTestServiceClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.url.multi.generated.queriesarraystringmultiempty.queriesarraystringmultiempty
         RequestOptions requestOptions = new RequestOptions().addQueryParam("arrayQuery", "");
-        Response<Void> response =
-                autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiEmptyWithResponse(requestOptions);
+        Response<Void> response = autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiEmptyWithResponse(requestOptions);
         // END:fixtures.url.multi.generated.queriesarraystringmultiempty.queriesarraystringmultiempty
     }
 }

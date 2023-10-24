@@ -12,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-/** The Sawshark model. */
+/**
+ * The Sawshark model.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("sawshark")
 @Fluent
@@ -23,12 +25,14 @@ public final class Sawshark extends Shark {
     @JsonProperty(value = "picture")
     private byte[] picture;
 
-    /** Creates an instance of Sawshark class. */
+    /**
+     * Creates an instance of Sawshark class.
+     */
     public Sawshark() {}
 
     /**
      * Get the picture property: The picture property.
-     *
+     * 
      * @return the picture value.
      */
     public byte[] getPicture() {
@@ -37,7 +41,7 @@ public final class Sawshark extends Shark {
 
     /**
      * Set the picture property: The picture property.
-     *
+     * 
      * @param picture the picture value to set.
      * @return the Sawshark object itself.
      */
@@ -46,35 +50,45 @@ public final class Sawshark extends Shark {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Sawshark setAge(Integer age) {
         super.setAge(age);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Sawshark setBirthday(OffsetDateTime birthday) {
         super.setBirthday(birthday);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Sawshark setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Sawshark setLength(float length) {
         super.setLength(length);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Sawshark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);

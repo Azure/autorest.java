@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The HeadersResponseEnumHeaders model. */
+/**
+ * The HeadersResponseEnumHeaders model.
+ */
 @Fluent
 public final class HeadersResponseEnumHeaders {
     /*
@@ -23,7 +25,7 @@ public final class HeadersResponseEnumHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseEnumHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseEnumHeaders(HttpHeaders rawHeaders) {
@@ -35,7 +37,7 @@ public final class HeadersResponseEnumHeaders {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     public GreyscaleColors getValue() {
@@ -44,7 +46,7 @@ public final class HeadersResponseEnumHeaders {
 
     /**
      * Set the value property: The value property.
-     *
+     * 
      * @param value the value value to set.
      * @return the HeadersResponseEnumHeaders object itself.
      */
@@ -55,7 +57,7 @@ public final class HeadersResponseEnumHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

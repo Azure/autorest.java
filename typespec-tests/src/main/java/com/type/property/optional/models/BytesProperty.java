@@ -6,10 +6,15 @@ package com.type.property.optional.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** Template type for testing models with optional property. Pass in the type of the property you are looking for. */
+/**
+ * Template type for testing models with optional property. Pass in the type of the property you are looking for.
+ */
 @Fluent
 public final class BytesProperty {
     /*
@@ -19,13 +24,16 @@ public final class BytesProperty {
     @JsonProperty(value = "property")
     private byte[] property;
 
-    /** Creates an instance of BytesProperty class. */
+    /**
+     * Creates an instance of BytesProperty class.
+     */
     @Generated
-    public BytesProperty() {}
+    public BytesProperty() {
+    }
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated
@@ -35,7 +43,7 @@ public final class BytesProperty {
 
     /**
      * Set the property property: Property.
-     *
+     * 
      * @param property the property value to set.
      * @return the BytesProperty object itself.
      */

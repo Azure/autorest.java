@@ -4,49 +4,74 @@
 
 package com.projection.projectedname;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.projection.projectedname.implementation.PropertiesImpl;
 import com.projection.projectedname.models.ClientProjectedNameModel;
 import com.projection.projectedname.models.JsonAndClientProjectedNameModel;
 import com.projection.projectedname.models.JsonProjectedNameModel;
 import com.projection.projectedname.models.LanguageProjectedNameModel;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the synchronous ProjectedNameClient type. */
+/**
+ * Initializes a new instance of the synchronous ProjectedNameClient type.
+ */
 @ServiceClient(builder = ProjectedNameClientBuilder.class)
 public final class PropertyClient {
-    @Generated private final PropertiesImpl serviceClient;
+    @Generated
+    private final PropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of PropertyClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    PropertyClient(PropertiesImpl serviceClient) {
+     PropertyClient(PropertiesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The json operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param jsonProjectedNameModel The jsonProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -63,15 +88,13 @@ public final class PropertyClient {
 
     /**
      * The client operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param clientProjectedNameModel The clientProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,15 +111,13 @@ public final class PropertyClient {
 
     /**
      * The language operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param languageProjectedNameModel The languageProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -113,15 +134,13 @@ public final class PropertyClient {
 
     /**
      * The jsonAndClient operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param jsonAndClientProjectedNameModel The jsonAndClientProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -132,14 +151,13 @@ public final class PropertyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> jsonAndClientWithResponse(
-            BinaryData jsonAndClientProjectedNameModel, RequestOptions requestOptions) {
+    public Response<Void> jsonAndClientWithResponse(BinaryData jsonAndClientProjectedNameModel, RequestOptions requestOptions) {
         return this.serviceClient.jsonAndClientWithResponse(jsonAndClientProjectedNameModel, requestOptions);
     }
 
     /**
      * The json operation.
-     *
+     * 
      * @param jsonProjectedNameModel The jsonProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -158,7 +176,7 @@ public final class PropertyClient {
 
     /**
      * The client operation.
-     *
+     * 
      * @param clientProjectedNameModel The clientProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -177,7 +195,7 @@ public final class PropertyClient {
 
     /**
      * The language operation.
-     *
+     * 
      * @param languageProjectedNameModel The languageProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -196,7 +214,7 @@ public final class PropertyClient {
 
     /**
      * The jsonAndClient operation.
-     *
+     * 
      * @param jsonAndClientProjectedNameModel The jsonAndClientProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

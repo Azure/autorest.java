@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-/** The DictionaryWrapper model. */
+/**
+ * The DictionaryWrapper model.
+ */
 @Fluent
 public final class DictionaryWrapper {
     /*
@@ -17,12 +19,14 @@ public final class DictionaryWrapper {
     @JsonProperty(value = "defaultProgram")
     private Map<String, String> defaultProgram;
 
-    /** Creates an instance of DictionaryWrapper class. */
+    /**
+     * Creates an instance of DictionaryWrapper class.
+     */
     public DictionaryWrapper() {}
 
     /**
      * Get the defaultProgram property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @return the defaultProgram value.
      */
     public Map<String, String> getDefaultProgram() {
@@ -31,7 +35,7 @@ public final class DictionaryWrapper {
 
     /**
      * Set the defaultProgram property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @param defaultProgram the defaultProgram value to set.
      * @return the DictionaryWrapper object itself.
      */

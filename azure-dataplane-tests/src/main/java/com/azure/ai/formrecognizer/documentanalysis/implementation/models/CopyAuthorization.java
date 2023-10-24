@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/** Authorization to copy a document model to the specified target resource and modelId. */
+/**
+ * Authorization to copy a document model to the specified target resource and modelId.
+ */
 @Fluent
 public final class CopyAuthorization {
     /*
@@ -47,12 +49,14 @@ public final class CopyAuthorization {
     @JsonProperty(value = "expirationDateTime", required = true)
     private OffsetDateTime expirationDateTime;
 
-    /** Creates an instance of CopyAuthorization class. */
+    /**
+     * Creates an instance of CopyAuthorization class.
+     */
     public CopyAuthorization() {}
 
     /**
      * Get the targetResourceId property: ID of the target Azure resource where the document model should be copied to.
-     *
+     * 
      * @return the targetResourceId value.
      */
     public String getTargetResourceId() {
@@ -61,7 +65,7 @@ public final class CopyAuthorization {
 
     /**
      * Set the targetResourceId property: ID of the target Azure resource where the document model should be copied to.
-     *
+     * 
      * @param targetResourceId the targetResourceId value to set.
      * @return the CopyAuthorization object itself.
      */
@@ -73,7 +77,7 @@ public final class CopyAuthorization {
     /**
      * Get the targetResourceRegion property: Location of the target Azure resource where the document model should be
      * copied to.
-     *
+     * 
      * @return the targetResourceRegion value.
      */
     public String getTargetResourceRegion() {
@@ -83,7 +87,7 @@ public final class CopyAuthorization {
     /**
      * Set the targetResourceRegion property: Location of the target Azure resource where the document model should be
      * copied to.
-     *
+     * 
      * @param targetResourceRegion the targetResourceRegion value to set.
      * @return the CopyAuthorization object itself.
      */
@@ -94,7 +98,7 @@ public final class CopyAuthorization {
 
     /**
      * Get the targetModelId property: Identifier of the target document model.
-     *
+     * 
      * @return the targetModelId value.
      */
     public String getTargetModelId() {
@@ -103,7 +107,7 @@ public final class CopyAuthorization {
 
     /**
      * Set the targetModelId property: Identifier of the target document model.
-     *
+     * 
      * @param targetModelId the targetModelId value to set.
      * @return the CopyAuthorization object itself.
      */
@@ -114,7 +118,7 @@ public final class CopyAuthorization {
 
     /**
      * Get the targetModelLocation property: URL of the copied document model in the target account.
-     *
+     * 
      * @return the targetModelLocation value.
      */
     public String getTargetModelLocation() {
@@ -123,7 +127,7 @@ public final class CopyAuthorization {
 
     /**
      * Set the targetModelLocation property: URL of the copied document model in the target account.
-     *
+     * 
      * @param targetModelLocation the targetModelLocation value to set.
      * @return the CopyAuthorization object itself.
      */
@@ -134,7 +138,7 @@ public final class CopyAuthorization {
 
     /**
      * Get the accessToken property: Token used to authorize the request.
-     *
+     * 
      * @return the accessToken value.
      */
     public String getAccessToken() {
@@ -143,7 +147,7 @@ public final class CopyAuthorization {
 
     /**
      * Set the accessToken property: Token used to authorize the request.
-     *
+     * 
      * @param accessToken the accessToken value to set.
      * @return the CopyAuthorization object itself.
      */
@@ -154,7 +158,7 @@ public final class CopyAuthorization {
 
     /**
      * Get the expirationDateTime property: Date/time when the access token expires.
-     *
+     * 
      * @return the expirationDateTime value.
      */
     public OffsetDateTime getExpirationDateTime() {
@@ -163,7 +167,7 @@ public final class CopyAuthorization {
 
     /**
      * Set the expirationDateTime property: Date/time when the access token expires.
-     *
+     * 
      * @param expirationDateTime the expirationDateTime value to set.
      * @return the CopyAuthorization object itself.
      */

@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The metric alert resource. */
+/**
+ * The metric alert resource.
+ */
 @Fluent
 public final class MetricAlertResource {
     /*
@@ -18,12 +20,14 @@ public final class MetricAlertResource {
     @JsonProperty(value = "properties.criteria", required = true)
     private MetricAlertCriteria criteria;
 
-    /** Creates an instance of MetricAlertResource class. */
+    /**
+     * Creates an instance of MetricAlertResource class.
+     */
     public MetricAlertResource() {}
 
     /**
      * Get the criteria property: defines the specific alert criteria information.
-     *
+     * 
      * @return the criteria value.
      */
     public MetricAlertCriteria getCriteria() {
@@ -32,7 +36,7 @@ public final class MetricAlertResource {
 
     /**
      * Set the criteria property: defines the specific alert criteria information.
-     *
+     * 
      * @param criteria the criteria value to set.
      * @return the MetricAlertResource object itself.
      */
@@ -43,7 +47,7 @@ public final class MetricAlertResource {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

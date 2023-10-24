@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LROsPost202ListHeaders model. */
+/**
+ * The LROsPost202ListHeaders model.
+ */
 @Fluent
 public final class LROsPost202ListHeaders {
     /*
@@ -29,7 +31,7 @@ public final class LROsPost202ListHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LROsPost202ListHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LROsPost202ListHeaders(HttpHeaders rawHeaders) {
@@ -39,7 +41,7 @@ public final class LROsPost202ListHeaders {
 
     /**
      * Get the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @return the azureAsyncOperation value.
      */
     public String getAzureAsyncOperation() {
@@ -48,7 +50,7 @@ public final class LROsPost202ListHeaders {
 
     /**
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsPost202ListHeaders object itself.
      */
@@ -59,7 +61,7 @@ public final class LROsPost202ListHeaders {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -68,7 +70,7 @@ public final class LROsPost202ListHeaders {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the LROsPost202ListHeaders object itself.
      */
@@ -79,7 +81,7 @@ public final class LROsPost202ListHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

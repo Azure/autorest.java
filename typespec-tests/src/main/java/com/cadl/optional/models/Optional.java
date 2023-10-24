@@ -6,15 +6,20 @@ package com.cadl.optional.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
-/** The Optional model. */
+/**
+ * The Optional model.
+ */
 @Fluent
 public final class Optional {
     /*
@@ -138,7 +143,7 @@ public final class Optional {
 
     /**
      * Creates an instance of Optional class.
-     *
+     * 
      * @param booleanRequired the booleanRequired value to set.
      * @param booleanRequiredNullable the booleanRequiredNullable value to set.
      * @param stringRequired the stringRequired value to set.
@@ -146,11 +151,7 @@ public final class Optional {
      */
     @Generated
     @JsonCreator
-    public Optional(
-            @JsonProperty(value = "booleanRequired") boolean booleanRequired,
-            @JsonProperty(value = "booleanRequiredNullable") Boolean booleanRequiredNullable,
-            @JsonProperty(value = "stringRequired") String stringRequired,
-            @JsonProperty(value = "stringRequiredNullable") String stringRequiredNullable) {
+    public Optional(@JsonProperty(value = "booleanRequired") boolean booleanRequired, @JsonProperty(value = "booleanRequiredNullable") Boolean booleanRequiredNullable, @JsonProperty(value = "stringRequired") String stringRequired, @JsonProperty(value = "stringRequiredNullable") String stringRequiredNullable) {
         this.booleanRequired = booleanRequired;
         this.booleanRequiredNullable = booleanRequiredNullable;
         this.stringRequired = stringRequired;
@@ -159,7 +160,7 @@ public final class Optional {
 
     /**
      * Get the booleanProperty property: The boolean property.
-     *
+     * 
      * @return the booleanProperty value.
      */
     @Generated
@@ -169,7 +170,7 @@ public final class Optional {
 
     /**
      * Set the booleanProperty property: The boolean property.
-     *
+     * 
      * @param booleanProperty the booleanProperty value to set.
      * @return the Optional object itself.
      */
@@ -181,7 +182,7 @@ public final class Optional {
 
     /**
      * Get the booleanNullable property: The booleanNullable property.
-     *
+     * 
      * @return the booleanNullable value.
      */
     @Generated
@@ -191,7 +192,7 @@ public final class Optional {
 
     /**
      * Set the booleanNullable property: The booleanNullable property.
-     *
+     * 
      * @param booleanNullable the booleanNullable value to set.
      * @return the Optional object itself.
      */
@@ -203,7 +204,7 @@ public final class Optional {
 
     /**
      * Get the booleanRequired property: The booleanRequired property.
-     *
+     * 
      * @return the booleanRequired value.
      */
     @Generated
@@ -213,7 +214,7 @@ public final class Optional {
 
     /**
      * Get the booleanRequiredNullable property: The booleanRequiredNullable property.
-     *
+     * 
      * @return the booleanRequiredNullable value.
      */
     @Generated
@@ -223,7 +224,7 @@ public final class Optional {
 
     /**
      * Get the string property: The string property.
-     *
+     * 
      * @return the string value.
      */
     @Generated
@@ -233,7 +234,7 @@ public final class Optional {
 
     /**
      * Set the string property: The string property.
-     *
+     * 
      * @param string the string value to set.
      * @return the Optional object itself.
      */
@@ -245,7 +246,7 @@ public final class Optional {
 
     /**
      * Get the stringNullable property: The stringNullable property.
-     *
+     * 
      * @return the stringNullable value.
      */
     @Generated
@@ -255,7 +256,7 @@ public final class Optional {
 
     /**
      * Set the stringNullable property: The stringNullable property.
-     *
+     * 
      * @param stringNullable the stringNullable value to set.
      * @return the Optional object itself.
      */
@@ -267,7 +268,7 @@ public final class Optional {
 
     /**
      * Get the stringRequired property: The stringRequired property.
-     *
+     * 
      * @return the stringRequired value.
      */
     @Generated
@@ -277,7 +278,7 @@ public final class Optional {
 
     /**
      * Get the stringRequiredNullable property: The stringRequiredNullable property.
-     *
+     * 
      * @return the stringRequiredNullable value.
      */
     @Generated
@@ -287,7 +288,7 @@ public final class Optional {
 
     /**
      * Get the bytes property: The bytes property.
-     *
+     * 
      * @return the bytes value.
      */
     @Generated
@@ -297,7 +298,7 @@ public final class Optional {
 
     /**
      * Set the bytes property: The bytes property.
-     *
+     * 
      * @param bytes the bytes value to set.
      * @return the Optional object itself.
      */
@@ -309,7 +310,7 @@ public final class Optional {
 
     /**
      * Get the intProperty property: The int property.
-     *
+     * 
      * @return the intProperty value.
      */
     @Generated
@@ -319,7 +320,7 @@ public final class Optional {
 
     /**
      * Set the intProperty property: The int property.
-     *
+     * 
      * @param intProperty the intProperty value to set.
      * @return the Optional object itself.
      */
@@ -331,7 +332,7 @@ public final class Optional {
 
     /**
      * Get the longProperty property: The long property.
-     *
+     * 
      * @return the longProperty value.
      */
     @Generated
@@ -341,7 +342,7 @@ public final class Optional {
 
     /**
      * Set the longProperty property: The long property.
-     *
+     * 
      * @param longProperty the longProperty value to set.
      * @return the Optional object itself.
      */
@@ -353,7 +354,7 @@ public final class Optional {
 
     /**
      * Get the floatProperty property: The float property.
-     *
+     * 
      * @return the floatProperty value.
      */
     @Generated
@@ -363,7 +364,7 @@ public final class Optional {
 
     /**
      * Set the floatProperty property: The float property.
-     *
+     * 
      * @param floatProperty the floatProperty value to set.
      * @return the Optional object itself.
      */
@@ -375,7 +376,7 @@ public final class Optional {
 
     /**
      * Get the doubleProperty property: The double property.
-     *
+     * 
      * @return the doubleProperty value.
      */
     @Generated
@@ -385,7 +386,7 @@ public final class Optional {
 
     /**
      * Set the doubleProperty property: The double property.
-     *
+     * 
      * @param doubleProperty the doubleProperty value to set.
      * @return the Optional object itself.
      */
@@ -397,7 +398,7 @@ public final class Optional {
 
     /**
      * Get the duration property: The duration property.
-     *
+     * 
      * @return the duration value.
      */
     @Generated
@@ -407,7 +408,7 @@ public final class Optional {
 
     /**
      * Set the duration property: The duration property.
-     *
+     * 
      * @param duration the duration value to set.
      * @return the Optional object itself.
      */
@@ -419,7 +420,7 @@ public final class Optional {
 
     /**
      * Get the dateTime property: The dateTime property.
-     *
+     * 
      * @return the dateTime value.
      */
     @Generated
@@ -429,7 +430,7 @@ public final class Optional {
 
     /**
      * Set the dateTime property: The dateTime property.
-     *
+     * 
      * @param dateTime the dateTime value to set.
      * @return the Optional object itself.
      */
@@ -441,7 +442,7 @@ public final class Optional {
 
     /**
      * Get the stringList property: The stringList property.
-     *
+     * 
      * @return the stringList value.
      */
     @Generated
@@ -451,7 +452,7 @@ public final class Optional {
 
     /**
      * Set the stringList property: The stringList property.
-     *
+     * 
      * @param stringList the stringList value to set.
      * @return the Optional object itself.
      */
@@ -463,7 +464,7 @@ public final class Optional {
 
     /**
      * Get the bytesDict property: The bytesDict property.
-     *
+     * 
      * @return the bytesDict value.
      */
     @Generated
@@ -473,7 +474,7 @@ public final class Optional {
 
     /**
      * Set the bytesDict property: The bytesDict property.
-     *
+     * 
      * @param bytesDict the bytesDict value to set.
      * @return the Optional object itself.
      */

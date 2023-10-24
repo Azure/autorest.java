@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
 
-/** An Access policy. */
+/**
+ * An Access policy.
+ */
 @JacksonXmlRootElement(localName = "AccessPolicy")
 @Fluent
 public final class AccessPolicy {
@@ -31,12 +33,14 @@ public final class AccessPolicy {
     @JsonProperty(value = "Permission", required = true)
     private String permission;
 
-    /** Creates an instance of AccessPolicy class. */
+    /**
+     * Creates an instance of AccessPolicy class.
+     */
     public AccessPolicy() {}
 
     /**
      * Get the start property: the date-time the policy is active.
-     *
+     * 
      * @return the start value.
      */
     public OffsetDateTime getStart() {
@@ -45,7 +49,7 @@ public final class AccessPolicy {
 
     /**
      * Set the start property: the date-time the policy is active.
-     *
+     * 
      * @param start the start value to set.
      * @return the AccessPolicy object itself.
      */
@@ -56,7 +60,7 @@ public final class AccessPolicy {
 
     /**
      * Get the expiry property: the date-time the policy expires.
-     *
+     * 
      * @return the expiry value.
      */
     public OffsetDateTime getExpiry() {
@@ -65,7 +69,7 @@ public final class AccessPolicy {
 
     /**
      * Set the expiry property: the date-time the policy expires.
-     *
+     * 
      * @param expiry the expiry value to set.
      * @return the AccessPolicy object itself.
      */
@@ -76,7 +80,7 @@ public final class AccessPolicy {
 
     /**
      * Get the permission property: the permissions for the acl policy.
-     *
+     * 
      * @return the permission value.
      */
     public String getPermission() {
@@ -85,7 +89,7 @@ public final class AccessPolicy {
 
     /**
      * Set the permission property: the permissions for the acl policy.
-     *
+     * 
      * @param permission the permission value to set.
      * @return the AccessPolicy object itself.
      */
@@ -96,7 +100,7 @@ public final class AccessPolicy {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

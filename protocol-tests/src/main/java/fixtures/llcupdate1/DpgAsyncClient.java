@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import fixtures.llcupdate1.implementation.ParamsImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DpgClient type. */
+/**
+ * Initializes a new instance of the asynchronous DpgClient type.
+ */
 @ServiceClient(builder = DpgClientBuilder.class, isAsync = true)
 public final class DpgAsyncClient {
-    @Generated private final ParamsImpl serviceClient;
+    @Generated
+    private final ParamsImpl serviceClient;
 
     /**
      * Initializes an instance of DpgAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,23 +39,32 @@ public final class DpgAsyncClient {
     /**
      * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
      * added.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>new_parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I'm a new input optional parameter</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Object
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -67,33 +79,43 @@ public final class DpgAsyncClient {
     }
 
     /**
-     * Get true Boolean value on path. Initially only has one required Query Parameter. After evolution, a new optional
-     * query parameter is added.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * Get true Boolean value on path.
+     * Initially only has one required Query Parameter. After evolution, a new optional query parameter is added.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>new_parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I'm a new input optional parameter</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Object
      * }</pre>
-     *
+     * 
      * @param parameter I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path. Initially only has one required Query Parameter along with {@link Response}
-     *     on successful completion of {@link Mono}.
+     * @return true Boolean value on path.
+     * Initially only has one required Query Parameter along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -104,24 +126,38 @@ public final class DpgAsyncClient {
     /**
      * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
      * query parameter is added.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
-     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>optionalParam</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I am an optional parameter</td>
+     * </tr>
+     * <tr>
+     * <td>new_parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I'm a new input optional parameter</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Object
      * }</pre>
-     *
+     * 
      * @param requiredParam I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -132,29 +168,29 @@ public final class DpgAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putRequiredOptionalWithResponse(
-            String requiredParam, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> putRequiredOptionalWithResponse(String requiredParam,
+        RequestOptions requestOptions) {
         return this.serviceClient.putRequiredOptionalWithResponseAsync(requiredParam, requestOptions);
     }
 
     /**
      * POST a JSON or a JPEG.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Object
      * }</pre>
-     *
+     * 
      * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
      * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
-     *     "http://example.org/myimage.jpeg" }.
+     * "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -164,15 +200,15 @@ public final class DpgAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postParametersWithResponse(
-            String contentType, BinaryData parameter, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> postParametersWithResponse(String contentType, BinaryData parameter,
+        RequestOptions requestOptions) {
         return this.serviceClient.postParametersWithResponseAsync(contentType, parameter, requestOptions);
     }
 
     /**
-     * Delete something. Initially the path exists but there is no delete method. After evolution this is a new method
-     * in a known path.
-     *
+     * Delete something.
+     * Initially the path exists but there is no delete method. After evolution this is a new method in a known path.
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -187,33 +223,47 @@ public final class DpgAsyncClient {
     }
 
     /**
-     * Get true Boolean value on path. Initially has one optional query parameter. After evolution, a new optional query
-     * parameter is added.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * Get true Boolean value on path.
+     * Initially has one optional query parameter. After evolution, a new optional query parameter is added.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
-     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>optionalParam</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I am an optional parameter</td>
+     * </tr>
+     * <tr>
+     * <td>new_parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I'm a new input optional parameter</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Object
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return true Boolean value on path. Initially has one optional query parameter along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * @return true Boolean value on path.
+     * Initially has one optional query parameter along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -222,15 +272,15 @@ public final class DpgAsyncClient {
     }
 
     /**
-     * I'm a new operation. Initiallty neither path or method exist for this operation. After evolution, this is a new
-     * method in a new path.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * I'm a new operation.
+     * Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Object
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

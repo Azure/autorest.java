@@ -6,9 +6,13 @@ package fixtures.url.multi;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of AutoRestUrlMutliCollectionFormatTestServiceClient. */
+/**
+ * Service version of AutoRestUrlMutliCollectionFormatTestServiceClient.
+ */
 public enum AutoRestUrlMutliCollectionFormatTestServiceVersion implements ServiceVersion {
-    /** Enum value 1.0.0. */
+    /**
+     * Enum value 1.0.0.
+     */
     V1_0_0("1.0.0");
 
     private final String version;
@@ -17,7 +21,9 @@ public enum AutoRestUrlMutliCollectionFormatTestServiceVersion implements Servic
         this.version = version;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVersion() {
         return this.version;
@@ -25,7 +31,7 @@ public enum AutoRestUrlMutliCollectionFormatTestServiceVersion implements Servic
 
     /**
      * Gets the latest service version supported by this client library.
-     *
+     * 
      * @return The latest {@link AutoRestUrlMutliCollectionFormatTestServiceVersion}.
      */
     public static AutoRestUrlMutliCollectionFormatTestServiceVersion getLatest() {

@@ -4,12 +4,16 @@
 
 package com.cadl.versioning.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The ExportedResource model. */
+/**
+ * The ExportedResource model.
+ */
 @Immutable
 public final class ExportedResource {
     /*
@@ -28,21 +32,20 @@ public final class ExportedResource {
 
     /**
      * Creates an instance of ExportedResource class.
-     *
+     * 
      * @param id the id value to set.
      * @param resourceUri the resourceUri value to set.
      */
     @Generated
     @JsonCreator
-    private ExportedResource(
-            @JsonProperty(value = "id") String id, @JsonProperty(value = "resourceUri") String resourceUri) {
+    private ExportedResource(@JsonProperty(value = "id") String id, @JsonProperty(value = "resourceUri") String resourceUri) {
         this.id = id;
         this.resourceUri = resourceUri;
     }
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -52,7 +55,7 @@ public final class ExportedResource {
 
     /**
      * Get the resourceUri property: The resourceUri property.
-     *
+     * 
      * @return the resourceUri value.
      */
     @Generated

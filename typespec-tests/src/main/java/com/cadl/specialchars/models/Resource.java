@@ -4,12 +4,16 @@
 
 package com.cadl.specialchars.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The Resource model. */
+/**
+ * The Resource model.
+ */
 @Immutable
 public final class Resource {
     /*
@@ -53,7 +57,7 @@ public final class Resource {
 
     /**
      * Creates an instance of Resource class.
-     *
+     * 
      * @param id the id value to set.
      */
     @Generated
@@ -64,7 +68,7 @@ public final class Resource {
 
     /**
      * Get the id property: id.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -73,10 +77,11 @@ public final class Resource {
     }
 
     /**
-     * Get the aggregate property: The aggregation function to be applied on the client metric. Allowed functions -
-     * ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’, ‘max’ - for response_time_ms and
-     * latency metric, ‘avg’ - for requests_per_sec, ‘count’ - for requests.
-     *
+     * Get the aggregate property: The aggregation function to be applied on the client metric. Allowed functions
+     * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
+     * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
+     * ‘count’ - for requests.
+     * 
      * @return the aggregate value.
      */
     @Generated
@@ -86,7 +91,7 @@ public final class Resource {
 
     /**
      * Get the condition property: The comparison operator. Supported types ‘&gt;’, ‘&lt;’.
-     *
+     * 
      * @return the condition value.
      */
     @Generated
@@ -96,7 +101,7 @@ public final class Resource {
 
     /**
      * Get the requestName property: Request name for which the Pass fail criteria has to be applied.
-     *
+     * 
      * @return the requestName value.
      */
     @Generated
@@ -105,9 +110,9 @@ public final class Resource {
     }
 
     /**
-     * Get the value property: The value to compare with the client metric. Allowed values - ‘error : [0.0 , 100.0]
-     * unit- % ’, response_time_ms and latency : any integer value unit- ms.
-     *
+     * Get the value property: The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
+     * 100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
+     * 
      * @return the value value.
      */
     @Generated

@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ComposeDocumentModelHeaders model. */
+/**
+ * The ComposeDocumentModelHeaders model.
+ */
 @Fluent
 public final class ComposeDocumentModelHeaders {
     /*
@@ -23,7 +25,7 @@ public final class ComposeDocumentModelHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of ComposeDocumentModelHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public ComposeDocumentModelHeaders(HttpHeaders rawHeaders) {
@@ -32,7 +34,7 @@ public final class ComposeDocumentModelHeaders {
 
     /**
      * Get the operationLocation property: The Operation-Location property.
-     *
+     * 
      * @return the operationLocation value.
      */
     public String getOperationLocation() {
@@ -41,7 +43,7 @@ public final class ComposeDocumentModelHeaders {
 
     /**
      * Set the operationLocation property: The Operation-Location property.
-     *
+     * 
      * @param operationLocation the operationLocation value to set.
      * @return the ComposeDocumentModelHeaders object itself.
      */

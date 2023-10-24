@@ -7,57 +7,94 @@ package com._specs_.azure.core.lro.standard;
 import com._specs_.azure.core.lro.standard.implementation.StandardClientImpl;
 import com._specs_.azure.core.lro.standard.models.ExportedUser;
 import com._specs_.azure.core.lro.standard.models.User;
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.Delete;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.PathParam;
+import com.azure.core.annotation.Post;
+import com.azure.core.annotation.Put;
+import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.experimental.models.PollResult;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
+import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.polling.LocationPollingStrategy;
+import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncPoller;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.core.util.serializer.TypeReference;
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the synchronous StandardClient type. */
+/**
+ * Initializes a new instance of the synchronous StandardClient type.
+ */
 @ServiceClient(builder = StandardClientBuilder.class)
 public final class StandardClient {
-    @Generated private final StandardClientImpl serviceClient;
+    @Generated
+    private final StandardClientImpl serviceClient;
 
     /**
      * Initializes an instance of StandardClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    StandardClient(StandardClientImpl serviceClient) {
+     StandardClient(StandardClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * Adds a user or replaces a user's fields.
-     *
-     * <p>Creates or replaces a User.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * Creates or replaces a User.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name The name of user.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -69,18 +106,15 @@ public final class StandardClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(
-            String name, BinaryData resource, RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource, RequestOptions requestOptions) {
         return this.serviceClient.beginCreateOrReplace(name, resource, requestOptions);
     }
 
     /**
      * Deletes a user.
-     *
-     * <p>Deletes a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Deletes a User.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -95,7 +129,7 @@ public final class StandardClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name The name of user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -112,11 +146,9 @@ public final class StandardClient {
 
     /**
      * Exports a user.
-     *
-     * <p>Exports a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Exports a User.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -131,7 +163,7 @@ public final class StandardClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name The name of user.
      * @param format The format of the data.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -149,9 +181,9 @@ public final class StandardClient {
 
     /**
      * Adds a user or replaces a user's fields.
-     *
-     * <p>Creates or replaces a User.
-     *
+     * 
+     * Creates or replaces a User.
+     * 
      * @param name The name of user.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -172,9 +204,9 @@ public final class StandardClient {
 
     /**
      * Deletes a user.
-     *
-     * <p>Deletes a User.
-     *
+     * 
+     * Deletes a User.
+     * 
      * @param name The name of user.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -194,9 +226,9 @@ public final class StandardClient {
 
     /**
      * Exports a user.
-     *
-     * <p>Exports a User.
-     *
+     * 
+     * Exports a User.
+     * 
      * @param name The name of user.
      * @param format The format of the data.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

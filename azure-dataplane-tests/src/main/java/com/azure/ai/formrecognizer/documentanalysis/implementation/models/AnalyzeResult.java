@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Document analysis result. */
+/**
+ * Document analysis result.
+ */
 @Fluent
 public final class AnalyzeResult {
     /*
@@ -77,12 +79,14 @@ public final class AnalyzeResult {
     @JsonProperty(value = "documents")
     private List<Document> documents;
 
-    /** Creates an instance of AnalyzeResult class. */
+    /**
+     * Creates an instance of AnalyzeResult class.
+     */
     public AnalyzeResult() {}
 
     /**
      * Get the apiVersion property: API version used to produce this result.
-     *
+     * 
      * @return the apiVersion value.
      */
     public ApiVersion getApiVersion() {
@@ -91,7 +95,7 @@ public final class AnalyzeResult {
 
     /**
      * Set the apiVersion property: API version used to produce this result.
-     *
+     * 
      * @param apiVersion the apiVersion value to set.
      * @return the AnalyzeResult object itself.
      */
@@ -102,7 +106,7 @@ public final class AnalyzeResult {
 
     /**
      * Get the modelId property: Document model ID used to produce this result.
-     *
+     * 
      * @return the modelId value.
      */
     public String getModelId() {
@@ -111,7 +115,7 @@ public final class AnalyzeResult {
 
     /**
      * Set the modelId property: Document model ID used to produce this result.
-     *
+     * 
      * @param modelId the modelId value to set.
      * @return the AnalyzeResult object itself.
      */
@@ -122,7 +126,7 @@ public final class AnalyzeResult {
 
     /**
      * Get the stringIndexType property: Method used to compute string offset and length.
-     *
+     * 
      * @return the stringIndexType value.
      */
     public StringIndexType getStringIndexType() {
@@ -131,7 +135,7 @@ public final class AnalyzeResult {
 
     /**
      * Set the stringIndexType property: Method used to compute string offset and length.
-     *
+     * 
      * @param stringIndexType the stringIndexType value to set.
      * @return the AnalyzeResult object itself.
      */
@@ -142,7 +146,7 @@ public final class AnalyzeResult {
 
     /**
      * Get the content property: Concatenate string representation of all textual and visual elements in reading order.
-     *
+     * 
      * @return the content value.
      */
     public String getContent() {
@@ -151,7 +155,7 @@ public final class AnalyzeResult {
 
     /**
      * Set the content property: Concatenate string representation of all textual and visual elements in reading order.
-     *
+     * 
      * @param content the content value to set.
      * @return the AnalyzeResult object itself.
      */
@@ -162,7 +166,7 @@ public final class AnalyzeResult {
 
     /**
      * Get the pages property: Analyzed pages.
-     *
+     * 
      * @return the pages value.
      */
     public List<DocumentPage> getPages() {
@@ -171,7 +175,7 @@ public final class AnalyzeResult {
 
     /**
      * Set the pages property: Analyzed pages.
-     *
+     * 
      * @param pages the pages value to set.
      * @return the AnalyzeResult object itself.
      */
@@ -182,7 +186,7 @@ public final class AnalyzeResult {
 
     /**
      * Get the paragraphs property: Extracted paragraphs.
-     *
+     * 
      * @return the paragraphs value.
      */
     public List<DocumentParagraph> getParagraphs() {
@@ -191,7 +195,7 @@ public final class AnalyzeResult {
 
     /**
      * Set the paragraphs property: Extracted paragraphs.
-     *
+     * 
      * @param paragraphs the paragraphs value to set.
      * @return the AnalyzeResult object itself.
      */
@@ -202,7 +206,7 @@ public final class AnalyzeResult {
 
     /**
      * Get the tables property: Extracted tables.
-     *
+     * 
      * @return the tables value.
      */
     public List<DocumentTable> getTables() {
@@ -211,7 +215,7 @@ public final class AnalyzeResult {
 
     /**
      * Set the tables property: Extracted tables.
-     *
+     * 
      * @param tables the tables value to set.
      * @return the AnalyzeResult object itself.
      */
@@ -222,7 +226,7 @@ public final class AnalyzeResult {
 
     /**
      * Get the keyValuePairs property: Extracted key-value pairs.
-     *
+     * 
      * @return the keyValuePairs value.
      */
     public List<DocumentKeyValuePair> getKeyValuePairs() {
@@ -231,7 +235,7 @@ public final class AnalyzeResult {
 
     /**
      * Set the keyValuePairs property: Extracted key-value pairs.
-     *
+     * 
      * @param keyValuePairs the keyValuePairs value to set.
      * @return the AnalyzeResult object itself.
      */
@@ -242,7 +246,7 @@ public final class AnalyzeResult {
 
     /**
      * Get the styles property: Extracted font styles.
-     *
+     * 
      * @return the styles value.
      */
     public List<DocumentStyle> getStyles() {
@@ -251,7 +255,7 @@ public final class AnalyzeResult {
 
     /**
      * Set the styles property: Extracted font styles.
-     *
+     * 
      * @param styles the styles value to set.
      * @return the AnalyzeResult object itself.
      */
@@ -262,7 +266,7 @@ public final class AnalyzeResult {
 
     /**
      * Get the languages property: Detected languages.
-     *
+     * 
      * @return the languages value.
      */
     public List<DocumentLanguage> getLanguages() {
@@ -271,7 +275,7 @@ public final class AnalyzeResult {
 
     /**
      * Set the languages property: Detected languages.
-     *
+     * 
      * @param languages the languages value to set.
      * @return the AnalyzeResult object itself.
      */
@@ -282,7 +286,7 @@ public final class AnalyzeResult {
 
     /**
      * Get the documents property: Extracted documents.
-     *
+     * 
      * @return the documents value.
      */
     public List<Document> getDocuments() {
@@ -291,7 +295,7 @@ public final class AnalyzeResult {
 
     /**
      * Set the documents property: Extracted documents.
-     *
+     * 
      * @param documents the documents value to set.
      * @return the AnalyzeResult object itself.
      */

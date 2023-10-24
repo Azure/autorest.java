@@ -4,12 +4,16 @@
 
 package com.specialwords.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The SameAsModel model. */
+/**
+ * The SameAsModel model.
+ */
 @Immutable
 public final class SameAsModel {
     /*
@@ -21,7 +25,7 @@ public final class SameAsModel {
 
     /**
      * Creates an instance of SameAsModel class.
-     *
+     * 
      * @param sameAsModel the sameAsModel value to set.
      */
     @Generated
@@ -32,7 +36,7 @@ public final class SameAsModel {
 
     /**
      * Get the sameAsModel property: The SameAsModel property.
-     *
+     * 
      * @return the sameAsModel value.
      */
     @Generated

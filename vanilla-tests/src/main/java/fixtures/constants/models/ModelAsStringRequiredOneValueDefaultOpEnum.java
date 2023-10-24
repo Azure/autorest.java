@@ -8,15 +8,19 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for ModelAsStringRequiredOneValueDefaultOpEnum. */
+/**
+ * Defines values for ModelAsStringRequiredOneValueDefaultOpEnum.
+ */
 public final class ModelAsStringRequiredOneValueDefaultOpEnum
-        extends ExpandableStringEnum<ModelAsStringRequiredOneValueDefaultOpEnum> {
-    /** Static value value1 for ModelAsStringRequiredOneValueDefaultOpEnum. */
+    extends ExpandableStringEnum<ModelAsStringRequiredOneValueDefaultOpEnum> {
+    /**
+     * Static value value1 for ModelAsStringRequiredOneValueDefaultOpEnum.
+     */
     public static final ModelAsStringRequiredOneValueDefaultOpEnum VALUE1 = fromString("value1");
 
     /**
      * Creates a new instance of ModelAsStringRequiredOneValueDefaultOpEnum value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
@@ -24,7 +28,7 @@ public final class ModelAsStringRequiredOneValueDefaultOpEnum
 
     /**
      * Creates or finds a ModelAsStringRequiredOneValueDefaultOpEnum from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding ModelAsStringRequiredOneValueDefaultOpEnum.
      */
@@ -35,7 +39,7 @@ public final class ModelAsStringRequiredOneValueDefaultOpEnum
 
     /**
      * Gets known ModelAsStringRequiredOneValueDefaultOpEnum values.
-     *
+     * 
      * @return known ModelAsStringRequiredOneValueDefaultOpEnum values.
      */
     public static Collection<ModelAsStringRequiredOneValueDefaultOpEnum> values() {

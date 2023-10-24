@@ -4,40 +4,62 @@
 
 package com.cadl.multipart;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.serializer.SerializerAdapter;
 import com.cadl.multipart.implementation.MultipartClientImpl;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous MultipartClient type. */
+/**
+ * Initializes a new instance of the asynchronous MultipartClient type.
+ */
 @ServiceClient(builder = MultipartClientBuilder.class, isAsync = true)
 public final class MultipartAsyncClient {
-    @Generated private final MultipartClientImpl serviceClient;
+    @Generated
+    private final MultipartClientImpl serviceClient;
 
     /**
      * Initializes an instance of MultipartAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    MultipartAsyncClient(MultipartClientImpl serviceClient) {
+     MultipartAsyncClient(MultipartClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * request is binary.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     data (Required): {
@@ -46,7 +68,7 @@ public final class MultipartAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -57,9 +79,8 @@ public final class MultipartAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<Response<Void>> uploadWithResponse(BinaryData request, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'upload' is
-        // 'multipart/form-data'
+     Mono<Response<Void>> uploadWithResponse(BinaryData request, RequestOptions requestOptions) {
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'upload' is 'multipart/form-data'
         return this.serviceClient.uploadWithResponseAsync(request, requestOptions);
     }
 }

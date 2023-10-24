@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** A table object consisting table cells arranged in a rectangular layout. */
+/**
+ * A table object consisting table cells arranged in a rectangular layout.
+ */
 @Fluent
 public final class DocumentTable {
     /*
@@ -41,12 +43,14 @@ public final class DocumentTable {
     @JsonProperty(value = "spans", required = true)
     private List<DocumentSpan> spans;
 
-    /** Creates an instance of DocumentTable class. */
+    /**
+     * Creates an instance of DocumentTable class.
+     */
     public DocumentTable() {}
 
     /**
      * Get the rowCount property: Number of rows in the table.
-     *
+     * 
      * @return the rowCount value.
      */
     public int getRowCount() {
@@ -55,7 +59,7 @@ public final class DocumentTable {
 
     /**
      * Set the rowCount property: Number of rows in the table.
-     *
+     * 
      * @param rowCount the rowCount value to set.
      * @return the DocumentTable object itself.
      */
@@ -66,7 +70,7 @@ public final class DocumentTable {
 
     /**
      * Get the columnCount property: Number of columns in the table.
-     *
+     * 
      * @return the columnCount value.
      */
     public int getColumnCount() {
@@ -75,7 +79,7 @@ public final class DocumentTable {
 
     /**
      * Set the columnCount property: Number of columns in the table.
-     *
+     * 
      * @param columnCount the columnCount value to set.
      * @return the DocumentTable object itself.
      */
@@ -86,7 +90,7 @@ public final class DocumentTable {
 
     /**
      * Get the cells property: Cells contained within the table.
-     *
+     * 
      * @return the cells value.
      */
     public List<DocumentTableCell> getCells() {
@@ -95,7 +99,7 @@ public final class DocumentTable {
 
     /**
      * Set the cells property: Cells contained within the table.
-     *
+     * 
      * @param cells the cells value to set.
      * @return the DocumentTable object itself.
      */
@@ -106,7 +110,7 @@ public final class DocumentTable {
 
     /**
      * Get the boundingRegions property: Bounding regions covering the table.
-     *
+     * 
      * @return the boundingRegions value.
      */
     public List<BoundingRegion> getBoundingRegions() {
@@ -115,7 +119,7 @@ public final class DocumentTable {
 
     /**
      * Set the boundingRegions property: Bounding regions covering the table.
-     *
+     * 
      * @param boundingRegions the boundingRegions value to set.
      * @return the DocumentTable object itself.
      */
@@ -126,7 +130,7 @@ public final class DocumentTable {
 
     /**
      * Get the spans property: Location of the table in the reading order concatenated content.
-     *
+     * 
      * @return the spans value.
      */
     public List<DocumentSpan> getSpans() {
@@ -135,7 +139,7 @@ public final class DocumentTable {
 
     /**
      * Set the spans property: Location of the table in the reading order concatenated content.
-     *
+     * 
      * @param spans the spans value to set.
      * @return the DocumentTable object itself.
      */

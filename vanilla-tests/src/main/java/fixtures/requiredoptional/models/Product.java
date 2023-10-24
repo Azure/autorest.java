@@ -7,7 +7,9 @@ package fixtures.requiredoptional.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Product model. */
+/**
+ * The Product model.
+ */
 @Fluent
 public final class Product {
     /*
@@ -22,12 +24,14 @@ public final class Product {
     @JsonProperty(value = "name")
     private String name;
 
-    /** Creates an instance of Product class. */
+    /**
+     * Creates an instance of Product class.
+     */
     public Product() {}
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     public int getId() {
@@ -36,7 +40,7 @@ public final class Product {
 
     /**
      * Set the id property: The id property.
-     *
+     * 
      * @param id the id value to set.
      * @return the Product object itself.
      */
@@ -47,7 +51,7 @@ public final class Product {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -56,7 +60,7 @@ public final class Product {
 
     /**
      * Set the name property: The name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the Product object itself.
      */
@@ -67,7 +71,7 @@ public final class Product {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

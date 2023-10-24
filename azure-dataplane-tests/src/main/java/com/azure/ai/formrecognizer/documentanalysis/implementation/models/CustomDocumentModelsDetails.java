@@ -7,7 +7,9 @@ package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Details regarding custom document models. */
+/**
+ * Details regarding custom document models.
+ */
 @Fluent
 public final class CustomDocumentModelsDetails {
     /*
@@ -22,12 +24,14 @@ public final class CustomDocumentModelsDetails {
     @JsonProperty(value = "limit", required = true)
     private int limit;
 
-    /** Creates an instance of CustomDocumentModelsDetails class. */
+    /**
+     * Creates an instance of CustomDocumentModelsDetails class.
+     */
     public CustomDocumentModelsDetails() {}
 
     /**
      * Get the count property: Number of custom document models in the current resource.
-     *
+     * 
      * @return the count value.
      */
     public int getCount() {
@@ -36,7 +40,7 @@ public final class CustomDocumentModelsDetails {
 
     /**
      * Set the count property: Number of custom document models in the current resource.
-     *
+     * 
      * @param count the count value to set.
      * @return the CustomDocumentModelsDetails object itself.
      */
@@ -47,7 +51,7 @@ public final class CustomDocumentModelsDetails {
 
     /**
      * Get the limit property: Maximum number of custom document models supported in the current resource.
-     *
+     * 
      * @return the limit value.
      */
     public int getLimit() {
@@ -56,7 +60,7 @@ public final class CustomDocumentModelsDetails {
 
     /**
      * Set the limit property: Maximum number of custom document models supported in the current resource.
-     *
+     * 
      * @param limit the limit value to set.
      * @return the CustomDocumentModelsDetails object itself.
      */

@@ -7,7 +7,9 @@ package fixtures.paging.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The BodyParamModel model. */
+/**
+ * The BodyParamModel model.
+ */
 @Fluent
 public final class BodyParamModel {
     /*
@@ -16,12 +18,14 @@ public final class BodyParamModel {
     @JsonProperty(value = "name")
     private String name;
 
-    /** Creates an instance of BodyParamModel class. */
+    /**
+     * Creates an instance of BodyParamModel class.
+     */
     public BodyParamModel() {}
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -30,7 +34,7 @@ public final class BodyParamModel {
 
     /**
      * Set the name property: The name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the BodyParamModel object itself.
      */
@@ -41,7 +45,7 @@ public final class BodyParamModel {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

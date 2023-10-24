@@ -4,13 +4,17 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** Model with a bytes property. */
+/**
+ * Model with a bytes property.
+ */
 @Immutable
 public final class BytesProperty {
     /*
@@ -22,7 +26,7 @@ public final class BytesProperty {
 
     /**
      * Creates an instance of BytesProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -33,7 +37,7 @@ public final class BytesProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

@@ -7,7 +7,9 @@ package fixtures.bodycomplex.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The IntWrapper model. */
+/**
+ * The IntWrapper model.
+ */
 @Fluent
 public final class IntWrapper {
     /*
@@ -22,12 +24,14 @@ public final class IntWrapper {
     @JsonProperty(value = "field2")
     private Integer field2;
 
-    /** Creates an instance of IntWrapper class. */
+    /**
+     * Creates an instance of IntWrapper class.
+     */
     public IntWrapper() {}
 
     /**
      * Get the field1 property: The field1 property.
-     *
+     * 
      * @return the field1 value.
      */
     public Integer getField1() {
@@ -36,7 +40,7 @@ public final class IntWrapper {
 
     /**
      * Set the field1 property: The field1 property.
-     *
+     * 
      * @param field1 the field1 value to set.
      * @return the IntWrapper object itself.
      */
@@ -47,7 +51,7 @@ public final class IntWrapper {
 
     /**
      * Get the field2 property: The field2 property.
-     *
+     * 
      * @return the field2 value.
      */
     public Integer getField2() {
@@ -56,7 +60,7 @@ public final class IntWrapper {
 
     /**
      * Set the field2 property: The field2 property.
-     *
+     * 
      * @param field2 the field2 value to set.
      * @return the IntWrapper object itself.
      */
@@ -67,7 +71,7 @@ public final class IntWrapper {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

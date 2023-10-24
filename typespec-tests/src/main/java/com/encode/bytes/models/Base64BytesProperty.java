@@ -4,13 +4,17 @@
 
 package com.encode.bytes.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The Base64BytesProperty model. */
+/**
+ * The Base64BytesProperty model.
+ */
 @Immutable
 public final class Base64BytesProperty {
     /*
@@ -22,7 +26,7 @@ public final class Base64BytesProperty {
 
     /**
      * Creates an instance of Base64BytesProperty class.
-     *
+     * 
      * @param value the value value to set.
      */
     @Generated
@@ -33,7 +37,7 @@ public final class Base64BytesProperty {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     @Generated

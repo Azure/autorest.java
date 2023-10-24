@@ -4,12 +4,31 @@
 
 package com.cadl.model.generated;
 
+import com.azure.core.credential.AccessToken;
+import com.azure.core.http.HttpClient;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.HttpLogDetailLevel;
+import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.test.TestMode;
+import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import com.cadl.model.ModelAsyncClient;
+import com.cadl.model.ModelClient;
+import com.cadl.model.ModelClientBuilder;
+import com.cadl.model.implementation.ModelClientImpl;
 import com.cadl.model.models.NestedModel;
 import com.cadl.model.models.NestedModel1;
 import com.cadl.model.models.NestedModel2;
+import java.time.OffsetDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import reactor.core.publisher.Mono;
 
 @Disabled
 public final class ModelOpPutNestedTests extends ModelClientTestBase {

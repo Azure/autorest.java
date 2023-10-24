@@ -25,17 +25,23 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Queries. */
+/**
+ * An instance of this class provides access to all the operations defined in Queries.
+ */
 public final class Queries {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final QueriesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestUrlMutliCollectionFormatTestService client;
 
     /**
      * Initializes an instance of Queries.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Queries(AutoRestUrlMutliCollectionFormatTestService client) {
@@ -51,86 +57,76 @@ public final class Queries {
     @ServiceInterface(name = "AutoRestUrlMutliColl")
     public interface QueriesService {
         @Get("/queries/array/multi/string/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayStringMultiNull(
-                @HostParam("$host") String host,
-                @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> arrayStringMultiNull(@HostParam("$host") String host,
+            @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/multi/string/empty")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayStringMultiEmpty(
-                @HostParam("$host") String host,
-                @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> arrayStringMultiEmpty(@HostParam("$host") String host,
+            @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/multi/string/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayStringMultiValid(
-                @HostParam("$host") String host,
-                @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> arrayStringMultiValid(@HostParam("$host") String host,
+            @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get a null array of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the multi-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array of string using the multi-array format along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiNullWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
-                (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> arrayQueryConverted = (arrayQuery == null) ? new ArrayList<>()
+            : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return FluxUtil.withContext(
-                context -> service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context));
+            context -> service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
      * Get a null array of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the multi-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array of string using the multi-array format along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiNullWithResponseAsync(List<String> arrayQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
-                (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> arrayQueryConverted = (arrayQuery == null) ? new ArrayList<>()
+            : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
     /**
      * Get a null array of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the multi-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -144,7 +140,7 @@ public final class Queries {
 
     /**
      * Get a null array of string using the multi-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array of string using the multi-array format on successful completion of {@link Mono}.
@@ -157,7 +153,7 @@ public final class Queries {
 
     /**
      * Get a null array of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the multi-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -172,7 +168,7 @@ public final class Queries {
 
     /**
      * Get a null array of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the multi-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -187,7 +183,7 @@ public final class Queries {
 
     /**
      * Get a null array of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the multi-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -200,7 +196,7 @@ public final class Queries {
 
     /**
      * Get a null array of string using the multi-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -212,57 +208,53 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the multi-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty array [] of string using the multi-array format along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiEmptyWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
-                (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> arrayQueryConverted = (arrayQuery == null) ? new ArrayList<>()
+            : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return FluxUtil.withContext(
-                context -> service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
+            context -> service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
      * Get an empty array [] of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the multi-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty array [] of string using the multi-array format along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiEmptyWithResponseAsync(List<String> arrayQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
-                (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> arrayQueryConverted = (arrayQuery == null) ? new ArrayList<>()
+            : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
     /**
      * Get an empty array [] of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the multi-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -276,7 +268,7 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the multi-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty array [] of string using the multi-array format on successful completion of {@link Mono}.
@@ -289,7 +281,7 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the multi-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -304,7 +296,7 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the multi-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -319,7 +311,7 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the multi-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the multi-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -332,7 +324,7 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the multi-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -344,66 +336,62 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     mult-array format.
+     * mult-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiValidWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
-                (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> arrayQueryConverted = (arrayQuery == null) ? new ArrayList<>()
+            : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return FluxUtil.withContext(
-                context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context));
+            context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     mult-array format.
+     * mult-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiValidWithResponseAsync(List<String> arrayQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        List<String> arrayQueryConverted =
-                (arrayQuery == null)
-                        ? new ArrayList<>()
-                        : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
+        List<String> arrayQueryConverted = (arrayQuery == null) ? new ArrayList<>()
+            : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
         return service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     mult-array format.
+     * mult-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringMultiValidAsync(List<String> arrayQuery) {
@@ -412,11 +400,11 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringMultiValidAsync() {
@@ -426,15 +414,15 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     mult-array format.
+     * mult-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringMultiValidAsync(List<String> arrayQuery, Context context) {
@@ -443,15 +431,15 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     mult-array format.
+     * mult-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array
-     *     format along with {@link Response}.
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringMultiValidWithResponse(List<String> arrayQuery, Context context) {
@@ -460,9 +448,9 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     mult-array format.
+     * mult-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -474,7 +462,7 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */

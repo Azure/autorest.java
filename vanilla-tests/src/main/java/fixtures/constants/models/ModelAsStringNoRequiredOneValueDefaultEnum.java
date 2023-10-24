@@ -8,15 +8,19 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for ModelAsStringNoRequiredOneValueDefaultEnum. */
+/**
+ * Defines values for ModelAsStringNoRequiredOneValueDefaultEnum.
+ */
 public final class ModelAsStringNoRequiredOneValueDefaultEnum
-        extends ExpandableStringEnum<ModelAsStringNoRequiredOneValueDefaultEnum> {
-    /** Static value value1 for ModelAsStringNoRequiredOneValueDefaultEnum. */
+    extends ExpandableStringEnum<ModelAsStringNoRequiredOneValueDefaultEnum> {
+    /**
+     * Static value value1 for ModelAsStringNoRequiredOneValueDefaultEnum.
+     */
     public static final ModelAsStringNoRequiredOneValueDefaultEnum VALUE1 = fromString("value1");
 
     /**
      * Creates a new instance of ModelAsStringNoRequiredOneValueDefaultEnum value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
@@ -24,7 +28,7 @@ public final class ModelAsStringNoRequiredOneValueDefaultEnum
 
     /**
      * Creates or finds a ModelAsStringNoRequiredOneValueDefaultEnum from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding ModelAsStringNoRequiredOneValueDefaultEnum.
      */
@@ -35,7 +39,7 @@ public final class ModelAsStringNoRequiredOneValueDefaultEnum
 
     /**
      * Gets known ModelAsStringNoRequiredOneValueDefaultEnum values.
-     *
+     * 
      * @return known ModelAsStringNoRequiredOneValueDefaultEnum values.
      */
     public static Collection<ModelAsStringNoRequiredOneValueDefaultEnum> values() {

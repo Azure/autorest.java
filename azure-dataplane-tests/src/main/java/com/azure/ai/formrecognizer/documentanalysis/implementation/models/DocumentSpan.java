@@ -7,7 +7,9 @@ package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Contiguous region of the concatenated content property, specified as an offset and length. */
+/**
+ * Contiguous region of the concatenated content property, specified as an offset and length.
+ */
 @Fluent
 public final class DocumentSpan {
     /*
@@ -22,12 +24,14 @@ public final class DocumentSpan {
     @JsonProperty(value = "length", required = true)
     private int length;
 
-    /** Creates an instance of DocumentSpan class. */
+    /**
+     * Creates an instance of DocumentSpan class.
+     */
     public DocumentSpan() {}
 
     /**
      * Get the offset property: Zero-based index of the content represented by the span.
-     *
+     * 
      * @return the offset value.
      */
     public int getOffset() {
@@ -36,7 +40,7 @@ public final class DocumentSpan {
 
     /**
      * Set the offset property: Zero-based index of the content represented by the span.
-     *
+     * 
      * @param offset the offset value to set.
      * @return the DocumentSpan object itself.
      */
@@ -47,7 +51,7 @@ public final class DocumentSpan {
 
     /**
      * Get the length property: Number of characters in the content represented by the span.
-     *
+     * 
      * @return the length value.
      */
     public int getLength() {
@@ -56,7 +60,7 @@ public final class DocumentSpan {
 
     /**
      * Set the length property: Number of characters in the content represented by the span.
-     *
+     * 
      * @param length the length value to set.
      * @return the DocumentSpan object itself.
      */

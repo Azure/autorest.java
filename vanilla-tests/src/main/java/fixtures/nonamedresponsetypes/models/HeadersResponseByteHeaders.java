@@ -11,7 +11,9 @@ import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Base64;
 
-/** The HeadersResponseByteHeaders model. */
+/**
+ * The HeadersResponseByteHeaders model.
+ */
 @Fluent
 public final class HeadersResponseByteHeaders {
     /*
@@ -25,7 +27,7 @@ public final class HeadersResponseByteHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseByteHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseByteHeaders(HttpHeaders rawHeaders) {
@@ -37,7 +39,7 @@ public final class HeadersResponseByteHeaders {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     public byte[] getValue() {
@@ -46,7 +48,7 @@ public final class HeadersResponseByteHeaders {
 
     /**
      * Set the value property: The value property.
-     *
+     * 
      * @param value the value value to set.
      * @return the HeadersResponseByteHeaders object itself.
      */
@@ -57,7 +59,7 @@ public final class HeadersResponseByteHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

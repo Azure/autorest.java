@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** An object representing the field key or value in a key-value pair. */
+/**
+ * An object representing the field key or value in a key-value pair.
+ */
 @Fluent
 public final class DocumentKeyValueElement {
     /*
@@ -29,12 +31,14 @@ public final class DocumentKeyValueElement {
     @JsonProperty(value = "spans", required = true)
     private List<DocumentSpan> spans;
 
-    /** Creates an instance of DocumentKeyValueElement class. */
+    /**
+     * Creates an instance of DocumentKeyValueElement class.
+     */
     public DocumentKeyValueElement() {}
 
     /**
      * Get the content property: Concatenated content of the key-value element in reading order.
-     *
+     * 
      * @return the content value.
      */
     public String getContent() {
@@ -43,7 +47,7 @@ public final class DocumentKeyValueElement {
 
     /**
      * Set the content property: Concatenated content of the key-value element in reading order.
-     *
+     * 
      * @param content the content value to set.
      * @return the DocumentKeyValueElement object itself.
      */
@@ -54,7 +58,7 @@ public final class DocumentKeyValueElement {
 
     /**
      * Get the boundingRegions property: Bounding regions covering the key-value element.
-     *
+     * 
      * @return the boundingRegions value.
      */
     public List<BoundingRegion> getBoundingRegions() {
@@ -63,7 +67,7 @@ public final class DocumentKeyValueElement {
 
     /**
      * Set the boundingRegions property: Bounding regions covering the key-value element.
-     *
+     * 
      * @param boundingRegions the boundingRegions value to set.
      * @return the DocumentKeyValueElement object itself.
      */
@@ -74,7 +78,7 @@ public final class DocumentKeyValueElement {
 
     /**
      * Get the spans property: Location of the key-value element in the reading order concatenated content.
-     *
+     * 
      * @return the spans value.
      */
     public List<DocumentSpan> getSpans() {
@@ -83,7 +87,7 @@ public final class DocumentKeyValueElement {
 
     /**
      * Set the spans property: Location of the key-value element in the reading order concatenated content.
-     *
+     * 
      * @param spans the spans value to set.
      * @return the DocumentKeyValueElement object itself.
      */

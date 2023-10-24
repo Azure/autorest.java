@@ -9,7 +9,9 @@ import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-/** Flattened product. */
+/**
+ * Flattened product.
+ */
 @JsonFlatten
 @Fluent
 public class FlattenedProduct extends Resource {
@@ -37,12 +39,14 @@ public class FlattenedProduct extends Resource {
     @JsonProperty(value = "properties.provisioningState")
     private String provisioningState;
 
-    /** Creates an instance of FlattenedProduct class. */
+    /**
+     * Creates an instance of FlattenedProduct class.
+     */
     public FlattenedProduct() {}
 
     /**
      * Get the pName property: The p.name property.
-     *
+     * 
      * @return the pName value.
      */
     public String getPName() {
@@ -51,7 +55,7 @@ public class FlattenedProduct extends Resource {
 
     /**
      * Set the pName property: The p.name property.
-     *
+     * 
      * @param pName the pName value to set.
      * @return the FlattenedProduct object itself.
      */
@@ -62,7 +66,7 @@ public class FlattenedProduct extends Resource {
 
     /**
      * Get the typePropertiesType property: The type property.
-     *
+     * 
      * @return the typePropertiesType value.
      */
     public String getTypePropertiesType() {
@@ -71,7 +75,7 @@ public class FlattenedProduct extends Resource {
 
     /**
      * Set the typePropertiesType property: The type property.
-     *
+     * 
      * @param typePropertiesType the typePropertiesType value to set.
      * @return the FlattenedProduct object itself.
      */
@@ -82,7 +86,7 @@ public class FlattenedProduct extends Resource {
 
     /**
      * Get the provisioningStateValues property: The provisioningStateValues property.
-     *
+     * 
      * @return the provisioningStateValues value.
      */
     public FlattenedProductPropertiesProvisioningStateValues getProvisioningStateValues() {
@@ -91,7 +95,7 @@ public class FlattenedProduct extends Resource {
 
     /**
      * Get the provisioningState property: The provisioningState property.
-     *
+     * 
      * @return the provisioningState value.
      */
     public String getProvisioningState() {
@@ -100,7 +104,7 @@ public class FlattenedProduct extends Resource {
 
     /**
      * Set the provisioningState property: The provisioningState property.
-     *
+     * 
      * @param provisioningState the provisioningState value to set.
      * @return the FlattenedProduct object itself.
      */
@@ -109,14 +113,18 @@ public class FlattenedProduct extends Resource {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FlattenedProduct setTags(Map<String, String> tags) {
         super.setTags(tags);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FlattenedProduct setLocation(String location) {
         super.setLocation(location);
@@ -125,7 +133,7 @@ public class FlattenedProduct extends Resource {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

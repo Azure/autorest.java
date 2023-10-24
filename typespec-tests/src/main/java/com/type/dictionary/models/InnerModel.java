@@ -6,11 +6,16 @@ package com.type.dictionary.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
+import java.util.regex.Pattern;
 
-/** Dictionary inner model. */
+/**
+ * Dictionary inner model.
+ */
 @Fluent
 public final class InnerModel {
     /*
@@ -29,7 +34,7 @@ public final class InnerModel {
 
     /**
      * Creates an instance of InnerModel class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -40,7 +45,7 @@ public final class InnerModel {
 
     /**
      * Get the property property: Required string property.
-     *
+     * 
      * @return the property value.
      */
     @Generated
@@ -50,7 +55,7 @@ public final class InnerModel {
 
     /**
      * Get the children property: The children property.
-     *
+     * 
      * @return the children value.
      */
     @Generated
@@ -60,7 +65,7 @@ public final class InnerModel {
 
     /**
      * Set the children property: The children property.
-     *
+     * 
      * @param children the children value to set.
      * @return the InnerModel object itself.
      */

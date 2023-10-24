@@ -7,7 +7,9 @@ package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Currency field value. */
+/**
+ * Currency field value.
+ */
 @Fluent
 public final class CurrencyValue {
     /*
@@ -22,12 +24,14 @@ public final class CurrencyValue {
     @JsonProperty(value = "currencySymbol")
     private String currencySymbol;
 
-    /** Creates an instance of CurrencyValue class. */
+    /**
+     * Creates an instance of CurrencyValue class.
+     */
     public CurrencyValue() {}
 
     /**
      * Get the amount property: Currency amount.
-     *
+     * 
      * @return the amount value.
      */
     public double getAmount() {
@@ -36,7 +40,7 @@ public final class CurrencyValue {
 
     /**
      * Set the amount property: Currency amount.
-     *
+     * 
      * @param amount the amount value to set.
      * @return the CurrencyValue object itself.
      */
@@ -47,7 +51,7 @@ public final class CurrencyValue {
 
     /**
      * Get the currencySymbol property: Currency symbol label, if any.
-     *
+     * 
      * @return the currencySymbol value.
      */
     public String getCurrencySymbol() {
@@ -56,7 +60,7 @@ public final class CurrencyValue {
 
     /**
      * Set the currencySymbol property: Currency symbol label, if any.
-     *
+     * 
      * @param currencySymbol the currencySymbol value to set.
      * @return the CurrencyValue object itself.
      */

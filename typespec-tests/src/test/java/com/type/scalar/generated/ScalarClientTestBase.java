@@ -8,17 +8,33 @@ package com.type.scalar.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
+import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import com.type.scalar.BooleanOperationAsyncClient;
 import com.type.scalar.BooleanOperationClient;
 import com.type.scalar.ScalarClientBuilder;
+import com.type.scalar.StringOperationAsyncClient;
 import com.type.scalar.StringOperationClient;
+import com.type.scalar.UnknownAsyncClient;
 import com.type.scalar.UnknownClient;
+import com.type.scalar.implementation.ScalarClientImpl;
+import java.time.OffsetDateTime;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import reactor.core.publisher.Mono;
 
-class ScalarClientTestBase extends TestProxyTestBase {
+ class ScalarClientTestBase extends TestProxyTestBase {
     protected StringOperationClient stringOperationClient;
 
     protected BooleanOperationClient booleanOperationClient;
@@ -27,10 +43,9 @@ class ScalarClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ScalarClientBuilder stringOperationClientbuilder =
-                new ScalarClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ScalarClientBuilder stringOperationClientbuilder = new ScalarClientBuilder()
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -38,10 +53,9 @@ class ScalarClientTestBase extends TestProxyTestBase {
         }
         stringOperationClient = stringOperationClientbuilder.buildStringOperationClient();
 
-        ScalarClientBuilder booleanOperationClientbuilder =
-                new ScalarClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ScalarClientBuilder booleanOperationClientbuilder = new ScalarClientBuilder()
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             booleanOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -49,15 +63,15 @@ class ScalarClientTestBase extends TestProxyTestBase {
         }
         booleanOperationClient = booleanOperationClientbuilder.buildBooleanOperationClient();
 
-        ScalarClientBuilder unknownClientbuilder =
-                new ScalarClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ScalarClientBuilder unknownClientbuilder = new ScalarClientBuilder()
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             unknownClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         unknownClient = unknownClientbuilder.buildUnknownClient();
+
     }
 }

@@ -7,7 +7,9 @@ package fixtures.discriminatorflattening.noflatten.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Describes a Virtual Machine Scale Set. */
+/**
+ * Describes a Virtual Machine Scale Set.
+ */
 @Fluent
 public final class VirtualMachineScaleSet {
     /*
@@ -16,12 +18,14 @@ public final class VirtualMachineScaleSet {
     @JsonProperty(value = "properties")
     private VirtualMachineScaleSetProperties properties;
 
-    /** Creates an instance of VirtualMachineScaleSet class. */
+    /**
+     * Creates an instance of VirtualMachineScaleSet class.
+     */
     public VirtualMachineScaleSet() {}
 
     /**
      * Get the properties property: Describes the properties of a Virtual Machine Scale Set.
-     *
+     * 
      * @return the properties value.
      */
     public VirtualMachineScaleSetProperties getProperties() {
@@ -30,7 +34,7 @@ public final class VirtualMachineScaleSet {
 
     /**
      * Set the properties property: Describes the properties of a Virtual Machine Scale Set.
-     *
+     * 
      * @param properties the properties value to set.
      * @return the VirtualMachineScaleSet object itself.
      */
@@ -41,7 +45,7 @@ public final class VirtualMachineScaleSet {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

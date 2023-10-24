@@ -4,12 +4,16 @@
 
 package com.projection.projectedname.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The LanguageProjectedNameModel model. */
+/**
+ * The LanguageProjectedNameModel model.
+ */
 @Immutable
 public final class LanguageProjectedNameModel {
     /*
@@ -21,7 +25,7 @@ public final class LanguageProjectedNameModel {
 
     /**
      * Creates an instance of LanguageProjectedNameModel class.
-     *
+     * 
      * @param javaName the javaName value to set.
      */
     @Generated
@@ -32,7 +36,7 @@ public final class LanguageProjectedNameModel {
 
     /**
      * Get the javaName property: Pass in true.
-     *
+     * 
      * @return the javaName value.
      */
     @Generated

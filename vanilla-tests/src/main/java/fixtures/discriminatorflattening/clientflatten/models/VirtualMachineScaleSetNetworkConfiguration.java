@@ -7,7 +7,9 @@ package fixtures.discriminatorflattening.clientflatten.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Describes a virtual machine scale set network profile's network configurations. */
+/**
+ * Describes a virtual machine scale set network profile's network configurations.
+ */
 @Fluent
 public final class VirtualMachineScaleSetNetworkConfiguration {
     /*
@@ -22,12 +24,14 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     @JsonProperty(value = "properties")
     private VirtualMachineScaleSetNetworkConfigurationProperties innerProperties;
 
-    /** Creates an instance of VirtualMachineScaleSetNetworkConfiguration class. */
+    /**
+     * Creates an instance of VirtualMachineScaleSetNetworkConfiguration class.
+     */
     public VirtualMachineScaleSetNetworkConfiguration() {}
 
     /**
      * Get the name property: The network configuration name.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -36,7 +40,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
 
     /**
      * Set the name property: The network configuration name.
-     *
+     * 
      * @param name the name value to set.
      * @return the VirtualMachineScaleSetNetworkConfiguration object itself.
      */
@@ -47,7 +51,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
 
     /**
      * Get the innerProperties property: Describes a virtual machine scale set network profile's IP configuration.
-     *
+     * 
      * @return the innerProperties value.
      */
     private VirtualMachineScaleSetNetworkConfigurationProperties getInnerProperties() {
@@ -57,7 +61,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     /**
      * Get the primary property: Specifies the primary network interface in case the virtual machine has more than 1
      * network interface.
-     *
+     * 
      * @return the primary value.
      */
     public Boolean isPrimary() {
@@ -67,7 +71,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     /**
      * Set the primary property: Specifies the primary network interface in case the virtual machine has more than 1
      * network interface.
-     *
+     * 
      * @param primary the primary value to set.
      * @return the VirtualMachineScaleSetNetworkConfiguration object itself.
      */
@@ -81,7 +85,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

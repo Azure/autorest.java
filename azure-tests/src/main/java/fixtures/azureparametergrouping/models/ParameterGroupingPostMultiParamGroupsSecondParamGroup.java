@@ -7,7 +7,9 @@ package fixtures.azureparametergrouping.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Parameter group. */
+/**
+ * Parameter group.
+ */
 @Fluent
 public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
     /*
@@ -22,12 +24,14 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
     @JsonProperty(value = "query-two")
     private Integer queryTwo;
 
-    /** Creates an instance of ParameterGroupingPostMultiParamGroupsSecondParamGroup class. */
+    /**
+     * Creates an instance of ParameterGroupingPostMultiParamGroupsSecondParamGroup class.
+     */
     public ParameterGroupingPostMultiParamGroupsSecondParamGroup() {}
 
     /**
      * Get the headerTwo property: The header-two property.
-     *
+     * 
      * @return the headerTwo value.
      */
     public String getHeaderTwo() {
@@ -36,7 +40,7 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
 
     /**
      * Set the headerTwo property: The header-two property.
-     *
+     * 
      * @param headerTwo the headerTwo value to set.
      * @return the ParameterGroupingPostMultiParamGroupsSecondParamGroup object itself.
      */
@@ -47,7 +51,7 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
 
     /**
      * Get the queryTwo property: Query parameter with default.
-     *
+     * 
      * @return the queryTwo value.
      */
     public Integer getQueryTwo() {
@@ -56,7 +60,7 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
 
     /**
      * Set the queryTwo property: Query parameter with default.
-     *
+     * 
      * @param queryTwo the queryTwo value to set.
      * @return the ParameterGroupingPostMultiParamGroupsSecondParamGroup object itself.
      */
@@ -67,7 +71,7 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

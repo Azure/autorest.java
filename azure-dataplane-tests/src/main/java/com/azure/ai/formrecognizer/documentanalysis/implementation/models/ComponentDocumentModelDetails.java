@@ -7,7 +7,9 @@ package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** A component of a composed document model. */
+/**
+ * A component of a composed document model.
+ */
 @Fluent
 public final class ComponentDocumentModelDetails {
     /*
@@ -16,12 +18,14 @@ public final class ComponentDocumentModelDetails {
     @JsonProperty(value = "modelId", required = true)
     private String modelId;
 
-    /** Creates an instance of ComponentDocumentModelDetails class. */
+    /**
+     * Creates an instance of ComponentDocumentModelDetails class.
+     */
     public ComponentDocumentModelDetails() {}
 
     /**
      * Get the modelId property: Unique document model name.
-     *
+     * 
      * @return the modelId value.
      */
     public String getModelId() {
@@ -30,7 +34,7 @@ public final class ComponentDocumentModelDetails {
 
     /**
      * Set the modelId property: Unique document model name.
-     *
+     * 
      * @param modelId the modelId value to set.
      * @return the ComponentDocumentModelDetails object itself.
      */

@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** A content line object consisting of an adjacent sequence of content elements, such as words and selection marks. */
+/**
+ * A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.
+ */
 @Fluent
 public final class DocumentLine {
     /*
@@ -29,12 +31,14 @@ public final class DocumentLine {
     @JsonProperty(value = "spans", required = true)
     private List<DocumentSpan> spans;
 
-    /** Creates an instance of DocumentLine class. */
+    /**
+     * Creates an instance of DocumentLine class.
+     */
     public DocumentLine() {}
 
     /**
      * Get the content property: Concatenated content of the contained elements in reading order.
-     *
+     * 
      * @return the content value.
      */
     public String getContent() {
@@ -43,7 +47,7 @@ public final class DocumentLine {
 
     /**
      * Set the content property: Concatenated content of the contained elements in reading order.
-     *
+     * 
      * @param content the content value to set.
      * @return the DocumentLine object itself.
      */
@@ -54,7 +58,7 @@ public final class DocumentLine {
 
     /**
      * Get the polygon property: Bounding polygon of the line.
-     *
+     * 
      * @return the polygon value.
      */
     public List<Float> getPolygon() {
@@ -63,7 +67,7 @@ public final class DocumentLine {
 
     /**
      * Set the polygon property: Bounding polygon of the line.
-     *
+     * 
      * @param polygon the polygon value to set.
      * @return the DocumentLine object itself.
      */
@@ -74,7 +78,7 @@ public final class DocumentLine {
 
     /**
      * Get the spans property: Location of the line in the reading order concatenated content.
-     *
+     * 
      * @return the spans value.
      */
     public List<DocumentSpan> getSpans() {
@@ -83,7 +87,7 @@ public final class DocumentLine {
 
     /**
      * Set the spans property: Location of the line in the reading order concatenated content.
-     *
+     * 
      * @param spans the spans value to set.
      * @return the DocumentLine object itself.
      */

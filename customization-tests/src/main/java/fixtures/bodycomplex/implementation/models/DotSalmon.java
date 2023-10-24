@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** The DotSalmon model. */
+/**
+ * The DotSalmon model.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fish\\.type")
 @JsonTypeName("DotSalmon")
 @JsonFlatten
@@ -28,7 +30,9 @@ public class DotSalmon extends DotFish {
     @JsonProperty(value = "isWild")
     private Boolean isWild;
 
-    /** Creates an instance of DotSalmon class. */
+    /**
+     * Creates an instance of DotSalmon class.
+     */
     public DotSalmon() {}
 
     /**
@@ -63,14 +67,16 @@ public class DotSalmon extends DotFish {
 
     /**
      * Set the iswild property: The iswild property.
-     *
+     * 
      * @param iswild the iswild value to set.
      */
     public void setWild(Boolean iswild) {
         this.isWild = iswild;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DotSalmon setSpecies(String species) {
         super.setSpecies(species);
@@ -79,7 +85,7 @@ public class DotSalmon extends DotFish {
 
     /**
      * Return if the salmon is a domestic species.
-     *
+     * 
      * @return true if the salmon is domestic
      * @deprecated Removing in the next version
      */

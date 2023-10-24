@@ -7,7 +7,9 @@ package fixtures.bodycomplex.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Pet model. */
+/**
+ * The Pet model.
+ */
 @Fluent
 public class Pet {
     /*
@@ -22,12 +24,14 @@ public class Pet {
     @JsonProperty(value = "name")
     private String name;
 
-    /** Creates an instance of Pet class. */
+    /**
+     * Creates an instance of Pet class.
+     */
     public Pet() {}
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     public Integer getId() {
@@ -36,7 +40,7 @@ public class Pet {
 
     /**
      * Set the id property: The id property.
-     *
+     * 
      * @param id the id value to set.
      * @return the Pet object itself.
      */
@@ -47,7 +51,7 @@ public class Pet {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -56,7 +60,7 @@ public class Pet {
 
     /**
      * Set the name property: The name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the Pet object itself.
      */
@@ -67,7 +71,7 @@ public class Pet {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

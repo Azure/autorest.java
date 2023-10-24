@@ -7,7 +7,9 @@ package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Address field value. */
+/**
+ * Address field value.
+ */
 @Fluent
 public final class AddressValue {
     /*
@@ -58,12 +60,14 @@ public final class AddressValue {
     @JsonProperty(value = "streetAddress")
     private String streetAddress;
 
-    /** Creates an instance of AddressValue class. */
+    /**
+     * Creates an instance of AddressValue class.
+     */
     public AddressValue() {}
 
     /**
      * Get the houseNumber property: House or building number.
-     *
+     * 
      * @return the houseNumber value.
      */
     public String getHouseNumber() {
@@ -72,7 +76,7 @@ public final class AddressValue {
 
     /**
      * Set the houseNumber property: House or building number.
-     *
+     * 
      * @param houseNumber the houseNumber value to set.
      * @return the AddressValue object itself.
      */
@@ -83,7 +87,7 @@ public final class AddressValue {
 
     /**
      * Get the poBox property: Post office box number.
-     *
+     * 
      * @return the poBox value.
      */
     public String getPoBox() {
@@ -92,7 +96,7 @@ public final class AddressValue {
 
     /**
      * Set the poBox property: Post office box number.
-     *
+     * 
      * @param poBox the poBox value to set.
      * @return the AddressValue object itself.
      */
@@ -103,7 +107,7 @@ public final class AddressValue {
 
     /**
      * Get the road property: Street name.
-     *
+     * 
      * @return the road value.
      */
     public String getRoad() {
@@ -112,7 +116,7 @@ public final class AddressValue {
 
     /**
      * Set the road property: Street name.
-     *
+     * 
      * @param road the road value to set.
      * @return the AddressValue object itself.
      */
@@ -123,7 +127,7 @@ public final class AddressValue {
 
     /**
      * Get the city property: Name of city, town, village, etc.
-     *
+     * 
      * @return the city value.
      */
     public String getCity() {
@@ -132,7 +136,7 @@ public final class AddressValue {
 
     /**
      * Set the city property: Name of city, town, village, etc.
-     *
+     * 
      * @param city the city value to set.
      * @return the AddressValue object itself.
      */
@@ -143,7 +147,7 @@ public final class AddressValue {
 
     /**
      * Get the state property: First-level administrative division.
-     *
+     * 
      * @return the state value.
      */
     public String getState() {
@@ -152,7 +156,7 @@ public final class AddressValue {
 
     /**
      * Set the state property: First-level administrative division.
-     *
+     * 
      * @param state the state value to set.
      * @return the AddressValue object itself.
      */
@@ -163,7 +167,7 @@ public final class AddressValue {
 
     /**
      * Get the postalCode property: Postal code used for mail sorting.
-     *
+     * 
      * @return the postalCode value.
      */
     public String getPostalCode() {
@@ -172,7 +176,7 @@ public final class AddressValue {
 
     /**
      * Set the postalCode property: Postal code used for mail sorting.
-     *
+     * 
      * @param postalCode the postalCode value to set.
      * @return the AddressValue object itself.
      */
@@ -183,7 +187,7 @@ public final class AddressValue {
 
     /**
      * Get the countryRegion property: Country/region.
-     *
+     * 
      * @return the countryRegion value.
      */
     public String getCountryRegion() {
@@ -192,7 +196,7 @@ public final class AddressValue {
 
     /**
      * Set the countryRegion property: Country/region.
-     *
+     * 
      * @param countryRegion the countryRegion value to set.
      * @return the AddressValue object itself.
      */
@@ -203,7 +207,7 @@ public final class AddressValue {
 
     /**
      * Get the streetAddress property: Street-level address, excluding city, state, countryRegion, and postalCode.
-     *
+     * 
      * @return the streetAddress value.
      */
     public String getStreetAddress() {
@@ -212,7 +216,7 @@ public final class AddressValue {
 
     /**
      * Set the streetAddress property: Street-level address, excluding city, state, countryRegion, and postalCode.
-     *
+     * 
      * @param streetAddress the streetAddress value to set.
      * @return the AddressValue object itself.
      */

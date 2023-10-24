@@ -11,7 +11,9 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 
-/** The JsonInput model. */
+/**
+ * The JsonInput model.
+ */
 @Fluent
 public final class JsonInput implements JsonSerializable<JsonInput> {
     /*
@@ -19,12 +21,14 @@ public final class JsonInput implements JsonSerializable<JsonInput> {
      */
     private Integer id;
 
-    /** Creates an instance of JsonInput class. */
+    /**
+     * Creates an instance of JsonInput class.
+     */
     public JsonInput() {}
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     public Integer getId() {
@@ -33,7 +37,7 @@ public final class JsonInput implements JsonSerializable<JsonInput> {
 
     /**
      * Set the id property: The id property.
-     *
+     * 
      * @param id the id value to set.
      * @return the JsonInput object itself.
      */
@@ -44,7 +48,7 @@ public final class JsonInput implements JsonSerializable<JsonInput> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}
@@ -58,28 +62,27 @@ public final class JsonInput implements JsonSerializable<JsonInput> {
 
     /**
      * Reads an instance of JsonInput from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of JsonInput if the JsonReader was pointing to an instance of it, or null if it was pointing
-     *     to JSON null.
+     * to JSON null.
      * @throws IOException If an error occurs while reading the JsonInput.
      */
     public static JsonInput fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    JsonInput deserializedJsonInput = new JsonInput();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            JsonInput deserializedJsonInput = new JsonInput();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("id".equals(fieldName)) {
-                            deserializedJsonInput.id = reader.getNullable(JsonReader::getInt);
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
+                if ("id".equals(fieldName)) {
+                    deserializedJsonInput.id = reader.getNullable(JsonReader::getInt);
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedJsonInput;
-                });
+            return deserializedJsonInput;
+        });
     }
 }

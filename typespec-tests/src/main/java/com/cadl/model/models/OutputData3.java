@@ -4,12 +4,16 @@
 
 package com.cadl.model.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The OutputData3 model. */
+/**
+ * The OutputData3 model.
+ */
 @Immutable
 public final class OutputData3 {
     /*
@@ -21,7 +25,7 @@ public final class OutputData3 {
 
     /**
      * Creates an instance of OutputData3 class.
-     *
+     * 
      * @param data the data value to set.
      */
     @Generated
@@ -32,7 +36,7 @@ public final class OutputData3 {
 
     /**
      * Get the data property: The data property.
-     *
+     * 
      * @return the data value.
      */
     @Generated

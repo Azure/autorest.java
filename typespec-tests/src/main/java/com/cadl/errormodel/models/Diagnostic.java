@@ -4,13 +4,17 @@
 
 package com.cadl.errormodel.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The Diagnostic model. */
+/**
+ * The Diagnostic model.
+ */
 @Immutable
 public final class Diagnostic {
     /*
@@ -29,7 +33,7 @@ public final class Diagnostic {
 
     /**
      * Creates an instance of Diagnostic class.
-     *
+     * 
      * @param name the name value to set.
      * @param error the error value to set.
      */
@@ -42,7 +46,7 @@ public final class Diagnostic {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated
@@ -52,7 +56,7 @@ public final class Diagnostic {
 
     /**
      * Get the error property: The error property.
-     *
+     * 
      * @return the error value.
      */
     @Generated

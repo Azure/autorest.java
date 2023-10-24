@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** I am root, and I ref a model WITH meta. */
+/**
+ * I am root, and I ref a model WITH meta.
+ */
 @JacksonXmlRootElement(localName = "RootWithRefAndMeta")
 @Fluent
 public final class RootWithRefAndMeta {
@@ -24,12 +26,14 @@ public final class RootWithRefAndMeta {
     @JsonProperty(value = "Something")
     private String something;
 
-    /** Creates an instance of RootWithRefAndMeta class. */
+    /**
+     * Creates an instance of RootWithRefAndMeta class.
+     */
     public RootWithRefAndMeta() {}
 
     /**
      * Get the refToModel property: XML will use XMLComplexTypeWithMeta.
-     *
+     * 
      * @return the refToModel value.
      */
     public ComplexTypeWithMeta getRefToModel() {
@@ -38,7 +42,7 @@ public final class RootWithRefAndMeta {
 
     /**
      * Set the refToModel property: XML will use XMLComplexTypeWithMeta.
-     *
+     * 
      * @param refToModel the refToModel value to set.
      * @return the RootWithRefAndMeta object itself.
      */
@@ -49,7 +53,7 @@ public final class RootWithRefAndMeta {
 
     /**
      * Get the something property: Something else (just to avoid flattening).
-     *
+     * 
      * @return the something value.
      */
     public String getSomething() {
@@ -58,7 +62,7 @@ public final class RootWithRefAndMeta {
 
     /**
      * Set the something property: Something else (just to avoid flattening).
-     *
+     * 
      * @param something the something value to set.
      * @return the RootWithRefAndMeta object itself.
      */
@@ -69,7 +73,7 @@ public final class RootWithRefAndMeta {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

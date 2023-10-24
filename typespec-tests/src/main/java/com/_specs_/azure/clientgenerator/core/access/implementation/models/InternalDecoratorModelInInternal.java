@@ -4,12 +4,16 @@
 
 package com._specs_.azure.clientgenerator.core.access.implementation.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** Used in an internal operation, should be generated but not exported. */
+/**
+ * Used in an internal operation, should be generated but not exported.
+ */
 @Immutable
 public final class InternalDecoratorModelInInternal {
     /*
@@ -21,7 +25,7 @@ public final class InternalDecoratorModelInInternal {
 
     /**
      * Creates an instance of InternalDecoratorModelInInternal class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +36,7 @@ public final class InternalDecoratorModelInInternal {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

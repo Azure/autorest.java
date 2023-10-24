@@ -11,50 +11,60 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the AutoRestSwaggerBATArrayService type. */
+/**
+ * Initializes a new instance of the AutoRestSwaggerBATArrayService type.
+ */
 public final class AutoRestSwaggerBATArrayService {
-    /** server parameter. */
+    /**
+     * server parameter.
+     */
     private final String host;
 
     /**
      * Gets server parameter.
-     *
+     * 
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The Arrays object to access its operations. */
+    /**
+     * The Arrays object to access its operations.
+     */
     private final Arrays arrays;
 
     /**
      * Gets the Arrays object to access its operations.
-     *
+     * 
      * @return the Arrays object.
      */
     public Arrays getArrays() {
@@ -63,19 +73,17 @@ public final class AutoRestSwaggerBATArrayService {
 
     /**
      * Initializes an instance of AutoRestSwaggerBATArrayService client.
-     *
+     * 
      * @param host server parameter.
      */
     AutoRestSwaggerBATArrayService(String host) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                host);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), host);
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATArrayService client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
      */
@@ -85,7 +93,7 @@ public final class AutoRestSwaggerBATArrayService {
 
     /**
      * Initializes an instance of AutoRestSwaggerBATArrayService client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.

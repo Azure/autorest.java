@@ -4,6 +4,7 @@
 
 package com.type.model.inheritance.singlediscriminator.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,15 +12,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.regex.Pattern;
 
-/** Define a base class in the legacy way. Discriminator property is not explicitly defined in the model. */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "kind",
-        defaultImpl = Dinosaur.class)
+/**
+ * Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.
+ */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind", defaultImpl = Dinosaur.class)
 @JsonTypeName("Dinosaur")
-@JsonSubTypes({@JsonSubTypes.Type(name = "t-rex", value = TRex.class)})
+@JsonSubTypes({
+    @JsonSubTypes.Type(name = "t-rex", value = TRex.class)
+})
 @Immutable
 public class Dinosaur {
     /*
@@ -31,7 +33,7 @@ public class Dinosaur {
 
     /**
      * Creates an instance of Dinosaur class.
-     *
+     * 
      * @param size the size value to set.
      */
     @Generated
@@ -42,7 +44,7 @@ public class Dinosaur {
 
     /**
      * Get the size property: The size property.
-     *
+     * 
      * @return the size value.
      */
     @Generated

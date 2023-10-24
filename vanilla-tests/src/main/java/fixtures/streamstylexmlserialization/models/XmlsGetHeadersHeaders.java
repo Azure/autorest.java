@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
-/** The XmlsGetHeadersHeaders model. */
+/**
+ * The XmlsGetHeadersHeaders model.
+ */
 @Fluent
 public final class XmlsGetHeadersHeaders {
     /*
@@ -21,7 +23,7 @@ public final class XmlsGetHeadersHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of XmlsGetHeadersHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public XmlsGetHeadersHeaders(HttpHeaders rawHeaders) {
@@ -30,7 +32,7 @@ public final class XmlsGetHeadersHeaders {
 
     /**
      * Get the customHeader property: The Custom-Header property.
-     *
+     * 
      * @return the customHeader value.
      */
     public String getCustomHeader() {
@@ -39,7 +41,7 @@ public final class XmlsGetHeadersHeaders {
 
     /**
      * Set the customHeader property: The Custom-Header property.
-     *
+     * 
      * @param customHeader the customHeader value to set.
      * @return the XmlsGetHeadersHeaders object itself.
      */
@@ -50,7 +52,7 @@ public final class XmlsGetHeadersHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.url.implementation.PathItemsImpl;
 
-/** Initializes a new instance of the synchronous AutoRestUrlTestServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestUrlTestServiceClient type.
+ */
 @ServiceClient(builder = PathItemsClientBuilder.class)
 public final class PathItemsClient {
-    @Generated private final PathItemsImpl serviceClient;
+    @Generated
+    private final PathItemsImpl serviceClient;
 
     /**
      * Initializes an instance of PathItemsClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,18 +38,32 @@ public final class PathItemsClient {
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
      * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
      * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>pathItemStringQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A string value 'pathItemStringQuery' that appears as a query parameter</td>
+     * </tr>
+     * <tr>
+     * <td>localStringQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>should contain value 'localStringQuery'</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -58,8 +75,8 @@ public final class PathItemsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getAllWithValuesWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+    public Response<Void> getAllWithValuesWithResponse(String pathItemStringPath, String localStringPath,
+        RequestOptions requestOptions) {
         return this.serviceClient.getAllWithValuesWithResponse(pathItemStringPath, localStringPath, requestOptions);
     }
 
@@ -67,18 +84,32 @@ public final class PathItemsClient {
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
      * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
      * localStringQuery='localStringQuery'.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value 'localStringQuery'</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>pathItemStringQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A string value 'pathItemStringQuery' that appears as a query parameter</td>
+     * </tr>
+     * <tr>
+     * <td>localStringQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>should contain value 'localStringQuery'</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -90,8 +121,8 @@ public final class PathItemsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getGlobalQueryNullWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
+    public Response<Void> getGlobalQueryNullWithResponse(String pathItemStringPath, String localStringPath,
+        RequestOptions requestOptions) {
         return this.serviceClient.getGlobalQueryNullWithResponse(pathItemStringPath, localStringPath, requestOptions);
     }
 
@@ -99,18 +130,32 @@ public final class PathItemsClient {
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
      * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
      * localStringQuery=null.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>A string value 'pathItemStringQuery' that appears as a query parameter</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain null value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>pathItemStringQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A string value 'pathItemStringQuery' that appears as a query parameter</td>
+     * </tr>
+     * <tr>
+     * <td>localStringQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>should contain null value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -122,28 +167,42 @@ public final class PathItemsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getGlobalAndLocalQueryNullWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        return this.serviceClient.getGlobalAndLocalQueryNullWithResponse(
-                pathItemStringPath, localStringPath, requestOptions);
+    public Response<Void> getGlobalAndLocalQueryNullWithResponse(String pathItemStringPath, String localStringPath,
+        RequestOptions requestOptions) {
+        return this.serviceClient.getGlobalAndLocalQueryNullWithResponse(pathItemStringPath, localStringPath,
+            requestOptions);
     }
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
      * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
      * localStringQuery=null.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pathItemStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
-     *     <tr><td>localStringQuery</td><td>String</td><td>No</td><td>should contain value null</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>pathItemStringQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>should contain value null</td>
+     * </tr>
+     * <tr>
+     * <td>localStringQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>should contain value null</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -155,9 +214,9 @@ public final class PathItemsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getLocalPathItemQueryNullWithResponse(
-            String pathItemStringPath, String localStringPath, RequestOptions requestOptions) {
-        return this.serviceClient.getLocalPathItemQueryNullWithResponse(
-                pathItemStringPath, localStringPath, requestOptions);
+    public Response<Void> getLocalPathItemQueryNullWithResponse(String pathItemStringPath, String localStringPath,
+        RequestOptions requestOptions) {
+        return this.serviceClient.getLocalPathItemQueryNullWithResponse(pathItemStringPath, localStringPath,
+            requestOptions);
     }
 }

@@ -6,10 +6,15 @@ package com.type.property.optional.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
+import java.util.regex.Pattern;
 
-/** Model with a duration property. */
+/**
+ * Model with a duration property.
+ */
 @Fluent
 public final class DurationProperty {
     /*
@@ -19,13 +24,16 @@ public final class DurationProperty {
     @JsonProperty(value = "property")
     private Duration property;
 
-    /** Creates an instance of DurationProperty class. */
+    /**
+     * Creates an instance of DurationProperty class.
+     */
     @Generated
-    public DurationProperty() {}
+    public DurationProperty() {
+    }
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated
@@ -35,7 +43,7 @@ public final class DurationProperty {
 
     /**
      * Set the property property: Property.
-     *
+     * 
      * @param property the property value to set.
      * @return the DurationProperty object itself.
      */

@@ -7,7 +7,9 @@ package fixtures.discriminatorflattening.noflatten.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Properties of the backend address pool. */
+/**
+ * Properties of the backend address pool.
+ */
 @Fluent
 public final class BackendAddressPoolPropertiesFormat {
     /*
@@ -16,12 +18,14 @@ public final class BackendAddressPoolPropertiesFormat {
     @JsonProperty(value = "location")
     private String location;
 
-    /** Creates an instance of BackendAddressPoolPropertiesFormat class. */
+    /**
+     * Creates an instance of BackendAddressPoolPropertiesFormat class.
+     */
     public BackendAddressPoolPropertiesFormat() {}
 
     /**
      * Get the location property: The location of the backend address pool.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -30,7 +34,7 @@ public final class BackendAddressPoolPropertiesFormat {
 
     /**
      * Set the location property: The location of the backend address pool.
-     *
+     * 
      * @param location the location value to set.
      * @return the BackendAddressPoolPropertiesFormat object itself.
      */
@@ -41,7 +45,7 @@ public final class BackendAddressPoolPropertiesFormat {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

@@ -7,7 +7,9 @@ package fixtures.azureparametergrouping.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Parameter group. */
+/**
+ * Parameter group.
+ */
 @Fluent
 public final class FirstParameterGroup {
     /*
@@ -22,12 +24,14 @@ public final class FirstParameterGroup {
     @JsonProperty(value = "query-one")
     private Integer queryOne;
 
-    /** Creates an instance of FirstParameterGroup class. */
+    /**
+     * Creates an instance of FirstParameterGroup class.
+     */
     public FirstParameterGroup() {}
 
     /**
      * Get the headerOne property: The header-one property.
-     *
+     * 
      * @return the headerOne value.
      */
     public String getHeaderOne() {
@@ -36,7 +40,7 @@ public final class FirstParameterGroup {
 
     /**
      * Set the headerOne property: The header-one property.
-     *
+     * 
      * @param headerOne the headerOne value to set.
      * @return the FirstParameterGroup object itself.
      */
@@ -47,7 +51,7 @@ public final class FirstParameterGroup {
 
     /**
      * Get the queryOne property: Query parameter with default.
-     *
+     * 
      * @return the queryOne value.
      */
     public Integer getQueryOne() {
@@ -56,7 +60,7 @@ public final class FirstParameterGroup {
 
     /**
      * Set the queryOne property: Query parameter with default.
-     *
+     * 
      * @param queryOne the queryOne value to set.
      * @return the FirstParameterGroup object itself.
      */
@@ -67,7 +71,7 @@ public final class FirstParameterGroup {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

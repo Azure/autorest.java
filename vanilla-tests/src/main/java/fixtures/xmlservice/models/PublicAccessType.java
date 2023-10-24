@@ -8,17 +8,23 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for PublicAccessType. */
+/**
+ * Defines values for PublicAccessType.
+ */
 public final class PublicAccessType extends ExpandableStringEnum<PublicAccessType> {
-    /** Static value container for PublicAccessType. */
+    /**
+     * Static value container for PublicAccessType.
+     */
     public static final PublicAccessType CONTAINER = fromString("container");
 
-    /** Static value blob for PublicAccessType. */
+    /**
+     * Static value blob for PublicAccessType.
+     */
     public static final PublicAccessType BLOB = fromString("blob");
 
     /**
      * Creates a new instance of PublicAccessType value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
@@ -26,7 +32,7 @@ public final class PublicAccessType extends ExpandableStringEnum<PublicAccessTyp
 
     /**
      * Creates or finds a PublicAccessType from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding PublicAccessType.
      */
@@ -37,7 +43,7 @@ public final class PublicAccessType extends ExpandableStringEnum<PublicAccessTyp
 
     /**
      * Gets known PublicAccessType values.
-     *
+     * 
      * @return known PublicAccessType values.
      */
     public static Collection<PublicAccessType> values() {

@@ -4,12 +4,16 @@
 
 package com.cadl.internal.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.regex.Pattern;
 
-/** The ApiRequest model. */
+/**
+ * The ApiRequest model.
+ */
 @Immutable
 public final class ApiRequest {
     /*
@@ -21,7 +25,7 @@ public final class ApiRequest {
 
     /**
      * Creates an instance of ApiRequest class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -32,7 +36,7 @@ public final class ApiRequest {
 
     /**
      * Get the property property: The property property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

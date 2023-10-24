@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** A selection mark object representing check boxes, radio buttons, and other elements indicating a selection. */
+/**
+ * A selection mark object representing check boxes, radio buttons, and other elements indicating a selection.
+ */
 @Fluent
 public final class DocumentSelectionMark {
     /*
@@ -35,12 +37,14 @@ public final class DocumentSelectionMark {
     @JsonProperty(value = "confidence", required = true)
     private float confidence;
 
-    /** Creates an instance of DocumentSelectionMark class. */
+    /**
+     * Creates an instance of DocumentSelectionMark class.
+     */
     public DocumentSelectionMark() {}
 
     /**
      * Get the state property: State of the selection mark.
-     *
+     * 
      * @return the state value.
      */
     public SelectionMarkState getState() {
@@ -49,7 +53,7 @@ public final class DocumentSelectionMark {
 
     /**
      * Set the state property: State of the selection mark.
-     *
+     * 
      * @param state the state value to set.
      * @return the DocumentSelectionMark object itself.
      */
@@ -60,7 +64,7 @@ public final class DocumentSelectionMark {
 
     /**
      * Get the polygon property: Bounding polygon of the selection mark.
-     *
+     * 
      * @return the polygon value.
      */
     public List<Float> getPolygon() {
@@ -69,7 +73,7 @@ public final class DocumentSelectionMark {
 
     /**
      * Set the polygon property: Bounding polygon of the selection mark.
-     *
+     * 
      * @param polygon the polygon value to set.
      * @return the DocumentSelectionMark object itself.
      */
@@ -80,7 +84,7 @@ public final class DocumentSelectionMark {
 
     /**
      * Get the span property: Location of the selection mark in the reading order concatenated content.
-     *
+     * 
      * @return the span value.
      */
     public DocumentSpan getSpan() {
@@ -89,7 +93,7 @@ public final class DocumentSelectionMark {
 
     /**
      * Set the span property: Location of the selection mark in the reading order concatenated content.
-     *
+     * 
      * @param span the span value to set.
      * @return the DocumentSelectionMark object itself.
      */
@@ -100,7 +104,7 @@ public final class DocumentSelectionMark {
 
     /**
      * Get the confidence property: Confidence of correctly extracting the selection mark.
-     *
+     * 
      * @return the confidence value.
      */
     public float getConfidence() {
@@ -109,7 +113,7 @@ public final class DocumentSelectionMark {
 
     /**
      * Set the confidence property: Confidence of correctly extracting the selection mark.
-     *
+     * 
      * @param confidence the confidence value to set.
      * @return the DocumentSelectionMark object itself.
      */

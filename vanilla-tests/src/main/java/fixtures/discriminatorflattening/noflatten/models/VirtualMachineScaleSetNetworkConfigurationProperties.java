@@ -7,7 +7,9 @@ package fixtures.discriminatorflattening.noflatten.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Describes a virtual machine scale set network profile's IP configuration. */
+/**
+ * Describes a virtual machine scale set network profile's IP configuration.
+ */
 @Fluent
 public final class VirtualMachineScaleSetNetworkConfigurationProperties {
     /*
@@ -16,13 +18,15 @@ public final class VirtualMachineScaleSetNetworkConfigurationProperties {
     @JsonProperty(value = "primary")
     private Boolean primary;
 
-    /** Creates an instance of VirtualMachineScaleSetNetworkConfigurationProperties class. */
+    /**
+     * Creates an instance of VirtualMachineScaleSetNetworkConfigurationProperties class.
+     */
     public VirtualMachineScaleSetNetworkConfigurationProperties() {}
 
     /**
      * Get the primary property: Specifies the primary network interface in case the virtual machine has more than 1
      * network interface.
-     *
+     * 
      * @return the primary value.
      */
     public Boolean isPrimary() {
@@ -32,7 +36,7 @@ public final class VirtualMachineScaleSetNetworkConfigurationProperties {
     /**
      * Set the primary property: Specifies the primary network interface in case the virtual machine has more than 1
      * network interface.
-     *
+     * 
      * @param primary the primary value to set.
      * @return the VirtualMachineScaleSetNetworkConfigurationProperties object itself.
      */
@@ -43,7 +47,7 @@ public final class VirtualMachineScaleSetNetworkConfigurationProperties {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}

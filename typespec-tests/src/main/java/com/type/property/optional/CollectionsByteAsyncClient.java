@@ -4,42 +4,68 @@
 
 package com.type.property.optional;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.type.property.optional.implementation.CollectionsBytesImpl;
 import com.type.property.optional.models.CollectionsByteProperty;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous OptionalClient type. */
+/**
+ * Initializes a new instance of the asynchronous OptionalClient type.
+ */
 @ServiceClient(builder = OptionalClientBuilder.class, isAsync = true)
 public final class CollectionsByteAsyncClient {
-    @Generated private final CollectionsBytesImpl serviceClient;
+    @Generated
+    private final CollectionsBytesImpl serviceClient;
 
     /**
      * Initializes an instance of CollectionsByteAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    CollectionsByteAsyncClient(CollectionsBytesImpl serviceClient) {
+     CollectionsByteAsyncClient(CollectionsBytesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property (Optional): [
@@ -47,14 +73,13 @@ public final class CollectionsByteAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return all properties in the model along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * @return models that will return all properties in the model along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -64,9 +89,7 @@ public final class CollectionsByteAsyncClient {
 
     /**
      * Get models that will return the default object.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property (Optional): [
@@ -74,14 +97,13 @@ public final class CollectionsByteAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return the default object along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return models that will return the default object along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -91,9 +113,7 @@ public final class CollectionsByteAsyncClient {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property (Optional): [
@@ -101,7 +121,7 @@ public final class CollectionsByteAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with collection bytes properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -118,9 +138,7 @@ public final class CollectionsByteAsyncClient {
 
     /**
      * Put a body with default properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property (Optional): [
@@ -128,7 +146,7 @@ public final class CollectionsByteAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with collection bytes properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -145,7 +163,7 @@ public final class CollectionsByteAsyncClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -158,14 +176,12 @@ public final class CollectionsByteAsyncClient {
     public Mono<CollectionsByteProperty> getAll() {
         // Generated convenience method for getAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getAllWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(CollectionsByteProperty.class));
+        return getAllWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(CollectionsByteProperty.class));
     }
 
     /**
      * Get models that will return the default object.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -178,14 +194,12 @@ public final class CollectionsByteAsyncClient {
     public Mono<CollectionsByteProperty> getDefault() {
         // Generated convenience method for getDefaultWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getDefaultWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(CollectionsByteProperty.class));
+        return getDefaultWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(CollectionsByteProperty.class));
     }
 
     /**
      * Put a body with all properties present.
-     *
+     * 
      * @param body Model with collection bytes properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -205,7 +219,7 @@ public final class CollectionsByteAsyncClient {
 
     /**
      * Put a body with default properties.
-     *
+     * 
      * @param body Model with collection bytes properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

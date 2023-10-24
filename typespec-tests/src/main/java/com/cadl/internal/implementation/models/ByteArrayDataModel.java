@@ -5,16 +5,20 @@
 package com.cadl.internal.implementation.models;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.CoreUtils;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** The ByteArrayDataModel model. */
+/**
+ * The ByteArrayDataModel model.
+ */
 @Immutable
 public final class ByteArrayDataModel extends DataModelBase {
     private final byte[] value;
 
     /**
      * Creates an instance of ByteArrayDataModel class.
-     *
+     * 
      * @param value the value.
      */
     public ByteArrayDataModel(byte[] value) {
@@ -23,7 +27,7 @@ public final class ByteArrayDataModel extends DataModelBase {
 
     /**
      * Gets the value.
-     *
+     * 
      * @return the value.
      */
     @JsonValue

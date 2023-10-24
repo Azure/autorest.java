@@ -22,22 +22,28 @@ import com.azure.core.util.FluxUtil;
 import fixtures.bodybyte.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in ByteOperations. */
+/**
+ * An instance of this class provides access to all the operations defined in ByteOperations.
+ */
 public final class ByteOperations {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final ByteOperationsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestSwaggerBATByteService client;
 
     /**
      * Initializes an instance of ByteOperations.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     ByteOperations(AutoRestSwaggerBATByteService client) {
-        this.service =
-                RestProxy.create(ByteOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(ByteOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -49,42 +55,39 @@ public final class ByteOperations {
     @ServiceInterface(name = "AutoRestSwaggerBATBy")
     public interface ByteOperationsService {
         @Get("/byte/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getNull(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<byte[]>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/byte/empty")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getEmpty(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<byte[]>> getEmpty(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/byte/nonAscii")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getNonAscii(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<byte[]>> getNonAscii(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/byte/nonAscii")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putNonAscii(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") byte[] byteBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putNonAscii(@HostParam("$host") String host,
+            @BodyParam("application/json") byte[] byteBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/byte/invalid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getInvalid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<byte[]>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Get null byte value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null byte value along with {@link Response} on successful completion of {@link Mono}.
@@ -92,8 +95,8 @@ public final class ByteOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
@@ -101,7 +104,7 @@ public final class ByteOperations {
 
     /**
      * Get null byte value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -111,8 +114,8 @@ public final class ByteOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getNullWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNull(this.client.getHost(), accept, context);
@@ -120,7 +123,7 @@ public final class ByteOperations {
 
     /**
      * Get null byte value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null byte value on successful completion of {@link Mono}.
@@ -132,7 +135,7 @@ public final class ByteOperations {
 
     /**
      * Get null byte value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -146,7 +149,7 @@ public final class ByteOperations {
 
     /**
      * Get null byte value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -160,7 +163,7 @@ public final class ByteOperations {
 
     /**
      * Get null byte value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null byte value.
@@ -172,7 +175,7 @@ public final class ByteOperations {
 
     /**
      * Get empty byte value ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty byte value '' along with {@link Response} on successful completion of {@link Mono}.
@@ -180,8 +183,8 @@ public final class ByteOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
@@ -189,7 +192,7 @@ public final class ByteOperations {
 
     /**
      * Get empty byte value ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -199,8 +202,8 @@ public final class ByteOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getEmptyWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getEmpty(this.client.getHost(), accept, context);
@@ -208,7 +211,7 @@ public final class ByteOperations {
 
     /**
      * Get empty byte value ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty byte value '' on successful completion of {@link Mono}.
@@ -220,7 +223,7 @@ public final class ByteOperations {
 
     /**
      * Get empty byte value ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -234,7 +237,7 @@ public final class ByteOperations {
 
     /**
      * Get empty byte value ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -248,7 +251,7 @@ public final class ByteOperations {
 
     /**
      * Get empty byte value ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty byte value ''.
@@ -260,17 +263,17 @@ public final class ByteOperations {
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6) along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getNonAsciiWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNonAscii(this.client.getHost(), accept, context));
@@ -278,19 +281,19 @@ public final class ByteOperations {
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6) along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getNonAsciiWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNonAscii(this.client.getHost(), accept, context);
@@ -298,7 +301,7 @@ public final class ByteOperations {
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6) on successful completion of {@link Mono}.
@@ -310,7 +313,7 @@ public final class ByteOperations {
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -324,7 +327,7 @@ public final class ByteOperations {
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -338,7 +341,7 @@ public final class ByteOperations {
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -350,7 +353,7 @@ public final class ByteOperations {
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -360,8 +363,8 @@ public final class ByteOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNonAsciiWithResponseAsync(byte[] byteBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (byteBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter byteBody is required and cannot be null."));
@@ -372,7 +375,7 @@ public final class ByteOperations {
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -383,8 +386,8 @@ public final class ByteOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNonAsciiWithResponseAsync(byte[] byteBody, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (byteBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter byteBody is required and cannot be null."));
@@ -395,7 +398,7 @@ public final class ByteOperations {
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -409,7 +412,7 @@ public final class ByteOperations {
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -424,7 +427,7 @@ public final class ByteOperations {
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -439,7 +442,7 @@ public final class ByteOperations {
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
+     * 
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -452,7 +455,7 @@ public final class ByteOperations {
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid byte value ':::SWAGGER::::' along with {@link Response} on successful completion of {@link Mono}.
@@ -460,8 +463,8 @@ public final class ByteOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
@@ -469,7 +472,7 @@ public final class ByteOperations {
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -479,8 +482,8 @@ public final class ByteOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getInvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getInvalid(this.client.getHost(), accept, context);
@@ -488,7 +491,7 @@ public final class ByteOperations {
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid byte value ':::SWAGGER::::' on successful completion of {@link Mono}.
@@ -500,7 +503,7 @@ public final class ByteOperations {
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -514,7 +517,7 @@ public final class ByteOperations {
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -528,7 +531,7 @@ public final class ByteOperations {
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid byte value ':::SWAGGER::::'.

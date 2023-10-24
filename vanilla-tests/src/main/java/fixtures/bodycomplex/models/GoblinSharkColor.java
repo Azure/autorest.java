@@ -8,26 +8,38 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Colors possible. */
+/**
+ * Colors possible.
+ */
 public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColor> {
-    /** Static value pink for GoblinSharkColor. */
+    /**
+     * Static value pink for GoblinSharkColor.
+     */
     public static final GoblinSharkColor PINK = fromString("pink");
 
-    /** Static value gray for GoblinSharkColor. */
+    /**
+     * Static value gray for GoblinSharkColor.
+     */
     public static final GoblinSharkColor GRAY = fromString("gray");
 
-    /** Static value brown for GoblinSharkColor. */
+    /**
+     * Static value brown for GoblinSharkColor.
+     */
     public static final GoblinSharkColor BROWN = fromString("brown");
 
-    /** Uppercase RED. */
+    /**
+     * Uppercase RED.
+     */
     public static final GoblinSharkColor UPPER_RED = fromString("RED");
 
-    /** Lowercase RED. */
+    /**
+     * Lowercase RED.
+     */
     public static final GoblinSharkColor LOWER_RED = fromString("red");
 
     /**
      * Creates a new instance of GoblinSharkColor value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
@@ -35,7 +47,7 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
 
     /**
      * Creates or finds a GoblinSharkColor from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding GoblinSharkColor.
      */
@@ -46,7 +58,7 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
 
     /**
      * Gets known GoblinSharkColor values.
-     *
+     * 
      * @return known GoblinSharkColor values.
      */
     public static Collection<GoblinSharkColor> values() {

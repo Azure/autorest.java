@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** The ProductResultValueWithXMSClientName model. */
+/**
+ * The ProductResultValueWithXMSClientName model.
+ */
 @Fluent
 public final class ProductResultValueWithXMSClientName {
     /*
@@ -23,12 +25,14 @@ public final class ProductResultValueWithXMSClientName {
     @JsonProperty(value = "nextLink")
     private String nextLink;
 
-    /** Creates an instance of ProductResultValueWithXMSClientName class. */
+    /**
+     * Creates an instance of ProductResultValueWithXMSClientName class.
+     */
     public ProductResultValueWithXMSClientName() {}
 
     /**
      * Get the indexes property: The values property.
-     *
+     * 
      * @return the indexes value.
      */
     public List<Product> getIndexes() {
@@ -37,7 +41,7 @@ public final class ProductResultValueWithXMSClientName {
 
     /**
      * Set the indexes property: The values property.
-     *
+     * 
      * @param indexes the indexes value to set.
      * @return the ProductResultValueWithXMSClientName object itself.
      */
@@ -48,7 +52,7 @@ public final class ProductResultValueWithXMSClientName {
 
     /**
      * Get the nextLink property: The nextLink property.
-     *
+     * 
      * @return the nextLink value.
      */
     public String getNextLink() {
@@ -57,7 +61,7 @@ public final class ProductResultValueWithXMSClientName {
 
     /**
      * Set the nextLink property: The nextLink property.
-     *
+     * 
      * @param nextLink the nextLink value to set.
      * @return the ProductResultValueWithXMSClientName object itself.
      */
@@ -68,7 +72,7 @@ public final class ProductResultValueWithXMSClientName {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

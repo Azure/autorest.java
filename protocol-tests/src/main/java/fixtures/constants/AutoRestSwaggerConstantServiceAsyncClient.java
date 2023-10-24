@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import fixtures.constants.implementation.ContantsImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestSwaggerConstantServiceClient type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestSwaggerConstantServiceClient type.
+ */
 @ServiceClient(builder = AutoRestSwaggerConstantServiceClientBuilder.class, isAsync = true)
 public final class AutoRestSwaggerConstantServiceAsyncClient {
-    @Generated private final ContantsImpl serviceClient;
+    @Generated
+    private final ContantsImpl serviceClient;
 
     /**
      * Initializes an instance of AutoRestSwaggerConstantServiceAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,17 +37,26 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -54,24 +66,33 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(
-            RequestOptions requestOptions) {
+    public Mono<Response<Void>>
+        putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(requestOptions);
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -87,7 +108,7 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -97,14 +118,14 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse(
-            RequestOptions requestOptions) {
+    public Mono<Response<Void>>
+        putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(requestOptions);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -120,7 +141,7 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -131,14 +152,14 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
+    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
         return this.serviceClient.putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -149,14 +170,14 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
+    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
         return this.serviceClient.putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -172,7 +193,7 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -188,17 +209,26 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -214,17 +244,26 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -240,17 +279,26 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -266,17 +314,26 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -292,7 +349,7 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -303,14 +360,14 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredTwoValueNoDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
+    public Mono<Response<Void>> putModelAsStringRequiredTwoValueNoDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
         return this.serviceClient.putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -321,14 +378,14 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredTwoValueDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
+    public Mono<Response<Void>> putModelAsStringRequiredTwoValueDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
         return this.serviceClient.putModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -339,14 +396,14 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredOneValueNoDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
+    public Mono<Response<Void>> putModelAsStringRequiredOneValueNoDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
         return this.serviceClient.putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -357,14 +414,14 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredOneValueDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
+    public Mono<Response<Void>> putModelAsStringRequiredOneValueDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
         return this.serviceClient.putModelAsStringRequiredOneValueDefaultWithResponseAsync(input, requestOptions);
     }
 
     /**
      * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

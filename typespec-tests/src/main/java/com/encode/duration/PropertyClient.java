@@ -4,58 +4,81 @@
 
 package com.encode.duration;
 
+import com.azure.core.annotation.BodyParam;
+import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.HeaderParam;
+import com.azure.core.annotation.Host;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
+import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.serializer.CollectionFormat;
+import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.encode.duration.implementation.PropertiesImpl;
 import com.encode.duration.models.DefaultDurationProperty;
 import com.encode.duration.models.FloatSecondsDurationArrayProperty;
 import com.encode.duration.models.FloatSecondsDurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
 import com.encode.duration.models.Iso8601DurationProperty;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the synchronous DurationClient type. */
+/**
+ * Initializes a new instance of the synchronous DurationClient type.
+ */
 @ServiceClient(builder = DurationClientBuilder.class)
 public final class PropertyClient {
-    @Generated private final PropertiesImpl serviceClient;
+    @Generated
+    private final PropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of PropertyClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    PropertyClient(PropertiesImpl serviceClient) {
+     PropertyClient(PropertiesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The defaultMethod operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -72,23 +95,19 @@ public final class PropertyClient {
 
     /**
      * The iso8601 operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -105,23 +124,19 @@ public final class PropertyClient {
 
     /**
      * The int32Seconds operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: long (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: long (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -138,23 +153,19 @@ public final class PropertyClient {
 
     /**
      * The floatSeconds operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: double (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: double (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -171,9 +182,7 @@ public final class PropertyClient {
 
     /**
      * The floatSecondsArray operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -181,9 +190,7 @@ public final class PropertyClient {
      *     ]
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -191,7 +198,7 @@ public final class PropertyClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -208,7 +215,7 @@ public final class PropertyClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -223,14 +230,12 @@ public final class PropertyClient {
     public DefaultDurationProperty defaultMethod(DefaultDurationProperty body) {
         // Generated convenience method for defaultMethodWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(DefaultDurationProperty.class);
+        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(DefaultDurationProperty.class);
     }
 
     /**
      * The iso8601 operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -245,14 +250,12 @@ public final class PropertyClient {
     public Iso8601DurationProperty iso8601(Iso8601DurationProperty body) {
         // Generated convenience method for iso8601WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return iso8601WithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(Iso8601DurationProperty.class);
+        return iso8601WithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(Iso8601DurationProperty.class);
     }
 
     /**
      * The int32Seconds operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -267,14 +270,12 @@ public final class PropertyClient {
     public Int32SecondsDurationProperty int32Seconds(Int32SecondsDurationProperty body) {
         // Generated convenience method for int32SecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return int32SecondsWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(Int32SecondsDurationProperty.class);
+        return int32SecondsWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(Int32SecondsDurationProperty.class);
     }
 
     /**
      * The floatSeconds operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -289,14 +290,12 @@ public final class PropertyClient {
     public FloatSecondsDurationProperty floatSeconds(FloatSecondsDurationProperty body) {
         // Generated convenience method for floatSecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return floatSecondsWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(FloatSecondsDurationProperty.class);
+        return floatSecondsWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(FloatSecondsDurationProperty.class);
     }
 
     /**
      * The floatSecondsArray operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -311,8 +310,6 @@ public final class PropertyClient {
     public FloatSecondsDurationArrayProperty floatSecondsArray(FloatSecondsDurationArrayProperty body) {
         // Generated convenience method for floatSecondsArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return floatSecondsArrayWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(FloatSecondsDurationArrayProperty.class);
+        return floatSecondsArrayWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(FloatSecondsDurationArrayProperty.class);
     }
 }

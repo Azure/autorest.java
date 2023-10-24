@@ -4,13 +4,17 @@
 
 package com.cadl.wiretype.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
+import java.util.regex.Pattern;
 
-/** The SuperClass model. */
+/**
+ * The SuperClass model.
+ */
 @Immutable
 public class SuperClass {
     /*
@@ -22,7 +26,7 @@ public class SuperClass {
 
     /**
      * Creates an instance of SuperClass class.
-     *
+     * 
      * @param dateTime the dateTime value to set.
      */
     @Generated
@@ -33,7 +37,7 @@ public class SuperClass {
 
     /**
      * Get the dateTime property: The dateTime property.
-     *
+     * 
      * @return the dateTime value.
      */
     @Generated

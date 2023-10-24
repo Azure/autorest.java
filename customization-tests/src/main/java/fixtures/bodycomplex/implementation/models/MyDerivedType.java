@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** The MyDerivedType model. */
+/**
+ * The MyDerivedType model.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("Kind1")
 @Fluent
@@ -20,12 +22,14 @@ public final class MyDerivedType extends MyBaseType {
     @JsonProperty(value = "propD1")
     private String propD1;
 
-    /** Creates an instance of MyDerivedType class. */
+    /**
+     * Creates an instance of MyDerivedType class.
+     */
     public MyDerivedType() {}
 
     /**
      * Get the propD1 property: The propD1 property.
-     *
+     * 
      * @return the propD1 value.
      */
     public String getPropD1() {
@@ -34,7 +38,7 @@ public final class MyDerivedType extends MyBaseType {
 
     /**
      * Set the propD1 property: The propD1 property.
-     *
+     * 
      * @param propD1 the propD1 value to set.
      * @return the MyDerivedType object itself.
      */
@@ -43,14 +47,18 @@ public final class MyDerivedType extends MyBaseType {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MyDerivedType setPropB1(String propB1) {
         super.setPropB1(propB1);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MyDerivedType setPropBH1(String propBH1) {
         super.setPropBH1(propBH1);

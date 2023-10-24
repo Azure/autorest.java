@@ -13,7 +13,9 @@ import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** I am a complex type with no XML node. */
+/**
+ * I am a complex type with no XML node.
+ */
 @Fluent
 public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMeta> {
     /*
@@ -21,12 +23,14 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
      */
     private String id;
 
-    /** Creates an instance of ComplexTypeNoMeta class. */
+    /**
+     * Creates an instance of ComplexTypeNoMeta class.
+     */
     public ComplexTypeNoMeta() {}
 
     /**
      * Get the id property: The id of the res.
-     *
+     * 
      * @return the id value.
      */
     public String getId() {
@@ -35,7 +39,7 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
 
     /**
      * Set the id property: The id of the res.
-     *
+     * 
      * @param id the id value to set.
      * @return the ComplexTypeNoMeta object itself.
      */
@@ -46,7 +50,7 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}
@@ -66,10 +70,10 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
 
     /**
      * Reads an instance of ComplexTypeNoMeta from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of ComplexTypeNoMeta if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ComplexTypeNoMeta.
      */
     public static ComplexTypeNoMeta fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -78,31 +82,29 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
 
     /**
      * Reads an instance of ComplexTypeNoMeta from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of ComplexTypeNoMeta if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ComplexTypeNoMeta.
      */
     public static ComplexTypeNoMeta fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ComplexTypeNoMeta" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    ComplexTypeNoMeta deserializedComplexTypeNoMeta = new ComplexTypeNoMeta();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            ComplexTypeNoMeta deserializedComplexTypeNoMeta = new ComplexTypeNoMeta();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("ID".equals(elementName.getLocalPart())) {
-                            deserializedComplexTypeNoMeta.id = reader.getStringElement();
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                if ("ID".equals(elementName.getLocalPart())) {
+                    deserializedComplexTypeNoMeta.id = reader.getStringElement();
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedComplexTypeNoMeta;
-                });
+            return deserializedComplexTypeNoMeta;
+        });
     }
 }
