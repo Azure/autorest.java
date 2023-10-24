@@ -9,9 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ParametersModel model. */
+/** The RequestParametersModel model. */
 @Immutable
-public final class ParametersModel {
+public final class RequestParametersModel {
     /*
      * The type property.
      */
@@ -20,13 +20,13 @@ public final class ParametersModel {
     private TypeModel type;
 
     /**
-     * Creates an instance of ParametersModel class.
+     * Creates an instance of RequestParametersModel class.
      *
      * @param type the type value to set.
      */
     @Generated
     @JsonCreator
-    public ParametersModel(@JsonProperty(value = "type") TypeModel type) {
+    public RequestParametersModel(@JsonProperty(value = "type") TypeModel type) {
         this.type = type;
     }
 
