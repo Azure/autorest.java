@@ -180,7 +180,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
     }
 
     protected String getStringEnumImport() {
-        return "com.azure.core.util.ExpandableStringEnum";
+        return ClassType.EXPANDABLE_STRING_ENUM.getFullName();
     }
 
     /**

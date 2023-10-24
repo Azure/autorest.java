@@ -422,6 +422,10 @@ public class ClassType implements IType {
             .knownClass(com.azure.core.http.policy.HttpPolicyProviders.class)
             .build();
 
+    public static final ClassType EXPANDABLE_STRING_ENUM = new ClassType.Builder(false)
+            .knownClass(com.azure.core.util.ExpandableStringEnum.class)
+            .build();
+
     private final String fullName;
     private final String packageName;
     private final String name;
@@ -762,7 +766,8 @@ public class ClassType implements IType {
                 } else if (Objects.equals(clazz, com.azure.core.http.HttpClient.class)) {
                     this.packageName("com.generic.core.http.client");
                 } else if (Objects.equals(clazz, com.azure.core.http.HttpPipeline.class)
-                        || Objects.equals(clazz, com.azure.core.http.HttpPipelineBuilder.class)) {
+                        || Objects.equals(clazz, com.azure.core.http.HttpPipelineBuilder.class)
+                        || Objects.equals(clazz, com.azure.core.http.policy.HttpPipelinePolicy.class)) {
                     this.packageName("com.generic.core.http.pipeline");
                 } else if (Objects.equals(clazz, com.azure.core.http.policy.HttpLogOptions.class)
                         || Objects.equals(clazz, com.azure.core.http.policy.HttpLoggingPolicy.class)) {
