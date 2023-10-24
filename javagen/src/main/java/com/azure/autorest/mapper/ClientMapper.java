@@ -36,7 +36,7 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
-import com.azure.autorest.model.clientmodel.ExternalPackage;
+import com.azure.autorest.model.clientmodel.Package;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.clientmodel.PackageInfo;
@@ -578,9 +578,9 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
 
         List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
-        requireModules.add(new ModuleInfo.RequireModule(ExternalPackage.CORE.getPackageName(), true));
+        requireModules.add(new ModuleInfo.RequireModule(Package.CORE.getPackageName(), true));
         if (settings.isStreamStyleSerialization()) {
-            requireModules.add(new ModuleInfo.RequireModule(ExternalPackage.JSON.getPackageName(), false));
+            requireModules.add(new ModuleInfo.RequireModule(Package.JSON.getPackageName(), false));
         }
 
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
@@ -595,7 +595,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
             // open models package to azure-core and jaskson
             List<String> openToModules = new ArrayList<>();
-            openToModules.add(ExternalPackage.CORE.getPackageName());
+            openToModules.add(Package.CORE.getPackageName());
             if (!settings.isStreamStyleSerialization()) {
                 openToModules.add("com.fasterxml.jackson.databind");
             }

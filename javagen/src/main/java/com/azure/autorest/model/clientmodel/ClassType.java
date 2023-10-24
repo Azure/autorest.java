@@ -774,8 +774,8 @@ public class ClassType implements IType {
                     this.packageName("com.generic.core.http.policy.logging");
                 } else {
                     this.packageName(clazz.getPackage().getName()
-                            .replace(ExternalPackage.AZURE_CORE_PACKAGE_NAME, ExternalPackage.GENERIC_CORE_PACKAGE_NAME)
-                            .replace(ExternalPackage.AZURE_JSON_PACKAGE_NAME, ExternalPackage.GENERIC_JSON_PACKAGE_NAME));
+                            .replace(Package.AZURE_CORE_PACKAGE_NAME, Package.GENERIC_CORE_PACKAGE_NAME)
+                            .replace(Package.AZURE_JSON_PACKAGE_NAME, Package.GENERIC_JSON_PACKAGE_NAME));
                 }
             }
 

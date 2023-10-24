@@ -17,7 +17,7 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
-import com.azure.autorest.model.clientmodel.ExternalPackage;
+import com.azure.autorest.model.clientmodel.Package;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.util.CodeNamer;
@@ -572,7 +572,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
             // see ObjectMapper.mapPredefinedModel
             // this might be too simplified, and Android might require a different implementation
-            return compositeType.getPackage().startsWith(ExternalPackage.CORE.getPackageName() + ".");
+            return compositeType.getPackage().startsWith(Package.CORE.getPackageName() + ".");
         } else {
             return false;
         }

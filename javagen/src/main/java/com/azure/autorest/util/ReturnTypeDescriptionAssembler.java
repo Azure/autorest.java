@@ -17,9 +17,13 @@ import com.azure.core.util.polling.SyncPoller;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class ReturnTypeDescriptionAssembler {
     private final PluginLogger logger;
+
+    private final ConcurrentMap<GenericType, Class<?>> typeToClassMap = new ConcurrentHashMap<>();
 
     public ReturnTypeDescriptionAssembler(NewPlugin host) {
         logger = new PluginLogger(host, ReturnTypeDescriptionAssembler.class);
@@ -134,13 +138,14 @@ public class ReturnTypeDescriptionAssembler {
     }
 
     private Class<?> getGenericClass(GenericType type) {
-        String className = String.format("%s.%s", type.getPackage(), type.getName());
-        try {
-            return Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            logger.warn(String.format("class %s not found!", className), e);
-            return null;
-        }
+        return typeToClassMap.computeIfAbsent(type, key -> {
+            String className = String.format("%s.%s", type.getPackage(), type.getName());
+            try {
+                return Class.forName(className);
+            } catch (ClassNotFoundException e) {
+                logger.warn(String.format("class %s not found!", className), e);
+                return null;
+            }
+        });
     }
-
 }

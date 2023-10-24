@@ -5,7 +5,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
-public class ExternalPackage {
+public class Package {
 
     public static final String GENERIC_CORE_PACKAGE_NAME = "com.generic.core";
     public static final String GENERIC_JSON_PACKAGE_NAME = "com.generic.json";
@@ -14,13 +14,13 @@ public class ExternalPackage {
     public static final String AZURE_JSON_PACKAGE_NAME = "com.azure.json";
 
 
-    public static final ExternalPackage CORE = new Builder()
+    public static final Package CORE = new Builder()
             .packageName(GENERIC_CORE_PACKAGE_NAME)
             .groupId("com.generic")
             .artifactId("generic-core")
             .build();
 
-    public static final ExternalPackage JSON = new Builder()
+    public static final Package JSON = new Builder()
             .packageName(GENERIC_JSON_PACKAGE_NAME)
             .groupId("com.generic")
             .artifactId("generic-json")
@@ -30,7 +30,7 @@ public class ExternalPackage {
     private final String groupId;
     private final String artifactId;
 
-    private ExternalPackage(String packageName, String groupId, String artifactId) {
+    private Package(String packageName, String groupId, String artifactId) {
         this.packageName = packageName;
         this.groupId = groupId;
         this.artifactId = artifactId;
@@ -71,7 +71,7 @@ public class ExternalPackage {
             return this;
         }
 
-        public ExternalPackage build() {
+        public Package build() {
             if (JavaSettings.getInstance().isBranding()) {
                 switch (packageName) {
                     case GENERIC_CORE_PACKAGE_NAME:
@@ -87,7 +87,7 @@ public class ExternalPackage {
                         break;
                 }
             }
-            return new ExternalPackage(packageName, groupId, artifactId);
+            return new Package(packageName, groupId, artifactId);
         }
     }
 }
