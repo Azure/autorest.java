@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.util.List;
 
-/** The Fish model. */
+/**
+ * The Fish model.
+ */
 @Fluent
 public class Fish implements JsonSerializable<Fish> {
     /*
@@ -30,12 +32,14 @@ public class Fish implements JsonSerializable<Fish> {
      */
     private List<Fish> siblings;
 
-    /** Creates an instance of Fish class. */
+    /**
+     * Creates an instance of Fish class.
+     */
     public Fish() {}
 
     /**
      * Get the species property: The species property.
-     *
+     * 
      * @return the species value.
      */
     public String getSpecies() {
@@ -44,7 +48,7 @@ public class Fish implements JsonSerializable<Fish> {
 
     /**
      * Set the species property: The species property.
-     *
+     * 
      * @param species the species value to set.
      * @return the Fish object itself.
      */
@@ -55,7 +59,7 @@ public class Fish implements JsonSerializable<Fish> {
 
     /**
      * Get the length property: The length property.
-     *
+     * 
      * @return the length value.
      */
     public float getLength() {
@@ -64,7 +68,7 @@ public class Fish implements JsonSerializable<Fish> {
 
     /**
      * Set the length property: The length property.
-     *
+     * 
      * @param length the length value to set.
      * @return the Fish object itself.
      */
@@ -75,7 +79,7 @@ public class Fish implements JsonSerializable<Fish> {
 
     /**
      * Get the siblings property: The siblings property.
-     *
+     * 
      * @return the siblings value.
      */
     public List<Fish> getSiblings() {
@@ -84,7 +88,7 @@ public class Fish implements JsonSerializable<Fish> {
 
     /**
      * Set the siblings property: The siblings property.
-     *
+     * 
      * @param siblings the siblings value to set.
      * @return the Fish object itself.
      */
@@ -95,7 +99,7 @@ public class Fish implements JsonSerializable<Fish> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
@@ -115,54 +119,52 @@ public class Fish implements JsonSerializable<Fish> {
 
     /**
      * Reads an instance of Fish from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of Fish if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     *     JSON null.
+     * JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     *     polymorphic discriminator.
+     * polymorphic discriminator.
      * @throws IOException If an error occurs while reading the Fish.
      */
     public static Fish fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    String discriminatorValue = null;
-                    JsonReader readerToUse = reader.bufferObject();
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            JsonReader readerToUse = reader.bufferObject();
 
-                    readerToUse.nextToken(); // Prepare for reading
-                    while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = readerToUse.getFieldName();
-                        readerToUse.nextToken();
-                        if ("fishtype".equals(fieldName)) {
-                            discriminatorValue = readerToUse.getString();
-                            break;
-                        } else {
-                            readerToUse.skipChildren();
-                        }
-                    }
+            readerToUse.nextToken(); // Prepare for reading
+            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = readerToUse.getFieldName();
+                readerToUse.nextToken();
+                if ("fishtype".equals(fieldName)) {
+                    discriminatorValue = readerToUse.getString();
+                    break;
+                } else {
+                    readerToUse.skipChildren();
+                }
+            }
 
-                    if (discriminatorValue != null) {
-                        readerToUse = readerToUse.reset();
-                    }
-                    // Use the discriminator value to determine which subtype should be deserialized.
-                    if ("salmon".equals(discriminatorValue)) {
-                        return Salmon.fromJsonKnownDiscriminator(readerToUse);
-                    } else if ("smart_salmon".equals(discriminatorValue)) {
-                        return SmartSalmon.fromJson(readerToUse);
-                    } else if ("shark".equals(discriminatorValue)) {
-                        return Shark.fromJsonKnownDiscriminator(readerToUse);
-                    } else if ("sawshark".equals(discriminatorValue)) {
-                        return Sawshark.fromJson(readerToUse);
-                    } else if ("goblin".equals(discriminatorValue)) {
-                        return Goblinshark.fromJson(readerToUse);
-                    } else if ("cookiecuttershark".equals(discriminatorValue)) {
-                        return Cookiecuttershark.fromJson(readerToUse);
-                    } else {
-                        throw new IllegalStateException(
-                                "Discriminator field 'fishtype' didn't match one of the expected values 'salmon', 'smart_salmon', 'shark', 'sawshark', 'goblin', or 'cookiecuttershark'. It was: '"
-                                        + discriminatorValue
-                                        + "'.");
-                    }
-                });
+            if (discriminatorValue != null) {
+                readerToUse = readerToUse.reset();
+            }
+            // Use the discriminator value to determine which subtype should be deserialized.
+            if ("salmon".equals(discriminatorValue)) {
+                return Salmon.fromJsonKnownDiscriminator(readerToUse);
+            } else if ("smart_salmon".equals(discriminatorValue)) {
+                return SmartSalmon.fromJson(readerToUse);
+            } else if ("shark".equals(discriminatorValue)) {
+                return Shark.fromJsonKnownDiscriminator(readerToUse);
+            } else if ("sawshark".equals(discriminatorValue)) {
+                return Sawshark.fromJson(readerToUse);
+            } else if ("goblin".equals(discriminatorValue)) {
+                return Goblinshark.fromJson(readerToUse);
+            } else if ("cookiecuttershark".equals(discriminatorValue)) {
+                return Cookiecuttershark.fromJson(readerToUse);
+            } else {
+                throw new IllegalStateException(
+                    "Discriminator field 'fishtype' didn't match one of the expected values 'salmon', 'smart_salmon', 'shark', 'sawshark', 'goblin', or 'cookiecuttershark'. It was: '"
+                        + discriminatorValue + "'.");
+            }
+        });
     }
 }

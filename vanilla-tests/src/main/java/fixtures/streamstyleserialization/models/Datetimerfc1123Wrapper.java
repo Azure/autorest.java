@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-/** The Datetimerfc1123Wrapper model. */
+/**
+ * The Datetimerfc1123Wrapper model.
+ */
 @Fluent
 public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerfc1123Wrapper> {
     /*
@@ -27,12 +29,14 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
      */
     private DateTimeRfc1123 now;
 
-    /** Creates an instance of Datetimerfc1123Wrapper class. */
+    /**
+     * Creates an instance of Datetimerfc1123Wrapper class.
+     */
     public Datetimerfc1123Wrapper() {}
 
     /**
      * Get the field property: The field property.
-     *
+     * 
      * @return the field value.
      */
     public OffsetDateTime getField() {
@@ -44,7 +48,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
 
     /**
      * Set the field property: The field property.
-     *
+     * 
      * @param field the field value to set.
      * @return the Datetimerfc1123Wrapper object itself.
      */
@@ -59,7 +63,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
 
     /**
      * Get the now property: The now property.
-     *
+     * 
      * @return the now value.
      */
     public OffsetDateTime getNow() {
@@ -71,7 +75,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
 
     /**
      * Set the now property: The now property.
-     *
+     * 
      * @param now the now value to set.
      * @return the Datetimerfc1123Wrapper object itself.
      */
@@ -86,7 +90,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}
@@ -101,32 +105,31 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
 
     /**
      * Reads an instance of Datetimerfc1123Wrapper from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of Datetimerfc1123Wrapper if the JsonReader was pointing to an instance of it, or null if it
-     *     was pointing to JSON null.
+     * was pointing to JSON null.
      * @throws IOException If an error occurs while reading the Datetimerfc1123Wrapper.
      */
     public static Datetimerfc1123Wrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    Datetimerfc1123Wrapper deserializedDatetimerfc1123Wrapper = new Datetimerfc1123Wrapper();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            Datetimerfc1123Wrapper deserializedDatetimerfc1123Wrapper = new Datetimerfc1123Wrapper();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("field".equals(fieldName)) {
-                            deserializedDatetimerfc1123Wrapper.field =
-                                    reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
-                        } else if ("now".equals(fieldName)) {
-                            deserializedDatetimerfc1123Wrapper.now =
-                                    reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
+                if ("field".equals(fieldName)) {
+                    deserializedDatetimerfc1123Wrapper.field
+                        = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
+                } else if ("now".equals(fieldName)) {
+                    deserializedDatetimerfc1123Wrapper.now
+                        = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedDatetimerfc1123Wrapper;
-                });
+            return deserializedDatetimerfc1123Wrapper;
+        });
     }
 }

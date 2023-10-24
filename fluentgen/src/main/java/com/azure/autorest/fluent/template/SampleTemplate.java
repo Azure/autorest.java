@@ -3,8 +3,6 @@
 
 package com.azure.autorest.fluent.template;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.model.javamodel.JavaFile;
 
@@ -77,12 +75,7 @@ public class SampleTemplate {
                 formattedLines.add(line);
             }
         }
-        content = String.join(System.lineSeparator(), formattedLines);
-
-        if (!JavaSettings.getInstance().isSkipFormatting()) {
-            content = new JavaFormatter(content, path).format();
-        }
-        return content;
+        return String.join(System.lineSeparator(), formattedLines);
     }
 
     private static String link(String text, URL url) {

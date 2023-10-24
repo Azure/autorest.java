@@ -11,7 +11,9 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 
-/** The MyBaseType model. */
+/**
+ * The MyBaseType model.
+ */
 @Fluent
 public class MyBaseType implements JsonSerializable<MyBaseType> {
     /*
@@ -24,12 +26,14 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      */
     private String propBH1;
 
-    /** Creates an instance of MyBaseType class. */
+    /**
+     * Creates an instance of MyBaseType class.
+     */
     public MyBaseType() {}
 
     /**
      * Get the propB1 property: The propB1 property.
-     *
+     * 
      * @return the propB1 value.
      */
     public String getPropB1() {
@@ -38,7 +42,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
 
     /**
      * Set the propB1 property: The propB1 property.
-     *
+     * 
      * @param propB1 the propB1 value to set.
      * @return the MyBaseType object itself.
      */
@@ -49,7 +53,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
 
     /**
      * Get the propBH1 property: The propBH1 property.
-     *
+     * 
      * @return the propBH1 value.
      */
     public String getPropBH1() {
@@ -58,7 +62,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
 
     /**
      * Set the propBH1 property: The propBH1 property.
-     *
+     * 
      * @param propBH1 the propBH1 value to set.
      * @return the MyBaseType object itself.
      */
@@ -69,7 +73,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {}
@@ -88,41 +92,40 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
 
     /**
      * Reads an instance of MyBaseType from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of MyBaseType if the JsonReader was pointing to an instance of it, or null if it was pointing
-     *     to JSON null.
+     * to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      * @throws IOException If an error occurs while reading the MyBaseType.
      */
     public static MyBaseType fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    String discriminatorValue = null;
-                    JsonReader readerToUse = reader.bufferObject();
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            JsonReader readerToUse = reader.bufferObject();
 
-                    readerToUse.nextToken(); // Prepare for reading
-                    while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = readerToUse.getFieldName();
-                        readerToUse.nextToken();
-                        if ("kind".equals(fieldName)) {
-                            discriminatorValue = readerToUse.getString();
-                            break;
-                        } else {
-                            readerToUse.skipChildren();
-                        }
-                    }
+            readerToUse.nextToken(); // Prepare for reading
+            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = readerToUse.getFieldName();
+                readerToUse.nextToken();
+                if ("kind".equals(fieldName)) {
+                    discriminatorValue = readerToUse.getString();
+                    break;
+                } else {
+                    readerToUse.skipChildren();
+                }
+            }
 
-                    if (discriminatorValue != null) {
-                        readerToUse = readerToUse.reset();
-                    }
-                    // Use the discriminator value to determine which subtype should be deserialized.
-                    if ("Kind1".equals(discriminatorValue)) {
-                        return MyDerivedType.fromJson(readerToUse);
-                    } else {
-                        throw new IllegalStateException(
-                                "Discriminator field 'kind' didn't match one of the expected values 'Kind1'");
-                    }
-                });
+            if (discriminatorValue != null) {
+                readerToUse = readerToUse.reset();
+            }
+            // Use the discriminator value to determine which subtype should be deserialized.
+            if ("Kind1".equals(discriminatorValue)) {
+                return MyDerivedType.fromJson(readerToUse);
+            } else {
+                throw new IllegalStateException(
+                    "Discriminator field 'kind' didn't match one of the expected values 'Kind1'");
+            }
+        });
     }
 }

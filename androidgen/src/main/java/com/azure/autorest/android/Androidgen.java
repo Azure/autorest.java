@@ -24,7 +24,6 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.template.Templates;
-import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -162,17 +161,8 @@ public class Androidgen extends Javagen {
 
             // TODO: POM, Manager
             //Step 4: Print to files
-            Formatter formatter = new Formatter();
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
                 String content = javaFile.getContents().toString();
-                if (!settings.isSkipFormatting()) {
-                    try {
-                        content = formatter.formatSourceAndFixImports(content);
-                    } catch (Exception e) {
-                        LOGGER.error("Unable to format output file " + javaFile.getFilePath(), e);
-                        return false;
-                    }
-                }
                 writeFile(javaFile.getFilePath(), content, null);
             }
             String artifactId = JavaSettings.getInstance().getArtifactId();

@@ -8,7 +8,6 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
-import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.ExampleParser;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
@@ -22,26 +21,26 @@ import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
-import com.azure.autorest.fluent.util.FluentUtils;
-import com.azure.autorest.model.clientmodel.ClientBuilder;
-import com.azure.autorest.model.clientmodel.ClientModels;
-import com.azure.autorest.model.clientmodel.UnionModels;
-import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.Pom;
+import com.azure.autorest.model.clientmodel.UnionModels;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
@@ -122,13 +121,6 @@ public class FluentGen extends Javagen {
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
                 String content = javaFile.getContents().toString();
                 String path = javaFile.getFilePath();
-
-                if (!settings.isSkipFormatting()) {
-                    // formatter
-                    boolean isSampleOrTestJavaFile = path.contains("src/samples/java/") || path.contains("src/test/java/");
-                    content = new JavaFormatter(content, path).format();
-                }
-
                 writeFile(path, content, null);
             }
             logger.info("Write Xml");

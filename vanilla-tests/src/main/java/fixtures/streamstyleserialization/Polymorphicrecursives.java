@@ -24,23 +24,28 @@ import fixtures.streamstyleserialization.models.ErrorException;
 import fixtures.streamstyleserialization.models.Fish;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Polymorphicrecursives. */
+/**
+ * An instance of this class provides access to all the operations defined in Polymorphicrecursives.
+ */
 public final class Polymorphicrecursives {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final PolymorphicrecursivesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Polymorphicrecursives.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Polymorphicrecursives(AutoRestComplexTestService client) {
-        this.service =
-                RestProxy.create(
-                        PolymorphicrecursivesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(PolymorphicrecursivesService.class, client.getHttpPipeline(),
+            client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -52,49 +57,43 @@ public final class Polymorphicrecursives {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface PolymorphicrecursivesService {
         @Get("/complex/polymorphicrecursive/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Fish>> getValid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Fish>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/polymorphicrecursive/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<Fish> getValidSync(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Response<Fish> getValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/polymorphicrecursive/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Fish complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/polymorphicrecursive/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<Void> putValidSync(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Fish complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<Void> putValidSync(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get complex types that are polymorphic and have recursive references.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic and have recursive references along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Fish>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
@@ -102,19 +101,19 @@ public final class Polymorphicrecursives {
 
     /**
      * Get complex types that are polymorphic and have recursive references.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic and have recursive references along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Fish>> getValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValid(this.client.getHost(), accept, context);
@@ -122,11 +121,11 @@ public final class Polymorphicrecursives {
 
     /**
      * Get complex types that are polymorphic and have recursive references.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic and have recursive references on successful completion of {@link
-     *     Mono}.
+     * @return complex types that are polymorphic and have recursive references on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValidAsync() {
@@ -135,13 +134,13 @@ public final class Polymorphicrecursives {
 
     /**
      * Get complex types that are polymorphic and have recursive references.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic and have recursive references on successful completion of {@link
-     *     Mono}.
+     * @return complex types that are polymorphic and have recursive references on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValidAsync(Context context) {
@@ -150,7 +149,7 @@ public final class Polymorphicrecursives {
 
     /**
      * Get complex types that are polymorphic and have recursive references.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -161,7 +160,7 @@ public final class Polymorphicrecursives {
     public Response<Fish> getValidWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValidSync(this.client.getHost(), accept, context);
@@ -169,7 +168,7 @@ public final class Polymorphicrecursives {
 
     /**
      * Get complex types that are polymorphic and have recursive references.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic and have recursive references.
@@ -181,14 +180,60 @@ public final class Polymorphicrecursives {
 
     /**
      * Put complex types that are polymorphic and have recursive references.
-     *
-     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
-     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
-     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
-     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
-     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
-     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
-     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * "fishtype": "salmon",
+     * "species": "king",
+     * "length": 1,
+     * "age": 1,
+     * "location": "alaska",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6,
+     * "siblings": [
+     * {
+     * "fishtype": "salmon",
+     * "species": "coho",
+     * "length": 2,
+     * "age": 2,
+     * "location": "atlantic",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -198,11 +243,11 @@ public final class Polymorphicrecursives {
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -212,14 +257,60 @@ public final class Polymorphicrecursives {
 
     /**
      * Put complex types that are polymorphic and have recursive references.
-     *
-     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
-     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
-     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
-     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
-     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
-     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
-     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * "fishtype": "salmon",
+     * "species": "king",
+     * "length": 1,
+     * "age": 1,
+     * "location": "alaska",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6,
+     * "siblings": [
+     * {
+     * "fishtype": "salmon",
+     * "species": "coho",
+     * "length": 2,
+     * "age": 2,
+     * "location": "atlantic",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -230,11 +321,11 @@ public final class Polymorphicrecursives {
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -244,14 +335,60 @@ public final class Polymorphicrecursives {
 
     /**
      * Put complex types that are polymorphic and have recursive references.
-     *
-     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
-     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
-     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
-     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
-     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
-     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
-     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * "fishtype": "salmon",
+     * "species": "king",
+     * "length": 1,
+     * "age": 1,
+     * "location": "alaska",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6,
+     * "siblings": [
+     * {
+     * "fishtype": "salmon",
+     * "species": "coho",
+     * "length": 2,
+     * "age": 2,
+     * "location": "atlantic",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -264,14 +401,60 @@ public final class Polymorphicrecursives {
 
     /**
      * Put complex types that are polymorphic and have recursive references.
-     *
-     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
-     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
-     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
-     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
-     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
-     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
-     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * "fishtype": "salmon",
+     * "species": "king",
+     * "length": 1,
+     * "age": 1,
+     * "location": "alaska",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6,
+     * "siblings": [
+     * {
+     * "fishtype": "salmon",
+     * "species": "coho",
+     * "length": 2,
+     * "age": 2,
+     * "location": "atlantic",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -285,14 +468,60 @@ public final class Polymorphicrecursives {
 
     /**
      * Put complex types that are polymorphic and have recursive references.
-     *
-     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
-     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
-     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
-     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
-     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
-     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
-     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * "fishtype": "salmon",
+     * "species": "king",
+     * "length": 1,
+     * "age": 1,
+     * "location": "alaska",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6,
+     * "siblings": [
+     * {
+     * "fishtype": "salmon",
+     * "species": "coho",
+     * "length": 2,
+     * "age": 2,
+     * "location": "atlantic",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -303,11 +532,11 @@ public final class Polymorphicrecursives {
     public Response<Void> putValidWithResponse(Fish complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -317,14 +546,60 @@ public final class Polymorphicrecursives {
 
     /**
      * Put complex types that are polymorphic and have recursive references.
-     *
-     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
-     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
-     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
-     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
-     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
-     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
-     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * "fishtype": "salmon",
+     * "species": "king",
+     * "length": 1,
+     * "age": 1,
+     * "location": "alaska",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6,
+     * "siblings": [
+     * {
+     * "fishtype": "salmon",
+     * "species": "coho",
+     * "length": 2,
+     * "age": 2,
+     * "location": "atlantic",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

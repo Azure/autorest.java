@@ -13,8 +13,8 @@ import com.azure.autorest.model.clientmodel.LiveTests;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.XmsExampleWrapper;
-import com.google.common.collect.Lists;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class LiveTestsMapper implements IMapper<TestModel, List<LiveTests>>{
     @Override
     public List<LiveTests> map(TestModel testModel) {
         if (testModel.getScenarioTests() == null) {
-            return Lists.newArrayList();
+            return new ArrayList<>();
         }
         return testModel.getScenarioTests().stream().map(scenarioTest -> {
             LiveTests liveTests = new LiveTests(getFilename(scenarioTest.getFilePath()));

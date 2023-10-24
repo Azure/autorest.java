@@ -24,8 +24,39 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.13.1</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>spotless</id>
+      <activation>
+        <property>
+          <name>spotless</name>
+        </property>
+      </activation>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.diffplug.spotless</groupId>
+            <artifactId>spotless-maven-plugin</artifactId>
+            <version>2.40.0</version>
+            <configuration>
+              <java>
+                <importOrder />
+                <removeUnusedImports />
+                <eclipse>
+                  <version>4.26</version>
+                  <file>eclipse-format-azure-sdk-for-java.xml</file>
+                </eclipse>
+              </java>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

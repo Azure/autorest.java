@@ -17,7 +17,6 @@ import com.azure.typespec.model.EmitterOptions;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.DumperOptions;
@@ -109,25 +108,9 @@ public class Main {
         javaFiles.putAll(typeSpecPlugin.customizeGeneratedCode(javaFiles, outputDir));
 
         // format
-        Formatter formatter = new Formatter();
-
-        Map<String, String> formattedFiles = new ConcurrentHashMap<>();
-        javaFiles.entrySet().parallelStream().forEach(entry -> {
-            String filePath = entry.getKey();
-            String fileContent = entry.getValue();
-            String formattedSource = fileContent;
-            try {
-                formattedSource = formatter.formatSourceAndFixImports(fileContent);
-            } catch (Exception e) {
-                LOGGER.error("Failed to format file: {}", emitterOptions.getOutputDir() + filePath, e);
-                // but we continue so user can still check the file and see why format fails
-            }
-            formattedFiles.put(filePath, formattedSource);
-        });
-
         // write output
         // java files
-        formattedFiles.forEach((filePath, formattedSource) -> typeSpecPlugin.writeFile(filePath, formattedSource, null));
+        javaFiles.forEach((filePath, formattedSource) -> typeSpecPlugin.writeFile(filePath, formattedSource, null));
 
         // XML include POM
         javaPackage.getXmlFiles().forEach(xmlFile -> typeSpecPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
@@ -192,8 +175,7 @@ public class Main {
         loaderOptions.setTagInspector(new TrustedTagInspector());
         Constructor constructor = new CodeModelCustomConstructor(loaderOptions);
         Yaml yamlMapper = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
-        CodeModel codeModel = yamlMapper.loadAs(file, CodeModel.class);
-        return codeModel;
+        return yamlMapper.loadAs(file, CodeModel.class);
     }
 
     private static String readFile(String path) throws IOException {
