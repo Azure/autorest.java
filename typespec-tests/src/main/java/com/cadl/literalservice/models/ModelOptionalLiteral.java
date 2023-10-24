@@ -7,31 +7,31 @@ package com.cadl.literalservice.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for ModelOptionalLiteralModel. */
-public enum ModelOptionalLiteralModel {
+/** Defines values for ModelOptionalLiteral. */
+public enum ModelOptionalLiteral {
     /** Enum value optionalLiteral. */
     OPTIONAL_LITERAL("optionalLiteral");
 
-    /** The actual serialized value for a ModelOptionalLiteralModel instance. */
+    /** The actual serialized value for a ModelOptionalLiteral instance. */
     private final String value;
 
-    ModelOptionalLiteralModel(String value) {
+    ModelOptionalLiteral(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a ModelOptionalLiteralModel instance.
+     * Parses a serialized value to a ModelOptionalLiteral instance.
      *
      * @param value the serialized value to parse.
-     * @return the parsed ModelOptionalLiteralModel object, or null if unable to parse.
+     * @return the parsed ModelOptionalLiteral object, or null if unable to parse.
      */
     @JsonCreator
-    public static ModelOptionalLiteralModel fromString(String value) {
+    public static ModelOptionalLiteral fromString(String value) {
         if (value == null) {
             return null;
         }
-        ModelOptionalLiteralModel[] items = ModelOptionalLiteralModel.values();
-        for (ModelOptionalLiteralModel item : items) {
+        ModelOptionalLiteral[] items = ModelOptionalLiteral.values();
+        for (ModelOptionalLiteral item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }

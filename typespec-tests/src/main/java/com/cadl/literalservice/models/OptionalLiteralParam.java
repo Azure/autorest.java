@@ -7,31 +7,31 @@ package com.cadl.literalservice.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for OptionalLiteralParamModel. */
-public enum OptionalLiteralParamModel {
+/** Defines values for OptionalLiteralParam. */
+public enum OptionalLiteralParam {
     /** Enum value optionalLiteralParam. */
     OPTIONAL_LITERAL_PARAM("optionalLiteralParam");
 
-    /** The actual serialized value for a OptionalLiteralParamModel instance. */
+    /** The actual serialized value for a OptionalLiteralParam instance. */
     private final String value;
 
-    OptionalLiteralParamModel(String value) {
+    OptionalLiteralParam(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a OptionalLiteralParamModel instance.
+     * Parses a serialized value to a OptionalLiteralParam instance.
      *
      * @param value the serialized value to parse.
-     * @return the parsed OptionalLiteralParamModel object, or null if unable to parse.
+     * @return the parsed OptionalLiteralParam object, or null if unable to parse.
      */
     @JsonCreator
-    public static OptionalLiteralParamModel fromString(String value) {
+    public static OptionalLiteralParam fromString(String value) {
         if (value == null) {
             return null;
         }
-        OptionalLiteralParamModel[] items = OptionalLiteralParamModel.values();
-        for (OptionalLiteralParamModel item : items) {
+        OptionalLiteralParam[] items = OptionalLiteralParam.values();
+        for (OptionalLiteralParam item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }

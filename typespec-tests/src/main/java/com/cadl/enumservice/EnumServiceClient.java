@@ -321,7 +321,7 @@ public final class EnumServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. In the form of "," separated string.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. In the form of "," separated string.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -332,7 +332,7 @@ public final class EnumServiceClient {
      * String
      * }</pre>
      *
-     * @param intArray Array of IntArrayModel.
+     * @param intArray Array of IntArray.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -453,7 +453,7 @@ public final class EnumServiceClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArrayModel. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -464,7 +464,7 @@ public final class EnumServiceClient {
      * String
      * }</pre>
      *
-     * @param intArray Array of IntArrayModel.
+     * @param intArray Array of IntArray.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -804,8 +804,8 @@ public final class EnumServiceClient {
     /**
      * The setIntArray operation.
      *
-     * @param intArray Array of IntArrayModel.
-     * @param intArrayOpt Array of IntArrayModel.
+     * @param intArray Array of IntArray.
+     * @param intArrayOpt Array of IntArray.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -832,7 +832,7 @@ public final class EnumServiceClient {
     /**
      * The setIntArray operation.
      *
-     * @param intArray Array of IntArrayModel.
+     * @param intArray Array of IntArray.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1024,8 +1024,8 @@ public final class EnumServiceClient {
     /**
      * The setIntMulti operation.
      *
-     * @param intArray Array of IntArrayModel.
-     * @param intArrayOpt Array of IntArrayModel.
+     * @param intArray Array of IntArray.
+     * @param intArrayOpt Array of IntArray.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1050,7 +1050,7 @@ public final class EnumServiceClient {
     /**
      * The setIntMulti operation.
      *
-     * @param intArray Array of IntArrayModel.
+     * @param intArray Array of IntArray.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

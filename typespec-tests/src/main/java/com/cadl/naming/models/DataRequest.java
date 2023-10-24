@@ -20,7 +20,7 @@ public final class DataRequest {
      */
     @Generated
     @JsonProperty(value = "parameters")
-    private RequestParametersModel parameters;
+    private RequestParameters parameters;
 
     /** Creates an instance of DataRequest class. */
     @Generated
@@ -32,7 +32,7 @@ public final class DataRequest {
      * @return the parameters value.
      */
     @Generated
-    public RequestParametersModel getParameters() {
+    public RequestParameters getParameters() {
         return this.parameters;
     }
 
@@ -43,7 +43,7 @@ public final class DataRequest {
      * @return the DataRequest object itself.
      */
     @Generated
-    public DataRequest setParameters(RequestParametersModel parameters) {
+    public DataRequest setParameters(RequestParameters parameters) {
         this.parameters = parameters;
         return this;
     }
