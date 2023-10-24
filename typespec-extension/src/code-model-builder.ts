@@ -2125,14 +2125,14 @@ export class CodeModelBuilder {
 
     if (isSameLiteralTypes(nonNullVariants)) {
       // enum
-      this.logWarning(`Rename TypeSpec union '${getUnionDescription(type, this.typeNameOptions)}' to '${name}'`);
+      this.logWarning(`Rename TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to '${name}'`);
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
 
     // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(type);
     const baseName = pascalCase(name) + "Model";
-    this.logWarning(`Rename TypeSpec union '${getUnionDescription(type, this.typeNameOptions)}' to '${baseName}'`);
+    this.logWarning(`Rename TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to '${baseName}'`);
     const unionSchema = new OrSchema(baseName + "Base", this.getDoc(type), {
       summary: this.getSummary(type),
     });
@@ -2275,13 +2275,13 @@ export class CodeModelBuilder {
     ) {
       const tspName = getTypeName(target, this.typeNameOptions);
       const newName = getNameForTemplate(target);
-      this.logWarning(`Rename TypeSpec model '${tspName}' to '${newName}'`);
+      this.logWarning(`Rename TypeSpec Model '${tspName}' to '${newName}'`);
       return newName;
     }
 
     if (!target.name && nameHint) {
       const newName = nameHint;
-      this.logWarning(`Rename anonymous TypeSpec model to '${newName}'`);
+      this.logWarning(`Rename anonymous TypeSpec Model to '${newName}'`);
       return newName;
     }
     return target.name;

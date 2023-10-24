@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-
 package com.azure.autorest.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
@@ -17,13 +16,14 @@ import com.azure.core.util.polling.SyncPoller;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class ReturnTypeDescriptionAssembler {
     private final PluginLogger logger;
 
-    private final ConcurrentMap<GenericType, Class<?>> typeToClassMap = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, Optional<Class<?>>> TYPE_CLASS_MAP = new ConcurrentHashMap<>();
 
     public ReturnTypeDescriptionAssembler(NewPlugin host) {
         logger = new PluginLogger(host, ReturnTypeDescriptionAssembler.class);
@@ -138,14 +138,14 @@ public class ReturnTypeDescriptionAssembler {
     }
 
     private Class<?> getGenericClass(GenericType type) {
-        return typeToClassMap.computeIfAbsent(type, key -> {
-            String className = String.format("%s.%s", type.getPackage(), type.getName());
+        String className = String.format("%s.%s", type.getPackage(), type.getName());
+        return TYPE_CLASS_MAP.computeIfAbsent(className, key -> {
             try {
-                return Class.forName(className);
+                return Optional.of(Class.forName(key));
             } catch (ClassNotFoundException e) {
-                logger.warn(String.format("class %s not found!", className), e);
-                return null;
+                logger.warn(String.format("class %s not found!", key), e);
+                return Optional.empty();
             }
-        });
+        }).orElse(null);
     }
 }
