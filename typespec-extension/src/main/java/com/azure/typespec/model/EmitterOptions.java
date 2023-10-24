@@ -21,6 +21,9 @@ public class EmitterOptions {
     @JsonProperty(value="output-dir")
     private String outputDir;
 
+    @JsonProperty(value = "branding")
+    private Boolean branding = true;
+
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
     @JsonProperty(value="service-name")
     private String serviceName;
@@ -58,6 +61,10 @@ public class EmitterOptions {
 
     public String getOutputDir() {
         return outputDir;
+    }
+
+    public Boolean getBranding() {
+        return branding;
     }
 
     public String getServiceName() {
