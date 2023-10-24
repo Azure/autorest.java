@@ -6,6 +6,7 @@ import {
   EnumMember,
   IntrinsicScalarName,
   Model,
+  ModelProperty,
   Operation,
   Program,
   Scalar,
@@ -216,6 +217,28 @@ export function getUnionDescription(union: Union, typeNameOptions: TypeNameOptio
     name = names.join(" | ");
   }
   return name;
+}
+
+export function getModelNameForProperty(property: ModelProperty): string {
+  if (property.model) {
+    if (property.model.name) {
+      return property.model.name;
+    } else if (property.model.namespace) {
+      for (const model of property.model.namespace.models.values()) {
+        for (const prop of model.properties.values()) {
+          const candidateModel = prop.type;
+          // find the property that refers to the unnamed property.model
+          if (
+            candidateModel.kind === "Model" &&
+            (candidateModel === property.model || candidateModel.indexer?.value === property.model)
+          ) {
+            return getModelNameForProperty(prop);
+          }
+        }
+      }
+    }
+  }
+  return "";
 }
 
 export function modelIs(model: Model, name: string, namespace: string): boolean {
