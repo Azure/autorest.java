@@ -1530,7 +1530,8 @@ export class CodeModelBuilder {
           // use it for extensible enum
           schema = this.processChoiceSchema(knownValues, this.getName(knownValues), false);
         } else {
-          schema = this.processSchema(type.type, nameHint + "Model");
+          const schemaNameHint = pascalCase(type.model?.name ?? "") + pascalCase(nameHint) + "Model";
+          schema = this.processSchema(type.type, schemaNameHint);
         }
         return this.applyModelPropertyDecorators(type, nameHint, schema);
       }
