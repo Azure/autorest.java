@@ -206,7 +206,7 @@ export function unionReferredByType(
   return null;
 }
 
-export function getUnionName(union: Union, typeNameOptions: TypeNameOptions): string {
+export function getUnionDescription(union: Union, typeNameOptions: TypeNameOptions): string {
   let name = union.name;
   if (!name) {
     const names: string[] = [];

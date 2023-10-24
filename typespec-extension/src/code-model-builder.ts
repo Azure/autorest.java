@@ -146,7 +146,7 @@ import {
   getAccess,
   getUsage,
   unionReferredByType,
-  getUnionName,
+  getUnionDescription,
   modelIs,
 } from "./type-utils.js";
 import {
@@ -389,7 +389,7 @@ export class CodeModelBuilder {
           const errorMsg = `Model '${getTypeName(
             model,
             this.typeNameOptions,
-          )}' cannot be set as access=public, as it refers Union '${getUnionName(union, this.typeNameOptions)}'`;
+          )}' cannot be set as access=public, as it refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
           throw new Error(errorMsg);
         }
 
@@ -638,7 +638,7 @@ export class CodeModelBuilder {
           generateConvenienceApi = false;
           apiComment = `Convenience API is not generated, as operation '${
             op.operation.name
-          }' refers Union '${getUnionName(union, this.typeNameOptions)}'`;
+          }' refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
           this.logWarning(apiComment);
         }
       }
@@ -1530,7 +1530,7 @@ export class CodeModelBuilder {
           // use it for extensible enum
           schema = this.processChoiceSchema(knownValues, this.getName(knownValues), false);
         } else {
-          const schemaNameHint = pascalCase(type.model?.name ?? "") + pascalCase(nameHint) + "Model";
+          const schemaNameHint = pascalCase(type.model?.name ?? "") + pascalCase(nameHint);
           schema = this.processSchema(type.type, schemaNameHint);
         }
         return this.applyModelPropertyDecorators(type, nameHint, schema);
@@ -2124,18 +2124,21 @@ export class CodeModelBuilder {
 
     if (isSameLiteralTypes(nonNullVariants)) {
       // enum
+      this.logWarning(`Rename TypeSpec union '${getUnionDescription(type, this.typeNameOptions)}' to '${name}'`);
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
 
     // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(type);
-    const unionSchema = new OrSchema(pascalCase(name) + "Base", this.getDoc(type), {
+    const baseName = pascalCase(name) + "Model";
+    this.logWarning(`Rename TypeSpec union '${getUnionDescription(type, this.typeNameOptions)}' to '${baseName}'`);
+    const unionSchema = new OrSchema(baseName + "Base", this.getDoc(type), {
       summary: this.getSummary(type),
     });
     unionSchema.anyOf = [];
     nonNullVariants.forEach((it) => {
       const variantName = this.getUnionVariantName(it.type, { depth: 0 });
-      const modelName = variantName + pascalCase(name);
+      const modelName = variantName + baseName;
       const propertyName = "value";
 
       // these ObjectSchema is not added to codeModel.schemas
@@ -2210,9 +2213,9 @@ export class CodeModelBuilder {
           return pascalCase(type.name);
         }
       case "String":
-        return type.value;
+        return pascalCase(type.value);
       case "Number":
-        return type.valueAsString;
+        return pascalCase(type.valueAsString);
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
     }
