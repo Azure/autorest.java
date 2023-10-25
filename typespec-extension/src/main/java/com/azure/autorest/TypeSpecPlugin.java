@@ -217,6 +217,7 @@ public class TypeSpecPlugin extends Javagen {
 
         if (options.getBranding() == Boolean.FALSE) {
             SETTINGS_MAP.put("branding", false);
+            SETTINGS_MAP.put("sdk-integration", false);
 
             SETTINGS_MAP.put("sync-methods", "sync-only");
             SETTINGS_MAP.put("stream-style-serialization", true);

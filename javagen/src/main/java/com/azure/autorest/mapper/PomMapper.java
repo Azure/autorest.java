@@ -19,6 +19,8 @@ public class PomMapper implements IMapper<Project, Pom> {
 
     @Override
     public Pom map(Project project) {
+        JavaSettings settings = JavaSettings.getInstance();
+
         Pom pom = new Pom();
         pom.setGroupId(project.getGroupId());
         pom.setArtifactId(project.getArtifactId());
@@ -29,30 +31,35 @@ public class PomMapper implements IMapper<Project, Pom> {
 
         Set<String> addedDependencyPrefixes = new HashSet<>();
         List<String> dependencyIdentifiers = new ArrayList<>();
-        if (JavaSettings.getInstance().isStreamStyleSerialization()) {
+        if (settings.isBranding()) {
+            if (settings.isStreamStyleSerialization()) {
+                addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                        Project.Dependency.AZURE_JSON, true);
+                addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                        Project.Dependency.AZURE_XML, true);
+            }
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                    Project.Dependency.AZURE_JSON, true);
+                    Project.Dependency.AZURE_CORE, false);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                    Project.Dependency.AZURE_XML, true);
-            dependencyIdentifiers.add(Project.Dependency.AZURE_JSON.getDependencyIdentifier());
-            dependencyIdentifiers.add(Project.Dependency.AZURE_XML.getDependencyIdentifier());
+                    Project.Dependency.AZURE_CORE_HTTP_NETTY, false);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.JUNIT_JUPITER_API, true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.JUNIT_JUPITER_ENGINE, true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.MOCKITO_CORE, true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.AZURE_CORE_TEST, true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.AZURE_IDENTITY, true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.SLF4J_SIMPLE, true);
+        } else {
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.GENERIC_CORE, false);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.GENERIC_JSON, false);
         }
-        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                Project.Dependency.AZURE_CORE, false);
-        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                Project.Dependency.AZURE_CORE_HTTP_NETTY, false);
-        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                Project.Dependency.JUNIT_JUPITER_API, true);
-        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                Project.Dependency.JUNIT_JUPITER_ENGINE, true);
-        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                Project.Dependency.MOCKITO_CORE, true);
-        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                Project.Dependency.AZURE_CORE_TEST, true);
-        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                Project.Dependency.AZURE_IDENTITY, true);
-        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                Project.Dependency.SLF4J_SIMPLE, true);
 
         // merge dependencies in POM and dependencies added above
         dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()

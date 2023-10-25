@@ -34,6 +34,8 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
     }
 
     public final void write(Pom pom, XmlFile xmlFile) {
+        boolean branding = JavaSettings.getInstance().isBranding();
+
         // copyright
         xmlFile.blockComment(xmlLineComment -> {
             xmlLineComment.line(
@@ -76,9 +78,12 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.line();
 
-            projectBlock.tag("name", String.format("Microsoft Azure SDK for %s", pom.getServiceName()));
-            projectBlock.tag("description", pom.getServiceDescription());
-            projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
+            projectBlock.tag("name",
+                    String.format((branding ? "Microsoft Azure SDK for %s" : "SDK for %s"), pom.getServiceName()));
+            if (branding) {
+                projectBlock.tag("description", pom.getServiceDescription());
+                projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
+            }
 
             projectBlock.line();
 
@@ -92,12 +97,14 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.line();
 
-            projectBlock.block("scm", scmBlock -> {
-                scmBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
-                scmBlock.tag("connection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
-                scmBlock.tag("developerConnection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
-                scmBlock.tag("tag", "HEAD");
-            });
+            if (branding) {
+                projectBlock.block("scm", scmBlock -> {
+                    scmBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
+                    scmBlock.tag("connection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
+                    scmBlock.tag("developerConnection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
+                    scmBlock.tag("tag", "HEAD");
+                });
+            }
 
             projectBlock.block("developers", developersBlock -> {
                 developersBlock.block("developer", developerBlock -> {
