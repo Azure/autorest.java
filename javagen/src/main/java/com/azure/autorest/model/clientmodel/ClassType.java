@@ -398,33 +398,41 @@ public class ClassType implements IType {
         .knownClass(com.azure.core.http.policy.UserAgentPolicy.class)
         .build();
 
+    public static final ClassType HTTP_LOGGING_POLICY = new ClassType.Builder(false)
+        .knownClass(com.azure.core.http.policy.HttpLoggingPolicy.class)
+        .build();
+
+    public static final ClassType KEY_CREDENTIAL_POLICY = new ClassType.Builder(false)
+        .knownClass(com.azure.core.http.policy.KeyCredentialPolicy.class)
+        .build();
+
     public static final ClassType CORE_UTILS = new ClassType.Builder(false)
         .knownClass(com.azure.core.util.CoreUtils.class)
         .build();
 
     public static final ClassType JSON_SERIALIZABLE = new ClassType.Builder(false)
-            .knownClass(com.azure.json.JsonSerializable.class)
-            .build();
+        .knownClass(com.azure.json.JsonSerializable.class)
+        .build();
 
     public static final ClassType JSON_WRITER = new ClassType.Builder(false)
-            .knownClass(com.azure.json.JsonWriter.class)
-            .build();
+        .knownClass(com.azure.json.JsonWriter.class)
+        .build();
 
     public static final ClassType JSON_READER = new ClassType.Builder(false)
-            .knownClass(com.azure.json.JsonReader.class)
-            .build();
+        .knownClass(com.azure.json.JsonReader.class)
+        .build();
 
     public static final ClassType JSON_TOKEN = new ClassType.Builder(false)
-            .knownClass(com.azure.json.JsonToken.class)
-            .build();
+        .knownClass(com.azure.json.JsonToken.class)
+        .build();
 
     public static final ClassType HTTP_POLICY_PROVIDERS = new ClassType.Builder(false)
-            .knownClass(com.azure.core.http.policy.HttpPolicyProviders.class)
-            .build();
+        .knownClass(com.azure.core.http.policy.HttpPolicyProviders.class)
+        .build();
 
     public static final ClassType EXPANDABLE_STRING_ENUM = new ClassType.Builder(false)
-            .knownClass(com.azure.core.util.ExpandableStringEnum.class)
-            .build();
+        .knownClass(com.azure.core.util.ExpandableStringEnum.class)
+        .build();
 
     private final String fullName;
     private final String packageName;
@@ -766,12 +774,13 @@ public class ClassType implements IType {
                 } else if (Objects.equals(clazz, com.azure.core.http.HttpClient.class)) {
                     this.packageName("com.generic.core.http.client");
                 } else if (Objects.equals(clazz, com.azure.core.http.HttpPipeline.class)
-                        || Objects.equals(clazz, com.azure.core.http.HttpPipelineBuilder.class)
-                        || Objects.equals(clazz, com.azure.core.http.policy.HttpPipelinePolicy.class)) {
+                        || Objects.equals(clazz, com.azure.core.http.HttpPipelineBuilder.class)) {
                     this.packageName("com.generic.core.http.pipeline");
                 } else if (Objects.equals(clazz, com.azure.core.http.policy.HttpLogOptions.class)
                         || Objects.equals(clazz, com.azure.core.http.policy.HttpLoggingPolicy.class)) {
                     this.packageName("com.generic.core.http.policy.logging");
+                } else if (Objects.equals(clazz, com.azure.core.http.policy.KeyCredentialPolicy.class)) {
+                    this.packageName("com.generic.core.http.policy.credential");
                 } else {
                     this.packageName(clazz.getPackage().getName()
                             .replace(Package.AZURE_CORE_PACKAGE_NAME, Package.GENERIC_CORE_PACKAGE_NAME)

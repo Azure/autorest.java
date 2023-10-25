@@ -32,8 +32,6 @@ import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
 import com.azure.core.http.policy.AzureKeyCredentialPolicy;
 import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
-import com.azure.core.http.policy.HttpLoggingPolicy;
-import com.azure.core.http.policy.KeyCredentialPolicy;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
@@ -463,11 +461,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         // one of the key credential policy imports will be removed by the formatter depending
         // on which one is used
         imports.add(AzureKeyCredentialPolicy.class.getName());
-        imports.add(KeyCredentialPolicy.class.getName());
+        ClassType.KEY_CREDENTIAL_POLICY.addImportsTo(imports, false);
 
         ClassType.HTTP_POLICY_PROVIDERS.addImportsTo(imports, false);
         ClassType.HttpPipelinePolicy.addImportsTo(imports, false);
-        imports.add(HttpLoggingPolicy.class.getName());
+        ClassType.HTTP_LOGGING_POLICY.addImportsTo(imports, false);
         imports.add(AddHeadersPolicy.class.getName());
         imports.add(RequestIdPolicy.class.getName());
         imports.add(AddHeadersFromContextPolicy.class.getName());
