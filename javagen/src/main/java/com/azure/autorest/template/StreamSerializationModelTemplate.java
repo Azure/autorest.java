@@ -80,7 +80,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             ClassType.JSON_TOKEN.addImportsTo(imports, false);
         }
 
-        imports.add(CoreUtils.class.getName());
+        ClassType.CORE_UTILS.addImportsTo(imports, false);
 
         imports.add(ArrayList.class.getName());
         imports.add(Base64.class.getName());
