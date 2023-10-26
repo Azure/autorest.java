@@ -34,8 +34,16 @@ public class PackageInfoTemplate implements IJavaTemplate<PackageInfo, JavaFile>
         }
 
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) -> {
+            if (settings.isHandlePartialUpdate()) {
+                comment.line("<!-- start generated doc -->");
+            }
+
             for (String desc : NEW_LINE.split(packageInfo.getDescription(), -1)) {
                 comment.description(desc);
+            }
+
+            if (settings.isHandlePartialUpdate()) {
+                comment.line("<!-- end generated doc -->");
             }
         });
 
