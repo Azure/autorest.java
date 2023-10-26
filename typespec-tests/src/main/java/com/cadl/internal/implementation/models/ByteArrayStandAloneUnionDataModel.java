@@ -7,17 +7,17 @@ package com.cadl.internal.implementation.models;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** The UrlDataModel model. */
+/** The ByteArrayStandAloneUnionDataModel model. */
 @Immutable
-public final class UrlDataModel extends DataModelBase {
-    private final String value;
+public final class ByteArrayStandAloneUnionDataModel extends StandAloneUnionDataModelBase {
+    private final byte[] value;
 
     /**
-     * Creates an instance of UrlDataModel class.
+     * Creates an instance of ByteArrayStandAloneUnionDataModel class.
      *
      * @param value the value.
      */
-    public UrlDataModel(String value) {
+    public ByteArrayStandAloneUnionDataModel(byte[] value) {
         this.value = value;
     }
 
@@ -27,7 +27,7 @@ public final class UrlDataModel extends DataModelBase {
      * @return the value.
      */
     @JsonValue
-    public String getValue() {
+    public byte[] getValue() {
         return this.value;
     }
 }
