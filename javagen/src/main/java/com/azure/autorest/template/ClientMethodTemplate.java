@@ -1504,60 +1504,22 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     private String getPollingStrategy(ClientMethod clientMethod, String contextParam) {
-        String endpoint = "null";
-        if (clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
-            if (clientMethod.getProxyMethod().getParameters().stream()
-                .anyMatch(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI && "endpoint".equals(p.getName()))) {
-                // has EndpointTrait
-
-                final String baseUrl = clientMethod.getProxyMethod().getBaseUrl();
-                final String endpointReplacementExpr = clientMethod.getProxyMethod().getParameters().stream()
-                        .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
-                        .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
-                        .map(p -> String.format(".replace(%1$s, %2$s)",
-                                ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
-                                p.getParameterReference()
-                        )).collect(Collectors.joining());
-                if (!CoreUtils.isNullOrEmpty(endpointReplacementExpr)) {
-                    endpoint = ClassType.String.defaultValueExpression(baseUrl) + endpointReplacementExpr;
-                }
-            }
-        }
         return clientMethod.getMethodPollingDetails().getPollingStrategy()
             .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
-            .replace("{endpoint}", endpoint)
+            .replace("{endpoint}", getEndpointPollingStrategy(clientMethod))
             .replace("{context}", contextParam)
-            .replace("{serviceVersion}", getServiceVersionValue(clientMethod))
+            .replace("    .setServiceVersion({serviceVersion}))", getServiceVersionPollingStrategy(clientMethod))
             .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
             .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
             .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
     }
 
     private String getSyncPollingStrategy(ClientMethod clientMethod, String contextParam) {
-        String endpoint = "null";
-        if (clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
-            if (clientMethod.getProxyMethod().getParameters().stream()
-                    .anyMatch(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI && "endpoint".equals(p.getName()))) {
-                // has EndpointTrait
-
-                final String baseUrl = clientMethod.getProxyMethod().getBaseUrl();
-                final String endpointReplacementExpr = clientMethod.getProxyMethod().getParameters().stream()
-                        .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
-                        .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
-                        .map(p -> String.format(".replace(%1$s, %2$s)",
-                                ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
-                                p.getParameterReference()
-                        )).collect(Collectors.joining());
-                if (!CoreUtils.isNullOrEmpty(endpointReplacementExpr)) {
-                    endpoint = ClassType.String.defaultValueExpression(baseUrl) + endpointReplacementExpr;
-                }
-            }
-        }
         return clientMethod.getMethodPollingDetails().getSyncPollingStrategy()
                 .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
-                .replace("{endpoint}", endpoint)
+                .replace("    .setEndpoint({endpoint}))", getEndpointPollingStrategy(clientMethod))
                 .replace("{context}", contextParam)
-                .replace("{serviceVersion}", getServiceVersionValue(clientMethod))
+                .replace("    .setServiceVersion({serviceVersion}))", getServiceVersionPollingStrategy(clientMethod))
                 .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
                 .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
                 .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
@@ -1582,14 +1544,47 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         });
     }
 
-    private static String getServiceVersionValue(ClientMethod clientMethod) {
-        String serviceVersion = "null";
+    private static String getServiceVersionPollingStrategy(ClientMethod clientMethod) {
+        boolean needsSetServiceVersion = false;
         if (JavaSettings.getInstance().isDataPlaneClient() && clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
             if (clientMethod.getProxyMethod().getParameters().stream()
                     .anyMatch(p -> p.getOrigin() == ParameterSynthesizedOrigin.API_VERSION)) {
-                serviceVersion = clientMethod.getClientReference() + ".getServiceVersion().getVersion()";
+                needsSetServiceVersion = true;
             }
         }
-        return serviceVersion;
+        if (needsSetServiceVersion) {
+            return "    .setServiceVersion({serviceVersion}))".replace("{serviceVersion}", clientMethod.getClientReference() + ".getServiceVersion().getVersion()");
+        } else {
+            return "";
+        }
+    }
+
+    private static String getEndpointPollingStrategy(ClientMethod clientMethod) {
+        boolean needsSetEndpoint = false;
+        String endpoint = null;
+        if (clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
+            if (clientMethod.getProxyMethod().getParameters().stream()
+                    .anyMatch(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI && "endpoint".equals(p.getName()))) {
+                // has EndpointTrait
+
+                final String baseUrl = clientMethod.getProxyMethod().getBaseUrl();
+                final String endpointReplacementExpr = clientMethod.getProxyMethod().getParameters().stream()
+                        .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
+                        .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
+                        .map(p -> String.format(".replace(%1$s, %2$s)",
+                                ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
+                                p.getParameterReference()
+                        )).collect(Collectors.joining());
+                if (!CoreUtils.isNullOrEmpty(endpointReplacementExpr)) {
+                    needsSetEndpoint = true;
+                    endpoint = ClassType.String.defaultValueExpression(baseUrl) + endpointReplacementExpr;
+                }
+            }
+        }
+        if (needsSetEndpoint) {
+            return "    .setEndpoint({endpoint}))".replace("{endpoint}", endpoint);
+        } else {
+            return "";
+        }
     }
 }
