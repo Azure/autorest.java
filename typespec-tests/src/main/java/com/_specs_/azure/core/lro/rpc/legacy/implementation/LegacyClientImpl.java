@@ -331,7 +331,6 @@ public final class LegacyClientImpl {
                 () -> this.createJobWithResponseAsync(jobData, requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -396,7 +395,6 @@ public final class LegacyClientImpl {
                 () -> this.createJobWithResponse(jobData, requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -462,7 +460,6 @@ public final class LegacyClientImpl {
                 () -> this.createJobWithResponseAsync(jobData, requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -527,7 +524,6 @@ public final class LegacyClientImpl {
                 () -> this.createJobWithResponse(jobData, requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
